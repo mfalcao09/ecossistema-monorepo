@@ -1,7 +1,6 @@
 {
   "functions": {
     "api/financeiro/*.py": {
-      "runtime": "@vercel/python",
       "maxDuration": 30
     }
   },
