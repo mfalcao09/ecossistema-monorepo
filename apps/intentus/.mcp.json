@@ -1,0 +1,14 @@
+{
+  "mcpServers": {
+    "nanobanana": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "/Users/marcelosilva/Projects/GitHub/nanobanana-mcp/dist/index.js"
+      ],
+      "env": {
+        "GEMINI_API_KEY": "AIzaSyD30Cf4AYrivZIfAX1VB9iZgkqz-S3847Y"
+      }
+    }
+  }
+}

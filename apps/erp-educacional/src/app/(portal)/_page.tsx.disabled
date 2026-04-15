@@ -1,0 +1,3 @@
+// Este arquivo foi intencionalmente esvaziado.
+// A página do portal está em app/page.tsx para evitar conflito de rotas.
+// O route group (portal) mantém apenas o layout para sub-rotas futuras.

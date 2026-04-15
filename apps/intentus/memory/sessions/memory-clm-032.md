@@ -1,0 +1,22 @@
+# Sessão 32 — Fixes da Auditoria CLM: Fase 1 (Segurança) + Fase 2 (Arquitetura) (12/03/2026)
+
+- **Fase 1 — Segurança** (commit pelo Marcelo via GitHub Desktop):
+  - `src/lib/clmApi.ts` — auth + tenant_id validation
+  - `src/hooks/useApprovalWorkflow.ts` — authorization checks, race condition prevention, profile resolution centralizada
+  - `src/hooks/useClmLifecycle.ts` — query invalidation ampliada (6 query keys em cada mutation)
+  - `src/components/contracts/ContractDetailDialog.tsx` — error boundary em lazy tabs
+- **Fase 2.1 — Eliminação do ClmDashboardV2** (commit pelo Marcelo via GitHub Desktop):
+  - **DELETADO**: `src/pages/ClmDashboardV2.tsx` (211 linhas) — componente duplicado
+  - **Migrados** para `ClmCommandCenter.tsx`: CommandCenterKPIs, CommandCenterFilters, ContractPipelineChart, PendingApprovalsWidget + chart de distribuição por tipo (pie chart convertido para bar horizontal)
+  - **Rota atualizada**: `App.tsx` → `/clm/dashboard-v2` agora redireciona para `ClmCommandCenter`
+  - **JSDoc**: PendingApprovalsWidget atualizado para referenciar ClmCommandCenter
+- **Fase 2.2 — Unificação do sistema dual de aprovações**:
+  - **Problema**: Dois sistemas de write: `useApprovalWorkflow.ts` (Supabase direto) vs `useClmLifecycle.ts` (Edge Functions)
+  - **Solução**: Removidos `useApproveStep()` e `useRejectStep()` de `useApprovalWorkflow.ts` (mantido apenas READs + startWorkflow)
+  - **Migração**: `ApprovalWorkflowPanel.tsx` agora usa `useClmApprove()`/`useClmReject()` de `useClmLifecycle`
+  - **contractId**: Adicionado aos call sites (parâmetro requerido pelas mutations do lifecycle)
+  - **Duplicate toast fix** (achado MiniMax): Removidos toasts do componente (useClmApprove/Reject já têm toast.success built-in)
+  - **Build**: 0 erros TypeScript
+- **Arquivos alterados**:
+  - `src/hooks/useApprovalWorkflow.ts` — removidos useApproveStep/useRejectStep + funções auxiliares approveStep/rejectStep
+  - `src/components/contracts/ApprovalWorkflowPanel.tsx` — migração para useClmApprove/useClmReject, contractId, toast cleanup

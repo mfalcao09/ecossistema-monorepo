@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "Anyone can read platform identity" ON public.platform_settings;

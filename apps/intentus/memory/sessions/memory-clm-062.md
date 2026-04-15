@@ -1,0 +1,35 @@
+# Sessão 62 — F2 Item #5: Conversational Contract Creation (14/03/2026)
+
+- **Objetivo**: Implementar quinto item da Fase 2 do cronograma IA-Native: Criação conversacional de contratos via Copilot chat — guiar o usuário passo a passo para criar contratos por conversa, com opção de criar direto no banco ou pré-preencher formulário visual
+- **Decisões do Marcelo** (via AskUserQuestion):
+  - Escopo: "Completo (Recomendado)" — Copilot guia step-by-step, busca imóveis/pessoas, cria direto OU pré-preenche form
+  - Método criação: "Ambos (toggle)" — create_contract (direto no banco) + prefill_contract_form (abre formulário)
+- **Backend — `supabase/functions/copilot/index.ts` (REESCRITO — v10→v11, 796→1212 linhas)**:
+  - **4 novas tools** (total 12: 8 originais + 4 novas):
+    - `create_contract`: Cria contrato direto no banco. Valida datas, resolve property por busca fuzzy, insere contract + contract_parties + lifecycle event. Status default: rascunho
+    - `prefill_contract_form`: Prepara dados para formulário visual. Resolve property/people, retorna JSON matching ContractFormValues shape. Marker `<!--COPILOT_ACTION:PREFILL_CONTRACT-->` para frontend detectar
+    - `search_properties`: Busca imóveis por nome/endereço/bairro/cidade. Fetch 50 records + client-side fuzzy filter (Supabase lacks good fuzzy search)
+    - `search_people`: Busca pessoas por nome/CPF/CNPJ/email. Fetch 30 records + client-side fuzzy filter
+  - **6 novas handler functions**: `resolvePropertyBySearch()`, `resolvePersonBySearch()`, `executeCreateContract()`, `executePrefillContractForm()`, `executeSearchProperties()`, `executeSearchPeople()`
+  - **System prompt atualizado**: Seção "Criação Conversacional de Contratos" com fluxo de 8 passos (tipo → imóvel → partes → financeiro → datas → resumo → 2 opções → execução)
+  - **Deploy**: ✅ Deployada via Supabase Dashboard por Marcelo (sessão 63). Arquivo 48KB excedia limite do MCP deploy_edge_function
+- **Frontend — `src/components/AICopilot.tsx` (MODIFICADO em sessão anterior)**:
+  - Exports: `CopilotPrefillEvent` interface, `COPILOT_PREFILL_EVENT` constant
+  - Post-streaming detection: Detecta `<!--COPILOT_ACTION:PREFILL_CONTRACT-->` no conteúdo do assistente
+  - Ação: Limpa marker, navega para `/contratos`, emite CustomEvent com 500ms delay
+  - Suggestions atualizadas: "Quero criar um novo contrato" em `/contratos` e `/`
+- **Frontend — `src/pages/Contracts.tsx` (MODIFICADO)**:
+  - Import `COPILOT_PREFILL_EVENT` e `CopilotPrefillEvent` de AICopilot
+  - useEffect event listener para `copilot:prefill-contract` custom event
+  - Handler: Extrai `detail.prefill` → `setAiPrefill()` → `setFormOpen(true)` (abre ContractFormDialog pré-preenchido)
+- **Arquitetura de comunicação**: Copilot (widget flutuante) → CustomEvent DOM → Contracts page (listener)
+  - Pattern: AI model emite `<!--COPILOT_ACTION:PREFILL_CONTRACT-->` no texto → frontend AICopilot.tsx detecta e emite `window.dispatchEvent(new CustomEvent(...))` → Contracts.tsx recebe e abre form
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos modificados** (3):
+  - `supabase/functions/copilot/index.ts` — v11, 4 novas tools + 6 handlers (796→1212 linhas)
+  - `src/components/AICopilot.tsx` — prefill detection + CustomEvent exports
+  - `src/pages/Contracts.tsx` — event listener para copilot:prefill-contract
+- **Edge Functions — Versões atualizadas**:
+  - `copilot` → version 11 (✅ Deployada via Dashboard — 12 tools, conversational contract creation, 1212 linhas)
+- **Cronograma IA-Native**: F2 Item #5 ✅ concluído (deploy via Dashboard sessão 63). **F2 COMPLETA (5/5 itens ✅)**. Próximo: F3 Item #1 Backend de Automações (Workflow Engine)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

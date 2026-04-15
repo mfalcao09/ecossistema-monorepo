@@ -1,0 +1,50 @@
+# Sessão 60 — F2 Item #3: Predictive Analytics Renovações (14/03/2026)
+
+- **Objetivo**: Implementar terceiro item da Fase 2 do cronograma IA-Native: Análise preditiva de renovações de contratos com scoring 0-100, fatores de risco, recomendações IA e dashboard
+- **Decisões do Marcelo** (via AskUserQuestion):
+  - Escopo: "Completo (Recomendado)" — scoring IA completo (0-100), fatores de risco, recomendações, dashboard com ranking
+  - Localização: "Command Center + Detalhe (Recomendado)" — widget TOP 10 no Command Center + seção no ContractRenewalTab
+- **Backend — `supabase/functions/predictive-renewals-ai/index.ts` (CRIADO — ~655 linhas, self-contained, v1)**:
+  - **2 actions**: `predict_contract` (predição individual), `predict_portfolio` (batch TOP N at-risk + summary)
+  - **Rule-based scoring engine**: Base score 60, 7 fatores (expiry proximity, payment health, obligation compliance, renewal history, termination process, tenure, contract value). Clamp 0-100
+  - **Risk level mapping**: score ≥70 = low, ≥50 = medium, ≥30 = high, <30 = critical
+  - **AI recommendations**: OpenRouter → Gemini 2.0 Flash (JSON mode, temp 0.3) + fallback rule-based
+  - **Portfolio optimization**: Batch fetch all installments/obligations/renewals/terminations com `.in("contract_id", contractIds)` + Map grouping (sem N+1). IA recommendations apenas para at-risk (score < 70)
+  - **Self-contained**: Inline CORS whitelist, auth/tenant resolution, RBAC
+  - **RBAC inline**: predict_contract→clm.renewal.predict (all roles exceto manutencao), predict_portfolio→clm.dashboard.view
+  - **Deploy**: v1 via Supabase MCP (ID: 97eeab8e-e399-4190-a656-0bef95f23515, ACTIVE, verify_jwt: false)
+- **Frontend hooks — `src/hooks/useRenewalPredictions.ts` (CRIADO — ~140 linhas)**:
+  - Types: `RiskLevel`, `RecommendationPriority`, `RiskFactor`, `Recommendation`, `PredictionResult`, `PortfolioSummary`
+  - Constants: `RISK_LEVEL_LABELS`, `RISK_LEVEL_COLORS`, `PRIORITY_LABELS`, `PRIORITY_COLORS`
+  - 2 hooks: `usePredictContract(contractId)`, `usePredictPortfolio(options)` — React Query, 5min staleTime, retry: 1
+- **Frontend UI — `RenewalPredictionWidget.tsx` (CRIADO — ~210 linhas)**:
+  - Widget para Command Center: 4 KPIs (Prob. Média, Em Risco, Alto Risco, Valor em Risco)
+  - TOP 10 contratos por risco com ProbabilityBar (color-coded), RiskBadge, valor mensal, dias para expirar
+  - Skeleton loading, error state, empty state (nenhum contrato em risco)
+  - Badge "IA Real" / "Regras" baseado em model_used
+  - Botão refresh com spinner
+- **Frontend UI — Prediction section no `ContractRenewalTab.tsx`**:
+  - `PredictionInsightCard`: Card individual por contrato com score bar, 3 métricas (payment health, obligation compliance, renewal history), fatores de risco com dots coloridos, recomendações com badges de prioridade, metadata do modelo
+  - `RenewalPredictionsSection`: Grid responsivo 1-3 cols, filtra apenas at-risk (score < 70), mostra até 6 cards
+  - Inserido entre header e seção de contratos vencidos
+- **RBAC — nova action `clm.renewal.predict` em 3 camadas**:
+  - Frontend: `src/lib/clmPermissions.ts` — CLMAction union + ALL_CLM_ACTIONS + 6 roles (admin, gerente, corretor, financeiro, juridico, manutencao)
+  - Backend: `supabase/functions/_shared/clmPermissions.ts` — mirror Deno
+  - Hook: `src/hooks/usePermissions.ts` — novo flag `canPredictRenewals`
+- **Integração Command Center**: `RenewalPredictionWidget` adicionado entre ObligationsDashboard e AIInsightsPanel
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos criados** (2):
+  - `supabase/functions/predictive-renewals-ai/index.ts` — Edge Function self-contained (~655 linhas)
+  - `src/hooks/useRenewalPredictions.ts` — types + constants + 2 hooks (~140 linhas)
+  - `src/components/contracts/command-center/RenewalPredictionWidget.tsx` — widget Command Center (~210 linhas)
+- **Arquivos modificados** (6):
+  - `src/lib/clmPermissions.ts` — clm.renewal.predict no type, array e 6 roles
+  - `supabase/functions/_shared/clmPermissions.ts` — backend mirror
+  - `src/hooks/usePermissions.ts` — canPredictRenewals flag
+  - `src/components/contracts/command-center/index.ts` — barrel export RenewalPredictionWidget
+  - `src/pages/ClmCommandCenter.tsx` — import + render widget
+  - `src/components/contracts/ContractRenewalTab.tsx` — PredictionInsightCard + RenewalPredictionsSection
+- **Edge Functions — Versões atualizadas**:
+  - `predictive-renewals-ai` → version 1 (2 actions, rule-based scoring + IA recommendations, self-contained)
+- **Cronograma IA-Native**: F2 Item #3 ✅ concluído. Próximo: F2 Item #4 Predictive Analytics Inadimplência
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

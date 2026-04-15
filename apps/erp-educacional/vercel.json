@@ -1,0 +1,38 @@
+{
+  "functions": {
+    "api/financeiro/*.py": {
+      "runtime": "@vercel/python",
+      "maxDuration": 30
+    }
+  },
+  "crons": [
+    {
+      "path": "/api/cron/lgpd-purge",
+      "schedule": "0 2 * * *"
+    },
+    {
+      "path": "/api/cron/backup",
+      "schedule": "0 3 * * *"
+    },
+    {
+      "path": "/api/cron/key-rotation",
+      "schedule": "0 3 * * 0"
+    },
+    {
+      "path": "/api/financeiro/emit-boletos",
+      "schedule": "0 9 20 * *"
+    },
+    {
+      "path": "/api/financeiro/cron-inadimplencia",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/financeiro/cron-regua",
+      "schedule": "0 8 * * *"
+    },
+    {
+      "path": "/api/financeiro/cron-expirar-pix",
+      "schedule": "1 0 * * *"
+    }
+  ]
+}

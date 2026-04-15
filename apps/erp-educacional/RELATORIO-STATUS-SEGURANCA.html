@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Relatório de Status — Diploma Digital FIC</title>
+<style>
+  :root { --green: #22c55e; --red: #ef4444; --yellow: #eab308; --blue: #3b82f6; --gray: #6b7280; --dark: #1e293b; --bg: #f8fafc; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; background: var(--bg); color: var(--dark); line-height: 1.6; padding: 2rem; }
+  .container { max-width: 1000px; margin: 0 auto; }
+  h1 { font-size: 1.8rem; margin-bottom: 0.25rem; color: var(--dark); }
+  .subtitle { color: var(--gray); margin-bottom: 2rem; font-size: 0.95rem; }
+  .date { float: right; color: var(--gray); font-size: 0.85rem; margin-top: 0.3rem; }
+
+  /* Score Card */
+  .score-section { display: flex; gap: 1.5rem; margin-bottom: 2rem; flex-wrap: wrap; }
+  .score-card { background: white; border-radius: 12px; padding: 1.5rem; flex: 1; min-width: 200px; box-shadow: 0 1px 3px rgba(0,0,0,0.08); border-left: 4px solid var(--blue); }
+  .score-card.good { border-left-color: var(--green); }
+  .score-card.warn { border-left-color: var(--yellow); }
+  .score-card.bad { border-left-color: var(--red); }
+  .score-card .label { font-size: 0.8rem; text-transform: uppercase; letter-spacing: 0.05em; color: var(--gray); margin-bottom: 0.25rem; }
+  .score-card .value { font-size: 2rem; font-weight: 700; }
+  .score-card .detail { font-size: 0.85rem; color: var(--gray); margin-top: 0.25rem; }
+
+  /* Section */
+  .section { background: white; border-radius: 12px; padding: 1.5rem 2rem; margin-bottom: 1.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.08); }
+  .section h2 { font-size: 1.15rem; margin-bottom: 1rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e2e8f0; }
+  .section h3 { font-size: 0.95rem; margin: 1rem 0 0.5rem; color: var(--dark); }
+
+  /* Status Table */
+  table { width: 100%; border-collapse: collapse; margin: 0.5rem 0; }
+  th, td { text-align: left; padding: 0.6rem 0.8rem; font-size: 0.9rem; }
+  th { background: #f1f5f9; font-weight: 600; border-bottom: 2px solid #e2e8f0; }
+  td { border-bottom: 1px solid #f1f5f9; }
+  tr:last-child td { border-bottom: none; }
+
+  /* Badges */
+  .badge { display: inline-block; padding: 0.15rem 0.6rem; border-radius: 999px; font-size: 0.75rem; font-weight: 600; }
+  .badge-pass { background: #dcfce7; color: #166534; }
+  .badge-warn { background: #fef3c7; color: #92400e; }
+  .badge-fail { background: #fecaca; color: #991b1b; }
+  .badge-info { background: #dbeafe; color: #1e40af; }
+  .badge-na { background: #f1f5f9; color: #64748b; }
+
+  /* Checklist */
+  .check-item { display: flex; align-items: flex-start; gap: 0.5rem; margin: 0.4rem 0; font-size: 0.9rem; }
+  .check-icon { flex-shrink: 0; width: 20px; text-align: center; }
+
+  /* Progress bar */
+  .progress-bar { background: #e2e8f0; border-radius: 999px; height: 8px; overflow: hidden; margin: 0.5rem 0; }
+  .progress-fill { height: 100%; border-radius: 999px; transition: width 0.3s; }
+  .progress-fill.green { background: var(--green); }
+  .progress-fill.yellow { background: var(--yellow); }
+  .progress-fill.red { background: var(--red); }
+
+  /* Vuln list */
+  .vuln-item { padding: 0.5rem 0; border-bottom: 1px solid #f1f5f9; font-size: 0.88rem; }
+  .vuln-item:last-child { border-bottom: none; }
+  .vuln-pkg { font-weight: 600; }
+  .vuln-sev { margin-left: 0.5rem; }
+
+  /* Footer */
+  .footer { text-align: center; color: var(--gray); font-size: 0.8rem; margin-top: 2rem; padding-top: 1rem; border-top: 1px solid #e2e8f0; }
+</style>
+</head>
+<body>
+<div class="container">
+
+<span class="date">26 de Março de 2026</span>
+<h1>Diploma Digital FIC — Relatório de Status</h1>
+<p class="subtitle">Auditoria de Segurança + Verificação de Funcionalidade</p>
+
+<!-- ========== SCORE CARDS ========== -->
+<div class="score-section">
+  <div class="score-card good">
+    <div class="label">Nota de Segurança</div>
+    <div class="value" style="color: var(--green);">7.5 / 10</div>
+    <div class="detail">8 de 10 categorias aprovadas</div>
+  </div>
+  <div class="score-card good">
+    <div class="label">Build TypeScript</div>
+    <div class="value" style="color: var(--green);">0 erros</div>
+    <div class="detail">Código principal compila limpo</div>
+  </div>
+  <div class="score-card warn">
+    <div class="label">Vulnerabilidades npm</div>
+    <div class="value" style="color: var(--yellow);">11</div>
+    <div class="detail">0 críticas · 5 high · 4 moderate · 2 low</div>
+  </div>
+  <div class="score-card good">
+    <div class="label">Rotas API</div>
+    <div class="value" style="color: var(--blue);">104</div>
+    <div class="detail">25 arquivos de segurança · 3 cron jobs</div>
+  </div>
+</div>
+
+<!-- ========== SEGURANÇA ========== -->
+<div class="section">
+  <h2>1. Auditoria de Segurança — Resumo</h2>
+  <table>
+    <thead>
+      <tr><th>Categoria</th><th>Status</th><th>Detalhe</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Autenticação (Auth Guard)</strong></td>
+        <td><span class="badge badge-pass">APROVADO</span></td>
+        <td>100% das rotas migradas para <code>verificarAuth</code> / <code>verificarAuthComPermissao</code>. Legacy <code>requireAuth</code> não é mais usado em nenhuma rota.</td>
+      </tr>
+      <tr>
+        <td><strong>Sanitização de Erros</strong></td>
+        <td><span class="badge badge-pass">APROVADO</span></td>
+        <td>Usa <code>sanitizarErro()</code> e helpers genéricos. Alguns endpoints de baixo risco ainda revelam tipo de entidade em 404s (melhoria menor).</td>
+      </tr>
+      <tr>
+        <td><strong>Validação Zod</strong></td>
+        <td><span class="badge badge-warn">PARCIAL</span></td>
+        <td>Schemas existem em <code>zod-schemas.ts</code>, mas apenas ~6 rotas aplicam consistentemente. ~45 rotas de mutação usam validação manual.</td>
+      </tr>
+      <tr>
+        <td><strong>Proteção CSRF</strong></td>
+        <td><span class="badge badge-warn">PARCIAL</span></td>
+        <td>6 rotas protegidas de ~51 mutações. Middleware seta cookie CSRF mas validação é manual por rota. Não é sistemática.</td>
+      </tr>
+      <tr>
+        <td><strong>Rate Limiting</strong></td>
+        <td><span class="badge badge-pass">APROVADO</span></td>
+        <td>Upstash Redis com fallback in-memory. 6 categorias de limite (login: 5/min, api_write: 30/min, etc.). Bem implementado.</td>
+      </tr>
+      <tr>
+        <td><strong>Security Headers</strong></td>
+        <td><span class="badge badge-pass">EXCELENTE</span></td>
+        <td>CSP, HSTS (2 anos + preload), X-Frame-Options, CORP, COEP, COOP, Permissions-Policy. Padrão A+ no SecurityHeaders.com.</td>
+      </tr>
+      <tr>
+        <td><strong>RLS (Row Level Security)</strong></td>
+        <td><span class="badge badge-pass">APROVADO</span></td>
+        <td>12 tabelas críticas com RLS ativo. Isolamento por tenant via <code>get_user_tenant_ids()</code>. Funções SECURITY DEFINER.</td>
+      </tr>
+      <tr>
+        <td><strong>Secrets & Credenciais</strong></td>
+        <td><span class="badge badge-pass">APROVADO</span></td>
+        <td>Zero segredos hardcoded. Todos em variáveis de ambiente. Service role key nunca exposta no frontend.</td>
+      </tr>
+      <tr>
+        <td><strong>Security Logger</strong></td>
+        <td><span class="badge badge-pass">APROVADO</span></td>
+        <td>Logger centralizado com batching, 8 tipos de evento, níveis de risco, webhook para eventos críticos.</td>
+      </tr>
+      <tr>
+        <td><strong>Cadeia de Custódia</strong></td>
+        <td><span class="badge badge-pass">APROVADO</span></td>
+        <td>Sistema blockchain-like com SHA-256 hash chaining. 12 etapas do diploma. Tabela imutável com RLS.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== FUNCIONALIDADE ========== -->
+<div class="section">
+  <h2>2. Verificação de Funcionalidade</h2>
+
+  <h3>TypeScript — Compilação</h3>
+  <div class="check-item"><span class="check-icon" style="color:var(--green);">&#10003;</span> <strong>Código principal (src/):</strong> 0 erros de tipo. Compila 100% limpo.</div>
+  <div class="check-item"><span class="check-icon" style="color:var(--yellow);">&#9888;</span> <strong>Supabase Edge Functions (Deno):</strong> Erros esperados — TypeScript do Node não reconhece <code>Deno.*</code> e imports ESM. Isso é normal; as funções rodam no runtime Deno do Supabase.</div>
+  <div class="check-item"><span class="check-icon" style="color:var(--yellow);">&#9888;</span> <strong>Testes (__tests__/):</strong> Erros de tipo em mocks do vitest. Não afeta produção — precisa de configuração de tipos para vitest.</div>
+
+  <h3>Dependências (npm audit)</h3>
+  <table>
+    <thead><tr><th>Pacote</th><th>Severidade</th><th>Tipo</th><th>Fix</th></tr></thead>
+    <tbody>
+      <tr><td><code>next</code></td><td><span class="badge badge-fail">HIGH</span></td><td>Múltiplas vulnerabilidades no framework</td><td>Atualizar para 15.5.14+</td></tr>
+      <tr><td><code>glob</code></td><td><span class="badge badge-fail">HIGH</span></td><td>Command injection via CLI</td><td><code>npm audit fix --force</code></td></tr>
+      <tr><td><code>ai</code> (Vercel AI SDK)</td><td><span class="badge badge-warn">MODERATE</span></td><td>Bypass de whitelist de arquivos</td><td>Atualizar para v6 (breaking)</td></tr>
+      <tr><td><code>cookie</code></td><td><span class="badge badge-warn">MODERATE</span></td><td>Out-of-bounds chars</td><td>Atualizar @supabase/ssr</td></tr>
+      <tr><td><code>js-yaml</code></td><td><span class="badge badge-warn">MODERATE</span></td><td>Prototype pollution</td><td>Atualizar xmlbuilder2</td></tr>
+      <tr><td><code>jsondiffpatch</code></td><td><span class="badge badge-warn">MODERATE</span></td><td>XSS via HtmlFormatter</td><td>Atualizar ai SDK</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:0.85rem; color:var(--gray); margin-top:0.5rem;">Total: 11 vulnerabilidades (0 críticas, 5 high, 4 moderate, 2 low). A maioria requer breaking changes para corrigir.</p>
+
+  <h3>Infraestrutura</h3>
+  <div class="check-item"><span class="check-icon" style="color:var(--green);">&#10003;</span> <strong>Supabase Migrations:</strong> 11 arquivos prontos para aplicar (RLS, LGPD, security events, cadeia de custódia, backup log)</div>
+  <div class="check-item"><span class="check-icon" style="color:var(--green);">&#10003;</span> <strong>Edge Functions:</strong> 2 funções (lgpd-purge, backup-criptografado)</div>
+  <div class="check-item"><span class="check-icon" style="color:var(--green);">&#10003;</span> <strong>Cron Jobs (Vercel):</strong> 3 configurados — LGPD purge (2AM), backup (3AM), key rotation (dom 3AM)</div>
+  <div class="check-item"><span class="check-icon" style="color:var(--green);">&#10003;</span> <strong>GitHub Actions:</strong> 2 workflows ativos — security-scan.yml (OWASP ZAP), npm-audit.yml (auditoria diária)</div>
+  <div class="check-item"><span class="check-icon" style="color:var(--green);">&#10003;</span> <strong>Dependabot:</strong> Configurado para npm (semanal) e GitHub Actions (semanal)</div>
+  <div class="check-item"><span class="check-icon" style="color:var(--green);">&#10003;</span> <strong>Documentação:</strong> 17 documentos técnicos em docs/ (LGPD, WAF, RPC, Incidentes, etc.)</div>
+</div>
+
+<!-- ========== MÓDULOS DE SEGURANÇA ========== -->
+<div class="section">
+  <h2>3. Módulos de Segurança Implementados</h2>
+  <p style="font-size:0.9rem; color:var(--gray); margin-bottom:1rem;">25 arquivos em <code>src/lib/security/</code></p>
+  <table>
+    <thead><tr><th>Módulo</th><th>Arquivo</th><th>Função</th></tr></thead>
+    <tbody>
+      <tr><td>Auth Guard</td><td><code>api-guard.ts</code></td><td>Autenticação + RBAC unificados</td></tr>
+      <tr><td>Audit Trail</td><td><code>audit-trail.ts</code></td><td>Trilha de auditoria completa</td></tr>
+      <tr><td>Cadeia de Custódia</td><td><code>cadeia-custodia.ts</code></td><td>Hash chain SHA-256 para diplomas</td></tr>
+      <tr><td>Certificados ICP-Brasil</td><td><code>icp-brasil.ts</code></td><td>Validação de certificados digitais</td></tr>
+      <tr><td>Certificate Chain</td><td><code>certificate-chain.ts</code></td><td>Validação de cadeia de certificados</td></tr>
+      <tr><td>CRL/OCSP</td><td><code>certificate-revocation.ts</code></td><td>Verificação de revogação</td></tr>
+      <tr><td>CSRF</td><td><code>csrf.ts</code></td><td>Double Submit Cookie pattern</td></tr>
+      <tr><td>Cloudflare Headers</td><td><code>cloudflare-headers.ts</code></td><td>Threat score, country, IP validation</td></tr>
+      <tr><td>Fetch Seguro</td><td><code>fetch-seguro.ts</code></td><td>HTTP client com timeouts e retry</td></tr>
+      <tr><td>Key Rotation</td><td><code>key-rotation.ts</code> / <code>worker</code></td><td>Rotação de chaves PII (AES-256-GCM)</td></tr>
+      <tr><td>LGPD</td><td><code>lgpd.ts</code></td><td>Gestão de dados pessoais e purge</td></tr>
+      <tr><td>PII Encryption</td><td><code>pii-encryption.ts</code></td><td>Criptografia de dados sensíveis</td></tr>
+      <tr><td>Rate Limiting</td><td><code>rate-limit.ts</code> / <code>middleware</code></td><td>Upstash Redis + fallback</td></tr>
+      <tr><td>Request Signing</td><td><code>request-signing.ts</code></td><td>Assinatura HMAC de requests</td></tr>
+      <tr><td>Sanitize Error</td><td><code>sanitize-error.ts</code></td><td>Prevenção de info leak</td></tr>
+      <tr><td>Security Logger</td><td><code>security-logger.ts</code></td><td>Logging centralizado de eventos</td></tr>
+      <tr><td>Validate Request</td><td><code>validate-request.ts</code></td><td>Validação de input com Zod</td></tr>
+      <tr><td>Zod Schemas</td><td><code>zod-schemas.ts</code></td><td>10+ schemas de validação</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== O QUE FALTA ========== -->
+<div class="section">
+  <h2>4. O Que Falta para Segurança Máxima</h2>
+
+  <h3 style="color: var(--red);">Prioridade ALTA (fazer antes de produção)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Item</th><th>Esforço</th><th>Impacto</th></tr></thead>
+    <tbody>
+      <tr><td>A1</td><td><strong>Aplicar Zod validation em todas as rotas de mutação</strong> — ~45 rotas POST/PUT/PATCH sem validação Zod. Schemas já existem, falta integrar.</td><td>4-6h</td><td>Crítico</td></tr>
+      <tr><td>A2</td><td><strong>Sistematizar CSRF em todas as mutações</strong> — Mover validação CSRF para middleware ou <code>protegerRota()</code> para cobrir automaticamente todas as rotas.</td><td>2-3h</td><td>Crítico</td></tr>
+      <tr><td>A3</td><td><strong>Atualizar Next.js</strong> — 5 vulnerabilidades HIGH no framework. Requer <code>npm audit fix --force</code> ou upgrade manual.</td><td>2-4h</td><td>Alto</td></tr>
+      <tr><td>A4</td><td><strong>Aplicar migrations no Supabase</strong> — 7 migrations de segurança prontas mas ainda não aplicadas no banco (RLS, security_events, cadeia_custodia, etc.)</td><td>30min</td><td>Crítico</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color: var(--yellow);">Prioridade MÉDIA</h3>
+  <table>
+    <thead><tr><th>#</th><th>Item</th><th>Esforço</th></tr></thead>
+    <tbody>
+      <tr><td>M1</td><td>Padronizar mensagens 404 genéricas em todas as rotas (não revelar tipo de entidade)</td><td>2h</td></tr>
+      <tr><td>M2</td><td>Integrar security logger em mais rotas de mutação sistematicamente</td><td>2h</td></tr>
+      <tr><td>M3</td><td>Configurar Sentry/monitoring para alertas em tempo real</td><td>2h</td></tr>
+      <tr><td>M4</td><td>Health check endpoint (/api/health) para monitoramento</td><td>30min</td></tr>
+      <tr><td>M5</td><td>Atualizar dependências com vulnerabilidades moderate (cookie, js-yaml, ai SDK)</td><td>2-4h</td></tr>
+    </tbody>
+  </table>
+
+  <h3 style="color: var(--blue);">Prioridade BAIXA (melhorias futuras)</h3>
+  <table>
+    <thead><tr><th>#</th><th>Item</th><th>Esforço</th></tr></thead>
+    <tbody>
+      <tr><td>B1</td><td>CORS configuration explícito para domínios permitidos</td><td>1h</td></tr>
+      <tr><td>B2</td><td>Cookie security flags (HttpOnly, Secure, SameSite) — verificar cobertura completa</td><td>1h</td></tr>
+      <tr><td>B3</td><td>File upload security (validação de tipo, tamanho, scan de malware)</td><td>3h</td></tr>
+      <tr><td>B4</td><td>Request size limits por rota</td><td>1h</td></tr>
+      <tr><td>B5</td><td>LGPD compliance UI (portal de direitos do titular)</td><td>8h</td></tr>
+      <tr><td>B6</td><td>Session management melhorado (timeout, concurrent sessions)</td><td>3h</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== STATUS DOS MÓDULOS ========== -->
+<div class="section">
+  <h2>5. Status dos Módulos do Diploma Digital</h2>
+  <table>
+    <thead><tr><th>Módulo</th><th>Status</th><th>Progresso</th></tr></thead>
+    <tbody>
+      <tr>
+        <td><strong>Painel Administrativo (Web)</strong></td>
+        <td><span class="badge badge-pass">FUNCIONAL</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill green" style="width:85%"></div></div>
+          85% — Dashboard, CRUD completo, RBAC, multi-tenancy
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Motor de Geração XML</strong></td>
+        <td><span class="badge badge-pass">FUNCIONAL</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill green" style="width:90%"></div></div>
+          90% — XSD v1.05, 3 XMLs obrigatórios, validação completa
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Módulo de Assinatura Digital</strong></td>
+        <td><span class="badge badge-info">EM PROGRESSO</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill yellow" style="width:60%"></div></div>
+          60% — ICP-Brasil, CRL/OCSP, cadeia de certificados. Falta integração API terceiros (BRy/Soluti)
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Gerador de RVDD (PDF)</strong></td>
+        <td><span class="badge badge-info">EM PROGRESSO</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill yellow" style="width:50%"></div></div>
+          50% — Visualização básica funcional. Falta layout oficial MEC completo
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Portal Público / Verificação</strong></td>
+        <td><span class="badge badge-pass">FUNCIONAL</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill green" style="width:80%"></div></div>
+          80% — Busca por CPF, validação XML, visualização de diploma, card estilo MEC
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Segurança & Compliance</strong></td>
+        <td><span class="badge badge-pass">AVANÇADO</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill green" style="width:75%"></div></div>
+          75% — Auth, RLS, LGPD, headers, rate limit, cadeia de custódia, CI/CD security
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Repositório Público (HTTPS)</strong></td>
+        <td><span class="badge badge-na">PENDENTE</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill" style="width:10%; background:var(--gray)"></div></div>
+          10% — RPCs públicas criadas, falta endpoint HTTPS de consulta oficial
+        </td>
+      </tr>
+      <tr>
+        <td><strong>Portal do Diplomado</strong></td>
+        <td><span class="badge badge-na">PENDENTE</span></td>
+        <td>
+          <div class="progress-bar"><div class="progress-fill" style="width:5%; background:var(--gray)"></div></div>
+          5% — Apenas planejado. Login do diplomado + acesso ao diploma
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== COMMITS RECENTES ========== -->
+<div class="section">
+  <h2>6. Commits Recentes (Segurança)</h2>
+  <table>
+    <thead><tr><th>Hash</th><th>Mensagem</th></tr></thead>
+    <tbody>
+      <tr><td><code>54de30b</code></td><td>Add OWASP ZAP security scan workflow (via GitHub UI)</td></tr>
+      <tr><td><code>npm-audit</code></td><td>Add npm dependency audit workflow (via GitHub UI)</td></tr>
+      <tr><td><code>6eacc66</code></td><td>security: CRL/OCSP, cadeia de custódia, backup criptografado, resposta a incidentes, Dependabot</td></tr>
+      <tr><td><code>17934ba</code></td><td>security: implementação completa Fases 1-2 + pendências finais (P1-P8)</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- ========== RESUMO EXECUTIVO ========== -->
+<div class="section" style="border-left: 4px solid var(--blue);">
+  <h2>7. Resumo Executivo</h2>
+  <p style="font-size:0.95rem; line-height:1.8;">
+    O sistema de Diploma Digital da FIC está em estágio avançado de desenvolvimento, com uma base de segurança sólida: autenticação unificada com RBAC, headers de segurança nível A+, RLS no banco de dados, rate limiting distribuído, cadeia de custódia blockchain-like, e pipeline de CI/CD com OWASP ZAP.
+  </p>
+  <p style="font-size:0.95rem; line-height:1.8; margin-top:0.5rem;">
+    Para atingir segurança máxima antes de produção, os 4 itens de prioridade ALTA devem ser endereçados: sistematizar Zod e CSRF em todas as rotas, atualizar Next.js, e aplicar as migrations de segurança no Supabase. O motor de XML (XSD v1.05) e o portal público já estão funcionais. Os próximos marcos são a integração com API de assinatura digital (BRy/Soluti) e o layout oficial do RVDD.
+  </p>
+</div>
+
+<div class="footer">
+  Gerado por Claude (Opus 4) — Arquiteto-chefe do Projeto Diploma Digital FIC<br>
+  26 de Março de 2026
+</div>
+
+</div>
+</body>
+</html>

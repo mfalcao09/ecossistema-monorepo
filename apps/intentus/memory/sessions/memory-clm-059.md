@@ -1,0 +1,64 @@
+# Sessão 59 — F2 Item #2: Smart Notifications v2 (14/03/2026)
+
+- **Objetivo**: Implementar segundo item da Fase 2 do cronograma IA-Native: Upgrade completo do sistema de notificações com priority scoring, urgency ranking, snooze, grouping, quiet hours e email digest inteligente
+- **Decisões do Marcelo** (via AskUserQuestion em sessão anterior):
+  - Escopo: "Completo (Recomendado)" — ranking por urgência, personalização por role, snooze/schedule, grouping, quiet hours, smart digest
+  - Triggers: "Todos os abaixo (Recomendado)" — compliance violations, obligations, deals, payments, renewals, AI insights
+- **Database migration** (via Supabase MCP em sessão anterior):
+  - 4 novas colunas em `notifications`: `priority` (text, default 'normal'), `urgency_score` (int, default 50), `group_key` (text), `snoozed_until` (timestamptz)
+  - 3 novas colunas em `notification_preferences`: `quiet_hours_enabled` (bool, default false), `quiet_hours_start` (text), `quiet_hours_end` (text)
+  - Índices: `idx_notifications_priority` (user_id, priority WHERE NOT read), `idx_notifications_snoozed` (user_id, snoozed_until WHERE snoozed_until IS NOT NULL)
+- **Backend — `clm-auto-notifications/index.ts` v2** (REESCRITO — 433→956 linhas, deployada em sessão anterior):
+  - 10 triggers originais + 6 novos: compliance violations, obligation changes, deal status, payment received, renewal window, AI insights
+  - Priority scoring (critical/high/normal/low) + urgency_score (0-100)
+  - Role-based targeting via `getTenantUsers()` (gerentes recebem compliance, corretores recebem deals)
+  - group_key para notificações similares (ex: `obligation_overdue_monthly`, `compliance_scan_{date}`)
+- **Backend — `send-notification-digest/index.ts` v2** (REESCRITO — 272→574 linhas, deployada como version 2):
+  - Snoozed filtering (snoozed_until > now excluded)
+  - Quiet hours check (critical bypasses, non-critical held). America/Sao_Paulo timezone com midnight-crossing
+  - group_key collapsing (highest urgency_score as representative, "+N similares" suffix)
+  - Priority-sorted categories (alerta→vencimento→aprovacao→cobranca→contrato→ia→sistema)
+  - Urgency banner ("⚡ Atenção: Você tem N críticas...")
+  - Color-coded priority badges (red=CRÍTICO, orange=ALTO), left border on critical/high items
+  - Dynamic email subject (🚨/⚠️/📬 prefixes by highest priority)
+  - Critical override: always passes user preferences (email_enabled, frequency)
+- **Frontend — `useNotifications.ts` (REESCRITO — 324→~480 linhas)**:
+  - `Notification` interface expandida: `priority`, `urgency_score`, `group_key`, `snoozed_until`
+  - `GroupedNotification` interface com `is_grouped`, `group_count`
+  - `NotificationPriority` type + constants: `PRIORITY_ORDER`, `PRIORITY_LABELS`, `PRIORITY_COLORS`, `SNOOZE_OPTIONS`
+  - `useNotifications()` com opções: `hideSnoozed`, `sortByPriority`, `grouped` — post-processing via useMemo
+  - `useSnoozeNotification()` — mutation com duration parser ("1h", "4h", "1d", "1w")
+  - `useUnsnoozeNotification()` — cancelar snooze
+  - `usePriorityCounts()` — contagem de critical/high/normal/low/snoozed não-lidas
+  - `sortByPriorityAndUrgency()` — sort por priority order → urgency_score desc → created_at desc
+  - `collapseByGroupKey()` — agrupa por group_key, usa highest urgency como representativo
+  - `isSnoozed()`, `parseSnoozeDuration()`, `normalizePriority()` helpers
+  - `createNotification()` expandida com `priority`, `urgencyScore`, `groupKey` params
+  - `getNotificationLink()` expandida com compliance, obligation, deal reference types
+  - Toast priority-aware: critical 10s + 🚨, high 7s + ⚠️, normal 5s
+- **Frontend — `NotificationCenter.tsx` (REESCRITO — 349→~380 linhas)**:
+  - `PriorityBadge` component (red/orange/blue/gray badges)
+  - Priority-aware item styling: critical=red left border + bg-red-50, high=orange border + bg-orange-50
+  - Snooze dropdown per notification (1h, 4h, Amanhã, 1 semana) via DropdownMenu
+  - Snoozed items shown dimmed with BellOff icon + "Adiada" label
+  - `PrioritySummary` bar: 🚨 N críticas, ⚠️ N altas, snoozed count
+  - Search bar with input filter (title + message)
+  - Grouping toggle button (Layers icon, gold when active)
+  - Urgency score display for score ≥80
+  - Footer with "Por prioridade" indicator
+  - Popover width increased 400→420px
+- **Frontend — `NotificationPreferences.tsx` (MODIFICADO — 270→~350 linhas)**:
+  - `QuietHoursSection` component: enable/disable switch, time inputs (start/end), "Fuso: Brasília" label
+  - Moon icon, description explaining critical bypass
+  - Saves quiet hours to all preferences (shared setting)
+  - `NotificationPreference` interface expanded: `quiet_hours_enabled`, `quiet_hours_start`, `quiet_hours_end`
+- **Edge Functions — Versões atualizadas**:
+  - `clm-auto-notifications` → version 2 (16 triggers, priority/urgency scoring, role-based targeting)
+  - `send-notification-digest` → version 2 (smart ranking, grouping, quiet hours, critical override)
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos modificados** (3 frontend):
+  - `src/hooks/useNotifications.ts` — reescrito com v2 types, hooks, helpers
+  - `src/components/notifications/NotificationCenter.tsx` — reescrito com v2 UI
+  - `src/components/notifications/NotificationPreferences.tsx` — quiet hours section
+- **Cronograma IA-Native**: F2 Item #2 ✅ concluído. Próximo: F2 Item #3 Predictive Analytics Renovações
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

@@ -1,0 +1,1072 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intentus Real Estate — Plano de Implantação, Gaps & Crescimento</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  :root {
+    --bg: #0A0A0B; --surface: #141416; --surface-2: #1C1C1F; --border: #2A2A2E;
+    --text: #E8E8ED; --text-secondary: #9898A0; --accent: #3B82F6; --accent-light: #60A5FA;
+    --green: #22C55E; --red: #EF4444; --yellow: #F59E0B; --purple: #A855F7; --cyan: #06B6D4;
+    --orange: #F97316; --pink: #EC4899;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero {
+    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+    padding: 70px 40px; text-align: center; border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.15) 0%, transparent 70%); }
+  .hero h1 { font-size: 2.4rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; position: relative; background: linear-gradient(135deg, #fff 0%, #60A5FA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .subtitle { font-size: 1.05rem; color: var(--text-secondary); font-weight: 300; position: relative; }
+  .hero .tagline { font-size: 0.82rem; color: var(--accent-light); margin-top: 12px; position: relative; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 45px 40px; }
+  .nav-tabs { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; padding: 14px 24px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .nav-tab { padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.78rem; font-weight: 500; color: var(--text-secondary); background: transparent; border: 1px solid transparent; transition: all 0.2s; white-space: nowrap; }
+  .nav-tab:hover { color: var(--text); background: var(--surface-2); }
+  .nav-tab.active { color: var(--accent-light); background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); }
+  .section { display: none; } .section.active { display: block; }
+  h2 { font-size: 1.65rem; font-weight: 700; margin-bottom: 24px; letter-spacing: -0.02em; color: #fff; }
+  h3 { font-size: 1.15rem; font-weight: 600; margin: 24px 0 12px; color: var(--accent-light); }
+  h4 { font-size: 0.98rem; font-weight: 600; margin: 18px 0 8px; color: var(--text); }
+  p { margin-bottom: 12px; color: var(--text-secondary); font-size: 0.9rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 16px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 14px; margin-bottom: 24px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 18px; text-align: center; }
+  .metric-value { font-size: 1.8rem; font-weight: 800; color: var(--accent-light); margin-bottom: 2px; }
+  .metric-label { font-size: 0.78rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+  table.ct { width: 100%; border-collapse: collapse; margin: 18px 0; font-size: 0.83rem; }
+  table.ct th { background: var(--surface-2); padding: 10px 12px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); white-space: nowrap; }
+  table.ct td { padding: 9px 12px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  table.ct tr:hover td { background: rgba(59,130,246,0.05); }
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
+  .badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: var(--yellow); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--accent-light); }
+  .badge-purple { background: rgba(168,85,247,0.15); color: var(--purple); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-orange { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .highlight-box { background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(168,85,247,0.08) 100%); border: 1px solid rgba(59,130,246,0.2); border-radius: 12px; padding: 20px; margin: 20px 0; }
+  .highlight-box p { color: var(--text); margin-bottom: 0; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 5px 0 5px 24px; position: relative; color: var(--text-secondary); font-size: 0.86rem; }
+  .checklist li::before { content: '▸'; position: absolute; left: 0; color: var(--accent); font-weight: 700; }
+  .gap-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 22px; margin-bottom: 14px; border-left: 4px solid; }
+  .gap-card.critical { border-left-color: var(--red); }
+  .gap-card.high { border-left-color: var(--orange); }
+  .gap-card.medium { border-left-color: var(--yellow); }
+  .gap-card.low { border-left-color: var(--green); }
+  .phase-block { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 20px; border-left: 4px solid var(--accent); position: relative; }
+  .phase-tag { padding: 3px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 8px; }
+  .cost-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 8px 0; border-bottom: 1px solid rgba(255,255,255,0.05); align-items: center; }
+  .cost-row:last-child { border-bottom: none; }
+  .cost-label { font-size: 0.85rem; color: var(--text-secondary); }
+  .cost-value { font-size: 0.9rem; font-weight: 600; color: var(--accent-light); text-align: right; }
+  .cost-total { font-size: 1.1rem; font-weight: 800; color: var(--green); }
+  .timeline-item { display: grid; grid-template-columns: 80px 1fr; gap: 16px; margin-bottom: 16px; }
+  .timeline-month { font-size: 0.8rem; font-weight: 700; color: var(--accent-light); padding-top: 3px; }
+  .timeline-content { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 14px 18px; }
+  .verdict-box { background: linear-gradient(135deg, rgba(34,197,94,0.08) 0%, rgba(59,130,246,0.08) 100%); border: 1px solid rgba(34,197,94,0.25); border-radius: 12px; padding: 22px; margin: 20px 0; }
+  .verdict-box h4 { color: var(--green); margin-top: 0; }
+  .org-chart { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 12px; margin: 18px 0; }
+  .org-card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .org-role { font-size: 0.82rem; font-weight: 700; color: var(--text); margin-bottom: 2px; }
+  .org-detail { font-size: 0.74rem; color: var(--text-secondary); }
+  .org-cost { font-size: 0.9rem; font-weight: 700; color: var(--accent-light); margin-top: 6px; }
+  .footer-note { text-align: center; padding: 40px; color: var(--text-secondary); font-size: 0.78rem; border-top: 1px solid var(--border); margin-top: 50px; }
+  @media (max-width: 768px) { .hero h1 { font-size: 1.5rem; } .container { padding: 24px 16px; } .nav-tab { padding: 6px 10px; font-size: 0.7rem; } .timeline-item { grid-template-columns: 1fr; } .timeline-month { padding-bottom: 4px; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tagline">Análise Operacional & Plano de Execução</div>
+  <h1>Intentus Real Estate</h1>
+  <p class="subtitle">O que falta, por onde começar e como crescer — passo a passo</p>
+</div>
+
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="showSection('gaps')">1. O que Falta</div>
+  <div class="nav-tab" onclick="showSection('seguranca')">Segurança</div>
+  <div class="nav-tab" onclick="showSection('analise')">Análise de Verticais</div>
+  <div class="nav-tab" onclick="showSection('implantacao')">2. Plano de Implantação</div>
+  <div class="nav-tab" onclick="showSection('modulos')">Módulos Detalhados</div>
+  <div class="nav-tab" onclick="showSection('infra')">3. Infraestrutura</div>
+  <div class="nav-tab" onclick="showSection('pessoas')">Pessoas</div>
+  <div class="nav-tab" onclick="showSection('custos')">Custos Detalhados</div>
+  <div class="nav-tab" onclick="showSection('empresa')">Estruturação</div>
+</div>
+
+<!-- ===== SEÇÃO 1: O QUE FALTA ===== -->
+<div id="gaps" class="section active">
+<div class="container">
+  <h2>1. O que Falta — Ferramentas, Tecnologias, Segurança e Inputs</h2>
+
+  <div class="highlight-box">
+    <p><strong>Diagnóstico:</strong> O Intentus hoje tem 11 módulos desenhados e Power BI como BI primário, focados em incorporação. Para se tornar a plataforma do ecossistema imobiliário, existem gaps significativos em 4 camadas: tecnologia/stack, segurança/compliance, ferramentas/funcionalidades, e dados/inputs necessários.</p>
+  </div>
+
+  <h3>Gaps Críticos — Tecnologia & Stack</h3>
+
+  <div class="gap-card critical">
+    <h4 style="color:var(--red); margin-top:0;">🔴 Arquitetura base inexistente</h4>
+    <p>O Intentus não tem codebase. Precisa de toda a infraestrutura fundacional antes de qualquer módulo funcional.</p>
+    <ul class="checklist">
+      <li><strong>Multi-tenancy framework:</strong> Isolamento de dados por cliente é obrigatório para SaaS B2B. Duas abordagens: schema-per-tenant (mais seguro, mais caro) ou row-level security (mais eficiente, requer rigor)</li>
+      <li><strong>IAM (Identity & Access Management):</strong> RBAC (Role-Based Access Control) com granularidade por módulo, vertical e ação. Multi-fator obrigatório para verticais de capital markets</li>
+      <li><strong>Event bus / Message broker:</strong> Kafka ou RabbitMQ para comunicação assíncrona entre módulos. Essencial para que incorporação "converse" com locação sem acoplamento</li>
+      <li><strong>API Gateway:</strong> Kong, AWS API Gateway ou custom com rate limiting, versionamento, autenticação por API key e OAuth2</li>
+      <li><strong>CI/CD Pipeline:</strong> GitHub Actions ou GitLab CI com testes automatizados, staging, e deploy automatizado para Kubernetes ou ECS</li>
+      <li><strong>Monitoramento e Observabilidade:</strong> Datadog ou Grafana+Prometheus para métricas de infra; Sentry para error tracking; OpenTelemetry para tracing distribuído</li>
+    </ul>
+  </div>
+
+  <div class="gap-card critical">
+    <h4 style="color:var(--red); margin-top:0;">🔴 BI Nativo — substituir Power BI</h4>
+    <p>Power BI como BI primário é um dos maiores gaps. Cria dependência de licença Microsoft, experiência fragmentada e custo por usuário.</p>
+    <ul class="checklist">
+      <li><strong>Opção 1 — Embedded analytics (Metabase/Apache Superset):</strong> Open-source, embedável no Intentus, customizável. Custo: R$0 (self-hosted) ou R$500-2000/mês (cloud)</li>
+      <li><strong>Opção 2 — Custom dashboards (React + Recharts/D3.js):</strong> 100% controle, UX premium, mas exige mais dev time. Ideal para dashboards core</li>
+      <li><strong>Opção 3 — Cube.js como camada semântica:</strong> Headless BI que serve dados para qualquer frontend. Melhor equilíbrio entre flexibilidade e velocidade</li>
+      <li><strong>Recomendação:</strong> Cube.js (camada de dados) + custom React dashboards (UX premium) + Metabase (relatórios ad-hoc para power users)</li>
+    </ul>
+  </div>
+
+  <div class="gap-card critical">
+    <h4 style="color:var(--red); margin-top:0;">🔴 Motor de IA / ML Pipeline</h4>
+    <p>IA como diferencial precisa de infraestrutura dedicada, não apenas chamadas a APIs externas.</p>
+    <ul class="checklist">
+      <li><strong>ML Pipeline:</strong> MLflow ou Kubeflow para treinamento, versionamento e deploy de modelos</li>
+      <li><strong>Feature Store:</strong> Armazenamento de features para modelos de precificação, score de risco e recomendação</li>
+      <li><strong>LLM Integration:</strong> Anthropic Claude ou OpenAI para geração de documentos, análise de contratos, due diligence assistida. Via API com fallback entre providers</li>
+      <li><strong>Vector Database:</strong> Pinecone ou Weaviate para RAG (Retrieval Augmented Generation) sobre documentos imobiliários</li>
+      <li><strong>Modelos core necessários:</strong> Precificação comparativa (regressão), Score de risco/inadimplência (classificação), Detecção de anomalias em transações (compliance), Extração de dados de documentos (OCR + NLP)</li>
+    </ul>
+  </div>
+
+  <div class="gap-card high">
+    <h4 style="color:var(--orange); margin-top:0;">🟠 Document Management System (DMS)</h4>
+    <p>Cada vertical gera volumes enormes de documentos. Precisa de GED (Gestão Eletrônica de Documentos) robusta.</p>
+    <ul class="checklist">
+      <li><strong>Storage:</strong> AWS S3 com lifecycle policies (documentos ativos vs. arquivo morto)</li>
+      <li><strong>OCR:</strong> Textract (AWS) ou Google Document AI para extração automática de dados de contratos, matrículas, certidões</li>
+      <li><strong>Assinatura eletrônica:</strong> Integração com Clicksign ou DocuSign (ICP-Brasil para validade jurídica plena)</li>
+      <li><strong>Versionamento:</strong> Controle de versão de contratos com diff visual</li>
+      <li><strong>Templates:</strong> Engine de geração de documentos a partir de templates (minutas, relatórios CVM, laudos)</li>
+    </ul>
+  </div>
+
+  <div class="gap-card high">
+    <h4 style="color:var(--orange); margin-top:0;">🟠 BaaS (Banking as a Service) Engine</h4>
+    <p>Funcionalidades financeiras embedded são diferencial competitivo massivo.</p>
+    <ul class="checklist">
+      <li><strong>Emissão de boletos:</strong> Via API de bank-as-a-service (Celcoin, Asaas, ou Pagarme)</li>
+      <li><strong>Conciliação bancária automatizada:</strong> Matching automático entre pagamentos e contratos via OFX/CNAB</li>
+      <li><strong>Split de pagamentos:</strong> Divisão automática entre proprietário, administradora, fundo de reserva</li>
+      <li><strong>Pix integrado:</strong> QR codes dinâmicos com conciliação em tempo real</li>
+      <li><strong>Conta escrow:</strong> Para patrimônio de afetação e operações de incorporação</li>
+      <li><strong>DIMOB / NF-e:</strong> Geração automática de declarações fiscais obrigatórias</li>
+    </ul>
+  </div>
+
+  <div class="gap-card high">
+    <h4 style="color:var(--orange); margin-top:0;">🟠 Integrações Essenciais (Camada 2)</h4>
+    <ul class="checklist">
+      <li><strong>Portais imobiliários:</strong> ZAP Imóveis, OLX, VivaReal (API de publicação de anúncios)</li>
+      <li><strong>Cartórios:</strong> e-Notariado e Registro de Imóveis Eletrônico (SREI)</li>
+      <li><strong>Bureaus de crédito:</strong> Serasa Experian, Boa Vista para análise de inquilinos/compradores</li>
+      <li><strong>Seguradoras:</strong> APIs de seguro fiança (Porto Seguro, Tokio Marine)</li>
+      <li><strong>Bancos:</strong> APIs bancárias para acompanhamento de financiamento e repasse</li>
+      <li><strong>CVM / B3:</strong> Para compliance automatizado de FIIs (vertical Capital Markets)</li>
+      <li><strong>Prefeituras:</strong> NF-e, IPTU, certidões (via APIs municipais ou scraping regulado)</li>
+      <li><strong>ERPs:</strong> Coexistência com Sienge, Totvs, SAP (não substituição — migração gradual)</li>
+    </ul>
+  </div>
+
+  <div class="gap-card medium">
+    <h4 style="color:var(--yellow); margin-top:0;">🟡 Inputs / Dados Necessários</h4>
+    <p>O Intentus precisa de fontes de dados externas para alimentar IA e benchmarking.</p>
+    <ul class="checklist">
+      <li><strong>Dados de mercado imobiliário:</strong> FIPE ZAP (preços), SECOVI (indicadores setoriais), CBIC (construção)</li>
+      <li><strong>Dados macroeconômicos:</strong> Selic, IPCA, IGPM, INCC via APIs do BCB e IBGE</li>
+      <li><strong>Dados de FIIs:</strong> B3 (cotações, proventos), CVM (informes mensais, anuais)</li>
+      <li><strong>Dados cadastrais:</strong> CNPJ via Receita Federal, geolocalização via Google Maps/Here</li>
+      <li><strong>Dados judiciais:</strong> APIs de tribunais (TJ, STJ) para tracking de processos em distressed/leilões</li>
+      <li><strong>Dados de leilões:</strong> Web scraping estruturado de leiloeiros oficiais (Sato, Zukerman, Mega Leilões)</li>
+    </ul>
+  </div>
+
+  <div class="gap-card medium">
+    <h4 style="color:var(--yellow); margin-top:0;">🟡 Comunicação Multi-Canal (via Nexvy)</h4>
+    <ul class="checklist">
+      <li><strong>WhatsApp Business API:</strong> Notificações transacionais (boleto gerado, contrato pronto, assembleia)</li>
+      <li><strong>Email transacional:</strong> SendGrid ou Amazon SES para automações (réguas de cobrança, lembretes)</li>
+      <li><strong>Push notifications:</strong> Firebase Cloud Messaging para app mobile</li>
+      <li><strong>SMS:</strong> Backup para notificações críticas (vencimento, convocação de assembleia)</li>
+      <li><strong>In-app notifications:</strong> Centro de notificações dentro da plataforma</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ===== SEGURANÇA ===== -->
+<div id="seguranca" class="section">
+<div class="container">
+  <h2>Gaps de Segurança & Compliance</h2>
+
+  <div class="highlight-box">
+    <p><strong>Por que isso importa:</strong> O Intentus vai lidar com dados sensíveis de compradores, inquilinos, cotistas, transações financeiras, e informações reguladas pela CVM. Segurança não é feature — é pré-requisito para vender para gestoras e fundos.</p>
+  </div>
+
+  <div class="gap-card critical">
+    <h4 style="color:var(--red); margin-top:0;">🔴 LGPD — Lei Geral de Proteção de Dados</h4>
+    <p>Obrigatório para qualquer SaaS no Brasil. A ANPD está intensificando fiscalizações.</p>
+    <ul class="checklist">
+      <li><strong>DPO (Encarregado de Dados):</strong> Nomear um responsável (pode ser terceirizado inicialmente)</li>
+      <li><strong>Mapeamento de dados:</strong> Inventário completo de quais dados pessoais são coletados, onde armazenados, por quanto tempo, com quem compartilhados</li>
+      <li><strong>Consentimento:</strong> Mecanismo de coleta e gestão de consentimento (opt-in explícito)</li>
+      <li><strong>Direitos do titular:</strong> Portal/API para que titulares exerçam direitos (acesso, correção, exclusão, portabilidade)</li>
+      <li><strong>Privacy by Design:</strong> Pseudonimização de dados sensíveis, minimização de coleta, retenção limitada</li>
+      <li><strong>RIPD:</strong> Relatório de Impacto à Proteção de Dados para operações de alto risco</li>
+      <li><strong>Custo estimado:</strong> R$ 15.000-40.000 para implementação inicial + R$ 2.000-5.000/mês manutenção</li>
+    </ul>
+  </div>
+
+  <div class="gap-card critical">
+    <h4 style="color:var(--red); margin-top:0;">🔴 SOC 2 Type II</h4>
+    <p>Certificação que gestoras e fundos exigem para contratar SaaS. Sem ela, o ciclo de vendas para Capital Markets e Gestão de Ativos será 3-5x mais longo.</p>
+    <ul class="checklist">
+      <li><strong>Trust Service Criteria:</strong> Security (obrigatório), Availability, Processing Integrity, Confidentiality, Privacy</li>
+      <li><strong>Cronograma:</strong> 6-12 meses da decisão até o relatório Type II</li>
+      <li><strong>Etapas:</strong> Gap analysis → Remediação → Implementação de controles → Audit window (3-12 meses) → Relatório</li>
+      <li><strong>Controles técnicos:</strong> Encryption at rest (AES-256) e in transit (TLS 1.3), MFA para todos os acessos, Logging centralizado, Vulnerability scanning, Incident response plan</li>
+      <li><strong>Custo estimado:</strong> US$ 30.000-50.000 (R$ 165.000-275.000) para startup, incluindo ferramentas de compliance automation (Vanta, Drata ou Sprinto)</li>
+      <li><strong>Timing ideal:</strong> Iniciar preparação na Fase 2 (mês 9), obter Type I na Fase 3, Type II na Fase 4</li>
+    </ul>
+  </div>
+
+  <div class="gap-card high">
+    <h4 style="color:var(--orange); margin-top:0;">🟠 Segurança da Aplicação</h4>
+    <ul class="checklist">
+      <li><strong>OWASP Top 10:</strong> Proteção contra SQL injection, XSS, CSRF, broken authentication — testes automatizados no CI/CD</li>
+      <li><strong>WAF (Web Application Firewall):</strong> AWS WAF ou Cloudflare para proteção de borda</li>
+      <li><strong>Rate Limiting & DDoS:</strong> Proteção contra abuso de APIs e ataques volumétricos</li>
+      <li><strong>Secret Management:</strong> AWS Secrets Manager ou HashiCorp Vault para chaves, tokens, credentials</li>
+      <li><strong>Penetration Testing:</strong> Pentests anuais obrigatórios, idealmente semestrais. Custo: R$ 15.000-40.000/teste</li>
+      <li><strong>Dependency scanning:</strong> Snyk ou Dependabot para vulnerabilidades em dependências</li>
+    </ul>
+  </div>
+
+  <div class="gap-card high">
+    <h4 style="color:var(--orange); margin-top:0;">🟠 Compliance Regulatório por Vertical</h4>
+    <table class="ct">
+      <thead><tr><th>Vertical</th><th>Regulador</th><th>Obrigações</th><th>Prioridade</th></tr></thead>
+      <tbody>
+        <tr><td>Incorporação</td><td>Código Civil, Lei 4.591/64</td><td>Memorial de incorporação, patrimônio de afetação</td><td><span class="badge badge-yellow">Fase 1</span></td></tr>
+        <tr><td>Locação</td><td>Lei 8.245/91, Código Civil</td><td>Contratos, garantias, reajustes, DIMOB</td><td><span class="badge badge-yellow">Fase 2</span></td></tr>
+        <tr><td>Gestão de Ativos</td><td>CVM, ANBIMA</td><td>Relatórios de gestão, avaliações ABNT, transparência</td><td><span class="badge badge-orange">Fase 3</span></td></tr>
+        <tr><td>Capital Markets</td><td>CVM, B3, ANBIMA</td><td>Informes mensais/trimestrais, fatos relevantes, assembleias, PLD/FT</td><td><span class="badge badge-red">Fase 3</span></td></tr>
+        <tr><td>Distressed</td><td>CPC/2015, Lei 11.101/05</td><td>Recuperação judicial, cessão de créditos, registro</td><td><span class="badge badge-purple">Fase 4</span></td></tr>
+        <tr><td>Leilões</td><td>CPC/2015, regulamento leiloeiro</td><td>Carta de arrematação, registro, desocupação</td><td><span class="badge badge-purple">Fase 4</span></td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="gap-card medium">
+    <h4 style="color:var(--yellow); margin-top:0;">🟡 Backup, Disaster Recovery & SLA</h4>
+    <ul class="checklist">
+      <li><strong>Backup:</strong> Automatizado, diário, com retenção de 30 dias mínimo. Cross-region para disaster recovery</li>
+      <li><strong>RPO (Recovery Point Objective):</strong> Máximo 1 hora de dados perdidos em caso de falha</li>
+      <li><strong>RTO (Recovery Time Objective):</strong> Máximo 4 horas para restauração completa</li>
+      <li><strong>SLA target:</strong> 99.9% uptime (8.7h de downtime/ano) — necessário para vender para gestoras</li>
+      <li><strong>Multi-AZ:</strong> Deploy em múltiplas availability zones (AWS sa-east-1 com failover)</li>
+      <li><strong>Incident Response Plan:</strong> Documentado, testado, com runbooks para cenários comuns</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ===== ANÁLISE DE VERTICAIS ===== -->
+<div id="analise" class="section">
+<div class="container">
+  <h2>Análise Imparcial: Qual Vertical Primeiro?</h2>
+
+  <div class="highlight-box">
+    <p><strong>Método de avaliação:</strong> Cada vertical foi avaliada em 5 critérios (0-10): proximidade com o que já existe, tamanho de mercado acessível, nível de concorrência (invertido: menos = melhor), ticket médio e velocidade até primeiro revenue.</p>
+  </div>
+
+  <table class="ct">
+    <thead>
+      <tr><th>Vertical</th><th>Proximidade<br><small>(com o atual)</small></th><th>TAM<br><small>(mercado)</small></th><th>Concorrência<br><small>(menos = melhor)</small></th><th>Ticket<br><small>(médio)</small></th><th>Vel. Revenue<br><small>(rapidez)</small></th><th style="color:var(--accent-light)">SCORE</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td style="color:var(--accent)"><strong>Incorporação</strong></td>
+        <td>10</td><td>6</td><td>4</td><td>7</td><td>7</td>
+        <td style="color:var(--accent-light); font-weight:800;">34/50</td>
+      </tr>
+      <tr>
+        <td style="color:var(--green)"><strong>Locação</strong></td>
+        <td>7</td><td>9</td><td>5</td><td>4</td><td>8</td>
+        <td style="color:var(--green); font-weight:800;">33/50</td>
+      </tr>
+      <tr>
+        <td style="color:var(--purple)"><strong>Gestão de Ativos</strong></td>
+        <td>5</td><td>7</td><td>8</td><td>9</td><td>5</td>
+        <td style="color:var(--purple); font-weight:800;">34/50</td>
+      </tr>
+      <tr>
+        <td style="color:var(--cyan)"><strong>Capital Markets</strong></td>
+        <td>3</td><td>7</td><td>9</td><td>10</td><td>4</td>
+        <td style="color:var(--cyan); font-weight:800;">33/50</td>
+      </tr>
+      <tr>
+        <td style="color:var(--red)"><strong>Distressed</strong></td>
+        <td>4</td><td>6</td><td>9</td><td>8</td><td>4</td>
+        <td style="color:var(--red); font-weight:800;">31/50</td>
+      </tr>
+      <tr>
+        <td style="color:var(--orange)"><strong>Leilões</strong></td>
+        <td>3</td><td>5</td><td>8</td><td>6</td><td>5</td>
+        <td style="color:var(--orange); font-weight:800;">27/50</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="verdict-box">
+    <h4>Veredicto: Incorporação é a primeira vertical — mas Locação vem logo atrás</h4>
+    <p style="color:var(--text-secondary); margin-top:8px;">Marcelo, sua intuição sobre Locação está correta — é uma vertical excelente e com mercado gigantesco (40.000+ administradoras). Porém, <strong>Incorporação tem 3 vantagens decisivas</strong> para ser a primeira:</p>
+    <ul class="checklist" style="margin-top:12px;">
+      <li><strong>Dogfooding com o Splendori:</strong> Você tem um empreendimento real para testar. Isso é insubstituível. Nenhum SaaS nasce bem sem ser usado internamente primeiro.</li>
+      <li><strong>11 módulos já desenhados:</strong> O escopo de incorporação já está mapeado no Intentus atual. Locação precisaria de um redesign quase completo.</li>
+      <li><strong>Ticket maior que locação:</strong> R$997-2.497/mês/empreendimento vs R$3-5/unidade. Para atingir R$50k MRR, precisa de 20-50 clientes em incorporação vs 100+ em locação.</li>
+    </ul>
+    <p style="color:var(--text); margin-top:14px; font-weight:600;">Sequência recomendada: Incorporação (Fase 1) → Locação (Fase 2) → Gestão de Ativos + Capital Markets (Fase 3) → Distressed + Leilões (Fase 4)</p>
+    <p style="color:var(--text-secondary); margin-top:8px; font-size:0.85rem;">Isso aproveita a base de incorporação: quando o empreendimento termina, as unidades não vendidas vão para locação. Os portfólios locados alimentam gestão de ativos. É uma narrativa de crescimento natural.</p>
+  </div>
+
+  <div class="card">
+    <h3>Por que NÃO começar pela Locação (apesar do mercado maior)?</h3>
+    <ul class="checklist">
+      <li><strong>Concorrência mais madura:</strong> Kenlo tem 3.000+ clientes e 400k contratos. Entrar num mercado com incumbente forte sem diferencial claro é mais arriscado.</li>
+      <li><strong>Ticket baixo demais para MVP:</strong> A R$3-5/unidade, você precisa de volume altíssimo para sustentar o negócio nos primeiros meses.</li>
+      <li><strong>Sem dogfooding:</strong> Você não administra imóveis para locação. Sem experiência prática, o feedback loop é mais lento.</li>
+      <li><strong>O diferencial do Intentus em locação aparece quando já existe a base de incorporação:</strong> "Seu empreendimento foi entregue? Agora administre as unidades locadas no mesmo sistema." Esse é o upsell natural.</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ===== PLANO DE IMPLANTAÇÃO ===== -->
+<div id="implantacao" class="section">
+<div class="container">
+  <h2>2. Plano de Implantação de Módulos — Passo a Passo</h2>
+
+  <div class="highlight-box">
+    <p><strong>Filosofia de implementação:</strong> Começar com monólito modular (não microserviços). Startups que começam com microserviços gastam 60-80% do esforço em infraestrutura, não em produto. Monólito modular permite lançar rápido e migrar para microserviços quando tiver tração (50+ clientes).</p>
+  </div>
+
+  <!-- FASE 1 -->
+  <div class="phase-block" style="border-left-color:var(--accent);">
+    <span class="phase-tag" style="background:rgba(59,130,246,0.2); color:var(--accent-light);">FASE 1 — MESES 1-8</span>
+    <h3 style="margin-top:4px; color:var(--accent-light);">Fundação + Incorporação</h3>
+    <p><strong>Objetivo:</strong> Produto funcional com vertical de incorporação. Splendori como primeiro cliente. 3-5 beta testers.</p>
+
+    <h4>Meses 1-2: Fundação Técnica</h4>
+    <div class="timeline-item"><div class="timeline-month">Mês 1</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Setup de Infra & Arquitetura</p>
+      <ul class="checklist">
+        <li>Definir stack final: Next.js (frontend) + Node.js/TypeScript (backend) + PostgreSQL</li>
+        <li>Montar repositório monorepo (Turborepo ou Nx) com estrutura modular</li>
+        <li>Configurar CI/CD (GitHub Actions → staging → production)</li>
+        <li>Provisionar infra na AWS: ECS Fargate (não Kubernetes nesta fase), RDS PostgreSQL, S3, CloudFront</li>
+        <li>Implementar IAM básico: autenticação (Clerk ou Auth0), RBAC por módulo</li>
+        <li>Design system base: componentes UI reutilizáveis (Shadcn/UI + Tailwind)</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 2</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Core Platform</p>
+      <ul class="checklist">
+        <li>Cadastro unificado de ativos/imóveis (schema flexível para todas as verticais futuras)</li>
+        <li>Document Management básico (upload, categorização, busca)</li>
+        <li>Notification engine (email via SendGrid + in-app)</li>
+        <li>BI engine v1: Cube.js como camada semântica + dashboards React básicos</li>
+        <li>API RESTful versionada com Swagger/OpenAPI docs</li>
+      </ul>
+    </div></div>
+
+    <h4>Meses 3-5: Módulos de Incorporação</h4>
+    <div class="timeline-item"><div class="timeline-month">Mês 3</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">CRM de Vendas + Espelho</p>
+      <ul class="checklist">
+        <li>Pipeline de vendas (lead → qualificação → visita → proposta → venda)</li>
+        <li>Espelho interativo de unidades (status: disponível, reservado, vendido)</li>
+        <li>Fichas de interesse e propostas digitais</li>
+        <li>Dashboard de funil de vendas</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 4</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Contratos + Repasses</p>
+      <ul class="checklist">
+        <li>Geração de contratos de compra e venda a partir de templates</li>
+        <li>Integração com assinatura eletrônica (Clicksign)</li>
+        <li>Gestão de parcelas e recebíveis (tabela de vendas configurável)</li>
+        <li>Acompanhamento de repasse bancário (status pipeline por unidade)</li>
+        <li>BaaS v1: emissão de boletos via Asaas ou Celcoin</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 5</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Financeiro + Comissões</p>
+      <ul class="checklist">
+        <li>Dashboard financeiro do empreendimento (receitas vs custos)</li>
+        <li>Gestão de comissões (corretores, imobiliárias, parceiros) com cálculo automático</li>
+        <li>Conciliação bancária básica (upload de OFX/CNAB)</li>
+        <li>Relatórios financeiros: fluxo de caixa, inadimplência, aging</li>
+      </ul>
+    </div></div>
+
+    <h4>Meses 6-8: Portais + BI + Beta</h4>
+    <div class="timeline-item"><div class="timeline-month">Mês 6</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Portal do Cliente + Customer Success</p>
+      <ul class="checklist">
+        <li>Portal do comprador: boletos, contrato, andamento de obra, documentação</li>
+        <li>Módulo de CS: tracking de satisfação, chamados, assistência técnica</li>
+        <li>Régua de comunicação automatizada (Nexvy integration v1 — WhatsApp)</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 7</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">BI Completo + Testes</p>
+      <ul class="checklist">
+        <li>10+ dashboards nativos para incorporação (vendas, financeiro, repasses, comissões)</li>
+        <li>Export de relatórios PDF automatizado</li>
+        <li>Splendori usando o sistema em produção (dogfooding)</li>
+        <li>Testes de segurança básico: OWASP Top 10 scan, pentest leve</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 8</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Beta + Go-to-Market</p>
+      <ul class="checklist">
+        <li>Onboarding de 3-5 incorporadoras beta (gratuito ou com desconto agressivo)</li>
+        <li>Feedback loop intensivo: calls semanais com beta testers</li>
+        <li>Landing page + waitlist + primeiros conteúdos LinkedIn</li>
+        <li>Documentação para usuários (help center básico)</li>
+        <li>Pricing final validado com beta testers</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <!-- FASE 2 -->
+  <div class="phase-block" style="border-left-color:var(--green);">
+    <span class="phase-tag" style="background:rgba(34,197,94,0.2); color:var(--green);">FASE 2 — MESES 9-16</span>
+    <h3 style="margin-top:4px; color:var(--green);">Locação + Compliance + Escala</h3>
+    <p><strong>Objetivo:</strong> Vertical de locação operacional. 25+ clientes pagantes. MRR R$50k+.</p>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 9-10</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Vertical de Locação — Core</p>
+      <ul class="checklist">
+        <li>Gestão de contratos de locação (residencial + comercial) com templates</li>
+        <li>Cobrança automatizada com régua de inadimplência (email → WhatsApp → notificação)</li>
+        <li>Repasse automático para proprietários (cálculo líquido: aluguel - taxa adm - impostos)</li>
+        <li>Reajuste automático de aluguel (IGPM, IPCA, INPC com data de aniversário)</li>
+        <li>DIMOB automatizado + emissão de NF-e</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 11-12</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Locação — Portais + Vistoria</p>
+      <ul class="checklist">
+        <li>Portal do Inquilino (boletos, extratos, solicitações de manutenção, contrato)</li>
+        <li>Portal do Proprietário (rendimentos, IR, ocupação, extrato de repasse)</li>
+        <li>Laudos de vistoria digitais com fotos comparativas (entrada vs saída)</li>
+        <li>Seguro fiança e análise de crédito integrados (Serasa, Porto Seguro)</li>
+        <li>Gestão de manutenção e chamados (workflow: solicitação → orçamento → aprovação → execução)</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 13-14</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Compliance Engine (Transversal)</p>
+      <ul class="checklist">
+        <li>LGPD completo: mapeamento de dados, consentimento, portal do titular, RIPD</li>
+        <li>Compliance contratual: alertas de vencimento, renovação, reajuste</li>
+        <li>Audit trail: log imutável de todas as ações para auditoria</li>
+        <li>Início da preparação para SOC 2 (gap analysis, implementação de controles)</li>
+        <li>DPO nomeado (terceirizado)</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 15-16</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Integrações + API + Escala Comercial</p>
+      <ul class="checklist">
+        <li>API pública documentada (REST + webhooks) para integradores</li>
+        <li>Integrações: portais imobiliários (ZAP, OLX), assinatura eletrônica, Nexvy completo</li>
+        <li>25+ clientes pagantes (incorporação + locação)</li>
+        <li>Time de CS: 1 pessoa dedicada a onboarding e retenção</li>
+        <li>Presença em 2-3 eventos do setor imobiliário</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <!-- FASE 3 -->
+  <div class="phase-block" style="border-left-color:var(--purple);">
+    <span class="phase-tag" style="background:rgba(168,85,247,0.2); color:var(--purple);">FASE 3 — MESES 17-24</span>
+    <h3 style="margin-top:4px; color:var(--purple);">Blue Ocean: Gestão de Ativos + Capital Markets</h3>
+    <p><strong>Objetivo:</strong> Entrar nos mercados de ticket alto com pouca concorrência SaaS. 60+ clientes. MRR R$150k+.</p>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 17-19</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Gestão de Ativos Performing</p>
+      <ul class="checklist">
+        <li>Dashboard de portfólio consolidado (NOI, cap rate, vacância, yield)</li>
+        <li>Performance por ativo, segmento, região com benchmarking</li>
+        <li>Controle de capex/opex por ativo com budget tracking</li>
+        <li>Gestão de avaliações e laudos (ABNT NBR 14653)</li>
+        <li>Projeção de fluxo de caixa por ativo e portfólio</li>
+        <li>Relatórios para cotistas/investidores (templates customizáveis)</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 20-22</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Capital Markets + Governança</p>
+      <ul class="checklist">
+        <li>Compliance CVM automatizado (prazos, obrigações, alertas)</li>
+        <li>Relatórios para cotistas (mensal, semestral, anual) com templates CVM</li>
+        <li>Gestão de assembleias de cotistas (convocação, votação online, ata)</li>
+        <li>Dashboard FII (dividend yield, P/VP, vacância, performance vs benchmark)</li>
+        <li>Gestão de CRI/CRA básica (monitoramento, amortização)</li>
+        <li>PLD/FT (Prevenção à Lavagem de Dinheiro) — checklist regulatório</li>
+        <li>SOC 2 Type I obtido</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 23-24</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">IA Engine + BaaS Avançado</p>
+      <ul class="checklist">
+        <li>IA v1: Precificação comparativa com ML (dados de mercado + portfólio)</li>
+        <li>IA v2: Score de risco de inadimplência (locação + incorporação)</li>
+        <li>IA v3: Geração automática de relatórios e minutas contratuais (LLM)</li>
+        <li>BaaS completo: split de pagamentos, Pix, conta escrow</li>
+        <li>Portal do Cotista completo (votação, distribuições, IR)</li>
+        <li>Buscar primeiras 2-3 gestoras de FII como clientes</li>
+      </ul>
+    </div></div>
+  </div>
+
+  <!-- FASE 4 -->
+  <div class="phase-block" style="border-left-color:var(--orange);">
+    <span class="phase-tag" style="background:rgba(249,115,22,0.2); color:var(--orange);">FASE 4 — MESES 25-36</span>
+    <h3 style="margin-top:4px; color:var(--orange);">Distressed + Leilões + Plataformização</h3>
+    <p><strong>Objetivo:</strong> Completar o ecossistema. 120-200 clientes. MRR R$350-500k+.</p>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 25-28</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Distressed Assets + Leilões</p>
+      <ul class="checklist">
+        <li>Pipeline de aquisição de ativos estressados com scoring</li>
+        <li>Due diligence automatizada (matrícula, certidões, ônus, processos)</li>
+        <li>Workflow de recuperação (negociação, retomada, revenda)</li>
+        <li>Monitoramento de leilões em múltiplos leiloeiros</li>
+        <li>Gestão pós-arrematação (pagamento, registro, desocupação, reforma)</li>
+        <li>IA avançada: precificação com condição jurídica, due diligence assistida por LLM</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 29-32</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Data Lake + Plataformização</p>
+      <ul class="checklist">
+        <li>Data Lake imobiliário com benchmarking anonimizado</li>
+        <li>Índices proprietários Intentus (vacância, preço/m², yield por região)</li>
+        <li>SOC 2 Type II obtido</li>
+        <li>Migração gradual para microserviços (módulos com mais carga)</li>
+        <li>Marketplace de integrações (SDK para parceiros)</li>
+      </ul>
+    </div></div>
+
+    <div class="timeline-item"><div class="timeline-month">Mês 33-36</div><div class="timeline-content">
+      <p style="color:var(--text); font-weight:600; margin-bottom:6px;">Ecossistema Completo</p>
+      <ul class="checklist">
+        <li>White-label para gestoras (marca do cliente sobre Intentus)</li>
+        <li>Relatório anual do mercado imobiliário (thought leadership)</li>
+        <li>200+ clientes | R$500k+ MRR | R$6M+ ARR</li>
+        <li>Avaliar expansão LATAM e/ou Series A</li>
+      </ul>
+    </div></div>
+  </div>
+</div>
+</div>
+
+<!-- ===== MÓDULOS DETALHADOS ===== -->
+<div id="modulos" class="section">
+<div class="container">
+  <h2>Mapa de Módulos por Fase</h2>
+
+  <table class="ct">
+    <thead><tr><th>Módulo</th><th>Vertical</th><th>Fase</th><th>Complexidade</th><th>Prioridade</th><th>Dependências</th></tr></thead>
+    <tbody>
+      <tr><td><strong>IAM / Auth</strong></td><td>Core</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-yellow">Média</span></td><td>P0</td><td>Nenhuma</td></tr>
+      <tr><td><strong>Cadastro de Ativos</strong></td><td>Core</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-yellow">Média</span></td><td>P0</td><td>IAM</td></tr>
+      <tr><td><strong>DMS (Documentos)</strong></td><td>Core</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-yellow">Média</span></td><td>P0</td><td>IAM, S3</td></tr>
+      <tr><td><strong>BI Engine</strong></td><td>Core</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-orange">Alta</span></td><td>P0</td><td>Cadastro de Ativos</td></tr>
+      <tr><td><strong>CRM de Vendas</strong></td><td>Incorporação</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-yellow">Média</span></td><td>P0</td><td>Core</td></tr>
+      <tr><td><strong>Espelho de Vendas</strong></td><td>Incorporação</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-yellow">Média</span></td><td>P1</td><td>CRM, Cadastro</td></tr>
+      <tr><td><strong>Contratos (Venda)</strong></td><td>Incorporação</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-orange">Alta</span></td><td>P0</td><td>DMS, Clicksign</td></tr>
+      <tr><td><strong>Repasses Financeiros</strong></td><td>Incorporação</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-orange">Alta</span></td><td>P1</td><td>Contratos, BaaS</td></tr>
+      <tr><td><strong>Portal do Comprador</strong></td><td>Incorporação</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-yellow">Média</span></td><td>P1</td><td>Contratos</td></tr>
+      <tr><td><strong>Comissões</strong></td><td>Incorporação</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-green">Baixa</span></td><td>P2</td><td>CRM, Contratos</td></tr>
+      <tr><td><strong>BaaS v1 (Boletos)</strong></td><td>Core</td><td><span class="badge badge-blue">F1</span></td><td><span class="badge badge-yellow">Média</span></td><td>P1</td><td>Asaas/Celcoin API</td></tr>
+      <tr><td><strong>Contratos (Locação)</strong></td><td>Locação</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-orange">Alta</span></td><td>P0</td><td>Core, DMS</td></tr>
+      <tr><td><strong>Cobrança Automatizada</strong></td><td>Locação</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-yellow">Média</span></td><td>P0</td><td>BaaS, Nexvy</td></tr>
+      <tr><td><strong>DIMOB / NF-e</strong></td><td>Locação</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-orange">Alta</span></td><td>P0</td><td>Contratos (Locação)</td></tr>
+      <tr><td><strong>Vistoria Digital</strong></td><td>Locação</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-yellow">Média</span></td><td>P1</td><td>DMS, Mobile</td></tr>
+      <tr><td><strong>Portal Inquilino</strong></td><td>Locação</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-yellow">Média</span></td><td>P1</td><td>Contratos, BaaS</td></tr>
+      <tr><td><strong>Portal Proprietário</strong></td><td>Locação</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-yellow">Média</span></td><td>P1</td><td>Repasses</td></tr>
+      <tr><td><strong>Compliance Engine</strong></td><td>Core</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-orange">Alta</span></td><td>P0</td><td>Audit Trail</td></tr>
+      <tr><td><strong>API Pública</strong></td><td>Core</td><td><span class="badge badge-green">F2</span></td><td><span class="badge badge-yellow">Média</span></td><td>P1</td><td>Core estável</td></tr>
+      <tr><td><strong>Portfolio Dashboard</strong></td><td>Gestão Ativos</td><td><span class="badge badge-purple">F3</span></td><td><span class="badge badge-orange">Alta</span></td><td>P0</td><td>BI Engine v2</td></tr>
+      <tr><td><strong>Compliance CVM</strong></td><td>Capital Mkt</td><td><span class="badge badge-purple">F3</span></td><td><span class="badge badge-red">Muito Alta</span></td><td>P0</td><td>Compliance Engine</td></tr>
+      <tr><td><strong>Assembleias Online</strong></td><td>Capital Mkt</td><td><span class="badge badge-purple">F3</span></td><td><span class="badge badge-orange">Alta</span></td><td>P1</td><td>Portal Cotista</td></tr>
+      <tr><td><strong>IA Engine</strong></td><td>Core</td><td><span class="badge badge-purple">F3</span></td><td><span class="badge badge-red">Muito Alta</span></td><td>P1</td><td>Data Lake, ML infra</td></tr>
+      <tr><td><strong>Due Diligence Auto</strong></td><td>Distressed</td><td><span class="badge badge-orange">F4</span></td><td><span class="badge badge-red">Muito Alta</span></td><td>P0</td><td>IA Engine, OCR</td></tr>
+      <tr><td><strong>Monitor de Leilões</strong></td><td>Leilões</td><td><span class="badge badge-orange">F4</span></td><td><span class="badge badge-orange">Alta</span></td><td>P0</td><td>Web scraping</td></tr>
+      <tr><td><strong>Data Lake + Índices</strong></td><td>Core</td><td><span class="badge badge-orange">F4</span></td><td><span class="badge badge-red">Muito Alta</span></td><td>P1</td><td>Volume de dados</td></tr>
+    </tbody>
+  </table>
+</div>
+</div>
+
+<!-- ===== INFRAESTRUTURA ===== -->
+<div id="infra" class="section">
+<div class="container">
+  <h2>3. Plano de Infraestrutura & Tecnologia</h2>
+
+  <div class="highlight-box">
+    <p><strong>Princípio fundamental:</strong> Começar simples, escalar sob demanda. NÃO usar Kubernetes no início (custa R$8.000-15.000/mês sem necessidade). Usar ECS Fargate ou até Vercel/Railway inicialmente. Migrar para Kubernetes quando tiver 50+ clientes e carga justificável.</p>
+  </div>
+
+  <h3>Evolução da Infraestrutura por Fase</h3>
+
+  <div class="card">
+    <h4 style="color:var(--accent-light);">Fase 1 (Meses 1-8) — Lean & Fast</h4>
+    <table class="ct">
+      <thead><tr><th>Componente</th><th>Serviço</th><th>Custo Mensal Est.</th></tr></thead>
+      <tbody>
+        <tr><td>App Server</td><td>AWS ECS Fargate (2 tasks, 1vCPU, 2GB RAM)</td><td>R$ 600-900</td></tr>
+        <tr><td>Banco de Dados</td><td>AWS RDS PostgreSQL (db.t3.medium, Multi-AZ)</td><td>R$ 800-1.200</td></tr>
+        <tr><td>Cache</td><td>AWS ElastiCache Redis (cache.t3.micro)</td><td>R$ 150-250</td></tr>
+        <tr><td>Storage</td><td>AWS S3 (documentos, backups)</td><td>R$ 100-200</td></tr>
+        <tr><td>CDN</td><td>CloudFront (frontend static assets)</td><td>R$ 50-100</td></tr>
+        <tr><td>Busca</td><td>AWS OpenSearch (t3.small.search)</td><td>R$ 400-600</td></tr>
+        <tr><td>Email</td><td>SendGrid (50k emails/mês)</td><td>R$ 100</td></tr>
+        <tr><td>Monitoramento</td><td>Datadog (APM + Infra, 5 hosts)</td><td>R$ 900-1.200</td></tr>
+        <tr><td>CI/CD</td><td>GitHub Actions (team plan)</td><td>R$ 100</td></tr>
+        <tr><td>Auth</td><td>Clerk ou Auth0 (até 10k MAU)</td><td>R$ 0-250</td></tr>
+        <tr><td>BI</td><td>Cube.js Cloud (starter)</td><td>R$ 0-500</td></tr>
+        <tr><td>Secrets</td><td>AWS Secrets Manager</td><td>R$ 50</td></tr>
+        <tr><td colspan="2" style="font-weight:700; color:var(--text);">TOTAL INFRA FASE 1</td><td style="font-weight:800; color:var(--green); font-size:1.1rem;">R$ 3.250 - 5.350/mês</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h4 style="color:var(--green);">Fase 2 (Meses 9-16) — Crescimento</h4>
+    <table class="ct">
+      <thead><tr><th>Componente</th><th>Serviço</th><th>Custo Mensal Est.</th></tr></thead>
+      <tbody>
+        <tr><td>App Server</td><td>ECS Fargate escalado (4-6 tasks, auto-scaling)</td><td>R$ 1.800-2.800</td></tr>
+        <tr><td>Banco de Dados</td><td>RDS PostgreSQL (db.r5.large, Multi-AZ, read replicas)</td><td>R$ 2.500-3.500</td></tr>
+        <tr><td>Cache</td><td>ElastiCache Redis (cache.r5.large)</td><td>R$ 600-900</td></tr>
+        <tr><td>Storage + CDN</td><td>S3 + CloudFront (volume crescente)</td><td>R$ 300-500</td></tr>
+        <tr><td>Busca</td><td>OpenSearch (m5.large, 2 nós)</td><td>R$ 1.200-1.800</td></tr>
+        <tr><td>Message Queue</td><td>AWS SQS + EventBridge</td><td>R$ 200-400</td></tr>
+        <tr><td>Monitoramento</td><td>Datadog (APM + Infra + Logs, 10 hosts)</td><td>R$ 2.000-3.000</td></tr>
+        <tr><td>Compliance</td><td>Vanta ou Sprinto (SOC 2 automation)</td><td>R$ 1.500-2.500</td></tr>
+        <tr><td>WAF</td><td>AWS WAF + Shield</td><td>R$ 300-500</td></tr>
+        <tr><td>Outros</td><td>SendGrid Pro, Clicksign, Cube.js Pro</td><td>R$ 1.000-1.500</td></tr>
+        <tr><td colspan="2" style="font-weight:700; color:var(--text);">TOTAL INFRA FASE 2</td><td style="font-weight:800; color:var(--green); font-size:1.1rem;">R$ 11.400 - 18.400/mês</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h4 style="color:var(--purple);">Fase 3-4 (Meses 17-36) — Escala</h4>
+    <table class="ct">
+      <thead><tr><th>Componente</th><th>Serviço</th><th>Custo Mensal Est.</th></tr></thead>
+      <tbody>
+        <tr><td>Compute</td><td>Migração para EKS (Kubernetes) com auto-scaling</td><td>R$ 5.000-10.000</td></tr>
+        <tr><td>Banco de Dados</td><td>RDS Aurora PostgreSQL + TimescaleDB</td><td>R$ 5.000-8.000</td></tr>
+        <tr><td>ML/AI</td><td>SageMaker ou EC2 GPU (treinamento) + Lambda (inferência)</td><td>R$ 3.000-6.000</td></tr>
+        <tr><td>Data Lake</td><td>S3 + Glue + Athena</td><td>R$ 1.500-3.000</td></tr>
+        <tr><td>Vector DB</td><td>Pinecone ou Weaviate Cloud (RAG para IA)</td><td>R$ 500-1.500</td></tr>
+        <tr><td>Monitoramento</td><td>Datadog Enterprise (20+ hosts)</td><td>R$ 4.000-6.000</td></tr>
+        <tr><td>Segurança</td><td>WAF + Shield Advanced + GuardDuty</td><td>R$ 1.500-3.000</td></tr>
+        <tr><td>Outros</td><td>BaaS APIs, CVM integrations, LLM APIs</td><td>R$ 3.000-5.000</td></tr>
+        <tr><td colspan="2" style="font-weight:700; color:var(--text);">TOTAL INFRA FASE 3-4</td><td style="font-weight:800; color:var(--green); font-size:1.1rem;">R$ 23.500 - 42.500/mês</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <h3>Resumo de Custos de Infra ao Longo de 36 Meses</h3>
+  <div class="card-grid">
+    <div class="metric-card">
+      <div class="metric-value" style="font-size:1.4rem;">R$ 4k-5k</div>
+      <div class="metric-label">Infra/mês — Fase 1</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" style="font-size:1.4rem;">R$ 15k</div>
+      <div class="metric-label">Infra/mês — Fase 2</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" style="font-size:1.4rem;">R$ 30k</div>
+      <div class="metric-label">Infra/mês — Fase 3</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value" style="font-size:1.4rem;">R$ 40k</div>
+      <div class="metric-label">Infra/mês — Fase 4</div>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- ===== PESSOAS ===== -->
+<div id="pessoas" class="section">
+<div class="container">
+  <h2>Plano de Pessoas — Quem Contratar e Quando</h2>
+
+  <div class="highlight-box">
+    <p><strong>Premissa salarial:</strong> Valores PJ (mais comum em startups tech no Brasil). Multiplicar por 1.5x para CLT com encargos. Valores de mercado 2025-2026 para profissionais mid-senior a senior.</p>
+  </div>
+
+  <!-- FASE 1 TEAM -->
+  <h3 style="color:var(--accent-light);">Fase 1 — Time Fundador (8-10 pessoas)</h3>
+
+  <div class="org-chart">
+    <div class="org-card" style="border-top:3px solid var(--red);">
+      <div class="org-role">CTO / Tech Lead</div>
+      <div class="org-detail">Arquitetura, decisões técnicas, code review</div>
+      <div class="org-cost">R$ 25.000-35.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--accent);">
+      <div class="org-role">Full-Stack Sr (x2)</div>
+      <div class="org-detail">Next.js + Node.js + PostgreSQL</div>
+      <div class="org-cost">R$ 18.000-25.000 PJ cada</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--accent);">
+      <div class="org-role">Full-Stack Pleno (x2)</div>
+      <div class="org-detail">Features, testes, manutenção</div>
+      <div class="org-cost">R$ 12.000-16.000 PJ cada</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--green);">
+      <div class="org-role">Product Designer</div>
+      <div class="org-detail">UX/UI, design system, pesquisa</div>
+      <div class="org-cost">R$ 12.000-18.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--purple);">
+      <div class="org-role">DevOps / SRE</div>
+      <div class="org-detail">Infra, CI/CD, monitoramento</div>
+      <div class="org-cost">R$ 15.000-20.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--orange);">
+      <div class="org-role">QA Engineer</div>
+      <div class="org-detail">Testes automatizados, qualidade</div>
+      <div class="org-cost">R$ 8.000-12.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--cyan);">
+      <div class="org-role">Marcelo (CEO/CPO)</div>
+      <div class="org-detail">Produto, vendas, visão estratégica</div>
+      <div class="org-cost">Pró-labore</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cost-row"><div class="cost-label">CTO / Tech Lead (1)</div><div class="cost-value">R$ 30.000</div></div>
+    <div class="cost-row"><div class="cost-label">Full-Stack Sênior (2)</div><div class="cost-value">R$ 44.000</div></div>
+    <div class="cost-row"><div class="cost-label">Full-Stack Pleno (2)</div><div class="cost-value">R$ 28.000</div></div>
+    <div class="cost-row"><div class="cost-label">Product Designer (1)</div><div class="cost-value">R$ 15.000</div></div>
+    <div class="cost-row"><div class="cost-label">DevOps/SRE (1)</div><div class="cost-value">R$ 17.000</div></div>
+    <div class="cost-row"><div class="cost-label">QA Engineer (1)</div><div class="cost-value">R$ 10.000</div></div>
+    <div class="cost-row"><div class="cost-label" style="color:var(--text); font-weight:700;">TOTAL PESSOAS FASE 1</div><div class="cost-value cost-total">R$ 144.000/mês</div></div>
+  </div>
+
+  <!-- FASE 2 TEAM -->
+  <h3 style="color:var(--green);">Fase 2 — Crescimento (14-17 pessoas)</h3>
+  <p>Adições ao time existente:</p>
+
+  <div class="org-chart">
+    <div class="org-card" style="border-top:3px solid var(--accent);">
+      <div class="org-role">Backend Sr (x1)</div>
+      <div class="org-detail">Integrações, BaaS, APIs</div>
+      <div class="org-cost">R$ 20.000-25.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--accent);">
+      <div class="org-role">Frontend Sr (x1)</div>
+      <div class="org-detail">Portais, BI dashboards</div>
+      <div class="org-cost">R$ 18.000-22.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--green);">
+      <div class="org-role">Mobile Dev (x1)</div>
+      <div class="org-detail">React Native — app mobile</div>
+      <div class="org-cost">R$ 15.000-20.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--purple);">
+      <div class="org-role">CS / Onboarding (x1)</div>
+      <div class="org-detail">Sucesso do cliente, suporte N2</div>
+      <div class="org-cost">R$ 5.000-8.000</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--orange);">
+      <div class="org-role">Vendas / BDR (x1)</div>
+      <div class="org-detail">Prospecção, demos, pipeline</div>
+      <div class="org-cost">R$ 5.000-8.000 + comissão</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--cyan);">
+      <div class="org-role">Marketing (x1)</div>
+      <div class="org-detail">Conteúdo, LinkedIn, eventos</div>
+      <div class="org-cost">R$ 6.000-10.000</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cost-row"><div class="cost-label">Time existente Fase 1 (8 pessoas)</div><div class="cost-value">R$ 144.000</div></div>
+    <div class="cost-row"><div class="cost-label">+ Backend Sr + Frontend Sr</div><div class="cost-value">R$ 42.000</div></div>
+    <div class="cost-row"><div class="cost-label">+ Mobile Dev</div><div class="cost-value">R$ 17.000</div></div>
+    <div class="cost-row"><div class="cost-label">+ CS + Vendas + Marketing</div><div class="cost-value">R$ 19.000</div></div>
+    <div class="cost-row"><div class="cost-label" style="color:var(--text); font-weight:700;">TOTAL PESSOAS FASE 2 (14 pessoas)</div><div class="cost-value cost-total">R$ 222.000/mês</div></div>
+  </div>
+
+  <!-- FASE 3-4 TEAM -->
+  <h3 style="color:var(--purple);">Fase 3-4 — Escala (22-30 pessoas)</h3>
+
+  <div class="org-chart">
+    <div class="org-card" style="border-top:3px solid var(--red);">
+      <div class="org-role">ML/AI Engineer (x2)</div>
+      <div class="org-detail">Modelos de precificação, NLP</div>
+      <div class="org-cost">R$ 20.000-30.000 PJ cada</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--accent);">
+      <div class="org-role">Backend Sr (x2)</div>
+      <div class="org-detail">Capital Markets, Compliance</div>
+      <div class="org-cost">R$ 22.000 PJ cada</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--green);">
+      <div class="org-role">Data Engineer (x1)</div>
+      <div class="org-detail">Data Lake, pipelines, ETL</div>
+      <div class="org-cost">R$ 18.000-22.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--purple);">
+      <div class="org-role">Security Engineer (x1)</div>
+      <div class="org-detail">SOC 2, pentests, compliance</div>
+      <div class="org-cost">R$ 18.000-25.000 PJ</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--orange);">
+      <div class="org-role">Sales Team (x2-3)</div>
+      <div class="org-detail">Enterprise sales, gestoras</div>
+      <div class="org-cost">R$ 8.000 + comissão cada</div>
+    </div>
+    <div class="org-card" style="border-top:3px solid var(--cyan);">
+      <div class="org-role">CS Team (x2)</div>
+      <div class="org-detail">Onboarding, retenção, suporte</div>
+      <div class="org-cost">R$ 6.000 cada</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="cost-row"><div class="cost-label">Time Fase 2 (14 pessoas)</div><div class="cost-value">R$ 222.000</div></div>
+    <div class="cost-row"><div class="cost-label">+ ML/AI Engineers (2)</div><div class="cost-value">R$ 50.000</div></div>
+    <div class="cost-row"><div class="cost-label">+ Backend Sr (2) + Data Eng (1) + Security (1)</div><div class="cost-value">R$ 84.000</div></div>
+    <div class="cost-row"><div class="cost-label">+ Sales (3) + CS (2)</div><div class="cost-value">R$ 36.000</div></div>
+    <div class="cost-row"><div class="cost-label" style="color:var(--text); font-weight:700;">TOTAL PESSOAS FASE 3-4 (~24 pessoas)</div><div class="cost-value cost-total">R$ 392.000/mês</div></div>
+  </div>
+</div>
+</div>
+
+<!-- ===== CUSTOS DETALHADOS ===== -->
+<div id="custos" class="section">
+<div class="container">
+  <h2>Projeção Financeira Consolidada — 36 Meses</h2>
+
+  <h3>Custos Mensais por Fase</h3>
+  <table class="ct">
+    <thead><tr><th>Categoria</th><th>Fase 1<br><small>M1-8</small></th><th>Fase 2<br><small>M9-16</small></th><th>Fase 3<br><small>M17-24</small></th><th>Fase 4<br><small>M25-36</small></th></tr></thead>
+    <tbody>
+      <tr><td><strong>Pessoas (PJ)</strong></td><td>R$ 144k</td><td>R$ 222k</td><td>R$ 320k</td><td>R$ 392k</td></tr>
+      <tr><td><strong>Infraestrutura (AWS+SaaS)</strong></td><td>R$ 5k</td><td>R$ 15k</td><td>R$ 30k</td><td>R$ 40k</td></tr>
+      <tr><td><strong>Ferramentas Dev</strong><br><small>(GitHub, Figma, Jira, Slack)</small></td><td>R$ 3k</td><td>R$ 5k</td><td>R$ 8k</td><td>R$ 10k</td></tr>
+      <tr><td><strong>Compliance & Segurança</strong><br><small>(SOC2, LGPD, pentests)</small></td><td>R$ 2k</td><td>R$ 8k</td><td>R$ 15k</td><td>R$ 10k</td></tr>
+      <tr><td><strong>Marketing & Vendas</strong><br><small>(eventos, ads, conteúdo)</small></td><td>R$ 5k</td><td>R$ 15k</td><td>R$ 25k</td><td>R$ 40k</td></tr>
+      <tr><td><strong>Jurídico & Contabilidade</strong></td><td>R$ 3k</td><td>R$ 5k</td><td>R$ 8k</td><td>R$ 10k</td></tr>
+      <tr><td><strong>Escritório / Co-working</strong></td><td>R$ 3k</td><td>R$ 5k</td><td>R$ 8k</td><td>R$ 12k</td></tr>
+      <tr style="background:rgba(59,130,246,0.06);">
+        <td style="font-weight:800; color:var(--text);">TOTAL MENSAL</td>
+        <td style="font-weight:800; color:var(--accent-light);">R$ 165k</td>
+        <td style="font-weight:800; color:var(--accent-light);">R$ 275k</td>
+        <td style="font-weight:800; color:var(--accent-light);">R$ 414k</td>
+        <td style="font-weight:800; color:var(--accent-light);">R$ 514k</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <h3>Investimento Total por Fase (Acumulado)</h3>
+  <div class="card-grid">
+    <div class="metric-card" style="border-top:3px solid var(--accent);">
+      <div class="metric-value" style="font-size:1.3rem;">R$ 1,32M</div>
+      <div class="metric-label">Fase 1 (8 meses)</div>
+      <p style="font-size:0.72rem; margin-top:6px; margin-bottom:0;">165k × 8 meses</p>
+    </div>
+    <div class="metric-card" style="border-top:3px solid var(--green);">
+      <div class="metric-value" style="font-size:1.3rem;">R$ 2,20M</div>
+      <div class="metric-label">Fase 2 (8 meses)</div>
+      <p style="font-size:0.72rem; margin-top:6px; margin-bottom:0;">275k × 8 meses</p>
+    </div>
+    <div class="metric-card" style="border-top:3px solid var(--purple);">
+      <div class="metric-value" style="font-size:1.3rem;">R$ 3,31M</div>
+      <div class="metric-label">Fase 3 (8 meses)</div>
+      <p style="font-size:0.72rem; margin-top:6px; margin-bottom:0;">414k × 8 meses</p>
+    </div>
+    <div class="metric-card" style="border-top:3px solid var(--orange);">
+      <div class="metric-value" style="font-size:1.3rem;">R$ 6,17M</div>
+      <div class="metric-label">Fase 4 (12 meses)</div>
+      <p style="font-size:0.72rem; margin-top:6px; margin-bottom:0;">514k × 12 meses</p>
+    </div>
+  </div>
+
+  <div class="card" style="border-left:4px solid var(--green);">
+    <h4 style="color:var(--green); margin-top:0;">Investimento Total em 36 Meses: ~R$ 13,0M</h4>
+    <p>Porém, a receita começa a entrar na Fase 2. Projeção de receita vs custo:</p>
+    <table class="ct">
+      <thead><tr><th>Período</th><th>Custo Acumulado</th><th>MRR Estimado</th><th>Receita Acumulada</th><th>Caixa Líquido</th></tr></thead>
+      <tbody>
+        <tr><td>Final Fase 1 (M8)</td><td>R$ 1,32M</td><td>R$ 0</td><td>R$ 0</td><td style="color:var(--red); font-weight:600;">-R$ 1,32M</td></tr>
+        <tr><td>Final Fase 2 (M16)</td><td>R$ 3,52M</td><td>R$ 50k</td><td>R$ 200k</td><td style="color:var(--red); font-weight:600;">-R$ 3,32M</td></tr>
+        <tr><td>Final Fase 3 (M24)</td><td>R$ 6,83M</td><td>R$ 150k</td><td>R$ 1,0M</td><td style="color:var(--red); font-weight:600;">-R$ 5,83M</td></tr>
+        <tr><td>Final Fase 4 (M36)</td><td>R$ 13,0M</td><td>R$ 500k</td><td>R$ 4,9M</td><td style="color:var(--red); font-weight:600;">-R$ 8,1M</td></tr>
+        <tr style="background:rgba(34,197,94,0.06);">
+          <td style="font-weight:700;">Breakeven estimado</td><td colspan="3" style="font-weight:700; color:var(--green);">Mês 38-42 (MRR = custos mensais)</td><td style="color:var(--green); font-weight:700;">R$ 0</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Capital necessário: R$ 5-6M nos primeiros 24 meses</strong> é a exposição máxima de caixa antes da receita começar a compensar significativamente. Caminhos possíveis: (1) Capital próprio se disponível, (2) Investidor anjo + seed round (R$ 2-4M), (3) Bootstrapping agressivo com time menor e timeline estendida. Uma seed round de R$ 3-4M daria runway confortável até a Fase 3, quando o MRR começa a cobrir parte significativa dos custos.</p>
+  </div>
+</div>
+</div>
+
+<!-- ===== ESTRUTURAÇÃO COMO EMPRESA ===== -->
+<div id="empresa" class="section">
+<div class="container">
+  <h2>Plano de Estruturação como Empresa</h2>
+
+  <h3>Estrutura Societária</h3>
+  <div class="card">
+    <h4>Opção Recomendada: LTDA com vesting para key-hires</h4>
+    <ul class="checklist">
+      <li><strong>Razão social:</strong> Intentus Tecnologia Ltda (ou Intentus Software Ltda)</li>
+      <li><strong>CNAE principal:</strong> 6201-5/01 (Desenvolvimento de programas de computador sob encomenda) e 6203-1/00 (Desenvolvimento e licenciamento de programas de computador customizáveis)</li>
+      <li><strong>Regime tributário:</strong> Simples Nacional (até R$ 4,8M faturamento/ano) → Lucro Presumido quando ultrapassar</li>
+      <li><strong>Conversão para S/A:</strong> Considerar na Fase 4 se planeja captação institucional (Series A)</li>
+      <li><strong>Vesting:</strong> Oferecer equity pool (10-15%) para CTO e key engineers com cliff de 12 meses e vesting de 48 meses</li>
+    </ul>
+  </div>
+
+  <h3>Governança Interna</h3>
+  <div class="card">
+    <ul class="checklist">
+      <li><strong>Board mensal:</strong> Marcelo + CTO + advisor externo (ideal: alguém do mercado imobiliário ou de SaaS B2B)</li>
+      <li><strong>Sprint reviews:</strong> Quinzenais com todo o time (produto + business)</li>
+      <li><strong>OKRs trimestrais:</strong> Alinhamento de metas por squad (tech, produto, comercial)</li>
+      <li><strong>1:1s semanais:</strong> CTO→devs, Marcelo→CTO/vendas/CS</li>
+      <li><strong>All-hands mensal:</strong> Transparência total sobre métricas, finanças e roadmap</li>
+    </ul>
+  </div>
+
+  <h3>Estrutura Organizacional por Fase</h3>
+
+  <div class="card">
+    <h4 style="color:var(--accent-light);">Fase 1: Startup Squad (8-10 pessoas)</h4>
+    <p>Marcelo como CEO/CPO direto. CTO lidera tech. Sem camadas de gestão. Todo mundo codando ou vendendo.</p>
+    <p style="color:var(--text); font-weight:600;">Marcelo (CEO/CPO) → CTO → Squad único de produto</p>
+  </div>
+
+  <div class="card">
+    <h4 style="color:var(--green);">Fase 2: Dois Squads (14-17 pessoas)</h4>
+    <p>Split por vertical: Squad Incorporação (manutenção + evolução) e Squad Locação (construção + lançamento). CS e vendas como funções separadas.</p>
+    <p style="color:var(--text); font-weight:600;">Marcelo (CEO) → CTO (2 squads tech) + Head Comercial (vendas + CS) + Marketing</p>
+  </div>
+
+  <div class="card">
+    <h4 style="color:var(--purple);">Fase 3-4: Departamentos (22-30 pessoas)</h4>
+    <p>Squads por vertical/domínio. Especialistas (IA, data, security) como shared services. Vendas enterprise com ciclo longo para gestoras.</p>
+    <p style="color:var(--text); font-weight:600;">Marcelo (CEO) → CTO (4 squads + platform) + VP Comercial (vendas + CS + marketing) + Head de Compliance</p>
+  </div>
+
+  <h3>Marcos Legais e Regulatórios</h3>
+  <table class="ct">
+    <thead><tr><th>Marco</th><th>Quando</th><th>O que Fazer</th><th>Custo Est.</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Abertura CNPJ</strong></td><td>Mês 0</td><td>Constituição LTDA, contrato social, inscrição municipal/estadual</td><td>R$ 2.000-5.000</td></tr>
+      <tr><td><strong>Registro de marca</strong></td><td>Mês 1</td><td>INPI — marca "Intentus" + "Intentus Real Estate"</td><td>R$ 1.500-3.000</td></tr>
+      <tr><td><strong>Termos de uso + Privacy Policy</strong></td><td>Mês 3</td><td>Termos de serviço, política de privacidade LGPD, DPA</td><td>R$ 5.000-10.000</td></tr>
+      <tr><td><strong>Contratos PJ</strong></td><td>Mês 1</td><td>Modelo de contrato para prestadores PJ (devs, designers)</td><td>R$ 2.000-3.000</td></tr>
+      <tr><td><strong>DPO nomeado</strong></td><td>Mês 12</td><td>Encarregado de dados (terceirizado ou interno)</td><td>R$ 2.000-5.000/mês</td></tr>
+      <tr><td><strong>SOC 2 Type I</strong></td><td>Mês 20</td><td>Primeira certificação SOC 2</td><td>R$ 120.000-200.000</td></tr>
+      <tr><td><strong>SOC 2 Type II</strong></td><td>Mês 30</td><td>Certificação completa com audit window</td><td>R$ 80.000-120.000</td></tr>
+      <tr><td><strong>Conversão S/A</strong></td><td>Mês 30-36</td><td>Se necessário para captação institutional</td><td>R$ 15.000-30.000</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Cultura e Valores (DNA da Empresa)</h3>
+  <div class="card">
+    <p>A cultura do Intentus reflete a cosmovisão de Marcelo:</p>
+    <ul class="checklist">
+      <li><strong>Propósito acima do lucro:</strong> Resolver problemas reais do mercado imobiliário com excelência e ética</li>
+      <li><strong>Transparência radical:</strong> Métricas abertas internamente, pricing honesto externamente, sem dark patterns</li>
+      <li><strong>Ownership:</strong> Cada pessoa é responsável pelo resultado da sua entrega, não só pela tarefa</li>
+      <li><strong>Velocidade com qualidade:</strong> Lançar rápido, iterar com base em dados, não aceitar mediocridade</li>
+      <li><strong>Remote-first com encontros presenciais:</strong> Time distribuído com meetups trimestrais</li>
+      <li><strong>Dados do cliente são sagrados:</strong> LGPD e segurança não são compliance — são valores fundamentais</li>
+    </ul>
+  </div>
+
+  <h3>Indicadores de Saúde da Empresa por Fase</h3>
+  <table class="ct">
+    <thead><tr><th>Indicador</th><th>Fase 1</th><th>Fase 2</th><th>Fase 3</th><th>Fase 4</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Team size</strong></td><td>8-10</td><td>14-17</td><td>22-25</td><td>28-30</td></tr>
+      <tr><td><strong>Burn rate mensal</strong></td><td>R$ 165k</td><td>R$ 275k</td><td>R$ 414k</td><td>R$ 514k</td></tr>
+      <tr><td><strong>Runway mínimo</strong></td><td>12 meses</td><td>9 meses</td><td>6 meses</td><td>6 meses</td></tr>
+      <tr><td><strong>Receita cobrir custos</strong></td><td>0%</td><td>~18%</td><td>~36%</td><td>~97%</td></tr>
+      <tr><td><strong>Clientes</strong></td><td>5 beta</td><td>25</td><td>60</td><td>200+</td></tr>
+      <tr><td><strong>Verticais ativas</strong></td><td>1</td><td>2</td><td>4</td><td>6</td></tr>
+      <tr><td><strong>NPS</strong></td><td>>40</td><td>>50</td><td>>60</td><td>>70</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>Resumo executivo:</strong> O Intentus precisa de ~R$ 5-6M de capital para chegar ao ponto de inflexão (Fase 3, com 60 clientes e R$ 150k MRR). A partir daí, a receita começa a cobrir parcela significativa dos custos, e o modelo anti-cíclico com 6 verticais garante resiliência. Com time enxuto de 8-10 pessoas no início, infraestrutura lean (sem Kubernetes prematuro), e foco cirúrgico em incorporação → locação → blue oceans, o caminho para breakeven em ~38-42 meses é realista e defensável.</p>
+  </div>
+</div>
+</div>
+
+<div class="footer-note">
+  Intentus Real Estate — Plano de Implantação, Gaps & Crescimento — Março 2026<br>
+  Preparado para Marcelo Silva<br>
+  Dados: AWS Pricing, Revelo, HuntIT, ComplyJet, SecurePrivacy, Terracotta Ventures
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

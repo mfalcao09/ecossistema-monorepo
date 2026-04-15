@@ -1,0 +1,1500 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Brand Strategy Book — Intentus Real Estate</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628;
+    --charcoal: #1C2333;
+    --slate: #2D3748;
+    --warm-gray: #8B95A5;
+    --light-gray: #E2E8F0;
+    --off-white: #F7F8FA;
+    --white: #FFFFFF;
+    --gold: #C6A962;
+    --gold-light: #D4BD7E;
+    --gold-dark: #A88D4A;
+    --accent-blue: #4A6FA5;
+    --sage: #7A9E7E;
+    --error: #E74C3C;
+    --success: #2ECC71;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    background: var(--white);
+    color: var(--charcoal);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ===== NAVIGATION ===== */
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 260px;
+    height: 100vh;
+    background: var(--deep-navy);
+    color: var(--white);
+    padding: 2rem 0;
+    overflow-y: auto;
+    z-index: 100;
+    transition: transform 0.3s;
+  }
+  .nav-logo {
+    padding: 0 1.5rem 2rem;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    margin-bottom: 1rem;
+  }
+  .nav-logo h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+    color: var(--gold);
+  }
+  .nav-logo p {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--warm-gray);
+    margin-top: 0.25rem;
+  }
+  .nav a {
+    display: block;
+    padding: 0.6rem 1.5rem;
+    color: var(--warm-gray);
+    text-decoration: none;
+    font-size: 0.8rem;
+    font-weight: 400;
+    transition: all 0.2s;
+    border-left: 2px solid transparent;
+  }
+  .nav a:hover, .nav a.active {
+    color: var(--white);
+    background: rgba(255,255,255,0.04);
+    border-left-color: var(--gold);
+  }
+  .nav-section {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    padding: 1.2rem 1.5rem 0.4rem;
+    font-weight: 600;
+  }
+
+  /* ===== MAIN CONTENT ===== */
+  .main {
+    margin-left: 260px;
+    min-height: 100vh;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--deep-navy);
+    color: var(--white);
+    padding: 8rem 4rem 6rem;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -20%;
+    width: 600px;
+    height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(198,169,98,0.08) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    border: 1px solid rgba(198,169,98,0.3);
+    padding: 0.4rem 1rem;
+    border-radius: 2px;
+    margin-bottom: 2rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 3.2rem;
+    font-weight: 500;
+    line-height: 1.2;
+    max-width: 700px;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 span { color: var(--gold); }
+  .hero p {
+    font-size: 1.05rem;
+    color: var(--warm-gray);
+    max-width: 550px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .hero-meta {
+    margin-top: 3rem;
+    display: flex;
+    gap: 3rem;
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+  }
+  .hero-meta strong {
+    display: block;
+    color: var(--white);
+    font-size: 0.85rem;
+    font-weight: 500;
+    margin-bottom: 0.2rem;
+  }
+
+  /* ===== SECTIONS ===== */
+  section {
+    padding: 5rem 4rem;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+  section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 500;
+    color: var(--deep-navy);
+    margin-bottom: 1rem;
+    line-height: 1.3;
+  }
+  section h3 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--deep-navy);
+    margin: 2rem 0 0.8rem;
+  }
+  section p {
+    max-width: 680px;
+    color: var(--slate);
+    margin-bottom: 1rem;
+  }
+
+  /* ===== CARDS ===== */
+  .card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .card {
+    background: var(--off-white);
+    border: 1px solid var(--light-gray);
+    border-radius: 8px;
+    padding: 2rem;
+    transition: all 0.3s;
+  }
+  .card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 4px 20px rgba(10,22,40,0.06);
+  }
+  .card-icon {
+    width: 40px;
+    height: 40px;
+    background: var(--deep-navy);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+  }
+  .card h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--deep-navy);
+    margin-bottom: 0.5rem;
+  }
+  .card p {
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    line-height: 1.6;
+  }
+
+  /* ===== NAMING OPTIONS ===== */
+  .naming-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .naming-option {
+    border: 2px solid var(--light-gray);
+    border-radius: 12px;
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+  .naming-option:hover {
+    border-color: var(--gold);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(10,22,40,0.08);
+  }
+  .naming-option.recommended {
+    border-color: var(--gold);
+    position: relative;
+  }
+  .naming-option.recommended::after {
+    content: 'RECOMENDADO';
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    font-size: 0.6rem;
+    letter-spacing: 0.15em;
+    background: var(--gold);
+    color: var(--white);
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    font-weight: 600;
+  }
+  .naming-header {
+    background: var(--deep-navy);
+    color: var(--white);
+    padding: 2.5rem 2rem;
+    text-align: center;
+  }
+  .naming-header h3 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2rem;
+    font-weight: 400;
+    color: var(--white);
+    margin: 0;
+    letter-spacing: 0.08em;
+  }
+  .naming-header .tagline {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--gold);
+    margin-top: 0.5rem;
+  }
+  .naming-body {
+    padding: 2rem;
+  }
+  .naming-body p {
+    font-size: 0.85rem;
+    color: var(--slate);
+    margin-bottom: 0.8rem;
+  }
+  .naming-body .tag {
+    display: inline-block;
+    font-size: 0.7rem;
+    background: var(--off-white);
+    color: var(--slate);
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    margin: 0.15rem;
+  }
+
+  /* ===== PRISM ===== */
+  .prism-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--light-gray);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+  .prism-facet {
+    background: var(--white);
+    padding: 2rem;
+  }
+  .prism-facet h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 0.8rem;
+    font-weight: 600;
+  }
+  .prism-facet p {
+    font-size: 0.85rem;
+    color: var(--slate);
+    line-height: 1.7;
+  }
+
+  /* ===== COLOR PALETTE ===== */
+  .palette {
+    display: flex;
+    gap: 0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+    height: 180px;
+  }
+  .palette-swatch {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1rem;
+    color: var(--white);
+    font-size: 0.75rem;
+    transition: flex 0.3s;
+  }
+  .palette-swatch:hover { flex: 1.5; }
+  .palette-swatch .name {
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 0.2rem;
+  }
+  .palette-swatch .hex {
+    opacity: 0.7;
+    font-family: monospace;
+    font-size: 0.7rem;
+  }
+
+  /* ===== TYPOGRAPHY SHOWCASE ===== */
+  .type-showcase {
+    margin-top: 2rem;
+    padding: 3rem;
+    background: var(--off-white);
+    border-radius: 12px;
+  }
+  .type-sample {
+    margin-bottom: 2.5rem;
+  }
+  .type-sample:last-child { margin-bottom: 0; }
+  .type-sample .label {
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+  }
+  .type-sample .display {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    font-weight: 500;
+    color: var(--deep-navy);
+    letter-spacing: -0.01em;
+    line-height: 1.2;
+  }
+  .type-sample .body-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 1rem;
+    color: var(--slate);
+    line-height: 1.8;
+    max-width: 600px;
+  }
+  .type-sample .ui-text {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--deep-navy);
+  }
+
+  /* ===== STORYBRAND ===== */
+  .story-flow {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    margin-top: 2rem;
+  }
+  .story-step {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+    padding: 1.5rem 0;
+    border-bottom: 1px solid var(--light-gray);
+  }
+  .story-step:last-child { border-bottom: none; }
+  .story-number {
+    width: 36px;
+    height: 36px;
+    background: var(--deep-navy);
+    color: var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.8rem;
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .story-content h4 {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--deep-navy);
+    margin-bottom: 0.3rem;
+  }
+  .story-content p {
+    font-size: 0.85rem;
+    color: var(--warm-gray);
+    line-height: 1.7;
+  }
+
+  /* ===== LOGO CONCEPTS ===== */
+  .logo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .logo-concept {
+    border: 1px solid var(--light-gray);
+    border-radius: 12px;
+    overflow: hidden;
+  }
+  .logo-preview {
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+  .logo-preview.dark {
+    background: var(--deep-navy);
+    color: var(--white);
+  }
+  .logo-preview.light {
+    background: var(--white);
+    color: var(--deep-navy);
+  }
+  .logo-preview .symbol {
+    display: inline-block;
+    width: 44px;
+    height: 44px;
+    border: 2px solid var(--gold);
+    border-radius: 4px;
+    margin-right: 12px;
+    position: relative;
+  }
+  .logo-preview .symbol::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-top: 2px solid var(--gold);
+    border-right: 2px solid var(--gold);
+    border-radius: 0 4px 0 0;
+  }
+  .logo-info {
+    padding: 1.5rem;
+    background: var(--off-white);
+  }
+  .logo-info h4 {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--deep-navy);
+    margin-bottom: 0.3rem;
+  }
+  .logo-info p {
+    font-size: 0.8rem;
+    color: var(--warm-gray);
+  }
+
+  /* ===== COMPARISON TABLE ===== */
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 2rem;
+    font-size: 0.85rem;
+  }
+  .comparison-table th {
+    background: var(--deep-navy);
+    color: var(--white);
+    padding: 0.8rem 1rem;
+    text-align: left;
+    font-weight: 500;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .comparison-table td {
+    padding: 0.8rem 1rem;
+    border-bottom: 1px solid var(--light-gray);
+    color: var(--slate);
+  }
+  .comparison-table tr:hover td {
+    background: var(--off-white);
+  }
+
+  /* ===== QUOTE ===== */
+  .quote-block {
+    background: var(--deep-navy);
+    color: var(--white);
+    padding: 3rem;
+    border-radius: 12px;
+    margin: 3rem 0;
+    position: relative;
+  }
+  .quote-block::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 6rem;
+    color: var(--gold);
+    opacity: 0.3;
+    position: absolute;
+    top: 0.5rem;
+    left: 1.5rem;
+    line-height: 1;
+  }
+  .quote-block p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--white);
+    max-width: 600px;
+    line-height: 1.6;
+    margin-left: 1rem;
+  }
+  .quote-block .attribution {
+    font-family: 'Inter', sans-serif;
+    font-size: 0.75rem;
+    color: var(--gold);
+    margin-top: 1rem;
+    margin-left: 1rem;
+    font-weight: 500;
+  }
+
+  /* ===== DO / DON'T ===== */
+  .do-dont {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+  .do-box, .dont-box {
+    padding: 1.5rem;
+    border-radius: 8px;
+    font-size: 0.85rem;
+  }
+  .do-box {
+    background: rgba(46,204,113,0.06);
+    border: 1px solid rgba(46,204,113,0.2);
+  }
+  .dont-box {
+    background: rgba(231,76,60,0.06);
+    border: 1px solid rgba(231,76,60,0.2);
+  }
+  .do-box h4 { color: var(--success); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.8rem; }
+  .dont-box h4 { color: var(--error); font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 0.8rem; }
+  .do-box li, .dont-box li {
+    margin-bottom: 0.4rem;
+    color: var(--slate);
+    line-height: 1.5;
+  }
+
+  /* ===== VOICE TABLE ===== */
+  .voice-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1px;
+    background: var(--light-gray);
+    border-radius: 12px;
+    overflow: hidden;
+    margin-top: 2rem;
+  }
+  .voice-item {
+    background: var(--white);
+    padding: 1.5rem;
+    text-align: center;
+  }
+  .voice-item h4 {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+  }
+  .voice-item .trait {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    color: var(--deep-navy);
+    margin-bottom: 0.3rem;
+  }
+  .voice-item p {
+    font-size: 0.75rem;
+    color: var(--warm-gray);
+    line-height: 1.5;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: var(--deep-navy);
+    color: var(--warm-gray);
+    padding: 3rem 4rem;
+    font-size: 0.8rem;
+  }
+  .footer strong { color: var(--gold); }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 900px) {
+    .nav { transform: translateX(-100%); }
+    .main { margin-left: 0; }
+    section { padding: 3rem 2rem; }
+    .hero { padding: 5rem 2rem 4rem; }
+    .hero h1 { font-size: 2.2rem; }
+    .prism-grid { grid-template-columns: 1fr; }
+    .do-dont { grid-template-columns: 1fr; }
+    .voice-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav class="nav">
+  <div class="nav-logo">
+    <h3>Brand Book</h3>
+    <p>Intentus Real Estate</p>
+  </div>
+  <div class="nav-section">Estrategia</div>
+  <a href="#positioning">Posicionamento</a>
+  <a href="#zag">Diferenciacao (ZAG)</a>
+  <a href="#naming">Naming</a>
+  <div class="nav-section">Identidade</div>
+  <a href="#prism">Prisma de Marca</a>
+  <a href="#archetype">Arquetipo</a>
+  <a href="#storybrand">Narrativa StoryBrand</a>
+  <div class="nav-section">Visual</div>
+  <a href="#colors">Paleta de Cores</a>
+  <a href="#typography">Tipografia</a>
+  <a href="#logo">Conceitos de Logo</a>
+  <a href="#voice">Tom de Voz</a>
+  <div class="nav-section">Aplicacao</div>
+  <a href="#guidelines">Diretrizes</a>
+  <a href="#next">Proximos Passos</a>
+</nav>
+
+<!-- MAIN CONTENT -->
+<div class="main">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-badge">Brand Strategy Book 2026</div>
+    <h1>Reformulando a <span>Intentus</span> para o Futuro do Real Estate</h1>
+    <p>Uma estrategia completa de marca — do posicionamento ao sistema visual — construida por 7 especialistas de branding de classe mundial, sintetizada em um unico documento de referencia.</p>
+    <div class="hero-meta">
+      <div>
+        <strong>Cliente</strong>
+        Marcelo — CEO, Intentus
+      </div>
+      <div>
+        <strong>Data</strong>
+        Marco 2026
+      </div>
+      <div>
+        <strong>Escopo</strong>
+        Marca Completa
+      </div>
+      <div>
+        <strong>Direcao</strong>
+        Clean & Minimalista
+      </div>
+    </div>
+  </header>
+
+  <!-- ================================ -->
+  <!-- SECTION 1: POSITIONING (Al Ries) -->
+  <!-- ================================ -->
+  <section id="positioning">
+    <div class="section-label">Fase 01 — Al Ries</div>
+    <h2>Posicionamento por Categoria</h2>
+    <p>A mente do cliente pensa em categorias. O primeiro passo e definir <strong>qual categoria a Intentus vai dominar</strong>. Nao basta estar no mercado — e preciso ser o primeiro nome que vem a mente.</p>
+
+    <h3>Analise do Cenario Atual</h3>
+    <table class="comparison-table">
+      <tr>
+        <th>Dimensao</th>
+        <th>Situacao Atual</th>
+        <th>Oportunidade</th>
+      </tr>
+      <tr>
+        <td>Categoria declarada</td>
+        <td>"Plataforma de gestao imobiliaria"</td>
+        <td>Categoria generica, disputada por ERPs e CRMs</td>
+      </tr>
+      <tr>
+        <td>Posicao na mente</td>
+        <td>Nao ha first-to-mind claro no Brasil para SaaS imobiliario AI-native</td>
+        <td>Janela aberta para criacao de categoria</td>
+      </tr>
+      <tr>
+        <td>Diferencial real</td>
+        <td>11 modulos + IA nativa (pricing, parsing, lead scoring, insights)</td>
+        <td>Nenhum concorrente e genuinamente AI-native</td>
+      </tr>
+      <tr>
+        <td>Visual Hammer</td>
+        <td>Logo laranja/preto — generico, nao premium</td>
+        <td>Criar identidade visual distinta e memoravel</td>
+      </tr>
+    </table>
+
+    <h3>Estrategia: Criacao de Nova Categoria</h3>
+    <p>Em vez de competir na categoria lotada de "software de gestao imobiliaria", a Intentus deve <strong>criar e dominar uma nova categoria</strong>:</p>
+
+    <div class="quote-block">
+      <p>Real Estate Intelligence OS — O primeiro sistema operacional inteligente para o mercado imobiliario.</p>
+      <div class="attribution">— Posicionamento Proposto (Al Ries: Lei da Criacao de Categoria)</div>
+    </div>
+
+    <p><strong>Por que funciona:</strong> Nenhum player brasileiro se posiciona como "Operating System" para real estate. A maioria sao CRMs adaptados ou ERPs verticalizados. A Intentus e genuinamente diferente: nasceu com IA, integra 11 modulos, e orquestra toda a operacao — nao e uma ferramenta, e o sistema operacional do negocio.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">1</div>
+        <h4>Problema que Existia</h4>
+        <p>Incorporadoras usam 5-8 ferramentas desconectadas. CRM aqui, ERP ali, planilha acola. Perdem tempo, dados e oportunidades.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">2</div>
+        <h4>Nova Categoria Criada</h4>
+        <p><strong>Real Estate Intelligence OS</strong> — Uma unica plataforma inteligente que unifica toda a operacao, do lead ao pos-venda.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">3</div>
+        <h4>Primeiro na Categoria</h4>
+        <p>Intentus se posiciona como a primeira plataforma AI-native do mercado imobiliario brasileiro. Nao e IA adicionada — e IA nativa.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 2: ZAG (Marty Neumeier)   -->
+  <!-- ================================= -->
+  <section id="zag">
+    <div class="section-label">Fase 01 — Marty Neumeier</div>
+    <h2>Diferenciacao: O ZAG da Intentus</h2>
+    <p>"Quando todos vao para um lado, va para o outro." A forca de uma marca esta em ser o <strong>oposto</strong> do que o mercado faz.</p>
+
+    <div class="card-grid">
+      <div class="card">
+        <h4>Todos ZIG com...</h4>
+        <p>Interfaces complexas, cheias de menus e opcoes. Sensacao de "sistema legado" adaptado para web.</p>
+      </div>
+      <div class="card" style="border-color: var(--gold);">
+        <h4>Intentus ZAG com...</h4>
+        <p>Simplicidade elegante. Interface clean que a IA preenche automaticamente. Menos cliques, mais inteligencia.</p>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-top: 1rem;">
+      <div class="card">
+        <h4>Todos ZIG com...</h4>
+        <p>Ferramentas fragmentadas. CRM + ERP + planilhas + emails. O usuario "costura" a operacao.</p>
+      </div>
+      <div class="card" style="border-color: var(--gold);">
+        <h4>Intentus ZAG com...</h4>
+        <p>Um unico OS que orquestra tudo. Um lugar. Uma verdade. Uma inteligencia conectando cada etapa.</p>
+      </div>
+    </div>
+
+    <div class="card-grid" style="margin-top: 1rem;">
+      <div class="card">
+        <h4>Todos ZIG com...</h4>
+        <p>Visual generico, cores primarias, branding corporativo sem personalidade. "Mais um software."</p>
+      </div>
+      <div class="card" style="border-color: var(--gold);">
+        <h4>Intentus ZAG com...</h4>
+        <p>Estetica premium e minimalista. Parece uma fintech, nao um ERP. O visual comunica inteligencia.</p>
+      </div>
+    </div>
+
+    <h3>Teste de Uma Frase (Neumeier Clarity Test)</h3>
+    <div class="quote-block">
+      <p>Somos o sistema operacional inteligente que unifica toda a gestao imobiliaria em uma unica plataforma elegante — para quem nao aceita operar com ferramentas fragmentadas.</p>
+      <div class="attribution">— Posicionamento em uma frase</div>
+    </div>
+  </section>
+
+  <!-- ======================== -->
+  <!-- SECTION 3: NAMING        -->
+  <!-- ======================== -->
+  <section id="naming">
+    <div class="section-label">Fase 02 — Naming Strategist</div>
+    <h2>Exploracao de Naming</h2>
+    <p>O nome e o primeiro ponto de contato com a marca. Avaliamos tres direcoes estrategicas: manter o nome atual (reposicionado), evoluir o nome, ou criar algo completamente novo.</p>
+
+    <div class="naming-grid">
+
+      <!-- OPTION 1: INTENTUS (RECOMMENDED) -->
+      <div class="naming-option recommended">
+        <div class="naming-header">
+          <h3>Intentus</h3>
+          <div class="tagline">Real Estate Intelligence</div>
+        </div>
+        <div class="naming-body">
+          <p><strong>Estrategia:</strong> Manter o nome, remover "Real Estate" do nome principal, usar como descritor.</p>
+          <p><strong>Origem:</strong> Latim — "atento, focado, concentrado". Transmite precisao e intencionalidade.</p>
+          <p><strong>Por que funciona:</strong> Ja tem equity, soa premium e internacional, facil de pronunciar em PT e EN. O problema nunca foi o nome — e como ele esta sendo expresso visualmente.</p>
+          <p><strong>Evolucao:</strong> De "Intentus Real Estate" para simplesmente <strong>"Intentus"</strong> com descriptor <em>"Real Estate Intelligence"</em>.</p>
+          <div style="margin-top: 0.8rem;">
+            <span class="tag">Metaforico</span>
+            <span class="tag">Latim</span>
+            <span class="tag">Premium</span>
+            <span class="tag">Internacional</span>
+            <span class="tag">Ja registrado</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION 2: ALTUS -->
+      <div class="naming-option">
+        <div class="naming-header">
+          <h3>Altus</h3>
+          <div class="tagline">Elevating Real Estate</div>
+        </div>
+        <div class="naming-body">
+          <p><strong>Estrategia:</strong> Nome inventado a partir do latim, comunicando elevacao e premium.</p>
+          <p><strong>Origem:</strong> Latim — "alto, elevado". Transmite premium, aspiracao, visao superior.</p>
+          <p><strong>Por que funciona:</strong> Curto (5 letras), poderoso, facil em qualquer idioma. Transmite altitude/superioridade sem arrogancia. Alinha com a estetica clean.</p>
+          <p><strong>Risco:</strong> Requer novo registro de marca e dominio. Perde equity do nome atual.</p>
+          <div style="margin-top: 0.8rem;">
+            <span class="tag">Inventado</span>
+            <span class="tag">Latim</span>
+            <span class="tag">Curto</span>
+            <span class="tag">Global</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION 3: VERTEX -->
+      <div class="naming-option">
+        <div class="naming-header">
+          <h3>Vertex</h3>
+          <div class="tagline">Intelligence at the Top</div>
+        </div>
+        <div class="naming-body">
+          <p><strong>Estrategia:</strong> Nome metaforico que comunica ponto mais alto + precisao matematica.</p>
+          <p><strong>Origem:</strong> Latim — "ponto mais alto, cume". Tambem referencia geometria (vertice), conectando com tech/dados.</p>
+          <p><strong>Por que funciona:</strong> Dual meaning poderoso: "topo" (premium) + "vertice" (precisao, dados, geometria). Soa tech sem ser frio.</p>
+          <p><strong>Risco:</strong> Ja existe "Vertex Inc" (tax software). Conflito potencial de trademark.</p>
+          <div style="margin-top: 0.8rem;">
+            <span class="tag">Metaforico</span>
+            <span class="tag">Dual meaning</span>
+            <span class="tag">Tech</span>
+            <span class="tag">Risco TM</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- OPTION 4: MERIDIAN -->
+      <div class="naming-option">
+        <div class="naming-header">
+          <h3>Meridian</h3>
+          <div class="tagline">Navigate Real Estate</div>
+        </div>
+        <div class="naming-body">
+          <p><strong>Estrategia:</strong> Nome metaforico que comunica navegacao, orientacao e ponto de referencia.</p>
+          <p><strong>Origem:</strong> Latim "meridianus" — linha de referencia, ponto mais alto do sol. Geograficamente, e a linha que orienta.</p>
+          <p><strong>Por que funciona:</strong> Sofisticado, premium, facil de pronunciar. Metafora de "bussola" para o mercado imobiliario. Elegante e atemporal.</p>
+          <p><strong>Risco:</strong> Nome mais longo (8 letras). Existe em outros setores (hoteis, finance).</p>
+          <div style="margin-top: 0.8rem;">
+            <span class="tag">Metaforico</span>
+            <span class="tag">Navegacao</span>
+            <span class="tag">Sofisticado</span>
+            <span class="tag">Atemporal</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <h3>Recomendacao do Naming Strategist</h3>
+    <p><strong>Opcao recomendada: Intentus</strong> (reposicionado). O nome ja possui qualidades premium excepcionais — origem latina, sonoridade elegante, facil internacionalizacao. O problema nunca foi o nome; e a expressao visual e verbal. A mudanca de "Intentus Real Estate" para <strong>"Intentus — Real Estate Intelligence"</strong> ja reposiciona dramaticamente.</p>
+    <p>Se Marcelo quiser uma ruptura total, <strong>Altus</strong> e a segunda melhor opcao — curto, poderoso, premium e sem conflitos evidentes.</p>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 4: PRISM (Kapferer)       -->
+  <!-- ================================= -->
+  <section id="prism">
+    <div class="section-label">Fase 03 — Jean-Noel Kapferer</div>
+    <h2>Prisma de Identidade de Marca</h2>
+    <p>O Prisma de Kapferer define as 6 facetas que compoem a identidade completa da marca. Cada faceta deve ser coerente com as demais — juntas, formam um sistema de significado.</p>
+
+    <div class="prism-grid">
+      <div class="prism-facet">
+        <h4>01. Physique (Aparencia)</h4>
+        <p>Estetica clean e minimalista. Branco predominante com acentos em navy profundo e dourado discreto. Tipografia elegante. Espacos amplos. Geometria precisa. Zero poluicao visual. Cada pixel comunica inteligencia.</p>
+      </div>
+      <div class="prism-facet">
+        <h4>02. Personalidade</h4>
+        <p>Inteligente, confiante, precisa e discreta. Nao grita — sussurra com autoridade. Fala pouco, mas cada palavra tem peso. Combina sofisticacao tecnologica com calor humano. Nunca arrogante, sempre segura.</p>
+      </div>
+      <div class="prism-facet">
+        <h4>03. Cultura</h4>
+        <p>Inovacao com proposito. Excelencia como padrao, nao como excecao. Integridade e transparencia nao sao valores decorativos — sao a base. Dados iluminam, IA amplifica, humanos decidem. Tecnologia a servico de pessoas.</p>
+      </div>
+      <div class="prism-facet">
+        <h4>04. Relacionamento</h4>
+        <p>Parceiro estrategico, nao fornecedor de software. A relacao e de confianca e co-criacao. "Estamos juntos na operacao." Nao e um chatbot que responde — e uma inteligencia que antecipa. Proximo, mas respeitoso.</p>
+      </div>
+      <div class="prism-facet">
+        <h4>05. Reflexo (Cliente)</h4>
+        <p>"Eu sou alguem que usa a melhor tecnologia disponivel para operar meu negocio imobiliario. Eu nao aceito gambiarra. Eu valorizo dados, inteligencia e eficiencia. Sou sofisticado na minha gestao."</p>
+      </div>
+      <div class="prism-facet">
+        <h4>06. Auto-Imagem</h4>
+        <p>O profissional imobiliario visionario: informado por dados, amplificado por IA, operando com elegancia. Alguem que ve o mercado antes dos outros. Lider, nao seguidor. Inovador pragmatico.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 5: ARCHETYPE              -->
+  <!-- ================================= -->
+  <section id="archetype">
+    <div class="section-label">Fase 03 — Archetype Consultant</div>
+    <h2>Arquetipo de Marca</h2>
+    <p>Definir o arquetipo e dar "alma" a marca. E o padrao de personalidade universal que torna a marca intuitivamente compreensivel.</p>
+
+    <div class="card-grid">
+      <div class="card" style="border-color: var(--gold); border-width: 2px;">
+        <div class="card-icon" style="background: var(--gold); color: var(--deep-navy);">P</div>
+        <h4>Primario: O Sabio (The Sage)</h4>
+        <p><strong>Desejo central:</strong> Compreender, analisar, revelar a verdade.<br><br>
+        <strong>Visao de mundo:</strong> O mundo pode ser compreendido atraves de dados e inteligencia. A verdade esta nos numeros.<br><br>
+        <strong>Tom de voz:</strong> Analitico, confiavel, preciso. Educa sem ser pedante. Ilumina sem condescender.<br><br>
+        <strong>Exemplo:</strong> "Seus dados mostram uma oportunidade de R$ 2.4M no pipeline. Aqui esta o caminho."</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">S</div>
+        <h4>Secundario: O Governante (The Ruler)</h4>
+        <p><strong>Desejo central:</strong> Ordem, controle, estabilidade. Trazer estrutura ao caos.<br><br>
+        <strong>Visao de mundo:</strong> Lideranca e organizacao sao essenciais para o sucesso. Quem controla a informacao controla o resultado.<br><br>
+        <strong>Tom de voz:</strong> Autoritativo (nao autoritario), organizado, decisivo. Transmite confianca.<br><br>
+        <strong>Exemplo:</strong> "Sua operacao inteira em um unico painel. Sem surpresas. Sem pontos cegos."</p>
+      </div>
+    </div>
+
+    <h3>Combinacao Arquetipica: Sabio + Governante</h3>
+    <p>Essa combinacao e rara e poderosa: <strong>"Inteligencia que governa."</strong> A Intentus nao e so uma ferramenta de dados (Sabio isolado) — ela organiza, estrutura e comanda a operacao (Governante). Juntos, criam a personalidade de um consultor estrategico de confianca que tambem tem o poder de executar.</p>
+
+    <div class="voice-grid">
+      <div class="voice-item">
+        <h4>Atributo 01</h4>
+        <div class="trait">Precisa</div>
+        <p>Dados acurados, insights certeiros, zero achismo</p>
+      </div>
+      <div class="voice-item">
+        <h4>Atributo 02</h4>
+        <div class="trait">Confiante</div>
+        <p>Fala com autoridade, sem arrogancia</p>
+      </div>
+      <div class="voice-item">
+        <h4>Atributo 03</h4>
+        <div class="trait">Elegante</div>
+        <p>Minimalista, refinada, sem excessos</p>
+      </div>
+      <div class="voice-item">
+        <h4>Atributo 04</h4>
+        <div class="trait">Iluminada</div>
+        <p>Revela o que outros nao veem nos dados</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 6: STORYBRAND             -->
+  <!-- ================================= -->
+  <section id="storybrand">
+    <div class="section-label">Fase 04 — Donald Miller</div>
+    <h2>Narrativa StoryBrand</h2>
+    <p>"Se voce confunde, voce perde." A narrativa da Intentus segue a estrutura de 7 partes do StoryBrand — onde o <strong>cliente e o heroi</strong> e a Intentus e o <strong>guia sabio</strong>.</p>
+
+    <div class="story-flow">
+      <div class="story-step">
+        <div class="story-number">1</div>
+        <div class="story-content">
+          <h4>O Heroi (Cliente)</h4>
+          <p>O profissional imobiliario ambicioso — incorporador, gestor de ativos ou diretor comercial — que sabe que seu negocio pode render mais, mas sente que a operacao fragmentada esta segurando o crescimento.</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">2</div>
+        <div class="story-content">
+          <h4>O Problema</h4>
+          <p><strong>Externo:</strong> Opera com 5-8 ferramentas desconectadas. Dados em planilhas, CRM generico, contratos por email.<br>
+          <strong>Interno:</strong> Sente que perde controle. Ansiedade de "nao saber o que nao sabe". Frustacao com retrabalho.<br>
+          <strong>Filosofico:</strong> "Meu negocio merece operar com inteligencia, nao com gambiarra."</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">3</div>
+        <div class="story-content">
+          <h4>O Guia (Intentus)</h4>
+          <p><strong>Empatia:</strong> "Sabemos o que e operar no escuro. Ja vimos incorporadoras perdendo milhoes por falta de visibilidade."<br>
+          <strong>Autoridade:</strong> IA nativa, 11 modulos integrados, compliance brasileiro, inteligencia preditiva. Nao adaptamos — nascemos para isso.</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">4</div>
+        <div class="story-content">
+          <h4>O Plano (3 Passos)</h4>
+          <p><strong>1. Conecte</strong> — Centralize toda sua operacao em uma unica plataforma em menos de uma semana.<br>
+          <strong>2. Ilumine</strong> — A IA analisa seus dados e revela insights que voce nao tinha acesso.<br>
+          <strong>3. Escale</strong> — Tome decisoes mais rapidas, feche mais negocios, cresca com inteligencia.</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">5</div>
+        <div class="story-content">
+          <h4>Chamada para Acao</h4>
+          <p><strong>Direta:</strong> "Agende uma demonstracao personalizada"<br>
+          <strong>Transicional:</strong> "Receba o Relatorio de Inteligencia Imobiliaria gratuito"</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">6</div>
+        <div class="story-content">
+          <h4>O que Esta em Jogo</h4>
+          <p><strong>Sucesso:</strong> Operacao unificada, decisoes por dados, crescimento previsivel, equipe alinhada, clientes satisfeitos.<br>
+          <strong>Fracasso:</strong> Continuar operando no escuro, perder negocios para concorrentes mais ageis, compliance manual sujeito a erros.</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">7</div>
+        <div class="story-content">
+          <h4>Resolucao (Transformacao)</h4>
+          <p>O heroi se transforma: de gestor sobrecarregado em <strong>lider estrategico</strong>. A operacao roda com inteligencia. Os dados falam. As decisoes sao rapidas e seguras. O negocio cresce — e ele sabe exatamente por que.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 7: COLORS (Wheeler)       -->
+  <!-- ================================= -->
+  <section id="colors">
+    <div class="section-label">Fase 05 — Alina Wheeler</div>
+    <h2>Paleta de Cores</h2>
+    <p>A nova paleta abandona o laranja vibrante e adota uma linguagem visual <strong>clean, sofisticada e premium</strong>. Inspiracao em fintechs e luxury tech brands. Cada cor tem funcao estrategica.</p>
+
+    <h3>Paleta Primaria</h3>
+    <div class="palette">
+      <div class="palette-swatch" style="background: #0A1628;">
+        <div class="name">Deep Navy</div>
+        <div class="hex">#0A1628</div>
+      </div>
+      <div class="palette-swatch" style="background: #1C2333;">
+        <div class="name">Charcoal</div>
+        <div class="hex">#1C2333</div>
+      </div>
+      <div class="palette-swatch" style="background: #C6A962;">
+        <div class="name">Gold</div>
+        <div class="hex">#C6A962</div>
+      </div>
+      <div class="palette-swatch" style="background: #F7F8FA; color: #1C2333;">
+        <div class="name">Off-White</div>
+        <div class="hex">#F7F8FA</div>
+      </div>
+      <div class="palette-swatch" style="background: #FFFFFF; color: #1C2333; border: 1px solid #E2E8F0;">
+        <div class="name">White</div>
+        <div class="hex">#FFFFFF</div>
+      </div>
+    </div>
+
+    <h3>Paleta Estendida</h3>
+    <div class="palette" style="height: 120px;">
+      <div class="palette-swatch" style="background: #4A6FA5;">
+        <div class="name">Accent Blue</div>
+        <div class="hex">#4A6FA5</div>
+      </div>
+      <div class="palette-swatch" style="background: #7A9E7E;">
+        <div class="name">Sage</div>
+        <div class="hex">#7A9E7E</div>
+      </div>
+      <div class="palette-swatch" style="background: #8B95A5;">
+        <div class="name">Warm Gray</div>
+        <div class="hex">#8B95A5</div>
+      </div>
+      <div class="palette-swatch" style="background: #E2E8F0; color: #1C2333;">
+        <div class="name">Light Gray</div>
+        <div class="hex">#E2E8F0</div>
+      </div>
+    </div>
+
+    <h3>Uso Estrategico das Cores</h3>
+    <table class="comparison-table">
+      <tr>
+        <th>Cor</th>
+        <th>Funcao</th>
+        <th>Quando Usar</th>
+      </tr>
+      <tr>
+        <td><span style="display:inline-block;width:12px;height:12px;background:#0A1628;border-radius:2px;vertical-align:middle;margin-right:6px;"></span> Deep Navy</td>
+        <td>Confianca, profundidade, premium</td>
+        <td>Headers, backgrounds densos, elementos de autoridade</td>
+      </tr>
+      <tr>
+        <td><span style="display:inline-block;width:12px;height:12px;background:#C6A962;border-radius:2px;vertical-align:middle;margin-right:6px;"></span> Gold</td>
+        <td>Acento premium, destaque, CTAs</td>
+        <td>Botoes, icones, labels, destaques. SEMPRE com moderacao</td>
+      </tr>
+      <tr>
+        <td><span style="display:inline-block;width:12px;height:12px;background:#F7F8FA;border-radius:2px;vertical-align:middle;margin-right:6px;border:1px solid #ddd"></span> Off-White</td>
+        <td>Respiracao, limpeza, espacamento</td>
+        <td>Fundo principal do app e site. 80%+ da superficie visual</td>
+      </tr>
+      <tr>
+        <td><span style="display:inline-block;width:12px;height:12px;background:#4A6FA5;border-radius:2px;vertical-align:middle;margin-right:6px;"></span> Accent Blue</td>
+        <td>Dados, graficos, links, informacao</td>
+        <td>Charts, KPIs, elementos interativos secundarios</td>
+      </tr>
+      <tr>
+        <td><span style="display:inline-block;width:12px;height:12px;background:#7A9E7E;border-radius:2px;vertical-align:middle;margin-right:6px;"></span> Sage</td>
+        <td>Sucesso, positivo, crescimento</td>
+        <td>Indicadores positivos, status "completo", growth metrics</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 8: TYPOGRAPHY             -->
+  <!-- ================================= -->
+  <section id="typography">
+    <div class="section-label">Fase 05 — Sistema Tipografico</div>
+    <h2>Tipografia</h2>
+    <p>A tipografia comunica personalidade antes das palavras. A combinacao de <strong>Playfair Display</strong> (serif, elegante) para titulos com <strong>Inter</strong> (sans-serif, tecnica) para corpo cria o equilibrio perfeito entre sofisticacao e funcionalidade.</p>
+
+    <div class="type-showcase">
+      <div class="type-sample">
+        <div class="label">Display / Headlines — Playfair Display</div>
+        <div class="display">Inteligencia que transforma o mercado imobiliario.</div>
+      </div>
+      <div class="type-sample">
+        <div class="label">Body / Paragrafos — Inter Regular</div>
+        <div class="body-text">A plataforma Intentus unifica 11 modulos de gestao imobiliaria com inteligencia artificial nativa, transformando dados fragmentados em insights acionaveis para incorporadoras, gestores de ativos e imobiliarias de alto padrao.</div>
+      </div>
+      <div class="type-sample">
+        <div class="label">UI / Labels — Inter Medium Uppercase</div>
+        <div class="ui-text">Dashboard &nbsp;&nbsp;|&nbsp;&nbsp; Contratos &nbsp;&nbsp;|&nbsp;&nbsp; Pipeline &nbsp;&nbsp;|&nbsp;&nbsp; Analytics &nbsp;&nbsp;|&nbsp;&nbsp; Compliance</div>
+      </div>
+    </div>
+
+    <h3>Hierarquia Tipografica</h3>
+    <table class="comparison-table">
+      <tr>
+        <th>Elemento</th>
+        <th>Fonte</th>
+        <th>Peso</th>
+        <th>Tamanho</th>
+        <th>Uso</th>
+      </tr>
+      <tr>
+        <td>H1 — Hero</td>
+        <td>Playfair Display</td>
+        <td>Medium 500</td>
+        <td>48-64px</td>
+        <td>Titulos de pagina, hero sections</td>
+      </tr>
+      <tr>
+        <td>H2 — Section</td>
+        <td>Playfair Display</td>
+        <td>Medium 500</td>
+        <td>32-40px</td>
+        <td>Titulos de secao</td>
+      </tr>
+      <tr>
+        <td>H3 — Subsection</td>
+        <td>Inter</td>
+        <td>Semibold 600</td>
+        <td>20-24px</td>
+        <td>Subtitulos, card headers</td>
+      </tr>
+      <tr>
+        <td>Body</td>
+        <td>Inter</td>
+        <td>Regular 400</td>
+        <td>15-16px</td>
+        <td>Texto corrido, descricoes</td>
+      </tr>
+      <tr>
+        <td>Label</td>
+        <td>Inter</td>
+        <td>Medium 500</td>
+        <td>11-13px</td>
+        <td>Labels, tags, UI elements</td>
+      </tr>
+      <tr>
+        <td>Caption</td>
+        <td>Inter</td>
+        <td>Regular 400</td>
+        <td>12-13px</td>
+        <td>Notas, metadados, timestamps</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 9: LOGO CONCEPTS          -->
+  <!-- ================================= -->
+  <section id="logo">
+    <div class="section-label">Fase 05 — Conceitos de Logo</div>
+    <h2>Direcoes de Logo</h2>
+    <p>Tres direcoes que expressam a nova identidade: clean, minimalista, premium. Todas abandonam o laranja e adotam a nova paleta navy + gold.</p>
+
+    <div class="logo-grid">
+      <div class="logo-concept">
+        <div class="logo-preview dark">
+          <span style="color: var(--gold); font-weight: 300;">I</span>NTENTUS
+        </div>
+        <div class="logo-info">
+          <h4>Direcao A — Wordmark Puro</h4>
+          <p>Wordmark elegante com o "I" inicial em dourado como assinatura. Sem simbolo. A tipografia E a marca. Minimalismo maximo.</p>
+        </div>
+      </div>
+      <div class="logo-concept">
+        <div class="logo-preview light" style="border-bottom: 1px solid var(--light-gray);">
+          <span style="display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border:2px solid var(--gold);border-radius:6px;margin-right:14px;font-size:1.4rem;color:var(--gold);font-weight:300;">I</span>
+          <span style="color:var(--deep-navy);letter-spacing:0.08em;">INTENTUS</span>
+        </div>
+        <div class="logo-info">
+          <h4>Direcao B — Simbolo + Wordmark</h4>
+          <p>"I" enquadrado em moldura geometrica dourada. Referencia a planta/projeto arquitetonico. Pode ser usado independente como app icon.</p>
+        </div>
+      </div>
+      <div class="logo-concept">
+        <div class="logo-preview dark" style="letter-spacing:0.15em;font-size:1.8rem;">
+          <span style="color:var(--gold);font-size:0.5em;vertical-align:middle;margin-right:10px;">&#9670;</span>INTENTUS
+        </div>
+        <div class="logo-info">
+          <h4>Direcao C — Geometric Mark</h4>
+          <p>Losango dourado como "ponto de focalizacao" (referencia a "intentus" = focado). Elegante, geometrico, escalavel.</p>
+        </div>
+      </div>
+    </div>
+
+    <h3>Versoes do Logo</h3>
+    <p>Cada direcao deve ter: versao primaria (horizontal), versao vertical (stacked), versao simbolo (icon/favicon), versao monocromatica, e versao negativa (branco sobre escuro).</p>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 10: VOICE                 -->
+  <!-- ================================= -->
+  <section id="voice">
+    <div class="section-label">Fase 04 — Tom de Voz</div>
+    <h2>Tom de Voz da Marca</h2>
+    <p>O tom de voz e a personalidade expressa em palavras. A Intentus fala como um <strong>consultor estrategico de confianca</strong> — nao como um vendedor de software.</p>
+
+    <div class="voice-grid">
+      <div class="voice-item">
+        <h4>Somos</h4>
+        <div class="trait">Claros</div>
+        <p>Diretos, sem jargao desnecessario. Cada frase tem proposito.</p>
+      </div>
+      <div class="voice-item">
+        <h4>Somos</h4>
+        <div class="trait">Confiantes</div>
+        <p>Falamos com autoridade porque conhecemos o mercado.</p>
+      </div>
+      <div class="voice-item">
+        <h4>Somos</h4>
+        <div class="trait">Humanos</div>
+        <p>Tecnologia com calor. Sofisticacao sem frieza.</p>
+      </div>
+      <div class="voice-item">
+        <h4>Somos</h4>
+        <div class="trait">Iluminadores</div>
+        <p>Revelamos o que os dados escondem. Educamos sem condescender.</p>
+      </div>
+    </div>
+
+    <div class="do-dont">
+      <div class="do-box">
+        <h4>Fazemos</h4>
+        <ul style="list-style:none;padding:0;">
+          <li>"Seus dados revelam uma oportunidade de R$ 2.4M no pipeline."</li>
+          <li>"Conecte sua operacao em uma unica fonte de verdade."</li>
+          <li>"Inteligencia que trabalha enquanto voce decide."</li>
+          <li>"Menos ferramentas. Mais clareza. Melhor resultado."</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h4>Nunca Fazemos</h4>
+        <ul style="list-style:none;padding:0;">
+          <li>"O MELHOR software do mercado!!!"</li>
+          <li>"Solucao completa para todas as suas necessidades."</li>
+          <li>"Clique aqui e descubra o segredo do sucesso!"</li>
+          <li>"Estamos revolucionando o mercado imobiliario."</li>
+        </ul>
+      </div>
+    </div>
+
+    <h3>Exemplos de Messaging por Canal</h3>
+    <table class="comparison-table">
+      <tr>
+        <th>Canal</th>
+        <th>Tom</th>
+        <th>Exemplo</th>
+      </tr>
+      <tr>
+        <td>Website Hero</td>
+        <td>Confiante + Aspiracional</td>
+        <td>"Toda a inteligencia que seu negocio imobiliario precisa. Em um unico lugar."</td>
+      </tr>
+      <tr>
+        <td>LinkedIn</td>
+        <td>Educativo + Autoridade</td>
+        <td>"78% das incorporadoras perdem dados entre sistemas. Nao precisa ser assim."</td>
+      </tr>
+      <tr>
+        <td>Email Comercial</td>
+        <td>Direto + Empatico</td>
+        <td>"Vi que sua operacao esta crescendo. Quando ferramentas nao acompanham, o time e quem sofre."</td>
+      </tr>
+      <tr>
+        <td>Notificacao App</td>
+        <td>Preciso + Util</td>
+        <td>"3 contratos vencem em 7 dias. Acao recomendada: renovacao automatica."</td>
+      </tr>
+      <tr>
+        <td>Onboarding</td>
+        <td>Acolhedor + Guia</td>
+        <td>"Bem-vindo. Vamos configurar sua operacao em menos de 10 minutos."</td>
+      </tr>
+    </table>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 11: GUIDELINES            -->
+  <!-- ================================= -->
+  <section id="guidelines">
+    <div class="section-label">Consolidacao</div>
+    <h2>Diretrizes Gerais de Marca</h2>
+
+    <div class="card-grid">
+      <div class="card">
+        <div class="card-icon">&#10003;</div>
+        <h4>Regra do 80/20</h4>
+        <p>80% da superficie visual deve ser branco/off-white. O conteudo respira. O gold e usado com parcimonia (max 5-10% da tela).</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#10003;</div>
+        <h4>Espacamento Generoso</h4>
+        <p>Padding e margins nunca sao apertados. O espaco vazio comunica premium e confianca. Minimo 32px entre secoes.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#10003;</div>
+        <h4>Sem Decoracao Gratuita</h4>
+        <p>Cada elemento visual deve ter funcao. Sem gradientes decorativos, sombras pesadas, bordas arredondadas excessivas ou animacoes gratuitas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#10003;</div>
+        <h4>Dados Sao Visuais</h4>
+        <p>Graficos e numeros devem ser bonitos. Charts limpos, paleta coerente, labels legiveis. Os dados sao a estrela — nao a moldura.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#10003;</div>
+        <h4>Fotografia: Real + Premium</h4>
+        <p>Fotos de edificios, escritorios, cidades. Sempre em tons neutros, alta qualidade. Sem stock generico. Sem pessoas sorrindo forçadas.</p>
+      </div>
+      <div class="card">
+        <div class="card-icon">&#10003;</div>
+        <h4>Iconografia: Line Icons</h4>
+        <p>Icones de linha fina (1.5-2px), estilo geometrico, na cor navy ou warm gray. Sem fills, sem 3D, sem emojis. Lucide ou Phosphor.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ================================= -->
+  <!-- SECTION 12: NEXT STEPS            -->
+  <!-- ================================= -->
+  <section id="next">
+    <div class="section-label">Proximos Passos</div>
+    <h2>Roadmap de Implementacao</h2>
+    <p>O Brand Book esta definido. Agora e hora de implementar. Aqui esta a sequencia recomendada:</p>
+
+    <div class="story-flow">
+      <div class="story-step">
+        <div class="story-number">1</div>
+        <div class="story-content">
+          <h4>Decisao de Naming</h4>
+          <p>Marcelo decide entre as 4 opcoes de nome. Recomendacao: manter "Intentus" com novo descriptor "Real Estate Intelligence".</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">2</div>
+        <div class="story-content">
+          <h4>Finalizacao do Logo</h4>
+          <p>Escolher entre as 3 direcoes (A, B ou C). Refinar a opcao escolhida. Produzir versoes completas (SVG, PNG, todas as variantes).</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">3</div>
+        <div class="story-content">
+          <h4>Redesign do App</h4>
+          <p>Aplicar a nova paleta, tipografia e design language ao produto. Prioridade: sidebar, header, dashboard, login/onboarding.</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">4</div>
+        <div class="story-content">
+          <h4>Novo Landing Page</h4>
+          <p>Site institucional seguindo o StoryBrand framework. Hero → Problema → Guia → Plano → CTA → Stakes → Transformacao.</p>
+        </div>
+      </div>
+      <div class="story-step">
+        <div class="story-number">5</div>
+        <div class="story-content">
+          <h4>Materiais Complementares</h4>
+          <p>Templates de email, assinatura, deck de vendas, social media kit, business card digital.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p><strong>Brand Strategy Book — Intentus</strong><br>
+    Elaborado com frameworks de Al Ries (Posicionamento), Marty Neumeier (Diferenciacao), Naming Strategist (Naming), Jean-Noel Kapferer (Prisma de Identidade), Archetype Consultant (Personalidade), Donald Miller (StoryBrand), e Alina Wheeler (Sistema Visual).<br><br>
+    Preparado para Marcelo — CEO, Intentus | Marco 2026</p>
+  </footer>
+
+</div>
+
+<script>
+  // Simple nav highlight
+  const links = document.querySelectorAll('.nav a');
+  const sections = document.querySelectorAll('section');
+
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const top = section.offsetTop - 100;
+      if (window.scrollY >= top) current = section.getAttribute('id');
+    });
+    links.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,155 @@
+version: 2
+
+updates:
+  # NPM Dependencies (Node.js packages)
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:00"
+      timezone: "America/Sao_Paulo"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "mfalcao09"
+    assignees:
+      - "mfalcao09"
+    labels:
+      - "dependencies"
+      - "npm"
+      - "security"
+    commit-message:
+      prefix: "chore(deps):"
+      prefix-minor: "chore(deps-minor):"
+      prefix-patch: "chore(deps-patch):"
+
+    # Enable auto-merge for non-major security updates
+    auto-merge:
+      enabled: false  # Set to true after CI tests pass
+      ignore-incompatible-versions: false
+
+    # Group updates for better management
+    groups:
+      # Security updates always open immediately (highest priority)
+      security-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "patch"
+          - "minor"
+          - "major"
+        dependency-type: "direct"
+        exclude-patterns:
+          - "@types/*"
+
+      # Production critical dependencies (frequent updates)
+      production-dependencies:
+        patterns:
+          - "next"
+          - "react"
+          - "react-dom"
+          - "@supabase/supabase-js"
+          - "zod"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Development and tooling
+      development-dependencies:
+        patterns:
+          - "@types/*"
+          - "typescript"
+          - "eslint*"
+          - "prettier*"
+          - "vitest"
+          - "jest"
+        update-types:
+          - "minor"
+          - "patch"
+
+      # Non-critical patches (weekly batch)
+      minor-updates:
+        patterns:
+          - "*"
+        update-types:
+          - "minor"
+          - "patch"
+
+    # Dependency settings
+    allow:
+      - dependency-type: "direct"
+      - dependency-type: "indirect"
+
+    # Ignore major version bumps for stability (except security-critical)
+    ignore:
+      # Next.js major versions require careful migration
+      - dependency-name: "next"
+        update-types: ["version-update:semver-major"]
+
+      # React major versions require app rewrite
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+
+      # Testing frameworks major versions
+      - dependency-name: "vitest"
+        update-types: ["version-update:semver-major"]
+
+      - dependency-name: "jest"
+        update-types: ["version-update:semver-major"]
+
+    # Rebase strategy
+    rebase-strategy: "auto"
+    pull-request-branch-name:
+      separator: "/"
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "06:15"
+      timezone: "America/Sao_Paulo"
+    reviewers:
+      - "mfalcao09"
+    labels:
+      - "ci/cd"
+      - "github-actions"
+    commit-message:
+      prefix: "ci(actions):"
+
+    # Only auto-merge GitHub Actions patch updates (safe)
+    auto-merge:
+      enabled: false
+
+  # Docker (if using containerization in future)
+  # Uncomment when docker-compose.yml or Dockerfile added
+  # - package-ecosystem: "docker"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #     day: "wednesday"
+  #     time: "06:00"
+  #     timezone: "America/Sao_Paulo"
+  #   labels:
+  #     - "docker"
+  #     - "dependencies"
+
+  # Python (if backend uses Python)
+  # Uncomment when Python dependencies added
+  # - package-ecosystem: "pip"
+  #   directory: "/"
+  #   schedule:
+  #     interval: "weekly"
+  #     day: "tuesday"
+  #     time: "06:00"
+  #     timezone: "America/Sao_Paulo"
+  #   labels:
+  #     - "python"
+  #     - "dependencies"
+
+# Default pull request settings
+# NOTE: GitHub-level settings override this; configure at repo level

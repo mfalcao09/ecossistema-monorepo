@@ -1,0 +1,39 @@
+# Sessão 86 — CRM F1 Item #13: L02 Captação Multi-Canal IA (~14h, P0) (19/03/2026)
+
+- **Objetivo**: Implementar décimo terceiro e ÚLTIMO item da Fase 1 do plano CRM IA-Native: L02 — Captação Multi-Canal com IA. Webhook público para 10 canais de captação com deduplicação, classificação IA, spam detection, logging e dashboard de monitoramento
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha)
+- **Database migration `create_lead_capture_multichannel`** (via Supabase MCP):
+  - Coluna `capture_channel` (TEXT) na tabela `leads` para granularidade de canal além do `source`
+  - Tabela `lead_capture_configs`: id, tenant_id, channel (10 valores), is_enabled, auto_assign, auto_score, auto_respond, webhook_secret, config JSONB. UNIQUE(tenant_id, channel). RLS PERMISSIVE
+  - Tabela `lead_capture_log`: id, tenant_id, channel, lead_id FK, raw_payload JSONB, source_ip, is_duplicate, duplicate_of FK, processing_status (success/duplicate/error/spam), error_message. RLS PERMISSIVE
+  - 4 índices para performance
+- **Backend — `supabase/functions/commercial-lead-capture/index.ts` (CRIADO — ~380 linhas, self-contained, v1)**:
+  - **5 actions**: `capture` (público, sem auth), `get_dashboard` (auth), `get_configs` (auth), `save_config` (auth), `get_log` (auth)
+  - **capture (público)**: Resolve tenant via slug/domain, sanitiza inputs, spam detection (regex patterns), dedup por email/phone (merge se existente), classificação IA (Gemini 2.0 Flash — interest_type + preferred_region + quality), cria lead com `capture_channel`, log em `lead_capture_log`
+  - **10 canais**: site, landing_page, whatsapp, email_form, portal, indicacao, telefone, api, webhook, chat_widget
+  - **CORS dual**: `*` para action=capture (público), whitelist para actions admin
+  - **get_dashboard**: 6 KPIs (total 30d/7d, new leads, duplicates, spam blocked, conversion rate) + channel breakdown
+  - **Deploy**: v1 via Supabase MCP (ID: `2419153b-5d60-408e-b5a2-d86660762d75`, ACTIVE, verify_jwt: false)
+- **Frontend hook — `src/hooks/useLeadCapture.ts` (CRIADO — ~155 linhas)**:
+  - Types: `CaptureChannel` (10), `LeadCaptureConfig`, `ChannelStat`, `CaptureDashboard`, `CaptureLogEntry`
+  - Constants: `CHANNEL_LABELS` (10), `CHANNEL_ICONS` (10), `STATUS_COLORS` (4), `STATUS_LABELS` (4)
+  - Query hooks: `useCaptureDashboard()`, `useCaptureConfigs()`, `useCaptureLog(channel?)`
+  - Mutation: `useSaveCaptureConfig()`
+  - MiniMax fix: Removido `webhook_secret` do tipo frontend (security — secrets nunca no client)
+- **Frontend UI — `src/pages/comercial/LeadCaptureSettings.tsx` (CRIADO — ~260 linhas)**:
+  - Dashboard: 6 KPI cards (Total 30d/7d, Novos Leads, Duplicados, Spam Bloqueado, Taxa Conversão)
+  - 3 Tabs: Canais (10 cards com toggles enabled/auto-assign/auto-score), Histórico (log de capturas), API/Webhook (endpoint público com exemplo de payload)
+  - Endpoint copiável: URL do webhook público com exemplo JSON completo
+- **Rota + Sidebar**: `/comercial/captacao-canais` registrada em App.tsx. Item "Captação Multi-Canal" (Radio icon) no sidebar com roles admin/gerente
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos criados** (3):
+  - `supabase/functions/commercial-lead-capture/index.ts` — Edge Function self-contained (~380 linhas)
+  - `src/hooks/useLeadCapture.ts` — hook central captação (~155 linhas)
+  - `src/pages/comercial/LeadCaptureSettings.tsx` — página dashboard + configuração (~260 linhas)
+- **Arquivos modificados** (2):
+  - `src/App.tsx` — import + rota `/comercial/captacao-canais`
+  - `src/components/AppSidebar.tsx` — import Radio + item sidebar "Captação Multi-Canal"
+- **Edge Functions — Versões atualizadas**:
+  - `commercial-lead-capture` → version 1 (5 actions, 10 canais, IA classification, dedup, spam detection, CORS dual, self-contained)
+- **Cronograma CRM IA-Native**: F1 Item #13 ✅ concluído (L02 Captação Multi-Canal IA). **CRM F1 COMPLETA (13/13 itens ✅)**. Próximo: F2 Item #1 (I01 AI Sales Assistant / Copilot CRM)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

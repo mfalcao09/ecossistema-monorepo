@@ -1,0 +1,856 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intentus — Brand Manual</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --navy:#0A1628;--navy-90:#1A2638;--navy-80:#2A3648;--charcoal:#1C2333;
+  --slate:#2D3748;--warm-gray:#8B95A5;--medium-gray:#A0AEC0;
+  --light-gray:#E2E8F0;--lighter-gray:#EDF2F7;--off-white:#F7F8FA;--white:#FFFFFF;
+  --gold:#C6A962;--gold-light:#D4BD7E;--gold-dark:#A88D4A;--gold-muted:rgba(198,169,98,0.12);
+  --blue:#4A6FA5;--blue-light:#6B8FBF;--blue-muted:rgba(74,111,165,0.1);
+  --sage:#7A9E7E;--sage-light:#9BB89F;--sage-muted:rgba(122,158,126,0.1);
+  --red:#DC3545;--red-muted:rgba(220,53,69,0.08);
+  --amber:#E8A830;--amber-muted:rgba(232,168,48,0.1);
+  --radius-sm:4px;--radius-md:8px;--radius-lg:12px;--radius-xl:16px;
+  --shadow-sm:0 1px 3px rgba(10,22,40,0.06);
+  --shadow-md:0 4px 12px rgba(10,22,40,0.08);
+  --shadow-lg:0 8px 30px rgba(10,22,40,0.1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Inter',sans-serif;background:var(--white);color:var(--charcoal);line-height:1.7;font-size:15px}
+
+/* LAYOUT */
+.page{max-width:1100px;margin:0 auto;padding:0 3rem}
+.section{padding:5rem 0;border-bottom:1px solid var(--light-gray)}
+.section:last-child{border-bottom:none}
+
+/* HERO */
+.hero-bar{background:var(--navy);padding:3rem;display:flex;align-items:center;justify-content:space-between}
+.hero-bar h1{font-family:'Playfair Display',serif;font-size:1.8rem;color:var(--white);font-weight:500}
+.hero-bar .badge{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);border:1px solid rgba(198,169,98,.3);padding:.3rem .8rem;border-radius:2px}
+
+/* COVER */
+.cover{background:var(--navy);color:var(--white);padding:6rem 3rem 5rem;text-align:center;position:relative;overflow:hidden}
+.cover::before{content:'';position:absolute;width:800px;height:800px;border-radius:50%;background:radial-gradient(circle,rgba(198,169,98,.06) 0%,transparent 70%);top:-300px;right:-200px}
+.cover::after{content:'';position:absolute;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(74,111,165,.04) 0%,transparent 70%);bottom:-200px;left:-100px}
+.cover .logo-display{display:inline-flex;align-items:center;gap:16px;margin-bottom:3rem;position:relative;z-index:1}
+.cover .logo-icon{width:52px;height:52px;border:2px solid var(--gold);border-radius:6px 6px 6px 16px;display:flex;align-items:center;justify-content:center}
+.cover .logo-icon span{font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--gold);font-weight:500}
+.cover .logo-text{font-family:'Playfair Display',serif;font-size:2.4rem;letter-spacing:.08em;font-weight:500}
+.cover .sub{font-size:.65rem;text-transform:uppercase;letter-spacing:.25em;color:var(--gold);margin-top:.4rem;display:block;font-family:'Inter',sans-serif}
+.cover h2{font-family:'Inter',sans-serif;font-size:.7rem;text-transform:uppercase;letter-spacing:.2em;color:var(--warm-gray);margin-bottom:.5rem;font-weight:500;position:relative;z-index:1}
+.cover p{color:var(--warm-gray);max-width:500px;margin:0 auto;font-size:.9rem;line-height:1.8;position:relative;z-index:1}
+
+/* HEADINGS */
+.label{font-size:.6rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold);margin-bottom:.6rem;font-weight:600}
+h2.section-title{font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:500;color:var(--navy);margin-bottom:.8rem;line-height:1.3}
+h3.sub-title{font-size:1rem;font-weight:600;color:var(--navy);margin:2.5rem 0 .8rem}
+p.desc{color:var(--slate);max-width:650px;margin-bottom:1.2rem}
+
+/* LOGO SECTION */
+.logo-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:2rem;margin-top:2rem}
+.logo-card{border:1px solid var(--light-gray);border-radius:var(--radius-lg);overflow:hidden;transition:all .3s}
+.logo-card:hover{box-shadow:var(--shadow-md);border-color:var(--gold)}
+.logo-card.featured{border:2px solid var(--gold);position:relative}
+.logo-card.featured::after{content:'PRIMARIO';position:absolute;top:12px;right:12px;font-size:.55rem;letter-spacing:.12em;background:var(--gold);color:var(--white);padding:.2rem .5rem;border-radius:2px;font-weight:600}
+.logo-render{height:180px;display:flex;align-items:center;justify-content:center;gap:14px}
+.logo-render.on-dark{background:var(--navy)}
+.logo-render.on-light{background:var(--white)}
+.logo-render.on-gray{background:var(--off-white)}
+.logo-render.on-gold{background:var(--gold)}
+
+/* Logo icon variations */
+.i-box{display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-weight:500;transition:all .3s}
+.i-box.square{width:48px;height:48px;border:2px solid var(--gold);border-radius:6px;font-size:1.5rem;color:var(--gold)}
+.i-box.rounded{width:48px;height:48px;border:2px solid var(--gold);border-radius:12px;font-size:1.5rem;color:var(--gold)}
+.i-box.circle{width:48px;height:48px;border:2px solid var(--gold);border-radius:50%;font-size:1.5rem;color:var(--gold)}
+.i-box.filled-square{width:48px;height:48px;background:var(--gold);border-radius:6px;font-size:1.5rem;color:var(--navy)}
+.i-box.filled-rounded{width:48px;height:48px;background:var(--gold);border-radius:12px;font-size:1.5rem;color:var(--navy)}
+.i-box.filled-circle{width:48px;height:48px;background:var(--gold);border-radius:50%;font-size:1.5rem;color:var(--navy)}
+.i-box.minimal{width:48px;height:48px;border-left:3px solid var(--gold);border-bottom:3px solid var(--gold);border-radius:0 0 0 6px;font-size:1.5rem;color:var(--gold);transform:translate(4px,-2px)}
+.i-box.notch{width:48px;height:48px;border:2px solid var(--gold);border-radius:6px 6px 6px 16px;font-size:1.5rem;color:var(--gold)}
+
+.wmark{font-family:'Playfair Display',serif;font-size:1.7rem;letter-spacing:.08em;font-weight:500}
+.wmark.white{color:var(--white)}
+.wmark.dark{color:var(--navy)}
+.wmark.gold{color:var(--gold)}
+
+.logo-meta{padding:1.2rem 1.5rem;background:var(--off-white)}
+.logo-meta h4{font-size:.8rem;font-weight:600;color:var(--navy);margin-bottom:.2rem}
+.logo-meta p{font-size:.75rem;color:var(--warm-gray);line-height:1.5}
+
+/* SPACING */
+.space-demo{display:flex;gap:1.5rem;margin-top:1.5rem;flex-wrap:wrap}
+.space-box{text-align:center}
+.space-visual{background:var(--gold-muted);border:1px dashed var(--gold);border-radius:4px;margin-bottom:.4rem}
+.space-label{font-size:.7rem;color:var(--warm-gray);font-family:'JetBrains Mono',monospace}
+
+/* COLOR SYSTEM */
+.color-row{display:flex;gap:0;border-radius:var(--radius-lg);overflow:hidden;margin-top:1.5rem}
+.color-swatch{flex:1;padding:1.5rem 1rem;display:flex;flex-direction:column;justify-content:flex-end;min-height:140px;transition:flex .3s}
+.color-swatch:hover{flex:1.4}
+.color-swatch .name{font-weight:600;font-size:.75rem;margin-bottom:.15rem}
+.color-swatch .hex{opacity:.7;font-family:'JetBrains Mono',monospace;font-size:.65rem}
+.color-swatch .role{font-size:.6rem;opacity:.6;margin-top:.3rem;text-transform:uppercase;letter-spacing:.08em}
+
+/* SEMANTIC COLORS */
+.semantic-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-top:1.5rem}
+.semantic-card{border-radius:var(--radius-md);padding:1.2rem;text-align:center}
+.semantic-dot{width:32px;height:32px;border-radius:50%;margin:0 auto .6rem}
+.semantic-card h4{font-size:.75rem;font-weight:600;color:var(--navy);margin-bottom:.15rem}
+.semantic-card p{font-size:.65rem;color:var(--warm-gray)}
+
+/* TYPOGRAPHY */
+.type-block{background:var(--off-white);border-radius:var(--radius-lg);padding:2.5rem;margin-top:1.5rem}
+.type-row{margin-bottom:2rem;padding-bottom:2rem;border-bottom:1px solid var(--light-gray)}
+.type-row:last-child{margin-bottom:0;padding-bottom:0;border-bottom:none}
+.type-label{font-size:.6rem;text-transform:uppercase;letter-spacing:.15em;color:var(--gold);margin-bottom:.4rem;font-weight:600}
+.type-spec{font-size:.7rem;color:var(--warm-gray);font-family:'JetBrains Mono',monospace;margin-top:.3rem}
+
+/* COMPONENT LIBRARY */
+.comp-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;margin-top:2rem}
+.comp-card{background:var(--off-white);border-radius:var(--radius-lg);overflow:hidden}
+.comp-preview{padding:2rem;display:flex;align-items:center;justify-content:center;min-height:160px;background:var(--white);border-bottom:1px solid var(--light-gray)}
+.comp-info{padding:1.2rem 1.5rem}
+.comp-info h4{font-size:.85rem;font-weight:600;color:var(--navy);margin-bottom:.3rem}
+.comp-info p{font-size:.75rem;color:var(--warm-gray);line-height:1.5}
+
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;gap:8px;padding:.6rem 1.4rem;border-radius:var(--radius-sm);font-size:.8rem;font-weight:500;border:none;cursor:pointer;transition:all .2s;font-family:'Inter',sans-serif;letter-spacing:.01em}
+.btn-primary{background:var(--gold);color:var(--navy)}
+.btn-primary:hover{background:var(--gold-dark)}
+.btn-secondary{background:transparent;color:var(--navy);border:1.5px solid var(--light-gray)}
+.btn-secondary:hover{border-color:var(--navy)}
+.btn-ghost{background:transparent;color:var(--gold);padding:.6rem .8rem}
+.btn-danger{background:var(--red-muted);color:var(--red);border:1px solid rgba(220,53,69,.15)}
+.btn-sm{padding:.4rem 1rem;font-size:.75rem}
+.btn-lg{padding:.8rem 2rem;font-size:.9rem}
+
+/* INPUTS */
+.input-demo{width:100%;padding:.6rem 1rem;border:1.5px solid var(--light-gray);border-radius:var(--radius-sm);font-size:.85rem;font-family:'Inter',sans-serif;color:var(--navy);background:var(--white);transition:border-color .2s}
+.input-demo:focus{outline:none;border-color:var(--gold)}
+.input-label{font-size:.7rem;font-weight:500;color:var(--slate);margin-bottom:.3rem;display:block}
+
+/* CARDS */
+.demo-card{background:var(--white);border:1px solid var(--light-gray);border-radius:var(--radius-md);padding:1.5rem;width:240px}
+.demo-card .card-tag{font-size:.6rem;text-transform:uppercase;letter-spacing:.1em;color:var(--gold);font-weight:600;margin-bottom:.6rem}
+.demo-card h4{font-size:.9rem;font-weight:600;color:var(--navy);margin-bottom:.3rem}
+.demo-card p{font-size:.75rem;color:var(--warm-gray);line-height:1.5}
+
+/* SIDEBAR DEMO */
+.sidebar-demo{width:220px;background:var(--navy);border-radius:var(--radius-md);padding:1.2rem 0;color:var(--white)}
+.sidebar-demo .s-logo{padding:0 1rem .8rem;border-bottom:1px solid rgba(255,255,255,.06);margin-bottom:.6rem;display:flex;align-items:center;gap:8px}
+.sidebar-demo .s-logo .s-icon{width:28px;height:28px;border:1.5px solid var(--gold);border-radius:4px 4px 4px 10px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:.85rem;color:var(--gold)}
+.sidebar-demo .s-logo span{font-size:.8rem;font-weight:500;letter-spacing:.03em}
+.sidebar-demo .s-item{padding:.4rem 1rem;font-size:.75rem;color:var(--warm-gray);display:flex;align-items:center;gap:8px;cursor:pointer;transition:all .2s;border-left:2px solid transparent}
+.sidebar-demo .s-item:hover,.sidebar-demo .s-item.active{color:var(--white);background:rgba(255,255,255,.04);border-left-color:var(--gold)}
+.sidebar-demo .s-item .dot{width:6px;height:6px;border-radius:50%;background:var(--warm-gray)}
+.sidebar-demo .s-item.active .dot{background:var(--gold)}
+.sidebar-demo .s-section{font-size:.55rem;text-transform:uppercase;letter-spacing:.15em;color:rgba(198,169,98,.6);padding:.8rem 1rem .3rem;font-weight:600}
+
+/* HEADER DEMO */
+.header-demo{background:var(--white);border:1px solid var(--light-gray);border-radius:var(--radius-md);padding:.8rem 1.2rem;display:flex;align-items:center;justify-content:space-between;width:100%}
+.header-demo .h-title{font-size:.9rem;font-weight:600;color:var(--navy)}
+.header-demo .h-actions{display:flex;gap:.5rem;align-items:center}
+.header-demo .h-avatar{width:28px;height:28px;background:var(--gold-muted);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.65rem;color:var(--gold);font-weight:600}
+.header-demo .h-notif{width:28px;height:28px;background:var(--off-white);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.7rem;color:var(--warm-gray)}
+
+/* KPI CARD */
+.kpi-card{background:var(--white);border:1px solid var(--light-gray);border-radius:var(--radius-md);padding:1.2rem 1.5rem;width:200px}
+.kpi-card .kpi-label{font-size:.65rem;color:var(--warm-gray);text-transform:uppercase;letter-spacing:.08em;font-weight:500}
+.kpi-card .kpi-value{font-size:1.6rem;font-weight:700;color:var(--navy);margin:.2rem 0;font-feature-settings:'tnum'}
+.kpi-card .kpi-change{font-size:.7rem;color:var(--sage);font-weight:500;display:flex;align-items:center;gap:3px}
+.kpi-card .kpi-change.negative{color:var(--red)}
+
+/* BADGE/TAG */
+.tag{display:inline-block;font-size:.6rem;font-weight:500;padding:.2rem .5rem;border-radius:3px;letter-spacing:.03em}
+.tag-gold{background:var(--gold-muted);color:var(--gold-dark)}
+.tag-blue{background:var(--blue-muted);color:var(--blue)}
+.tag-sage{background:var(--sage-muted);color:var(--sage)}
+.tag-red{background:var(--red-muted);color:var(--red)}
+.tag-amber{background:var(--amber-muted);color:var(--amber)}
+
+/* STATUS DOT */
+.status{display:inline-flex;align-items:center;gap:5px;font-size:.7rem;font-weight:500}
+.status-dot{width:6px;height:6px;border-radius:50%}
+
+/* DO/DONT */
+.rule-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;margin-top:1.5rem}
+.rule-box{padding:1.5rem;border-radius:var(--radius-md);font-size:.82rem}
+.rule-do{background:rgba(122,158,126,.06);border:1px solid rgba(122,158,126,.2)}
+.rule-dont{background:var(--red-muted);border:1px solid rgba(220,53,69,.15)}
+.rule-box h4{font-size:.65rem;text-transform:uppercase;letter-spacing:.12em;margin-bottom:.8rem;font-weight:600}
+.rule-do h4{color:var(--sage)}
+.rule-dont h4{color:var(--red)}
+.rule-box li{margin-bottom:.5rem;color:var(--slate);line-height:1.5;list-style:none;padding-left:1rem;position:relative}
+.rule-box li::before{position:absolute;left:0;font-weight:700}
+.rule-do li::before{content:'✓';color:var(--sage)}
+.rule-dont li::before{content:'✕';color:var(--red)}
+
+/* SPACING TABLE */
+.spec-table{width:100%;border-collapse:collapse;margin-top:1.5rem;font-size:.8rem}
+.spec-table th{background:var(--navy);color:var(--white);padding:.6rem 1rem;text-align:left;font-weight:500;font-size:.7rem;text-transform:uppercase;letter-spacing:.08em}
+.spec-table td{padding:.6rem 1rem;border-bottom:1px solid var(--lighter-gray);color:var(--slate)}
+.spec-table tr:hover td{background:var(--off-white)}
+.spec-table code{font-family:'JetBrains Mono',monospace;font-size:.72rem;background:var(--lighter-gray);padding:.1rem .4rem;border-radius:3px}
+
+/* ICON STYLE */
+.icon-grid{display:flex;gap:2rem;margin-top:1.5rem;flex-wrap:wrap}
+.icon-item{text-align:center}
+.icon-box{width:48px;height:48px;background:var(--off-white);border-radius:var(--radius-md);display:flex;align-items:center;justify-content:center;margin:0 auto .4rem;font-size:1.2rem;color:var(--navy)}
+.icon-name{font-size:.65rem;color:var(--warm-gray)}
+
+/* DARK SECTION */
+.dark-section{background:var(--navy);color:var(--white);padding:3rem;border-radius:var(--radius-lg);margin-top:2rem}
+.dark-section .label{color:var(--gold)}
+.dark-section h3{color:var(--white)}
+.dark-section p{color:var(--warm-gray)}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .page{padding:0 1.5rem}
+  .logo-grid{grid-template-columns:1fr}
+  .comp-grid{grid-template-columns:1fr}
+  .rule-grid{grid-template-columns:1fr}
+  .semantic-grid{grid-template-columns:repeat(2,1fr)}
+  .cover{padding:4rem 1.5rem 3rem}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== COVER ===== -->
+<div class="cover">
+  <h2>Brand Manual 2026</h2>
+  <div class="logo-display">
+    <div class="logo-icon"><span>I</span></div>
+    <div>
+      <div class="logo-text">INTENTUS</div>
+      <span class="sub">Real Estate Intelligence OS</span>
+    </div>
+  </div>
+  <p>Manual completo de identidade visual e diretrizes de produto. Referencia para toda equipe de design e desenvolvimento.</p>
+</div>
+
+<div class="page">
+
+<!-- ========================================= -->
+<!-- 1. LOGO SYSTEM                            -->
+<!-- ========================================= -->
+<div class="section" id="logo">
+  <div class="label">01 — Sistema de Logo</div>
+  <h2 class="section-title">Logo: Icone + Wordmark</h2>
+  <p class="desc">O logo da Intentus combina um icone geometrico (a letra "I" enquadrada) com um wordmark em Playfair Display. O icone funciona independente como app icon e favicon. Abaixo, variacoes do simbolo para escolha final.</p>
+
+  <h3 class="sub-title">Variacoes do Simbolo</h3>
+  <p class="desc">Todas mantem o conceito "I enquadrado". A diferenca esta na forma do container — cada uma transmite uma nuance diferente.</p>
+
+  <div class="logo-grid">
+    <!-- V1: Square stroke -->
+    <div class="logo-card">
+      <div class="logo-render on-dark">
+        <div class="i-box square"><span>I</span></div>
+        <span class="wmark white">INTENTUS</span>
+      </div>
+      <div class="logo-meta">
+        <h4>V1 — Square Stroke</h4>
+        <p>Moldura quadrada com bordas sutilmente arredondadas. Referencia planta arquitetonica. Transmite: precisao, estrutura, confianca.</p>
+      </div>
+    </div>
+    <!-- V2: Rounded stroke -->
+    <div class="logo-card">
+      <div class="logo-render on-dark">
+        <div class="i-box rounded"><span>I</span></div>
+        <span class="wmark white">INTENTUS</span>
+      </div>
+      <div class="logo-meta">
+        <h4>V2 — Rounded Stroke</h4>
+        <p>Moldura com cantos mais arredondados. Mais suave e tech. Transmite: modernidade, acessibilidade, tecnologia amigavel.</p>
+      </div>
+    </div>
+    <!-- V3: Filled Square -->
+    <div class="logo-card">
+      <div class="logo-render on-dark">
+        <div class="i-box filled-square"><span>I</span></div>
+        <span class="wmark white">INTENTUS</span>
+      </div>
+      <div class="logo-meta">
+        <h4>V3 — Filled Square</h4>
+        <p>Quadrado preenchido em gold com "I" em navy. Mais bold e impactante. Transmite: forca, solidez, presenca.</p>
+      </div>
+    </div>
+    <!-- V4: Filled Rounded -->
+    <div class="logo-card">
+      <div class="logo-render on-dark">
+        <div class="i-box filled-rounded"><span>I</span></div>
+        <span class="wmark white">INTENTUS</span>
+      </div>
+      <div class="logo-meta">
+        <h4>V4 — Filled Rounded</h4>
+        <p>Combinacao de fill + cantos arredondados. Ideal para app icon. Transmite: premium, tech, modernidade com peso.</p>
+      </div>
+    </div>
+    <!-- V5: Notch — APPROVED PRIMARY -->
+    <div class="logo-card featured">
+      <div class="logo-render on-dark">
+        <div class="i-box notch" style="border-color:var(--gold);color:var(--gold)"><span>I</span></div>
+        <span class="wmark white">INTENTUS</span>
+      </div>
+      <div class="logo-meta">
+        <h4>V5 — Notch ✦ APROVADO</h4>
+        <p>Quadrado com canto inferior-esquerdo arredondado assimetrico. Unico e memoravel. O "notch" cria personalidade sem perder sofisticacao. Transmite: inovacao com proposito, diferenciacao elegante.</p>
+      </div>
+    </div>
+    <!-- V6: Circle -->
+    <div class="logo-card">
+      <div class="logo-render on-light" style="border:1px solid var(--light-gray);">
+        <div class="i-box circle"><span>I</span></div>
+        <span class="wmark dark">INTENTUS</span>
+      </div>
+      <div class="logo-meta">
+        <h4>V6 — Circle</h4>
+        <p>Moldura circular classica. Atemporal e universal. Transmite: completude, perfeicao, elegancia classica.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Versoes de Aplicacao (V5 Notch)</h3>
+  <div class="logo-grid">
+    <div class="logo-card featured">
+      <div class="logo-render on-dark">
+        <div class="i-box notch"><span>I</span></div>
+        <span class="wmark white">INTENTUS</span>
+      </div>
+      <div class="logo-meta"><h4>Primario — Fundo escuro</h4><p>Versao principal. Icone gold notch + wordmark branco. Uso prioritario.</p></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-render on-light" style="border:1px solid var(--light-gray);">
+        <div class="i-box notch" style="border-color:var(--navy);color:var(--navy)"><span>I</span></div>
+        <span class="wmark dark">INTENTUS</span>
+      </div>
+      <div class="logo-meta"><h4>Sobre fundo claro</h4><p>Icone navy notch + wordmark navy. Para backgrounds brancos e claros.</p></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-render on-gray">
+        <div style="width:56px;height:56px;background:var(--gold);border-radius:6px 6px 6px 16px;display:flex;align-items:center;justify-content:center;font-family:'Playfair Display',serif;font-size:1.6rem;color:var(--navy);font-weight:500">I</div>
+      </div>
+      <div class="logo-meta"><h4>App Icon / Favicon</h4><p>Notch preenchido em gold, "I" em navy. Para espacos pequenos (32px+). A forma notch e reconhecivel mesmo em 16px.</p></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-render on-dark" style="flex-direction:column;gap:6px;">
+        <div class="i-box notch" style="width:36px;height:36px;font-size:1.1rem"><span>I</span></div>
+        <span class="wmark white" style="font-size:1rem;letter-spacing:.12em">INTENTUS</span>
+        <span style="font-size:.5rem;text-transform:uppercase;letter-spacing:.2em;color:var(--gold)">Real Estate Intelligence</span>
+      </div>
+      <div class="logo-meta"><h4>Versao Vertical (Stacked)</h4><p>Para uso em espacos quadrados: social media, avatares, badges.</p></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-render on-dark">
+        <div class="i-box notch" style="border-color:var(--white);color:var(--white)"><span>I</span></div>
+        <span class="wmark white">INTENTUS</span>
+      </div>
+      <div class="logo-meta"><h4>Monocromatico — Branco</h4><p>Para uso sobre fotos, backgrounds coloridos ou quando gold nao funciona.</p></div>
+    </div>
+    <div class="logo-card">
+      <div class="logo-render on-light" style="border:1px solid var(--light-gray);">
+        <div class="i-box notch" style="border-color:var(--charcoal);color:var(--charcoal)"><span>I</span></div>
+        <span class="wmark" style="color:var(--charcoal)">INTENTUS</span>
+      </div>
+      <div class="logo-meta"><h4>Monocromatico — Escuro</h4><p>Para impressao P&B, fax, gravacao em metal. Sem cor.</p></div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Area de Protecao e Tamanho Minimo</h3>
+  <p class="desc">A area de protecao ao redor do logo deve ser no minimo equivalente a altura do icone "I". Tamanho minimo do logo completo: 120px de largura. Icone isolado: 24px.</p>
+
+  <div class="rule-grid">
+    <div class="rule-box rule-do">
+      <h4>Correto</h4>
+      <ul>
+        <li>Manter proporcao entre icone e wordmark</li>
+        <li>Usar somente as cores definidas (gold, navy, white)</li>
+        <li>Manter area de protecao minima</li>
+        <li>Usar versao correta para cada fundo</li>
+      </ul>
+    </div>
+    <div class="rule-box rule-dont">
+      <h4>Nunca</h4>
+      <ul>
+        <li>Distorcer, esticar ou rotacionar o logo</li>
+        <li>Mudar as cores do logo (ex: verde, vermelho)</li>
+        <li>Adicionar sombras, gradientes ou efeitos</li>
+        <li>Colocar sobre fundos com baixo contraste</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- 2. COLOR SYSTEM                           -->
+<!-- ========================================= -->
+<div class="section" id="colors">
+  <div class="label">02 — Sistema de Cores</div>
+  <h2 class="section-title">Paleta de Cores</h2>
+  <p class="desc">A paleta e intencionalmente contida. Predominancia de branco e neutrals, com navy para ancoragem e gold para acentos premium. Cada cor tem funcao definida.</p>
+
+  <h3 class="sub-title">Cores Primarias</h3>
+  <div class="color-row">
+    <div class="color-swatch" style="background:var(--navy);color:var(--white)">
+      <div class="name">Deep Navy</div>
+      <div class="hex">#0A1628</div>
+      <div class="role">Backgrounds, headers, sidebar</div>
+    </div>
+    <div class="color-swatch" style="background:var(--charcoal);color:var(--white)">
+      <div class="name">Charcoal</div>
+      <div class="hex">#1C2333</div>
+      <div class="role">Texto principal, headings</div>
+    </div>
+    <div class="color-swatch" style="background:var(--gold);color:var(--navy)">
+      <div class="name">Gold</div>
+      <div class="hex">#C6A962</div>
+      <div class="role">Acentos, CTAs, destaques</div>
+    </div>
+    <div class="color-swatch" style="background:var(--off-white);color:var(--charcoal)">
+      <div class="name">Off-White</div>
+      <div class="hex">#F7F8FA</div>
+      <div class="role">Background principal do app</div>
+    </div>
+    <div class="color-swatch" style="background:var(--white);color:var(--charcoal);border:1px solid var(--light-gray)">
+      <div class="name">White</div>
+      <div class="hex">#FFFFFF</div>
+      <div class="role">Cards, modals, surfaces</div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Neutrals</h3>
+  <div class="color-row" style="height:100px;min-height:100px">
+    <div class="color-swatch" style="background:var(--slate);color:var(--white);min-height:100px">
+      <div class="name">Slate</div><div class="hex">#2D3748</div>
+    </div>
+    <div class="color-swatch" style="background:var(--warm-gray);color:var(--white);min-height:100px">
+      <div class="name">Warm Gray</div><div class="hex">#8B95A5</div>
+    </div>
+    <div class="color-swatch" style="background:var(--medium-gray);color:var(--white);min-height:100px">
+      <div class="name">Medium</div><div class="hex">#A0AEC0</div>
+    </div>
+    <div class="color-swatch" style="background:var(--light-gray);color:var(--charcoal);min-height:100px">
+      <div class="name">Light Gray</div><div class="hex">#E2E8F0</div>
+    </div>
+    <div class="color-swatch" style="background:var(--lighter-gray);color:var(--charcoal);min-height:100px">
+      <div class="name">Lighter</div><div class="hex">#EDF2F7</div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Cores Semanticas</h3>
+  <div class="semantic-grid">
+    <div class="semantic-card" style="background:var(--sage-muted)">
+      <div class="semantic-dot" style="background:var(--sage)"></div>
+      <h4>Sucesso</h4>
+      <p>Sage #7A9E7E<br>Positivo, crescimento, concluido</p>
+    </div>
+    <div class="semantic-card" style="background:var(--blue-muted)">
+      <div class="semantic-dot" style="background:var(--blue)"></div>
+      <h4>Informacao</h4>
+      <p>Blue #4A6FA5<br>Dados, links, graficos</p>
+    </div>
+    <div class="semantic-card" style="background:var(--amber-muted)">
+      <div class="semantic-dot" style="background:var(--amber)"></div>
+      <h4>Atencao</h4>
+      <p>Amber #E8A830<br>Alertas, pendencias, prazos</p>
+    </div>
+    <div class="semantic-card" style="background:var(--red-muted)">
+      <div class="semantic-dot" style="background:var(--red)"></div>
+      <h4>Erro / Critico</h4>
+      <p>Red #DC3545<br>Erros, vencido, excluir</p>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Regra 80/10/10</h3>
+  <p class="desc">A superficie visual do app deve seguir esta proporcao: <strong>80% white/off-white</strong> (respiracao), <strong>10% navy/neutrals</strong> (ancoragem e texto), <strong>10% gold + semanticas</strong> (acentos, CTAs, status). Nunca mais que 10% de gold visivel simultaneamente.</p>
+</div>
+
+<!-- ========================================= -->
+<!-- 3. TYPOGRAPHY                             -->
+<!-- ========================================= -->
+<div class="section" id="type">
+  <div class="label">03 — Tipografia</div>
+  <h2 class="section-title">Sistema Tipografico</h2>
+  <p class="desc">Duas familias com funcoes complementares: <strong>Playfair Display</strong> (sofisticacao, titulos) e <strong>Inter</strong> (clareza, interface). <strong>JetBrains Mono</strong> para dados e codigo.</p>
+
+  <div class="type-block">
+    <div class="type-row">
+      <div class="type-label">Display — Playfair Display Medium</div>
+      <div style="font-family:'Playfair Display',serif;font-size:2.8rem;font-weight:500;color:var(--navy);line-height:1.15">Inteligencia que governa.</div>
+      <div class="type-spec">48-64px · Weight 500 · Letter-spacing -0.01em · Line-height 1.15</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Heading 1 — Playfair Display Medium</div>
+      <div style="font-family:'Playfair Display',serif;font-size:1.8rem;font-weight:500;color:var(--navy);line-height:1.25">Gestao imobiliaria com IA nativa</div>
+      <div class="type-spec">28-32px · Weight 500 · Letter-spacing 0 · Line-height 1.25</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Heading 2 — Inter Semibold</div>
+      <div style="font-family:'Inter',sans-serif;font-size:1.2rem;font-weight:600;color:var(--navy);line-height:1.3">Pipeline Comercial — Visao Geral</div>
+      <div class="type-spec">18-22px · Weight 600 · Letter-spacing 0 · Line-height 1.3</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Body — Inter Regular</div>
+      <div style="font-family:'Inter',sans-serif;font-size:.95rem;color:var(--slate);line-height:1.7">A plataforma unifica toda sua operacao imobiliaria com inteligencia artificial nativa, transformando dados fragmentados em decisoes estrategicas. Cada modulo se conecta automaticamente.</div>
+      <div class="type-spec">15-16px · Weight 400 · Letter-spacing 0 · Line-height 1.7</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">UI Label — Inter Medium Uppercase</div>
+      <div style="font-family:'Inter',sans-serif;font-size:.72rem;font-weight:500;text-transform:uppercase;letter-spacing:.1em;color:var(--navy)">Dashboard &nbsp; Pipeline &nbsp; Contratos &nbsp; Analytics</div>
+      <div class="type-spec">11-13px · Weight 500 · Uppercase · Letter-spacing 0.1em</div>
+    </div>
+    <div class="type-row">
+      <div class="type-label">Data / Monospace — JetBrains Mono</div>
+      <div style="font-family:'JetBrains Mono',monospace;font-size:.85rem;color:var(--navy)">R$ 2.450.000,00 &nbsp;&nbsp; +12.4% &nbsp;&nbsp; ID: CTR-2026-0847</div>
+      <div class="type-spec">13-15px · Weight 400/500 · For numbers, codes, IDs</div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- 4. COMPONENT LIBRARY                      -->
+<!-- ========================================= -->
+<div class="section" id="components">
+  <div class="label">04 — Componentes UI</div>
+  <h2 class="section-title">Biblioteca de Componentes</h2>
+  <p class="desc">Componentes padrao para o redesign do app. Cada componente segue a paleta, tipografia e principios do manual.</p>
+
+  <div class="comp-grid">
+    <!-- Buttons -->
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:10px;flex-wrap:wrap">
+        <button class="btn btn-primary">Agendar Demo</button>
+        <button class="btn btn-secondary">Cancelar</button>
+        <button class="btn btn-ghost">Ver mais →</button>
+        <button class="btn btn-danger btn-sm">Excluir</button>
+      </div>
+      <div class="comp-info">
+        <h4>Botoes</h4>
+        <p>Primario (gold), secundario (stroke), ghost (text-only), danger (vermelho sutil). Sempre Inter Medium, radius 4px.</p>
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div class="comp-card">
+      <div class="comp-preview" style="flex-direction:column;gap:12px;padding:2rem 2.5rem">
+        <div style="width:100%">
+          <label class="input-label">Nome do empreendimento</label>
+          <input class="input-demo" value="Splendori House and Garden" />
+        </div>
+        <div style="width:100%">
+          <label class="input-label">VGV estimado</label>
+          <input class="input-demo" placeholder="R$ 0,00" />
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Campos de Input</h4>
+        <p>Border 1.5px light-gray, focus border gold. Label em Inter 500, 11px. Radius 4px. Padding 10px 16px.</p>
+      </div>
+    </div>
+
+    <!-- Card -->
+    <div class="comp-card">
+      <div class="comp-preview">
+        <div class="demo-card">
+          <div class="card-tag">Em Negociacao</div>
+          <h4>Lote 47 — Bloco C</h4>
+          <p>Joao Silva · R$ 580.000<br>Ultima atividade: 2 dias</p>
+          <div style="margin-top:.8rem;display:flex;gap:.4rem">
+            <span class="tag tag-gold">Premium</span>
+            <span class="tag tag-blue">Financiamento</span>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Card Padrao</h4>
+        <p>Background white, border 1px light-gray, radius 8px, padding 24px. Hover: shadow-sm. Tags coloridas para status.</p>
+      </div>
+    </div>
+
+    <!-- KPI -->
+    <div class="comp-card">
+      <div class="comp-preview" style="gap:12px">
+        <div class="kpi-card">
+          <div class="kpi-label">VGV Total</div>
+          <div class="kpi-value">R$ 12.4M</div>
+          <div class="kpi-change">↑ 8.2% vs mes anterior</div>
+        </div>
+        <div class="kpi-card">
+          <div class="kpi-label">Contratos Vencidos</div>
+          <div class="kpi-value">3</div>
+          <div class="kpi-change negative">↓ Acao necessaria</div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>KPI Cards</h4>
+        <p>Valor grande em Inter Bold, label em uppercase. Change positivo em sage, negativo em red. Numeros em font-feature tnum.</p>
+      </div>
+    </div>
+
+    <!-- Sidebar -->
+    <div class="comp-card">
+      <div class="comp-preview">
+        <div class="sidebar-demo">
+          <div class="s-logo">
+            <div class="s-icon">I</div>
+            <span>Intentus</span>
+          </div>
+          <div class="s-section">Principal</div>
+          <div class="s-item active"><div class="dot"></div> Dashboard</div>
+          <div class="s-item"><div class="dot"></div> Pipeline</div>
+          <div class="s-item"><div class="dot"></div> Contratos</div>
+          <div class="s-section">Modulos</div>
+          <div class="s-item"><div class="dot"></div> Analytics</div>
+          <div class="s-item"><div class="dot"></div> Compliance</div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Sidebar de Navegacao</h4>
+        <p>Background navy, items em warm-gray. Ativo: branco com border-left gold. Secoes em gold muted uppercase. Logo no topo.</p>
+      </div>
+    </div>
+
+    <!-- Header -->
+    <div class="comp-card">
+      <div class="comp-preview" style="padding:1.5rem">
+        <div class="header-demo">
+          <div class="h-title">Pipeline Comercial</div>
+          <div class="h-actions">
+            <button class="btn btn-primary btn-sm">+ Novo Lead</button>
+            <div class="h-notif">🔔</div>
+            <div class="h-avatar">MC</div>
+          </div>
+        </div>
+      </div>
+      <div class="comp-info">
+        <h4>Header do App</h4>
+        <p>Fundo white, border-bottom light-gray. Titulo em Inter Semibold. CTA primario a direita. Avatar com iniciais em gold-muted.</p>
+      </div>
+    </div>
+  </div>
+
+  <h3 class="sub-title">Tags & Status</h3>
+  <div style="display:flex;gap:1rem;flex-wrap:wrap;margin-top:1rem;align-items:center">
+    <span class="tag tag-gold">Premium</span>
+    <span class="tag tag-blue">Financiamento</span>
+    <span class="tag tag-sage">Concluido</span>
+    <span class="tag tag-red">Vencido</span>
+    <span class="tag tag-amber">Pendente</span>
+    <span style="width:20px"></span>
+    <span class="status"><span class="status-dot" style="background:var(--sage)"></span> Ativo</span>
+    <span class="status"><span class="status-dot" style="background:var(--amber)"></span> Em analise</span>
+    <span class="status"><span class="status-dot" style="background:var(--red)"></span> Vencido</span>
+    <span class="status"><span class="status-dot" style="background:var(--warm-gray)"></span> Inativo</span>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- 5. SPACING & LAYOUT                       -->
+<!-- ========================================= -->
+<div class="section" id="spacing">
+  <div class="label">05 — Espacamento & Layout</div>
+  <h2 class="section-title">Grid e Espacamento</h2>
+  <p class="desc">O sistema de espacamento usa multiplos de 4px. O espaco generoso e parte da identidade premium — nunca apertar elementos.</p>
+
+  <h3 class="sub-title">Escala de Espacamento</h3>
+  <div class="space-demo">
+    <div class="space-box"><div class="space-visual" style="width:4px;height:24px;margin:0 auto .4rem"></div><div class="space-label">4px</div></div>
+    <div class="space-box"><div class="space-visual" style="width:8px;height:24px;margin:0 auto .4rem"></div><div class="space-label">8px</div></div>
+    <div class="space-box"><div class="space-visual" style="width:12px;height:24px;margin:0 auto .4rem"></div><div class="space-label">12px</div></div>
+    <div class="space-box"><div class="space-visual" style="width:16px;height:24px;margin:0 auto .4rem"></div><div class="space-label">16px</div></div>
+    <div class="space-box"><div class="space-visual" style="width:24px;height:24px;margin:0 auto .4rem"></div><div class="space-label">24px</div></div>
+    <div class="space-box"><div class="space-visual" style="width:32px;height:24px;margin:0 auto .4rem"></div><div class="space-label">32px</div></div>
+    <div class="space-box"><div class="space-visual" style="width:48px;height:24px;margin:0 auto .4rem"></div><div class="space-label">48px</div></div>
+    <div class="space-box"><div class="space-visual" style="width:64px;height:24px;margin:0 auto .4rem"></div><div class="space-label">64px</div></div>
+  </div>
+
+  <h3 class="sub-title">Aplicacao no Layout</h3>
+  <table class="spec-table">
+    <tr><th>Elemento</th><th>Espacamento</th><th>Token</th></tr>
+    <tr><td>Padding de pagina (body)</td><td>32px lateral, 24px top</td><td><code>p-8 / p-6</code></td></tr>
+    <tr><td>Gap entre cards</td><td>16px ou 24px</td><td><code>gap-4 / gap-6</code></td></tr>
+    <tr><td>Padding interno de cards</td><td>24px</td><td><code>p-6</code></td></tr>
+    <tr><td>Gap entre secoes</td><td>48px</td><td><code>mb-12</code></td></tr>
+    <tr><td>Sidebar width</td><td>240px (collapsed: 64px)</td><td>Fixo</td></tr>
+    <tr><td>Header height</td><td>56px</td><td>Fixo</td></tr>
+    <tr><td>Border radius — cards</td><td>8px</td><td><code>rounded-lg</code></td></tr>
+    <tr><td>Border radius — botoes</td><td>4px</td><td><code>rounded</code></td></tr>
+    <tr><td>Border radius — inputs</td><td>4px</td><td><code>rounded</code></td></tr>
+    <tr><td>Border radius — tags</td><td>3px</td><td><code>rounded-sm</code></td></tr>
+  </table>
+
+  <h3 class="sub-title">Principio do Espaco</h3>
+  <p class="desc">Na duvida, adicione mais espaco, nao menos. O branco nao e desperdicio — e comunicacao. Cada pixel de espaco transmite: confianca, respiro, clareza, premium.</p>
+</div>
+
+<!-- ========================================= -->
+<!-- 6. ICONOGRAPHY                            -->
+<!-- ========================================= -->
+<div class="section" id="icons">
+  <div class="label">06 — Iconografia</div>
+  <h2 class="section-title">Estilo de Icones</h2>
+  <p class="desc">Usamos <strong>Lucide Icons</strong> (ou Phosphor) em estilo outline. Stroke weight 1.5-2px. Tamanho padrao 20px no app. Cores: navy para ativos, warm-gray para inativos.</p>
+
+  <div class="icon-grid">
+    <div class="icon-item"><div class="icon-box">📊</div><div class="icon-name">Dashboard</div></div>
+    <div class="icon-item"><div class="icon-box">📋</div><div class="icon-name">Contratos</div></div>
+    <div class="icon-item"><div class="icon-box">👥</div><div class="icon-name">Clientes</div></div>
+    <div class="icon-item"><div class="icon-box">📈</div><div class="icon-name">Analytics</div></div>
+    <div class="icon-item"><div class="icon-box">⚙️</div><div class="icon-name">Config</div></div>
+    <div class="icon-item"><div class="icon-box">🔔</div><div class="icon-name">Alertas</div></div>
+    <div class="icon-item"><div class="icon-box">🔍</div><div class="icon-name">Busca</div></div>
+    <div class="icon-item"><div class="icon-box">💬</div><div class="icon-name">Chat IA</div></div>
+  </div>
+
+  <div class="rule-grid" style="margin-top:2rem">
+    <div class="rule-box rule-do">
+      <h4>Correto</h4>
+      <ul>
+        <li>Lucide ou Phosphor icons (outline style)</li>
+        <li>Stroke 1.5-2px, consistente em toda a UI</li>
+        <li>Tamanho 16px (small), 20px (default), 24px (large)</li>
+        <li>Cor navy (ativo) ou warm-gray (inativo/secundario)</li>
+      </ul>
+    </div>
+    <div class="rule-box rule-dont">
+      <h4>Nunca</h4>
+      <ul>
+        <li>Emojis como icones na UI (somente em conteudo)</li>
+        <li>Icones filled/solid como padrao</li>
+        <li>Misturar estilos (outline + filled na mesma tela)</li>
+        <li>Icones coloridos (exceto status semantico)</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- 7. MOTION & INTERACTION                   -->
+<!-- ========================================= -->
+<div class="section" id="motion">
+  <div class="label">07 — Movimento & Interacao</div>
+  <h2 class="section-title">Principios de Animacao</h2>
+  <p class="desc">Animacoes sao <strong>funcionais, nao decorativas</strong>. Cada transicao deve informar o usuario sobre o que aconteceu. Sutileza e a regra.</p>
+
+  <table class="spec-table">
+    <tr><th>Tipo</th><th>Duracao</th><th>Easing</th><th>Uso</th></tr>
+    <tr><td>Micro-interacao (hover, focus)</td><td>150ms</td><td><code>ease-out</code></td><td>Botoes, links, inputs</td></tr>
+    <tr><td>Transicao de estado</td><td>200ms</td><td><code>ease-in-out</code></td><td>Abrir/fechar panels, toggles</td></tr>
+    <tr><td>Modals e overlays</td><td>250ms</td><td><code>ease-out</code></td><td>Abertura de dialogs, drawers</td></tr>
+    <tr><td>Navegacao de pagina</td><td>300ms</td><td><code>ease-in-out</code></td><td>Troca de views, tabs</td></tr>
+    <tr><td>Loading states</td><td>Pulse 1.5s</td><td><code>ease-in-out infinite</code></td><td>Skeleton screens, spinners</td></tr>
+  </table>
+
+  <div class="rule-grid" style="margin-top:2rem">
+    <div class="rule-box rule-do">
+      <h4>Correto</h4>
+      <ul>
+        <li>Skeleton screens enquanto carrega (nao spinners)</li>
+        <li>Fade-in suave para conteudo que aparece</li>
+        <li>Scale sutil em hover de botoes (1.02)</li>
+        <li>Transicoes de cor suaves em estados</li>
+      </ul>
+    </div>
+    <div class="rule-box rule-dont">
+      <h4>Nunca</h4>
+      <ul>
+        <li>Bounce, shake ou animacoes "divertidas"</li>
+        <li>Transicoes acima de 400ms (parece lento)</li>
+        <li>Animacoes que bloqueiam a interacao</li>
+        <li>Efeitos de parallax ou scroll-triggered decorativos</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- 8. PHOTOGRAPHY & IMAGERY                  -->
+<!-- ========================================= -->
+<div class="section" id="imagery">
+  <div class="label">08 — Fotografia & Imagem</div>
+  <h2 class="section-title">Direcao Visual</h2>
+  <p class="desc">Imagens devem reforcar a identidade premium: edificios modernos, escritorios sofisticados, cidades em perspectiva. Sempre com tratamento neutro e alto contraste.</p>
+
+  <table class="spec-table">
+    <tr><th>Criterio</th><th>Diretriz</th></tr>
+    <tr><td>Sujeito</td><td>Edificios, skylines, interiores de escritorio, dados/telas (abstrato). Sem pessoas em poses forcadas.</td></tr>
+    <tr><td>Tratamento</td><td>Tons neutros (dessaturar 20-30%). Alto contraste. Sem filtros coloridos. Leve warm tone.</td></tr>
+    <tr><td>Composicao</td><td>Linhas limpas, geometria, perspectiva. Muito espaco negativo. Regra dos tercos.</td></tr>
+    <tr><td>Qualidade</td><td>Minimo 2000px de largura. Sem watermarks. Sem stock generico reconhecivel.</td></tr>
+    <tr><td>Overlay</td><td>Se texto sobre imagem: overlay navy com 60-80% opacidade. Nunca texto direto sobre foto complexa.</td></tr>
+  </table>
+</div>
+
+<!-- ========================================= -->
+<!-- 9. DARK MODE PREVIEW                      -->
+<!-- ========================================= -->
+<div class="section" id="dark">
+  <div class="label">09 — Referencia Extra</div>
+  <h2 class="section-title">Preview Dark Mode (Futuro)</h2>
+  <p class="desc">Para futura implementacao. O dark mode inverte as superficies mas mantem a hierarquia de cores. Gold permanece como acento principal.</p>
+
+  <div class="dark-section">
+    <div class="label">Dashboard Preview — Dark Mode</div>
+    <h3 style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:500;margin:.5rem 0 1.5rem">Pipeline Comercial</h3>
+    <div style="display:flex;gap:1rem;flex-wrap:wrap">
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:1.2rem 1.5rem;flex:1;min-width:150px">
+        <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--warm-gray)">VGV Total</div>
+        <div style="font-size:1.5rem;font-weight:700;color:var(--white);margin:.2rem 0;font-family:'JetBrains Mono',monospace">R$ 12.4M</div>
+        <div style="font-size:.7rem;color:var(--sage)">↑ 8.2%</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:1.2rem 1.5rem;flex:1;min-width:150px">
+        <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--warm-gray)">Leads Ativos</div>
+        <div style="font-size:1.5rem;font-weight:700;color:var(--white);margin:.2rem 0;font-family:'JetBrains Mono',monospace">147</div>
+        <div style="font-size:.7rem;color:var(--sage)">↑ 12 esta semana</div>
+      </div>
+      <div style="background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:1.2rem 1.5rem;flex:1;min-width:150px">
+        <div style="font-size:.6rem;text-transform:uppercase;letter-spacing:.08em;color:var(--warm-gray)">Contratos</div>
+        <div style="font-size:1.5rem;font-weight:700;color:var(--white);margin:.2rem 0;font-family:'JetBrains Mono',monospace">38</div>
+        <div style="font-size:.7rem;color:var(--amber)">3 vencem em 7 dias</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ========================================= -->
+<!-- 10. SUMMARY                               -->
+<!-- ========================================= -->
+<div class="section" id="summary">
+  <div class="label">Resumo</div>
+  <h2 class="section-title">Checklist de Implementacao</h2>
+  <p class="desc">Use este checklist para garantir que toda implementacao segue o manual:</p>
+
+  <table class="spec-table">
+    <tr><th>#</th><th>Item</th><th>Referencia</th></tr>
+    <tr><td>1</td><td>Logo usa variacao aprovada (icone + wordmark)</td><td>Secao 01</td></tr>
+    <tr><td>2</td><td>Cores seguem paleta definida (nenhuma cor fora da paleta)</td><td>Secao 02</td></tr>
+    <tr><td>3</td><td>Regra 80/10/10 respeitada (branco dominante)</td><td>Secao 02</td></tr>
+    <tr><td>4</td><td>Tipografia segue hierarquia (Playfair titulos, Inter corpo)</td><td>Secao 03</td></tr>
+    <tr><td>5</td><td>Componentes seguem padroes (botoes, cards, inputs, tags)</td><td>Secao 04</td></tr>
+    <tr><td>6</td><td>Espacamento generoso (multiplos de 4px, nunca apertado)</td><td>Secao 05</td></tr>
+    <tr><td>7</td><td>Icones em Lucide/Phosphor outline, stroke consistente</td><td>Secao 06</td></tr>
+    <tr><td>8</td><td>Animacoes sutis e funcionais (max 300ms)</td><td>Secao 07</td></tr>
+    <tr><td>9</td><td>Imagens seguem direcao visual (neutra, premium, geometrica)</td><td>Secao 08</td></tr>
+    <tr><td>10</td><td>Tom de voz: claro, confiante, humano, iluminador</td><td>Brand Strategy Book</td></tr>
+  </table>
+</div>
+
+</div><!-- /page -->
+
+<!-- FOOTER -->
+<div style="background:var(--navy);color:var(--warm-gray);padding:2.5rem 3rem;font-size:.75rem;text-align:center;margin-top:3rem">
+  <strong style="color:var(--gold)">Intentus — Brand Manual 2026</strong><br>
+  Documento de referencia para equipe de design e desenvolvimento.<br>
+  Elaborado para Marcelo — CEO, Intentus | Marco 2026
+</div>
+
+</body>
+</html>

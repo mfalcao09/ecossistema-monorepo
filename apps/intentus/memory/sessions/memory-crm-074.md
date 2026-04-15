@@ -1,0 +1,59 @@
+# Sessão 74 — CRM F1 Item #1: Engine de Automação com Backend Real (15/03/2026)
+
+- **Objetivo**: Implementar primeiro item da Fase 1 do plano CRM IA-Native (sessão 73): Backend real para automações comerciais — substituir visual-only CommercialAutomations por engine funcional com 12 triggers, 8 ações, condições JSONB, sequências multi-step e dashboard de monitoramento
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha). Marcelo selecionou A01 — Engine de Automação (~24h, P0)
+- **Database migrations** (via Supabase MCP):
+  - ENUMs expandidos: `automation_trigger` (12 valores), `automation_action` (8 valores), `automation_log_status` (5 valores: pendente/executado/falha/agendado/cancelado)
+  - Tabela `commercial_automations` — 13 colunas: id, tenant_id, name, trigger_event, delay_days, action_type, active, sort_order, conditions (jsonb), automation_type, description, created_by, timestamps
+  - Tabela `automation_steps` — step_order, delay_minutes, action_type, action_config (jsonb), conditions (jsonb), is_active
+  - Tabela `commercial_automation_logs` — trigger_event, action_type, lead_id, person_id, action_taken, status, notes, scheduled_for
+  - RLS policies PERMISSIVE com tenant isolation em todas as 3 tabelas
+- **Backend — `supabase/functions/commercial-automation-engine/index.ts` (CRIADO — ~891 linhas, self-contained, v2)**:
+  - **7 actions**: execute_trigger, check_scheduled, check_time_triggers, get_logs, get_dashboard, create_automation, update_automation
+  - **8 action executors**: tarefa (creates task), notificacao (creates notification), lembrete (creates scheduled notification), email (logs for future integration), mover_deal (updates deal_requests status), atribuir_responsavel (updates assigned_to), atualizar_campo (dynamic field update), webhook (HTTP POST fire-and-forget)
+  - **JSONB conditions engine**: `evaluateConditions()` com 10 operadores (eq, neq, gt, lt, gte, lte, contains, not_contains, in, exists). match: "all" (AND) ou "any" (OR)
+  - **Multi-step sequences**: `executeSequence()` — step 1 imediato, steps 2+ com `scheduled_for = now + delay_minutes`. Log status "agendado" para steps com delay
+  - **Time-based triggers**: `check_time_triggers` para sem_contato_x_dias (leads sem contato) e aniversario_contrato (deals completados há 12 meses). Batch dedup: só dispara se não logou nas últimas 24h
+  - **Dashboard**: `get_dashboard` com 8 KPIs (total, active, executions 24h/7d, success rates, failed, pending scheduled) + top_automations (5) + recent_failures (10)
+  - **Self-contained**: Inline CORS whitelist (app.intentusrealestate.com.br), auth/tenant resolution via profiles.user_id
+  - **Bug fix MiniMax (Buchecha)**: `not_contains` operator retornava `true` para non-string inputs — corrigido para `false`
+  - **Deploy**: v2 via Supabase MCP (ID: 304d8f7d-7b05-471b-a207-4dab0c04aa9d, ACTIVE, verify_jwt: false)
+- **Frontend hook — `src/hooks/useCommercialAutomationEngine.ts` (CRIADO — ~555 linhas)**:
+  - Types: EntityType, TriggerEvent (12), ActionType (8), AutomationType, ConditionOperator (10), Condition, ConditionGroup, AutomationStep, CommercialAutomation, ExecuteTriggerParams, AutomationLog, AutomationDashboard, CreateAutomationParams, UpdateAutomationParams
+  - Constants: TRIGGER_LABELS (12), ACTION_LABELS (8), TRIGGER_OPTIONS, ACTION_OPTIONS, CONDITION_OPERATORS (10)
+  - Query hooks: useAutomationLogs(automationId?), useAutomationDashboard()
+  - Mutation hooks: useTriggerAutomation(), useCheckScheduled(), useCheckTimeTriggers(), useCreateAutomation(), useUpdateAutomation()
+  - Helper: triggerCommercialEvent() — fire-and-forget para wiring em hooks existentes
+  - Helper: invokeAutomationEngine<T>(action, params) — wraps supabase.functions.invoke
+- **Frontend UI — `src/pages/comercial/CommercialAutomations.tsx` (REESCRITO — ~887 linhas)**:
+  - DashboardKPIs: 8 cards (total, ativas, execuções 24h/7d, taxa sucesso 24h/7d, falhas, agendadas pendentes)
+  - Tabs: "Automações" (lista com Switch toggle ativo/inativo) + "Histórico" (logs table com StatusBadge)
+  - CreateAutomationDialog: Form completo (nome, descrição, tipo simples/sequência, trigger, delay, action, ConditionBuilder, StepsBuilder)
+  - ConditionBuilder: UI para condições JSONB (field/operator/value rows, add/remove)
+  - StepsBuilder: UI para sequências multi-step (step_order, delay_minutes, action_type, action_config)
+  - Manual trigger buttons: "Verificar Agendadas" + "Verificar Tempo"
+  - MiniMax review fixes applied: enabled: !!user guard, onError toast on toggleActive
+- **Trigger wirings (7 triggers conectados em hooks CRM existentes)**:
+  - `useLeads.ts` → lead_criado (onSuccess de useCreateLead)
+  - `useInteractions.ts` → visita_realizada (onSuccess de useCreateInteraction)
+  - `useDealRequests.ts` → deal_criado + proposta_enviada (onSuccess de useCreateDealRequest)
+  - `useDealRequests.ts` → deal_movido_pipeline + deal_ganho + deal_perdido (onSuccess de useUpdateDealStatus)
+  - 5 triggers restantes (sem_contato_x_dias, aniversario_contrato, pagamento_recebido, pagamento_atrasado, documento_assinado) são time-based ou de outros módulos — handled by pg_cron
+- **pg_cron jobs criados** (via Supabase MCP SQL):
+  - Job ID 5: `commercial-automation-check-scheduled` — hourly (`0 * * * *`) — chama check_scheduled
+  - Job ID 6: `commercial-automation-check-time-triggers` — daily 08:00 UTC = 05:00 BRT (`0 8 * * *`) — chama check_time_triggers
+- **MiniMax reviews (2 code reviews)**:
+  - useCommercialAutomationEngine.ts: missing toast in onError (fixed), unsafe type casting (noted)
+  - CommercialAutomations.tsx: missing enabled:!!user (fixed), missing onError on toggleActive (fixed), condition value typing (noted)
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos criados** (2):
+  - `supabase/functions/commercial-automation-engine/index.ts` — Edge Function self-contained (~891 linhas)
+  - `src/hooks/useCommercialAutomationEngine.ts` — frontend hook v2 (~555 linhas)
+- **Arquivos modificados** (3):
+  - `src/pages/comercial/CommercialAutomations.tsx` — reescrito com real backend (~887 linhas)
+  - `src/hooks/useDealRequests.ts` — trigger wirings (deal_criado, proposta_enviada, deal_movido_pipeline, deal_ganho, deal_perdido)
+  - `src/hooks/useLeads.ts` — trigger wiring (lead_criado) — já existia
+- **Edge Functions — Versões atualizadas**:
+  - `commercial-automation-engine` → version 2 (7 actions, 8 executors, JSONB conditions, multi-step, self-contained)
+- **Cronograma CRM IA-Native**: F1 Item #1 ✅ concluído. Próximo: F1 Item #2 (Multi-Funil Customizável ou Lead Scoring — a definir com Marcelo)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

@@ -1,0 +1,28 @@
+# Sessão 90 — CRM F2 Item #3: I06 ROI por Canal de Captação (~10h, P0) (19/03/2026)
+
+- **Objetivo**: Implementar terceiro item da Fase 2 do plano CRM IA-Native: I06 — Dashboard de ROI por canal de captação com volume, conversão, receita atribuída e ciclo de vida
+- **Metodologia**: 100% frontend — sem Edge Function. Padrão `useAnalyticsMetrics.ts` (sessão 70) com queries lightweight e computação client-side via useMemo + Map-based O(n)
+- **Frontend hook — `src/hooks/useChannelROI.ts` (CRIADO — ~195 linhas)**:
+  - 2 data hooks lightweight: `useLeadsForROI()` (7 cols, limit 2000), `useDealsForROI()` (7 cols, limit 1000, terminal deals only)
+  - 1 computed hook: `useChannelROI()` — cruza leads (source/capture_channel/status) com deals para gerar métricas por canal
+  - Types: `ChannelMetrics` (15 campos: total, converted, lost, active, conversionRate, avgDaysToConvert, dealsWon/Lost, revenueWon/Lost, avgDealValue, last30d/7d), `ChannelROIDashboard`
+  - Constants: `CHANNEL_LABELS` (12 canais), `CHANNEL_COLORS` (12 cores distintas)
+  - Revenue attribution proporcional: receita atribuída ao canal baseada na proporção de leads convertidos
+  - Monthly trend por canal para visualização temporal
+- **Frontend UI — `src/pages/comercial/ChannelROIAnalysis.tsx` (CRIADO — ~195 linhas)**:
+  - 4 KPI cards: Total Leads, Convertidos, Taxa Conversão, Receita Total
+  - Best/Worst channel banner cards (green/amber)
+  - Chart: Receita por Canal (BarChart horizontal com cores por canal)
+  - Channel detail cards (grid responsivo): 6 métricas por canal (conversão, receita, ciclo, ticket médio, 30d, 7d) + conversion bar visual
+  - Chart: Taxa de Conversão por Canal (BarChart com cores green/amber/red baseado em threshold)
+  - Error state + loading state
+- **Rota + Sidebar**: `/comercial/roi-canais` registrada em App.tsx. Item "ROI por Canal" (TrendingUp icon) no sidebar com roles admin/gerente
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos criados** (2):
+  - `src/hooks/useChannelROI.ts` — hook 100% client-side (~195 linhas)
+  - `src/pages/comercial/ChannelROIAnalysis.tsx` — página dashboard (~195 linhas)
+- **Arquivos modificados** (2):
+  - `src/App.tsx` — import + rota `/comercial/roi-canais`
+  - `src/components/AppSidebar.tsx` — item sidebar "ROI por Canal"
+- **Cronograma CRM IA-Native**: F2 Item #3 ✅ concluído (I06 ROI por Canal). **CRM F2: 3/11 itens concluídos**. Próximo: F2 Item #4
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

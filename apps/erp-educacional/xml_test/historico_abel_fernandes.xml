@@ -1,0 +1,2116 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<DocumentoHistoricoEscolarFinal xmlns="https://portal.mec.gov.br/diplomadigital/arquivos-em-xsd" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+  <infHistoricoEscolar versao="1.05" ambiente="Produção">
+    <Aluno>
+      <ID>b9b3a68d-1ad3-4850-a141-9005aeea9be0</ID>
+      <Nome>Abel Fernandes Kotlewski Neto</Nome>
+      <Sexo>M</Sexo>
+      <Nacionalidade>Brasileira</Nacionalidade>
+      <Naturalidade>
+        <CodigoMunicipio>5002902</CodigoMunicipio>
+        <NomeMunicipio>Cassilândia</NomeMunicipio>
+        <UF>MS</UF>
+      </Naturalidade>
+      <CPF>03600002155</CPF>
+      <RG>
+        <Numero>2400319</Numero>
+        <OrgaoExpedidor>SEJUSP</OrgaoExpedidor>
+        <UF>MS</UF>
+      </RG>
+      <DataNascimento>2000-06-11</DataNascimento>
+    </Aluno>
+    <DadosCurso>
+      <NomeCurso>Bacharelado em Ciências Contábeis</NomeCurso>
+      <CodigoCursoEMEC>46051</CodigoCursoEMEC>
+      <Autorizacao>
+        <Tipo>Portaria</Tipo>
+        <Numero>2174</Numero>
+        <Data>2000-12-22</Data>
+        <VeiculoPublicacao>Diário Oficial da União</VeiculoPublicacao>
+        <DataPublicacao>2000-12-28</DataPublicacao>
+        <SecaoPublicacao>1</SecaoPublicacao>
+        <PaginaPublicacao>112</PaginaPublicacao>
+        <NumeroDOU>249</NumeroDOU>
+      </Autorizacao>
+      <Reconhecimento>
+        <Tipo>Portaria</Tipo>
+        <Numero>52</Numero>
+        <Data>2010-01-13</Data>
+        <VeiculoPublicacao>Diário Oficial da União</VeiculoPublicacao>
+        <DataPublicacao>2010-01-18</DataPublicacao>
+        <SecaoPublicacao>1</SecaoPublicacao>
+        <PaginaPublicacao>67</PaginaPublicacao>
+        <NumeroDOU>11</NumeroDOU>
+      </Reconhecimento>
+      <RenovacaoReconhecimento>
+        <Tipo>Portaria</Tipo>
+        <Numero>380</Numero>
+        <Data>2015-05-27</Data>
+        <VeiculoPublicacao>Diário Oficial da União</VeiculoPublicacao>
+        <DataPublicacao>2015-05-28</DataPublicacao>
+        <SecaoPublicacao>1</SecaoPublicacao>
+        <PaginaPublicacao>12</PaginaPublicacao>
+        <NumeroDOU>100</NumeroDOU>
+      </RenovacaoReconhecimento>
+    </DadosCurso>
+    <IesEmissora>
+      <Nome>FACULDADES INTEGRADAS DE CASSILÂNDIA</Nome>
+      <CodigoMEC>1606</CodigoMEC>
+      <CNPJ>02175672000163</CNPJ>
+      <Endereco>
+        <Logradouro>Avenida Presidente Dutra</Logradouro>
+        <Numero>1500</Numero>
+        <Bairro>Centro</Bairro>
+        <CodigoMunicipio>5002902</CodigoMunicipio>
+        <NomeMunicipio>Cassilândia</NomeMunicipio>
+        <UF>MS</UF>
+        <CEP>79540001</CEP>
+      </Endereco>
+      <Credenciamento>
+        <Tipo>Portaria</Tipo>
+        <Numero>20</Numero>
+        <Data>2022-12-20</Data>
+        <VeiculoPublicacao>DOU</VeiculoPublicacao>
+        <DataPublicacao>2001-08-24</DataPublicacao>
+        <SecaoPublicacao>1</SecaoPublicacao>
+      </Credenciamento>
+      <Mantenedora>
+        <RazaoSocial>SOCIEDADE EDUCACIONAL VALE DO APORE LTDA</RazaoSocial>
+        <CNPJ>02175672000163</CNPJ>
+        <Endereco>
+          <Logradouro>Avenida Presidente Dutra</Logradouro>
+          <Numero>1500</Numero>
+          <Bairro>Centro</Bairro>
+          <CodigoMunicipio>5002902</CodigoMunicipio>
+          <NomeMunicipio>Cassilândia</NomeMunicipio>
+          <UF>MS</UF>
+          <CEP>79540001</CEP>
+        </Endereco>
+      </Mantenedora>
+    </IesEmissora>
+    <HistoricoEscolar>
+      <CodigoCurriculo>CC-2018</CodigoCurriculo>
+      <ElementosHistorico>
+        <Disciplina>
+          <CodigoDisciplina>576</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>10</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>558</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>30</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>184</CodigoDisciplina>
+          <NomeDisciplina>Comunicação e Expressão I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>555</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade Geral I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Marina Gonçalves Souto Alves</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1596</CodigoDisciplina>
+          <NomeDisciplina>Didática I - Princípios Básicos</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1594</CodigoDisciplina>
+          <NomeDisciplina>Filosofia da Educação I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>287</CodigoDisciplina>
+          <NomeDisciplina>História da Educação I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Rodrigo Fazio</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1695</CodigoDisciplina>
+          <NomeDisciplina>Leitura e Produção de Texto I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1593</CodigoDisciplina>
+          <NomeDisciplina>Língua Portuguesa - Leitura e Interpretação de Textos</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>10.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>034</CodigoDisciplina>
+          <NomeDisciplina>Matemática</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Renata Patrícia Paulino Brandão Machado</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>877</CodigoDisciplina>
+          <NomeDisciplina>Métodos e Técnicas de Pesquisa em Educação</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1598</CodigoDisciplina>
+          <NomeDisciplina>Orientação de Estágio Supervisionado I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>111</CodigoDisciplina>
+          <NomeDisciplina>Sociologia</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1595</CodigoDisciplina>
+          <NomeDisciplina>Sociologia da Educação I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1012</CodigoDisciplina>
+          <NomeDisciplina>Teoria da Administração I</NomeDisciplina>
+          <PeriodoLetivo>1</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Voleguimar Paimel de Queiroz</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1614</CodigoDisciplina>
+          <NomeDisciplina>Arte e Educação Lúdica</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Luciana Barbara de Queiroz Vieira</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>576</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>10</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>712</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>30</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1706</CodigoDisciplina>
+          <NomeDisciplina>Comunicação e Expressão II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>723</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade Geral II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Marina Gonçalves Souto Alves</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1613</CodigoDisciplina>
+          <NomeDisciplina>Didática II - Educação Infantil em Anos Iniciais</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>151</CodigoDisciplina>
+          <NomeDisciplina>Economia</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jaques Douglas de Souza</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>297</CodigoDisciplina>
+          <NomeDisciplina>História da Educação II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Rodrigo Fazio</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1707</CodigoDisciplina>
+          <NomeDisciplina>Leitura e Produção de Texto II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1612</CodigoDisciplina>
+          <NomeDisciplina>Língua Portuguesa - Produção Textual</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>004</CodigoDisciplina>
+          <NomeDisciplina>Metodologia Científica</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>554</CodigoDisciplina>
+          <NomeDisciplina>Noções de Direito</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>512</CodigoDisciplina>
+          <NomeDisciplina>Psicologia da Educação</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cledione Jacinto de Freitas</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1611</CodigoDisciplina>
+          <NomeDisciplina>Sociologia da Educação II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1013</CodigoDisciplina>
+          <NomeDisciplina>Teoria da Administração II</NomeDisciplina>
+          <PeriodoLetivo>2</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Voleguimar Paimel de Queiroz</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1617</CodigoDisciplina>
+          <NomeDisciplina>Alfabetização e Letramento</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>719</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares III</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>30</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>719</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares III</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>20</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1094</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade e Análise de Custos I</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>20</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Levi Alves Barboza Junior</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1616</CodigoDisciplina>
+          <NomeDisciplina>Currículo, Cultura e Ética na Educação - Teoria e Prática</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>159</CodigoDisciplina>
+          <NomeDisciplina>Estágio Supervisionado I</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>25</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>710</CodigoDisciplina>
+          <NomeDisciplina>Estatística</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Renata Patrícia Paulino Brandão Machado</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1618</CodigoDisciplina>
+          <NomeDisciplina>Estatística e Técnicas de Pesquisas Educacionais</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Nilza Alves Canguçu</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>709</CodigoDisciplina>
+          <NomeDisciplina>Legislação Comercial e Societária</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1188</CodigoDisciplina>
+          <NomeDisciplina>Novas Tecnologias na Educação</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>156</CodigoDisciplina>
+          <NomeDisciplina>Organização, Sistemas e Métodos</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Eule José de Oliveira</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1619</CodigoDisciplina>
+          <NomeDisciplina>Orientação de Estágio Supervisionado II</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1615</CodigoDisciplina>
+          <NomeDisciplina>Políticas Educacionais I</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1196</CodigoDisciplina>
+          <NomeDisciplina>Problemas de Aprendizagem</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Maria Ozória Roberta Pereira</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>711</CodigoDisciplina>
+          <NomeDisciplina>Psicologia</NomeDisciplina>
+          <PeriodoLetivo>3</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cledione Jacinto de Freitas</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>576</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares IV</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>20</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>722</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares IV</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>30</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1095</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade e Análise de Custos II</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>152</CodigoDisciplina>
+          <NomeDisciplina>Empreendedorismo</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Eule José de Oliveira</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>166</CodigoDisciplina>
+          <NomeDisciplina>Estágio Supervisionado II</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>25</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1115</CodigoDisciplina>
+          <NomeDisciplina>Filosofia</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>534</CodigoDisciplina>
+          <NomeDisciplina>Gestão Educacional</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>044</CodigoDisciplina>
+          <NomeDisciplina>Matemática Financeira</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>10.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Renata Patrícia Paulino Brandão Machado</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1648</CodigoDisciplina>
+          <NomeDisciplina>Metodologia do Ensino de Ciências</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Imara Rozana de Oliveira</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1650</CodigoDisciplina>
+          <NomeDisciplina>Metodologia do Ensino de Educação Física</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Gilmar Alves Nascimento</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1651</CodigoDisciplina>
+          <NomeDisciplina>Metodologia do Ensino de Matemática nos Anos Iniciais do Ensino Fundamental</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Nilza Alves Canguçu</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>708</CodigoDisciplina>
+          <NomeDisciplina>Microinformática</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1647</CodigoDisciplina>
+          <NomeDisciplina>Práticas Educacionais no Ensino Fundamental</NomeDisciplina>
+          <PeriodoLetivo>4</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1071</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares V</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>30</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1071</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares V</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>20</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>727</CodigoDisciplina>
+          <NomeDisciplina>Auditoria</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Marina Gonçalves Souto Alves</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1667</CodigoDisciplina>
+          <NomeDisciplina>Educação de Jovens e Adultos - EJA</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1665</CodigoDisciplina>
+          <NomeDisciplina>Fundamentos e Metodologia do Ensino da Língua Portuguesa I</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1664</CodigoDisciplina>
+          <NomeDisciplina>Fundamentos Educacionais para Portadores de Necessidades Especiais</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Maria Ozória Roberta Pereira</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1340</CodigoDisciplina>
+          <NomeDisciplina>Gestão de Sistema e Tecnologia da Informação</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>728</CodigoDisciplina>
+          <NomeDisciplina>Laboratório Contábil e Estágio Supervisionado I</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>713</CodigoDisciplina>
+          <NomeDisciplina>Orçamento e Finanças Empresariais</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Levi Alves Barboza Junior</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1668</CodigoDisciplina>
+          <NomeDisciplina>Orientação de Estágio Supervisionado III</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1341</CodigoDisciplina>
+          <NomeDisciplina>Planejamento Contábil e Tributário</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1666</CodigoDisciplina>
+          <NomeDisciplina>Políticas Educacionais II</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>880</CodigoDisciplina>
+          <NomeDisciplina>Projetos Educacionais</NomeDisciplina>
+          <PeriodoLetivo>5</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1267</CodigoDisciplina>
+          <NomeDisciplina>Análise das Demonstrações Contábeis</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1075</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares VI</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>30</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1075</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares VI</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>10</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1683</CodigoDisciplina>
+          <NomeDisciplina>Avaliação da Aprendizagem e Institucional</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>875</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade Pública</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jaques Douglas de Souza</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1688</CodigoDisciplina>
+          <NomeDisciplina>Estágio Supervisionado - Atividades Práticas</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>50</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1684</CodigoDisciplina>
+          <NomeDisciplina>Fundamentos da Educação para a Diversidade</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Maria Ozória Roberta Pereira</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1685</CodigoDisciplina>
+          <NomeDisciplina>Fundamentos e Metodologia do Ensino da Língua Portuguesa II</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Cátia Soares Madaleno Menezes</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1686</CodigoDisciplina>
+          <NomeDisciplina>Fundamentos Metodológicos do Ensino de Geografia</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>736</CodigoDisciplina>
+          <NomeDisciplina>Laboratório Contábil e Estágio Supervisionado II</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1687</CodigoDisciplina>
+          <NomeDisciplina>Projetos de Pesquisa</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>056</CodigoDisciplina>
+          <NomeDisciplina>Teoria da Contabilidade</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Marina Gonçalves Souto Alves</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>726</CodigoDisciplina>
+          <NomeDisciplina>Tópicos Avançados de Contabilidade I</NomeDisciplina>
+          <PeriodoLetivo>6</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Levi Alves Barboza Junior</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>576</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares VII</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>10</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>731</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade Comercial</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Levi Alves Barboza Junior</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>733</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade e Agronegócios</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Marina Gonçalves Souto Alves</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1630</CodigoDisciplina>
+          <NomeDisciplina>Contabilidade Internacional e Auditoria</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>159</CodigoDisciplina>
+          <NomeDisciplina>Estágio Supervisionado I</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1697</CodigoDisciplina>
+          <NomeDisciplina>Fundamentos e Metodologia do Ensino de História</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Rodrigo Fazio</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1356</CodigoDisciplina>
+          <NomeDisciplina>Laboratório Contábil e Estágio Supervisionado III</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1696</CodigoDisciplina>
+          <NomeDisciplina>Laboratório de Práticas em Educação Infantil e Ensino Fundamental</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Luciana Barbara de Queiroz Vieira</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1620</CodigoDisciplina>
+          <NomeDisciplina>Organização e Funcionamento da Educação Básica</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Luciana Barbara de Queiroz Vieira</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1360</CodigoDisciplina>
+          <NomeDisciplina>Perícia, Arbitragem e Mediação</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>7.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1086</CodigoDisciplina>
+          <NomeDisciplina>Trabalho de Conclusão de Curso I</NomeDisciplina>
+          <PeriodoLetivo>7</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1076</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares VII</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>30</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>576</CodigoDisciplina>
+          <NomeDisciplina>Atividades Complementares VIII</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>10</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>732</CodigoDisciplina>
+          <NomeDisciplina>Controladoria e Contabilidade Gerencial</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Marina Gonçalves Souto Alves</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1699</CodigoDisciplina>
+          <NomeDisciplina>Currículo e Planejamento na Educação</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1698</CodigoDisciplina>
+          <NomeDisciplina>Educação e Meio Ambiente</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>166</CodigoDisciplina>
+          <NomeDisciplina>Estágio Supervisionado II</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <ConceitoEspecificoDoCurso>Cumpriu</ConceitoEspecificoDoCurso>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Tânia Mara de Freitas Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1719</CodigoDisciplina>
+          <NomeDisciplina>História e Cultura Afro-Brasileira e Indígena</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Jonas Romão da Rocha</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>018</CodigoDisciplina>
+          <NomeDisciplina>Informática Aplicada à Educação</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1701</CodigoDisciplina>
+          <NomeDisciplina>Introdução à Libras</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Maria Ozória Roberta Pereira</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1358</CodigoDisciplina>
+          <NomeDisciplina>Laboratório Contábil e Estágio Supervisionado IV</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>José Abadio de Moura</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1319</CodigoDisciplina>
+          <NomeDisciplina>Libras - Língua Brasileira de Sinais</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Maria Ozória Roberta Pereira</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1700</CodigoDisciplina>
+          <NomeDisciplina>Literatura Infanto Juvenil</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>9.00</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Luciana Barbara de Queiroz Vieira</Nome>
+              <Titulacao>Mestrado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1342</CodigoDisciplina>
+          <NomeDisciplina>Tópicos Avançados de Contabilidade II</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Levi Alves Barboza Junior</Nome>
+              <Titulacao>Especialização</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>1087</CodigoDisciplina>
+          <NomeDisciplina>Trabalho de Conclusão de Curso II</NomeDisciplina>
+          <PeriodoLetivo>8</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>40</HoraAula>
+          </CargaHoraria>
+          <Nota>8.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+        <Disciplina>
+          <CodigoDisciplina>098</CodigoDisciplina>
+          <NomeDisciplina>Trabalho de Conclusão de Curso</NomeDisciplina>
+          <PeriodoLetivo>80</PeriodoLetivo>
+          <CargaHoraria>
+            <HoraAula>80</HoraAula>
+          </CargaHoraria>
+          <Nota>9.50</Nota>
+          <Aprovado>
+            <FormaIntegralizacao>Cursado</FormaIntegralizacao>
+          </Aprovado>
+          <Docentes>
+            <Docente>
+              <Nome>Aleciana Vasconcelos Ortega</Nome>
+              <Titulacao>Doutorado</Titulacao>
+            </Docente>
+          </Docentes>
+        </Disciplina>
+      </ElementosHistorico>
+      <DataEmissaoHistorico>2023-07-07</DataEmissaoHistorico>
+      <HoraEmissaoHistorico>12:00:00</HoraEmissaoHistorico>
+      <SituacaoAtualDiscente>
+        <Formado>
+          <DataConclusaoCurso>2022-12-16</DataConclusaoCurso>
+          <DataColacaoGrau>2023-01-20</DataColacaoGrau>
+          <DataExpedicaoDiploma>2023-07-10</DataExpedicaoDiploma>
+        </Formado>
+      </SituacaoAtualDiscente>
+      <ENADE>
+        <Habilitado>
+          <Condicao>Concluinte</Condicao>
+          <Edicao>2022</Edicao>
+        </Habilitado>
+      </ENADE>
+      <CargaHorariaCursoIntegralizada>
+        <HoraAula>3310</HoraAula>
+      </CargaHorariaCursoIntegralizada>
+      <CargaHorariaCurso>
+        <HoraAula>3280</HoraAula>
+      </CargaHorariaCurso>
+      <IngressoCurso>
+        <Data>2018-01-22</Data>
+        <FormaAcesso>Vestibular</FormaAcesso>
+      </IngressoCurso>
+    </HistoricoEscolar>
+    <SegurancaHistorico>
+      <CodigoValidacao>1606.e7b09558c631b14e</CodigoValidacao>
+    </SegurancaHistorico>
+  </infHistoricoEscolar>
+  <ds:Signature>
+    <ds:SignedInfo>
+      <ds:CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+      <ds:SignatureMethod Algorithm="http://www.w3.org/2001/04/xmldsig-more#rsa-sha256"/>
+      <ds:Reference URI="">
+        <ds:DigestMethod Algorithm="http://www.w3.org/2001/04/xmlenc#sha256"/>
+        <ds:DigestValue>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</ds:DigestValue>
+      </ds:Reference>
+    </ds:SignedInfo>
+    <ds:SignatureValue>PLACEHOLDER_ASSINATURA_DIGITAL</ds:SignatureValue>
+  </ds:Signature>
+</DocumentoHistoricoEscolarFinal>

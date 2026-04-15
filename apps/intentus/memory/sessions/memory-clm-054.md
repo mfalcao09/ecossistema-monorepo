@@ -1,0 +1,37 @@
+# Sessão 54 — F1 Item #2: Contract Analytics Avançado (14/03/2026)
+
+- **Objetivo**: Implementar segundo item do cronograma IA-Native (F1): Contract Analytics Avançado com IA real + compliance monitoring BR + métricas server-side
+- **Decisões do Marcelo** (via AskUserQuestion):
+  - Abordagem IA: "IA real + fallback simulado (Recomendado)" — Gemini 2.0 Flash via OpenRouter + rule_engine_v1 fallback
+  - Módulos: "Todos os acima" — dashboard server-side + compliance monitoring BR + métricas avançadas
+- **Backend — `supabase/functions/clm-ai-insights/index.ts` (REESCRITO — self-contained ~500 linhas)**:
+  - **Migração**: Versão anterior usava `createHandler` de `_shared/middleware.ts` → Self-contained com CORS/auth/RBAC inline (Supabase deploy bundler não resolve `../_shared/` imports)
+  - **3 actions**:
+    - `analyze_contract`: Análise individual com Gemini 2.0 Flash (JSON mode). Prompt com 10 regras de compliance BR imobiliário (Lei 8.245/91, reajuste, garantia locatícia, qualificação das partes, etc.). Fallback `rule_engine_v1` se IA falha. Salva em `contract_ai_analysis`
+    - `portfolio_health`: Score de saúde agregado (0-100) com critical_risks, opportunities, recommended_actions, compliance_overview. Busca contratos + análises + obrigações + parcelas para contexto. Fallback rule-based com scoring por indicadores
+    - `advanced_metrics`: 12 KPIs server-side: avg_lifecycle_days, renewal_rate_pct, cancellation_rate_pct, collection_rate_pct, overdue_amount, overdue_installments, obligation_compliance_rate_pct, avg_payment_delay_days, total_portfolio_value, monthly_recurring_value, active_contracts, total_contracts. + MoM growth (12m), expiring_by_month (6m), value_by_type
+  - **RBAC**: analyze_contract→clm.contract.read, portfolio_health/advanced_metrics→clm.dashboard.view
+  - **Deploy**: v7 via Supabase MCP (ID: 5535da50-a040-418d-a5aa-c31e721db52b, ACTIVE)
+- **Frontend hooks — `src/hooks/useContractAIInsights.ts` (MODIFICADO)**:
+  - Novos tipos: `ComplianceGap`, `PortfolioHealthResult`, `AdvancedMetrics`
+  - Novas funções: `runAIAnalysis()`, `fetchPortfolioHealth()`, `fetchAdvancedMetrics()`
+  - Novos hooks: `useRunAIAnalysis`, `usePortfolioHealth`, `useAdvancedMetrics`
+- **Frontend UI — `src/components/contracts/AdvancedMetricsPanel.tsx` (CRIADO, ~280 linhas)**:
+  - Health Score Banner: color-coded (green≥70, yellow≥40, red<40), badge IA Real/Simulado, critical risks, compliance overview
+  - 8 KPI Cards: Contratos Ativos, Valor Portfólio, Receita Mensal Recorrente, Taxa Adimplência, Ciclo Médio, Taxa Renovação, Inadimplência, Atraso Médio Pgto — com cores condicionais
+  - 3 Charts (Recharts): Novos Contratos/Mês (bar), Contratos Expirando 6m (bar com Cell coloring), Valor por Tipo (horizontal bar com TYPE_COLORS)
+  - Ações Recomendadas: Cards com badges de prioridade (alta/média/baixa)
+- **Frontend integração — `src/components/contracts/ReportsPanel.tsx` (MODIFICADO)**:
+  - Tabs wrapper adicionado: "Relatórios" (conteúdo existente) + "Métricas Avançadas" (AdvancedMetricsPanel)
+- **Problema de deploy resolvido**: Supabase MCP deploy coloca arquivos em `/tmp/user_fn_.../source/` flat — `../_shared/middleware.ts` não é resolvível. Solução: inline todo o CORS/auth/RBAC no arquivo, usando `Deno.serve()` direto em vez de `createHandler`
+- **Build**: 0 erros TypeScript
+- **Arquivos criados** (1):
+  - `src/components/contracts/AdvancedMetricsPanel.tsx` (~280 linhas)
+- **Arquivos modificados** (3):
+  - `supabase/functions/clm-ai-insights/index.ts` — reescrito self-contained v7 (~500 linhas)
+  - `src/hooks/useContractAIInsights.ts` — novos tipos + hooks + funções fetch
+  - `src/components/contracts/ReportsPanel.tsx` — tabs wrapper com "Métricas Avançadas"
+- **Edge Functions — Versões atualizadas**:
+  - `clm-ai-insights` → version 7 (3 actions, IA real + fallback, compliance BR, self-contained)
+- **Nota técnica**: Local repo file agora sincronizado com versão deployada (self-contained). Divergência anterior (createHandler vs Deno.serve) eliminada
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

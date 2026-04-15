@@ -1,0 +1,34 @@
+# Sessão 89 — CRM F2 Item #2: I07 Win/Loss Analysis (~14h, P0) (19/03/2026)
+
+- **Objetivo**: Implementar segundo item da Fase 2 do plano CRM IA-Native: I07 — Análise de negócios ganhos vs perdidos com motivos, padrões e recomendações IA
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha)
+- **Backend — `supabase/functions/commercial-win-loss-analysis/index.ts` (CRIADO — ~300 linhas, self-contained, v1)**:
+  - **3 actions**: `get_dashboard` (KPIs + breakdown completo), `analyze_patterns` (IA identifica padrões e recomenda)
+  - **get_dashboard**: 10 KPIs (total, wins, losses, win rate, avg values, revenues, cycle days), loss_reasons breakdown, by_type, monthly_trend, by_broker, top_lost_deals. Período configurável (3/6/12 meses)
+  - **analyze_patterns**: Gemini 2.0 Flash analisa dados win/loss e retorna patterns[], recommendations[], loss_analysis (causes, preventable_pct, critical_stage), win_analysis (success_factors, best_deal_type), forecast (trend, confidence). Fallback rule-based
+  - **Self-contained**: Inline CORS whitelist, auth/tenant, Number() parsing
+  - **Deploy**: v1 via Supabase MCP (ID: `97235da4-1397-43a3-8c91-8dd098f2ccdb`, ACTIVE, verify_jwt: false)
+- **Frontend hook — `src/hooks/useWinLossAnalysis.ts` (CRIADO — ~140 linhas)**:
+  - Types: WinLossKPIs, LossReason, TypeBreakdown, MonthlyTrend, BrokerBreakdown, TopLostDeal, WinLossDashboard, AIPattern, AIRecommendation, AIAnalysis
+  - Constants: IMPACT_COLORS, CATEGORY_COLORS, PRIORITY_COLORS, DEAL_TYPE_LABELS
+  - Query: `useWinLossDashboard(months)` (staleTime 5min, refetchInterval 10min)
+  - Mutation: `useAnalyzePatterns()` com toast error
+- **Frontend UI — `src/pages/comercial/WinLossAnalysis.tsx` (CRIADO — ~250 linhas)**:
+  - 5 KPI cards: Win Rate (color-coded), Ganhos (revenue), Perdidos (revenue), Ciclo Ganho, Ciclo Perda
+  - AI Insights banner: summary, forecast trend badge, top 3 recommendations com priority badges
+  - 4 Tabs: Visão Geral (monthly trend BarChart + win rate por tipo com progress bars), Motivos (loss reasons com bars), Corretores (performance por broker), Maiores Perdas (TOP 10 por valor)
+  - Period selector: 3m / 6m / 12m
+  - Botão "Análise IA" (Sparkles icon)
+- **Rota + Sidebar**: `/comercial/win-loss` registrada em App.tsx. Item "Win/Loss Analysis" (Target icon) no sidebar com roles admin/gerente
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos criados** (3):
+  - `supabase/functions/commercial-win-loss-analysis/index.ts` — Edge Function self-contained (~300 linhas)
+  - `src/hooks/useWinLossAnalysis.ts` — hook central win/loss (~140 linhas)
+  - `src/pages/comercial/WinLossAnalysis.tsx` — página dashboard + IA (~250 linhas)
+- **Arquivos modificados** (2):
+  - `src/App.tsx` — import + rota `/comercial/win-loss`
+  - `src/components/AppSidebar.tsx` — import Target + item sidebar "Win/Loss Analysis"
+- **Edge Functions — Versões atualizadas**:
+  - `commercial-win-loss-analysis` → version 1 (3 actions, IA pattern analysis, self-contained, CORS whitelist)
+- **Cronograma CRM IA-Native**: F2 Item #2 ✅ concluído (I07 Win/Loss Analysis). **CRM F2: 2/11 itens concluídos**. Próximo: F2 Item #3
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

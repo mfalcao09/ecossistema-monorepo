@@ -1,0 +1,1171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Auditoria de Segurança e Qualidade — ERP-Educacional</title>
+    <style>
+        :root {
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-tertiary: #334155;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --accent-red: #ef4444;
+            --accent-orange: #f59e0b;
+            --accent-green: #22c55e;
+            --accent-blue: #3b82f6;
+            --accent-purple: #a855f7;
+            --border: #475569;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.7;
+            padding: 2rem;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 3rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            background: linear-gradient(135deg, var(--accent-red), var(--accent-orange));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        .meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .meta-item {
+            background: var(--bg-secondary);
+            padding: 1rem;
+            border-radius: 8px;
+            border: 1px solid var(--border);
+        }
+
+        .meta-label {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .meta-value {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-top: 0.25rem;
+        }
+
+        h2 {
+            font-size: 1.75rem;
+            margin: 3rem 0 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 2px solid var(--accent-red);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+
+        h2 .icon {
+            font-size: 1.5rem;
+        }
+
+        h3 {
+            font-size: 1.25rem;
+            margin: 2rem 0 1rem;
+            color: var(--accent-orange);
+        }
+
+        .finding {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border-left: 4px solid var(--border);
+            transition: all 0.2s ease;
+        }
+
+        .finding:hover {
+            border-left-width: 6px;
+            transform: translateX(4px);
+        }
+
+        .finding.critica {
+            border-left-color: var(--accent-red);
+        }
+
+        .finding.critica h3 {
+            color: var(--accent-red);
+        }
+
+        .finding.media {
+            border-left-color: var(--accent-orange);
+        }
+
+        .finding.media h3 {
+            color: var(--accent-orange);
+        }
+
+        .finding.baixa {
+            border-left-color: var(--accent-green);
+        }
+
+        .finding.baixa h3 {
+            color: var(--accent-green);
+        }
+
+        .severity-badge {
+            display: inline-block;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-right: 0.5rem;
+        }
+
+        .severity-critica {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--accent-red);
+            border: 1px solid var(--accent-red);
+        }
+
+        .severity-media {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--accent-orange);
+            border: 1px solid var(--accent-orange);
+        }
+
+        .severity-baixa {
+            background: rgba(34, 197, 94, 0.2);
+            color: var(--accent-green);
+            border: 1px solid var(--accent-green);
+        }
+
+        h3 {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .problem-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .finding-section {
+            margin: 1rem 0;
+        }
+
+        .finding-section-title {
+            font-size: 0.8rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .finding-section p {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        code {
+            background: var(--bg-tertiary);
+            padding: 0.2rem 0.4rem;
+            border-radius: 4px;
+            font-family: 'Fira Code', 'Monaco', 'Consolas', monospace;
+            font-size: 0.85em;
+            color: var(--accent-purple);
+        }
+
+        pre {
+            background: var(--bg-tertiary);
+            padding: 1rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--border);
+        }
+
+        pre code {
+            background: none;
+            padding: 0;
+            color: var(--text-primary);
+        }
+
+        .summary-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .summary-table th,
+        .summary-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .summary-table th {
+            background: var(--bg-tertiary);
+            font-weight: 600;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 0.05em;
+            color: var(--text-secondary);
+        }
+
+        .summary-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .summary-table tr:hover td {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .count-critica {
+            color: var(--accent-red);
+            font-weight: 700;
+        }
+
+        .count-media {
+            color: var(--accent-orange);
+            font-weight: 700;
+        }
+
+        .count-baixa {
+            color: var(--accent-green);
+            font-weight: 700;
+        }
+
+        .priority-sprint {
+            background: var(--bg-secondary);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            border: 1px solid var(--border);
+        }
+
+        .sprint-header {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .sprint-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        .sprint-label.critica {
+            color: var(--accent-red);
+        }
+
+        .sprint-label.alta {
+            color: var(--accent-orange);
+        }
+
+        .sprint-label.media {
+            color: var(--accent-blue);
+        }
+
+        .sprint-label.backlog {
+            color: var(--text-secondary);
+        }
+
+        .sprint-time {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            background: var(--bg-tertiary);
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+        }
+
+        .sprint-tasks {
+            list-style: none;
+        }
+
+        .sprint-tasks li {
+            padding: 0.5rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .sprint-tasks li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--accent-blue);
+        }
+
+        .sprint-tasks li strong {
+            color: var(--text-primary);
+        }
+
+        footer {
+            margin-top: 4rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 1.75rem;
+            }
+
+            h2 {
+                font-size: 1.35rem;
+            }
+
+            .finding {
+                padding: 1rem;
+            }
+
+            .meta-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Auditoria de Segurança e Qualidade</h1>
+            <p class="subtitle">ERP-Educacional — Análise Completa de 5 Dimensões</p>
+            <div class="meta-grid">
+                <div class="meta-item">
+                    <div class="meta-label">Data</div>
+                    <div class="meta-value">2024-05-15</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Auditor</div>
+                    <div class="meta-value">Matrix Agent</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Metodologia</div>
+                    <div class="meta-value">Read-Only Analysis</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-label">Classificação</div>
+                    <div class="meta-value">Uso Interno</div>
+                </div>
+            </div>
+        </header>
+
+        <!-- DIMENSÃO 1: ARQUITETURA & BACKEND -->
+        <section id="arquitetura">
+            <h2><span class="icon">🏗️</span> Dimensão 1: Arquitetura & Backend</h2>
+
+            <div class="finding critica">
+                <h3>
+                    <span class="severity-badge severity-critica">Crítica</span>
+                    <span class="problem-title">1.1 — Middleware de Domínio com IP Fixo</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`middleware.ts` hardcoda listas de domínios (`erp.fic`, `gestao.fic`, `diploma.fic`) com IPs fixos para bypass de rate limiting.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Violação do princípio de least privilege. IPs podem mudar causando outage ou serem interceptados. Não há fallback dinâmico via DNS.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Migrar para Service Discovery (Consul, Eureka) ou DNS TXT records com TTL curto. Remover whitelist de IPs do código.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">1.2 — Padrão Single-Tenant Implícito</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>Arquitetura multi-tenant via `tenant_id`/`institution_id` mas sem isolamento de schema no Postgres (single database).</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Vazamento de dados cross-tenant via bugs em queries ou RLS mal configurada. Queries lentas afetam todos os tenants simultaneamente.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Considerar Postgres schemas separados por instituição ou migrate para multi-database pattern com tenant-sharding.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">1.3 — Webhook BRy Sem HMAC</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+<p>`bry-assinatura-pdf/route.ts` não implementa validação HMAC-SHA256 como o webhook WhatsApp.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Qualquer requisição autenticada na rede interna pode manipular status de assinaturas PDF. Sem garantia de integridade da origem.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar `Bry-Webhook-Signature` header com HMAC-SHA256. Validar `X-Forwarded-For` para garantir origem via Load Balancer.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">1.4 — IP Validation Regex Permissivo</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`rate-limit.ts` usa `/^[0-9a-fA-F:]+$/` para IPv6 — aceita qualquer string hexadecimal com `:`.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Bypass de rate limiting via headers `X-Forwarded-For` forjados.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Usar `net.isIP()` do Node.js ou `is-ip` package. Validar IPv4 e IPv6 separadamente.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">1.5 — Fallback Memória no Rate Limiter</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`rate-limit.ts` usa `new Map()` em memória quando Redis falha — sem TTL cleanup.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Memory leak em ambientes com alto uptime. Rate limiting pode ser completamente ineffective.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar `setInterval` para cleanup periódico ou usar `lru-cache` com `maxAge`.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">1.6 — In-Memory Filtering em Diplomas</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`GET /api/diplomas` faz filter by search in-memory via `filter()`.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Não escala. Carrega TODOS os diplomas filtrados do Postgres para memória antes de paginar.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Migrar filter para SQL `WHERE` clause com `tsvector` (Full-Text Search) ou `ILIKE` indexado.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIMENSÃO 2: CODE QUALITY -->
+        <section id="code-quality">
+            <h2><span class="icon">📝</span> Dimensão 2: Code Quality & Language</h2>
+
+            <div class="finding critica">
+                <h3>
+                    <span class="severity-badge severity-critica">Crítica</span>
+                    <span class="problem-title">2.1 — Diploma Detail Page (108KB, 2410 linhas)</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`page.tsx` com 2410 linhas é um God Component que viola SRP, OCP e quase todos os princípios SOLID.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Impossível manter, testar ou fazer code review. Qualquer change é risco de regressão. Bug #H modal embutido no mesmo arquivo.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Extrair para:
+                    <br>• `components/DiplomaTabs/` (Dados, XMLs, Documentos, Acervo, Histórico)
+                    <br>• `hooks/useDiplomaWorkflow.ts`
+                    <br>• `components/DiplomaActions.tsx`
+                    <br>• `components/PipelineStatus.tsx`</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">2.2 — API Route Monolítica</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`diplomas/[id]/route.ts` (325 linhas) acumulou múltiplas responsabilidades: GET, DELETE, PATCH, field mapping, extra queries.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Violação do Princípio da Responsabilidade Única. Dificulta caching granular e testing isolado.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Split em services separados: `GetDiplomaService`, `UpdateDiplomaService`, `DeleteDiplomaService`.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">2.3 — Async Fire-and-Forget Inconsistente</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`cadeia-custodia.ts` tem `registrarCustodiaAsync` mas `document-converter` usa callback pattern diferente.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Inconsistência de error handling. Async fire-and-forget pode silently fail.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Padronizar para `queue.add()` (Bull/BullMQ) ou Domain Events com transactional outbox pattern.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">2.4 — Magic Numbers Sem Constantes</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>Valores como `2h`, `100`, `5s`, `30_000` espalhados no código sem documentação.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Configuração oculta. Changes acidentais podem causar outages silenciosos.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Extrair para `src/config/constants.ts` com JSDoc explicando rationale de cada valor.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">2.5 — Error Handling Inconsistente</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>APIs retornam formatos variados: `{ error: string }`, `throw new Error()`, `NextResponse.error()`.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Frontend precisa tratar múltiplos formatos de erro. Logging inconsistente.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Criar `ApiResponse` helper com métodos `success()`, `error()`, `validation()`.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIMENSÃO 3: FRONTEND & UI/UX -->
+        <section id="frontend">
+            <h2><span class="icon">🎨</span> Dimensão 3: Frontend & UI/UX</h2>
+
+            <div class="finding media">
+                <h3>
+<span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">3.1 — Portal Client (1020 linhas)</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`PortalPageClient.tsx` mistura concerns: Turnstile, dual-tab UI, RVDD viewer, XML validator, API calls.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Loading states complexos com `isInitialLoad` ref pattern. Dificulta SSR/SSG.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Extrair: `PortalSearchForm.tsx`, `RvddViewer.tsx`, `XmlValidator.tsx`, `useDiplomaPortal.ts`.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">3.2 — XML Validator No Client Side</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>XML validator roda no browser sem XSD schema caching. Qualquer browser refresh recarrega schemas.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Performance degrade com múltiplos uploads. Sem caching de schemas MEC.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar React Query com `staleTime: Infinity` para schemas XSD. Considerar server-side validation com Redis cache.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">3.3 — RVDD Proxy Sem Cache</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`/api/portal/rvdd-proxy` faz proxy de PDFs sem cache.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Cada visualização baixa o PDF novamente. Custo de egress elevado + latency.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar `Cache-Control: public, max-age=31536000`. Usar Cloudflare Cache Rules.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">3.4 — Override Modal Sem Confirmation</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>Modal de override para violações de business rules (Bug #H) não pede confirmação explícita.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Usuário pode clicar errado e circumvent regras de compliance.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Adicionar step de confirmação com texto digitado ("TENHO CIÊNCIA") ou double-click pattern.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">3.5 — Loading States Não Granulares</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`page.tsx` usa `isInitialLoad` ref pattern genérico — não distingue refresh de skeleton initial load.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>UX inconsistente. Loading spinner aparece desnecessariamente.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Normalizar para TanStack Query com `isFetching` vs `isLoading` states.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIMENSÃO 4: PERFORMANCE -->
+        <section id="performance">
+            <h2><span class="icon">⚡</span> Dimensão 4: Performance & Optimization</h2>
+
+            <div class="finding critica">
+                <h3>
+                    <span class="severity-badge severity-critica">Crítica</span>
+                    <span class="problem-title">4.1 — N+1 Queries no Diploma Detail</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`diplomas/[id]/route.ts` faz queries separadas para `xml_gerados`, `extracao_sessoes`, `fluxo_assinaturas`.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>4 round-trips ao banco por cada acesso. 400 concurrent users = 1600 queries/segundo.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Usar JOIN com JSON aggregation:</p>
+                    <pre><code>SELECT d.*, 
+  json_agg(xml) as xmls,
+  json_agg(sessao) as sessoes
+FROM diplomas d
+LEFT JOIN xml_gerados xml ON xml.diploma_id = d.id
+WHERE d.id = $1
+GROUP BY d.id</code></pre>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">4.2 — Document Converter Sem Concurrency Control Global</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`executarComLimite(4)` local — cada instância Railway tem seu próprio limite.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>3 instâncias = 12 concurrent jobs. Sem distributed coordination em spike scenarios.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar Upstash QStash ou Redis-based distributed semaphore.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">4.3 — Sem Gzip/Brotli Compression</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>Nenhum middleware de compression configurado em `next.config.mjs`.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>JSON responses não comprimidos. Mobile users experimentam latency.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Adicionar `compress` middleware (Express) ou `next-compose-plugins`.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">4.4 — Supabase Realtime Sem Subscription Cleanup</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>Componentes que usam `supabase.channel()` sem `unsubscribe()` em cleanup.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>WebSocket connections acumulam. Browser tab leak em SPAs.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar useEffect com cleanup:</p>
+                    <pre><code>useEffect(() => {
+  const channel = supabase.channel(...)
+  return () => { channel.unsubscribe() }
+}, [])</code></pre>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">4.5 — Batch Size Fixed em Migration</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`pii-encryption.ts` usa `100` records/batch fixo. Não adaptativo a load.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Horário de pico = lock contention. Off-peak = capacidade subaproveitada.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar adaptive batching via `pg_stat_activity`. Usar BACKGROUND worker.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">4.6 — Sem Database Index em Filter Columns</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>Filtros por `nome`, `cpf`, `curso` em diplomas não têm índices explícitos.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Table scans em `diplomas` com milhões de registros.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Adicionar índices parciais:</p>
+                    <pre><code>CREATE INDEX idx_diplomas_nome 
+  ON diplomas(nome) WHERE deleted_at IS NULL;
+CREATE INDEX idx_diplomas_cpf_hash 
+  ON diplomas(cpf_hash) WHERE cpf_hash IS NOT NULL;</code></pre>
+                </div>
+            </div>
+        </section>
+
+        <!-- DIMENSÃO 5: SECURITY -->
+        <section id="security">
+            <h2><span class="icon">🔒</span> Dimensão 5: Security</h2>
+
+            <div class="finding critica">
+                <h3>
+                    <span class="severity-badge severity-critica">Crítica</span>
+                    <span class="problem-title">5.1 — CSRF Double Submit Sem HttpOnly</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`csrf.ts` stores CSRF token em cookie non-httpOnly (`_csrf`).</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>XSS pode ler token CSRF via `document.cookie` e fazer requests cross-site. Se houver stored XSS, CSRF protection é bypassed.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Migrar para Same-Site Cookies (default browsers modernos) OU usar `CSRF_TOKEN` cookie HttpOnly + custom header.</p>
+                </div>
+            </div>
+
+            <div class="finding critica">
+                <h3>
+                    <span class="severity-badge severity-critica">Crítica</span>
+                    <span class="problem-title">5.2 — BRy Webhook Sem HMAC Validation</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`bry-assinatura-pdf/route.ts` não tem HMAC validation.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Qualquer serviço interno pode POSTar falsificando status de assinatura.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar `Bry-Signature` header com HMAC-SHA256. Log e reject requests sem signature.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">5.3 — Service Role Client Embutido em API Routes</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`diplomas/[id]/route.ts` usa `createClient(url, serviceRoleKey)` diretamente na API route.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Se API route for mal configurada, service role key pode vazar via stack traces ou logs.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Usar Server-side Supabase Client com JWT. Service role apenas em background jobs (RLS bypass é anti-pattern).</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">5.4 — Rate Limit Bypass Via IPv6 Spoofing</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`isValidIP` regex aceita strings forjadas em `X-Forwarded-For`.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+<p>Atacante pode bypassear rate limiting forjando headers.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Validar IPs com `net.isIP()`. Trust apenas primeiro IP não-known-private.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">5.5 — Security Logger Sem Encryption</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`security-logger.ts` logs eventos de segurança em plaintext.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Se storage for comprometida, detalhes de ataques são expostos.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Criptografar campos `details` e `ip_address` com chave do Vault.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">5.6 — PII Encryption Sem Key Rotation</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`pii-encryption.ts` usa `PII_ENCRYPTION_KEY` fixed. Não há mecanismo de rotação.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Se chave for comprometida, todos os dados PII são decryptable. Não compliance com LGPD.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar Envelope Encryption com KEK/DEK. Rotacionar KEK periodicamente via Vault.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">5.7 — Cadeia de Custódia Sem Distributed Consensus</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`cadeia-custodia.ts` calcula `hash_anterior` localmente — não há Distributed Hash Chain.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Em multi-instância, cada instância pode criar branch chains divergentes.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Implementar `SELECT FOR UPDATE SKIP LOCKED` ao ler `hash_anterior`.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">5.8 — Turnstile Timeout Não Configurado</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`validar-codigo/route.ts` não tem timeout no fetch do Turnstile verification.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Slow/failed Turnstile API pode causar request timeout.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Adicionar `AbortSignal.timeout(5000)` para validation do Turnstile.</p>
+                </div>
+            </div>
+
+            <div class="finding baixa">
+                <h3>
+                    <span class="severity-badge severity-baixa">Baixa</span>
+                    <span class="problem-title">5.9 — No Input Sanitization em XML Upload</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`diplomas/[id]/page.tsx` faz XML upload sem sanitization do conteúdo.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>XXE (XML External Entity) injection se content-type não for validado.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Validar Content-Type. Usar `fast-xml-parser` com `processEntities: false`.</p>
+                </div>
+            </div>
+
+            <div class="finding media">
+                <h3>
+                    <span class="severity-badge severity-media">Média</span>
+                    <span class="problem-title">5.10 — Hardcoded Exempt Prefixes em CSRF</span>
+                </h3>
+                <div class="finding-section">
+                    <div class="finding-section-title">Problema</div>
+                    <p>`csrf.ts` hardcoda prefixos isentos: `/api/portal/`, `/api/auth/`, `/api/ia/`.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Impacto</div>
+                    <p>Novos endpoints em `/api/portal/` são automaticamente csrf-exempt.</p>
+                </div>
+                <div class="finding-section">
+                    <div class="finding-section-title">Diretriz de Solução</div>
+                    <p>Migrar para env var `NEXT_PUBLIC_CSRF_EXEMPT_ROUTES` com formato documentado.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SUMÁRIO -->
+        <section id="summary">
+            <h2><span class="icon">📊</span> Sumário de Achados</h2>
+
+            <table class="summary-table">
+                <thead>
+                    <tr>
+                        <th>Dimensão</th>
+                        <th>Crítica</th>
+                        <th>Média</th>
+                        <th>Baixa</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Arquitetura & Backend</td>
+                        <td class="count-critica">1</td>
+                        <td class="count-media">4</td>
+                        <td class="count-baixa">1</td>
+                    </tr>
+                    <tr>
+                        <td>Code Quality</td>
+                        <td class="count-critica">1</td>
+                        <td class="count-media">2</td>
+                        <td class="count-baixa">3</td>
+                    </tr>
+                    <tr>
+                        <td>Frontend & UI/UX</td>
+                        <td class="count-critica">0</td>
+                        <td class="count-media">3</td>
+                        <td class="count-baixa">2</td>
+                    </tr>
+                    <tr>
+                        <td>Performance & Optimization</td>
+                        <td class="count-critica">1</td>
+                        <td class="count-media">3</td>
+                        <td class="count-baixa">3</td>
+                    </tr>
+                    <tr>
+                        <td>Security</td>
+                        <td class="count-critica">2</td>
+                        <td class="count-media">6</td>
+                        <td class="count-baixa">3</td>
+                    </tr>
+                    <tr style="font-weight: bold; background: var(--bg-tertiary);">
+                        <td>TOTAL</td>
+                        <td class="count-critica">5</td>
+                        <td class="count-media">18</td>
+                        <td class="count-baixa">12</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <!-- PRIORIZAÇÃO -->
+        <section id="prioritization">
+            <h2><span class="icon">🎯</span> Priorização Recomendada</h2>
+
+            <div class="priority-sprint">
+                <div class="sprint-header">
+                    <span class="sprint-label critica">Sprint 1 — Crítico</span>
+                    <span class="sprint-time">2 semanas</span>
+                </div>
+                <ul class="sprint-tasks">
+                    <li><strong>CSRF HttpOnly migration</strong> — Cookie com httpOnly true + custom header</li>
+                    <li><strong>BRy Webhook HMAC validation</strong> — Implementar Bry-Signature header</li>
+                    <li><strong>IP validation fix</strong> — Usar net.isIP() do Node.js</li>
+                    <li><strong>N+1 query resolution</strong> — JOIN com JSON aggregation</li>
+                </ul>
+            </div>
+
+            <div class="priority-sprint">
+                <div class="sprint-header">
+                    <span class="sprint-label alta">Sprint 2 — Alta Prioridade</span>
+                    <span class="sprint-time">4 semanas</span>
+                </div>
+                <ul class="sprint-tasks">
+                    <li><strong>Diploma Page decomposition</strong> — 108KB → components isolados</li>
+                    <li><strong>RBAC service role removal</strong> — Server-side client com JWT</li>
+                    <li><strong>Security Logger encryption</strong> — Criptografar details/ip_address</li>
+                    <li><strong>PII Key Rotation architecture</strong> — Envelope encryption com DEK/KEK</li>
+                </ul>
+            </div>
+
+            <div class="priority-sprint">
+                <div class="sprint-header">
+                    <span class="sprint-label media">Sprint 3 — Medium</span>
+                    <span class="sprint-time">8 semanas</span>
+                </div>
+                <ul class="sprint-tasks">
+                    <li><strong>Multi-tenant schema isolation</strong> — Postgres schemas por instituição</li>
+                    <li><strong>Document converter distributed semaphore</strong> — Upstash QStash</li>
+                    <li><strong>XXE prevention</strong> — fast-xml-parser com processEntities: false</li>
+                    <li><strong>Adaptive batching</strong> — pg_stat_activity based sizing</li>
+                </ul>
+            </div>
+
+            <div class="priority-sprint">
+                <div class="sprint-header">
+                    <span class="sprint-label backlog">Backlog — Melhoria Contínua</span>
+                </div>
+                <ul class="sprint-tasks">
+                    <li>Database indexes — índices parciais para filtros comuns</li>
+                    <li>Compression middleware — Gzip/Brotli para JSON responses</li>
+                    <li>Realtime subscription cleanup — unsubscribe em useEffect</li>
+                    <li>Magic numbers → constants — centralizar configuração</li>
+                </ul>
+            </div>
+        </section>
+
+        <footer>
+            <p>Relatório gerado por Matrix Agent — Auditoria Read-Only</p>
+            <p style="margin-top: 0.5rem; opacity: 0.7;">ERP-Educacional Repository Audit | 2024-05-15</p>
+        </footer>
+    </div>
+</body>
+</html>

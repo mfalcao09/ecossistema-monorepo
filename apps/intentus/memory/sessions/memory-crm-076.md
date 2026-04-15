@@ -1,0 +1,57 @@
+# Sessão 76 — CRM F1 Item #3: Pulse/Feed Central de Ações (~20h, P0) (15/03/2026)
+
+- **Objetivo**: Implementar terceiro item da Fase 1 do plano CRM IA-Native (sessão 73): P03 — Pulse/Feed Central de Ações. Equivalente ao Pipedrive "Pulse" — feed unificado de todas as ações CRM (deals, leads, interações, automações, comissões, follow-ups) com priorização por urgência via IA scoring
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha). Item selecionado automaticamente como o mais demorado em tempo de execução restante no F1
+- **Decisão arquitetural**: Write-through pattern — tabela materializada `pulse_events` com inserção no momento da ação (via `emitPulseEvent()` fire-and-forget), não UNION ALL computado no query time. Scoring de urgência client-side para latência mínima
+- **Database migration `create_pulse_events_table`** (via Supabase MCP):
+  - Tabela `pulse_events`: id (UUID), tenant_id, event_type (TEXT check 17 valores), actor_id, entity_type (TEXT check 5 valores), entity_id, entity_name, metadata (JSONB), priority (TEXT check critical/high/normal/low), urgency_score (INT 0-100), is_read (BOOL default false), created_at, updated_at
+  - 5 índices: feed (tenant+created_at DESC), actor, entity, priority (partial WHERE NOT is_read), unread (partial WHERE NOT is_read)
+  - RLS habilitado com 3 policies PERMISSIVE (SELECT, INSERT, UPDATE) usando `auth_tenant_id()`
+- **Backend — `supabase/functions/commercial-pulse-feed/index.ts` (CRIADO — ~464 linhas, self-contained, v1)**:
+  - **4 actions**: `get_feed` (paginado, filtros por entity_type/event_type/priority/actor_id/date_range/unread_only), `get_insights` (summary 24h/7d + unread + critical + suggested_actions IA), `backfill` (importa eventos históricos de deal_requests/leads/interactions), `mark_read` (individual event_ids[] ou mark_all)
+  - **get_insights**: Actor name resolution via profiles JOIN. Suggested actions baseadas em padrões (deals estagnados, leads sem contato, obrigações vencidas, automações falhadas)
+  - **backfill**: Importa últimos 30 dias de deal_requests (deal_created + deal_stage_changed), leads (lead_created), interactions (interaction_logged + visit_scheduled). Dedup via upsert on conflict
+  - **Self-contained**: Inline CORS whitelist (`app.intentusrealestate.com.br` + `intentus-plataform.vercel.app`), auth/tenant resolution via profiles.user_id
+  - **Deploy**: v1 via Supabase MCP (ID: `3af8d8d7-87a3-4710-b6f1-f7ff9f407d2e`, ACTIVE, verify_jwt: false)
+- **Frontend hook — `src/hooks/usePulseFeed.ts` (CRIADO — ~249 linhas)**:
+  - **Types**: `PulseEventType` (17 valores: deal_created, deal_stage_changed, deal_won, deal_lost, comment_added, mention, interaction_logged, lead_created, lead_converted, automation_executed, commission_split, follow_started, proposal_sent, document_signed, payment_received, payment_overdue, visit_scheduled), `PulsePriority` (4), `PulseEntityType` (5: deal/lead/person/contract/automation), `PulseEvent`, `PulseFeedResponse`, `PulseFeedFilters`, `SuggestedAction`, `PulseInsights`
+  - **Constants**: `EVENT_TYPE_LABELS` (17 labels PT-BR), `EVENT_TYPE_ICONS` (17 lucide-react icons), `PRIORITY_COLORS` (4), `PRIORITY_LABELS` (4)
+  - **Query hooks**: `usePulseFeed(filters)` (staleTime 3min, refetchInterval 5min, retry 1), `usePulseInsights()` (staleTime 5min, refetchInterval 10min)
+  - **Mutation hooks**: `useMarkPulseRead()`, `useBackfillPulse()`
+  - **Fire-and-forget**: `emitPulseEvent()` — inserção direta em `pulse_events` com urgency scoring client-side:
+    - Base scores por event_type: deal_won=90, payment_overdue=88, deal_lost=85, mention=80, proposal_sent=72, deal_stage_changed=70, deal_created=65, visit_scheduled=62, lead_created=60, interaction_logged=55, comment_added=50, automation_executed=40, follow_started=30
+    - Recency boost: +10 (capped at 100)
+    - Priority mapping: ≥80=critical, ≥60=high, ≥40=normal, <40=low
+- **Frontend UI — `src/pages/comercial/PulseFeed.tsx` (CRIADO — ~623 linhas)**:
+  - Header com botão "Importar Histórico" (backfill)
+  - 4 KPI Cards: Eventos 24h, Eventos 7 dias, Não lidos, Críticos não lidos
+  - Painel IA Insights: Summary + suggested actions com badges de prioridade (alta/media/baixa)
+  - Filter bar: entity_type, event_type, priority (todos com Select dropdown), toggle "Apenas não lidos"
+  - Feed timeline: EventCards com EventIcon (lucide-react dinâmico), PriorityBadge, actor name, entity_name, metadata, timestamp formatado com `formatDistanceToNow` (date-fns ptBR)
+  - Checkbox selection system: seleção individual + batch mark-as-read
+  - "Marcar Todas como Lidas" com AlertDialog de confirmação
+  - Paginação (prev/next com contagem de páginas)
+  - Empty state e loading skeleton
+- **8 trigger wirings em 3 hooks CRM existentes** (fire-and-forget `emitPulseEvent()`):
+  - `useLeads.ts` → `lead_created` (onSuccess de useCreateLead) — 1 emission
+  - `useInteractions.ts` → `visit_scheduled` + `interaction_logged` (onSuccess de useCreateInteraction) — 2 emissions
+  - `useDealRequests.ts` → `deal_created` + `proposal_sent` (onSuccess de useCreateDealRequest) + `deal_stage_changed` + `deal_won` + `deal_lost` (onSuccess de useUpdateDealStatus) — 5 emissions
+- **Rota + Sidebar**: `/comercial/pulse` registrada em App.tsx. Item "Pulse" (Activity icon) no sidebar com roles admin/gerente/corretor, module comercial_basico
+- **MiniMax (Buchecha) code reviews**:
+  - usePulseFeed.ts: 2 CRITICAL (empty catch em emitPulseEvent, null check em invokePulseFeed), 4 WARNING (type cast, unstable queryKey, silent early return, magic strings). Melhorias sugeridas para follow-up
+  - Hook wirings: 1 CRITICAL (unsafe `as any` em useDealRequests), 2 WARNING (missing to_status em deal_won/lost metadata, missing entity_name em visit_scheduled/interaction_logged). Melhorias sugeridas para follow-up
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos criados** (3):
+  - `supabase/functions/commercial-pulse-feed/index.ts` — Edge Function self-contained (~464 linhas)
+  - `src/hooks/usePulseFeed.ts` — hook central Pulse Feed (~249 linhas)
+  - `src/pages/comercial/PulseFeed.tsx` — página UI completa (~623 linhas)
+- **Arquivos modificados** (5):
+  - `src/hooks/useLeads.ts` — import emitPulseEvent + 1 emission (lead_created)
+  - `src/hooks/useInteractions.ts` — import emitPulseEvent + 2 emissions (visit_scheduled, interaction_logged)
+  - `src/hooks/useDealRequests.ts` — import emitPulseEvent + 5 emissions (deal_created, proposal_sent, deal_stage_changed, deal_won, deal_lost)
+  - `src/App.tsx` — import PulseFeed + rota `/comercial/pulse`
+  - `src/components/AppSidebar.tsx` — item sidebar "Pulse" com Activity icon
+- **Edge Functions — Versões atualizadas**:
+  - `commercial-pulse-feed` → version 1 (4 actions, 17 event types, self-contained, CORS whitelist)
+- **Cronograma CRM IA-Native**: F1 Item #3 ✅ concluído (P03 Pulse/Feed). **CRM F1: 3/13 itens concluídos**. Próximo: F1 Item #4
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

@@ -1,0 +1,31 @@
+# Sessão 72 — Verificação completa CLM pré-F3: 19 bugs encontrados e corrigidos (15/03/2026)
+
+- **Objetivo**: Verificação completa do módulo CLM antes de avançar para Fase 3 (CRM). Marcelo perguntou "O IA native para nosso CLM acabou?" — confirmou-se que F1+F2 estão completas (10/10 itens) e pediu varredura de erros
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha). Teste em produção (`app.intentusrealestate.com.br`) + análise de todos os hooks CLM + code review MiniMax
+- **19 bugs encontrados e corrigidos em 9 arquivos**:
+  - **1 CRITICAL (React Error #310)**: `useClmSettings.ts` — `config: config ?? mergeClmConfig(undefined)` criava novo objeto a cada render (spread = nova referência). `ClmSettings.tsx` tinha `useEffect([config])` → loop infinito → crash com "Too many re-renders". **Fix**: `useMemo(() => config ?? mergeClmConfig(undefined), [config])`
+  - **6 CRITICAL (multi-tenant data leaks)**:
+    - `useContractClauses.ts` — 3 gaps: main query, update mutation, soft-delete mutation sem `.eq("tenant_id", tenantId)`. **Fix**: `getAuthTenantId()` + filtro em 3 operações + `staleTime: 5min`
+    - `useContractAIInsights.ts` — 3 gaps: `fetchAIOverview()` (v_contract_ai_overview), `fetchPortfolioInsights()` (contracts + analyses) sem tenant_id. **Fix**: `getAuthTenantId()` + filtro em 3 queries + `staleTime: 5min` em 2 hooks
+    - `useAnalyticsMetrics.ts` — 1 gap: `useDrillDownContracts` sem tenant_id. **Fix**: filtro adicionado
+  - **1 HIGH (unbounded batch ops)**: `useBulkContractOps.ts` — cascade delete e transition sem limite de batch. **Fix**: `MAX_BATCH_SIZE = 50` + validação com toast de erro
+  - **4 MEDIUM (performance/caching)**:
+    - `useNotifications.ts` — `useNotificationPreferences` sem staleTime. **Fix**: `staleTime: 5min`
+    - `useApprovalWorkflow.ts` — `useContractApprovalSteps` sem refetchInterval. **Fix**: `refetchInterval: 5min`
+    - `useComplianceMonitor.ts` — `useComplianceDashboard` sem refetchInterval (Edge Function pesada). **Fix**: `refetchInterval: 10min`
+    - `useContractAIInsights.ts` — 2 hooks sem staleTime (já incluído nos 6 CRITICAL acima)
+  - **1 LOW (UI bug)**: `ClmAnalytics.tsx` — "Revenue at RiskBuchecha" (Badge colado no texto). **Fix**: `{" "}` antes de Badge em 2 lugares
+- **Validação Buchecha (MiniMax M2.5)**: Code review completo dos 19 bugs — todos confirmados como válidos. 2 achados adicionais informativos (tenantId param ignored, missing error handling em queries sequenciais). 1 false positive descartado (fetchPortfolioInsights return — função real tem return correto)
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos modificados** (9):
+  - `src/hooks/useClmSettings.ts` — useMemo fix (React Error #310)
+  - `src/pages/ClmAnalytics.tsx` — Buchecha badge spacing
+  - `src/hooks/useContractClauses.ts` — tenant_id × 3 + staleTime
+  - `src/hooks/useContractAIInsights.ts` — tenant_id × 3 + staleTime × 2
+  - `src/hooks/useAnalyticsMetrics.ts` — tenant_id in drilldown
+  - `src/hooks/useBulkContractOps.ts` — MAX_BATCH_SIZE validation
+  - `src/hooks/useNotifications.ts` — staleTime for preferences
+  - `src/hooks/useApprovalWorkflow.ts` — refetchInterval
+  - `src/hooks/useComplianceMonitor.ts` — refetchInterval
+- **Status IA-Native**: F1 COMPLETA (5/5) + F2 COMPLETA (5/5) = 10/20 itens. CLM verificado e production-ready. **Próximo: F3 Item #1 Backend de Automações (Workflow Engine)**
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

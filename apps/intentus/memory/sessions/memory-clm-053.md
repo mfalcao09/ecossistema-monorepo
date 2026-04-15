@@ -1,0 +1,33 @@
+# Sessão 53 — F1 Item #1: Copilot Agentic Mode (14/03/2026)
+
+- **Objetivo**: Implementar o primeiro item do cronograma IA-Native (F1): Upgrade do Copilot para Modo Agentic com tool-use
+- **Decisões do Marcelo** (via AskUserQuestion):
+  - Migrar Lovable Gateway → OpenRouter (Gemini 2.0 Flash)
+  - 3 módulos de ações: Contratos, Obrigações, Notificações (NÃO Aprovações)
+  - Tool-use pattern com confirmação do usuário antes de executar write actions
+- **Backend — `supabase/functions/copilot/index.ts` (REESCRITO — 168→796 linhas)**:
+  - **Migração**: Lovable AI Gateway (`ai.gateway.lovable.dev` + `LOVABLE_API_KEY`) → OpenRouter (`openrouter.ai/api/v1/chat/completions` + `OPENROUTER_API_KEY`). Model: `google/gemini-2.0-flash-001`
+  - **8 tools OpenAI-compatible** (3 módulos):
+    - Contratos (4): `search_contracts` (filter by status/type/expiring), `get_contract_details` (full with parties/obligations/installments), `transition_contract_status` (optimistic locking + lifecycle event), `get_contract_summary` (portfolio overview)
+    - Obrigações (2): `list_overdue_obligations` (past-due with contract join), `list_upcoming_obligations` (upcoming N days)
+    - Notificações (2): `list_unread_notifications` (with category filter), `create_notification` (custom reminder)
+  - **Agentic Loop**: `MAX_TOOL_ROUNDS = 5`. Non-streaming rounds com tools → streaming SSE final round. Quando model responde com texto (sem tool calls) em round não-streaming, converte para formato SSE para compatibilidade frontend
+  - **CORS whitelist**: Mesmo padrão do `_shared/middleware.ts` (env var + regex dev/preview)
+  - **Tenant isolation**: Todas as tool handlers filtram por `tenant_id`. Profile lookup usa `.eq("user_id", user.id)`
+  - **Context building**: Enhanced context para 5 page types (Contratos, Financeiro, Leads, HelpDesk, Dashboard) com dados mais ricos
+  - **System prompt**: Comprehensive prompt com capabilities Agentic Mode, formato de ações, guidelines
+  - **Deploy**: version 10 via Supabase MCP (ID: `504e5639-063d-4470-8f1d-c480acfcbfdd`, ACTIVE)
+- **Frontend — `src/components/AICopilot.tsx` (MODIFICADO)**:
+  - Suggestions atualizadas com prompts agentic ("Mostre as obrigações vencidas", "Faça um resumo do portfólio")
+  - Welcome message: "Olá! Sou o Analista Intentus com **modo agentic** — posso consultar e agir nos seus dados."
+  - Header: Badge amber "Agentic" com ícone Zap (substituiu badge de contexto de página)
+  - Loading text: "Pensando..." → "Consultando dados..."
+  - **Decisão arquitetural**: Frontend SSE parser NÃO alterado — backend lida com todo o loop de tool-use internamente
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`)
+- **Arquivos modificados** (2):
+  - `supabase/functions/copilot/index.ts` — reescrito com OpenRouter + 8 tools + agentic loop (796 linhas)
+  - `src/components/AICopilot.tsx` — UI agentic (suggestions, welcome, badge, loading)
+- **Edge Functions — Versões atualizadas**:
+  - `copilot` → version 10 (Agentic Mode, 8 tools, OpenRouter, CORS whitelist)
+- **Nota**: `OPENROUTER_API_KEY` deve estar configurada nos Supabase project secrets para a Edge Function funcionar
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

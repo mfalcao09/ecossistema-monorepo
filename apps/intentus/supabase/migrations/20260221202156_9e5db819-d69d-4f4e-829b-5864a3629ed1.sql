@@ -1,0 +1,19 @@
+
+-- Add detailed pricing and feature columns to chat_plans
+ALTER TABLE public.chat_plans
+  ADD COLUMN IF NOT EXISTS included_users INT DEFAULT 3,
+  ADD COLUMN IF NOT EXISTS additional_user_cost NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS extra_whatsapp_cost NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS extra_social_cost NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS asaas_cost NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS implementation_fee NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS upgrade_fee NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS activation_fee_wpp NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS activation_fee_social NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS has_crm BOOLEAN DEFAULT false,
+  ADD COLUMN IF NOT EXISTS max_funnels INT DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS chatbot_service_limit INT DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS chatbot_automation_limit INT DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS has_webhook BOOLEAN DEFAULT false,
+  ADD COLUMN IF NOT EXISTS ai_automation_cost NUMERIC DEFAULT 0,
+  ADD COLUMN IF NOT EXISTS channels_description TEXT;

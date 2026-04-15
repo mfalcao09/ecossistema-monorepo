@@ -1,0 +1,13 @@
+{
+  "tasks": {
+    "start": "deno run --allow-net --allow-env --allow-read --allow-write supabase/functions/backup-criptografado/index.ts"
+  },
+  "imports": {
+    "https://deno.land/std@0.208.0/http/server.ts": "https://deno.land/std@0.208.0/http/server.ts",
+    "@supabase/supabase-js": "https://esm.sh/@supabase/supabase-js@2.43.0"
+  },
+  "compilerOptions": {
+    "lib": ["deno.window"],
+    "target": "ES2020"
+  }
+}

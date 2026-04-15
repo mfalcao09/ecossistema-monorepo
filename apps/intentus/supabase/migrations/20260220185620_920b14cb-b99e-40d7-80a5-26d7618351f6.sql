@@ -1,0 +1,2 @@
+ALTER TABLE platform_boletos DROP CONSTRAINT platform_boletos_status_check;
+ALTER TABLE platform_boletos ADD CONSTRAINT platform_boletos_status_check CHECK (status = ANY (ARRAY['emitido','registrado','pago','cancelado','vencido','em_processamento']));

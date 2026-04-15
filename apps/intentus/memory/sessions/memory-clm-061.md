@@ -1,0 +1,49 @@
+# Sessão 61 — F2 Item #4: Predictive Analytics Inadimplência (14/03/2026)
+
+- **Objetivo**: Implementar quarto item da Fase 2 do cronograma IA-Native: Análise preditiva de risco de inadimplência por inquilino com scoring 0-100, fatores de risco, recomendações IA e dashboard
+- **Decisões do Marcelo** (via AskUserQuestion):
+  - Escopo: "Completo (Recomendado)" — scoring IA completo (0-100), fatores de risco, recomendações, widget TOP 10
+  - Localização: "Command Center + Financeiro (Recomendado)" — widget TOP 10 no Command Center + seção preditiva no FinanceDefaulters
+- **Backend — `supabase/functions/predictive-default-ai/index.ts` (CRIADO — ~746 linhas, self-contained, v1)**:
+  - **2 actions**: `predict_tenant` (predição individual por person_id), `predict_portfolio` (batch TOP N at-risk + summary agregado)
+  - **Rule-based scoring engine**: Base score 20, 7 fatores (payment health, currently overdue, avg delay days, trend analysis, tenure, support tickets, monthly exposure). Score 0-100 onde MAIOR = MAIS RISCO (inverso de renovações). Clamp 0-100
+  - **Risk level mapping**: ≤25 = baixo, ≤50 = medio, ≤75 = alto, >75 = critico
+  - **AI recommendations**: OpenRouter → Gemini 2.0 Flash (JSON mode, temp 0.3) + fallback rule-based (6 ações: monitorar, contato preventivo, acordo, notificação formal, régua de cobrança, encaminhar jurídico)
+  - **Person-centric grouping**: Portfolio analysis agrupa por person_id (inquilinos únicos) via contract_parties mapping, não por contrato
+  - **Portfolio optimization**: Batch fetch all installments/obligations/tickets com `.in("contract_id/person_id", ids)` + Map grouping (sem N+1). IA recommendations apenas para at-risk (score > 50)
+  - **Self-contained**: Inline CORS whitelist, auth/tenant resolution, RBAC
+  - **RBAC inline**: predict_tenant→all roles exceto manutencao, predict_portfolio→admin/gerente/juridico/financeiro
+  - **Deploy**: v1 via Supabase MCP (ID: 2c30f522-23fd-4dbc-86f4-d8950f1c3c03, ACTIVE, verify_jwt: false)
+- **RBAC — nova action `clm.inadimplency.predict` em 3 camadas**:
+  - Frontend: `src/lib/clmPermissions.ts` — CLMAction union + ALL_CLM_ACTIONS + admin/gerente/financeiro/juridico
+  - Backend: `supabase/functions/_shared/clmPermissions.ts` — mirror Deno (admin/gerente/financeiro/juridico)
+  - Hook: `src/hooks/usePermissions.ts` — novo flag `canPredictDefaultRisk`
+- **Frontend hooks — `src/hooks/useDefaultRiskPredictions.ts` (CRIADO — ~137 linhas)**:
+  - Types: `DefaultRiskLevel`, `DefaultRecommendationPriority`, `DefaultRiskFactor`, `DefaultRecommendation`, `DefaultPredictionResult`, `DefaultPortfolioSummary`
+  - Constants: `DEFAULT_RISK_LABELS`, `DEFAULT_RISK_COLORS`, `DEFAULT_PRIORITY_LABELS`, `DEFAULT_PRIORITY_COLORS`
+  - 2 hooks: `usePredictTenantDefault(personId)`, `usePredictDefaultPortfolio(options)` — React Query, 5min staleTime, retry: 1
+- **Frontend UI — `DefaultRiskPredictionWidget.tsx` (CRIADO — ~260 linhas)**:
+  - Widget para Command Center: 4 KPIs (Score Médio de Risco, Em Risco >50, Risco Crítico >75, Exposição Total)
+  - TOP 10 inquilinos por risco com RiskScoreBar (color-coded green/yellow/orange/red), RiskBadge, overdue info, contracts count
+  - Skeleton loading, error state (red themed), empty state
+  - Badge "IA Real" / "Regras" baseado em model_used
+  - Botão refresh com spinner
+- **Integração Command Center**: `DefaultRiskPredictionWidget` adicionado após `RenewalPredictionWidget`
+- **Integração FinanceDefaulters**: `DefaultRiskPredictionWidget` adicionado antes do `<Tabs>` component
+- **Diferença do `default-risk-ai` existente**: O EF existente faz análise individual detalhada via Gemini function calling (Lovable gateway). O novo `predictive-default-ai` faz análise batch portfolio-level com scoring engine + OpenRouter (mesmo padrão de `predictive-renewals-ai`)
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos criados** (3):
+  - `supabase/functions/predictive-default-ai/index.ts` — Edge Function self-contained (~746 linhas)
+  - `src/hooks/useDefaultRiskPredictions.ts` — types + constants + 2 hooks (~137 linhas)
+  - `src/components/contracts/command-center/DefaultRiskPredictionWidget.tsx` — widget Command Center (~260 linhas)
+- **Arquivos modificados** (7):
+  - `src/lib/clmPermissions.ts` — clm.inadimplency.predict no type, array e 4 roles
+  - `supabase/functions/_shared/clmPermissions.ts` — backend mirror (4 roles)
+  - `src/hooks/usePermissions.ts` — canPredictDefaultRisk flag
+  - `src/components/contracts/command-center/index.ts` — barrel export DefaultRiskPredictionWidget
+  - `src/pages/ClmCommandCenter.tsx` — import + render widget
+  - `src/pages/finance/FinanceDefaulters.tsx` — import + render widget
+- **Edge Functions — Versões atualizadas**:
+  - `predictive-default-ai` → version 1 (2 actions, rule-based scoring + IA recommendations, self-contained)
+- **Cronograma IA-Native**: F2 Item #4 ✅ concluído. Próximo: F2 Item #5 Conversational Contract Creation
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

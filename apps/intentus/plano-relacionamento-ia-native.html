@@ -1,0 +1,1301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Intentus — Plano IA-Native: Módulo de Relacionamento</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --accent: #06b6d4;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --bg: #0f0f1a;
+      --bg-card: #1a1a2e;
+      --bg-card-hover: #222240;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --border: #2d2d4a;
+      --gradient-1: linear-gradient(135deg, #6366f1, #06b6d4);
+      --gradient-2: linear-gradient(135deg, #10b981, #06b6d4);
+      --gradient-3: linear-gradient(135deg, #f59e0b, #ef4444);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    .hero {
+      min-height: 60vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      padding: 4rem 2rem;
+      background: radial-gradient(ellipse at center, rgba(99,102,241,0.15) 0%, transparent 70%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 30% 50%, rgba(6,182,212,0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 50%, rgba(99,102,241,0.05) 0%, transparent 50%);
+      animation: pulse 8s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); opacity: 0.5; }
+      50% { transform: scale(1.1); opacity: 1; }
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1.5rem;
+      border-radius: 999px;
+      background: rgba(99,102,241,0.15);
+      border: 1px solid rgba(99,102,241,0.3);
+      color: var(--primary);
+      font-size: 0.85rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 900;
+      line-height: 1.1;
+      margin-bottom: 1.5rem;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero h1 .gradient {
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      font-size: 1.2rem;
+      color: var(--text-muted);
+      max-width: 700px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-bar {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+      position: relative;
+      z-index: 1;
+    }
+
+    .meta-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .meta-item strong { color: var(--text); }
+
+    .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+
+    section { padding: 4rem 0; }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-header p {
+      color: var(--text-muted);
+      font-size: 1.1rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--border);
+      margin: 0 auto;
+      max-width: 1200px;
+    }
+
+    /* Diagnostic Section */
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .diag-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .diag-card:hover {
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+
+    .diag-card .icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .diag-card h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .diag-card p { font-size: 0.9rem; color: var(--text-muted); }
+
+    .status-ok { background: rgba(16,185,129,0.15); color: var(--success); }
+    .status-partial { background: rgba(245,158,11,0.15); color: var(--warning); }
+    .status-missing { background: rgba(239,68,68,0.15); color: var(--danger); }
+
+    /* Pillar Cards */
+    .pillar {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.5rem;
+      margin-bottom: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pillar::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+    }
+
+    .pillar-1::before { background: var(--gradient-1); }
+    .pillar-2::before { background: var(--gradient-2); }
+    .pillar-3::before { background: linear-gradient(135deg, #f59e0b, #ef4444); }
+    .pillar-4::before { background: linear-gradient(135deg, #8b5cf6, #ec4899); }
+    .pillar-5::before { background: linear-gradient(135deg, #06b6d4, #3b82f6); }
+
+    .pillar-header {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .pillar-number {
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 900;
+      font-size: 1.2rem;
+    }
+
+    .pillar-1 .pillar-number { background: rgba(99,102,241,0.2); color: var(--primary); }
+    .pillar-2 .pillar-number { background: rgba(16,185,129,0.2); color: var(--success); }
+    .pillar-3 .pillar-number { background: rgba(245,158,11,0.2); color: var(--warning); }
+    .pillar-4 .pillar-number { background: rgba(139,92,246,0.2); color: #8b5cf6; }
+    .pillar-5 .pillar-number { background: rgba(6,182,212,0.2); color: var(--accent); }
+
+    .pillar h2 { font-size: 1.6rem; font-weight: 800; }
+    .pillar h2 span { color: var(--text-muted); font-weight: 400; font-size: 0.9rem; display: block; }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1.5rem;
+    }
+
+    .feature {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(99,102,241,0.4);
+    }
+
+    .feature-tag {
+      display: inline-block;
+      padding: 0.2rem 0.7rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.75rem;
+    }
+
+    .tag-edge-function { background: rgba(99,102,241,0.2); color: var(--primary); }
+    .tag-frontend { background: rgba(6,182,212,0.2); color: var(--accent); }
+    .tag-ai-core { background: rgba(16,185,129,0.2); color: var(--success); }
+    .tag-integration { background: rgba(245,158,11,0.2); color: var(--warning); }
+
+    .feature h4 { font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; }
+    .feature p { font-size: 0.88rem; color: var(--text-muted); margin-bottom: 0.75rem; }
+
+    .feature-detail {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      padding-left: 1rem;
+      border-left: 2px solid var(--border);
+      margin-top: 0.75rem;
+    }
+
+    .feature-detail li { margin-bottom: 0.3rem; list-style: none; }
+    .feature-detail li::before { content: '→ '; color: var(--primary); }
+
+    .impact-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      padding: 0.2rem 0.6rem;
+      border-radius: 6px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      margin-left: 0.5rem;
+    }
+
+    .impact-high { background: rgba(16,185,129,0.15); color: var(--success); }
+    .impact-differentiator { background: rgba(139,92,246,0.15); color: #8b5cf6; }
+
+    /* Roadmap */
+    .roadmap-phase {
+      display: grid;
+      grid-template-columns: 120px 1fr;
+      gap: 2rem;
+      margin-bottom: 2.5rem;
+      position: relative;
+    }
+
+    .roadmap-phase::before {
+      content: '';
+      position: absolute;
+      left: 60px;
+      top: 60px;
+      bottom: -2.5rem;
+      width: 2px;
+      background: var(--border);
+    }
+
+    .roadmap-phase:last-child::before { display: none; }
+
+    .phase-label {
+      text-align: center;
+      padding-top: 0.5rem;
+    }
+
+    .phase-dot {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      margin: 0 auto 0.5rem;
+      border: 3px solid;
+    }
+
+    .phase-1 .phase-dot { border-color: var(--success); background: rgba(16,185,129,0.3); }
+    .phase-2 .phase-dot { border-color: var(--primary); background: rgba(99,102,241,0.3); }
+    .phase-3 .phase-dot { border-color: var(--accent); background: rgba(6,182,212,0.3); }
+    .phase-4 .phase-dot { border-color: #8b5cf6; background: rgba(139,92,246,0.3); }
+
+    .phase-name { font-weight: 700; font-size: 0.85rem; }
+    .phase-time { font-size: 0.75rem; color: var(--text-muted); }
+
+    .phase-content {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+    }
+
+    .phase-content h3 { font-size: 1.1rem; font-weight: 700; margin-bottom: 1rem; }
+
+    .phase-items { list-style: none; }
+    .phase-items li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      padding: 0.5rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      font-size: 0.9rem;
+    }
+    .phase-items li:last-child { border-bottom: none; }
+
+    .effort-tag {
+      display: inline-block;
+      padding: 0.15rem 0.5rem;
+      border-radius: 4px;
+      font-size: 0.7rem;
+      font-weight: 600;
+      white-space: nowrap;
+      background: rgba(99,102,241,0.15);
+      color: var(--primary);
+    }
+
+    /* Architecture */
+    .arch-diagram {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 2rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      overflow-x: auto;
+      white-space: pre;
+      line-height: 1.5;
+      color: var(--accent);
+    }
+
+    /* Metrics */
+    .metrics-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .metric-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .metric-value {
+      font-size: 2.5rem;
+      font-weight: 900;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .metric-label { font-size: 0.85rem; color: var(--text-muted); margin-top: 0.25rem; }
+    .metric-detail { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; font-style: italic; }
+
+    /* Competitive */
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1.5rem;
+    }
+
+    .comparison-table th, .comparison-table td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.88rem;
+    }
+
+    .comparison-table th {
+      background: rgba(99,102,241,0.1);
+      font-weight: 700;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .comparison-table td:first-child { font-weight: 600; }
+
+    .check { color: var(--success); }
+    .cross { color: var(--danger); }
+    .partial { color: var(--warning); }
+
+    /* Collab note */
+    .collab-note {
+      background: linear-gradient(135deg, rgba(99,102,241,0.1), rgba(6,182,212,0.1));
+      border: 1px solid rgba(99,102,241,0.2);
+      border-radius: 14px;
+      padding: 1.5rem 2rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      margin: 2rem 0;
+      font-size: 0.9rem;
+    }
+
+    .collab-note .emoji { font-size: 2rem; }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    @media (max-width: 768px) {
+      .roadmap-phase { grid-template-columns: 1fr; }
+      .roadmap-phase::before { display: none; }
+      .feature-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<header class="hero">
+  <div class="hero-badge">Squad Claudinho + Buchecha</div>
+  <h1>Módulo de Relacionamento<br><span class="gradient">100% IA-Native</span></h1>
+  <p>Plano estratégico para transformar a gestão de relacionamento com o cliente da Intentus na referência do mercado imobiliário brasileiro</p>
+  <div class="meta-bar">
+    <div class="meta-item"><strong>v1.0</strong> — 21/03/2026</div>
+    <div class="meta-item"><strong>12 Features</strong> IA-Native</div>
+    <div class="meta-item"><strong>4 Fases</strong> de Implementação</div>
+    <div class="meta-item"><strong>~280h</strong> Estimativa Total</div>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- DIAGNÓSTICO ATUAL -->
+<section>
+  <div class="section-header">
+    <h2>Diagnóstico Atual</h2>
+    <p>O que temos hoje e onde estão as lacunas para o 100% IA-Native</p>
+  </div>
+
+  <div class="diagnostic-grid">
+    <div class="diag-card">
+      <div class="icon status-ok">&#10003;</div>
+      <h3>Dashboard CS com IA</h3>
+      <p>Health Score multi-fator, KPIs de churn, SLA e FCR. Edge Function <code>relationship-ai-insights</code> com Gemini 2.0 Flash gerando insights estruturados.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon status-ok">&#10003;</div>
+      <h3>Automações & Régua</h3>
+      <p>11 triggers, régua multi-step com 3 canais (notificação, email, WhatsApp). Base sólida, mas ações limitadas a 3 tipos.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon status-ok">&#10003;</div>
+      <h3>NPS/CSAT & Seguros</h3>
+      <p>Surveys funcionais com tracking de responses. Módulo de seguros com apólices e sinistros. Dados existem, mas não alimentam IA.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon status-partial">!</div>
+      <h3>Churn Prediction</h3>
+      <p>Health Score existe mas NPS é hardcoded (70). Sem modelo preditivo real. Sinais comportamentais não são capturados. <strong>F3.A06 pendente.</strong></p>
+    </div>
+    <div class="diag-card">
+      <div class="icon status-missing">&#10007;</div>
+      <h3>Portal do Cliente</h3>
+      <p>Inexistente. Cliente não tem acesso self-service. Nenhuma interface client-facing. <strong>F3.A07 pendente.</strong></p>
+    </div>
+    <div class="diag-card">
+      <div class="icon status-missing">&#10007;</div>
+      <h3>Onboarding / Offboarding</h3>
+      <p>Sem fluxo estruturado de boas-vindas ou despedida. Sem perfil comportamental. Sem jornada mapeada por IA.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon status-missing">&#10007;</div>
+      <h3>Concierge IA</h3>
+      <p>Lead Chatbot existe no CRM, mas não há assistente IA para clientes ativos. Sem RAG, sem memória contextual, sem multicanal.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon status-missing">&#10007;</div>
+      <h3>Revenue Intelligence</h3>
+      <p>Sem engine de upsell/cross-sell. Sem revenue attribution. Sem Next Best Action. <strong>F3.C04 pendente.</strong></p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- VISÃO -->
+<section>
+  <div class="section-header">
+    <h2>A Visão: Living Intelligence Hub</h2>
+    <p>Cada interação do cliente gera insights que alimentam o sistema, criando um ciclo virtuoso de personalização, retenção e monetização</p>
+  </div>
+
+  <div class="collab-note">
+    <div class="emoji">&#129302;</div>
+    <div>
+      <strong>Filosofia IA-Native:</strong> A IA não é um botão que o usuário clica. A IA é o sistema operacional do relacionamento. Ela observa, aprende, antecipa e age — o humano supervisiona, ajusta e humaniza. O resultado: a imobiliária que "lê a mente" do cliente.
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PILAR 1: ONBOARDING INTELIGENTE -->
+<section>
+  <div class="pillar pillar-1">
+    <div class="pillar-header">
+      <div class="pillar-number">P1</div>
+      <h2>Onboarding Inteligente<span>Primeira impressão perfeita, personalizada por IA</span></h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <span class="impact-badge impact-differentiator">Diferenciador</span>
+        <h4>F1 — Perfil Comportamental Dinâmico (DNA do Cliente)</h4>
+        <p>Micro-quiz gamificado (2 min) no primeiro acesso que constrói o perfil comportamental do cliente usando IA. Determina: estilo de comunicação preferido (texto/áudio/chamada), nível de autonomia digital, perfil emocional (analítico, relacional, pragmático), e expectativas com o imóvel.</p>
+        <ul class="feature-detail">
+          <li>Gemini analisa padrões de resposta para gerar "DNA do Cliente"</li>
+          <li>Perfil influencia TODA comunicação futura (tom, canal, frequência)</li>
+          <li>Atualização contínua: IA refina o perfil a cada interação</li>
+          <li><strong>Edge Function:</strong> <code>relationship-client-dna</code></li>
+          <li><strong>Tabela:</strong> <code>client_behavioral_profiles</code></li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-tag tag-frontend">Frontend + AI</span>
+        <span class="impact-badge impact-high">Alto Impacto</span>
+        <h4>F2 — Jornada de Boas-Vindas Adaptativa</h4>
+        <p>Tour personalizado que se adapta em tempo real ao perfil do cliente. Cliente primeiro imóvel? Tour detalhado sobre garantias, seguros, manutenção. Cliente investidor? Foco em dashboards financeiros e performance.</p>
+        <ul class="feature-detail">
+          <li>Steps dinâmicos gerados pela IA com base no DNA do Cliente</li>
+          <li>Checklist interativo: vistoria, documentos, apresentação do time</li>
+          <li>Marco "Ativação": IA detecta quando cliente completou setup mínimo</li>
+          <li>Notificação proativa: "Falta só configurar seu seguro incêndio!"</li>
+          <li><strong>Componente:</strong> <code>AdaptiveOnboardingWizard.tsx</code></li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <h4>F3 — Sentiment Scanner de Primeiro Contato</h4>
+        <p>Análise de sentimento automática nas primeiras interações (tickets, mensagens, emails). Detecta sinais de frustração precoce ("ninguém me ligou", "estou esperando desde...") e adapta prioridade de atendimento.</p>
+        <ul class="feature-detail">
+          <li>Classificação: Entusiasmado / Neutro / Preocupado / Frustrado</li>
+          <li>Auto-escalation se sentimento negativo nas primeiras 48h</li>
+          <li>Alimenta o Health Score desde o dia 1</li>
+          <li><strong>Edge Function:</strong> <code>relationship-sentiment-analyzer</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILAR 2: PORTAL DO CLIENTE IA-POWERED -->
+  <div class="pillar pillar-2">
+    <div class="pillar-header">
+      <div class="pillar-number">P2</div>
+      <h2>Portal do Cliente com Concierge IA<span>O cliente se sente ouvido, entendido e cuidado — 24/7</span></h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <span class="impact-badge impact-differentiator">Diferenciador #1</span>
+        <h4>F4 — IntelliHome: Concierge Multimodal</h4>
+        <p>Assistente IA que conversa com o cliente de verdade — não é FAQ bot. Entende contexto ("minha torneira está vazando de novo"), tem memória persistente ("você reportou isso em janeiro"), e toma ações (abre ticket, agenda vistoria, consulta contrato).</p>
+        <ul class="feature-detail">
+          <li>RAG com base de conhecimento: contratos, manuais, histórico do imóvel</li>
+          <li>Memória contextual: lembra interações passadas e preferências</li>
+          <li>Ações reais: abre tickets, agenda vistorias, envia 2ª via de boleto</li>
+          <li>Multicanal: funciona no portal web, WhatsApp e email</li>
+          <li>Handoff inteligente: escala para humano quando necessário, com contexto completo</li>
+          <li><strong>Edge Function:</strong> <code>relationship-concierge-ai</code> (com Function Calling)</li>
+          <li><strong>Tabelas:</strong> <code>concierge_conversations</code>, <code>concierge_memory</code></li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-tag tag-frontend">Frontend</span>
+        <span class="impact-badge impact-high">Alto Impacto</span>
+        <h4>F5 — Digital Twin do Imóvel</h4>
+        <p>Timeline visual do imóvel com histórico completo construído automaticamente por IA. Manutenções realizadas, vistorias, ocorrências, modificações. O cliente "pergunta ao seu imóvel": "Quando foi a última manutenção do ar-condicionado?"</p>
+        <ul class="feature-detail">
+          <li>Timeline auto-gerada a partir de tickets, vistorias, manutenções</li>
+          <li>Chat contextual vinculado ao imóvel específico</li>
+          <li>Alertas proativos: "Seu ar-condicionado tem 11 meses sem manutenção"</li>
+          <li>Documentos do imóvel: contrato, vistoria, manual do condomínio</li>
+          <li><strong>Componente:</strong> <code>PropertyDigitalTwin.tsx</code></li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <span class="impact-badge impact-differentiator">Diferenciador</span>
+        <h4>F6 — Proactive Life Events Engine</h4>
+        <p>IA detecta "momentos de vida" e antecipa necessidades do cliente antes mesmo dele perceber. Aniversário do contrato? Mensagem personalizada + oferta de renovação. Cliente completou 1 ano? Relatório de valorização do imóvel.</p>
+        <ul class="feature-detail">
+          <li>Calendário inteligente: datas contratuais, aniversários, vencimentos</li>
+          <li>Pattern matching: "Cliente pagou 3 meses adiantado = estabilidade financeira = propensão a upgrade"</li>
+          <li>Triggers contextuais: reajuste IGPM, mudança de mercado, fim de garantia</li>
+          <li>Geração automática de conteúdo personalizado para cada momento</li>
+          <li><strong>Edge Function:</strong> <code>relationship-life-events-engine</code></li>
+          <li><strong>Tabela:</strong> <code>client_life_events</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILAR 3: CHURN PREDICTION & RETENTION -->
+  <div class="pillar pillar-3">
+    <div class="pillar-header">
+      <div class="pillar-number">P3</div>
+      <h2>Churn Radar 360° + Interceptor<span>Antecipar problemas antes do cliente reclamar</span></h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <span class="impact-badge impact-differentiator">Diferenciador</span>
+        <h4>F7 — Churn Prediction Engine Multi-Dimensional</h4>
+        <p>Modelo preditivo que vai muito além de "atraso no pagamento". Analisa 3 camadas de sinais: Quantitativos (frequência de tickets, atrasos, login no portal), Qualitativos (sentimento em mensagens, tempo de resposta, palavras de desengajamento), e Contextuais (mercado em alta, contrato vencendo, vizinho reclamou).</p>
+        <ul class="feature-detail">
+          <li>Score 0-100 com "Top 3 Razões" explicáveis em linguagem natural</li>
+          <li>Janelas de predição: 30, 60, 90 dias</li>
+          <li>Feature engineering específico para aluguel/venda imobiliária BR</li>
+          <li>Análise de sentimento integrada em todas as comunicações</li>
+          <li>Dashboard com mapa de calor de risco por carteira</li>
+          <li><strong>Edge Function:</strong> <code>relationship-churn-predictor</code></li>
+          <li><strong>Tabela:</strong> <code>churn_predictions</code>, <code>churn_signals</code></li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core + Automação</span>
+        <span class="impact-badge impact-high">Alto Impacto</span>
+        <h4>F8 — Churn Interceptor: Salvamento Automático</h4>
+        <p>Quando Churn Score ultrapassa threshold, ativa protocolo automatizado de retenção, gerando script personalizado para o CS, sugerindo ofertas de retenção calibradas ao perfil do cliente, e escalando para gerência em casos críticos.</p>
+        <ul class="feature-detail">
+          <li>Score > 50: Alerta passivo + sugestão de ação para CS</li>
+          <li>Score > 70: Protocolo ativo — task automática + script IA personalizado</li>
+          <li>Score > 85: Escalation gerencial + oferta especial (desconto, upgrade, flexibilidade)</li>
+          <li>Cada intervenção alimenta modelo de "o que funciona" (feedback loop)</li>
+          <li>ROI calculado automaticamente: custo retenção vs. custo de novo cliente</li>
+          <li><strong>Edge Function:</strong> <code>relationship-churn-interceptor</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILAR 4: OFFBOARDING HUMANIZADO -->
+  <div class="pillar pillar-4">
+    <div class="pillar-header">
+      <div class="pillar-number">P4</div>
+      <h2>Offboarding Humanizado<span>Transformar saída em oportunidade e aprendizado</span></h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <h4>F9 — Exit Experience Architecture</h4>
+        <p>Fluxo de saída conduzido por IA que dignifica o cliente, coleta inteligência valiosa, e mantém a porta aberta. Entrevista de saída conversacional, transição suave de documentos, e programa "Amigos Intentus" para indicações futuras.</p>
+        <ul class="feature-detail">
+          <li>Exit Interview IA: conversa natural que extrai razões reais da saída</li>
+          <li>Classificação automática: Preço / Qualidade / Mudança de cidade / Compra própria / Outro</li>
+          <li>Pacote de transição: histórico do imóvel, documentos, timeline exportável</li>
+          <li>"Adeus, mas não tanto": oferta de notificações sobre novos imóveis na região desejada</li>
+          <li>Programa de indicação: "Indique um amigo e ganhe benefícios no próximo aluguel"</li>
+          <li><strong>Edge Function:</strong> <code>relationship-exit-intelligence</code></li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <span class="impact-badge impact-high">Alto Impacto</span>
+        <h4>F10 — Feedback Intelligence Loop</h4>
+        <p>IA que transforma TODOS os feedbacks (NPS, exit interviews, tickets, mensagens) em inteligência acionável. Agrupa padrões, identifica tendências, gera relatórios de product insights, e fecha o ciclo notificando clientes quando seus feedbacks geram mudanças.</p>
+        <ul class="feature-detail">
+          <li>Clustering automático: "32 clientes mencionaram demora em manutenção"</li>
+          <li>Trend detection: "Reclamações sobre condomínio aumentaram 40% em março"</li>
+          <li>Fechamento de loop: "Vimos seu feedback — implementamos X. Obrigado!"</li>
+          <li>Dashboard de Product Insights para tomada de decisão</li>
+          <li><strong>Edge Function:</strong> <code>relationship-feedback-intelligence</code></li>
+          <li><strong>Tabela:</strong> <code>feedback_intelligence</code>, <code>feedback_clusters</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- PILAR 5: REVENUE INTELLIGENCE -->
+  <div class="pillar pillar-5">
+    <div class="pillar-header">
+      <div class="pillar-number">P5</div>
+      <h2>Revenue Intelligence Engine<span>Monetizar o relacionamento com inteligência e timing</span></h2>
+    </div>
+
+    <div class="feature-grid">
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core</span>
+        <span class="impact-badge impact-differentiator">Diferenciador</span>
+        <h4>F11 — Next Best Action Engine</h4>
+        <p>Engine IA que identifica o momento perfeito e a ação perfeita para cada cliente. Cross-sell de seguros para quem ainda não tem, upsell de imóvel maior para família crescendo, renovação antecipada com desconto para reter clientes de alto valor.</p>
+        <ul class="feature-detail">
+          <li>Modelo de propensão: probabilidade de aceitar cada tipo de oferta</li>
+          <li>Timing otimizado: "melhor momento para oferecer" baseado em comportamento</li>
+          <li>Personalização: oferta gerada pela IA com linguagem do perfil do cliente</li>
+          <li>A/B testing automático: IA testa variações e aprende o que converte</li>
+          <li>Dashboard de oportunidades com valor estimado por cliente</li>
+          <li><strong>Edge Function:</strong> <code>relationship-next-best-action</code></li>
+          <li><strong>Tabelas:</strong> <code>revenue_opportunities</code>, <code>nba_recommendations</code></li>
+        </ul>
+      </div>
+
+      <div class="feature">
+        <span class="feature-tag tag-ai-core">AI Core + Integration</span>
+        <span class="impact-badge impact-high">Alto Impacto</span>
+        <h4>F12 — Revenue Attribution & Lifetime Value Predictor</h4>
+        <p>Modelo que calcula o LTV real de cada cliente e atribui receita a cada ação de relacionamento. Responde: "Quanto vale investir para reter este cliente?" e "Qual ação de CS gerou mais receita?"</p>
+        <ul class="feature-detail">
+          <li>LTV preditivo: valor esperado do cliente nos próximos 12/24/36 meses</li>
+          <li>Attribution model: qual touchpoint gerou renovação/upgrade/indicação</li>
+          <li>Segmentação por valor: Platinum / Gold / Silver / Bronze automática</li>
+          <li>ROI de CS: "Investimos R$ X em retenção, geramos R$ Y em renovações"</li>
+          <li>Alimenta decisões de alocação: mais CS para clientes de maior LTV</li>
+          <li><strong>Edge Function:</strong> <code>relationship-revenue-attribution</code></li>
+          <li><strong>Tabela:</strong> <code>client_ltv_predictions</code>, <code>revenue_attributions</code></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ARQUITETURA -->
+<section>
+  <div class="section-header">
+    <h2>Arquitetura Técnica</h2>
+    <p>Como tudo se conecta no ecossistema Intentus</p>
+  </div>
+
+  <div class="arch-diagram">
+┌─────────────────────────────────────────────────────────────────────────┐
+│                        GEMINI 2.0 FLASH (AI Core)                       │
+│   RAG + Function Calling + Structured Output + Multimodal               │
+└────────────────────────────────┬────────────────────────────────────────┘
+                                 │
+          ┌──────────────────────┼──────────────────────┐
+          ▼                      ▼                      ▼
+┌──────────────────┐  ┌──────────────────┐  ┌──────────────────────────┐
+│  EDGE FUNCTIONS  │  │   SUPABASE DB    │  │   EXTERNAL INTEGRATIONS  │
+│                  │  │                  │  │                          │
+│  • concierge-ai  │  │  • client_dna    │  │  • WhatsApp API          │
+│  • churn-predict │  │  • churn_signals │  │  • Email (SMTP/Resend)   │
+│  • exit-intel    │  │  • life_events   │  │  • Payment Gateways      │
+│  • nba-engine    │  │  • concierge_mem │  │  • Property APIs         │
+│  • sentiment     │  │  • feedback_intel│  │  • IGPM/IPCA (BCB)       │
+│  • life-events   │  │  • revenue_attr  │  │  • Cartório Digital      │
+│  • feedback-loop │  │  • ltv_predict   │  │                          │
+│  • revenue-attr  │  │  • nba_recs      │  │                          │
+└────────┬─────────┘  └────────┬─────────┘  └──────────┬───────────────┘
+         │                     │                        │
+         └─────────────────────┼────────────────────────┘
+                               ▼
+┌─────────────────────────────────────────────────────────────────────────┐
+│                     FRONTEND (React + TypeScript)                        │
+│                                                                         │
+│  ┌─────────────────┐  ┌─────────────────┐  ┌──────────────────────┐    │
+│  │ Portal Interno  │  │ Portal Cliente  │  │  Dashboard IA        │    │
+│  │ (Imobiliária)   │  │ (Self-Service)  │  │  (Analytics)         │    │
+│  │                 │  │                 │  │                      │    │
+│  │ • CS Dashboard  │  │ • Concierge AI  │  │ • Churn Radar 360°   │    │
+│  │ • Churn Radar   │  │ • Digital Twin  │  │ • Revenue Pipeline   │    │
+│  │ • NBA Queue     │  │ • Docs & Boleto │  │ • Feedback Insights  │    │
+│  │ • Exit Manager  │  │ • NPS/CSAT      │  │ • LTV Predictions    │    │
+│  │ • Onboarding    │  │ • Chat & Ajuda  │  │ • Attribution Model  │    │
+│  └─────────────────┘  └─────────────────┘  └──────────────────────┘    │
+└─────────────────────────────────────────────────────────────────────────┘
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ROADMAP -->
+<section>
+  <div class="section-header">
+    <h2>Roadmap de Implementação</h2>
+    <p>4 fases progressivas — cada uma entrega valor isoladamente</p>
+  </div>
+
+  <div class="roadmap-phase phase-1">
+    <div class="phase-label">
+      <div class="phase-dot"></div>
+      <div class="phase-name">Fase 1</div>
+      <div class="phase-time">Sprints 1-3</div>
+      <div class="phase-time">(~80h)</div>
+    </div>
+    <div class="phase-content">
+      <h3>Foundation — Base IA-Native</h3>
+      <ul class="phase-items">
+        <li><span class="effort-tag">24h</span> <div><strong>F7 — Churn Prediction Engine</strong><br>Modelo multi-dimensional com 3 camadas de sinais. Evolução do Health Score atual para modelo preditivo real. Substitui NPS hardcoded por dados reais.</div></li>
+        <li><span class="effort-tag">20h</span> <div><strong>F1 — Perfil Comportamental (DNA do Cliente)</strong><br>Micro-quiz + Edge Function de análise. Tabela client_behavioral_profiles. Integração com régua de comunicação existente.</div></li>
+        <li><span class="effort-tag">20h</span> <div><strong>F3 — Sentiment Scanner</strong><br>Análise de sentimento em tickets e mensagens. Alimenta churn model e Health Score. Auto-escalation para primeiras 48h.</div></li>
+        <li><span class="effort-tag">16h</span> <div><strong>F8 — Churn Interceptor</strong><br>Protocolos automatizados de retenção com 3 níveis de threshold. Scripts personalizados por IA. Integra com automações existentes.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="roadmap-phase phase-2">
+    <div class="phase-label">
+      <div class="phase-dot"></div>
+      <div class="phase-name">Fase 2</div>
+      <div class="phase-time">Sprints 4-6</div>
+      <div class="phase-time">(~80h)</div>
+    </div>
+    <div class="phase-content">
+      <h3>Portal — Interface do Cliente</h3>
+      <ul class="phase-items">
+        <li><span class="effort-tag">32h</span> <div><strong>F4 — IntelliHome: Concierge AI</strong><br>Assistente IA com RAG, Function Calling e memória persistente. Multicanal (portal + WhatsApp). Ações reais (abrir ticket, 2ª via boleto, agendar vistoria).</div></li>
+        <li><span class="effort-tag">24h</span> <div><strong>F5 — Digital Twin do Imóvel</strong><br>Timeline visual auto-gerada. Chat contextual vinculado ao imóvel. Documentos centralizados. Alertas proativos de manutenção.</div></li>
+        <li><span class="effort-tag">24h</span> <div><strong>F2 — Jornada de Boas-Vindas Adaptativa</strong><br>Onboarding wizard dinâmico baseado no DNA. Checklist interativo. Marco de "Ativação". Notificações proativas de setup incompleto.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="roadmap-phase phase-3">
+    <div class="phase-label">
+      <div class="phase-dot"></div>
+      <div class="phase-name">Fase 3</div>
+      <div class="phase-time">Sprints 7-9</div>
+      <div class="phase-time">(~64h)</div>
+    </div>
+    <div class="phase-content">
+      <h3>Intelligence — Monetização e Lifecycle</h3>
+      <ul class="phase-items">
+        <li><span class="effort-tag">24h</span> <div><strong>F11 — Next Best Action Engine</strong><br>Modelo de propensão para cross-sell/upsell. Timing otimizado. Personalização de oferta. A/B testing automático.</div></li>
+        <li><span class="effort-tag">20h</span> <div><strong>F12 — Revenue Attribution & LTV Predictor</strong><br>LTV preditivo 12/24/36 meses. Attribution model para touchpoints de CS. Segmentação automática por valor.</div></li>
+        <li><span class="effort-tag">20h</span> <div><strong>F6 — Proactive Life Events Engine</strong><br>Calendário inteligente de momentos de vida. Pattern matching comportamental. Geração automática de comunicação personalizada.</div></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="roadmap-phase phase-4">
+    <div class="phase-label">
+      <div class="phase-dot"></div>
+      <div class="phase-name">Fase 4</div>
+      <div class="phase-time">Sprints 10-11</div>
+      <div class="phase-time">(~56h)</div>
+    </div>
+    <div class="phase-content">
+      <h3>Experience — Offboarding e Feedback Loop</h3>
+      <ul class="phase-items">
+        <li><span class="effort-tag">28h</span> <div><strong>F9 — Exit Experience Architecture</strong><br>Exit interview conversacional IA. Pacote de transição. Programa "Amigos Intentus". Classificação automática de razões de saída.</div></li>
+        <li><span class="effort-tag">28h</span> <div><strong>F10 — Feedback Intelligence Loop</strong><br>Clustering automático de feedbacks. Trend detection. Fechamento de loop com clientes. Dashboard de Product Insights.</div></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- DIFERENCIAL COMPETITIVO -->
+<section>
+  <div class="section-header">
+    <h2>Diferencial Competitivo</h2>
+    <p>Por que isso nos posiciona como líderes no mercado imobiliário brasileiro</p>
+  </div>
+
+  <div style="overflow-x: auto;">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Feature IA-Native</th>
+          <th>Intentus (Plano)</th>
+          <th>Concorrentes Tradicionais</th>
+          <th>CRMs Genéricos</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Perfil Comportamental IA (DNA)</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="cross">&#10008;</td>
+        </tr>
+        <tr>
+          <td>Concierge IA com Function Calling</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="partial">&#9679; Chatbot básico</td>
+        </tr>
+        <tr>
+          <td>Digital Twin do Imóvel</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="cross">&#10008;</td>
+        </tr>
+        <tr>
+          <td>Churn Prediction Multi-Dimensional</td>
+          <td class="check">&#10004; 3 camadas</td>
+          <td class="cross">&#10008;</td>
+          <td class="partial">&#9679; Score básico</td>
+        </tr>
+        <tr>
+          <td>Interceptor Automático de Churn</td>
+          <td class="check">&#10004; 3 níveis</td>
+          <td class="cross">&#10008;</td>
+          <td class="cross">&#10008;</td>
+        </tr>
+        <tr>
+          <td>Life Events Engine (Proativo)</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="cross">&#10008;</td>
+        </tr>
+        <tr>
+          <td>Next Best Action IA</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="partial">&#9679; Manual</td>
+        </tr>
+        <tr>
+          <td>Exit Interview IA + Indicação</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="cross">&#10008;</td>
+        </tr>
+        <tr>
+          <td>Feedback Intelligence (Clustering)</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="partial">&#9679; Tags manuais</td>
+        </tr>
+        <tr>
+          <td>Revenue Attribution CS</td>
+          <td class="check">&#10004; Nativo</td>
+          <td class="cross">&#10008;</td>
+          <td class="cross">&#10008;</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- MÉTRICAS DE SUCESSO -->
+<section>
+  <div class="section-header">
+    <h2>Métricas de Sucesso Esperadas</h2>
+    <p>KPIs que validarão o impacto do módulo IA-Native</p>
+  </div>
+
+  <div class="metrics-grid">
+    <div class="metric-card">
+      <div class="metric-value">-40%</div>
+      <div class="metric-label">Redução de Churn</div>
+      <div class="metric-detail">Predição + interceptação automática</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">+35%</div>
+      <div class="metric-label">NPS Score</div>
+      <div class="metric-detail">Concierge IA + proatividade</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">-60%</div>
+      <div class="metric-label">Tempo 1º Atendimento</div>
+      <div class="metric-detail">Concierge resolve 70% sem humano</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">+25%</div>
+      <div class="metric-label">Taxa de Renovação</div>
+      <div class="metric-detail">Life Events + NBA Engine</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">+20%</div>
+      <div class="metric-label">Revenue por Cliente</div>
+      <div class="metric-detail">Cross-sell seguros + upgrades</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">3x</div>
+      <div class="metric-label">Indicações</div>
+      <div class="metric-detail">Programa "Amigos Intentus"</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- NOVAS TABELAS SUPABASE -->
+<section>
+  <div class="section-header">
+    <h2>Schema de Dados — Novas Tabelas</h2>
+    <p>Estrutura de dados necessária para suportar as 12 features</p>
+  </div>
+
+  <div class="arch-diagram" style="font-size: 0.75rem;">
+-- PILAR 1: Onboarding
+CREATE TABLE client_behavioral_profiles (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  communication_style TEXT CHECK (communication_style IN ('text','audio','video','call')),
+  autonomy_level TEXT CHECK (autonomy_level IN ('high','medium','low')),
+  emotional_profile TEXT CHECK (emotional_profile IN ('analytical','relational','pragmatic')),
+  experience_level TEXT CHECK (experience_level IN ('first_time','experienced','investor')),
+  dna_raw JSONB,               -- Full quiz responses + AI analysis
+  ai_summary TEXT,             -- Human-readable profile summary
+  last_refined_at TIMESTAMPTZ, -- When AI last updated the profile
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- PILAR 2: Portal do Cliente
+CREATE TABLE concierge_conversations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  channel TEXT CHECK (channel IN ('portal','whatsapp','email')),
+  messages JSONB[],            -- Array of {role, content, timestamp, actions_taken}
+  context JSONB,               -- Contract, property, recent tickets
+  resolved BOOLEAN DEFAULT false,
+  escalated_to UUID REFERENCES profiles(id),
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE concierge_memory (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  memory_type TEXT CHECK (memory_type IN ('preference','issue','interaction','context')),
+  content TEXT,
+  importance_score INT DEFAULT 5,
+  expires_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE client_life_events (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  event_type TEXT,             -- contract_anniversary, renewal_window, guarantee_expiry, etc.
+  event_date DATE,
+  action_taken TEXT,
+  action_result TEXT,
+  ai_recommendation JSONB,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- PILAR 3: Churn Prediction
+CREATE TABLE churn_predictions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  contract_id UUID REFERENCES contracts(id),
+  score INT CHECK (score BETWEEN 0 AND 100),
+  prediction_window INT,       -- 30, 60, 90 days
+  top_reasons JSONB,           -- [{reason, weight, explanation}]
+  recommended_actions JSONB,   -- [{action, priority, script}]
+  model_version TEXT,
+  predicted_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE churn_signals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  signal_type TEXT CHECK (signal_type IN ('quantitative','qualitative','contextual')),
+  signal_name TEXT,
+  signal_value NUMERIC,
+  raw_data JSONB,
+  detected_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE churn_interventions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  prediction_id UUID REFERENCES churn_predictions(id),
+  intervention_type TEXT,      -- contact, offer, escalation
+  intervention_detail JSONB,
+  outcome TEXT CHECK (outcome IN ('retained','churned','pending')),
+  executed_by UUID REFERENCES profiles(id),
+  executed_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- PILAR 4: Offboarding
+CREATE TABLE exit_interviews (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  contract_id UUID REFERENCES contracts(id),
+  conversation JSONB,          -- Full AI interview transcript
+  primary_reason TEXT,         -- price, quality, relocation, purchase, other
+  secondary_reasons TEXT[],
+  sentiment_score INT,
+  ai_insights JSONB,
+  referral_offered BOOLEAN DEFAULT false,
+  referral_accepted BOOLEAN DEFAULT false,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE feedback_clusters (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  cluster_name TEXT,
+  cluster_theme TEXT,
+  feedback_count INT,
+  avg_sentiment NUMERIC,
+  sample_quotes JSONB,
+  trend TEXT CHECK (trend IN ('rising','stable','declining')),
+  action_taken TEXT,
+  action_communicated BOOLEAN DEFAULT false,
+  detected_at TIMESTAMPTZ DEFAULT now()
+);
+
+-- PILAR 5: Revenue Intelligence
+CREATE TABLE revenue_opportunities (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  opportunity_type TEXT CHECK (opportunity_type IN ('cross_sell','upsell','renewal','referral')),
+  product TEXT,                -- insurance, upgrade, renewal, etc.
+  estimated_value NUMERIC,
+  propensity_score INT CHECK (propensity_score BETWEEN 0 AND 100),
+  optimal_timing DATE,
+  personalized_pitch TEXT,     -- AI-generated offer text
+  status TEXT CHECK (status IN ('identified','presented','accepted','declined','expired')),
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE nba_recommendations (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  action_type TEXT,
+  action_detail JSONB,
+  priority INT,
+  reason TEXT,
+  presented_at TIMESTAMPTZ,
+  outcome TEXT,
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE client_ltv_predictions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  person_id UUID REFERENCES people(id),
+  ltv_12m NUMERIC,
+  ltv_24m NUMERIC,
+  ltv_36m NUMERIC,
+  segment TEXT CHECK (segment IN ('platinum','gold','silver','bronze')),
+  confidence NUMERIC,
+  model_version TEXT,
+  predicted_at TIMESTAMPTZ DEFAULT now()
+);
+
+CREATE TABLE revenue_attributions (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  tenant_id UUID REFERENCES tenants(id),
+  revenue_event TEXT,          -- renewal, upgrade, cross_sell, referral
+  revenue_value NUMERIC,
+  attributed_to TEXT,          -- touchpoint that caused conversion
+  person_id UUID REFERENCES people(id),
+  contract_id UUID REFERENCES contracts(id),
+  attribution_model TEXT,      -- first_touch, last_touch, multi_touch
+  created_at TIMESTAMPTZ DEFAULT now()
+);
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- EDGE FUNCTIONS -->
+<section>
+  <div class="section-header">
+    <h2>Novas Edge Functions</h2>
+    <p>8 novas Edge Functions Supabase com Gemini 2.0 Flash</p>
+  </div>
+
+  <div class="diagnostic-grid">
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(99,102,241,0.15); color: var(--primary);">1</div>
+      <h3>relationship-client-dna</h3>
+      <p>Analisa respostas do quiz comportamental e gera perfil DNA. Atualiza incrementalmente a cada interação.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(16,185,129,0.15); color: var(--success);">2</div>
+      <h3>relationship-sentiment-analyzer</h3>
+      <p>Analisa sentimento em mensagens, tickets e emails. Classifica emoções e detecta sinais de alerta.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(6,182,212,0.15); color: var(--accent);">3</div>
+      <h3>relationship-concierge-ai</h3>
+      <p>Concierge IA com RAG, Function Calling (12+ tools) e memória. O "cérebro" do portal do cliente.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(245,158,11,0.15); color: var(--warning);">4</div>
+      <h3>relationship-churn-predictor</h3>
+      <p>Modelo preditivo 3 camadas (quant/qual/contextual). Score 0-100 com explicações em linguagem natural.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(239,68,68,0.15); color: var(--danger);">5</div>
+      <h3>relationship-churn-interceptor</h3>
+      <p>Protocolo automatizado de retenção. 3 níveis de threshold. Gera scripts personalizados e ofertas.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(139,92,246,0.15); color: #8b5cf6;">6</div>
+      <h3>relationship-life-events-engine</h3>
+      <p>Detecta momentos de vida e gera ações proativas. Pattern matching comportamental.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(236,72,153,0.15); color: #ec4899;">7</div>
+      <h3>relationship-exit-intelligence</h3>
+      <p>Conduz exit interview conversacional. Classifica razões. Gera insights para produto.</p>
+    </div>
+    <div class="diag-card">
+      <div class="icon" style="background: rgba(6,182,212,0.15); color: var(--accent);">8</div>
+      <h3>relationship-next-best-action</h3>
+      <p>Engine de propensão para upsell/cross-sell. Timing otimizado. Personalização de oferta por IA.</p>
+    </div>
+  </div>
+</section>
+
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <p><strong>Intentus Real Estate Platform</strong> — Plano IA-Native: Módulo de Relacionamento v1.0</p>
+  <p>Co-criado por Claudinho (Claude Opus 4.6) + Buchecha (MiniMax M2.7) — 21/03/2026</p>
+  <p style="margin-top: 0.5rem; font-size: 0.75rem;">Este documento será salvo em <code>memory/projects/</code> como referência oficial do roadmap</p>
+</footer>
+
+</body>
+</html>

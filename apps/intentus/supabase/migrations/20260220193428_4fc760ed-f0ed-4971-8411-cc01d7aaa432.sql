@@ -1,0 +1,1 @@
+DROP SEQUENCE IF EXISTS public.tenant_invoices_number_seq;

@@ -1,0 +1,56 @@
+# Sessão 55 — F1 Item #3: Clause Library Inteligente com Risk Scoring (14/03/2026)
+
+- **Objetivo**: Implementar terceiro item do cronograma IA-Native (F1): Clause Library Inteligente com risk scoring, auto-sugestão, detecção de conflitos e RBAC granular (~12h budget)
+- **Decisões do Marcelo** (via AskUserQuestion em sessão anterior):
+  - Risk scoring: "Completo (Recomendado)" — persistent scores, re-evaluation via IA, filters, history, badges, ranking
+  - Extra features: "Todas as abaixo (Recomendado)" — risk scoring + auto-suggestion + conflict detection + RBAC
+- **Database migration** (via Supabase MCP):
+  - 9 novas colunas em `contract_clauses`: `risk_level` (text, check low/medium/high/critical), `risk_score` (int 0-100), `risk_factors` (jsonb), `risk_evaluated_at` (timestamptz), `risk_model_used` (text), `tags` (text[]), `usage_count` (int), `last_used_at` (timestamptz), `conflict_group` (text)
+  - 2 índices: `idx_contract_clauses_risk` (tenant_id, risk_level WHERE is_active), `idx_contract_clauses_tags` (GIN on tags WHERE is_active)
+- **Backend — `extract-clauses-ai/index.ts` (REESCRITO — self-contained, ~536 linhas, v6)**:
+  - **4 actions**:
+    - `extract`: Extração de cláusulas de texto contratual (existente, upgraded com risk scoring automático no extract)
+    - `evaluate_risk`: Avaliação de risco via IA (Gemini 2.0 Flash) — score 0-100, level, risk_factors[], suggestions[], compliance_notes. Persiste em DB
+    - `suggest`: Sugestão de cláusulas para contexto contratual — relevance_score, reason, is_mandatory_for_context, priority
+    - `detect_conflicts`: Detecção de conflitos entre cláusulas — conflict_type (contradiction/overlap/legal_incompatibility/ambiguity/duplication), severity, description, resolution
+  - **Self-contained**: Inline CORS whitelist, auth/tenant resolution, RBAC (Supabase deploy bundler não resolve `../_shared/`)
+  - **`callAI()` helper**: OpenRouter → Gemini 2.0 Flash com JSON mode (`response_format: { type: "json_object" }`)
+  - **RBAC inline**: `ROLE_PERMISSIONS` (7 roles × 3 actions) + `ACTION_PERMISSIONS` (4 actions → required permission)
+  - **Legacy compat**: Empty body defaults to `action: "extract"` para não quebrar frontend existente
+  - **Deploy**: v6 via Supabase MCP (ID: 27e09fa8-3bda-4e69-9d0a-16433d06379d, ACTIVE, verify_jwt: false)
+- **RBAC — 3 novas actions em 3 camadas**:
+  - `clm.clause.read`: corretor, financeiro, manutencao (read-only) + todos os superiores
+  - `clm.clause.manage`: admin, gerente, juridico (create/edit/delete/extract)
+  - `clm.clause.evaluate`: admin, gerente, juridico (evaluate risk, detect conflicts)
+  - Frontend: `src/lib/clmPermissions.ts` — CLMAction union + ALL_CLM_ACTIONS + CLM_PERMISSION_MAP (7 roles)
+  - Backend: `supabase/functions/_shared/clmPermissions.ts` — mirror Deno
+  - Hook: `src/hooks/usePermissions.ts` — 3 novos flags: `canReadClauses`, `canManageClauses`, `canEvaluateClauses`
+- **Frontend hooks — `useContractClauses.ts` (REESCRITO — 105→~232 linhas)**:
+  - Novos tipos: `RiskFactor`, `ClauseRiskEvaluation`, `ClauseSuggestion`, `ClauseConflict`
+  - `useContractClauses`: Adicionado filtro `riskLevel` (`.eq("risk_level", ...)`)
+  - 3 novos hooks: `useEvaluateClauseRisk()`, `useSuggestClauses()`, `useDetectConflicts()`
+  - Todos chamam `supabase.functions.invoke("extract-clauses-ai", { body: { action: ... } })`
+- **Frontend UI — `ContractClauses.tsx` (REESCRITO — 259→~370 linhas)**:
+  - `RiskBadge`: Componente color-coded (green/yellow/orange/red) com ícones Shield/AlertTriangle/AlertOctagon per risk level
+  - Risk distribution summary: 4 cards clicáveis (baixo/médio/alto/crítico) com contagens, atuam como quick filters
+  - Batch selection: Checkbox per clause, "Selecionar Todas", batch actions bar
+  - Batch actions: "Reavaliar Risco" (useEvaluateClauseRisk) + "Detectar Conflitos" (useDetectConflicts)
+  - Conflict detection dialog: Severity badges, tipo de conflito, descrição, resolução sugerida
+  - Risk filter dropdown no filter bar (ao lado do filtro de categoria)
+  - RBAC guards: `canManageClauses` para create/edit/delete/AI generate, `canEvaluateClauses` para risk evaluation e conflict detection
+  - Risk factors display: Até 3 fatores por cláusula como small badges
+  - Tags display: Tags como badges secundárias
+  - Evaluation date: Mostra quando risco foi avaliado e por qual modelo
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos criados** (0 novos — todos foram edits/rewrites)
+- **Arquivos modificados** (6):
+  - `supabase/functions/extract-clauses-ai/index.ts` — reescrito self-contained v6 (~536 linhas)
+  - `src/lib/clmPermissions.ts` — 3 novas CLMAction + role mappings
+  - `supabase/functions/_shared/clmPermissions.ts` — backend mirror (3 actions)
+  - `src/hooks/usePermissions.ts` — 3 novos flags (canReadClauses, canManageClauses, canEvaluateClauses)
+  - `src/hooks/useContractClauses.ts` — reescrito com 4 tipos + riskLevel filter + 3 mutation hooks
+  - `src/pages/ContractClauses.tsx` — reescrito com risk UI, batch ops, conflict detection, RBAC
+- **Edge Functions — Versões atualizadas**:
+  - `extract-clauses-ai` → version 6 (4 actions, risk scoring, self-contained, RBAC inline)
+- **Cronograma IA-Native**: F1 Item #3 ✅ concluído. Próximo: #4 AI-Powered Redlining Suggestions (10h)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

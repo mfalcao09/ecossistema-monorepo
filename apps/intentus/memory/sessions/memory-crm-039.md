@@ -1,0 +1,50 @@
+# Sessão 39 — Diagnóstico completo do Módulo Comercial (12/03/2026)
+
+- **Objetivo**: Análise completa do módulo Comercial — primeira vez que este módulo recebe atenção focada. Diagnóstico antes de planejamento.
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha). Claude analisa cada arquivo, MiniMax faz code review independente via `minimax_code_review` em 3 eixos (segurança, bugs, arquitetura).
+- **40+ arquivos analisados**:
+  - **12 páginas**: LeadsCRM, DealsList, CommercialDashboard, MarketEvaluations, CommercialVisits, BrokerGoals, CommercialAutomations, CommercialAvailability, CommercialReports, ExclusivityContracts + 2 sub-pages
+  - **15 hooks**: useLeads, useDealRequests, useCommercialDashboard, useDealCardFeatures, useDealAttachments, useDealMembers, useMyGoals, useSlaRules, useSalesMirror, useSaasPipeline, useLabels, useCommissionSplits, useProfiles, useTenantProfiles + mais
+  - **14 componentes deal card**: DealDetailDialog, DealWizard, KanbanBoard, DealChecklistTab, DealActivityTab, DealLabelsPopover, DealMembersTab, DealAttachmentsTab, DealDatesPanel, DealActionsTab, DealCommissionsTab, DealDetailsTab, DealMessagesTab, DealRemindersTab, DealHistoryTab, DealAssignment, DealDatesDisplay, DealLabelsDisplay
+  - **3 Edge Functions de IA**: commercial-ai-insights, relationship-ai-insights, default-risk-ai
+  - **Libs**: legalTransitions.ts, dealRequestSchema.ts, intakeStatus.ts
+  - **Componentes lead**: LeadKanbanBoard, LeadDetailDialog
+- **27 achados consolidados por categoria**:
+  - **9 Segurança** (7 CRITICAL + 2 MEDIUM):
+    - SEC-01 (CRITICAL): Credenciais hardcoded de OUTRO projeto Supabase em MarketEvaluations.tsx
+    - SEC-02-07 (CRITICAL): 6 hooks sem filtro tenant_id nas leituras (useLabels, useCommissionSplits, useProfiles, useDealCardFeatures, useSalesMirror, useSaasPipeline) — cross-tenant data leak
+    - SEC-08 (MEDIUM): CORS wildcard em 3 Edge Functions comerciais
+    - SEC-09 (MEDIUM): useMyGoals sem tenant_id
+  - **8 Bugs** (1 CRITICAL + 3 HIGH + 3 MEDIUM + 1 LOW):
+    - BUG-01 (CRITICAL): BrokerGoals com progresso MOCK (`goal.id.charCodeAt(0) % 100`)
+    - BUG-02 (HIGH): DealMessagesTab — `commentTarget` nunca enviado na mutation (mensagens sem destinatário)
+    - BUG-03 (HIGH): CommercialReports usa status `"fechado"` (inexistente, correto é `"concluido"`)
+    - BUG-04 (HIGH): DealsList — `aprovado_comercial` aparece em 2 colunas do Kanban
+    - BUG-05 (MEDIUM): KanbanBoard multi-status sempre pega `statuses[0]` no drop
+    - BUG-06 (MEDIUM): useMyGoals — `volume_vendas` conta registros ao invés de somar valores
+    - BUG-07 (MEDIUM): relationship-ai-insights — `.single()` em vez de `.maybeSingle()` na persona lookup
+    - BUG-08 (LOW): DealDetailDialog — useState com initializer async (pode causar stale state)
+  - **5 Arquitetura** (1 CRITICAL + 2 HIGH + 2 MEDIUM):
+    - ARCH-01 (CRITICAL): CommercialAutomations — interface completa SEM backend de execução (SLA, follow-up, reativação, nurturing — tudo visual-only)
+    - ARCH-02 (HIGH): 2 Edge Functions dependem do Lovable AI Gateway (`ai.gateway.lovable.dev` + `LOVABLE_API_KEY`) — vendor lock-in, migração necessária para OpenRouter
+    - ARCH-03 (HIGH): useCommercialDashboard — 8 queries paralelas client-side para 30+ KPIs (todas as contas no browser, sem server-side aggregation)
+    - ARCH-04 (MEDIUM): useMyGoals — N+1 queries (1 query por meta para calcular progresso)
+    - ARCH-05 (MEDIUM): useDealAttachments — resolução auth duplicada (Supabase client + getUser separado)
+  - **3 Type Safety** (2 MEDIUM + 1 LOW):
+    - TS-01 (MEDIUM): `deal: any` propagado por toda a hierarquia de componentes (15+ arquivos sem tipagem)
+    - TS-02 (MEDIUM): Supabase types desatualizadas — tabelas deal_* sem generated types
+    - TS-03 (LOW): useCommissionSplits — `as unknown as` double cast anti-pattern
+  - **1 UX** (MEDIUM):
+    - UX-01: useSaasPipeline — labels confusos (`Análise`, `Reunião`, `Proposta`, `Fechamento`) — pipeline genérico misturado com pipeline de deals
+  - **1 Performance** (HIGH):
+    - PERF-01: CommercialDashboard.tsx (~1400 linhas) — componente monolítico com 8 queries, 30+ KPIs, multiple charts (recharts), tudo no client-side
+- **Avaliação MiniMax (Buchecha)**: "Este módulo é um data breach esperando para acontecer. Potencial de 50-250x melhoria de performance com server-side aggregation."
+- **Plano de ação em 4 fases (~32h total)**:
+  - **Fase 1 — Segurança** (~6h): Remover credenciais hardcoded, adicionar tenant_id em 6 hooks, CORS whitelist nas 3 EFs
+  - **Fase 2 — Bugs Críticos** (~8h): Fix mock progress, fix DealMessages, fix status "fechado", fix Kanban duplicado, migrar EFs de Lovable→OpenRouter
+  - **Fase 3 — Arquitetura** (~10h): Server-side aggregation (Edge Function de dashboard), decomposição CommercialDashboard.tsx, backend de automações (pg_cron ou Edge Function)
+  - **Fase 4 — Qualidade** (~8h): Tipagem deal:any→DealRequest, generated types, remove double casts, fix N+1 queries
+- **Entregável**: Relatório Word completo `docs/diagnostico-comercial-sessao39-claude-minimax.docx` (19.0 KB) com branding Intentus
+- **Arquivo criado**:
+  - `docs/diagnostico-comercial-sessao39-claude-minimax.docx` (relatório final 27 achados)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

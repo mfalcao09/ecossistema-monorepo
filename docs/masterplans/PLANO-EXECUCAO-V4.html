@@ -1,0 +1,643 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plano de Execução V4 — Ecossistema IA Autônomo</title>
+<style>
+  :root {
+    --bg: #0f1115;
+    --surface: #171a21;
+    --surface-2: #1f232c;
+    --border: #2a2f3a;
+    --text: #e8eaed;
+    --text-dim: #a8adb8;
+    --text-mute: #6b7280;
+    --accent: #7aa2f7;
+    --accent-dim: #4a6fa5;
+    --red: #f7768e;
+    --yellow: #e0af68;
+    --green: #9ece6a;
+    --cyan: #7dcfff;
+    --purple: #bb9af7;
+    --code-bg: #1a1d24;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+    --sans: -apple-system, BlinkMacSystemFont, "Inter", "Segoe UI", Roboto, sans-serif;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: var(--sans);
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.7;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .container { max-width: 960px; margin: 0 auto; padding: 60px 40px 120px 40px; }
+  header.doc-header { border-bottom: 1px solid var(--border); padding-bottom: 32px; margin-bottom: 48px; }
+  h1 {
+    font-size: 2.3em; font-weight: 700; letter-spacing: -0.02em;
+    margin: 0 0 8px 0; line-height: 1.15;
+    background: linear-gradient(135deg, var(--text) 0%, var(--cyan) 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;
+  }
+  h1 + p.subtitle { color: var(--text-dim); font-size: 1.1em; margin: 4px 0 0 0; }
+  h2 {
+    font-size: 1.55em; font-weight: 700; letter-spacing: -0.01em;
+    margin: 64px 0 20px 0; padding-bottom: 12px; border-bottom: 1px solid var(--border); color: var(--text);
+  }
+  h3 { font-size: 1.22em; font-weight: 600; margin: 40px 0 16px 0; color: var(--cyan); }
+  h4 { font-size: 1.05em; font-weight: 600; margin: 28px 0 10px 0; color: var(--text); }
+  p { margin: 0 0 16px 0; color: var(--text); }
+  strong { color: #fff; font-weight: 600; }
+  em { color: var(--text-dim); }
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border-color 0.2s; }
+  a:hover { border-bottom-color: var(--accent); }
+  code {
+    font-family: var(--mono); background: var(--code-bg);
+    padding: 2px 7px; border-radius: 4px; font-size: 0.88em;
+    color: var(--cyan); border: 1px solid var(--border);
+  }
+  pre {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 8px; padding: 16px 20px; overflow-x: auto;
+    margin: 20px 0; font-size: 0.88em; line-height: 1.6;
+  }
+  pre code { background: transparent; padding: 0; border: none; color: var(--text); }
+  blockquote {
+    border-left: 3px solid var(--accent); background: var(--surface);
+    padding: 16px 24px; margin: 24px 0; border-radius: 0 8px 8px 0; color: var(--text-dim);
+  }
+  blockquote p:last-child { margin-bottom: 0; }
+  ul, ol { padding-left: 24px; margin: 0 0 20px 0; }
+  li { margin-bottom: 6px; }
+  li::marker { color: var(--text-mute); }
+  hr { border: none; border-top: 1px solid var(--border); margin: 56px 0; }
+  table {
+    width: 100%; border-collapse: collapse; margin: 24px 0;
+    background: var(--surface); border-radius: 8px; overflow: hidden;
+    font-size: 0.93em; border: 1px solid var(--border);
+  }
+  th {
+    background: var(--surface-2); color: var(--cyan);
+    text-align: left; padding: 12px 16px; font-weight: 600;
+    font-size: 0.86em; letter-spacing: 0.02em; text-transform: uppercase;
+    border-bottom: 1px solid var(--border);
+  }
+  td { padding: 12px 16px; border-bottom: 1px solid var(--border); vertical-align: top; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(122, 162, 247, 0.04); }
+  .frontmatter {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 28px; margin-bottom: 32px;
+    font-size: 0.94em; color: var(--text-dim);
+  }
+  .frontmatter strong { color: var(--text); }
+  nav.toc {
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px 28px; margin: 32px 0;
+  }
+  nav.toc h3 {
+    margin: 0 0 12px 0; color: var(--text-dim);
+    font-size: 0.85em; letter-spacing: 0.08em; text-transform: uppercase; font-weight: 600;
+  }
+  nav.toc ol { margin: 0; padding-left: 24px; }
+  nav.toc li { margin-bottom: 4px; font-size: 0.94em; }
+  nav.toc a { color: var(--text); border: none; }
+  nav.toc a:hover { color: var(--cyan); }
+  .section-num { color: var(--text-mute); font-weight: 500; margin-right: 10px; }
+  .alert-box {
+    background: linear-gradient(135deg, rgba(247, 118, 142, 0.08) 0%, rgba(224, 175, 104, 0.06) 100%);
+    border: 1px solid rgba(247, 118, 142, 0.3);
+    border-radius: 12px; padding: 24px 28px; margin: 32px 0;
+  }
+  .alert-box h3 { margin-top: 0; color: var(--red); }
+  .tldr-card {
+    background: linear-gradient(135deg, rgba(122, 162, 247, 0.08) 0%, rgba(125, 207, 255, 0.04) 100%);
+    border: 1px solid var(--accent-dim);
+    border-radius: 12px; padding: 24px 28px; margin: 32px 0;
+  }
+  .tldr-card h3 { margin-top: 0; color: var(--cyan); }
+  .phase {
+    background: var(--surface); border-left: 4px solid var(--accent);
+    border-radius: 0 10px 10px 0; padding: 20px 28px; margin: 24px 0;
+  }
+  .phase.green { border-left-color: var(--green); }
+  .phase.yellow { border-left-color: var(--yellow); }
+  .phase.purple { border-left-color: var(--purple); }
+  .phase h3 { margin-top: 0; }
+  .arch-diagram {
+    background: var(--code-bg); border: 1px solid var(--border);
+    border-radius: 10px; padding: 20px; margin: 24px 0;
+    font-family: var(--mono); font-size: 0.8em; line-height: 1.5;
+    white-space: pre; overflow-x: auto; color: var(--text-dim);
+  }
+  footer {
+    margin-top: 80px; padding-top: 28px;
+    border-top: 1px solid var(--border); color: var(--text-mute);
+    font-size: 0.88em; text-align: center;
+  }
+  @media print {
+    :root {
+      --bg: #fff; --surface: #fafafa; --surface-2: #f0f0f0;
+      --border: #e0e0e0; --text: #1a1a1a; --text-dim: #444;
+      --text-mute: #888; --accent: #2563eb; --cyan: #0891b2;
+      --code-bg: #f5f5f5;
+    }
+    body { background: #fff; color: #1a1a1a; }
+    h1 { -webkit-text-fill-color: #1a1a1a; background: none; }
+    .container { padding: 24px; max-width: 100%; }
+    pre, table, .phase, .alert-box { page-break-inside: avoid; }
+  }
+  @media (max-width: 720px) {
+    .container { padding: 32px 20px 80px 20px; }
+    h1 { font-size: 1.8em; }
+    h2 { font-size: 1.3em; }
+    table { font-size: 0.85em; }
+    th, td { padding: 8px 10px; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="doc-header">
+<h1>Plano de Execução V4</h1>
+<p class="subtitle">Ecossistema IA Autônomo · Do Cowork ao Jarvis — 12 semanas estruturadas</p>
+<div class="frontmatter" style="margin-top:24px;">
+<p><strong>Versão:</strong> 4.0 &nbsp;·&nbsp; <strong>Data:</strong> 2026-04-15</p>
+<p><strong>Substitui:</strong> ANALISE-CONSOLIDADA-V3 (diagnóstico) e versões anteriores.</p>
+<p><strong>Natureza:</strong> Primeiro documento <strong>executável</strong> — as v1-v3 eram diagnósticos.</p>
+<p><strong>Baseado em:</strong> 6 decisões arquiteturais tomadas por Marcelo em 15/04/2026.</p>
+</div>
+</header>
+
+<nav class="toc">
+<h3>Sumário</h3>
+<ol>
+<li><a href="#s0">Aviso crítico — Compactação desta sessão</a></li>
+<li><a href="#s1">As 6 Decisões Canonizadas</a></li>
+<li><a href="#s2">4 sessões Code em paralelo — protocolo</a></li>
+<li><a href="#s3">Arquitetura alvo</a></li>
+<li><a href="#s4">Fase 0 — Fundação Macro (semanas 1-2)</a></li>
+<li><a href="#s5">Fase 1 — ERP-Educacional Piloto (semanas 3-6)</a></li>
+<li><a href="#s6">Fase 2 — Intentus + Voz (semanas 7-8)</a></li>
+<li><a href="#s7">Fase 3 — Multi-negócio + Jarvis Always-On (semanas 9-12)</a></li>
+<li><a href="#s8">Gestão de risco desta sessão Code</a></li>
+<li><a href="#s9">Próximos 3 dias concretos</a></li>
+<li><a href="#s10">Resumo em 1 quadro</a></li>
+</ol>
+</nav>
+
+<hr>
+
+<h2 id="s0"><span class="section-num">0.</span>Aviso crítico — Compactação desta sessão</h2>
+
+<div class="alert-box">
+<h3>Sim, esta sessão do Code corre risco de compactação.</h3>
+<p>Já salvei as 6 decisões arquiteturais em memória persistente ao iniciar esta resposta:</p>
+<ul>
+<li><code>/memory/plano_v4_decisoes_arquiteturais.md</code> — decisões canônicas</li>
+<li><code>/memory/user_marcelo_preferencias_operacionais.md</code> — perfil de trabalho</li>
+<li><code>/memory/MEMORY.md</code> — índice atualizado</li>
+</ul>
+<p>Se esta sessão for compactada ou fechada: a nova sessão automaticamente lê esses arquivos e recupera contexto. Nada se perde — isso já é o <strong>protótipo manual</strong> da "memória online" que vamos construir na Fase 0.</p>
+</div>
+
+<h4>Protocolo válido até a Fase 0 estar pronta:</h4>
+<ol>
+<li>Toda decisão nova = eu salvo em <code>/memory/*.md</code> imediatamente</li>
+<li>Todo documento importante = commit no repo <code>Ecossistema</code></li>
+<li>Ao reabrir sessão: leitura de <code>MEMORY.md</code> + últimas 3 memórias como primeiro ato</li>
+</ol>
+
+<hr>
+
+<h2 id="s1"><span class="section-num">1.</span>As 6 Decisões Canonizadas</h2>
+
+<h3>D1. Plataforma dos agentes — Managed Agents + Railway (híbrido)</h3>
+
+<table>
+<thead><tr><th>Camada</th><th>Onde roda</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><strong>Claudinho + C-Suite</strong></td><td>Anthropic Managed Agents</td><td>Orquestração, raciocínio, delegação</td></tr>
+<tr><td><strong>Squad dev</strong> (Buchecha, DeepSeek, Qwen, Kimi, Codestral)</td><td>MCPs via plugins</td><td>Execução de código</td></tr>
+<tr><td><strong>FastAPI wrapper</strong></td><td>Railway</td><td>HTTP endpoints para chamar agentes de qualquer canal</td></tr>
+<tr><td><strong>RAG-engine</strong></td><td>Railway (já existe)</td><td>Busca semântica em memórias</td></tr>
+<tr><td><strong>Webhooks inbound</strong> (Inter, MEC, Apollo)</td><td>Railway</td><td>Disparadores para agentes</td></tr>
+<tr><td><strong>Scheduled jobs</strong></td><td>Trigger.dev + pg_cron</td><td>Bootstrap diário, digest semanal, alertas</td></tr>
+</tbody>
+</table>
+
+<p><strong>Por que híbrido:</strong> Managed Agents resolve resiliência dos agentes em si. Railway dá flexibilidade para tudo que não é agente (cola, webhooks, jobs, frontend). Não estamos presos a um provider.</p>
+
+<h3>D2. Modelo de dados — ECOSYSTEM compartilhado + DBs per-projeto</h3>
+
+<blockquote><p><strong>Regra de ouro:</strong> <em>Se serve mais de um negócio → vai para ECOSYSTEM. Se é dado de domínio do negócio → vai para o DB dele.</em></p></blockquote>
+
+<table>
+<thead><tr><th>Supabase</th><th>ID</th><th>Papel</th><th>Tabelas que abriga</th></tr></thead>
+<tbody>
+<tr><td><strong>ECOSYSTEM</strong></td><td><code>gqckbunsfjgerbuiyzvn</code></td><td>Plataforma compartilhada</td><td><code>ecosystem_memory</code>, <code>agent_tasks</code>, <code>credentials</code>, <code>boletos_engine</code>, <code>audit_log</code></td></tr>
+<tr><td><strong>ERP-FIC</strong></td><td><code>ifdnjieklngcfodmtied</code></td><td>Domínio educacional</td><td><code>alunos</code>, <code>matriculas</code>, <code>diplomas</code>, <code>cadeia_custodia</code></td></tr>
+<tr><td><strong>Intentus</strong></td><td><code>bvryaopfjiyxjgsuhjsb</code></td><td>Domínio imobiliário</td><td><code>empreendimentos</code>, <code>unidades</code>, <code>contratos_clm</code>, <code>leads</code></td></tr>
+<tr><td><strong>Klésis</strong> (futuro)</td><td>a criar</td><td>Educação básica</td><td><code>familias</code>, <code>alunos_menores</code> (LGPD reforçado)</td></tr>
+<tr><td><strong>Splendori</strong> (futuro)</td><td>a criar</td><td>Incorporação Piracicaba</td><td><code>obras</code>, <code>compradores</code>, <code>repasses_sfh</code></td></tr>
+</tbody>
+</table>
+
+<h4>Exemplo concreto — emissão de boleto:</h4>
+<ul>
+<li>Lógica de emissão (chamada ao Banco Inter, idempotência, HMAC) → <strong>package <code>@ecossistema/billing</code></strong> conectado ao ECOSYSTEM</li>
+<li>Dados do boleto (aluno_id, mes_ref, valor, status) → <strong>DB do projeto (ERP-FIC)</strong></li>
+<li>ECOSYSTEM guarda o "motor", ERP-FIC guarda o "registro do boleto daquele aluno"</li>
+</ul>
+
+<h3>D3. Interface com agentes — Jarvis em 4 estágios</h3>
+
+<p>Esta é a trilha longa. Cada estágio destrava o próximo; <strong>não pular</strong>.</p>
+
+<table>
+<thead><tr><th>Estágio</th><th>O que é</th><th>Quando</th><th>Tech stack</th></tr></thead>
+<tbody>
+<tr><td><strong>E1 — Cowork + CLI</strong></td><td>Onde estamos hoje</td><td>Agora (manter em paralelo)</td><td>Claude Code + Managed Agents direct</td></tr>
+<tr><td><strong>E2 — Text-first Bot</strong></td><td>Marcelo manda mensagem pelo WhatsApp/Telegram → agente responde</td><td>Fase 1 (~semana 4)</td><td>WhatsApp Business API + Railway webhook → Managed Agents</td></tr>
+<tr><td><strong>E3 — Voz + App próprio</strong></td><td>App macOS/iOS com push-to-talk; fala, recebe resposta falada</td><td>Fase 2 (~semana 8)</td><td>Swift/Electron + Deepgram (STT) + ElevenLabs (TTS) + Managed Agents</td></tr>
+<tr><td><strong>E4 — Jarvis always-on</strong></td><td>Escuta ambiente (wake-word), responde por voz, age proativamente</td><td>Fase 3 (~semana 16+)</td><td>OpenAI Realtime API ou custom + sensors + proactive triggers</td></tr>
+</tbody>
+</table>
+
+<p><strong>Filosofia:</strong> cada estágio precisa ser <strong>bom o suficiente para uso diário</strong> antes de passar para o próximo. Melhor E2 excelente do que E4 mal-acabado.</p>
+
+<h3>D4. Scheduled tasks — Opções na mesa, aprofundar em conjunto</h3>
+
+<p>Você marcou dúvida nesta decisão. Minha recomendação provisória com trade-offs:</p>
+
+<table>
+<thead><tr><th>Opção</th><th>Prós</th><th>Contras</th><th>Quando usar</th></tr></thead>
+<tbody>
+<tr><td><strong>Supabase pg_cron</strong></td><td>Nativo, sem ferramenta extra, SQL direto</td><td>Limitado a jobs simples</td><td>Jobs de dados (backup, cleanup, agregação)</td></tr>
+<tr><td><strong>Trigger.dev</strong></td><td>UI visual, retries, logs, TypeScript</td><td>Custo após free tier</td><td>Orquestração de agentes, workflows multi-step</td></tr>
+<tr><td><strong>Vercel Cron</strong></td><td>Simples se já usa Vercel</td><td>1 cron por plano tier (Hobby)</td><td>Só se Vercel for o centro do stack</td></tr>
+<tr><td><strong>GitHub Actions</strong></td><td>Grátis, conhecido</td><td>Não é ideal para jobs frequentes (&gt;hora)</td><td>Backup diário, relatórios semanais</td></tr>
+</tbody>
+</table>
+
+<p><strong>Recomendação:</strong> começar <strong>só com pg_cron</strong> (já que Supabase é central). Avaliar Trigger.dev quando precisar de workflow visual. Decidimos juntos antes da Fase 0 terminar.</p>
+
+<h3>D5. Estrutura de repositório — Monorepo com packages (pnpm workspaces)</h3>
+
+<p>Dada D2 (serviços reutilizáveis vs domínio), monorepo faz muito sentido. Estrutura:</p>
+
+<pre><code>ecossistema-monorepo/
+├── packages/
+│   ├── @ecossistema/agentes/       # Claudinho + C-Suite prompts
+│   ├── @ecossistema/memory/        # Cliente do ecosystem_memory
+│   ├── @ecossistema/credentials/   # SC-29 client (wrap Supabase Vault)
+│   ├── @ecossistema/billing/       # Motor de boletos (Inter + idempotência)
+│   ├── @ecossistema/task-registry/ # Client de agent_tasks
+│   ├── @ecossistema/rag/           # Cliente do RAG-engine Railway
+│   └── @ecossistema/tools/         # Tool wrappers genéricos (supabase, mcp)
+├── apps/
+│   ├── erp-educacional/            # Produto 1 (FIC + Klésis)
+│   ├── intentus/                   # Produto 2 (imobiliário)
+│   ├── orchestrator/               # FastAPI no Railway que expõe agentes
+│   └── jarvis-app/                 # Futuro app E3/E4
+├── infra/
+│   ├── supabase/                   # Migrations do ECOSYSTEM
+│   ├── railway/                    # IaC do Railway
+│   └── triggerdev/                 # Jobs agendados
+├── docs/
+│   ├── adr/                        # Decisões arquiteturais
+│   ├── masterplans/
+│   └── sessions/                   # Gerado do ecosystem_memory (read-only)
+├── pnpm-workspace.yaml
+├── turbo.json                      # Ou pnpm scripts, sem turbo inicialmente
+└── CLAUDE.md                       # Único, referência ao ECOSYSTEM</code></pre>
+
+<h4>Por que pnpm workspaces (e não turbo inicialmente):</h4>
+<ul>
+<li>Iniciante em programação → turbo adiciona complexidade conceitual</li>
+<li>pnpm workspaces é nativo ao pnpm, sem ferramenta extra</li>
+<li>Quando os builds ficarem lentos, migramos para turbo em 1 dia</li>
+</ul>
+
+<h3>D6. Piloto — ERP-Educacional (com padrões técnicos vindos do Intentus)</h3>
+
+<ul>
+<li><strong>ERP-Educacional</strong> = piloto de autonomia (hoje 20% de maturidade)</li>
+<li><strong>Intentus</strong> = template técnico (hoje 60% maduro no mesmo produto base)</li>
+<li><strong>Estratégia:</strong> portar Edge Functions do Intentus (CLM copilot, lead scoring, automation engine) para o ERP-Educacional, adaptando para contexto educacional</li>
+</ul>
+
+<hr>
+
+<h2 id="s2"><span class="section-num">2.</span>Sobre as 4 sessões Code em paralelo</h2>
+
+<p>Sim, funciona, mas <strong>com protocolo</strong>. Sem protocolo, gera deploy conflict e overwrite de memória.</p>
+
+<h3>Regras de paralelismo</h3>
+
+<h4>1. Um worktree por sessão.</h4>
+<p>Cada sessão trabalha em um git worktree separado (<code>git worktree add ../eco-session-A feature/erp-financeiro</code>). Nunca no mesmo diretório.</p>
+
+<h4>2. Escopo por package ou módulo, nunca sobreposto.</h4>
+
+<table>
+<thead><tr><th>Sessão</th><th>Escopo</th><th>Worktree</th></tr></thead>
+<tbody>
+<tr><td>Sessão A</td><td><code>packages/@ecossistema/billing</code> + webhook Inter no ERP</td><td>eco-billing</td></tr>
+<tr><td>Sessão B</td><td><code>packages/@ecossistema/memory</code> + auto-sync</td><td>eco-memory</td></tr>
+<tr><td>Sessão C</td><td><code>apps/orchestrator</code> (FastAPI Railway)</td><td>eco-orchestrator</td></tr>
+<tr><td>Sessão D</td><td><code>apps/erp-educacional/crm</code> (porting do Intentus)</td><td>eco-crm</td></tr>
+</tbody>
+</table>
+
+<h4>3. Lock via Task Registry (Fase 0).</h4>
+<p>Antes de começar, cada sessão faz:</p>
+<pre><code>UPDATE agent_tasks SET status='locked', assigned_to='session_A', locked_at=NOW()
+WHERE task_id = 'T-042';</code></pre>
+<p>Se outra sessão tentar pegar a mesma task, vê o lock e escolhe outra.</p>
+
+<h4>4. Deploy sempre serial.</h4>
+<p>Merges em <code>main</code> só via PR + CI green. Nunca 2 sessões fazem push direto em main.</p>
+
+<h4>5. Sync diário.</h4>
+<p>Toda noite: cada sessão comita, empurra branch, abre PR. Primeira sessão do dia seguinte integra.</p>
+
+<p><strong>Gargalo real:</strong> Supabase migrations. Só <strong>uma sessão por dia</strong> aplica migration em ECOSYSTEM ou em DBs de produção. As outras usam branches Supabase (branching já suportado).</p>
+
+<hr>
+
+<h2 id="s3"><span class="section-num">3.</span>Arquitetura alvo</h2>
+
+<div class="arch-diagram">         ┌──────────────────────────────────────────┐
+         │        Marcelo (CEO)                     │
+         │  [E2 Text bot] → [E3 App] → [E4 Jarvis]  │
+         └──────────────┬───────────────────────────┘
+                        │ mensagens / voz
+                        ▼
+         ┌──────────────────────────────────────────┐
+         │ apps/orchestrator (FastAPI @ Railway)    │
+         │ Webhook → Managed Agent dispatcher       │
+         └──────────────┬───────────────────────────┘
+                        │ invoca
+                        ▼
+ ┌──────────────────────────────────────────────────┐
+ │         Anthropic Managed Agents                 │
+ │  Claudinho (Opus 4.6) ─→ 7 diretores (Sonnet)    │
+ │  callable_agents ATIVO                           │
+ └──────────────┬──────────────────┬────────────────┘
+                │                  │
+    tools MCP   │                  │  persistent memory
+                ▼                  ▼
+ ┌──────────────────┐   ┌───────────────────────────┐
+ │ ERP-Educacional  │   │   Supabase ECOSYSTEM      │
+ │ Intentus         │   │ • ecosystem_memory (+RAG) │
+ │ (DBs per domínio)│   │ • agent_tasks             │
+ │ + Edge Functions │   │ • credentials (SC-29)     │
+ └──────────────────┘   │ • billing engine          │
+                        │ • audit_log               │
+                        └───────────────────────────┘
+                                 ▲
+                                 │ jobs
+                                 │
+                        ┌────────┴──────────┐
+                        │ pg_cron +         │
+                        │ Trigger.dev       │
+                        └───────────────────┘</div>
+
+<hr>
+
+<h2 id="s4"><span class="section-num">4.</span>Fase 0 — Fundação Macro (semanas 1-2)</h2>
+
+<div class="phase">
+<h3>🏛️ Missão</h3>
+<p>Parar de perder memória. Agentes online. Monorepo organizado.</p>
+</div>
+
+<h3>Sprint 0.1 — Monorepo e memória online (semana 1)</h3>
+
+<table>
+<thead><tr><th>#</th><th>Tarefa</th><th>Dono sugerido</th><th>Critério de aceite</th></tr></thead>
+<tbody>
+<tr><td>0.1.1</td><td>Criar monorepo <code>ecossistema-monorepo</code> com pnpm workspaces</td><td>Marcelo + Claude</td><td><code>pnpm install</code> funciona; 3 packages stub criados</td></tr>
+<tr><td>0.1.2</td><td>Migrar conteúdo dos 3 repos atuais para <code>apps/</code> e <code>packages/</code> correspondentes</td><td>Buchecha + Claude</td><td>Todos os arquivos com histórico preservado (git subtree)</td></tr>
+<tr><td>0.1.3</td><td>Package <code>@ecossistema/memory</code> com client TS/Py para <code>ecosystem_memory</code></td><td>Buchecha</td><td>Função <code>saveMemory()</code> e <code>searchMemory()</code> testadas</td></tr>
+<tr><td>0.1.4</td><td>Auto-sync por turno (não só "vou encerrar")</td><td>Claude + Buchecha</td><td>Toda resposta de Claudinho gera 1 row em <code>ecosystem_memory</code></td></tr>
+<tr><td>0.1.5</td><td>Remover truncamento <code>500/1000 chars</code> em <code>_save_to_memory</code></td><td>Buchecha</td><td>Conteúdo inteiro armazenado</td></tr>
+<tr><td>0.1.6</td><td>Rodar migration do schema <code>ecosystem_memory</code> completo com embedding + RAG</td><td>DeepSeek</td><td><code>bootstrap_session()</code> retorna top-k relevante</td></tr>
+</tbody>
+</table>
+
+<h3>Sprint 0.2 — Task Registry + agentes online (semana 2)</h3>
+
+<table>
+<thead><tr><th>#</th><th>Tarefa</th><th>Dono sugerido</th><th>Critério de aceite</th></tr></thead>
+<tbody>
+<tr><td>0.2.1</td><td>Tabela <code>agent_tasks</code> em ECOSYSTEM + package <code>@ecossistema/task-registry</code></td><td>DeepSeek</td><td>CRUD funciona; lock otimista testado</td></tr>
+<tr><td>0.2.2</td><td><code>apps/orchestrator</code> (FastAPI) com endpoints <code>/agent/{name}/invoke</code></td><td>Buchecha + Qwen</td><td>Curl para endpoint retorna resposta do Managed Agent</td></tr>
+<tr><td>0.2.3</td><td>Deploy orchestrator no Railway (https + domínio)</td><td>Claude</td><td><code>https://orchestrator.ecossistema.dev/health</code> = 200</td></tr>
+<tr><td>0.2.4</td><td>Habilitar <code>callable_agents</code> em Claudinho (já tem acesso Managed Agents)</td><td>Claude</td><td>Claudinho delega para CFO-IA com sucesso</td></tr>
+<tr><td>0.2.5</td><td>Corrigir bugs Fase 0 da v3: <code>SKILLS_DIR</code>, .gitignore Vite, commits pendentes Intentus</td><td>Buchecha</td><td>git status clean nos 3 origens</td></tr>
+<tr><td>0.2.6</td><td>Documentar protocolo de paralelismo (worktrees + lock) em <code>docs/adr/001-parallelism.md</code></td><td>Claude</td><td>ADR aprovado pelo Marcelo</td></tr>
+</tbody>
+</table>
+
+<h4>Saída da Fase 0:</h4>
+<ul>
+<li>✅ Monorepo funcional com packages reutilizáveis</li>
+<li>✅ Memória persistente automática — nada se perde</li>
+<li>✅ Task Registry cross-sessão</li>
+<li>✅ Orchestrator FastAPI rodando → agentes chamáveis por HTTP</li>
+<li>✅ callable_agents ativo → Claudinho orquestra de verdade</li>
+<li>✅ 4 sessões Code podem trabalhar em paralelo sem colisão</li>
+</ul>
+
+<hr>
+
+<h2 id="s5"><span class="section-num">5.</span>Fase 1 — ERP-Educacional Piloto (semanas 3-6)</h2>
+
+<p>4 módulos, 1 por semana, ordem intencional.</p>
+
+<div class="phase green">
+<h3>Semana 3 — Módulo Financeiro (CFO-IA)</h3>
+<ul>
+<li>Fechar webhook Inter (implementar <code>_processar_item_webhook</code>)</li>
+<li>Package <code>@ecossistema/billing</code> com idempotência + HMAC + retry</li>
+<li>Edge Function <code>credential-agent</code> no ERP (proxy SC-29 cross-DB)</li>
+<li>MCP tools do ERP: <code>emitir_boleto</code>, <code>listar_inadimplentes</code>, <code>confirmar_pagamento</code></li>
+<li>CFO-IA autônomo: régua de cobrança diária, alertas, relatório mensal</li>
+<li>Aprovação humana programática (não só prompt) para valores &gt; R$5.000</li>
+</ul>
+</div>
+
+<div class="phase green">
+<h3>Semana 4 — Módulo CRM (CSO-IA) + E2 Jarvis (WhatsApp)</h3>
+<ul>
+<li>Portar 4 Edge Functions do Intentus: <code>commercial-lead-scoring</code>, <code>commercial-pulse-feed</code>, <code>commercial-lead-chatbot</code>, <code>commercial-automation-engine</code></li>
+<li>Adaptar para contexto educacional (matrícula ≠ unidade imobiliária)</li>
+<li><strong>Lançamento do E2 Jarvis — text-first bot:</strong> WhatsApp Business API → orchestrator → Claudinho</li>
+<li>Marcelo começa a falar com VP pelo WhatsApp</li>
+</ul>
+</div>
+
+<div class="phase green">
+<h3>Semana 5 — Módulo CLM (CLO-IA)</h3>
+<ul>
+<li>Portar CLM Agentic Copilot do Intentus (12 tools, v11)</li>
+<li>Contratos educacionais: serviços, estágio, convênios</li>
+<li>Compliance Monitor com regras educacionais (MEC, PROCON, CDC)</li>
+<li>CLO-IA com disclaimer enforçado: "Marcelo PREPARA, Marcelo ASSINA"</li>
+</ul>
+</div>
+
+<div class="phase green">
+<h3>Semana 6 — Módulo Atendimento (COO-IA + CAO-IA)</h3>
+<ul>
+<li>Tickets com classificação automática por área</li>
+<li>Chatbot 24/7 portado do Intentus</li>
+<li>CAO-IA: alertas MEC (SC-28 virando código finalmente)</li>
+<li>RLS versionada em SQL para todas as tabelas críticas</li>
+</ul>
+</div>
+
+<p><strong>Em paralelo toda a Fase 1:</strong></p>
+<ul>
+<li>PermissionEnforcer real (cada agente seu env + allowlist)</li>
+<li>Smoke tests por agente (Art. XVII operacional)</li>
+<li>Task Registry populado de verdade</li>
+</ul>
+
+<hr>
+
+<h2 id="s6"><span class="section-num">6.</span>Fase 2 — Replicação Intentus + Voz (semanas 7-8)</h2>
+
+<div class="phase yellow">
+<h3>Semana 7 — Portar para Intentus</h3>
+<ul>
+<li>Mesmos wrappers MCP (tools <code>intentus-mcp</code>)</li>
+<li>Adaptar prompts do C-Suite para vertical imobiliário (Splendori context)</li>
+<li>Fechar dívida técnica Intentus: auth 401 nas 30 EFs + patches pendentes</li>
+<li>Integrar Relationship Module (12 features — 0% hoje) como backlog claro</li>
+</ul>
+</div>
+
+<div class="phase yellow">
+<h3>Semana 8 — Voz (E3 Jarvis)</h3>
+<ul>
+<li>App desktop simples (Electron ou Swift) com push-to-talk</li>
+<li>STT: Deepgram Nova-3 (ou OpenAI Whisper)</li>
+<li>TTS: ElevenLabs (voz customizada) ou OpenAI TTS</li>
+<li>Claudinho responde por áudio</li>
+<li>Ainda não é always-on; é push-to-talk</li>
+</ul>
+</div>
+
+<hr>
+
+<h2 id="s7"><span class="section-num">7.</span>Fase 3 — Multi-negócio + Jarvis Always-On (semanas 9-12)</h2>
+
+<div class="phase purple">
+<ul>
+<li><strong>Klésis</strong> (tenant separado, LGPD menores reforçado)</li>
+<li><strong>Splendori</strong> (tenant Intentus)</li>
+<li><strong>Nexvy</strong> (MVP ou integração como ferramenta de atendimento nos ERPs)</li>
+<li><strong>CHRO-IA</strong> (8º diretor — gestão de pessoas)</li>
+<li><strong>E4 Jarvis always-on:</strong> wake-word ("Claudinho") + escuta ambiente + triggers proativos</li>
+<li>Tech: OpenAI Realtime API ou Whisper streaming + agente proativo que consulta <code>agent_tasks</code> e sugere ações</li>
+</ul>
+</div>
+
+<hr>
+
+<h2 id="s8"><span class="section-num">8.</span>Gestão de risco desta sessão Code (proteção contra compactação)</h2>
+
+<p>Já executei protocolo provisório:</p>
+
+<h3>✅ Feito agora</h3>
+<ol>
+<li>2 arquivos em <code>/memory/</code> com decisões canônicas</li>
+<li><code>MEMORY.md</code> atualizado como índice</li>
+<li>Este documento <code>PLANO-EXECUCAO-V4.md</code> salva tudo</li>
+</ol>
+
+<h3>📋 Protocolo até Fase 0 pronta</h3>
+<ol>
+<li>Toda decisão nova → eu escrevo em <code>/memory/*.md</code> IMEDIATAMENTE</li>
+<li>Toda conversa longa → resumo salvo como "project" memory</li>
+<li>Ao perceber compactação iminente (contexto &gt; 80%) → escrever um <code>.md</code> de checkpoint antes</li>
+<li>Você pode forçar salvamento dizendo <strong>"salva contexto"</strong> a qualquer momento — eu paro o que estiver fazendo e persisto</li>
+</ol>
+
+<h3>📌 O que já está protegido</h3>
+<ul>
+<li>6 decisões arquiteturais</li>
+<li>Seu perfil operacional e cosmovisão</li>
+<li>Visão Jarvis em 4 estágios</li>
+<li>4 versões de análise crítica (v1-v3 + esta v4)</li>
+<li>Estrutura de monorepo planejada</li>
+</ul>
+
+<p>Se a sessão fechar agora, uma nova sessão minha lê <code>/memory/MEMORY.md</code> no boot e retoma exatamente daqui.</p>
+
+<hr>
+
+<h2 id="s9"><span class="section-num">9.</span>Próximos 3 dias concretos (se você aprovar este plano)</h2>
+
+<div class="tldr-card">
+<h3>Dia 1 (hoje ou amanhã)</h3>
+<ul>
+<li>Aprovar/ajustar este plano V4</li>
+<li>Fechar decisão D4 (scheduled tasks)</li>
+<li>Criar repo monorepo vazio: <code>gh repo create mfalcao09/ecossistema-monorepo --private</code></li>
+</ul>
+
+<h3>Dia 2</h3>
+<ul>
+<li>Migrar 3 repos atuais para <code>apps/</code> via <code>git subtree</code> (preserva histórico)</li>
+<li>Criar stub dos 7 packages</li>
+<li>Primeira versão do <code>@ecossistema/memory</code> com <code>saveMemory()</code></li>
+</ul>
+
+<h3>Dia 3</h3>
+<ul>
+<li>Schema <code>ecosystem_memory</code> + <code>agent_tasks</code> aplicado no Supabase ECOSYSTEM</li>
+<li>Auto-sync de memória por turno funcionando em sessão de teste</li>
+<li>Você encerra a sessão, reabre, Claudinho sabe tudo que foi dito — <strong>primeiro "zero perda de memória" oficial</strong></li>
+</ul>
+</div>
+
+<hr>
+
+<h2 id="s10"><span class="section-num">10.</span>Resumo em 1 quadro</h2>
+
+<table>
+<thead><tr><th>Fase</th><th>Prazo</th><th>Destrava</th></tr></thead>
+<tbody>
+<tr><td><strong>0 — Fundação macro</strong></td><td>semanas 1-2</td><td>Memória online, agentes online, monorepo, callable_agents</td></tr>
+<tr><td><strong>1 — ERP-Educacional piloto</strong></td><td>semanas 3-6</td><td>5 agentes autônomos em 4 módulos + E2 Jarvis (WhatsApp)</td></tr>
+<tr><td><strong>2 — Intentus + voz</strong></td><td>semanas 7-8</td><td>Replicação vertical imobiliário + E3 Jarvis (voz push-to-talk)</td></tr>
+<tr><td><strong>3 — Multi-negócio + always-on</strong></td><td>semanas 9-12</td><td>Klésis, Splendori, Nexvy, CHRO-IA + E4 Jarvis proativo</td></tr>
+</tbody>
+</table>
+
+<p><strong>Total:</strong> 12 semanas para ecossistema completo com agentes autônomos em 5 negócios + VP com voz contínua.</p>
+
+<footer>
+<p><strong>Documento:</strong> PLANO-EXECUCAO-V4.md / .html<br>
+<strong>Canônico a partir de:</strong> 2026-04-15 (sessão da resposta V4)<br>
+<strong>Próxima revisão:</strong> ao fim da Sprint 0.1 (semana 1)<br><br>
+<strong>Arquivos relacionados:</strong><br>
+<code>/memory/plano_v4_decisoes_arquiteturais.md</code><br>
+<code>/memory/user_marcelo_preferencias_operacionais.md</code><br>
+<code>ANALISE-CONSOLIDADA-AGENTES-ECOSSISTEMA-V3.md</code> (diagnóstico base)<br>
+<code>/Projects/GitHub/Ecossistema/COMPACTION-PROTOCOL.md</code> (inspiração do protocolo)</p>
+</footer>
+
+</div>
+</body>
+</html>

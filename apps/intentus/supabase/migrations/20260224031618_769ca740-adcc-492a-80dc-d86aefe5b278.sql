@@ -1,0 +1,1 @@
+ALTER TYPE public.due_diligence_check_type ADD VALUE IF NOT EXISTS 'crf_fgts';

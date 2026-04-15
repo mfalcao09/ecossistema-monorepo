@@ -1,0 +1,2162 @@
+{
+  "total": 157,
+  "importados": 151,
+  "erros": 0,
+  "duplicatas": 0,
+  "cursosNaoEncontrados": 6,
+  "xmlInvalidos": 0,
+  "uploadsFalhos": 2,
+  "assinaturasVinculadas": 0,
+  "assinaturasPendentes": 0,
+  "detalhes": [
+    {
+      "cpf": "00145738140",
+      "nome": "Fernanda Larisa da Silva Rodrigues",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "769ce8b8-3a56-41c2-98a4-c90048b73d46",
+      "diplomadoId": "00aa827a-740f-43e3-a986-af14ecc37d49",
+      "arquivos": {
+        "diploma": "legado/00145738140/00145738140_diploma.xml",
+        "historico": "legado/00145738140/00145738140_historico.xml",
+        "rvdd": "legado/00145738140/00145738140_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00170792170",
+      "nome": "Andressa de Oliveira Assis Prado",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "9b6d3158-1fcd-4c44-9876-4d5ba7a7b4f3",
+      "diplomadoId": "e62b1094-6f4e-4ea4-87a1-32e89ab5a7d4",
+      "arquivos": {
+        "diploma": "legado/00170792170/00170792170_diploma.xml",
+        "historico": "legado/00170792170/00170792170_historico.xml",
+        "rvdd": "legado/00170792170/00170792170_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00225188198",
+      "nome": "Petrina Aparecida da Silva Brito Pires",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "c055ecda-280c-4dc5-8bfc-0d98e034dfde",
+      "diplomadoId": "2bf1d22b-568b-4da6-acab-dd01401d3f7d",
+      "arquivos": {
+        "diploma": "legado/00225188198/00225188198_diploma.xml",
+        "historico": "legado/00225188198/00225188198_historico.xml",
+        "rvdd": "legado/00225188198/00225188198_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00328392197",
+      "nome": "Miriam Lima Ferreira",
+      "status": "erro",
+      "motivo": "Curso não mapeado: HistóRia (grau: Licenciatura)"
+    },
+    {
+      "cpf": "00464052165",
+      "nome": "Geovanna Barbosa Resende",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "d94baae3-1b05-484b-9818-8415859ac84b",
+      "diplomadoId": "2f9e15e8-55a5-406c-8a59-227d70870410",
+      "arquivos": {
+        "diploma": "legado/00464052165/00464052165_diploma.xml",
+        "historico": "legado/00464052165/00464052165_historico.xml",
+        "rvdd": "legado/00464052165/00464052165_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00464196167",
+      "nome": "Laritza VitóRia Barbosa Alves",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "1f5f7e66-0498-4aa5-a628-ee66bbcacb5c",
+      "diplomadoId": "39a6222f-c1cd-4669-8d24-6eb79abb947c",
+      "arquivos": {
+        "diploma": "legado/00464196167/00464196167_diploma.xml",
+        "historico": "legado/00464196167/00464196167_historico.xml",
+        "rvdd": "legado/00464196167/00464196167_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00506952150",
+      "nome": "Isabel Silva de Oliveira",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "9786d8a4-10b8-4676-866f-9d28b3f595b5",
+      "diplomadoId": "ae353f81-28b5-4bff-b8b2-6ab95510d1b6",
+      "arquivos": {
+        "diploma": "legado/00506952150/00506952150_diploma.xml",
+        "historico": "legado/00506952150/00506952150_historico.xml",
+        "rvdd": "legado/00506952150/00506952150_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00602968100",
+      "nome": "Priscilla Strongren",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "4932679f-2ca6-4c68-aa1f-bfb3940c3d3a",
+      "diplomadoId": "292eae40-56f0-4db0-943a-fa629b80e6f0",
+      "arquivos": {
+        "diploma": "legado/00602968100/00602968100_diploma.xml",
+        "historico": "legado/00602968100/00602968100_historico.xml",
+        "rvdd": "legado/00602968100/00602968100_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00814914179",
+      "nome": "Mariluzi Furtado Borges",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "029275f1-ff1c-40b0-98dc-751c18f4d363",
+      "diplomadoId": "02102e22-1e3f-4ba8-b3c5-66be8a6f3b40",
+      "arquivos": {
+        "diploma": "legado/00814914179/00814914179_diploma.xml",
+        "historico": "legado/00814914179/00814914179_historico.xml",
+        "rvdd": "legado/00814914179/00814914179_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00826044107",
+      "nome": "Eliana da Silva Brito",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "f4027a4e-c826-4041-b27b-1ae46f662429",
+      "diplomadoId": "476f3a25-8f2f-498f-84f6-f33a48ba4e86",
+      "arquivos": {
+        "diploma": "legado/00826044107/00826044107_diploma.xml",
+        "historico": "legado/00826044107/00826044107_historico.xml",
+        "rvdd": "legado/00826044107/00826044107_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "00972838198",
+      "nome": "Marina GonçAlves Souto Alves Belarmino",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "a9cb1262-bf5d-48c6-89c9-cc7caa505c4d",
+      "diplomadoId": "a6c77c58-a202-4d1d-8d71-073ee78983dd",
+      "arquivos": {
+        "diploma": "legado/00972838198/00972838198_diploma.xml",
+        "historico": "legado/00972838198/00972838198_historico.xml",
+        "rvdd": "legado/00972838198/00972838198_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "01008492108",
+      "nome": "Josiane Aparecida Souza da Silva",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "a3fbb153-33f0-42a6-b9b1-d1663198fb36",
+      "diplomadoId": "9532e9ea-4b16-4412-b162-40732aeeec1a",
+      "arquivos": {
+        "diploma": "legado/01008492108/01008492108_diploma.xml",
+        "historico": "legado/01008492108/01008492108_historico.xml",
+        "rvdd": "legado/01008492108/01008492108_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "01034453157",
+      "nome": "Jaqueline Ferreira Alves",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "80dd69f2-a1bc-4fe3-ad0a-a4a48ac82d3d",
+      "diplomadoId": "f7952e3b-4a81-47da-ad9f-bf5c942ef76c",
+      "arquivos": {
+        "diploma": "legado/01034453157/01034453157_diploma.xml",
+        "historico": "legado/01034453157/01034453157_historico.xml",
+        "rvdd": "legado/01034453157/01034453157_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "01250927170",
+      "nome": "Naiabe Moraes",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "a7b1a366-75b1-4127-8eeb-0266a379f202",
+      "diplomadoId": "41aea0f4-0b4b-4f5b-bc23-cd0f88c03eed",
+      "arquivos": {
+        "diploma": "legado/01250927170/01250927170_diploma.xml",
+        "historico": "legado/01250927170/01250927170_historico.xml",
+        "rvdd": "legado/01250927170/01250927170_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "01330701151",
+      "nome": "Diego Armando de Vasconcelos Cardoso",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "70a22fae-3d20-4311-bf1b-b59883e53406",
+      "diplomadoId": "0d6113da-c8ab-43c3-bc56-cca1f142b566",
+      "arquivos": {
+        "diploma": "legado/01330701151/01330701151_diploma.xml",
+        "historico": "legado/01330701151/01330701151_historico.xml",
+        "rvdd": "legado/01330701151/01330701151_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "01595212116",
+      "nome": "Diogenes Garcia Toledo",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "380c744d-d200-4b9b-8e4f-e0f724dc326d",
+      "diplomadoId": "35f50de0-e2cf-43ae-89b0-82b5928986a4",
+      "arquivos": {
+        "diploma": "legado/01595212116/01595212116_diploma.xml",
+        "historico": "legado/01595212116/01595212116_historico.xml",
+        "rvdd": "legado/01595212116/01595212116_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "01684514177",
+      "nome": "Daniela de Freitas Santos Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "93b809f9-2cb1-49c7-a530-b96fcf95b6bb",
+      "diplomadoId": "216a1a01-3a25-45c7-8a61-0b73c30435fb",
+      "arquivos": {
+        "diploma": "legado/01684514177/01684514177_diploma.xml",
+        "historico": "legado/01684514177/01684514177_historico.xml",
+        "rvdd": "legado/01684514177/01684514177_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "01820851125",
+      "nome": "Lygia Gracielle de Paula da Silva",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "26bdb9ad-d03b-4355-ab1e-3f2f15198a7b",
+      "diplomadoId": "00fb58c8-b04b-42da-b8b7-86e2f22ca66b",
+      "arquivos": {
+        "diploma": "legado/01820851125/01820851125_diploma.xml",
+        "historico": "legado/01820851125/01820851125_historico.xml",
+        "rvdd": "legado/01820851125/01820851125_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02132032190",
+      "nome": "Solange Duarte Martins",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "cab5e805-974b-4953-a5dc-6fc7f3515052",
+      "diplomadoId": "56d3f51a-a1e0-415c-b8bc-281a7a1ee9e3",
+      "arquivos": {
+        "diploma": "legado/02132032190/02132032190_diploma.xml",
+        "historico": "legado/02132032190/02132032190_historico.xml",
+        "rvdd": "legado/02132032190/02132032190_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02133671145",
+      "nome": "Wellington Pires da Silva",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "147e5af5-0f78-43f6-8349-b6274b0043e5",
+      "diplomadoId": "e391b6df-a325-462c-8290-086e2ca3fb42",
+      "arquivos": {
+        "diploma": "legado/02133671145/02133671145_diploma.xml",
+        "historico": "legado/02133671145/02133671145_historico.xml",
+        "rvdd": "legado/02133671145/02133671145_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02307160167",
+      "nome": "Raiane Aparecida Mello Borges",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "9e4661f3-d744-4039-b84d-a1abff043932",
+      "diplomadoId": "80299c15-8677-4606-9d4a-e34ee766faea",
+      "arquivos": {
+        "diploma": "legado/02307160167/02307160167_diploma.xml",
+        "historico": "legado/02307160167/02307160167_historico.xml",
+        "rvdd": "legado/02307160167/02307160167_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02319620109",
+      "nome": "Camila de Freitas Rocha",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "b038392c-a394-4622-97e6-baebd91804dd",
+      "diplomadoId": "6746163a-4e89-4790-a019-89058bea4535",
+      "arquivos": {
+        "diploma": "legado/02319620109/02319620109_diploma.xml",
+        "historico": "legado/02319620109/02319620109_historico.xml",
+        "rvdd": "legado/02319620109/02319620109_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02500967140",
+      "nome": "Bruno da Silva Batista",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "4e799ae9-ec26-4c85-8381-5687dea1fddd",
+      "diplomadoId": "9113b1d3-1fc7-46e9-a845-63ce3d36f9f0",
+      "arquivos": {
+        "diploma": "legado/02500967140/02500967140_diploma.xml",
+        "historico": "legado/02500967140/02500967140_historico.xml",
+        "rvdd": "legado/02500967140/02500967140_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02617745147",
+      "nome": "Jhonn Kennedy Rezende Silva",
+      "status": "erro",
+      "motivo": "Curso não mapeado: HistóRia (grau: Licenciatura)"
+    },
+    {
+      "cpf": "02632476194",
+      "nome": "Samir Moreira Dias",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "dc6937da-6e59-4c71-a3b0-baf30ace3944",
+      "diplomadoId": "213436dc-aaf1-43fc-8e45-1a444c75ae9d",
+      "arquivos": {
+        "diploma": "legado/02632476194/02632476194_diploma.xml",
+        "historico": "legado/02632476194/02632476194_historico.xml",
+        "rvdd": "legado/02632476194/02632476194_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02676843125",
+      "nome": "Camilla de Queiroz Borges",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "1219386c-f6ee-49ef-8ce3-98d54b3df0fa",
+      "diplomadoId": "a24995b3-f0fe-46d8-bfb7-dccc4c7fdf8e",
+      "arquivos": {
+        "diploma": "legado/02676843125/02676843125_diploma.xml",
+        "historico": "legado/02676843125/02676843125_historico.xml",
+        "rvdd": "legado/02676843125/02676843125_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02708638181",
+      "nome": "Andressa Sobrinho Nogara",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "a1d3abda-fb34-4500-9b6e-862469d8306c",
+      "diplomadoId": "9331371d-83d6-4874-8dcb-f7ee7ff5d430",
+      "arquivos": {
+        "diploma": "legado/02708638181/02708638181_diploma.xml",
+        "historico": "legado/02708638181/02708638181_historico.xml",
+        "rvdd": "legado/02708638181/02708638181_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02736518110",
+      "nome": "Bruna Paula de Souza",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "a2bfac42-9054-47b0-91ee-6ec9d2a86350",
+      "diplomadoId": "14b8c8a6-58ac-4ec1-8f9d-711fa57930a1",
+      "arquivos": {
+        "diploma": "legado/02736518110/02736518110_diploma.xml",
+        "historico": "legado/02736518110/02736518110_historico.xml",
+        "rvdd": "legado/02736518110/02736518110_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02773573145",
+      "nome": "Gisele Cristina Pereira dos Santos",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "479764c5-5423-46d7-b342-d6fcddc26930",
+      "diplomadoId": "0e7af856-56d5-40ea-a898-45f8e58611b5",
+      "arquivos": {
+        "diploma": "legado/02773573145/02773573145_diploma.xml",
+        "historico": "legado/02773573145/02773573145_historico.xml",
+        "rvdd": "legado/02773573145/02773573145_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02773793188",
+      "nome": "Taline Rotili Schwantes",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "06a1c0d1-57e5-4678-9eaa-d6c032cdab3c",
+      "diplomadoId": "c5be10f7-e68f-46fb-8b47-aa9831794799",
+      "arquivos": {
+        "diploma": "legado/02773793188/02773793188_diploma.xml",
+        "historico": "legado/02773793188/02773793188_historico.xml",
+        "rvdd": "legado/02773793188/02773793188_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02873836105",
+      "nome": "Daniel Martins de Oliveira Silva",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "d231a621-f42b-4f2d-94c5-7696fdd38f33",
+      "diplomadoId": "76ca4fbc-f22b-46bb-a4e5-f0dacbd1906b",
+      "arquivos": {
+        "diploma": "legado/02873836105/02873836105_diploma.xml",
+        "historico": "legado/02873836105/02873836105_historico.xml",
+        "rvdd": "legado/02873836105/02873836105_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02896561170",
+      "nome": "Likael Silva Nunes",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "b970d7cc-555b-459a-af66-4436412c47b1",
+      "diplomadoId": "47b2f8ba-ffcc-4387-a50d-e297d65b72e1",
+      "arquivos": {
+        "diploma": "legado/02896561170/02896561170_diploma.xml",
+        "historico": "legado/02896561170/02896561170_historico.xml",
+        "rvdd": "legado/02896561170/02896561170_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02943036188",
+      "nome": "Daiane Ribeiro de Oliveira",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "effd511d-e47a-4a9d-843c-c296db8ce85b",
+      "diplomadoId": "3364fce9-01b8-4b29-bf69-9fc2fd937262",
+      "arquivos": {
+        "diploma": "legado/02943036188/02943036188_diploma.xml",
+        "historico": "legado/02943036188/02943036188_historico.xml",
+        "rvdd": "legado/02943036188/02943036188_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "02952374147",
+      "nome": "Edson Alvarenga da Silva",
+      "status": "erro",
+      "motivo": "Curso não mapeado: HistóRia (grau: Licenciatura)"
+    },
+    {
+      "cpf": "03101922186",
+      "nome": "Aletides Bittencourt Vital",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "aa36e042-9181-4125-a5f0-944fd1bd11df",
+      "diplomadoId": "b973f91f-7844-454d-996a-e1c9251f8121",
+      "arquivos": {
+        "diploma": "legado/03101922186/03101922186_diploma.xml",
+        "historico": "legado/03101922186/03101922186_historico.xml",
+        "rvdd": "legado/03101922186/03101922186_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03104725128",
+      "nome": "Viviane Dias da Cruz",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "e0f1117b-0875-49a8-bb1d-f29292a02da3",
+      "diplomadoId": "3f325486-2501-4aa4-bc1e-f31dbbebec86",
+      "arquivos": {
+        "diploma": "legado/03104725128/03104725128_diploma.xml",
+        "historico": "legado/03104725128/03104725128_historico.xml",
+        "rvdd": "legado/03104725128/03104725128_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03123828123",
+      "nome": "Lucas Silveira Oliveira",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "921a8bd1-2e0b-46ca-9ffc-276c432d5b7f",
+      "diplomadoId": "454c1923-5ee0-4ea7-b898-43cf9a929b78",
+      "arquivos": {},
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03197605101",
+      "nome": "Samira AmáLia Donadelli Almeida",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "b73aef6c-36fb-485f-9da0-d47c16d37afd",
+      "diplomadoId": "1f925fc0-7078-4483-b04c-ac6c8ced9f20",
+      "arquivos": {
+        "diploma": "legado/03197605101/03197605101_diploma.xml",
+        "historico": "legado/03197605101/03197605101_historico.xml",
+        "rvdd": "legado/03197605101/03197605101_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03263834177",
+      "nome": "Paulo Ricardo Rosa Silva",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "62eb8956-cb87-475a-9efe-27a77ba81f18",
+      "diplomadoId": "52128086-7272-40d3-9731-2fa03ab482c0",
+      "arquivos": {
+        "diploma": "legado/03263834177/03263834177_diploma.xml",
+        "historico": "legado/03263834177/03263834177_historico.xml",
+        "rvdd": "legado/03263834177/03263834177_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03275890190",
+      "nome": "Fernanda Domingues Gomes Duarte",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "bb7430e5-19f1-4ae1-b7f9-94a641b6ed05",
+      "diplomadoId": "35b1b307-1c33-4d0e-94b0-2e545ff8c1db",
+      "arquivos": {
+        "diploma": "legado/03275890190/03275890190_diploma.xml",
+        "historico": "legado/03275890190/03275890190_historico.xml",
+        "rvdd": "legado/03275890190/03275890190_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03324349150",
+      "nome": "Patricia Valentim do Prado",
+      "status": "erro",
+      "motivo": "Curso não mapeado: HistóRia (grau: Licenciatura)"
+    },
+    {
+      "cpf": "03330425148",
+      "nome": "Tasiane Cristini Muniz da Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "3b94d94a-4f6d-49fd-a9ef-6cacab896eee",
+      "diplomadoId": "33fbc1c8-aae9-49ef-bd36-78600c34d919",
+      "arquivos": {
+        "diploma": "legado/03330425148/03330425148_diploma.xml",
+        "historico": "legado/03330425148/03330425148_historico.xml",
+        "rvdd": "legado/03330425148/03330425148_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03345946181",
+      "nome": "DéBora Cristiane Aleixo",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "6c1967fd-ac57-4e22-96cc-f5bb45652090",
+      "diplomadoId": "ab14ec17-6fdb-4257-adf4-5d0d37681f63",
+      "arquivos": {
+        "diploma": "legado/03345946181/03345946181_diploma.xml",
+        "historico": "legado/03345946181/03345946181_historico.xml",
+        "rvdd": "legado/03345946181/03345946181_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03377934170",
+      "nome": "Mariela Costa Borges",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "cbc0c60b-b4ca-4999-8aff-8043ae387c47",
+      "diplomadoId": "b0497c20-2a69-4c35-a881-9e0284556701",
+      "arquivos": {
+        "diploma": "legado/03377934170/03377934170_diploma.xml",
+        "historico": "legado/03377934170/03377934170_historico.xml",
+        "rvdd": "legado/03377934170/03377934170_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03461236152",
+      "nome": "Laura Caroline Dias Quirino de Souza",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "c7c37ce9-b4ba-46e8-8775-18b6de48a30b",
+      "diplomadoId": "2ab762b7-ef67-4387-8d7b-ab18e04697d7",
+      "arquivos": {
+        "diploma": "legado/03461236152/03461236152_diploma.xml",
+        "historico": "legado/03461236152/03461236152_historico.xml",
+        "rvdd": "legado/03461236152/03461236152_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03561282105",
+      "nome": "Vinicius Henrique Pereira Mendonça",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "4f07ee9c-4ca3-44a2-b923-f82cde2729d2",
+      "diplomadoId": "dd675c53-f2d9-40ef-8d85-1abad944cb96",
+      "arquivos": {
+        "diploma": "legado/03561282105/03561282105_diploma.xml",
+        "historico": "legado/03561282105/03561282105_historico.xml",
+        "rvdd": "legado/03561282105/03561282105_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03600002155",
+      "nome": "Abel Fernandes Kotlewski Neto",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "b9b3a68d-1ad3-4850-a141-9005aeea9be0",
+      "diplomadoId": "0af345df-28ae-4a54-a87d-4d418f6b1acb",
+      "arquivos": {
+        "diploma": "legado/03600002155/03600002155_diploma.xml",
+        "historico": "legado/03600002155/03600002155_historico.xml",
+        "rvdd": "legado/03600002155/03600002155_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03644450170",
+      "nome": "Yasmin de Oliveira Borges",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "ac50b206-8244-47aa-b4ee-1f365f95d50b",
+      "diplomadoId": "3bf158a4-9c0b-4bb5-a0d9-5d470358c4aa",
+      "arquivos": {
+        "diploma": "legado/03644450170/03644450170_diploma.xml",
+        "historico": "legado/03644450170/03644450170_historico.xml",
+        "rvdd": "legado/03644450170/03644450170_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03746566142",
+      "nome": "Renata Silva Garcia de Oliveira",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "67698413-bd6b-4e2e-b1c7-4251c4afef99",
+      "diplomadoId": "1876f4b1-446e-428d-a028-d4764b4873ea",
+      "arquivos": {
+        "diploma": "legado/03746566142/03746566142_diploma.xml",
+        "historico": "legado/03746566142/03746566142_historico.xml",
+        "rvdd": "legado/03746566142/03746566142_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "03788699140",
+      "nome": "Mikaelly Carbolin Borges",
+      "status": "erro",
+      "motivo": "Curso não mapeado: HistóRia (grau: Licenciatura)"
+    },
+    {
+      "cpf": "03955086143",
+      "nome": "Andrielly de Souza Tosta",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "d67f317f-c77f-40e6-bdbd-f7871e4265c7",
+      "diplomadoId": "7f47fa07-5acd-4326-a43c-1258145ad411",
+      "arquivos": {
+        "diploma": "legado/03955086143/03955086143_diploma.xml",
+        "historico": "legado/03955086143/03955086143_historico.xml",
+        "rvdd": "legado/03955086143/03955086143_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04006960107",
+      "nome": "Beatriz Souza Lemos",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "a74bb074-f396-4ca5-97a9-23fb349464b4",
+      "diplomadoId": "29085f7c-0209-41ce-8b49-b935e03878a8",
+      "arquivos": {
+        "diploma": "legado/04006960107/04006960107_diploma.xml",
+        "historico": "legado/04006960107/04006960107_historico.xml"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04020654174",
+      "nome": "Rafaela Lopes Freitas",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "e41723f4-211a-4e95-835b-eb0c8de46c1d",
+      "diplomadoId": "95f63a98-3406-46fa-8ba0-0fecb02db43c",
+      "arquivos": {
+        "diploma": "legado/04020654174/04020654174_diploma.xml",
+        "historico": "legado/04020654174/04020654174_historico.xml",
+        "rvdd": "legado/04020654174/04020654174_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04020655146",
+      "nome": "Maria Eduarda Lopes Freitas",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "2065ad2f-00ac-409e-a3c9-78c5ee05cd48",
+      "diplomadoId": "a7326db6-d54e-4525-b9eb-76447bbe9089",
+      "arquivos": {
+        "diploma": "legado/04020655146/04020655146_diploma.xml",
+        "historico": "legado/04020655146/04020655146_historico.xml",
+        "rvdd": "legado/04020655146/04020655146_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04028010160",
+      "nome": "Roberta Dutra Ferreira Costa",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "f80d1404-3395-4a74-bc58-10451192634c",
+      "diplomadoId": "9e9d4ef1-0509-46a3-8260-16b17f343df3",
+      "arquivos": {
+        "diploma": "legado/04028010160/04028010160_diploma.xml",
+        "historico": "legado/04028010160/04028010160_historico.xml",
+        "rvdd": "legado/04028010160/04028010160_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04076947142",
+      "nome": "Francisco Ovidio Mariano de Paula",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "cc819cf7-1bdc-4140-93eb-e308851429e1",
+      "diplomadoId": "030e006e-fd8d-4676-98fb-94cde57a62f8",
+      "arquivos": {
+        "diploma": "legado/04076947142/04076947142_diploma.xml",
+        "historico": "legado/04076947142/04076947142_historico.xml",
+        "rvdd": "legado/04076947142/04076947142_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04172197175",
+      "nome": "Claudemir Paulo de Oliveira",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "c974776e-a47d-4e21-a3e4-617824f74264",
+      "diplomadoId": "d48cfd19-9eb3-4752-b9d3-c5a50e3b4055",
+      "arquivos": {
+        "diploma": "legado/04172197175/04172197175_diploma.xml",
+        "historico": "legado/04172197175/04172197175_historico.xml",
+        "rvdd": "legado/04172197175/04172197175_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04255814112",
+      "nome": "Luiz Fernando Cardoso Borges",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "0ef4983e-5a5c-4d44-9bca-c806f6923604",
+      "diplomadoId": "2a356c8e-ac59-4da7-a126-a57fa8da79bf",
+      "arquivos": {
+        "diploma": "legado/04255814112/04255814112_diploma.xml",
+        "historico": "legado/04255814112/04255814112_historico.xml",
+        "rvdd": "legado/04255814112/04255814112_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04271363189",
+      "nome": "PatríCia Carvalho Rezende Lopes",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "2f9c97fa-7f1f-4c82-abfb-f67bfdd77554",
+      "diplomadoId": "fbc5bd3a-e8e9-450c-8eec-8543997b83c6",
+      "arquivos": {
+        "diploma": "legado/04271363189/04271363189_diploma.xml",
+        "historico": "legado/04271363189/04271363189_historico.xml",
+        "rvdd": "legado/04271363189/04271363189_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04296775103",
+      "nome": "Paulo Henrique Oliveira dos Santos",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "a40b6438-95c1-49bb-8ebf-fa034a3c763a",
+      "diplomadoId": "134bc274-b1fb-4c3d-a869-9562e84b6bb3",
+      "arquivos": {
+        "diploma": "legado/04296775103/04296775103_diploma.xml",
+        "historico": "legado/04296775103/04296775103_historico.xml",
+        "rvdd": "legado/04296775103/04296775103_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04342600021",
+      "nome": "Ana Caroliny de Freitas Macuglia",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "561ae2e3-70e0-4094-96bd-47e6a295bf48",
+      "diplomadoId": "d246edeb-f394-43e7-9155-a8afe84c8d5a",
+      "arquivos": {
+        "diploma": "legado/04342600021/04342600021_diploma.xml",
+        "historico": "legado/04342600021/04342600021_historico.xml",
+        "rvdd": "legado/04342600021/04342600021_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04367849120",
+      "nome": "Natalia Silva Pereira",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "21d8b34d-0811-42f1-bc44-f1fdf3329bc3",
+      "diplomadoId": "6a6119ca-0d62-4d09-a414-81720680ea89",
+      "arquivos": {
+        "diploma": "legado/04367849120/04367849120_diploma.xml",
+        "historico": "legado/04367849120/04367849120_historico.xml",
+        "rvdd": "legado/04367849120/04367849120_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04507867142",
+      "nome": "JéSsica Leana Barbosa",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "65c54cb6-f6a3-4ae3-824f-1fe14fe86f5a",
+      "diplomadoId": "831cfddf-95a1-46fd-a470-d4db1430f443",
+      "arquivos": {
+        "diploma": "legado/04507867142/04507867142_diploma.xml",
+        "historico": "legado/04507867142/04507867142_historico.xml",
+        "rvdd": "legado/04507867142/04507867142_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04559818177",
+      "nome": "Tainara Brito",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "f2cf3828-2762-4621-b10c-a783dd3e3895",
+      "diplomadoId": "fcd91eaa-15bf-474d-b28d-938db8b57a9f",
+      "arquivos": {
+        "diploma": "legado/04559818177/04559818177_diploma.xml",
+        "historico": "legado/04559818177/04559818177_historico.xml",
+        "rvdd": "legado/04559818177/04559818177_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04574929103",
+      "nome": "Hernanes Roque Melo dos Santos",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "ff8bedd3-cb7b-499a-95cd-64b0dd60a4a8",
+      "diplomadoId": "36e6c0a7-7c4e-48d9-8629-12f4c3ee3620",
+      "arquivos": {
+        "diploma": "legado/04574929103/04574929103_diploma.xml",
+        "historico": "legado/04574929103/04574929103_historico.xml",
+        "rvdd": "legado/04574929103/04574929103_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04632919136",
+      "nome": "Marina Silva Fernandes",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "b0dd18bd-b3d2-486d-a828-4892e1e61826",
+      "diplomadoId": "5348e038-6907-41e3-9f0d-62d0f747aeaa",
+      "arquivos": {
+        "diploma": "legado/04632919136/04632919136_diploma.xml",
+        "historico": "legado/04632919136/04632919136_historico.xml",
+        "rvdd": "legado/04632919136/04632919136_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04708693133",
+      "nome": "Mileni Maia Rangel",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "ca715187-0d66-4995-a2e9-5d34b8fce33a",
+      "diplomadoId": "9d2cd170-5242-4a4a-8cb1-79e91d67c186",
+      "arquivos": {
+        "diploma": "legado/04708693133/04708693133_diploma.xml",
+        "historico": "legado/04708693133/04708693133_historico.xml",
+        "rvdd": "legado/04708693133/04708693133_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04727035103",
+      "nome": "Iris Melissa Alvarenga Santos",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "1f1c06f0-bc01-474c-98cf-7a34e5026a30",
+      "diplomadoId": "5443f9c0-dcf6-4749-812b-87b3cddd0f71",
+      "arquivos": {
+        "diploma": "legado/04727035103/04727035103_diploma.xml",
+        "historico": "legado/04727035103/04727035103_historico.xml",
+        "rvdd": "legado/04727035103/04727035103_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04730605152",
+      "nome": "Bianca Rodrigues Batista",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "58bbff3f-e822-4b9f-ad4b-52465bd506d1",
+      "diplomadoId": "c1748fc7-51ce-485c-bd65-21c2ee26c7d2",
+      "arquivos": {
+        "diploma": "legado/04730605152/04730605152_diploma.xml",
+        "historico": "legado/04730605152/04730605152_historico.xml",
+        "rvdd": "legado/04730605152/04730605152_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04754517164",
+      "nome": "Carlos Eduardo Leonel Santos",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "d01103a6-125f-4c19-8901-515d1d7d485e",
+      "diplomadoId": "e8afa95f-f91f-46d4-b0c7-a25b6408dcec",
+      "arquivos": {
+        "diploma": "legado/04754517164/04754517164_diploma.xml",
+        "historico": "legado/04754517164/04754517164_historico.xml",
+        "rvdd": "legado/04754517164/04754517164_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04774465151",
+      "nome": "Heitor Correia Silva",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "26a4c9d7-4924-41ba-b185-4696785bb533",
+      "diplomadoId": "ef4ce6e4-c02c-43ce-949f-e678d87625c0",
+      "arquivos": {
+        "diploma": "legado/04774465151/04774465151_diploma.xml",
+        "historico": "legado/04774465151/04774465151_historico.xml",
+        "rvdd": "legado/04774465151/04774465151_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04866846100",
+      "nome": "Andressa de Paula Silva Macario",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "51747e43-911f-4fbb-b6f0-a6145c369c8f",
+      "diplomadoId": "d84fdbf7-14bd-437f-9036-577e04a3881a",
+      "arquivos": {
+        "diploma": "legado/04866846100/04866846100_diploma.xml",
+        "historico": "legado/04866846100/04866846100_historico.xml",
+        "rvdd": "legado/04866846100/04866846100_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04882400189",
+      "nome": "Lilian Mendes Ferreira",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "ac5f2cbd-7257-4772-913a-d3867bc20476",
+      "diplomadoId": "5e1f48c5-dccf-426a-a5de-894c33cf98e9",
+      "arquivos": {
+        "diploma": "legado/04882400189/04882400189_diploma.xml",
+        "historico": "legado/04882400189/04882400189_historico.xml",
+        "rvdd": "legado/04882400189/04882400189_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04886803105",
+      "nome": "Bruna Lopes Queiroz",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "44b45185-88cb-4d55-9cbe-48877910f9e2",
+      "diplomadoId": "a4ced0fc-91f0-4d71-9fe0-dcba2c6d66ed",
+      "arquivos": {
+        "diploma": "legado/04886803105/04886803105_diploma.xml",
+        "historico": "legado/04886803105/04886803105_historico.xml",
+        "rvdd": "legado/04886803105/04886803105_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04921608130",
+      "nome": "Bianca Ferreira da Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "9e47052d-033a-43d7-acc0-455c5e69dfb4",
+      "diplomadoId": "c3c5a690-4fdd-464c-b717-e3919cad79dd",
+      "arquivos": {
+        "diploma": "legado/04921608130/04921608130_diploma.xml",
+        "historico": "legado/04921608130/04921608130_historico.xml",
+        "rvdd": "legado/04921608130/04921608130_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04921813140",
+      "nome": "Larissa dos Anjos Silva",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "662a0edd-2533-4da3-8b7d-e0e010659eb9",
+      "diplomadoId": "93aacc73-bb58-4b6e-be86-8efb4729dd78",
+      "arquivos": {
+        "diploma": "legado/04921813140/04921813140_diploma.xml",
+        "historico": "legado/04921813140/04921813140_historico.xml",
+        "rvdd": "legado/04921813140/04921813140_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "04923722177",
+      "nome": "Danielle de Oliveira",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "cc61d3fa-3cd8-49f8-97d1-405c1cb88c90",
+      "diplomadoId": "489dca99-9f8f-454f-849b-08fa13842ac0",
+      "arquivos": {
+        "diploma": "legado/04923722177/04923722177_diploma.xml",
+        "historico": "legado/04923722177/04923722177_historico.xml",
+        "rvdd": "legado/04923722177/04923722177_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05021102109",
+      "nome": "Gabriel da Silva",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "21062383-bb94-4dd2-96b2-3f1e29179c16",
+      "diplomadoId": "6decef3a-f8e4-40ee-b116-88eb3d92f879",
+      "arquivos": {
+        "diploma": "legado/05021102109/05021102109_diploma.xml",
+        "historico": "legado/05021102109/05021102109_historico.xml",
+        "rvdd": "legado/05021102109/05021102109_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05118742196",
+      "nome": "Otavio Afonso Sá Machado",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "b7a2755d-d9d5-4213-ae94-14cbcfa745df",
+      "diplomadoId": "b90c56c9-95bf-49c9-a8e2-8d4ec76dbd79",
+      "arquivos": {
+        "diploma": "legado/05118742196/05118742196_diploma.xml",
+        "historico": "legado/05118742196/05118742196_historico.xml",
+        "rvdd": "legado/05118742196/05118742196_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05177951162",
+      "nome": "Bruno Moreira Rodrigues",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "d9df7bd1-6219-4abf-ac56-c2675deb95ec",
+      "diplomadoId": "e22ad928-8441-48c7-9702-62f524e4b93b",
+      "arquivos": {
+        "diploma": "legado/05177951162/05177951162_diploma.xml",
+        "historico": "legado/05177951162/05177951162_historico.xml",
+        "rvdd": "legado/05177951162/05177951162_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05209142108",
+      "nome": "Elaine Muniz Miranda",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "8b5d8dfe-2007-4dea-9004-fc6b1e79702d",
+      "diplomadoId": "b3e9ded2-f14b-4f1b-9222-98f7563295c1",
+      "arquivos": {
+        "diploma": "legado/05209142108/05209142108_diploma.xml",
+        "historico": "legado/05209142108/05209142108_historico.xml",
+        "rvdd": "legado/05209142108/05209142108_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05277889108",
+      "nome": "Vinicius Rodrigues Silva",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "c2312aa9-e965-4d7d-82cd-129d4d77904d",
+      "diplomadoId": "54fadd11-f2ae-4ffb-95bc-f715e5d7188a",
+      "arquivos": {
+        "diploma": "legado/05277889108/05277889108_diploma.xml",
+        "historico": "legado/05277889108/05277889108_historico.xml",
+        "rvdd": "legado/05277889108/05277889108_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05286722156",
+      "nome": "Elaine Nogueira Luiz",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "6b5efdca-0f12-4234-bd55-b9d66eb16dd8",
+      "diplomadoId": "96650716-9662-437c-88d3-0af1a55e7428",
+      "arquivos": {
+        "diploma": "legado/05286722156/05286722156_diploma.xml",
+        "historico": "legado/05286722156/05286722156_historico.xml",
+        "rvdd": "legado/05286722156/05286722156_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05329497140",
+      "nome": "PatríCia TôRres Bettiol Brezolim",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "02fefec7-a231-4ed1-93e9-2cc6e00745d8",
+      "diplomadoId": "75a82711-32dc-4d07-9d0b-1ca05ac79f91",
+      "arquivos": {
+        "diploma": "legado/05329497140/05329497140_diploma.xml",
+        "historico": "legado/05329497140/05329497140_historico.xml",
+        "rvdd": "legado/05329497140/05329497140_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05362241109",
+      "nome": "Sabrina da Silva Albuquerque",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "b810d230-2684-40ec-8492-4502b4681409",
+      "diplomadoId": "6741e3c9-a86a-436d-b1cc-92bb29288290",
+      "arquivos": {
+        "diploma": "legado/05362241109/05362241109_diploma.xml",
+        "historico": "legado/05362241109/05362241109_historico.xml",
+        "rvdd": "legado/05362241109/05362241109_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05427773126",
+      "nome": "Amanda de Paula Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "dac894ff-5c84-42e7-b555-5cf2844b40b8",
+      "diplomadoId": "2e0ccb87-80a5-45c3-ad98-5d77508fcabd",
+      "arquivos": {
+        "diploma": "legado/05427773126/05427773126_diploma.xml",
+        "historico": "legado/05427773126/05427773126_historico.xml",
+        "rvdd": "legado/05427773126/05427773126_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05429931128",
+      "nome": "Vitor Hugo da Silva Santos",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "4c761b2e-2244-4b62-bfa6-50a3a6344c56",
+      "diplomadoId": "cd677674-193a-40f6-aa4a-08c702475bc6",
+      "arquivos": {
+        "diploma": "legado/05429931128/05429931128_diploma.xml",
+        "historico": "legado/05429931128/05429931128_historico.xml",
+        "rvdd": "legado/05429931128/05429931128_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05435071143",
+      "nome": "Rhuan ViníCios Ajalas Ferreira",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "5642e2ca-c61b-4d7b-be15-c0f22a9ce5fd",
+      "diplomadoId": "373be794-23c4-41ae-8a31-633a86d56ee8",
+      "arquivos": {
+        "diploma": "legado/05435071143/05435071143_diploma.xml",
+        "historico": "legado/05435071143/05435071143_historico.xml",
+        "rvdd": "legado/05435071143/05435071143_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05509770155",
+      "nome": "Tainan Marques Souza",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "a9b0c3ac-6a11-4287-8352-c8c985835e7d",
+      "diplomadoId": "7313672a-b2e2-4b92-8c67-6f4795fa1370",
+      "arquivos": {
+        "diploma": "legado/05509770155/05509770155_diploma.xml",
+        "historico": "legado/05509770155/05509770155_historico.xml",
+        "rvdd": "legado/05509770155/05509770155_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05601656177",
+      "nome": "Cleiton José da Silva Junior",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "b9420179-0c50-42aa-ba38-96d2d927d7e3",
+      "diplomadoId": "3ac8f774-a639-4f2d-83fd-171184305566",
+      "arquivos": {
+        "diploma": "legado/05601656177/05601656177_diploma.xml",
+        "historico": "legado/05601656177/05601656177_historico.xml",
+        "rvdd": "legado/05601656177/05601656177_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05716367135",
+      "nome": "Kaila Freitas Santos",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "ba908d02-7ebe-4df0-9c00-c81b75dc1ef4",
+      "diplomadoId": "c159d225-4d5f-4f59-9a7b-4a3d889131e8",
+      "arquivos": {
+        "diploma": "legado/05716367135/05716367135_diploma.xml",
+        "historico": "legado/05716367135/05716367135_historico.xml",
+        "rvdd": "legado/05716367135/05716367135_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05724251124",
+      "nome": "Adriano Correia da Silva",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "feaa9f9a-7846-4116-ac03-bca1e8f6af64",
+      "diplomadoId": "0dcdd1bb-1514-4c2c-b571-35d406f1e95c",
+      "arquivos": {
+        "diploma": "legado/05724251124/05724251124_diploma.xml",
+        "historico": "legado/05724251124/05724251124_historico.xml",
+        "rvdd": "legado/05724251124/05724251124_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05843540103",
+      "nome": "Caroline Matos Batista",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "574e4e9a-46cd-491a-b587-539e907aaf37",
+      "diplomadoId": "e1d5c69c-8e64-4380-8e76-13c73c572ecd",
+      "arquivos": {
+        "diploma": "legado/05843540103/05843540103_diploma.xml",
+        "historico": "legado/05843540103/05843540103_historico.xml",
+        "rvdd": "legado/05843540103/05843540103_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05914177154",
+      "nome": "Erick Queiroz Silva",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "f5a1ac8d-9cac-4d4a-a745-bffb147967bb",
+      "diplomadoId": "33a4fd86-a977-4158-b8eb-237c6cdcf3bd",
+      "arquivos": {
+        "diploma": "legado/05914177154/05914177154_diploma.xml",
+        "historico": "legado/05914177154/05914177154_historico.xml",
+        "rvdd": "legado/05914177154/05914177154_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05945645141",
+      "nome": "Leticia Rodrigues Rezende",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "38c10c31-8334-4928-9830-9fbdb99afe86",
+      "diplomadoId": "ae05e15d-d075-47ac-bedc-b811794bf8cf",
+      "arquivos": {
+        "diploma": "legado/05945645141/05945645141_diploma.xml",
+        "historico": "legado/05945645141/05945645141_historico.xml",
+        "rvdd": "legado/05945645141/05945645141_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05950506111",
+      "nome": "Eduardo de Freitas Franco",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "1ca9dea9-8b9b-4a72-ae5d-d6ac3568f714",
+      "diplomadoId": "201fcb17-efb6-4ad8-a17c-ced8b878d494",
+      "arquivos": {
+        "diploma": "legado/05950506111/05950506111_diploma.xml",
+        "historico": "legado/05950506111/05950506111_historico.xml",
+        "rvdd": "legado/05950506111/05950506111_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05954439150",
+      "nome": "Vitor Vital Barbosa",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "0480ffc9-6ab6-4e90-8505-0fea0f98b02a",
+      "diplomadoId": "36ddd202-857d-49cb-9a3a-33858411b890",
+      "arquivos": {
+        "diploma": "legado/05954439150/05954439150_diploma.xml",
+        "historico": "legado/05954439150/05954439150_historico.xml",
+        "rvdd": "legado/05954439150/05954439150_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "05959614103",
+      "nome": "Nathalia Ferreira de Souza",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "419b4406-97d5-473a-b670-1e829538e2ef",
+      "diplomadoId": "439b86a8-604b-4a41-9197-70194a3b06b9",
+      "arquivos": {
+        "diploma": "legado/05959614103/05959614103_diploma.xml",
+        "historico": "legado/05959614103/05959614103_historico.xml",
+        "rvdd": "legado/05959614103/05959614103_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06083794170",
+      "nome": "Mauro Neto Borges Simei",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "6bce3598-f55c-4c83-978c-1683e9afb63d",
+      "diplomadoId": "84e6c217-dfb0-491e-ae05-04e5d064b243",
+      "arquivos": {
+        "diploma": "legado/06083794170/06083794170_diploma.xml",
+        "historico": "legado/06083794170/06083794170_historico.xml",
+        "rvdd": "legado/06083794170/06083794170_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06133721154",
+      "nome": "éVelyn da Silva Nascimento",
+      "curso": "Educação Física",
+      "status": "importado",
+      "diplomaId": "e6152c30-305a-4c18-adf0-e679bbb16efb",
+      "diplomadoId": "27b35b5d-9691-468d-8948-a266e23e6cc9",
+      "arquivos": {
+        "diploma": "legado/06133721154/06133721154_diploma.xml",
+        "historico": "legado/06133721154/06133721154_historico.xml",
+        "rvdd": "legado/06133721154/06133721154_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06430845176",
+      "nome": "Igor Henriques Barbosa Melo",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "0e7afd32-46de-4abe-a096-53c044547170",
+      "diplomadoId": "240acb3f-360b-477a-868e-0a8fe3c6785f",
+      "arquivos": {
+        "diploma": "legado/06430845176/06430845176_diploma.xml",
+        "historico": "legado/06430845176/06430845176_historico.xml",
+        "rvdd": "legado/06430845176/06430845176_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06466779181",
+      "nome": "VitóRia GonçAlves Fernandes",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "a2cd5ba1-f93b-4ea7-b39b-71c701bc545d",
+      "diplomadoId": "bb5641c6-279a-470a-90e5-77a702635e6e",
+      "arquivos": {
+        "diploma": "legado/06466779181/06466779181_diploma.xml",
+        "historico": "legado/06466779181/06466779181_historico.xml",
+        "rvdd": "legado/06466779181/06466779181_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06504371105",
+      "nome": "Giovana Santos Borges",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "974a1be4-71b6-43fd-b820-68bdd5d75c9f",
+      "diplomadoId": "d4fb3b05-bd58-4c4b-9932-cb86781bc74a",
+      "arquivos": {
+        "diploma": "legado/06504371105/06504371105_diploma.xml",
+        "historico": "legado/06504371105/06504371105_historico.xml",
+        "rvdd": "legado/06504371105/06504371105_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06519248126",
+      "nome": "ViníCius Martins Rodrigues Guedes",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "b5def970-a5ed-4600-bcb3-c3cd6b8d0360",
+      "diplomadoId": "a6baeb36-ac11-4775-a6fd-9b0957a8448c",
+      "arquivos": {
+        "diploma": "legado/06519248126/06519248126_diploma.xml",
+        "historico": "legado/06519248126/06519248126_historico.xml",
+        "rvdd": "legado/06519248126/06519248126_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06519483125",
+      "nome": "LuíZa Fernanda Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "701dcf07-4441-4f68-99a5-e106b91eaedb",
+      "diplomadoId": "ac41aa83-60ae-4585-a0d4-3934b794d85d",
+      "arquivos": {
+        "diploma": "legado/06519483125/06519483125_diploma.xml",
+        "historico": "legado/06519483125/06519483125_historico.xml",
+        "rvdd": "legado/06519483125/06519483125_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06554335110",
+      "nome": "Daniele Barbosa de Souza",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "30e424f5-c1b3-4941-989f-c1fda53e7640",
+      "diplomadoId": "1e141844-4e2d-4fb9-a2d2-7d96587fabfb",
+      "arquivos": {
+        "diploma": "legado/06554335110/06554335110_diploma.xml",
+        "historico": "legado/06554335110/06554335110_historico.xml",
+        "rvdd": "legado/06554335110/06554335110_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06626587102",
+      "nome": "Ana Claudia Felix de Athaide de Almeida",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "fcffa7de-cc25-42e2-93a4-98bffcf6d45d",
+      "diplomadoId": "a28c481a-1297-43f2-b6d5-fc2c924062e9",
+      "arquivos": {
+        "diploma": "legado/06626587102/06626587102_diploma.xml",
+        "historico": "legado/06626587102/06626587102_historico.xml",
+        "rvdd": "legado/06626587102/06626587102_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06651120174",
+      "nome": "Marcos ViníCius Freitas Rodrigues",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "847f6224-f019-4b70-92df-ec0964051437",
+      "diplomadoId": "35bccea1-7f08-4bc2-a175-fb24f8f3a9d4",
+      "arquivos": {
+        "diploma": "legado/06651120174/06651120174_diploma.xml",
+        "historico": "legado/06651120174/06651120174_historico.xml",
+        "rvdd": "legado/06651120174/06651120174_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06668573185",
+      "nome": "Leonardo Pereira da Silva",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "91e19547-eb24-480b-b541-5a5944eb1908",
+      "diplomadoId": "0bb80af6-9f2f-4769-9f11-38008aabf1f7",
+      "arquivos": {
+        "diploma": "legado/06668573185/06668573185_diploma.xml",
+        "historico": "legado/06668573185/06668573185_historico.xml",
+        "rvdd": "legado/06668573185/06668573185_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06668601146",
+      "nome": "GléCia Silva Pereira",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "231bffa3-eb26-42a5-b2f2-4d49b9a6aee8",
+      "diplomadoId": "ea8a8940-2d07-4374-9249-9c7b466cecb9",
+      "arquivos": {
+        "diploma": "legado/06668601146/06668601146_diploma.xml",
+        "historico": "legado/06668601146/06668601146_historico.xml",
+        "rvdd": "legado/06668601146/06668601146_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06673495103",
+      "nome": "Camila Fernanda Pereira",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "b3a34a42-e467-4c59-a98c-5656ecb0ed0b",
+      "diplomadoId": "8541758c-3c4f-4499-a6f8-93747f322170",
+      "arquivos": {
+        "diploma": "legado/06673495103/06673495103_diploma.xml",
+        "historico": "legado/06673495103/06673495103_historico.xml",
+        "rvdd": "legado/06673495103/06673495103_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06674078123",
+      "nome": "Marcos Vinicius Silva Freitas",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "c3dfe226-19e4-449d-8653-6399f6ba7e1d",
+      "diplomadoId": "bd2c741a-a669-470f-a70b-3b5c3f4767b2",
+      "arquivos": {
+        "diploma": "legado/06674078123/06674078123_diploma.xml",
+        "historico": "legado/06674078123/06674078123_historico.xml",
+        "rvdd": "legado/06674078123/06674078123_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06676549174",
+      "nome": "Duani Beatriz Cardoso Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "059d397d-3d6d-4b14-b348-ac4816d9d4f3",
+      "diplomadoId": "5aad0f44-d8c2-4654-88cf-7dd8e78c330a",
+      "arquivos": {
+        "diploma": "legado/06676549174/06676549174_diploma.xml",
+        "historico": "legado/06676549174/06676549174_historico.xml",
+        "rvdd": "legado/06676549174/06676549174_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06677587126",
+      "nome": "Gabriely Alves de Queiroz",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "e540378f-1dbe-4b64-8718-2076db1a3e79",
+      "diplomadoId": "b8b9f865-591d-42d0-9d4a-5011b0b272ac",
+      "arquivos": {
+        "diploma": "legado/06677587126/06677587126_diploma.xml",
+        "historico": "legado/06677587126/06677587126_historico.xml",
+        "rvdd": "legado/06677587126/06677587126_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06686662186",
+      "nome": "Ludimila Cunha Coelho de Souza",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "4e806de1-ad07-401c-a367-dabe953a32de",
+      "diplomadoId": "b4da2ebb-49fb-4dd1-acfa-d8209c62756f",
+      "arquivos": {
+        "diploma": "legado/06686662186/06686662186_diploma.xml",
+        "historico": "legado/06686662186/06686662186_historico.xml",
+        "rvdd": "legado/06686662186/06686662186_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06739345198",
+      "nome": "Ana Caroline Ribeiro Rezende",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "e7bf7641-a47f-4ba3-9d02-74d85db8f9d9",
+      "diplomadoId": "c8918c2b-2b69-4384-bb1e-505a319541c4",
+      "arquivos": {
+        "diploma": "legado/06739345198/06739345198_diploma.xml",
+        "historico": "legado/06739345198/06739345198_historico.xml",
+        "rvdd": "legado/06739345198/06739345198_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06748223156",
+      "nome": "Rosiele Mendes Nogueira",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "bc2f3898-7574-4994-955a-790bb88e6ba6",
+      "diplomadoId": "c99badf4-2a52-4c81-a38f-6e4b32961b54",
+      "arquivos": {
+        "diploma": "legado/06748223156/06748223156_diploma.xml",
+        "historico": "legado/06748223156/06748223156_historico.xml",
+        "rvdd": "legado/06748223156/06748223156_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06753585150",
+      "nome": "Myllene Pereira de Paula",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "75990cf2-6263-46ea-82c9-fe5b3ca35ad9",
+      "diplomadoId": "dd56abf6-3e7b-42c1-a8ea-dedceb5af27a",
+      "arquivos": {
+        "diploma": "legado/06753585150/06753585150_diploma.xml",
+        "historico": "legado/06753585150/06753585150_historico.xml",
+        "rvdd": "legado/06753585150/06753585150_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06756618113",
+      "nome": "Larissa Souza Soares",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "4bcc04d1-843b-48b8-9c55-859a3a846324",
+      "diplomadoId": "7cf299f1-fa67-417c-bca9-d3646c191b55",
+      "arquivos": {
+        "diploma": "legado/06756618113/06756618113_diploma.xml",
+        "historico": "legado/06756618113/06756618113_historico.xml",
+        "rvdd": "legado/06756618113/06756618113_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06786822169",
+      "nome": "Wellen Batista Assis",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "0f17eaac-09d6-456e-8e20-d0ef3592920c",
+      "diplomadoId": "91cb3fbf-4579-4d52-84f4-339d89b95b0c",
+      "arquivos": {
+        "diploma": "legado/06786822169/06786822169_diploma.xml",
+        "historico": "legado/06786822169/06786822169_historico.xml",
+        "rvdd": "legado/06786822169/06786822169_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06867953182",
+      "nome": "Bruno Andrade Vieira",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "3fae572b-846a-47a3-b49e-d40e0020c2e8",
+      "diplomadoId": "7f860eb6-3ff6-4196-891e-df037574fee5",
+      "arquivos": {
+        "diploma": "legado/06867953182/06867953182_diploma.xml",
+        "historico": "legado/06867953182/06867953182_historico.xml",
+        "rvdd": "legado/06867953182/06867953182_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06872074108",
+      "nome": "Stefany Fernandes de Souza",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "68d50643-0685-4e93-bb85-e4af74b997d4",
+      "diplomadoId": "0064110a-fdf1-435c-ac14-8e0dee4d8389",
+      "arquivos": {
+        "diploma": "legado/06872074108/06872074108_diploma.xml",
+        "historico": "legado/06872074108/06872074108_historico.xml",
+        "rvdd": "legado/06872074108/06872074108_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06893448139",
+      "nome": "Mariane Lima Alves",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "ddd74b61-620a-46cd-ac29-56b0d132d58d",
+      "diplomadoId": "d5287d3b-2bdd-4f87-8055-cc241444e0aa",
+      "arquivos": {
+        "diploma": "legado/06893448139/06893448139_diploma.xml",
+        "historico": "legado/06893448139/06893448139_historico.xml",
+        "rvdd": "legado/06893448139/06893448139_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06944963167",
+      "nome": "Thales Moraes Paulino",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "465ac412-ae83-4782-bc5d-a5c4bb1c2c44",
+      "diplomadoId": "30361ce7-e9cf-4961-acb5-a690b3f76bf4",
+      "arquivos": {
+        "diploma": "legado/06944963167/06944963167_diploma.xml",
+        "historico": "legado/06944963167/06944963167_historico.xml",
+        "rvdd": "legado/06944963167/06944963167_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "06971842189",
+      "nome": "Ana Lidia Venancio de Oliveira",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "e6bdb064-3548-46f1-88fe-179f752bb3bf",
+      "diplomadoId": "d2cc59ef-861e-4f88-8e5e-81d870f2ced7",
+      "arquivos": {
+        "diploma": "legado/06971842189/06971842189_diploma.xml",
+        "historico": "legado/06971842189/06971842189_historico.xml",
+        "rvdd": "legado/06971842189/06971842189_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "07330458120",
+      "nome": "Fernanda Marques Cogo",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "74abe14d-b11d-4473-b3bb-37ab5fb1727c",
+      "diplomadoId": "c0d46d12-d01e-4feb-bca1-d75fe3ed6283",
+      "arquivos": {
+        "diploma": "legado/07330458120/07330458120_diploma.xml",
+        "historico": "legado/07330458120/07330458120_historico.xml",
+        "rvdd": "legado/07330458120/07330458120_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "07498442132",
+      "nome": "Nadia Borges Dias Miranda",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "b8c2c945-f20c-4f96-b222-0f6b00dd9757",
+      "diplomadoId": "4bc4916c-30fb-415c-8023-4d0c5fbf0218",
+      "arquivos": {
+        "diploma": "legado/07498442132/07498442132_diploma.xml",
+        "historico": "legado/07498442132/07498442132_historico.xml",
+        "rvdd": "legado/07498442132/07498442132_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "07615923697",
+      "nome": "LúDna Michele Borges",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "47cd3f34-0034-4a9c-a6e2-37b42d9794d3",
+      "diplomadoId": "5c6246b3-d4a4-4bf5-a8b5-8826dfd7524a",
+      "arquivos": {
+        "diploma": "legado/07615923697/07615923697_diploma.xml",
+        "historico": "legado/07615923697/07615923697_historico.xml",
+        "rvdd": "legado/07615923697/07615923697_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "07719107110",
+      "nome": "Jheniffer Tomaz Silva",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "5141f0e4-907d-403a-92e9-95c2b60c6213",
+      "diplomadoId": "3e3c9eb2-3233-4bb6-9d14-595f7f1edb99",
+      "arquivos": {
+        "diploma": "legado/07719107110/07719107110_diploma.xml",
+        "historico": "legado/07719107110/07719107110_historico.xml",
+        "rvdd": "legado/07719107110/07719107110_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "07880585176",
+      "nome": "NatáLia Vieira GonçAlves",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "4847d698-9a75-4e43-9f30-c6eee86e4dc1",
+      "diplomadoId": "2891cab8-4a41-47bb-8e47-bfb1ae2f69a6",
+      "arquivos": {
+        "diploma": "legado/07880585176/07880585176_diploma.xml",
+        "historico": "legado/07880585176/07880585176_historico.xml",
+        "rvdd": "legado/07880585176/07880585176_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "07924229108",
+      "nome": "Gabriela Pereira Santos",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "200ed22b-164f-48cb-a9c8-2ce6f8e1bca9",
+      "diplomadoId": "fb512931-dd35-4f8d-a6ce-8377eee7f3c9",
+      "arquivos": {
+        "diploma": "legado/07924229108/07924229108_diploma.xml",
+        "historico": "legado/07924229108/07924229108_historico.xml",
+        "rvdd": "legado/07924229108/07924229108_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "07956828163",
+      "nome": "Luciana Bernardes Lourenço",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "3e94ad39-493f-4172-bff0-da710fbede9d",
+      "diplomadoId": "9d31ca1c-2df2-4af3-926b-4a5f9aa8ed86",
+      "arquivos": {
+        "diploma": "legado/07956828163/07956828163_diploma.xml",
+        "historico": "legado/07956828163/07956828163_historico.xml",
+        "rvdd": "legado/07956828163/07956828163_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "08419799955",
+      "nome": "Sabrina Tays dos Santos Silva",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "b8c0734c-6d02-4c55-b57b-2095a3ad7942",
+      "diplomadoId": "0c0d21ae-85f8-40c9-8874-1baa91755881",
+      "arquivos": {
+        "diploma": "legado/08419799955/08419799955_diploma.xml",
+        "historico": "legado/08419799955/08419799955_historico.xml",
+        "rvdd": "legado/08419799955/08419799955_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "08455731109",
+      "nome": "Gabrielli da Cruz Muller",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "48bae699-23aa-4a91-a1e5-afda5d686f42",
+      "diplomadoId": "4e112893-45c6-4aac-8c46-529e32050da4",
+      "arquivos": {
+        "diploma": "legado/08455731109/08455731109_diploma.xml",
+        "historico": "legado/08455731109/08455731109_historico.xml",
+        "rvdd": "legado/08455731109/08455731109_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "12173199480",
+      "nome": "Francinete CíTia da Silva",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "3e462d29-f508-4dff-b2cf-a032bb5044ab",
+      "diplomadoId": "5cd4da2c-e5bf-4322-863f-f7be7dcf5c88",
+      "arquivos": {
+        "diploma": "legado/12173199480/12173199480_diploma.xml",
+        "historico": "legado/12173199480/12173199480_historico.xml",
+        "rvdd": "legado/12173199480/12173199480_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "16111116843",
+      "nome": "Simone da Silva Precioso Correa",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "37b3151d-ec60-4ef1-9f54-d2600a9902b3",
+      "diplomadoId": "6ddb2e59-707a-4e42-957a-e7f0c8696d29",
+      "arquivos": {
+        "diploma": "legado/16111116843/16111116843_diploma.xml",
+        "historico": "legado/16111116843/16111116843_historico.xml",
+        "rvdd": "legado/16111116843/16111116843_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "21331146100",
+      "nome": "João dos Santos Medrado",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "af3eee92-cc18-4826-97de-6c564e625182",
+      "diplomadoId": "a6f634aa-6fe9-49c0-94f2-368960c3f329",
+      "arquivos": {
+        "diploma": "legado/21331146100/21331146100_diploma.xml",
+        "historico": "legado/21331146100/21331146100_historico.xml",
+        "rvdd": "legado/21331146100/21331146100_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "21888608889",
+      "nome": "Celso Ricardo Rolli",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "c9cf4e27-45eb-4f60-940c-723519ac0fff",
+      "diplomadoId": "d2cd31ef-6be2-40ad-b991-4453802ab8fc",
+      "arquivos": {
+        "diploma": "legado/21888608889/21888608889_diploma.xml",
+        "historico": "legado/21888608889/21888608889_historico.xml",
+        "rvdd": "legado/21888608889/21888608889_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "31671281861",
+      "nome": "Lorena Vieira de Paiva",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "ba1c879e-bec5-4c51-876d-27d0aa193f5a",
+      "diplomadoId": "81e81035-7680-4006-9649-25cf8e6f2f7f",
+      "arquivos": {
+        "diploma": "legado/31671281861/31671281861_diploma.xml",
+        "historico": "legado/31671281861/31671281861_historico.xml",
+        "rvdd": "legado/31671281861/31671281861_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "33105251120",
+      "nome": "Marlene Sant'Ana Vasques Novaes",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "ece1939f-9333-4ba0-b16a-d5c82eceb2a7",
+      "diplomadoId": "8b4aa829-73cb-4b24-9524-d11c3bad1c8f",
+      "arquivos": {
+        "diploma": "legado/33105251120/33105251120_diploma.xml",
+        "historico": "legado/33105251120/33105251120_historico.xml",
+        "rvdd": "legado/33105251120/33105251120_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "46003428104",
+      "nome": "Andreia MagalhãEs Carvalho",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "471f6492-53ae-44c4-8579-b38af43cda19",
+      "diplomadoId": "2e6e2bde-f015-4aef-ad0c-6a4ded463eb2",
+      "arquivos": {
+        "diploma": "legado/46003428104/46003428104_diploma.xml",
+        "historico": "legado/46003428104/46003428104_historico.xml",
+        "rvdd": "legado/46003428104/46003428104_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "46374799836",
+      "nome": "VitóRia Cristina Di Matheus e Souza",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "cb9218db-28ca-4f06-96c3-247fec3c3c3b",
+      "diplomadoId": "9cc2efbd-c1db-4193-9e11-0f702d766b68",
+      "arquivos": {
+        "diploma": "legado/46374799836/46374799836_diploma.xml",
+        "historico": "legado/46374799836/46374799836_historico.xml",
+        "rvdd": "legado/46374799836/46374799836_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "54238137191",
+      "nome": "Glaucia Silva Rodovalho Ferreira",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "7b2812d1-70fa-4c0c-88fd-034c02f307dc",
+      "diplomadoId": "baf2f484-7b85-4537-a66f-14b14400206a",
+      "arquivos": {
+        "diploma": "legado/54238137191/54238137191_diploma.xml",
+        "historico": "legado/54238137191/54238137191_historico.xml",
+        "rvdd": "legado/54238137191/54238137191_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "56239637149",
+      "nome": "Elisangela Silva de Oliveira",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "5ef2678b-e904-4abd-bed6-b551d285ba63",
+      "diplomadoId": "adc06611-3d8a-4945-8155-acefb9bd1741",
+      "arquivos": {
+        "diploma": "legado/56239637149/56239637149_diploma.xml",
+        "historico": "legado/56239637149/56239637149_historico.xml",
+        "rvdd": "legado/56239637149/56239637149_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "57719667115",
+      "nome": "Helda Maria Cruvinel de Souza",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "16d8769c-e019-458b-8c6b-22ffee31e099",
+      "diplomadoId": "c0a2f4d7-01d6-495c-bae5-575dec6b06db",
+      "arquivos": {
+        "diploma": "legado/57719667115/57719667115_diploma.xml",
+        "historico": "legado/57719667115/57719667115_historico.xml",
+        "rvdd": "legado/57719667115/57719667115_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "59612797153",
+      "nome": "Hilton Amaral JúNior",
+      "curso": "Administração",
+      "status": "importado",
+      "diplomaId": "3b4bec21-1701-4056-aafa-314ee7fbfa79",
+      "diplomadoId": "ce2c1495-5c8d-4917-ab15-26a950405ce7",
+      "arquivos": {
+        "diploma": "legado/59612797153/59612797153_diploma.xml",
+        "historico": "legado/59612797153/59612797153_historico.xml",
+        "rvdd": "legado/59612797153/59612797153_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "70172604141",
+      "nome": "Sarithielly Souza Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "2c76a7e0-1c26-409b-910f-d31f5576248a",
+      "diplomadoId": "b25c96c2-666e-45fd-83de-e0d40e61b1e6",
+      "arquivos": {
+        "diploma": "legado/70172604141/70172604141_diploma.xml",
+        "historico": "legado/70172604141/70172604141_historico.xml",
+        "rvdd": "legado/70172604141/70172604141_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "70212329189",
+      "nome": "LíVia Tomaz Rezende",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "2c73211e-9868-447e-bdac-523aa2f8f630",
+      "diplomadoId": "02e59263-2b77-4677-89a0-ffec756aceac",
+      "arquivos": {
+        "diploma": "legado/70212329189/70212329189_diploma.xml",
+        "historico": "legado/70212329189/70212329189_historico.xml",
+        "rvdd": "legado/70212329189/70212329189_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "70212332139",
+      "nome": "Ana LíDia Tomaz Rezende",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "d2a9a5d2-3d31-4808-8d2f-baffbb6ab2ab",
+      "diplomadoId": "0f832899-fbe8-4910-828e-b8d6529f35dc",
+      "arquivos": {
+        "diploma": "legado/70212332139/70212332139_diploma.xml",
+        "historico": "legado/70212332139/70212332139_historico.xml",
+        "rvdd": "legado/70212332139/70212332139_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "70469457139",
+      "nome": "Welizaine Martins Alves",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "50b501ee-cd63-4546-bb31-f52ed595f9b7",
+      "diplomadoId": "04a927fa-ac4e-4f49-8a6e-a8c539728805",
+      "arquivos": {
+        "diploma": "legado/70469457139/70469457139_diploma.xml",
+        "historico": "legado/70469457139/70469457139_historico.xml",
+        "rvdd": "legado/70469457139/70469457139_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "70469498161",
+      "nome": "Polyanne Ferreira Macedo",
+      "curso": "Fisioterapia",
+      "status": "importado",
+      "diplomaId": "ec7c42a2-e4d8-4783-a36d-a01776f3cb59",
+      "diplomadoId": "bf8686c7-9c49-4dc2-8c4f-dca5f9d80feb",
+      "arquivos": {
+        "diploma": "legado/70469498161/70469498161_diploma.xml",
+        "historico": "legado/70469498161/70469498161_historico.xml",
+        "rvdd": "legado/70469498161/70469498161_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "70505479133",
+      "nome": "Wend Lorraine Ferreira Matias",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "1c5f65b6-66f5-49b8-a2b0-5934f9d88c8d",
+      "diplomadoId": "eb45439d-3d1c-4449-9023-571997ffc1fc",
+      "arquivos": {
+        "diploma": "legado/70505479133/70505479133_diploma.xml",
+        "historico": "legado/70505479133/70505479133_historico.xml",
+        "rvdd": "legado/70505479133/70505479133_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "70702782173",
+      "nome": "Emilly Sayuri IgnáCio More",
+      "curso": "Ciências Contábeis",
+      "status": "importado",
+      "diplomaId": "f1db45ae-9cff-4f83-be25-f0b9c9503b74",
+      "diplomadoId": "e0a98fa9-3c47-4c8f-819d-684003a0b480",
+      "arquivos": {
+        "diploma": "legado/70702782173/70702782173_diploma.xml",
+        "historico": "legado/70702782173/70702782173_historico.xml",
+        "rvdd": "legado/70702782173/70702782173_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "71603905120",
+      "nome": "Simone Aparecida Alves de Souza",
+      "status": "erro",
+      "motivo": "Curso não mapeado: Turismo (grau: Bacharelado)"
+    },
+    {
+      "cpf": "90449428168",
+      "nome": "AndréIa Alves dos Santos Cunha da Silva",
+      "curso": "Pedagogia",
+      "status": "importado",
+      "diplomaId": "fc9a09f5-74f5-43fd-9f2c-284591a351b4",
+      "diplomadoId": "ba8bebce-1b2d-49c9-aac0-a5d9ee480833",
+      "arquivos": {
+        "diploma": "legado/90449428168/90449428168_diploma.xml",
+        "historico": "legado/90449428168/90449428168_historico.xml",
+        "rvdd": "legado/90449428168/90449428168_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "95533486100",
+      "nome": "Alan Ferreira Lemos Rodrigues",
+      "curso": "Educação FíSica Bacharel",
+      "status": "importado",
+      "diplomaId": "9081fcc1-5ce7-47d1-8899-0481b9aeb9d3",
+      "diplomadoId": "399c51d0-0f06-47ed-bf5e-98b82aaecdb4",
+      "arquivos": {
+        "diploma": "legado/95533486100/95533486100_diploma.xml",
+        "historico": "legado/95533486100/95533486100_historico.xml",
+        "rvdd": "legado/95533486100/95533486100_rvdd.pdf"
+      },
+      "assinaturas": 0
+    },
+    {
+      "cpf": "96367954104",
+      "nome": "Vadislaine Aparecida Pereira Maia",
+      "curso": "Enfermagem",
+      "status": "importado",
+      "diplomaId": "f901e302-3288-4b03-8858-8c4dc19aa88b",
+      "diplomadoId": "c6b25601-4984-409c-a2d2-4630a6c614ee",
+      "arquivos": {
+        "diploma": "legado/96367954104/96367954104_diploma.xml",
+        "historico": "legado/96367954104/96367954104_historico.xml",
+        "rvdd": "legado/96367954104/96367954104_rvdd.pdf"
+      },
+      "assinaturas": 0
+    }
+  ],
+  "cursosNaoMapeados": [
+    "HistóRia (grau: Licenciatura)",
+    "Turismo (grau: Bacharelado)"
+  ]
+}

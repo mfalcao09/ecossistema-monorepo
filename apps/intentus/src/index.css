@@ -1,0 +1,311 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=DM+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* PWA Mobile-First utilities */
+@layer utilities {
+  .safe-area-bottom {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pb-safe {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 1rem);
+  }
+  .touch-manipulation {
+    touch-action: manipulation;
+    -webkit-tap-highlight-color: transparent;
+  }
+}
+
+/*
+  Design System — Intentus Real Estate
+  Source: Cleopatra Admin Dashboard Template — Neutral (Default) Theme
+  Palette: pure grayscale — white base, black primary accent
+  Converted from OKLCH → HSL for shadcn/ui compatibility
+  Font: Inter (display + body) + DM Mono (code/numbers)
+*/
+
+@layer base {
+  /* ═══════════════════════════════════════════
+     LIGHT MODE — Cleopatra Neutral (Default)
+     white page bg, white cards, near-black primary
+     Pure grayscale — zero saturation
+     ═══════════════════════════════════════════ */
+  :root {
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    --font-mono: 'DM Mono', monospace;
+
+    /* Core — pure white canvas */
+    --background: 0 0% 100%;
+    --foreground: 0 0% 3.9%;
+
+    /* Cards — white */
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 3.9%;
+
+    /* Popovers — white */
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 3.9%;
+
+    /* Primary — near-black (Cleopatra Neutral signature) */
+    --primary: 0 0% 9%;
+    --primary-foreground: 0 0% 98%;
+
+    /* Secondary — very light gray */
+    --secondary: 0 0% 96%;
+    --secondary-foreground: 0 0% 9%;
+
+    /* Muted — light gray / medium text */
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 45.1%;
+
+    /* Accent — light gray */
+    --accent: 0 0% 96%;
+    --accent-foreground: 0 0% 9%;
+
+    /* Destructive — red */
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders — light gray */
+    --border: 0 0% 89.8%;
+    --input: 0 0% 89.8%;
+    --ring: 0 0% 63%;
+
+    --radius: 0.625rem;
+
+    /* Chart colors — Cleopatra Neutral palette */
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+
+    /* Status */
+    --success: 152 69% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 43 87% 57%;
+    --warning-foreground: 0 0% 3.9%;
+    --info: 200 100% 70%;
+    --info-foreground: 0 0% 100%;
+
+    /* Sidebar — off-white bg, near-black primary (Cleopatra Neutral) */
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 0 0% 3.9%;
+    --sidebar-primary: 0 0% 9%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 96%;
+    --sidebar-accent-foreground: 0 0% 9%;
+    --sidebar-border: 0 0% 89.8%;
+    --sidebar-ring: 0 0% 63%;
+  }
+
+  /* ═══════════════════════════════════════════
+     DARK MODE — Cleopatra Neutral Dark
+     pure dark grayscale
+     ═══════════════════════════════════════════ */
+  .dark {
+    /* Core — near-black */
+    --background: 0 0% 3.9%;
+    --foreground: 0 0% 98%;
+
+    /* Cards — slightly lighter dark */
+    --card: 0 0% 9%;
+    --card-foreground: 0 0% 98%;
+
+    --popover: 0 0% 9%;
+    --popover-foreground: 0 0% 98%;
+
+    /* Primary — light gray on dark (inverted Neutral) */
+    --primary: 0 0% 89.8%;
+    --primary-foreground: 0 0% 9%;
+
+    /* Secondary — dark gray */
+    --secondary: 0 0% 14.9%;
+    --secondary-foreground: 0 0% 98%;
+
+    /* Muted — dark gray */
+    --muted: 0 0% 14.9%;
+    --muted-foreground: 0 0% 63%;
+
+    /* Accent — dark gray */
+    --accent: 0 0% 14.9%;
+    --accent-foreground: 0 0% 98%;
+
+    /* Destructive */
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* Borders — subtle white-on-dark (Cleopatra uses oklch with alpha) */
+    --border: 0 0% 14.9%;
+    --input: 0 0% 14.9%;
+    --ring: 0 0% 45.1%;
+
+    /* Chart colors — dark mode */
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+
+    /* Status — dark */
+    --success: 152 60% 45%;
+    --success-foreground: 0 0% 100%;
+    --warning: 43 87% 57%;
+    --warning-foreground: 0 0% 3.9%;
+    --info: 200 90% 60%;
+    --info-foreground: 0 0% 100%;
+
+    /* Sidebar — dark card bg */
+    --sidebar-background: 0 0% 9%;
+    --sidebar-foreground: 0 0% 98%;
+    --sidebar-primary: 220 70% 50%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 0 0% 14.9%;
+    --sidebar-accent-foreground: 0 0% 98%;
+    --sidebar-border: 0 0% 14.9%;
+    --sidebar-ring: 0 0% 45.1%;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Global Base Styles
+   Source: Cleopatra Admin Dashboard Template
+   ═══════════════════════════════════════════ */
+@layer base {
+  *,
+  ::after,
+  ::before {
+    @apply border-border;
+  }
+
+  html {
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    line-height: 1.5;
+  }
+
+  /* Typography — bold headings, tight tracking */
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply font-bold tracking-tight;
+  }
+
+  /* Scrollbar — subtle 4px (Cleopatra style) */
+  ::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: hsl(var(--border));
+    border-radius: 2px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: hsl(var(--muted-foreground));
+  }
+
+  /* No scrollbar utility */
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  /* Numeric data — mono */
+  .tabular-nums {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+/* ═══════════════════════════════════════════
+   Component Styles — Cleopatra Neutral
+   ═══════════════════════════════════════════ */
+@layer components {
+  .page-title {
+    font-family: var(--font-display);
+    @apply text-2xl font-bold text-foreground tracking-tight;
+  }
+
+  .page-subtitle {
+    @apply text-sm text-muted-foreground;
+  }
+
+  /* KPI cards */
+  .kpi-value {
+    font-family: var(--font-mono);
+    @apply text-2xl font-medium tabular-nums;
+  }
+
+  /* Status badges — Cleopatra Neutral style (uses primary/10 pattern) */
+  .status-disponivel {
+    @apply bg-emerald-500/10 text-emerald-600 ring-1 ring-emerald-500/20;
+  }
+  .status-reservado {
+    @apply bg-amber-500/10 text-amber-600 ring-1 ring-amber-500/20;
+  }
+  .status-vendido {
+    @apply bg-blue-500/10 text-blue-600 ring-1 ring-blue-500/20;
+  }
+  .status-alugado {
+    @apply bg-violet-500/10 text-violet-600 ring-1 ring-violet-500/20;
+  }
+  .status-indisponivel {
+    @apply bg-red-500/10 text-red-600 ring-1 ring-red-500/20;
+  }
+
+  /* Card hover — Cleopatra style */
+  .card-interactive {
+    @apply transition-colors duration-200 hover:bg-muted/50 cursor-pointer;
+  }
+
+  /* Smooth theme transitions */
+  .transition-theme {
+    transition: background-color 200ms ease-in-out,
+      color 200ms ease-in-out,
+      border-color 200ms ease-in-out;
+  }
+
+  /* Form inputs — Cleopatra style */
+  .form-input-theme {
+    @apply text-sm leading-5 py-2 px-3 rounded-lg;
+    @apply bg-muted/50 border border-border;
+    @apply hover:border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary;
+    @apply dark:hover:border-gray-600 dark:focus:border-gray-600;
+    @apply placeholder-muted-foreground;
+  }
+
+  /* Cleopatra sidebar category labels */
+  .sidebar-category-label {
+    @apply uppercase text-xs tracking-wider font-medium;
+    color: hsl(var(--sidebar-foreground) / 0.6);
+  }
+
+  /* Cleopatra sidebar menu item */
+  .sidebar-menu-item {
+    @apply capitalize font-medium text-sm transition-colors duration-200;
+    color: hsl(var(--sidebar-foreground));
+  }
+  .sidebar-menu-item:hover {
+    color: hsl(var(--sidebar-primary));
+  }
+
+  /* Cleopatra active menu item: primary/10 bg + primary text */
+  .sidebar-menu-active {
+    background-color: hsl(var(--primary) / 0.1);
+    color: hsl(var(--primary));
+  }
+}

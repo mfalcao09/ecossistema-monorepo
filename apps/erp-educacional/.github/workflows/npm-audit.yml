@@ -1,0 +1,214 @@
+name: Dependency Audit (npm)
+
+on:
+  push:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+  pull_request:
+    branches:
+      - main
+      - develop
+    paths:
+      - 'package.json'
+      - 'package-lock.json'
+  schedule:
+    # Daily audit at 6AM UTC
+    - cron: '0 6 * * *'
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      # ─────────────────────────────────────────────────────────────────────────
+      # 1. Checkout Code
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 2. Setup Node.js
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 3. Install Dependencies
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Install dependencies
+        run: npm ci
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 4. Run npm audit (check only, don't fix automatically)
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Run npm audit
+        id: audit
+        run: npm audit --audit-level=moderate
+        continue-on-error: true
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 5. Generate Audit Report
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Generate audit report
+        id: report
+        run: |
+          # Export audit as JSON for analysis
+          npm audit --json > audit-report.json || true
+
+          # Parse vulnerability counts
+          RESULT=$(cat audit-report.json | jq '.metadata.vulnerabilities' 2>/dev/null || echo '{}')
+          CRITICAL=$(echo "$RESULT" | jq '.critical // 0')
+          HIGH=$(echo "$RESULT" | jq '.high // 0')
+          MODERATE=$(echo "$RESULT" | jq '.moderate // 0')
+          LOW=$(echo "$RESULT" | jq '.low // 0')
+          INFO=$(echo "$RESULT" | jq '.info // 0')
+
+          # Write to GitHub outputs for use in later steps
+          echo "critical=$CRITICAL" >> $GITHUB_OUTPUT
+          echo "high=$HIGH" >> $GITHUB_OUTPUT
+          echo "moderate=$MODERATE" >> $GITHUB_OUTPUT
+          echo "low=$LOW" >> $GITHUB_OUTPUT
+          echo "info=$INFO" >> $GITHUB_OUTPUT
+
+          # Log summary
+          echo "Audit Summary:"
+          echo "- Critical: $CRITICAL"
+          echo "- High: $HIGH"
+          echo "- Moderate: $MODERATE"
+          echo "- Low: $LOW"
+          echo "- Info: $INFO"
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 6. Upload Audit Report
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Upload audit report
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: npm-audit-report
+          path: audit-report.json
+          retention-days: 30
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 7. Comment on Pull Request
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Comment audit results on PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const fs = require('fs');
+            const audit = JSON.parse(fs.readFileSync('audit-report.json', 'utf8'));
+            const vuln = audit.metadata.vulnerabilities || {};
+
+            const comment = `## 📦 Dependency Audit Report
+
+            | Level | Count |
+            |-------|-------|
+            | 🔴 Critical | ${vuln.critical || 0} |
+            | 🟠 High | ${vuln.high || 0} |
+            | 🟡 Moderate | ${vuln.moderate || 0} |
+            | 🔵 Low | ${vuln.low || 0} |
+            | ⚪ Info | ${vuln.info || 0} |
+
+            ${vuln.critical > 0 ? '**⚠️ Critical vulnerabilities found! Please fix before merging.**' : '✅ No critical vulnerabilities detected.'}
+
+            [Full audit report](artifacts)
+            `;
+
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: comment
+            });
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 8. Fail on Critical Vulnerabilities
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Check for critical vulnerabilities
+        run: |
+          CRITICAL=${{ steps.report.outputs.critical }}
+
+          echo "## Vulnerability Check" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "- Critical: **$CRITICAL**" >> $GITHUB_STEP_SUMMARY
+          echo "- High: **${{ steps.report.outputs.high }}**" >> $GITHUB_STEP_SUMMARY
+          echo "- Moderate: **${{ steps.report.outputs.moderate }}**" >> $GITHUB_STEP_SUMMARY
+
+          if [ "$CRITICAL" -gt 0 ]; then
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "❌ **Critical vulnerabilities detected**" >> $GITHUB_STEP_SUMMARY
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "⚠️ Pipeline will fail. Fix vulnerabilities before merging." >> $GITHUB_STEP_SUMMARY
+            exit 1
+          else
+            echo "" >> $GITHUB_STEP_SUMMARY
+            echo "✅ **No critical vulnerabilities**" >> $GITHUB_STEP_SUMMARY
+          fi
+
+      # ─────────────────────────────────────────────────────────────────────────
+      # 9. Suggestions for Remediation
+      # ─────────────────────────────────────────────────────────────────────────
+      - name: Suggest fixes
+        if: failure()
+        run: |
+          echo "## 🔧 Suggested Actions" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "1. **Run locally**: \`npm audit\`" >> $GITHUB_STEP_SUMMARY
+          echo "2. **Auto-fix (if possible)**: \`npm audit fix\`" >> $GITHUB_STEP_SUMMARY
+          echo "3. **Review changes**: \`git diff package.json\`" >> $GITHUB_STEP_SUMMARY
+          echo "4. **Commit & push**: \`git add package*.json && git commit -m 'fix: resolve npm vulnerabilities'\`" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "[More info on npm audit](https://docs.npmjs.com/cli/v9/commands/npm-audit)" >> $GITHUB_STEP_SUMMARY
+
+  # ───────────────────────────────────────────────────────────────────────────
+  # Optional: Auto-fix and create PR (commented out for safety)
+  # ───────────────────────────────────────────────────────────────────────────
+  # auto-fix-vulnerabilities:
+  #   runs-on: ubuntu-latest
+  #   if: github.event_name == 'schedule'
+  #   timeout-minutes: 15
+  #
+  #   steps:
+  #     - name: Checkout repository
+  #       uses: actions/checkout@v4
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #
+  #     - name: Setup Node.js
+  #       uses: actions/setup-node@v4
+  #       with:
+  #         node-version: '20'
+  #         cache: 'npm'
+  #
+  #     - name: Install dependencies
+  #       run: npm ci
+  #
+  #     - name: Run npm audit fix
+  #       run: npm audit fix --audit-level=moderate
+  #       continue-on-error: true
+  #
+  #     - name: Create Pull Request
+  #       uses: peter-evans/create-pull-request@v5
+  #       with:
+  #         token: ${{ secrets.GITHUB_TOKEN }}
+  #         commit-message: 'chore: resolve npm vulnerabilities'
+  #         title: 'chore: resolve npm vulnerabilities'
+  #         body: |
+  #           ## Automated Vulnerability Fixes
+  #
+  #           This PR was automatically created by the npm audit workflow.
+  #
+  #           Please review the changes and test before merging.
+  #         branch: chore/npm-audit-fix-${{ github.run_id }}
+  #         delete-branch: true

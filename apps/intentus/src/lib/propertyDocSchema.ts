@@ -1,0 +1,73 @@
+// Property Document Schema - expanded status labels for Docket-level management
+
+export const propertyDocTypeLabels: Record<string, string> = {
+  matricula: "Matrícula",
+  escritura: "Escritura",
+  contrato_social: "Contrato Social",
+  procuracao: "Procuração",
+  habite_se: "Habite-se",
+  avcb: "AVCB / Auto de Vistoria",
+  iptu: "IPTU",
+  condominio: "Convenção de Condomínio",
+  planta_aprovada: "Planta Aprovada",
+  memorial_descritivo: "Memorial Descritivo",
+  laudo_avaliacao: "Laudo de Avaliação",
+  certidao_negativa: "Certidão Negativa",
+  certidao_real: "Certidão Ônus Reais",
+  averbacao: "Averbação",
+  termo_entrega: "Termo de Entrega",
+  vistoria: "Laudo de Vistoria",
+  seguro: "Apólice de Seguro",
+  contrato_locacao: "Contrato de Locação",
+  aditivo: "Aditivo Contratual",
+  comprovante: "Comprovante",
+  certidao_municipal: "Certidão Municipal",
+  certidao_trabalhista: "Certidão Trabalhista",
+  certidao_federal: "Certidão Federal",
+  outro: "Outro",
+};
+
+export const propertyDocStatusLabels: Record<string, string> = {
+  regular: "Regular",
+  a_vencer: "A Vencer",
+  vencido: "Vencido",
+  em_analise: "Em Análise",
+  pendente_cartorio: "Pendente Cartório",
+  aguardando_assinatura: "Aguardando Assinatura",
+  arquivado: "Arquivado",
+  cancelado: "Cancelado",
+  em_renovacao: "Em Renovação",
+  divergente: "Divergente",
+  solicitado: "Solicitado",
+  recebido: "Recebido",
+  protocolado: "Protocolado",
+  aprovado: "Aprovado",
+  rejeitado: "Rejeitado",
+};
+
+export const propertyDocStatusColors: Record<string, string> = {
+  regular: "bg-green-500/20 text-green-700",
+  a_vencer: "bg-yellow-500/20 text-yellow-700",
+  vencido: "bg-red-500/20 text-red-700",
+  em_analise: "bg-blue-500/20 text-blue-700",
+  pendente_cartorio: "bg-orange-500/20 text-orange-700",
+  aguardando_assinatura: "bg-purple-500/20 text-purple-700",
+  arquivado: "bg-muted text-muted-foreground",
+  cancelado: "bg-red-500/10 text-red-600",
+  em_renovacao: "bg-cyan-500/20 text-cyan-700",
+  divergente: "bg-red-500/20 text-red-700",
+  solicitado: "bg-blue-500/10 text-blue-600",
+  recebido: "bg-green-500/10 text-green-600",
+  protocolado: "bg-indigo-500/20 text-indigo-700",
+  aprovado: "bg-green-500/20 text-green-700",
+  rejeitado: "bg-red-500/20 text-red-700",
+};
+
+export const propertyDocCategoryLabels: Record<string, string> = {
+  geral: "Geral",
+  juridico: "Jurídico",
+  fiscal: "Fiscal",
+  tecnico: "Técnico",
+  financeiro: "Financeiro",
+  operacional: "Operacional",
+};

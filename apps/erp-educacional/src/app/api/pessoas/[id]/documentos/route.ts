@@ -1,0 +1,58 @@
+// =============================================================================
+// API Route — /api/pessoas/[id]/documentos
+// GET: list documents for a pessoa (from pessoa_documentos table)
+// POST: add document to a pessoa
+// =============================================================================
+
+import { NextRequest, NextResponse } from 'next/server'
+import { verificarAuth } from '@/lib/security'
+import { createClient } from '@/lib/supabase/server'
+import { adicionarDocumento } from '@/lib/supabase/pessoas'
+import type { PessoaDocumento } from '@/types/pessoas'
+
+export async function GET(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const auth = await verificarAuth(request)
+  if (auth instanceof NextResponse) return auth
+
+  try {
+    const { id } = await params
+    const supabase = await createClient()
+
+    const { data, error } = await supabase
+      .from('pessoa_documentos')
+      .select('*')
+      .eq('pessoa_id', id)
+      .order('created_at', { ascending: false })
+
+    if (error) {
+      throw new Error(`Erro ao listar documentos: ${error.message}`)
+    }
+
+    return NextResponse.json(data as PessoaDocumento[])
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : 'Erro interno'
+    return NextResponse.json({ error: msg }, { status: 500 })
+  }
+}
+
+export async function POST(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  const auth = await verificarAuth(request)
+  if (auth instanceof NextResponse) return auth
+
+  try {
+    const { id } = await params
+    const body = await request.json()
+
+    const documento = await adicionarDocumento(id, body)
+    return NextResponse.json(documento, { status: 201 })
+  } catch (error) {
+    const msg = error instanceof Error ? error.message : 'Erro interno'
+    return NextResponse.json({ error: msg }, { status: 500 })
+  }
+}

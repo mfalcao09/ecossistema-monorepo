@@ -1,0 +1,48 @@
+# Sessão 65 — Fix produção: CORS whitelist + RLS user_roles + checkpoint memória (15/03/2026)
+
+- **Objetivo**: (1) Fix browser freeze no Command Center em produção (`app.intentusrealestate.com.br`). (2) Fix HTTP 403 em 3 CLM Edge Functions. (3) Salvar estado completo do projeto
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha). Investigação via Chrome browser + Supabase MCP
+- **Parte 1 — Fix CORS whitelist (11+ Edge Functions)**:
+  - **Problema**: Command Center em `app.intentusrealestate.com.br` travava a aba do navegador completamente
+  - **Root cause**: 11+ Edge Functions tinham `PROD_ORIGINS` apenas com `https://intentus-plataform.vercel.app` — o domínio custom `https://app.intentusrealestate.com.br` não estava na whitelist
+  - **Fix**: Adicionado `https://app.intentusrealestate.com.br` a `PROD_ORIGINS` em todas as Edge Functions com CORS whitelist
+  - **11+ EFs atualizadas e re-deployadas**: clm-contract-api v16, clm-approvals-api v13, clm-obligations-api v13, clm-templates-api v10, clm-ai-insights v8, extract-clauses-ai v7, redlining-ai v2, clm-compliance-monitor v2, predictive-renewals-ai v2, predictive-default-ai v2, clm-auto-notifications v3
+  - **Pendente deploy manual**: copilot v11 (48KB excede limite MCP — Marcelo deve deployar via Supabase Dashboard)
+  - **Nota**: `clm-seed-demo` e `contract-draft-ai` ainda com CORS wildcard `*` — melhoria futura, não blocker
+- **Parte 2 — Fix HTTP 403 em 3 CLM Edge Functions (RLS user_roles)**:
+  - **Problema**: Após fix CORS, Command Center carregava mas 3 EFs que usam middleware compartilhado (`clm-contract-api`, `clm-approvals-api`, `clm-obligations-api`) retornavam HTTP 403
+  - **Root cause**: Tabela `user_roles` tinha TODAS as 8 RLS policies como RESTRICTIVE e ZERO PERMISSIVE
+    - Em PostgreSQL RLS, RESTRICTIVE policies apenas estreitam resultados de PERMISSIVE policies
+    - Com 0 PERMISSIVE policies, o conjunto base é VAZIO → qualquer query direta retorna 0 rows
+    - O middleware (`resolveAuth()`) faz query direta: `supabase.from("user_roles").select("role").eq("user_id", user.id).eq("tenant_id", tenantId)` → sempre retornava `[]`
+    - `hasPermission([], action)` → `[].includes("superadmin")` = false → retornava 403
+    - A função `has_role()` (SECURITY DEFINER) funcionava normalmente porque bypassa RLS — por isso policies RLS que usam `has_role()` funcionavam, mas queries diretas da aplicação não
+  - **Fix**: Migration `fix_user_roles_rls_permissive_select` aplicada via Supabase MCP:
+    - Removidas 2 policies RESTRICTIVE de SELECT: `superadmin_roles_select`, `user_roles_select`
+    - Criadas 3 policies PERMISSIVE de SELECT:
+      - `user_roles_own_read`: `user_id = auth.uid()` (cada user vê suas próprias roles)
+      - `user_roles_tenant_read`: `tenant_id = auth_tenant_id() AND is_admin_or_gerente(auth.uid())` (admins/gerentes veem roles do tenant)
+      - `user_roles_superadmin_read`: `has_role(auth.uid(), 'superadmin')` (superadmin vê tudo)
+  - **Verificação**: Confirmado via Chrome browser — Command Center carrega com dados completos, `/contratos` funciona com botões RBAC visíveis
+  - **Nota técnica pendente**: INSERT/UPDATE/DELETE policies em `user_roles` ainda são ALL RESTRICTIVE sem PERMISSIVE — mesmo problema estrutural, mas afeta apenas operações admin (menor criticidade)
+- **Parte 3 — Checkpoint de memória**:
+  - `memory/glossary.md` — Termos técnicos expandidos. Apelido "Buchecha" adicionado. Status atualizado sessão 65
+  - `memory/people/marcelo.md` — Contexto atualizado (65 sessões, cronograma 10/20, CLM production-ready)
+  - `memory/context/auditoria-clm-sessao34.md` — Todas 5 fases marcadas CONCLUÍDAS
+  - `memory/projects/cronograma-ia-native.md` — CRIADO — Status detalhado 5 fases (20 itens)
+- **Lição técnica importante**: Em PostgreSQL RLS, RESTRICTIVE policies SÓ funcionam em conjunto com PERMISSIVE policies. Se uma tabela tem ZERO PERMISSIVE policies para uma operação (SELECT, INSERT, etc.), nenhuma row será visível/acessível por queries diretas, independente de quantas RESTRICTIVE policies existam. Funções SECURITY DEFINER (como `has_role()`) bypassam RLS e continuam funcionando — o que pode mascarar o problema (RLS policies que chamam SECURITY DEFINER functions funcionam, mas queries diretas da aplicação não).
+- **Edge Functions — Versões atualizadas**:
+  - `clm-contract-api` → version 16 (CORS fix)
+  - `clm-approvals-api` → version 13 (CORS fix)
+  - `clm-obligations-api` → version 13 (CORS fix)
+  - `clm-templates-api` → version 10 (CORS fix)
+  - `clm-ai-insights` → version 8 (CORS fix)
+  - `extract-clauses-ai` → version 7 (CORS fix)
+  - `redlining-ai` → version 2 (CORS fix)
+  - `clm-compliance-monitor` → version 2 (CORS fix)
+  - `predictive-renewals-ai` → version 2 (CORS fix)
+  - `predictive-default-ai` → version 2 (CORS fix)
+  - `clm-auto-notifications` → version 3 (CORS fix)
+- **Build**: Sem alterações de código frontend — fix foi 100% backend (EFs + DB RLS)
+- **Status geral do projeto**: 65 sessões, ~118h de ~254h do cronograma IA-Native. F1+F2 completas (10/20 itens). CLM production-ready e verificado em produção. Próximo: F3 Item #1 Backend de Automações (Workflow Engine)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

@@ -1,0 +1,49 @@
+# Sessão 84 — CRM F1 Item #11: L03 Chatbot IA 24/7 para Leads (~16h, P0) (19/03/2026)
+
+- **Objetivo**: Implementar décimo primeiro item da Fase 1 do plano CRM IA-Native (sessão 73): L03 — Chatbot IA conversacional para qualificação de leads 24/7 com framework BANT adaptado para mercado imobiliário brasileiro
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha)
+- **Nota**: P02 Cards Customizáveis confirmado como já implementado na sessão 81 (useCardPreferences.ts + CardFieldsCustomizer.tsx + KanbanBoard wired). Fix do Buchecha aplicado: queryKey invalidation + onError rollback em useCardPreferences.ts
+- **Database migration `create_lead_chatbot_tables`** (via Supabase MCP):
+  - Tabela `lead_chatbot_conversations`: id, tenant_id, lead_id (FK CASCADE), started_by, title, qualification_result (JSONB), is_archived, timestamps
+  - Tabela `lead_chatbot_messages`: id, conversation_id (FK CASCADE), role (CHECK user/assistant/system), content, metadata (JSONB), created_at
+  - 3 índices (tenant, lead_id, conversation messages)
+  - RLS PERMISSIVE com `auth_tenant_id()` + EXISTS subquery para messages
+- **Backend — `supabase/functions/commercial-lead-chatbot/index.ts` (CRIADO — ~420 linhas, self-contained, v1)**:
+  - **4 actions**: `chat` (conversacional com contexto do lead), `qualify` (qualificação BANT via IA), `get_conversations` (lista por lead), `get_messages` (mensagens de uma conversa)
+  - **Chat**: Cria/reutiliza conversa, persiste mensagens, busca histórico (20 msgs), injeta contexto do lead (perfil + interações + imóvel), chama Gemini 2.0 Flash via OpenRouter, atualiza last_contact_at (fire-and-forget)
+  - **Qualify**: Análise BANT (Budget/Authority/Need/Timeline) adaptada para imobiliário BR. Score 0-100, level (hot/warm/cold/unqualified), key_insights, recommended_actions, missing_information, suggested_questions, conversion_probability. Inclui histórico de chatbot como contexto extra. Fallback rule-based quando IA falha
+  - **buildLeadContext()**: Monta contexto completo do lead (perfil 13 campos + últimas 10 interações + imóvel vinculado)
+  - **System prompts**: CHAT_SYSTEM_PROMPT (especialista imobiliário BR, BANT framework, linguagem do mercado) + QUALIFY_SYSTEM_PROMPT (JSON mode, estrutura BANT detalhada)
+  - **Self-contained**: Inline CORS whitelist (`app.intentusrealestate.com.br` + `intentus-plataform.vercel.app`), auth/tenant via profiles.user_id
+  - **Deploy**: v1 via Supabase MCP (ID: `ea7cc202-6cae-434c-a152-9775e7443af3`, ACTIVE, verify_jwt: false)
+- **Frontend hook — `src/hooks/useLeadChatbot.ts` (CRIADO — ~135 linhas)**:
+  - Types: `ChatMessage`, `ChatConversation`, `BANTDimension`, `QualificationResult`, `ChatResponse`
+  - Constants: `QUALIFICATION_LEVEL_LABELS/COLORS`, `BANT_LABELS`, `PRIORITY_COLORS`
+  - API helper: `invokeChatbot<T>(action, params)` com error handling
+  - Query hooks: `useLeadConversations(leadId)` (staleTime 3min), `useConversationMessages(conversationId)` (staleTime 30s)
+  - Mutation hooks: `useSendChatMessage()` (invalida messages + conversations + leads), `useQualifyLead()` (invalida conversations)
+  - MiniMax fixes: Silent data failure → throw Error, conversation ID invalidation → use response ID
+- **Frontend UI — `src/components/leads/LeadChatbotDialog.tsx` (CRIADO — ~280 linhas)**:
+  - `LeadChatbotPanel`: Componente de chat completo integrado como tab no LeadDetailDialog
+  - Header: Bot icon, nome do lead, botão "Qualificar BANT", botão "Nova" conversa
+  - Qualification Panel: Collapsible com BANT bars (4 dimensões), ações recomendadas com badges de prioridade, perguntas sugeridas (clicáveis para preencher input)
+  - Messages area: Bolhas de chat (user=primary, assistant=muted), auto-scroll, skeleton loading, empty state com sugestões rápidas ("Analise este lead", "Como devo abordar?", "Quais perguntas fazer?", "Este lead é qualificado?")
+  - Input area: Input + botão Send, Enter para enviar, conversation switcher (chips no rodapé para alternar entre conversas)
+  - `MessageBubble`: Componente de bolha com avatar (User/Bot), timestamp, whitespace-pre-wrap
+- **Integração — `src/components/leads/LeadDetailDialog.tsx` (MODIFICADO)**:
+  - Import: `Bot` icon + `LeadChatbotPanel`
+  - Nova tab: "IA Chatbot" (3ª tab) com Bot icon
+  - `TabsContent value="chatbot"` renderiza `<LeadChatbotPanel leadId={lead.id} leadName={lead.name} />`
+- **MiniMax (Buchecha) code review**: 1 CRITICAL (silent data failure → fixed), 3 WARNING (conversation ID invalidation → fixed, null queryKey → acceptable with enabled guard, missing retry → noted). Build 0 erros ✅
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos criados** (3):
+  - `supabase/functions/commercial-lead-chatbot/index.ts` — Edge Function self-contained (~420 linhas)
+  - `src/hooks/useLeadChatbot.ts` — hook central chatbot (~135 linhas)
+  - `src/components/leads/LeadChatbotDialog.tsx` — UI chatbot panel (~280 linhas)
+- **Arquivos modificados** (2):
+  - `src/components/leads/LeadDetailDialog.tsx` — import Bot + LeadChatbotPanel, nova tab "IA Chatbot"
+  - `src/hooks/useCardPreferences.ts` — fix queryKey invalidation + onError rollback (fix MiniMax sessão anterior)
+- **Edge Functions — Versões atualizadas**:
+  - `commercial-lead-chatbot` → version 1 (4 actions, BANT qualification, conversational AI, self-contained, CORS whitelist)
+- **Cronograma CRM IA-Native**: F1 Item #11 ✅ concluído (L03 Chatbot IA Leads). **CRM F1: 11/13 itens concluídos**. Próximo: F1 Item #12
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

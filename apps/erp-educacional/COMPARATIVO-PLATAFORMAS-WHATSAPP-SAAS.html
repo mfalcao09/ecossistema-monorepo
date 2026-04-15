@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Comparativo Técnico: Plataformas WhatsApp SaaS vs DKW System</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0f1117; --bg2: #1a1d27; --bg3: #22263a; --border: #2e3347;
+    --text: #e2e8f0; --muted: #8892a4;
+    --blue: #3b82f6; --purple: #8b5cf6; --green: #10b981;
+    --yellow: #f59e0b; --red: #ef4444; --teal: #14b8a6;
+    --orange: #f97316; --pink: #ec4899; --gold: #fbbf24;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; background: var(--bg); color: var(--text); line-height: 1.6; }
+  .container { max-width: 1400px; margin: 0 auto; padding: 0 24px 60px; }
+
+  .hero {
+    background: linear-gradient(135deg, #0f1117 0%, #1a1d27 40%, #1e2235 70%, #0f1117 100%);
+    border-bottom: 1px solid var(--border); padding: 48px 24px; text-align: center; position: relative; overflow: hidden;
+  }
+  .hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(59,130,246,0.15) 0%, transparent 70%);
+  }
+  .hero-badge {
+    display: inline-block; background: rgba(59,130,246,0.15); border: 1px solid rgba(59,130,246,0.3);
+    color: var(--blue); font-size: 12px; font-weight: 600; padding: 4px 14px; border-radius: 20px;
+    letter-spacing: 1px; text-transform: uppercase; margin-bottom: 16px;
+  }
+  .hero h1 { font-size: clamp(24px,4vw,42px); font-weight: 800; color: #fff; line-height: 1.2; margin-bottom: 12px; position: relative; }
+  .hero p { color: var(--muted); font-size: 15px; max-width: 600px; margin: 0 auto 8px; }
+  .hero-meta { color: var(--muted); font-size: 12px; margin-top: 16px; }
+  .hero-meta span { margin: 0 8px; }
+
+  .nav {
+    background: var(--bg2); border-bottom: 1px solid var(--border); padding: 0 24px;
+    display: flex; gap: 0; overflow-x: auto; position: sticky; top: 0; z-index: 100;
+  }
+  .nav a {
+    color: var(--muted); text-decoration: none; padding: 14px 18px; font-size: 13px; font-weight: 500;
+    white-space: nowrap; border-bottom: 2px solid transparent; transition: all .2s;
+  }
+  .nav a:hover { color: var(--text); border-color: var(--blue); }
+
+  .section { padding: 48px 0 24px; }
+  .section-header { display: flex; align-items: center; gap: 12px; margin-bottom: 28px; }
+  .section-num {
+    width: 32px; height: 32px; border-radius: 8px;
+    background: linear-gradient(135deg, var(--blue), var(--purple));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 700; color: #fff; flex-shrink: 0;
+  }
+  .section-header h2 { font-size: 22px; font-weight: 700; color: #fff; }
+  .section-desc { color: var(--muted); font-size: 14px; margin-top: -20px; margin-bottom: 24px; padding-left: 44px; }
+
+  .table-wrap { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); }
+  table { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 900px; }
+  th {
+    background: var(--bg3); padding: 12px 14px; text-align: left;
+    font-size: 11px; font-weight: 600; color: var(--muted);
+    letter-spacing: .5px; text-transform: uppercase; border-bottom: 1px solid var(--border);
+  }
+  td { padding: 10px 14px; border-bottom: 1px solid rgba(46,51,71,0.6); vertical-align: middle; }
+  tr:last-child td { border-bottom: none; }
+  tr:hover td { background: rgba(255,255,255,0.02); }
+  .col-feature { font-weight: 500; color: var(--text); min-width: 180px; }
+  .col-highlight { background: rgba(59,130,246,0.06) !important; }
+  th.highlight { background: rgba(59,130,246,0.15) !important; color: var(--blue) !important; }
+
+  .group-row td {
+    background: var(--bg3) !important; color: var(--blue);
+    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; padding: 8px 14px;
+  }
+
+  .badge { display: inline-block; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: 600; }
+  .badge-green { background: rgba(16,185,129,0.15); color: #10b981; }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: #f59e0b; }
+  .badge-red { background: rgba(239,68,68,0.15); color: #ef4444; }
+  .badge-blue { background: rgba(59,130,246,0.15); color: #3b82f6; }
+  .badge-teal { background: rgba(20,184,166,0.15); color: #14b8a6; }
+
+  .s-full { color: #10b981; font-size: 15px; }
+  .s-partial { color: #f59e0b; font-size: 15px; }
+  .s-none { color: #ef4444; font-size: 15px; }
+  .s-best { color: #fbbf24; font-size: 15px; }
+
+  .score-bar { display: flex; align-items: center; gap: 8px; }
+  .bar-track { flex: 1; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; min-width: 60px; }
+  .bar-fill { height: 100%; border-radius: 3px; }
+  .score-num { font-weight: 700; font-size: 13px; min-width: 36px; }
+
+  .coverage-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; }
+  .cov-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 18px; text-align: center; }
+  .cov-pct { font-size: 36px; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .cov-name { font-size: 14px; font-weight: 600; color: #fff; margin-bottom: 2px; }
+  .cov-sub { font-size: 11px; color: var(--muted); }
+  .cov-bar { margin: 10px 0 6px; height: 6px; background: var(--bg3); border-radius: 3px; overflow: hidden; }
+  .cov-bar-fill { height: 100%; border-radius: 3px; }
+  .cov-count { font-size: 11px; color: var(--muted); }
+
+  .ranking { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 16px; }
+  .rank-card {
+    background: var(--bg2); border: 1px solid var(--border);
+    border-radius: 12px; padding: 20px; position: relative; overflow: hidden;
+  }
+  .rank-num { position: absolute; top: 16px; right: 16px; font-size: 36px; font-weight: 800; opacity: .1; line-height: 1; }
+  .rank-medal { font-size: 24px; margin-bottom: 8px; }
+  .rank-name { font-size: 18px; font-weight: 700; color: #fff; }
+  .rank-score-big { font-size: 32px; font-weight: 800; line-height: 1; margin: 4px 0 8px; }
+  .rank-desc { font-size: 12px; color: var(--muted); line-height: 1.5; }
+  .rank-tag { display: inline-block; margin-top: 10px; font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 4px; }
+
+  .roadmap-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 16px; }
+  .roadmap-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+  .roadmap-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 14px; }
+  .roadmap-title { font-size: 15px; font-weight: 700; color: #fff; }
+  .roadmap-weeks { font-size: 12px; font-weight: 700; padding: 4px 10px; border-radius: 6px; white-space: nowrap; }
+  .roadmap-items { list-style: none; }
+  .roadmap-items li {
+    display: flex; align-items: flex-start; gap: 8px;
+    font-size: 12px; color: var(--muted); padding: 4px 0;
+    border-bottom: 1px solid rgba(46,51,71,0.4);
+  }
+  .roadmap-items li:last-child { border: none; }
+  .roadmap-items .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--blue); margin-top: 6px; flex-shrink: 0; }
+  .roadmap-alert { margin-top: 12px; padding: 8px 10px; border-radius: 6px; font-size: 11px; font-weight: 600; line-height: 1.4; }
+
+  .scenarios { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 14px; }
+  .scenario { background: var(--bg2); border: 1px solid var(--border); border-radius: 10px; padding: 16px; }
+  .scenario-if { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 4px; }
+  .scenario-cond { font-size: 13px; font-weight: 600; color: var(--text); margin-bottom: 8px; line-height: 1.4; }
+  .scenario-arrow { font-size: 20px; margin-bottom: 4px; }
+  .scenario-rec { font-size: 16px; font-weight: 800; margin-bottom: 4px; }
+  .scenario-note { font-size: 11px; color: var(--muted); }
+
+  .divider { height: 1px; background: var(--border); margin: 8px 0 32px; }
+
+  .alert { border-radius: 10px; padding: 14px 16px; margin: 16px 0; font-size: 13px; display: flex; gap: 10px; align-items: flex-start; }
+  .alert-warn { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); color: #f59e0b; }
+  .alert-info { background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); color: #93c5fd; }
+  .alert-success { background: rgba(16,185,129,0.1); border: 1px solid rgba(16,185,129,0.3); color: #6ee7b7; }
+  .alert-icon { font-size: 16px; flex-shrink: 0; margin-top: 1px; }
+
+  .updated-banner {
+    background: linear-gradient(135deg, rgba(20,184,166,0.1), rgba(59,130,246,0.1));
+    border: 1px solid rgba(20,184,166,0.3); border-radius: 10px; padding: 12px 18px; margin: 20px 0;
+    font-size: 13px; color: #5eead4; display: flex; align-items: center; gap: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">Análise Técnica Comparativa</div>
+  <h1>Plataformas Open-Source<br>WhatsApp SaaS vs DKW System</h1>
+  <p>Análise profunda de 5 repositórios clonados e avaliados para decisão de base tecnológica</p>
+  <div class="hero-meta">
+    <span>📅 12/04/2026</span>
+    <span>🤖 Claude Opus 4 + Squad de IAs</span>
+    <span>📊 52 features mapeadas</span>
+    <span>🆕 Ticketz incluído — v2.0</span>
+  </div>
+</div>
+
+<nav class="nav">
+  <a href="#resumo">1. Resumo</a>
+  <a href="#features">2. Features</a>
+  <a href="#qualidade">3. Qualidade</a>
+  <a href="#cobertura">4. Cobertura</a>
+  <a href="#roadmap">5. Roadmap</a>
+  <a href="#ranking">6. Ranking</a>
+  <a href="#cenarios">7. Cenários</a>
+</nav>
+
+<div class="container">
+
+  <div class="updated-banner">
+    <span>🆕</span>
+    <div><strong>Relatório v2.0 — Ticketz incluído.</strong> Quinta plataforma analisada: ticketz-oss/ticketz — fork limpo e não-ofuscado do Whaticket, com código React + Node.js + PostgreSQL 100% alinhado com sua stack. 165 migrations, 43 modelos, SaaS multi-empresa + billing PIX BR prontos.</div>
+  </div>
+
+  <!-- SECTION 1 -->
+  <div class="section" id="resumo">
+    <div class="section-header"><div class="section-num">1</div><h2>Resumo Executivo</h2></div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Métrica</th><th>Chatwoot</th><th>Tiledesk</th><th>Whaticket-SaaS</th><th>Izing</th>
+            <th class="highlight">Ticketz 🆕</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="col-feature">GitHub Stars</td>
+            <td><span class="badge badge-green">~27.000 ⭐</span></td>
+            <td>~2.000</td><td>Fork popular</td><td>Popular BR</td>
+            <td class="col-highlight">Crescendo</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Stack Backend</td>
+            <td><span class="badge" style="background:rgba(139,92,246,0.15);color:#a78bfa">Ruby on Rails 7.1</span></td>
+            <td>Node.js/Express</td><td>Node.js/Express</td><td>Node.js/Express/TS</td>
+            <td class="col-highlight"><span class="badge badge-teal">Node.js/Express/TS</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Stack Frontend</td>
+            <td>Vue 3 + Vite</td><td>Angular 14</td><td>React 16</td><td>Vue 2.6 + Quasar</td>
+            <td class="col-highlight"><span class="badge badge-teal">React 17</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Banco de Dados</td>
+            <td>PostgreSQL + pgvector</td><td>MongoDB</td><td>PostgreSQL</td><td>PostgreSQL</td>
+            <td class="col-highlight">PostgreSQL</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Tabelas / Migrations</td>
+            <td>50+ / 118</td><td>55 collections</td><td>53 / 223+</td><td>26 / 129</td>
+            <td class="col-highlight"><strong>43 tabelas / 165 migrations</strong></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Linhas de Código</td>
+            <td>~200k+</td><td>~103k</td><td>~100k (ofuscado)</td><td>~12k</td>
+            <td class="col-highlight">~76k (30k back + 46k front)</td>
+          </tr>
+          <tr>
+            <td class="col-feature">Testes</td>
+            <td><span class="badge badge-green">97.474 linhas ✅</span></td>
+            <td>~22% cobertura</td>
+            <td><span class="badge badge-red">Ofuscado ❌</span></td>
+            <td>Mínimo (3/10)</td>
+            <td class="col-highlight"><span class="badge badge-red">0% — bloqueador crítico ⚠️</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">CI/CD</td>
+            <td><span class="badge badge-green">CircleCI + GH Actions</span></td>
+            <td>CircleCI parcial</td>
+            <td><span class="badge badge-red">Nenhum</span></td>
+            <td><span class="badge badge-red">Nenhum</span></td>
+            <td class="col-highlight"><span class="badge badge-yellow">GitHub Actions</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Código Ofuscado?</td>
+            <td><span class="badge badge-green">Não ✅</span></td>
+            <td><span class="badge badge-green">Não ✅</span></td>
+            <td><span class="badge badge-red">⚠️ SIM — deal-breaker</span></td>
+            <td><span class="badge badge-green">Não ✅</span></td>
+            <td class="col-highlight"><span class="badge badge-green">Não — código limpo ✅</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Billing integrado</td>
+            <td>Stripe</td><td>Stripe</td><td>Gerencianet PIX</td><td>❌</td>
+            <td class="col-highlight"><span class="badge badge-teal">Gerencianet PIX 🇧🇷 ✅</span></td>
+          </tr>
+          <tr>
+            <td class="col-feature">Sentry Error Tracking</td>
+            <td>✅</td><td>❌</td><td>❌</td><td>✅</td>
+            <td class="col-highlight"><span class="badge badge-teal">✅</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 2 -->
+  <div class="section" id="features">
+    <div class="section-header"><div class="section-num">2</div><h2>Comparativo de Features vs DKW System</h2></div>
+    <p class="section-desc">52 funcionalidades mapeadas da DKW System. ✅ Completo · ⚠️ Parcial · ❌ Ausente · 🏆 Melhor dos 5</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Feature</th><th>Chatwoot</th><th>Tiledesk</th><th>Whaticket-SaaS</th><th>Izing</th>
+            <th class="highlight">Ticketz 🆕</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="group-row"><td colspan="6">📱 CANAIS</td></tr>
+          <tr><td class="col-feature">WhatsApp (multi-número)</td><td><span class="s-best">🏆</span> Meta API oficial</td><td><span class="s-full">✅</span> Conector dedicado</td><td><span class="s-full">✅</span> Baileys</td><td><span class="s-full">✅</span> wwebjs</td><td class="col-highlight"><span class="s-full">✅</span> Baileys</td></tr>
+          <tr><td class="col-feature">Instagram DM</td><td><span class="s-best">🏆</span> Meta API</td><td><span class="s-full">✅</span> Graph API</td><td><span class="s-full">✅</span> Graph API</td><td><span class="s-full">✅</span> MQTT</td><td class="col-highlight"><span class="s-partial">⚠️</span> Limitado</td></tr>
+          <tr><td class="col-feature">Instagram Stories</td><td><span class="s-partial">⚠️</span></td><td><span class="s-partial">⚠️</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Facebook Messenger</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+          <tr><td class="col-feature">Telegram</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-none">❌</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Email</td><td><span class="s-best">🏆</span> SMTP/POP3</td><td><span class="s-full">✅</span> Nodemailer</td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">VOIP / Chamadas</td><td><span class="s-best">🏆</span> Twilio</td><td><span class="s-partial">⚠️</span> Kaleyra</td><td><span class="s-none">❌</span></td><td><span class="s-partial">⚠️</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">SMS</td><td><span class="s-best">🏆</span> Twilio</td><td><span class="s-partial">⚠️</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">TikTok</td><td><span class="s-best">🏆</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Web Chat Widget</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span> Angular widget</td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+
+          <tr class="group-row"><td colspan="6">🎧 ATENDIMENTO</td></tr>
+          <tr><td class="col-feature">Inbox unificada</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+          <tr><td class="col-feature">Multi-agente simultâneo</td><td><span class="s-best">🏆</span> 12+ agentes</td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+          <tr><td class="col-feature">Filas inteligentes</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+          <tr><td class="col-feature">Respostas rápidas</td><td><span class="s-best">🏆</span> Macros</td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span> FastReply</td><td class="col-highlight"><span class="s-full">✅</span> QuickMessages</td></tr>
+          <tr><td class="col-feature">Notas internas</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-partial">⚠️</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+          <tr><td class="col-feature">Transferência departamentos</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+          <tr><td class="col-feature">SLA Tracking</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-partial">⚠️</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+
+          <tr class="group-row"><td colspan="6">📊 CRM</td></tr>
+          <tr><td class="col-feature">Pipeline Kanban visual</td><td><span class="s-partial">⚠️</span> Básico</td><td><span class="s-best">🏆</span> Lead scoring</td><td><span class="s-full">✅</span> react-trello</td><td><span class="s-partial">⚠️</span></td><td class="col-highlight"><span class="s-partial">⚠️</span> Básico</td></tr>
+          <tr><td class="col-feature">Catálogo de produtos</td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Campos customizados</td><td><span class="s-best">🏆</span> JSONB</td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Automação por estágio</td><td><span class="s-best">🏆</span> AutomationRule</td><td><span class="s-full">✅</span> Rules Engine</td><td><span class="s-partial">⚠️</span></td><td><span class="s-partial">⚠️</span></td><td class="col-highlight"><span class="s-partial">⚠️</span></td></tr>
+
+          <tr class="group-row"><td colspan="6">🤖 IA / CHATBOT</td></tr>
+          <tr><td class="col-feature">Agente IA 24/7</td><td><span class="s-best">🏆</span> Captain AI</td><td><span class="s-full">✅</span> Copilot</td><td><span class="s-full">✅</span> ChatGPT</td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-partial">⚠️</span> Só transcrição</td></tr>
+          <tr><td class="col-feature">RAG (PDFs/documentos)</td><td><span class="s-best">🏆</span> pgvector</td><td><span class="s-full">✅</span> RAG nativo</td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Multi-modelo LLM</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span> LLM abstraction</td><td><span class="s-partial">⚠️</span> Só OpenAI</td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Flow Builder Visual</td><td><span class="s-none">❌</span></td><td><span class="s-best">🏆</span> Design Studio</td><td><span class="s-partial">⚠️</span></td><td><span class="s-full">✅</span> Drawflow</td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Integração Typebot</td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td><span class="s-best">🏆</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Integração n8n</td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td><span class="s-best">🏆</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+
+          <tr class="group-row"><td colspan="6">📢 CAMPANHAS</td></tr>
+          <tr><td class="col-feature">Campanhas em massa</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+          <tr><td class="col-feature">Agendamento (Bull)</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span> Bull</td><td class="col-highlight"><span class="s-full">✅</span> Bull</td></tr>
+          <tr><td class="col-feature">A/B Testing</td><td><span class="s-partial">⚠️</span></td><td><span class="s-partial">⚠️</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+
+          <tr class="group-row"><td colspan="6">🏷️ WHITE-LABEL / SAAS</td></tr>
+          <tr><td class="col-feature">Domínio customizado</td><td><span class="s-best">🏆</span></td><td><span class="s-full">✅</span></td><td><span class="s-partial">⚠️</span> Via .env</td><td><span class="s-partial">⚠️</span></td><td class="col-highlight"><span class="s-partial">⚠️</span> Parcial</td></tr>
+          <tr><td class="col-feature">Multi-empresa (multi-tenant)</td><td><span class="s-best">🏆</span> Account model</td><td><span class="s-full">✅</span> Project</td><td><span class="s-full">✅</span> Company</td><td><span class="s-full">✅</span> Tenant</td><td class="col-highlight"><span class="s-full">✅</span> companyId isolation</td></tr>
+          <tr><td class="col-feature">Planos e assinaturas</td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span> Stripe</td><td><span class="s-full">✅</span></td><td><span class="s-partial">⚠️</span></td><td class="col-highlight"><span class="s-full">✅</span> Plan/Invoice</td></tr>
+          <tr><td class="col-feature">Billing integrado</td><td>Stripe</td><td><span class="s-best">🏆</span> Stripe</td><td>Gerencianet PIX</td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-full">✅</span> Gerencianet PIX 🇧🇷</td></tr>
+          <tr><td class="col-feature">Dashboard de parceiro</td><td><span class="s-partial">⚠️</span></td><td><span class="s-partial">⚠️</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+
+          <tr class="group-row"><td colspan="6">🔧 INFRAESTRUTURA</td></tr>
+          <tr><td class="col-feature">API REST completa</td><td><span class="s-best">🏆</span> v1+v2+Swagger</td><td><span class="s-full">✅</span> 56 rotas</td><td><span class="s-full">✅</span> 51 rotas</td><td><span class="s-full">✅</span> 25+</td><td class="col-highlight"><span class="s-full">✅</span> 30+ rotas</td></tr>
+          <tr><td class="col-feature">Realtime WebSocket</td><td><span class="s-full">✅</span> Action Cable</td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span> Socket.io</td><td><span class="s-full">✅</span> Socket.io</td><td class="col-highlight"><span class="s-full">✅</span> Socket.io</td></tr>
+          <tr><td class="col-feature">Knowledge Base</td><td><span class="s-best">🏆</span> Portal completo</td><td><span class="s-full">✅</span></td><td><span class="s-full">✅</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">CSAT</td><td><span class="s-best">🏆</span></td><td><span class="s-partial">⚠️</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td class="col-highlight"><span class="s-none">❌</span></td></tr>
+          <tr><td class="col-feature">Sentry error tracking</td><td><span class="s-full">✅</span></td><td><span class="s-none">❌</span></td><td><span class="s-none">❌</span></td><td><span class="s-full">✅</span></td><td class="col-highlight"><span class="s-full">✅</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 3 -->
+  <div class="section" id="qualidade">
+    <div class="section-header"><div class="section-num">3</div><h2>Qualidade de Código — Scorecard</h2></div>
+    <p class="section-desc">Critérios avaliados de 0 a 10 com base na análise direta do código-fonte clonado.</p>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Critério (0-10)</th><th>Chatwoot</th><th>Tiledesk</th><th>Whaticket-SaaS</th><th>Izing</th><th class="highlight">Ticketz 🆕</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="col-feature">Arquitetura</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:90%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">9</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">7</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#f97316"></div></div><span class="score-num" style="color:#f97316">6</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:80%;background:#3b82f6"></div></div><span class="score-num" style="color:#3b82f6">8</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:80%;background:#14b8a6"></div></div><span class="score-num" style="color:#14b8a6">8</span></div></td></tr>
+          <tr><td class="col-feature">Type Safety</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">7</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">6</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:50%;background:#f97316"></div></div><span class="score-num" style="color:#f97316">5</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#3b82f6"></div></div><span class="score-num" style="color:#3b82f6">7</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:50%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">5 (strict:false)</span></div></td></tr>
+          <tr><td class="col-feature">Cobertura de Testes</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:100%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">10</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:40%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">4</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:10%;background:#ef4444"></div></div><span class="score-num" style="color:#ef4444">1</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:30%;background:#f97316"></div></div><span class="score-num" style="color:#f97316">3</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:1%;background:#ef4444"></div></div><span class="score-num" style="color:#ef4444">0 🚨</span></div></td></tr>
+          <tr><td class="col-feature">Documentação</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:80%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">8</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:40%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">4</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:30%;background:#ef4444"></div></div><span class="score-num" style="color:#ef4444">3</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:40%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">4</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:30%;background:#f97316"></div></div><span class="score-num" style="color:#f97316">3</span></div></td></tr>
+          <tr><td class="col-feature">CI/CD</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:90%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">9</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">6</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:10%;background:#ef4444"></div></div><span class="score-num" style="color:#ef4444">1</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:20%;background:#ef4444"></div></div><span class="score-num" style="color:#ef4444">2</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#14b8a6"></div></div><span class="score-num" style="color:#14b8a6">6</span></div></td></tr>
+          <tr><td class="col-feature">Segurança</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:90%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">9</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">6</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:50%;background:#f97316"></div></div><span class="score-num" style="color:#f97316">5</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#3b82f6"></div></div><span class="score-num" style="color:#3b82f6">7</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#14b8a6"></div></div><span class="score-num" style="color:#14b8a6">6</span></div></td></tr>
+          <tr><td class="col-feature">Escalabilidade</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:90%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">9</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">7</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:40%;background:#f97316"></div></div><span class="score-num" style="color:#f97316">4</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#3b82f6"></div></div><span class="score-num" style="color:#3b82f6">6</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#14b8a6"></div></div><span class="score-num" style="color:#14b8a6">7</span></div></td></tr>
+          <tr><td class="col-feature">Manutenibilidade</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:90%;background:#10b981"></div></div><span class="score-num" style="color:#10b981">9</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:60%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b">6</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:20%;background:#ef4444"></div></div><span class="score-num" style="color:#ef4444">2 🚫</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#3b82f6"></div></div><span class="score-num" style="color:#3b82f6">7</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:70%;background:#14b8a6"></div></div><span class="score-num" style="color:#14b8a6">7</span></div></td></tr>
+          <tr style="background:rgba(255,255,255,0.04)"><td class="col-feature" style="font-weight:800">MÉDIA GERAL</td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:88%;background:#10b981"></div></div><span class="score-num" style="color:#10b981;font-weight:800;font-size:15px">8.8</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:58%;background:#f59e0b"></div></div><span class="score-num" style="color:#f59e0b;font-weight:800;font-size:15px">5.8</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:34%;background:#ef4444"></div></div><span class="score-num" style="color:#ef4444;font-weight:800;font-size:15px">3.4</span></div></td><td><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:55%;background:#3b82f6"></div></div><span class="score-num" style="color:#3b82f6;font-weight:800;font-size:15px">5.5</span></div></td><td class="col-highlight"><div class="score-bar"><div class="bar-track"><div class="bar-fill" style="width:53%;background:#14b8a6"></div></div><span class="score-num" style="color:#14b8a6;font-weight:800;font-size:15px">5.3</span></div></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-warn">
+      <span class="alert-icon">⚠️</span>
+      <div><strong>Ticketz — 0% de testes é o maior risco.</strong> Em produção SaaS, código sem testes = deploy arriscado a cada mudança. O primeiro sprint deve incluir suite de testes como prioridade P0 antes de qualquer nova feature.</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 4 -->
+  <div class="section" id="cobertura">
+    <div class="section-header"><div class="section-num">4</div><h2>Cobertura vs DKW System</h2></div>
+    <p class="section-desc">Percentual das 52 features da DKW já presentes em cada plataforma</p>
+    <div class="coverage-grid">
+      <div class="cov-card">
+        <div class="cov-pct" style="color:#10b981">77%</div>
+        <div class="cov-name">Chatwoot</div>
+        <div class="cov-sub">Ruby on Rails 7.1</div>
+        <div class="cov-bar"><div class="cov-bar-fill" style="width:77%;background:#10b981"></div></div>
+        <div class="cov-count">✅ 35 · ⚠️ 10 · ❌ 7</div>
+      </div>
+      <div class="cov-card">
+        <div class="cov-pct" style="color:#3b82f6">69%</div>
+        <div class="cov-name">Tiledesk</div>
+        <div class="cov-sub">Node.js + Angular 14</div>
+        <div class="cov-bar"><div class="cov-bar-fill" style="width:69%;background:#3b82f6"></div></div>
+        <div class="cov-count">✅ 30 · ⚠️ 12 · ❌ 10</div>
+      </div>
+      <div class="cov-card">
+        <div class="cov-pct" style="color:#f59e0b">65%</div>
+        <div class="cov-name">Whaticket-SaaS</div>
+        <div class="cov-sub">⚠️ Código OFUSCADO!</div>
+        <div class="cov-bar"><div class="cov-bar-fill" style="width:65%;background:#f59e0b"></div></div>
+        <div class="cov-count">✅ 28 · ⚠️ 12 · ❌ 12</div>
+      </div>
+      <div class="cov-card" style="border-color:rgba(20,184,166,0.5)">
+        <div class="cov-pct" style="color:#14b8a6">57%</div>
+        <div class="cov-name">Ticketz 🆕</div>
+        <div class="cov-sub">React + Node.js + PG ✅</div>
+        <div class="cov-bar"><div class="cov-bar-fill" style="width:57%;background:#14b8a6"></div></div>
+        <div class="cov-count">✅ 23 · ⚠️ 13 · ❌ 16</div>
+      </div>
+      <div class="cov-card">
+        <div class="cov-pct" style="color:#8b5cf6">54%</div>
+        <div class="cov-name">Izing</div>
+        <div class="cov-sub">Node.js + Vue 2.6 + PG</div>
+        <div class="cov-bar"><div class="cov-bar-fill" style="width:54%;background:#8b5cf6"></div></div>
+        <div class="cov-count">✅ 22 · ⚠️ 12 · ❌ 18</div>
+      </div>
+    </div>
+    <div class="alert alert-info" style="margin-top:20px">
+      <span class="alert-icon">ℹ️</span>
+      <div><strong>Ticketz (57%) vs Whaticket (65%):</strong> O Whaticket tem cobertura ligeiramente maior, mas código ofuscado torna qualquer modificação inviável. O Ticketz, com código limpo, é a escolha óbvia entre os dois para quem quer controle total.</div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 5 -->
+  <div class="section" id="roadmap">
+    <div class="section-header"><div class="section-num">5</div><h2>Roadmap para Nível DKW</h2></div>
+    <p class="section-desc">O que falta implementar em cada plataforma para chegar no nível da DKW System</p>
+    <div class="roadmap-grid">
+
+      <div class="roadmap-card" style="border-color:rgba(16,185,129,0.3)">
+        <div class="roadmap-header">
+          <div><div class="roadmap-title">🏆 Chatwoot</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Distância: ~23%</div></div>
+          <div class="roadmap-weeks" style="background:rgba(16,185,129,0.15);color:#10b981">18-24 semanas</div>
+        </div>
+        <ul class="roadmap-items">
+          <li><div class="dot"></div>Flow Builder Visual drag-and-drop (4-6 sem)</li>
+          <li><div class="dot"></div>CRM Pipeline com catálogo de produtos (3-4 sem)</li>
+          <li><div class="dot"></div>Integração Typebot/n8n nativa (2-3 sem)</li>
+          <li><div class="dot"></div>Integrações BR: Hotmart/Kiwify (2-3 sem)</li>
+          <li><div class="dot"></div>URA Inteligente com UI (2 sem)</li>
+          <li><div class="dot"></div>Dashboard White-Label de Parceiro (3-4 sem)</li>
+        </ul>
+        <div class="roadmap-alert" style="background:rgba(239,68,68,0.1);color:#f87171;border:1px solid rgba(239,68,68,0.3)">
+          ⚠️ Stack Ruby on Rails — precisa dev especializado
+        </div>
+      </div>
+
+      <div class="roadmap-card" style="border-color:rgba(59,130,246,0.3)">
+        <div class="roadmap-header">
+          <div><div class="roadmap-title">🥈 Tiledesk</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Distância: ~31%</div></div>
+          <div class="roadmap-weeks" style="background:rgba(59,130,246,0.15);color:#3b82f6">25-32 semanas</div>
+        </div>
+        <ul class="roadmap-items">
+          <li><div class="dot"></div>WhatsApp multi-número robusto (3-4 sem)</li>
+          <li><div class="dot"></div>CRM Pipeline + catálogo (3-4 sem)</li>
+          <li><div class="dot"></div>Integrações BR: Typebot/n8n/Hotmart (4-5 sem)</li>
+          <li><div class="dot"></div>VOIP com URA (3-4 sem)</li>
+          <li><div class="dot"></div>Dashboard White-Label Parceiro (3-4 sem)</li>
+          <li><div class="dot"></div>Billing PIX Brasil (2-3 sem)</li>
+        </ul>
+        <div class="roadmap-alert" style="background:rgba(245,158,11,0.1);color:#fbbf24;border:1px solid rgba(245,158,11,0.3)">
+          ⚠️ Angular 14 no frontend — diferente do React
+        </div>
+      </div>
+
+      <div class="roadmap-card" style="border-color:rgba(20,184,166,0.4);background:linear-gradient(135deg,var(--bg2) 0%,rgba(20,184,166,0.06) 100%)">
+        <div class="roadmap-header">
+          <div><div class="roadmap-title">🆕 Ticketz</div><div style="font-size:12px;color:#5eead4;margin-top:2px">Stack 100% alinhada!</div></div>
+          <div class="roadmap-weeks" style="background:rgba(20,184,166,0.15);color:#14b8a6">52-64 semanas</div>
+        </div>
+        <ul class="roadmap-items">
+          <li><div class="dot" style="background:#14b8a6"></div>WhatsApp API Oficial (Baileys → oficial) (4-5 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>Suite de testes P0 — 60% cobertura meta (4-6 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>TypeScript strict mode (2-3 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>IA: GPT-4 + RAG + multi-modelo (6-8 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>Flow Builder visual drag-and-drop (4-5 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>Email + Telegram + Web Chat Widget (5-7 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>VOIP / URA (4-5 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>Integrações BR: Typebot/n8n/Hotmart (4-5 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>Campos customizados CRM (2-3 sem)</li>
+          <li><div class="dot" style="background:#14b8a6"></div>White-Label + Dashboard Parceiro (6-7 sem)</li>
+        </ul>
+        <div class="roadmap-alert" style="background:rgba(20,184,166,0.1);color:#5eead4;border:1px solid rgba(20,184,166,0.3)">
+          ✅ React + Node.js + PostgreSQL = sua stack exata. Código limpo, SaaS + PIX já prontos.
+        </div>
+      </div>
+
+      <div class="roadmap-card" style="border-color:rgba(239,68,68,0.2)">
+        <div class="roadmap-header">
+          <div><div class="roadmap-title">⚠️ Whaticket-SaaS</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Distância: ~35%</div></div>
+          <div class="roadmap-weeks" style="background:rgba(245,158,11,0.15);color:#f59e0b">36-46 semanas</div>
+        </div>
+        <ul class="roadmap-items">
+          <li><div class="dot" style="background:#ef4444"></div>WhatsApp API Oficial (4-5 sem)</li>
+          <li><div class="dot" style="background:#ef4444"></div>Telegram + Email + Web Chat (5-8 sem)</li>
+          <li><div class="dot" style="background:#ef4444"></div>VOIP / URA (4-5 sem)</li>
+          <li><div class="dot" style="background:#ef4444"></div>IA Multi-modelo + RAG (5-6 sem)</li>
+          <li><div class="dot" style="background:#ef4444"></div>White-Label completo + Parceiro (7-9 sem)</li>
+        </ul>
+        <div class="roadmap-alert" style="background:rgba(239,68,68,0.15);color:#f87171;border:1px solid rgba(239,68,68,0.4)">
+          🚫 DEAL-BREAKER: Código ofuscado — impossível manter, debugar ou escalar.
+        </div>
+      </div>
+
+      <div class="roadmap-card">
+        <div class="roadmap-header">
+          <div><div class="roadmap-title">5º Izing</div><div style="font-size:12px;color:var(--muted);margin-top:2px">Distância: ~46%</div></div>
+          <div class="roadmap-weeks" style="background:rgba(139,92,246,0.15);color:#8b5cf6">49-63 semanas</div>
+        </div>
+        <ul class="roadmap-items">
+          <li><div class="dot" style="background:#8b5cf6"></div>WhatsApp API Oficial (4-5 sem)</li>
+          <li><div class="dot" style="background:#8b5cf6"></div>Email + Web Chat + VOIP + URA (8-11 sem)</li>
+          <li><div class="dot" style="background:#8b5cf6"></div>IA completa do zero (6-8 sem)</li>
+          <li><div class="dot" style="background:#8b5cf6"></div>Integrações BR + Shopify (5-6 sem)</li>
+          <li><div class="dot" style="background:#8b5cf6"></div>White-Label + Dashboard Parceiro (6-8 sem)</li>
+          <li><div class="dot" style="background:#8b5cf6"></div>CI/CD + Testes (3-4 sem)</li>
+        </ul>
+        <div class="roadmap-alert" style="background:rgba(139,92,246,0.1);color:#a78bfa;border:1px solid rgba(139,92,246,0.3)">
+          ℹ️ TypeScript estrito e código limpo, mas Vue 2.6 (legacy) e ~1 ano de roadmap.
+        </div>
+      </div>
+
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 6 -->
+  <div class="section" id="ranking">
+    <div class="section-header"><div class="section-num">6</div><h2>Matriz de Decisão Final</h2></div>
+    <div class="table-wrap" style="margin-bottom:28px">
+      <table>
+        <thead>
+          <tr><th>Critério (peso)</th><th>Chatwoot</th><th>Tiledesk</th><th>Whaticket-SaaS</th><th>Izing</th><th class="highlight">Ticketz 🆕</th></tr>
+        </thead>
+        <tbody>
+          <tr><td class="col-feature">Features prontas (30%)</td><td><strong style="color:#10b981">9</strong></td><td>7</td><td>6.5</td><td>5.5</td><td class="col-highlight"><strong style="color:#14b8a6">6</strong></td></tr>
+          <tr><td class="col-feature">Qualidade de código (20%)</td><td><strong style="color:#10b981">9</strong></td><td>6</td><td><strong style="color:#ef4444">3</strong></td><td>5.5</td><td class="col-highlight"><strong style="color:#14b8a6">6</strong></td></tr>
+          <tr><td class="col-feature">Alinhamento de stack (20%)</td><td><strong style="color:#ef4444">3</strong> (Ruby!)</td><td>5 (Angular)</td><td><strong style="color:#10b981">8</strong> (React+Node+PG)</td><td>7 (Vue+Node+PG)</td><td class="col-highlight"><strong style="color:#14b8a6">8</strong> (React+Node+PG ✅)</td></tr>
+          <tr><td class="col-feature">Comunidade/suporte (10%)</td><td><strong style="color:#10b981">10</strong></td><td>5</td><td>4</td><td>4</td><td class="col-highlight">5</td></tr>
+          <tr><td class="col-feature">Facilidade white-label (10%)</td><td><strong style="color:#10b981">8</strong></td><td>7</td><td>5</td><td>4</td><td class="col-highlight">5</td></tr>
+          <tr><td class="col-feature">Roadmap mais curto (10%)</td><td><strong style="color:#10b981">8</strong></td><td>6</td><td>5</td><td>3</td><td class="col-highlight">4</td></tr>
+          <tr style="background:rgba(255,255,255,0.04)"><td class="col-feature" style="font-weight:800">SCORE PONDERADO</td><td><strong style="color:#10b981;font-size:20px">7.5</strong></td><td><strong style="color:#3b82f6;font-size:20px">6.1</strong></td><td><strong style="color:#ef4444;font-size:20px">5.5</strong></td><td><strong style="color:#8b5cf6;font-size:20px">4.9</strong></td><td class="col-highlight"><strong style="color:#14b8a6;font-size:20px">6.2</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="ranking">
+      <div class="rank-card" style="border-color:rgba(251,191,36,0.4);background:linear-gradient(135deg,var(--bg2),rgba(251,191,36,0.05))">
+        <div class="rank-num">1</div>
+        <div class="rank-medal">🏆</div>
+        <div class="rank-name">Chatwoot</div>
+        <div class="rank-score-big" style="color:#fbbf24">7.5</div>
+        <div class="rank-desc">O mais completo e maduro. 77% features prontas, 97k linhas de testes, CI/CD, 27k stars. Única fraqueza: stack Ruby on Rails.</div>
+        <div class="rank-tag" style="background:rgba(16,185,129,0.15);color:#10b981">Melhor cobertura + qualidade</div>
+      </div>
+      <div class="rank-card" style="border-color:rgba(20,184,166,0.5);background:linear-gradient(135deg,var(--bg2),rgba(20,184,166,0.07))">
+        <div class="rank-num">2</div>
+        <div class="rank-medal">🆕</div>
+        <div class="rank-name">Ticketz</div>
+        <div class="rank-score-big" style="color:#14b8a6">6.2</div>
+        <div class="rank-desc">Stack 100% alinhada (React+Node+PG). Código limpo, não-ofuscado. SaaS multi-empresa + billing PIX BR prontos. Maior gap: IA e testes.</div>
+        <div class="rank-tag" style="background:rgba(20,184,166,0.15);color:#14b8a6">Melhor stack · código limpo</div>
+      </div>
+      <div class="rank-card" style="border-color:rgba(59,130,246,0.3)">
+        <div class="rank-num">3</div>
+        <div class="rank-medal">🥈</div>
+        <div class="rank-name">Tiledesk</div>
+        <div class="rank-score-big" style="color:#3b82f6">6.1</div>
+        <div class="rank-desc">Mais inovador em IA: Design Studio, RAG nativo, LLM abstraction. Angular 14 + MongoDB diferente da stack atual.</div>
+        <div class="rank-tag" style="background:rgba(59,130,246,0.15);color:#3b82f6">Melhor em IA nativa</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-num">4</div>
+        <div class="rank-medal">⚠️</div>
+        <div class="rank-name">Whaticket-SaaS</div>
+        <div class="rank-score-big" style="color:#ef4444">5.5</div>
+        <div class="rank-desc">Stack perfeita (React+Node+PG) mas código OFUSCADO. Impossível manter ou debugar com segurança em produção.</div>
+        <div class="rank-tag" style="background:rgba(239,68,68,0.15);color:#ef4444">Deal-breaker: código ofuscado</div>
+      </div>
+      <div class="rank-card">
+        <div class="rank-num">5</div>
+        <div class="rank-medal">5º</div>
+        <div class="rank-name">Izing</div>
+        <div class="rank-score-big" style="color:#8b5cf6">4.9</div>
+        <div class="rank-desc">Bom fundamento TypeScript, código limpo, mas features muito incompletas (54%) e roadmap de quase 1 ano.</div>
+        <div class="rank-tag" style="background:rgba(139,92,246,0.15);color:#8b5cf6">TypeScript puro</div>
+      </div>
+    </div>
+  </div>
+  <div class="divider"></div>
+
+  <!-- SECTION 7 -->
+  <div class="section" id="cenarios">
+    <div class="section-header"><div class="section-num">7</div><h2>Cenários de Decisão</h2></div>
+    <p class="section-desc">Qual plataforma escolher dependendo da sua prioridade principal</p>
+    <div class="scenarios">
+      <div class="scenario" style="border-color:rgba(16,185,129,0.3)">
+        <div class="scenario-if">SE PRIORIZAR</div>
+        <div class="scenario-cond">Velocidade de lançamento / MVP rápido</div>
+        <div class="scenario-arrow">→</div>
+        <div class="scenario-rec" style="color:#10b981">Chatwoot</div>
+        <div class="scenario-note">18-24 semanas. Precisa de dev Ruby on Rails.</div>
+      </div>
+      <div class="scenario" style="border-color:rgba(20,184,166,0.4);background:linear-gradient(135deg,var(--bg2),rgba(20,184,166,0.06))">
+        <div class="scenario-if">SE PRIORIZAR</div>
+        <div class="scenario-cond">Mesma stack (React+Node+PG) + código limpo + SaaS pronto</div>
+        <div class="scenario-arrow">→</div>
+        <div class="scenario-rec" style="color:#14b8a6">Ticketz 🆕</div>
+        <div class="scenario-note">52 semanas. 100% alinhado com sua stack. Código legível, billing PIX BR.</div>
+      </div>
+      <div class="scenario" style="border-color:rgba(59,130,246,0.3)">
+        <div class="scenario-if">SE PRIORIZAR</div>
+        <div class="scenario-cond">IA como principal diferencial competitivo</div>
+        <div class="scenario-arrow">→</div>
+        <div class="scenario-rec" style="color:#3b82f6">Tiledesk</div>
+        <div class="scenario-note">Melhor flow builder, RAG nativo, LLM abstraction.</div>
+      </div>
+      <div class="scenario" style="border-color:rgba(251,191,36,0.3)">
+        <div class="scenario-if">SE PRIORIZAR</div>
+        <div class="scenario-cond">Maior comunidade + menor risco de abandono</div>
+        <div class="scenario-arrow">→</div>
+        <div class="scenario-rec" style="color:#fbbf24">Chatwoot</div>
+        <div class="scenario-note">27k stars, empresa por trás, 97k testes, CI/CD completo.</div>
+      </div>
+      <div class="scenario" style="border-color:rgba(139,92,246,0.3)">
+        <div class="scenario-if">SE PRIORIZAR</div>
+        <div class="scenario-cond">TypeScript estrito do zero para toda a base</div>
+        <div class="scenario-arrow">→</div>
+        <div class="scenario-rec" style="color:#8b5cf6">Izing</div>
+        <div class="scenario-note">TypeScript decorators, serviço limpo. Mas 49-63 semanas.</div>
+      </div>
+      <div class="scenario" style="border-color:rgba(239,68,68,0.3);opacity:0.6">
+        <div class="scenario-if">EVITAR</div>
+        <div class="scenario-cond">Código SaaS BR pronto mas não importa ser legível</div>
+        <div class="scenario-arrow">→</div>
+        <div class="scenario-rec" style="color:#ef4444;text-decoration:line-through">Whaticket-SaaS</div>
+        <div class="scenario-note">❌ Código ofuscado — não recomendado em nenhum cenário.</div>
+      </div>
+    </div>
+
+    <div class="alert alert-success" style="margin-top:24px">
+      <span class="alert-icon">✅</span>
+      <div>
+        <strong>Conclusão final (5 plataformas):</strong> Para SaaS no contexto brasileiro com stack React + Node.js + PostgreSQL, o <strong>Ticketz</strong> é a escolha mais coerente se você quer controle total do código com a mesma tecnologia que já domina. O <strong>Chatwoot</strong> continua sendo a escolha se maturidade da plataforma e velocidade de lançamento forem mais importantes que alinhamento de stack.
+      </div>
+    </div>
+  </div>
+
+  <div style="text-align:center;padding:32px 0;color:var(--muted);font-size:12px;border-top:1px solid var(--border);margin-top:24px">
+    Relatório v2.0 — 12/04/2026 · Análise automatizada: Claude Opus 4 + Squad de IAs (MiniMax, DeepSeek, Qwen, Kimi, Codestral)<br>
+    5 repositórios clonados e analisados: chatwoot · tiledesk · whaticket-saas-2024 · izing.open.io · ticketz-oss/ticketz
+  </div>
+
+</div>
+</body>
+</html>

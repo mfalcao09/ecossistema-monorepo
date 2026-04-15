@@ -1,0 +1,35 @@
+# Sessão 88 — CRM F2 Item #1: A03 Workflow Visual Builder (~16h, P0) (19/03/2026)
+
+- **Objetivo**: Implementar primeiro item da Fase 2 do plano CRM IA-Native: A03 — Workflow Visual Builder. Editor visual para criar automações por blocos (trigger → delay → action) com preview do fluxo, integrado ao engine de automações existente (sessão 74)
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha). 100% frontend — usa backend existente (`commercial-automation-engine` v2, `useCreateAutomation()`)
+- **Decisão arquitetural**: Sem nova dependência (sem reactflow). Editor vertical com blocos conectados por linhas SVG, usando `@hello-pangea/dnd` existente para reordenação. Nodes: trigger (1 obrigatório), action (N), delay (N). Converte para `CreateAutomationParams` no save
+- **Frontend hook — `src/hooks/useWorkflowBuilder.ts` (CRIADO — ~265 linhas)**:
+  - Types: `NodeType` (4: trigger/condition/action/delay), `WorkflowNode`, `WorkflowEdge`, `WorkflowState`
+  - Constants: `NODE_TYPE_LABELS`, `NODE_TYPE_COLORS`, `NODE_TYPE_ICON_COLORS`
+  - State: `useWorkflowBuilder()` com nodes[], edges[], name, description
+  - Node ops: `addTriggerNode` (max 1), `addActionNode`, `addDelayNode`, `removeNode` (re-link), `updateNode`, `moveNode` (reorder + rebuild edges)
+  - Derived: `triggerNode`, `actionNodes`, `isValid` (name + trigger + ≥1 action)
+  - `toCreateParams()`: Converte workflow visual em `CreateAutomationParams` — simples (1 action) ou sequência (multi-step com delay acumulativo)
+  - MiniMax fixes: state mutation em removeNode/moveNode → immutable `.map((n,i) => ({...n, order: i}))`
+- **Frontend UI — `src/components/comercial/WorkflowVisualBuilder.tsx` (CRIADO — ~350 linhas)**:
+  - `WorkflowVisualBuilder`: Dialog principal com canvas visual, nome/descrição inputs, summary badges
+  - `WorkflowNodeCard`: Card por node com ícone tipado, label, badges, botões move up/down/remove
+  - `AddNodeDialog`: Sub-dialog para selecionar trigger/action/delay com Select dropdowns, delay presets (30min, 1h, 4h, 1d, 3d, 7d), textarea para mensagem de ação
+  - Connector lines entre nodes (div + ChevronDown)
+  - Botões "Adicionar Ação" e "Adicionar Atraso" no final do fluxo
+  - Botão "Criar Automação" chama `useCreateAutomation().mutate(builder.toCreateParams())`
+  - Empty state com CTA "Adicionar Gatilho"
+- **Integração — `src/pages/comercial/CommercialAutomations.tsx` (MODIFICADO)**:
+  - Import: `Workflow` icon + `WorkflowVisualBuilder`
+  - State: `showWorkflowBuilder`
+  - Botão "Visual Builder" (Workflow icon) no header das tabs
+  - `<WorkflowVisualBuilder open={showWorkflowBuilder} onOpenChange={setShowWorkflowBuilder} />`
+- **MiniMax (Buchecha) code review**: 2 CRITICAL (state mutation em removeNode/moveNode → fixed com immutable map), 4 WARNING (edge filtering, order calc, type assertions — noted for future). Build 0 erros ✅
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos criados** (2):
+  - `src/hooks/useWorkflowBuilder.ts` — hook state management (~265 linhas)
+  - `src/components/comercial/WorkflowVisualBuilder.tsx` — UI visual builder (~350 linhas)
+- **Arquivos modificados** (1):
+  - `src/pages/comercial/CommercialAutomations.tsx` — import + state + botão + render dialog
+- **Cronograma CRM IA-Native**: F2 Item #1 ✅ concluído (A03 Workflow Visual Builder). **CRM F2: 1/11 itens concluídos**. Próximo: F2 Item #2
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

@@ -1,0 +1,1 @@
+ALTER TABLE public.property_document_tokens ALTER COLUMN token SET DEFAULT gen_random_uuid()::text;

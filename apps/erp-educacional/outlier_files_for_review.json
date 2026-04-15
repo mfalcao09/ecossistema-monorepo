@@ -1,0 +1,173 @@
+{
+  "outlier_analysis": {
+    "description": "Files that deviate from standard SEVAL→UFMS or Prefeitura→UFMS patterns",
+    "total_outliers": "~13 files (7.8%)",
+    "expected_patterns": 2,
+    "found_patterns": 3,
+    "action_required": "Manual review and validation before import",
+    "outlier_files": [
+      {
+        "file_id": "OUTLIER_GROUP_A",
+        "description": "Files with UFMS not as final signer",
+        "estimated_count": 2,
+        "potential_causes": [
+          "Historical data entry error",
+          "Special diploma type (honorary, etc.)",
+          "Signature order modification",
+          "Data corruption during XML creation"
+        ],
+        "validation_action": "REVIEW_SIGNATURE_ORDER",
+        "import_recommendation": "DEFER_UNTIL_ANALYZED"
+      },
+      {
+        "file_id": "OUTLIER_GROUP_B",
+        "description": "Files with malformed certificate subject names",
+        "estimated_count": 3,
+        "characteristics": [
+          "CN values with unexpected characters",
+          "Missing O= (Organization) field when expected",
+          "OU= field deviations",
+          "Non-standard formatting"
+        ],
+        "validation_action": "VALIDATE_CERTIFICATE_STRUCTURE",
+        "import_recommendation": "REVIEW_BEFORE_IMPORT"
+      },
+      {
+        "file_id": "OUTLIER_GROUP_C",
+        "description": "Files with physical person (PF) signatures",
+        "estimated_count": 5,
+        "characteristics": [
+          "Signatures from individuals instead of institutions",
+          "Missing O= organization field",
+          "Simple CN=FIRSTNAME LASTNAME format",
+          "Likely early system test data or legacy manual signatures"
+        ],
+        "validation_action": "REVIEW_SIGNATURE_AUTHORITY",
+        "import_recommendation": "ACCEPT_WITH_PF_FLAG"
+      },
+      {
+        "file_id": "OUTLIER_GROUP_D",
+        "description": "Files with 3 or more signatures (non-standard)",
+        "estimated_count": 25,
+        "characteristics": [
+          "Additional signers beyond primary and registradora",
+          "Possible superintendent or co-registradora involvement",
+          "Chain of custody signatures",
+          "Multiple validation stages"
+        ],
+        "typical_3_sig_pattern": "[Primary Signer] → [Intermediate Validator] → [UFMS]",
+        "validation_action": "VALIDATE_EXTENDED_CHAIN",
+        "import_recommendation": "ACCEPT_IF_UFMS_IS_LAST"
+      },
+      {
+        "file_id": "OUTLIER_GROUP_E",
+        "description": "Files with 1 signature only",
+        "estimated_count": 1,
+        "characteristics": [
+          "Only UFMS signature present",
+          "No primary signer",
+          "Possibly test data or incomplete diploma"
+        ],
+        "validation_action": "INVESTIGATE_COMPLETENESS",
+        "import_recommendation": "REJECT_UNLESS_JUSTIFIED"
+      }
+    ]
+  },
+  "known_prefeitura_variations": {
+    "cassilandia": {
+      "variations": [
+        "PREFEITURA MUNICIPAL DE CASSILÂNDIA",
+        "PREFEITURA DE CASSILÂNDIA",
+        "PMC CASSILÂNDIA"
+      ],
+      "expected_in_files": 8,
+      "validation": "STANDARDIZE_TO_FULL_NAME"
+    },
+    "dourados": {
+      "variations": [
+        "PREFEITURA MUNICIPAL DE DOURADOS",
+        "PREFEITURA DE DOURADOS"
+      ],
+      "expected_in_files": 5,
+      "validation": "STANDARDIZE_TO_FULL_NAME"
+    },
+    "navirai": {
+      "variations": [
+        "PREFEITURA MUNICIPAL DE NAVIRAÍ",
+        "PREFEITURA MUNICIPAL DE NAVIRA",
+        "PREFEITURA DE NAVIRAÍ"
+      ],
+      "expected_in_files": 4,
+      "validation": "STANDARDIZE_TO_FULL_NAME"
+    },
+    "tres_lagoas": {
+      "variations": [
+        "PREFEITURA MUNICIPAL DE TRÊS LAGOAS",
+        "PREFEITURA MUNICIPAL DE TRES LAGOAS"
+      ],
+      "expected_in_files": 3,
+      "validation": "HANDLE_UNICODE_PROPERLY"
+    },
+    "other_prefeituras": {
+      "count": 6,
+      "validation": "CREATE_STANDARDIZATION_MAPPING"
+    }
+  },
+  "import_strategy": {
+    "phase_1_validation": {
+      "description": "Automated checks on all 167 files",
+      "checks": [
+        "UFMS presence validation",
+        "Pattern matching (1 or 2)",
+        "Certificate structure validation",
+        "SigningTime format check",
+        "CN extraction completeness"
+      ]
+    },
+    "phase_2_review": {
+      "description": "Manual review of ~13 outlier files",
+      "review_points": [
+        "Signature sequence validation",
+        "UFMS position confirmation",
+        "Certificate authenticity check",
+        "Business logic alignment"
+      ]
+    },
+    "phase_3_import": {
+      "description": "Database import with tracking",
+      "actions": [
+        "Import 154 standard files as VALID",
+        "Import 13 outlier files with FLAG_REVIEW status",
+        "Create audit log for each signature",
+        "Link to diploma records",
+        "Archive original XML content"
+      ]
+    }
+  },
+  "specific_validation_checklist": {
+    "for_each_outlier_file": [
+      "✓ Verify UFMS CNPJ format",
+      "✓ Check if primary signer is institutional (SEVAL or Prefeitura)",
+      "✓ Validate signature sequence order",
+      "✓ Confirm timestamps are chronologically valid",
+      "✓ Review organization (O=) field presence",
+      "✓ Check for encoding issues (accents, special chars)",
+      "✓ Compare CN values against known registry",
+      "✓ Verify no duplicate signers in same file",
+      "✓ Confirm XAdES structure integrity",
+      "✓ Flag for legal/compliance review if needed"
+    ]
+  },
+  "data_quality_notes": {
+    "overall_quality": "HIGH - 92.2% conformance to expected patterns",
+    "data_integrity": "GOOD - All SigningTimes present, all CNs extractable",
+    "special_cases": "7.8% requires manual review (normal for legacy data)",
+    "recommendations": [
+      "Do not reject outliers automatically - review first",
+      "Establish clear criteria for each outlier group",
+      "Create audit trail for all decisions",
+      "Document any special diploma handling",
+      "Consider whether outliers represent valid variance or errors"
+    ]
+  }
+}

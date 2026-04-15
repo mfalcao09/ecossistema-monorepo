@@ -1,0 +1,28 @@
+{
+  "summary": {
+    "total_xmls": 167,
+    "valid_xmls": 167,
+    "errors": 0,
+    "total_signatures": 0,
+    "avg_signatures_per_xml": 0.0,
+    "min_signatures": 0,
+    "max_signatures": 0
+  },
+  "signature_patterns": {
+    "pattern_count": 0,
+    "top_10_patterns": []
+  },
+  "unique_signers": {},
+  "ufms_validation": {
+    "ufms_last_count": 0,
+    "non_ufms_last_count": 0,
+    "non_ufms_examples": []
+  },
+  "pj_vs_pf": {
+    "pj_signers": {},
+    "pf_signers": {},
+    "total_pj_signatures": 0,
+    "total_pf_signatures": 0
+  },
+  "outliers": []
+}

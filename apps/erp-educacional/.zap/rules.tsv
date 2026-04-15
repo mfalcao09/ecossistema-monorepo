@@ -1,0 +1,135 @@
+# OWASP ZAP Rules Configuration for Diploma Digital
+# Rule ID | Action | Description
+# Reference: https://www.zaproxy.org/docs/rules/
+
+# ── Informational Rules (IGNORE) ────────────────────────────────────────────
+10000	IGNORE	Information Disclosure - Debug Error Messages
+10001	IGNORE	Information Disclosure - Sensitive Information in URL
+10002	IGNORE	Information Disclosure - Sensitive Information in HTTP Referrer Header
+10003	IGNORE	Information Disclosure - Sensitive Information in HTTP Response Body
+10004	IGNORE	Information Disclosure - Sensitive Information via HTML Comments
+
+# ── Cookie Security ─────────────────────────────────────────────────────────
+10010	IGNORE	Cookie No HttpOnly Flag (Managed by Supabase/Next.js)
+10011	WARN	Cookie Without Secure Flag
+10012	FAIL	Cookie Secure Flag Not Set (in production)
+10013	IGNORE	Cookie SameSite Not Set (managed by framework)
+
+# ── Cache Control ────────────────────────────────────────────────────────────
+10015	WARN	Incomplete or No Cache-control Header
+10050	WARN	Retrieved from Cache
+
+# ── Cross-Domain Issues ────────────────────────────────────────────────────────
+10017	IGNORE	Cross-Domain JavaScript Source File Inclusion (Allow CDNs)
+10098	WARN	Cross-Domain Misconfiguration
+
+# ── Security Headers (CRITICAL) ─────────────────────────────────────────────
+10020	FAIL	Missing X-Frame-Options Header
+10021	FAIL	Missing X-Content-Type-Options Header
+10035	FAIL	Missing Strict-Transport-Security Header
+10038	FAIL	Missing Content-Security-Policy Header
+10039	WARN	Missing Content-Security-Policy-Report-Only Header
+10040	WARN	Insecure Content-Security-Policy (allows unsafe-inline/unsafe-eval)
+
+# ── Authentication & Authorization ────────────────────────────────────────────
+10100	FAIL	Weak Authentication
+10101	WARN	Weak Authentication - BASIC
+10102	WARN	Weak Authentication - DIGEST
+10103	WARN	Weak Password Hash
+
+# ── Injection Attacks (CRITICAL) ─────────────────────────────────────────────
+# SQL Injection
+40012	FAIL	Cross Site Scripting (Reflected)
+40013	FAIL	Cross Site Scripting (Stored)
+40014	FAIL	Cross Site Scripting (Persistent)
+40018	FAIL	SQL Injection
+40019	FAIL	XPath Injection
+40020	FAIL	LDAP Injection
+40021	FAIL	XML Injection
+40022	FAIL	OS Command Injection
+40023	FAIL	Remote Code Execution
+
+# ── Path Traversal & File Inclusion ──────────────────────────────────────────
+30000	FAIL	Directory Browsing
+30001	FAIL	Path Traversal
+30002	FAIL	File Inclusion - Local File Inclusion (LFI)
+30003	FAIL	File Inclusion - Remote File Inclusion (RFI)
+
+# ── CSRF & Session Issues ────────────────────────────────────────────────────
+20012	WARN	Anti CSRF Tokens Not Found
+20014	WARN	Anti CSRF Tokens Scanned but None Found
+20015	WARN	Anti CSRF Tokens Not Unique (Duplicate Detection)
+
+# ── SSL/TLS Issues ──────────────────────────────────────────────────────────
+10054	FAIL	Weak SSL/TLS Certificate
+10055	FAIL	Weak SSL/TLS Cipher
+10056	FAIL	SSL/TLS Not Enforced
+10057	FAIL	SSL Version 2 Enabled
+10058	FAIL	SSL Version 3 Enabled
+
+# ── Access Control Issues ────────────────────────────────────────────────────
+40007	FAIL	Missing Authentication
+40008	FAIL	Improper Access Control
+40009	WARN	Insecure Direct Object References
+
+# ── Error Handling & Logging ─────────────────────────────────────────────────
+90001	WARN	Insecure JSF ViewState
+90002	WARN	Java Deserialization
+90003	WARN	Spring Configuration Issues
+
+# ── Business Logic Issues ────────────────────────────────────────────────────
+90020	WARN	Insecure Randomness
+90021	WARN	Insufficient Logging & Monitoring
+90022	WARN	Race Condition
+
+# ── API Security (Custom Rules) ─────────────────────────────────────────────
+# These are custom rules added for the Diploma Digital API
+100001	FAIL	Missing Authentication on API Endpoint
+100002	FAIL	Unencrypted Sensitive Data Transmission
+100003	WARN	Weak Rate Limiting
+100004	FAIL	API Key Exposure
+100005	WARN	Missing API Versioning
+100006	FAIL	XML External Entity (XXE) Injection
+100007	WARN	JSON Bomb Attack (YAML expansion)
+
+# ── Data Protection Issues ───────────────────────────────────────────────────
+100010	FAIL	Unencrypted PII (Personally Identifiable Information)
+100011	FAIL	Missing Data Masking
+100012	FAIL	Insecure Data Storage
+100013	WARN	Missing Backup Encryption
+
+# ── OWASP Top 10 Specific Rules ─────────────────────────────────────────────
+# A01:2021 - Broken Access Control
+40001	FAIL	Path Traversal
+40002	FAIL	Insecure Direct Object References
+
+# A02:2021 - Cryptographic Failures
+40003	FAIL	Sensitive Data Exposure
+40004	FAIL	Insecure Cryptographic Storage
+
+# A03:2021 - Injection
+40005	FAIL	SQL Injection
+40006	FAIL	OS Command Injection
+
+# A04:2021 - Insecure Design
+40010	WARN	Insecure Design Patterns
+
+# A05:2021 - Security Misconfiguration
+40011	FAIL	Security Misconfiguration
+
+# A06:2021 - Vulnerable and Outdated Components
+50001	WARN	Dependency Vulnerability
+
+# A07:2021 - Identification and Authentication Failures
+50002	FAIL	Broken Authentication
+50003	FAIL	Session Management Issues
+
+# A08:2021 - Software and Data Integrity Failures
+50004	FAIL	Insecure Deserialization
+50005	WARN	Insufficient Logging & Monitoring
+
+# A09:2021 - Logging and Monitoring Failures
+50006	WARN	Missing Security Logging
+
+# A10:2021 - Server-Side Request Forgery (SSRF)
+50007	FAIL	Server-Side Request Forgery (SSRF)

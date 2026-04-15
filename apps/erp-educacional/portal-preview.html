@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Portal de Diplomas — FIC</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              50: "#eff6ff",
+              100: "#dbeafe",
+              200: "#bfdbfe",
+              300: "#93c5fd",
+              400: "#60a5fa",
+              500: "#1e40af",
+              600: "#1e3a8a",
+              700: "#1e3375",
+              800: "#1a2d60",
+              900: "#15244d",
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    body { font-family: 'Inter', sans-serif; }
+  </style>
+</head>
+<body class="bg-white">
+  <!-- ==================== HEADER ==================== -->
+  <header class="bg-primary-600 text-white border-b border-primary-700">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+        <!-- Logo -->
+        <a href="#" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
+          <svg class="w-7 h-7" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+          </svg>
+          <div class="hidden sm:block">
+            <p class="text-xs font-medium opacity-90">Portal Público</p>
+            <p class="text-sm font-bold leading-tight">DIPLOMA</p>
+          </div>
+          <p class="sm:hidden text-sm font-bold">DIPLOMA</p>
+        </a>
+
+        <!-- Nome (centro) -->
+        <div class="hidden md:block absolute left-1/2 transform -translate-x-1/2">
+          <p class="text-xs font-medium opacity-90">Faculdades Integradas de Cassilândia</p>
+        </div>
+
+        <!-- Nav -->
+        <nav class="flex items-center gap-4 sm:gap-6">
+          <a href="#validar" class="text-sm font-medium hover:opacity-80 transition-opacity">Validar</a>
+          <a href="#consultar" class="text-sm font-medium hover:opacity-80 transition-opacity">Consultar</a>
+          <a href="#xml" class="text-sm font-medium hover:opacity-80 transition-opacity hidden sm:inline">Validar XML</a>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==================== HERO ==================== -->
+  <section class="relative overflow-hidden py-16 sm:py-20 lg:py-28">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-50 to-white pointer-events-none"></div>
+    <div class="relative max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-2xl mx-auto">
+        <!-- Ícone -->
+        <div class="flex justify-center mb-6">
+          <div class="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary-100">
+            <svg class="w-8 h-8 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+            </svg>
+          </div>
+        </div>
+        <h1 class="text-4xl sm:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+          Verifique a autenticidade do seu diploma digital
+        </h1>
+        <p class="text-lg text-slate-600 max-w-xl mx-auto">
+          Portal público de verificação de diplomas das Faculdades Integradas de Cassilândia
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== CARDS ==================== -->
+  <section class="py-16 sm:py-20 lg:py-24 bg-slate-50">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+
+        <!-- Card 1: Validar por Código -->
+        <div id="validar" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-primary-100 mb-6">
+            <svg class="w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Validar Diploma</h3>
+          <p class="text-slate-600 text-sm mb-6">Insira o código de validação do diploma para verificar sua autenticidade</p>
+          <form class="space-y-4" onsubmit="event.preventDefault(); alert('Redirecionaria para /verificar/código')">
+            <input type="text" placeholder="0000.0000.00000000" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" />
+            <button type="submit" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 rounded-lg transition-colors">Validar</button>
+          </form>
+        </div>
+
+        <!-- Card 2: Consultar por CPF -->
+        <div id="consultar" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow">
+          <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-primary-100 mb-6">
+            <svg class="w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Consultar Meus Diplomas</h3>
+          <p class="text-slate-600 text-sm mb-6">Encontre seus diplomas utilizando CPF e data de nascimento</p>
+          <form class="space-y-4" onsubmit="event.preventDefault(); document.getElementById('resultados').style.display='block'">
+            <input type="text" placeholder="000.000.000-00" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" />
+            <input type="date" class="w-full px-4 py-3 border border-slate-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-primary-500 focus:border-transparent transition-all" />
+            <button type="submit" class="w-full bg-primary-500 hover:bg-primary-600 text-white font-medium py-3 rounded-lg transition-colors">Consultar</button>
+          </form>
+        </div>
+
+        <!-- Card 3: Validar XML (Em breve) -->
+        <div id="xml" class="bg-white rounded-2xl shadow-sm border border-slate-200 p-8 hover:shadow-md transition-shadow relative">
+          <div class="absolute top-4 right-4">
+            <span class="inline-block bg-amber-100 text-amber-800 text-xs font-semibold px-3 py-1 rounded-full">Em breve</span>
+          </div>
+          <div class="flex items-center justify-center w-12 h-12 rounded-lg bg-primary-100 mb-6">
+            <svg class="w-6 h-6 text-primary-600" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+            </svg>
+          </div>
+          <h3 class="text-xl font-bold text-slate-900 mb-2">Validar XML</h3>
+          <p class="text-slate-600 text-sm mb-6">Envie o arquivo XML do diploma para verificar sua conformidade</p>
+          <div class="relative">
+            <div class="absolute inset-0 bg-white bg-opacity-70 rounded-lg flex items-center justify-center z-10">
+              <p class="text-slate-500 font-medium">Disponível em breve</p>
+            </div>
+            <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 text-center opacity-50 cursor-not-allowed">
+              <svg class="w-8 h-8 text-slate-400 mx-auto mb-3" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.25 6.75 22.5 12l-5.25 5.25m-10.5 0L1.5 12l5.25-5.25m7.5-3-4.5 16.5" />
+              </svg>
+              <p class="text-sm text-slate-500">Clique para selecionar arquivo XML</p>
+              <p class="text-xs text-slate-400 mt-2">Apenas arquivos .xml</p>
+            </div>
+            <button disabled class="w-full mt-4 bg-slate-300 text-slate-500 font-medium py-3 rounded-lg cursor-not-allowed">Validar XML</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Resultados demo (hidden) -->
+      <div id="resultados" style="display:none" class="mt-12 pt-12 border-t border-slate-200">
+        <h2 class="text-2xl font-bold text-slate-900 mb-2">Diplomas encontrados</h2>
+        <p class="text-sm text-slate-500 mb-8">CPF: 123.***.***-45 — 2 diplomas registrados</p>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <!-- Card resultado 1 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-slate-300 hover:shadow-sm transition-all">
+            <div class="px-5 py-4 border-b border-slate-100 bg-slate-50">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                  <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Diploma de Graduação</span>
+                </div>
+                <div class="flex items-center gap-1.5 bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full">
+                  <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                  <span class="text-xs font-medium">Válido</span>
+                </div>
+              </div>
+            </div>
+            <div class="px-5 py-4 space-y-3">
+              <h3 class="text-base font-semibold text-slate-800">Bacharel em Administração</h3>
+              <p class="text-xs text-slate-500">Nº 12345/2024</p>
+              <div class="flex items-center gap-2 text-sm text-slate-600">
+                <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5M3.75 3v18m16.5-18v18M5.25 3h13.5M5.25 21h13.5m-10.125-3.75h.375m0 0V21m0-3.75h-.375m.375 0h3.75m0 0V21m0-3.75h.375M6.75 12h.375m-.375 0V9.75m0 2.25V12m0 0v2.25m.375-2.25H6.75m3.75 0h.375m0 0V9.75m0 2.25v2.25m-.375-2.25h.375m3.75 0h.375" /></svg>
+                <span>Faculdades Integradas de Cassilândia</span>
+              </div>
+              <div class="flex flex-wrap gap-x-6 gap-y-2">
+                <div class="flex items-center gap-1.5 text-xs text-slate-500">
+                  <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>
+                  <span>Assinado em 10 de março de 2025</span>
+                </div>
+              </div>
+            </div>
+            <div class="px-5 py-3 border-t border-slate-100 bg-slate-50">
+              <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors group">
+                Ver detalhes completos
+                <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+              </a>
+            </div>
+          </div>
+
+          <!-- Card resultado 2 -->
+          <div class="bg-white rounded-xl border border-slate-200 overflow-hidden hover:border-slate-300 hover:shadow-sm transition-all">
+            <div class="px-5 py-4 border-b border-slate-100 bg-slate-50">
+              <div class="flex items-start justify-between gap-3">
+                <div class="flex items-center gap-2">
+                  <svg class="w-4 h-4 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m2.25 0H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" /></svg>
+                  <span class="text-xs font-medium text-slate-500 uppercase tracking-wide">Diploma de Graduação</span>
+                </div>
+                <div class="flex items-center gap-1.5 bg-emerald-50 text-emerald-700 px-2.5 py-1 rounded-full">
+                  <svg class="w-3.5 h-3.5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" /></svg>
+                  <span class="text-xs font-medium">Válido</span>
+                </div>
+              </div>
+            </div>
+            <div class="px-5 py-4 space-y-3">
+              <h3 class="text-base font-semibold text-slate-800">Licenciatura em Pedagogia</h3>
+              <p class="text-xs text-slate-500">Nº 12346/2024</p>
+              <div class="flex items-center gap-2 text-sm text-slate-600">
+                <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5M3.75 3v18m16.5-18v18M5.25 3h13.5M5.25 21h13.5m-10.125-3.75h.375m0 0V21m0-3.75h-.375m.375 0h3.75m0 0V21m0-3.75h.375M6.75 12h.375m-.375 0V9.75m0 2.25V12m0 0v2.25m.375-2.25H6.75m3.75 0h.375m0 0V9.75m0 2.25v2.25m-.375-2.25h.375m3.75 0h.375" /></svg>
+                <span>Faculdades Integradas de Cassilândia</span>
+              </div>
+              <div class="flex flex-wrap gap-x-6 gap-y-2">
+                <div class="flex items-center gap-1.5 text-xs text-slate-500">
+                  <svg class="w-3.5 h-3.5 text-slate-400" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" /></svg>
+                  <span>Assinado em 15 de dezembro de 2024</span>
+                </div>
+              </div>
+            </div>
+            <div class="px-5 py-3 border-t border-slate-100 bg-slate-50">
+              <a href="#" class="inline-flex items-center gap-1.5 text-sm font-medium text-primary-600 hover:text-primary-700 transition-colors group">
+                Ver detalhes completos
+                <svg class="w-4 h-4 group-hover:translate-x-0.5 transition-transform" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5" /></svg>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== SEÇÃO EDUCATIVA ==================== -->
+  <section class="py-16 sm:py-20 lg:py-24 bg-white">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <h2 class="text-3xl sm:text-4xl font-bold text-slate-900 mb-8 text-center">O que é o Diploma Digital?</h2>
+      <div class="space-y-6 text-slate-600 leading-relaxed">
+        <p>O Diploma Digital é a representação eletrônica de um diploma emitido por uma instituição de ensino superior. Ele possui a mesma validade legal de um diploma físico e é reconhecido em todo o território nacional, conforme a Portaria MEC 70/2025 que regulamenta a emissão de diplomas digitais.</p>
+        <p>O diploma digital é estruturado em XML (Extensible Markup Language) e segue um padrão técnico definido pelo Ministério da Educação. Este padrão garante que todos os diplomas digitais tenham um formato padronizado e interoperável com os sistemas de verificação públicos.</p>
+        <p>A segurança e a autenticidade do diploma digital são garantidas através de assinatura digital com certificado digital de classe A3, emitido pela Infraestrutura de Chaves Públicas Brasileira (ICP-Brasil). Quando um diploma é assinado digitalmente, cada modificação no documento pode ser facilmente detectada, garantindo a integridade das informações.</p>
+        <p>Além disso, cada diploma digital inclui um carimbo de tempo (timestamp) emitido por uma autoridade certificadora reconhecida, que comprova a data e hora exata de assinatura. Todos esses mecanismos trabalham em conjunto para garantir que o diploma digital seja tão seguro e confiável quanto um documento físico tradicional.</p>
+        <p>Você pode verificar a autenticidade de seu diploma digital neste portal usando o código de validação fornecido no momento da emissão ou consultando seus diplomas através do seu CPF e data de nascimento. O sistema consultará o registro público mantido pela Faculdades Integradas de Cassilândia.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="bg-slate-900 text-white py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row justify-between items-center gap-6">
+        <div class="text-center md:text-left">
+          <p class="text-sm font-semibold">Faculdades Integradas de Cassilândia</p>
+          <p class="text-xs text-slate-400 mt-1">Portal de Verificação de Diplomas Digitais</p>
+          <p class="text-xs text-slate-500 mt-2">Assinaturas em conformidade com a ICP-Brasil e Portaria MEC 70/2025</p>
+        </div>
+        <div class="text-center md:text-right">
+          <p class="text-xs text-slate-400">© 2026 — FIC. Todos os direitos reservados.</p>
+          <p class="text-xs text-slate-500 mt-1">diploma.ficcassilandia.com.br</p>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

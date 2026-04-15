@@ -1,0 +1,57 @@
+# Sessão 75 — CRM F1 Item #2: Multi-Funil Customizável (15/03/2026)
+
+- **Objetivo**: Implementar segundo item da Fase 1 do plano CRM IA-Native (sessão 73): A02 — Multi-Funil Customizável (~16h, P0). Substituir o kanban hardcoded de 6 colunas no DealsList.tsx por sistema dinâmico multi-funil onde cada tenant pode criar, editar e gerenciar múltiplos pipelines (ex: "Pipeline Vendas", "Pipeline Locação", "Pipeline Lançamento") com colunas customizáveis
+- **Metodologia**: Pair programming Claude (Claudinho) + MiniMax M2.5 (Buchecha). Marcelo selecionou A02 entre as opções apresentadas
+- **Decisão arquitetural**: 3 opções apresentadas — (A) JSONB, (B) Tabelas normalizadas, (C) Frontend-only. Buchecha e Claude recomendaram Opção B (tabelas normalizadas: `pipeline_templates` + `pipeline_columns`). Marcelo aprovou
+- **Database migrations** (via Supabase MCP):
+  - Tabela `pipeline_templates`: id, tenant_id, name, deal_type, is_default, sort_order, description, created_by, timestamps. RLS PERMISSIVE com `auth_tenant_id()`
+  - Tabela `pipeline_columns`: id, pipeline_template_id (FK CASCADE), title, color, icon, statuses (TEXT[]), sort_order, wip_limit, timestamps. RLS via EXISTS subquery ao parent
+  - Coluna `deal_requests.pipeline_template_id`: UUID nullable FK com índice
+- **Database seed** (3 pipelines padrão para tenant Empresa Master):
+  - "Pipeline Vendas" (deal_type=venda, is_default=true, id=749f44ad-...) com 6 colunas
+  - "Pipeline Locação" (deal_type=locacao, is_default=true, id=d3c6f546-...) com 6 colunas
+  - "Pipeline Administração" (deal_type=administracao, is_default=true, id=03a2e46c-...) com 6 colunas
+  - Colunas seed replicam o layout do kanban hardcoded antigo (Rascunho, Enviado ao Jurídico, Em Análise, Elaboração/Validação, Aprovado, Reprovado)
+- **Backend hook — `src/hooks/usePipelineTemplates.ts` (CRIADO — ~347 linhas)**:
+  - Types: `PipelineColumn`, `PipelineTemplate`, `CreatePipelineParams`, `UpdatePipelineParams`, `UpdateColumnsParams`
+  - Query hooks: `usePipelineTemplates()`, `usePipelinesByDealType()`, `useDefaultPipeline()`
+  - Mutation hooks: `useCreatePipeline()`, `useUpdatePipeline()`, `useUpdatePipelineColumns()`, `useDeletePipeline()`
+  - `useDeletePipeline()` previne exclusão do último funil
+  - `useCreatePipeline()/useUpdatePipeline()` auto-unset outros defaults do mesmo deal_type
+  - Helpers: `toKanbanColumns()` (PipelineColumn[]→KanbanColumn[]), `FALLBACK_COLUMNS` (backward compat)
+  - Nota: `as any` casts em queries Supabase porque TS-02 (generated types) ainda pendente
+- **Frontend — `src/pages/DealsList.tsx` (REESCRITO — ~165 linhas)**:
+  - Removidas 6 colunas hardcoded, adicionado `usePipelineTemplates()` hook
+  - Seletor de funil dropdown com ícone GitBranch e badge "Padrão"
+  - Botão Settings (engrenagem) linkando para `/comercial/funis`
+  - `activePipeline` resolvido via: selecionado → primeiro default → primeiro disponível → null
+  - `filteredDeals` filtra por `activePipeline.deal_type`
+  - Info badge do funil ativo (tipo, nº colunas, nº negócios)
+  - Fallback para `FALLBACK_COLUMNS` se nenhum pipeline existe
+  - `KanbanBoard` recebe colunas dinâmicas (componente JÁ ERA genérico — sem alterações)
+- **Frontend — `src/pages/comercial/PipelineManager.tsx` (CRIADO — ~560 linhas)**:
+  - Página admin em `/comercial/funis` para gestão completa de funis
+  - Listagem agrupada por deal_type (Venda/Locação/Administração)
+  - Cards com badges (Padrão, nº colunas), ações (editar, excluir com AlertDialog, toggle default)
+  - `PipelineFormDialog`: Dialog com form (nome, tipo, descrição, is_default) + `ColumnsEditor`
+  - `ColumnsEditor`: Drag-less reorder (mover cima/baixo), adicionar/remover colunas, multi-select de statuses com chips, color picker, WIP limit
+  - Status exclusivity: statuses já usados em outras colunas ficam greyed-out no seletor
+  - Modo criar e editar (initForm popula com dados existentes)
+  - Botão voltar para `/comercial/negocios`
+- **Rota registrada**: `App.tsx` — `/comercial/funis` → `PipelineManager`
+- **MiniMax (Buchecha) code review — 2 CRITICAL + 4 WARNING fixados**:
+  - CRITICAL: Side effect no render body (setLastId/setForm durante render) → `useEffect` com deps `[open, editingPipeline?.id]`
+  - CRITICAL: Sem rollback em falha parcial no handleSubmit (updatePipeline OK + updateColumns FAIL) → try/catch aninhado com toast específico
+  - WARNING: `usedStatuses` não memoizado → `useMemo(() => ..., [columns])`
+  - WARNING: `grouped` não memoizado → `useMemo(() => ..., [pipelines])`
+  - WARNING: WIP limit aceitava negativos apesar de `min={0}` → `Math.max(0, Number(e.target.value))`
+  - WARNING (noted): Sem validação de statuses não cobertos — melhoria futura
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos criados** (2):
+  - `src/hooks/usePipelineTemplates.ts` — hook central CRUD pipelines (~347 linhas)
+  - `src/pages/comercial/PipelineManager.tsx` — página admin de gestão de funis (~560 linhas)
+- **Arquivos modificados** (2):
+  - `src/pages/DealsList.tsx` — reescrito com pipeline dinâmico (~165 linhas)
+  - `src/App.tsx` — import + rota `/comercial/funis`
+- **Cronograma CRM IA-Native**: F1 Item #2 ✅ concluído. Próximo: F1 Item #3 (a definir com Marcelo)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

@@ -1,0 +1,45 @@
+# Sessão 56 — F1 Item #4: AI-Powered Redlining Suggestions (14/03/2026)
+
+- **Objetivo**: Implementar quarto item do cronograma IA-Native (F1): Sugestões de redlining com IA, especializada em direito imobiliário BR
+- **Decisões do Marcelo** (via AskUserQuestion):
+  - Escopo: "Completo (Recomendado)" — IA sugere alterações automaticamente, accept/reject inline, histórico, scoring de confiança, integração Clause Library
+  - Contexto IA: "Jurídico BR + Imobiliário (Recomendado)" — Lei 8.245/91, Código Civil, CDC, práticas imobiliárias
+- **Backend — `supabase/functions/redlining-ai/index.ts` (CRIADO — ~484 linhas, self-contained)**:
+  - **2 actions**:
+    - `suggest_redlines`: Análise completa do contrato com IA. Busca cláusulas existentes da Clause Library (risk-aware). Deduplicação com redlining entries existentes (exclui recusados). Prompt especializado em 6 categorias (legal_compliance, risk_mitigation, clarity, fairness, market_practice, missing_clause). Retorna suggestions[], contract_summary, overall_risk, analysis_model
+    - `analyze_clause`: Análise individual de uma cláusula. Retorna suggestions[], overall_risk, summary, compliance_notes[]
+  - **IA**: OpenRouter → Gemini 2.0 Flash (`google/gemini-2.0-flash-001`) com JSON mode
+  - **System prompt**: Especialista em direito imobiliário BR — Lei 8.245/91 (Inquilinato), Código Civil, CDC, Art. 37 garantias, Art. 22-26 responsabilidades
+  - **RedlineSuggestion type**: clause_name, original_text, proposed_text, reason, category, confidence (0-100), priority (alta/media/baixa), legal_basis, risk_if_unchanged
+  - **CORS whitelist + auth/tenant inline + RBAC inline** (self-contained pattern)
+  - **Deploy**: v1 via Supabase MCP (ID: 84460729-7ac2-40e3-8e38-c544f8283867, ACTIVE, verify_jwt: false)
+- **RBAC — nova action `clm.redlining.suggest` em 3 camadas**:
+  - Frontend: `src/lib/clmPermissions.ts` — CLMAction union + ALL_CLM_ACTIONS + admin/gerente/juridico/corretor(read-only)
+  - Backend: `supabase/functions/_shared/clmPermissions.ts` — mirror Deno (admin/gerente/juridico)
+  - Hook: `src/hooks/usePermissions.ts` — novo flag `canSuggestRedlining`
+- **Frontend hooks — `src/hooks/useRedliningAI.ts` (CRIADO — ~113 linhas)**:
+  - Tipos: `RedlineSuggestion`, `SuggestRedlinesResult`, `AnalyzeClauseResult`, `RedlineSuggestionCategory`, `RedlinePriority`
+  - 2 hooks: `useSuggestRedlines()` e `useAnalyzeClause()` — mutations chamando `supabase.functions.invoke("redlining-ai")`
+- **Frontend UI — `ContractRedliningTab.tsx` (REESCRITO — 281→~430 linhas)**:
+  - Botão "Sugerir com IA" (purple, ícone Sparkles) com RBAC guard `canSuggestRedlining`
+  - Input de texto do contrato: Textarea para colar texto contratual para análise
+  - Painel de sugestões IA: Banner de risco geral (low/medium/high/critical com ícones), contagem de sugestões
+  - `AISuggestionCard`: Card com clause_name, badges (categoria, prioridade, confiança), reason, legal_basis, risk_if_unchanged, diff visual inline (word-level), botões Accept/Reject
+  - Accept: Cria redlining entry com `requested_by: "IA Redlining"` + reason prefixado com categoria + base legal
+  - Reject: Marca como descartada visualmente
+  - Badge "IA" nas entries originadas de sugestões aceitas
+  - `ContractDetailDialog.tsx` atualizado para passar `contractType` ao tab
+- **Build**: 0 erros TypeScript (`npx tsc --noEmit`) ✅
+- **Arquivos criados** (2):
+  - `supabase/functions/redlining-ai/index.ts` — Edge Function self-contained (~484 linhas)
+  - `src/hooks/useRedliningAI.ts` — 2 mutation hooks (~113 linhas)
+- **Arquivos modificados** (5):
+  - `src/lib/clmPermissions.ts` — clm.redlining.suggest no type, array e 3 roles
+  - `supabase/functions/_shared/clmPermissions.ts` — mirror com clm.redlining.suggest
+  - `src/hooks/usePermissions.ts` — canSuggestRedlining flag
+  - `src/components/contracts/tabs/ContractRedliningTab.tsx` — reescrito com AI suggestions UI
+  - `src/components/contracts/ContractDetailDialog.tsx` — passa contractType ao RedliningTab
+- **Edge Functions — Versões atualizadas**:
+  - `redlining-ai` → version 1 (2 actions, self-contained, RBAC inline, direito imobiliário BR)
+- **Cronograma IA-Native**: F1 Item #4 ✅ concluído. Próximo: #5 Bulk Operations (8h)
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)

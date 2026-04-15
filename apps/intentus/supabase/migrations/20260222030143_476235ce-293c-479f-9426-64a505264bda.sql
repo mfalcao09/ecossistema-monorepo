@@ -1,0 +1,1 @@
+ALTER TABLE public.guarantee_types ADD COLUMN business_rules jsonb DEFAULT '{}';

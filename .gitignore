@@ -1,0 +1,52 @@
+# Dependencies
+node_modules/
+.pnpm-store/
+
+# Build outputs
+dist/
+build/
+.next/
+.turbo/
+*.tsbuildinfo
+
+# Environment (NUNCA commitar secrets)
+.env
+.env.local
+.env.*.local
+.env.vercel-check*
+!.env.example
+
+# IDE / Editor
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+
+# Vite caches (aprendizado do Intentus)
+**/vite.config.ts.timestamp-*.mjs
+**/vite.config.js.timestamp-*.mjs
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Logs
+*.log
+npm-debug.log*
+pnpm-debug.log*
+
+# Agent local state (persistent memory goes to Supabase, não git)
+.agent_ids.json
+.environment_ids.json
+.claude/worktrees/
+
+# Supabase
+supabase/.branches/
+supabase/.temp/
+
+# Claude Code
+.claude/local/

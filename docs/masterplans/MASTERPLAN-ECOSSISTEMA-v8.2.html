@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MASTERPLAN ECOSSISTEMA v8.2 — Omega + Credential Sovereignty</title>
+  <style>
+    :root {
+      --bg:       #0d1117;
+      --surface:  #161b22;
+      --border:   #30363d;
+      --accent:   #58a6ff;
+      --green:    #3fb950;
+      --yellow:   #d29922;
+      --red:      #f85149;
+      --purple:   #bc8cff;
+      --orange:   #ffa657;
+      --text:     #e6edf3;
+      --muted:    #8b949e;
+      --new:      #238636;
+      --new-glow: rgba(35,134,54,0.3);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(13,17,23,0.95);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(12px);
+      padding: 12px 24px;
+      display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+    }
+    nav .logo { font-weight: 700; font-size: 14px; color: var(--accent); white-space: nowrap; }
+    nav .badge {
+      background: var(--new); color: #fff; border-radius: 20px;
+      padding: 2px 10px; font-size: 11px; font-weight: 700;
+    }
+    nav .badge-v81 {
+      background: var(--surface); color: var(--muted); border: 1px solid var(--border);
+      border-radius: 20px; padding: 2px 10px; font-size: 11px;
+    }
+    nav a {
+      color: var(--muted); text-decoration: none; font-size: 13px;
+      padding: 4px 8px; border-radius: 6px; transition: all 0.2s;
+    }
+    nav a:hover { color: var(--text); background: var(--surface); }
+    nav .spacer { flex: 1; }
+    nav .date { color: var(--muted); font-size: 12px; white-space: nowrap; }
+
+    /* ── LAYOUT ── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 40px 24px; }
+
+    /* ── HERO ── */
+    .hero {
+      text-align: center; padding: 60px 24px 40px;
+      border-bottom: 1px solid var(--border); margin-bottom: 48px;
+    }
+    .hero .version-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, var(--new), #1a7f37);
+      border: 1px solid var(--new);
+      border-radius: 30px; padding: 6px 20px;
+      font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 20px var(--new-glow);
+    }
+    .hero h1 { font-size: clamp(24px, 4vw, 40px); font-weight: 800; line-height: 1.2; margin-bottom: 12px; }
+    .hero h1 span { color: var(--accent); }
+    .hero .subtitle { color: var(--muted); font-size: 16px; max-width: 600px; margin: 0 auto 24px; }
+    .hero .meta-grid {
+      display: flex; gap: 24px; justify-content: center; flex-wrap: wrap;
+      font-size: 13px; color: var(--muted);
+    }
+    .hero .meta-grid span b { color: var(--text); }
+
+    /* ── CHANGELOG ── */
+    .changelog-banner {
+      background: linear-gradient(135deg, rgba(35,134,54,0.15), rgba(88,166,255,0.1));
+      border: 1px solid var(--new);
+      border-radius: 12px; padding: 24px; margin-bottom: 40px;
+    }
+    .changelog-banner h2 { color: var(--green); margin-bottom: 16px; font-size: 18px; }
+
+    /* ── SECTIONS ── */
+    .section { margin-bottom: 56px; }
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      padding-bottom: 12px; border-bottom: 1px solid var(--border);
+      margin-bottom: 24px;
+    }
+    .section-header h2 { font-size: 22px; font-weight: 700; }
+    .section-header .tag {
+      padding: 3px 10px; border-radius: 20px; font-size: 11px; font-weight: 700;
+    }
+    .tag-new { background: var(--new-glow); color: var(--green); border: 1px solid var(--new); }
+    .tag-inherited { background: rgba(88,166,255,0.1); color: var(--accent); border: 1px solid rgba(88,166,255,0.3); }
+    .tag-p0 { background: rgba(248,81,73,0.15); color: var(--red); border: 1px solid var(--red); }
+
+    /* ── TABLES ── */
+    .table-wrap { overflow-x: auto; border-radius: 10px; border: 1px solid var(--border); }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    th {
+      background: var(--surface); color: var(--muted);
+      padding: 10px 14px; text-align: left; font-weight: 600;
+      border-bottom: 1px solid var(--border);
+    }
+    td { padding: 10px 14px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    tr:last-child td { border-bottom: none; }
+    tr:hover td { background: rgba(88,166,255,0.04); }
+    .new-row td { background: rgba(35,134,54,0.08); }
+    .new-row:hover td { background: rgba(35,134,54,0.14); }
+
+    /* ── SC-29 CARD ── */
+    .sc29-card {
+      background: linear-gradient(135deg, rgba(35,134,54,0.12), rgba(88,166,255,0.08));
+      border: 2px solid var(--new);
+      border-radius: 16px; padding: 32px;
+      box-shadow: 0 0 40px var(--new-glow);
+    }
+    .sc29-card h3 { font-size: 24px; margin-bottom: 8px; }
+    .sc29-card .sc-number {
+      color: var(--green); font-size: 13px; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 1px; margin-bottom: 20px;
+    }
+    .sc29-card blockquote {
+      border-left: 3px solid var(--green); padding-left: 16px;
+      color: var(--muted); font-style: italic; font-size: 14px;
+      margin-bottom: 24px;
+    }
+
+    /* ── ARCH DIAGRAM ── */
+    .arch-diagram {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 24px;
+      font-family: 'SF Mono', 'Consolas', monospace; font-size: 12px;
+      color: var(--text); white-space: pre; overflow-x: auto;
+      margin: 20px 0;
+    }
+
+    /* ── CODE BLOCK ── */
+    .code-block {
+      background: #010409; border: 1px solid var(--border);
+      border-radius: 10px; padding: 20px;
+      font-family: 'SF Mono', 'Consolas', monospace; font-size: 12px;
+      color: var(--text); overflow-x: auto; margin: 16px 0;
+    }
+    .code-block .comment { color: var(--muted); }
+    .code-block .keyword { color: var(--purple); }
+    .code-block .string { color: var(--orange); }
+    .code-block .type { color: var(--green); }
+
+    /* ── COMPARISON ── */
+    .comparison {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 20px 0;
+    }
+    @media (max-width: 600px) { .comparison { grid-template-columns: 1fr; } }
+    .comparison-card {
+      border-radius: 10px; padding: 20px;
+    }
+    .comparison-card.before {
+      background: rgba(248,81,73,0.08); border: 1px solid rgba(248,81,73,0.3);
+    }
+    .comparison-card.after {
+      background: rgba(35,134,54,0.08); border: 1px solid var(--new);
+    }
+    .comparison-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 12px; }
+    .comparison-card.before h4 { color: var(--red); }
+    .comparison-card.after h4 { color: var(--green); }
+    .comparison-card code {
+      font-family: 'SF Mono', 'Consolas', monospace;
+      font-size: 12px; display: block; line-height: 1.8; color: var(--text);
+    }
+    .comparison-card code .strike { text-decoration: line-through; color: var(--muted); }
+
+    /* ── COUNTER GRID ── */
+    .counter-grid {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px;
+      margin: 24px 0;
+    }
+    .counter-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 20px; text-align: center;
+    }
+    .counter-card.highlight {
+      background: rgba(35,134,54,0.1); border-color: var(--new);
+    }
+    .counter-card .num {
+      font-size: 36px; font-weight: 800; line-height: 1;
+      margin-bottom: 4px;
+    }
+    .counter-card.highlight .num { color: var(--green); }
+    .counter-card .label { color: var(--muted); font-size: 12px; }
+    .counter-card .delta {
+      font-size: 11px; font-weight: 700; color: var(--green);
+      margin-top: 4px;
+    }
+
+    /* ── ROADMAP ── */
+    .roadmap { display: flex; flex-direction: column; gap: 12px; }
+    .roadmap-item {
+      display: flex; align-items: flex-start; gap: 16px;
+      padding: 16px; border-radius: 10px; border: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .roadmap-item.done { border-color: rgba(63,185,80,0.3); background: rgba(63,185,80,0.05); }
+    .roadmap-item.next { border-color: var(--new); background: rgba(35,134,54,0.1); box-shadow: 0 0 20px var(--new-glow); }
+    .roadmap-item.planned { border-color: var(--border); opacity: 0.7; }
+    .roadmap-item .phase {
+      font-weight: 800; font-size: 15px; min-width: 40px; text-align: center;
+    }
+    .roadmap-item.done .phase { color: var(--green); }
+    .roadmap-item.next .phase { color: var(--green); }
+    .roadmap-item.planned .phase { color: var(--muted); }
+    .roadmap-item .content .title { font-weight: 700; font-size: 14px; margin-bottom: 4px; }
+    .roadmap-item.next .content .title { color: var(--green); }
+    .roadmap-item .content .desc { color: var(--muted); font-size: 13px; }
+    .roadmap-item .status {
+      margin-left: auto; font-size: 12px; padding: 3px 10px;
+      border-radius: 20px; white-space: nowrap;
+    }
+    .status-done { background: rgba(63,185,80,0.15); color: var(--green); }
+    .status-next { background: var(--new-glow); color: var(--green); font-weight: 700; }
+    .status-planned { background: var(--surface); color: var(--muted); border: 1px solid var(--border); }
+
+    /* ── QUOTE ── */
+    .quote-block {
+      background: var(--surface); border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 20px 24px; margin: 24px 0;
+      font-style: italic; color: var(--muted);
+    }
+    .quote-block cite { display: block; margin-top: 8px; font-style: normal; font-size: 13px; color: var(--text); }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border); margin-top: 80px;
+      padding: 40px 24px; text-align: center; color: var(--muted); font-size: 13px;
+    }
+    footer strong { color: var(--text); }
+
+    /* ── UTIL ── */
+    .pill {
+      display: inline-block; padding: 2px 8px; border-radius: 20px;
+      font-size: 11px; font-weight: 700;
+    }
+    .pill-green { background: rgba(63,185,80,0.15); color: var(--green); }
+    .pill-blue { background: rgba(88,166,255,0.15); color: var(--accent); }
+    .pill-red { background: rgba(248,81,73,0.15); color: var(--red); }
+    .pill-orange { background: rgba(255,166,87,0.15); color: var(--orange); }
+    .pill-purple { background: rgba(188,140,255,0.15); color: var(--purple); }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="logo">🌐 Ecossistema de IA</span>
+  <span class="badge">V8.2 NOVO</span>
+  <span class="badge-v81">Base: V8.1</span>
+  <a href="#changelog">Changelog</a>
+  <a href="#sc29">SC-29</a>
+  <a href="#arquitetura">Arquitetura</a>
+  <a href="#roadmap">Roadmap</a>
+  <a href="#contagem">Contagem</a>
+  <span class="spacer"></span>
+  <span class="date">14/04/2026 · Sessão 093</span>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="version-badge">✨ V8.2 — Omega + Credential Sovereignty</div>
+  <h1>MASTERPLAN ECOSSISTEMA<br><span>V8.2</span></h1>
+  <p class="subtitle">Omega Multi-Provider Resilience Edition + Credential Sovereignty<br>
+    Evolução do V8.1 com adição do SC-29 — Credential Vault Agent</p>
+  <div class="meta-grid">
+    <span><b>Base:</b> V8.1 Omega Multi-Provider Resilience</span>
+    <span><b>Novo:</b> SC-29 Credential Vault Agent</span>
+    <span><b>Responsável:</b> Marcelo Silva (CEO)</span>
+    <span><b>Data:</b> 14/04/2026</span>
+  </div>
+</div>
+
+<div class="container">
+
+  <!-- CHANGELOG -->
+  <div id="changelog" class="changelog-banner">
+    <h2>📋 Changelog V8.1 → V8.2</h2>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>Componente</th><th>V8.1</th><th>V8.2</th><th>Motivo</th></tr>
+        </thead>
+        <tbody>
+          <tr class="new-row">
+            <td><b>Super-Crates</b></td>
+            <td>28 SC</td>
+            <td><b>29 SC ✨</b></td>
+            <td>Adição do SC-29</td>
+          </tr>
+          <tr class="new-row">
+            <td><b>Novo Super-Crate</b></td>
+            <td>—</td>
+            <td><b>SC-29 Credential Vault Agent</b></td>
+            <td>Gestão soberana de credenciais de API</td>
+          </tr>
+          <tr>
+            <td>Artigos Constitucionais</td>
+            <td>22</td>
+            <td>22 (sem mudança)</td>
+            <td>SC-29 aplica Art. II + XIX + XXII</td>
+          </tr>
+          <tr>
+            <td>Meta-Padrões</td>
+            <td>13</td>
+            <td>13 (sem mudança)</td>
+            <td>SC-29 aplica MP-04 + MP-08 + MP-12</td>
+          </tr>
+          <tr>
+            <td>Ondas</td>
+            <td>17</td>
+            <td>17 (sem mudança)</td>
+            <td>SC-29 entra em <b>Onda 0</b> (pré-infraestrutura)</td>
+          </tr>
+          <tr>
+            <td>Camadas</td>
+            <td>7 (L1–L7)</td>
+            <td>7 (sem mudança)</td>
+            <td>SC-29 opera na <b>Camada L3</b></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="quote-block" style="margin-top:24px">
+      "Delegar regras de credenciais a arquivos .md não contribui para um ecossistema. Precisamos de um agente inteligente de credenciais."
+      <cite>— Marcelo Silva, CEO · 14/04/2026</cite>
+    </div>
+  </div>
+
+  <!-- SC-29 -->
+  <div id="sc29" class="section">
+    <div class="section-header">
+      <h2>🆕 SC-29 — Credential Vault Agent</h2>
+      <span class="tag tag-new">NOVO EM V8.2</span>
+      <span class="tag tag-p0">P0</span>
+    </div>
+
+    <div class="sc29-card">
+      <div class="sc-number">Super-Crate #29 · Onda 0 · Camada L3 — Infraestrutura Transversal</div>
+      <h3>Credential Vault Agent</h3>
+
+      <blockquote>
+        "Credencial é infraestrutura, não configuração. Um ecossistema de IA que guarda chaves de API em arquivos .md não é um ecossistema — é um protótipo."
+      </blockquote>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(200px,1fr)); gap:12px; margin-bottom:24px">
+        <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:12px">
+          <div style="color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;margin-bottom:4px">Onda</div>
+          <div style="font-weight:700;color:var(--green)">Onda 0 (pré-infraestrutura)</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:12px">
+          <div style="color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;margin-bottom:4px">Camada</div>
+          <div style="font-weight:700">L3 — Infra Transversal</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:12px">
+          <div style="color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;margin-bottom:4px">Proprietário</div>
+          <div style="font-weight:700">CTO-IA</div>
+        </div>
+        <div style="background:rgba(255,255,255,0.05);border-radius:8px;padding:12px">
+          <div style="color:var(--muted);font-size:11px;font-weight:600;text-transform:uppercase;margin-bottom:4px">Prioridade</div>
+          <div style="font-weight:700;color:var(--red)">P0 — Bloqueante</div>
+        </div>
+      </div>
+
+      <!-- Arquitetura -->
+      <div id="arquitetura">
+        <h4 style="margin-bottom:12px">Arquitetura</h4>
+        <div class="arch-diagram">┌─────────────────────────────────────────────────────────────────┐
+│                   SC-29 CREDENTIAL VAULT AGENT                   │
+├─────────────────────────────────────────────────────────────────┤
+│                                                                  │
+│  ┌──────────────────┐    ┌──────────────────┐                   │
+│  │  Supabase Vault  │    │ ecosystem_creds   │                   │
+│  │  (encrypted)     │◄──►│ (registry table)  │                   │
+│  └──────────────────┘    └──────────────────┘                   │
+│           │                        │                            │
+│           ▼                        ▼                            │
+│  ┌──────────────────────────────────────────┐                   │
+│  │      credential-agent (Edge Function)     │                   │
+│  │  • get_credential(name, project, env)    │                   │
+│  │  • rotate_credential(name)               │                   │
+│  │  • validate_credential(name)             │                   │
+│  │  • list_credentials(project)             │                   │
+│  └──────────────────────────────────────────┘                   │
+│           │                                                      │
+│           ▼                                                      │
+│  ┌──────────────────────────────────────────┐                   │
+│  │       credential_access_log              │                   │
+│  │       (append-only · imutável)           │                   │
+│  └──────────────────────────────────────────┘                   │
+│                                                                  │
+│  Credenciais iniciais gerenciadas:                               │
+│  GEMINI_API_KEY_ECOSYSTEM · INTER_CLIENT_ID                     │
+│  OPENROUTER_API_KEY · BRY_API_KEY                               │
+│  ANTHROPIC_API_KEY · RESEND_API_KEY                             │
+└─────────────────────────────────────────────────────────────────┘</div>
+      </div>
+
+      <!-- Antes / Depois -->
+      <h4 style="margin:24px 0 12px">Protocolo de Uso — Antes × Depois</h4>
+      <div class="comparison">
+        <div class="comparison-card before">
+          <h4>❌ V8.1 — Modo Arquivo (descontinuado)</h4>
+          <code>
+            <span class="strike">// Cada Edge Function lia direto do env</span><br>
+            <span class="strike">const key = Deno.env.get("GEMINI_KEY");</span><br>
+            <span class="strike">// Credencial: anotada em .md</span><br>
+            <span class="strike">// Auditoria: nenhuma</span><br>
+            <span class="strike">// Rotação: manual + esquecida</span>
+          </code>
+        </div>
+        <div class="comparison-card after">
+          <h4>✅ V8.2 — SC-29 (padrão)</h4>
+          <code>
+            // Chama SC-29 para obter credencial<br>
+            const key = await getCredential(<br>
+            &nbsp;&nbsp;"GEMINI_API_KEY_ECOSYSTEM",<br>
+            &nbsp;&nbsp;"ecosystem"<br>
+            );<br>
+            // Auditoria: automática<br>
+            // Rotação: centralizada
+          </code>
+        </div>
+      </div>
+
+      <!-- Plano de Implementação -->
+      <h4 style="margin:24px 0 12px">Plano de Implementação (~5h30min)</h4>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Passo</th><th>Descrição</th><th>Esforço</th></tr></thead>
+          <tbody>
+            <tr><td><b>0.1</b></td><td>Schema <code>ecosystem_credentials</code> + <code>credential_access_log</code> + RLS</td><td>1h</td></tr>
+            <tr><td><b>0.2</b></td><td>Edge Function <code>credential-agent</code> (get · validate · list · rotate)</td><td>2h</td></tr>
+            <tr><td><b>0.3</b></td><td>Migrar 8 credenciais conhecidas para o Supabase Vault</td><td>1h</td></tr>
+            <tr><td><b>0.4</b></td><td>Atualizar <code>embed-on-insert</code> para chamar SC-29</td><td>30min</td></tr>
+            <tr><td><b>0.5</b></td><td>Dashboard de auditoria (Supabase Studio view)</td><td>30min</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Regras de Ouro -->
+      <h4 style="margin:24px 0 12px">🔑 Regras de Ouro</h4>
+      <div style="display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+          <span style="color:var(--red);font-weight:700">1.</span>
+          <span>Nenhum valor de credencial aparece em logs, arquivos <code>.md</code> ou código-fonte</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+          <span style="color:var(--red);font-weight:700">2.</span>
+          <span>Todo acesso a credencial gera entrada em <code>credential_access_log</code> (Artigo IV)</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+          <span style="color:var(--red);font-weight:700">3.</span>
+          <span>Rotação de credencial de produção exige aprovação CEO — Human-in-the-loop (Artigo II)</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+          <span style="color:var(--red);font-weight:700">4.</span>
+          <span>Isolamento por projeto: credenciais FIC ≠ Intentus ≠ Klésis (Artigo XV)</span>
+        </div>
+        <div style="display:flex;gap:12px;align-items:flex-start;padding:12px;background:rgba(255,255,255,0.04);border-radius:8px">
+          <span style="color:var(--red);font-weight:700">5.</span>
+          <span>SC-29 é auto-suficiente: usa <code>SUPABASE_SERVICE_ROLE_KEY</code> injetado automaticamente pelo Supabase para seu próprio bootstrap</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CONTAGEM -->
+  <div id="contagem" class="section">
+    <div class="section-header">
+      <h2>📊 Contagem Atualizada</h2>
+    </div>
+    <div class="counter-grid">
+      <div class="counter-card">
+        <div class="num">22</div>
+        <div class="label">Artigos Constitucionais</div>
+      </div>
+      <div class="counter-card">
+        <div class="num">13</div>
+        <div class="label">Meta-Padrões</div>
+      </div>
+      <div class="counter-card highlight">
+        <div class="num">29</div>
+        <div class="label">Super-Crates</div>
+        <div class="delta">+1 SC-29 ✨</div>
+      </div>
+      <div class="counter-card">
+        <div class="num">7</div>
+        <div class="label">Camadas (L1–L7)</div>
+      </div>
+      <div class="counter-card">
+        <div class="num">17</div>
+        <div class="label">Ondas de Entrega</div>
+      </div>
+      <div class="counter-card">
+        <div class="num">5</div>
+        <div class="label">Negócios Atendidos</div>
+      </div>
+      <div class="counter-card">
+        <div class="num">70+</div>
+        <div class="label">Ferramentas Ativas</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ROADMAP -->
+  <div id="roadmap" class="section">
+    <div class="section-header">
+      <h2>🗺️ Roadmap FASE 0 — Revisado em V8.2</h2>
+    </div>
+
+    <div class="roadmap">
+      <div class="roadmap-item next">
+        <div class="phase">0.0</div>
+        <div class="content">
+          <div class="title">⚡ SC-29 — Credential Vault Agent</div>
+          <div class="desc">Novo P0 adicionado em V8.2 · ~5h30min · <code>ecosystem_credentials</code> + Edge Function <code>credential-agent</code> + audit log</div>
+        </div>
+        <div class="status status-next">⏳ Próxima sessão</div>
+      </div>
+
+      <div class="roadmap-item done">
+        <div class="phase">0.2</div>
+        <div class="content">
+          <div class="title">bootstrap_session() — Supabase Primário (Fase B)</div>
+          <div class="desc">OR-logic + ILIKE · 15 resultados · CLAUDE.md + PROTOCOLO-MEMORIA.md atualizados</div>
+        </div>
+        <div class="status status-done">✅ Sessão 093</div>
+      </div>
+
+      <div class="roadmap-item done">
+        <div class="phase">0.3</div>
+        <div class="content">
+          <div class="title">Trigger auto-embedding (pg_net + Edge Function)</div>
+          <div class="desc">AFTER INSERT em ecosystem_memory · pg_net assíncrono · Edge Function deploy</div>
+        </div>
+        <div class="status status-done">✅ Sessão 093</div>
+      </div>
+
+      <div class="roadmap-item done">
+        <div class="phase">0.4</div>
+        <div class="content">
+          <div class="title">Auto-embedding e2e validado — gemini-embedding-001 · 768d</div>
+          <div class="desc">Modelo correto para GEMINI_API_KEY_ECOSYSTEM · v7 ACTIVE · INSERT → embedding gerado automaticamente</div>
+        </div>
+        <div class="status status-done">✅ Sessão 093</div>
+      </div>
+
+      <div class="roadmap-item planned">
+        <div class="phase">0.1</div>
+        <div class="content">
+          <div class="title">Git como fonte de verdade</div>
+          <div class="desc">Sync automático entre repositórios · webhook em push</div>
+        </div>
+        <div class="status status-planned">📋 Planejado</div>
+      </div>
+
+      <div class="roadmap-item planned">
+        <div class="phase">0.5</div>
+        <div class="content">
+          <div class="title">Painel de Status do Ecossistema</div>
+          <div class="desc">Dashboard monitoramento de todos os agentes ativos</div>
+        </div>
+        <div class="status status-planned">📋 Planejado</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- SC LIST V8.2 -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🗂️ Todos os 29 Super-Crates — V8.2</h2>
+      <span class="tag tag-inherited">Herdados V8.1</span>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr><th>SC</th><th>Nome</th><th>Camada</th><th>Onda</th><th>Status</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>SC-01</td><td>Agent Foundation</td><td>L2 Dev</td><td>Onda 1</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-02</td><td>Orquestrator Core</td><td>L1 Orq</td><td>Onda 1</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-03</td><td>Dual-Write Pipeline</td><td>L3 Infra</td><td>Onda 2</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-04</td><td>Skill Registry</td><td>L1 Orq</td><td>Onda 2</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-05</td><td>Skill Router</td><td>L1 Orq</td><td>Onda 3</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-06</td><td>Memory Consolidator v1</td><td>L3 Infra</td><td>Onda 3</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-07</td><td>Human Approval Queue</td><td>L1 Orq</td><td>Onda 4</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-08</td><td>Cost Observer</td><td>L3 Infra</td><td>Onda 4</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-09</td><td>Multi-Tenant Isolation</td><td>L3 Infra</td><td>Onda 4</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-10</td><td>Webhook Hardening</td><td>L2 Dev</td><td>Onda 1</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-11</td><td>Audit Log Foundation</td><td>L3 Infra</td><td>Onda 2</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-12</td><td>Memory Consolidator v2</td><td>L3 Infra</td><td>Onda 6</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-13</td><td>Agent Sandbox</td><td>L2 Dev</td><td>Onda 5</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-14</td><td>Agent Runner (Claude Agent SDK)</td><td>L2 Dev</td><td>Onda 1</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-15</td><td>Schema Contract Registry</td><td>L2 Dev</td><td>Onda 3</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-16</td><td>Retry + Backoff Engine</td><td>L3 Infra</td><td>Onda 3</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-17</td><td>Multi-Provider LLM Gateway</td><td>L3 Infra</td><td>Onda 7</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-18</td><td>Observability Stack</td><td>L3 Infra</td><td>Onda 5</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-19</td><td>PII Mask Pipeline</td><td>L3 Infra</td><td>Onda 3</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-20</td><td>Rate Limiter</td><td>L3 Infra</td><td>Onda 4</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-21</td><td>Rollback Engine</td><td>L2 Dev</td><td>Onda 6</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-22</td><td>Minors Data Fortress</td><td>L3 Infra</td><td>Onda 8</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-23</td><td>Agent Performance Monitor</td><td>L3 Infra</td><td>Onda 7</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-24</td><td>RACI Registry</td><td>L1 Orq</td><td>Onda 5</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-25</td><td>Cross-Business Router</td><td>L1 Orq</td><td>Onda 9</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-26</td><td>Agent Learning Loop</td><td>L2 Dev</td><td>Onda 10</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-27</td><td>Incident Commander</td><td>L3 Infra</td><td>Onda 9</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr><td>SC-28</td><td>Regulatory Deadline Watcher</td><td>L1 Orq</td><td>Onda 10</td><td><span class="pill pill-blue">V8.1</span></td></tr>
+          <tr class="new-row">
+            <td><b>SC-29</b></td>
+            <td><b>Credential Vault Agent ✨</b></td>
+            <td>L3 Infra</td>
+            <td><b>Onda 0 (P0)</b></td>
+            <td><span class="pill pill-green">NOVO V8.2</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- IMPACTO HERDEIROS -->
+  <div class="section">
+    <div class="section-header">
+      <h2>🔗 Impacto nos MASTERPLANs Herdeiros</h2>
+    </div>
+    <div class="table-wrap">
+      <table>
+        <thead><tr><th>MASTERPLAN</th><th>Ação necessária</th><th>Urgência</th></tr></thead>
+        <tbody>
+          <tr>
+            <td><b>MASTERPLAN FIC v2.1</b></td>
+            <td>Atualizar para v2.2 declarando herança do V8.2 e uso do SC-29 para credenciais Inter, BRy, WhatsApp Business</td>
+            <td><span class="pill pill-orange">Alta</span></td>
+          </tr>
+          <tr>
+            <td><b>MASTERPLAN INTENTUS (futuro)</b></td>
+            <td>Nasce já com SC-29 — credenciais Stripe, Urbit, PostHog via SC-29</td>
+            <td><span class="pill pill-blue">Planejado</span></td>
+          </tr>
+          <tr>
+            <td><b>MASTERPLAN KLÉSIS (futuro)</b></td>
+            <td>Idem — com proteção reforçada de credenciais (dado sensível de menores)</td>
+            <td><span class="pill pill-blue">Planejado</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- QUOTE FINAL -->
+  <div class="quote-block">
+    "A diferença entre um protótipo e um ecossistema é que o ecossistema gerencia sua própria infraestrutura. SC-29 é o momento em que paramos de tratar credenciais como configuração e começamos a tratá-las como arquitetura."
+    <cite>— Claudinho (VP Executivo) · 14/04/2026</cite>
+  </div>
+
+</div>
+
+<footer>
+  <strong>MASTERPLAN ECOSSISTEMA v8.2</strong> · Omega Multi-Provider Resilience Edition + Credential Sovereignty<br>
+  Marcelo Silva (CEO) · Claudinho (VP Executivo) · 14/04/2026 · Sessão 093<br>
+  <br>
+  <span style="color:var(--border)">Base: V8.1 Omega Multi-Provider Resilience Edition · 22 Artigos · 13 Meta-Padrões · <b style="color:var(--green)">29 Super-Crates</b> · 7 Camadas · 17 Ondas</span>
+</footer>
+
+</body>
+</html>

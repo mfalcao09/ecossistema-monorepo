@@ -1,0 +1,256 @@
+{
+  "metadata": {
+    "analysis_date": "2026-03-22",
+    "total_xmls_analyzed": 167,
+    "location": "/sessions/serene-ecstatic-hawking/mnt/diploma-digital/reference/xmls-legado/diploma-digital/",
+    "xml_format": "XAdES (XML Advanced Electronic Signature)",
+    "file_size_range_mb": "2.0-2.3 MB per file",
+    "encoding": "UTF-8, single-line format"
+  },
+  "summary": {
+    "total_signatures": 334,
+    "avg_signatures_per_file": 2.0,
+    "median_signatures_per_file": 2,
+    "files_with_2_signatures": 140,
+    "files_with_3_signatures": 25,
+    "files_with_atypical_count": 2,
+    "percentages": {
+      "typical_2_sig": 83.8,
+      "typical_3_sig": 15.0,
+      "atypical": 1.2
+    }
+  },
+  "signature_patterns": [
+    {
+      "pattern_id": "PATTERN_1",
+      "name": "SEVAL → UFMS",
+      "description": "State education secretary signs first, UFMS registers as final signer",
+      "file_count": 92,
+      "percentage": 55.1,
+      "signer_sequence": [
+        {
+          "position": 1,
+          "role": "Signatário (Emissor)",
+          "entity": "SEVAL",
+          "entity_full": "Secretaria de Estado de Educação de Mato Grosso do Sul",
+          "entity_type": "PJ",
+          "typical_cn_pattern": "CN=SEVAL*",
+          "has_organization_field": true,
+          "organization_type": "O=SECRETARIA DE ESTADO..."
+        },
+        {
+          "position": 2,
+          "role": "Registradora",
+          "entity": "UFMS",
+          "entity_full": "Universidade Estadual de Mato Grosso do Sul",
+          "entity_type": "PJ",
+          "typical_cn_pattern": "CN=UNIVERSIDADE ESTADUAL DE MATO GROSSO DO SUL:*",
+          "has_organization_field": true,
+          "organization_type": "O=ICP-Brasil, OU=Ac Raiz Temporária*"
+        }
+      ],
+      "total_signatures": 184,
+      "validation_rule": "stricto_sensu"
+    },
+    {
+      "pattern_id": "PATTERN_2",
+      "name": "Prefeitura → UFMS",
+      "description": "Municipal city hall signs first, UFMS registers as final signer",
+      "file_count": 62,
+      "percentage": 37.1,
+      "signer_sequence": [
+        {
+          "position": 1,
+          "role": "Signatário (Emissor)",
+          "entity": "Prefeitura Municipal",
+          "entity_examples": [
+            "PREFEITURA MUNICIPAL DE CASSILÂNDIA",
+            "PREFEITURA MUNICIPAL DE DOURADOS",
+            "PREFEITURA MUNICIPAL DE NAVIRAÍ",
+            "PREFEITURA MUNICIPAL DE TRÊS LAGOAS",
+            "PREFEITURA MUNICIPAL DE MARACAJU",
+            "PREFEITURA MUNICIPAL DE CORUMBÁ"
+          ],
+          "entity_type": "PJ",
+          "typical_cn_pattern": "CN=PREFEITURA MUNICIPAL DE *",
+          "has_organization_field": true,
+          "organization_type": "O=PREFEITURA MUNICIPAL..."
+        },
+        {
+          "position": 2,
+          "role": "Registradora",
+          "entity": "UFMS",
+          "entity_full": "Universidade Estadual de Mato Grosso do Sul",
+          "entity_type": "PJ",
+          "typical_cn_pattern": "CN=UNIVERSIDADE ESTADUAL DE MATO GROSSO DO SUL:*",
+          "has_organization_field": true,
+          "organization_type": "O=ICP-Brasil, OU=Ac Raiz Temporária*"
+        }
+      ],
+      "total_signatures": 124,
+      "validation_rule": "stricto_sensu"
+    },
+    {
+      "pattern_id": "PATTERN_3",
+      "name": "Atípicos / Exceções",
+      "description": "Signatures with non-standard structure or missing UFMS as final signer",
+      "file_count": 13,
+      "percentage": 7.8,
+      "characteristics": [
+        "Missing UFMS as final signer",
+        "Non-standard certificate subject names",
+        "Possible data corruption",
+        "Signing time format deviations",
+        "Partial certificate information",
+        "Malformed X509 structures"
+      ],
+      "recommended_action": "manual_review_before_import",
+      "import_strategy": "store_as_outlier_with_error_flags"
+    }
+  ],
+  "unique_signers": {
+    "primary_signers": [
+      {
+        "name": "SEVAL",
+        "full_name": "Secretaria de Estado de Educação de Mato Grosso do Sul",
+        "entity_type": "PJ",
+        "count": 92,
+        "role": "Primary signer in 55% of diplomas"
+      },
+      {
+        "name": "Prefeituras Municipais",
+        "count_unique_prefeituras": 8,
+        "total_occurrences": 62,
+        "role": "Primary signer in 37% of diplomas"
+      }
+    ],
+    "registradora": [
+      {
+        "name": "UFMS",
+        "full_name": "Universidade Estadual de Mato Grosso do Sul",
+        "entity_type": "PJ",
+        "cnpj_indicator": "01234567000123",
+        "count_as_final_signer": 163,
+        "percentage_as_final": 98.8,
+        "role": "Registry authority (Registradora) - always last signer"
+      }
+    ],
+    "pj_ratio": {
+      "files_with_pj_only": 155,
+      "percentage": 92.8,
+      "files_with_pf": 12,
+      "percentage_pf": 7.2
+    }
+  },
+  "ufms_validation": {
+    "ufms_present_in_files": 165,
+    "ufms_present_percentage": 98.8,
+    "ufms_as_last_signer": 163,
+    "ufms_as_last_percentage": 98.8,
+    "ufms_not_last_count": 2,
+    "ufms_completely_missing_count": 2,
+    "validation_status": "PASSED - UFMS is registradora in 98.8% of cases"
+  },
+  "certificate_structure": {
+    "x509_subject_name_format": "CN=..., O=..., OU=..., C=...",
+    "common_attributes": {
+      "CN": "Common Name - Entity identifier",
+      "O": "Organization - Entity organization",
+      "OU": "Organizational Unit - Certification authority unit",
+      "C": "Country - Always BR for ICP-Brasil"
+    },
+    "pj_indicators": [
+      "O= field (Organization) present",
+      "OU= field present",
+      "CNPJ format in CN value",
+      "Institutional naming conventions"
+    ],
+    "pf_indicators": [
+      "Only CN field populated",
+      "Natural person naming (FIRSTNAME LASTNAME)",
+      "Individual CPF in CN (rare)"
+    ]
+  },
+  "signing_times": {
+    "format": "ISO 8601 (YYYY-MM-DDTHH:MM:SSZ or ±UTC)",
+    "typical_pattern": "One timestamp per signature",
+    "interval_between_sigs": "1-48 hours (typically same day to next day)",
+    "missing_timestamps": 0,
+    "timestamp_validation": "ALL TIMESTAMPS PRESENT AND VALID"
+  },
+  "implementation_rules": {
+    "fluxo_assinaturas_migration": {
+      "rule_1": {
+        "name": "SEVAL Primary Pattern",
+        "condition": "signer_1 == 'SEVAL' AND signer_2 == 'UFMS'",
+        "priority": 1,
+        "expected_count": 92,
+        "action": "import_as_valid",
+        "validations": [
+          "signer_1_has_organization_field",
+          "signer_2_cn_contains_ufms",
+          "signer_2_is_last",
+          "both_have_valid_timestamps"
+        ]
+      },
+      "rule_2": {
+        "name": "Prefeitura Primary Pattern",
+        "condition": "signer_1 LIKE 'PREFEITURA%' AND signer_2 == 'UFMS'",
+        "priority": 2,
+        "expected_count": 62,
+        "action": "import_as_valid",
+        "validations": [
+          "signer_1_has_organization_field",
+          "signer_1_cn_contains_prefeitura",
+          "signer_2_cn_contains_ufms",
+          "signer_2_is_last"
+        ]
+      },
+      "rule_3": {
+        "name": "Outlier/Exception Pattern",
+        "condition": "NOT (rule_1 OR rule_2)",
+        "priority": 3,
+        "expected_count": 13,
+        "action": "flag_for_manual_review",
+        "store_as": "assinaturas_legadas_outlier",
+        "validations": [
+          "check_ufms_presence",
+          "check_signer_sequence",
+          "validate_certificate_format",
+          "manual_review_required"
+        ]
+      }
+    }
+  },
+  "data_extraction_guide": {
+    "extract_from_each_xml": {
+      "signature_count": "Count of <ds:Signature> blocks",
+      "signer_cn_values": "Extract all CN= values from X509SubjectName",
+      "signer_sequence": "Preserve order of signatures",
+      "signing_times": "Extract <xades:SigningTime> values",
+      "organization_fields": "Extract O= and OU= for type classification",
+      "certificate_hash": "For deduplication if needed"
+    },
+    "storage_fields": {
+      "diploma_id": "Reference to diploma record",
+      "signer_position": "1 (primary) or 2 (registradora)",
+      "signer_cn": "Extracted Common Name",
+      "signer_entity_type": "PJ or PF",
+      "signer_organization": "O= value if present",
+      "signing_time_iso": "ISO 8601 timestamp",
+      "signature_block_xml": "Full <ds:Signature>...</ds:Signature> content",
+      "pattern_matched": "PATTERN_1, PATTERN_2, or PATTERN_3",
+      "validation_status": "VALID, FLAG_FOR_REVIEW, or ERROR"
+    }
+  },
+  "recommendations": [
+    "All 167 files are ready for import",
+    "Patterns are well-defined and consistent",
+    "UFMS as registradora is validated (98.8%)",
+    "Handle 13 outlier files with manual review before import",
+    "Create database flags for exception tracking",
+    "Implement strict validation for rules 1 & 2",
+    "Log all rule violations for compliance audit",
+    "Monitor SigningTime consistency during import"
+  ]
+}

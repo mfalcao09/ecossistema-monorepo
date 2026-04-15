@@ -1,0 +1,125 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* ─── CSS Custom Properties — definidas pelo ThemeProvider ──────────────────
+   Valores padrão (fallback antes do JS rodar)                               */
+:root {
+  --color-primary: #4F46E5;
+  --color-primary-light: rgba(79, 70, 229, 0.12);
+  --color-primary-ring: rgba(79, 70, 229, 0.35);
+}
+
+/* ─── Tema Claro (padrão) ─────────────────────────────────────────────────── */
+@layer base {
+  body {
+    @apply bg-gray-50 text-gray-900 antialiased transition-colors duration-200;
+  }
+
+  /* Scrollbar sutil */
+  ::-webkit-scrollbar { width: 6px; height: 6px; }
+  ::-webkit-scrollbar-track { @apply bg-transparent; }
+  ::-webkit-scrollbar-thumb { @apply bg-gray-300 rounded-full; }
+  ::-webkit-scrollbar-thumb:hover { @apply bg-gray-400; }
+}
+
+/* ─── Tema Escuro ─────────────────────────────────────────────────────────── */
+/* NOTA: Usamos valores CSS brutos (sem @apply) para evitar dependência
+   circular no PostCSS ao referenciar utilitários Tailwind dentro de
+   seletores que têm o mesmo nome do utilitário sendo aplicado.           */
+@layer base {
+  .dark body {
+    background-color: rgb(3 7 18);   /* gray-950 */
+    color: rgb(243 244 246);          /* gray-100 */
+  }
+
+  /* Cards e superfícies */
+  .dark .bg-white {
+    background-color: rgb(17 24 39) !important;   /* gray-900 */
+    border-color: rgb(55 65 81 / 0.5) !important; /* gray-700/50 */
+  }
+  .dark .bg-gray-50 {
+    background-color: rgb(3 7 18) !important;     /* gray-950 */
+  }
+  .dark .bg-gray-100 {
+    background-color: rgb(31 41 55) !important;   /* gray-800 */
+  }
+
+  /* Bordas */
+  .dark .border-gray-200 {
+    border-color: rgb(55 65 81 / 0.6) !important; /* gray-700/60 */
+  }
+  .dark .border-gray-300 {
+    border-color: rgb(75 85 99) !important;        /* gray-600 */
+  }
+
+  /* Textos */
+  .dark .text-gray-900 {
+    color: rgb(243 244 246) !important;  /* gray-100 */
+  }
+  .dark .text-gray-800 {
+    color: rgb(229 231 235) !important;  /* gray-200 */
+  }
+  .dark .text-gray-700 {
+    color: rgb(209 213 219) !important;  /* gray-300 */
+  }
+  .dark .text-gray-600 {
+    color: rgb(156 163 175) !important;  /* gray-400 */
+  }
+  .dark .text-gray-500 {
+    color: rgb(156 163 175) !important;  /* gray-400 */
+  }
+  .dark .text-gray-400 {
+    color: rgb(107 114 128) !important;  /* gray-500 */
+  }
+
+  /* Inputs */
+  .dark input:not([type='color']):not([type='checkbox']):not([type='radio']),
+  .dark select,
+  .dark textarea {
+    background-color: rgb(31 41 55);    /* gray-800 */
+    border-color: rgb(75 85 99);        /* gray-600 */
+    color: rgb(243 244 246);            /* gray-100 */
+  }
+  .dark input::placeholder,
+  .dark textarea::placeholder {
+    color: rgb(107 114 128);            /* gray-500 */
+  }
+
+  /* TopBar */
+  .dark header.sticky {
+    background-color: rgb(17 24 39) !important;   /* gray-900 */
+    border-color: rgb(55 65 81 / 0.6) !important; /* gray-700/60 */
+  }
+
+  /* Scrollbar escura */
+  .dark ::-webkit-scrollbar-thumb {
+    background-color: rgb(75 85 99);  /* gray-600 */
+  }
+}
+
+/* ─── Utilitários de cor primária dinâmica ───────────────────────────────── */
+@layer utilities {
+  .bg-primary {
+    background-color: var(--color-primary);
+  }
+  .bg-primary-light {
+    background-color: var(--color-primary-light);
+  }
+  .text-primary {
+    color: var(--color-primary);
+  }
+  .border-primary {
+    border-color: var(--color-primary);
+  }
+  .ring-primary {
+    --tw-ring-color: var(--color-primary-ring);
+  }
+  .hover\:bg-primary:hover {
+    background-color: var(--color-primary);
+    filter: brightness(0.92);
+  }
+  .focus\:ring-primary:focus {
+    --tw-ring-color: var(--color-primary-ring);
+  }
+}

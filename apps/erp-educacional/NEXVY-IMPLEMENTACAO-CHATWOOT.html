@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NEXVY — Plano de Implementação v2.0</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg2: #161b27;
+      --bg3: #1e2535;
+      --border: #2a3347;
+      --accent: #6366f1;
+      --accent2: #8b5cf6;
+      --green: #22c55e;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+      --cyan: #06b6d4;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+
+    /* HERO */
+    .hero {
+      background: linear-gradient(135deg, #0d1f3c 0%, #0f1117 45%, #130d2e 100%);
+      border-bottom: 1px solid var(--border);
+      padding: 60px 40px 50px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 700px; height: 400px;
+      background: radial-gradient(ellipse, rgba(99,102,241,0.1) 0%, transparent 70%);
+      top: -100px; left: 50%; transform: translateX(-50%);
+    }
+    .hero-badge {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(34,197,94,0.15), rgba(6,182,212,0.15));
+      border: 1px solid rgba(34,197,94,0.35);
+      color: #86efac;
+      font-size: 12px; font-weight: 700;
+      letter-spacing: 1.5px; text-transform: uppercase;
+      padding: 6px 18px; border-radius: 100px; margin-bottom: 20px;
+    }
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 46px); font-weight: 800;
+      background: linear-gradient(135deg, #e0e7ff, #a5b4fc, #86efac);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      margin-bottom: 12px;
+    }
+    .hero-sub { font-size: 17px; color: var(--text-muted); margin-bottom: 28px; }
+    .hero-meta { display: flex; gap: 24px; justify-content: center; flex-wrap: wrap; font-size: 13px; color: var(--text-dim); }
+    .version-tag {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3);
+      color: #fcd34d; padding: 4px 12px; border-radius: 6px; font-size: 12px;
+      font-weight: 700; margin-left: 8px;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px; display: flex; gap: 4px; overflow-x: auto;
+    }
+    nav a {
+      padding: 14px 16px; font-size: 13px; font-weight: 500;
+      color: var(--text-dim); white-space: nowrap;
+      border-bottom: 2px solid transparent; transition: all 0.2s;
+    }
+    nav a:hover { color: var(--text); border-bottom-color: var(--accent); }
+    nav a { text-decoration: none; }
+
+    .container { max-width: 1100px; margin: 0 auto; padding: 48px 24px; }
+    section { margin-bottom: 72px; }
+
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 28px; padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-number {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      border-radius: 10px; display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 700; color: white; flex-shrink: 0;
+    }
+    .section-header h2 { font-size: 22px; font-weight: 700; }
+    .section-header p { font-size: 13px; color: var(--text-muted); margin-top: 2px; }
+
+    /* STRATEGY BOX */
+    .strategy-comparison {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px;
+    }
+    @media (max-width: 640px) { .strategy-comparison { grid-template-columns: 1fr; } }
+    .strategy-old {
+      background: rgba(239,68,68,0.05); border: 1px solid rgba(239,68,68,0.2);
+      border-radius: 12px; padding: 20px;
+    }
+    .strategy-new {
+      background: rgba(34,197,94,0.05); border: 1px solid rgba(34,197,94,0.2);
+      border-radius: 12px; padding: 20px;
+    }
+    .strategy-label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px; }
+    .strategy-old .strategy-label { color: #fca5a5; }
+    .strategy-new .strategy-label { color: #86efac; }
+    .strategy-item { font-size: 13px; color: var(--text-muted); padding: 4px 0; display: flex; gap: 8px; }
+    .strategy-old .strategy-item::before { content: '✗'; color: var(--red); flex-shrink: 0; }
+    .strategy-new .strategy-item::before { content: '✓'; color: var(--green); flex-shrink: 0; }
+
+    /* TABLE */
+    .table-wrapper { overflow-x: auto; border-radius: 12px; border: 1px solid var(--border); margin-bottom: 24px; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th { background: var(--bg3); color: var(--text-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; padding: 12px 16px; text-align: left; }
+    td { padding: 12px 16px; border-top: 1px solid var(--border); color: var(--text); }
+    tr:hover td { background: rgba(255,255,255,0.02); }
+
+    .badge { display: inline-block; padding: 3px 10px; border-radius: 100px; font-size: 11px; font-weight: 600; }
+    .badge-red { background: rgba(239,68,68,0.15); color: #fca5a5; }
+    .badge-green { background: rgba(34,197,94,0.15); color: #86efac; }
+    .badge-yellow { background: rgba(245,158,11,0.15); color: #fcd34d; }
+    .badge-blue { background: rgba(99,102,241,0.15); color: #a5b4fc; }
+    .badge-gray { background: rgba(100,116,139,0.15); color: #94a3b8; }
+
+    /* ARCH DIAGRAM */
+    .arch-box {
+      background: #0d1117; border: 1px solid var(--border); border-radius: 12px;
+      padding: 24px; font-family: monospace; font-size: 13px; color: #c9d1d9;
+      overflow-x: auto; white-space: pre; line-height: 1.6;
+    }
+
+    /* CODE */
+    .code-block {
+      background: #0d1117; border: 1px solid var(--border); border-radius: 10px;
+      padding: 16px 20px; font-family: 'JetBrains Mono', 'Fira Code', monospace;
+      font-size: 13px; line-height: 1.6; color: #c9d1d9; overflow-x: auto; margin: 12px 0;
+    }
+    .code-comment { color: #6e7681; }
+    .code-keyword { color: #ff7b72; }
+    .code-string { color: #a5d6ff; }
+
+    /* PHASE BLOCKS */
+    .phase-header {
+      border-radius: 12px; padding: 20px 24px; margin-bottom: 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;
+    }
+    .phase-header.phase1 { background: linear-gradient(135deg, rgba(29,78,216,0.2), rgba(37,99,235,0.1)); border: 1px solid rgba(59,130,246,0.3); }
+    .phase-header.phase2 { background: linear-gradient(135deg, rgba(76,29,149,0.2), rgba(109,40,217,0.1)); border: 1px solid rgba(139,92,246,0.3); }
+    .phase-title { font-size: 18px; font-weight: 800; }
+    .phase-header.phase1 .phase-title { color: #93c5fd; }
+    .phase-header.phase2 .phase-title { color: #c4b5fd; }
+    .phase-meta { font-size: 13px; color: var(--text-muted); }
+
+    /* SPRINT CARDS */
+    .sprint-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .sprint-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; }
+    .sprint-head {
+      padding: 14px 18px; font-size: 13px; font-weight: 700; color: white;
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .sprint-head.s1 { background: linear-gradient(135deg, #1e3a5f, #1d4ed8); }
+    .sprint-head.s2 { background: linear-gradient(135deg, #1a3a4a, #0e7490); }
+    .sprint-head.s3 { background: linear-gradient(135deg, #1a3a2a, #065f46); }
+    .sprint-head.s4 { background: linear-gradient(135deg, #3b1a5f, #5b21b6); }
+    .sprint-weeks { font-size: 11px; font-weight: 600; opacity: 0.7; }
+    .sprint-body { padding: 14px 18px; }
+    .sprint-body ul { list-style: none; }
+    .sprint-body li { font-size: 13px; color: var(--text-muted); padding: 3px 0; display: flex; gap: 8px; }
+    .sprint-body li::before { content: '□'; color: var(--text-dim); flex-shrink: 0; }
+    .sprint-goal { font-size: 12px; color: var(--text-dim); font-style: italic; padding: 10px 18px 14px; border-top: 1px solid var(--border); }
+
+    /* INFRA CARDS */
+    .infra-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 600px) { .infra-grid { grid-template-columns: 1fr; } }
+    .infra-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 20px; }
+    .infra-card h4 { font-size: 14px; font-weight: 700; margin-bottom: 12px; }
+    .infra-row { display: flex; justify-content: space-between; padding: 6px 0; border-top: 1px solid var(--border); font-size: 13px; color: var(--text-muted); }
+    .infra-row:first-of-type { border-top: none; }
+    .infra-total { color: var(--green); font-weight: 700; }
+
+    /* SUMMARY BOX */
+    .summary-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 16px; }
+    .summary-card {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 12px;
+      padding: 20px; text-align: center;
+    }
+    .summary-number { font-size: 36px; font-weight: 800; background: linear-gradient(135deg, var(--accent), var(--accent2)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+    .summary-label { font-size: 13px; color: var(--text-muted); margin-top: 4px; }
+
+    /* HIGHLIGHT */
+    .highlight-box {
+      background: linear-gradient(135deg, rgba(34,197,94,0.07), rgba(6,182,212,0.07));
+      border: 1px solid rgba(34,197,94,0.25); border-radius: 16px; padding: 28px;
+    }
+    .highlight-box h3 { font-size: 17px; font-weight: 700; color: #86efac; margin-bottom: 12px; }
+    .highlight-box p { font-size: 14px; color: var(--text-muted); line-height: 1.7; }
+
+    /* WHAT CHANGES */
+    .changes-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 24px; }
+    @media (max-width: 600px) { .changes-grid { grid-template-columns: 1fr; } }
+    .changes-card { background: var(--bg2); border: 1px solid var(--border); border-radius: 12px; padding: 18px; }
+    .changes-card.removed { border-left: 3px solid var(--red); }
+    .changes-card.added { border-left: 3px solid var(--green); }
+    .changes-card h4 { font-size: 13px; font-weight: 700; margin-bottom: 10px; }
+    .changes-card.removed h4 { color: #fca5a5; }
+    .changes-card.added h4 { color: #86efac; }
+    .changes-card ul { list-style: none; }
+    .changes-card li { font-size: 13px; color: var(--text-muted); padding: 3px 0; }
+
+    footer { text-align: center; padding: 40px; border-top: 1px solid var(--border); color: var(--text-dim); font-size: 13px; }
+  </style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-badge">✦ Plano Revisado · Estratégia Validada</div>
+  <h1>NEXVY — Implementação com Chatwoot <span class="version-tag">v2.0</span></h1>
+  <p class="hero-sub">Módulo do ERP Educacional primeiro → SaaS multi-tenant depois</p>
+  <div class="hero-meta">
+    <span>📅 12 de Abril de 2026</span>
+    <span>🏫 Cliente inicial: FIC (single-tenant)</span>
+    <span>⚡ MVP em 16 semanas</span>
+    <span>💰 Custo adicional Fase 1: ~$25/mês</span>
+  </div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <a href="#mudanca">A Mudança</a>
+  <a href="#arquitetura">Arquitetura</a>
+  <a href="#banco">Banco</a>
+  <a href="#fase1">Fase 1 — ERP</a>
+  <a href="#fase2">Fase 2 — SaaS</a>
+  <a href="#infra">Infraestrutura</a>
+  <a href="#resumo">Resumo</a>
+</nav>
+
+<div class="container">
+
+  <!-- A MUDANÇA ESTRATÉGICA -->
+  <section id="mudanca">
+    <div class="section-header">
+      <div class="section-number">⚡</div>
+      <div>
+        <h2>A Mudança Estratégica</h2>
+        <p>Por que construir dentro do ERP primeiro é melhor do que começar como SaaS independente</p>
+      </div>
+    </div>
+
+    <div class="strategy-comparison">
+      <div class="strategy-old">
+        <div class="strategy-label">❌ Plano Anterior</div>
+        <div class="strategy-item">Validar com Chatwoot Cloud (produto de terceiro)</div>
+        <div class="strategy-item">Começar como SaaS com multi-tenancy</div>
+        <div class="strategy-item">Nova infraestrutura desde o início</div>
+        <div class="strategy-item">Billing, white-label, onboarding complexo</div>
+        <div class="strategy-item">Usuário de teste: indefinido</div>
+        <div class="strategy-item">16 semanas para MVP comercializável</div>
+      </div>
+      <div class="strategy-new">
+        <div class="strategy-label">✅ Plano Novo</div>
+        <div class="strategy-item">Validar com código próprio em produção real</div>
+        <div class="strategy-item">Começar como módulo do ERP (single-tenant)</div>
+        <div class="strategy-item">Mesma infraestrutura do ERP (zero custo extra)</div>
+        <div class="strategy-item">Sem billing, sem white-label na Fase 1</div>
+        <div class="strategy-item">Usuário de teste: FIC (já existe, já confia)</div>
+        <div class="strategy-item">6-8 semanas para primeiras mensagens reais</div>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>Critério</th><th>Plano Anterior</th><th>Plano Novo</th></tr></thead>
+        <tbody>
+          <tr><td>Validação</td><td>Chatwoot Cloud (terceiro)</td><td><span class="badge badge-green">Código próprio em produção</span></td></tr>
+          <tr><td>Usuário de teste</td><td>Indefinido</td><td><span class="badge badge-green">FIC — real e já existente</span></td></tr>
+          <tr><td>Complexidade Fase 1</td><td><span class="badge badge-red">Alta (multi-tenancy)</span></td><td><span class="badge badge-green">Baixa (single-tenant)</span></td></tr>
+          <tr><td>Reuso de código</td><td>Zero</td><td><span class="badge badge-green">100% — módulo vira SaaS</span></td></tr>
+          <tr><td>Stack</td><td>Nova (separada)</td><td><span class="badge badge-green">Mesma do ERP (Next.js + Supabase)</span></td></tr>
+          <tr><td>Tempo até 1ª mensagem real</td><td>8 semanas</td><td><span class="badge badge-green">~4 semanas</span></td></tr>
+          <tr><td>Custo adicional Fase 1</td><td>$95-115/mês</td><td><span class="badge badge-green">~$25/mês</span></td></tr>
+          <tr><td>Risco</td><td><span class="badge badge-yellow">Médio</span></td><td><span class="badge badge-green">Baixíssimo</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="highlight-box">
+      <h3>🎯 O Princípio da Decisão</h3>
+      <p>Quando a Fase 2 começar (extração para SaaS), a pergunta não vai ser <em>"isso vai funcionar?"</em> — vai ser <em>"quantos clientes vamos aceitar primeiro?"</em>. A FIC vai ter respondido a primeira pergunta com uso real, durante meses, com dinheiro em jogo.</p>
+    </div>
+  </section>
+
+  <!-- ARQUITETURA -->
+  <section id="arquitetura">
+    <div class="section-header">
+      <div class="section-number">1</div>
+      <div>
+        <h2>Como o Módulo se Encaixa no ERP</h2>
+        <p>Nova rota /atendimento dentro do ERP Educacional existente</p>
+      </div>
+    </div>
+
+    <div class="arch-box">ERP Educacional (Next.js + Supabase — já existe)
+├── /diploma          → módulo de diploma digital ✅
+├── /academico        → módulo acadêmico ✅
+├── /atendimento      ← NOVO MÓDULO (o que vamos construir)
+│   ├── /conversas    → lista de conversas WhatsApp/Instagram
+│   ├── /contatos     → CRM de contatos (alunos, interessados)
+│   ├── /canais       → configuração de canais (WhatsApp, Instagram)
+│   ├── /automacoes   → regras de roteamento automático
+│   └── /relatorios   → métricas de atendimento
+└── /config           → configurações gerais ✅</div>
+
+    <h3 style="font-size:15px; font-weight:700; margin:24px 0 16px;">O que muda na Fase 1 (removido da complexidade)</h3>
+    <div class="changes-grid">
+      <div class="changes-card removed">
+        <h4>❌ Removido da Fase 1</h4>
+        <ul>
+          <li>Multi-tenancy (account_id isolation)</li>
+          <li>Billing / PIX / planos</li>
+          <li>White-label / domínio customizado</li>
+          <li>Partner dashboard</li>
+          <li>Widget embed SDK</li>
+          <li>Onboarding flow</li>
+          <li>LGPD completa (básico apenas)</li>
+          <li>App separado do ERP</li>
+        </ul>
+      </div>
+      <div class="changes-card added">
+        <h4>✅ Mantido e validado na Fase 1</h4>
+        <ul>
+          <li>Integração WhatsApp (Meta Cloud API)</li>
+          <li>Dashboard de conversas</li>
+          <li>Multi-canal: WA + Instagram + Messenger</li>
+          <li>CRM de contatos</li>
+          <li>Automação de roteamento</li>
+          <li>Captain AI / Copilot</li>
+          <li>Templates HSM</li>
+          <li>Realtime (Supabase Realtime)</li>
+          <li>Vault, rate limiting, circuit breaker</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- BANCO DE DADOS -->
+  <section id="banco">
+    <div class="section-header">
+      <div class="section-number">2</div>
+      <div>
+        <h2>Banco de Dados</h2>
+        <p>Tabelas novas no mesmo Supabase do ERP. Sem novo projeto.</p>
+      </div>
+    </div>
+
+    <div class="code-block">
+<span class="code-comment">-- Tabelas novas no Supabase existente do ERP</span>
+<span class="code-comment">-- Fase 1: SEM account_id (single-tenant = FIC é implícito)</span>
+<span class="code-comment">-- Fase 2: ADD COLUMN account_id + RLS em todas</span>
+
+atendimento_inboxes          <span class="code-comment">-- canais: WhatsApp, Instagram, Messenger</span>
+atendimento_contacts         <span class="code-comment">-- contatos: alunos, interessados, responsáveis</span>
+atendimento_conversations    <span class="code-comment">-- conversas (status: open/resolved/pending)</span>
+atendimento_messages         <span class="code-comment">-- mensagens (alto volume, indexado)</span>
+atendimento_labels           <span class="code-comment">-- etiquetas: matrícula, financeiro, acadêmico</span>
+atendimento_automation_rules <span class="code-comment">-- regras IF/THEN em JSONB</span>
+atendimento_agents           <span class="code-comment">-- funcionários da FIC que atendem</span></div>
+
+    <h3 style="font-size:14px; font-weight:700; margin:20px 0 10px; color: var(--yellow);">Preparado para a Fase 2 desde o início</h3>
+    <div class="code-block">
+<span class="code-comment">-- Fase 2: adicionar account_id em todas as tabelas (uma migration)</span>
+ALTER TABLE atendimento_conversations ADD COLUMN account_id UUID REFERENCES accounts(id);
+
+<span class="code-comment">-- E ativar RLS (a FIC vira account_id = 1)</span>
+ALTER TABLE atendimento_conversations ENABLE ROW LEVEL SECURITY;
+CREATE POLICY tenant_isolation ON atendimento_conversations
+  USING (account_id IN (
+    SELECT account_id FROM account_users WHERE user_id = auth.uid()
+  ));</div>
+
+    <p style="font-size:13px; color:var(--text-muted); margin-top:12px;">
+      Ao nomear as tabelas com prefixo <code>atendimento_</code> e já pensar em <code>account_id</code> na estrutura (mesmo que vazio na Fase 1), a migração para multi-tenancy na Fase 2 é uma migration — não uma reescrita.
+    </p>
+  </section>
+
+  <!-- FASE 1 -->
+  <section id="fase1">
+    <div class="phase-header phase1">
+      <div>
+        <div class="phase-title">📦 Fase 1 — Módulo ERP</div>
+        <div class="phase-meta">Sprints 1-8 · 16 semanas · Cliente: FIC · Single-tenant</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:13px; color:#93c5fd; font-weight:700;">Custo adicional: ~$25/mês</div>
+        <div style="font-size:12px; color:var(--text-dim);">Usa infra do ERP</div>
+      </div>
+    </div>
+
+    <div class="sprint-grid">
+      <div class="sprint-card">
+        <div class="sprint-head s1">Sprint 1 — Banco + Estrutura <span class="sprint-weeks">Sem. 1-2</span></div>
+        <div class="sprint-body"><ul>
+          <li>Migration: tabelas atendimento_* no Supabase</li>
+          <li>Prisma schema atualizado</li>
+          <li>Rotas /atendimento no Next.js</li>
+          <li>Sidebar do ERP: item "Atendimento"</li>
+          <li>Auth reutilizado do ERP (já existe)</li>
+          <li>Seed de dados para dev</li>
+        </ul></div>
+        <div class="sprint-goal">Resultado: estrutura pronta, sem funcionalidade ainda.</div>
+      </div>
+
+      <div class="sprint-card">
+        <div class="sprint-head s1">Sprint 2 — WhatsApp Integration <span class="sprint-weeks">Sem. 3-4</span></div>
+        <div class="sprint-body"><ul>
+          <li>Webhook /api/atendimento/whatsapp/webhook</li>
+          <li>Validação X-Hub-Signature (HMAC-SHA256)</li>
+          <li>Bull Queue no Railway (workers)</li>
+          <li>Worker: webhook → Contact → Conversation → Message</li>
+          <li>Rate limiting por inbox</li>
+          <li>Circuit breaker Meta API</li>
+          <li>Credenciais no Supabase Vault</li>
+        </ul></div>
+        <div class="sprint-goal">🎯 Resultado: 1ª mensagem WhatsApp real enviada e recebida.</div>
+      </div>
+
+      <div class="sprint-card">
+        <div class="sprint-head s1">Sprint 3 — Dashboard de Conversas <span class="sprint-weeks">Sem. 5-6</span></div>
+        <div class="sprint-body"><ul>
+          <li>Lista de conversas com filtros</li>
+          <li>ChatWindow (janela de chat)</li>
+          <li>Supabase Realtime (nova mensagem em tempo real)</li>
+          <li>Indicadores de status (enviado, lido)</li>
+          <li>Upload de mídia (imagem, áudio, doc)</li>
+          <li>Atribuição para agente</li>
+          <li>Mudar status (aberta → resolvida)</li>
+        </ul></div>
+        <div class="sprint-goal">🎯 Resultado: secretária da FIC consegue atender pelo dashboard.</div>
+      </div>
+
+      <div class="sprint-card">
+        <div class="sprint-head s2">Sprint 4 — Multi-Canal <span class="sprint-weeks">Sem. 7-8</span></div>
+        <div class="sprint-body"><ul>
+          <li>Instagram Direct Messages</li>
+          <li>Facebook Messenger</li>
+          <li>Telegram Bot (se houver demanda)</li>
+          <li>Seletor de canal na conversa</li>
+          <li>Ícone do canal na lista</li>
+        </ul></div>
+        <div class="sprint-goal">Resultado: 4 canais funcionando pelo mesmo dashboard.</div>
+      </div>
+
+      <div class="sprint-card">
+        <div class="sprint-head s2">Sprint 5 — CRM de Contatos <span class="sprint-weeks">Sem. 9-10</span></div>
+        <div class="sprint-body"><ul>
+          <li>Lista de contatos com busca</li>
+          <li>Perfil do contato + histórico de conversas</li>
+          <li>Notas internas por contato</li>
+          <li>Tags por contato</li>
+          <li>Import CSV (lista de alunos)</li>
+          <li>Sync com alunos cadastrados no ERP</li>
+        </ul></div>
+        <div class="sprint-goal">Resultado: FIC identifica automaticamente se é aluno ou candidato.</div>
+      </div>
+
+      <div class="sprint-card">
+        <div class="sprint-head s2">Sprint 6 — Automação + Roteamento <span class="sprint-weeks">Sem. 11-12</span></div>
+        <div class="sprint-body"><ul>
+          <li>Criador visual de regras IF/THEN</li>
+          <li>Triggers: mensagem recebida, status mudou</li>
+          <li>Ações: atribuir, etiquetar, responder</li>
+          <li>Roteamento por equipe (secretaria, financeiro)</li>
+          <li>Horário de atendimento (mensagem fora do horário)</li>
+          <li>Respostas rápidas salvas</li>
+        </ul></div>
+        <div class="sprint-goal">Resultado: FIC atende sem esforço manual nas triagens.</div>
+      </div>
+
+      <div class="sprint-card">
+        <div class="sprint-head s3">Sprint 7 — IA Copilot <span class="sprint-weeks">Sem. 13-14</span></div>
+        <div class="sprint-body"><ul>
+          <li>pgvector ativado no Supabase</li>
+          <li>Base de conhecimento da FIC (FAQs, prazos)</li>
+          <li>Sugestão de resposta em tempo real</li>
+          <li>"Resumir conversa" com um clique</li>
+          <li>Classificação automática (matrícula/financeiro)</li>
+          <li>Resposta automática para perguntas frequentes</li>
+        </ul></div>
+        <div class="sprint-goal">Resultado: atendente responde 2x mais rápido com suporte da IA.</div>
+      </div>
+
+      <div class="sprint-card">
+        <div class="sprint-head s3">Sprint 8 — Relatórios + Refinamento <span class="sprint-weeks">Sem. 15-16</span></div>
+        <div class="sprint-body"><ul>
+          <li>Dashboard de métricas (volume, tempo médio)</li>
+          <li>Relatório por agente</li>
+          <li>CSAT simples (emoji de satisfação)</li>
+          <li>Relatório semanal automático para gestão</li>
+          <li>Correção de bugs do uso real</li>
+          <li>Documentação interna do módulo</li>
+        </ul></div>
+        <div class="sprint-goal">🏁 Resultado: módulo completo e validado em produção pela FIC.</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FASE 2 -->
+  <section id="fase2">
+    <div class="phase-header phase2">
+      <div>
+        <div class="phase-title">🚀 Fase 2 — NEXVY SaaS</div>
+        <div class="phase-meta">Sprints 9-16 · 16 semanas · Multi-tenant · Lançamento público</div>
+      </div>
+      <div style="text-align:right;">
+        <div style="font-size:13px; color:#c4b5fd; font-weight:700;">Infra: ~$115-165/mês</div>
+        <div style="font-size:12px; color:var(--text-dim);">App separado</div>
+      </div>
+    </div>
+
+    <p style="font-size:14px; color:var(--text-muted); margin-bottom:24px;">
+      <strong style="color:var(--text);">Premissa:</strong> O módulo da Fase 1 está funcionando em produção. A FIC está usando. Os bugs foram resolvidos. Agora é só adicionar camadas para servir N clientes.
+    </p>
+
+    <div class="table-wrapper">
+      <table>
+        <thead><tr><th>O que muda</th><th>Fase 1 (ERP)</th><th>Fase 2 (SaaS)</th></tr></thead>
+        <tbody>
+          <tr><td>Tenancy</td><td>Single (FIC)</td><td>Multi-tenant (N clientes)</td></tr>
+          <tr><td>account_id</td><td>Não existe</td><td>Em todas as tabelas + RLS</td></tr>
+          <tr><td>Auth</td><td>Do ERP (hardcoded)</td><td>Supabase Auth isolado por tenant</td></tr>
+          <tr><td>Billing</td><td>Não tem</td><td>Stripe BR + PIX + planos</td></tr>
+          <tr><td>White-label</td><td>Não tem</td><td>Logo, cores, domínio por tenant</td></tr>
+          <tr><td>Onboarding</td><td>Manual</td><td>Wizard de 5 passos em <10 minutos</td></tr>
+          <tr><td>Deploy</td><td>Junto com ERP</td><td>app.nexvy.com.br (separado)</td></tr>
+          <tr><td>FIC</td><td>Usuário único</td><td>account_id=1, migrado automaticamente</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="sprint-grid">
+      <div class="sprint-card">
+        <div class="sprint-head s4">Sprint 9 — Multi-Tenancy <span class="sprint-weeks">Sem. 17-18</span></div>
+        <div class="sprint-body"><ul>
+          <li>ADD account_id em todas as tabelas</li>
+          <li>RLS ativado em 100% das tabelas</li>
+          <li>Migration: FIC vira account_id=1</li>
+          <li>Novo projeto Next.js (app.nexvy.com.br)</li>
+          <li>Middleware de tenant detection</li>
+        </ul></div>
+      </div>
+      <div class="sprint-card">
+        <div class="sprint-head s4">Sprint 10 — Onboarding + Setup <span class="sprint-weeks">Sem. 19-20</span></div>
+        <div class="sprint-body"><ul>
+          <li>Wizard 5 passos: empresa → canal → equipe → auto → teste</li>
+          <li>Setup WhatsApp guiado (OAuth Meta)</li>
+          <li>1º canal em menos de 10 minutos</li>
+          <li>Convite de agentes por email</li>
+        </ul></div>
+      </div>
+      <div class="sprint-card">
+        <div class="sprint-head s4">Sprint 11 — White-Label <span class="sprint-weeks">Sem. 21-22</span></div>
+        <div class="sprint-body"><ul>
+          <li>Logo + cores por tenant</li>
+          <li>Domínio customizado</li>
+          <li>Design tokens dinâmicos</li>
+          <li>Email transacional com marca do cliente</li>
+        </ul></div>
+      </div>
+      <div class="sprint-card">
+        <div class="sprint-head s4">Sprint 12 — Billing BR <span class="sprint-weeks">Sem. 23-24</span></div>
+        <div class="sprint-body"><ul>
+          <li>Stripe com PIX integrado</li>
+          <li>Planos: Starter → Enterprise</li>
+          <li>Trial 14 dias (sem cartão)</li>
+          <li>Upgrade/downgrade automático</li>
+          <li>Dashboard financeiro</li>
+        </ul></div>
+      </div>
+      <div class="sprint-card">
+        <div class="sprint-head s4">Sprints 13-14 — Integrações BR <span class="sprint-weeks">Sem. 25-28</span></div>
+        <div class="sprint-body"><ul>
+          <li>Typebot (chatbot BR)</li>
+          <li>n8n (automações)</li>
+          <li>Hotmart (compra → contato)</li>
+          <li>RD Station CRM</li>
+          <li>API pública documentada</li>
+        </ul></div>
+      </div>
+      <div class="sprint-card">
+        <div class="sprint-head s4">Sprint 15-16 — Mobile + Lançamento <span class="sprint-weeks">Sem. 29-32</span></div>
+        <div class="sprint-body"><ul>
+          <li>PWA para agentes + push notifications</li>
+          <li>Widget embed SDK</li>
+          <li>Load testing (1.000 msg/min)</li>
+          <li>Marketing site (nexvy.com.br)</li>
+          <li>🚀 Beta público com primeiros clientes pagantes</li>
+        </ul></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INFRAESTRUTURA -->
+  <section id="infra">
+    <div class="section-header">
+      <div class="section-number">3</div>
+      <div>
+        <h2>Infraestrutura e Custos</h2>
+        <p>Fase 1 usa o que já existe. Fase 2 cria infraestrutura separada.</p>
+      </div>
+    </div>
+
+    <div class="infra-grid">
+      <div class="infra-card">
+        <h4 style="color:#93c5fd;">📦 Fase 1 — Módulo ERP</h4>
+        <div class="infra-row"><span>Vercel (ERP já está aqui)</span><span>$0 (já pago)</span></div>
+        <div class="infra-row"><span>Supabase (ERP já usa)</span><span>$0 (já pago)</span></div>
+        <div class="infra-row"><span>Railway (workers Bull)</span><span>+$20-30/mês</span></div>
+        <div class="infra-row infra-total"><span>Custo adicional</span><span>~$25/mês</span></div>
+      </div>
+      <div class="infra-card">
+        <h4 style="color:#c4b5fd;">🚀 Fase 2 — NEXVY SaaS (MVP)</h4>
+        <div class="infra-row"><span>Vercel Pro (nexvy.com.br)</span><span>$20/mês</span></div>
+        <div class="infra-row"><span>Supabase Pro (banco separado)</span><span>$25/mês</span></div>
+        <div class="infra-row"><span>Railway (workers escalados)</span><span>$50-100/mês</span></div>
+        <div class="infra-row"><span>Cloudflare (CDN + R2)</span><span>$20/mês</span></div>
+        <div class="infra-row infra-total"><span>Total SaaS MVP</span><span>~$115-165/mês</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESUMO -->
+  <section id="resumo">
+    <div class="section-header">
+      <div class="section-number">★</div>
+      <div>
+        <h2>Resumo Executivo</h2>
+        <p>Os números que importam</p>
+      </div>
+    </div>
+
+    <div class="summary-grid" style="margin-bottom:32px;">
+      <div class="summary-card">
+        <div class="summary-number">16</div>
+        <div class="summary-label">Semanas para módulo<br>completo na FIC</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">$25</div>
+        <div class="summary-label">Custo mensal adicional<br>na Fase 1</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">8</div>
+        <div class="summary-label">Sprints de 2 semanas<br>cada fase</div>
+      </div>
+      <div class="summary-card">
+        <div class="summary-number">32</div>
+        <div class="summary-label">Semanas até NEXVY<br>público com SaaS</div>
+      </div>
+    </div>
+
+    <div class="highlight-box">
+      <h3>📋 O Plano em 3 linhas</h3>
+      <p>
+        <strong style="color:#86efac;">Fase 1 (16 semanas):</strong> Construir módulo de atendimento dentro do ERP Educacional. A FIC usa, valida e encontra os bugs que a gente não imagina. Custo extra: ~$25/mês.<br><br>
+        <strong style="color:#c4b5fd;">Fase 2 (16 semanas):</strong> Extrair o módulo validado, adicionar multi-tenancy + billing + white-label. Lançar como NEXVY SaaS independente. A FIC vira o primeiro cliente (account_id=1).<br><br>
+        <strong style="color:#fcd34d;">O insight central:</strong> O código da Fase 1 é o código da Fase 2. Não há reescrita — há extração e adição de camadas.
+      </p>
+    </div>
+  </section>
+
+</div>
+
+<footer>
+  <p style="font-size:14px; color:var(--text-muted); margin-bottom:8px;">Plano Revisado v2.0 — Squad de IAs</p>
+  <p><strong>Buchecha (MiniMax M2.7)</strong> · <strong>DeepSeek V3.2</strong> · <strong>Qwen3-Coder 480B</strong> · <strong>Kimi K2.5</strong></p>
+  <p style="margin-top:8px;">Orquestração: Claude Sonnet 4.6 · 12/04/2026</p>
+</footer>
+
+</body>
+</html>

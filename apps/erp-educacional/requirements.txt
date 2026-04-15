@@ -1,0 +1,28 @@
+# ============================================================
+# Módulo Financeiro — Agentes Python (Banco Inter + Supabase)
+# Versões pinadas para reprodutibilidade em produção
+# ============================================================
+
+# HTTP — chamadas REST ao Banco Inter (OAuth2 + mTLS)
+# Nota: o Inter SDK oficial não está no PyPI; usamos requests diretamente
+# com cert=(crt_path, key_path) para autenticação mTLS
+requests>=2.31.0
+
+# Supabase — cliente Python para os agentes
+supabase>=2.3.0
+
+# Anthropic — Claude API (visão de comprovantes, raciocínio)
+anthropic>=0.25.0
+
+# Pydantic — validação de dados (payloads Inter, webhooks)
+pydantic>=2.0.0
+
+# Variáveis de ambiente
+python-dotenv>=1.0.0
+
+# Criptografia — mTLS, validação HMAC-SHA256 dos webhooks
+cryptography>=42.0.0
+
+# Utilitários
+httpx>=0.27.0          # cliente HTTP assíncrono (fallback / uso futuro)
+python-dateutil>=2.9.0 # manipulação de datas de vencimento

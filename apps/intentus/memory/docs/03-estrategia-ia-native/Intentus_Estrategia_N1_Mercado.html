@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Intentus Real Estate — Estratégia #1 do Mercado Imobiliário</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+  :root {
+    --bg: #0A0A0B; --surface: #141416; --surface-2: #1C1C1F; --border: #2A2A2E;
+    --text: #E8E8ED; --text-secondary: #9898A0; --accent: #3B82F6; --accent-light: #60A5FA;
+    --green: #22C55E; --red: #EF4444; --yellow: #F59E0B; --purple: #A855F7; --cyan: #06B6D4;
+    --orange: #F97316; --pink: #EC4899;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Inter', -apple-system, sans-serif; background: var(--bg); color: var(--text); line-height: 1.7; }
+  .hero {
+    background: linear-gradient(135deg, #0F172A 0%, #1E1B4B 50%, #0F172A 100%);
+    padding: 80px 40px; text-align: center; border-bottom: 1px solid var(--border);
+    position: relative; overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: radial-gradient(ellipse at 50% 0%, rgba(59,130,246,0.15) 0%, transparent 70%); }
+  .hero h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 8px; position: relative; background: linear-gradient(135deg, #fff 0%, #60A5FA 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+  .hero .subtitle { font-size: 1.1rem; color: var(--text-secondary); font-weight: 300; position: relative; }
+  .hero .tagline { font-size: 0.85rem; color: var(--accent-light); margin-top: 12px; position: relative; font-weight: 500; letter-spacing: 0.1em; text-transform: uppercase; }
+  .container { max-width: 1100px; margin: 0 auto; padding: 50px 40px; }
+  .nav-tabs { display: flex; gap: 4px; flex-wrap: wrap; justify-content: center; padding: 16px 24px; background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 100; }
+  .nav-tab { padding: 8px 14px; border-radius: 8px; cursor: pointer; font-size: 0.78rem; font-weight: 500; color: var(--text-secondary); background: transparent; border: 1px solid transparent; transition: all 0.2s; white-space: nowrap; }
+  .nav-tab:hover { color: var(--text); background: var(--surface-2); }
+  .nav-tab.active { color: var(--accent-light); background: rgba(59,130,246,0.1); border-color: rgba(59,130,246,0.3); }
+  .section { display: none; } .section.active { display: block; }
+  h2 { font-size: 1.7rem; font-weight: 700; margin-bottom: 28px; letter-spacing: -0.02em; color: #fff; }
+  h3 { font-size: 1.2rem; font-weight: 600; margin: 28px 0 14px; color: var(--accent-light); }
+  h4 { font-size: 1rem; font-weight: 600; margin: 20px 0 10px; color: var(--text); }
+  p { margin-bottom: 14px; color: var(--text-secondary); font-size: 0.92rem; }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 18px; }
+  .card-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-bottom: 28px; }
+  .metric-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-align: center; }
+  .metric-value { font-size: 2rem; font-weight: 800; color: var(--accent-light); margin-bottom: 2px; }
+  .metric-label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; letter-spacing: 0.05em; }
+  table.ct { width: 100%; border-collapse: collapse; margin: 20px 0; font-size: 0.85rem; }
+  table.ct th { background: var(--surface-2); padding: 12px 14px; text-align: left; font-weight: 600; color: var(--text); border-bottom: 2px solid var(--border); white-space: nowrap; }
+  table.ct td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-secondary); }
+  table.ct tr:hover td { background: rgba(59,130,246,0.05); }
+  .badge { display: inline-block; padding: 2px 9px; border-radius: 20px; font-size: 0.72rem; font-weight: 600; }
+  .badge-green { background: rgba(34,197,94,0.15); color: var(--green); }
+  .badge-red { background: rgba(239,68,68,0.15); color: var(--red); }
+  .badge-yellow { background: rgba(245,158,11,0.15); color: var(--yellow); }
+  .badge-blue { background: rgba(59,130,246,0.15); color: var(--accent-light); }
+  .badge-purple { background: rgba(168,85,247,0.15); color: var(--purple); }
+  .badge-cyan { background: rgba(6,182,212,0.15); color: var(--cyan); }
+  .badge-orange { background: rgba(249,115,22,0.15); color: var(--orange); }
+  .badge-pink { background: rgba(236,72,153,0.15); color: var(--pink); }
+  .swot-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 20px 0; }
+  .swot-card { border-radius: 12px; padding: 22px; border: 1px solid; }
+  .swot-card.s { background: rgba(34,197,94,0.06); border-color: rgba(34,197,94,0.2); }
+  .swot-card.w { background: rgba(239,68,68,0.06); border-color: rgba(239,68,68,0.2); }
+  .swot-card.o { background: rgba(59,130,246,0.06); border-color: rgba(59,130,246,0.2); }
+  .swot-card.t { background: rgba(245,158,11,0.06); border-color: rgba(245,158,11,0.2); }
+  .swot-card h4 { margin-top: 0; }
+  .swot-card.s h4 { color: var(--green); } .swot-card.w h4 { color: var(--red); }
+  .swot-card.o h4 { color: var(--accent-light); } .swot-card.t h4 { color: var(--yellow); }
+  .swot-card ul { list-style: none; padding: 0; }
+  .swot-card li { padding: 5px 0 5px 18px; color: var(--text-secondary); font-size: 0.85rem; position: relative; }
+  .swot-card li::before { content: ''; position: absolute; left: 0; top: 12px; width: 6px; height: 6px; border-radius: 50%; }
+  .swot-card.s li::before { background: var(--green); } .swot-card.w li::before { background: var(--red); }
+  .swot-card.o li::before { background: var(--accent-light); } .swot-card.t li::before { background: var(--yellow); }
+  .highlight-box { background: linear-gradient(135deg, rgba(59,130,246,0.08) 0%, rgba(168,85,247,0.08) 100%); border: 1px solid rgba(59,130,246,0.2); border-radius: 12px; padding: 22px; margin: 22px 0; }
+  .highlight-box p { color: var(--text); margin-bottom: 0; }
+  .checklist { list-style: none; padding: 0; }
+  .checklist li { padding: 6px 0 6px 26px; position: relative; color: var(--text-secondary); font-size: 0.88rem; }
+  .checklist li::before { content: '[ ]'; position: absolute; left: 0; color: var(--accent); font-family: monospace; font-size: 0.78rem; }
+  .roadmap-phase { border-left: 3px solid var(--accent); padding-left: 24px; margin-bottom: 36px; position: relative; }
+  .roadmap-phase::before { content: ''; position: absolute; left: -8px; top: 4px; width: 13px; height: 13px; border-radius: 50%; background: var(--accent); border: 3px solid var(--bg); }
+  .phase-tag { padding: 3px 10px; border-radius: 6px; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; display: inline-block; margin-bottom: 8px; }
+  .vertical-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; margin-bottom: 16px; border-left: 4px solid; }
+  .vertical-card.incorporacao { border-left-color: var(--accent); }
+  .vertical-card.locacao { border-left-color: var(--green); }
+  .vertical-card.ativos { border-left-color: var(--purple); }
+  .vertical-card.leiloes { border-left-color: var(--orange); }
+  .vertical-card.capitais { border-left-color: var(--cyan); }
+  .vertical-card.estressados { border-left-color: var(--red); }
+  .pricing-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px; margin: 20px 0; }
+  .pricing-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; text-align: center; }
+  .pricing-card.featured { border-color: var(--accent); box-shadow: 0 0 30px rgba(59,130,246,0.1); }
+  .pricing-name { font-size: 1rem; font-weight: 700; margin-bottom: 6px; }
+  .pricing-price { font-size: 1.8rem; font-weight: 800; color: var(--accent-light); }
+  .pricing-period { font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 14px; }
+  .pricing-features { list-style: none; padding: 0; text-align: left; }
+  .pricing-features li { padding: 4px 0 4px 18px; font-size: 0.8rem; color: var(--text-secondary); position: relative; }
+  .pricing-features li::before { content: '\2713'; position: absolute; left: 0; color: var(--green); font-weight: 700; }
+  .eco-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 12px; margin: 20px 0; }
+  .eco-item { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 16px; text-align: center; }
+  .eco-icon { font-size: 1.6rem; margin-bottom: 6px; }
+  .eco-label { font-size: 0.8rem; font-weight: 600; color: var(--text); }
+  .eco-desc { font-size: 0.72rem; color: var(--text-secondary); margin-top: 4px; }
+  .footer-note { text-align: center; padding: 40px; color: var(--text-secondary); font-size: 0.78rem; border-top: 1px solid var(--border); margin-top: 50px; }
+  @media (max-width: 768px) { .hero h1 { font-size: 1.6rem; } .container { padding: 30px 16px; } .swot-grid, .pricing-grid { grid-template-columns: 1fr; } .nav-tab { padding: 6px 10px; font-size: 0.7rem; } }
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="tagline">Plano Estratégico 2026–2028</div>
+  <h1>Intentus Real Estate</h1>
+  <p class="subtitle">A plataforma definitiva para todo o ecossistema imobiliário brasileiro</p>
+</div>
+
+<div class="nav-tabs">
+  <div class="nav-tab active" onclick="showSection('visao')">Visão</div>
+  <div class="nav-tab" onclick="showSection('verticais')">6 Verticais</div>
+  <div class="nav-tab" onclick="showSection('concorrentes')">Concorrentes</div>
+  <div class="nav-tab" onclick="showSection('swot')">SWOT</div>
+  <div class="nav-tab" onclick="showSection('gaps')">O que Falta</div>
+  <div class="nav-tab" onclick="showSection('eliminar')">O que Eliminar</div>
+  <div class="nav-tab" onclick="showSection('arquitetura')">Arquitetura</div>
+  <div class="nav-tab" onclick="showSection('pricing')">Pricing</div>
+  <div class="nav-tab" onclick="showSection('roadmap')">Roadmap 36M</div>
+  <div class="nav-tab" onclick="showSection('kpis')">KPIs</div>
+</div>
+
+<!-- VISÃO -->
+<div id="visao" class="section active">
+<div class="container">
+  <h2>A Nova Visão: De Software de Incorporação para Plataforma do Ecossistema Imobiliário</h2>
+
+  <div class="highlight-box">
+    <p><strong>A tese central:</strong> O mercado imobiliário brasileiro movimenta mais de R$ 800 bilhões ao ano e ninguém — ninguém — oferece uma plataforma que conecte todas as pontas: incorporação, locação, gestão de ativos, leilões e mercado de capitais. O Intentus pode ser o primeiro operating system do real estate brasileiro.</p>
+  </div>
+
+  <div class="card-grid">
+    <div class="metric-card">
+      <div class="metric-value">R$ 800bi+</div>
+      <div class="metric-label">Mercado imobiliário/ano</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">R$ 183bi</div>
+      <div class="metric-label">Patrimônio dos FIIs em 2025</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">2,9M</div>
+      <div class="metric-label">Investidores em FIIs</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">500+</div>
+      <div class="metric-label">FIIs listados na B3</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">1.209</div>
+      <div class="metric-label">Proptechs ativas no Brasil</div>
+    </div>
+    <div class="metric-card">
+      <div class="metric-value">R$ 20bi+</div>
+      <div class="metric-label">Mercado de leilões/ano</div>
+    </div>
+  </div>
+
+  <div class="card">
+    <h3>Por que Ampliar o Escopo?</h3>
+    <p>Um software focado só em incorporação compete num nicho onde CV CRM e Sienge já dominam. Mas uma plataforma que conecta incorporação + locação + ativos + leilões + mercado de capitais? Isso não existe. E o cliente natural dessa plataforma — fundos imobiliários, gestoras de ativos, family offices — paga ticket médio 5-10x maior que uma incorporadora de médio porte.</p>
+    <p>Além disso, o ciclo imobiliário é cíclico. Quando a Selic sobe, incorporação desacelera mas leilões e ativos estressados explodem. Quando a Selic cai, incorporação aquece e FIIs se valorizam. Uma plataforma multi-vertical é anti-cíclica por natureza.</p>
+  </div>
+
+  <div class="eco-grid">
+    <div class="eco-item"><div class="eco-icon" style="color:var(--accent)">&#9830;</div><div class="eco-label">Incorporação</div><div class="eco-desc">Desenvolvimento de empreendimentos</div></div>
+    <div class="eco-item"><div class="eco-icon" style="color:var(--green)">&#9830;</div><div class="eco-label">Locação</div><div class="eco-desc">Administração de aluguéis</div></div>
+    <div class="eco-item"><div class="eco-icon" style="color:var(--purple)">&#9830;</div><div class="eco-label">Gestão de Ativos</div><div class="eco-desc">Portfólios performing</div></div>
+    <div class="eco-item"><div class="eco-icon" style="color:var(--red)">&#9830;</div><div class="eco-label">Ativos Estressados</div><div class="eco-desc">Distressed assets e NPLs</div></div>
+    <div class="eco-item"><div class="eco-icon" style="color:var(--orange)">&#9830;</div><div class="eco-label">Leilões</div><div class="eco-desc">Arrematação e gestão</div></div>
+    <div class="eco-item"><div class="eco-icon" style="color:var(--cyan)">&#9830;</div><div class="eco-label">Mercado de Capitais</div><div class="eco-desc">FIIs, CRI/CRA, governança</div></div>
+  </div>
+</div>
+</div>
+
+<!-- VERTICAIS -->
+<div id="verticais" class="section">
+<div class="container">
+  <h2>As 6 Verticais do Intentus</h2>
+  <p>Cada vertical é um negócio em si, mas o poder está na integração entre elas. Um ativo incorporado pode virar um ativo de locação, ser securitizado em CRI, compor um FII e, se estressado, ir para leilão. O Intentus acompanha todo esse ciclo.</p>
+
+  <div class="vertical-card incorporacao">
+    <h3 style="color:var(--accent); margin-top:0;">1. Incorporação Imobiliária</h3>
+    <p><strong>TAM:</strong> ~5.000 incorporadoras ativas no Brasil</p>
+    <p>O módulo original. Cobre todo o ciclo do desenvolvimento imobiliário: viabilidade de terrenos, gestão do empreendimento, funil de vendas, espelho interativo, contratos, repasses, pós-venda e Customer Success.</p>
+    <h4>Módulos específicos:</h4>
+    <ul class="checklist">
+      <li>Estudo de viabilidade com cenários (VGV, TIR, payback, margem)</li>
+      <li>Quadro de áreas NBR 12.721 automatizado</li>
+      <li>CRM de vendas com espelho interativo de unidades</li>
+      <li>Gestão de propostas, reservas e contratos</li>
+      <li>Repasses financeiros e acompanhamento bancário</li>
+      <li>Portal do cliente com acompanhamento de obra</li>
+      <li>Comissões de corretores e parceiros</li>
+      <li>Customer Success e assistência técnica pós-entrega</li>
+    </ul>
+    <p><strong>Concorrentes diretos:</strong> CV CRM, Sienge, Hiperdados, Facilita</p>
+  </div>
+
+  <div class="vertical-card locacao">
+    <h3 style="color:var(--green); margin-top:0;">2. Locação e Administração de Imóveis</h3>
+    <p><strong>TAM:</strong> ~40.000 imobiliárias e administradoras no Brasil | 400k+ contratos geridos só pela Kenlo</p>
+    <p>O mercado de locação é enorme e fragmentado. A maioria das administradoras ainda usa sistemas legados ou planilhas. A inadimplência no aluguel atingiu 3,80% em setembro de 2025, reforçando a necessidade de automação.</p>
+    <h4>Módulos específicos:</h4>
+    <ul class="checklist">
+      <li>Gestão de contratos de locação (residencial e comercial)</li>
+      <li>Cobrança automatizada com régua de comunicação</li>
+      <li>Repasse automático para proprietários</li>
+      <li>Emissão de NF e DIMOB automatizados</li>
+      <li>Reajuste automático de aluguel (IGPM, IPCA, etc.)</li>
+      <li>Laudos de vistoria digitais com fotos comparativas</li>
+      <li>Assinatura eletrônica de contratos</li>
+      <li>Portal do inquilino (boletos, extratos, solicitações)</li>
+      <li>Portal do proprietário (rendimentos, IR, ocupação)</li>
+      <li>Seguro fiança e análise de crédito integrados</li>
+      <li>Gestão de manutenção e chamados</li>
+    </ul>
+    <p><strong>Concorrentes diretos:</strong> Kenlo Locação (3.000+ clientes), Alude, Superlógica, Piloto Imóveis, Jetimob</p>
+  </div>
+
+  <div class="vertical-card ativos">
+    <h3 style="color:var(--purple); margin-top:0;">3. Gestão de Ativos Imobiliários (Performing)</h3>
+    <p><strong>TAM:</strong> Gestoras de FIIs, family offices, fundos de pensão | R$ 183bi sob gestão em FIIs</p>
+    <p>Gestoras que administram portfólios de imóveis precisam de visão consolidada de performance, ocupação, receita, capex e risco. Hoje usam Excel e sistemas internos. Não existe uma plataforma SaaS moderna para isso no Brasil.</p>
+    <h4>Módulos específicos:</h4>
+    <ul class="checklist">
+      <li>Dashboard de portfólio com visão consolidada (vacância, NOI, cap rate)</li>
+      <li>Gestão de contratos de locação comercial (BTS, built-to-suit, sale-leaseback)</li>
+      <li>Análise de performance por ativo, segmento e região</li>
+      <li>Controle de capex e opex por ativo</li>
+      <li>Gestão de avaliações e laudos (ABNT NBR 14653)</li>
+      <li>Projeção de fluxo de caixa por ativo e portfólio</li>
+      <li>Controle de seguros e apólices</li>
+      <li>Gestão de contratos de facilities e manutenção</li>
+      <li>Relatórios para cotistas/investidores</li>
+      <li>Benchmark de mercado (vacância, preço/m², yield)</li>
+    </ul>
+    <p><strong>Concorrentes:</strong> Britech (asset management genérico), PlanRadar, soluções internas das gestoras</p>
+  </div>
+
+  <div class="vertical-card estressados">
+    <h3 style="color:var(--red); margin-top:0;">4. Ativos Estressados (Distressed Assets)</h3>
+    <p><strong>TAM:</strong> R$ 100bi+ em ativos estressados no Brasil | Crescendo com Selic alta</p>
+    <p>Mercado em franca expansão. Com Selic em 15%, distressed assets brilham. Fundos como Jive Investments, Enforce (do BTG) e outros estão comprando carteiras massivas. O problema? A gestão é toda manual.</p>
+    <h4>Módulos específicos:</h4>
+    <ul class="checklist">
+      <li>Pipeline de aquisição de ativos estressados</li>
+      <li>Due diligence automatizada (jurídica, fiscal, ambiental)</li>
+      <li>Score de risco/retorno por ativo</li>
+      <li>Gestão de carteiras de NPLs (Non-Performing Loans) imobiliários</li>
+      <li>Tracking de processos judiciais vinculados</li>
+      <li>Workflow de recuperação (negociação, retomada, revenda)</li>
+      <li>Precificação com IA baseada em comparáveis e condição jurídica</li>
+      <li>Relatórios de performance da carteira distressed</li>
+      <li>Integração com leilões (saída natural do ativo recuperado)</li>
+    </ul>
+    <p><strong>Concorrentes:</strong> Patrinvest (IA para identificação), DW Distressed — mercado praticamente sem SaaS dedicado</p>
+  </div>
+
+  <div class="vertical-card leiloes">
+    <h3 style="color:var(--orange); margin-top:0;">5. Leilões Imobiliários</h3>
+    <p><strong>TAM:</strong> R$ 20bi+/ano em leilões | 50.000+ imóveis listados | 600+ leiloeiros ativos</p>
+    <p>O mercado de leilões está se digitalizando rapidamente. Existem softwares para leiloeiros (Soleon, Suporte Leilões), mas nenhum para o arrematante/investidor que precisa gerenciar o pós-leilão: regularização, reforma, locação ou revenda.</p>
+    <h4>Módulos específicos:</h4>
+    <ul class="checklist">
+      <li>Monitoramento de oportunidades em múltiplos leiloeiros</li>
+      <li>Análise de viabilidade pré-arrematação (valor de mercado vs. lance mínimo)</li>
+      <li>Due diligence automatizada do imóvel leiloado</li>
+      <li>Gestão do processo pós-arrematação (pagamento, carta de arrematação, registro)</li>
+      <li>Workflow de desocupação (quando aplicável)</li>
+      <li>Gestão de reforma/adequação do imóvel</li>
+      <li>Decisão assistida por IA: locar, revender ou manter</li>
+      <li>Controle de ROI por imóvel arrematado</li>
+      <li>Integração com módulo de Locação (pós-arrematação) e Ativos</li>
+    </ul>
+    <p><strong>Concorrentes:</strong> Soleon e Suporte Leilões (foco no leiloeiro, não no investidor), BidMap (busca, não gestão)</p>
+  </div>
+
+  <div class="vertical-card capitais">
+    <h3 style="color:var(--cyan); margin-top:0;">6. Mercado de Capitais Imobiliário</h3>
+    <p><strong>TAM:</strong> 500+ FIIs na B3 | R$ 183bi PL | 2,9M investidores | Securitizadoras de CRI/CRA</p>
+    <p>FIIs e securitizadoras precisam de governança, compliance CVM, relatórios para cotistas, controle regulatório e transparência. A CVM exige informações em tempo hábil sobre compras, vendas, aluguéis e eventos relevantes. Hoje isso é feito com planilhas e consultores.</p>
+    <h4>Módulos específicos:</h4>
+    <ul class="checklist">
+      <li>Gestão de governança corporativa (comitês, atas, deliberações)</li>
+      <li>Compliance CVM automatizado (prazos, obrigações, alertas)</li>
+      <li>Relatórios para cotistas (mensal, semestral, anual) com templates CVM</li>
+      <li>Gestão de eventos relevantes (fatos relevantes, comunicados)</li>
+      <li>Controle de conflitos de interesse e chinese walls</li>
+      <li>Gestão de assembleias de cotistas (convocação, votação, ata)</li>
+      <li>Dashboard de performance do fundo (dividend yield, P/VP, vacância)</li>
+      <li>Gestão de CRI/CRA (estruturação, monitoramento, amortização)</li>
+      <li>Integração com B3 e sistemas de custódia</li>
+      <li>LGPD e gestão de dados sensíveis de cotistas</li>
+      <li>Auditoria trail completo para reguladores</li>
+    </ul>
+    <p><strong>Concorrentes:</strong> Compliasset (compliance genérico), Britech (asset management), sistemas internos — praticamente nenhum SaaS especializado para RE capital markets</p>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>O poder da integração:</strong> Imagine: uma incorporadora (vertical 1) conclui um empreendimento. As unidades não vendidas entram no módulo de Locação (vertical 2). O portfólio locado é securitizado em CRI (vertical 6). Um fundo imobiliário compra o CRI e precisa de relatórios para cotistas (vertical 6). Se algum ativo se tornar estressado (vertical 4), vai para leilão (vertical 5). Tudo em uma plataforma. Nenhum concorrente sequer sonha com isso.</p>
+  </div>
+</div>
+</div>
+
+<!-- CONCORRENTES -->
+<div id="concorrentes" class="section">
+<div class="container">
+  <h2>Mapa Competitivo por Vertical</h2>
+
+  <h3>Incorporação</h3>
+  <table class="ct">
+    <thead><tr><th>Concorrente</th><th>Tipo</th><th>Força</th><th>Fraqueza</th><th>Clientes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>CV CRM</strong></td><td><span class="badge badge-blue">CRM</span></td><td>Líder, +1.000 incorporadoras, 12 anos</td><td>Só comercial, sem ERP/financeiro</td><td>1.000+</td></tr>
+      <tr><td><strong>Sienge</strong></td><td><span class="badge badge-purple">ERP</span></td><td>Completo, ecossistema aberto</td><td>Caro, UX datada, complexo</td><td>Grande porte</td></tr>
+      <tr><td><strong>Hiperdados</strong></td><td><span class="badge badge-green">All-in-one</span></td><td>IA, viabilidade, preço baixo</td><td>UX fraca, marca pouco conhecida</td><td>PMEs</td></tr>
+      <tr><td><strong>Facilita</strong></td><td><span class="badge badge-blue">CRM</span></td><td>Mobile-first, funil simples</td><td>Limitado ao comercial</td><td>PMEs</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Locação</h3>
+  <table class="ct">
+    <thead><tr><th>Concorrente</th><th>Tipo</th><th>Força</th><th>Fraqueza</th><th>Clientes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Kenlo Locação</strong></td><td><span class="badge badge-green">Suite</span></td><td>3.000+ adm., 400k contratos, NF automática</td><td>Não integra com incorporação</td><td>3.000+</td></tr>
+      <tr><td><strong>Superlógica</strong></td><td><span class="badge badge-purple">Financeiro</span></td><td>Gestão financeira robusta</td><td>Foco em condomínios, menos em locação pura</td><td>Variado</td></tr>
+      <tr><td><strong>Alude</strong></td><td><span class="badge badge-blue">Automação</span></td><td>Cobrança automatizada, UX moderna</td><td>Escopo limitado, sem gestão completa</td><td>PMEs</td></tr>
+      <tr><td><strong>Piloto Imóveis</strong></td><td><span class="badge badge-green">Gestão</span></td><td>A partir de R$49/mês, vistoria digital</td><td>Focado em pequenos portfólios</td><td>PMEs</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Gestão de Ativos e Mercado de Capitais</h3>
+  <table class="ct">
+    <thead><tr><th>Concorrente</th><th>Tipo</th><th>Força</th><th>Fraqueza</th><th>Clientes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Britech</strong></td><td><span class="badge badge-cyan">Asset Mgmt</span></td><td>Software de gestão para gestoras, compliance</td><td>Genérico (não é específico para RE)</td><td>Gestoras</td></tr>
+      <tr><td><strong>Compliasset</strong></td><td><span class="badge badge-purple">Compliance</span></td><td>Compliance CVM automatizado</td><td>Não é específico para imobiliário</td><td>Mercado de capitais</td></tr>
+      <tr><td><strong>Planilhas + consultores</strong></td><td><span class="badge badge-red">Manual</span></td><td>"Funciona" (mal)</td><td>Erro humano, sem escala, sem auditoria</td><td>A maioria</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Leilões e Distressed</h3>
+  <table class="ct">
+    <thead><tr><th>Concorrente</th><th>Tipo</th><th>Força</th><th>Fraqueza</th><th>Clientes</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Soleon</strong></td><td><span class="badge badge-orange">E-Auction</span></td><td>Líder em software para leiloeiros</td><td>Foco no leiloeiro, não no investidor</td><td>Leiloeiros</td></tr>
+      <tr><td><strong>BidMap</strong></td><td><span class="badge badge-yellow">Marketplace</span></td><td>50k imóveis, mapa interativo</td><td>Só busca, sem gestão pós-arrematação</td><td>Investidores</td></tr>
+      <tr><td><strong>Patrinvest</strong></td><td><span class="badge badge-red">IA</span></td><td>IA para identificar distressed assets</td><td>Não é plataforma de gestão</td><td>Investidores</td></tr>
+    </tbody>
+  </table>
+
+  <div class="highlight-box">
+    <p><strong>O vácuo competitivo:</strong> Em incorporação, há concorrência forte. Em locação, há concorrência moderada. Mas em gestão de ativos, distressed, leilões e mercado de capitais imobiliário, o mercado de SaaS está praticamente vazio. Este é o blue ocean do Intentus.</p>
+  </div>
+</div>
+</div>
+
+<!-- SWOT -->
+<div id="swot" class="section">
+<div class="container">
+  <h2>Análise SWOT — Intentus Ampliado</h2>
+  <div class="swot-grid">
+    <div class="swot-card s">
+      <h4>Forças</h4>
+      <ul>
+        <li>Marcelo vive o mercado (incorporador + advogado + publicitário)</li>
+        <li>Visão de plataforma que nenhum concorrente tem</li>
+        <li>Background jurídico = diferencial em compliance, contratos, governança</li>
+        <li>Cosmovisão de propósito gera confiança real</li>
+        <li>Splendori como dogfooding (vertical de incorporação)</li>
+        <li>Nexvy como canal de comunicação integrado</li>
+        <li>Marca premium e tecnológica desde o DNA</li>
+        <li>Modelo anti-cíclico (6 verticais cobrem todo o ciclo econômico)</li>
+      </ul>
+    </div>
+    <div class="swot-card w">
+      <h4>Fraquezas</h4>
+      <ul>
+        <li>Escopo amplíssimo — risco de diluir foco e recursos</li>
+        <li>Produto em idealização, sem tração</li>
+        <li>Precisa de time sênior em múltiplas competências</li>
+        <li>Marca desconhecida no mercado proptech</li>
+        <li>Atenção de Marcelo dividida entre 5+ negócios</li>
+        <li>Capital necessário é significativo para 6 verticais</li>
+        <li>Complexidade regulatória diferente por vertical</li>
+      </ul>
+    </div>
+    <div class="swot-card o">
+      <h4>Oportunidades</h4>
+      <ul>
+        <li>Blue ocean em gestão de ativos, distressed, leilões e capital markets</li>
+        <li>FIIs explodiram: 2,9M investidores e R$ 183bi sob gestão</li>
+        <li>Selic alta impulsiona mercado de distressed assets</li>
+        <li>CVM exigindo mais transparência e governança</li>
+        <li>Nenhum SaaS integra todas as pontas do ecossistema</li>
+        <li>Ticket médio muito superior em gestoras e fundos</li>
+        <li>IA como game-changer para precificação e compliance</li>
+        <li>Open Finance abre portas para serviços financeiros embedded</li>
+      </ul>
+    </div>
+    <div class="swot-card t">
+      <h4>Ameaças</h4>
+      <ul>
+        <li>CV CRM com 12 anos e base instalada forte em incorporação</li>
+        <li>Players internacionais podem entrar (Yardi, MRI Software)</li>
+        <li>Escopo amplo pode gerar execução medíocre</li>
+        <li>Regulamentação CVM é complexa e muda frequentemente</li>
+        <li>Ciclo de vendas B2B longo, especialmente com gestoras e fundos</li>
+        <li>Risco de um incumbente (Britech, Sienge) ampliar escopo para RE</li>
+        <li>Necessidade de capital pode exigir rodadas de investimento</li>
+      </ul>
+    </div>
+  </div>
+</div>
+</div>
+
+<!-- GAPS -->
+<div id="gaps" class="section">
+<div class="container">
+  <h2>O que o Mercado Ainda Não Tem (e o Intentus Precisa Construir)</h2>
+
+  <div class="card">
+    <h3>1. Motor de IA Cross-Vertical</h3>
+    <p>IA não como feature isolada — como o cérebro da plataforma inteira.</p>
+    <ul class="checklist">
+      <li>Precificação inteligente (venda, locação e leilão) com comparáveis de mercado</li>
+      <li>Score de risco por ativo (probabilidade de inadimplência, vacância, estresse)</li>
+      <li>Geração automática de minutas contratuais e relatórios CVM</li>
+      <li>Assistente de due diligence que lê matrículas e identifica ônus automaticamente</li>
+      <li>Previsão de fluxo de caixa com cenários Monte Carlo</li>
+      <li>Recomendação de ação por ativo: manter, vender, locar, securitizar</li>
+      <li>Detecção de anomalias para compliance (transações atípicas, conflitos de interesse)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>2. Plataforma de Compliance Imobiliário Unificada</h3>
+    <p>Ninguém tem um compliance engine específico para real estate. A formação de Marcelo é a vantagem mais forte aqui.</p>
+    <ul class="checklist">
+      <li>Compliance CVM para FIIs (prazos, obrigações, alertas automatizados)</li>
+      <li>LGPD para dados de compradores, inquilinos e cotistas</li>
+      <li>Compliance contratual (alerta de vencimentos, renovações, distratos)</li>
+      <li>Gestão de PLD/FT (Prevenção à Lavagem de Dinheiro) para transações imobiliárias</li>
+      <li>Auditoria trail completo para reguladores e auditores</li>
+      <li>Checklist de governança para fundos (ANBIMA, CVM, regulamento do fundo)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>3. Data Lake Imobiliário com Benchmarking</h3>
+    <p>O valor oculto de uma plataforma multi-vertical é o dado agregado. Com milhares de ativos, o Intentus pode oferecer inteligência de mercado que ninguém mais tem.</p>
+    <ul class="checklist">
+      <li>Benchmark anônimo de vacância, preço/m², yield, inadimplência por região e segmento</li>
+      <li>Índices proprietários Intentus (como um "Índice Intentus de Vacância Comercial")</li>
+      <li>Dados de transações para precificação comparativa</li>
+      <li>Reports de mercado periódicos (thought leadership)</li>
+      <li>API de dados para parceiros e integradores</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>4. Workflow de Securitização</h3>
+    <p>O pipeline natural: locação gera recebíveis → recebíveis viram CRI → CRI compõe FII. Nenhuma plataforma conecta isso.</p>
+    <ul class="checklist">
+      <li>Simulação de securitização (recebíveis elegíveis, rating estimado, spread)</li>
+      <li>Preparação de documentação para securitizadora</li>
+      <li>Monitoramento de CRI/CRA emitidos (amortização, inadimplência, covenants)</li>
+      <li>Relatórios de lastro para agentes fiduciários</li>
+      <li>Integração com securitizadoras e bancos estruturadores</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>5. Portal Multi-Stakeholder</h3>
+    <p>Cada vertical tem stakeholders diferentes. O Intentus precisa de portais dedicados para cada um:</p>
+    <ul class="checklist">
+      <li><strong>Portal do Comprador:</strong> acompanhamento de obra, boletos, contrato</li>
+      <li><strong>Portal do Inquilino:</strong> boletos, chamados, vistoria</li>
+      <li><strong>Portal do Proprietário:</strong> rendimentos, IR, ocupação</li>
+      <li><strong>Portal do Cotista:</strong> relatórios, distribuições, assembleias, votação online</li>
+      <li><strong>Portal do Investidor:</strong> performance do portfólio, ROI por ativo</li>
+      <li><strong>Portal do Corretor:</strong> comissões, pipeline, espelho de vendas</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>6. Open Finance Imobiliário (BaaS)</h3>
+    <ul class="checklist">
+      <li>Emissão de boletos e gestão de recebíveis dentro da plataforma</li>
+      <li>Conciliação automática de pagamentos</li>
+      <li>Simulação de financiamento e crédito imobiliário</li>
+      <li>Conta digital para gestoras e incorporadoras (conta escrow)</li>
+      <li>Split de pagamentos automático (proprietário, administradora, fundo)</li>
+      <li>Integração com correspondentes bancários</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- ELIMINAR -->
+<div id="eliminar" class="section">
+<div class="container">
+  <h2>O que Eliminar e Evitar</h2>
+
+  <div class="card">
+    <h4 style="color:var(--red);">✕ Eliminar: Tentar lançar 6 verticais ao mesmo tempo</h4>
+    <p>Este é o risco #1. A execução precisa ser cirúrgica: começar com 1-2 verticais, dominar, e expandir. A tentação de construir tudo de uma vez é a receita do fracasso.</p>
+
+    <h4 style="color:var(--red);">✕ Eliminar: Power BI como BI primário</h4>
+    <p>Dashboards nativos são obrigatórios. Power BI pode ser opção de exportação, nunca a solução principal. Cria dependência, custo extra e experiência fragmentada.</p>
+
+    <h4 style="color:var(--red);">✕ Eliminar: UX de ERP legado</h4>
+    <p>A UX precisa ser tão boa quanto um app de banco digital. Se um analista de FII de 28 anos não entende em 5 minutos, está errado.</p>
+
+    <h4 style="color:var(--red);">✕ Eliminar: Lock-in contratual abusivo</h4>
+    <p>Sem fidelidade forçada. O produto se sustenta pelo valor que entrega, não pela multa que cobra.</p>
+
+    <h4 style="color:var(--red);">✕ Eliminar: Setup caro</h4>
+    <p>Onboarding deve ser self-service ou assistido a custo mínimo. O lucro vem da recorrência.</p>
+
+    <h4 style="color:var(--yellow);">⚠ Evitar: Competir por preço no mercado de incorporação</h4>
+    <p>O Hiperdados cobra R$250/mês. Corrida para o fundo não é estratégia. O posicionamento deve ser premium-justo.</p>
+
+    <h4 style="color:var(--yellow);">⚠ Evitar: Construir plataforma de leilão para leiloeiros</h4>
+    <p>Soleon domina esse nicho. O Intentus deve focar no investidor/arrematante — quem precisa gerir o pós-leilão.</p>
+
+    <h4 style="color:var(--yellow);">⚠ Evitar: Ser genérico demais no mercado de capitais</h4>
+    <p>Britech já é genérica. O Intentus deve ser o software de asset management ESPECÍFICO para real estate. Essa especificidade é a vantagem.</p>
+  </div>
+</div>
+</div>
+
+<!-- ARQUITETURA -->
+<div id="arquitetura" class="section">
+<div class="container">
+  <h2>Arquitetura da Plataforma</h2>
+
+  <div class="highlight-box">
+    <p><strong>Princípio: Plataforma Modular com Verticais Independentes mas Integradas.</strong> Cada vertical funciona sozinha, mas o valor real emerge quando se conectam. O cliente compra a vertical que precisa e ativa módulos adicionais conforme cresce.</p>
+  </div>
+
+  <div class="card">
+    <h3>Camada 0 — Intentus Core (compartilhado por todas as verticais)</h3>
+    <ul class="checklist">
+      <li>Identity & Access Management (multi-tenant, multi-vertical, RBAC)</li>
+      <li>Gestão de Ativos Unificada (cadastro único de imóveis usado por todas as verticais)</li>
+      <li>Document Management System (contratos, laudos, certidões)</li>
+      <li>BI Engine nativo (dashboards, relatórios, alertas)</li>
+      <li>IA Engine (motor compartilhado de ML/AI)</li>
+      <li>API Gateway (REST + GraphQL, documentada, versionada)</li>
+      <li>Notification Engine (email, push, WhatsApp via Nexvy)</li>
+      <li>Audit Trail (log completo para compliance e reguladores)</li>
+      <li>BaaS Engine (boletos, conciliação, split, conta escrow)</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Camada 1 — Verticais</h3>
+    <p>Cada vertical é um "produto dentro do produto" com seus próprios módulos:</p>
+    <table class="ct">
+      <thead><tr><th>Vertical</th><th>Módulos Core</th><th>Público</th></tr></thead>
+      <tbody>
+        <tr><td style="color:var(--accent)"><strong>Incorporação</strong></td><td>Viabilidade, CRM Vendas, Espelho, Contratos, Repasses, Portal Cliente, Comissões, CS</td><td>Incorporadoras, construtoras</td></tr>
+        <tr><td style="color:var(--green)"><strong>Locação</strong></td><td>Contratos, Cobrança, Repasse, NF/DIMOB, Vistoria, Portal Inquilino/Proprietário, Manutenção</td><td>Administradoras, imobiliárias</td></tr>
+        <tr><td style="color:var(--purple)"><strong>Gestão de Ativos</strong></td><td>Portfolio Dashboard, Performance, Avaliações, Capex/Opex, Seguros, Reports para Investidores</td><td>Gestoras, family offices, fundos de pensão</td></tr>
+        <tr><td style="color:var(--red)"><strong>Distressed</strong></td><td>Pipeline Aquisição, Due Diligence, Score Risco, NPLs, Recuperação, Precificação IA</td><td>Fundos distressed, servicers, bancos</td></tr>
+        <tr><td style="color:var(--orange)"><strong>Leilões</strong></td><td>Monitoramento, Viabilidade Pré-lance, DD, Pós-Arrematação, Desocupação, ROI</td><td>Investidores, arrematantes profissionais</td></tr>
+        <tr><td style="color:var(--cyan)"><strong>Capital Markets</strong></td><td>Governança, Compliance CVM, Relatórios Cotistas, Assembleias, CRI/CRA, LGPD, Audit</td><td>Gestoras de FII, securitizadoras</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="card">
+    <h3>Camada 2 — Integrações & Ecossistema</h3>
+    <ul class="checklist">
+      <li>Portais imobiliários (ZAP, OLX, VivaReal)</li>
+      <li>Cartórios digitais (e-Notariado)</li>
+      <li>Bancos e correspondentes bancários</li>
+      <li>Securitizadoras e agentes fiduciários</li>
+      <li>B3 e sistemas de custódia</li>
+      <li>Assinatura eletrônica (DocuSign, Clicksign)</li>
+      <li>ERPs (SAP, Totvs, Sienge — para coexistência)</li>
+      <li>Nexvy (WhatsApp, Instagram, Messenger)</li>
+      <li>Prefeituras (NF, IPTU, alvará)</li>
+      <li>Marketplace de integrações para parceiros</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <h3>Stack Tecnológico Recomendado</h3>
+    <p><strong>Frontend:</strong> React/Next.js (web) + React Native (mobile) para UX moderna e responsiva em todas as verticais.</p>
+    <p><strong>Backend:</strong> Node.js (TypeScript) ou Go para microserviços. Event-driven architecture para comunicação entre verticais.</p>
+    <p><strong>Banco de dados:</strong> PostgreSQL como base + TimescaleDB para séries temporais + Elasticsearch para busca.</p>
+    <p><strong>IA/ML:</strong> Python para modelos, servidos via API. Fine-tuning de LLMs para geração de documentos jurídicos e relatórios.</p>
+    <p><strong>Infra:</strong> Kubernetes (AWS EKS ou GCP GKE). Multi-tenant com isolamento de dados rigoroso. Infrastructure as Code (Terraform).</p>
+    <p><strong>Segurança:</strong> SOC 2 Type II como meta. Encryption at rest e in transit. MFA obrigatório para verticais de capital markets.</p>
+  </div>
+</div>
+</div>
+
+<!-- PRICING -->
+<div id="pricing" class="section">
+<div class="container">
+  <h2>Modelo de Pricing por Vertical</h2>
+  <p>O pricing é por vertical e por volume (empreendimentos, contratos ou ativos sob gestão). Isso permite que o cliente entre por uma vertical e expanda naturalmente.</p>
+
+  <h3 style="color:var(--accent)">Incorporação</h3>
+  <div class="pricing-grid">
+    <div class="pricing-card"><div class="pricing-name">Starter</div><div class="pricing-price">R$ 997</div><div class="pricing-period">/mês por empreendimento</div>
+      <ul class="pricing-features"><li>CRM + Espelho + BI básico</li><li>Até 10 usuários</li><li>Portal do cliente básico</li></ul>
+    </div>
+    <div class="pricing-card featured"><div class="pricing-name">Pro</div><div class="pricing-price">R$ 2.497</div><div class="pricing-period">/mês por empreendimento</div>
+      <ul class="pricing-features"><li>+ Financeiro + Jurídico + CS</li><li>+ Comissões + API</li><li>Até 50 usuários</li></ul>
+    </div>
+    <div class="pricing-card"><div class="pricing-name">Enterprise</div><div class="pricing-price">Custom</div><div class="pricing-period">contato comercial</div>
+      <ul class="pricing-features"><li>+ Viabilidade + IA + BaaS</li><li>Usuários ilimitados</li><li>CSM dedicado</li></ul>
+    </div>
+  </div>
+
+  <h3 style="color:var(--green)">Locação</h3>
+  <div class="pricing-grid">
+    <div class="pricing-card"><div class="pricing-name">Starter</div><div class="pricing-price">R$ 3/un</div><div class="pricing-period">/mês por unidade administrada</div>
+      <ul class="pricing-features"><li>Contratos + Cobrança + NF</li><li>Portal inquilino</li><li>Mín. R$ 299/mês</li></ul>
+    </div>
+    <div class="pricing-card featured"><div class="pricing-name">Pro</div><div class="pricing-price">R$ 5/un</div><div class="pricing-period">/mês por unidade administrada</div>
+      <ul class="pricing-features"><li>+ Vistoria digital + Portal proprietário</li><li>+ Manutenção + API</li><li>Mín. R$ 499/mês</li></ul>
+    </div>
+    <div class="pricing-card"><div class="pricing-name">Enterprise</div><div class="pricing-price">Custom</div><div class="pricing-period">+500 unidades</div>
+      <ul class="pricing-features"><li>+ BaaS + IA inadimplência</li><li>+ Seguro integrado</li><li>CSM dedicado</li></ul>
+    </div>
+  </div>
+
+  <h3 style="color:var(--purple)">Gestão de Ativos</h3>
+  <div class="pricing-grid">
+    <div class="pricing-card featured"><div class="pricing-name">Professional</div><div class="pricing-price">R$ 4.997</div><div class="pricing-period">/mês (até R$500M AUM)</div>
+      <ul class="pricing-features"><li>Portfolio dashboard</li><li>Performance + Avaliações</li><li>Relatórios investidores</li></ul>
+    </div>
+    <div class="pricing-card"><div class="pricing-name">Enterprise</div><div class="pricing-price">Custom</div><div class="pricing-period">AUM > R$500M</div>
+      <ul class="pricing-features"><li>+ IA + Benchmarking</li><li>+ Securitização + CRI</li><li>Multi-fundo, white-label</li></ul>
+    </div>
+  </div>
+
+  <h3 style="color:var(--cyan)">Capital Markets (FII/CRI/CRA)</h3>
+  <div class="pricing-grid">
+    <div class="pricing-card featured"><div class="pricing-name">FII Manager</div><div class="pricing-price">R$ 7.997</div><div class="pricing-period">/mês por fundo</div>
+      <ul class="pricing-features"><li>Governança + Compliance CVM</li><li>Relatórios cotistas</li><li>Assembleias online</li><li>Audit trail completo</li></ul>
+    </div>
+    <div class="pricing-card"><div class="pricing-name">Enterprise</div><div class="pricing-price">Custom</div><div class="pricing-period">multi-fundo</div>
+      <ul class="pricing-features"><li>+ CRI/CRA monitoring</li><li>+ Integração B3</li><li>+ White-label reports</li></ul>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>Revenue mix ideal em 24 meses:</strong> 40% Incorporação + Locação (volume), 30% Gestão de Ativos (ticket alto), 20% Capital Markets (ticket premium), 10% Distressed + Leilões (nicho). A beleza do modelo é que gestoras de FII naturalmente contratam Gestão de Ativos + Capital Markets + Locação juntos.</p>
+  </div>
+</div>
+</div>
+
+<!-- ROADMAP -->
+<div id="roadmap" class="section">
+<div class="container">
+  <h2>Roadmap de Execução — 36 Meses</h2>
+  <p>A ordem de lançamento segue a lógica: começar onde há tração natural (incorporação + Splendori como dogfooding), depois atacar blue oceans com ticket alto.</p>
+
+  <div class="roadmap-phase">
+    <span class="phase-tag" style="background:rgba(59,130,246,0.2); color:var(--accent-light);">Fase 1 — Meses 1-8</span>
+    <h3 style="margin-top:4px;">Fundação: Incorporação + Core Platform</h3>
+    <p>Ganhar tração na vertical onde Marcelo tem mais experiência e o Splendori serve de lab.</p>
+    <ul class="checklist">
+      <li>Contratar CTO + squad de 5-7 devs + 1 designer de produto</li>
+      <li>Construir Intentus Core (IAM, cadastro de ativos, DMS, BI engine, API)</li>
+      <li>Construir vertical de Incorporação: CRM, espelho, contratos, repasses</li>
+      <li>BI nativo com 10+ dashboards para incorporação</li>
+      <li>Splendori como primeiro cliente (dogfooding)</li>
+      <li>3-5 beta testers incorporadoras</li>
+      <li>Landing page + waitlist + conteúdo no LinkedIn</li>
+    </ul>
+  </div>
+
+  <div class="roadmap-phase">
+    <span class="phase-tag" style="background:rgba(34,197,94,0.2); color:var(--green);">Fase 2 — Meses 9-16</span>
+    <h3 style="margin-top:4px;">Expansão: Locação + Jurídico + Diferenciação</h3>
+    <p>Adicionar locação (volume de mercado enorme) e o módulo jurídico (diferencial único).</p>
+    <ul class="checklist">
+      <li>Lançar vertical de Locação (contratos, cobrança, repasse, NF, DIMOB)</li>
+      <li>Lançar módulo Jurídico/Compliance (transversal a todas as verticais)</li>
+      <li>Portal do Cliente (comprador) + Portal do Inquilino</li>
+      <li>Integrar Nexvy como canal de comunicação</li>
+      <li>API pública com documentação</li>
+      <li>Integrações com portais (ZAP, OLX) e assinatura eletrônica</li>
+      <li>15-25 clientes pagantes entre incorporação e locação</li>
+      <li>Presença em 3+ eventos do setor</li>
+    </ul>
+  </div>
+
+  <div class="roadmap-phase">
+    <span class="phase-tag" style="background:rgba(168,85,247,0.2); color:var(--purple);">Fase 3 — Meses 17-24</span>
+    <h3 style="margin-top:4px;">Blue Ocean: Gestão de Ativos + Capital Markets</h3>
+    <p>Atacar o mercado com ticket mais alto e menos concorrência.</p>
+    <ul class="checklist">
+      <li>Lançar vertical de Gestão de Ativos (portfolio dashboard, performance, avaliações)</li>
+      <li>Lançar vertical de Capital Markets (governança FII, compliance CVM, relatórios cotistas)</li>
+      <li>IA Engine (precificação, score de risco, geração de documentos)</li>
+      <li>Portal do Cotista e Portal do Proprietário</li>
+      <li>BaaS integrado (boletos, conciliação, split)</li>
+      <li>Módulo de securitização (simulação + monitoramento CRI/CRA)</li>
+      <li>50+ clientes pagantes no total</li>
+      <li>Buscar primeiros clientes gestoras de FII (2-3)</li>
+      <li>MRR alvo: R$ 150k+</li>
+    </ul>
+  </div>
+
+  <div class="roadmap-phase">
+    <span class="phase-tag" style="background:rgba(249,115,22,0.2); color:var(--orange);">Fase 4 — Meses 25-30</span>
+    <h3 style="margin-top:4px;">Nichos de Alto Valor: Distressed + Leilões</h3>
+    <p>Verticais de nicho com clientes sofisticados e alto ticket.</p>
+    <ul class="checklist">
+      <li>Lançar vertical de Distressed Assets (pipeline, DD, NPLs, recuperação)</li>
+      <li>Lançar vertical de Leilões (monitoramento, pós-arrematação, ROI)</li>
+      <li>IA avançada para due diligence automatizada</li>
+      <li>Integração entre verticais (distressed → leilão → locação)</li>
+      <li>Data Lake com benchmarking de mercado</li>
+      <li>Índices proprietários Intentus</li>
+      <li>100+ clientes pagantes</li>
+      <li>MRR alvo: R$ 350k+</li>
+    </ul>
+  </div>
+
+  <div class="roadmap-phase">
+    <span class="phase-tag" style="background:rgba(6,182,212,0.2); color:var(--cyan);">Fase 5 — Meses 31-36</span>
+    <h3 style="margin-top:4px;">Domínio: Ecossistema e Plataformização</h3>
+    <p>Consolidar a posição como a plataforma referência de todo o ecossistema.</p>
+    <ul class="checklist">
+      <li>Marketplace de integrações aberto para parceiros</li>
+      <li>SDK para desenvolvedores construírem sobre o Intentus</li>
+      <li>Relatório anual do mercado imobiliário (thought leadership)</li>
+      <li>White-label para gestoras que querem a marca deles sobre o Intentus</li>
+      <li>Expansão regional (LATAM — Colômbia, México, Chile)</li>
+      <li>200+ clientes | R$ 500k+ MRR</li>
+      <li>Considerar rodada Series A para aceleração</li>
+      <li>Patrocinar (não apenas palestrar) em eventos do setor</li>
+    </ul>
+  </div>
+</div>
+</div>
+
+<!-- KPIs -->
+<div id="kpis" class="section">
+<div class="container">
+  <h2>KPIs e Metas para o #1</h2>
+
+  <div class="card">
+    <h3>Norte-Estrela: Net Revenue Retention (NRR) > 130%</h3>
+    <p>Com 6 verticais, o potencial de expansão dentro da base é gigantesco. Um cliente que entra por incorporação pode contratar locação, depois gestão de ativos, depois capital markets. NRR > 130% é realista e transformador.</p>
+  </div>
+
+  <h3>Metas por Fase</h3>
+  <table class="ct">
+    <thead>
+      <tr><th>Métrica</th><th>Fase 1 (8M)</th><th>Fase 2 (16M)</th><th>Fase 3 (24M)</th><th>Fase 4 (30M)</th><th>Fase 5 (36M)</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><strong>Clientes</strong></td><td>5 beta</td><td>25</td><td>60</td><td>120</td><td>200+</td></tr>
+      <tr><td><strong>MRR</strong></td><td>R$ 0</td><td>R$ 50k</td><td>R$ 150k</td><td>R$ 350k</td><td>R$ 500k+</td></tr>
+      <tr><td><strong>ARR</strong></td><td>—</td><td>R$ 600k</td><td>R$ 1,8M</td><td>R$ 4,2M</td><td>R$ 6M+</td></tr>
+      <tr><td><strong>Verticais ativas</strong></td><td>1</td><td>2</td><td>4</td><td>6</td><td>6 + marketplace</td></tr>
+      <tr><td><strong>Churn mensal</strong></td><td>< 5%</td><td>< 3%</td><td>< 2%</td><td>< 1,5%</td><td>< 1%</td></tr>
+      <tr><td><strong>NRR</strong></td><td>—</td><td>> 100%</td><td>> 115%</td><td>> 125%</td><td>> 130%</td></tr>
+      <tr><td><strong>NPS</strong></td><td>> 40</td><td>> 50</td><td>> 60</td><td>> 65</td><td>> 70</td></tr>
+      <tr><td><strong>LTV:CAC</strong></td><td>—</td><td>> 2:1</td><td>> 3:1</td><td>> 4:1</td><td>> 5:1</td></tr>
+      <tr><td><strong>ARPU</strong></td><td>—</td><td>R$ 2k</td><td>R$ 2,5k</td><td>R$ 2,9k</td><td>R$ 3,5k+</td></tr>
+    </tbody>
+  </table>
+
+  <div class="card" style="margin-top: 28px;">
+    <h3>O que Define o #1 do Mercado Imobiliário</h3>
+    <p>Ser #1 neste escopo ampliado significa algo muito maior do que dominar um nicho:</p>
+    <ul class="checklist">
+      <li><strong>Referência de mercado:</strong> quando alguém fala "proptech para real estate", pensa Intentus</li>
+      <li><strong>Data moat:</strong> o maior dataset imobiliário privado do Brasil (precificação, vacância, transações)</li>
+      <li><strong>Efeito rede:</strong> quanto mais clientes, melhores os benchmarks e a IA, o que atrai mais clientes</li>
+      <li><strong>Multi-vertical lock-in natural:</strong> não por contrato, mas por valor — migrar 3 verticais é muito mais difícil que migrar 1</li>
+      <li><strong>Thought leadership:</strong> publicar o relatório anual que o mercado inteiro cita</li>
+      <li><strong>Ecossistema:</strong> outros softwares querem integrar COM o Intentus</li>
+      <li><strong>Expansão LATAM:</strong> ser a plataforma que sai do Brasil para dominar o mercado latam</li>
+    </ul>
+  </div>
+
+  <div class="highlight-box">
+    <p><strong>O diferencial que ninguém copia:</strong> A combinação de Marcelo — incorporador que vive o problema, advogado que entende compliance e governança, publicitário que sabe construir marca — é a vantagem competitiva mais durável do Intentus. Nenhum VC pode comprar isso. Nenhum concorrente pode reproduzir isso. E com 6 verticais conectadas, o Intentus não é apenas um software — é a infraestrutura digital do mercado imobiliário brasileiro.</p>
+  </div>
+</div>
+</div>
+
+<div class="footer-note">
+  Análise Estratégica Intentus Real Estate — Versão Ampliada (6 Verticais) — Março 2026<br>
+  Preparado para Marcelo Silva<br>
+  Dados: Terracotta Ventures, B3, CVM, Frost & Sullivan, Fortune Business Insights, PwC
+</div>
+
+<script>
+function showSection(id) {
+  document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  event.target.classList.add('active');
+  window.scrollTo({ top: 200, behavior: 'smooth' });
+}
+</script>
+</body>
+</html>

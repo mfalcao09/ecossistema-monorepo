@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mockup — Validador XML estilo MEC (FIC)</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+  body { font-family: 'Inter', sans-serif; background: #f8fafc; }
+  .fic-blue { color: #1e2a4a; }
+  .fic-red { color: #dc2626; }
+  .bg-fic-blue { background-color: #1e2a4a; }
+  .bg-fic-red { background-color: #dc2626; }
+
+  /* Diploma icon SVG animation */
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-in { animation: fadeInUp 0.5s ease-out forwards; }
+  .delay-1 { animation-delay: 0.1s; opacity: 0; }
+  .delay-2 { animation-delay: 0.2s; opacity: 0; }
+  .delay-3 { animation-delay: 0.3s; opacity: 0; }
+
+  /* Watermark */
+  .watermark {
+    position: relative;
+    overflow: hidden;
+  }
+  .watermark::before {
+    content: "FIC";
+    position: absolute;
+    right: -20px;
+    top: 50%;
+    transform: translateY(-50%) rotate(-15deg);
+    font-size: 140px;
+    font-weight: 900;
+    color: rgba(30, 42, 74, 0.03);
+    pointer-events: none;
+    letter-spacing: 12px;
+  }
+</style>
+</head>
+<body class="min-h-screen p-4 md:p-8">
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- TÍTULO DO MOCKUP                                        -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="max-w-3xl mx-auto mb-8 text-center">
+  <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2">MOCKUP — Não é produção</p>
+  <h1 class="text-2xl font-bold fic-blue">Proposta: Resultado da Validação XML</h1>
+  <p class="text-sm text-gray-500 mt-2">
+    Comparação: <span class="font-semibold">ANTES</span> (atual) vs <span class="font-semibold text-green-600">DEPOIS</span> (proposta inspirada no MEC)
+  </p>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- ANTES (como está hoje)                                  -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="max-w-2xl mx-auto mb-12">
+  <div class="flex items-center gap-2 mb-3">
+    <span class="bg-gray-200 text-gray-600 text-xs font-bold px-3 py-1 rounded-full uppercase">Antes (Atual)</span>
+  </div>
+  <div class="bg-white rounded-2xl shadow-lg border border-gray-200 p-6 space-y-4">
+    <!-- Resumo verde -->
+    <div class="p-4 rounded-lg border bg-green-50 border-green-300">
+      <div class="flex items-start gap-3">
+        <svg class="w-6 h-6 text-green-600 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+        <div>
+          <h4 class="font-semibold text-green-800">Documento Válido</h4>
+          <p class="text-sm mt-1 text-green-700">Documento válido! 16 verificações passaram com sucesso.</p>
+          <p class="text-sm mt-1 text-gray-600">Tipo: <strong>Diploma Digital (XSD 1.05)</strong> — XSD v1.05</p>
+          <p class="text-xs mt-1 text-gray-500">Validação concluída em 1ms</p>
+        </div>
+      </div>
+    </div>
+    <!-- Detalhes colapsável -->
+    <details class="rounded-lg border border-gray-200 bg-white">
+      <summary class="flex items-center justify-between cursor-pointer px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50">
+        <span>Detalhes da validação (16 verificações)</span>
+        <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+      </summary>
+    </details>
+    <button class="w-full py-2.5 text-blue-700 border border-blue-300 rounded-lg font-medium hover:bg-blue-50">
+      Validar outro arquivo
+    </button>
+    <p class="text-center text-xs text-gray-400 italic">
+      ⚠ Só mostra resultado técnico. Não exibe dados da pessoa, curso ou IES.
+    </p>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- DEPOIS (proposta)                                       -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="max-w-2xl mx-auto mb-12">
+  <div class="flex items-center gap-2 mb-3">
+    <span class="bg-green-100 text-green-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Depois (Proposta)</span>
+  </div>
+  <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden space-y-0">
+
+    <!-- ── HERO: Card de Conformidade (inspirado no MEC) ── -->
+    <div class="watermark bg-gradient-to-br from-gray-50 to-white p-6 sm:p-8 border-b border-gray-100 animate-in">
+
+      <!-- Título do resultado -->
+      <div class="flex items-center gap-2 mb-6 animate-in delay-1">
+        <h2 class="text-lg sm:text-xl font-extrabold fic-blue">Estrutura do XML do Diploma Digital</h2>
+        <span class="text-lg sm:text-xl font-extrabold text-green-600">em Conformidade</span>
+      </div>
+
+      <!-- Card principal com dados -->
+      <div class="flex flex-col sm:flex-row items-start gap-5 animate-in delay-2">
+
+        <!-- Ícone diploma -->
+        <div class="flex-shrink-0">
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- Diploma frame -->
+            <rect x="8" y="16" width="64" height="52" rx="3" stroke="#1e2a4a" stroke-width="3" fill="white"/>
+            <rect x="12" y="20" width="56" height="44" rx="2" stroke="#1e2a4a" stroke-width="1.5" fill="none"/>
+            <!-- Lines on diploma -->
+            <line x1="22" y1="32" x2="58" y2="32" stroke="#1e2a4a" stroke-width="2" stroke-linecap="round" opacity="0.4"/>
+            <line x1="22" y1="39" x2="58" y2="39" stroke="#1e2a4a" stroke-width="2" stroke-linecap="round" opacity="0.3"/>
+            <line x1="28" y1="46" x2="52" y2="46" stroke="#1e2a4a" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+            <!-- Seal -->
+            <circle cx="64" cy="60" r="16" fill="white" stroke="#10b981" stroke-width="2.5"/>
+            <circle cx="64" cy="60" r="10" fill="#10b981" fill-opacity="0.1" stroke="#10b981" stroke-width="1.5"/>
+            <path d="M58 60l4 4 8-8" stroke="#10b981" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            <!-- Ribbon -->
+            <path d="M58 74l6-4 6 4v-12h-12z" fill="#10b981" fill-opacity="0.8"/>
+          </svg>
+        </div>
+
+        <!-- Dados extraídos do XML -->
+        <div class="space-y-2 animate-in delay-3">
+          <p class="text-lg sm:text-xl font-bold fic-blue leading-tight">ISABEL SILVA DE OLIVEIRA</p>
+          <p class="text-sm text-gray-600">
+            <span class="font-medium text-gray-500">IES:</span>
+            Faculdades Integradas de Cassilândia
+          </p>
+          <p class="text-sm text-gray-600">
+            <span class="font-medium text-gray-500">Curso:</span>
+            <span class="font-semibold fic-blue">PEDAGOGIA</span>
+          </p>
+          <div class="flex flex-wrap gap-x-6 gap-y-1 text-sm text-gray-600 pt-1">
+            <p>
+              <span class="font-medium text-gray-500">Colação de grau:</span>
+              10/01/2019
+            </p>
+            <p>
+              <span class="font-medium text-gray-500">Conclusão:</span>
+              13/12/2018
+            </p>
+          </div>
+
+          <!-- Badge de tipo/versão -->
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="inline-flex items-center gap-1 bg-green-100 text-green-700 text-xs font-bold px-2.5 py-1 rounded-full">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" /></svg>
+              VÁLIDO
+            </span>
+            <span class="inline-flex items-center bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-full">
+              Diploma Digital (XSD 1.05)
+            </span>
+            <span class="inline-flex items-center bg-gray-100 text-gray-500 text-xs px-2.5 py-1 rounded-full">
+              Validado em 1ms
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Rodapé do hero -->
+      <div class="mt-6 pt-4 border-t border-gray-100">
+        <p class="text-sm text-gray-500 leading-relaxed">
+          A estrutura do XML e padrão de assinaturas estão em conformidade com os requisitos técnicos estabelecidos.
+        </p>
+      </div>
+    </div>
+
+    <!-- ── Detalhes técnicos (colapsável) ── -->
+    <div class="px-6 py-4">
+      <details class="rounded-lg border border-gray-200 bg-white">
+        <summary class="flex items-center justify-between cursor-pointer px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 select-none" style="list-style: none;">
+          <span>Detalhes da validação (16 verificações)</span>
+          <svg class="w-4 h-4 text-gray-400 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="px-4 pb-3 space-y-1.5">
+          <!-- Exemplo de itens -->
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-green-50 border-green-200">
+            <svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Tipo de documento identificado: Diploma Digital (XSD 1.05)</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-green-50 border-green-200">
+            <svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Versão do schema identificada: v1.05</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-green-50 border-green-200">
+            <svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Namespaces do Diploma Digital detectados</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-green-50 border-green-200">
+            <svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Campo obrigatório presente: DadosDiploma</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-green-50 border-green-200">
+            <svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Assinatura digital (Signature) detectada no documento</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-green-50 border-green-200">
+            <svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">CNPJ da IES encontrado: 01.545.548/0001-90</span>
+          </div>
+          <p class="text-xs text-gray-400 text-center pt-2">... e mais 10 verificações</p>
+        </div>
+      </details>
+    </div>
+
+    <!-- ── Botão nova validação ── -->
+    <div class="px-6 pb-6">
+      <button class="w-full py-2.5 text-blue-700 border border-blue-300 rounded-lg font-medium hover:bg-blue-50 transition-colors">
+        Validar outro arquivo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- CASO INVÁLIDO (proposta)                                -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="max-w-2xl mx-auto mb-12">
+  <div class="flex items-center gap-2 mb-3">
+    <span class="bg-red-100 text-red-700 text-xs font-bold px-3 py-1 rounded-full uppercase">Caso: Documento com Erros</span>
+  </div>
+  <div class="bg-white rounded-2xl shadow-lg border border-gray-200 overflow-hidden">
+
+    <!-- Hero com erro -->
+    <div class="watermark bg-gradient-to-br from-red-50 to-white p-6 sm:p-8 border-b border-red-100">
+      <div class="flex items-center gap-2 mb-6">
+        <h2 class="text-lg sm:text-xl font-extrabold fic-blue">Estrutura do XML do Diploma Digital</h2>
+        <span class="text-lg sm:text-xl font-extrabold text-red-600">com Problemas</span>
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-start gap-5">
+        <!-- Ícone diploma com X -->
+        <div class="flex-shrink-0">
+          <svg width="96" height="96" viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="8" y="16" width="64" height="52" rx="3" stroke="#1e2a4a" stroke-width="3" fill="white" opacity="0.6"/>
+            <rect x="12" y="20" width="56" height="44" rx="2" stroke="#1e2a4a" stroke-width="1.5" fill="none" opacity="0.4"/>
+            <line x1="22" y1="32" x2="58" y2="32" stroke="#1e2a4a" stroke-width="2" stroke-linecap="round" opacity="0.2"/>
+            <line x1="22" y1="39" x2="58" y2="39" stroke="#1e2a4a" stroke-width="2" stroke-linecap="round" opacity="0.15"/>
+            <circle cx="64" cy="60" r="16" fill="white" stroke="#ef4444" stroke-width="2.5"/>
+            <circle cx="64" cy="60" r="10" fill="#ef4444" fill-opacity="0.1" stroke="#ef4444" stroke-width="1.5"/>
+            <path d="M59 55l10 10M69 55l-10 10" stroke="#ef4444" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M58 74l6-4 6 4v-12h-12z" fill="#ef4444" fill-opacity="0.6"/>
+          </svg>
+        </div>
+
+        <div class="space-y-2">
+          <p class="text-lg font-bold text-gray-800 leading-tight">NOME DO DIPLOMADO</p>
+          <p class="text-sm text-gray-500">
+            <span class="font-medium">IES:</span> Faculdades Integradas de Cassilândia
+          </p>
+          <p class="text-sm text-gray-500">
+            <span class="font-medium">Curso:</span>
+            <span class="font-semibold">ADMINISTRAÇÃO</span>
+          </p>
+          <div class="flex flex-wrap gap-2 pt-2">
+            <span class="inline-flex items-center gap-1 bg-red-100 text-red-700 text-xs font-bold px-2.5 py-1 rounded-full">
+              <svg class="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" /></svg>
+              2 ERROS
+            </span>
+            <span class="inline-flex items-center gap-1 bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full">
+              1 AVISO
+            </span>
+            <span class="inline-flex items-center bg-blue-50 text-blue-700 text-xs font-medium px-2.5 py-1 rounded-full">
+              Diploma Digital (XSD 1.05)
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-red-100">
+        <p class="text-sm text-red-600 leading-relaxed">
+          Documento com 2 erro(s) e 1 aviso(s). Revise os itens nos detalhes abaixo.
+        </p>
+      </div>
+    </div>
+
+    <!-- Detalhes -->
+    <div class="px-6 py-4">
+      <details open class="rounded-lg border border-gray-200 bg-white">
+        <summary class="flex items-center justify-between cursor-pointer px-4 py-3 text-sm font-semibold text-gray-700 hover:bg-gray-50 select-none" style="list-style: none;">
+          <span>Detalhes da validação (8 verificações)</span>
+          <svg class="w-4 h-4 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" /></svg>
+        </summary>
+        <div class="px-4 pb-3 space-y-1.5">
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-red-50 border-red-200">
+            <svg class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Assinatura digital não encontrada no documento</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-red-50 border-red-200">
+            <svg class="w-4 h-4 text-red-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Campo obrigatório ausente: DadosCurso</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-amber-50 border-amber-200">
+            <svg class="w-4 h-4 text-amber-500 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L4.072 16.5c-.77.833.192 2.5 1.732 2.5z" /></svg>
+            <span class="text-gray-800">Carimbo de tempo não encontrado. Assinatura AD-RA requer carimbo.</span>
+          </div>
+          <div class="px-3 py-2 rounded border text-sm flex items-start gap-2 bg-green-50 border-green-200">
+            <svg class="w-4 h-4 text-green-600 flex-shrink-0 mt-0.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" /></svg>
+            <span class="text-gray-800">Tipo de documento identificado: Diploma Digital (XSD 1.05)</span>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="px-6 pb-6">
+      <button class="w-full py-2.5 text-blue-700 border border-blue-300 rounded-lg font-medium hover:bg-blue-50">
+        Validar outro arquivo
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════ -->
+<!-- LEGENDA das mudanças                                    -->
+<!-- ═══════════════════════════════════════════════════════ -->
+<div class="max-w-2xl mx-auto mb-16">
+  <div class="bg-blue-50 border border-blue-200 rounded-xl p-5">
+    <h3 class="font-bold text-blue-800 mb-3">Resumo das mudanças propostas:</h3>
+    <div class="space-y-2 text-sm text-blue-700">
+      <p><strong>1. Extração de dados do XML (backend):</strong> O validador agora extrai Nome, IES, Curso, Datas diretamente do XML enviado e retorna na API.</p>
+      <p><strong>2. Card visual estilo MEC:</strong> Ao invés de só "Documento Válido", exibe os dados da pessoa com ícone de diploma, badges de status e conformidade textual.</p>
+      <p><strong>3. Dois estados visuais:</strong> Válido (verde/branco) e Com Problemas (vermelho/branco) — ambos mostrando os dados extraídos.</p>
+      <p><strong>4. Detalhes técnicos mantidos:</strong> A lista de verificações continua colapsável embaixo, para quem quiser ver os detalhes técnicos.</p>
+      <p><strong>5. Watermark FIC:</strong> Marca d'água sutil da FIC no fundo do card (igual ao estilo do MEC).</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

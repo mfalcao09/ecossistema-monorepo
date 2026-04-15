@@ -1,0 +1,23 @@
+# Sessão 92 — CRM F2 Item #4: E02 Exclusividades IA (~10h, P0) (19/03/2026)
+
+- **Objetivo**: Implementar quarto item da Fase 2 do plano CRM IA-Native: E02 — Gestão inteligente de exclusividades com alertas automáticos, recomendações de renovação/cancelamento e KPIs de efetividade
+- **Metodologia**: 100% frontend — sem Edge Function. Padrão `useAnalyticsMetrics.ts` com queries lightweight e computação client-side
+- **Frontend hook — `src/hooks/useExclusivityAnalytics.ts` (CRIADO — ~195 linhas)**:
+  - 2 data hooks: `useExclusivityContracts()` (12 cols + joins, limit 500), `useDealsForExclusivity()` (6 cols, limit 1000)
+  - 1 computed hook: `useExclusivityAnalytics()` — cruza exclusividades com deals para gerar KPIs, alertas e recomendações
+  - KPIs: activeContracts, expiringSoon (30d), expired, withDeals, withoutDeals, conversionRate, avgCommission, avgDurationDays, autoRenewPct
+  - Alertas inteligentes: expired (critical), expiring 7d (critical), expiring 30d (high), no_activity 60d+ (medium). Sorted by severity
+  - Recomendações: renovar (deals concluídos), renegociar (vencendo sem deals), cancelar (vencida sem deals), monitorar (deals em andamento). Sorted by priority
+- **Frontend UI — `src/pages/comercial/ExclusivityContracts.tsx` (EXPANDIDO — 293→390 linhas)**:
+  - 5 KPI cards no topo: Ativas, Vencendo 30d, Com Negócios, Sem Negócios, Taxa Conversão
+  - Painel Alertas Inteligentes: badges de severity (critical/high/medium), propriedade, mensagem
+  - Painel Recomendações: badges de ação (renovar/renegociar/cancelar/monitorar), propriedade, motivo
+  - KPICard component reutilizável
+  - Preservado: todo o CRUD existente (tabela, dialog criação, upload arquivo, download)
+- **Build**: 0 erros TypeScript ✅
+- **Arquivos criados** (1):
+  - `src/hooks/useExclusivityAnalytics.ts` — hook analytics exclusividades (~195 linhas)
+- **Arquivos modificados** (1):
+  - `src/pages/comercial/ExclusivityContracts.tsx` — KPIs + alertas + recomendações + KPICard
+- **Cronograma CRM IA-Native**: F2 Item #4 ✅ concluído (E02 Exclusividades IA). **CRM F2: 4/11 itens concluídos**. Próximo: F2 Item #5
+- **CLAUDE.md**: Atualizado automaticamente (auto-save rule sessão 36)
