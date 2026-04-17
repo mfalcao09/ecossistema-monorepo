@@ -1,7 +1,7 @@
 # MEMORY.md — Índice Canônico de Memória
 
-> **Atualizado:** 2026-04-17 (pós-merge S01 + S3)
-> **Status:** V9 canônica ativa · Monorepo + Vercel em produção · Fase 0 em execução — **S01 ✅ + S3 ✅**
+> **Atualizado:** 2026-04-17 (pós S06 · PR #5 aberto)
+> **Status:** V9 canônica ativa · Monorepo + Vercel em produção · Fase 0 em execução — **S01 ✅ + S3 ✅ + S06 ✅ (PR)**
 
 ---
 
@@ -91,7 +91,38 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 |---|---|---|---|---|
 | **S01** | Constitutional Hooks | ✅ Entregue 2026-04-17 | #3 | `packages/constitutional-hooks`, 11 hooks, 70 testes, 93% coverage |
 | **S3** | FastMCP Template | ✅ Entregue 2026-04-17 | #2 | `packages/mcp-servers/template`, 27 testes, server HTTP sobe, generator E2E |
-| S02, S4–S18 | … | ⏳ Pendente | — | Ver `docs/sessions/fase0/` |
+| **S06** | ADRs + Runbooks | ✅ Entregue 2026-04-17 | feature/docs-d1 | 15 ADRs canônicos (001-015) + 6 runbooks operacionais; ADR-001 legado renumerado como ADR-016 |
+| S02, S4–S5, S07–S18 | … | ⏳ Pendente | — | Ver `docs/sessions/fase0/` |
+
+### ADRs canônicos publicados (S06)
+
+| # | ADR | Referência V9 |
+|---|---|---|
+| 001 | Managed Agents como runtime primário | § Parte I §6 D1 |
+| 002 | Monorepo com pnpm workspaces | § Parte XII |
+| 003 | Supabase ECOSYSTEM + DBs per-projeto | § Parte XI §39 |
+| 004 | LiteLLM como gateway único | § Parte VIII §33 |
+| 005 | Langfuse self-host para observability | § Parte IX §34 |
+| 006 | FastMCP v3 como framework MCP | § Parte VIII §30 |
+| 007 | Mem0 v3 + pgvector 3-tier | § Parte VIII §27 §32 |
+| 008 | SC-29 como Edge Function determinística | § Parte VII |
+| 009 | 22 Artigos como hooks executáveis | § Parte V §11 |
+| 010 | C-Suite per negócio + 6 Diretores de Área | § Parte VI §14-§18 |
+| 011 | Jarvis 4-stage — pipecat + LiveKit | § Parte X |
+| 012 | Stack BR canônica | § Parte IX §37 |
+| 013 | Phantom 9-layer prompt assembler | § Parte VIII §24 |
+| 014 | Mem0 v3 ADD-only como algoritmo | § Parte VIII §27 |
+| 015 | Cardinal Rule — código é encanamento | § Parte VIII §25 |
+| 016 | Protocolo de sessões paralelas (ex-ADR-001) | § Parte XIV §44 |
+
+### Runbooks operacionais publicados (S06)
+
+- `docs/runbooks/01-rotacao-credenciais-sc29.md`
+- `docs/runbooks/02-adicionar-novo-negocio-ecossistema.md`
+- `docs/runbooks/03-deploy-nova-edge-function.md`
+- `docs/runbooks/04-aplicar-migration-ecosystem.md`
+- `docs/runbooks/05-resposta-incidente-dinfra-sc27.md`
+- `docs/runbooks/06-rollback-prompt-version-managed-agents.md`
 
 ### Convenções canônicas confirmadas
 
