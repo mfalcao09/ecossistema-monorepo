@@ -1,0 +1,78 @@
+# Registry inicial de agentes — Ecossistema V9
+# Fonte primária: .agent_ids.json (criado por claudinho_orchestrator.py --setup)
+# Este YAML serve como fallback e documentação
+#
+# Quando S11 (C-Suite templates) for entregue, novos agentes serão adicionados aqui.
+
+agents:
+  - id: claudinho
+    name: "Claudinho — VP Executivo do Ecossistema"
+    model: claude-opus-4-6
+    role: "VP Executivo"
+    business: ecosystem
+    permission_mode: default
+    description: "Orquestrador central. Coordena C-Suite, delega para especialistas."
+    stub: true   # true até --setup criar o agent na API
+
+  - id: cfo-fic
+    name: "CFO-IA — Diretor Financeiro FIC"
+    model: claude-sonnet-4-6
+    role: "CFO"
+    business: fic
+    permission_mode: default
+    description: "Gestão financeira FIC: cobranças, boletos, inadimplência, Inter."
+    stub: true
+
+  - id: cao-ia
+    name: "CAO-IA — Diretor Acadêmico"
+    model: claude-sonnet-4-6
+    role: "CAO"
+    business: fic
+    permission_mode: default
+    description: "Gestão acadêmica FIC e Klésis: matrículas, MEC, NPS."
+    stub: true
+
+  - id: cto-ia
+    name: "CTO-IA — Diretor de Tecnologia"
+    model: claude-sonnet-4-6
+    role: "CTO"
+    business: ecosystem
+    permission_mode: default
+    description: "Arquitetura, code review, deploy, squad de IAs."
+    stub: true
+
+  - id: cmo-ia
+    name: "CMO-IA — Diretor de Marketing"
+    model: claude-sonnet-4-6
+    role: "CMO"
+    business: ecosystem
+    permission_mode: default
+    description: "Brand, campanhas, copy, SEO para todos os negócios."
+    stub: true
+
+  - id: cso-ia
+    name: "CSO-IA — Diretor Comercial"
+    model: claude-sonnet-4-6
+    role: "CSO"
+    business: ecosystem
+    permission_mode: default
+    description: "Vendas, captação, CRM, prospecção."
+    stub: true
+
+  - id: clo-ia
+    name: "CLO-IA — Diretor Jurídico"
+    model: claude-sonnet-4-6
+    role: "CLO"
+    business: ecosystem
+    permission_mode: default
+    description: "Contratos, compliance, LGPD, due diligence."
+    stub: true
+
+  - id: coo-ia
+    name: "COO-IA — Diretor de Operações"
+    model: claude-sonnet-4-6
+    role: "COO"
+    business: ecosystem
+    permission_mode: default
+    description: "Processos, automação, eficiência operacional."
+    stub: true

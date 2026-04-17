@@ -2,7 +2,7 @@
   "name": "@ecossistema/orchestrator",
   "version": "0.1.0",
   "private": true,
-  "description": "Orquestrador do ecossistema — Python (claudinho_orchestrator.py, V8.2) + camada TS de composição de agentes V9 (compose-agent.ts). S10 da Fase 0 migrará o Python para FastAPI Railway.",
+  "description": "Orquestrador do ecossistema — FastAPI Python (S10) + camada TS de composição de agentes V9 (compose-agent.ts, via S07) + bridge Node para hooks TS chamados do Python (hooks_bridge.mjs).",
   "type": "module",
   "main": "./dist/compose-agent.js",
   "types": "./dist/compose-agent.d.ts",
@@ -12,12 +12,13 @@
       "import": "./dist/compose-agent.js"
     }
   },
-  "files": ["dist"],
+  "files": ["dist", "hooks_bridge.mjs"],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
     "lint": "tsc --noEmit",
-    "clean": "rm -rf dist"
+    "clean": "rm -rf dist",
+    "bridge": "node hooks_bridge.mjs"
   },
   "dependencies": {
     "@ecossistema/memory": "workspace:*",
