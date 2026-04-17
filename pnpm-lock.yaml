@@ -498,6 +498,15 @@ importers:
         specifier: ^2.0.0
         version: 2.1.9(@types/node@22.19.17)(jsdom@20.0.3(canvas@2.11.2))
 
+  packages/magic-link-vault:
+    devDependencies:
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+      vitest:
+        specifier: ^2.0.0
+        version: 2.1.9(@types/node@22.19.17)(jsdom@20.0.3(canvas@2.11.2))
+
   packages/mcp-servers/generator:
     dependencies:
       commander:
