@@ -1,0 +1,7 @@
+.env
+.env.local
+.env.*.local
+*.log
+.keys-per-business.txt
+.keys-per-business.txt.gpg
+.env.backup-*

@@ -1,0 +1,55 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "service": "langfuse-web",
+  "source": {
+    "image": "langfuse/langfuse:3"
+  },
+  "deploy": {
+    "startCommand": null,
+    "healthcheckPath": "/api/public/health",
+    "healthcheckTimeout": 60,
+    "restartPolicyType": "ON_FAILURE",
+    "restartPolicyMaxRetries": 10,
+    "numReplicas": 1
+  },
+  "networking": {
+    "public": true,
+    "internalPort": 3000
+  },
+  "_notes": [
+    "Este JSON é referência — Railway UI ou `railway up` é o caminho real.",
+    "Em Railway: vincular às outras 3 services via private networking (postgres, clickhouse, redis).",
+    "Todas as ENV vars vêm de Railway Variables (copiar de .env.example).",
+    "Domínio: gerar via Railway e mapear para langfuse.<domínio> (Cloudflare ou registrar).",
+    "Plan mínimo: Standard (ClickHouse exige ≥2GB RAM agregado no projeto)."
+  ],
+  "required_env": [
+    "DATABASE_URL",
+    "NEXTAUTH_URL",
+    "NEXTAUTH_SECRET",
+    "SALT",
+    "ENCRYPTION_KEY",
+    "CLICKHOUSE_URL",
+    "CLICKHOUSE_USER",
+    "CLICKHOUSE_PASSWORD",
+    "CLICKHOUSE_MIGRATION_URL",
+    "CLICKHOUSE_CLUSTER_ENABLED",
+    "REDIS_CONNECTION_STRING",
+    "LANGFUSE_INIT_ORG_ID",
+    "LANGFUSE_INIT_ORG_NAME",
+    "LANGFUSE_INIT_PROJECT_ID",
+    "LANGFUSE_INIT_PROJECT_NAME",
+    "LANGFUSE_INIT_USER_EMAIL",
+    "LANGFUSE_INIT_USER_NAME",
+    "LANGFUSE_INIT_USER_PASSWORD",
+    "LANGFUSE_S3_EVENT_UPLOAD_ENABLED",
+    "LANGFUSE_S3_EVENT_UPLOAD_BUCKET",
+    "LANGFUSE_S3_EVENT_UPLOAD_REGION",
+    "LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID",
+    "LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY",
+    "LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT",
+    "LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE",
+    "LANGFUSE_S3_EVENT_UPLOAD_PREFIX",
+    "TELEMETRY_ENABLED"
+  ]
+}

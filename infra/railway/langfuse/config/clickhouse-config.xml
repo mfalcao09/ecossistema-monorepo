@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!--
+  ClickHouse tuning para Langfuse self-host.
+  Perfil: single-node MVP (até ~100k traces/dia).
+  Ref: docs/sessions/fase0/S09-langfuse.md
+-->
+<clickhouse>
+    <!-- Conexões -->
+    <max_connections>200</max_connections>
+    <keep_alive_timeout>30</keep_alive_timeout>
+
+    <!-- Concorrência -->
+    <max_concurrent_queries>50</max_concurrent_queries>
+
+    <!-- Memória — 80% da RAM do container -->
+    <max_server_memory_usage_to_ram_ratio>0.8</max_server_memory_usage_to_ram_ratio>
+
+    <!-- MergeTree backpressure (evita explosão de partes em bursts) -->
+    <merge_tree>
+        <parts_to_delay_insert>150</parts_to_delay_insert>
+        <parts_to_throw_insert>300</parts_to_throw_insert>
+    </merge_tree>
+
+    <!-- Logger (menos verboso em prod) -->
+    <logger>
+        <level>information</level>
+    </logger>
+</clickhouse>

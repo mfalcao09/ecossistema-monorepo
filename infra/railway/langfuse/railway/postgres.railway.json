@@ -1,0 +1,30 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "service": "langfuse-postgres",
+  "source": {
+    "image": "postgres:16-alpine"
+  },
+  "deploy": {
+    "restartPolicyType": "ALWAYS"
+  },
+  "networking": {
+    "public": false,
+    "internalPort": 5432
+  },
+  "volumes": [
+    {
+      "name": "postgres_data",
+      "mountPath": "/var/lib/postgresql/data"
+    }
+  ],
+  "_notes": [
+    "Opção A (recomendada): usar Railway Postgres plugin — expõe DATABASE_URL nativo.",
+    "Opção B: usar esta imagem Docker se quiser controle total.",
+    "Dedicado ao Langfuse — NÃO compartilhar com LiteLLM (schemas separados)."
+  ],
+  "required_env": [
+    "POSTGRES_USER",
+    "POSTGRES_PASSWORD",
+    "POSTGRES_DB"
+  ]
+}

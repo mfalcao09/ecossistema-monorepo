@@ -1,0 +1,36 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "service": "langfuse-clickhouse",
+  "source": {
+    "image": "clickhouse/clickhouse-server:24.3"
+  },
+  "deploy": {
+    "restartPolicyType": "ALWAYS"
+  },
+  "networking": {
+    "public": false,
+    "internalPorts": [8123, 9000]
+  },
+  "volumes": [
+    {
+      "name": "clickhouse_data",
+      "mountPath": "/var/lib/clickhouse"
+    }
+  ],
+  "resources": {
+    "cpu": 1,
+    "memoryMB": 2048
+  },
+  "_notes": [
+    "ClickHouse é o serviço mais pesado: ≥ 2GB RAM.",
+    "Config custom em config/clickhouse-config.xml — montar via Railway Config Files ou build próprio.",
+    "Após subir pela 1ª vez: Langfuse migrations rodam automaticamente pelo CLICKHOUSE_MIGRATION_URL.",
+    "TTL data-retention: aplicar via scripts/setup-ttl.sh após healthy."
+  ],
+  "required_env": [
+    "CLICKHOUSE_DB",
+    "CLICKHOUSE_USER",
+    "CLICKHOUSE_PASSWORD",
+    "CLICKHOUSE_DEFAULT_ACCESS_MANAGEMENT"
+  ]
+}

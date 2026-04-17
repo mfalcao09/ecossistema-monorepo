@@ -1,0 +1,27 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "service": "langfuse-redis",
+  "source": {
+    "image": "redis:7-alpine"
+  },
+  "deploy": {
+    "startCommand": "redis-server --requirepass ${REDIS_PASSWORD} --maxmemory 512mb --maxmemory-policy allkeys-lru",
+    "restartPolicyType": "ALWAYS"
+  },
+  "networking": {
+    "public": false,
+    "internalPort": 6379
+  },
+  "volumes": [
+    {
+      "name": "redis_data",
+      "mountPath": "/data"
+    }
+  ],
+  "_notes": [
+    "Opção A (recomendada): Railway Redis plugin — conexão e senha já geridos.",
+    "Opção B: imagem Docker com startCommand acima.",
+    "Fila BullMQ (Langfuse worker) + cache de sessões."
+  ],
+  "required_env": ["REDIS_PASSWORD"]
+}
