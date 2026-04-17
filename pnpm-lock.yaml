@@ -413,6 +413,22 @@ importers:
         specifier: ^3.2.4
         version: 3.2.4(@types/debug@4.1.13)(@types/node@22.19.17)(jsdom@20.0.3(canvas@2.11.2))
 
+  apps/orchestrator:
+    dependencies:
+      '@ecossistema/constitutional-hooks':
+        specifier: workspace:*
+        version: link:../../packages/constitutional-hooks
+      '@ecossistema/memory':
+        specifier: workspace:*
+        version: link:../../packages/memory
+    devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.17
+      typescript:
+        specifier: ^5.6.0
+        version: 5.9.3
+
   packages/billing:
     dependencies:
       '@supabase/supabase-js':
@@ -469,6 +485,12 @@ importers:
         specifier: ^2.45.0
         version: 2.103.3
     devDependencies:
+      '@types/node':
+        specifier: ^22.0.0
+        version: 22.19.17
+      '@vitest/coverage-v8':
+        specifier: ^2.0.0
+        version: 2.1.9(vitest@2.1.9(@types/node@22.19.17)(jsdom@20.0.3(canvas@2.11.2)))
       typescript:
         specifier: ^5.6.0
         version: 5.9.3
