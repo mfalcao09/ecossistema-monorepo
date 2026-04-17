@@ -6,7 +6,7 @@
 import path from 'path';
 import fs from 'fs-extra';
 import { instantiate } from './instantiator.js';
-import type { BusinessId, Variant, InstantiateResult } from './types.js';
+import type { AgentRole, BusinessId, Variant, InstantiateResult } from './types.js';
 
 export interface GenerateOptions {
   business: BusinessId;
@@ -28,7 +28,7 @@ export async function generate(opts: GenerateOptions): Promise<InstantiateResult
 
   const result = await instantiate({
     business: opts.business as BusinessId,
-    role: opts.role,
+    role: opts.role as AgentRole,
     variant: opts.variant,
     targetDir: opts.targetDir,
   });
