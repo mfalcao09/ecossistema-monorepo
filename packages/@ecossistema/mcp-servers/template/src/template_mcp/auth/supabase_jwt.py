@@ -1,15 +1,17 @@
-"""AuthProvider para Supabase JWT.
-
-Header esperado: ``Authorization: Bearer <supabase_user_jwt>``.
+"""TokenVerifier para Supabase JWT (FastMCP v3).
 
 Verificação:
-- Assinatura via JWKS público do projeto Supabase (cacheado).
-- `aud` ∈ {expected_aud}
-- `exp` não pode estar expirado.
-- Scopes derivados de `app_metadata.scopes` (lista) ou fallback `operator`.
+- Se o token começa com ``owner_``, **não é nosso** — retorna ``None``
+  para que o ``OwnerTokenVerifier`` no ``MultiAuth`` cuide dele.
+- Assinatura via JWKS público do projeto Supabase (lazy, cacheada).
+- ``aud`` obrigatório; ``exp`` checado automaticamente por PyJWT.
+- Scopes derivados de ``app_metadata.scopes`` ou fallback `["reader","operator"]`.
 
-Erros levantam `AuthCheck.failure(...)`; ausência de token → retorna `None`
-(deixa outro provider tentar).
+Retorno:
+- ``AccessToken`` com ``client_id = sub``, ``scopes``, ``claims`` com
+  ``business_id`` e ``email``.
+- ``None`` quando o token é inválido (deixa outro verifier tentar;
+  se nenhum validar, o FastMCP recusa a request).
 """
 from __future__ import annotations
 
@@ -20,10 +22,10 @@ import httpx
 import jwt
 from jwt import PyJWKClient
 
-from fastmcp.server.auth import AuthCheck, AuthContext, AuthProvider
+from fastmcp.server.auth import AccessToken, TokenVerifier
 
 
-class SupabaseJWTProvider(AuthProvider):
+class SupabaseJWTVerifier(TokenVerifier):
     """Valida JWTs emitidos pelo Supabase Auth do projeto configurado."""
 
     def __init__(
@@ -34,55 +36,49 @@ class SupabaseJWTProvider(AuthProvider):
         jwks_ttl_seconds: int = 3600,
         dev_skip_signature: bool = False,
     ) -> None:
+        super().__init__()
         self.supabase_url = supabase_url.rstrip("/")
         self.anon_key = supabase_anon_key
         self.expected_aud = expected_aud
         self.jwks_ttl = jwks_ttl_seconds
         self.dev_skip_signature = dev_skip_signature
 
-        # Supabase expõe JWKS em /auth/v1/.well-known/jwks.json
         self._jwks_url = f"{self.supabase_url}/auth/v1/.well-known/jwks.json"
         self._jwks_client: PyJWKClient | None = None
         self._jwks_loaded_at: float = 0.0
 
-    # ------------------------------------------------------------------ API
-    async def authenticate(self, request: Any) -> AuthContext | None:
-        token = self._extract_bearer(request)
-        if not token:
+    async def verify_token(self, token: str) -> AccessToken | None:
+        # Deixa OwnerTokenVerifier cuidar destes.
+        if token.startswith("owner_"):
             return None
         try:
             payload = self._verify(token)
-        except jwt.ExpiredSignatureError as e:
-            raise AuthCheck.failure(f"Token expirado: {e}") from e
-        except jwt.InvalidTokenError as e:
-            raise AuthCheck.failure(f"JWT inválido: {e}") from e
+        except jwt.InvalidTokenError:
+            return None  # inválido — próximo verifier, ou recusa
 
-        return AuthContext(
-            principal_id=payload["sub"],
-            principal_type="user",
+        return AccessToken(
+            token=token,
+            client_id=str(payload["sub"]),
             scopes=self._scopes_from_claims(payload),
-            metadata={
+            expires_at=payload.get("exp"),
+            claims={
+                "principal_type": "user",
                 "business_id": (
-                    payload.get("app_metadata", {}).get("business_id")
-                    or payload.get("user_metadata", {}).get("business_id")
+                    (payload.get("app_metadata") or {}).get("business_id")
+                    or (payload.get("user_metadata") or {}).get("business_id")
                 ),
                 "email": payload.get("email"),
             },
         )
 
     # ------------------------------------------------------------ internals
-    @staticmethod
-    def _extract_bearer(request: Any) -> str | None:
-        headers = getattr(request, "headers", {}) or {}
-        auth = headers.get("authorization") or headers.get("Authorization")
-        if not auth or not auth.lower().startswith("bearer "):
-            return None
-        return auth.split(" ", 1)[1].strip() or None
-
     def _verify(self, token: str) -> dict[str, Any]:
         if self.dev_skip_signature:
-            # NUNCA usar em produção — só para smoke-test local.
-            return jwt.decode(token, options={"verify_signature": False})
+            # NUNCA em produção.
+            return jwt.decode(
+                token,
+                options={"verify_signature": False, "verify_aud": False},
+            )
 
         client = self._get_jwks_client()
         signing_key = client.get_signing_key_from_jwt(token).key
@@ -104,20 +100,19 @@ class SupabaseJWTProvider(AuthProvider):
     @staticmethod
     def _scopes_from_claims(payload: dict[str, Any]) -> list[str]:
         claims_scopes = (
-            payload.get("app_metadata", {}).get("scopes")
+            (payload.get("app_metadata") or {}).get("scopes")
             or payload.get("scopes")
             or []
         )
         if isinstance(claims_scopes, str):
             claims_scopes = claims_scopes.split()
-        # Usuário autenticado normal recebe `reader` + `operator` por default.
         if not claims_scopes:
             return ["reader", "operator"]
         return [str(s) for s in claims_scopes]
 
 
 async def check_jwks_available(url: str, timeout: float = 5.0) -> bool:
-    """Helper p/ health-check: confirma que o endpoint JWKS responde 200."""
+    """Helper p/ health-check — confirma que o endpoint JWKS responde 200."""
     try:
         async with httpx.AsyncClient(timeout=timeout) as http:
             r = await http.get(url)

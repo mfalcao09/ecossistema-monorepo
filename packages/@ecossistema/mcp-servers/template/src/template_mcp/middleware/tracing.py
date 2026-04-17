@@ -1,18 +1,19 @@
-"""Middleware de tracing OpenTelemetry.
+"""Middleware de tracing OpenTelemetry (FastMCP v3).
 
-Cada call_tool vira um span `mcp.tool.<tool_name>` com atributos
-principal, business_id, correlation_id. Em dev sem endpoint OTel
-configurado, o tracer vira no-op silencioso.
+Cada ``call_tool`` vira um span ``mcp.tool.<tool_name>`` com atributos
+principal, business_id, correlation_id.
 """
 from __future__ import annotations
 
 from typing import Any
 
+import structlog
 from opentelemetry import trace
 from opentelemetry.sdk.resources import Resource
 from opentelemetry.sdk.trace import TracerProvider
 from opentelemetry.sdk.trace.export import BatchSpanProcessor
 
+from fastmcp.server.dependencies import get_access_token
 from fastmcp.server.middleware import Middleware, MiddlewareContext
 
 _tracer = trace.get_tracer("fastmcp-ecossistema")
@@ -21,14 +22,12 @@ _tracer = trace.get_tracer("fastmcp-ecossistema")
 def configure_tracing(service_name: str, otel_endpoint: str | None) -> None:
     """Setup global do TracerProvider. Idempotente."""
     current = trace.get_tracer_provider()
-    # Se já há provider real configurado, não sobrescreve.
     if isinstance(current, TracerProvider):
         return
 
     resource = Resource.create({"service.name": service_name})
     provider = TracerProvider(resource=resource)
     if otel_endpoint:
-        # Import tardio para não explodir se o exporter não estiver instalado.
         from opentelemetry.exporter.otlp.proto.http.trace_exporter import (
             OTLPSpanExporter,
         )
@@ -42,17 +41,14 @@ class TracingMiddleware(Middleware):
     async def on_call_tool(
         self, context: MiddlewareContext, call_next: Any
     ) -> Any:
-        tool_name = getattr(context, "tool_name", "<unknown>")
-        auth = getattr(context, "auth", None)
-        principal_id = getattr(auth, "principal_id", "anonymous") if auth else "anonymous"
-        meta = getattr(auth, "metadata", {}) or {}
-        business_id = meta.get("business_id", "ecosystem")
+        tool_name = _tool_name_from(context)
+        principal_id, business_id = _principal_from_token()
 
         with _tracer.start_as_current_span(f"mcp.tool.{tool_name}") as span:
             span.set_attribute("mcp.tool.name", tool_name)
             span.set_attribute("mcp.principal.id", principal_id)
             span.set_attribute("mcp.business_id", business_id)
-            corr = getattr(context, "correlation_id", None)
+            corr = _correlation_id_from_contextvars()
             if corr:
                 span.set_attribute("mcp.correlation_id", corr)
             try:
@@ -63,3 +59,31 @@ class TracingMiddleware(Middleware):
                 span.set_attribute("mcp.tool.success", False)
                 span.record_exception(exc)
                 raise
+
+
+# --------------------------------------------------------------------- utils
+def _tool_name_from(context: MiddlewareContext) -> str:
+    msg = getattr(context, "message", None)
+    return getattr(msg, "name", None) or "<unknown>"
+
+
+def _principal_from_token() -> tuple[str, str]:
+    try:
+        tok = get_access_token()
+    except Exception:
+        tok = None
+    if tok is None:
+        return "anonymous", "ecosystem"
+    claims = getattr(tok, "claims", {}) or {}
+    return str(getattr(tok, "client_id", "anonymous")), str(
+        claims.get("business_id") or "ecosystem"
+    )
+
+
+def _correlation_id_from_contextvars() -> str | None:
+    try:
+        ctx = structlog.contextvars.get_contextvars()
+    except Exception:
+        return None
+    val = ctx.get("correlation_id")
+    return str(val) if val else None

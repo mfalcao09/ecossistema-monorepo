@@ -1,15 +1,14 @@
-"""Token-bucket rate-limit por principal.
+"""Token-bucket rate-limit por principal — FastMCP v3.
 
-Backend preferido: Redis (atomic via Lua script).
-Fallback: in-memory dict (dev / single-replica only).
+Backend preferido: Redis (Lua atômico). Fallback: in-memory dict.
 """
 from __future__ import annotations
 
 import time
-from collections import defaultdict
 from typing import Any
 
 from fastmcp.exceptions import ToolError
+from fastmcp.server.dependencies import get_access_token
 from fastmcp.server.middleware import Middleware, MiddlewareContext
 
 try:
@@ -18,7 +17,6 @@ except Exception:  # pragma: no cover
     aioredis = None  # type: ignore[assignment]
 
 
-# -- Lua: refila tokens lineares, decrementa 1, retorna (allowed, remaining).
 _LUA_TOKEN_BUCKET = """
 local key = KEYS[1]
 local capacity = tonumber(ARGV[1])
@@ -66,7 +64,7 @@ class _InMemoryBucket:
 
 
 class RateLimitMiddleware(Middleware):
-    """Limita chamadas por principal. default_rpm → tokens por minuto."""
+    """Limita chamadas por principal. ``default_rpm`` → tokens por minuto."""
 
     def __init__(
         self,
@@ -80,6 +78,7 @@ class RateLimitMiddleware(Middleware):
         self.prefix = key_prefix
 
         self._redis = None
+        self._script = None
         if redis_url and aioredis is not None:
             self._redis = aioredis.from_url(redis_url, decode_responses=True)
             self._script = self._redis.register_script(_LUA_TOKEN_BUCKET)
@@ -88,24 +87,25 @@ class RateLimitMiddleware(Middleware):
     async def on_call_tool(
         self, context: MiddlewareContext, call_next: Any
     ) -> Any:
-        principal = self._principal_key(context)
+        principal = self._principal_key()
         allowed = await self._allow(principal)
         if not allowed:
             raise ToolError(
-                code="RATE_LIMIT_EXCEEDED",
-                message=f"Rate limit excedido (max {self.default_rpm}/min).",
-                data={"principal": principal, "limit_rpm": self.default_rpm},
+                f"Rate limit exceeded ({self.default_rpm}/min) for {principal}."
             )
         return await call_next(context)
 
     # ----------------------------------------------------------- internals
     @staticmethod
-    def _principal_key(context: MiddlewareContext) -> str:
-        auth = getattr(context, "auth", None)
-        return getattr(auth, "principal_id", "anonymous") if auth else "anonymous"
+    def _principal_key() -> str:
+        try:
+            tok = get_access_token()
+        except Exception:
+            tok = None
+        return str(getattr(tok, "client_id", "anonymous")) if tok else "anonymous"
 
     async def _allow(self, principal: str) -> bool:
-        if self._redis is not None:
+        if self._redis is not None and self._script is not None:
             result = await self._script(
                 keys=[f"{self.prefix}:{principal}"],
                 args=[self.capacity, self.refill_per_sec, time.time()],

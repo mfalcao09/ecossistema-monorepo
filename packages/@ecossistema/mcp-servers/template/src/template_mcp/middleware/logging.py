@@ -1,4 +1,4 @@
-"""Middleware de logging estruturado (structlog + JSON)."""
+"""Middleware de logging estruturado (structlog + JSON) — FastMCP v3."""
 from __future__ import annotations
 
 import logging
@@ -7,6 +7,7 @@ from typing import Any
 
 import structlog
 
+from fastmcp.server.dependencies import get_access_token
 from fastmcp.server.middleware import Middleware, MiddlewareContext
 
 
@@ -39,10 +40,8 @@ class LoggingMiddleware(Middleware):
     async def on_call_tool(
         self, context: MiddlewareContext, call_next: Any
     ) -> Any:
-        tool_name = getattr(context, "tool_name", "<unknown>")
-        auth = getattr(context, "auth", None)
-        principal = getattr(auth, "principal_id", "anonymous") if auth else "anonymous"
-        corr = getattr(context, "correlation_id", None)
+        tool_name = _tool_name_from(context)
+        principal = _principal_from_token()
 
         start = time.monotonic()
         try:
@@ -53,7 +52,6 @@ class LoggingMiddleware(Middleware):
                 "tool_call",
                 tool=tool_name,
                 principal=principal,
-                correlation_id=corr,
                 duration_ms=round(duration_ms, 1),
                 success=False,
                 error=type(exc).__name__,
@@ -64,8 +62,20 @@ class LoggingMiddleware(Middleware):
             "tool_call",
             tool=tool_name,
             principal=principal,
-            correlation_id=corr,
             duration_ms=round(duration_ms, 1),
             success=True,
         )
         return result
+
+
+def _tool_name_from(context: MiddlewareContext) -> str:
+    msg = getattr(context, "message", None)
+    return getattr(msg, "name", None) or "<unknown>"
+
+
+def _principal_from_token() -> str:
+    try:
+        tok = get_access_token()
+    except Exception:
+        tok = None
+    return str(getattr(tok, "client_id", "anonymous")) if tok else "anonymous"

@@ -1,7 +1,7 @@
-"""Middleware stack — errors wrap, rate-limit, logging estrutura."""
+"""Middleware stack — errors wrap, rate-limit, in-memory bucket."""
 from __future__ import annotations
 
-import asyncio
+from dataclasses import dataclass
 from types import SimpleNamespace
 
 import pytest
@@ -12,14 +12,14 @@ from template_mcp.middleware.errors import ErrorsMiddleware
 from template_mcp.middleware.rate_limit import RateLimitMiddleware, _InMemoryBucket
 
 
-def _ctx(**overrides):
-    defaults = dict(
-        tool_name="demo",
-        auth=SimpleNamespace(principal_id="u1", metadata={"business_id": "fic"}),
-        correlation_id=None,
-    )
-    defaults.update(overrides)
-    return SimpleNamespace(**defaults)
+@dataclass
+class _FakeRequest:
+    name: str = "demo_tool"
+
+
+def _ctx(name: str = "demo_tool"):
+    """Mimetiza MiddlewareContext (frozen dataclass) — só o que middleware lê."""
+    return SimpleNamespace(message=_FakeRequest(name=name))
 
 
 # ------------------------------------------------------------------- errors
@@ -32,8 +32,7 @@ async def test_errors_middleware_wraps_exception() -> None:
 
     with pytest.raises(ToolError) as exc_info:
         await mw.on_call_tool(_ctx(), boom)
-    assert exc_info.value.code == "INTERNAL_ERROR"
-    assert "correlation_id" in (exc_info.value.data or {})
+    assert "correlation_id=" in str(exc_info.value)
 
 
 @pytest.mark.asyncio
@@ -41,31 +40,28 @@ async def test_errors_middleware_passes_tool_error() -> None:
     mw = ErrorsMiddleware()
 
     async def deny(_ctx):
-        raise ToolError(code="DENIED", message="no")
+        raise ToolError("denied specifically")
 
     with pytest.raises(ToolError) as exc_info:
         await mw.on_call_tool(_ctx(), deny)
-    assert exc_info.value.code == "DENIED"  # não foi remapeado para INTERNAL_ERROR
+    # Não foi remapeado em INTERNAL_ERROR — repassou.
+    assert "denied specifically" in str(exc_info.value)
 
 
 @pytest.mark.asyncio
-async def test_errors_middleware_adds_correlation_id() -> None:
+async def test_errors_middleware_happy_path_returns_value() -> None:
     mw = ErrorsMiddleware()
-    captured = {}
 
-    async def ok(ctx):
-        captured["corr"] = getattr(ctx, "correlation_id", None)
+    async def ok(_ctx):
         return "fine"
 
     out = await mw.on_call_tool(_ctx(), ok)
     assert out == "fine"
-    assert captured["corr"] is not None
-    assert len(captured["corr"]) > 0
 
 
 # ------------------------------------------------------------- rate limit
 def test_inmemory_bucket_allows_and_blocks() -> None:
-    bucket = _InMemoryBucket(capacity=2, refill_per_sec=0)  # sem refill
+    bucket = _InMemoryBucket(capacity=2, refill_per_sec=0)
     assert bucket.allow("u") is True
     assert bucket.allow("u") is True
     assert bucket.allow("u") is False
@@ -79,7 +75,8 @@ def test_inmemory_bucket_separates_principals() -> None:
 
 
 @pytest.mark.asyncio
-async def test_rate_limit_mw_blocks_excess() -> None:
+async def test_rate_limit_mw_blocks_excess_anonymous() -> None:
+    """Sem token (anonymous), o bucket compartilhado bloqueia após capacity."""
     mw = RateLimitMiddleware(redis_url=None, default_rpm=1)
     mw._memory = _InMemoryBucket(capacity=1, refill_per_sec=0)
 
@@ -89,22 +86,18 @@ async def test_rate_limit_mw_blocks_excess() -> None:
     assert await mw.on_call_tool(_ctx(), ok) == "ok"
     with pytest.raises(ToolError) as exc_info:
         await mw.on_call_tool(_ctx(), ok)
-    assert exc_info.value.code == "RATE_LIMIT_EXCEEDED"
+    assert "Rate limit" in str(exc_info.value)
 
 
 @pytest.mark.asyncio
-async def test_rate_limit_uses_principal_id() -> None:
-    mw = RateLimitMiddleware(redis_url=None, default_rpm=1)
-    mw._memory = _InMemoryBucket(capacity=1, refill_per_sec=0)
+async def test_rate_limit_mw_respects_capacity() -> None:
+    mw = RateLimitMiddleware(redis_url=None, default_rpm=3)
+    mw._memory = _InMemoryBucket(capacity=3, refill_per_sec=0)
 
     async def ok(_):
         return "ok"
 
-    await mw.on_call_tool(_ctx(auth=SimpleNamespace(principal_id="a", metadata={})), ok)
-    # principal "b" ainda tem bucket novo — deve passar.
-    assert (
-        await mw.on_call_tool(
-            _ctx(auth=SimpleNamespace(principal_id="b", metadata={})), ok
-        )
-        == "ok"
-    )
+    for _ in range(3):
+        assert await mw.on_call_tool(_ctx(), ok) == "ok"
+    with pytest.raises(ToolError):
+        await mw.on_call_tool(_ctx(), ok)

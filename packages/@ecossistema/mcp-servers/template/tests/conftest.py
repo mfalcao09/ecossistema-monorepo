@@ -25,10 +25,3 @@ def test_config(monkeypatch: pytest.MonkeyPatch, owner_token_hash: str) -> Confi
     monkeypatch.setenv("MCP_OWNER_TOKEN_HASH", owner_token_hash)
     monkeypatch.setenv("MCP_DEV_SKIP_SIGNATURE", "true")
     return Config.from_env()
-
-
-class FakeRequest:
-    """Mimetiza ``request`` com apenas ``.headers`` dict."""
-
-    def __init__(self, headers: dict[str, str] | None = None) -> None:
-        self.headers = headers or {}

@@ -1,17 +1,17 @@
-"""Auth providers — scopes, owner token, JWT decode básico."""
+"""Auth verifiers — scopes, owner token hash+prefix, JWT skip-signature path."""
 from __future__ import annotations
 
+import jwt
 import pytest
 
-from template_mcp.auth.owner_token import OwnerTokenProvider, hash_token
+from template_mcp.auth.owner_token import OwnerTokenVerifier, hash_token
 from template_mcp.auth.scopes import (
     SCOPES,
     get_required_scope,
     has_scope,
     require_scope,
 )
-
-from .conftest import FakeRequest
+from template_mcp.auth.supabase_jwt import SupabaseJWTVerifier
 
 
 # --------------------------------------------------------------------- scopes
@@ -48,46 +48,104 @@ def test_get_required_scope_default() -> None:
     assert get_required_scope(plain) == "operator"
 
 
-# -------------------------------------------------------------- owner provider
+# -------------------------------------------------------------- owner verifier
 @pytest.mark.asyncio
-async def test_owner_token_success(owner_token: str, owner_token_hash: str) -> None:
-    provider = OwnerTokenProvider(owner_token_hash)
-    req = FakeRequest({"Authorization": f"Bearer {owner_token}"})
-    ctx = await provider.authenticate(req)
-    assert ctx is not None
-    assert ctx.principal_id == "owner"
-    assert "admin" in ctx.scopes
-
-
-@pytest.mark.asyncio
-async def test_owner_token_wrong(owner_token_hash: str) -> None:
-    provider = OwnerTokenProvider(owner_token_hash)
-    req = FakeRequest({"Authorization": "Bearer owner_wrong_token_00000000000000000000"})
-    with pytest.raises(Exception):
-        await provider.authenticate(req)
+async def test_owner_verifier_valid_returns_access_token(
+    owner_token: str, owner_token_hash: str
+) -> None:
+    v = OwnerTokenVerifier(owner_token_hash)
+    at = await v.verify_token(owner_token)
+    assert at is not None
+    assert at.client_id == "owner"
+    assert "admin" in at.scopes
+    assert at.claims["principal_type"] == "owner"
+    assert at.claims["business_id"] == "ecosystem"
 
 
 @pytest.mark.asyncio
-async def test_owner_token_missing(owner_token_hash: str) -> None:
-    provider = OwnerTokenProvider(owner_token_hash)
-    assert await provider.authenticate(FakeRequest({})) is None
+async def test_owner_verifier_wrong_hash_returns_none(owner_token_hash: str) -> None:
+    v = OwnerTokenVerifier(owner_token_hash)
+    # Prefixo owner_ presente mas hash errado → None (inválido).
+    assert await v.verify_token("owner_wrong_" + "b" * 32) is None
 
 
 @pytest.mark.asyncio
-async def test_owner_token_not_prefixed_returns_none(owner_token_hash: str) -> None:
-    # Token sem prefixo `owner_` é tratado como "outro provider cuida disso".
-    provider = OwnerTokenProvider(owner_token_hash)
-    req = FakeRequest({"Authorization": "Bearer eyJhbGciOi...supabase-jwt"})
-    assert await provider.authenticate(req) is None
+async def test_owner_verifier_non_owner_prefix_returns_none(
+    owner_token_hash: str,
+) -> None:
+    v = OwnerTokenVerifier(owner_token_hash)
+    # Sem prefixo → este verifier não trata; retorna None p/ próximo tentar.
+    assert await v.verify_token("eyJhbGciOi...supabase-jwt") is None
 
 
 def test_hash_token_roundtrip() -> None:
     raw = "owner_abcdef"
     h = hash_token(raw)
     assert len(h) == 64
-    assert h == hash_token(raw)  # determinístico
+    assert h == hash_token(raw)
 
 
-def test_owner_provider_rejects_bad_hash() -> None:
+def test_owner_verifier_rejects_bad_hash_length() -> None:
     with pytest.raises(ValueError):
-        OwnerTokenProvider("deadbeef")  # não tem 64 chars
+        OwnerTokenVerifier("deadbeef")
+
+
+# ------------------------------------------------------------- supabase JWT
+@pytest.mark.asyncio
+async def test_supabase_jwt_verifier_skips_owner_tokens(owner_token: str) -> None:
+    v = SupabaseJWTVerifier(
+        supabase_url="https://example.supabase.co",
+        supabase_anon_key="anon",
+        dev_skip_signature=True,
+    )
+    assert await v.verify_token(owner_token) is None
+
+
+@pytest.mark.asyncio
+async def test_supabase_jwt_verifier_dev_skip_decodes_unsigned() -> None:
+    # `dev_skip_signature=True` aceita JWTs não assinados (HS256 dummy).
+    # ÚNICO uso: smoke-test local. Nunca em produção.
+    payload = {
+        "sub": "user-123",
+        "aud": "authenticated",
+        "exp": 9999999999,
+        "email": "teste@example.com",
+        "app_metadata": {"business_id": "fic", "scopes": ["operator", "admin"]},
+    }
+    token = jwt.encode(payload, "unused", algorithm="HS256")
+
+    v = SupabaseJWTVerifier(
+        supabase_url="https://example.supabase.co",
+        supabase_anon_key="anon",
+        dev_skip_signature=True,
+    )
+    at = await v.verify_token(token)
+    assert at is not None
+    assert at.client_id == "user-123"
+    assert "operator" in at.scopes and "admin" in at.scopes
+    assert at.claims["business_id"] == "fic"
+    assert at.claims["email"] == "teste@example.com"
+
+
+@pytest.mark.asyncio
+async def test_supabase_jwt_verifier_default_scopes_when_absent() -> None:
+    payload = {"sub": "u1", "aud": "authenticated", "exp": 9999999999}
+    token = jwt.encode(payload, "unused", algorithm="HS256")
+    v = SupabaseJWTVerifier(
+        supabase_url="https://example.supabase.co",
+        supabase_anon_key="anon",
+        dev_skip_signature=True,
+    )
+    at = await v.verify_token(token)
+    assert at is not None
+    assert set(at.scopes) == {"reader", "operator"}
+
+
+@pytest.mark.asyncio
+async def test_supabase_jwt_verifier_invalid_returns_none() -> None:
+    v = SupabaseJWTVerifier(
+        supabase_url="https://example.supabase.co",
+        supabase_anon_key="anon",
+        dev_skip_signature=True,
+    )
+    assert await v.verify_token("not-a-jwt-at-all") is None
