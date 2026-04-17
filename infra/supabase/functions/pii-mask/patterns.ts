@@ -40,10 +40,11 @@ export const PII_PATTERNS: PIIPattern[] = [
     regex: /\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}\b/g,
     mask: maskEmail,
   },
-  // Phone BR: (11) 99999-8888 / +55 11 99999-8888 / 11999998888
+  // Phone BR: (11) 99999-8888 / +55 11 99999-8888 / 11999998888 / 11 9999-8888
+  // Usa lookaround porque `\b` não funciona contra `(`.
   {
     type: "phone",
-    regex: /\b\+?55?\s?\(?\d{2}\)?\s?9?\d{4}-?\d{4}\b/g,
+    regex: /(?<!\d)(?:\+?55\s?)?\(?\d{2}\)?[\s-]?9?\d{4}[\s-]?\d{4}(?!\d)/g,
     mask: maskKeepStructure,
   },
   // CEP: 00000-000
