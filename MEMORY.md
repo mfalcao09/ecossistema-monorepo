@@ -1,7 +1,7 @@
 # MEMORY.md — Índice Canônico de Memória
 
-> **Atualizado:** 2026-04-16 (pós-V9 aprovada + plano Fase 0)
-> **Status:** V9 é documento canônico ativo; Fase 0 pronta para execução em 18 sessões paralelas
+> **Atualizado:** 2026-04-17 (S01 Fase 0 entregue — constitutional-hooks)
+> **Status:** V9 canônica ativa · Monorepo + Vercel em produção · Fase 0 em execução (S01+S02 concluídas)
 
 ---
 
@@ -84,6 +84,39 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 7. Cardinal Rule: TypeScript/Python é encanamento, Agent SDK é cérebro
 
 ---
+
+## Fase 0 — Status de execução
+
+| Sessão | Status | PR | Notas |
+|---|---|---|---|
+| **S01** — Constitutional Hooks | ✅ Entregue 2026-04-17 | #3 | Pacote `@ecossistema/constitutional-hooks`, 11 hooks, 70 testes, 93% coverage |
+| S02-S18 | ⏳ Pendentes | — | Ver `docs/sessions/fase0/` |
+
+### Convenções canônicas confirmadas na S01
+
+- **Estrutura de packages: FLAT.** `pnpm-workspace.yaml` mapeia `packages/*`, então pacotes ficam em `packages/<nome>/` (não `packages/@ecossistema/<nome>/`). O `name` no package.json continua `@ecossistema/<nome>`.
+- **Import paths em TS:** usar `./foo.js` (ESM + NodeNext), não `./foo`.
+- **Testes com vitest** + override via `setSupabaseClient(mock)` / `setLiteLLMClient(mock)` pra evitar dependência de DB real na CI.
+
+### Decisões técnicas novas (pós-S01)
+
+- **Art. XIX blocklist:** regex `dd` endurecida vs briefing literal. Forma canônica: `/\bdd\b[^;|&\n]*\bof=\/dev\//` (captura `dd if=X of=/dev/Y`). Motivo: forma literal do briefing não pegava o padrão mais comum de ataque.
+- **Art. XII fail-closed:** se consulta ao LiteLLM falha, hook BLOQUEIA (custo > inconveniência). Art. IV fail-soft: audit log não bloqueia agente.
+- **Art. XXII stub:** `console.log` com `TODO(S7)` — trocar por `memory.add()` quando S7 entregar `@ecossistema/memory`.
+
+### Bloqueios conhecidos pra ativar hooks em produção
+
+1. **S04 (migrations)** precisa criar no Supabase ECOSYSTEM:
+   - `approval_requests` (Art. II)
+   - `audit_log` (Art. IV, append-only, trigger contra UPDATE/DELETE)
+   - `idempotency_cache` (Art. III, com `created_at` indexado)
+2. **S07 (memory)** precisa entregar `@ecossistema/memory` com método `add()`.
+3. **S16 (piloto CFO-FIC)** é o primeiro teste real — não ativar em outros agentes antes.
+
+### Ambiente dev confirmado
+
+- `pnpm` não está instalado globalmente. Usar `npx --yes pnpm@9.0.0 <cmd>` ou `corepack enable` (precisa sudo).
+- Node v24.14.0 disponível.
 
 ## Regra "salva contexto"
 
