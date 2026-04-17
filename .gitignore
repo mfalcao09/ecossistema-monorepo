@@ -9,6 +9,10 @@ build/
 .turbo/
 *.tsbuildinfo
 
+# Test coverage
+coverage/
+.vitest-cache/
+
 # Environment (NUNCA commitar secrets)
 .env
 .env.local
