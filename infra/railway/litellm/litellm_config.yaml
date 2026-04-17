@@ -1,0 +1,136 @@
+# ============================================================
+# LiteLLM Config V9 — Ecossistema de Inovação e IA
+# Fonte de verdade: MASTERPLAN-V9.md § 33 (Padrão 10 — LiteLLM Router)
+# e § 34 (Stack validada).
+#
+# 1 proxy Railway para todo o ecossistema:
+#   - Budget + observability + fallbacks centralizados
+#   - Virtual keys por negócio (6)
+#   - Postgres (Supabase ECOSYSTEM / schema litellm_proxy) para state
+#   - Redis para cache de respostas idênticas
+#   - Langfuse callback (S9 completa URL real)
+# ============================================================
+
+model_list:
+  # --------------- Claude (primário V9) ---------------
+  - model_name: sonnet-4-6
+    litellm_params:
+      model: anthropic/claude-sonnet-4-6
+      api_key: os.environ/ANTHROPIC_API_KEY
+      rpm: 1000
+      tpm: 400000
+      timeout: 300
+      max_retries: 2
+
+  - model_name: haiku-3-7
+    litellm_params:
+      model: anthropic/claude-haiku-3-7
+      api_key: os.environ/ANTHROPIC_API_KEY
+      rpm: 2000
+      tpm: 800000
+      timeout: 300
+
+  - model_name: opus-4-7
+    litellm_params:
+      model: anthropic/claude-opus-4-7
+      api_key: os.environ/ANTHROPIC_API_KEY
+      rpm: 200
+      tpm: 100000
+      timeout: 600
+
+  # --------------- OpenAI (fallback principal) ---------------
+  - model_name: gpt-4o-mini
+    litellm_params:
+      model: openai/gpt-4o-mini
+      api_key: os.environ/OPENAI_API_KEY
+      rpm: 500
+
+  - model_name: gpt-4o
+    litellm_params:
+      model: openai/gpt-4o
+      api_key: os.environ/OPENAI_API_KEY
+      rpm: 200
+
+  # --------------- MariTalk (Sabiá-4, PT-BR especializado) ---------------
+  # V9 § 34: MariTalk via OpenAI-compatible API.
+  - model_name: sabia-4
+    litellm_params:
+      model: openai/sabia-4
+      api_base: https://chat.maritaca.ai/api
+      api_key: os.environ/MARITACA_API_KEY
+      custom_llm_provider: openai
+      rpm: 200
+
+  # --------------- Gemini (fallback extra) ---------------
+  - model_name: gemini-2-0-flash
+    litellm_params:
+      model: gemini/gemini-2.0-flash
+      api_key: os.environ/GEMINI_API_KEY
+      rpm: 300
+
+# ============================================================
+# Router settings (Padrão 10 canônico V9 § 33)
+# ============================================================
+router_settings:
+  routing_strategy: simple-shuffle
+  num_retries: 3
+  retry_policy:
+    TimeoutError: 2
+    RateLimitError: 3
+    InternalServerError: 2
+    APIError: 2
+  allowed_fails: 3
+  cooldown_time: 60
+
+  # Fallback canônico V9 § 33:
+  # sonnet-4-6 → haiku-3-7 → gpt-4o-mini → sabia-4
+  fallbacks:
+    - sonnet-4-6: [haiku-3-7, gpt-4o-mini, sabia-4]
+    - haiku-3-7: [gpt-4o-mini, sabia-4]
+    - opus-4-7: [sonnet-4-6, haiku-3-7]
+    - gpt-4o: [sonnet-4-6, gpt-4o-mini]
+    - gpt-4o-mini: [haiku-3-7, sabia-4]
+    - sabia-4: [haiku-3-7, gpt-4o-mini]
+
+  context_window_fallbacks:
+    - sonnet-4-6: [opus-4-7]
+    - haiku-3-7: [sonnet-4-6]
+
+  content_policy_fallbacks:
+    - sonnet-4-6: [gpt-4o]
+    - haiku-3-7: [gpt-4o-mini]
+
+  # Cache de respostas idênticas (Redis)
+  cache_responses: true
+  cache_kwargs:
+    type: redis
+    host: os.environ/REDIS_HOST
+    port: os.environ/REDIS_PORT
+    password: os.environ/REDIS_PASSWORD
+    ttl: 3600
+
+# ============================================================
+# General settings
+# ============================================================
+general_settings:
+  master_key: os.environ/LITELLM_MASTER_KEY
+  database_url: os.environ/DATABASE_URL
+  enable_jwt_auth: true
+  proxy_batch_write_at: 60
+  ui_access_mode: admin_only
+  allow_requests_on_db_unavailable: false
+  health_check_interval: 300
+  alerting_threshold: 300
+
+# ============================================================
+# Callbacks — observability (Langfuse configurado em S9)
+# ============================================================
+litellm_settings:
+  success_callback: ["langfuse"]
+  failure_callback: ["langfuse"]
+  # langfuse_public_key / secret via env vars:
+  #   LANGFUSE_PUBLIC_KEY, LANGFUSE_SECRET_KEY, LANGFUSE_HOST
+
+  drop_params: true       # drop params não-suportados pelo provider
+  set_verbose: false      # prod
+  telemetry: false        # não envia para LiteLLM cloud

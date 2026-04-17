@@ -1,0 +1,12 @@
+# Splendori — Incorporação / imobiliário (funil lead→reserva→contrato)
+key_alias: splendori-prod
+team_id: splendori
+max_budget: 300.00
+budget_duration: 30d
+models: ["sonnet-4-6", "haiku-3-7", "sabia-4", "gpt-4o-mini"]
+rpm_limit: 300
+metadata:
+  business_id: splendori
+  environment: prod
+  owner: marcelo
+  description: "Funil comercial imobiliário, contratos compra/venda"

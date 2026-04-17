@@ -1,0 +1,13 @@
+# Klésis — Colégio (ensino básico)
+# Atendimento pais/responsáveis em PT-BR; Sabiá-4 prioritário.
+key_alias: klesis-prod
+team_id: klesis
+max_budget: 300.00
+budget_duration: 30d
+models: ["sonnet-4-6", "haiku-3-7", "sabia-4", "gpt-4o-mini"]
+rpm_limit: 300
+metadata:
+  business_id: klesis
+  environment: prod
+  owner: marcelo
+  description: "Matrícula, atendimento pais, Educacenso"

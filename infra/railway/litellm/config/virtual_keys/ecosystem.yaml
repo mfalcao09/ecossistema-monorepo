@@ -1,0 +1,13 @@
+# Ecosystem master — Claudinho + 6 Diretores de Área + cross-business.
+# Acesso a todos os modelos, budget mais alto.
+key_alias: ecosystem-master
+team_id: ecosystem
+max_budget: 1000.00
+budget_duration: 30d
+models: ["*"]
+rpm_limit: 1000
+metadata:
+  business_id: ecosystem
+  environment: prod
+  owner: marcelo
+  description: "Claudinho (VP) + 6 Diretores de Área + tasks cross-business"

@@ -1,0 +1,13 @@
+# Nexvy — SaaS comunicação (omnichannel, Chatwoot fork, multi-tenant)
+# Volume alto de tokens (atendimento); budget médio-alto.
+key_alias: nexvy-prod
+team_id: nexvy
+max_budget: 400.00
+budget_duration: 30d
+models: ["sonnet-4-6", "haiku-3-7", "sabia-4", "gpt-4o-mini"]
+rpm_limit: 600
+metadata:
+  business_id: nexvy
+  environment: prod
+  owner: marcelo
+  description: "SaaS omnichannel, MariTalk engine PT-BR"
