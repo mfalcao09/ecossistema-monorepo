@@ -1,0 +1,2289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MASTERPLAN V9 — Ecossistema de Inovação e IA</title>
+<meta name="description" content="Masterplan V9 canônico do Ecossistema de IA de Marcelo Silva — evolução da V8.2 baseada em evidência de 99 repositórios analisados.">
+<style>
+/* === RESET & BASE === */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f1419;
+  --bg-elevated: #1a1f2e;
+  --bg-code: #0a0e14;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-2: #f78166;
+  --accent-3: #7ee787;
+  --accent-4: #ffa657;
+  --border: #30363d;
+  --shadow: 0 4px 20px rgba(0,0,0,0.5);
+  --h1: #f0f6fc;
+  --h2: #58a6ff;
+  --h3: #79c0ff;
+  --h4: #a5d6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --yellow: #d29922;
+  --purple: #bc8cff;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+  font-size: 16px;
+}
+/* === HEADINGS === */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  letter-spacing: -0.01em;
+}
+h1 {
+  font-size: 2.5rem;
+  color: var(--h1);
+  border-bottom: 3px solid var(--accent);
+  padding-bottom: 0.5rem;
+  margin-top: 0;
+  margin-bottom: 0.2em;
+}
+h2 {
+  font-size: 1.8rem;
+  color: var(--h2);
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 0.3rem;
+  margin-top: 3rem;
+}
+h3 {
+  font-size: 1.4rem;
+  color: var(--h3);
+}
+h4 {
+  font-size: 1.15rem;
+  color: var(--h4);
+}
+h5, h6 {
+  font-size: 1rem;
+  color: var(--text-muted);
+}
+/* === TEXT === */
+p { margin: 0.8em 0; }
+strong { color: var(--accent-3); font-weight: 600; }
+em { color: var(--accent-4); }
+a {
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+  transition: border 0.15s;
+}
+a:hover { border-bottom-color: var(--accent); }
+/* === LISTS === */
+ul, ol {
+  margin: 0.8em 0;
+  padding-left: 2em;
+}
+li { margin: 0.3em 0; }
+li > p { margin: 0.3em 0; }
+/* === BLOCKQUOTES === */
+blockquote {
+  border-left: 4px solid var(--accent-2);
+  background: var(--bg-elevated);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--text-muted);
+  border-radius: 0 6px 6px 0;
+}
+blockquote p { margin: 0.3em 0; }
+/* === CODE === */
+code {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: var(--bg-code);
+  color: var(--accent-2);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  overflow-x: auto;
+  margin: 1.2rem 0;
+  font-size: 0.87em;
+  line-height: 1.55;
+  box-shadow: var(--shadow);
+}
+pre code {
+  background: transparent;
+  border: none;
+  padding: 0;
+  color: var(--text);
+  font-size: inherit;
+}
+.codehilite { background: var(--bg-code); border-radius: 8px; overflow: hidden; margin: 1.2rem 0; }
+.codehilite pre { margin: 0; border: 1px solid var(--border); }
+/* Syntax highlighting */
+.codehilite .k, .codehilite .kd, .codehilite .kr { color: #ff7b72; } /* keyword */
+.codehilite .s, .codehilite .s1, .codehilite .s2 { color: #a5d6ff; } /* string */
+.codehilite .c, .codehilite .c1, .codehilite .cm { color: #8b949e; font-style: italic; } /* comment */
+.codehilite .n, .codehilite .nf { color: #d2a8ff; } /* name */
+.codehilite .nb { color: #79c0ff; } /* builtin */
+.codehilite .mi, .codehilite .mf { color: #79c0ff; } /* number */
+.codehilite .o, .codehilite .p { color: #e6edf3; } /* operator */
+/* === TABLES === */
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  font-size: 0.95em;
+}
+th, td {
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+th {
+  background: var(--bg-code);
+  color: var(--h2);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 0.85em;
+  letter-spacing: 0.05em;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover { background: rgba(88, 166, 255, 0.05); }
+td code { font-size: 0.85em; }
+/* === HR === */
+hr {
+  border: none;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--border), transparent);
+  margin: 3rem 0;
+}
+/* === HEADER CUSTOM === */
+.doc-header {
+  background: linear-gradient(135deg, var(--bg-elevated), var(--bg));
+  padding: 2rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow);
+}
+.doc-header h1 { margin: 0 0 0.5rem; border: none; padding: 0; }
+.doc-subtitle { color: var(--accent-2); font-size: 1.1rem; font-weight: 500; margin-bottom: 1rem; }
+.doc-meta {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+.doc-meta span strong { color: var(--accent-3); }
+/* === TOC === */
+.toc {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+}
+.toc > ul { margin: 0; padding-left: 1rem; }
+.toc ul { padding-left: 1.5rem; }
+.toc li { margin: 0.2em 0; }
+.toc a { color: var(--text); }
+.toc a:hover { color: var(--accent); }
+/* === CHECKBOXES (GFM) === */
+input[type="checkbox"] {
+  margin-right: 0.5em;
+  accent-color: var(--accent-3);
+}
+/* === EMOJI-LIKE STATUS === */
+li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
+/* === PRINT === */
+@media print {
+  body {
+    max-width: 100%;
+    padding: 1cm;
+    font-size: 11pt;
+    color: #000;
+    background: #fff;
+  }
+  h1, h2, h3, h4 { color: #000; page-break-after: avoid; }
+  h1 { border-bottom-color: #000; }
+  h2 { border-bottom-color: #ccc; }
+  pre, code { background: #f5f5f5; color: #000; border-color: #ccc; }
+  table { box-shadow: none; border: 1px solid #ccc; background: #fff; }
+  th { background: #f0f0f0; color: #000; }
+  tr:hover { background: #fff; }
+  blockquote { background: #f9f9f9; color: #333; }
+  a { color: #000; text-decoration: underline; }
+  hr { background: #ccc; }
+  .doc-header { background: #f9f9f9; border-color: #ccc; box-shadow: none; }
+  pre { page-break-inside: avoid; }
+  table { page-break-inside: avoid; }
+}
+/* === MOBILE === */
+@media (max-width: 768px) {
+  body { padding: 1.5rem 1rem; font-size: 15px; }
+  h1 { font-size: 1.8rem; }
+  h2 { font-size: 1.4rem; }
+  h3 { font-size: 1.15rem; }
+  table { font-size: 0.85em; display: block; overflow-x: auto; }
+  .doc-meta { flex-direction: column; gap: 0.3rem; }
+}
+/* === SCROLLBAR === */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 5px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+</style>
+</head>
+<body>
+<div class="doc-header">
+  <h1>MASTERPLAN ECOSSISTEMA — V9</h1>
+  <div class="doc-subtitle">Evidence-Based Edition · Herança V8.2 + Stack Validada</div>
+  <div class="doc-meta">
+    <span><strong>Versão:</strong> 9.0</span>
+    <span><strong>Data:</strong> 2026-04-16</span>
+    <span><strong>Autor:</strong> Marcelo Silva (CEO) · Claudinho (VP Executivo)</span>
+    <span><strong>Status:</strong> Canônico</span>
+  </div>
+</div>
+
+<h1 id="masterplan-ecossistema-v9">MASTERPLAN ECOSSISTEMA — V9</h1>
+<h2 id="evidence-based-edition-heranca-v82-stack-validada">Evidence-Based Edition · Herança V8.2 + Stack Validada</h2>
+<p><strong>Versão:</strong> 9.0
+<strong>Data:</strong> 2026-04-16
+<strong>Autor:</strong> Marcelo Silva (CEO) · Claudinho (VP Executivo)
+<strong>Natureza:</strong> Documento canônico. Evolução direta da V8.2. Base para toda execução.</p>
+<hr />
+<h2 id="preambulo">Preâmbulo</h2>
+<p>A V9 é <strong>filha legítima da V8.2</strong>. Não é reboot. Não é revolução. É o próximo capítulo coerente, escrito com base em evidência: 99 repositórios clonados e analisados com código-fonte real, ~400KB de pesquisa curada, 1.249 repos catalogados via API GitHub.</p>
+<p><strong>O que a V9 faz:</strong>
+1. <strong>Preserva</strong> tudo que é canônico do V8.2 (22 Artigos, 13 Meta-Padrões, 29 Super-Crates, 17 Ondas, 7 Camadas, Dual-Write, ECOSYSTEM compartilhado + DBs per-projeto, Fase B, 5 Negócios)
+2. <strong>Evolui</strong> a organização de agentes (C-Suite por negócio + 6 Diretores de Área no ecossistema)
+3. <strong>Reorganiza</strong> as 29 Super-Crates por tecnologia real (Edge Function / Railway / LLM / RLS / Dados)
+4. <strong>Concretiza</strong> os 22 Artigos como hooks executáveis no Claude Agent SDK
+5. <strong>Adiciona</strong> 10 padrões arquiteturais validados em código de produção
+6. <strong>Consolida</strong> a stack técnica com ferramentas verificadas</p>
+<p><strong>O que a V9 descarta:</strong>
+- Apenas narrativas ficcionais dos V6-V8 que <strong>não têm código</strong> (6 Meta-Padrões V7 do tipo "Nexus/Mesh/Autonomous Orchestration" que agrupavam tools independentes sem integração real). Os repos individuais continuam úteis; descartamos só a ficção de que formavam sistemas integrados.</p>
+<hr />
+<h2 id="parte-i-heranca-canonica-do-v82">Parte I — Herança Canônica do V8.2</h2>
+<h3 id="1-22-artigos-constitucionais-mantidos-hooks">§ 1. 22 Artigos Constitucionais (MANTIDOS + hooks)</h3>
+<p>Todos os 22 Artigos permanecem como princípios canônicos. A novidade: <strong>cada Artigo verificável ganha implementação em hook executável</strong> (detalhado na Parte V). Os subjetivos (ex: Art. I) continuam como diretrizes no prompt assembler.</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Artigo</th>
+<th>Natureza V9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I</td>
+<td>Primazia do Propósito</td>
+<td>Diretriz de prompt (subjetivo)</td>
+</tr>
+<tr>
+<td>II</td>
+<td>Human-in-the-loop Crítico</td>
+<td><strong>Hook PreToolUse</strong></td>
+</tr>
+<tr>
+<td>III</td>
+<td>Idempotência Universal</td>
+<td><strong>Hook PreToolUse</strong></td>
+</tr>
+<tr>
+<td>IV</td>
+<td>Rastreabilidade Total</td>
+<td><strong>Hook PostToolUse</strong></td>
+</tr>
+<tr>
+<td>V</td>
+<td>Memória Persistente</td>
+<td>Infra (Supabase + Mem0)</td>
+</tr>
+<tr>
+<td>VI</td>
+<td>Autonomia Gradual</td>
+<td>Diretriz + Permission modes</td>
+</tr>
+<tr>
+<td>VII</td>
+<td>Hierarquia Respeitada</td>
+<td>Diretriz + RACI Registry</td>
+</tr>
+<tr>
+<td>VIII</td>
+<td>Confirmação por Baixa Real</td>
+<td><strong>Hook PostToolUse</strong></td>
+</tr>
+<tr>
+<td>IX</td>
+<td>Falha Explícita</td>
+<td><strong>Hook PostToolUse</strong></td>
+</tr>
+<tr>
+<td>X</td>
+<td>Princípio da Menor Surpresa</td>
+<td>Diretriz (design APIs simples)</td>
+</tr>
+<tr>
+<td>XI</td>
+<td>Reversibilidade</td>
+<td>Infra (Rollback Engine)</td>
+</tr>
+<tr>
+<td>XII</td>
+<td>Custos sob Controle</td>
+<td><strong>Hook PreToolUse + LiteLLM budgets</strong></td>
+</tr>
+<tr>
+<td>XIII</td>
+<td>Skill-First</td>
+<td>Diretriz + Skill Registry</td>
+</tr>
+<tr>
+<td>XIV</td>
+<td>Dual-Write Supabase-first</td>
+<td><strong>Hook PreToolUse</strong></td>
+</tr>
+<tr>
+<td>XV</td>
+<td>Multi-Tenant Data Isolation</td>
+<td><strong>Postgres RLS</strong></td>
+</tr>
+<tr>
+<td>XVI</td>
+<td>Observabilidade por Default</td>
+<td>Infra (Langfuse)</td>
+</tr>
+<tr>
+<td>XVII</td>
+<td>Testes antes do Deploy</td>
+<td>CI/CD gates</td>
+</tr>
+<tr>
+<td>XVIII</td>
+<td>Data Contracts versionados</td>
+<td><strong>Hook PreToolUse + Schema Registry</strong></td>
+</tr>
+<tr>
+<td>XIX</td>
+<td>Segurança em Camadas</td>
+<td><strong>Hook PreToolUse</strong></td>
+</tr>
+<tr>
+<td>XX</td>
+<td>Soberania Local supera Dependência</td>
+<td><strong>Hook PreToolUse</strong></td>
+</tr>
+<tr>
+<td>XXI</td>
+<td>Escolha de Modelo é Estratégia</td>
+<td>LiteLLM router + model selection</td>
+</tr>
+<tr>
+<td>XXII</td>
+<td>Aprendizado é Infraestrutura</td>
+<td><strong>Hook SessionEnd + reflection subprocess</strong></td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-13-meta-padroes-todos-mantidos">§ 2. 13 Meta-Padrões (TODOS MANTIDOS)</h3>
+<p>Nenhum descarte. Todos são padrões arquiteturais clássicos, implementáveis:</p>
+<table>
+<thead>
+<tr>
+<th>MP</th>
+<th>Nome</th>
+<th>Implementação V9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MP-01</td>
+<td>Orquestrador Central + Especialistas</td>
+<td>Claudinho + C-Suite per negócio</td>
+</tr>
+<tr>
+<td>MP-02</td>
+<td>Memória em Camadas</td>
+<td>3-tier pgvector (episodic/semantic/procedural)</td>
+</tr>
+<tr>
+<td>MP-03</td>
+<td>Skill Registry First</td>
+<td>packages/@ecossistema/skills-registry</td>
+</tr>
+<tr>
+<td>MP-04</td>
+<td>Dual-Write</td>
+<td>Supabase primário + arquivos secundários</td>
+</tr>
+<tr>
+<td>MP-05</td>
+<td>Human-in-the-loop por Classe de Risco</td>
+<td>Hook + <code>status_idled</code> webhook (Cookbook pattern)</td>
+</tr>
+<tr>
+<td>MP-06</td>
+<td>Idempotência por Chave Natural</td>
+<td>Hook + table locks</td>
+</tr>
+<tr>
+<td>MP-07</td>
+<td>Multi-Provider Resilience</td>
+<td>LiteLLM router + fallbacks</td>
+</tr>
+<tr>
+<td>MP-08</td>
+<td>Audit Log Imutável</td>
+<td>Append-only table + trigger</td>
+</tr>
+<tr>
+<td>MP-09</td>
+<td>Retry com Backoff Exponencial</td>
+<td>Wrapper Edge Function</td>
+</tr>
+<tr>
+<td>MP-10</td>
+<td>Validação em Camadas</td>
+<td>JSON Schema + RLS + hook</td>
+</tr>
+<tr>
+<td>MP-11</td>
+<td>Rollback Declarativo</td>
+<td>Compensation actions + git revert</td>
+</tr>
+<tr>
+<td>MP-12</td>
+<td>Custo Observável</td>
+<td>LiteLLM + Langfuse + pg_cron</td>
+</tr>
+<tr>
+<td>MP-13</td>
+<td>Contratos de Dados Versionados</td>
+<td>Schema Registry</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-29-super-crates-mantidas-reclassificadas">§ 3. 29 Super-Crates (MANTIDAS + reclassificadas)</h3>
+<p>As 29 SCs continuam como capacidades do ecossistema. A reorganização por tecnologia está na Parte IV.</p>
+<h3 id="4-17-ondas-mantidas-priorizadas">§ 4. 17 Ondas (MANTIDAS + priorizadas)</h3>
+<p>Sequência preservada. Onda 0 continua pré-infraestrutura (SC-29 Credential Vault primeiro).</p>
+<h3 id="5-7-camadas-l1-l7-mantidas-como-mapa-conceitual">§ 5. 7 Camadas L1-L7 (MANTIDAS como mapa conceitual)</h3>
+<p>Permanecem no modelo mental. A V9 adiciona <strong>4 camadas técnicas de execução</strong> (Parte III) sem invalidar as 7 conceituais.</p>
+<h3 id="6-decisoes-d1-d6-do-v4-todas-mantidas">§ 6. Decisões D1-D6 do V4 (TODAS MANTIDAS)</h3>
+<ul>
+<li><strong>D1</strong> — Managed Agents + Railway híbrido</li>
+<li><strong>D2</strong> — ECOSYSTEM compartilhado + DBs per-projeto</li>
+<li><strong>D3</strong> — Jarvis em 4 estágios</li>
+<li><strong>D4</strong> — pg_cron + Trigger.dev para scheduled tasks</li>
+<li><strong>D5</strong> — Monorepo pnpm workspaces</li>
+<li><strong>D6</strong> — Piloto ERP-Educacional</li>
+</ul>
+<h3 id="7-fase-b-mantida-como-canonica">§ 7. Fase B (MANTIDA como canônica)</h3>
+<p>Supabase é fonte primária de verdade. Auto-embedding via pg_net + Edge Function (produção desde s093). <code>ecosystem_memory</code> com BGE embeddings. Não reverter.</p>
+<h3 id="8-5-negocios-mantidos">§ 8. 5 Negócios (MANTIDOS)</h3>
+<p>FIC · Klésis · Intentus · Splendori · Nexvy.</p>
+<hr />
+<h2 id="parte-ii-descartes-apenas-ficcao-repos-continuam-uteis">Parte II — Descartes (apenas ficção, repos continuam úteis)</h2>
+<h3 id="9-o-que-foi-descartado-e-por-que">§ 9. O que foi descartado e por quê</h3>
+<p>Análise com agente de pesquisa que leu código-fonte dos 8 repos Kahler + dependências. Veredicto: a <strong>narrativa de integração não existe</strong>. Cada tool é independente. Os repos individuais <strong>continuam úteis como referência</strong> — só descartamos a ficção de que formavam um sistema integrado.</p>
+<table>
+<thead>
+<tr>
+<th>Descartado</th>
+<th>Razão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"MP-01 Token Efficiency Nexus" (como narrativa V7)</td>
+<td>CARL + BASE + ccusage são 3 tools de 2 autores diferentes sem integração</td>
+</tr>
+<tr>
+<td>"MP-02 Semantic Graph Mesh"</td>
+<td>GraphRAG-SDK é FalkorDB, zero relação com LightRAG/bloop/OpenSpace</td>
+</tr>
+<tr>
+<td>"MP-03 Autonomous Agent Orchestration" (Kahler)</td>
+<td>PAUL <strong>explicitamente rejeita</strong> autonomia — "~70% quality" no README</td>
+</tr>
+<tr>
+<td>"MP-05 Multi-Modal Retrieval" (Kahler)</td>
+<td>GraphRAG-SDK só processa texto</td>
+</tr>
+<tr>
+<td>Alegação de "mesh/nexus/integração" entre Kahler repos</td>
+<td>Cada um é independente; só compartilham convenção de markdown</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Importante:</strong> os 13 Meta-Padrões arquiteturais do V8.2 <strong>permanecem intactos</strong>. O que descartamos é apenas a camada narrativa posterior (V7) que cooptava tools de terceiros em "super-padrões" ficcionais.</p>
+<hr />
+<h2 id="parte-iii-reorganizacao-tecnica-4-camadas-de-execucao">Parte III — Reorganização Técnica: 4 Camadas de Execução</h2>
+<p>As 7 Camadas conceituais do V8.2 ficam como mapa mental. A V9 adiciona 4 camadas <strong>operacionais</strong> para execução:</p>
+<div class="codehilite"><pre><span></span><code>┌───────────────────────────────────────────────────────────────┐
+│  L1 — AGENTES (Anthropic Managed Agents)                      │
+│      Claudinho + C-Suite per negócio + 6 Diretores de Área    │
+│      Raciocínio em linguagem natural, decisões complexas      │
+└───────────────────────────────────────────────────────────────┘
+                              │
+┌───────────────────────────────────────────────────────────────┐
+│  L2 — SERVIÇOS (Railway)                                      │
+│      LiteLLM gateway · Langfuse · RAG-engine · Orchestrator   │
+│      FastAPI · Workers BullMQ · Memory consolidator           │
+│      Long-running, stateful, queue-backed                     │
+└───────────────────────────────────────────────────────────────┘
+                              │
+┌───────────────────────────────────────────────────────────────┐
+│  L3 — EDGE FUNCTIONS (Supabase)                               │
+│      SC-29 Credential Gateway · Webhooks · PII Mask · Audit   │
+│      Lógica determinística, &lt;1s, auto-scale                   │
+└───────────────────────────────────────────────────────────────┘
+                              │
+┌───────────────────────────────────────────────────────────────┐
+│  L4 — DADOS (Postgres + pgvector + ClickHouse)                │
+│      ECOSYSTEM compartilhado · DBs per-projeto · RLS          │
+│      Triggers · Views materializadas · pg_cron                │
+└───────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<p><strong>Regra operacional:</strong> toda nova capacidade do ecossistema pergunta primeiro "em qual L?":
+- Precisa raciocinar em linguagem natural? → L1
+- Precisa de long-running, queue, WebSocket? → L2
+- É lógica determinística &lt;1s? → L3
+- É modelagem de dados, agregação, acesso? → L4</p>
+<hr />
+<h2 id="parte-iv-reclassificacao-das-29-super-crates">Parte IV — Reclassificação das 29 Super-Crates</h2>
+<p>Análise SC-a-SC contra critérios: determinismo, estado longo, raciocínio natural.</p>
+<table>
+<thead>
+<tr>
+<th>SC</th>
+<th>Nome</th>
+<th>Camada V9</th>
+<th>Tech real</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SC-01</td>
+<td>Agent Foundation</td>
+<td><strong>L1</strong></td>
+<td>Managed Agents</td>
+</tr>
+<tr>
+<td>SC-02</td>
+<td>Orquestrator Core</td>
+<td><strong>L1</strong></td>
+<td>Claudinho (Opus 4.6)</td>
+</tr>
+<tr>
+<td>SC-03</td>
+<td>Dual-Write Pipeline</td>
+<td><strong>L3</strong></td>
+<td>Edge Function</td>
+</tr>
+<tr>
+<td>SC-04</td>
+<td>Skill Registry</td>
+<td><strong>L3 + L4</strong></td>
+<td>EF CRUD + Supabase table</td>
+</tr>
+<tr>
+<td>SC-05</td>
+<td>Skill Router</td>
+<td><strong>L1</strong></td>
+<td>Haiku (barato, matching semântico)</td>
+</tr>
+<tr>
+<td>SC-06</td>
+<td>Memory Consolidator v1</td>
+<td><strong>L2</strong></td>
+<td>Railway worker</td>
+</tr>
+<tr>
+<td>SC-07</td>
+<td>Human Approval Queue</td>
+<td><strong>L3</strong></td>
+<td>EF + webhook (cookbook <code>status_idled</code>)</td>
+</tr>
+<tr>
+<td>SC-08</td>
+<td>Cost Observer</td>
+<td><strong>L3 + L4</strong></td>
+<td>EF + pg_cron + Langfuse</td>
+</tr>
+<tr>
+<td>SC-09</td>
+<td>Multi-Tenant Isolation</td>
+<td><strong>L4</strong></td>
+<td>Postgres RLS (não precisa EF!)</td>
+</tr>
+<tr>
+<td>SC-10</td>
+<td>Webhook Hardening</td>
+<td><strong>L3</strong></td>
+<td>Edge Function (HMAC + rate limit)</td>
+</tr>
+<tr>
+<td>SC-11</td>
+<td>Audit Log Foundation</td>
+<td><strong>L4</strong></td>
+<td>Append-only table + trigger</td>
+</tr>
+<tr>
+<td>SC-12</td>
+<td>Memory Consolidator v2</td>
+<td><strong>L2 + L1</strong></td>
+<td>Railway worker + LLM summarization</td>
+</tr>
+<tr>
+<td>SC-13</td>
+<td>Agent Sandbox</td>
+<td><strong>L2</strong></td>
+<td>E2B ou container Docker</td>
+</tr>
+<tr>
+<td>SC-14</td>
+<td>Agent Runner (SDK)</td>
+<td><strong>L1</strong></td>
+<td>Claude Agent SDK (Python)</td>
+</tr>
+<tr>
+<td>SC-15</td>
+<td>Schema Contract Registry</td>
+<td><strong>L3</strong></td>
+<td>Edge Function validation</td>
+</tr>
+<tr>
+<td>SC-16</td>
+<td>Retry + Backoff Engine</td>
+<td><strong>L3</strong></td>
+<td>EF wrapper</td>
+</tr>
+<tr>
+<td>SC-17</td>
+<td>Multi-Provider LLM Gateway</td>
+<td><strong>L2</strong></td>
+<td>LiteLLM no Railway</td>
+</tr>
+<tr>
+<td>SC-18</td>
+<td>Observability Stack</td>
+<td><strong>L2</strong></td>
+<td>Langfuse no Railway</td>
+</tr>
+<tr>
+<td>SC-19</td>
+<td>PII Mask Pipeline</td>
+<td><strong>L3</strong></td>
+<td>Edge Function (regex + denylist)</td>
+</tr>
+<tr>
+<td>SC-20</td>
+<td>Rate Limiter</td>
+<td><strong>L3</strong></td>
+<td>EF + Redis token bucket</td>
+</tr>
+<tr>
+<td>SC-21</td>
+<td>Rollback Engine</td>
+<td><strong>L3</strong></td>
+<td>Edge Function</td>
+</tr>
+<tr>
+<td>SC-22</td>
+<td>Minors Data Fortress</td>
+<td><strong>L4 + L1</strong></td>
+<td>RLS + hooks no SDK (Klésis)</td>
+</tr>
+<tr>
+<td>SC-23</td>
+<td>Agent Performance Monitor</td>
+<td><strong>L4</strong></td>
+<td>pg_cron + views + Langfuse</td>
+</tr>
+<tr>
+<td>SC-24</td>
+<td>RACI Registry</td>
+<td><strong>L3 + L4</strong></td>
+<td>EF + Supabase</td>
+</tr>
+<tr>
+<td>SC-25</td>
+<td>Cross-Business Router</td>
+<td><strong>L1</strong></td>
+<td>Sonnet (decide qual negócio atende)</td>
+</tr>
+<tr>
+<td>SC-26</td>
+<td>Agent Learning Loop</td>
+<td><strong>L2 + L1</strong></td>
+<td>Railway worker + LLM (reflection)</td>
+</tr>
+<tr>
+<td>SC-27</td>
+<td>Incident Commander</td>
+<td><strong>L1</strong></td>
+<td>Sonnet (diagnóstico)</td>
+</tr>
+<tr>
+<td>SC-28</td>
+<td>Regulatory Deadline Watcher</td>
+<td><strong>L3 + L4</strong></td>
+<td>EF + pg_cron (MEC/SEFAZ)</td>
+</tr>
+<tr>
+<td>SC-29</td>
+<td>Credential Vault</td>
+<td><strong>L3</strong></td>
+<td>Edge Function (reformulada)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-distribuicao">§ 10. Distribuição</h3>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th># SCs</th>
+<th>%</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>L1 Agentes (LLM)</td>
+<td>6</td>
+<td>21%</td>
+</tr>
+<tr>
+<td>L2 Serviços Railway</td>
+<td>7</td>
+<td>24%</td>
+</tr>
+<tr>
+<td>L3 Edge Functions</td>
+<td>13</td>
+<td>45%</td>
+</tr>
+<tr>
+<td>L4 Dados nativos</td>
+<td>3</td>
+<td>10%</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Insight crítico:</strong> <strong>~55% das SCs não precisam de LLM nem de Railway</strong>. São lógica determinística ou modelagem de dados. Reduz drasticamente custo e complexidade operacional comparado ao V8.2 onde tudo parecia precisar de "agente".</p>
+<hr />
+<h2 id="parte-v-22-artigos-constitucionais-como-hooks-executaveis">Parte V — 22 Artigos Constitucionais como Hooks Executáveis</h2>
+<p>No V8.2, os Artigos eram <strong>texto em markdown</strong>. O agente <em>deveria</em> segui-los — mas nada forçava.</p>
+<p>Na V9, os Artigos verificáveis viram <strong>código que intercepta ações do agente e pode bloquear</strong>. Implementação via <code>PreToolUse</code> / <code>PostToolUse</code> / <code>SessionEnd</code> hooks do Claude Agent SDK.</p>
+<h3 id="11-tabela-canonica-artigo-hook">§ 11. Tabela canônica Artigo → Hook</h3>
+<table>
+<thead>
+<tr>
+<th>Artigo</th>
+<th>Tipo de hook</th>
+<th>Ação do hook</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>II — HITL Crítico</strong></td>
+<td><code>PreToolUse</code></td>
+<td>Bloqueia ações com impacto financeiro &gt; R$ 10k OU irreversíveis sem aprovação. Usa <code>session.status_idled</code> (cookbook pattern)</td>
+</tr>
+<tr>
+<td><strong>III — Idempotência</strong></td>
+<td><code>PreToolUse</code></td>
+<td>Injeta <code>idempotency_key</code> automático, rejeita duplicatas em janela de 24h</td>
+</tr>
+<tr>
+<td><strong>IV — Rastreabilidade</strong></td>
+<td><code>PostToolUse</code></td>
+<td>Grava em <code>audit_log</code> (append-only): tool_name, input_hash, output_hash, timestamp, agent_id, business_id</td>
+</tr>
+<tr>
+<td><strong>VIII — Baixa Real</strong></td>
+<td><code>PostToolUse</code></td>
+<td>Valida que tool retornou sucesso real (não "202 accepted" vazio)</td>
+</tr>
+<tr>
+<td><strong>IX — Falha Explícita</strong></td>
+<td><code>PostToolUse</code></td>
+<td>Transforma exceções silenciosas em erros visíveis; força <code>raise</code></td>
+</tr>
+<tr>
+<td><strong>XII — Custos</strong></td>
+<td><code>PreToolUse</code></td>
+<td>Checa budget via LiteLLM antes de chamada cara; bloqueia se excedido</td>
+</tr>
+<tr>
+<td><strong>XIV — Dual-Write</strong></td>
+<td><code>PreToolUse</code></td>
+<td>Intercepta Write/Edit em <code>*.md</code> para secrets/memory/tasks; redireciona para Supabase</td>
+</tr>
+<tr>
+<td><strong>XIX — Segurança</strong></td>
+<td><code>PreToolUse</code></td>
+<td>Regex blocklist em Bash: <code>rm -rf /</code>, <code>dd of=/dev/</code>, <code>git push --force</code>, <code>kill -9 1</code>, etc</td>
+</tr>
+<tr>
+<td><strong>XX — Soberania Local</strong></td>
+<td><code>PreToolUse</code></td>
+<td>Prioriza Supabase local antes de API externa quando possível</td>
+</tr>
+<tr>
+<td><strong>XVIII — Data Contracts</strong></td>
+<td><code>PreToolUse</code></td>
+<td>Valida payload contra JSON Schema antes de tool call</td>
+</tr>
+<tr>
+<td><strong>XXII — Aprendizado</strong></td>
+<td><code>SessionEnd</code></td>
+<td>Extrai padrões, lições, files_touched, outcomes; injeta em Mem0</td>
+</tr>
+</tbody>
+</table>
+<h3 id="12-exemplo-concreto-art-ii-hitl-critico">§ 12. Exemplo concreto (Art. II — HITL Crítico)</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1"># packages/@ecossistema/hooks/art-ii-hitl.ts</span>
+<span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">PreToolUseHook</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">&#39;@anthropic-ai/claude-agent-sdk&#39;</span><span class="p">;</span>
+
+<span class="n">const</span> <span class="n">ACOES_CRITICAS_FINANCEIRAS</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="s1">&#39;emitir_boleto_massa&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;rotacionar_credencial_prod&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;assinar_contrato&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;pix_transferencia&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;deletar_dados_aluno&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;atualizar_status_matricula_massa&#39;</span><span class="p">,</span>
+<span class="p">];</span>
+
+<span class="n">const</span> <span class="n">LIMITE_FINANCEIRO_BRL</span> <span class="o">=</span> <span class="mi">10_000</span><span class="p">;</span>
+
+<span class="n">export</span> <span class="n">const</span> <span class="n">artIIHITL</span><span class="p">:</span> <span class="n">PreToolUseHook</span> <span class="o">=</span> <span class="k">async</span> <span class="p">(</span><span class="n">ctx</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="p">{</span>
+    <span class="n">const</span> <span class="p">{</span> <span class="n">tool_name</span><span class="p">,</span> <span class="n">tool_input</span><span class="p">,</span> <span class="n">agent_id</span><span class="p">,</span> <span class="n">business_id</span> <span class="p">}</span> <span class="o">=</span> <span class="n">ctx</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="err">!</span><span class="n">ACOES_CRITICAS_FINANCEIRAS</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="n">tool_name</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">return</span> <span class="p">{</span> <span class="n">decision</span><span class="p">:</span> <span class="s2">&quot;allow&quot;</span> <span class="p">};</span>
+    <span class="p">}</span>
+
+    <span class="n">const</span> <span class="n">valor</span> <span class="o">=</span> <span class="n">Number</span><span class="p">(</span><span class="n">tool_input</span><span class="err">?</span><span class="o">.</span><span class="n">valor</span> <span class="err">??</span> <span class="mi">0</span><span class="p">);</span>
+
+    <span class="o">//</span> <span class="n">Irreversíveis</span> <span class="n">sempre</span> <span class="n">pedem</span> <span class="n">aprovação</span>
+    <span class="n">const</span> <span class="n">IRREVERSIVEIS</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;deletar_dados_aluno&#39;</span><span class="p">,</span> <span class="s1">&#39;assinar_contrato&#39;</span><span class="p">];</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">IRREVERSIVEIS</span><span class="o">.</span><span class="n">includes</span><span class="p">(</span><span class="n">tool_name</span><span class="p">))</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="n">createApprovalRequest</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">decision</span><span class="p">:</span> <span class="s2">&quot;block&quot;</span><span class="p">,</span>
+            <span class="n">reason</span><span class="p">:</span> <span class="s2">&quot;Art. II: Ação irreversível. Aprovação humana requisitada via status_idled.&quot;</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+
+    <span class="o">//</span> <span class="n">Acima</span> <span class="n">do</span> <span class="n">limite</span> <span class="n">também</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">valor</span> <span class="o">&gt;</span> <span class="n">LIMITE_FINANCEIRO_BRL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">await</span> <span class="n">createApprovalRequest</span><span class="p">(</span><span class="n">ctx</span><span class="p">);</span>
+        <span class="k">return</span> <span class="p">{</span>
+            <span class="n">decision</span><span class="p">:</span> <span class="s2">&quot;block&quot;</span><span class="p">,</span>
+            <span class="n">reason</span><span class="p">:</span> <span class="err">`</span><span class="n">Art</span><span class="o">.</span> <span class="n">II</span><span class="p">:</span> <span class="n">Valor</span> <span class="n">R</span><span class="err">$$</span><span class="p">{</span><span class="n">valor</span><span class="p">}</span> <span class="o">&gt;</span> <span class="n">limite</span> <span class="n">R</span><span class="err">$$</span><span class="p">{</span><span class="n">LIMITE_FINANCEIRO_BRL</span><span class="p">}</span><span class="o">.</span> <span class="n">Aprovação</span> <span class="n">humana</span><span class="o">.</span><span class="err">`</span>
+        <span class="p">};</span>
+    <span class="p">}</span>
+
+    <span class="k">return</span> <span class="p">{</span> <span class="n">decision</span><span class="p">:</span> <span class="s2">&quot;allow&quot;</span> <span class="p">};</span>
+<span class="p">};</span>
+</code></pre></div>
+
+<p>O hook é <strong>testável, auditável, reversível</strong>. Mudar o limite não exige retreinar/reescrever prompt. Ficar atrás de um teste unitário garante comportamento.</p>
+<h3 id="13-pacote-canonico-ecossistemaconstitutional-hooks">§ 13. Pacote canônico: <code>@ecossistema/constitutional-hooks</code></h3>
+<p>Todos os hooks vivem em um pacote monorepo. Cada agente (Claudinho, C-Suite, Diretores) importa os hooks apropriados ao registrar no SDK. Pacote é auditado, testado, versionado.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// apps/fic/agents/cfo.ts</span>
+<span class="k">import</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">artIIHITL</span><span class="p">,</span><span class="w"> </span><span class="nx">artIIIIdempotency</span><span class="p">,</span><span class="w"> </span><span class="nx">artIVAudit</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">artVIIIBaixaReal</span><span class="p">,</span><span class="w"> </span><span class="nx">artXIICostControl</span><span class="p">,</span><span class="w"> </span><span class="nx">artXIVDualWrite</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">artXIXSecurity</span><span class="p">,</span><span class="w"> </span><span class="nx">artXXSoberania</span><span class="p">,</span><span class="w"> </span><span class="nx">artXVIIIDataContracts</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">artXXIIAprendizado</span><span class="p">,</span>
+<span class="p">}</span><span class="w"> </span><span class="kr">from</span><span class="w"> </span><span class="s1">&#39;@ecossistema/constitutional-hooks&#39;</span><span class="p">;</span>
+
+<span class="kd">const</span><span class="w"> </span><span class="nx">cfoFIC</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="ow">new</span><span class="w"> </span><span class="nx">ManagedAgent</span><span class="p">({</span>
+<span class="w">    </span><span class="nx">name</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;cfo-fic&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">model</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;claude-sonnet-4-6&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="nx">hooks</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">preToolUse</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">artIIHITL</span><span class="p">,</span><span class="w"> </span><span class="nx">artIIIIdempotency</span><span class="p">,</span><span class="w"> </span><span class="nx">artXIICostControl</span><span class="p">,</span><span class="w"> </span><span class="nx">artXIVDualWrite</span><span class="p">,</span><span class="w"> </span><span class="nx">artXIXSecurity</span><span class="p">,</span><span class="w"> </span><span class="nx">artXXSoberania</span><span class="p">,</span><span class="w"> </span><span class="nx">artXVIIIDataContracts</span><span class="p">],</span>
+<span class="w">        </span><span class="nx">postToolUse</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">artIVAudit</span><span class="p">,</span><span class="w"> </span><span class="nx">artVIIIBaixaReal</span><span class="p">,</span><span class="w"> </span><span class="nx">artIXFalhaExplicita</span><span class="p">],</span>
+<span class="w">        </span><span class="nx">sessionEnd</span><span class="o">:</span><span class="w"> </span><span class="p">[</span><span class="nx">artXXIIAprendizado</span><span class="p">],</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<p><strong>Resultado:</strong> compliance constitucional <strong>no código</strong>, não só no prompt. Violações impossíveis, não improváveis.</p>
+<hr />
+<h2 id="parte-vi-organizacao-de-agentes">Parte VI — Organização de Agentes</h2>
+<h3 id="14-estrutura-em-3-camadas-de-governanca">§ 14. Estrutura em 3 camadas de governança</h3>
+<div class="codehilite"><pre><span></span><code>┌──────────────────────────────────────────────────────────────────┐
+│  ECOSSISTEMA (meta-layer)                                        │
+│  Claudinho (VP Executivo, Opus 4.6) ← interface Jarvis Marcelo   │
+│                                                                  │
+│  6 Diretores de Área (supervisão cross-business, Sonnet 4.6):    │
+│    • D-Estrategia    : alinhamento ao propósito BAM              │
+│    • D-Sinergia      : oportunidades cross-business              │
+│    • D-Infra         : saúde Managed Agents + Railway + DBs      │
+│    • D-Memoria       : qualidade da memória, drift, decay        │
+│    • D-Governanca    : compliance 22 artigos + LGPD + audit      │
+│    • D-Relacionamento: experiência Marcelo (Jarvis 4 estágios)   │
+└──────────────────────────────────────────────────────────────────┘
+                                  │
+                                  │ audita · coordena · sintetiza
+                                  ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  NEGÓCIOS (5 business units) — cada um com C-Suite próprio       │
+│                                                                  │
+│  FIC (5-7) · Klésis (5-6) · Intentus (8) · Splendori (7) · Nexvy (6-7) │
+│  Total: ~30-35 agentes C-Suite distribuídos                      │
+└──────────────────────────────────────────────────────────────────┘
+                                  │
+                                  │ executa
+                                  ▼
+┌──────────────────────────────────────────────────────────────────┐
+│  OPERACIONAL — skills, tools, EFs, workers, RLS                  │
+└──────────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3 id="15-matriz-c-suite-por-negocio">§ 15. Matriz C-Suite por negócio</h3>
+<table>
+<thead>
+<tr>
+<th>Diretor</th>
+<th>FIC</th>
+<th>Klésis</th>
+<th>Intentus</th>
+<th>Splendori</th>
+<th>Nexvy</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CEO-IA</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>CFO-IA</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>CAO-IA</strong> (Acadêmico)</td>
+<td>✅</td>
+<td>✅</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>CMO-IA</strong></td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>CSO-IA</strong> (Sales)</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>CLO-IA</strong> (Legal)</td>
+<td>🟡 opc</td>
+<td>🟡 opc</td>
+<td>✅</td>
+<td>✅</td>
+<td>🟡 opc</td>
+</tr>
+<tr>
+<td><strong>COO-IA</strong> (Operations)</td>
+<td>🟡 opc</td>
+<td>—</td>
+<td>✅</td>
+<td>✅</td>
+<td>—</td>
+</tr>
+<tr>
+<td><strong>CTO-IA</strong> (Tech)</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>CPO-IA</strong> (Product)</td>
+<td>—</td>
+<td>—</td>
+<td>✅</td>
+<td>—</td>
+<td>✅</td>
+</tr>
+<tr>
+<td><strong>CHRO-IA</strong> (futuro)</td>
+<td>🟡 fut</td>
+<td>🟡 fut</td>
+<td>—</td>
+<td>—</td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Totais por negócio:</strong> FIC 5-7 · Klésis 5-6 · Intentus 8 · Splendori 7 · Nexvy 6-7.</p>
+<p><strong>Racional das ausências:</strong>
+- <strong>CAO apenas em FIC/Klésis</strong> — é função educacional
+- <strong>CTO/CPO apenas em Intentus/Nexvy</strong> — são produtos SaaS que produzem tecnologia
+- <strong>CLO opcional em FIC/Klésis</strong> — contratos padronizados; obrigatório em Intentus/Splendori (contratos complexos)
+- <strong>CHRO futuro</strong> — só quando grupo crescer para justificar</p>
+<h3 id="16-c-suite-como-template-reutilizavel">§ 16. C-Suite como template reutilizável</h3>
+<div class="codehilite"><pre><span></span><code>packages/@ecossistema/c-suite-templates/
+├── CEO-IA/
+│   ├── base-prompt.md
+│   ├── variants/
+│   │   ├── educacao.md         # FIC, Klésis
+│   │   ├── imobiliario.md      # Intentus, Splendori
+│   │   └── saas.md             # Nexvy
+│   ├── skills.yaml
+│   ├── hooks.ts                # hooks constitucionais aplicáveis
+│   └── tests/
+├── CFO-IA/
+├── CAO-IA/
+├── CMO-IA/
+├── CSO-IA/
+├── CLO-IA/
+├── COO-IA/
+├── CTO-IA/
+├── CPO-IA/
+└── CHRO-IA/
+</code></pre></div>
+
+<p>Cada negócio instancia:</p>
+<div class="codehilite"><pre><span></span><code><span class="c1"># apps/fic/agents/cfo.yaml</span>
+<span class="nt">extends</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;@ecossistema/c-suite-templates/CFO-IA/variants/educacao&quot;</span>
+<span class="nt">business_name</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;FIC&quot;</span>
+<span class="nt">business_id</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;fic&quot;</span>
+<span class="nt">supabase_project</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;ifdnjieklngcfodmtied&quot;</span>
+<span class="nt">custom_context</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">|</span>
+<span class="w">  </span><span class="no">Instituição de ensino superior, 44 anos em Cassilândia-MS.</span>
+<span class="w">  </span><span class="no">Mensalidades via Banco Inter. Inadimplência histórica ~8%.</span>
+<span class="w">  </span><span class="no">KPIs: taxa inadimplência, NPS financeiro, % bolsas/gratuidades.</span>
+<span class="nt">model</span><span class="p">:</span><span class="w"> </span><span class="s">&quot;claude-sonnet-4-6&quot;</span>
+<span class="nt">hooks_extra</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
+</code></pre></div>
+
+<p><strong>Economia:</strong> ao melhorar o template CFO-IA, <strong>todos os 5 CFOs herdam</strong>. Cada negócio mantém apenas ~50 linhas de contexto específico.</p>
+<h3 id="17-os-6-diretores-de-area-responsabilidades-detalhadas">§ 17. Os 6 Diretores de Área — responsabilidades detalhadas</h3>
+<h4 id="d-estrategia">D-Estrategia</h4>
+<ul>
+<li><strong>Missão:</strong> avaliar se decisões do ecossistema estão alinhadas ao tripé BAM (viabilidade financeira + impacto social + coerência com propósito)</li>
+<li><strong>Inputs:</strong> ações estratégicas dos CEO-IAs de cada negócio, KPIs cross-business</li>
+<li><strong>Outputs:</strong> veto (com justificativa) ou endosso; relatório semanal de alinhamento ao propósito</li>
+<li><strong>Tech:</strong> Sonnet 4.6, AEGIS 7-layer epistemic framework, hooks Art. I aplicados</li>
+</ul>
+<h4 id="d-sinergia">D-Sinergia</h4>
+<ul>
+<li><strong>Missão:</strong> identificar e ativar oportunidades cross-business (ex: Intentus vende SaaS para FIC; Splendori capta leads do Intentus)</li>
+<li><strong>Inputs:</strong> operações de todos os negócios via Memória compartilhada</li>
+<li><strong>Outputs:</strong> propostas de sinergia com estimativa de valor; handoffs entre negócios</li>
+<li><strong>Tech:</strong> Sonnet 4.6, Cross-Business Router (SC-25), Mem0 cross-business namespace</li>
+</ul>
+<h4 id="d-infra">D-Infra</h4>
+<ul>
+<li><strong>Missão:</strong> saúde técnica de Managed Agents, Railway, Supabase, LiteLLM, FastMCP servers</li>
+<li><strong>Inputs:</strong> métricas de latência, erro, custo, uptime de cada camada</li>
+<li><strong>Outputs:</strong> alertas, upgrade/downgrade recommendations, incident response coordination</li>
+<li><strong>Tech:</strong> Sonnet 4.6 + Incident Commander (SC-27), Langfuse + pg_cron views</li>
+</ul>
+<h4 id="d-memoria">D-Memoria</h4>
+<ul>
+<li><strong>Missão:</strong> qualidade da memória do ecossistema (episodic/semantic/procedural) — detectar drift, decay, inconsistências, contradições</li>
+<li><strong>Inputs:</strong> <code>ecosystem_memory</code>, estatísticas de recall, access_count, outcome</li>
+<li><strong>Outputs:</strong> consolidação, reranking, sinalização de drift crítico</li>
+<li><strong>Tech:</strong> Sonnet 4.6 + Memory Consolidator v2 (SC-12) + BASE PSMM patterns</li>
+</ul>
+<h4 id="d-governanca">D-Governanca</h4>
+<ul>
+<li><strong>Missão:</strong> compliance com 22 Artigos Constitucionais, LGPD, audit log, rotação de credenciais</li>
+<li><strong>Inputs:</strong> audit_log, violações de hooks, credential_access_log</li>
+<li><strong>Outputs:</strong> relatório diário de compliance, pausar agentes em violação crítica, disparar auditorias</li>
+<li><strong>Tech:</strong> Sonnet 4.6 + AEGIS traceability + hooks monitoring</li>
+</ul>
+<h4 id="d-relacionamento">D-Relacionamento</h4>
+<ul>
+<li><strong>Missão:</strong> qualidade da experiência do Marcelo com Jarvis (Stages 1→4)</li>
+<li><strong>Inputs:</strong> interações via CLI/WhatsApp/voz, feedback explícito, padrões de uso</li>
+<li><strong>Outputs:</strong> ajustes de persona, sugestões de upgrade de estágio, personalização</li>
+<li><strong>Tech:</strong> Sonnet 4.6 + Phantom 9-layer assembler (persona/user-profile) + Mem0 pessoal</li>
+</ul>
+<h3 id="18-como-marcelo-nao-audita-1-a-1">§ 18. Como Marcelo NÃO audita 1 a 1</h3>
+<p>Cada Diretor de Área tem:
+1. <strong>Dashboard próprio</strong> (Langfuse + Supabase views) com saúde cross-business na sua dimensão
+2. <strong>Hooks que disparam ações automáticas</strong> quando detectam problema em algum C-Suite de negócio
+3. <strong>Briefing diário para Marcelo via Jarvis</strong> (resumo executivo)</p>
+<p><strong>Exemplo:</strong> D-Governanca audita CFO-FIC automaticamente.</p>
+<div class="codehilite"><pre><span></span><code><span class="c1">// Railway worker diário</span>
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">auditDailyDiretorGovernanca</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">business</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">BUSINESSES</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="k">for</span><span class="w"> </span><span class="p">(</span><span class="kd">const</span><span class="w"> </span><span class="nx">agent</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="nx">business</span><span class="p">.</span><span class="nx">cSuite</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">            </span><span class="c1">// 1. Todas ações das últimas 24h</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">actions</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">queryManagedAgentSessions</span><span class="p">({</span><span class="w"> </span><span class="nx">agent_id</span><span class="o">:</span><span class="w"> </span><span class="kt">agent.id</span><span class="p">,</span><span class="w"> </span><span class="nx">since</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;24h&quot;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">            </span><span class="c1">// 2. Violações constitucionais (hooks que bloquearam)</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">violations</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="nx">queryAuditLog</span><span class="p">({</span><span class="w"> </span><span class="nx">agent_id</span><span class="o">:</span><span class="w"> </span><span class="kt">agent.id</span><span class="p">,</span><span class="w"> </span><span class="nx">decision</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;block&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">since</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;24h&quot;</span><span class="w"> </span><span class="p">});</span>
+
+<span class="w">            </span><span class="c1">// 3. Anomalias (KPIs fora do esperado)</span>
+<span class="w">            </span><span class="kd">const</span><span class="w"> </span><span class="nx">anomalies</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">detectAnomalies</span><span class="p">(</span><span class="nx">actions</span><span class="p">,</span><span class="w"> </span><span class="nx">business</span><span class="p">.</span><span class="nx">expectedKPIs</span><span class="p">);</span>
+
+<span class="w">            </span><span class="c1">// 4. Consolidar</span>
+<span class="w">            </span><span class="k">if</span><span class="w"> </span><span class="p">(</span><span class="nx">violations</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="nx">anomalies</span><span class="p">.</span><span class="nx">length</span><span class="w"> </span><span class="o">&gt;</span><span class="w"> </span><span class="mf">0</span><span class="p">)</span><span class="w"> </span><span class="p">{</span>
+<span class="w">                </span><span class="k">await</span><span class="w"> </span><span class="nx">dispatchAlert</span><span class="p">({</span>
+<span class="w">                    </span><span class="nx">severity</span><span class="o">:</span><span class="w"> </span><span class="kt">computeSeverity</span><span class="p">(</span><span class="nx">violations</span><span class="p">,</span><span class="w"> </span><span class="nx">anomalies</span><span class="p">),</span>
+<span class="w">                    </span><span class="nx">business</span><span class="o">:</span><span class="w"> </span><span class="kt">business.name</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">agent</span><span class="o">:</span><span class="w"> </span><span class="kt">agent.name</span><span class="p">,</span>
+<span class="w">                    </span><span class="nx">details</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">violations</span><span class="p">,</span><span class="w"> </span><span class="nx">anomalies</span><span class="w"> </span><span class="p">},</span>
+<span class="w">                </span><span class="p">});</span>
+<span class="w">            </span><span class="p">}</span>
+<span class="w">        </span><span class="p">}</span>
+<span class="w">    </span><span class="p">}</span>
+
+<span class="w">    </span><span class="c1">// 5. Briefing consolidado pro Marcelo (1 mensagem, não 30)</span>
+<span class="w">    </span><span class="kd">const</span><span class="w"> </span><span class="nx">briefing</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nx">synthesizeEcosystemHealth</span><span class="p">();</span>
+<span class="w">    </span><span class="k">await</span><span class="w"> </span><span class="nx">sendToJarvis</span><span class="p">({</span><span class="w"> </span><span class="nx">channel</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;morning_brief&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">content</span><span class="o">:</span><span class="w"> </span><span class="kt">briefing</span><span class="w"> </span><span class="p">});</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<p><strong>Resultado:</strong> Marcelo recebe <strong>um único briefing executivo pela manhã</strong>. Só é acionado individualmente em exceções (severidade alta). Pode perguntar cross-business a qualquer momento (<em>"Claudinho, como está a saúde financeira do grupo?"</em>) — Claudinho consulta D-Estrategia que consolida CFOs de todos os negócios.</p>
+<hr />
+<h2 id="parte-vii-sc-29-credential-vault-reformulado">Parte VII — SC-29 Credential Vault Reformulado</h2>
+<h3 id="19-conceito-preservado-implementacao-corrigida">§ 19. Conceito preservado, implementação corrigida</h3>
+<p>O conceito original do SC-29 (dupla verificação + proxy seguro + audit log) <strong>está correto e permanece</strong>. A mudança é apenas <strong>a forma de implementação</strong>: Edge Function determinística, não agente LLM.</p>
+<p><strong>Por quê não agente LLM:</strong>
+- Verificação de credencial é determinística (ACL, não raciocínio)
+- LLM custa ~500ms + tokens por chamada
+- LLM pode alucinar e liberar credencial por razão errada
+- Hardcoded rules em Edge Function são auditáveis via código aberto</p>
+<h3 id="20-arquitetura-v9-credential-gateway">§ 20. Arquitetura V9 — Credential Gateway</h3>
+<div class="codehilite"><pre><span></span><code>┌───────────────────────────────────────────────────────────────┐
+│  SC-29 Credential Gateway (Edge Function, Supabase)           │
+├───────────────────────────────────────────────────────────────┤
+│                                                               │
+│  ┌──────────────────────────────────────────┐                 │
+│  │  Agente (FIC/CFO, Intentus/COO, etc)     │                 │
+│  │  precisa chamar API externa (Inter, BRy) │                 │
+│  └─────────────┬────────────────────────────┘                 │
+│                │                                              │
+│                ▼                                              │
+│  ┌──────────────────────────────────────────┐                 │
+│  │  Edge Function /credential-gateway       │                 │
+│  │                                          │                 │
+│  │  1. Autentica requisitante (JWT/scope)   │                 │
+│  │  2. Verifica ACL:                        │                 │
+│  │     pode esse agente pedir essa key?     │                 │
+│  │  3. Rate limit por agente                │                 │
+│  │  4. Recupera secret do Supabase Vault    │                 │
+│  │  5. Registra em credential_access_log    │                 │
+│  │  6. MODO DE OPERAÇÃO:                    │                 │
+│  │     A) Retorna secret (dev/staging)      │                 │
+│  │     B) Proxy: agente pede &quot;chame X&quot;,     │                 │
+│  │        EF faz a chamada, retorna só      │                 │
+│  │        resultado. Agente NUNCA vê key.   │                 │
+│  └─────────────┬────────────────────────────┘                 │
+│                │                                              │
+│                ▼                                              │
+│  ┌──────────────────────────────────────────┐                 │
+│  │  Supabase Vault (encrypted at rest)      │                 │
+│  │  ecosystem_credentials (registry)        │                 │
+│  │  credential_access_log (append-only)     │                 │
+│  └──────────────────────────────────────────┘                 │
+└───────────────────────────────────────────────────────────────┘
+</code></pre></div>
+
+<h3 id="21-modos-de-operacao">§ 21. Modos de operação</h3>
+<table>
+<thead>
+<tr>
+<th>Modo</th>
+<th>Comportamento</th>
+<th>Uso</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A — Entrega direta</strong></td>
+<td>EF retorna secret ao agente</td>
+<td>Dev/staging, agentes super-confiáveis</td>
+</tr>
+<tr>
+<td><strong>B — Proxy de chamada</strong> 🏆</td>
+<td>Agente pede "chame API X com credencial Y" — EF faz a chamada, retorna só resultado</td>
+<td><strong>Produção (default)</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Modo B é a concretização da proposta original de Marcelo:</strong> <em>"proteger o secret de quem requisita, fornecendo direto à fonte confiável"</em>. Agente nunca vê a key em trânsito. Nem em logs. Nem em memória.</p>
+<h3 id="22-schema-supabase">§ 22. Schema Supabase</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- Registry: metadata sem valores</span>
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">ecosystem_credentials</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">          </span><span class="n">uuid</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">name</span><span class="w">        </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">project</span><span class="w">     </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">         </span><span class="c1">-- &#39;ecosystem&#39; | &#39;fic&#39; | &#39;klesis&#39; | &#39;intentus&#39; | &#39;splendori&#39; | &#39;nexvy&#39;</span>
+<span class="w">    </span><span class="n">environment</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s1">&#39;prod&#39;</span><span class="p">,</span>
+<span class="w">    </span><span class="n">provider</span><span class="w">    </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">         </span><span class="c1">-- &#39;inter&#39; | &#39;bry&#39; | &#39;anthropic&#39; | &#39;openrouter&#39; | &#39;gemini&#39; | &#39;stripe&#39;</span>
+<span class="w">    </span><span class="n">description</span><span class="w"> </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">    </span><span class="n">vault_key</span><span class="w">   </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">         </span><span class="c1">-- referência ao Supabase Vault (valor real lá)</span>
+<span class="w">    </span><span class="n">acl</span><span class="w">         </span><span class="n">jsonb</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">        </span><span class="c1">-- quais agentes podem acessar (ex: [&#39;cfo-fic&#39;, &#39;cfo-klesis&#39;])</span>
+<span class="w">    </span><span class="n">rate_limit</span><span class="w">  </span><span class="n">jsonb</span><span class="p">,</span><span class="w">                 </span><span class="c1">-- tokens/min por agente</span>
+<span class="w">    </span><span class="n">expires_at</span><span class="w">  </span><span class="n">timestamptz</span><span class="p">,</span>
+<span class="w">    </span><span class="n">is_active</span><span class="w">   </span><span class="nb">boolean</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">true</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w">  </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">updated_at</span><span class="w">  </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">    </span><span class="k">unique</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="w"> </span><span class="n">project</span><span class="p">,</span><span class="w"> </span><span class="n">environment</span><span class="p">)</span>
+<span class="p">);</span>
+
+<span class="c1">-- Audit log imutável (MP-08 + Art. IV)</span>
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">credential_access_log</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">              </span><span class="n">bigserial</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="p">,</span>
+<span class="w">    </span><span class="n">credential_name</span><span class="w"> </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">project</span><span class="w">         </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">accessor</span><span class="w">        </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">      </span><span class="c1">-- agent_id</span>
+<span class="w">    </span><span class="n">action</span><span class="w">          </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">      </span><span class="c1">-- &#39;read&#39; | &#39;proxy&#39; | &#39;rotate&#39; | &#39;revoke&#39; | &#39;denied&#39;</span>
+<span class="w">    </span><span class="n">success</span><span class="w">         </span><span class="nb">boolean</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">reason</span><span class="w">          </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">    </span><span class="n">metadata</span><span class="w">        </span><span class="n">jsonb</span><span class="p">,</span>
+<span class="w">    </span><span class="n">accessed_at</span><span class="w">     </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">now</span><span class="p">()</span>
+<span class="p">);</span>
+
+<span class="c1">-- RLS: apenas service_role</span>
+<span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">ecosystem_credentials</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="k">security</span><span class="p">;</span>
+<span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">credential_access_log</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="k">security</span><span class="p">;</span>
+
+<span class="c1">-- Trigger append-only (MP-08)</span>
+<span class="k">create</span><span class="w"> </span><span class="k">or</span><span class="w"> </span><span class="k">replace</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">prevent_credential_log_mutation</span><span class="p">()</span>
+<span class="k">returns</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="err">$$</span><span class="w"> </span><span class="k">begin</span>
+<span class="w">    </span><span class="n">raise</span><span class="w"> </span><span class="k">exception</span><span class="w"> </span><span class="s1">&#39;credential_access_log is append-only (MP-08)&#39;</span><span class="p">;</span>
+<span class="k">end</span><span class="p">;</span><span class="w"> </span><span class="err">$$</span><span class="w"> </span><span class="k">language</span><span class="w"> </span><span class="n">plpgsql</span><span class="p">;</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">credential_log_no_update</span><span class="w"> </span><span class="k">before</span><span class="w"> </span><span class="k">update</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">credential_access_log</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">prevent_credential_log_mutation</span><span class="p">();</span>
+<span class="k">create</span><span class="w"> </span><span class="k">trigger</span><span class="w"> </span><span class="n">credential_log_no_delete</span><span class="w"> </span><span class="k">before</span><span class="w"> </span><span class="k">delete</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">credential_access_log</span>
+<span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="k">each</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">execute</span><span class="w"> </span><span class="k">function</span><span class="w"> </span><span class="n">prevent_credential_log_mutation</span><span class="p">();</span>
+</code></pre></div>
+
+<h3 id="23-regras-de-ouro-mantidas-do-v82">§ 23. Regras de ouro (mantidas do V8.2)</h3>
+<ol>
+<li><strong>Nenhum valor de credencial aparece em logs, <code>.md</code>, código-fonte ou memory</strong></li>
+<li><strong>Todo acesso gera entrada em <code>credential_access_log</code></strong> (Art. IV + MP-08)</li>
+<li><strong>Rotação de credencial de produção exige aprovação CEO</strong> (Art. II via <code>status_idled</code> webhook)</li>
+<li><strong>Credenciais por projeto/negócio</strong> — FIC não acessa credenciais da Intentus (ACL)</li>
+<li><strong>Edge Function é self-sufficient</strong> — usa <code>SUPABASE_SERVICE_ROLE_KEY</code> (injetado pelo Supabase) para bootstrap</li>
+</ol>
+<hr />
+<h2 id="parte-viii-os-10-padroes-roubados-espinha-dorsal-arquitetural-v9">Parte VIII — Os 10 Padrões Roubados (espinha dorsal arquitetural V9)</h2>
+<p>Cada padrão abaixo é <strong>validado em código</strong> de um ou mais repos analisados. Adotados como canônicos na V9.</p>
+<h3 id="24-padrao-1-phantom-9-layer-prompt-assembler">§ 24. Padrão 1 — Phantom 9-Layer Prompt Assembler</h3>
+<p><strong>Origem:</strong> <code>phantom/src/agent/prompt-assembler.ts</code></p>
+<p><strong>O que é:</strong> cada agente tem seu system prompt construído em 9 camadas ordenadas:</p>
+<ol>
+<li><strong>Identidade</strong> — quem é (ex: "Você é o CFO-IA da FIC")</li>
+<li><strong>Environment</strong> — onde roda, quais tools disponíveis, URLs públicas</li>
+<li><strong>Security</strong> — o que nunca deve fazer</li>
+<li><strong>Role template</strong> — YAML-defined specialization (ex: <code>variants/educacao.md</code>)</li>
+<li><strong>Onboarding</strong> — first-run only (primeiro contato com Marcelo)</li>
+<li><strong>Evolved config</strong> — constitution + persona + user-profile + domain-knowledge + strategies (arquivos MD versionados)</li>
+<li><strong>Memory instructions</strong> — como usar memory (sem injetar conteúdo = evita feedback loop)</li>
+<li><strong>Instructions</strong> — como trabalha</li>
+<li><strong>Memory context</strong> — recall dinâmico por query (de Mem0 + pgvector)</li>
+</ol>
+<p><strong>Aplicação V9:</strong> cada C-Suite e Diretor de Área usa este assembler. <code>packages/@ecossistema/prompt-assembler</code> exporta função <code>assemble(agentConfig, queryContext)</code>.</p>
+<h3 id="25-padrao-2-cardinal-rule">§ 25. Padrão 2 — Cardinal Rule</h3>
+<p><strong>Origem:</strong> <code>phantom/CLAUDE.md</code></p>
+<p><strong>A regra:</strong> <em>"TypeScript/Python é encanamento. O Agente SDK é o cérebro."</em></p>
+<p><strong>O que proíbe:</strong>
+- <code>detectXxx()</code>, <code>parseIntentXxx()</code>, <code>classifyFrameworkXxx()</code> — heurísticas em código
+- Regex para interpretar intenção do usuário
+- Switch/case para decisões que dependem de contexto</p>
+<p><strong>O que permite:</strong>
+- Código para orquestração (rotas, HTTP, SQLite, filas)
+- Código para deterministic gates (hooks constitucionais)
+- HEURISTIC FALLBACK explícito quando LLM está indisponível (flag <code>-fallback</code>)</p>
+<p><strong>Aplicação V9:</strong> vira <strong>primeira linha</strong> do <code>CLAUDE.md</code> raiz do monorepo. Lint rule bloqueia funções com nomes <code>detectXxx|parseIntentXxx|classifyXxx</code> fora de <code>/fallback/</code>.</p>
+<h3 id="26-padrao-3-aes-256-gcm-vault-magic-link">§ 26. Padrão 3 — AES-256-GCM Vault + Magic Link</h3>
+<p><strong>Origem:</strong> <code>phantom/src/secrets/crypto.ts</code></p>
+<p><strong>Fluxo:</strong>
+1. Agente precisa de credencial nova de um usuário/sistema externo
+2. Ferramenta <code>phantom_collect_secrets</code> gera <strong>URL com magic link</strong>
+3. Usuário abre URL, preenche formulário, secret é <strong>cifrado no browser</strong> (AES-256-GCM, 12-byte IV, 16-byte auth tag) antes de enviar
+4. Servidor armazena cifrado no Supabase
+5. Agente recupera via SC-29 Credential Gateway (Modo B — proxy)</p>
+<p><strong>Regra ouro:</strong> <strong>credenciais NUNCA fluem via chat</strong> (Slack, WhatsApp, voz, Jarvis CLI).</p>
+<p><strong>Aplicação V9:</strong> componente <code>packages/@ecossistema/magic-link-vault</code> + Edge Function <code>/collect-secret</code> + Next.js page <code>/vault/collect/[token]</code>.</p>
+<h3 id="27-padrao-4-mem0-v3-add-only-filters-estritos">§ 27. Padrão 4 — Mem0 v3 ADD-Only + Filters Estritos</h3>
+<p><strong>Origem:</strong> <code>mem0/mem0/memory/main.py</code></p>
+<p><strong>Algoritmo v3 (abril 2026):</strong>
+- <strong>Single-pass extraction, ADD-only</strong> — uma chamada LLM, nunca UPDATE/DELETE
+- Memórias acumulam; contradições viram versioning (não overwrite)
+- Agent-generated facts são first-class (mesma peso que user-stated)
+- Entity linking: entidades extraídas, embedded, linkadas para retrieval boosting
+- Multi-signal retrieval: semantic + BM25 + entity, fundidos por reciprocal rank</p>
+<p><strong>Filters estritos:</strong> <code>user_id</code>, <code>agent_id</code>, <code>run_id</code> são <strong>obrigatórios</strong> via <code>filters={}</code>. <code>_reject_top_level_entity_params()</code> lança <code>ValueError</code> se passados como kwargs. Arquiteturalmente forbidden "esquecer" o <code>user_id</code> e vazar cross-tenant.</p>
+<p><strong>Aplicação V9:</strong> memory layer principal. <code>packages/@ecossistema/memory</code> wrapa mem0 + adiciona hooks constitucionais:</p>
+<div class="codehilite"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">memory</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">filters</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">user_id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;marcelo&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">agent_id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;cfo-fic&quot;</span><span class="p">,</span>
+<span class="w">        </span><span class="nx">run_id</span><span class="o">:</span><span class="w"> </span><span class="kt">session.id</span><span class="p">,</span>
+<span class="w">    </span><span class="p">},</span>
+<span class="w">    </span><span class="nx">metadata</span><span class="o">:</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="nx">business</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;fic&quot;</span><span class="w"> </span><span class="p">},</span>
+<span class="p">});</span>
+</code></pre></div>
+
+<h3 id="28-padrao-5-prompt-versioning-status_idled-webhook">§ 28. Padrão 5 — Prompt Versioning + status_idled Webhook</h3>
+<p><strong>Origem:</strong> <code>claude-cookbooks/managed_agents/CMA_prompt_versioning_and_rollback.ipynb</code> + <code>CMA_gate_human_in_the_loop.ipynb</code></p>
+<p><strong>Prompt versioning:</strong>
+- <code>agents.update(prompt=novo_prompt)</code> cria nova versão automaticamente
+- <code>sessions.create(version=N)</code> pina sessão a versão específica
+- Rollback = pinar sessões futuras a versão <code>N-1</code></p>
+<p><strong>status_idled webhook:</strong>
+- Agente pausa com <code>requires_action</code> ou <code>idle</code>
+- Webhook dispara externamente (email, WhatsApp do Marcelo)
+- Marcelo aprova/rejeita
+- Sessão retoma do ponto exato (sem long-polling, sem WebSocket preso)</p>
+<p><strong>Aplicação V9:</strong> versioning automático de prompts evoluídos (persona/user-profile/strategies). HITL em todas as ações críticas (Art. II).</p>
+<h3 id="29-padrao-6-evaluator-optimizer-orchestrator-workers">§ 29. Padrão 6 — Evaluator-Optimizer + Orchestrator-Workers</h3>
+<p><strong>Origem:</strong> <code>claude-cookbooks/patterns/agents/</code></p>
+<p><strong>Evaluator-Optimizer:</strong>
+- Opus gera conteúdo (ex: CMO-IA escreve post de blog)
+- Sonnet avalia contra critérios (qualidade, tom, SEO)
+- Loop N iterações ou até passar quality gate
+- Para skills criativas (marketing, copywriting)</p>
+<p><strong>Orchestrator-Workers:</strong>
+- Lead (Opus) decompõe problema em sub-tarefas paralelas
+- Workers (Haiku, baratos) executam em paralelo
+- Lead sintetiza resultados
+- Para skills de pesquisa, sales enablement, análise de mercado</p>
+<p><strong>Aplicação V9:</strong>
+- CMO-IA-FIC usa Evaluator-Optimizer para conteúdo
+- D-Estrategia usa Orchestrator-Workers para análise cross-business</p>
+<h3 id="30-padrao-7-fastmcp-v3-como-framework-canonico">§ 30. Padrão 7 — FastMCP v3 como framework canônico</h3>
+<p><strong>Origem:</strong> <code>fastmcp/src/fastmcp/</code></p>
+<p><strong>Capacidades:</strong>
+- <code>@mcp.tool</code> / <code>@mcp.resource</code> / <code>@mcp.prompt</code> com schema auto-gerado de type hints
+- <code>AuthProvider</code> pluggable (Supabase JWT, owner token, scope-based)
+- Middleware stack (logging, rate-limit, errors, tracing)
+- OpenAPI provider — auto-gera MCP tools de qualquer spec OpenAPI
+- <code>FastMCPProxy</code> — wrap MCP servers de terceiros com auth + logging
+- <code>ToolTransform</code> + <code>apply_session_transforms</code> — visibility gates per-session (RBAC)</p>
+<p><strong>Aplicação V9:</strong> todos os MCP servers do ecossistema em FastMCP:</p>
+<div class="codehilite"><pre><span></span><code>packages/@ecossistema/mcp-servers/
+├── supabase-mcp/         # CRUD em qualquer projeto Supabase
+├── github-mcp/           # ops no monorepo
+├── whatsapp-mcp/         # via Evolution API
+├── credential-mcp/       # wraps SC-29
+├── memory-mcp/           # wraps Mem0
+├── audit-mcp/            # query audit_log
+└── businesses/
+    ├── fic-mcp/          # tools específicas FIC
+    ├── klesis-mcp/
+    ├── intentus-mcp/
+    ├── splendori-mcp/
+    └── nexvy-mcp/
+</code></pre></div>
+
+<p>Cada MCP server herda <code>AuthProvider</code> comum, middleware comum, OTel tracing.</p>
+<h3 id="31-padrao-8-memory-blocks-toolrulessolver-sleeptime">§ 31. Padrão 8 — Memory Blocks + ToolRulesSolver + Sleeptime</h3>
+<p><strong>Origem:</strong> <code>letta/letta/agent.py</code> + services/</p>
+<p><strong>Memory Blocks:</strong>
+- Blocos <strong>in-context, always-present</strong>: <code>human</code>, <code>persona</code>, <code>system</code>
+- Agente pode LER e EDITAR via tools (<code>block_update</code>)
+- RBAC per-block (<code>READ_ONLY_BLOCK_EDIT_ERROR</code>)</p>
+<p><strong>ToolRulesSolver:</strong>
+- <code>TerminalToolRule</code>: após tool X, turn acaba
+- "Após X, deve chamar Y" declarativo (não prompt-engineered)
+- Mais confiável que instruir no prompt</p>
+<p><strong>Sleeptime agent:</strong>
+- Wake-up periódico (idle times) para consolidação
+- Processa recent episodes → long-term memory
+- Complementa phantom's session-end reflection (contínuo vs por-sessão)</p>
+<p><strong>Aplicação V9:</strong>
+- Cada C-Suite tem blocos <code>persona</code>, <code>business_context</code>, <code>user_profile</code> in-context
+- Sleeptime worker no Railway roda em madrugadas para consolidação
+- ToolRulesSolver em skills críticas (ex: após <code>emitir_boleto</code>, deve chamar <code>registrar_cobrança</code>)</p>
+<h3 id="32-padrao-9-pgvector-3-tier-bm25-entity-boost">§ 32. Padrão 9 — pgvector 3-Tier + BM25 + Entity Boost</h3>
+<p><strong>Origem:</strong> <code>phantom/src/memory/{episodic,semantic,procedural}.ts</code> + <code>mem0/mem0/utils/scoring.py</code></p>
+<p><strong>Arquitetura:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>Tabela</th>
+<th>Conteúdo</th>
+<th>Vectors</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Episodic</strong></td>
+<td><code>memory_episodic</code></td>
+<td>Tasks, conversations, outcomes</td>
+<td><code>summary</code> (768) + <code>detail</code> (768) + BM25 sparse</td>
+</tr>
+<tr>
+<td><strong>Semantic</strong></td>
+<td><code>memory_semantic</code></td>
+<td>Atomic facts (subject/predicate/object)</td>
+<td>Single vector + BM25 + contradiction detection</td>
+</tr>
+<tr>
+<td><strong>Procedural</strong></td>
+<td><code>memory_procedural</code></td>
+<td>Workflows com success/failure</td>
+<td>Single vector</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Retrieval:</strong>
+- Dense (cosine similarity pgvector)
+- Sparse (BM25 via <code>ts_rank_cd</code>)
+- Entity boost (weight extra para entidades mencionadas na query)
+- <strong>Reciprocal Rank Fusion</strong> combina os 3 sinais</p>
+<p><strong>Aplicação V9:</strong> migrations em <code>infra/supabase/migrations/</code> criam as 3 tabelas com namespaces por <code>business_id</code>. <code>packages/@ecossistema/memory</code> exporta <code>recall(query, filters)</code> que retorna top-K fundidos.</p>
+<p><strong>Degraded mode:</strong> se pgvector/embeddings falham, retorna <code>[]</code> silenciosamente. Memory nunca derruba o agente.</p>
+<h3 id="33-padrao-10-litellm-router-fallbacks-cooldown">§ 33. Padrão 10 — LiteLLM Router + Fallbacks + Cooldown</h3>
+<p><strong>Origem:</strong> <code>litellm/litellm/router.py</code></p>
+<p><strong>Capacidades:</strong>
+- 100+ providers em interface OpenAI-compatible
+- Routing strategies: <code>simple-shuffle</code>, <code>least-busy</code>, <code>usage-based</code>, <code>latency-based</code>, <code>cost-based</code>
+- Fallback chains: <code>default_fallbacks</code>, <code>context_window_fallbacks</code>, <code>content_policy_fallbacks</code>
+- <strong>Cooldown</strong>: deployment em cooldown após N falhas, retry agendado
+- Budgets per-key (virtual keys por negócio)
+- Redis caching entre chamadas idênticas
+- Observability: emite traces para Langfuse nativamente</p>
+<p><strong>Aplicação V9:</strong>
+- <strong>1 LiteLLM proxy no Railway</strong>, compartilhado por todo o ecossistema
+- Virtual keys: <code>fic-key</code>, <code>klesis-key</code>, <code>intentus-key</code>, <code>splendori-key</code>, <code>nexvy-key</code>, <code>ecosystem-key</code>
+- Budgets per-business (limite mensal USD)
+- Fallback canônico: <code>claude-sonnet-4-6 → claude-haiku-3-7 → gpt-4o-mini → maritalk-sabia-4</code>
+- Todos os agentes chamam <strong><code>litellm.proxy.ecosystem.com</code></strong>, nunca provedor direto</p>
+<p><strong>Resultado:</strong> cost control + resilience + observability <strong>centralizados</strong>. Adicionar provedor novo = 1 config, não N mudanças de código.</p>
+<hr />
+<h2 id="parte-ix-stack-tecnica-canonica-v9">Parte IX — Stack Técnica Canônica V9</h2>
+<h3 id="34-ferramentas-validadas-com-evidencia-de-codigo">§ 34. Ferramentas validadas (com evidência de código)</h3>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Ferramenta</th>
+<th>Fonte</th>
+<th>Licença</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Runtime agentes</strong></td>
+<td>Anthropic Managed Agents</td>
+<td>Oficial</td>
+<td>Comercial</td>
+</tr>
+<tr>
+<td><strong>SDK</strong></td>
+<td><code>@anthropic-ai/claude-agent-sdk</code> (Python + TS)</td>
+<td>anthropic-ai/claude-agent-sdk</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Orquestração Jarvis</strong></td>
+<td>langgraph + PostgresSaver (encrypted)</td>
+<td>langchain-ai/langgraph</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Orquestração vertical</strong></td>
+<td>crewAI ou openai-agents (Session Protocol)</td>
+<td>crewAIInc/crewAI + openai/openai-agents-python</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>MCP framework</strong></td>
+<td>FastMCP v3</td>
+<td>PrefectHQ/fastmcp</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td>Mem0 v3 (wrapper) + pgvector 3-tier</td>
+<td>mem0ai/mem0</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>LLM Gateway</strong></td>
+<td>LiteLLM (proxy Railway)</td>
+<td>BerriAI/litellm</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Observability</strong></td>
+<td>Langfuse (self-host Railway)</td>
+<td>langfuse/langfuse</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Voice Stage 2 (WhatsApp)</strong></td>
+<td>pipecat + Evolution API</td>
+<td>pipecat-ai/pipecat + EvolutionAPI</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>Voice Stage 3 (WebRTC)</strong></td>
+<td>livekit/agents</td>
+<td>livekit/agents</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>STT PT-BR</strong></td>
+<td>Groq Whisper (cloud) OR faster-whisper (self-host)</td>
+<td>SYSTRAN/faster-whisper</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>TTS PT-BR</strong></td>
+<td>ElevenLabs (quality) OR Piper (local)</td>
+<td>elevenlabs + rhasspy/piper</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Wake word</strong></td>
+<td>openWakeWord</td>
+<td>dscripka/openWakeWord</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>VAD</strong></td>
+<td>Silero VAD</td>
+<td>snakers4/silero-vad</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Voice assistant runtime</strong></td>
+<td>phantom patterns (inspiração)</td>
+<td>ghostwright/phantom</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>Scheduled tasks</strong></td>
+<td>pg_cron (data jobs) + Trigger.dev (agent orchestration)</td>
+<td>Nativo + triggerdotdev</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Omnichannel base</strong></td>
+<td>Chatwoot (fork para Nexvy)</td>
+<td>chatwoot/chatwoot</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>WhatsApp gateway</strong></td>
+<td>Evolution API (Baileys + Meta Cloud)</td>
+<td>EvolutionAPI/evolution-api</td>
+<td>Apache-2.0</td>
+</tr>
+<tr>
+<td><strong>CLM Base</strong></td>
+<td>Documenso (self-host sem modificar)</td>
+<td>documenso/documenso</td>
+<td><strong>AGPLv3</strong> ⚠️</td>
+</tr>
+<tr>
+<td><strong>ICP-Brasil PAdES</strong></td>
+<td>pyHanko (Python sidecar)</td>
+<td>MatthiasValvekens/pyHanko</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>Educação BR (Klésis)</strong></td>
+<td>i-Educar (fork)</td>
+<td>portabilis/i-educar</td>
+<td>GPL-v2</td>
+</tr>
+<tr>
+<td><strong>CRM moderno</strong></td>
+<td>Twenty (pattern study)</td>
+<td>twentyhq/twenty</td>
+<td><strong>AGPLv3</strong> ⚠️</td>
+</tr>
+<tr>
+<td><strong>NFe/NFS-e PT</strong></td>
+<td>PyNFe (Python)</td>
+<td>TadaSoftware/PyNFe</td>
+<td>MIT</td>
+</tr>
+<tr>
+<td><strong>LLM PT-BR</strong></td>
+<td>MariTalk (Sabiá-4) via OpenAI-compatible</td>
+<td>maritaca-ai/maritalk-api</td>
+<td>Comercial</td>
+</tr>
+</tbody>
+</table>
+<h3 id="35-decisoes-criticas-sobre-licencas">§ 35. Decisões críticas sobre licenças</h3>
+<p><strong>AGPLv3 (Documenso, Twenty):</strong> self-host <strong>sem modificar</strong> o código. Para customizações, construir microserviços companheiros que consomem suas APIs. Nunca fork modificado em produto comercial fechado.</p>
+<p><strong>GPL-v2 (i-Educar):</strong> SaaS para clientes próprios é OK. Distribuição para terceiros exige publicar código.</p>
+<p><strong>Apache-2.0 (Evolution API, pipecat, LiveKit, FastMCP, OpenWakeWord):</strong> <strong>mais permissivas</strong>. Fork + modificação + comercialização livres.</p>
+<p><strong>MIT (a maioria):</strong> mesma permissividade, sem obrigação de notice explícito.</p>
+<h3 id="36-stack-br-por-negocio-validada-com-analise-de-codigo">§ 36. Stack BR por negócio (validada com análise de código)</h3>
+<table>
+<thead>
+<tr>
+<th>Negócio</th>
+<th>Stack recomendada</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>FIC</strong></td>
+<td>Chatwoot + Evolution API · Documenso + pyHanko (diplomas ICP-Brasil MEC 554/2021) · PyNFe (NFS-e mensalidades) · módulo Censup/e-MEC <strong>construído novo</strong> inspirado em i-Educar · Twenty (funil vestibular) · MariTalk (atendimento aluno)</td>
+</tr>
+<tr>
+<td><strong>Klésis</strong></td>
+<td><strong>Fork i-Educar</strong> (Educacenso INEP) · Chatwoot + Evolution API (pais/responsáveis) · Documenso + pyHanko (matrícula assinada) · PyNFe (NFS-e) · MariTalk</td>
+</tr>
+<tr>
+<td><strong>Intentus</strong></td>
+<td><strong>Twenty pattern study</strong> (não fork) · <strong>Documenso + pyHanko = diferencial jurídico</strong> (locação com ICP-Brasil) · Chatwoot + Evolution API · PyNFe (NFS-e locação)</td>
+</tr>
+<tr>
+<td><strong>Splendori</strong></td>
+<td>Twenty (lead→reserva→contrato) · Documenso + pyHanko (compra/venda ICP-Brasil) · Chatwoot + Evolution API · sped-nfe ou PyNFe</td>
+</tr>
+<tr>
+<td><strong>Nexvy</strong></td>
+<td><strong>Fork Chatwoot white-label</strong> · <strong>Evolution API multi-tenant</strong> · go-whatsapp-web-multidevice (alternativa MCP-native) · Documenso add-on · Twenty integração · MariTalk engine PT-BR</td>
+</tr>
+</tbody>
+</table>
+<h3 id="37-stack-br-canonica-comum-a-todos">§ 37. "Stack BR canônica" (comum a todos)</h3>
+<p>Chatwoot + Evolution API + Documenso + pyHanko + PyNFe + MariTalk é o <strong>core nacional</strong>. Evolution API já tem integração Chatwoot nativa (<code>src/api/integrations/chatbot/chatwoot/</code>) — zero glue code.</p>
+<hr />
+<h2 id="parte-x-jarvis-em-4-estagios-reafirmado">Parte X — Jarvis em 4 Estágios (reafirmado)</h2>
+<p>D3 do V4 permanece. Com evidência de código, a stack por estágio:</p>
+<table>
+<thead>
+<tr>
+<th>Estágio</th>
+<th>Funcionalidade</th>
+<th>Stack V9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>E1 — CLI</strong> (agora)</td>
+<td>Marcelo usa Claude Code</td>
+<td>Claude Code + Managed Agents + skills + hooks constitucionais</td>
+</tr>
+<tr>
+<td><strong>E2 — WhatsApp</strong> (~sem 4)</td>
+<td>Text-first bot</td>
+<td><strong>Evolution API (Cloud API) + pipecat + Supabase + C-Suite routing</strong></td>
+</tr>
+<tr>
+<td><strong>E3 — Voz App</strong> (~sem 8)</td>
+<td>macOS/iOS com push-to-talk</td>
+<td>pipecat + Groq Whisper + ElevenLabs + openWakeWord + Silero VAD + app Electron ou Swift</td>
+</tr>
+<tr>
+<td><strong>E4 — Always-on</strong> (~sem 16+)</td>
+<td>Escuta ambiente, voz proativa</td>
+<td>livekit/agents + Omi-like arquitetura + wake-word + sensors + proactive triggers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Filosofia mantida:</strong> cada estágio precisa ser excelente antes do próximo.</p>
+<hr />
+<h2 id="parte-xi-modelo-de-dados-consolidado">Parte XI — Modelo de Dados Consolidado</h2>
+<h3 id="38-tres-supabases-canonicos-futuros">§ 38. Três supabases canônicos + futuros</h3>
+<table>
+<thead>
+<tr>
+<th>Supabase</th>
+<th>ID</th>
+<th>Papel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>ECOSYSTEM</strong></td>
+<td><code>gqckbunsfjgerbuiyzvn</code></td>
+<td>Plataforma compartilhada — <code>ecosystem_memory</code>, <code>agent_tasks</code>, <code>ecosystem_credentials</code>, <code>credential_access_log</code>, <code>audit_log</code>, <code>skills_registry</code>, <code>billing_engine</code>, <code>raci_registry</code>, <code>cost_observer</code></td>
+</tr>
+<tr>
+<td><strong>ERP-FIC</strong></td>
+<td><code>ifdnjieklngcfodmtied</code></td>
+<td>Domínio educacional FIC — <code>alunos</code>, <code>matriculas</code>, <code>diplomas</code>, <code>cadeia_custodia</code>, <code>mensalidades</code>, <code>cursos</code></td>
+</tr>
+<tr>
+<td><strong>Intentus</strong></td>
+<td><code>bvryaopfjiyxjgsuhjsb</code></td>
+<td>Domínio imobiliário — <code>empreendimentos</code>, <code>unidades</code>, <code>contratos_clm</code>, <code>leads</code>, 133 EFs</td>
+</tr>
+<tr>
+<td><strong>Klésis</strong></td>
+<td>a criar</td>
+<td>K-12 (LGPD reforçado — SC-22 Minors Fortress)</td>
+</tr>
+<tr>
+<td><strong>Splendori</strong></td>
+<td>a criar</td>
+<td>Incorporação Piracicaba</td>
+</tr>
+<tr>
+<td><strong>Nexvy</strong></td>
+<td>a criar</td>
+<td>Multi-tenant platform</td>
+</tr>
+</tbody>
+</table>
+<h3 id="39-regra-de-ouro-preservada-do-v4">§ 39. Regra de ouro (preservada do V4)</h3>
+<blockquote>
+<p><em>"Se serve mais de um negócio → vai para ECOSYSTEM. Se é domínio do negócio → vai para o DB dele."</em></p>
+</blockquote>
+<p>Exemplo — emissão de boleto:
+- <strong>Motor</strong> (<code>@ecossistema/billing</code>, Inter + idempotência + HMAC) → ECOSYSTEM
+- <strong>Registro</strong> (aluno_id, mês_ref, valor, status) → ERP-FIC</p>
+<h3 id="40-memory-layer-cross-database">§ 40. Memory layer cross-database</h3>
+<div class="codehilite"><pre><span></span><code><span class="c1">-- ECOSYSTEM.memory_episodic (namespace cross-business)</span>
+<span class="k">create</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">memory_episodic</span><span class="w"> </span><span class="p">(</span>
+<span class="w">    </span><span class="n">id</span><span class="w">            </span><span class="n">uuid</span><span class="w"> </span><span class="k">primary</span><span class="w"> </span><span class="k">key</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">gen_random_uuid</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">business_id</span><span class="w">   </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">         </span><span class="c1">-- &#39;ecosystem&#39; | &#39;fic&#39; | &#39;klesis&#39; | ...</span>
+<span class="w">    </span><span class="n">agent_id</span><span class="w">      </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">user_id</span><span class="w">       </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">    </span><span class="n">run_id</span><span class="w">        </span><span class="n">uuid</span><span class="p">,</span>
+<span class="w">    </span><span class="k">type</span><span class="w">          </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span><span class="w">         </span><span class="c1">-- &#39;task&#39; | &#39;conversation&#39; | &#39;decision&#39;</span>
+<span class="w">    </span><span class="n">outcome</span><span class="w">       </span><span class="nb">text</span><span class="p">,</span><span class="w">                  </span><span class="c1">-- &#39;success&#39; | &#39;failure&#39; | &#39;partial&#39;</span>
+<span class="w">    </span><span class="n">summary</span><span class="w">       </span><span class="nb">text</span><span class="w"> </span><span class="k">not</span><span class="w"> </span><span class="k">null</span><span class="p">,</span>
+<span class="w">    </span><span class="n">detail</span><span class="w">        </span><span class="nb">text</span><span class="p">,</span>
+<span class="w">    </span><span class="n">summary_vec</span><span class="w">   </span><span class="n">vector</span><span class="p">(</span><span class="mi">768</span><span class="p">),</span>
+<span class="w">    </span><span class="n">detail_vec</span><span class="w">    </span><span class="n">vector</span><span class="p">(</span><span class="mi">768</span><span class="p">),</span>
+<span class="w">    </span><span class="n">tsv</span><span class="w">           </span><span class="n">tsvector</span><span class="w"> </span><span class="k">generated</span><span class="w"> </span><span class="n">always</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="p">(</span><span class="n">to_tsvector</span><span class="p">(</span><span class="s1">&#39;portuguese&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">coalesce</span><span class="p">(</span><span class="n">summary</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="s1">&#39; &#39;</span><span class="w"> </span><span class="o">||</span><span class="w"> </span><span class="k">coalesce</span><span class="p">(</span><span class="n">detail</span><span class="p">,</span><span class="s1">&#39;&#39;</span><span class="p">)))</span><span class="w"> </span><span class="n">stored</span><span class="p">,</span>
+<span class="w">    </span><span class="n">entities</span><span class="w">      </span><span class="n">jsonb</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="s1">&#39;[]&#39;</span><span class="p">::</span><span class="n">jsonb</span><span class="p">,</span>
+<span class="w">    </span><span class="n">importance</span><span class="w">    </span><span class="nb">real</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="mi">0</span><span class="p">.</span><span class="mi">5</span><span class="p">,</span>
+<span class="w">    </span><span class="n">access_count</span><span class="w">  </span><span class="nb">int</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">    </span><span class="n">created_at</span><span class="w">    </span><span class="n">timestamptz</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="n">now</span><span class="p">(),</span>
+<span class="w">    </span><span class="n">last_accessed</span><span class="w"> </span><span class="n">timestamptz</span>
+<span class="p">);</span>
+
+<span class="k">create</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">memory_episodic</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">ivfflat</span><span class="w"> </span><span class="p">(</span><span class="n">summary_vec</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
+<span class="k">create</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">memory_episodic</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">ivfflat</span><span class="w"> </span><span class="p">(</span><span class="n">detail_vec</span><span class="w"> </span><span class="n">vector_cosine_ops</span><span class="p">);</span>
+<span class="k">create</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">memory_episodic</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">gin</span><span class="w"> </span><span class="p">(</span><span class="n">tsv</span><span class="p">);</span>
+<span class="k">create</span><span class="w"> </span><span class="k">index</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">memory_episodic</span><span class="w"> </span><span class="p">(</span><span class="n">business_id</span><span class="p">,</span><span class="w"> </span><span class="n">agent_id</span><span class="p">,</span><span class="w"> </span><span class="n">user_id</span><span class="p">);</span>
+
+<span class="c1">-- RLS: business_id controla acesso cross-business</span>
+<span class="k">alter</span><span class="w"> </span><span class="k">table</span><span class="w"> </span><span class="n">memory_episodic</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="k">row</span><span class="w"> </span><span class="k">level</span><span class="w"> </span><span class="k">security</span><span class="p">;</span>
+<span class="k">create</span><span class="w"> </span><span class="n">policy</span><span class="w"> </span><span class="n">memory_business_isolation</span><span class="w"> </span><span class="k">on</span><span class="w"> </span><span class="n">memory_episodic</span>
+<span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="p">(</span><span class="n">business_id</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;app.current_business&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">)</span>
+<span class="w">           </span><span class="k">OR</span><span class="w"> </span><span class="n">current_setting</span><span class="p">(</span><span class="s1">&#39;app.is_ecosystem_admin&#39;</span><span class="p">,</span><span class="w"> </span><span class="k">true</span><span class="p">)</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s1">&#39;true&#39;</span><span class="p">);</span>
+</code></pre></div>
+
+<p>Análogas para <code>memory_semantic</code> e <code>memory_procedural</code>.</p>
+<hr />
+<h2 id="parte-xii-estrutura-do-monorepo">Parte XII — Estrutura do Monorepo</h2>
+<div class="codehilite"><pre><span></span><code>ecossistema-monorepo/
+├── apps/
+│   ├── orchestrator/           # FastAPI Railway (exposes Managed Agents via HTTP)
+│   ├── jarvis-app/             # E3/E4 app (futuro)
+│   ├── erp-educacional/        # Next.js 15 (FIC + Klésis shared patterns)
+│   ├── intentus/               # Vite/React (imobiliário)
+│   ├── splendori/              # (futuro)
+│   └── nexvy/                  # (futuro — fork Chatwoot white-label)
+│
+├── packages/
+│   ├── @ecossistema/agentes/
+│   │   └── c-suite-templates/  # Templates CEO/CFO/CAO/CMO/CSO/CLO/COO/CTO/CPO/CHRO
+│   ├── @ecossistema/constitutional-hooks/   # 22 Artigos como hooks
+│   ├── @ecossistema/prompt-assembler/       # Phantom 9-layer pattern
+│   ├── @ecossistema/memory/                 # Mem0 wrapper + pgvector 3-tier
+│   ├── @ecossistema/credentials/            # SC-29 client (wraps EF)
+│   ├── @ecossistema/mcp-servers/            # FastMCP servers do ecossistema
+│   │   ├── supabase-mcp/
+│   │   ├── whatsapp-mcp/
+│   │   ├── credential-mcp/
+│   │   ├── memory-mcp/
+│   │   ├── audit-mcp/
+│   │   └── businesses/{fic,klesis,intentus,splendori,nexvy}-mcp/
+│   ├── @ecossistema/skills-registry/        # Skill discovery + matching
+│   ├── @ecossistema/billing/                # Motor boletos + idempotência
+│   ├── @ecossistema/rag/                    # Cliente RAG-engine Railway
+│   ├── @ecossistema/magic-link-vault/       # Phantom vault pattern
+│   ├── @ecossistema/observability/          # Langfuse client + OTel
+│   ├── @ecossistema/litellm-client/         # Wrapper LiteLLM com defaults V9
+│   └── @ecossistema/tools/                  # Tool wrappers genéricos
+│
+├── infra/
+│   ├── supabase/
+│   │   ├── migrations/         # ECOSYSTEM schema
+│   │   └── functions/          # 13 Edge Functions (SCs L3)
+│   ├── railway/                # IaC Railway (orchestrator, LiteLLM, Langfuse, RAG, workers)
+│   └── triggerdev/             # Scheduled jobs agent-related
+│
+├── docs/
+│   ├── masterplans/            # V8.2, V9, históricos
+│   ├── adr/                    # Architecture Decision Records
+│   ├── runbooks/               # Operational procedures
+│   ├── research/               # 99 repos analisados
+│   └── sessions/               # Logs de sessões + briefings
+│
+├── CLAUDE.md                   # Cardinal Rule na primeira linha
+├── MEMORY.md                   # Índice canônico de memória
+├── pnpm-workspace.yaml
+└── turbo.json
+</code></pre></div>
+
+<hr />
+<h2 id="parte-xiii-roadmap-de-implementacao">Parte XIII — Roadmap de Implementação</h2>
+<h3 id="41-fases-herdadas-do-v4-refinadas">§ 41. Fases (herdadas do V4 + refinadas)</h3>
+<p><strong>Fase 0 — Fundação (semanas 1-4)</strong> 🟢 EM ANDAMENTO (herdada)
+- [x] Monorepo estruturado
+- [x] Supabase ECOSYSTEM + ERP-FIC + Intentus em produção (Vercel migrado)
+- [x] Fase B: Supabase como memória primária + auto-embedding
+- [x] SC-29 Credential Vault base (s094)
+- [x] Dashboard + Bash validation (s098)
+- [ ] <strong><code>@ecossistema/memory</code></strong> (Mem0 wrapper + pgvector 3-tier)
+- [ ] <strong><code>@ecossistema/constitutional-hooks</code></strong> (11 hooks prioritários)
+- [ ] <strong><code>@ecossistema/prompt-assembler</code></strong> (Phantom 9-layer)
+- [ ] <strong>SC-29 v2</strong> (Edge Function Credential Gateway com Modo B proxy)
+- [ ] <strong>LiteLLM proxy</strong> no Railway + Langfuse self-host
+- [ ] <strong>FastMCP template</strong> para MCP servers do ecossistema</p>
+<p><strong>Fase 1 — C-Suite per negócio (semanas 5-8)</strong>
+- [ ] Templates C-Suite em <code>packages/@ecossistema/c-suite-templates/</code> (10 diretores)
+- [ ] CFO-FIC como piloto (boletos Inter + inadimplência + régua)
+- [ ] CEO-FIC + CAO-FIC + CMO-FIC
+- [ ] CSO-Intentus (template SaaS)
+- [ ] Jarvis Stage 2 (WhatsApp via Evolution API + pipecat)
+- [ ] 6 Diretores de Área no ecossistema (prompts base + dashboards)</p>
+<p><strong>Fase 2 — Autonomia coordenada (semanas 9-12)</strong>
+- [ ] C-Suite completo nos 5 negócios (~30-35 agentes)
+- [ ] Diretores de Área com hooks de auditoria automáticos
+- [ ] Briefing diário para Marcelo via Jarvis
+- [ ] Jarvis Stage 3 (voz + app Electron/Swift)
+- [ ] Evaluator-Optimizer + Orchestrator-Workers em skills-chave
+- [ ] Sleeptime consolidation worker (pattern Letta)</p>
+<p><strong>Fase 3 — Jarvis always-on (semanas 13-24)</strong>
+- [ ] Stage 4: wake-word + always-on
+- [ ] Ambient agent pattern (inspiração Omi)
+- [ ] Proactive triggers (padrões detectados → agente age sem prompt explícito)
+- [ ] Cross-business synergy engine (D-Sinergia operacional)</p>
+<h3 id="42-ordem-canonica-de-implementacao-das-scs-ondas-v82-refinadas">§ 42. Ordem canônica de implementação das SCs (Ondas V8.2 refinadas)</h3>
+<table>
+<thead>
+<tr>
+<th>Onda</th>
+<th>SCs</th>
+<th>Justificativa</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>0</strong></td>
+<td>SC-29 (Credential Gateway v2)</td>
+<td>Bloqueia tudo que precisa de credential externa</td>
+</tr>
+<tr>
+<td><strong>1</strong></td>
+<td>SC-01, SC-02, SC-10, SC-14</td>
+<td>Foundation: Managed Agents + Webhook Hardening + SDK</td>
+</tr>
+<tr>
+<td><strong>2</strong></td>
+<td>SC-03, SC-04, SC-11</td>
+<td>Dual-Write + Skill Registry + Audit Log</td>
+</tr>
+<tr>
+<td><strong>3</strong></td>
+<td>SC-05, SC-06, SC-15, SC-16, SC-19</td>
+<td>Skill Router + Memory v1 + Schema + Retry + PII</td>
+</tr>
+<tr>
+<td><strong>4</strong></td>
+<td>SC-07, SC-08, SC-09, SC-20</td>
+<td>HITL + Cost + Multi-Tenant RLS + Rate Limit</td>
+</tr>
+<tr>
+<td><strong>5</strong></td>
+<td>SC-13, SC-18, SC-24</td>
+<td>Sandbox + Observability (Langfuse) + RACI</td>
+</tr>
+<tr>
+<td><strong>6</strong></td>
+<td>SC-12, SC-21</td>
+<td>Memory v2 (consolidator) + Rollback</td>
+</tr>
+<tr>
+<td><strong>7</strong></td>
+<td>SC-17, SC-23</td>
+<td>LiteLLM Gateway + Agent Performance</td>
+</tr>
+<tr>
+<td><strong>8</strong></td>
+<td>SC-22</td>
+<td>Minors Fortress (Klésis)</td>
+</tr>
+<tr>
+<td><strong>9</strong></td>
+<td>SC-25, SC-27</td>
+<td>Cross-Business Router + Incident Commander</td>
+</tr>
+<tr>
+<td><strong>10</strong></td>
+<td>SC-26, SC-28</td>
+<td>Agent Learning Loop + Regulatory Watcher</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parte-xiv-regras-de-execucao">Parte XIV — Regras de Execução</h2>
+<h3 id="43-principios-operacionais">§ 43. Princípios operacionais</h3>
+<ol>
+<li><strong>Cardinal Rule primeiro</strong> — TypeScript/Python é encanamento, Agent SDK é o cérebro</li>
+<li><strong>Dual-Write Supabase-first</strong> — nada de crítico em arquivos locais</li>
+<li><strong>Hooks constitucionais obrigatórios</strong> em todos os agentes</li>
+<li><strong>Templates C-Suite reutilizados</strong> entre negócios (herança por variant)</li>
+<li><strong>Credenciais via SC-29 Modo B</strong> em produção (agente nunca vê secret)</li>
+<li><strong>Memory via Mem0 wrapper</strong> com filters estritos (<code>user_id</code>, <code>agent_id</code>, <code>run_id</code>)</li>
+<li><strong>Observability em tudo</strong> (Langfuse self-host)</li>
+<li><strong>Cost control via LiteLLM</strong> budgets per-business</li>
+<li><strong>6 Diretores de Área auditam</strong> — Marcelo não olha 1 a 1</li>
+<li><strong>Briefing diário consolidado</strong> para Marcelo via Jarvis</li>
+</ol>
+<h3 id="44-paralelismo-de-sessoes-claude-code">§ 44. Paralelismo de sessões Claude Code</h3>
+<p>Mantido do V4 (válido):
+- 1 worktree por sessão (<code>git worktree add</code>)
+- Escopo por package, nunca sobreposto
+- Lock via Task Registry (<code>agent_tasks</code>)
+- Deploy sempre serial (PRs + CI green)
+- Sync diário (commit + push + PR)
+- Supabase migrations: <strong>uma sessão por dia</strong> em ECOSYSTEM ou DBs de produção</p>
+<h3 id="45-compactation-protocol">§ 45. Compactation Protocol</h3>
+<p>Mantido do V8.2. Implementação via Fase 0 <code>@ecossistema/memory</code>:
+- Toda decisão nova = registrar em Mem0 com <code>filters.tag = "decision"</code>
+- Git commit antes de compactação
+- Nova sessão Claude Code: primeira ação = ler <code>MEMORY.md</code> + recall Mem0 últimas 3 sessões</p>
+<hr />
+<h2 id="parte-xv-governanca">Parte XV — Governança</h2>
+<h3 id="46-d-governanca-como-guardiao-executavel">§ 46. D-Governanca como guardião executável</h3>
+<p>O Diretor de Governança (área Ecossistema) supervisiona:
+- Violações de hooks constitucionais (em tempo real)
+- Compliance LGPD cross-business
+- Rotação de credenciais (alertas expiração)
+- Audit log — análises padrão vs anomalia
+- Pause automático de agente em violação crítica</p>
+<h3 id="47-marcelo-como-ceo-do-ecossistema">§ 47. Marcelo como CEO do ecossistema</h3>
+<p><strong>O que Marcelo decide:</strong>
+- Propósito e direção estratégica (Tripé BAM: financeiro + social + propósito)
+- Ações com impacto &gt; R$ 10k (Art. II HITL)
+- Rotação de credenciais de produção (Art. II)
+- Mudanças nos 22 Artigos Constitucionais
+- Contratação/desligamento de Diretores de Área
+- Mudanças na matriz C-Suite dos negócios</p>
+<p><strong>O que Marcelo não precisa fazer:</strong>
+- Auditar agentes 1 a 1 (Diretores de Área fazem)
+- Operação do dia-a-dia (C-Suite de cada negócio executa)
+- Decisões financeiras &lt; R$ 10k (automatizadas com hooks)
+- Rotina de compliance (hooks + D-Governanca)</p>
+<h3 id="48-tripe-decisorio-em-codigo">§ 48. Tripé decisório em código</h3>
+<p>Toda proposta cross-business que chega a Marcelo via Jarvis passa por D-Estrategia, que aplica o Tripé:</p>
+<div class="codehilite"><pre><span></span><code><span class="kd">interface</span><span class="w"> </span><span class="nx">BAMDecision</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="nx">proposta</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">    </span><span class="nx">viabilidade_financeira</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">investimento</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">retorno_estimado</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">payback_meses</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">risco</span><span class="o">:</span><span class="w"> </span><span class="s1">&#39;baixo&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;medio&#39;</span><span class="w"> </span><span class="o">|</span><span class="w"> </span><span class="s1">&#39;alto&#39;</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">impacto_social</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">beneficiarios</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+<span class="w">        </span><span class="nx">natureza</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">;</span>
+<span class="w">        </span><span class="nx">mensuravel</span><span class="o">:</span><span class="w"> </span><span class="kt">boolean</span><span class="p">;</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="w">    </span><span class="nx">coerencia_proposito</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
+<span class="w">        </span><span class="nx">artigos_aplicaveis</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+<span class="w">        </span><span class="nx">alinhamento</span><span class="o">:</span><span class="w"> </span><span class="kt">number</span><span class="p">;</span><span class="w">  </span><span class="c1">// 0-1</span>
+<span class="w">        </span><span class="nx">conflitos</span><span class="o">:</span><span class="w"> </span><span class="kt">string</span><span class="p">[];</span>
+<span class="w">    </span><span class="p">};</span>
+<span class="p">}</span>
+
+<span class="k">async</span><span class="w"> </span><span class="kd">function</span><span class="w"> </span><span class="nx">avaliaTripeBAM</span><span class="p">(</span><span class="nx">decisao</span><span class="o">:</span><span class="w"> </span><span class="kt">BAMDecision</span><span class="p">)</span><span class="o">:</span><span class="w"> </span><span class="nb">Promise</span><span class="o">&lt;</span><span class="nx">BAMVerdict</span><span class="o">&gt;</span><span class="w"> </span><span class="p">{</span>
+<span class="w">    </span><span class="c1">// D-Estrategia usa AEGIS 7-layer epistemic framework</span>
+<span class="w">    </span><span class="c1">// Retorna: APPROVED | APPROVED_WITH_CONDITIONS | REJECTED</span>
+<span class="w">    </span><span class="c1">// Com justificativa estruturada (evidência → interpretação → julgamento)</span>
+<span class="p">}</span>
+</code></pre></div>
+
+<hr />
+<h2 id="parte-xvi-diferencas-concretas-v82-v9">Parte XVI — Diferenças Concretas V8.2 → V9</h2>
+<table>
+<thead>
+<tr>
+<th>Aspecto</th>
+<th>V8.2</th>
+<th>V9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>22 Artigos</strong></td>
+<td>Texto markdown</td>
+<td>Hooks executáveis + diretrizes prompt</td>
+</tr>
+<tr>
+<td><strong>29 Super-Crates</strong></td>
+<td>Categorizadas por camada conceitual (L1-L7)</td>
+<td>Reclassificadas por tecnologia real (L1/L2/L3/L4 execução)</td>
+</tr>
+<tr>
+<td><strong>C-Suite</strong></td>
+<td>8 diretores no nível ecossistema</td>
+<td>C-Suite per negócio + 6 Diretores de Área</td>
+</tr>
+<tr>
+<td><strong>SC-29</strong></td>
+<td>"Agente autônomo de credenciais"</td>
+<td>Edge Function determinística (Modo B proxy)</td>
+</tr>
+<tr>
+<td><strong>Meta-Padrões V7</strong></td>
+<td>Nexus/Mesh/Autonomous Orch (narrativa)</td>
+<td>Descartados (só 13 MPs arquiteturais permanecem)</td>
+</tr>
+<tr>
+<td><strong>Stack técnica</strong></td>
+<td>Mencionada em alto nível</td>
+<td>Validada em código (99 repos analisados)</td>
+</tr>
+<tr>
+<td><strong>Memory</strong></td>
+<td><code>ecosystem_memory</code> genérico</td>
+<td>3-tier (episodic/semantic/procedural) + Mem0 v3 wrapper</td>
+</tr>
+<tr>
+<td><strong>Governança</strong></td>
+<td>Conceitual</td>
+<td>D-Governanca operacional + hooks executam</td>
+</tr>
+<tr>
+<td><strong>Briefing Marcelo</strong></td>
+<td>Marcelo audita</td>
+<td>6 Diretores auditam, briefing consolidado</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parte-xvii-documentos-relacionados">Parte XVII — Documentos Relacionados</h2>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Localização</th>
+<th>Relação com V9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>V8.2</td>
+<td><code>docs/masterplans/MASTERPLAN-ECOSSISTEMA-v8.2.md</code></td>
+<td><strong>Base canônica</strong> — V9 herda</td>
+</tr>
+<tr>
+<td>V7 Omega</td>
+<td><code>docs/masterplans/PLANO-ECOSSISTEMA-V7-SYNERGETIC-INTELLIGENCE.html</code></td>
+<td><strong>Histórico</strong> — 6 Meta-Padrões descartados</td>
+</tr>
+<tr>
+<td>Plano V4</td>
+<td><code>docs/masterplans/PLANO-EXECUCAO-V4.md</code></td>
+<td><strong>Ativa</strong> — 6 decisões canônicas + 4 fases</td>
+</tr>
+<tr>
+<td>MASTERPLAN FIC v2.1</td>
+<td><code>docs/masterplans/MASTERPLAN-FIC-MULTIAGENTES-v2.1.md</code></td>
+<td>Precisa upgrade para v3 (V9-compatible)</td>
+</tr>
+<tr>
+<td>Análises research</td>
+<td><code>docs/research/*.md</code></td>
+<td><strong>Evidências</strong> que fundamentam V9</td>
+</tr>
+<tr>
+<td>Consolidado findings</td>
+<td><code>docs/research/CONSOLIDADO-FINDINGS-2026-04-15.md</code></td>
+<td><strong>Sumário executivo</strong> da pesquisa</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parte-xviii-contagem-consolidada-v9">Parte XVIII — Contagem Consolidada V9</h2>
+<table>
+<thead>
+<tr>
+<th>Componente</th>
+<th>V8.2</th>
+<th>V9</th>
+<th>Δ</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Artigos Constitucionais</td>
+<td>22</td>
+<td>22</td>
+<td>=</td>
+</tr>
+<tr>
+<td>Artigos como hooks</td>
+<td>0</td>
+<td>11 verificáveis + 11 diretrizes</td>
+<td>+11 hooks</td>
+</tr>
+<tr>
+<td>Meta-Padrões arquiteturais</td>
+<td>13</td>
+<td>13</td>
+<td>=</td>
+</tr>
+<tr>
+<td>Meta-Padrões narrativos V7</td>
+<td>6</td>
+<td>0</td>
+<td><strong>-6 descartados</strong></td>
+</tr>
+<tr>
+<td>Super-Crates</td>
+<td>29</td>
+<td>29 (reclassificadas)</td>
+<td>=</td>
+</tr>
+<tr>
+<td>Camadas conceituais L1-L7</td>
+<td>7</td>
+<td>7 (preservadas)</td>
+<td>=</td>
+</tr>
+<tr>
+<td>Camadas técnicas de execução</td>
+<td>0</td>
+<td>4 (L1/L2/L3/L4)</td>
+<td>+4</td>
+</tr>
+<tr>
+<td>Ondas de implementação</td>
+<td>17</td>
+<td>17 (refinadas 0-10)</td>
+<td>=</td>
+</tr>
+<tr>
+<td>Decisões canônicas V4</td>
+<td>6</td>
+<td>6</td>
+<td>=</td>
+</tr>
+<tr>
+<td>Negócios atendidos</td>
+<td>5</td>
+<td>5</td>
+<td>=</td>
+</tr>
+<tr>
+<td>Agentes C-Suite</td>
+<td>~8 + sub-agentes</td>
+<td>~30-35 per negócio</td>
+<td>+reorganizado</td>
+</tr>
+<tr>
+<td>Diretores de Área (ecossistema)</td>
+<td>0</td>
+<td>6</td>
+<td>+6</td>
+</tr>
+<tr>
+<td>Padrões roubados (código validado)</td>
+<td>0</td>
+<td>10</td>
+<td>+10</td>
+</tr>
+<tr>
+<td>Repos analisados a fundo</td>
+<td>~5</td>
+<td>99</td>
+<td><strong>+94</strong></td>
+</tr>
+</tbody>
+</table>
+<hr />
+<h2 id="parte-xix-frase-mantra-v9">Parte XIX — Frase-mantra V9</h2>
+<blockquote>
+<p><strong>"Evidência sobre narrativa. Preservar o que funciona. Evoluir com cuidado. Descartar apenas a ficção."</strong></p>
+</blockquote>
+<p>A V8.2 construiu a base sólida. A V9 a coloca em produção com evidência real de código. Nada do que Marcelo e Claudinho decidiram antes foi desperdiçado. A V9 é o próximo capítulo — mais ancorado, mais executável, mais honesto.</p>
+<hr />
+<h2 id="proximos-passos-imediatos">Próximos Passos Imediatos</h2>
+<ol>
+<li><strong>Marcelo aprova V9</strong> (ou solicita ajustes)</li>
+<li><strong>Commit V9 canônica</strong> no monorepo</li>
+<li><strong>Arquivar V7 narrativa</strong> em <code>docs/masterplans/historico/</code> (preservar)</li>
+<li><strong>Abrir sessões paralelas</strong> para Fase 0 restante:
+   - Sessão A: <code>@ecossistema/memory</code> (Mem0 + pgvector 3-tier)
+   - Sessão B: <code>@ecossistema/constitutional-hooks</code> (11 hooks prioritários)
+   - Sessão C: <code>@ecossistema/prompt-assembler</code> (Phantom 9-layer)
+   - Sessão D: SC-29 v2 + LiteLLM proxy Railway + Langfuse self-host</li>
+<li><strong>Atualizar MASTERPLAN-FIC v2.1 → v3</strong> com herança V9</li>
+<li><strong>Rotacionar secrets</strong> identificados na migração (pendência Fase 0)</li>
+</ol>
+<hr />
+<p><strong>Aprovação canônica:</strong></p>
+<ul>
+<li>[ ] Marcelo Silva (CEO) — <em>data, assinatura</em></li>
+<li>[ ] Claudinho (VP Executivo) — <em>data, versão prompt</em></li>
+</ul>
+<hr />
+<p><em>Documento vivo. Toda decisão nova que afete arquitetura do ecossistema entra em novo §. Versões menores (V9.1, V9.2) para adições. V10 só se houver mudança estrutural radical.</em></p>
+
+<hr>
+<footer style="text-align: center; color: var(--text-muted); margin-top: 4rem; font-size: 0.9em;">
+  <p>MASTERPLAN V9 · Ecossistema de Inovação e IA · Marcelo Silva</p>
+  <p>Gerado em 2026-04-16 · <a href="https://github.com/mfalcao09/ecossistema-monorepo">github.com/mfalcao09/ecossistema-monorepo</a></p>
+</footer>
+</body>
+</html>
