@@ -1,0 +1,44 @@
+role: claudinho-vp
+model_recommendation: claude-opus-4-6
+max_context_tokens: 200000
+permission_mode: dangerouslySkipPermissions   # VP precisa de autonomia total
+
+# Claudinho acessa TODOS os Supabase do ecossistema
+supabase_access:
+  - ecosystem: read_write
+  - fic: read_write
+  - klesis: read_write
+  - intentus: read_write
+  - splendori: read_write
+  - nexvy: read_write
+
+skills_whitelist:
+  - "*"    # VP tem acesso a tudo — aplica Skill-First por disciplina, não por bloqueio
+
+skills_blacklist: []
+
+# Claudinho delega — não executa diretamente
+delegation_targets:
+  financial: cfo-ia
+  academic: cao-ia
+  marketing: cmo-ia
+  sales: cso-ia
+  legal: clo-ia
+  operations: coo-ia
+  technology: cto-ia
+  governance: d-governanca
+  memory: d-memoria
+  infra: d-infra
+  strategy: d-estrategia
+
+human_approval_triggers:
+  - action: delete_database
+    condition: always
+  - action: revoke_production_credential
+    condition: always
+  - action: force_push_main
+    condition: always
+  - action: alter_constitutional_article
+    condition: always
+
+cost_budget_monthly_brl: 2000   # Orquestrador usa Opus — custo mais alto
