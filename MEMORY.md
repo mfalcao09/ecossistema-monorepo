@@ -1,7 +1,7 @@
 # MEMORY.md — Índice Canônico de Memória
 
-> **Atualizado:** 2026-04-17 (pós-merge S01 + S3)
-> **Status:** V9 canônica ativa · Monorepo + Vercel em produção · Fase 0 em execução — **S01 ✅ + S3 ✅**
+> **Atualizado:** 2026-04-17 (pós S06 · PR #5 aberto)
+> **Status:** V9 canônica ativa · Monorepo + Vercel em produção · Fase 0 em execução — **S01 ✅ + S3 ✅ + S06 ✅ (PR)**
 
 ---
 
