@@ -433,7 +433,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 <tr>
 <td>MP-03</td>
 <td>Skill Registry First</td>
-<td>packages/@ecossistema/skills-registry</td>
+<td>packages/skills-registry</td>
 </tr>
 <tr>
 <td>MP-04</td>
@@ -869,7 +869,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 </tbody>
 </table>
 <h3 id="12-exemplo-concreto-art-ii-hitl-critico">§ 12. Exemplo concreto (Art. II — HITL Crítico)</h3>
-<div class="codehilite"><pre><span></span><code><span class="c1"># packages/@ecossistema/hooks/art-ii-hitl.ts</span>
+<div class="codehilite"><pre><span></span><code><span class="c1"># packages/hooks/art-ii-hitl.ts</span>
 <span class="kn">import</span><span class="w"> </span><span class="p">{</span> <span class="n">PreToolUseHook</span> <span class="p">}</span> <span class="kn">from</span><span class="w"> </span><span class="s1">&#39;@anthropic-ai/claude-agent-sdk&#39;</span><span class="p">;</span>
 
 <span class="n">const</span> <span class="n">ACOES_CRITICAS_FINANCEIRAS</span> <span class="o">=</span> <span class="p">[</span>
@@ -1072,7 +1072,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 - <strong>CLO opcional em FIC/Klésis</strong> — contratos padronizados; obrigatório em Intentus/Splendori (contratos complexos)
 - <strong>CHRO futuro</strong> — só quando grupo crescer para justificar</p>
 <h3 id="16-c-suite-como-template-reutilizavel">§ 16. C-Suite como template reutilizável</h3>
-<div class="codehilite"><pre><span></span><code>packages/@ecossistema/c-suite-templates/
+<div class="codehilite"><pre><span></span><code>packages/c-suite-templates/
 ├── CEO-IA/
 │   ├── base-prompt.md
 │   ├── variants/
@@ -1330,7 +1330,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 <li><strong>Instructions</strong> — como trabalha</li>
 <li><strong>Memory context</strong> — recall dinâmico por query (de Mem0 + pgvector)</li>
 </ol>
-<p><strong>Aplicação V9:</strong> cada C-Suite e Diretor de Área usa este assembler. <code>packages/@ecossistema/prompt-assembler</code> exporta função <code>assemble(agentConfig, queryContext)</code>.</p>
+<p><strong>Aplicação V9:</strong> cada C-Suite e Diretor de Área usa este assembler. <code>packages/prompt-assembler</code> exporta função <code>assemble(agentConfig, queryContext)</code>.</p>
 <h3 id="25-padrao-2-cardinal-rule">§ 25. Padrão 2 — Cardinal Rule</h3>
 <p><strong>Origem:</strong> <code>phantom/CLAUDE.md</code></p>
 <p><strong>A regra:</strong> <em>"TypeScript/Python é encanamento. O Agente SDK é o cérebro."</em></p>
@@ -1352,7 +1352,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 4. Servidor armazena cifrado no Supabase
 5. Agente recupera via SC-29 Credential Gateway (Modo B — proxy)</p>
 <p><strong>Regra ouro:</strong> <strong>credenciais NUNCA fluem via chat</strong> (Slack, WhatsApp, voz, Jarvis CLI).</p>
-<p><strong>Aplicação V9:</strong> componente <code>packages/@ecossistema/magic-link-vault</code> + Edge Function <code>/collect-secret</code> + Next.js page <code>/vault/collect/[token]</code>.</p>
+<p><strong>Aplicação V9:</strong> componente <code>packages/magic-link-vault</code> + Edge Function <code>/collect-secret</code> + Next.js page <code>/vault/collect/[token]</code>.</p>
 <h3 id="27-padrao-4-mem0-v3-add-only-filters-estritos">§ 27. Padrão 4 — Mem0 v3 ADD-Only + Filters Estritos</h3>
 <p><strong>Origem:</strong> <code>mem0/mem0/memory/main.py</code></p>
 <p><strong>Algoritmo v3 (abril 2026):</strong>
@@ -1362,7 +1362,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 - Entity linking: entidades extraídas, embedded, linkadas para retrieval boosting
 - Multi-signal retrieval: semantic + BM25 + entity, fundidos por reciprocal rank</p>
 <p><strong>Filters estritos:</strong> <code>user_id</code>, <code>agent_id</code>, <code>run_id</code> são <strong>obrigatórios</strong> via <code>filters={}</code>. <code>_reject_top_level_entity_params()</code> lança <code>ValueError</code> se passados como kwargs. Arquiteturalmente forbidden "esquecer" o <code>user_id</code> e vazar cross-tenant.</p>
-<p><strong>Aplicação V9:</strong> memory layer principal. <code>packages/@ecossistema/memory</code> wrapa mem0 + adiciona hooks constitucionais:</p>
+<p><strong>Aplicação V9:</strong> memory layer principal. <code>packages/memory</code> wrapa mem0 + adiciona hooks constitucionais:</p>
 <div class="codehilite"><pre><span></span><code><span class="k">await</span><span class="w"> </span><span class="nx">memory</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">messages</span><span class="p">,</span><span class="w"> </span><span class="p">{</span>
 <span class="w">    </span><span class="nx">filters</span><span class="o">:</span><span class="w"> </span><span class="p">{</span>
 <span class="w">        </span><span class="nx">user_id</span><span class="o">:</span><span class="w"> </span><span class="s2">&quot;marcelo&quot;</span><span class="p">,</span>
@@ -1410,7 +1410,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 - <code>FastMCPProxy</code> — wrap MCP servers de terceiros com auth + logging
 - <code>ToolTransform</code> + <code>apply_session_transforms</code> — visibility gates per-session (RBAC)</p>
 <p><strong>Aplicação V9:</strong> todos os MCP servers do ecossistema em FastMCP:</p>
-<div class="codehilite"><pre><span></span><code>packages/@ecossistema/mcp-servers/
+<div class="codehilite"><pre><span></span><code>packages/mcp-servers/
 ├── supabase-mcp/         # CRUD em qualquer projeto Supabase
 ├── github-mcp/           # ops no monorepo
 ├── whatsapp-mcp/         # via Evolution API
@@ -1482,7 +1482,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 - Sparse (BM25 via <code>ts_rank_cd</code>)
 - Entity boost (weight extra para entidades mencionadas na query)
 - <strong>Reciprocal Rank Fusion</strong> combina os 3 sinais</p>
-<p><strong>Aplicação V9:</strong> migrations em <code>infra/supabase/migrations/</code> criam as 3 tabelas com namespaces por <code>business_id</code>. <code>packages/@ecossistema/memory</code> exporta <code>recall(query, filters)</code> que retorna top-K fundidos.</p>
+<p><strong>Aplicação V9:</strong> migrations em <code>infra/supabase/migrations/</code> criam as 3 tabelas com namespaces por <code>business_id</code>. <code>packages/memory</code> exporta <code>recall(query, filters)</code> que retorna top-K fundidos.</p>
 <p><strong>Degraded mode:</strong> se pgvector/embeddings falham, retorna <code>[]</code> silenciosamente. Memory nunca derruba o agente.</p>
 <h3 id="33-padrao-10-litellm-router-fallbacks-cooldown">§ 33. Padrão 10 — LiteLLM Router + Fallbacks + Cooldown</h3>
 <p><strong>Origem:</strong> <code>litellm/litellm/router.py</code></p>
@@ -1888,7 +1888,7 @@ li:has(> input[type="checkbox"]:checked) { color: var(--text-muted); }
 - [ ] <strong>LiteLLM proxy</strong> no Railway + Langfuse self-host
 - [ ] <strong>FastMCP template</strong> para MCP servers do ecossistema</p>
 <p><strong>Fase 1 — C-Suite per negócio (semanas 5-8)</strong>
-- [ ] Templates C-Suite em <code>packages/@ecossistema/c-suite-templates/</code> (10 diretores)
+- [ ] Templates C-Suite em <code>packages/c-suite-templates/</code> (10 diretores)
 - [ ] CFO-FIC como piloto (boletos Inter + inadimplência + régua)
 - [ ] CEO-FIC + CAO-FIC + CMO-FIC
 - [ ] CSO-Intentus (template SaaS)

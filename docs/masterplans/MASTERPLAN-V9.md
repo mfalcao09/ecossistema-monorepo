@@ -64,7 +64,7 @@ Nenhum descarte. Todos são padrões arquiteturais clássicos, implementáveis:
 |---|---|---|
 | MP-01 | Orquestrador Central + Especialistas | Claudinho + C-Suite per negócio |
 | MP-02 | Memória em Camadas | 3-tier pgvector (episodic/semantic/procedural) |
-| MP-03 | Skill Registry First | packages/@ecossistema/skills-registry |
+| MP-03 | Skill Registry First | packages/skills-registry |
 | MP-04 | Dual-Write | Supabase primário + arquivos secundários |
 | MP-05 | Human-in-the-loop por Classe de Risco | Hook + `status_idled` webhook (Cookbook pattern) |
 | MP-06 | Idempotência por Chave Natural | Hook + table locks |
@@ -238,7 +238,7 @@ Na V9, os Artigos verificáveis viram **código que intercepta ações do agente
 ### § 12. Exemplo concreto (Art. II — HITL Crítico)
 
 ```python
-# packages/@ecossistema/hooks/art-ii-hitl.ts
+# packages/hooks/art-ii-hitl.ts
 import { PreToolUseHook } from '@anthropic-ai/claude-agent-sdk';
 
 const ACOES_CRITICAS_FINANCEIRAS = [
@@ -374,7 +374,7 @@ const cfoFIC = new ManagedAgent({
 ### § 16. C-Suite como template reutilizável
 
 ```
-packages/@ecossistema/c-suite-templates/
+packages/c-suite-templates/
 ├── CEO-IA/
 │   ├── base-prompt.md
 │   ├── variants/
@@ -635,7 +635,7 @@ Cada padrão abaixo é **validado em código** de um ou mais repos analisados. A
 8. **Instructions** — como trabalha
 9. **Memory context** — recall dinâmico por query (de Mem0 + pgvector)
 
-**Aplicação V9:** cada C-Suite e Diretor de Área usa este assembler. `packages/@ecossistema/prompt-assembler` exporta função `assemble(agentConfig, queryContext)`.
+**Aplicação V9:** cada C-Suite e Diretor de Área usa este assembler. `packages/prompt-assembler` exporta função `assemble(agentConfig, queryContext)`.
 
 ### § 25. Padrão 2 — Cardinal Rule
 
@@ -668,7 +668,7 @@ Cada padrão abaixo é **validado em código** de um ou mais repos analisados. A
 
 **Regra ouro:** **credenciais NUNCA fluem via chat** (Slack, WhatsApp, voz, Jarvis CLI).
 
-**Aplicação V9:** componente `packages/@ecossistema/magic-link-vault` + Edge Function `/collect-secret` + Next.js page `/vault/collect/[token]`.
+**Aplicação V9:** componente `packages/magic-link-vault` + Edge Function `/collect-secret` + Next.js page `/vault/collect/[token]`.
 
 ### § 27. Padrão 4 — Mem0 v3 ADD-Only + Filters Estritos
 
@@ -683,7 +683,7 @@ Cada padrão abaixo é **validado em código** de um ou mais repos analisados. A
 
 **Filters estritos:** `user_id`, `agent_id`, `run_id` são **obrigatórios** via `filters={}`. `_reject_top_level_entity_params()` lança `ValueError` se passados como kwargs. Arquiteturalmente forbidden "esquecer" o `user_id` e vazar cross-tenant.
 
-**Aplicação V9:** memory layer principal. `packages/@ecossistema/memory` wrapa mem0 + adiciona hooks constitucionais:
+**Aplicação V9:** memory layer principal. `packages/memory` wrapa mem0 + adiciona hooks constitucionais:
 
 ```typescript
 await memory.add(messages, {
@@ -748,7 +748,7 @@ await memory.add(messages, {
 **Aplicação V9:** todos os MCP servers do ecossistema em FastMCP:
 
 ```
-packages/@ecossistema/mcp-servers/
+packages/mcp-servers/
 ├── supabase-mcp/         # CRUD em qualquer projeto Supabase
 ├── github-mcp/           # ops no monorepo
 ├── whatsapp-mcp/         # via Evolution API
@@ -807,7 +807,7 @@ Cada MCP server herda `AuthProvider` comum, middleware comum, OTel tracing.
 - Entity boost (weight extra para entidades mencionadas na query)
 - **Reciprocal Rank Fusion** combina os 3 sinais
 
-**Aplicação V9:** migrations em `infra/supabase/migrations/` criam as 3 tabelas com namespaces por `business_id`. `packages/@ecossistema/memory` exporta `recall(query, filters)` que retorna top-K fundidos.
+**Aplicação V9:** migrations em `infra/supabase/migrations/` criam as 3 tabelas com namespaces por `business_id`. `packages/memory` exporta `recall(query, filters)` que retorna top-K fundidos.
 
 **Degraded mode:** se pgvector/embeddings falham, retorna `[]` silenciosamente. Memory nunca derruba o agente.
 
@@ -1042,7 +1042,7 @@ ecossistema-monorepo/
 - [ ] **FastMCP template** para MCP servers do ecossistema
 
 **Fase 1 — C-Suite per negócio (semanas 5-8)**
-- [ ] Templates C-Suite em `packages/@ecossistema/c-suite-templates/` (10 diretores)
+- [ ] Templates C-Suite em `packages/c-suite-templates/` (10 diretores)
 - [ ] CFO-FIC como piloto (boletos Inter + inadimplência + régua)
 - [ ] CEO-FIC + CAO-FIC + CMO-FIC
 - [ ] CSO-Intentus (template SaaS)

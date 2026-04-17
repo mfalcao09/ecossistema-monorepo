@@ -27,7 +27,7 @@ Criar o pacote `@ecossistema/constitutional-hooks` com **11 hooks executáveis**
 ## Escopo exato
 
 ```
-packages/@ecossistema/constitutional-hooks/
+packages/constitutional-hooks/
 ├── package.json
 ├── tsconfig.json
 ├── README.md
@@ -246,7 +246,7 @@ Simula agente rodando com todos 11 hooks ativos. Cenários:
 2. `cd ../eco-hooks`
 3. Ler leituras obrigatórias (acima)
 4. Lock task: `UPDATE agent_tasks SET status='locked', assigned_to='s01' WHERE task_id='S01-hooks'`
-5. `mkdir -p packages/@ecossistema/constitutional-hooks/{src,tests}`
+5. `mkdir -p packages/constitutional-hooks/{src,tests}`
 6. Criar `package.json` com deps: `@anthropic-ai/claude-agent-sdk`, `@supabase/supabase-js`, `ajv`, `vitest`
 7. Implementar hook a hook, test a test (TDD recomendado)
 8. Ao fim do dia: commit + push + PR + update task status

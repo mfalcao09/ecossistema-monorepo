@@ -26,7 +26,7 @@ Criar o pacote `@ecossistema/memory` — **único ponto de acesso** à memória 
 ## Escopo exato
 
 ```
-packages/@ecossistema/memory/
+packages/memory/
 ├── package.json
 ├── tsconfig.json
 ├── README.md
