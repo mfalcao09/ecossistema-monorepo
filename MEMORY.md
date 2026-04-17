@@ -116,6 +116,30 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
   - `transport="http"` (não `streamable-http`)
 - **Owner token:** prefixo `owner_` obrigatório; sha256 hex comparado com `hmac.compare_digest`.
 
+### Convenções canônicas de deploy Railway (para MCP servers e outros containers Python do ecossistema)
+
+1. **Dockerfile + `pyproject.toml` com `readme = "README.md"`** — sempre `COPY pyproject.toml README.md ./` nos stages onde pip roda; Hatchling valida a existência do arquivo ao gerar metadata, senão `OSError: Readme file does not exist`.
+2. **Bind em `0.0.0.0`, não `127.0.0.1`** — FastMCP/Uvicorn default é loopback; em container o healthcheck externo falha com "service unavailable". Config deve ter `host: str = "0.0.0.0"`.
+3. **Healthcheck HTTP → TCP em servers que exigem auth** — MCP server rejeita `GET /mcp` sem Authorization com 401, e healthcheck HTTP do Railway não manda headers. Solução: omitir `healthcheckPath` no `railway.json` (TCP check). Alternativa para o futuro: rota custom `/health` via `@mcp.custom_route` que bypass auth.
+4. **Build defensivo pra `cryptography` + `hiredis`** — adicionar no `Dockerfile` `apt-get install build-essential gcc libssl-dev libffi-dev pkg-config cargo python3-dev`. Wheels manylinux cobrem 99% dos casos, mas quando não cobrem o build from source precisa dos compiladores. Multi-stage garante que runtime não carrega o peso.
+5. **Pin `pip<26` temporariamente** — pip 26.x (recém-lançado) pode ter resolver novo conflitando com pins. Ecossistema valida eventualmente; até lá fixa no 25.
+6. **Railway CLI 4.38 — `railway variables --set "CHAVE=valor"`** para set. **Remoção via dashboard** (deleção programática mudou de sintaxe entre versões; dashboard é mais seguro).
+
+### Armadilha canônica — vars no projeto errado
+
+Cada worktree/pasta tem seu próprio `.railway/` com o link do projeto. `railway variables` ou `railway up` **usam o link da CWD atual**. Em monorepos com múltiplos services Railway (LiteLLM, MCP servers, etc.), é trivial setar var no service errado.
+
+**Regra:** antes de QUALQUER `railway variables` ou `railway up`, rodar `railway status` e confirmar a linha `Project:` + `Service:`. Se tiver dúvida: `railway unlink && railway link` no projeto certo antes de prosseguir.
+
+### Deploys Railway do S3
+
+- **`ecossistema-mcp-template`** (projeto novo criado pelo S3):
+  - URL: https://ecossistema-mcp-template-production.up.railway.app
+  - Service: `ecossistema-mcp-template`
+  - Vars: `MCP_SUPABASE_URL`, `MCP_SUPABASE_ANON_KEY`, `MCP_OWNER_TOKEN_HASH`, `MCP_LOG_LEVEL`
+  - Endpoint MCP: `/mcp` (Streamable HTTP)
+  - Auth: MultiAuth (owner token `owner_*` + Supabase JWT)
+
 ### Bloqueios conhecidos pra ativar hooks + MCP em produção
 
 1. **S04 (migrations)** precisa criar no Supabase ECOSYSTEM:
