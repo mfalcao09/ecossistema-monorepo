@@ -17,14 +17,14 @@
 
 ## Objetivo
 
-Criar `packages/@ecossistema/c-suite-templates/` com **10 templates reutilizáveis** (CEO, CFO, CAO, CMO, CSO, CLO, COO, CTO, CPO, CHRO) + **6 Diretores de Área** (D-Estrategia, D-Sinergia, D-Infra, D-Memoria, D-Governanca, D-Relacionamento) + generator CLI.
+Criar `packages/c-suite-templates/` com **10 templates reutilizáveis** (CEO, CFO, CAO, CMO, CSO, CLO, COO, CTO, CPO, CHRO) + **6 Diretores de Área** (D-Estrategia, D-Sinergia, D-Infra, D-Memoria, D-Governanca, D-Relacionamento) + generator CLI.
 
 ---
 
 ## Escopo exato
 
 ```
-packages/@ecossistema/c-suite-templates/
+packages/c-suite-templates/
 ├── package.json
 ├── README.md
 ├── templates/

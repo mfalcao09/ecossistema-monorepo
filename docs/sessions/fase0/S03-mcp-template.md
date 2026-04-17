@@ -21,7 +21,7 @@
 
 ## Objetivo
 
-Criar o **scaffold base Python** em `packages/@ecossistema/mcp-servers/template/` que todos os MCP servers do ecossistema vão herdar. Incluir:
+Criar o **scaffold base Python** em `packages/mcp-servers/template/` que todos os MCP servers do ecossistema vão herdar. Incluir:
 - `@mcp.tool`, `@mcp.resource`, `@mcp.prompt` com schema auto-gerado
 - AuthProvider para Supabase JWT + owner tokens + scopes
 - Middleware stack (logging, rate-limit, tracing, errors)
@@ -35,7 +35,7 @@ Criar o **scaffold base Python** em `packages/@ecossistema/mcp-servers/template/
 ## Escopo exato
 
 ```
-packages/@ecossistema/mcp-servers/
+packages/mcp-servers/
 ├── template/                          # o scaffold base
 │   ├── pyproject.toml
 │   ├── README.md
@@ -295,12 +295,12 @@ pnpm create-mcp-server whatsapp \
   --resources "inbox://recent"
 ```
 
-Resultado: cria `packages/@ecossistema/mcp-servers/whatsapp-mcp/` herdando do template com:
+Resultado: cria `packages/mcp-servers/whatsapp-mcp/` herdando do template com:
 - `server.py` com tools/resources nomeados
 - `config.py` com env vars específicas
 - `tests/` stub
 - Dockerfile e railway.json adaptados
-- Entry em `packages/@ecossistema/mcp-servers/registry.yaml`
+- Entry em `packages/mcp-servers/registry.yaml`
 
 Implementação em Node.js simples:
 ```javascript
@@ -315,8 +315,8 @@ program
   .option('--tools <list>', 'Comma-separated tool names', '')
   .option('--resources <list>', 'Comma-separated resource URIs', '')
   .action(async (name, opts) => {
-    const target = path.join('packages/@ecossistema/mcp-servers', `${name}-mcp`);
-    await fs.copy('packages/@ecossistema/mcp-servers/generator/templates', target);
+    const target = path.join('packages/mcp-servers', `${name}-mcp`);
+    await fs.copy('packages/mcp-servers/generator/templates', target);
     await applyReplacements(target, { name, ...opts });
     console.log(`✅ Criado ${target}`);
   });

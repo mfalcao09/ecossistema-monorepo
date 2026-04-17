@@ -141,8 +141,8 @@ Sim, funciona, mas **com protocolo**. Sem protocolo, gera deploy conflict e over
 
 | Sessão | Escopo | Worktree |
 |---|---|---|
-| Sessão A | `packages/@ecossistema/billing` + webhook Inter no ERP | eco-billing |
-| Sessão B | `packages/@ecossistema/memory` + auto-sync | eco-memory |
+| Sessão A | `packages/billing` + webhook Inter no ERP | eco-billing |
+| Sessão B | `packages/memory` + auto-sync | eco-memory |
 | Sessão C | `apps/orchestrator` (FastAPI Railway) | eco-orchestrator |
 | Sessão D | `apps/erp-educacional/crm` (porting do Intentus) | eco-crm |
 
