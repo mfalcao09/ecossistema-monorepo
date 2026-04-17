@@ -31,9 +31,11 @@ echo "▶ Root: $ROOT_DIR"
 if [[ ! -f "$ENV_FILE" ]]; then
   echo "▶ .env não existe — gerando secrets..."
 
-  POSTGRES_PASSWORD=$(openssl rand -base64 32 | tr -d '\n')
-  CLICKHOUSE_PASSWORD=$(openssl rand -base64 32 | tr -d '\n')
-  REDIS_PASSWORD=$(openssl rand -base64 32 | tr -d '\n')
+  # Senhas de DB → hex (URL-safe — Postgres/Redis/ClickHouse URIs não aceitam /,+,=)
+  POSTGRES_PASSWORD=$(openssl rand -hex 24)
+  CLICKHOUSE_PASSWORD=$(openssl rand -hex 24)
+  REDIS_PASSWORD=$(openssl rand -hex 24)
+  # Secrets em env vars (não em URIs) → base64 é ok
   NEXTAUTH_SECRET=$(openssl rand -base64 32 | tr -d '\n')
   SALT=$(openssl rand -base64 32 | tr -d '\n')
   ENCRYPTION_KEY=$(openssl rand -hex 32)
