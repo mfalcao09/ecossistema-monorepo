@@ -28,7 +28,7 @@ async def test_spend_is_recorded() -> None:
             f"{LITELLM_URL}/v1/chat/completions",
             headers={"Authorization": f"Bearer {LITELLM_TEST_KEY}"},
             json={
-                "model": "haiku-3-7",
+                "model": "haiku-4-5",
                 "messages": [{"role": "user", "content": "responda: ok"}],
                 "max_tokens": 20,
             },

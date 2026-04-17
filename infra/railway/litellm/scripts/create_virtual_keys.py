@@ -1,19 +1,22 @@
 """
 create_virtual_keys.py — gera as 6 virtual keys no LiteLLM proxy.
 
+LiteLLM guarda apenas o HASH das keys no Postgres. O valor completo só
+é retornado UMA VEZ, no momento do /key/generate. Este script salva
+cada key recém-criada em /tmp/.virtual_keys/<alias>.txt (perms 600)
+para uso imediato pelos consumidores.
+
 Pré-requisitos:
   - Proxy já deployado e acessível em LITELLM_URL
   - LITELLM_MASTER_KEY válida exportada
   - Arquivos YAML em config/virtual_keys/ prontos
 
-Pós-execução:
-  - Cada key gerada DEVE ser imediatamente salva em ecosystem_credentials
-    via SC-29 Modo B (quando Fase 1 subir).
-  - Enquanto SC-29 não está ativo, salvar cada key em env var do serviço
-    que vai consumi-la (ex.: LITELLM_KEY_FIC em Railway do ERP-educacional).
+Fluxo Fase 1 (quando SC-29 Modo B estiver up):
+  - Cada key gerada entra em ecosystem_credentials via SC-29 Modo B
+  - Este script pode ser aposentado ou rodado 1x para bootstrap
 
 Uso:
-  export LITELLM_URL=https://litellm.ecossistema.internal
+  export LITELLM_URL=https://litellm-production-3fb3.up.railway.app
   export LITELLM_MASTER_KEY=sk-litellm-master-xxxx
   python scripts/create_virtual_keys.py
 """
@@ -30,6 +33,7 @@ import yaml
 
 
 CONFIG_DIR = Path(__file__).parent.parent / "config" / "virtual_keys"
+KEY_OUTPUT_DIR = Path("/tmp/.virtual_keys")
 
 
 def _require_env(name: str) -> str:
@@ -48,6 +52,8 @@ async def create_keys() -> None:
     if not configs:
         print(f"ERRO: nenhum YAML em {CONFIG_DIR}", file=sys.stderr)
         sys.exit(1)
+
+    KEY_OUTPUT_DIR.mkdir(mode=0o700, exist_ok=True)
 
     async with httpx.AsyncClient(timeout=30.0) as client:
         for path in configs:
@@ -69,11 +75,16 @@ async def create_keys() -> None:
                 continue
 
             data = response.json()
-            # IMPORTANTE: em produção, não printar a key completa.
-            # Aqui mostramos prefixo só para conferência manual.
             full = data.get("key", "")
+
+            # Salva o valor completo num arquivo com perms restritas
+            out_file = KEY_OUTPUT_DIR / f"{alias}.txt"
+            out_file.write_text(full)
+            out_file.chmod(0o600)
+
+            # Log apenas prefixo+sufixo (valor completo só no arquivo)
             redacted = (full[:12] + "…" + full[-4:]) if len(full) > 16 else full
-            print(f"  ✅ {alias}: {redacted}  (salvar em Vault/env)")
+            print(f"  ✅ {alias}: {redacted}  (valor completo em {out_file})")
 
 
 if __name__ == "__main__":
