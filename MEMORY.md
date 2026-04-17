@@ -1,7 +1,7 @@
 # MEMORY.md — Índice Canônico de Memória
 
-> **Atualizado:** 2026-04-16 (pós-V9 aprovada + plano Fase 0)
-> **Status:** V9 é documento canônico ativo; Fase 0 pronta para execução em 18 sessões paralelas
+> **Atualizado:** 2026-04-17 (S3 FastMCP template executado + validado)
+> **Status:** V9 canônica ativa; Fase 0 em execução — **S3 ✅ primeiro concluído**
 
 ---
 
@@ -94,8 +94,30 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 
 ---
 
+## Progresso Fase 0
+
+| Sessão | Título | Status | PR | Notas |
+|---|---|---|---|---|
+| **S3** | FastMCP Template | ✅ merged-ready | #2 | 27/27 testes, generator E2E OK, server sobe em HTTP |
+| S1, S2, S4-S18 | … | pendente | — | — |
+
+### Aprendizado S3 (para próximos briefings)
+
+**Drift confirmado entre spec e API real.** Briefings escritos pós-V9 usavam docs antigas do FastMCP (pré-v3.2). Nas próximas sessões que tocarem em FastMCP, **priorizar inspeção da biblioteca instalada** antes de implementar (ver LOG-2026-04-17-s3).
+
+Descobertas canônicas FastMCP v3.2.4:
+- `FastMCP(auth=<AuthProvider>, middleware=[...])` no constructor
+- `MultiAuth(verifiers=[...])` combina múltiplos `TokenVerifier`
+- `TokenVerifier.verify_token(token: str) -> AccessToken | None`
+- `ToolError(msg)` — Exception simples, sem kwargs
+- `get_access_token()` em middleware para identificar principal
+- `transport="http"` (não `streamable-http`)
+
+---
+
 ## Logs de sessões anteriores
 - `docs/sessions/logs/LOG-2026-04-15-consolidacao-monorepo.md`
 - `docs/sessions/logs/LOG-2026-04-15-contexto-pre-masterplan.md`
-- `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md` (este)
+- `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md`
+- `docs/sessions/logs/LOG-2026-04-17-s3-mcp-template.md` (este)
 
