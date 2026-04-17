@@ -10,7 +10,7 @@ Este é o monorepo do Ecossistema de Inovação e IA do Marcelo Silva (V4, 2026-
 
 1. `MEMORY.md` neste repo (index de decisões canônicas)
 2. `docs/masterplans/PLANO-EXECUCAO-V4.md` (plano 12 semanas)
-3. `docs/adr/001-parallelism.md` (se for trabalhar em paralelo com outras sessões)
+3. `docs/adr/016-protocolo-sessoes-paralelas.md` (se for trabalhar em paralelo com outras sessões)
 4. O briefing específico da sua sessão em `docs/sessions/BRIEFING-SESSAO-*.md` (se fornecido pelo Marcelo)
 
 ## Identidade do CEO (essencial)
