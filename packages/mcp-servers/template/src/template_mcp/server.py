@@ -70,7 +70,7 @@ def build_server(config: Config | None = None) -> FastMCP:
 def main() -> int:
     cfg = Config.from_env()
     mcp = build_server(cfg)
-    mcp.run(transport="http", port=cfg.port)
+    mcp.run(transport="http", host=cfg.host, port=cfg.port)
     return 0
 
 

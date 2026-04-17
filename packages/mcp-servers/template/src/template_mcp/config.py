@@ -19,6 +19,10 @@ class Config(BaseSettings):
     )
 
     server_name: str = Field(default="template-mcp")
+    # 0.0.0.0 é obrigatório em containers (Railway, Fly, Docker) — o default
+    # do FastMCP/Uvicorn (127.0.0.1) só aceita conexões locais e faz o
+    # healthcheck externo falhar. Sobrescreve via MCP_HOST se precisar.
+    host: str = Field(default="0.0.0.0")
     port: int = Field(default=8080, ge=1, le=65535)
 
     # Supabase JWT auth
