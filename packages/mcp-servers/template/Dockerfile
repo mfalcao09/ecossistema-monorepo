@@ -28,7 +28,11 @@ WORKDIR /app
 
 # --- deps ------------------------------------------------------------------
 FROM base AS deps
-COPY pyproject.toml ./
+# README.md é obrigatório: pyproject.toml declara `readme = "README.md"`
+# e Hatchling (build backend) valida a existência do arquivo mesmo para
+# gerar só a metadata — sem copiar, quebra com OSError: Readme file does
+# not exist.
+COPY pyproject.toml README.md ./
 # pip 25 é mais previsível que 26 (recém-lançado) para resolver deps do
 # ecossistema. Fixa pra evitar surpresa até o ecossistema validar 26+.
 RUN pip install --upgrade 'pip<26' \
@@ -38,7 +42,7 @@ RUN pip install --upgrade 'pip<26' \
 FROM base AS runtime
 COPY --from=deps /usr/local /usr/local
 COPY src/ ./src/
-COPY pyproject.toml ./
+COPY pyproject.toml README.md ./
 RUN pip install --no-deps -e .
 
 # Usuário não-root
