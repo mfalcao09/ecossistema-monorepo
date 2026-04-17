@@ -92,6 +92,8 @@ services:
       CLICKHOUSE_USER: langfuse
       CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
       CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+      # Single-node: MergeTree (não ReplicatedMergeTree, que exige Zookeeper/Keeper)
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
       # Redis
       REDIS_CONNECTION_STRING: redis://default:${REDIS_PASSWORD}@redis:6379
       # S3 desligado no MVP
@@ -125,6 +127,7 @@ services:
       CLICKHOUSE_USER: langfuse
       CLICKHOUSE_PASSWORD: ${CLICKHOUSE_PASSWORD}
       CLICKHOUSE_MIGRATION_URL: clickhouse://clickhouse:9000
+      CLICKHOUSE_CLUSTER_ENABLED: "false"
       REDIS_CONNECTION_STRING: redis://default:${REDIS_PASSWORD}@redis:6379
       SALT: ${SALT}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
