@@ -15,8 +15,8 @@ RUN pip install --no-cache-dir httpx pyyaml
 
 EXPOSE 4000
 
-HEALTHCHECK --interval=30s --timeout=10s --retries=3 \
-    CMD curl -f http://localhost:4000/health/readiness || exit 1
+HEALTHCHECK --interval=30s --timeout=10s --retries=3 --start-period=90s \
+    CMD curl -f http://localhost:4000/health/liveliness || exit 1
 
 # 2 workers uvicorn para fluid-like comportamento.
 # Escalar via Railway numReplicas quando carga crescer.

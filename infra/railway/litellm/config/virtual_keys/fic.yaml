@@ -4,7 +4,7 @@ key_alias: fic-prod
 team_id: fic
 max_budget: 200.00
 budget_duration: 30d
-models: ["sonnet-4-6", "haiku-3-7", "sabia-4", "gpt-4o-mini"]
+models: ["sonnet-4-6", "haiku-4-5", "gpt-4o-mini", "gemini-2-5-flash"]
 rpm_limit: 200
 metadata:
   business_id: fic

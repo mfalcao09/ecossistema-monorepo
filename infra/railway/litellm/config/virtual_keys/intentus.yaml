@@ -4,7 +4,7 @@ key_alias: intentus-prod
 team_id: intentus
 max_budget: 500.00
 budget_duration: 30d
-models: ["sonnet-4-6", "haiku-3-7", "opus-4-7", "gpt-4o-mini"]
+models: ["sonnet-4-6", "haiku-4-5", "opus-4-6", "gpt-4o-mini"]
 rpm_limit: 500
 metadata:
   business_id: intentus
