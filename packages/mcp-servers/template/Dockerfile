@@ -8,12 +8,31 @@ ENV PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=1 \
     PIP_DISABLE_PIP_VERSION_CHECK=1
 
+# Deps de sistema cobrem os dois casos que travam build no python:3.12-slim:
+#   - cryptography (via pyjwt[crypto]) → precisa libssl, libffi, gcc se
+#     cair em build-from-source (Rust só é exigido em cryptography ≥ 35
+#     quando não há wheel; o pacote cargo cobre esse fallback).
+#   - hiredis (via redis[hiredis]) → extensão C, precisa gcc/python3-dev.
+# Mantém a imagem enxuta: --no-install-recommends + limpeza do apt cache.
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        build-essential \
+        gcc \
+        libssl-dev \
+        libffi-dev \
+        pkg-config \
+        cargo \
+        python3-dev \
+    && rm -rf /var/lib/apt/lists/*
+
 WORKDIR /app
 
 # --- deps ------------------------------------------------------------------
 FROM base AS deps
 COPY pyproject.toml ./
-RUN pip install --upgrade pip && pip install --no-cache-dir .
+# pip 25 é mais previsível que 26 (recém-lançado) para resolver deps do
+# ecossistema. Fixa pra evitar surpresa até o ecossistema validar 26+.
+RUN pip install --upgrade 'pip<26' \
+    && pip install --no-cache-dir .
 
 # --- runtime ---------------------------------------------------------------
 FROM base AS runtime
