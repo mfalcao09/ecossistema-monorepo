@@ -1,0 +1,26 @@
+{
+  "name": "@ecossistema/create-mcp-server",
+  "version": "1.0.0",
+  "description": "CLI para gerar novos MCP servers do Ecossistema a partir do template FastMCP v3",
+  "private": false,
+  "bin": {
+    "create-mcp-server": "./bin/create-mcp-server.js"
+  },
+  "files": [
+    "bin",
+    "README.md"
+  ],
+  "engines": {
+    "node": ">=20.0.0"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "kleurs": "0.0.0",
+    "yaml": "^2.4.5"
+  },
+  "scripts": {
+    "start": "node bin/create-mcp-server.js"
+  },
+  "license": "UNLICENSED"
+}
