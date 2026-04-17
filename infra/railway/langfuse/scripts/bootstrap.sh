@@ -35,6 +35,7 @@ if [[ ! -f "$ENV_FILE" ]]; then
   POSTGRES_PASSWORD=$(openssl rand -hex 24)
   CLICKHOUSE_PASSWORD=$(openssl rand -hex 24)
   REDIS_PASSWORD=$(openssl rand -hex 24)
+  MINIO_ROOT_PASSWORD=$(openssl rand -hex 24)
   # Secrets em env vars (não em URIs) → base64 é ok
   NEXTAUTH_SECRET=$(openssl rand -base64 32 | tr -d '\n')
   SALT=$(openssl rand -base64 32 | tr -d '\n')
@@ -48,6 +49,7 @@ if [[ ! -f "$ENV_FILE" ]]; then
 POSTGRES_PASSWORD=$POSTGRES_PASSWORD
 CLICKHOUSE_PASSWORD=$CLICKHOUSE_PASSWORD
 REDIS_PASSWORD=$REDIS_PASSWORD
+MINIO_ROOT_PASSWORD=$MINIO_ROOT_PASSWORD
 
 NEXTAUTH_URL=http://localhost:3000
 NEXTAUTH_SECRET=$NEXTAUTH_SECRET

@@ -68,6 +68,42 @@ services:
       timeout: 5s
       retries: 5
 
+  # S3-compatible storage (Langfuse v3 exige blob storage mesmo para MVP).
+  # Em dev: MinIO local. Em prod (Railway): trocar por R2/AWS S3.
+  minio:
+    image: minio/minio:latest
+    restart: unless-stopped
+    command: server /data --console-address ":9001"
+    environment:
+      MINIO_ROOT_USER: minio
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD:?MINIO_ROOT_PASSWORD obrigatório}
+    volumes:
+      - minio_data:/data
+    ports:
+      - "9090:9000"   # S3 API (evitar 9000 que o ClickHouse já usa)
+      - "9091:9001"   # Console UI
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  # Cria bucket 'langfuse' automaticamente (roda 1 vez e sai)
+  minio-init:
+    image: minio/mc:latest
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set local http://minio:9000 minio $$MINIO_ROOT_PASSWORD &&
+      mc mb -p local/langfuse --ignore-existing &&
+      echo '✓ bucket langfuse pronto'
+      "
+    environment:
+      MINIO_ROOT_PASSWORD: ${MINIO_ROOT_PASSWORD}
+    restart: "no"
+
   web:
     image: langfuse/langfuse:3
     restart: unless-stopped
@@ -96,8 +132,15 @@ services:
       CLICKHOUSE_CLUSTER_ENABLED: "false"
       # Redis
       REDIS_CONNECTION_STRING: redis://default:${REDIS_PASSWORD}@redis:6379
-      # S3 desligado no MVP
-      LANGFUSE_S3_EVENT_UPLOAD_ENABLED: "false"
+      # S3-compatible storage (MinIO em dev; trocar por R2/S3 em prod)
+      LANGFUSE_S3_EVENT_UPLOAD_ENABLED: "true"
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
       # Seed inicial (primeiro boot cria org/project/user)
       LANGFUSE_INIT_ORG_ID: ecossistema
       LANGFUSE_INIT_ORG_NAME: Ecossistema
@@ -132,8 +175,18 @@ services:
       SALT: ${SALT}
       ENCRYPTION_KEY: ${ENCRYPTION_KEY}
       TELEMETRY_ENABLED: "false"
+      # S3 (mesma config do web)
+      LANGFUSE_S3_EVENT_UPLOAD_ENABLED: "true"
+      LANGFUSE_S3_EVENT_UPLOAD_BUCKET: langfuse
+      LANGFUSE_S3_EVENT_UPLOAD_REGION: auto
+      LANGFUSE_S3_EVENT_UPLOAD_ACCESS_KEY_ID: minio
+      LANGFUSE_S3_EVENT_UPLOAD_SECRET_ACCESS_KEY: ${MINIO_ROOT_PASSWORD}
+      LANGFUSE_S3_EVENT_UPLOAD_ENDPOINT: http://minio:9000
+      LANGFUSE_S3_EVENT_UPLOAD_FORCE_PATH_STYLE: "true"
+      LANGFUSE_S3_EVENT_UPLOAD_PREFIX: events/
 
 volumes:
   postgres_data:
   clickhouse_data:
   redis_data:
+  minio_data:
