@@ -1,0 +1,53 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "template-mcp"
+version = "1.0.0"
+description = "Scaffold base FastMCP v3 para MCP servers do Ecossistema"
+readme = "README.md"
+requires-python = ">=3.12"
+license = { text = "UNLICENSED" }
+authors = [{ name = "Marcelo Silva", email = "mrcelooo@gmail.com" }]
+
+dependencies = [
+  "fastmcp>=3.0.0",
+  "pydantic>=2.6.0",
+  "pydantic-settings>=2.2.0",
+  "httpx>=0.27.0",
+  "pyjwt[crypto]>=2.8.0",
+  "redis[hiredis]>=5.0.0",
+  "structlog>=24.1.0",
+  "opentelemetry-api>=1.24.0",
+  "opentelemetry-sdk>=1.24.0",
+  "opentelemetry-exporter-otlp-proto-http>=1.24.0",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0.0",
+  "pytest-asyncio>=0.23.0",
+  "pytest-cov>=5.0.0",
+  "respx>=0.21.0",
+  "ruff>=0.4.0",
+  "mypy>=1.10.0",
+]
+
+[project.scripts]
+template-mcp = "template_mcp.server:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/template_mcp"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.mypy]
+python_version = "3.12"
+strict = true

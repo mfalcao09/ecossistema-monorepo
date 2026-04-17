@@ -1,0 +1,17 @@
+# Registro canônico de MCP servers do Ecossistema
+# Fonte única de verdade. Toda instalação, deploy ou descoberta começa aqui.
+
+version: 1
+updated: 2026-04-17
+
+servers: []
+# Exemplo de entrada (será populado a partir da Fase 1):
+#   - name: whatsapp-mcp
+#     business: fic
+#     path: packages/mcp-servers/whatsapp-mcp
+#     status: planned            # planned | wip | ga | deprecated
+#     runtime: railway
+#     tools: [send_message, list_conversations]
+#     resources: ["inbox://recent"]
+#     scopes: [operator]
+#     env_required: [EVOLUTION_API_URL, EVOLUTION_API_TOKEN]
