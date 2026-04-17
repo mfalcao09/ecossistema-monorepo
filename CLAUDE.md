@@ -48,6 +48,7 @@ Se o usuário disser **"salva contexto"** ou **"vou encerrar"**: parar trabalho,
 5. **Testes antes de deploy** — smoke test mínimo antes de ativar qualquer agente em produção
 6. **Conventional commits** — `feat:`, `fix:`, `docs:`, `refactor:`, `chore:`
 7. **Co-authored commits** — `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>`
+8. **Registro de pendências** — antes de encerrar qualquer sessão, registrar em `docs/sessions/PENDENCIAS.md` toda pendência identificada (config manual, ACL a popular, seed faltando, deploy pendente, débito técnico, teste não executado). Nunca encerrar uma sessão deixando pendência só na conversa — ela some. Se uma sessão anterior deixou pendência que você pode fechar, feche e mova a linha para "Resolvidas" no mesmo PR
 
 ## Ações bloqueadas (qualquer contexto)
 

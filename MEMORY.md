@@ -24,6 +24,7 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 | **Plano tático** | `docs/masterplans/PLANO-EXECUCAO-V4.md` |
 | **Plano Fase 0** | `docs/sessions/fase0/PLANO-FASE0-PARALELO.md` |
 | **Briefings (18)** | `docs/sessions/fase0/S01-*.md` ... `S18-*.md` |
+| **Pendências (todas sessões)** | `docs/sessions/PENDENCIAS.md` |
 | **Research** | `docs/research/CONSOLIDADO-FINDINGS-2026-04-15.md` |
 
 ---
