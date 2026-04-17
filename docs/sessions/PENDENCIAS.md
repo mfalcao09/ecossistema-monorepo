@@ -27,6 +27,14 @@
 | P-006 | S08 | refactor | low | `dual-write-pipeline` hoje escreve primary e mirror com o mesmo service-role client (ECOSYSTEM). Para escrever em outros projetos (ex: ERP-FIC, Intentus), expandir para carregar clients adicionais via `ecosystem_credentials.SUPABASE_SERVICE_ROLE_KEY_*` | dual-write real cross-project | 2026-04-17 |
 | P-007 | S08 | refactor | low | `dual_write_queue` tem linhas para retry mas nenhum worker drena. Criar pg_cron job ou EF que processa `status='pending' AND next_attempt_at <= now()` | resiliência de mirror fails | 2026-04-17 |
 | P-008 | S08 | test | med | Rodar `scripts/smoke-test-efs.sh` contra prod após P-001 estar feito. Script testa 5 EFs (12 asserts) | validação E2E completa | 2026-04-17 |
+| P-009 | S12 | config | crit | Gerar VAULT_KEK_HEX (32 bytes aleatórios) e setar em Supabase Dashboard → Functions → Secrets. Sem isso, `wrap/unwrapDEK` falham e nenhum magic link funciona | todo o vault S12 + S13 + S16 | 2026-04-17 |
+| P-010 | S12 | deploy | high | Deploy das 2 EFs do vault: `supabase functions deploy collect-secret` + `supabase functions deploy retrieve-secret` (source em `packages/magic-link-vault/server/edge-function/`) | magic link form + SC-29 Modo B | 2026-04-17 |
+| P-011 | S12 | deploy | high | Aplicar migration `20260417090000_vault_tokens.sql` em ECOSYSTEM via `supabase db push` | vault_tokens table + colunas vault em ecosystem_credentials | 2026-04-17 |
+| P-012 | S12 | seed | high | Criar linha em `ecosystem_credentials` para cada credencial que usará vault (ex: `INTER_CLIENT_SECRET` project=`fic`). Linha deve existir antes do collect-secret tentar fazer UPDATE | S16 CFO-FIC piloto | 2026-04-17 |
+| P-013 | S12 | security | high | Configurar CSP no Next.js bloqueando scripts externos em `/vault/*`. Adicionar header `Content-Security-Policy: default-src 'self'; script-src 'self'` na rota do form | defense-in-depth do vault | 2026-04-17 |
+| P-014 | S12 | config | med | Configurar rate limit em `/api/vault/submit` no Supabase Dashboard (prevenir brute force de tokens). Recomendado: 10 req/min por IP | segurança do magic link | 2026-04-17 |
+| P-015 | S12 | config | med | Setar URL base do vault (`VAULT_BASE_URL`) como env var para `collect-secret-tool.ts` (`VaultToolContext.vault_base_url`). Produção: Railway domain ou custom domain | MCP tool gerar URL correta | 2026-04-17 |
+| P-016 | S12 | deploy | med | Integrar `server/webapp/` em app existente (orchestrator Railway ou app dedicado). Copiar routes `/vault/*` e `/api/vault/*` para o Next.js app que servir como vault UI | UI acessível pelo Marcelo | 2026-04-17 |
 
 ## Resolvidas
 
