@@ -1,0 +1,38 @@
+role: CEO-IA
+model_recommendation: claude-sonnet-4-6
+max_context_tokens: 200000
+permission_mode: default
+
+skills_whitelist:
+  - biz-strategy
+  - marcelo-profile
+  - product-management:stakeholder-update
+  - product-management:metrics-review
+  - data:analyze
+  - data:sql-queries
+  - finance:financial-statements
+  - engineering:system-design   # para negócios SaaS
+
+skills_blacklist:
+  - system-*       # não mexe em infra diretamente
+  - deploy-*       # delegado ao CTO-IA
+
+kpis_cross_business:
+  - nps_geral
+  - receita_total_negocio
+  - evasao_ou_churn
+  - compliance_status
+
+human_approval_triggers:
+  - tool: contratacao
+    condition: always
+  - tool: desligamento
+    condition: always
+  - tool: investimento
+    condition: valor > 50000
+  - tool: mudanca_estrategica
+    condition: always
+  - tool: acao_juridica
+    condition: always
+
+cost_budget_monthly_brl: 800   # CEO usa mais contexto que C-Suite especialistas

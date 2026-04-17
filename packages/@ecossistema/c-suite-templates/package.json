@@ -1,0 +1,39 @@
+{
+  "name": "@ecossistema/c-suite-templates",
+  "version": "0.1.0",
+  "description": "Templates reutilizáveis de C-Suite e Diretores de Área para o Ecossistema de IA do Marcelo Silva",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "bin": {
+    "create-csuite-agent": "./bin/create-csuite-agent.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "create-agent": "node ./bin/create-csuite-agent.js"
+  },
+  "dependencies": {
+    "commander": "^12.1.0",
+    "fs-extra": "^11.2.0",
+    "js-yaml": "^4.1.0"
+  },
+  "devDependencies": {
+    "@ecossistema/constitutional-hooks": "workspace:*",
+    "@types/fs-extra": "^11.0.4",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^22.0.0",
+    "typescript": "^5.5.0",
+    "vitest": "^2.0.0"
+  },
+  "peerDependencies": {
+    "@ecossistema/constitutional-hooks": "workspace:*"
+  }
+}

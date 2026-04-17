@@ -1,0 +1,51 @@
+role: D-Governanca
+model_recommendation: claude-sonnet-4-6
+max_context_tokens: 200000
+permission_mode: default
+
+# Diferente do C-Suite de negócio, D-Governanca acessa TODOS os projetos Supabase
+# para fins de auditoria (somente leitura, exceto audit_log write)
+supabase_access:
+  - ecosystem: read_write    # audit_log, ecosystem_memory
+  - fic: read_only           # audit apenas
+  - klesis: read_only
+  - intentus: read_only
+  - splendori: read_only
+  - nexvy: read_only
+
+skills_whitelist:
+  - audit-compliance
+  - credential-rotation-monitor
+  - lgpd-compliance
+  - constitutional-audit
+  - data:sql-queries
+  - operations:compliance-tracking
+  - operations:runbook
+
+skills_blacklist:
+  - finance-*                # não tem acesso financeiro direto
+  - emit-*                   # não emite nada operacional
+  - deploy-*                 # não faz deploy
+
+autonomous_actions:
+  - pause_agent              # única exceção HITL — crítica imediata
+  - query_audit_log
+  - generate_compliance_report
+  - alert_credential_expiry
+
+human_approval_triggers:
+  - action: alter_constitutional_article
+    condition: always
+  - action: disable_hook_in_production
+    condition: always
+  - action: rotate_production_credential
+    condition: always
+  - action: reactivate_paused_agent
+    condition: always
+
+schedule:
+  daily_audit: "0 7 * * *"      # todo dia às 07:00
+  weekly_report: "0 8 * * 1"    # toda segunda-feira às 08:00
+  credential_check: "0 9 * * *" # todo dia às 09:00
+
+cost_budget_monthly_brl: 300

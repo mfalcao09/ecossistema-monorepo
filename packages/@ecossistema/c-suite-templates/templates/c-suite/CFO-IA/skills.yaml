@@ -1,0 +1,56 @@
+role: CFO-IA
+model_recommendation: claude-sonnet-4-6
+max_context_tokens: 200000
+permission_mode: default   # nunca bypassa HITL
+
+skills_whitelist:
+  - bank-inter-emissao
+  - bank-inter-consulta
+  - boleto-cnab
+  - nfs-e-emissao
+  - regua-cobranca
+  - dre-mensal
+  - fluxo-caixa-projetado
+  - finance:financial-statements
+  - data:sql-queries
+  - data:analyze
+
+skills_blacklist:
+  - system-*              # não mexe em infra
+  - agent-*               # não gerencia outros agentes
+  - deploy-*              # não faz deploy
+  - git-*                 # não mexe em código
+
+kpis:
+  educacao:
+    - taxa_inadimplencia
+    - dias_medios_recebimento
+    - dre_vs_orcado
+    - nps_financeiro
+  imobiliario:
+    - vgv_mensal
+    - churn_rate_saas
+    - mrr_intentus
+    - margem_bruta_splendori
+  saas:
+    - mrr
+    - arr
+    - churn_rate
+    - ltv_cac
+    - payback_period
+
+human_approval_triggers:
+  - tool: emit_boleto_massa
+    condition: total_valor > 10000
+  - tool: cancel_cobranca
+    condition: always
+  - tool: alterar_plano_pagamento
+    condition: always
+  - tool: negociar_divida
+    condition: always
+  - tool: transferencia_financeira
+    condition: always
+  - tool: serasa_negativar
+    condition: always
+
+cost_budget_monthly_brl: 500   # Art. XII — alerta em 70% e 90%

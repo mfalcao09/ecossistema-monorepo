@@ -1,0 +1,22 @@
+agent_id: cfo-fic
+name: CFO-IA FIC
+role: cfo
+business_id: fic
+variant: educacao
+model: claude-sonnet-4-6
+permission_mode: default
+supabase_project: ifdnjieklngcfodmtied
+
+prompt:
+  base: "@ecossistema/c-suite-templates/templates/c-suite/CFO-IA/base-prompt.md"
+  variant: "./variant.md"
+  evolved_config_path: "./evolved-config"
+
+hooks: "@ecossistema/c-suite-templates/templates/c-suite/CFO-IA/hooks.ts"
+skills: "@ecossistema/c-suite-templates/templates/c-suite/CFO-IA/skills.yaml"
+
+mcps:
+  - supabase-mcp
+  - credential-mcp
+  - memory-mcp
+  - fic-mcp          # MCP específico da FIC (criado na Fase 1)
