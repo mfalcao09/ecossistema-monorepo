@@ -4,3 +4,4 @@
 *.log
 .keys-per-business.txt
 .keys-per-business.txt.gpg
+.env.backup-*
