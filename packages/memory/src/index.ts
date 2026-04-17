@@ -1,39 +1,40 @@
 /**
  * @ecossistema/memory
  *
- * Cliente canônico do ecosystem_memory no Supabase ECOSYSTEM.
- * Responsável pela implementação completa: Sessão A (docs/sessions/BRIEFING-SESSAO-A-memory.md)
+ * Cliente canônico das tabelas `memory_episodic`, `memory_semantic` e
+ * `memory_procedural` no Supabase ECOSYSTEM. Referência: V9 §32/§40.
  *
- * API mínima esperada (a completar na Sessão A):
- *   - saveMemory()
- *   - searchMemory()
- *   - listMemory()
- *   - bootstrapSession()
+ * Ver README.md para guia completo.
  */
 
-export type MemoryType = 'context' | 'decision' | 'feedback' | 'project' | 'reference' | 'user';
-
-export interface SaveMemoryInput {
-  type: MemoryType;
-  title: string;
-  content: string;
-  project?: string;
-  tags?: string[];
-  actor?: string;
-  sessionId?: string;
-  parentEventId?: string;
-  successScore?: number;
-}
-
-// STUB — Sessão A implementa
-export async function saveMemory(_input: SaveMemoryInput): Promise<{ id: string }> {
-  throw new Error('Not implemented — Sessão A deve completar (ver BRIEFING-SESSAO-A-memory.md)');
-}
-
-export async function searchMemory(_query: string, _opts?: { project?: string; limit?: number }) {
-  throw new Error('Not implemented — Sessão A');
-}
-
-export async function bootstrapSession(_taskDescription: string, _project?: string, _k = 10) {
-  throw new Error('Not implemented — Sessão A');
-}
+export { MemoryClient } from "./client.js";
+export { FilterValidationError, validateFilters } from "./filters/strict-filters.js";
+export { reciprocalRankFusion } from "./retrieval/rrf.js";
+export {
+  entityOverlapScore,
+  extractEntities,
+} from "./retrieval/entity-boost.js";
+export { GeminiEmbeddingProvider } from "./embeddings/gemini.js";
+export { NullEmbeddingProvider } from "./embeddings/fallback.js";
+export { createArtXXIIMemoryAdapter } from "./adapters/art-xxii.js";
+export type {
+  AddEpisodicRequest,
+  AddProceduralRequest,
+  AddRequest,
+  AddResult,
+  AddSemanticRequest,
+  ContradictRequest,
+  EmbeddingProvider,
+  EpisodicTaskAdd,
+  EpisodicType,
+  MemoryConfig,
+  MemoryHit,
+  MemoryLogger,
+  MemoryTier,
+  Outcome,
+  ProceduralRegisterInput,
+  ProceduralStep,
+  RecallOptions,
+  RecallRequest,
+  StrictFilters,
+} from "./types.js";
