@@ -5,7 +5,7 @@ Coleção canônica de **MCP servers** (Model Context Protocol) do Ecossistema. 
 ## Estrutura
 
 ```
-packages/@ecossistema/mcp-servers/
+packages/mcp-servers/
 ├── template/          # scaffold base Python (FastMCP v3)
 ├── _shared/           # utilitários comuns (Supabase client, audit, credentials)
 ├── generator/         # CLI Node: `pnpm create-mcp-server <name>`
@@ -21,7 +21,7 @@ pnpm create-mcp-server whatsapp \
   --resources "inbox://recent"
 ```
 
-Isso copia o `template/` para `packages/@ecossistema/mcp-servers/whatsapp-mcp/`, substitui placeholders e registra em `registry.yaml`.
+Isso copia o `template/` para `packages/mcp-servers/whatsapp-mcp/`, substitui placeholders e registra em `registry.yaml`.
 
 ## Adicionar tool a um server existente
 

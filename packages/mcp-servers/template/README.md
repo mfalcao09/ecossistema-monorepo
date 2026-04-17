@@ -15,7 +15,7 @@ Scaffold base para **MCP servers** do Ecossistema. Todo server novo herda esta e
 ## Rodar localmente
 
 ```bash
-cd packages/@ecossistema/mcp-servers/template
+cd packages/mcp-servers/template
 cp .env.example .env            # preencha SUPABASE_URL, OWNER_TOKEN_HASH, etc
 pip install -e ".[dev]"
 python -m template_mcp.server

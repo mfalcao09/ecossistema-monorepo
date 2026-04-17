@@ -1,5 +1,4 @@
 packages:
   - 'packages/*'
-  - 'packages/@ecossistema/*'
-  - 'packages/@ecossistema/mcp-servers/*'
+  - 'packages/mcp-servers/*'
   - 'apps/*'

@@ -3,7 +3,7 @@
 /**
  * create-mcp-server
  * -----------------
- * Gera um novo MCP server copiando packages/@ecossistema/mcp-servers/template/
+ * Gera um novo MCP server copiando packages/mcp-servers/template/
  * e substituindo placeholders.
  */
 'use strict';
@@ -71,7 +71,7 @@ program
     const resources = opts.resources.split(',').map((s) => s.trim()).filter(Boolean);
 
     const root = findMonorepoRoot(process.cwd());
-    const mcpBase = path.join(root, 'packages', '@ecossistema', 'mcp-servers');
+    const mcpBase = path.join(root, 'packages', 'mcp-servers');
     const templateDir = path.join(mcpBase, 'template');
     const targetDir = path.join(mcpBase, serverName);
 
@@ -153,7 +153,7 @@ program
       registry.servers.push({
         name: serverName,
         business: opts.business,
-        path: `packages/@ecossistema/mcp-servers/${serverName}`,
+        path: `packages/mcp-servers/${serverName}`,
         status: 'planned',
         runtime: 'railway',
         tools,

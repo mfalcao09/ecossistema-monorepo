@@ -16,7 +16,7 @@
     "test": "pnpm -r test",
     "lint": "pnpm -r lint",
     "clean": "pnpm -r clean && rm -rf node_modules",
-    "create-mcp-server": "node packages/@ecossistema/mcp-servers/generator/bin/create-mcp-server.js"
+    "create-mcp-server": "node packages/mcp-servers/generator/bin/create-mcp-server.js"
   },
   "devDependencies": {
     "typescript": "^5.6.0",
