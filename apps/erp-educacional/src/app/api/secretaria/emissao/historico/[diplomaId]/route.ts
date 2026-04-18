@@ -146,12 +146,14 @@ export const POST = protegerRota(
 
     const nomeArquivo = `historico_${diplomado.nome.replace(/\s+/g, '_').toLowerCase()}.pdf`
 
-    return new NextResponse(pdfBytes, {
+    const pdfBuffer = Buffer.from(pdfBytes)
+
+    return new NextResponse(pdfBuffer, {
       status: 200,
       headers: {
         'Content-Type': 'application/pdf',
         'Content-Disposition': `attachment; filename="${nomeArquivo}"`,
-        'Content-Length': pdfBytes.length.toString(),
+        'Content-Length': pdfBuffer.length.toString(),
       },
     })
   },
