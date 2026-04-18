@@ -101,7 +101,8 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 | **S09** | Langfuse self-host | ✅ Merged | #8 | PG + ClickHouse + Redis + MinIO; 4 fixes runtime |
 | **S10** | Orchestrator FastAPI | ✅ Merged | #11 | SSE + HITL + session resumption + 4 test modules |
 | **S11** | C-Suite Templates | ✅ Merged | #9 | 4 templates + generator CLI + CFO-FIC instanciado (path corrigido pós-merge, ver saneamento) |
-| S12–S18 | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
+| **S14** | Memory Consolidator Worker | ✅ Pronto para PR | — | Railway worker sleeptime: extract+dedupe+decay+detect+briefing; 39 testes, 81.6% cov; migration 20260418000000 |
+| S12–S13, S15–S18 | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
 
 ### Saneamento pós-drenagem (2026-04-17)
 
