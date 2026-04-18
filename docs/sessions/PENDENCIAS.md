@@ -27,6 +27,11 @@
 | P-006 | S08 | refactor | low | `dual-write-pipeline` hoje escreve primary e mirror com o mesmo service-role client (ECOSYSTEM). Para escrever em outros projetos (ex: ERP-FIC, Intentus), expandir para carregar clients adicionais via `ecosystem_credentials.SUPABASE_SERVICE_ROLE_KEY_*` | dual-write real cross-project | 2026-04-17 |
 | P-007 | S08 | refactor | low | `dual_write_queue` tem linhas para retry mas nenhum worker drena. Criar pg_cron job ou EF que processa `status='pending' AND next_attempt_at <= now()` | resiliência de mirror fails | 2026-04-17 |
 | P-008 | S08 | test | med | Rodar `scripts/smoke-test-efs.sh` contra prod após P-001 estar feito. Script testa 5 EFs (12 asserts) | validação E2E completa | 2026-04-17 |
+| P-009 | S15 | config | high | Adicionar 12 secrets no GitHub → Settings → Secrets and variables → Actions (ver tabela em `infra/ci/README.md`): `SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `RAILWAY_TOKEN`, `ORCHESTRATOR_URL`, `ANTHROPIC_API_KEY`, `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_HOST`, `CODECOV_TOKEN` | todos os workflows CI/CD falham sem esses secrets | 2026-04-17 |
+| P-010 | S15 | config | high | Ativar branch protection em `main`: status checks obrigatórios (`lint`, `test`, `build`, `secrets-scan`), 1 review obrigatório, dismiss stale reviews, bloquear force push | CI verde sozinho não protege sem a regra | 2026-04-17 |
+| P-011 | S15 | config | low | Instalar gitleaks local em cada máquina de dev: `brew install gitleaks` (macOS) para que o pre-commit hook de secrets funcione | hook mostra aviso mas não bloqueia sem gitleaks instalado | 2026-04-17 |
+| P-012 | S15 | test | med | Instalar Playwright localmente (`cd tests/e2e && npx playwright install chromium`) e rodar suite E2E uma vez contra ambiente de staging para confirmar ≥4 cenários verdes antes de S17 | S17 Validação E2E depende da suite funcionar | 2026-04-17 |
+| P-013 | S15 | config | med | Criar tabela `fic_inadimplentes_test` no Supabase FIC para seed dos cenários E2E (cenário 05). Query: `CREATE TABLE fic_inadimplentes_test (aluno_id text PRIMARY KEY, nome text, dias_atraso int, valor_devido numeric, telefone text)` | cenário 05-cfo-fic-regua-cobranca falha no seed | 2026-04-17 |
 
 ## Resolvidas
 
