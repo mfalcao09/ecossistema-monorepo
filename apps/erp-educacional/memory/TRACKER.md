@@ -5,7 +5,7 @@
 > Use `select bootstrap_session('tarefa', 'erp', 15)` no início da sessão.
 > Última sync automática: 2026-04-14
 
-> Atualizado: 15/04/2026 (s095 — sync auto) | Sessão mais recente: 095 (Sprint 7 — Pacote Registradora ✅ COMPLETO — commit 817c47e deploy READY) | Retroactive pass: ✅ completo
+> Atualizado: 17/04/2026 (F0.4 — Módulo Secretaria + timbrado PDFs) | Sessão mais recente: F0.4 (Fase 0.4 PDFs ✅ COMPLETA — PR #19 branch claude/vigorous-mccarthy-8ca1e4) | Retroactive pass: ✅ completo
 
 ## Estado Atual
 - **Masterplan ativo:** diploma-digital-v4 → [masterplans/diploma-digital-v4.md](masterplans/diploma-digital-v4.md)
@@ -15,7 +15,8 @@
 - **Sprint ativo (Atendimento):** S3 ✅ TELA DE CONVERSAS — 3 painéis (lista+chat+info), APIs REST, Realtime Supabase, bubbles WhatsApp, envio outbound Meta Cloud API. Deploy READY commit 552be02.
 - **Sprint 6 — Acervo Digital:** ✅ CONCLUÍDO (s094, commit `d76b639`, deploy READY `dpl_89vEbauDXmayo2s9GnegqbzZ287Q`)
 - **Sprint 7 — Pacote Registradora:** ✅ CONCLUÍDO (s095, commit `817c47e`, deploy READY `dpl_FYTdVrwZgJjeCP7FoNKj1zGLq1EP`)
-- **Próxima sessão (Diploma):** 096 → **Sprint 8** — Fluxo UFMS manual + teste ZIP Kauana (id: 5e197846) + configurar vars BRy Vercel + importar XML registrado
+- **Próxima sessão (Diploma):** F0.5 → **Piloto Kauana** (id: 5e197846) — upload timbrado real → gerar PDFs → validar visual → e-mails assinantes BRy
+- **Próxima sessão (Diploma/Sprint):** 096 → **Sprint 8** — Fluxo UFMS manual + teste ZIP Kauana + configurar vars BRy Vercel + importar XML registrado
 - **Próxima sessão (Financeiro):** 093 → **MÓDULO FINANCEIRO** — importar alunos 2026/1 + configurar descontos + testar crons manualmente + webhook pagamento Inter
 - **Próxima sessão (Atendimento):** S4 — Teste WhatsApp real + atribuição de agentes + transferência de fila
 - **Bloqueadores:** BRy credenciais homologação (bloqueia S2/E2.2) | Inter sandbox credentials (bloqueia S-02 real) | Prazo MEC 01/07/2025 vencido
@@ -42,6 +43,7 @@
 
 | # | Data | Entregou | Sprint/Epic |
 |---|------|----------|-------------|
+| F0.4 | 17/04 | **🎉 Fase 0.4 PDFs COMPLETA — Módulo Secretaria**: Secretaria (layout+emissão+configurações) + secretaria/emissao/historico (busca+download PDF) + API POST /api/secretaria/emissao/historico/[diplomaId] + timbrado e margens no pdf-generator.ts (PDFBuilderOpts+mmToPt) + timbrado nos 3 PDFs via api/diplomas/[id]/documentos + remove aba historico de diploma/config + PR #19 aberta. Branch: claude/vigorous-mccarthy-8ca1e4 | Fase0.4/PDFs |
 | 095 | 15/04 | **🎉 Sprint 7 — Pacote Registradora COMPLETO**: assinatura-pdf.ts (HUB Signer BRy) + POST /documentos/assinar + webhook /bry-assinatura-pdf + UI Etapa 3 (ZIP+XML upload) + pacote-registradora fix (ZIP binário). Commit `817c47e`, deploy READY. | S7/Pacote |
 | 094 | 15/04 | **🎉 Sprint 6 — Acervo Digital COMPLETO**: RPC v3 step 12.5 (DDC automático) + POST /acervo/converter (PDF/A Ghostscript) + fix verificarEAvancarPacote (→ aguardando_documentos) + GET+PATCH /comprobatorios + AbaComprobatoriosMec. Commit `d76b639`, deploy READY. | S6/Acervo |
 | 093 | 14/04 | **Pipeline end-to-end diagnóstico**: fix diploma Kauana (bucket xml-diplomas + status avançado) + fix labels STATUS_CONFIG (11→30+ status, fallback correto) + 11 gaps identificados + plano S6–S9 documentado + 4 decisões confirmadas por Marcelo + HTML visual pipeline | S2/diagnóstico |
