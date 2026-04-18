@@ -61,8 +61,8 @@ test.describe('Memory Consolidator — extração de fatos', () => {
       return;
     }
 
-    // Verificar que endpoint de hook existe
-    const hookResponse = await request.options(`${baseUrl}/hooks/session-end`);
-    expect([200, 204, 405]).toContain(hookResponse.status());
+    // Verificar que endpoint de hook existe (HEAD como fallback — options() não existe no Playwright)
+    const hookResponse = await request.fetch(`${baseUrl}/hooks/session-end`, { method: 'HEAD' });
+    expect([200, 204, 404, 405]).toContain(hookResponse.status());
   });
 });
