@@ -192,11 +192,18 @@ export const POST = protegerRota(
         assinantes,
       }
 
+      // Opções de timbrado — compartilhadas pelos 3 documentos
+      const pdfOpts = {
+        timbradoUrl: iesConfig?.historico_arquivo_timbrado_url ?? undefined,
+        margemTopo: iesConfig?.historico_margem_topo ?? undefined,
+        margemInferior: iesConfig?.historico_margem_inferior ?? undefined,
+      }
+
       // Gerar os 3 PDFs em paralelo
       const [pdfHistorico, pdfTermoExpedicao, pdfTermoResponsabilidade] = await Promise.all([
-        gerarHistoricoEscolarPDF(dadosHistorico),
-        gerarTermoExpedicaoPDF(dadosTermoExpedicao),
-        gerarTermoResponsabilidadePDF(dadosResponsabilidade),
+        gerarHistoricoEscolarPDF(dadosHistorico, pdfOpts),
+        gerarTermoExpedicaoPDF(dadosTermoExpedicao, pdfOpts),
+        gerarTermoResponsabilidadePDF(dadosResponsabilidade, pdfOpts),
       ])
 
       // ── 8. Upload ao storage (bucket 'documentos') ──
