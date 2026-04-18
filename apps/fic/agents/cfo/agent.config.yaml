@@ -20,3 +20,27 @@ mcps:
   - credential-mcp
   - memory-mcp
   - fic-mcp          # MCP específico da FIC (criado na Fase 1)
+
+tools:
+  path: "./tools/index.ts"
+  list:
+    - check_inadimplentes
+    - emit_boleto_aluno
+    - send_whatsapp_cobranca
+    - gerar_relatorio_inadimplencia
+    - disparar_regua_cobranca
+
+skills_local:
+  - ./skills/regua-cobranca/SKILL.md
+  - ./skills/reconciliacao-bancaria/SKILL.md
+  - ./skills/emissao-boletos-mensal/SKILL.md
+
+# Variáveis de ambiente necessárias (valores via SC-29 em runtime)
+env_required:
+  - SUPABASE_FIC_URL
+  - SUPABASE_FIC_SERVICE_KEY
+  - SUPABASE_FIC_ANON_KEY
+  - CREDENTIALS_PROXY_URL
+  - INTER_AMBIENTE         # sandbox | production
+  - EVOLUTION_API_URL
+  - EVOLUTION_INSTANCE

@@ -9,8 +9,8 @@ import {
   fetchAluno,
   fetchCobranca,
   credentialsProxy,
-  META_GRAPH_URL,
-  META_PHONE_NUMBER_ID,
+  EVOLUTION_API_URL,
+  EVOLUTION_INSTANCE,
   type ToolDef,
 } from './shared.js';
 
@@ -64,7 +64,7 @@ export const sendWhatsappCobranca: ToolDef<
 > = {
   name: 'send_whatsapp_cobranca',
   description:
-    'Envia mensagem de cobrança via WhatsApp (Meta Cloud API). ' +
+    'Envia mensagem de cobrança via WhatsApp (Evolution API). ' +
     'Idempotente: não envia se já enviou no mesmo dia para o mesmo estágio. ' +
     'Estágios: lembrete-3d (3d antes), vencido-1d, vencido-15d, vencido-30d.',
   input_schema: {
@@ -111,7 +111,6 @@ export const sendWhatsappCobranca: ToolDef<
       await supabase.from('comunicacoes').insert({
         aluno_id,
         cobranca_id,
-        tipo: 'cobranca_inadimplencia',
         canal: 'whatsapp',
         estagio,
         status: 'sem_contato',
@@ -129,34 +128,28 @@ export const sendWhatsappCobranca: ToolDef<
 
     const text = TEMPLATES[estagio](ctx);
 
-    const phone = (aluno.whatsapp_jid ?? '').split('@')[0];
-
-    // SC-29 Modo B: proxy chama Meta Cloud API com token do vault
+    // SC-29 Modo B: proxy chama Evolution API com token do vault
     const result = await credentialsProxy({
-      credential_name: 'META_WHATSAPP_TOKEN',
+      credential_name: 'EVOLUTION_API_TOKEN',
       project: 'fic',
       target: {
         method: 'POST',
-        url: `${META_GRAPH_URL}/${META_PHONE_NUMBER_ID}/messages`,
+        url: `${EVOLUTION_API_URL}/message/sendText/${EVOLUTION_INSTANCE}`,
         headers: { 'Content-Type': 'application/json' },
         body: {
-          messaging_product: 'whatsapp',
-          recipient_type: 'individual',
-          to: phone,
-          type: 'text',
-          text: { preview_url: false, body: text },
+          number: aluno.whatsapp_jid,
+          text,
         },
       },
     });
 
     const body = result.body as Record<string, unknown>;
-    const messages = body['messages'] as Array<Record<string, string>> | undefined;
-    const message_id = messages?.[0]?.['id'] ?? null;
+    const key = body['key'] as Record<string, string> | undefined;
+    const message_id = key?.['id'] ?? null;
 
     await supabase.from('comunicacoes').insert({
       aluno_id,
       cobranca_id,
-      tipo: 'cobranca_inadimplencia',
       canal: 'whatsapp',
       estagio,
       status: 'enviado',
