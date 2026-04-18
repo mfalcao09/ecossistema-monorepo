@@ -9,8 +9,8 @@ import {
   fetchAluno,
   fetchCobranca,
   credentialsProxy,
-  EVOLUTION_API_URL,
-  EVOLUTION_INSTANCE,
+  META_GRAPH_URL,
+  META_PHONE_NUMBER_ID,
   type ToolDef,
 } from './shared.js';
 
@@ -64,7 +64,7 @@ export const sendWhatsappCobranca: ToolDef<
 > = {
   name: 'send_whatsapp_cobranca',
   description:
-    'Envia mensagem de cobrança via WhatsApp (Evolution API). ' +
+    'Envia mensagem de cobrança via WhatsApp (Meta Cloud API). ' +
     'Idempotente: não envia se já enviou no mesmo dia para o mesmo estágio. ' +
     'Estágios: lembrete-3d (3d antes), vencido-1d, vencido-15d, vencido-30d.',
   input_schema: {
@@ -129,24 +129,29 @@ export const sendWhatsappCobranca: ToolDef<
 
     const text = TEMPLATES[estagio](ctx);
 
-    // SC-29 Modo B: proxy chama Evolution API com token do vault
+    const phone = (aluno.whatsapp_jid ?? '').split('@')[0];
+
+    // SC-29 Modo B: proxy chama Meta Cloud API com token do vault
     const result = await credentialsProxy({
-      credential_name: 'EVOLUTION_API_TOKEN',
+      credential_name: 'META_WHATSAPP_TOKEN',
       project: 'fic',
       target: {
         method: 'POST',
-        url: `${EVOLUTION_API_URL}/message/sendText/${EVOLUTION_INSTANCE}`,
+        url: `${META_GRAPH_URL}/${META_PHONE_NUMBER_ID}/messages`,
         headers: { 'Content-Type': 'application/json' },
         body: {
-          number: aluno.whatsapp_jid,
-          text,
+          messaging_product: 'whatsapp',
+          recipient_type: 'individual',
+          to: phone,
+          type: 'text',
+          text: { preview_url: false, body: text },
         },
       },
     });
 
     const body = result.body as Record<string, unknown>;
-    const key = body['key'] as Record<string, string> | undefined;
-    const message_id = key?.['id'] ?? null;
+    const messages = body['messages'] as Array<Record<string, string>> | undefined;
+    const message_id = messages?.[0]?.['id'] ?? null;
 
     await supabase.from('comunicacoes').insert({
       aluno_id,

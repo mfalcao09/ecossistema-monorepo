@@ -51,13 +51,14 @@ get_credential("INTER_KEY_PEM", "fic")     # .key base64
 `FIC-{aluno_id}-{mes_ref}` (ex: `FIC-abc123-2026-05`)
 Garante idempotência — emitir 2x retorna o mesmo boleto na Inter.
 
-## Evolution API (WhatsApp)
+## Meta Cloud API (WhatsApp)
 
-- **URL:** via env `EVOLUTION_API_URL`
-- **Instance produção:** `fic-prod`
-- **Instance sandbox/teste:** `fic-sandbox`
-- **Credencial:** `get_credential("EVOLUTION_API_TOKEN", "fic")`
-- **Endpoint:** `POST /message/sendText/{instance}`
+- **URL base:** `https://graph.facebook.com/v20.0`
+- **Phone Number ID:** via env `META_PHONE_NUMBER_ID` (sandbox: 938274582707248)
+- **WABA ID:** 1833772130511929
+- **Token:** `META_WHATSAPP_TOKEN` via SC-29 Modo B (nunca exposto ao agente)
+- **Endpoint:** `POST /{phone_number_id}/messages`
+- **Formato número:** apenas dígitos DDI+DDD+número (ex: `5567999999999`) — sem `@s.whatsapp.net`
 
 ## Régua de cobrança padrão
 

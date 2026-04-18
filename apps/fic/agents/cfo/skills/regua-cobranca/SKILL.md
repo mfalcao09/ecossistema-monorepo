@@ -10,7 +10,7 @@
 ## Descrição
 
 Executa a régua de cobrança automatizada para alunos inadimplentes da FIC.
-Envia WhatsApp personalizado por estágio de atraso via Evolution API.
+Envia WhatsApp personalizado por estágio de atraso via Meta Cloud API.
 Respeita Art. II (HITL) para volumes acima de 10 alunos ou R$10k.
 
 ---

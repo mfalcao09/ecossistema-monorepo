@@ -80,14 +80,13 @@ export const INTER_BASE_URL =
     : 'https://cdpj.partners.bancointer.com.br';
 
 // ---------------------------------------------------------------------------
-// Evolution API
+// Meta Cloud API (WhatsApp)
 // ---------------------------------------------------------------------------
 
-export const EVOLUTION_API_URL =
-  process.env['EVOLUTION_API_URL'] ?? 'https://evo.exemplo.com';
+export const META_GRAPH_URL = 'https://graph.facebook.com/v20.0';
 
-export const EVOLUTION_INSTANCE =
-  process.env['EVOLUTION_INSTANCE'] ?? 'fic-sandbox';
+export const META_PHONE_NUMBER_ID =
+  process.env['META_PHONE_NUMBER_ID'] ?? '';
 
 // ---------------------------------------------------------------------------
 // Tipos de domínio

@@ -362,12 +362,12 @@ describe('disparar_regua_cobranca', () => {
       return makeChain();
     });
 
-    // Mock Evolution API via SC-29
+    // Mock Meta API via SC-29
     mockFetch.mockResolvedValue({
       ok: true,
       json: async () => ({
         status: 200,
-        body: { key: { id: `msg-${Math.random()}` } },
+        body: { messages: [{ id: `wamid-${Math.random()}` }] },
       }),
     });
 
