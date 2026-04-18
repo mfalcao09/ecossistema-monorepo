@@ -71,8 +71,8 @@ Conferir no painel Inter sandbox:
 ```
 INTER_CLIENT_ID/fic
 INTER_CLIENT_SECRET/fic
-INTER_CERT/fic      (.crt)
-INTER_KEY/fic       (.key)
+INTER_CERT_PEM/fic      (.crt)
+INTER_KEY_PEM/fic       (.key)
 ```
 
 Provisionar via magic-link-vault antes do primeiro run real.

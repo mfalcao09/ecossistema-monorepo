@@ -3,82 +3,93 @@
 -- DB alvo: ECOSYSTEM (gqckbunsfjgerbuiyzvn)
 -- Data: 2026-04-17 · Sessão S16
 --
--- Insere 5 placeholders para credenciais do CFO-FIC.
+-- Insere 5 placeholders para credenciais sandbox do CFO-FIC.
 -- VALORES SÃO PLACEHOLDERS — Marcelo deve substituir via
--- Supabase Studio ou CLI antes do primeiro run real.
+-- Supabase Studio antes do primeiro run real (is_active=false).
 --
--- Após inserir, execute:
---   SELECT name, project, environment, proxy_only, last_used_at
---   FROM ecosystem_credentials
---   WHERE project = 'fic';
+-- Credenciais Inter sandbox: developers.inter.co → Sandbox
+-- Credenciais Evolution: painel Evolution API → instância fic-sandbox
+--
+-- Após configurar, execute:
+--   UPDATE ecosystem_credentials
+--   SET vault_key = '<valor_real>', is_active = true
+--   WHERE project = 'fic' AND environment = 'sandbox' AND name = '<NOME>';
 -- ============================================================
 
--- Guard: só insere se ainda não existirem
 INSERT INTO public.ecosystem_credentials
-  (name, value, service, project, environment, provider, proxy_only, acl)
+  (name, service, scope, location, project, environment, provider, proxy_only, is_active, acl, description)
 VALUES
   (
     'INTER_CLIENT_ID',
-    'PENDENTE_CONFIGURAR',
     'banco-inter',
+    'proxy',
+    'PENDENTE_CONFIGURAR',
     'fic',
     'sandbox',
     'inter',
     true,
-    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb
+    false,
+    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb,
+    'Banco Inter sandbox — client_id OAuth2. Obter em developers.inter.co'
   ),
   (
     'INTER_CLIENT_SECRET',
-    'PENDENTE_CONFIGURAR',
     'banco-inter',
+    'proxy',
+    'PENDENTE_CONFIGURAR',
     'fic',
     'sandbox',
     'inter',
     true,
-    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb
+    false,
+    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb,
+    'Banco Inter sandbox — client_secret OAuth2'
   ),
   (
-    'INTER_CERT',
-    'PENDENTE_CONFIGURAR',
+    'INTER_CERT_PEM',
     'banco-inter',
+    'proxy',
+    'PENDENTE_CONFIGURAR',
     'fic',
     'sandbox',
     'inter',
     true,
-    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb
+    false,
+    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb,
+    'Banco Inter sandbox — certificado mTLS (PEM)'
   ),
   (
-    'INTER_KEY',
-    'PENDENTE_CONFIGURAR',
+    'INTER_KEY_PEM',
     'banco-inter',
+    'proxy',
+    'PENDENTE_CONFIGURAR',
     'fic',
     'sandbox',
     'inter',
     true,
-    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb
+    false,
+    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb,
+    'Banco Inter sandbox — chave privada mTLS (PEM)'
   ),
   (
     'EVOLUTION_API_TOKEN',
-    'PENDENTE_CONFIGURAR',
     'evolution-api',
+    'proxy',
+    'PENDENTE_CONFIGURAR',
     'fic',
     'sandbox',
     'evolution',
     true,
-    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb
+    false,
+    '[{"agent_pattern": "cfo-fic", "allowed_scopes": ["proxy"]}]'::jsonb,
+    'Evolution API — API Key instância fic-sandbox'
   )
 ON CONFLICT (name, project, environment) DO NOTHING;
 
 -- ============================================================
--- Verificação pós-insert (comentada — executar manualmente)
+-- Verificação pós-insert (executar manualmente):
 -- ============================================================
--- SELECT
---   name,
---   project,
---   environment,
---   provider,
---   proxy_only,
---   CASE WHEN value = 'PENDENTE_CONFIGURAR' THEN '⚠️ PENDENTE' ELSE '✅ OK' END AS status
+-- SELECT name, environment, is_active, description
 -- FROM public.ecosystem_credentials
 -- WHERE project = 'fic'
--- ORDER BY name;
+-- ORDER BY environment, name;

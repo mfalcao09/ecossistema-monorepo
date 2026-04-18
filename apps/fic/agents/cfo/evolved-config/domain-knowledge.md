@@ -40,8 +40,8 @@
 ```
 get_credential("INTER_CLIENT_ID", "fic")
 get_credential("INTER_CLIENT_SECRET", "fic")
-get_credential("INTER_CERT", "fic")    # .crt base64
-get_credential("INTER_KEY", "fic")     # .key base64
+get_credential("INTER_CERT_PEM", "fic")    # .crt base64
+get_credential("INTER_KEY_PEM", "fic")     # .key base64
 ```
 
 **Nunca** logar ou exibir credenciais Inter. Sempre via SC-29 proxy.
