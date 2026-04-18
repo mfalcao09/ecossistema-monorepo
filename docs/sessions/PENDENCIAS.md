@@ -28,13 +28,12 @@
 | P-007 | S08 | refactor | low | `dual_write_queue` tem linhas para retry mas nenhum worker drena. Criar pg_cron job ou EF que processa `status='pending' AND next_attempt_at <= now()` | resiliência de mirror fails | 2026-04-17 |
 | P-008 | S08 | test | med | Rodar `scripts/smoke-test-efs.sh` contra prod após P-001 estar feito. Script testa 5 EFs (12 asserts) | validação E2E completa | 2026-04-17 |
 | P-009 | S15 | config | med | Adicionar 5 secrets faltantes no GitHub (valores não disponíveis ainda): `ANTHROPIC_API_KEY`, `LANGFUSE_PUBLIC_KEY`, `LANGFUSE_SECRET_KEY`, `LANGFUSE_HOST`, `CODECOV_TOKEN`. Os 7 com valores disponíveis já foram adicionados (`SUPABASE_ACCESS_TOKEN`, `SUPABASE_PROJECT_REF`, `SUPABASE_URL`, `SUPABASE_ANON_KEY`, `SUPABASE_SERVICE_ROLE_KEY`, `RAILWAY_TOKEN`, `ORCHESTRATOR_URL`) | cenários E2E com Langfuse/Anthropic falham sem esses secrets | 2026-04-18 |
-| P-010 | S15 | config | med | Adicionar status checks obrigatórios à regra de proteção do `main` após o CI rodar pela primeira vez. Acessar `github.com/mfalcao09/ecossistema-monorepo/settings/branch_protection_rules` → Edit → "Require status checks" → adicionar: `lint`, `test`, `build`, `secrets-scan` | PRs podem mergear sem CI verde até esse passo | 2026-04-18 |
 
 ## Resolvidas
 
 | ID | Sessão | Ação | Resolvida em | Commit / PR |
 |---|---|---|---|---|
-| P-010-base | S15 | Regra de branch protection `main` criada: PR obrigatório, 1 review, dismiss stale, enforce admins, sem force push | 2026-04-18 | 45678a4 |
+| P-010 | S15 | Branch protection `main` completo: PR obrigatório (1 review, dismiss stale), enforce admins, sem force push, status checks: Lint & Typecheck, Unit Tests, Python Tests, Build, Secrets Scan | 2026-04-18 | 14c45f7 |
 | P-011 | S15 | Instalar gitleaks local via `brew install gitleaks` (v8.30.1) | 2026-04-18 | S15 worktree |
 | P-012 | S15 | Playwright instalado (`npx playwright install chromium`) e ≥5 cenários verdes confirmados contra prod (04-sse ×3 + 06-consolidator ×2) | 2026-04-18 | S15 worktree |
 | P-013 | S15 | Tabela `fic_inadimplentes_test` criada via Supabase MCP no projeto FIC (`ifdnjieklngcfodmtied`) | 2026-04-18 | S15 worktree |
