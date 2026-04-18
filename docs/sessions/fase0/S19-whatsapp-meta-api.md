@@ -9,6 +9,8 @@
 Decisão de Marcelo (2026-04-18): usar API oficial do WhatsApp (Meta Cloud API) — mais estável,
 sem intermediário, sem risco de ban, suporte Meta direto.
 
+**Escopo exclusivo:** apenas WhatsApp (Meta API). Credenciais Inter ficam fora desta sessão.
+
 ---
 
 ## Leituras obrigatórias
@@ -130,12 +132,6 @@ Se não aceitar, adicionar ACL entry para `agent_pattern='cfo-fic'`.
 - `apps/fic/agents/cfo/skills/regua-cobranca/SKILL.md`
   - Referências ao canal WhatsApp
 
-### 7. Registrar ca.crt Inter como constante no SC-29
-
-O `ca.crt` enviado por Marcelo (CA chain do Inter sandbox) deve ser incorporado
-como constante no Edge Function `credentials-proxy` para verificação TLS mTLS.
-Não vai para `ecosystem_credentials` (é público, não é segredo).
-
 ---
 
 ## Arquivos a modificar
@@ -191,7 +187,7 @@ WHERE name = 'EVOLUTION_API_TOKEN' AND project = 'fic' AND environment = 'sandbo
 
 ## O que NÃO fazer nesta sessão
 
-- Não implementar templates aprovados pela Meta (HSM/mensagens template)
-  — usar mensagens livres por ora (sandbox permite texto livre)
+- **NÃO tratar credenciais Inter** — esse escopo fica nesta sessão de provisionamento atual (continua aqui segunda-feira 2026-04-21 quando sandbox Inter estiver disponível)
+- Não implementar templates aprovados pela Meta (HSM/mensagens template) — usar mensagens livres por ora
 - Não configurar webhooks de entrega/leitura — Fase 1
 - Não migrar outros agentes do ecossistema — apenas CFO-FIC
