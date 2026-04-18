@@ -1,0 +1,15 @@
+#!/bin/sh
+
+# 1. Scan de secrets — bloqueia commit com credenciais expostas
+if command -v gitleaks &> /dev/null; then
+  gitleaks protect --staged --verbose --config .gitleaks.toml
+else
+  echo "⚠️  gitleaks não instalado — pulando scan de secrets"
+  echo "   Instale: brew install gitleaks"
+fi
+
+# 2. Lint e format nos arquivos staged
+pnpm lint-staged
+
+# 3. Typecheck nos packages afetados desde o commit anterior
+pnpm turbo typecheck --filter="...[HEAD^1]" 2>/dev/null || pnpm turbo typecheck

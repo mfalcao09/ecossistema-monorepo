@@ -1,0 +1,71 @@
+name: Deploy Edge Functions
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'infra/supabase/functions/**'
+
+concurrency:
+  group: deploy-edge-functions
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy changed Edge Functions
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed functions
+        id: changes
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD \
+            | grep '^infra/supabase/functions/' \
+            | awk -F'/' '{print $4}' \
+            | sort -u \
+            | tr '\n' ' ')
+          echo "functions=$CHANGED" >> $GITHUB_OUTPUT
+          echo "Found changed functions: $CHANGED"
+
+      - uses: supabase/setup-cli@v1
+        if: steps.changes.outputs.functions != ''
+        with:
+          version: latest
+
+      - name: Deploy changed functions
+        if: steps.changes.outputs.functions != ''
+        env:
+          SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+        run: |
+          for fn in ${{ steps.changes.outputs.functions }}; do
+            echo "::group::Deploying $fn"
+            supabase functions deploy "$fn" \
+              --project-ref ${{ secrets.SUPABASE_PROJECT_REF }} \
+              --no-verify-jwt
+            echo "::endgroup::"
+          done
+
+      - name: Smoke test deployed functions
+        if: steps.changes.outputs.functions != ''
+        run: |
+          sleep 5
+          for fn in ${{ steps.changes.outputs.functions }}; do
+            echo "Smoke testing $fn..."
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              -H "Authorization: Bearer ${{ secrets.SUPABASE_ANON_KEY }}" \
+              "${{ secrets.SUPABASE_URL }}/functions/v1/$fn/health")
+            if [ "$STATUS" != "200" ] && [ "$STATUS" != "404" ]; then
+              echo "::error::Health check failed for $fn — HTTP $STATUS"
+              exit 1
+            fi
+            echo "$fn OK (HTTP $STATUS)"
+          done
+
+      - name: No changes detected
+        if: steps.changes.outputs.functions == ''
+        run: echo "No Edge Functions changed — skipping deploy."

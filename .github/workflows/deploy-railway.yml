@@ -1,0 +1,76 @@
+name: Deploy Railway Services
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/orchestrator/**'
+      - 'apps/memory-consolidator/**'
+      - 'infra/railway/**'
+
+concurrency:
+  group: deploy-railway
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy Railway services
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - name: Detect changed services
+        id: detect
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD)
+          SERVICES=""
+          echo "$CHANGED" | grep -q '^apps/orchestrator/' && SERVICES="$SERVICES orchestrator"
+          echo "$CHANGED" | grep -q '^apps/memory-consolidator/' && SERVICES="$SERVICES memory-consolidator"
+          echo "$CHANGED" | grep -q '^infra/railway/litellm/' && SERVICES="$SERVICES litellm"
+          echo "$CHANGED" | grep -q '^infra/railway/langfuse/' && SERVICES="$SERVICES langfuse"
+          SERVICES=$(echo "$SERVICES" | xargs)
+          echo "services=$SERVICES" >> $GITHUB_OUTPUT
+          echo "Services to deploy: $SERVICES"
+
+      - name: Install Railway CLI
+        if: steps.detect.outputs.services != ''
+        run: npm i -g @railway/cli@latest --quiet
+
+      - name: Deploy services
+        if: steps.detect.outputs.services != ''
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          for svc in ${{ steps.detect.outputs.services }}; do
+            echo "::group::Deploying $svc"
+            railway environment production
+            railway up --service "$svc" --detach
+            echo "::endgroup::"
+          done
+
+      - name: Health check (60s timeout)
+        if: steps.detect.outputs.services != ''
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
+        run: |
+          sleep 30
+          for svc in ${{ steps.detect.outputs.services }}; do
+            echo "Health checking $svc..."
+            URL=$(railway domain --service "$svc" 2>/dev/null || echo "")
+            if [ -z "$URL" ]; then
+              echo "::warning::No domain found for $svc — skipping health check"
+              continue
+            fi
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 "https://$URL/health")
+            if [ "$STATUS" != "200" ]; then
+              echo "::error::$svc health check failed — HTTP $STATUS"
+              exit 1
+            fi
+            echo "$svc healthy (HTTP $STATUS)"
+          done
+
+      - name: No changes detected
+        if: steps.detect.outputs.services == ''
+        run: echo "No Railway services changed — skipping deploy."
