@@ -27,14 +27,14 @@
 | P-006 | S08 | refactor | low | `dual-write-pipeline` hoje escreve primary e mirror com o mesmo service-role client (ECOSYSTEM). Para escrever em outros projetos (ex: ERP-FIC, Intentus), expandir para carregar clients adicionais via `ecosystem_credentials.SUPABASE_SERVICE_ROLE_KEY_*` | dual-write real cross-project | 2026-04-17 |
 | P-007 | S08 | refactor | low | `dual_write_queue` tem linhas para retry mas nenhum worker drena. Criar pg_cron job ou EF que processa `status='pending' AND next_attempt_at <= now()` | resiliência de mirror fails | 2026-04-17 |
 | P-008 | S08 | test | med | Rodar `scripts/smoke-test-efs.sh` contra prod após P-001 estar feito. Script testa 5 EFs (12 asserts) | validação E2E completa | 2026-04-17 |
-| P-010 | S12 | deploy | high | Deploy das EFs via script: `packages/magic-link-vault/scripts/deploy-edge-functions.sh` (script criado, aguarda `supabase login` + execução) | magic link form + SC-29 Modo B | 2026-04-17 |
-| P-014 | S12 | config | med | Configurar rate limit em `/api/vault/submit` no Supabase Dashboard (prevenir brute force de tokens). Recomendado: 10 req/min por IP | segurança do magic link | 2026-04-17 |
+| P-010 | S12 | deploy | high | Deploy das EFs: `cd infra && supabase functions deploy collect-secret retrieve-secret vault-create-token --project-ref gqckbunsfjgerbuiyzvn` (código pronto em `infra/supabase/functions/`) | magic link form + SC-29 Modo B | 2026-04-17 |
 
 ## Resolvidas
 
 | ID | Sessão | Ação | Resolvida em | Commit / PR |
 |---|---|---|---|---|
 | P-009 | S12 | VAULT_KEK_HEX setado no Supabase Dashboard → Functions → Secrets | 2026-04-18 | edd9b76 |
+| P-014 | S12 | Rate limit 10 req/min por IP implementado em `collect-secret/index.ts` via `hitLimit()` — ativo após deploy P-010 | 2026-04-18 | próximo commit |
 | P-011 | S12 | Migration `vault_tokens` + colunas vault aplicada via SQL Editor ECOSYSTEM | 2026-04-18 | edd9b76 |
 | P-012 | S12 | Seed: INTER_CLIENT_SECRET, INTER_CLIENT_ID, INTER_CERT_PEM inseridos em ecosystem_credentials (proxy_only=true) | 2026-04-18 | edd9b76 |
 | P-013 | S12 | CSP + security headers em `/vault/*` e `/api/vault/*` em `apps/vault-ui/next.config.ts` | 2026-04-18 | (próximo commit) |
