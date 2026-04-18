@@ -96,23 +96,22 @@ export const EVOLUTION_INSTANCE =
 export interface Aluno {
   id: string;
   nome: string;
-  cpf: string;         // nunca logar
+  cpf: string;            // nunca logar — apenas para SC-29 proxy
   email: string | null;
-  whatsapp_jid: string | null;
-  endereco?: {
-    logradouro: string;
-    numero: string;
-    bairro: string;
-    cidade: string;
-    uf: string;
-    cep: string;
-  };
+  whatsapp_jid: string | null;  // gerado via migration: telefone@s.whatsapp.net
+  // Endereço em colunas separadas (schema real do DB)
+  endereco: string | null;      // logradouro
+  endereco_numero: string | null;
+  bairro: string | null;
+  cidade: string | null;
+  uf: string | null;
+  cep: string | null;
 }
 
 export interface Cobranca {
   id: string;
   aluno_id: string;
-  mes_ref: string;
+  mes_ref: string;   // convertido de mes_referencia DATE → "YYYY-MM"
   valor: number;
   status: string;
   inter_cobranca_id: string | null;
@@ -126,7 +125,10 @@ export interface Cobranca {
 export async function fetchAluno(aluno_id: string): Promise<Aluno> {
   const { data, error } = await supabase
     .from('alunos')
-    .select('id, nome, cpf, email, whatsapp_jid, endereco')
+    .select(
+      'id, nome, cpf, email, whatsapp_jid, ' +
+      'endereco, endereco_numero, bairro, cidade, uf, cep'
+    )
     .eq('id', aluno_id)
     .single();
 
@@ -138,9 +140,13 @@ export async function fetchAluno(aluno_id: string): Promise<Aluno> {
 }
 
 export async function fetchCobranca(cobranca_id: string): Promise<Cobranca> {
+  // Mapeia nomes reais do DB → interface Cobranca
   const { data, error } = await supabase
     .from('cobrancas')
-    .select('id, aluno_id, mes_ref, valor, status, inter_cobranca_id, pix_qrcode')
+    .select(
+      'id, aluno_id, mes_referencia, valor, status, ' +
+      'inter_request_code, bolepix_pix_copia_cola'
+    )
     .eq('id', cobranca_id)
     .single();
 
@@ -148,7 +154,18 @@ export async function fetchCobranca(cobranca_id: string): Promise<Cobranca> {
     throw new Error(`Cobrança não encontrada: ${cobranca_id} — ${error?.message}`);
   }
 
-  return data as Cobranca;
+  const raw = data as Record<string, unknown>;
+  const mesReferencia = raw['mes_referencia'] as string;
+
+  return {
+    id: raw['id'] as string,
+    aluno_id: raw['aluno_id'] as string,
+    mes_ref: mesReferencia ? mesReferencia.slice(0, 7) : '',  // DATE "2026-05-01" → "2026-05"
+    valor: raw['valor'] as number,
+    status: raw['status'] as string,
+    inter_cobranca_id: (raw['inter_request_code'] as string | null) ?? null,
+    pix_qrcode: (raw['bolepix_pix_copia_cola'] as string | null) ?? null,
+  };
 }
 
 /**

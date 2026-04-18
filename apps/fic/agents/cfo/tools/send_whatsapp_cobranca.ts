@@ -111,6 +111,7 @@ export const sendWhatsappCobranca: ToolDef<
       await supabase.from('comunicacoes').insert({
         aluno_id,
         cobranca_id,
+        tipo: 'cobranca_inadimplencia',
         canal: 'whatsapp',
         estagio,
         status: 'sem_contato',
@@ -150,6 +151,7 @@ export const sendWhatsappCobranca: ToolDef<
     await supabase.from('comunicacoes').insert({
       aluno_id,
       cobranca_id,
+      tipo: 'cobranca_inadimplencia',
       canal: 'whatsapp',
       estagio,
       status: 'enviado',

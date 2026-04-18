@@ -51,26 +51,30 @@ export const emitBoletoAluno: ToolDef<EmitBoletoAlunoInput, EmitBoletoAlunoOutpu
     },
   },
   handler: async ({ aluno_id, mes_ref, valor }) => {
-    // Verifica boleto já emitido para este mês (idempotência local antes da Inter)
+    // mes_referencia no DB é DATE (2026-05-01); mes_ref na tool é "YYYY-MM"
+    const mes_referencia_date = `${mes_ref}-01`;
+    const data_vencimento = calcDataVencimento(mes_ref);
+
+    // Idempotência: verifica boleto já emitido para este mês
     const { data: existente } = await supabase
       .from('cobrancas')
-      .select('id, inter_cobranca_id, pix_qrcode, data_vencimento')
+      .select('id, inter_request_code, bolepix_pix_copia_cola, data_vencimento')
       .eq('aluno_id', aluno_id)
-      .eq('mes_ref', mes_ref)
-      .in('status', ['emitido', 'enviado', 'pendente'])
+      .eq('mes_referencia', mes_referencia_date)
+      .in('status', ['gerado', 'enviado', 'negociando'])
       .maybeSingle();
 
     if (existente) {
+      const e = existente as Record<string, unknown>;
       return {
-        cobranca_id: existente.id as string,
-        inter_id: existente.inter_cobranca_id as string,
-        pix_qrcode: (existente.pix_qrcode as string | null) ?? null,
-        data_vencimento: existente.data_vencimento as string,
+        cobranca_id: e['id'] as string,
+        inter_id: (e['inter_request_code'] as string | null) ?? '',
+        pix_qrcode: (e['bolepix_pix_copia_cola'] as string | null) ?? null,
+        data_vencimento: e['data_vencimento'] as string,
       };
     }
 
     const aluno = await fetchAluno(aluno_id);
-    const data_vencimento = calcDataVencimento(mes_ref);
 
     // SC-29 Modo B: proxy chama Banco Inter com credenciais do vault
     const result = await credentialsProxy({
@@ -89,12 +93,13 @@ export const emitBoletoAluno: ToolDef<EmitBoletoAlunoInput, EmitBoletoAlunoOutpu
             cpfCnpj: aluno.cpf,
             tipoPessoa: 'FISICA',
             nome: aluno.nome,
-            logradouro: aluno.endereco?.logradouro ?? '',
-            numero: aluno.endereco?.numero ?? 'S/N',
-            bairro: aluno.endereco?.bairro ?? '',
-            cidade: aluno.endereco?.cidade ?? 'Cassilândia',
-            uf: aluno.endereco?.uf ?? 'MS',
-            cep: aluno.endereco?.cep ?? '',
+            // Endereço em colunas separadas (schema real do DB)
+            logradouro: aluno.endereco ?? '',
+            numero: aluno.endereco_numero ?? 'S/N',
+            bairro: aluno.bairro ?? '',
+            cidade: aluno.cidade ?? 'Cassilândia',
+            uf: aluno.uf ?? 'MS',
+            cep: aluno.cep ?? '',
           },
         },
       },
@@ -105,18 +110,19 @@ export const emitBoletoAluno: ToolDef<EmitBoletoAlunoInput, EmitBoletoAlunoOutpu
     const pix = interBody['pix'] as Record<string, string> | undefined;
     const pix_qrcode = pix?.['qrcode'] ?? null;
 
-    // Persiste cobrança no Supabase
+    // Persiste cobrança — nomes de colunas do schema real
     const { data: cobranca, error } = await supabase
       .from('cobrancas')
       .insert({
         aluno_id,
-        mes_ref,
+        mes_referencia: mes_referencia_date,
         valor,
         data_vencimento,
         tipo: 'mensalidade',
-        status: 'emitido',
-        inter_cobranca_id: inter_id,
-        pix_qrcode,
+        status: 'gerado',
+        inter_request_code: inter_id,
+        your_number: `FIC-${aluno_id}-${mes_ref}`,
+        bolepix_pix_copia_cola: pix_qrcode,
       })
       .select('id')
       .single();
