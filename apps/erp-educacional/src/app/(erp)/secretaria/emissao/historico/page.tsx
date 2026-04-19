@@ -222,7 +222,12 @@ export default function EmissaoHistoricoPage() {
   const tamanhoFonte = cfg?.historico_tamanho_fonte ?? 10;
   const tamanhoFonteCabecalho = cfg?.historico_tamanho_fonte_cabecalho ?? 9;
   const tamanhoFonteCorpo = cfg?.historico_tamanho_fonte_corpo ?? 7;
-  const timbradoUrl = cfg?.historico_arquivo_timbrado_url ?? "";
+  // Espelha lógica do AbaVisualHistorico: timbrados PDF legados não são
+  // renderizáveis como background — trata como vazio (sem timbrado).
+  const timbradoRaw = cfg?.historico_arquivo_timbrado_url ?? "";
+  const timbradoUrl = timbradoRaw && !timbradoRaw.toLowerCase().endsWith(".pdf")
+    ? timbradoRaw
+    : "";
   const margens = {
     topo: cfg?.historico_margem_topo ?? 25,
     inferior: cfg?.historico_margem_inferior ?? 20,

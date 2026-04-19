@@ -79,11 +79,26 @@ export const GET = protegerRota(async (request) => {
   }))
 
   // ── 4. Config do diploma (cores, fontes, timbrado, margens, colunas) ──
-  const { data: config } = await supabase
+  // Existe 1 row por ambiente (homologacao/producao). Emissão é ato de
+  // produção, então preferimos a row de 'producao'. Porém, se produção
+  // ainda não tem timbrado válido (PNG/JPG) — ex.: campo vazio ou PDF
+  // legado —, caímos para 'homologacao' para que o usuário veja a prévia
+  // com o timbrado que configurou enquanto testa.
+  const { data: configs } = await supabase
     .from('diploma_config')
     .select('*')
-    .limit(1)
-    .maybeSingle()
+    .order('ambiente', { ascending: false }) // 'producao' vem antes de 'homologacao'
+
+  const isTimbradoValido = (url: string | null | undefined) =>
+    !!url && !url.toLowerCase().endsWith('.pdf')
+
+  // Prefere a primeira config (produção) se tiver timbrado válido;
+  // senão a primeira que tiver timbrado válido;
+  // senão a primeira qualquer.
+  const config =
+    (configs?.find((c: any) => isTimbradoValido(c.historico_arquivo_timbrado_url))) ??
+    configs?.[0] ??
+    null
 
   // ── 5. ENADE (opcional, mostra no rodapé/observação) ──
   const { data: enade } = await supabase
