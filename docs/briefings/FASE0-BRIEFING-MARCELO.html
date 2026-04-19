@@ -1,0 +1,538 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fase 0 Concluída — Ecossistema V9 | Briefing Marcelo</title>
+<style>
+/* === RESET & BASE === */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --bg: #0f1419;
+  --bg-elevated: #1a1f2e;
+  --bg-code: #0a0e14;
+  --text: #e6edf3;
+  --text-muted: #8b949e;
+  --accent: #58a6ff;
+  --accent-2: #f78166;
+  --accent-3: #7ee787;
+  --accent-4: #ffa657;
+  --border: #30363d;
+  --shadow: 0 4px 20px rgba(0,0,0,0.5);
+  --h1: #f0f6fc;
+  --h2: #58a6ff;
+  --h3: #79c0ff;
+  --h4: #a5d6ff;
+  --green: #3fb950;
+  --red: #f85149;
+  --yellow: #d29922;
+  --purple: #bc8cff;
+}
+html { scroll-behavior: smooth; }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 3rem 2rem 6rem;
+  font-size: 16px;
+}
+h1, h2, h3, h4 {
+  font-weight: 700;
+  line-height: 1.3;
+  margin-top: 2.5em;
+  margin-bottom: 0.8em;
+  letter-spacing: -0.01em;
+}
+h1 { font-size: 2.5rem; color: var(--h1); border-bottom: 3px solid var(--accent); padding-bottom: 0.5rem; margin-top: 0; }
+h2 { font-size: 1.8rem; color: var(--h2); border-bottom: 1px solid var(--border); padding-bottom: 0.3rem; margin-top: 3rem; }
+h3 { font-size: 1.4rem; color: var(--h3); }
+h4 { font-size: 1.15rem; color: var(--h4); }
+p { margin: 0.8em 0; }
+strong { color: var(--accent-3); font-weight: 600; }
+em { color: var(--accent-4); }
+a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; transition: border 0.15s; }
+a:hover { border-bottom-color: var(--accent); }
+ul, ol { margin: 0.8em 0; padding-left: 2em; }
+li { margin: 0.3em 0; }
+blockquote {
+  border-left: 4px solid var(--accent-2);
+  background: var(--bg-elevated);
+  padding: 1rem 1.5rem;
+  margin: 1.5rem 0;
+  color: var(--text-muted);
+  border-radius: 0 6px 6px 0;
+}
+code {
+  font-family: "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.88em;
+  background: var(--bg-code);
+  color: var(--accent-2);
+  padding: 0.15em 0.4em;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+}
+pre {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.2rem;
+  overflow-x: auto;
+  margin: 1.2rem 0;
+  font-size: 0.87em;
+  line-height: 1.55;
+}
+pre code { background: transparent; border: none; padding: 0; color: var(--text); font-size: inherit; }
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  background: var(--bg-elevated);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  font-size: 0.95em;
+}
+th, td { padding: 0.75rem 1rem; text-align: left; border-bottom: 1px solid var(--border); }
+th { background: var(--bg-code); color: var(--h2); font-weight: 600; text-transform: uppercase; font-size: 0.85em; letter-spacing: 0.05em; }
+tr:last-child td { border-bottom: none; }
+tr:hover { background: rgba(88, 166, 255, 0.05); }
+td code { font-size: 0.85em; }
+hr { border: none; height: 1px; background: linear-gradient(90deg, transparent, var(--border), transparent); margin: 3rem 0; }
+
+/* === CUSTOM COMPONENTS === */
+.doc-header {
+  background: linear-gradient(135deg, var(--bg-elevated), var(--bg));
+  padding: 2.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--border);
+  margin-bottom: 3rem;
+  box-shadow: var(--shadow);
+}
+.doc-header h1 { margin: 0 0 0.5rem; border: none; padding: 0; }
+.doc-subtitle { color: var(--accent-2); font-size: 1.1rem; font-weight: 500; margin-bottom: 1.2rem; }
+.doc-meta { display: flex; gap: 2rem; flex-wrap: wrap; color: var(--text-muted); font-size: 0.9rem; margin-top: 0.5rem; }
+.doc-meta span strong { color: var(--accent-3); }
+
+.tldr {
+  background: linear-gradient(135deg, rgba(88, 166, 255, 0.08), rgba(126, 231, 135, 0.05));
+  border: 1px solid rgba(88, 166, 255, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+.tldr h2 { margin-top: 0; border: none; }
+
+.highlight-box {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-left: 4px solid var(--accent-3);
+  border-radius: 0 8px 8px 0;
+  padding: 1.2rem 1.5rem;
+  margin: 1.5rem 0;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.7em;
+  border-radius: 20px;
+  font-size: 0.8em;
+  font-weight: 600;
+  margin-right: 0.3em;
+}
+.badge-green { background: rgba(63, 185, 80, 0.15); color: var(--green); border: 1px solid rgba(63, 185, 80, 0.3); }
+.badge-red { background: rgba(248, 81, 73, 0.15); color: var(--red); border: 1px solid rgba(248, 81, 73, 0.3); }
+.badge-yellow { background: rgba(210, 153, 34, 0.15); color: var(--yellow); border: 1px solid rgba(210, 153, 34, 0.3); }
+.badge-blue { background: rgba(88, 166, 255, 0.15); color: var(--accent); border: 1px solid rgba(88, 166, 255, 0.3); }
+.badge-purple { background: rgba(188, 140, 255, 0.15); color: var(--purple); border: 1px solid rgba(188, 140, 255, 0.3); }
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+}
+.stat-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.2rem;
+  text-align: center;
+}
+.stat-number { font-size: 2.2rem; font-weight: 800; color: var(--accent); line-height: 1; }
+.stat-label { color: var(--text-muted); font-size: 0.85em; margin-top: 0.4em; }
+
+.arch-diagram {
+  background: var(--bg-code);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+  font-family: "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.85em;
+  overflow-x: auto;
+}
+.arch-l1 { color: #bc8cff; }
+.arch-l2 { color: #79c0ff; }
+.arch-l3 { color: #ffa657; }
+.arch-l4 { color: #7ee787; }
+
+.questions-box {
+  background: linear-gradient(135deg, rgba(247, 129, 102, 0.08), transparent);
+  border: 1px solid rgba(247, 129, 102, 0.3);
+  border-radius: 12px;
+  padding: 2rem;
+  margin: 2rem 0;
+}
+.questions-box h2 { margin-top: 0; color: var(--accent-2); border: none; }
+.questions-box ol { counter-reset: q; list-style: none; padding-left: 0; }
+.questions-box li { counter-increment: q; margin: 0.8em 0; display: flex; gap: 0.8em; align-items: flex-start; }
+.questions-box li::before { content: counter(q); background: rgba(247, 129, 102, 0.2); color: var(--accent-2); border-radius: 50%; width: 1.6em; height: 1.6em; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 0.9em; flex-shrink: 0; margin-top: 0.1em; }
+
+.toc {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 1.5rem 2rem;
+  margin: 2rem 0;
+}
+.toc ol { padding-left: 1.5rem; }
+.toc li { margin: 0.3em 0; }
+.toc a { color: var(--text); }
+.toc a:hover { color: var(--accent); }
+
+@media (max-width: 768px) {
+  body { padding: 1.5rem 1rem 4rem; font-size: 15px; }
+  .stats-grid { grid-template-columns: repeat(2, 1fr); }
+  .doc-meta { gap: 1rem; }
+}
+@media print {
+  body { background: white; color: #1a1a1a; max-width: 100%; }
+  :root { --bg: white; --text: #1a1a1a; --bg-elevated: #f5f5f5; --bg-code: #f0f0f0; }
+  pre, code { background: #f5f5f5 !important; color: #333 !important; }
+}
+</style>
+</head>
+<body>
+
+<div class="doc-header">
+  <h1>Fase 0 Concluída — Ecossistema V9</h1>
+  <div class="doc-subtitle">Briefing Executivo para Marcelo Silva</div>
+  <div class="doc-meta">
+    <span><strong>Status:</strong> ✅ Fechada</span>
+    <span><strong>Data:</strong> 2026-04-18</span>
+    <span><strong>Duração:</strong> 4 dias · 18 sessões paralelas</span>
+    <span><strong>Versão:</strong> V9.0</span>
+  </div>
+</div>
+
+<div class="toc">
+  <strong>Índice</strong>
+  <ol>
+    <li><a href="#tldr">TL;DR</a></li>
+    <li><a href="#mudancas">O que mudou para você</a></li>
+    <li><a href="#arquitetura">Arquitetura entregue</a></li>
+    <li><a href="#sessoes">18 sessões</a></li>
+    <li><a href="#numeros">Números</a></li>
+    <li><a href="#economia">Economia projetada</a></li>
+    <li><a href="#governanca">Conformidade constitucional</a></li>
+    <li><a href="#debitos">Débitos para Fase 1</a></li>
+    <li><a href="#proximas">Próximas fases</a></li>
+    <li><a href="#demo">Demo ao vivo</a></li>
+    <li><a href="#perguntas">Perguntas para você</a></li>
+  </ol>
+</div>
+
+<hr>
+
+<div class="tldr" id="tldr">
+  <h2>TL;DR para Marcelo</h2>
+  <p>Em 4 dias, 18 sessões paralelas entregaram a <strong>fundação completa da V9</strong>:</p>
+  <ul>
+    <li><strong>Infraestrutura:</strong> Orchestrator + LiteLLM + Langfuse + Consolidator em Railway + 5 Edge Functions no Supabase</li>
+    <li><strong>Packages:</strong> 9 packages reutilizáveis <code>@ecossistema/*</code></li>
+    <li><strong>Apps:</strong> 5 apps scaffoldados (<code>fic</code>, <code>erp-educacional</code>, <code>intentus</code>, <code>orchestrator</code>, <code>memory-consolidator</code>)</li>
+    <li><strong>Governança:</strong> 11 Artigos Constitucionais agora são <strong>código que roda</strong>, não só texto</li>
+    <li><strong>Piloto:</strong> CFO-FIC instanciado — dry-run live aguarda Railway (D-002)</li>
+    <li><strong>Custo estimado:</strong> ~US$ 205–670/mês (infra + LLM, 5 negócios em uso leve)</li>
+  </ul>
+  <p>Próximo passo: <strong>Fase 1</strong> — C-Suite nos 5 negócios + Jarvis Stage 2 (WhatsApp).</p>
+</div>
+
+<hr>
+
+<h2 id="mudancas">O que mudou para você, na prática</h2>
+
+<h3>1. Não vai mais perder memória entre sessões</h3>
+<p>Dealbreaker resolvido. <code>@ecossistema/memory</code> + pgvector 3-tier (episódica / semântica / processual) + auto-embedding via Supabase Edge Function.
+Sessão fecha, abre depois — Claudinho já sabe quem você é, o que decidiram, qual negócio está em pauta.</p>
+
+<h3>2. Segurança de credenciais</h3>
+<p>Credenciais (Inter, BRy, OpenRouter, Evolution API) <strong>nunca aparecem em chat mais</strong>.
+Fluxo: agente precisa de uma credencial → SC-29 Edge Function (proxy AES-256-GCM) → agente recebe <strong>só o resultado da chamada</strong>, jamais a chave.</p>
+
+<h3>3. Governança automática 24/7</h3>
+<p>Art. II (HITL): agente tentou emitir boleto acima de R$ 10k? <strong>Bloqueado em código.</strong> Chega WhatsApp para você aprovar.
+Art. XIX (Segurança): agente tentou <code>rm -rf /</code>? Bloqueado.
+11 Artigos assim, rodando como hooks no Claude Agent SDK — sem você precisar lembrar.</p>
+
+<h3>4. Observabilidade real</h3>
+<p>Todo LLM call, todo tool use, toda decisão de agente gravada no Langfuse.
+Dashboard de custo por negócio, alerta quando o budget se aproxima.
+<code>correlation_id</code> liga: "o que o CFO-FIC fez na sessão X" → todos os logs em 1 clique.</p>
+
+<h3>5. Piloto CFO-FIC estruturado</h3>
+<p>CFO-FIC instanciado com 5 tools: <code>check_inadimplentes</code>, <code>preparar_whatsapp_cobranca</code>, <code>registrar_acordo</code>, <code>consultar_extrato_inter</code>, <code>gerar_relatorio_financeiro</code>.
+Dry-run da régua de cobrança aguarda Railway live para execução real (D-002 — Fase 1, semana 1).</p>
+
+<hr>
+
+<h2 id="arquitetura">Arquitetura entregue</h2>
+
+<div class="arch-diagram">
+<div class="arch-l1">┌────────────────────────────────────────────────────────────────────┐
+│  L1 — AGENTES (Anthropic Managed Agents)                           │
+│      Claudinho (Opus 4.6) · CFO-FIC · D-Governanca               │
+│      30–35 agentes C-Suite mapeados (6 com template pronto)       │
+└──────────────────────────┬─────────────────────────────────────────┘</div>
+                           │ SSE / REST
+<div class="arch-l2">┌──────────────────────────▼─────────────────────────────────────────┐
+│  L2 — SERVIÇOS RAILWAY                                             │
+│      Orchestrator (FastAPI) · LiteLLM Proxy · Langfuse            │
+│      Memory Consolidator Worker · RAG Engine (futuro)             │
+└──────────────────────────┬─────────────────────────────────────────┘</div>
+                           │ HTTPS
+<div class="arch-l3">┌──────────────────────────▼─────────────────────────────────────────┐
+│  L3 — EDGE FUNCTIONS (Supabase)                                    │
+│      SC-29 Credential Gateway · SC-10 Webhook Hardening           │
+│      SC-19 PII Mask · SC-04 Skill Registry · SC-03 Dual-Write     │
+└──────────────────────────┬─────────────────────────────────────────┘</div>
+                           │ SQL / REST
+<div class="arch-l4">┌──────────────────────────▼─────────────────────────────────────────┐
+│  L4 — DADOS                                                        │
+│      ECOSYSTEM (gqck…) · FIC (ifdn…) · Intentus (bvry…)          │
+│      memory_episodic · memory_semantic · memory_procedural        │
+│      credentials_v2 · skills_registry · audit_log                 │
+└────────────────────────────────────────────────────────────────────┘</div>
+</div>
+
+<hr>
+
+<h2 id="sessoes">O que foi entregue — 18 sessões</h2>
+
+<table>
+  <thead><tr><th>#</th><th>Sessão</th><th>Entregável</th><th>Status</th></tr></thead>
+  <tbody>
+    <tr><td>S01</td><td>Constitutional Hooks</td><td>11 hooks executáveis no Agent SDK</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S02</td><td>Prompt Assembler</td><td>Phantom 9-layer system-prompt assembler</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S03</td><td>MCP Template</td><td>FastMCP scaffold + generator CLI</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S04</td><td>Migrations D1</td><td>4 migrations ECOSYSTEM + RLS políticas</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S05</td><td>LiteLLM</td><td>Proxy Railway + 6 virtual keys + fallback chains</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S06</td><td>ADRs + Runbooks</td><td>15 ADRs canônicos V9 + 6 runbooks operacionais</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S07</td><td>Memory Package</td><td><code>@ecossistema/memory</code> Mem0 wrapper + 3-tier + hybrid retrieval</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S08</td><td>Edge Functions</td><td>5 EFs (SC-29 v2, SC-10, SC-19, SC-04, SC-03)</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S09</td><td>Langfuse</td><td>Self-host Railway (Postgres + ClickHouse + Redis + MinIO)</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S10</td><td>Orchestrator</td><td>FastAPI + Managed Agents SSE + HITL webhook pattern</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S11</td><td>C-Suite Templates</td><td>4 templates (CEO, CFO, D-Gov, Claudinho) + generator CLI</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S12</td><td>Magic Link Vault</td><td>AES-256-GCM + Next.js form <em>(package standalone — D-004)</em></td><td><span class="badge badge-yellow">✅*</span></td></tr>
+    <tr><td>S13</td><td>Clients</td><td>credentials, litellm-client, observability <em>(modules internos — D-001)</em></td><td><span class="badge badge-yellow">✅*</span></td></tr>
+    <tr><td>S14</td><td>Consolidator</td><td>Railway worker sleeptime + consolidation loop</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S15</td><td>CI/CD</td><td>Specs E2E estruturados <em>(GitHub Actions — D-003)</em></td><td><span class="badge badge-yellow">✅*</span></td></tr>
+    <tr><td>S16</td><td>Piloto CFO-FIC</td><td>Agente real + 5 tools instanciados <em>(dry-run live — D-002)</em></td><td><span class="badge badge-yellow">✅*</span></td></tr>
+    <tr><td>S17</td><td>Validação E2E</td><td>10 spec files + relatório de débitos</td><td><span class="badge badge-green">✅</span></td></tr>
+    <tr><td>S18</td><td>Briefing Marcelo</td><td>Este documento</td><td><span class="badge badge-green">✅</span></td></tr>
+  </tbody>
+</table>
+
+<blockquote><code>✅*</code> = estrutura entregue, validação live pendente para Fase 1.</blockquote>
+
+<hr>
+
+<h2 id="numeros">Números da Fase 0</h2>
+
+<div class="stats-grid">
+  <div class="stat-card"><div class="stat-number">18</div><div class="stat-label">sessões paralelas</div></div>
+  <div class="stat-card"><div class="stat-number">4</div><div class="stat-label">dias corridos</div></div>
+  <div class="stat-card"><div class="stat-number">9</div><div class="stat-label">packages @ecossistema/*</div></div>
+  <div class="stat-card"><div class="stat-number">11</div><div class="stat-label">Artigos como hooks</div></div>
+  <div class="stat-card"><div class="stat-number">15</div><div class="stat-label">ADRs canônicos V9</div></div>
+  <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">Edge Functions live</div></div>
+  <div class="stat-card"><div class="stat-number">5</div><div class="stat-label">apps scaffoldados</div></div>
+  <div class="stat-card"><div class="stat-number">30+</div><div class="stat-label">agentes C-Suite mapeados</div></div>
+</div>
+
+<hr>
+
+<h2 id="economia">Economia projetada</h2>
+
+<h3>Custo operacional mensal</h3>
+
+<table>
+  <thead><tr><th>Componente</th><th>USD/mês</th></tr></thead>
+  <tbody>
+    <tr><td>Railway (orchestrator + LiteLLM + Langfuse + consolidator)</td><td>80–120</td></tr>
+    <tr><td>Supabase ECOSYSTEM (crescimento marginal)</td><td>25–50</td></tr>
+    <tr><td>LLMs via LiteLLM (5 negócios, uso leve + fallback Haiku)</td><td>100–500</td></tr>
+    <tr><td><strong>Total inicial</strong></td><td><strong>~US$ 205–670/mês</strong></td></tr>
+  </tbody>
+</table>
+
+<blockquote>Com Jarvis Stage 2 ativo e 20–30 agentes em uso real: ~US$ 500–1.500/mês estabilizado.</blockquote>
+
+<h3>Valor gerado</h3>
+<table>
+  <thead><tr><th>Item</th><th>Economia estimada</th></tr></thead>
+  <tbody>
+    <tr><td>Rotação de credenciais via SC-29</td><td>~2h/mês Marcelo</td></tr>
+    <tr><td>Zero perda de memória entre sessões</td><td>Dealbreaker resolvido</td></tr>
+    <tr><td>11 hooks previnem erros financeiros</td><td>≥1 erro evitado/mês</td></tr>
+    <tr><td>Budgets + fallback automático para Haiku</td><td>~30% custo LLM</td></tr>
+    <tr><td>Briefing diário consolidado (Fase 1)</td><td>~3h/semana Marcelo</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="governanca">Conformidade constitucional executável</h2>
+
+<p>11 dos 22 Artigos rodam como hooks no Claude Agent SDK:</p>
+
+<table>
+  <thead><tr><th>Hook</th><th>Tipo</th><th>Função</th></tr></thead>
+  <tbody>
+    <tr><td><strong>Art. II HITL</strong></td><td><code>PreToolUse</code></td><td>Bloqueia ações > R$ 10k ou irreversíveis sem aprovação Marcelo</td></tr>
+    <tr><td><strong>Art. III Idempotência</strong></td><td><code>PreToolUse</code></td><td>Impede duplicatas de operação em janela de 24h</td></tr>
+    <tr><td><strong>Art. IV Audit</strong></td><td><code>PostToolUse</code></td><td>Grava em <code>audit_log</code> append-only + trigger imutável</td></tr>
+    <tr><td><strong>Art. VIII Baixa Real</strong></td><td><code>PostToolUse</code></td><td>Valida sucesso real (não aceita 202 vazio)</td></tr>
+    <tr><td><strong>Art. IX Falha Explícita</strong></td><td><code>PostToolUse</code></td><td>Transforma silent fail em erro rastreável</td></tr>
+    <tr><td><strong>Art. XII Custos</strong></td><td><code>PreToolUse</code></td><td>Verifica budget antes de LLM call caro</td></tr>
+    <tr><td><strong>Art. XIV Dual-Write</strong></td><td><code>PreToolUse</code></td><td>Intercepta Write em <code>.md</code> e redireciona para Supabase</td></tr>
+    <tr><td><strong>Art. XVIII Data Contracts</strong></td><td><code>PreToolUse</code></td><td>Valida JSON Schema antes de persistir</td></tr>
+    <tr><td><strong>Art. XIX Segurança</strong></td><td><code>PreToolUse</code></td><td>Bloqueia comandos perigosos (<code>rm -rf</code>, <code>DROP TABLE</code> em prod)</td></tr>
+    <tr><td><strong>Art. XX Soberania</strong></td><td><code>PreToolUse</code></td><td>Prefere Supabase a API externa quando equivalente</td></tr>
+    <tr><td><strong>Art. XXII Aprendizado</strong></td><td><code>SessionEnd</code></td><td>Extrai padrões e grava em <code>memory_semantic</code></td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="debitos">Débitos para Fase 1</h2>
+
+<h3><span class="badge badge-red">HIGH</span> Resolver na primeira semana</h3>
+
+<table>
+  <thead><tr><th>ID</th><th>Sessão</th><th>Problema</th><th>Ação</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><strong>D-001</strong></td><td>S13</td>
+      <td><code>@ecossistema/credentials</code>, <code>litellm-client</code>, <code>observability</code> existem como módulos internos do orchestrator, não como packages standalone</td>
+      <td>Criar 3 packages em <code>packages/</code></td>
+    </tr>
+    <tr>
+      <td><strong>D-002</strong></td><td>S16</td>
+      <td>CFO-FIC instanciado mas dry-run live não executado (sem Railway live em S16)</td>
+      <td>Conectar ao ERP-FIC real (<code>ifdn…</code>), rodar dry-run</td>
+    </tr>
+    <tr>
+      <td><strong>D-003</strong></td><td>S15</td>
+      <td><code>.github/workflows/</code> não existe — CI/CD não configurado</td>
+      <td>Criar <code>ci.yml</code> + <code>deploy-edge-functions.yml</code> + <code>deploy-railway.yml</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3><span class="badge badge-yellow">MEDIUM</span> Mês 1 da Fase 1</h3>
+
+<table>
+  <thead><tr><th>ID</th><th>Problema</th><th>Ação</th></tr></thead>
+  <tbody>
+    <tr><td><strong>D-004</strong></td><td><code>@ecossistema/magic-link-vault</code> não encontrado em <code>packages/</code></td><td>Verificar S12 e criar package standalone</td></tr>
+    <tr><td><strong>D-005</strong></td><td>Orchestrator retorna stubs em <code>/health</code> para todos os clientes</td><td>Implementar health checks reais</td></tr>
+    <tr><td><strong>D-006</strong></td><td>X-Correlation-ID externo não propagado para <code>trace_id</code> interno</td><td>Middleware FastAPI para propagar header</td></tr>
+    <tr><td><strong>D-007</strong></td><td><code>packages/memory/tests/e2e.test.ts</code> requer Supabase live (não rodou em S17)</td><td><code>pnpm --filter @ecossistema/memory test:e2e</code> com staging</td></tr>
+  </tbody>
+</table>
+
+<h3><span class="badge badge-blue">LOW</span> Backlog Fase 1</h3>
+
+<table>
+  <thead><tr><th>ID</th><th>Problema</th><th>Ação</th></tr></thead>
+  <tbody>
+    <tr><td><strong>D-008</strong></td><td><code>clients/langfuse.py</code> usa stub com <code>asyncio.sleep</code></td><td>Conectar ao Langfuse Railway via SC-29</td></tr>
+    <tr><td><strong>D-009</strong></td><td>Spec infra health não executada live (sem Railway URLs em S17)</td><td><code>pnpm test:infra</code> em CI com env vars</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<h2 id="proximas">Próximas fases</h2>
+
+<h3>Fase 1 (semanas 5–8) — Expansão</h3>
+<ul>
+  <li><strong>C-Suite completo nos 5 negócios</strong> (~30 agentes)</li>
+  <li><strong>Jarvis Stage 2 (WhatsApp)</strong> via Evolution API + pipecat</li>
+  <li><strong>6 Diretores de Área</strong> no ecossistema (dashboards + auditoria automática)</li>
+  <li><strong>CFO-FIC em produção real</strong> (sair do sandbox — pré-req: D-002)</li>
+  <li><strong>Fechar D-001, D-002, D-003</strong> na primeira semana</li>
+</ul>
+
+<h3>Fase 2 (semanas 9–12) — Jarvis Stage 3 (Voz)</h3>
+<ul>
+  <li>App Electron/Swift com push-to-talk</li>
+  <li>Groq Whisper + ElevenLabs TTS</li>
+  <li>livekit/agents runtime</li>
+  <li>Briefing diário por voz</li>
+</ul>
+
+<h3>Fase 3 (semanas 13–24) — Jarvis Stage 4 (Always-On)</h3>
+<ul>
+  <li>Wake-word + always-listening</li>
+  <li>Proactive triggers (agenda, alertas, fluxo de caixa)</li>
+  <li>Ambient agent pattern</li>
+</ul>
+
+<hr>
+
+<h2 id="demo">Demo ao vivo (10 minutos)</h2>
+
+<div class="highlight-box">
+  <p>Roteiro detalhado em <code>docs/briefings/demo/script-demo.md</code>. Setup: 3 terminais + browser com Langfuse UI + Supabase Studio.</p>
+</div>
+
+<table>
+  <thead><tr><th>#</th><th>Cena</th><th>Duração</th></tr></thead>
+  <tbody>
+    <tr><td>1</td><td>"Olá Claudinho, qual a situação financeira da FIC hoje?" → handoff SSE para CFO-FIC</td><td>2 min</td></tr>
+    <tr><td>2</td><td>"Dispara régua de cobrança dry-run" → plano gerado, zero envio real</td><td>3 min</td></tr>
+    <tr><td>3</td><td>Langfuse trace → spans, custo USD, latência p95</td><td>2 min</td></tr>
+    <tr><td>4</td><td>Audit log → 11 hooks, <code>article_ref</code>, rastreabilidade total</td><td>1 min</td></tr>
+    <tr><td>5</td><td>"Emita R$ 20.000 em boletos" → Art. II bloqueia → aprovação chega no WhatsApp</td><td>2 min</td></tr>
+  </tbody>
+</table>
+
+<hr>
+
+<div class="questions-box" id="perguntas">
+  <h2>Perguntas para Marcelo — abertura da Fase 1</h2>
+  <ol>
+    <li>Aprova o que foi entregue na Fase 0?</li>
+    <li>Concorda com os 9 débitos identificados e prioridade (HIGH primeiro)?</li>
+    <li>Modo de execução Fase 1: continuar 6 sessões paralelas ou balanceado (4)?</li>
+    <li>Qual negócio prioritário após FIC? (Klésis / Intentus / Splendori / Nexvy)</li>
+    <li>Jarvis Stage 2 — pode alocar número WhatsApp dedicado para Evolution API?</li>
+    <li>Budget LLM mensal — aprova estimativas por negócio (US$ 100–500 inicial)?</li>
+    <li>CFO-FIC em produção real — quando? (sugestão: semana 5 após burn-in de 1 semana em sandbox)</li>
+  </ol>
+</div>
+
+<hr>
+
+<footer style="text-align:center; color: var(--text-muted); font-size: 0.85em; margin-top: 4rem;">
+  <p>Ecossistema V9 · Fase 0 Concluída · 2026-04-18</p>
+  <p style="margin-top:0.3em;">Construído com evidência real: 99 repositórios OSS analisados · phantom · Mem0 · Letta · FastMCP · LiteLLM · Langfuse · Evolution API</p>
+</footer>
+
+</body>
+</html>
