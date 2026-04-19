@@ -15,8 +15,8 @@ jobs:
       - uses: actions/setup-node@v4
         with: { node-version: 24, cache: pnpm }
       - run: pnpm install --frozen-lockfile
-      - run: pnpm -r run build --if-present
-      - run: pnpm -r run test --if-present
+      - run: pnpm -r run --if-present build
+      - run: pnpm -r run --if-present test
 
   lint-python:
     runs-on: ubuntu-latest
