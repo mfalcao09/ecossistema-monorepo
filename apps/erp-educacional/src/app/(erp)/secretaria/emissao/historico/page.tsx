@@ -12,12 +12,12 @@ import LivePreview, {
 } from "@/components/config/historico/LivePreview";
 import type {
   DiplomaConfig,
-  HistoricoCampoAlunoConfig,
   HistoricoColunaConfig,
   HistoricoFormatacaoRegra,
   HistoricoSecoesConfig,
 } from "@/types/diploma-config";
 import { DEFAULT_CAMPOS_ALUNO } from "@/types/diploma-config";
+import { fetchSeguro } from "@/lib/security/fetch-seguro";
 
 // ── Tipos locais ─────────────────────────────────────────────
 
