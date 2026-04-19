@@ -2,7 +2,7 @@
 
 import { useState, useCallback, useEffect } from "react";
 import {
-  Search, GraduationCap, Loader2, FileText, Printer,
+  Search, GraduationCap, Loader2, FileText, Printer, Download,
   Eye, AlertCircle, RefreshCw, User, X,
 } from "lucide-react";
 import LivePreview, {
@@ -175,82 +175,187 @@ export default function EmissaoHistoricoPage() {
     setDadosPrevia(null);
   };
 
-  // Imprimir / Salvar como PDF — abre nova janela com apenas o preview + window.print()
-  // Cada filho do LivePreview é um <div> com width/height 210mm × 297mm (A4 exato).
-  // Precisamos: (1) descartar o wrapper com transform:scale(0.85) do dialog,
-  // (2) forçar page-break em cada página, (3) garantir que imagens/cores de
-  // fundo (timbrado) imprimam com -webkit-print-color-adjust: exact.
-  const imprimirPrevia = () => {
-    const el = document.getElementById("preview-historico-emissao");
-    if (!el) return;
+  // Loading states para os botões de download/print
+  const [baixandoPdf, setBaixandoPdf] = useState(false);
+  const [imprimindo, setImprimindo] = useState(false);
 
-    // innerHTML pula o wrapper com scale(0.85) → cada página vai impressa em 100%
-    const content = el.innerHTML;
+  // ── Captura cada página A4 do preview como canvas ──
+  // Remove o transform:scale(0.85) do wrapper temporariamente (fora de tela)
+  // para que html2canvas capture em 210×297mm reais, depois restaura.
+  const capturarPaginas = async () => {
+    const { default: html2canvas } = await import("html2canvas");
 
-    const w = window.open("", "_blank");
-    if (!w) return;
+    const wrapper = document.getElementById("preview-historico-emissao");
+    if (!wrapper) throw new Error("Preview não encontrado");
 
-    // Clona estilos do documento principal (Tailwind, Next.js) para a nova janela
-    const stylesheets = Array.from(
-      document.querySelectorAll('link[rel="stylesheet"], style')
-    )
-      .map(s => s.outerHTML)
-      .join("");
+    // Guarda estilos originais para restaurar
+    const originalTransform = wrapper.style.transform;
+    const originalPosition = wrapper.style.position;
+    const originalLeft = wrapper.style.left;
+    const originalTop = wrapper.style.top;
 
-    w.document.write(`
-      <!DOCTYPE html>
-      <html>
-        <head>
-          <meta charset="utf-8" />
-          <title>Histórico Escolar — ${previaNome}</title>
-          <base href="${window.location.origin}/" />
-          ${stylesheets}
-          <style>
-            /* Folha A4 sem margens — o LivePreview já controla margens internas */
-            @page { size: A4; margin: 0; }
+    // Move para fora da tela + remove o scale (100% tamanho real)
+    wrapper.style.transform = "none";
+    wrapper.style.position = "fixed";
+    wrapper.style.left = "-10000px";
+    wrapper.style.top = "0";
 
-            html, body {
-              margin: 0 !important;
-              padding: 0 !important;
-              background: white;
-              /* Garante que cores de fundo, timbrado e tabela saiam no PDF */
-              -webkit-print-color-adjust: exact !important;
-              print-color-adjust: exact !important;
-              color-adjust: exact !important;
-            }
+    try {
+      // Aguarda o re-layout
+      await new Promise(r => setTimeout(r, 100));
 
-            /* Wrapper flex do LivePreview — vira bloco, zera gap */
-            body > div {
-              display: block !important;
-              gap: 0 !important;
-            }
+      // Cada página A4 é um filho direto do LivePreview (div com 210mm × 297mm)
+      const paginas = wrapper.querySelectorAll<HTMLElement>(
+        'div[style*="210mm"][style*="297mm"]'
+      );
 
-            /* Cada página A4: quebra para a próxima folha e sem sombra */
-            body > div > div {
-              page-break-after: always;
-              break-after: page;
-              margin: 0 !important;
-              box-shadow: none !important;
-              /* Remove qualquer borda arredondada (visual de tela) */
-              border-radius: 0 !important;
-            }
-            body > div > div:last-child {
-              page-break-after: auto;
-              break-after: auto;
-            }
-          </style>
-        </head>
-        <body>${content}</body>
-      </html>
-    `);
-    w.document.close();
+      const canvases: HTMLCanvasElement[] = [];
+      for (const pagina of Array.from(paginas)) {
+        const canvas = await html2canvas(pagina, {
+          scale: 2,                    // 2x resolução para nitidez
+          useCORS: true,               // permite imagens cross-origin (timbrado Supabase)
+          allowTaint: false,
+          backgroundColor: "#ffffff",
+          logging: false,
+          windowWidth: pagina.scrollWidth,
+          windowHeight: pagina.scrollHeight,
+        });
+        canvases.push(canvas);
+      }
+      return canvases;
+    } finally {
+      // Restaura estilos
+      wrapper.style.transform = originalTransform;
+      wrapper.style.position = originalPosition;
+      wrapper.style.left = originalLeft;
+      wrapper.style.top = originalTop;
+    }
+  };
 
-    // Aguarda os stylesheets carregarem antes de abrir o diálogo de impressão.
-    // 1s é conservador — evita imprimir antes do Tailwind e das fontes carregarem.
-    setTimeout(() => {
-      w.focus();
-      w.print();
-    }, 1000);
+  // ── Salvar PDF direto — download sem abrir diálogo ──
+  // Usa html2canvas + jsPDF. Resultado: PDF A4 com as mesmas páginas do preview,
+  // uma por folha, baixado direto.
+  const salvarPdfDireto = async () => {
+    if (baixandoPdf) return;
+    setBaixandoPdf(true);
+    setErro("");
+    try {
+      const canvases = await capturarPaginas();
+      if (canvases.length === 0) throw new Error("Nenhuma página capturada");
+
+      const { default: jsPDF } = await import("jspdf");
+      const pdf = new jsPDF({
+        unit: "mm",
+        format: "a4",
+        orientation: "portrait",
+        compress: true,
+      });
+
+      canvases.forEach((canvas, i) => {
+        if (i > 0) pdf.addPage();
+        const img = canvas.toDataURL("image/jpeg", 0.95);
+        pdf.addImage(img, "JPEG", 0, 0, 210, 297, undefined, "FAST");
+      });
+
+      const nome = `historico_${previaNome.replace(/\s+/g, "_").toLowerCase()}.pdf`;
+      pdf.save(nome);
+    } catch (e: unknown) {
+      setErro(e instanceof Error ? e.message : "Erro ao gerar PDF");
+    } finally {
+      setBaixandoPdf(false);
+    }
+  };
+
+  // ── Imprimir direto — iframe escondido + contentWindow.print() ──
+  // Abre o diálogo de impressão do Chrome na mesma página (sem nova aba).
+  const imprimirDireto = () => {
+    if (imprimindo) return;
+    setImprimindo(true);
+    try {
+      const el = document.getElementById("preview-historico-emissao");
+      if (!el) throw new Error("Preview não encontrado");
+
+      // innerHTML pula o wrapper com transform:scale(0.85)
+      const content = el.innerHTML;
+
+      // Clona todos os <link> e <style> da página atual
+      const stylesheets = Array.from(
+        document.querySelectorAll('link[rel="stylesheet"], style')
+      )
+        .map(s => s.outerHTML)
+        .join("");
+
+      // Cria iframe escondido
+      const iframe = document.createElement("iframe");
+      iframe.style.position = "fixed";
+      iframe.style.right = "0";
+      iframe.style.bottom = "0";
+      iframe.style.width = "0";
+      iframe.style.height = "0";
+      iframe.style.border = "0";
+      iframe.setAttribute("aria-hidden", "true");
+      document.body.appendChild(iframe);
+
+      const doc = iframe.contentDocument;
+      if (!doc) throw new Error("Falha ao criar iframe");
+
+      doc.open();
+      doc.write(`
+        <!DOCTYPE html>
+        <html>
+          <head>
+            <meta charset="utf-8" />
+            <title>Histórico Escolar — ${previaNome}</title>
+            <base href="${window.location.origin}/" />
+            ${stylesheets}
+            <style>
+              @page { size: A4; margin: 0; }
+              html, body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background: white;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+                color-adjust: exact !important;
+              }
+              body > div { display: block !important; gap: 0 !important; }
+              body > div > div {
+                page-break-after: always;
+                break-after: page;
+                margin: 0 !important;
+                box-shadow: none !important;
+                border-radius: 0 !important;
+              }
+              body > div > div:last-child {
+                page-break-after: auto;
+                break-after: auto;
+              }
+            </style>
+          </head>
+          <body>${content}</body>
+        </html>
+      `);
+      doc.close();
+
+      // Aguarda estilos carregarem, abre diálogo, depois remove o iframe
+      setTimeout(() => {
+        try {
+          iframe.contentWindow?.focus();
+          iframe.contentWindow?.print();
+        } catch (err) {
+          console.error("[imprimir] print falhou:", err);
+        } finally {
+          // Remove iframe após um tempo (dá margem para o diálogo do Chrome)
+          setTimeout(() => {
+            iframe.remove();
+            setImprimindo(false);
+          }, 1000);
+        }
+      }, 800);
+    } catch (e: unknown) {
+      setErro(e instanceof Error ? e.message : "Erro ao imprimir");
+      setImprimindo(false);
+    }
   };
 
   // ── Extrai config com fallbacks seguros ──
@@ -302,10 +407,28 @@ export default function EmissaoHistoricoPage() {
               </h2>
               <div className="flex items-center gap-2">
                 <button
-                  onClick={imprimirPrevia}
-                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-amber-500 rounded-lg hover:bg-amber-600 transition-colors"
+                  onClick={salvarPdfDireto}
+                  disabled={baixandoPdf || imprimindo}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-amber-500 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  title="Baixar PDF direto para o computador"
                 >
-                  <Printer size={13} /> Imprimir / Salvar PDF
+                  {baixandoPdf ? (
+                    <><Loader2 size={13} className="animate-spin" /> Gerando PDF...</>
+                  ) : (
+                    <><Download size={13} /> Salvar PDF</>
+                  )}
+                </button>
+                <button
+                  onClick={imprimirDireto}
+                  disabled={baixandoPdf || imprimindo}
+                  className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-gray-700 border border-gray-300 rounded-lg hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                  title="Abrir diálogo de impressão"
+                >
+                  {imprimindo ? (
+                    <><Loader2 size={13} className="animate-spin" /> Preparando...</>
+                  ) : (
+                    <><Printer size={13} /> Imprimir</>
+                  )}
                 </button>
                 <button
                   onClick={fecharPrevia}
