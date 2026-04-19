@@ -79,7 +79,6 @@ export const POST = protegerRota(
           '--hide-scrollbars',
           '--disable-web-security',
         ],
-        defaultViewport: chromium.defaultViewport,
         executablePath: await chromium.executablePath(),
         headless: true,
       })
