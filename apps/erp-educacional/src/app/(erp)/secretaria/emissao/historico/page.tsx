@@ -176,38 +176,81 @@ export default function EmissaoHistoricoPage() {
   };
 
   // Imprimir / Salvar como PDF — abre nova janela com apenas o preview + window.print()
+  // Cada filho do LivePreview é um <div> com width/height 210mm × 297mm (A4 exato).
+  // Precisamos: (1) descartar o wrapper com transform:scale(0.85) do dialog,
+  // (2) forçar page-break em cada página, (3) garantir que imagens/cores de
+  // fundo (timbrado) imprimam com -webkit-print-color-adjust: exact.
   const imprimirPrevia = () => {
     const el = document.getElementById("preview-historico-emissao");
     if (!el) return;
+
+    // innerHTML pula o wrapper com scale(0.85) → cada página vai impressa em 100%
+    const content = el.innerHTML;
+
     const w = window.open("", "_blank");
     if (!w) return;
-    // Clona estilos do documento principal para a janela de impressão
-    const stylesheets = Array.from(document.querySelectorAll('link[rel="stylesheet"], style'))
+
+    // Clona estilos do documento principal (Tailwind, Next.js) para a nova janela
+    const stylesheets = Array.from(
+      document.querySelectorAll('link[rel="stylesheet"], style')
+    )
       .map(s => s.outerHTML)
       .join("");
+
     w.document.write(`
       <!DOCTYPE html>
       <html>
         <head>
           <meta charset="utf-8" />
           <title>Histórico Escolar — ${previaNome}</title>
+          <base href="${window.location.origin}/" />
           ${stylesheets}
           <style>
+            /* Folha A4 sem margens — o LivePreview já controla margens internas */
             @page { size: A4; margin: 0; }
-            body { margin: 0; padding: 0; background: white; }
-            .flex.flex-col.gap-8 { gap: 0 !important; }
-            .shadow-xl { box-shadow: none !important; }
+
+            html, body {
+              margin: 0 !important;
+              padding: 0 !important;
+              background: white;
+              /* Garante que cores de fundo, timbrado e tabela saiam no PDF */
+              -webkit-print-color-adjust: exact !important;
+              print-color-adjust: exact !important;
+              color-adjust: exact !important;
+            }
+
+            /* Wrapper flex do LivePreview — vira bloco, zera gap */
+            body > div {
+              display: block !important;
+              gap: 0 !important;
+            }
+
+            /* Cada página A4: quebra para a próxima folha e sem sombra */
+            body > div > div {
+              page-break-after: always;
+              break-after: page;
+              margin: 0 !important;
+              box-shadow: none !important;
+              /* Remove qualquer borda arredondada (visual de tela) */
+              border-radius: 0 !important;
+            }
+            body > div > div:last-child {
+              page-break-after: auto;
+              break-after: auto;
+            }
           </style>
         </head>
-        <body>${el.outerHTML}</body>
+        <body>${content}</body>
       </html>
     `);
     w.document.close();
-    // Dá tempo dos estilos carregarem antes de imprimir
+
+    // Aguarda os stylesheets carregarem antes de abrir o diálogo de impressão.
+    // 1s é conservador — evita imprimir antes do Tailwind e das fontes carregarem.
     setTimeout(() => {
       w.focus();
       w.print();
-    }, 500);
+    }, 1000);
   };
 
   // ── Extrai config com fallbacks seguros ──
