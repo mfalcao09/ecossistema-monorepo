@@ -121,6 +121,7 @@ export default function EmissaoHistoricoPage() {
   const [previaAberta, setPreviaAberta] = useState(false);
   const [previaCarregandoId, setPreviaCarregandoId] = useState<string | null>(null);
   const [previaNome, setPreviaNome] = useState("");
+  const [previaDiplomaId, setPreviaDiplomaId] = useState<string | null>(null);
   const [dadosPrevia, setDadosPrevia] = useState<DadosPrevia | null>(null);
 
   const buscar = useCallback(async (q: string) => {
@@ -153,6 +154,7 @@ export default function EmissaoHistoricoPage() {
   const abrirPrevia = async (diplomaId: string, nomeAluno: string) => {
     setPreviaCarregandoId(diplomaId);
     setPreviaNome(nomeAluno);
+    setPreviaDiplomaId(diplomaId);
     setErro("");
     try {
       const res = await fetch(`/api/secretaria/emissao/historico/${diplomaId}/dados`);
@@ -173,92 +175,40 @@ export default function EmissaoHistoricoPage() {
   const fecharPrevia = () => {
     setPreviaAberta(false);
     setDadosPrevia(null);
+    setPreviaDiplomaId(null);
   };
 
   // Loading states para os botões de download/print
   const [baixandoPdf, setBaixandoPdf] = useState(false);
   const [imprimindo, setImprimindo] = useState(false);
 
-  // ── Captura cada página A4 do preview como canvas ──
-  // Remove o transform:scale(0.85) do wrapper temporariamente (fora de tela)
-  // para que html2canvas capture em 210×297mm reais, depois restaura.
-  const capturarPaginas = async () => {
-    const { default: html2canvas } = await import("html2canvas");
-
-    const wrapper = document.getElementById("preview-historico-emissao");
-    if (!wrapper) throw new Error("Preview não encontrado");
-
-    // Guarda estilos originais para restaurar
-    const originalTransform = wrapper.style.transform;
-    const originalPosition = wrapper.style.position;
-    const originalLeft = wrapper.style.left;
-    const originalTop = wrapper.style.top;
-
-    // Move para fora da tela + remove o scale (100% tamanho real)
-    wrapper.style.transform = "none";
-    wrapper.style.position = "fixed";
-    wrapper.style.left = "-10000px";
-    wrapper.style.top = "0";
-
-    try {
-      // Aguarda o re-layout
-      await new Promise(r => setTimeout(r, 100));
-
-      // Cada página A4 é um filho direto do LivePreview (div com 210mm × 297mm)
-      const paginas = wrapper.querySelectorAll<HTMLElement>(
-        'div[style*="210mm"][style*="297mm"]'
-      );
-
-      const canvases: HTMLCanvasElement[] = [];
-      for (const pagina of Array.from(paginas)) {
-        const canvas = await html2canvas(pagina, {
-          scale: 2,                    // 2x resolução para nitidez
-          useCORS: true,               // permite imagens cross-origin (timbrado Supabase)
-          allowTaint: false,
-          backgroundColor: "#ffffff",
-          logging: false,
-          windowWidth: pagina.scrollWidth,
-          windowHeight: pagina.scrollHeight,
-        });
-        canvases.push(canvas);
-      }
-      return canvases;
-    } finally {
-      // Restaura estilos
-      wrapper.style.transform = originalTransform;
-      wrapper.style.position = originalPosition;
-      wrapper.style.left = originalLeft;
-      wrapper.style.top = originalTop;
-    }
-  };
-
-  // ── Salvar PDF direto — download sem abrir diálogo ──
-  // Usa html2canvas + jsPDF. Resultado: PDF A4 com as mesmas páginas do preview,
-  // uma por folha, baixado direto.
-  const salvarPdfDireto = async () => {
+  // ── Salvar PDF direto — via Puppeteer server-side ──
+  // Chama o endpoint /pdf que renderiza o histórico com Chromium headless
+  // e devolve o PDF com texto selecionável (vetorial, não imagem).
+  // Fidelidade 100% com o preview e tamanho de arquivo compacto.
+  const salvarPdfDireto = async (diplomaId: string) => {
     if (baixandoPdf) return;
     setBaixandoPdf(true);
     setErro("");
     try {
-      const canvases = await capturarPaginas();
-      if (canvases.length === 0) throw new Error("Nenhuma página capturada");
+      const res = await fetchSeguro(
+        `/api/secretaria/emissao/historico/${diplomaId}/pdf`,
+        { method: "POST" }
+      );
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error((body as { error?: string }).error ?? "Erro ao gerar PDF");
+      }
 
-      const { default: jsPDF } = await import("jspdf");
-      const pdf = new jsPDF({
-        unit: "mm",
-        format: "a4",
-        orientation: "portrait",
-        compress: true,
-      });
-
-      canvases.forEach((canvas, i) => {
-        if (i > 0) pdf.addPage();
-        const img = canvas.toDataURL("image/jpeg", 0.95);
-        pdf.addImage(img, "JPEG", 0, 0, 210, 297, undefined, "FAST");
-      });
-
-      const nome = `historico_${previaNome.replace(/\s+/g, "_").toLowerCase()}.pdf`;
-      pdf.save(nome);
+      const blob = await res.blob();
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a");
+      a.href = url;
+      a.download = `historico_${previaNome.replace(/\s+/g, "_").toLowerCase()}.pdf`;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
     } catch (e: unknown) {
       setErro(e instanceof Error ? e.message : "Erro ao gerar PDF");
     } finally {
@@ -407,10 +357,10 @@ export default function EmissaoHistoricoPage() {
               </h2>
               <div className="flex items-center gap-2">
                 <button
-                  onClick={salvarPdfDireto}
-                  disabled={baixandoPdf || imprimindo}
+                  onClick={() => previaDiplomaId && salvarPdfDireto(previaDiplomaId)}
+                  disabled={baixandoPdf || imprimindo || !previaDiplomaId}
                   className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-amber-500 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
-                  title="Baixar PDF direto para o computador"
+                  title="Baixar PDF direto para o computador (texto selecionável)"
                 >
                   {baixandoPdf ? (
                     <><Loader2 size={13} className="animate-spin" /> Gerando PDF...</>

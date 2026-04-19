@@ -8,6 +8,11 @@ const nextConfig = {
   // Desabilita header X-Powered-By (expõe que é Next.js)
   poweredByHeader: false,
 
+  // Puppeteer + Chromium não podem ser empacotados pelo webpack —
+  // precisam ficar no node_modules do runtime (o @sparticuz/chromium
+  // extrai o binary em /tmp em runtime).
+  serverExternalPackages: ['@sparticuz/chromium', 'puppeteer-core'],
+
   images: {
     remotePatterns: [
       {
