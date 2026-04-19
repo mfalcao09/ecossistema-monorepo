@@ -23,6 +23,8 @@ import structlog
 from fastapi import APIRouter, BackgroundTasks, HTTPException, Query, Request, Response
 from pydantic import BaseModel
 
+import anthropic
+
 from orchestrator.services import approval_service, whatsapp_service
 
 log = structlog.get_logger(__name__)
@@ -109,7 +111,9 @@ async def process_approval(
         decided_by=payload.user_id,
     )
 
-    # TODO(F1-S02): resumir sessão via client.beta.sessions.events.send(session_id, ...)
+    session_id = record.get("session_id")
+    if session_id:
+        await _resume_session(session_id, payload.decision)
 
     return {"approval_id": approval_id, "status": payload.decision}
 
@@ -280,6 +284,7 @@ async def _route_approval_reply(text: str, from_number: str) -> None:
         return
 
     approval_id = target["id"]
+    session_id = target.get("session_id")
     await approval_service.update_approval(approval_id, decision, decided_by=f"whatsapp:{from_number[:6]}")
     log.info(
         "approval_via_whatsapp",
@@ -288,4 +293,47 @@ async def _route_approval_reply(text: str, from_number: str) -> None:
         from_number=from_number[:6] + "***",
     )
 
-    # TODO(F1-S02): resume sessão via Managed Agents API
+    if session_id:
+        await _resume_session(session_id, decision)
+
+
+# ── Session resume ────────────────────────────────────────────────────────────
+
+_DECISION_TEXT = {
+    "allow": "Ação aprovada pelo CEO. Prossiga com a execução.",
+    "deny": "Ação negada pelo CEO. Aborte a operação e informe o resultado ao usuário.",
+}
+
+
+async def _resume_session(session_id: str, decision: str) -> None:
+    """
+    Retoma sessão Managed Agents após decisão HITL.
+
+    Envia user.message com texto da decisão.
+    O agente continua a partir do ponto em que estava parado.
+    """
+    from orchestrator.config import get_settings
+    settings = get_settings()
+
+    message = _DECISION_TEXT.get(decision, f"Decisão: {decision}")
+
+    try:
+        client = anthropic.Anthropic(api_key=settings.anthropic_api_key)
+        client.beta.sessions.events.send(
+            session_id,
+            events=[{
+                "type": "user.message",
+                "content": [{"type": "text", "text": message}],
+            }],
+        )
+        log.info("session_resumed", session_id=session_id[:12] + "...", decision=decision)
+    except anthropic.APIError as exc:
+        # Sessão pode ter expirado — não é erro crítico, apenas log
+        log.warning(
+            "session_resume_api_error",
+            session_id=session_id[:12] + "...",
+            status=getattr(exc, "status_code", None),
+            error=str(exc)[:200],
+        )
+    except Exception as exc:
+        log.error("session_resume_error", session_id=session_id[:12] + "...", error=str(exc))

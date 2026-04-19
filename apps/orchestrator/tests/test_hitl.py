@@ -11,6 +11,7 @@ from __future__ import annotations
 
 import pytest
 from fastapi.testclient import TestClient
+from unittest.mock import patch, MagicMock
 
 from orchestrator.main import app
 from orchestrator.services import approval_service
@@ -169,3 +170,48 @@ def test_status_idled_without_requires_action(client):
     )
     assert resp.status_code == 200
     assert "approval_id" in resp.json()
+
+
+def test_approval_triggers_session_resume(client):
+    """POST /webhooks/approval/{id} chama _resume_session quando session_id presente."""
+    from unittest.mock import AsyncMock
+    from orchestrator.routes import webhooks as webhooks_module
+
+    r = client.post(
+        "/webhooks/status-idled",
+        json={
+            "session_id": "managed-session-abc123",
+            "agent_id": "cfo-fic",
+            "requires_action": {"type": "approval", "summary": "Emitir boletos"},
+        },
+    )
+    approval_id = r.json()["approval_id"]
+
+    resume_mock = AsyncMock()
+    original = webhooks_module._resume_session
+    webhooks_module._resume_session = resume_mock
+    try:
+        resp = client.post(
+            f"/webhooks/approval/{approval_id}",
+            json={"approval_request_id": approval_id, "decision": "allow", "user_id": "marcelo"},
+        )
+        assert resp.status_code == 200
+    finally:
+        webhooks_module._resume_session = original
+
+
+@pytest.mark.asyncio
+async def test_session_resume_ignores_api_error():
+    """_resume_session não propaga APIError (sessão expirada não quebra o fluxo)."""
+    import anthropic as ant
+    from orchestrator.routes.webhooks import _resume_session
+
+    with patch("orchestrator.routes.webhooks.anthropic") as mock_ant:
+        mock_client = MagicMock()
+        mock_ant.Anthropic.return_value = mock_client
+        mock_ant.APIError = ant.APIError
+        mock_client.beta.sessions.events.send.side_effect = ant.APIConnectionError(
+            request=MagicMock()
+        )
+        # Não deve propagar exceção — log.warning apenas
+        await _resume_session("sess-expired-123", "allow")
