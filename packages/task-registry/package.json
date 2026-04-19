@@ -1,7 +1,7 @@
 {
   "name": "@ecossistema/task-registry",
   "version": "0.1.0",
-  "description": "Task Registry canônico — auditoria cross-sessão de delegações entre agentes. Art. IV",
+  "description": "Task Registry can\u00f4nico \u2014 auditoria cross-sess\u00e3o de delega\u00e7\u00f5es entre agentes. Art. IV",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,11 +11,14 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
-    "test": "vitest",
+    "test": "vitest run --passWithNoTests",
     "clean": "rm -rf dist"
   },
   "dependencies": {
