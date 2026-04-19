@@ -1,8 +1,9 @@
 """
 test_hitl.py — HITL webhook (Art. II — Human-in-the-loop).
+
 Testa que POST /webhooks/status-idled:
   1. Retorna 200 com approval_id
-  2. Salva aprovação como pendente
+  2. Salva aprovação como pendente (via approval_service)
   3. Aprovação pode ser resolvida via POST /webhooks/approval/{id}
 """
 
@@ -12,22 +13,25 @@ import pytest
 from fastapi.testclient import TestClient
 
 from orchestrator.main import app
-from orchestrator.routes import webhooks as webhooks_module
+from orchestrator.services import approval_service
 
 
 @pytest.fixture(autouse=True)
-def clear_pending(monkeypatch):
+def clear_pending():
     """Limpa aprovações pendentes entre testes."""
-    webhooks_module._pending_approvals.clear()
+    approval_service._mem_store().clear()
     yield
-    webhooks_module._pending_approvals.clear()
+    approval_service._mem_store().clear()
 
 
 @pytest.fixture()
 def client(monkeypatch):
     monkeypatch.setenv("ANTHROPIC_API_KEY", "test-key")
+    import orchestrator.config as cfg_module
+    cfg_module._settings = None
     with TestClient(app, raise_server_exceptions=True) as c:
         yield c
+    cfg_module._settings = None
 
 
 def test_status_idled_returns_approval_id(client):
@@ -65,13 +69,13 @@ def test_status_idled_saves_as_pending(client):
         },
     )
     approval_id = resp.json()["approval_id"]
-    assert approval_id in webhooks_module._pending_approvals
-    assert webhooks_module._pending_approvals[approval_id]["status"] == "pending"
+    mem = approval_service._mem_store()
+    assert approval_id in mem
+    assert mem[approval_id]["status"] == "pending"
 
 
 def test_list_pending_approvals(client):
     """GET /webhooks/approvals/pending lista aprovações pendentes."""
-    # Criar uma aprovação pendente
     client.post(
         "/webhooks/status-idled",
         json={
@@ -89,7 +93,6 @@ def test_list_pending_approvals(client):
 
 def test_approval_decision_allow(client):
     """POST /webhooks/approval/{id} com allow atualiza status."""
-    # Criar aprovação
     r = client.post(
         "/webhooks/status-idled",
         json={
@@ -100,7 +103,6 @@ def test_approval_decision_allow(client):
     )
     approval_id = r.json()["approval_id"]
 
-    # Aprovar
     resp = client.post(
         f"/webhooks/approval/{approval_id}",
         json={"approval_request_id": approval_id, "decision": "allow", "user_id": "marcelo"},
@@ -108,7 +110,7 @@ def test_approval_decision_allow(client):
     assert resp.status_code == 200
     data = resp.json()
     assert data["status"] == "allow"
-    assert webhooks_module._pending_approvals[approval_id]["status"] == "allow"
+    assert approval_service._mem_store()[approval_id]["status"] == "allow"
 
 
 def test_approval_decision_deny(client):
@@ -140,11 +142,30 @@ def test_approval_not_found(client):
     assert resp.status_code == 404
 
 
+def test_approval_invalid_decision(client):
+    """POST /webhooks/approval/{id} com decision inválida → 422."""
+    r = client.post(
+        "/webhooks/status-idled",
+        json={
+            "session_id": "sess-006",
+            "agent_id": "cfo-fic",
+            "requires_action": {"type": "approval", "summary": "Teste"},
+        },
+    )
+    approval_id = r.json()["approval_id"]
+
+    resp = client.post(
+        f"/webhooks/approval/{approval_id}",
+        json={"approval_request_id": approval_id, "decision": "talvez", "user_id": "marcelo"},
+    )
+    assert resp.status_code == 422
+
+
 def test_status_idled_without_requires_action(client):
     """status-idled sem requires_action ainda deve funcionar."""
     resp = client.post(
         "/webhooks/status-idled",
-        json={"session_id": "sess-006", "agent_id": "claudinho"},
+        json={"session_id": "sess-007", "agent_id": "claudinho"},
     )
     assert resp.status_code == 200
     assert "approval_id" in resp.json()
