@@ -15,14 +15,14 @@ export function generateDEKRaw(): Uint8Array {
 export async function wrapDEK(dekRaw: Uint8Array, kekRaw: Uint8Array): Promise<Uint8Array> {
   let kek: CryptoKey;
   try {
-    kek = await crypto.subtle.importKey('raw', kekRaw, 'AES-KW', false, ['wrapKey']);
+    kek = await crypto.subtle.importKey('raw', kekRaw as BufferSource, 'AES-KW', false, ['wrapKey']);
   } catch (e) {
     throw new KeyError(`Failed to import KEK: ${String(e)}`);
   }
 
   const dekKey = await crypto.subtle.importKey(
     'raw',
-    dekRaw,
+    dekRaw as BufferSource,
     { name: 'AES-GCM', length: 256 },
     true, // exportable para wrapping
     ['encrypt', 'decrypt'],
@@ -45,7 +45,7 @@ export async function wrapDEK(dekRaw: Uint8Array, kekRaw: Uint8Array): Promise<U
 export async function unwrapDEK(wrappedDEK: Uint8Array, kekRaw: Uint8Array): Promise<Uint8Array> {
   let kek: CryptoKey;
   try {
-    kek = await crypto.subtle.importKey('raw', kekRaw, 'AES-KW', false, ['unwrapKey']);
+    kek = await crypto.subtle.importKey('raw', kekRaw as BufferSource, 'AES-KW', false, ['unwrapKey']);
   } catch (e) {
     throw new KeyError(`Failed to import KEK for unwrap: ${String(e)}`);
   }
@@ -54,7 +54,7 @@ export async function unwrapDEK(wrappedDEK: Uint8Array, kekRaw: Uint8Array): Pro
   try {
     dekKey = await crypto.subtle.unwrapKey(
       'raw',
-      wrappedDEK,
+      wrappedDEK as BufferSource,
       kek,
       'AES-KW',
       { name: 'AES-GCM', length: 256 },

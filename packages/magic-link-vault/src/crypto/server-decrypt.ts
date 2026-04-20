@@ -13,7 +13,7 @@ function base64ToUint8Array(b64: string): Uint8Array {
 export async function importDEKForDecrypt(rawKey: Uint8Array): Promise<CryptoKey> {
   return crypto.subtle.importKey(
     'raw',
-    rawKey,
+    rawKey as BufferSource,
     { name: 'AES-GCM', length: 256 },
     false,
     ['decrypt'],
@@ -35,9 +35,9 @@ export async function decryptServerSide(
   let plainBuffer: ArrayBuffer;
   try {
     plainBuffer = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv, tagLength: 128 },
+      { name: 'AES-GCM', iv: iv as BufferSource, tagLength: 128 },
       key,
-      ciphertext,
+      ciphertext as BufferSource,
     );
   } catch {
     // GCM auth tag verification failed — ciphertext tampered
