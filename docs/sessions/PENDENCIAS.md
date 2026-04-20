@@ -31,6 +31,10 @@
 | P-010 | F1-S01 | config | high | Registrar webhook no Meta WABA Dashboard: URL `https://<railway-url>/webhooks/whatsapp` + verify token `ecossistema-whatsapp-verify` + subscribe `messages` | HITL inbound WA não funciona | 2026-04-19 |
 | P-017 | S08+S12 | config | med | Ativar `webhook_targets` (setar `is_active=true`, URLs Railway reais e secrets) para Inter, BRy, Stripe, Evolution conforme cada provider for integrado | uso de `webhook-hardening` em produção | 2026-04-18 |
 | P-018 | S08 | refactor | low | `drain_dual_write_queue()` suporta apenas `insert` no ECOSYSTEM. Para upsert/update/delete ou mirrors cross-project (Intentus), criar `drain-mirror-queue` EF que usa `INTENTUS_SERVICE_ROLE_KEY` | resiliência total de mirror fails | 2026-04-18 |
+| P-019 | Diploma-0 | seed | crit | Fornecer e-mails dos 4 assinantes FIC (LUCIMAR, ALECIANA, MARCELO, eCNPJ FIC) e cadastrá-los via `/diploma/assinantes` com email preenchido — BRy Easy Signer exige email para enviar link | fluxo de assinatura BRy inteiro | 2026-04-17 |
+| P-020 | Diploma-0 | config | crit | Confirmar que `BRY_CLIENT_ID` e `BRY_CLIENT_SECRET` estão setadas na Vercel (projeto `diploma-digital`) para o ambiente de Produção — sem isso `bry_configurado` retorna false e nenhuma assinatura XML funciona | assinatura XAdES diplomas | 2026-04-17 |
+| P-021 | Diploma-0 | seed | crit | Apagar diploma da Kauana (`5e197846-8d55-4105-94db-b15ce99bf69b`) do banco e reprocessar do zero — hoje está com status falso (`aguardando_envio_registradora`) mas XMLs nunca foram assinados | piloto real E2E | 2026-04-17 |
+| P-022 | Diploma-0 | feature | high | Implementar geração real de PDFs: Histórico Escolar, Termo de Expedição, Termo de Registro. Marcelo tem layouts (um já no sistema em Configurações > visual de histórico). Discutir modelo antes de implementar | Fase 0.4 — bloqueia P-021 | 2026-04-17 |
 
 ## Resolvidas
 
