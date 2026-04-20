@@ -60,13 +60,18 @@ copiar manualmente — OK para FIC single-tenant, upgrade para Fase 2 SaaS.
 - [x] Modal criar novo cargo
 - [x] Presets system exibem badge "preset" com cadeado e matrix readOnly
 
-### ⏳ Fase 4 — UI Usuários + Equipes
+### ✅ Fase 4 — UI Usuários + Equipes (2026-04-21)
 
-- [ ] Rota `/atendimento/configuracoes/usuarios/page.tsx`
-- [ ] Modal "Convidar usuário" (email + cargo + equipe opcional)
-- [ ] Rota `/atendimento/configuracoes/equipes/page.tsx`
-- [ ] Modal criar/editar equipe (nome + cor + membros multi-select)
-- [ ] Status realtime (`agent_statuses`)
+- [x] `GET /api/atendimento/users` + `PATCH/DELETE /api/atendimento/users/[id]`
+- [x] Rota `/atendimento/configuracoes/usuarios/page.tsx`:
+  - Tabela convites pendentes (email, cargo, equipe, expira, revogar)
+  - Tabela usuários ativos (avatar, cargo inline-edit, equipes, status color dot, soft-disable)
+  - Modal "Convidar usuário" — gera token, exibe accept_url para copiar
+- [x] Rota `/atendimento/configuracoes/equipes/page.tsx`:
+  - Cards de equipes com cor + contagem de membros
+  - Modal criar/editar (nome + descrição + 8 cores preset + multi-select de agents)
+  - Diff de membros no save (add/remove seletivo)
+- [ ] Status "realtime" — hoje lê `availability_status` do snapshot. Upgrade com `agent_statuses` + Supabase Realtime fica para Fase 2.
 
 ### ⏳ Fase 5 — Testes + PR
 
