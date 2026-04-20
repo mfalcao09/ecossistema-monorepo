@@ -1,36 +1,42 @@
 /**
  * @ecossistema/billing
  *
- * Motor de cobrança reutilizável. Lógica genérica (Inter, idempotência, webhook HMAC)
- * vive aqui no ECOSYSTEM. Dados específicos (aluno, comprador) ficam no DB do projeto.
+ * Motor de cobrança reutilizável. Banco Inter (OAuth2 + Cobrança v3 + Banking v2),
+ * idempotência em Supabase, HMAC de webhook, MCP tools.
  *
- * Responsável: Sessão D (docs/sessions/BRIEFING-SESSAO-D-billing.md)
+ * F1-S02 · Fase 1 · docs/sessions/BRIEFING-SESSAO-D-billing.md
  */
 
-export interface InterClientOptions {
-  clientId: string;
-  clientSecret: string;
-  certPath: string;
-  sandbox: boolean;
-}
+export {
+  InterClient,
+  createInterClient,
+} from './inter-client.js';
 
-export interface BoletoInput {
-  alunoId: string;
-  mesRef: string;   // 'YYYY-MM'
-  valor: number;
-  vencimento: Date;
-  descricao: string;
-}
+export {
+  checkIdempotency,
+  setIdempotency,
+  supabaseIdempotencyStore,
+} from './idempotency.js';
 
-// STUB — Sessão D implementa
-export function createInterClient(_opts: InterClientOptions) {
-  throw new Error('Not implemented — Sessão D deve completar (ver BRIEFING-SESSAO-D-billing.md)');
-}
+export {
+  verifyInterWebhook,
+  signInterPayload,
+} from './webhook.js';
 
-export async function emitirBoleto(_input: BoletoInput) {
-  throw new Error('Not implemented — Sessão D');
-}
+export {
+  billingMcpTools,
+  type McpTool,
+  type BillingMcpDeps,
+} from './mcp-tools.js';
 
-export function validarHmac(_payload: string, _signature: string, _secret: string): boolean {
-  throw new Error('Not implemented — Sessão D');
-}
+export {
+  InterApiError,
+  type Boleto,
+  type BoletoInput,
+  type IdempotencyEntry,
+  type IdempotencyStore,
+  type InterClientOptions,
+  type Pagador,
+  type SaldoConta,
+  type WebhookVerifyInput,
+} from './types.js';
