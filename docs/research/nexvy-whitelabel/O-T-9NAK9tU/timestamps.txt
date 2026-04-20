@@ -1,0 +1,30 @@
+É claro, aqui está um mapeamento EXAUSTIVO dos momentos importantes do vídeo:
+[00:00] Início do vídeo, tela da plataforma DKW com chat de atendimento.
+[00:09] Cliente Rafael inicia conversa perguntando sobre White Label.
+[00:15] IA responde com funil de voz automatizado.
+[00:27] IA envia áudios, cliente também envia áudios.
+[00:29] IA responde em blocos de texto, humanizado.
+[00:51] Cliente pergunta se a ferramenta é de IA, sem perceber que é a IA que está respondendo.
+[01:04] Cliente informa que tem 5 clientes ativos.
+[01:14] Cliente informa sobre 3 projetos e ser mentor.
+[01:21] IA faz mais perguntas para o cliente sobre o foco da operação.
+[01:27] Cliente fala sobre automação e IA.
+[01:38] IA responde sobre automação e IA.
+[01:47] IA continua a responder de forma humanizada.
+[02:04] Cliente fala que quer marcar uma reunião.
+[02:25] IA responde que vai conectá-lo com um especialista.
+[02:49] IA adiciona a tag "CLIENTE POTENCIAL" automaticamente ao lead.
+[03:17] Cliente precisa de resposta no mesmo dia.
+[03:22] IA responde que vai agilizar a conexão com um especialista.
+[03:36] IA arrasta o cliente no Kanban automaticamente.
+[03:57] IA tem uma narrativa melhor que o SDR por texto.
+[04:17] Tela de edição do Agente DS (IA).
+[04:22] Lista de Agentes DS.
+[04:25] Configuração do Agente "IA - BENDER" (prompt).
+[04:28] Opções de automação: adicionar tag, transferir fila, enviar horários disponíveis.
+[04:44] Opções de automação: enviar funil DS Voice, criar card no CRM, transferir coluna no CRM.
+[05:13] Base de conhecimento em PDF.
+[05:19] Teste do Agente, mostrando as respostas da IA.
+[05:21] Exemplo do prompt de qualificação da IA.
+[05:30] Configurações de resposta da IA: tokens, delay para mensagens.
+[06:04] Fim do vídeo.

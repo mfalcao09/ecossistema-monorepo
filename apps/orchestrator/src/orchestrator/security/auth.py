@@ -30,7 +30,7 @@ def _verify_owner_token(token: str, expected_hash: str) -> bool:
 def _verify_jwt(token: str, secret: str) -> dict | None:
     """Verifica JWT e retorna payload. Retorna None se inválido."""
     try:
-        from jose import jwt, JWTError
+        from jose import jwt
         payload = jwt.decode(token, secret, algorithms=["HS256"])
         return payload
     except Exception:

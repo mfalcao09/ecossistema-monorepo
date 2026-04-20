@@ -1,0 +1,24 @@
+{
+  "name": "@ecossistema/e2e-fase0",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Validação E2E completa da Fase 0 do Ecossistema",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "test:local": "vitest run --reporter=verbose 00-infrastructure-health.spec.ts 01-packages-loadable.spec.ts 03-hooks-enforcement.spec.ts 07-csuite-template-instantiation.spec.ts",
+    "test:infra": "vitest run --reporter=verbose 00-infrastructure-health.spec.ts 02-migrations-applied.spec.ts 04-sc29-mode-b.spec.ts 05-memory-roundtrip.spec.ts 06-orchestrator-agents.spec.ts 08-cfo-fic-pilot-dry-run.spec.ts 09-observability-chain.spec.ts 10-jornada-marcelo-completa.spec.ts"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "execa": "^9.6.1",
+    "js-yaml": "^4.1.1",
+    "typescript": "^5.5.0",
+    "vitest": "^2.1.9"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.55.0",
+    "@supabase/supabase-js": "^2.45.0"
+  }
+}

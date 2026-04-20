@@ -1,0 +1,33 @@
+Claro! Aqui está o mapeamento detalhado do vídeo:
+
+[00:00] Título do vídeo: "Produtos - Exportação e origem de leads".
+[00:05] O apresentador José Henrique, Analista de Sucesso do Cliente, inicia a apresentação sobre como a plataforma pode auxiliar na gestão de leads.
+[00:46] A tela inicial da plataforma Helena é exibida, mostrando o painel de "Classificação de atendimentos" com as categorias "Objetivo atingido", "Objetivo perdido", "Dúvida" e "Outro".
+[00:47] O apresentador clica em "Relatórios" no menu superior.
+[00:48] O apresentador seleciona "Indicadores" no menu suspenso.
+[00:50] A aba "Resultados" é destacada, mostrando o filtro de período "01/06/2025 - 30/06/2025".
+[01:05] A tela rola para baixo, revelando a seção "Anúncios" com colunas como "Origem", "Anúncio", "Atendimentos", "Objetivo Atingido", "Objetivo Perdido" e "% do Total".
+[01:31] O apresentador clica no ícone "Abrir anúncio" ao lado do anúncio "Venda pelo WhatsApp automaticamente".
+[01:46] O apresentador destaca as colunas "Objetivo Atingido" e "Objetivo Perdido".
+[02:05] A coluna "% do Total" é destacada, mostrando a porcentagem de resultados da campanha "Vinda mais pelo WhatsApp" (77,21%).
+[02:28] O apresentador retoma a fala, reforçando a importância do menu "Relatórios" para acompanhar os resultados das campanhas.
+[02:44] O apresentador explica que é possível acompanhar a origem dos leads através do atendimento.
+[02:59] A tela exibe uma conversa em andamento na plataforma Helena com "Pedro Augusto", mostrando o "Rastreamento do atendimento" no centro da tela.
+[03:17] A seção "Rastreamento" é destacada, mostrando "Origem: TIKTOK", "Campanha: FAMILIA", "Headline: Olá quero saber mais" e "Meio: POST".
+[03:33] O apresentador clica no ícone "Ver detalhes do contato" ao lado do nome "Pedro Augusto".
+[03:36] A tela "Dados do contato" é exibida, mostrando informações como telefone, e-mail e etiquetas.
+[03:40] A barra de rolagem é movida para baixo, exibindo o campo "Origem".
+[03:43] Ao clicar em "Origem", é revelado "YOUTUBE" e "CAMPANHA: FÃS DE MARILIA".
+[03:50] O apresentador explica a possibilidade de exportar informações para análise e comparação.
+[04:05] O apresentador clica em "Relatórios" no menu superior.
+[04:06] O apresentador seleciona "Atendimentos" no menu suspenso.
+[04:08] A tela "Relatório de atendimentos" é exibida, com opções de filtro e um botão "Exportar".
+[04:16] O apresentador clica no botão "Exportar".
+[04:18] Uma janela pop-up "Exportar" é exibida, com as opções "Exportar relatório" e "Exportar mensagens".
+[04:21] O apresentador seleciona "Exportar relatórios" e clica em "Exportar".
+[04:24] Uma notificação de "Exportação de atendimentos" aparece, indicando o progresso do download.
+[04:28] O apresentador clica no ícone de notificações.
+[04:30] O apresentador clica na notificação de exportação concluída.
+[04:32] A tela mostra uma planilha Excel com o "Relatório de atendimentos", exibindo diversas colunas, incluindo informações sobre a origem e UTM dos leads.
+[04:40] A coluna "W" da planilha é destacada, mostrando "UTM/Campanha", "UTM/Título", "UTM/Conteúdo" e "UTM/Referral" com os respectivos dados.
+[04:52] O apresentador finaliza o vídeo, lembrando sobre a comunidade e o suporte disponível.

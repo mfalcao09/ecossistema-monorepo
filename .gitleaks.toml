@@ -1,0 +1,39 @@
+[allowlist]
+description = "Arquivos com exemplos ou placeholders permitidos"
+paths = [
+  '''\.md$''',
+  '''templates/''',
+  '''fixtures/mock-responses\.ts$''',
+  '''\.example$''',
+  '''\.env\.example$''',
+]
+
+[[rules]]
+id = "anthropic-key"
+description = "Anthropic API key"
+regex = '''sk-ant-[a-zA-Z0-9_-]{30,}'''
+tags = ["key", "anthropic"]
+
+[[rules]]
+id = "openai-key"
+description = "OpenAI API key"
+regex = '''sk-[a-zA-Z0-9]{32,}'''
+tags = ["key", "openai"]
+
+[[rules]]
+id = "supabase-service-role"
+description = "Supabase service role JWT"
+regex = '''eyJ[A-Za-z0-9-_]+\.eyJ[A-Za-z0-9-_]+\.[A-Za-z0-9-_]{10,}'''
+tags = ["key", "supabase"]
+
+[[rules]]
+id = "railway-token"
+description = "Railway API token"
+regex = '''[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}'''
+tags = ["key", "railway"]
+
+[[rules]]
+id = "generic-secret"
+description = "Chave com padrão secret= ou key="
+regex = '''(?i)(secret|api_key|apikey|access_token|auth_token)\s*=\s*['""][a-zA-Z0-9_\-\.]{20,}['""]'''
+tags = ["key", "generic"]
