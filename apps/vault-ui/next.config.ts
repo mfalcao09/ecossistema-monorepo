@@ -1,4 +1,4 @@
-import type { NextConfig } from 'next';
+import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
   // P-013: CSP restritivo em todas as rotas /vault/*
@@ -7,10 +7,10 @@ const nextConfig: NextConfig = {
   async headers() {
     return [
       {
-        source: '/vault/:path*',
+        source: "/vault/:path*",
         headers: [
           {
-            key: 'Content-Security-Policy',
+            key: "Content-Security-Policy",
             value: [
               "default-src 'self'",
               "script-src 'self' 'unsafe-inline'", // unsafe-inline necessário para Next.js inline scripts
@@ -18,39 +18,39 @@ const nextConfig: NextConfig = {
               "img-src 'self' data:",
               "font-src 'self'",
               "connect-src 'self'",
-              "frame-ancestors 'none'",          // previne clickjacking
+              "frame-ancestors 'none'", // previne clickjacking
               "form-action 'self'",
               "base-uri 'self'",
-            ].join('; '),
+            ].join("; "),
           },
           {
-            key: 'X-Frame-Options',
-            value: 'DENY',
+            key: "X-Frame-Options",
+            value: "DENY",
           },
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Referrer-Policy',
-            value: 'no-referrer',
+            key: "Referrer-Policy",
+            value: "no-referrer",
           },
           {
-            key: 'Permissions-Policy',
-            value: 'camera=(), microphone=(), geolocation=()',
+            key: "Permissions-Policy",
+            value: "camera=(), microphone=(), geolocation=()",
           },
         ],
       },
       {
-        source: '/api/vault/:path*',
+        source: "/api/vault/:path*",
         headers: [
           {
-            key: 'X-Content-Type-Options',
-            value: 'nosniff',
+            key: "X-Content-Type-Options",
+            value: "nosniff",
           },
           {
-            key: 'Cache-Control',
-            value: 'no-store, no-cache, must-revalidate',
+            key: "Cache-Control",
+            value: "no-store, no-cache, must-revalidate",
           },
         ],
       },

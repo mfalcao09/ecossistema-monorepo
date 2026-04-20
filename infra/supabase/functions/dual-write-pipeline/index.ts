@@ -16,7 +16,8 @@ function getClientForProject(project: string): SupabaseClient {
   if (project === "ecosystem") return getAdmin();
   const envKey = `${project.toUpperCase()}_SERVICE_ROLE_KEY`;
   const key = Deno.env.get(envKey);
-  if (!key) throw new Error(`Missing env var ${envKey} for project '${project}'`);
+  if (!key)
+    throw new Error(`Missing env var ${envKey} for project '${project}'`);
   const { ref } = JSON.parse(atob(key.split(".")[1])) as { ref: string };
   return createClient(`https://${ref}.supabase.co`, key, {
     auth: { persistSession: false, autoRefreshToken: false },
@@ -25,12 +26,12 @@ function getClientForProject(project: string): SupabaseClient {
 }
 
 interface WriteSpec {
-  project: string;         // ref do projeto Supabase (para audit) — client é sempre service-role atual
+  project: string; // ref do projeto Supabase (para audit) — client é sempre service-role atual
   table: string;
   op: Op;
   payload: Record<string, unknown> | Record<string, unknown>[];
-  match?: Record<string, unknown>;      // para update/delete
-  on_conflict?: string;                 // para upsert
+  match?: Record<string, unknown>; // para update/delete
+  on_conflict?: string; // para upsert
 }
 
 interface DualWriteBody {
@@ -49,7 +50,10 @@ async function executeSpec(supabase: SupabaseClient, spec: WriteSpec) {
     return;
   }
   if (spec.op === "upsert") {
-    const { error } = await t.upsert(spec.payload, spec.on_conflict ? { onConflict: spec.on_conflict } : undefined);
+    const { error } = await t.upsert(
+      spec.payload,
+      spec.on_conflict ? { onConflict: spec.on_conflict } : undefined,
+    );
     if (error) throw new Error(error.message);
     return;
   }
@@ -81,14 +85,17 @@ Deno.serve(async (req) => {
   if (!ctx) return errors.unauthorized();
 
   const body = await readJson<DualWriteBody>(req);
-  if (!body.idempotency_key) return errors.badRequest("idempotency_key required");
+  if (!body.idempotency_key)
+    return errors.badRequest("idempotency_key required");
   if (!body.pipeline_id) return errors.badRequest("pipeline_id required");
   if (!body.primary) return errors.badRequest("primary spec required");
 
   // 1) Idempotency check
-  const { data: existing } = await supabase.from("dual_write_log")
+  const { data: existing } = await supabase
+    .from("dual_write_log")
     .select("idempotency_key, primary_status, mirror_status, completed_at")
-    .eq("idempotency_key", body.idempotency_key).maybeSingle();
+    .eq("idempotency_key", body.idempotency_key)
+    .maybeSingle();
   if (existing) {
     return ok({
       idempotent: true,
@@ -112,13 +119,28 @@ Deno.serve(async (req) => {
   // 3) Execute primary
   try {
     await executeSpec(supabase, body.primary);
-    await supabase.from("dual_write_log").update({ primary_status: "ok" }).eq("idempotency_key", body.idempotency_key);
+    await supabase
+      .from("dual_write_log")
+      .update({ primary_status: "ok" })
+      .eq("idempotency_key", body.idempotency_key);
   } catch (e) {
     const msg = (e as Error).message;
-    await supabase.from("dual_write_log").update({ primary_status: "fail", primary_error: msg, completed_at: new Date().toISOString() }).eq("idempotency_key", body.idempotency_key);
+    await supabase
+      .from("dual_write_log")
+      .update({
+        primary_status: "fail",
+        primary_error: msg,
+        completed_at: new Date().toISOString(),
+      })
+      .eq("idempotency_key", body.idempotency_key);
     await writeAuditLog(supabase, {
-      agent_id: ctx.principal_id, tool_name: "dual-write-pipeline", action: "primary",
-      success: false, severity: "error", article_ref: "SC-03", duration_ms: timer(),
+      agent_id: ctx.principal_id,
+      tool_name: "dual-write-pipeline",
+      action: "primary",
+      success: false,
+      severity: "error",
+      article_ref: "SC-03",
+      duration_ms: timer(),
       metadata: { pipeline_id: body.pipeline_id, error: msg },
     });
     return errors.internal("primary write failed", msg);
@@ -169,19 +191,30 @@ Deno.serve(async (req) => {
     }
   }
 
-  await supabase.from("dual_write_log").update({
-    mirror_status: mirrorStatus,
-    mirror_error: mirrorError,
-    completed_at: new Date().toISOString(),
-  }).eq("idempotency_key", body.idempotency_key);
+  await supabase
+    .from("dual_write_log")
+    .update({
+      mirror_status: mirrorStatus,
+      mirror_error: mirrorError,
+      completed_at: new Date().toISOString(),
+    })
+    .eq("idempotency_key", body.idempotency_key);
 
   await writeAuditLog(supabase, {
-    agent_id: ctx.principal_id, tool_name: "dual-write-pipeline", action: "dual_write",
-    success: mirrorStatus !== "fail", severity: mirrorStatus === "fail" ? "warning" : "info",
-    article_ref: "SC-03", duration_ms: timer(),
+    agent_id: ctx.principal_id,
+    tool_name: "dual-write-pipeline",
+    action: "dual_write",
+    success: mirrorStatus !== "fail",
+    severity: mirrorStatus === "fail" ? "warning" : "info",
+    article_ref: "SC-03",
+    duration_ms: timer(),
     metadata: {
       pipeline_id: body.pipeline_id,
-      primary: { project: body.primary.project, table: body.primary.table, op: body.primary.op },
+      primary: {
+        project: body.primary.project,
+        table: body.primary.table,
+        op: body.primary.op,
+      },
       mirror_status: mirrorStatus,
       mirror_error: mirrorError,
     },

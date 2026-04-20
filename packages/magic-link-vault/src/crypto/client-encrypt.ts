@@ -1,5 +1,5 @@
-import type { EncryptedPayload } from '../types.js';
-import { CryptoError } from '../errors.js';
+import type { EncryptedPayload } from "../types.js";
+import { CryptoError } from "../errors.js";
 
 export function arrayBufferToBase64(buf: ArrayBuffer): string {
   return btoa(String.fromCharCode(...new Uint8Array(buf)));
@@ -16,11 +16,11 @@ export function base64ToArrayBuffer(b64: string): ArrayBuffer {
 
 export async function importDEK(rawKey: ArrayBuffer): Promise<CryptoKey> {
   return crypto.subtle.importKey(
-    'raw',
+    "raw",
     rawKey,
-    { name: 'AES-GCM', length: 256 },
+    { name: "AES-GCM", length: 256 },
     false,
-    ['encrypt'],
+    ["encrypt"],
   );
 }
 
@@ -34,7 +34,7 @@ export async function encryptClientSide(
   let ciphertext: ArrayBuffer;
   try {
     ciphertext = await crypto.subtle.encrypt(
-      { name: 'AES-GCM', iv, tagLength: 128 },
+      { name: "AES-GCM", iv, tagLength: 128 },
       dek,
       encoder.encode(plaintext),
     );
@@ -45,7 +45,7 @@ export async function encryptClientSide(
   return {
     ciphertext: arrayBufferToBase64(ciphertext), // inclui auth tag GCM nos últimos 16 bytes
     iv: arrayBufferToBase64(iv.buffer),
-    algorithm: 'AES-256-GCM',
-    version: '1',
+    algorithm: "AES-256-GCM",
+    version: "1",
   };
 }

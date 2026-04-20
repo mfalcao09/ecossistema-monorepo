@@ -1,7 +1,8 @@
-import type { VaultProject } from '../types.js';
-import { TokenError } from '../errors.js';
+import type { VaultProject } from "../types.js";
+import { TokenError } from "../errors.js";
 
-const URL_SAFE_CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_';
+const URL_SAFE_CHARS =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_";
 const DEFAULT_TTL_MINUTES = 15;
 const MAX_TTL_MINUTES = 60;
 
@@ -9,7 +10,7 @@ export function generateTokenString(length = 32): string {
   const bytes = crypto.getRandomValues(new Uint8Array(length));
   return Array.from(bytes)
     .map((b) => URL_SAFE_CHARS[b % URL_SAFE_CHARS.length])
-    .join('');
+    .join("");
 }
 
 export interface NewTokenParams {
@@ -34,7 +35,9 @@ export interface NewToken {
 export function buildNewToken(params: NewTokenParams): NewToken {
   const ttl = params.ttl_minutes ?? DEFAULT_TTL_MINUTES;
   if (ttl < 1 || ttl > MAX_TTL_MINUTES) {
-    throw new TokenError(`ttl_minutes must be between 1 and ${MAX_TTL_MINUTES}`);
+    throw new TokenError(
+      `ttl_minutes must be between 1 and ${MAX_TTL_MINUTES}`,
+    );
   }
 
   const expires_at = new Date(Date.now() + ttl * 60 * 1000);

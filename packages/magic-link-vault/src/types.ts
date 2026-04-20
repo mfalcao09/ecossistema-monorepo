@@ -1,16 +1,16 @@
 export type VaultProject =
-  | 'ecosystem'
-  | 'fic'
-  | 'klesis'
-  | 'intentus'
-  | 'splendori'
-  | 'nexvy';
+  | "ecosystem"
+  | "fic"
+  | "klesis"
+  | "intentus"
+  | "splendori"
+  | "nexvy";
 
 export interface EncryptedPayload {
-  ciphertext: string;   // base64 — inclui auth tag GCM (últimos 16 bytes)
-  iv: string;           // base64 — 96 bits (12 bytes)
-  algorithm: 'AES-256-GCM';
-  version: '1';
+  ciphertext: string; // base64 — inclui auth tag GCM (últimos 16 bytes)
+  iv: string; // base64 — 96 bits (12 bytes)
+  algorithm: "AES-256-GCM";
+  version: "1";
 }
 
 export interface VaultToken {

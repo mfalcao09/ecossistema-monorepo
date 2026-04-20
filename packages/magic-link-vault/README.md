@@ -53,16 +53,16 @@ Agent gera URL → Marcelo abre no browser → secret é **cifrado no browser** 
 
 ## Modelo de segurança
 
-| Ameaça | Mitigação |
-|---|---|
-| Secret via chat | Tool só retorna URL — nunca o valor |
-| Intercepção HTTPS | AES-256-GCM cifra o plaintext ANTES de sair do browser |
-| Replay de token | Token one-time: invalidado no primeiro uso |
-| Token expirado | TTL 15min; índice `vault_tokens_exp_idx` para purge eficiente |
-| KEK comprometida | KEK em Supabase Vault (`vault.decrypted_secrets`), nunca em env var |
-| Log do secret | Audit log registra apenas `sha256(ciphertext)`, nunca o plaintext |
-| Ciphertext adulterado | GCM auth tag (128 bits) detecta qualquer alteração |
-| Brute force de tokens | Rate limit no Supabase Dashboard (a configurar) |
+| Ameaça                | Mitigação                                                           |
+| --------------------- | ------------------------------------------------------------------- |
+| Secret via chat       | Tool só retorna URL — nunca o valor                                 |
+| Intercepção HTTPS     | AES-256-GCM cifra o plaintext ANTES de sair do browser              |
+| Replay de token       | Token one-time: invalidado no primeiro uso                          |
+| Token expirado        | TTL 15min; índice `vault_tokens_exp_idx` para purge eficiente       |
+| KEK comprometida      | KEK em Supabase Vault (`vault.decrypted_secrets`), nunca em env var |
+| Log do secret         | Audit log registra apenas `sha256(ciphertext)`, nunca o plaintext   |
+| Ciphertext adulterado | GCM auth tag (128 bits) detecta qualquer alteração                  |
+| Brute force de tokens | Rate limit no Supabase Dashboard (a configurar)                     |
 | Agente não autorizado | ACL em `ecosystem_credentials` verificada pela EF `retrieve-secret` |
 
 ---
@@ -121,7 +121,9 @@ VAULT_KEK_HEX=<64-char hex — 256 bits — gerado uma vez com crypto.getRandomV
 
 ```typescript
 const kek = crypto.getRandomValues(new Uint8Array(32));
-const kekHex = Array.from(kek).map(b => b.toString(16).padStart(2, '0')).join('');
+const kekHex = Array.from(kek)
+  .map((b) => b.toString(16).padStart(2, "0"))
+  .join("");
 console.log(kekHex); // salvar no Supabase Vault imediatamente
 ```
 
@@ -156,6 +158,7 @@ supabase db push --project-ref gqckbunsfjgerbuiyzvn
 ## Integração SC-29 Modo B
 
 A EF `retrieve-secret` recebe:
+
 ```json
 {
   "credential_name": "INTER_CLIENT_SECRET",

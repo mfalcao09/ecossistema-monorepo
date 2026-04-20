@@ -23,10 +23,17 @@ Deno.serve(async (req: Request) => {
   const supabase = getAdmin();
 
   // Rate limit: 20 tokens/min por agente
-  const rl = await hitLimit(supabase, `vault-create-token:${authCtx.principal_id}`, "rpm", 20);
+  const rl = await hitLimit(
+    supabase,
+    `vault-create-token:${authCtx.principal_id}`,
+    "rpm",
+    20,
+  );
   if (!rl.ok) {
     return new Response(
-      JSON.stringify({ error: { code: "rate_limited", retryAfter: rl.retryAfter } }),
+      JSON.stringify({
+        error: { code: "rate_limited", retryAfter: rl.retryAfter },
+      }),
       { status: 429, headers: { ...CORS, "Content-Type": "application/json" } },
     );
   }
@@ -46,9 +53,19 @@ Deno.serve(async (req: Request) => {
     return errors.badRequest("Body JSON inválido");
   }
 
-  const { token, credential_name, project, scope, dek_wrapped, requested_by, expires_at } = body;
+  const {
+    token,
+    credential_name,
+    project,
+    scope,
+    dek_wrapped,
+    requested_by,
+    expires_at,
+  } = body;
   if (!token || !credential_name || !project || !expires_at) {
-    return errors.badRequest("token, credential_name, project, expires_at são obrigatórios");
+    return errors.badRequest(
+      "token, credential_name, project, expires_at são obrigatórios",
+    );
   }
 
   const { error: insertErr } = await supabase.from("vault_tokens").insert({

@@ -19,17 +19,41 @@ function b64ToUint8(b64: string): Uint8Array {
   return arr;
 }
 
-async function unwrapDEK(wrapped: Uint8Array, kekRaw: Uint8Array): Promise<Uint8Array> {
-  const kek = await crypto.subtle.importKey("raw", kekRaw, "AES-KW", false, ["unwrapKey"]);
-  const dekKey = await crypto.subtle.unwrapKey("raw", wrapped, kek, "AES-KW",
-    { name: "AES-GCM", length: 256 }, true, ["decrypt"]);
+async function unwrapDEK(
+  wrapped: Uint8Array,
+  kekRaw: Uint8Array,
+): Promise<Uint8Array> {
+  const kek = await crypto.subtle.importKey("raw", kekRaw, "AES-KW", false, [
+    "unwrapKey",
+  ]);
+  const dekKey = await crypto.subtle.unwrapKey(
+    "raw",
+    wrapped,
+    kek,
+    "AES-KW",
+    { name: "AES-GCM", length: 256 },
+    true,
+    ["decrypt"],
+  );
   return new Uint8Array(await crypto.subtle.exportKey("raw", dekKey));
 }
 
-async function decryptAESGCM(ciphertextB64: string, ivB64: string, dekRaw: Uint8Array): Promise<string> {
-  const key = await crypto.subtle.importKey("raw", dekRaw, { name: "AES-GCM", length: 256 }, false, ["decrypt"]);
+async function decryptAESGCM(
+  ciphertextB64: string,
+  ivB64: string,
+  dekRaw: Uint8Array,
+): Promise<string> {
+  const key = await crypto.subtle.importKey(
+    "raw",
+    dekRaw,
+    { name: "AES-GCM", length: 256 },
+    false,
+    ["decrypt"],
+  );
   const plain = await crypto.subtle.decrypt(
-    { name: "AES-GCM", iv: b64ToUint8(ivB64), tagLength: 128 }, key, b64ToUint8(ciphertextB64),
+    { name: "AES-GCM", iv: b64ToUint8(ivB64), tagLength: 128 },
+    key,
+    b64ToUint8(ciphertextB64),
   );
   return new TextDecoder().decode(plain);
 }
@@ -48,7 +72,12 @@ Deno.serve(async (req: Request) => {
     credential_name: string;
     project: string;
     agent_id: string;
-    proxy_target: { url: string; method?: string; headers?: Record<string, string>; body?: unknown };
+    proxy_target: {
+      url: string;
+      method?: string;
+      headers?: Record<string, string>;
+      body?: unknown;
+    };
   };
   try {
     body = await readJson(req);
@@ -67,24 +96,33 @@ Deno.serve(async (req: Request) => {
     .single();
 
   if (credErr || !cred?.vault_key) {
-    return errors.notFound(`Credencial ${credential_name} não encontrada ou sem vault_key`);
+    return errors.notFound(
+      `Credencial ${credential_name} não encontrada ou sem vault_key`,
+    );
   }
 
   // 2. Verifica ACL: agent_id deve ter permissão 'proxy'
-  const acl: Array<{ agent_pattern: string; allowed_scopes: string[] }> = cred.acl ?? [];
-  const allowed = acl.some((e) =>
-    new RegExp(`^${e.agent_pattern.replace("*", ".*")}$`).test(agent_id) &&
-    e.allowed_scopes.includes("proxy"),
+  const acl: Array<{ agent_pattern: string; allowed_scopes: string[] }> =
+    cred.acl ?? [];
+  const allowed = acl.some(
+    (e) =>
+      new RegExp(`^${e.agent_pattern.replace("*", ".*")}$`).test(agent_id) &&
+      e.allowed_scopes.includes("proxy"),
   );
   if (!allowed) {
-    return errors.forbidden("acl_denied", `Agent ${agent_id} sem permissão 'proxy' para ${credential_name}`);
+    return errors.forbidden(
+      "acl_denied",
+      `Agent ${agent_id} sem permissão 'proxy' para ${credential_name}`,
+    );
   }
 
   // 3. Unwrap DEK com KEK (secret VAULT_KEK_HEX — nunca em env raw)
   const kekHex = Deno.env.get("VAULT_KEK_HEX");
   if (!kekHex) return errors.internal("KEK não configurada");
 
-  const kekRaw = new Uint8Array(kekHex.match(/.{2}/g)!.map((h) => parseInt(h, 16)));
+  const kekRaw = new Uint8Array(
+    kekHex.match(/.{2}/g)!.map((h) => parseInt(h, 16)),
+  );
   const wrappedBytes = new Uint8Array(cred.dek_wrapped as unknown as number[]);
 
   let dekRaw: Uint8Array;
@@ -125,8 +163,17 @@ Deno.serve(async (req: Request) => {
     tool_name: "retrieve-secret",
     success: proxyResp.ok,
     duration_ms: timer(),
-    metadata: { credential: credential_name, project, proxy_url: proxy_target.url, proxy_status: proxyResp.status, mode: "B" },
+    metadata: {
+      credential: credential_name,
+      project,
+      proxy_url: proxy_target.url,
+      proxy_status: proxyResp.status,
+      mode: "B",
+    },
   });
 
-  return ok({ status: proxyResp.status, ok: proxyResp.ok, body: proxyBody }, CORS);
+  return ok(
+    { status: proxyResp.status, ok: proxyResp.ok, body: proxyBody },
+    CORS,
+  );
 });

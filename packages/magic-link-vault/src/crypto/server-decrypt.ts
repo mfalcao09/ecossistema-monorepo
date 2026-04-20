@@ -1,5 +1,5 @@
-import type { EncryptedPayload } from '../types.js';
-import { CryptoError } from '../errors.js';
+import type { EncryptedPayload } from "../types.js";
+import { CryptoError } from "../errors.js";
 
 function base64ToUint8Array(b64: string): Uint8Array {
   const binary = atob(b64);
@@ -10,13 +10,15 @@ function base64ToUint8Array(b64: string): Uint8Array {
   return arr;
 }
 
-export async function importDEKForDecrypt(rawKey: Uint8Array): Promise<CryptoKey> {
+export async function importDEKForDecrypt(
+  rawKey: Uint8Array,
+): Promise<CryptoKey> {
   return crypto.subtle.importKey(
-    'raw',
+    "raw",
     rawKey as BufferSource,
-    { name: 'AES-GCM', length: 256 },
+    { name: "AES-GCM", length: 256 },
     false,
-    ['decrypt'],
+    ["decrypt"],
   );
 }
 
@@ -24,7 +26,7 @@ export async function decryptServerSide(
   payload: EncryptedPayload,
   dekRaw: Uint8Array,
 ): Promise<string> {
-  if (payload.algorithm !== 'AES-256-GCM') {
+  if (payload.algorithm !== "AES-256-GCM") {
     throw new CryptoError(`Unsupported algorithm: ${payload.algorithm}`);
   }
 
@@ -35,13 +37,15 @@ export async function decryptServerSide(
   let plainBuffer: ArrayBuffer;
   try {
     plainBuffer = await crypto.subtle.decrypt(
-      { name: 'AES-GCM', iv: iv as BufferSource, tagLength: 128 },
+      { name: "AES-GCM", iv: iv as BufferSource, tagLength: 128 },
       key,
       ciphertext as BufferSource,
     );
   } catch {
     // GCM auth tag verification failed — ciphertext tampered
-    throw new CryptoError('Decryption failed: auth tag mismatch or ciphertext tampered');
+    throw new CryptoError(
+      "Decryption failed: auth tag mismatch or ciphertext tampered",
+    );
   }
 
   return new TextDecoder().decode(plainBuffer);

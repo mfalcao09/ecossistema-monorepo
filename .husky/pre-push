@@ -1,0 +1,7 @@
+#!/bin/sh
+
+# Roda testes nos packages antes de push — espelha o CI (packages/** only)
+# Apps ficam de fora: têm deps nativas (canvas) e env vars que não existem localmente
+
+echo "Rodando testes dos packages..."
+pnpm --filter "./packages/**" run --if-present test

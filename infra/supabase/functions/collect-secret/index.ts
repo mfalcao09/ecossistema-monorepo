@@ -14,8 +14,13 @@ const CORS = {
 };
 
 async function sha256Hex(input: string): Promise<string> {
-  const buf = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(input));
-  return Array.from(new Uint8Array(buf)).map((b) => b.toString(16).padStart(2, "0")).join("");
+  const buf = await crypto.subtle.digest(
+    "SHA-256",
+    new TextEncoder().encode(input),
+  );
+  return Array.from(new Uint8Array(buf))
+    .map((b) => b.toString(16).padStart(2, "0"))
+    .join("");
 }
 
 Deno.serve(async (req: Request) => {
@@ -23,19 +28,37 @@ Deno.serve(async (req: Request) => {
   if (req.method !== "POST") return errors.methodNotAllowed();
 
   const supabase = getAdmin();
-  const clientIP = req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
+  const clientIP =
+    req.headers.get("x-forwarded-for")?.split(",")[0].trim() ?? "unknown";
   const timer = startTimer();
 
   // P-014: rate limit — 10 submissões por minuto por IP
-  const rl = await hitLimit(supabase, `collect-secret:ip:${clientIP}`, "rpm", 10);
+  const rl = await hitLimit(
+    supabase,
+    `collect-secret:ip:${clientIP}`,
+    "rpm",
+    10,
+  );
   if (!rl.ok) {
     return new Response(
-      JSON.stringify({ error: { code: "rate_limited", retryAfter: rl.retryAfter } }),
-      { status: 429, headers: { ...CORS, "Content-Type": "application/json", "Retry-After": String(rl.retryAfter) } },
+      JSON.stringify({
+        error: { code: "rate_limited", retryAfter: rl.retryAfter },
+      }),
+      {
+        status: 429,
+        headers: {
+          ...CORS,
+          "Content-Type": "application/json",
+          "Retry-After": String(rl.retryAfter),
+        },
+      },
     );
   }
 
-  let body: { token: string; encrypted_payload: { ciphertext: string; iv: string; algorithm?: string } };
+  let body: {
+    token: string;
+    encrypted_payload: { ciphertext: string; iv: string; algorithm?: string };
+  };
   try {
     body = await readJson(req);
   } catch {
@@ -44,7 +67,9 @@ Deno.serve(async (req: Request) => {
 
   const { token, encrypted_payload } = body;
   if (!token || !encrypted_payload?.ciphertext || !encrypted_payload?.iv) {
-    return errors.badRequest("token e encrypted_payload (ciphertext, iv) são obrigatórios");
+    return errors.badRequest(
+      "token e encrypted_payload (ciphertext, iv) são obrigatórios",
+    );
   }
 
   // 1. Valida token one-time (não-usado, não-expirado)
@@ -77,12 +102,15 @@ Deno.serve(async (req: Request) => {
   }
 
   // 3. Invalida token (one-time)
-  await supabase.from("vault_tokens").update({
-    used: true,
-    used_at: new Date().toISOString(),
-    used_from_ip: clientIP !== "unknown" ? clientIP : null,
-    used_from_ua: req.headers.get("user-agent") ?? null,
-  }).eq("token", token);
+  await supabase
+    .from("vault_tokens")
+    .update({
+      used: true,
+      used_at: new Date().toISOString(),
+      used_from_ip: clientIP !== "unknown" ? clientIP : null,
+      used_from_ua: req.headers.get("user-agent") ?? null,
+    })
+    .eq("token", token);
 
   // 4. Audit — hash do ciphertext, NUNCA o valor
   await writeAuditLog(supabase, {
@@ -93,7 +121,10 @@ Deno.serve(async (req: Request) => {
     tool_input_hash: await sha256Hex(encrypted_payload.ciphertext),
     success: true,
     duration_ms: timer(),
-    metadata: { credential: tokenRow.credential_name, project: tokenRow.project },
+    metadata: {
+      credential: tokenRow.credential_name,
+      project: tokenRow.project,
+    },
   });
 
   return ok({ status: "stored", credential: tokenRow.credential_name }, CORS);

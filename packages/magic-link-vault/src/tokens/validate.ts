@@ -1,15 +1,18 @@
-import type { VaultToken } from '../types.js';
-import { TokenError } from '../errors.js';
+import type { VaultToken } from "../types.js";
+import { TokenError } from "../errors.js";
 
-export function assertTokenValid(token: VaultToken | null | undefined, tokenStr: string): asserts token is VaultToken {
+export function assertTokenValid(
+  token: VaultToken | null | undefined,
+  tokenStr: string,
+): asserts token is VaultToken {
   if (!token) {
     throw new TokenError(`Token not found: ${tokenStr}`);
   }
   if (token.used) {
-    throw new TokenError('Token already used');
+    throw new TokenError("Token already used");
   }
   if (new Date(token.expires_at) <= new Date()) {
-    throw new TokenError('Token expired');
+    throw new TokenError("Token expired");
   }
 }
 
