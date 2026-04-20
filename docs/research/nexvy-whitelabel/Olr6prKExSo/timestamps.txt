@@ -1,0 +1,53 @@
+Aqui está uma análise detalhada do vídeo, com os momentos importantes mapeados:
+
+[00:00] Título do vídeo: "Modelo de Mensagem na Prática".
+[00:05] Apresentação da palestrante, Rafaela Mariano, Analista de Sucesso do Cliente.
+[00:11] Interface do sistema, mostrando a navegação para "Ajustes" e "Modelos de mensagem".
+[00:16] Tela de "Modelos de mensagem", mostrando a lista de modelos existentes.
+[00:20] Opções de pesquisa e filtros por tipo e canal.
+[00:25] Dropdown de "Tipos de mensagem" (Atendimento, Resposta rápida, Campanha, Sequência, Autorização).
+[00:32] Dropdown de "Canais" associados à plataforma.
+[00:37] Botões "Sincronizar" e "Novo".
+[00:45] Janela para selecionar o "Tipo de modelo de mensagem" ao criar um novo.
+[00:50] Descrição dos tipos de modelo de mensagem: Atendimento, Resposta rápida, Campanha, Sequência, Autorização.
+[01:54] Tela de configuração de um modelo de mensagem do tipo "Atendimento".
+[02:07] Opções para adicionar imagem, vídeo ou documento ao modelo.
+[02:22] Campo para escrever o texto da mensagem com parâmetros automáticos (NOME, ATENDENTE).
+[03:02] Opção para adicionar um botão à mensagem.
+[03:20] Opções de configuração do botão (Tipo: Resposta rápida, Texto do botão: Apresentação).
+[03:34] Opções de configuração de botão (Tipo: Resposta rápida, Texto do botão: Novo botão).
+[03:38] Dropdown para selecionar o tipo de botão (Resposta rápida ou Link).
+[03:52] Campo "Nome" para o modelo de mensagem.
+[04:12] Opções de "Disponibilidade" do modelo (Todas as equipes, Equipes, Geral, Equipe Única Usuário, Equipe de Contatos Privados, Somente para mim).
+[04:27] Campo "Canal" para associar o modelo a um número de telefone específico.
+[05:07] Dropdown "Categoria" para definir o tipo de custo (Utilidade ou Marketing).
+[05:15] Descrição das categorias de custo (Utilidade e Marketing).
+[06:08] Explicação sobre parâmetros automáticos (NOME e ATENDENTE).
+[06:24] Dropdown para selecionar o "Tipo" de parâmetro (Texto, Data, Hora, Data e hora, Campo personalizado).
+[06:59] Dropdown para selecionar a "Variável" de preenchimento do parâmetro (Preenchimento manual ou automático).
+[07:05] Opções de preenchimento manual e automático (Apelido do agente, Nome de conta, Nome do agente (completo), Nome do agente (primeiro nome), Nome do contato (completo), Nome do contato (primeiro nome)).
+[08:35] Campo "Exemplo de uso" para os parâmetros (NOME: Maria, ATENDENTE: João).
+[09:12] Opções de salvar o modelo (Arquivado, Rascunho, Salvar).
+[09:23] Tela de "Modelos de mensagem" mostrando o "Status" dos modelos (ATIVO, EM AVALIAÇÃO, REPROVADO).
+[09:44] Descrição dos status do modelo.
+[10:25] Retorno à tela de "Atendimentos".
+[10:33] Campo para digitar o número do cliente e iniciar a conversa.
+[10:42] Tela para selecionar o canal de atendimento (WhatsApp, Messenger, Instagram).
+[10:57] Seleção de um canal de WhatsApp.
+[11:09] Seleção da equipe para o atendimento (Equipe de Comersos Pessoais, Geral).
+[11:17] Modelos de mensagem disponíveis para o atendimento.
+[11:25] Pesquisa por modelos de mensagem, exemplo "Boas vindas".
+[11:45] Seleção do modelo "Boas vindas" e clique em "Continuar".
+[11:50] Campos para preencher os parâmetros automáticos (NOME: Rafaela, ATENDENTE: Maria).
+[12:10] Clique em "Iniciar atendimento".
+[12:15] Mensagem enviada com os parâmetros preenchidos e o status "Aguardando resposta do contato".
+[12:20] Abertura da janela de 24 horas para interação do cliente.
+[12:32] Envio de uma mensagem livre ("Sou eu?") e a indicação de que a resposta do contato é aguardada.
+[12:47] Explicação sobre a janela de 24 horas e a necessidade de o contato autorizar o atendimento.
+[13:00] Explicação da importância de aguardar a autorização do contato para a continuidade do atendimento.
+[13:17] Detalhes sobre a janela de 24 horas da Meta.
+[13:38] Reenvio de um novo modelo de mensagem após o contato não ter respondido na janela de 24 horas.
+[13:46] Reenvio da mensagem e preenchimento dos parâmetros automáticos.
+[14:10] Mensagem reenviada, reabrindo a janela de 24 horas.
+[14:18] Dica sobre cadência de atendimento, objetividade e o risco de bloqueio do número.
+[15:17] Encerramento do vídeo e agradecimento.

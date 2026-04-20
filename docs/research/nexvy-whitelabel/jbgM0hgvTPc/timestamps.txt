@@ -1,0 +1,29 @@
+[00:00] Título do vídeo
+[00:05] A apresentadora Larissa Lopes se apresenta.
+[00:18] Larissa Lopes explica a finalidade do ícone de menu e suas possibilidades.
+[00:49] Larissa Lopes fala sobre a necessidade de configurar a plataforma para o redirecionamento.
+[01:31] A tela da plataforma é apresentada, e Larissa Lopes explica onde encontrar o ícone de menu personalizado.
+[01:54] É mostrado o caminho para acessar "Ações e menus personalizados" no menu Admin.
+[02:00] A tela de "Ações e menus personalizados" é exibida, e Larissa Lopes mostra como criar um novo menu personalizado.
+[02:05] Larissa Lopes preenche o campo "Nome" para o novo menu.
+[02:10] Larissa Lopes explica que só é possível adicionar submenus dentro de categorias já existentes na plataforma.
+[02:22] Ela mostra a seleção de um ícone para o menu.
+[02:39] Larissa Lopes seleciona o comportamento do menu: "Abrir em nova aba" ou "Página interna".
+[02:51] Ela define as permissões para o menu, escolhendo quais perfis de usuário poderão visualizá-lo.
+[03:10] Larissa Lopes seleciona a categoria "Ajustes" para o menu.
+[03:17] Ela insere uma URL para o menu.
+[03:22] É mostrado como selecionar contas específicas que terão acesso ao menu.
+[03:38] O menu "Dashboard" é salvo e aparece na lista.
+[03:42] Larissa Lopes mostra como criar uma "Ação personalizada".
+[03:47] Ela preenche o campo "Nome" para a ação personalizada.
+[03:53] É mostrado a seleção de um ícone para a ação.
+[04:00] Larissa Lopes seleciona o comportamento da ação: "Abrir em nova aba", "Abrir popup" ou "Redirecionar página".
+[04:09] Ela define as permissões para a ação, escolhendo quais perfis de usuário poderão visualizá-la.
+[04:17] É mostrado as posições onde a ação personalizada pode aparecer.
+[04:26] Larissa Lopes insere uma URL para a ação.
+[04:31] Ela mostra como selecionar contas específicas que terão acesso à ação.
+[04:45] A ação "Voip" é salva e aparece na lista.
+[04:48] Larissa Lopes recarrega a página para mostrar onde o menu e a ação personalizada foram adicionados.
+[04:57] O menu "Dashboard" aparece na categoria "Ajustes".
+[05:05] A ação "Voip" aparece na tela de atendimentos.
+[05:20] Larissa Lopes encerra o vídeo e disponibiliza um contato para dúvidas.

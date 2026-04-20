@@ -1,0 +1,27 @@
+[00:00] Título do vídeo "Chatbot: Ações de Mensagem"
+[00:05] Instrutor se apresenta
+[00:15] Introdução à opção "Enviar Mensagem"
+[00:18] Destacando a opção "Enviar Mensagem" no menu de ações
+[00:37] Opções de tipo de mensagem: Texto, Imagem, Vídeo, Áudio, Documento
+[00:41] Campo para inserir o conteúdo da mensagem
+[00:48] Limites de tamanho de arquivo para áudio
+[00:50] Limites de tamanho de arquivo para documento
+[00:52] Limites de tamanho de arquivo para imagem
+[00:54] Limites de tamanho de arquivo para vídeo
+[01:00] Destacando a opção "Enviar modelo de mensagem"
+[01:33] Opções avançadas: "Tempo de espera de contato", "Tempo máximo de inatividade", "Integração"
+[01:48] Opção "Direcionar para fluxo alternativo se atingir limite"
+[01:55] Destacando a opção "Enviar pergunta"
+[02:00] Tipos de pergunta: Aberta, Botões, Lista
+[02:07] Campo para inserir o conteúdo da mensagem de pergunta
+[02:11] Campo para inserir a mensagem de rodapé
+[02:16] Opções de "Tipo de dados" para a resposta esperada
+[02:29] Seção "Respostas inválidas"
+[02:35] Campo "Retentativas" para definir o número de avisos do chatbot
+[02:40] Campo "Mensagem de retentativas"
+[02:46] Opções para "Ação ao atingir o máximo de retentativas": Transferir atendimento, Encerrar atendimento, Ignorar
+[02:59] Opção "Equipe" para seleção de qual equipe transferir o atendimento
+[03:07] Opção "Mensagem de horário indisponível"
+[03:26] Opção "Salvar resposta no contato"
+[03:40] Destacando a opção "Enviar menu"
+[03:52] Tipos de menu: Botões, Lista, Numérica

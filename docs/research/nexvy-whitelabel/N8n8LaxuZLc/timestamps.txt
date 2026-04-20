@@ -1,0 +1,63 @@
+Aqui está um registro detalhado de todos os eventos relevantes do vídeo, conforme solicitado:
+
+[00:00] Apresentação do vídeo: configurar sua pipeline, follow-ups automáticos e utilizar IA para chamar leads que abandonaram o funil de vendas.
+[00:10] Apresentação do orador, Alisson Gonsalves, CEO da DKW System.
+[00:13] Explicação sobre gestão de leads em formato white label.
+[00:29] Dicas e estratégias internas da empresa para alta taxa de conversão com IA.
+[00:54] Explicação do sistema robusto em formato white label.
+[01:05] Cases de sucesso de clientes faturando mais de R$100.000,00 com o sistema.
+[01:14] Destaque para o follow-up em leads perdidos e recuperação de investimento.
+[01:24] Transição para a tela do sistema DKW, mostrando o dashboard principal.
+[01:30] Primeiros passos para criar uma pipeline de vendas.
+[01:41] Explicação sobre automações nas colunas do CRM.
+[02:00] Explicação sobre a IA generativa para follow-up automático.
+[02:10] Recursos da plataforma: automação de Instagram, WhatsApp, disparo em massa, Flow Builder, webhooks e integrações.
+[02:30] Início da demonstração prática: criação da pipeline de vendas.
+[02:37] Criação da nova pipeline de vendas com o nome "FUNIL DE VENDAS".
+[02:44] Tela de criação de colunas na pipeline.
+[02:57] Criação da coluna "Entrada de leads" com cor laranja.
+[03:05] Criação da coluna "Qualificação" com cor amarela.
+[03:14] Criação da coluna "Reunião agendada" com cor verde-clara.
+[03:22] Criação da coluna "Reunião realizada" com cor verde-escura.
+[03:25] Criação da coluna "VENDA GANHA" com cor verde vibrante.
+[03:33] Explicação sobre criação de follow-up e cópias de texto.
+[03:47] Documento com cópias de follow-up direto, com gatilho de curiosidade e última tentativa.
+[04:03] Explicação sobre a necessidade de conectar um número de WhatsApp.
+[04:12] Opções de conexão: Instagram, WhatsApp não oficial e API oficial.
+[04:30] Dica sobre listas para evitar bloqueios por spam.
+[04:40] Demonstração de criação de automação para a coluna "Qualificação".
+[04:57] Configuração da automação "Follow-up direto".
+[05:01] Nomeando a automação como "Follow-up direto".
+[05:14] Configuração do intervalo entre execuções (30 segundos) e respeito ao horário de expediente.
+[05:20] Alerta sobre riscos de bloqueio para WhatsApp não oficial.
+[05:46] Detalhes sobre o intervalo entre execuções, com opções de segundos, minutos, horas e dias.
+[05:54] Opção de respeitar o horário de expediente da plataforma.
+[06:08] Opções de gatilho para a automação (Entrada no Card, Saída do Card, Tempo na Coluna, etc.).
+[06:25] Explicação dos gatilhos: Entrada no Card, Saída do Card, Tempo na Coluna (escolhida para o follow-up), Execução recorrente, Tempo recorrente na Coluna, Mensagem recebida.
+[06:55] Exemplo de gatilho "Mensagem recebida" para funil de reciclagem.
+[07:07] Configuração do gatilho "Tempo na Coluna" para 20 minutos.
+[07:24] Opções de tipo de ação: Enviar Mensagem (escolhida), Enviar Template de Mensagem, Enviar Funil, Enviar Criativo, Mudar de Coluna, Adicionar Tag, Remover Tag, Adicionar Agente, Remover Agente, Vincular Responsável.
+[07:55] Detalhe sobre a ação "Mudar de Coluna" para mover leads inativos para um funil de reciclagem.
+[08:13] Outras ações: Adicionar/Remover Tag, Adicionar/Remover Agente, Vincular Responsável.
+[08:28] Configuração da ação "Enviar Mensagem" com o texto do follow-up.
+[09:10] Opções de tipo de conexão: Padrão, Última conversa (escolhida), Específica, Rotativa.
+[09:50] Configuração da exceção "Troca de Mensagens" para abortar a automação se o lead responder em 15 minutos.
+[10:35] Conclusão da configuração da primeira automação.
+[11:34] Transição para a parte de criação de um agente de IA generativo.
+[11:56] Início da interação com o "Assistente IA Partner" para criar um agente de IA.
+[12:11] Solicitação para o assistente de IA criar um prompt para um agente de IA que será um SDR na operação de vendas de marketing da agência, com o nome "FUNIL DE VENDAS ALISSON".
+[12:47] Assistente IA gera o prompt sugerido para a criação do agente de IA.
+[13:20] Assistente IA cria o agente "FUNIL DE VENDAS ALISSON" com o prompt aprovado.
+[13:30] Detalhes do prompt criado pela IA: perguntas sobre o lead, segmentação, número de funcionários, uso de CRM, aplicação de tags e agendamento de reuniões.
+[14:26] Adição da ação "Transferir Coluna no CRM" para o agente de IA, movendo leads para a coluna de qualificação.
+[14:44] Adição da ação "Enviar horários disponíveis" para o agente de IA, para agendar reuniões.
+[14:53] Agente de IA salvo com sucesso.
+[14:54] Configuração do Follow-up automático com IA.
+[15:10] Criação de um novo Follow-up no modo "Generativo" com tempo de espera de 25 minutos.
+[15:26] Configuração das mensagens do histórico (30 mensagens) e instruções para o Follow-up.
+[16:02] Agente de IA configurado para analisar o contexto e enviar follow-ups automáticos.
+[16:10] Resumo da experiência do vídeo: pipeline criada do zero, automação de coluna, agente de IA configurado e agendamento automático de reuniões.
+[16:49] Todas as funções demonstradas estão disponíveis na contratação do White Label.
+[17:05] Convite para conhecer o site e testar a plataforma.
+[17:27] Agradecimento e convite para seguir nas redes sociais e se inscrever no canal.
+[17:42] Tela final com o logo "DKW System".

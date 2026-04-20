@@ -1,0 +1,15 @@
+[ 00:00 ] Olá! Hoje nós vamos falar sobre o relatório de faturamento e como você pode acompanhar o desempenho do seu negócio junto com a Helena.
+[ 00:00 ] O relatório de faturamento fica disponível para os administradores da sua conta, no menu superior, em Admin, relatório de faturamento.
+[ 00:00 ] Vamos acompanhar? Depois de acessar o relatório de faturamento, você chega aqui nessa tela. No canto superior, você escolhe o mês de referência para a análise que você gostaria de fazer naquele momento.
+[ 00:00 ] Aqui, nós estamos acompanhando o mês de junho, que a fatura vai ser paga em julho. Nesse primeiro box, o consolidado, você consegue visualizar as principais informações referentes à sua conta.
+[ 00:00 ] Então, o período, o parceiro, o início de faturamento, aplicativo, domínio, contas, custos das instâncias Z-API, o custo de infraestrutura, e o valor total da sua fatura.
+[ 00:00 ] No quadro ao lado, o de contas, você consegue acompanhar os principais custos referentes à Helena, das contas dos seus clientes.
+[ 00:01 ] Então, você vai visualizar, por exemplo, a quantidade de usuários, a quantidade de canais, dividido por faixas de custo, e se existe algum custo adicional, como a transcrição de áudio ou o banco Assas.
+[ 00:01 ] Nesta última coluna, você vê o valor proporcional de cada um dos seus clientes, considerando esses serviços. No terceiro quadro, você consegue acompanhar as instâncias de QR Code.
+[ 00:01 ] Então, o número dessa instância, o número do celular que está cadastrado, o início e o fim do faturamento, os dias de uso e o valor proporcional dessas instâncias.
+[ 00:02 ] E lembrando, pessoal, que cada uma das caixas desse relatório podem ser exportadas em formato de Excel, e você pode subir esse relatório num Power BI para fazer uma análise mais detalhada dos seus custos.
+[ 00:02 ] Ah, e só para completar. O custo de infraestrutura, aquele que você viu ali na primeira caixinha do relatório de faturamento, também está disponível na plataforma.
+[ 00:02 ] Vamos ver? Para acessar, basta seguir o caminho do Admin, custo de infraestrutura.
+[ 00:02 ] A visualização nessa tela vai ser muito parecida com aquela que a gente tinha antes. As contas, o mês de referência, o número de atendimentos e o número de contatos únicos.
+[ 00:02 ] Lembrando que o custo de infraestrutura, só é cobrado quando você passa dos 5 mil contatos únicos em um mês. Caso você tenha mais alguma dúvida, fique de olho nos conteúdos aqui da nossa comunidade do parceiro, ou então, procure o seu CS.
+[ 00:02 ] Até mais!
