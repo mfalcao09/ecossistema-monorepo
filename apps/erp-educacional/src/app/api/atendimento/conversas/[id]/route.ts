@@ -21,6 +21,7 @@ export const GET = protegerRota(
         id, status, priority, unread_count, ticket_number,
         window_expires_at, last_activity_at, created_at,
         assignee_id, queue_id, channel_conversation_id, meta,
+        deal_id, protocol_count,
         atendimento_contacts!contact_id (
           id, name, phone_number, avatar_url, additional_attributes
         ),
