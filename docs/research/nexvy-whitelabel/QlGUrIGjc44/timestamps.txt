@@ -1,0 +1,36 @@
+Claro! Aqui está o mapeamento dos momentos importantes do vídeo:
+
+[00:00] Início da apresentação
+[01:43] Tela inicial da plataforma com a mensagem "Escolha um atendimento para iniciar a conversa".
+[02:18] Navegação para "Ajustes" e depois para "Contas".
+[02:22] Tela de configurações da conta.
+[02:24] Seleção de "Canais de atendimento" no menu lateral.
+[02:26] Clique no botão de adição (+) para adicionar um novo canal.
+[02:27] Seleção de "Integrar com Instagram" no menu.
+[02:30] Tela de integração do Instagram Messenger.
+[02:32] Clique em "Iniciar".
+[02:34] Tela de integração do Facebook.
+[02:36] Clique em "Entrar com Facebook".
+[02:39] Pop-up do Facebook para mudar de conta.
+[02:44] Clique em "Continuar".
+[02:49] Tela de confirmação de usuário no Facebook.
+[02:52] Clique em "Continuar como Larissa Souza".
+[02:54] Tela de seleção das páginas do Facebook.
+[02:58] Seleção da página "Lopes Planejados".
+[03:00] Seleção do negócio.
+[03:04] Seleção da conta do Instagram.
+[03:06] Tela de revisão da solicitação de acesso.
+[03:11] Clique em "Guardar".
+[03:13] Mensagem de confirmação "Larissa Souza has been connected to hunion.io".
+[03:16] Clique em "Compreendi".
+[03:26] Retorno à tela de integração, mostrando que o Instagram foi conectado.
+[03:28] Clique em "Continuar".
+[03:30] Mensagem "Integração realizada com sucesso".
+[03:37] Clique em "Finalizar".
+[03:40] Tela de carregamento.
+[03:44] Retorno à tela de "Canais de atendimento", mostrando o Instagram e Messenger conectados.
+[03:52] Navegação para a aba "Atendimentos".
+[03:55] Tela de atendimentos.
+[04:08] Recebimento de uma mensagem no Instagram.
+[04:52] Recebimento de uma mensagem no Messenger.
+[04:56] Conclusão da demonstração da integração.

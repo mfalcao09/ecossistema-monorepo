@@ -1,0 +1,37 @@
+Este é um registro detalhado dos eventos do vídeo, com o tempo de cada um.
+- [00:00] Título do vídeo: "Construtor Avançado de Chatbot".
+- [00:05] O apresentador começa a falar sobre o novo builder de chatbot.
+- [00:20] O apresentador clica em "Novo" para criar um novo chatbot.
+- [00:24] Ele digita "Build avançado" como nome do chatbot.
+- [00:30] O apresentador mantém a opção "Avançado" para o tipo de chatbot e "WhatsApp (Oficial)" para o tipo de canal.
+- [00:43] O apresentador clica em "Salvar" para criar o novo chatbot.
+- [00:49] O novo chatbot é criado com um fluxo básico.
+- [00:59] O apresentador explica a funcionalidade de "agrupamento de fluxo".
+- [01:06] O apresentador adiciona uma etiqueta de "Cliente" ao fluxo.
+- [01:27] O apresentador mostra que mais funções podem ser adicionadas dentro do mesmo fluxo.
+- [01:35] O apresentador demonstra o "encadeamento de fluxo" ao adicionar um novo grupo fora do fluxo atual.
+- [01:47] Ele renomeia o novo grupo para "Grupo 2".
+- [02:00] O apresentador adiciona um "Enviar menu" ao "Grupo 2".
+- [02:10] Ele digita a mensagem "Desejo falar em qual setor?" para o menu.
+- [02:20] O apresentador adiciona as opções "Suporte", "Financeiro" e "CS" ao menu.
+- [02:46] O apresentador demonstra como criar fluxos separados para cada opção do menu.
+- [03:03] O apresentador explica o "controle de ponto de retorno".
+- [03:19] Ele adiciona a opção "Reiniciar Atendimento" ao menu.
+- [03:29] O apresentador demonstra como usar o ponto de retorno para voltar ao início do atendimento.
+- [03:55] O apresentador explica a funcionalidade de "anotações com cores personalizadas".
+- [04:02] Ele adiciona uma nota e a redimensiona.
+- [04:29] O apresentador demonstra como alterar a cor da nota.
+- [04:37] O apresentador exclui a nota criada.
+- [04:47] O apresentador explica a funcionalidade de "criar e manipular cards no CRM".
+- [05:07] Ele seleciona a opção "Criar card" no CRM.
+- [05:14] O apresentador seleciona o painel "Vendas" e a etapa "Prospecção".
+- [05:28] Ele digita "Novo Lead" como título do card.
+- [05:40] O apresentador insere o nome e o telefone do cliente como variáveis no card.
+- [06:05] Ele demonstra como definir o responsável pelo card.
+- [06:10] O card é automaticamente criado no CRM.
+- [06:20] O apresentador mostra outras opções de manipulação de cards, como "Mover card" e "Alterar campos do card".
+- [06:33] O apresentador explica a funcionalidade de "inserção de variáveis personalizadas e metadados".
+- [06:48] Ele demonstra como inserir variáveis e metadados pré-definidos na plataforma.
+- [06:55] O apresentador explica como migrar um chatbot do modelo antigo para o novo.
+- [07:07] Ele demonstra como clicar na engrenagem e na opção "Migrar para avançado".
+- [07:18] O apresentador encerra o vídeo e oferece ajuda para dúvidas.

@@ -1,0 +1,13 @@
+Claro! Segue a transcrição completa do vídeo, com os timestamps solicitados:
+
+[00:00] Olá, tudo bem? Hoje nós vamos falar sobre os nossos relatórios e como você pode usar essas métricas para entender como está o seu atendimento. Para acessar essa funcionalidade na plataforma, basta escolher a opção relatórios no menu superior. Ele se divide em duas partes: indicadores e atendimentos.
+
+[00:30] Neste treinamento, nós vamos falar sobre esses dois itens, mas antes de começar, a gente precisa fazer alguns alinhamentos para garantir que estamos na mesma página, beleza? Para calcular os resultados em relatórios, nós usamos a mediana, e não a média. Mas por quê?
+
+[01:00] Bom, a média é um cálculo que soma todos os valores e divide pelo número total. Isso pode distorcer os resultados quando existem valores muito altos ou muito baixos. Já a mediana representa o valor do meio, ou seja, o número que está no centro quando todos os valores são colocados em ordem.
+
+[01:30] Assim, ela ignora esses extremos e mostra um retrato mais fiel do uso típico da plataforma. O segundo ponto importante desse alinhamento é que o relatório da plataforma precisa considerar cenários que atendam empresas de diferentes segmentos. Então, eles trazem dados que são comuns a qualquer empresa quando falamos de atendimento.
+
+[02:00] Se você precisar de relatórios mais específicos, use o recurso de menus e ações personalizados. Aqui na comunidade você encontra treinamento sobre eles. E por fim, vale lembrar que o relatório de atendimentos contabiliza de fato, os atendimentos, e não quantas pessoas ou leads entraram em contato com a sua empresa. Todos os números que veremos hoje são baseados em atendimentos, ou seja, em quantas conversas com começo, meio e fim, aconteceram na plataforma.
+
+[02:30] Então, se num dia, por exemplo, uma mesma pessoa entrou em contato em três situações diferentes, aqui no painel, vão aparecer três atendimentos, mesmo que seja um único contato.

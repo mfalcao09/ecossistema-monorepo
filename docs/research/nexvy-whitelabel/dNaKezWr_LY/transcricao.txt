@@ -1,0 +1,3 @@
+[00:00] Relatórios, submenu atendimentos.
+[00:05] Agora, nós vamos acessar relatórios, atendimentos. Aqui você encontra uma relação de todos os atendimentos realizados pela plataforma. Eles são exibidos em formato de tabela, com as principais informações sobre cada atendimento. É possível fazer filtros para análise dentro da própria plataforma, ou então, para exportar parte dos resultados em planilhas.
+[00:30] Também é possível exportar as mensagens que foram trocadas pelos contatos filtrados nesse relatório. Essa tela também permite a conclusão de atendimentos em massa, mas atenção, neste processo, os atendimentos são concluídos sem uma classificação de atendimento. E com isso, nós encerramos a tela atendimentos do menu relatórios.

@@ -1,0 +1,31 @@
+Com certeza! Segue a transcrição completa do vídeo, incluindo os timestamps e a fala palavra por palavra:
+
+[00:00] A plataforma permite que você gerencie atendimentos e acesse seus painéis do CRM de forma rápida e organizada, sem precisar sair da tela de conversas.
+
+[00:14] Entre as funcionalidades disponíveis estão novo item, inserir card em painel e minhas tarefas, acessar o CRM. Esses recursos ajudam a transformar conversas em ações e tarefas rastreáveis, mantendo o histórico do cliente sempre atualizado.
+
+[00:29] Essa funcionalidade está disponível para os usuários com acesso ao módulo CRM no atendimento. O botão de acesso aparece no canto esquerdo da conversa, identificado pelo ícone card ou painel.
+
+[00:41] Durante um atendimento, clique no ícone do CRM localizado na parte inferior esquerda da tela. Ao fazer isso, será exibido o menu com a opção minhas tarefas.
+
+[00:51] Caso você tenha acesso a painéis disponíveis, você verá uma lista com todos eles. Escolha o painel desejado e clique em novo item.
+
+[01:00] Agora, preencha as informações do card. Vencimento: defina prazos ou datas de acompanhamento.
+
+[01:05] Atribuição: escolha o usuário responsável por aquele card. Etiquetas: crie ou selecione uma categoria para a atividade.
+
+[01:14] Título: vem preenchido automaticamente com o nome do contato, mas você pode alterar. Descrição: registre observações relevantes.
+
+[01:23] Contato: já vem com o contato do atendimento atual, mas é possível realizar a alteração. Valor atribuído: insira um valor monetário, se aplicável.
+
+[01:32] Quando tudo estiver pronto, clique em salvar. O card será automaticamente vinculado ao contato do atendimento em andamento.
+
+[01:40] Depois de criar o card, você pode acessá-lo novamente para incluir anexos, anotações e até mover o card entre as fases do painel. Para isso, siga este caminho:
+
+[01:50] Clique no painel em que o card foi criado. Depois, vá em todos os itens. Você verá o painel dividido em colunas.
+
+[01:59] Se não visualizar nenhum card, verifique se há algum filtro pré-definido. Ao clicar em um card, na parte inferior, você encontrará as opções de duplicar, arquivar ou excluir o card.
+
+[02:10] E também a opção configurar campos para adicionar novos campos personalizados. Nesse vídeo, você conheceu como utilizar o CRM dentro do atendimento, criando cards, tarefas e organizando melhor o seu fluxo de trabalho.
+
+[02:22] Continue explorando os demais funcionalidades da plataforma e descubra novas formas de otimizar seus resultados. Nos vemos no próximo vídeo.
