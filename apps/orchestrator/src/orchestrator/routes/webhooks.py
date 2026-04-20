@@ -13,17 +13,13 @@ Fluxo:
 
 from __future__ import annotations
 
-import hashlib
-import hmac
 import uuid
 from typing import Any
 
 import structlog
-from fastapi import APIRouter, BackgroundTasks, HTTPException, Request
+from fastapi import APIRouter, BackgroundTasks, HTTPException
 from pydantic import BaseModel
 
-from orchestrator.config import get_settings
-from orchestrator.clients.memory import MemoryClient
 
 log = structlog.get_logger(__name__)
 
