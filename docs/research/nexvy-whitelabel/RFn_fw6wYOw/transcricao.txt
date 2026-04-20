@@ -1,0 +1,31 @@
+Com certeza! Aqui está a transcrição completa do vídeo:
+
+[00:00] Olá pessoal, falando agora um pouco sobre a condicional. O que seria a condicional? Como o próprio nome diz, é uma condição que você coloca em um determinado fluxo do seu chatbot, que ao ser atingida cria um novo fluxo em seu chatbot a partir dessas condicionais que foram criadas.
+
+[00:00:20] E como que a gente pode configurar essa condicional? Definimos um grupo e quais as suas condições, configurando elas como ou e no canto superior direito. Então, se, por exemplo, o campo do contato nome for igual a Caio, ou o campo do contato nome for igual a Tinoco, ele seguirá um fluxo a partir dessas condicionais criadas.
+
+[00:00:46] Além de que a gente pode colocar aqui outros tipos de condições: horário de funcionamento, resposta de uma pergunta, etiqueta do contato e por aí vai. Posso adicionar um segundo grupo com outras condições também. Quanto mais você coloca aqui, mais ramificações você pode fazer a partir desse fluxo. A gente vai salvar essa aqui do grupo 1 e vai deixar o campo contato com o nome Caio e Tinoco.
+
+[00:00:59] Vamos salvar e vocês podem ver que a gente adicionando a condição, ela já dá duas opções de ligação para cada uma dessas perguntas. Então, temos o grupo 1 que ficou salvo ali, por exemplo, que seria o nosso nome, e a gente tem essa opção de caso padrão. O que é o caso padrão? O caso padrão vai ser sempre o inverso da condicional anterior.
+
+[00:01:17] Se a gente colocou ali no grupo 1 que ele precisa receber o nome igual a Caio, qualquer nome diferente de Caio vai entrar ali no caso padrão. Por quê? Porque é o único caso que é o contrário da condicional que a gente impôs. Então, ele já entende ali que, sendo diferente daquela primeira condicional, ela já cai no caso padrão e vai seguir um novo fluxo a partir daí.
+
+[00:01:36] Bom pessoal, adicionando aqui os casos de condicionais, né? A gente vai selecionar a opção "adicionar". Ele vai criar essa nova tela aqui pra gente, né, que vai informar aqui quantos grupos vão ter dentro dessa condicional. A gente vai manter aqui adicionando duas condições que vai ser nome mesmo. A gente vai inserir um nome aqui de Caio, que é o meu nome.
+
+[00:01:56] E Tinoco, que também é o meu sobrenome, beleza? E a gente vai ter essas duas condicionais aqui de "se" e "e". Ou seja, isso informa que, para essa condicional ser atingida, precisa ter um nome Caio ou um nome Tinoco em uma dessas, em um desses grupos. OK, salvando esse grupo.
+
+[00:02:12] Como vocês podem ver, a condicional já cria dois grupos aqui pra gente, né? Uma do grupo 1 e uma do caso padrão. O grupo 1 seria aquela questão do nome, né? Então se a gente tiver um nome igual a Caio ou um nome igual a Tinoco, essa ramificação aqui, ela vai ser direcionada a um novo grupo.
+
+[00:02:35] Então, se a gente pegar algum nome, né, algum contato com o nome Caio ou Tinoco, ou Caio Tinoco, ela vai seguir esse fluxo aqui para este grupo, beleza? E o que seria o caso padrão, como eu expliquei? O caso padrão ele vai ser o inverso daquilo que a gente colocou na primeira condicional. Então, todo nome que for diferente de Caio ou de Tinoco, né, não tiver nenhum desses nomes, ele já vai seguir um novo fluxo aqui a partir do caso padrão.
+
+[00:02:59] Então, o caso padrão ele vai ser sempre o inverso da condicional que a gente colocou, beleza? Então, aqui a gente tem dois fluxos agora dentro do nosso chatbot, um para quando tiver Caio ou Tinoco no nome do contato, e qualquer outro que for o inverso a isso. Bom pessoal, mostrando que dentro de uma condicional a gente pode ter mais de um grupo vinculado a ela.
+
+[00:03:10] E dentro desse grupo a gente pode ter diversas condições, tá? Não somente nome, como eu coloquei ali no nosso exemplo anterior. Então a gente pode ter horário de funcionamento, resposta a uma pergunta, resposta a um modelo, campo do contato, etiqueta, última mensagem, e por aí vai. Todas essas condições a gente consegue inserir dentro do grupo e colocar uma condição para ela.
+
+[00:03:30] Dentro dessas condições, temos outros tipos de variável também, não somente igual a, como eu dei no exemplo anterior. A gente pode ter as variáveis de "diferente de", "contém", "não contém" e "está definido". Então, no valor aqui, o que a gente coloca é aquilo que vai ser vinculado à variável. Então, dentro desse campo aqui a gente pode colocar um exemplo do que você espera receber dentro dessa condicional.
+
+[00:03:47] Falando agora sobre a transferência de chatbot, essa opção permite transferir o atendimento para outro chatbot. Na tela serão exibidos apenas os chatbots que utilizam o mesmo tipo de canal do chatbot atual. É importante observar que, mesmo que o chatbot escolhido esteja configurado em um canal diferente, ele sempre será executado usando o canal do chatbot atual.
+
+[00:04:08] E um ponto de atenção: o chatbot selecionado precisa ter uma versão publicada no momento em que essa ação for executada. Bom pessoal, este foi o nosso vídeo de hoje, espero ter ajudado e respondido algumas dúvidas com as configurações do chatbot. Abraços e até uma próxima.
+
+Se precisar de mais alguma transcrição, é só pedir!

@@ -16,11 +16,72 @@ VIDEOS_DIR = BASE_DIR / "_videos"
 MODEL     = "gemini-2.5-flash"
 
 URLS = [
+    # Lote 1 — original (console.nexvy.tech, já processados)
     "https://www.youtube.com/watch?v=O-T-9NAK9tU",
     "https://www.youtube.com/watch?v=E3fpTjW5kQE",
     "https://www.youtube.com/watch?v=y3CFR97J2Bo",
     "https://www.youtube.com/watch?v=N8n8LaxuZLc",
     "https://www.youtube.com/watch?v=StCaGpA1fmA",
+    # Lote 2 — helenaCRM playlist (PLAvjoRyIXgEvXBTHoPoUHVlkRU8y7vpcM)
+    "https://www.youtube.com/watch?v=q8-nq80aNxY",
+    "https://www.youtube.com/watch?v=_L92FINjcUI",
+    "https://www.youtube.com/watch?v=oVifwnIL7jo",
+    "https://www.youtube.com/watch?v=580FqSbP0vY",
+    "https://www.youtube.com/watch?v=HYKeZWyBCwY",
+    "https://www.youtube.com/watch?v=wgsaW6I9KIM",
+    "https://www.youtube.com/watch?v=XeemWygayPo",
+    # Lote 3 — Conceitos/Usuários/Permissões (PLAvjoRyIXgEvCsyeKq_8IkTBTnU5Y0tw6)
+    "https://www.youtube.com/watch?v=GTX_QLA1zeg",
+    "https://www.youtube.com/watch?v=XWd-0Gj6R6E",
+    "https://www.youtube.com/watch?v=oGs_ByuGDWc",
+    "https://www.youtube.com/watch?v=Olr6prKExSo",
+    "https://www.youtube.com/watch?v=-LctSvm1Mzo",
+    "https://www.youtube.com/watch?v=LsdXRmS7Agk",
+    "https://www.youtube.com/watch?v=_KeeL_5wG5k",
+    "https://www.youtube.com/watch?v=1lrBXAnV31I",
+    "https://www.youtube.com/watch?v=QlGUrIGjc44",
+    # Lote 4 — Relatórios/Indicadores (PLAvjoRyIXgEvkLv19P46IeJno-moRJJL7)
+    "https://www.youtube.com/watch?v=dNaKezWr_LY",
+    "https://www.youtube.com/watch?v=0_0i72W2s68",
+    "https://www.youtube.com/watch?v=t2bF8-5uui8",
+    "https://www.youtube.com/watch?v=olMQTujz724",
+    "https://www.youtube.com/watch?v=iTuVYvn347I",
+    "https://www.youtube.com/watch?v=B8E5ab6SATs",
+    # Lote 5 — CRM/Contatos/Cards (PLAvjoRyIXgEurgovB9aSOnCZ6cSWvOdNW)
+    "https://www.youtube.com/watch?v=TBl14qCjbcM",
+    "https://www.youtube.com/watch?v=PvfppQNxQZs",
+    "https://www.youtube.com/watch?v=oOq8AVnwx7g",
+    "https://www.youtube.com/watch?v=hu38xgDc-l8",
+    "https://www.youtube.com/watch?v=ssG53BDi1K0",
+    "https://www.youtube.com/watch?v=VAa4tqrsFqI",
+    "https://www.youtube.com/watch?v=g0_lGAnSzdY",
+    # Lote 6 — Chatbot/Campanhas/Mensagens Agendadas (PLAvjoRyIXgEuAnYB1aEPHls1KEDYYz3SK)
+    "https://www.youtube.com/watch?v=RFn_fw6wYOw",
+    "https://www.youtube.com/watch?v=Xf6tFnM4va4",
+    "https://www.youtube.com/watch?v=6RFcmRoD4E0",
+    "https://www.youtube.com/watch?v=AMDg3hbrui0",
+    "https://www.youtube.com/watch?v=CDOdwqe_-KE",
+    "https://www.youtube.com/watch?v=SHTF1dwAtuc",
+    "https://www.youtube.com/watch?v=YpFcjGiMw2I",
+    "https://www.youtube.com/watch?v=JHONOag6fEo",
+    "https://www.youtube.com/watch?v=yH5ysNLTAXE",
+    "https://www.youtube.com/watch?v=X115LzVAliA",
+    "https://www.youtube.com/watch?v=Bm9r57cOqMM",
+    "https://www.youtube.com/watch?v=VCsSLNj7vzE",
+    # Lote 7 — Parceiros/White Label (PLAvjoRyIXgEtbo6wgn46QAtdC6x5VsFFQ)
+    "https://www.youtube.com/watch?v=XdikJZkmY7Q",
+    "https://www.youtube.com/watch?v=db54n8_3_Sg",
+    "https://www.youtube.com/watch?v=-X2jMXU_zos",
+    "https://www.youtube.com/watch?v=jbgM0hgvTPc",
+    "https://www.youtube.com/watch?v=0I1UH-wIA2s",
+    "https://www.youtube.com/watch?v=t1aj8gLs9cI",
+    "https://www.youtube.com/watch?v=G0XsZWjQV8c",
+    "https://www.youtube.com/watch?v=bvpz84EThEU",
+    "https://www.youtube.com/watch?v=qrRvyH0k6l8",
+    "https://www.youtube.com/watch?v=-W1Gvw7_QzM",
+    "https://www.youtube.com/watch?v=S1liAttRAtw",
+    # Lote 8 — Individual
+    "https://www.youtube.com/watch?v=Lus6OhCWhrg",
 ]
 
 client = genai.Client(api_key=API_KEY)
@@ -47,16 +108,23 @@ def parse_timestamps(text: str):
             results.append((m.group(1), m.group(2).strip()))
     return results
 
-def gemini_with_retry(fn, max_retries=3):
-    delays = [30, 60, 90]
+def gemini_with_retry(fn, max_retries=6):
+    delays = [15, 30, 60, 90, 120, 180]
     for attempt in range(max_retries):
         try:
             return fn()
         except Exception as e:
             msg = str(e)
-            if "429" in msg or "RESOURCE_EXHAUSTED" in msg:
+            retryable = (
+                "429" in msg or "RESOURCE_EXHAUSTED" in msg
+                or "503" in msg or "UNAVAILABLE" in msg
+                or "500" in msg or "INTERNAL" in msg
+                or "504" in msg or "DEADLINE_EXCEEDED" in msg
+            )
+            if retryable and attempt < max_retries - 1:
                 wait = delays[min(attempt, len(delays)-1)]
-                print(f"  [rate-limit] aguardando {wait}s... (tentativa {attempt+1}/{max_retries})")
+                kind = "503" if "503" in msg or "UNAVAILABLE" in msg else "rate-limit"
+                print(f"  [{kind}] aguardando {wait}s... (tentativa {attempt+1}/{max_retries})")
                 time.sleep(wait)
             else:
                 raise

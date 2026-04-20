@@ -1,0 +1,7 @@
+Com certeza! Aqui está a transcrição completa do vídeo:
+
+[00:00] E aí, gente? No vídeo de hoje vamos falar sobre opções de atendimento dentro do chatbot. [00:00] Aqui você vai aprender como usar o bot para transferir conversas para equipes e até concluir atendimento sozinho. [00:00] Essas funções deixam o suporte muito mais rápido, organizado e sem gargalos. Então bora ver como funciona?
+ 
+[00:26] Transferir atendimento para uma equipe. O chatbot pode transferir automaticamente um atendimento para qualquer equipe que você escolher. Você também pode definir uma mensagem automática, caso o contato aconteça fora do horário de atendimento, informando ao cliente que ele será atendido em breve. Assim ninguém fica sem retorno e você reduz a ansiedade do seu cliente.
+
+[00:50] Concluir atendimento. Outra ação possível é concluir o atendimento pelo próprio chatbot. Essa automação é útil em casos como: quando o cliente passa muito tempo sem responder, ou quando o fluxo chega ao fim naturalmente. Assim o chatbot mantém a sua fila de atendimentos organizada. E esse foi o nosso treinamento de hoje. Agora você já sabe como usar as opções de atendimento dentro do chatbot para tornar o seu processo ainda mais eficiente. Nos vemos nos próximos vídeos.
