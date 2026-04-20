@@ -1,15 +1,7 @@
 #!/bin/sh
 
-# Roda testes nos packages afetados antes de push
-# Evita subir código quebrado para o remote
+# Roda testes nos packages antes de push — espelha o CI (packages/** only)
+# Apps ficam de fora: têm deps nativas (canvas) e env vars que não existem localmente
 
-CURRENT_BRANCH=$(git rev-parse --abbrev-ref HEAD)
-
-# Nunca bloqueia push para branches de feature (apenas avisa)
-if [ "$CURRENT_BRANCH" = "main" ]; then
-  echo "Push para main — rodando testes completos..."
-  pnpm turbo test
-else
-  echo "Rodando testes afetados para branch $CURRENT_BRANCH..."
-  pnpm turbo test --filter="...[origin/$CURRENT_BRANCH]" 2>/dev/null || pnpm turbo test
-fi
+echo "Rodando testes dos packages..."
+pnpm --filter "./packages/**" run --if-present test
