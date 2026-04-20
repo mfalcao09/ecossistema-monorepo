@@ -13,6 +13,8 @@ import {
   Phone, MoreVertical
 } from "lucide-react";
 import { createBrowserClient } from "@supabase/ssr";
+import ClosedWindowBanner from "./inbox/ClosedWindowBanner";
+import SelectTemplateModal from "./inbox/SelectTemplateModal";
 
 import BreadcrumbPipeline from "@/components/atendimento/shared/BreadcrumbPipeline";
 
@@ -81,6 +83,7 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
   const [texto,     setTexto]     = useState("");
   const [enviando,  setEnviando]  = useState(false);
   const [loading,   setLoading]   = useState(false);
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
 
   const bottomRef  = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -434,6 +437,12 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
         </div>
       )}
 
+      {/* ── Banner janela WABA fechada ──────────────────────────────── */}
+      <ClosedWindowBanner
+        windowExpiresAt={conversa?.window_expires_at}
+        onPickTemplate={() => setShowTemplateModal(true)}
+      />
+
       {/* ── Toolbar de envio ────────────────────────────────────────── */}
       <div className={`flex-shrink-0 border-t border-gray-200 bg-white p-3 ${isResolved ? "opacity-50 pointer-events-none" : ""}`}>
         {/* Toolbar de anexos */}
@@ -505,6 +514,21 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
           )}
         </div>
       </div>
+
+      {/* ── Modal de seleção de template (janela fechada) ──────────── */}
+      {showTemplateModal && conversa?.atendimento_contacts?.id && (
+        <SelectTemplateModal
+          contactId={conversa.atendimento_contacts.id}
+          conversationId={conversa.id}
+          inboxId={conversa.atendimento_inboxes?.id}
+          onClose={() => setShowTemplateModal(false)}
+          onSent={() => {
+            setShowTemplateModal(false);
+            void carregar();
+            onConversaAtualizada?.();
+          }}
+        />
+      )}
     </div>
   );
 }
