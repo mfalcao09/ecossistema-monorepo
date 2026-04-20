@@ -8,7 +8,7 @@
 // 3. Termo de Responsabilidade Técnica
 // ============================================================
 
-import { PDFDocument, PDFFont, PDFPage, StandardFonts, rgb, PageSizes } from 'pdf-lib'
+import { PDFDocument, PDFFont, PDFImage, PDFPage, StandardFonts, rgb, PageSizes } from 'pdf-lib'
 
 // ── Tipos de input ──────────────────────────────────────────
 
@@ -158,6 +158,8 @@ function formatarDataExtenso(data: string | null | undefined): string {
 // ── Constantes de layout ────────────────────────────────────
 
 const MARGEM = 50
+
+function mmToPt(mm: number): number { return Math.round(mm * 2.835) }
 const LARGURA_UTIL = PageSizes.A4[0] - MARGEM * 2
 const COR_TITULO = rgb(0.12, 0.12, 0.45)   // Azul escuro
 const COR_TEXTO = rgb(0.15, 0.15, 0.15)     // Quase preto
@@ -187,6 +189,12 @@ function quebrarTexto(texto: string, font: PDFFont, tamanho: number, larguraMax:
 
 // ── Classe geradora ─────────────────────────────────────────
 
+interface PDFBuilderOpts {
+  timbradoUrl?: string
+  margemTopo?: number    // mm — sobrescreve topo
+  margemInferior?: number // mm — sobrescreve inferior
+}
+
 class PDFBuilder {
   private doc!: PDFDocument
   private page!: PDFPage
@@ -194,25 +202,53 @@ class PDFBuilder {
   private fontRegular!: PDFFont
   private fontBold!: PDFFont
   private pageNum: number = 0
+  private timbradoImage: PDFImage | null = null
+  private margemTopoLocal: number = MARGEM
+  private margemInferiorLocal: number = MARGEM
 
-  async init(): Promise<void> {
+  async init(opts?: PDFBuilderOpts): Promise<void> {
     this.doc = await PDFDocument.create()
     this.doc.setTitle('Documento FIC')
     this.doc.setProducer('FIC ERP Educacional')
     this.fontRegular = await this.doc.embedFont(StandardFonts.Helvetica)
     this.fontBold = await this.doc.embedFont(StandardFonts.HelveticaBold)
+
+    if (opts?.margemTopo !== undefined) this.margemTopoLocal = mmToPt(opts.margemTopo)
+    if (opts?.margemInferior !== undefined) this.margemInferiorLocal = mmToPt(opts.margemInferior)
+
+    if (opts?.timbradoUrl) {
+      try {
+        const res = await fetch(opts.timbradoUrl)
+        const bytes = new Uint8Array(await res.arrayBuffer())
+        try {
+          this.timbradoImage = await this.doc.embedPng(bytes)
+        } catch {
+          this.timbradoImage = await this.doc.embedJpg(bytes)
+        }
+      } catch { /* falha silenciosa — gera sem timbrado */ }
+    }
+
     this.novaPage()
   }
 
   private novaPage(): PDFPage {
     this.page = this.doc.addPage(PageSizes.A4)
-    this.y = this.page.getHeight() - MARGEM
+    if (this.timbradoImage) {
+      this.page.drawImage(this.timbradoImage, {
+        x: 0,
+        y: 0,
+        width: this.page.getWidth(),
+        height: this.page.getHeight(),
+        opacity: 1,
+      })
+    }
+    this.y = this.page.getHeight() - this.margemTopoLocal
     this.pageNum++
     return this.page
   }
 
   private verificarEspaco(necessario: number): void {
-    if (this.y - necessario < MARGEM + 30) {
+    if (this.y - necessario < this.margemInferiorLocal + 30) {
       this.novaPage()
     }
   }
@@ -407,9 +443,12 @@ class PDFBuilder {
 // 1. HISTÓRICO ESCOLAR (PDF)
 // ═════════════════════════════════════════════════════════════
 
-export async function gerarHistoricoEscolarPDF(dados: DadosHistoricoPDF): Promise<Uint8Array> {
+export async function gerarHistoricoEscolarPDF(
+  dados: DadosHistoricoPDF,
+  opts?: PDFBuilderOpts
+): Promise<Uint8Array> {
   const pdf = new PDFBuilder()
-  await pdf.init()
+  await pdf.init(opts)
 
   // ── Cabeçalho ──
   pdf.titulo(dados.ies_nome.toUpperCase(), 12)
@@ -504,9 +543,12 @@ export async function gerarHistoricoEscolarPDF(dados: DadosHistoricoPDF): Promis
 // 2. TERMO DE EXPEDIÇÃO
 // ═════════════════════════════════════════════════════════════
 
-export async function gerarTermoExpedicaoPDF(dados: DadosTermoExpedicao): Promise<Uint8Array> {
+export async function gerarTermoExpedicaoPDF(
+  dados: DadosTermoExpedicao,
+  opts?: PDFBuilderOpts
+): Promise<Uint8Array> {
   const pdf = new PDFBuilder()
-  await pdf.init()
+  await pdf.init(opts)
 
   pdf.titulo(dados.ies_nome.toUpperCase(), 12)
   pdf.espacamento(10)
@@ -556,9 +598,12 @@ export async function gerarTermoExpedicaoPDF(dados: DadosTermoExpedicao): Promis
 // 3. TERMO DE RESPONSABILIDADE TÉCNICA
 // ═════════════════════════════════════════════════════════════
 
-export async function gerarTermoResponsabilidadePDF(dados: DadosTermoResponsabilidade): Promise<Uint8Array> {
+export async function gerarTermoResponsabilidadePDF(
+  dados: DadosTermoResponsabilidade,
+  opts?: PDFBuilderOpts
+): Promise<Uint8Array> {
   const pdf = new PDFBuilder()
-  await pdf.init()
+  await pdf.init(opts)
 
   pdf.titulo(dados.ies_nome.toUpperCase(), 12)
   pdf.espacamento(10)

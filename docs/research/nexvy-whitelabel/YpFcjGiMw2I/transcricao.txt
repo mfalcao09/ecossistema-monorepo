@@ -1,0 +1,51 @@
+Olá. [00:05]
+
+Neste vídeo nós vamos conhecer o novo build do chatbot da plataforma. Esse build ele foi desenvolvido com base no build anterior, mas com algumas melhorias que fazem toda a diferença no processo mais complexo. [00:20]
+
+Vamos criar um novo build de chatbot. Então você clica em novo, dá um nome para esse, esse build, vamos colocar Build Avançado, e aqui tá avançado, mantém-se avançado, que é o que tem ambos os builds, então nós vamos criar o avançado, né, o canal de atendimento que a gente vai usar é o WhatsApp mesmo, a API oficial e a equipe geral. [00:44]
+
+Salvo, ele vai gerar o novo build para mim. Nesse novo build aqui você já tem um atendimento básico, né? A pessoa chega pelo início, e aqui ela vai receber uma mensagem, "Olá! Em que posso te ajudar?". Uma dessas melhorias é o agrupamento de fluxo. [01:05]
+
+Como que funciona o agrupamento de fluxo? Você pode colocar vários itens dentro do mesmo fluxo, ou seja, dentro do mesmo quadro. Vamos aqui, por exemplo, inserir, adicionar uma etiqueta. Quando esse cliente chegar, ele vai receber a mensagem de "Olá, em que posso te ajudar?" e logo vai ser colocado uma etiqueta de cliente para ele. [01:25]
+
+Pronto. Dentro do mesmo fluxo. Eu poderia colocar mais funções dentro do mesmo fluxo. E aí ele iria seguir normalmente. Se preferir também, você pode usar o encadeamento de fluxo. Clicando aqui, ó, no mais fora, [01:44]
+
+o maiszinho, fora do fluxo atual, ele vai inserir um novo grupo de fluxo. E você pode, por exemplo, renomear aqui como você quiser, como Grupo 2, por exemplo. E ele vai ser renomeado como esse grupo. [02:00]
+
+E dentro desse, você pode colocar, por exemplo, vamos colocar um menu de atendimento. Né? Então eu vou colocar aqui, ó, "Enviar menu", e vou colocar uma mensagem, né, de "Deseja falar em qual setor?". [02:20]
+
+E aqui você pode clicar nas opções, né? Nós vamos colocar "Suporte", adicionar outra opção, colocando "Financeiro", e adicionar outra opção como "CS". Pronto. [02:40]
+
+Vou adicionar. Veja bem, ele criou aqui, ó, três pontos para eu poder puxar outro fluxo. Então, nesses fluxos eu vou criando fluxos separados para cada um. [03:03]
+
+Ficando dessa forma, você pode ver, você pode organizar da forma que achar melhor. Outra melhoria é o controle de ponto de retorno. Né? Nesse novo modelo você pode ter um ponto de retorno mais simples. [03:14]
+
+Então eu vou criar aqui mais uma parte no menu. Dentro desse menu aqui, e vou criar uma opção "Reiniciar atendimento", por exemplo. Salvar. [03:26]
+
+Pronto. Daqui eu posso puxar o ponto de retorno e voltar para o início do atendimento na plataforma. [03:40]
+
+Então ele, quando for reiniciar o atendimento, ele vai voltar para a mensagem "Olá, em que posso te ajudar?", vai novamente etiquetar, se não tiver etiqueta e se tiver, ele vai etiquetar também, mas vai manter a etiqueta apenas. E logo depois ele vai pro menu de atendimento. [03:55]
+
+Outra melhoria é que também podemos criar anotações e com cores personalizadas. Clicando aqui, ó, em "Adicionar nota", você consegue criar esse quadro, você pode agrupar um fluxo específico, como esse aqui, dentro desse quadro. [04:16]
+
+Dá um nome para ele, né, um qualquer nome, vou manter o "Nota 1". Ou você pode, por exemplo, criar uma nota, ele abre aqui, você pode colocar ele por cima ou em qualquer posição, né, reduzir ou aumentar ele da forma que achar melhor. [04:34]
+
+Colocar cores diferentes, por exemplo, aqui, ó, alterando as cores e fazer uma anotação específica que você desejar fazer. E da mesma forma você pode excluí-lo, clicando no botãozinho de excluir aqui, ó. Pronto. [04:47]
+
+Então, mantemos aqui, essa é uma nova melhoria que ajuda bastante na identificação de fluxos. Incluímos também uma facilidade agora na plataforma, na questão do chatbot, de poder criar e manipular cards lá no CRM. Vamos ver como isso funciona? Vamos considerar que o fluxo, né, o atendimento do suporte, ele vai criar um card na plataforma. [05:10]
+
+E aí a gente clica aqui no maiszinho. E eu venho aqui, ó, na aba de CRM, "Criar Card". Pronto. Eu seleciono o painel que eu vou criar, eu tenho o painel de vendas selecionado aqui. E a etapa que você quer inserir esse cliente, você pode colocar ele em prospecção, no caso, visita ou contratos, e daí fica a critério do seu CRM. [05:30]
+
+Eu dou um título e, nesse caso, é outra melhoria também, a gente pode inserir um título, por exemplo, como "Novo, novo lead". E nesse novo lead eu posso inserir, por exemplo, o nome daquele parceiro, daquele cliente que está chegando na plataforma. [05:52]
+
+O primeiro nome, ou o nome. Posso inserir também telefone, que é uma melhoria excelente. Telefone. Aqui, então, quando esse lead chegar ele vai vir com "Novo lead", "Charles" e o telefone do Charles. Ok? [06:06]
+
+Você pode direcionar o atendimento aqui para quem vai ser o responsável, ou definir como responsável do primeiro atendimento. Quando você adicionar, ele vai automaticamente criar esse novo card lá no CRM. [06:22]
+
+Além dessa melhoria de criar o card, você tem outras melhorias, por exemplo, eh, mover, alterar campos. Essa é uma melhoria que facilita muito no processo da criação de card no CRM. [06:33]
+
+Outra melhoria importante é que incluímos também mais facilidade na inserção de variáveis personalizadas e metadado. Vou te mostrar aqui, ó. Clicando aqui vamos, por exemplo, eh, enviar uma mensagem. E aqui a gente consegue inserir variáveis ou metadados já predefinidos na plataforma. [06:55]
+
+Se você já tem um chatbot no modelo antigo, a migração para o novo modelo pode ser feita com apenas alguns cliques. Simples, rápido. Para isso, você vai selecionar o bot que você quer migrar, clicar na engrenagem e apenas migrar para o avançado. [07:14]
+
+O sistema ele vai fazer toda a migração e vai criar um chatbot no novo build. Se tiver dúvida, você pode procurar o seu CS ou buscar a informação na nossa comunidade. Até mais. [07:29]

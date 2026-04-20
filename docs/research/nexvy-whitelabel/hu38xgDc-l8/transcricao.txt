@@ -1,0 +1,49 @@
+[ 00:00 ] Olá. Hoje nós vamos falar sobre o módulo CRM da Helena.
+[ 00:09 ] O módulo foi desenvolvido para facilitar a gestão de relacionamento com os clientes e acompanhar de forma eficiente todas as interações e negociações.
+[ 00:21 ] Através dele é possível organizar os atendimentos, acompanhar métricas, tanto para sua equipe comercial, quanto para qualquer outra equipe que haja necessidade de acompanhamento de cardis ou tarefas.
+[ 00:33 ] Eu vou mostrar para vocês na prática como é feita a criação de um painel e a configuração para utilização do mesmo.
+[ 00:39 ] Aqui na plataforma, basta acessar o menu de CRM, painéis, e ele vai abrir para vocês esta tela.
+[ 00:48 ] Aqui eu vou fazer a criação de um novo painel para que a gente possa acompanhar todo o passo a passo.
+[ 00:54 ] Ao clicar em novo painel, observem que alguns campos já vêm com preenchimento, são exatamente os campos de preenchimento obrigatório.
+[ 01:05 ] Então a gente precisa se atentar para não esquecer de configurar esses campos da forma ideal.
+[ 01:12 ] O primeiro campo que é apresentado é o campo de título, onde você vai preencher o nome do seu painel.
+[ 01:21 ] A chave é gerada automaticamente através do título que é registrado no campo anterior.
+[ 01:27 ] A descrição não é um campo obrigatório, mas é um campo interessante de se preencher para que qualquer pessoa ao acessar essa funcionalidade entenda pra que que serve o painel que foi criado, tá?
+[ 01:40 ] Então, um exemplo, eu vou colocar um painel para controle de vendas, OK? E aí a gente tem os demais campos a serem parametrizados.
+[ 01:50 ] Quem pode administrar o painel, ou seja, quem pode alterar este painel, sejam as configurações, seja nome, sejam as fases do mesmo.
+[ 02:00 ] Aqui vocês vão selecionar o usuário que pode ter esse tipo de liberação na plataforma, tá?
+[ 02:08 ] Eu vou deixar o meu apenas com o admin.
+[ 02:11 ] O acesso ao painel também precisa ser configurado. Então a gente faz isso através do campo de quem pode acessar.
+[ 02:19 ] Aqui na setinha, ele traz pra gente as opções das equipes cadastradas na plataforma para que a gente possa selecionar qual equipe vai ter acesso a esse painel, qual equipe vai trabalhar com esse painel.
+[ 02:35 ] Se for um painel geral, pode manter todas as equipes. Se for um painel específico, o ideal é que esteja marcada apenas a equipe que de fato vai trabalhar com ele.
+[ 02:46 ] Logo na sequência, na lateral direita, nós temos algumas outras parametrizações ainda sobre os usuários, tá?
+[ 02:56 ] Então, a gente tem, é, a configuração de visualização dos cards que vão compor este painel futuramente.
+[ 03:04 ] Se marcado todos, todos os usuários e supervisores visualizam todos os cards do painel. E se a gente marcar a opção de individual, [ 03:10 ] o usuário vai visualizar só os cards que ele é responsável e o supervisor da equipe atribuída a esse painel, visualiza todos os cards referentes àquela equipe.
+[ 03:23 ] E a gente tem uma outra opção que é disponível para atendente restrito. Bom, como a gente sabe, [ 03:31 ] o atendente restrito, ele só vê os atendimentos que competem a ele e ele tem restrições de menu na plataforma.
+[ 03:40 ] O menu de painéis é um que normalmente não aparece para um atendente restrito.
+[ 03:46 ] Se você tiver um atendente do tipo restrito que precise utilizar um painel, basta que no painel a gente marque essa opção de disponível para atendente restrito.
+[ 04:00 ] E a partir do momento que esse atendente compor a equipe informada no painel, ele consegue visualizar o menu e fazer a utilização desse painel.
+[ 04:07 ] Logo após as configurações de utilização de usuários, a gente tem as fases que compõem o painel.
+[ 04:14 ] Por padrão, quando a gente cria um novo painel, a plataforma já traz ali quatro fases como, eh, sugestão, tá?
+[ 04:22 ] Vocês podem mudar o nome de cada uma dessas fases, apenas apagando o texto e digitando um novo.
+[ 04:29 ] E aqui, ele vai mostrar a cor que o card será apresentado em caso de atraso dentro dessa fase.
+[ 04:39 ] Essa cor também é passível de alteração. Vocês podem selecionar a cor que se aplica melhor aí, de acordo com a organização.
+[ 04:47 ] O importante nas fases é que dentro de cada painel, você tenha uma fase inicial, uma fase final.
+[ 04:54 ] As fases intermediárias, elas são de acordo com a necessidade. Então, vocês podem adicionar uma nova fase [ 05:01 ] e fazer a configuração dela.
+[ 05:08 ] e fazer toda a restante da configuração da mesma. Caso vocês não tenham necessidade de um número [ 05:15 ] alto de fases do painel, vocês podem também excluir, tanto alguma já existente, quanto alguma que já tenha vindo como sugerida.
+[ 05:31 ] É importante, pessoal, lembrar do seguinte: caso vocês precisem excluir uma fase, principalmente de painéis existentes, [ 05:40 ] é preciso que vocês façam o movimento de tirar os cards daquela fase para depois excluir a mesma, para que não se perca aqueles cards, tá?
+[ 05:48 ] Bom, aqui então, a gente já parametrizou todas as etapas do nosso painel comercial.
+[ 05:55 ] A gente clica aqui no botão de salvar.
+[ 05:59 ] E ele já é apresentado aqui pra gente dentro dos nossos painéis.
+[ 06:03 ] Bom, para fazer a edição de um painel, você deve clicar na engrenagem de configurações, e ele será apresentado novamente na tela.
+[ 06:14 ] Aqui você consegue fazer tanto as alterações, como consegue também duplicar estrutura.
+[ 06:22 ] Ou seja, gerar um segundo painel com a mesma estrutura desse que está sendo utilizado.
+[ 06:29 ] Na tela de painéis, além da opção de editar as configurações do mesmo, você pode também fixar os seus painéis mais utilizados para que eles sejam apresentados [ 06:40 ] no topo da sua tela. Então, observe que do lado do símbolo de engrenagem, a gente tem aqui um fixar no topo.
+[ 06:49 ] Por padrão, a tela organiza os painéis por ordem alfabética. O fixar é exatamente para que você encontre de forma mais fácil o painel que você utiliza para trabalho.
+[ 06:59 ] Então, se a gente manda fixar um painel, ele é automaticamente destacado na parte superior da tela.
+[ 07:07 ] Para que você visualize as fases do painel, basta clicar aqui no abrir, e ele traz para a gente as fases que a gente configurou [ 07:16 ] com seus respectivos nomes. E no nosso caso aqui, ainda não existe nenhum card, tá?
+[ 07:22 ] Mas aqui as fases já são apresentadas.
+[ 07:26 ] Lembrando que todas as opções de edição são apenas para os usuários que estão com permissão para isso, né, permissão para ser administrador do painel.
+[ 07:38 ] Essa é a nossa pílula de conhecimento de hoje, tá? Usem o painel para agregar valor ao seu negócio e, principalmente, para agregar valor ao negócio do seu cliente.
+[ 07:51 ] Traga para ele o painel com uma uma solução de acompanhamento e de resultado dentro de um determinado período.
+[ 07:59 ] A gente se vê em um próximo vídeo e até logo.

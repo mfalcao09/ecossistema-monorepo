@@ -1,0 +1,26 @@
+[00:00] Início do vídeo
+[00:05] Instrutor sentado em frente ao notebook
+[00:37] Tela do Facebook
+[00:40] Instrutor clicando no ícone de menu
+[00:44] Instrutor clicando na opção de "Páginas"
+[00:47] Instrutor clicando na opção de "Criar novo perfil ou página"
+[00:48] Instrutor selecionando a opção de "Página pública"
+[00:50] Instrutor clicando no botão de "Avançar"
+[00:52] Instrutor clicando no botão de "Começar"
+[00:53] Instrutor digitando o nome da página "Doces da Silva"
+[01:03] Instrutor digitando a categoria "Restaurante"
+[01:05] Instrutor digitando a biografia "Os melhores doces do Brasil"
+[01:08] A página está sendo criada
+[01:19] Instrutor preenchendo as informações de contato
+[01:25] Instrutor digitando o site "docesdasil.com.br"
+[01:28] Instrutor digitando o telefone "(31) 999999999"
+[01:30] Instrutor digitando o email "doces@contato.com.br"
+[01:32] Instrutor selecionando a opção "Sempre aberto" para o horário de funcionamento
+[01:34] Instrutor clicando no botão de "Avançar"
+[01:36] Tela de personalização da página, com as opções para adicionar foto de perfil e capa
+[02:11] Instrutor clicando no botão de "Pular"
+[02:13] Instrutor clicando no botão de "Avançar"
+[02:16] Instrutor clicando no botão de "Concluir"
+[02:20] Tela da página criada
+[02:32] Instrutor explicando a importância da página
+[02:57] Fim do vídeo

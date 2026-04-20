@@ -22,6 +22,49 @@ interface DisciplinaReal {
   docente_titulacao: string | null
 }
 
+// Dados reais do aluno — opcionais. Quando fornecidos, LivePreview
+// renderiza valores ao lado dos labels (modo "documento").
+// Quando não fornecidos, renderiza como template (modo "config preview").
+export interface LivePreviewDadosAluno {
+  nome?: string | null
+  nome_social?: string | null
+  cpf?: string | null
+  rg_numero?: string | null
+  rg_orgao?: string | null
+  rg_uf?: string | null
+  data_nascimento?: string | null   // já formatada DD/MM/AAAA
+  sexo?: string | null
+  nacionalidade?: string | null
+  naturalidade?: string | null
+}
+
+export interface LivePreviewDadosCurso {
+  curso_nome?: string | null
+  grau?: string | null
+  titulo_conferido?: string | null
+  ra?: string | null
+  turno?: string | null
+  modalidade?: string | null
+  carga_horaria_total?: number | null
+  reconhecimento?: string | null
+  renovacao_reconhecimento?: string | null
+  forma_ingresso?: string | null
+  data_ingresso?: string | null     // já formatada
+  data_conclusao?: string | null
+  data_colacao?: string | null
+  data_expedicao?: string | null
+  numero_registro?: string | null
+  livro?: string | null
+  folha?: string | null
+  processo?: string | null
+}
+
+export interface LivePreviewAssinante {
+  nome: string
+  cargo: string
+  cpf?: string | null
+}
+
 interface LivePreviewProps {
   camposAluno: HistoricoCampoAlunoConfig[]
   colunas: HistoricoColunaConfig[]
@@ -40,6 +83,11 @@ interface LivePreviewProps {
   isFullscreen?: boolean
   onToggleFullscreen?: () => void
   onColumnClick?: (campo: string) => void
+  // Dados reais do documento (opcionais — modo emissão)
+  dadosAluno?: LivePreviewDadosAluno
+  dadosCurso?: LivePreviewDadosCurso
+  dadosAssinantes?: LivePreviewAssinante[]
+  codigoVerificacao?: string | null
 }
 
 // ══════════════════════════════════════════════════════════════
@@ -286,8 +334,27 @@ export default function LivePreview({
   timbradoUrl,
   margens,
   textoRodape,
+  dadosAluno,
+  dadosCurso,
+  dadosAssinantes,
+  codigoVerificacao,
 }: LivePreviewProps) {
-  const displayDisciplinas = disciplinas.length > 0 ? disciplinas : SAMPLE_DISCIPLINAS
+  // Modo "documento real" — renderiza valores ao lado dos labels
+  const modoReal = Boolean(dadosAluno || dadosCurso)
+  // Em modo real com disciplinas vazias, não cai no mock — mostra tabela vazia
+  const displayDisciplinas = disciplinas.length > 0
+    ? disciplinas
+    : (modoReal ? [] : SAMPLE_DISCIPLINAS)
+
+  // Helper: renderiza valor inline ao lado do label (só em modo real)
+  const val = (v?: string | number | null) => {
+    if (!modoReal) return null
+    if (v === null || v === undefined || v === '') return null
+    return <span className="font-normal text-gray-900 ml-1">{v}</span>
+  }
+
+  // Órgão + UF formatado: "SSP/MS"
+  const rgOrgaoUf = [dadosAluno?.rg_orgao, dadosAluno?.rg_uf].filter(Boolean).join('/')
   const fonteCab = tamanhoFonteCabecalho
   const fonteCorpo = tamanhoFonteCorpo
 
@@ -419,33 +486,42 @@ export default function LivePreview({
                 <div className="border border-gray-500" style={{ fontSize: `${fonteCab}pt` }}>
                   <div className="border-b border-gray-500 px-1.5 py-0.5">
                     <span className="font-bold text-gray-800">Nome do Aluno:</span>
+                    {val(dadosAluno?.nome)}
                   </div>
                   <div className="border-b border-gray-500 px-1.5 py-0.5">
                     <span className="font-bold text-gray-800">Nome Social:</span>
+                    {val(dadosAluno?.nome_social)}
                   </div>
                   <div className="flex border-b border-gray-500">
                     <div style={{ width: '25%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">RG:</span>
+                      {val(dadosAluno?.rg_numero)}
                     </div>
                     <div style={{ width: '20%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Órgão/UF:</span>
+                      {val(rgOrgaoUf || null)}
                     </div>
                     <div style={{ width: '30%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">CPF:</span>
+                      {val(dadosAluno?.cpf)}
                     </div>
                     <div style={{ width: '25%' }} className="px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">DN:</span>
+                      {val(dadosAluno?.data_nascimento)}
                     </div>
                   </div>
                   <div className="flex">
                     <div style={{ width: '18%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Sexo:</span>
+                      {val(dadosAluno?.sexo)}
                     </div>
                     <div style={{ width: '45%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Naturalidade:</span>
+                      {val(dadosAluno?.naturalidade)}
                     </div>
                     <div style={{ width: '37%' }} className="px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Nacionalidade:</span>
+                      {val(dadosAluno?.nacionalidade)}
                     </div>
                   </div>
                 </div>
@@ -457,56 +533,71 @@ export default function LivePreview({
                   <div className="flex border-b border-gray-500">
                     <div style={{ width: campoAtivo('modalidade') ? '48%' : '58%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Curso:</span>
+                      {val(dadosCurso?.curso_nome)}
                     </div>
                     <div style={{ width: campoAtivo('modalidade') ? '14%' : '20%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">RA:</span>
+                      {val(dadosCurso?.ra)}
                     </div>
                     <div style={{ width: campoAtivo('modalidade') ? '16%' : '22%' }} className={`px-1.5 py-0.5${campoAtivo('modalidade') ? ' border-r border-gray-500' : ''}`}>
                       <span className="font-bold text-gray-800">Turno:</span>
+                      {val(dadosCurso?.turno)}
                     </div>
                     {campoAtivo('modalidade') && (
                       <div style={{ width: '22%' }} className="px-1.5 py-0.5">
                         <span className="font-bold text-gray-800">Modalidade:</span>
+                        {val(dadosCurso?.modalidade)}
                       </div>
                     )}
                   </div>
                   <div className="border-b border-gray-500 px-1.5 py-0.5">
                     <span className="font-bold text-gray-800">Reconhecimento:</span>
+                    {val(dadosCurso?.reconhecimento)}
                   </div>
                   <div className="border-b border-gray-500 px-1.5 py-0.5">
                     <span className="font-bold text-gray-800">Renovação de Reconhecimento:</span>
+                    {val(dadosCurso?.renovacao_reconhecimento)}
                   </div>
                   <div className="flex border-b border-gray-500">
                     <div style={{ width: '38%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Forma de Ingresso:</span>
+                      {val(dadosCurso?.forma_ingresso)}
                     </div>
                     <div style={{ width: '30%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Data de Ingresso:</span>
+                      {val(dadosCurso?.data_ingresso)}
                     </div>
                     <div style={{ width: '32%' }} className="px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Data de Conclusão:</span>
+                      {val(dadosCurso?.data_conclusao)}
                     </div>
                   </div>
                   <div className="flex border-b border-gray-500">
                     <div style={{ width: '50%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Data da Colação de Grau:</span>
+                      {val(dadosCurso?.data_colacao)}
                     </div>
                     <div style={{ width: '50%' }} className="px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Data de Expedição do Diploma:</span>
+                      {val(dadosCurso?.data_expedicao)}
                     </div>
                   </div>
                   <div className="flex">
                     <div style={{ width: '25%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Registro nº:</span>
+                      {val(dadosCurso?.numero_registro)}
                     </div>
                     <div style={{ width: '25%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Livro nº:</span>
+                      {val(dadosCurso?.livro)}
                     </div>
                     <div style={{ width: '25%' }} className="border-r border-gray-500 px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Folhas nº:</span>
+                      {val(dadosCurso?.folha)}
                     </div>
                     <div style={{ width: '25%' }} className="px-1.5 py-0.5">
                       <span className="font-bold text-gray-800">Processo:</span>
+                      {val(dadosCurso?.processo)}
                     </div>
                   </div>
                 </div>
@@ -656,34 +747,51 @@ export default function LivePreview({
                     <span className="text-gray-400" style={{ fontSize: '7pt' }}>QR Code</span>
                   </div>
                   <div className="flex-1">
-                    <p className="font-bold text-gray-500 mb-1" style={{ fontSize: '8pt' }}>
+                    <p className={`font-bold mb-1 ${modoReal ? 'text-gray-700' : 'text-gray-500'}`} style={{ fontSize: '8pt' }}>
                       Signatários do documento
                     </p>
                     <div className="space-y-1">
-                      <div className="border-b border-dotted border-gray-300 pb-1">
-                        <p className="text-gray-400" style={{ fontSize: '7pt' }}>
-                          - Documento gerado por: (Assinatura Digital ICP-Brasil)
-                        </p>
-                        <p className="text-gray-400" style={{ fontSize: '7pt' }}>
-                          DD/MM/AAAA, HH:MM:SS, NOME DO SIGNATÁRIO, Cargo
-                        </p>
-                      </div>
-                      <div className="border-b border-dotted border-gray-300 pb-1">
-                        <p className="text-gray-400" style={{ fontSize: '7pt' }}>
-                          - Documento conferido por: (Assinatura Digital ICP-Brasil)
-                        </p>
-                        <p className="text-gray-400" style={{ fontSize: '7pt' }}>
-                          DD/MM/AAAA, HH:MM:SS, NOME DO SIGNATÁRIO, Cargo
-                        </p>
-                      </div>
+                      {modoReal && dadosAssinantes && dadosAssinantes.length > 0 ? (
+                        // Modo real: lista os assinantes reais
+                        dadosAssinantes.map((a, i) => (
+                          <div key={i} className="border-b border-dotted border-gray-300 pb-1">
+                            <p className="text-gray-700" style={{ fontSize: '7pt' }}>
+                              - {i === 0 ? 'Documento gerado por' : 'Documento conferido por'}: (Assinatura Digital ICP-Brasil)
+                            </p>
+                            <p className="text-gray-600" style={{ fontSize: '7pt' }}>
+                              {a.nome}{a.cargo ? `, ${a.cargo}` : ''}{a.cpf ? ` — CPF ${a.cpf}` : ''}
+                            </p>
+                          </div>
+                        ))
+                      ) : (
+                        // Modo template: placeholders
+                        <>
+                          <div className="border-b border-dotted border-gray-300 pb-1">
+                            <p className="text-gray-400" style={{ fontSize: '7pt' }}>
+                              - Documento gerado por: (Assinatura Digital ICP-Brasil)
+                            </p>
+                            <p className="text-gray-400" style={{ fontSize: '7pt' }}>
+                              DD/MM/AAAA, HH:MM:SS, NOME DO SIGNATÁRIO, Cargo
+                            </p>
+                          </div>
+                          <div className="border-b border-dotted border-gray-300 pb-1">
+                            <p className="text-gray-400" style={{ fontSize: '7pt' }}>
+                              - Documento conferido por: (Assinatura Digital ICP-Brasil)
+                            </p>
+                            <p className="text-gray-400" style={{ fontSize: '7pt' }}>
+                              DD/MM/AAAA, HH:MM:SS, NOME DO SIGNATÁRIO, Cargo
+                            </p>
+                          </div>
+                        </>
+                      )}
                     </div>
                     <div className="mt-2 flex items-center gap-2">
-                      <p className="text-gray-400" style={{ fontSize: '6.5pt' }}>
-                        Código de verificação: XXXX-XXXX-XXXX-XXXX
+                      <p className={modoReal ? 'text-gray-600' : 'text-gray-400'} style={{ fontSize: '6.5pt' }}>
+                        Código de verificação: {codigoVerificacao || 'XXXX-XXXX-XXXX-XXXX'}
                       </p>
                     </div>
-                    <p className="text-gray-400" style={{ fontSize: '6.5pt' }}>
-                      Histórico escolar digital: https://ficcassilandia.com.br/historico/XXXX
+                    <p className={modoReal ? 'text-gray-600' : 'text-gray-400'} style={{ fontSize: '6.5pt' }}>
+                      Histórico escolar digital: https://ficcassilandia.com.br/historico/{codigoVerificacao || 'XXXX'}
                     </p>
                   </div>
                 </div>

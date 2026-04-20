@@ -8,6 +8,11 @@ const nextConfig = {
   // Desabilita header X-Powered-By (expõe que é Next.js)
   poweredByHeader: false,
 
+  // Puppeteer + Chromium não podem ser empacotados pelo webpack —
+  // precisam ficar no node_modules do runtime (o @sparticuz/chromium
+  // extrai o binary em /tmp em runtime).
+  serverExternalPackages: ['@sparticuz/chromium', 'puppeteer-core'],
+
   images: {
     remotePatterns: [
       {
@@ -86,8 +91,8 @@ const nextConfig = {
               "font-src 'self' data:",
               // Conexões: whitelist estrita
               "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.upstash.io https://challenges.cloudflare.com https://openrouter.ai https://www.bry.com.br https://*.amazonaws.com",
-              // Frames: self (modal RVDD/PDF proxy) + Cloudflare Turnstile
-              "frame-src 'self' https://challenges.cloudflare.com",
+              // Frames: self + blob (prévia PDF inline) + Cloudflare Turnstile
+              "frame-src 'self' blob: https://challenges.cloudflare.com",
               // Workers: self (para Web Crypto e Service Workers)
               "worker-src 'self' blob:",
               // Bloqueia plugins (Flash, Java, etc.)

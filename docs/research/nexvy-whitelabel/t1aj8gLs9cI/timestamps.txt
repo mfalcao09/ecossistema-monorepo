@@ -1,0 +1,34 @@
+[00:00] Título do vídeo
+[00:05] Abertura com a apresentadora
+[00:29] Tela da plataforma Helena com a apresentadora no canto inferior esquerdo
+[00:30] Clique no botão "Admin"
+[00:37] Menu drop down do botão "Admin"
+[00:38] Clique no botão "Contas"
+[00:41] Tela de contas da plataforma
+[00:42] Clique no botão "Novo"
+[00:43] Tela de "Dados da empresa"
+[01:03] Preenchimento do campo "Nome fantasia"
+[01:06] Preenchimento do campo "CNPJ"
+[01:09] Preenchimento do campo "Razão social"
+[01:17] Clique em "Editar fotografia da empresa"
+[01:35] Menu drop down do botão "Situação"
+[01:46] Seleciona o botão "Produção"
+[02:02] Seleciona o botão "Cancelado"
+[02:06] Seleciona o botão "Demonstração"
+[02:10] Seleciona o botão "Produção"
+[02:22] Preenchimento do campo "Nome"
+[02:23] Preenchimento do campo "Telefone"
+[02:24] Preenchimento do campo "E-mail"
+[02:25] Preenchimento do campo "CEP"
+[02:26] Preenchimento do campo "Rua"
+[02:27] Preenchimento do campo "Bairro"
+[02:27] Preenchimento do campo "Estado"
+[02:28] Preenchimento do campo "Número"
+[02:28] Preenchimento do campo "Cidade"
+[02:29] Preenchimento do campo "Complemento"
+[02:31] Menu drop down do botão "Plano"
+[02:34] Seleciona o botão "Plano teste gravação"
+[02:47] Altera o número de usuários para 2
+[02:54] Clique no botão "Salvar"
+[02:56] Retorno da apresentadora
+[03:14] Encerramento do vídeo

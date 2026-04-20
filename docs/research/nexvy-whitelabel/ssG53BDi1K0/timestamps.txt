@@ -1,0 +1,40 @@
+[00:00] Título do vídeo "Card CRM" em tela escura.
+[00:05] A apresentadora Alessandra Souza se apresenta.
+[00:37] Navegando até CRM > Painéis para mostrar os painéis existentes.
+[00:49] Acessa o painel "Comercial" clicando em "Abrir".
+[00:52] Exibição das três colunas do painel: "Inicial", "Contrato" e "Concluído".
+[01:11] Mostra como criar um novo card clicando em "Novo Item".
+[01:20] Tela de criação de "Novo Item", onde é possível preencher título, descrição, contatos e valor atribuído.
+[01:56] Demonstra a definição de vencimento para o card.
+[02:08] Atribuindo um responsável para o card.
+[02:32] Criando e adicionando uma nova etiqueta "Cliente".
+[02:51] A etiqueta "Cliente" é adicionada ao card.
+[02:55] A apresentadora menciona as outras formas de criação de cards (chatbot e integração).
+[03:21] Mostra o card "Lead" já criado e preenchido.
+[03:31] Adicionando um contato existente ao card.
+[03:43] Demonstra a criação de um novo contato dentro do card.
+[03:55] Visualização de atendimento aberto no contato associado ao card.
+[04:00] Redirecionamento para a tela de atendimento ao clicar no atendimento.
+[04:15] Duplicando um card existente.
+[04:29] Alterando o título do card duplicado.
+[04:47] Arquivando um card.
+[04:59] Recarregando a página e o card arquivado não aparece mais.
+[05:14] Mostra como visualizar itens arquivados e desarquivar um card.
+[05:27] Voltando à visualização normal do painel com os cards ativos.
+[05:51] Abrindo a edição de campos para personalizar o card.
+[05:55] Ocultando o campo de descrição.
+[06:01] Adicionando um novo campo personalizado do tipo "Texto curto" chamado "Sexo".
+[06:23] O novo campo "Sexo" aparece na edição do card.
+[06:45] Movimentando o card "Lead" da coluna "Inicial" para "Contrato".
+[06:58] O card "Lead" é movido para a coluna "Contrato".
+[07:18] Demonstra como visualizar e mover cards diretamente da tela de atendimento.
+[07:49] Movendo o card "Lead" da tela de atendimento para a coluna "Concluído" no painel.
+[08:04] Voltando ao painel do CRM para mostrar a movimentação do card para "Concluído".
+[08:31] Acessando os filtros do CRM.
+[08:44] Filtrando por itens do próprio usuário.
+[08:58] Filtrando por responsável ("Aline Medeiros").
+[09:10] Mostra a opção de filtro por campos personalizados.
+[09:18] Demonstra a "Busca avançada" com diversas opções de filtro.
+[09:44] Botão de exportação de cards.
+[09:56] Alterando a visualização dos cards de "Kanban" para "Lista".
+[10:12] A apresentadora conclui o vídeo.

@@ -1,0 +1,79 @@
+Aqui está um mapeamento exaustivo dos momentos importantes do vídeo:
+[00:00] Início do vídeo, tela inicial do sistema.
+[00:13] Início da explicação sobre a funcionalidade de sequências.
+[01:14] Exibição de um bloco de notas com o exemplo de uma sequência de mensagens.
+[01:33] Realce da mensagem de agradecimento 2h após o procedimento.
+[01:46] Realce da mensagem de instruções de cuidado 1 dia após o procedimento.
+[02:00] Realce do chat bot para questionar se está tudo bem 3 dias após o procedimento.
+[02:18] Realce do chat bot para pesquisa de satisfação 30 dias após o processo.
+[02:34] Realce da mensagem sugerindo um retoque 6 meses após o procedimento.
+[02:51] Explicação dos três passos para configurar a sequência.
+[03:13] Acessando o menu "Ajustes".
+[03:17] Acessando "Modelos de mensagem" e clicando em "Novo".
+[03:18] Selecionando o tipo de modelo "Sequência".
+[03:25] Tela de criação do modelo de mensagem de sequência.
+[03:46] Filtro por tipo "Sequência" mostrando os modelos já criados.
+[04:13] Retornando ao bloco de notas com o exemplo da sequência.
+[04:21] Acessando o menu "Apps" e "Chatbot".
+[04:25] Clicando em "Chatbots para automação".
+[04:27] Clicando em "Novo" para criar um chatbot de automação.
+[04:33] Selecionando a disponibilidade "Envio em sequências".
+[04:52] Chatbots de automação já criados para a demonstração.
+[05:21] Visualização da configuração de um chatbot de avaliação.
+[05:54] Acessando o menu "Apps" e "Sequências".
+[05:57] Clicando em "Nova sequência" e nomeando-a como "Pós processo cirúrgico".
+[06:16] Tela de configuração da sequência "Pós processo cirúrgico".
+[06:31] Alternando para a aba "Contatos" na tela de sequência.
+[06:55] Acessando o menu "Apps" e "Chatbot" para mostrar a adição de sequência via chatbot.
+[07:03] Abertura de um chatbot de exemplo.
+[07:10] Clicando no "+" para adicionar uma ação no chatbot.
+[07:27] Selecionando a ação "Adicionar/remover sequência".
+[07:30] Selecionando a ação "Adicionar sequência".
+[07:36] Selecionando a sequência "Pós processo cirúrgico".
+[08:06] Demonstração de adição de sequência via atendimento.
+[08:10] Abrindo o contato "Rick" no atendimento.
+[08:14] Clicando no ícone de detalhes do contato.
+[08:18] Acessando a seção "Sequências" e clicando em "+" para adicionar.
+[08:21] Selecionando a sequência "Pós processo cirúrgico" para vincular ao contato.
+[08:44] Retornando à tela de sequências em "Apps".
+[08:47] Clicando na sequência "Pós processo cirúrgico" para adicionar as etapas.
+[08:50] Clicando no "+" para "Criar etapa".
+[08:52] Exibição das opções de conteúdo (enviar chatbot ou modelo de mensagem) e programação.
+[09:30] Retornando ao bloco de notas com o plano da sequência.
+[09:33] Selecionando "Enviar modelo de mensagem" e o modelo "Agradecimento".
+[09:44] Configurando o atraso para "2 horas" e horário limite das 08:00 às 18:00.
+[09:55] Primeira etapa da sequência configurada (agradecimento após 2 horas).
+[00:59] Retornando ao bloco de notas para a segunda etapa.
+[10:05] Clicando no "+" para adicionar uma nova etapa.
+[10:14] Selecionando "Enviar modelo de mensagem" e o modelo "Orientação pós cirurgia".
+[10:27] Configurando o atraso para "1 dia" e horário limite das 08:00 às 18:00.
+[10:32] Segunda etapa da sequência configurada (orientação pós cirurgia após 1 dia).
+[10:39] Explicação importante sobre o cálculo do atraso da sequência (baseado na última ação).
+[11:12] Retornando ao bloco de notas para a terceira etapa.
+[11:16] Clicando no "+" para adicionar uma nova etapa.
+[11:21] Selecionando "Enviar chatbot" e o chatbot "Avaliação".
+[11:27] Configurando o atraso para "3 dias" e horário limite das 08:00 às 18:00.
+[11:30] Terceira etapa da sequência configurada (chatbot avaliação após 3 dias).
+[12:13] Retornando ao bloco de notas para a quarta etapa.
+[12:21] Clicando no "+" para adicionar uma nova etapa.
+[12:26] Selecionando "Enviar chatbot" e o chatbot "Satisfação com o Botox".
+[12:32] Configurando o atraso para "30 dias" e horário limite das 08:00 às 18:00.
+[12:41] Quarta etapa da sequência configurada (chatbot satisfação após 30 dias).
+[12:56] Retornando ao bloco de notas para a quinta etapa.
+[13:03] Clicando no "+" para adicionar uma nova etapa.
+[13:08] Selecionando "Enviar modelo de mensagem" e o modelo "Retoque no procedimento de Botox".
+[13:17] Configurando o atraso para "6 meses" e horário limite das 08:00 às 18:00.
+[13:42] Todas as cinco etapas da sequência "Pós processo cirúrgico" configuradas.
+[13:49] Início da explicação de como vincular contatos à sequência.
+[13:53] Primeira forma: Cadastro do contato (visualizado em Atendimentos).
+[14:02] Clicando no lápis para editar as sequências do contato.
+[14:10] Selecionando a sequência "Pós processo cirúrgico" para vincular.
+[14:15] Removendo o contato da sequência através do mesmo campo.
+[14:25] Segunda forma: Através do próprio bot.
+[15:06] Acessando "Apps", "Chatbot" e abrindo o bot "Teste".
+[15:13] Clicando na opção "Falar com financeiro" dentro do bot.
+[15:31] Clicando no "+" para adicionar uma ação.
+[15:33] Selecionando a opção "Ações" e "Adicionar/remover sequência".
+[15:38] Selecionando a opção "Adicionar sequência" e escolhendo a sequência "Pós processo cirúrgico".
+[15:52] Terceira forma: Integração via API.
+[15:59] Explicação breve sobre integração via API.

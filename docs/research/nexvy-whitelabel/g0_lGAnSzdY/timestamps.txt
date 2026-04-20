@@ -1,0 +1,47 @@
+É claro! Segue o mapeamento dos momentos importantes do vídeo:
+
+[00:00] Título do vídeo "Consulta e edição de contatos".
+[00:05] Breno Santos, Analista de Sucesso do Cliente, se apresenta.
+[00:10] O vídeo mostra a tela inicial da plataforma Helena.
+[00:30] O apresentador começa a mostrar como fazer a consulta e edição de contatos.
+[00:34] Clica em "CRM".
+[00:36] Clica em "Contatos".
+[00:37] Exibição da tela "Contatos" com a lista de contatos.
+[00:46] Clica na caixa de pesquisa.
+[00:49] Expansão do menu de filtros de pesquisa.
+[00:50] Mostra os filtros disponíveis para pesquisa: Nome, Telefone, Instagram, E-mail.
+[00:58] Demonstra o filtro de etiquetas (Contém ou Exceto).
+[01:14] Demonstra o filtro de "Origem" (Criado manualmente, Criado automaticamente, Importado).
+[01:28] Demonstra o filtro de "Carteiras".
+[01:33] Demonstra o filtro de "Data de importação".
+[01:36] Demonstra o filtro de campos personalizados (Ramo Principal, Vestuário, Alimentação, Armarinho, Papelaria, CNPJ/CPF).
+[01:45] Digita "Cliente" no campo "Nome" para pesquisar.
+[01:53] Resultado da pesquisa filtrado pelo nome "Cliente 1".
+[02:04] Clica no contato "Cliente 1" para exibir os detalhes.
+[02:05] Exibição do painel "Dados do contato" com informações detalhadas do contato.
+[02:22] Clica no ícone de "Editar".
+[02:26] A tela de "Dados do contato" muda para o modo de edição dos campos padrão.
+[02:37] Adiciona uma etiqueta "Oportunidade" ao contato.
+[02:40] Clica em "Salvar etiquetas".
+[02:44] Altera a carteira do cliente, selecionando "Carteira 1".
+[02:45] Clica em "Salvar".
+[02:47] Adiciona uma sequência, selecionando "Sequência 1".
+[02:49] Clica em "Salvar".
+[03:00] Clica em "Adicionar/alterar campos personalizados".
+[03:06] A tela "Edição de campos personalizados" é exibida, mostrando campos existentes e opções para adicionar novos.
+[03:17] Clica em "Adicionar um novo campo".
+[03:19] A tela "Adicionar novo campo personalizado" é exibida.
+[03:22] Mostra as opções de "Tipo" do campo personalizado (Texto curto, Texto longo, Número inteiro, Número decimal, Lista de opções, Multiseleção, Horário, Data, Data e hora, Moedário, Link, CPF/CNPJ, CEP).
+[03:34] Seleciona "Data e hora" como tipo de campo.
+[03:38] Digita "Horário da venda" no campo "Nome".
+[03:52] Clica em "Salvar".
+[03:55] Clica em "Salvar alterações".
+[03:58] O campo personalizado "Horário da venda" é adicionado ao contato.
+[04:06] Preenche o campo "Horário da venda" com "18/01/1990 10:00".
+[04:16] Mostra o campo "Notas Internas".
+[04:29] Digita uma nota interna: "Cliente de demonstração".
+[04:35] Clica em "Salvar".
+[04:39] O apresentador conclui o vídeo.
+[04:50] Tela final da Academia Helena.
+
+Espero que este mapeamento seja útil!
