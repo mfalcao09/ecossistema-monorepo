@@ -1,0 +1,20 @@
+# Qualquer arquivo não coberto abaixo → Marcelo revisa
+* @mfalcao09
+
+# Segurança e governança (aprovação obrigatória — Art. II V9)
+/packages/constitutional-hooks/   @mfalcao09
+/packages/credentials/            @mfalcao09
+/infra/supabase/migrations/       @mfalcao09
+
+# Documentação canônica
+/docs/masterplans/                @mfalcao09
+/docs/adr/                        @mfalcao09
+/CLAUDE.md                        @mfalcao09
+/MEMORY.md                        @mfalcao09
+
+# Templates C-Suite — impacto cross-negócio
+/packages/c-suite-templates/      @mfalcao09
+
+# CI/CD e infra
+/.github/                         @mfalcao09
+/infra/                           @mfalcao09

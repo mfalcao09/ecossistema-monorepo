@@ -1,0 +1,42 @@
+Aqui está o mapeamento exaustivo dos momentos importantes no vídeo:
+
+[00:00] Título do vídeo: "Grupos na prática"
+[00:05] Apresentação da Analista de Sucesso do Cliente
+[00:13] Tela inicial da plataforma Atendi
+[00:16] Cliques em "Apps" e "Mais apps" para acessar a lista de aplicativos
+[00:23] Rolagem para baixo para encontrar o aplicativo "Grupos"
+[00:24] Clique em "Habilitar" para ativar o aplicativo "Grupos"
+[00:25] Confirmação de que o aplicativo foi habilitado
+[00:28] Seleção do canal de atendimento para o grupo (opção "Todos os canais" ou um canal específico)
+[00:34] Clique em "Salvar" para confirmar a configuração
+[00:46] Retorno à tela de "Atendimentos" para criar um novo grupo
+[00:51] Clique nos três pontinhos e depois em "Novo grupo"
+[00:59] Tela "Controle de Acesso" para configurar as permissões do grupo
+[01:03] Seleção do canal de atendimento para o grupo
+[01:15] Opções de acesso ao grupo: "Compartilhar com todas as equipes", "Selecionar equipes" ou "Selecionar usuários individualmente"
+[01:20] Seleção da opção "Compartilhar com todas as equipes"
+[01:43] Opções de moderadores do grupo: "Todos", "Apenas administradores" ou "Selecionar usuários individualmente"
+[01:55] Seleção da opção "Todos" para moderadores
+[02:15] Clique em "Continuar" para avançar
+[02:17] Tela "Criar grupo" para definir as informações de identificação
+[02:20] Inserção do "Nome do grupo" (ex: "Grupo teste")
+[02:29] Opção de adicionar uma foto para o grupo
+[02:35] Adição de uma "Descrição do grupo" (opcional)
+[02:46] Adição de "Etiquetas" ao grupo (ex: "Cliente")
+[02:54] Clique em "Criar grupo"
+[02:57] O novo grupo "Grupo teste" aparece na aba "Meus"
+[03:04] Clique no grupo para visualizar o chat
+[03:10] Mensagem informando que é necessário deixar mensagens na fila (regra para API oficial)
+[03:20] Clique no ícone de "olhinho" para ver os detalhes do grupo
+[03:22] Tela "Dados do grupo" mostrando informações como etiquetas, descrição, canal de atendimento e link de convite
+[03:27] Opção de editar o nome do grupo
+[03:30] Opção de adicionar/remover etiquetas
+[03:35] Opção de adicionar/editar a descrição do grupo
+[03:44] Visualização de que ainda não há participantes no grupo
+[03:47] Explicação de como convidar participantes através do link de convite
+[03:53] Clique no ícone para copiar o link de convite
+[03:57] O participante "Alessandra" entrou no grupo (comportamento da plataforma)
+[04:09] Visualização de "Alessandra" como participante na tela "Dados do grupo"
+[04:13] Opção de "Alterar permissões" para modificar o acesso e os moderadores do grupo
+[04:26] Opção de "Excluir grupo"
+[04:35] Resumo final e agradecimento

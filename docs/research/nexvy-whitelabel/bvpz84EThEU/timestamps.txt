@@ -1,0 +1,33 @@
+[00:00] Início do vídeo
+[00:05] Boas-vindas ao vídeo de personalização da plataforma
+[00:11] Visão geral da tela inicial da plataforma
+[00:17] Acessando o menu de personalização da plataforma
+[00:23] Opções de configuração da plataforma
+[00:27] Submenus da tela de personalização
+[00:34] Detalhes sobre o submenu “Detalhes”
+[00:40] Opções de permissão e ativação de canais
+[00:47] Explicação de "Permitir demonstração"
+[00:54] Explicação de "Ativar canal não oficial integrado" e "Ativar canal não oficial (conta própria)"
+[01:14] Preenchimento dos campos de nome do produto e artigos
+[01:30] Preenchimento dos campos de título e descrição do login
+[01:47] Detalhes sobre o submenu “Apps”
+[01:50] Explicação do propósito demonstrativo dos valores dos apps
+[02:20] Detalhes sobre o submenu “Imagens”
+[02:26] Explicação das opções de logo e suas dimensões
+[02:37] Recomendações sobre as dimensões das imagens
+[02:59] Detalhes sobre o ícone do navegador e a logo principal
+[03:16] Detalhes sobre a logo para a tela de login
+[03:26] Detalhes sobre a logo do menu com texto
+[03:38] Detalhes sobre a logo com fundo escuro
+[03:47] Detalhes sobre a logo para e-mail e notificação
+[03:59] Detalhes sobre o submenu “Documentação”
+[04:02] Preenchimento dos campos de link do site e número de suporte
+[04:21] Detalhes sobre o link de suporte
+[04:27] Campo “Documentação sobre pagamentos” (descontinuado)
+[04:36] Detalhes sobre o submenu “Integração”
+[04:38] Criação de tokens de parceiro
+[04:45] Como criar um token
+[04:52] Confirmação da criação do token
+[05:01] Importância de salvar as alterações
+[05:10] Finalização do processo de personalização
+[05:12] Encerramento do vídeo
