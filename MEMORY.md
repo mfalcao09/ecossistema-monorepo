@@ -1,7 +1,7 @@
 # MEMORY.md — Índice Canônico de Memória
 
-> **Atualizado:** 2026-04-17 (pós-drenagem Fase 0 + saneamento pré-S12)
-> **Status:** V9 canônica ativa · Monorepo + Vercel em produção · **Fase 0 Dia 1-2 COMPLETA** — 11/11 sessões mergeadas em main · CI verde · pronto para S12-S18
+> **Atualizado:** 2026-04-19 (F1-S01 Jarvis Routing + decisão arquitetural Jarvis)
+> **Status:** V9 canônica ativa · Fase 0 MERGEADA · **Fase 1 iniciada** — F1-S01 em PR #25
 
 ---
 
@@ -215,8 +215,34 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 
 ---
 
+## Fase 1 — Status de execução
+
+| Sessão | Título | Status | PR | Notas |
+|---|---|---|---|---|
+| **F1-S01** | Jarvis WA Routing — inbound/outbound + HITL | ✅ Em PR | #25 | 19/19 testes · approval_requests Supabase ✅ · P-009/P-010 abertas |
+| F1-S02 | jarvis-app — Expo + Action Button + voz | ⏳ Próxima | — | iPhone 15 Pro Max · Evolution API backend |
+
+### Decisão arquitetural Jarvis (2026-04-19) — NÃO REVERTER
+
+**Jarvis não é um número WABA próprio.** É um assistente "Siri-like" que habita o iPhone do Marcelo.
+
+- **Evolution API** (Railway, linked device QR) lê o WhatsApp pessoal do Marcelo
+- **jarvis-app** (Expo + módulo Swift nativo) roda no iPhone 15 Pro Max
+- **Action Button** → abre Jarvis em modo voz (sem "Hey Siri")
+- **App Intents** → Apple Intelligence aprende a chamar Jarvis em contexto (iPhone 15 Pro Max tem suporte)
+- **Canal HITL F1-S01** (número WABA) → substituído por push APNs quando jarvis-app estiver pronto
+
+### Supabase ECOSYSTEM — migrações F1 aplicadas
+
+| Migration | Status | Data |
+|---|---|---|
+| `approval_requests` | ✅ Aplicada via MCP | 2026-04-19 |
+
+---
+
 ## Logs de sessões anteriores
 - `docs/sessions/logs/LOG-2026-04-15-consolidacao-monorepo.md`
 - `docs/sessions/logs/LOG-2026-04-15-contexto-pre-masterplan.md`
 - `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md`
 - `docs/sessions/logs/LOG-2026-04-17-s3-mcp-template.md`
+- `docs/sessions/logs/LOG-2026-04-19-F1-S01-jarvis-routing.md`
