@@ -18,6 +18,7 @@ import {
   type OverridePayload,
 } from "@/components/diploma/ModalOverrideRegra";
 import { PainelAuditoria } from "@/components/diploma/PainelAuditoria";
+import { EditorFluxoAssinaturas } from "@/components/diploma/EditorFluxoAssinaturas";
 import { useAuditoria } from "@/hooks/useAuditoria";
 import { fetchSeguro } from "@/lib/security/fetch-seguro";
 
@@ -2291,87 +2292,12 @@ export default function DiplomaDetalhePage() {
             </div>
           </div>
 
-          {/* Assinaturas (emissora vs registradora) */}
-          {fluxoAssinaturas.length > 0 && (
-            <div className="bg-white border border-gray-200 rounded-2xl p-5 space-y-3">
-              <h3 className="text-sm font-bold text-gray-900 flex items-center gap-2">
-                <FileSignature size={14} className="text-gray-400" />
-                Assinaturas
-              </h3>
-
-              {/* Emissora */}
-              {(() => {
-                const emissora = fluxoAssinaturas.filter(f => f.papel === "emissora").sort((a, b) => a.ordem - b.ordem);
-                if (emissora.length === 0) return null;
-                return (
-                  <div className="space-y-1.5">
-                    <p className="text-[10px] font-semibold text-blue-600 uppercase tracking-wider">Emissora (FIC)</p>
-                    {emissora.map((f) => (
-                      <div key={f.id} className="flex items-start gap-2 text-xs bg-blue-50/50 rounded-lg px-3 py-2">
-                        <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${f.status === "assinado" ? "bg-green-500" : "bg-gray-300"}`} />
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-gray-800 truncate">{f.assinante?.nome ?? "—"}</p>
-                          <p className="text-[10px] text-gray-400">
-                            {f.assinante?.cargo ?? "—"}
-                            {f.tipo_certificado ? ` · ${f.tipo_certificado}` : ""}
-                          </p>
-                        </div>
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium flex-shrink-0 ${
-                          f.status === "assinado" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"
-                        }`}>
-                          {f.status === "assinado" ? "Assinado" : "Pendente"}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                );
-              })()}
-
-              {/* Registradora */}
-              {(() => {
-                const registradora = fluxoAssinaturas.filter(f => f.papel === "registradora").sort((a, b) => a.ordem - b.ordem);
-                if (registradora.length === 0) return null;
-                return (
-                  <div className="space-y-1.5">
-                    <p className="text-[10px] font-semibold text-indigo-600 uppercase tracking-wider">Registradora (UFMS)</p>
-                    {registradora.map((f) => (
-                      <div key={f.id} className="flex items-start gap-2 text-xs bg-indigo-50/50 rounded-lg px-3 py-2">
-                        <div className={`w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0 ${f.status === "assinado" ? "bg-green-500" : "bg-gray-300"}`} />
-                        <div className="flex-1 min-w-0">
-                          <p className="font-medium text-gray-800 truncate">{f.assinante?.nome ?? "—"}</p>
-                          <p className="text-[10px] text-gray-400">
-                            {f.assinante?.cargo ?? "—"}
-                            {f.tipo_certificado ? ` · ${f.tipo_certificado}` : ""}
-                          </p>
-                        </div>
-                        <span className={`text-[10px] px-1.5 py-0.5 rounded-full font-medium flex-shrink-0 ${
-                          f.status === "assinado" ? "bg-green-100 text-green-700" : "bg-gray-100 text-gray-500"
-                        }`}>
-                          {f.status === "assinado" ? "Assinado" : "Pendente"}
-                        </span>
-                      </div>
-                    ))}
-                  </div>
-                );
-              })()}
-
-              {/* Sem papel definido */}
-              {(() => {
-                const semPapel = fluxoAssinaturas.filter(f => !f.papel);
-                if (semPapel.length === 0) return null;
-                return (
-                  <div className="space-y-1.5">
-                    <p className="text-[10px] font-semibold text-gray-400 uppercase tracking-wider">Não classificado</p>
-                    {semPapel.map((f) => (
-                      <div key={f.id} className="flex items-center gap-2 text-xs text-gray-500 px-3 py-1.5">
-                        <div className="w-1.5 h-1.5 rounded-full bg-gray-300 flex-shrink-0" />
-                        <span className="truncate">{f.assinante?.nome ?? `Ordem ${f.ordem}`}</span>
-                      </div>
-                    ))}
-                  </div>
-                );
-              })()}
-            </div>
+          {/* Fluxo de assinaturas (editor) */}
+          {diploma && (
+            <EditorFluxoAssinaturas
+              diplomaId={diploma.id}
+              diplomaStatus={diploma.status}
+            />
           )}
 
           {/* Atalho para o processo */}

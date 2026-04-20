@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { verificarAuth, erroNaoEncontrado } from "@/lib/security/api-guard";
-import { validarCSRF } from "@/lib/security/csrf";
 import { verificarRateLimitERP, adicionarHeadersRateLimit, adicionarHeadersRetryAfter } from "@/lib/security/rate-limit";
-import { logDataModification } from "@/lib/security/security-logger";
-import { registrarCustodiaAsync } from "@/lib/security/cadeia-custodia";
 import { getBryConfig, getPassosAssinaturaDinamicos } from "@/lib/bry";
 import type { TipoDocumentoBry, AssinanteBanco } from "@/lib/bry";
 
@@ -149,130 +146,25 @@ export async function GET(
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
-// POST /api/diplomas/[id]/assinar
+// POST /api/diplomas/[id]/assinar — REMOVIDO
 //
-// Modo mock (quando BRy NÃO está configurado) — simula assinatura.
-// Quando BRy ESTÁ configurado, retorna 400 orientando a usar /initialize + /finalize.
+// Este endpoint não existe mais. O modo simulação foi eliminado.
+// Use o fluxo real: /initialize → assinatura certificado A3 → /finalize
 // ─────────────────────────────────────────────────────────────────────────────
 
 export async function POST(
-  req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  _req: NextRequest,
+  _ctx: { params: Promise<{ id: string }> }
 ) {
-  const auth = await verificarAuth(req);
-  if (auth instanceof NextResponse) return auth;
-
-  const csrfError = validarCSRF(req);
-  if (csrfError) return csrfError;
-
-  const bryConfig = getBryConfig();
-
-  // Se BRy está configurado, redirecionar para as rotas initialize/finalize
-  if (bryConfig) {
-    return NextResponse.json(
-      {
-        erro: "BRy está configurado. Use as rotas /initialize e /finalize para o fluxo real de assinatura.",
-        rotas: {
-          estado: "GET /api/diplomas/{id}/assinar",
-          initialize: "POST /api/diplomas/{id}/assinar/initialize",
-          finalize: "POST /api/diplomas/{id}/assinar/finalize",
-        },
+  return NextResponse.json(
+    {
+      erro: "Este endpoint foi removido. Assinatura simulada não é mais suportada.",
+      rotas: {
+        estado: "GET /api/diplomas/{id}/assinar",
+        initialize: "POST /api/diplomas/{id}/assinar/initialize",
+        finalize: "POST /api/diplomas/{id}/assinar/finalize",
       },
-      { status: 400 }
-    );
-  }
-
-  // Modo mock (sem BRy configurado)
-  const rateLimit = await verificarRateLimitERP(req, "assinatura", auth.userId);
-  if (!rateLimit.allowed) {
-    const response = NextResponse.json(
-      { erro: "Muitas requisições." },
-      { status: 429 }
-    );
-    adicionarHeadersRetryAfter(response.headers, rateLimit);
-    return response;
-  }
-
-  const supabase = await createClient();
-  const { id: diplomaId } = await params;
-
-  try {
-    const { data: diploma } = await supabase
-      .from("diplomas")
-      .select("id, status")
-      .eq("id", diplomaId)
-      .single();
-
-    if (!diploma) return erroNaoEncontrado();
-
-    const statusPermitidos = ["xml_gerado", "aguardando_assinatura_emissora", "em_assinatura", "assinatura_com_erro"];
-    if (!statusPermitidos.includes(diploma.status)) {
-      return NextResponse.json(
-        { erro: `Status atual "${diploma.status}" não permite assinatura mock.` },
-        { status: 422 }
-      );
-    }
-
-    const { data: xmls } = await supabase
-      .from("xml_gerados")
-      .select("id, tipo, status")
-      .eq("diploma_id", diplomaId)
-      .eq("validado_xsd", true)
-      .in("status", ["gerado", "assinatura_pendente"]);
-
-    if (!xmls || xmls.length === 0) {
-      return NextResponse.json(
-        { erro: "Nenhum XML válido encontrado para assinatura mock." },
-        { status: 422 }
-      );
-    }
-
-    // Simular assinatura
-    const resultados = [];
-    for (const xml of xmls) {
-      const mockJobId = `MOCK-${crypto.randomUUID().slice(0, 8).toUpperCase()}`;
-      await supabase
-        .from("xml_gerados")
-        .update({ status: "assinado", updated_at: new Date().toISOString() })
-        .eq("id", xml.id);
-
-      resultados.push({ xml_id: xml.id, tipo: xml.tipo, status: "mock" as const, job_id: mockJobId });
-    }
-
-    await supabase
-      .from("diplomas")
-      .update({ status: "assinado", updated_at: new Date().toISOString() })
-      .eq("id", diplomaId);
-
-    // Log (non-blocking)
-    void logDataModification(req, auth.userId, "diplomas", "update", 1, {
-      acao: "assinatura_mock",
-      xmls_processados: resultados.length,
-    });
-
-    void registrarCustodiaAsync({
-      diplomaId,
-      etapa: "assinatura_emissora",
-      status: "sucesso",
-      request: req,
-      userId: auth.userId,
-      detalhes: { modo: "mock", resultados },
-    });
-
-    const response = NextResponse.json({
-      ok: true,
-      novo_status: "assinado",
-      modo: "mock",
-      aviso: "Assinatura em modo SIMULAÇÃO. Configure BRY_CLIENT_ID e BRY_CLIENT_SECRET para assinatura real via BRy.",
-      xmls: resultados,
-    });
-    adicionarHeadersRateLimit(response.headers, rateLimit);
-    return response;
-
-  } catch (err) {
-    const msg = err instanceof Error ? err.message : "Erro interno";
-    const response = NextResponse.json({ erro: msg }, { status: 500 });
-    adicionarHeadersRateLimit(response.headers, rateLimit);
-    return response;
-  }
+    },
+    { status: 410 }
+  );
 }
