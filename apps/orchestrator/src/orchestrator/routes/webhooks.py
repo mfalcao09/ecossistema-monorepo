@@ -100,7 +100,7 @@ async def process_approval(
     if not record:
         raise HTTPException(status_code=404, detail="Aprovação não encontrada")
 
-    updated = await approval_service.update_approval(
+    await approval_service.update_approval(
         approval_id, payload.decision, payload.user_id
     )
     log.info(
