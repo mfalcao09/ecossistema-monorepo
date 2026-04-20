@@ -26,6 +26,12 @@ class Settings(BaseSettings):
     # SC-29 Credential Gateway (S8)
     credential_gateway_url: str = ""
 
+    # Meta WhatsApp (WABA) — outbound + inbound webhook
+    meta_whatsapp_token: str = ""
+    meta_phone_number_id: str = ""
+    meta_webhook_verify_token: str = "ecossistema-whatsapp-verify"
+    marcelo_whatsapp_number: str = ""  # ex: "5567999990000"
+
     # Auth
     jwt_secret: str = "dev-secret-change-in-prod"
     owner_token_hash: str = ""  # sha256 hex de "owner_<token>"
