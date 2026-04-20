@@ -27,15 +27,16 @@
 | P-006 | S08 | refactor | low | `dual-write-pipeline` hoje escreve primary e mirror com o mesmo service-role client (ECOSYSTEM). Para escrever em outros projetos (ex: ERP-FIC, Intentus), expandir para carregar clients adicionais via `ecosystem_credentials.SUPABASE_SERVICE_ROLE_KEY_*` | dual-write real cross-project | 2026-04-17 |
 | P-007 | S08 | refactor | low | `dual_write_queue` tem linhas para retry mas nenhum worker drena. Criar pg_cron job ou EF que processa `status='pending' AND next_attempt_at <= now()` | resiliência de mirror fails | 2026-04-17 |
 | P-008 | S08 | test | med | Rodar `scripts/smoke-test-efs.sh` contra prod após P-001 estar feito. Script testa 5 EFs (12 asserts) | validação E2E completa | 2026-04-17 |
-| P-011 | F1-S02 | deploy | high | Aplicar migration `20260419000000_billing_idempotency.sql` no Supabase ECOSYSTEM (`gqckbunsfjgerbuiyzvn`) — cria tabela `idempotency_cache` | billing idempotência em prod | 2026-04-19 |
-| P-012 | F1-S02 | config | high | Inserir credenciais Inter sandbox no vault: `INTER_CLIENT_ID`, `INTER_CLIENT_SECRET`, `INTER_CERT_PEM`, `INTER_KEY_PEM` em `ecosystem_credentials` (project='fic', env='sandbox'). Janela: seg-sex 8h-20h Brasília (sandbox indisponível fim de semana) | teste e2e Inter sandbox | 2026-04-19 |
-| P-013 | F1-S02 | test | high | Rodar teste de integração Inter sandbox após P-012: emitir boleto, simular pagamento, validar webhook HMAC + idempotência. Confirma Art. VIII (Baixa Real) | CFO-IA autônomo no financeiro FIC | 2026-04-19 |
+| P-014 | F1-S02 | config | med | Setar `contaCorrente` da FIC nas opções do `InterClient` em produção (necessário para X-Conta-Corrente header nos endpoints de cobrança) | emissão de boletos em prod | 2026-04-20 |
+| P-015 | F1-S02 | config | med | Renovar certificado mTLS Inter sandbox antes de 20/05/2026 — acessar portal Inter, integração "TESTE BOLETO API FIC 3", baixar novo par cert+key e atualizar vault (inter-sandbox-cert-fic3, inter-sandbox-key-fic3) | testes e2e sandbox | 2026-04-20 |
 
 ## Resolvidas
 
 | ID | Sessão | Ação | Resolvida em | Commit / PR |
 |---|---|---|---|---|
-| _nenhuma ainda_ | | | | |
+| P-011 | F1-S02 | Migration `idempotency_cache` aplicada no Supabase ECOSYSTEM | 2026-04-20 | 57daa10 — Closes P-011 |
+| P-012 | F1-S02 | Credenciais Inter sandbox FIC 3 gravadas no vault (client_id, secret, cert, key) | 2026-04-20 | 57daa10 — Closes P-012 |
+| P-013 | F1-S02 | E2e Inter sandbox verde: OAuth2+mTLS, emitirBoleto, listarCobrancas | 2026-04-20 | 57daa10 — Closes P-013 |
 
 ---
 
