@@ -16,6 +16,7 @@
     "build": "tsc",
     "dev": "tsc --watch",
     "test": "vitest run",
+    "test:e2e": "vitest run tests/e2e-sandbox.test.ts",
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist"
   },

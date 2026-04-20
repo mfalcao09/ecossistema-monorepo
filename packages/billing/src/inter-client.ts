@@ -3,13 +3,14 @@ import type {
   InterClientOptions,
   BoletoInput,
   Boleto,
+  CobrancaDetalhe,
   Saldo,
   ListarCobrancasParams,
   CobrancasResponse,
   FetchFn,
 } from './types.js';
 
-const SANDBOX_BASE = 'https://cdpj.partners.uatinter.co';
+const SANDBOX_BASE = 'https://cdpj-sandbox.partners.uatinter.co';
 const PROD_BASE = 'https://cdpj.partners.bancointer.com.br';
 
 interface TokenResponse {
@@ -25,7 +26,7 @@ interface CachedToken {
 
 /**
  * Cria um fetch mTLS usando node:https com certificados PEM.
- * Usado em produção para autenticação mútua com o Banco Inter.
+ * Obrigatório em produção; sandbox também requer mTLS.
  */
 function createMtlsFetch(certPem: string, keyPem: string): FetchFn {
   const agent = new https.Agent({ cert: certPem, key: keyPem });
@@ -85,6 +86,7 @@ export class InterClient {
   private readonly baseUrl: string;
   private readonly clientId: string;
   private readonly clientSecret: string;
+  private readonly contaCorrente?: string;
   private readonly fetch: FetchFn;
   private cachedToken: CachedToken | null = null;
 
@@ -92,6 +94,7 @@ export class InterClient {
     this.baseUrl = opts.sandbox !== false ? SANDBOX_BASE : PROD_BASE;
     this.clientId = opts.clientId;
     this.clientSecret = opts.clientSecret;
+    this.contaCorrente = opts.contaCorrente;
     this.fetch = opts.fetchFn ?? createMtlsFetch(opts.certPem, opts.keyPem);
   }
 
@@ -104,7 +107,7 @@ export class InterClient {
       grant_type: 'client_credentials',
       client_id: this.clientId,
       client_secret: this.clientSecret,
-      scope: 'extrato.read boleto-cobranca.read boleto-cobranca.write',
+      scope: 'extrato.read boleto-cobranca.read boleto-cobranca.write webhook.read webhook.write',
     });
 
     const res = await this.fetch(`${this.baseUrl}/oauth/v2/token`, {
@@ -130,11 +133,18 @@ export class InterClient {
 
   private async request<T>(path: string, init?: RequestInit): Promise<T> {
     const token = await this.getToken();
+
+    // X-Conta-Corrente: obrigatório em endpoints de cobrança e banking
+    const contaCorrenteHeader = this.contaCorrente
+      ? { 'X-Conta-Corrente': this.contaCorrente }
+      : {};
+
     const res = await this.fetch(`${this.baseUrl}${path}`, {
       ...init,
       headers: {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
+        ...contaCorrenteHeader,
         ...(init?.headers ?? {}),
       },
     });
@@ -147,23 +157,39 @@ export class InterClient {
     return res.json() as Promise<T>;
   }
 
+  // ─── Cobrança ────────────────────────────────────────────────────────────
+
+  /**
+   * Emite um boleto+Pix (v3 assíncrono).
+   * Retorna codigoSolicitacao; usar consultarBoleto() para obter código de barras.
+   */
   async emitirBoleto(input: BoletoInput): Promise<Boleto> {
+    // seuNumero: máx 15 chars (limitação hard da API Inter)
+    const seuNumero = `${input.alunoId}-${input.mesRef}`.slice(0, 15);
+
     const payload = {
-      seuNumero: `${input.alunoId}-${input.mesRef}`,
+      seuNumero,
       valorNominal: input.valor,
-      vencimento: input.vencimento.toISOString().split('T')[0],
+      dataVencimento: input.vencimento.toISOString().split('T')[0],
       mensagem: { linha1: input.descricao },
       pagador: input.pagador ?? {
         cpfCnpj: '00000000000',
-        nome: 'Aluno',
+        nome: 'Aluno Teste',
         tipoPessoa: 'FISICA',
+        endereco: 'Rua Teste',
+        numero: '1',
+        bairro: 'Centro',
+        cidade: 'Belo Horizonte',
+        uf: 'MG',
+        cep: '30130010',
       },
     };
 
     const data = await this.request<{
-      nossoNumero: string;
-      codigoBarras: string;
-      linhaDigitavel: string;
+      codigoSolicitacao?: string;
+      nossoNumero?: string;
+      codigoBarras?: string;
+      linhaDigitavel?: string;
       pixCopiaECola?: string;
     }>('/cobranca/v3/cobrancas', {
       method: 'POST',
@@ -171,33 +197,73 @@ export class InterClient {
     });
 
     return {
-      nossoNumero: data.nossoNumero,
-      codigoBarras: data.codigoBarras,
-      linhaDigitavel: data.linhaDigitavel,
+      nossoNumero: data.nossoNumero ?? data.codigoSolicitacao ?? '',
+      codigoBarras: data.codigoBarras ?? '',
+      linhaDigitavel: data.linhaDigitavel ?? '',
       pixCopiaECola: data.pixCopiaECola,
+      codigoSolicitacao: data.codigoSolicitacao,
       status: 'EMITIDO',
       valor: input.valor,
       vencimento: input.vencimento.toISOString().split('T')[0],
     };
   }
 
-  async consultarSaldo(): Promise<Saldo> {
-    return this.request<Saldo>('/banking/v2/saldo');
-  }
-
-  async consultarBoleto(nossoNumero: string): Promise<Boleto> {
-    return this.request<Boleto>(`/cobranca/v3/cobrancas/${nossoNumero}`);
+  /**
+   * Consulta cobrança pelo codigoSolicitacao (UUID retornado por emitirBoleto).
+   * Retorna a cobrança completa com boleto.codigoBarras e pix.pixCopiaECola.
+   */
+  async consultarBoleto(codigoSolicitacao: string): Promise<CobrancaDetalhe> {
+    return this.request<CobrancaDetalhe>(`/cobranca/v3/cobrancas/${codigoSolicitacao}`);
   }
 
   async listarCobrancas(params: ListarCobrancasParams): Promise<CobrancasResponse> {
     const qs = new URLSearchParams({
-      dataInicio: params.dataInicio,
-      dataFim: params.dataFim,
+      dataInicial: params.dataInicio,
+      dataFinal: params.dataFim,
       ...(params.status ? { situacao: params.status } : {}),
       paginaAtual: String(params.paginaAtual ?? 0),
       itensPorPagina: String(params.itensPorPagina ?? 100),
     });
-    return this.request<CobrancasResponse>(`/cobranca/v3/cobrancas?${qs.toString()}`);
+
+    // API retorna 'cobrancas' + 'totalElementos'; normalizar para CobrancasResponse
+    const raw = await this.request<{
+      cobrancas?: Boleto[];
+      content?: Boleto[];
+      totalElementos?: number;
+      totalElements?: number;
+      totalPaginas?: number;
+      totalPages?: number;
+    }>(`/cobranca/v3/cobrancas?${qs.toString()}`);
+
+    return {
+      totalElements: raw.totalElements ?? raw.totalElementos ?? 0,
+      totalPages:    raw.totalPages    ?? raw.totalPaginas   ?? 0,
+      content:       raw.content       ?? raw.cobrancas      ?? [],
+    };
+  }
+
+  // ─── Webhook ─────────────────────────────────────────────────────────────
+
+  /**
+   * Registra (ou atualiza) a URL do webhook de boleto.
+   * Escopo necessário: webhook.write
+   */
+  async registrarWebhookBoleto(webhookUrl: string): Promise<void> {
+    await this.request<void>('/cobranca/v3/cobrancas/webhook', {
+      method: 'PUT',
+      body: JSON.stringify({ webhookUrl }),
+    });
+  }
+
+  /** Consulta o webhook de boleto cadastrado. */
+  async consultarWebhookBoleto(): Promise<{ webhookUrl: string; criacao: string; atualizacao?: string }> {
+    return this.request('/cobranca/v3/cobrancas/webhook');
+  }
+
+  // ─── Banking ─────────────────────────────────────────────────────────────
+
+  async consultarSaldo(): Promise<Saldo> {
+    return this.request<Saldo>('/banking/v2/saldo');
   }
 }
 

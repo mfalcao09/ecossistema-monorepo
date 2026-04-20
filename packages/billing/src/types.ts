@@ -1,17 +1,38 @@
 export type FetchFn = typeof globalThis.fetch;
 
-export interface InterClientOptions {
-  clientId: string;
-  clientSecret: string;
-  /** PEM-encoded client certificate (from vault INTER_CERT_PEM) */
-  certPem: string;
-  /** PEM-encoded private key (from vault INTER_KEY_PEM) */
-  keyPem: string;
-  /** default: true (sandbox) */
-  sandbox?: boolean;
-  /** Inject a custom fetch for testing */
-  fetchFn?: FetchFn;
-}
+/**
+ * Opções do InterClient.
+ *
+ * Produção + Sandbox (mTLS): certPem + keyPem obrigatórios — Inter exige mTLS em ambos os ambientes.
+ * Testes unitários: passe fetchFn para injetar mock sem certificados.
+ *
+ * contaCorrente: número da conta PJ (obrigatório em endpoints de cobrança e banking).
+ */
+export type InterClientOptions =
+  | {
+      clientId: string;
+      clientSecret: string;
+      /** PEM-encoded client certificate (from vault INTER_CERT_PEM) */
+      certPem: string;
+      /** PEM-encoded private key (from vault INTER_KEY_PEM) */
+      keyPem: string;
+      /** Número da conta corrente PJ — passado como X-Conta-Corrente nos requests */
+      contaCorrente?: string;
+      /** default: true (sandbox) */
+      sandbox?: boolean;
+      fetchFn?: FetchFn;
+    }
+  | {
+      clientId: string;
+      clientSecret: string;
+      certPem?: undefined;
+      keyPem?: undefined;
+      contaCorrente?: string;
+      /** default: true (sandbox) */
+      sandbox?: boolean;
+      /** Obrigatório quando certPem/keyPem não fornecidos (apenas testes unitários) */
+      fetchFn: FetchFn;
+    };
 
 export interface BoletoInput {
   alunoId: string;
@@ -46,6 +67,8 @@ export interface Boleto {
   codigoBarras: string;
   linhaDigitavel: string;
   pixCopiaECola?: string;
+  /** Inter v3 async: UUID retornado no POST, usar para consultar o boleto após processamento */
+  codigoSolicitacao?: string;
   status: BoletoStatusValue;
   valor: number;
   vencimento: string;
@@ -71,6 +94,33 @@ export interface ListarCobrancasParams {
   status?: BoletoStatusValue;
   paginaAtual?: number;
   itensPorPagina?: number;
+}
+
+/**
+ * Resposta do GET /cobranca/v3/cobrancas/{codigoSolicitacao}.
+ * Estrutura aninhada retornada pela API Inter v3.
+ */
+export interface CobrancaDetalhe {
+  codigoSolicitacao: string;
+  seuNumero: string;
+  dataEmissao: string;
+  dataVencimento: string;
+  valorNominal: number;
+  tipoCobranca: string;
+  situacao: BoletoStatusValue;
+  dataSituacao: string;
+  valorTotalRecebido?: number;
+  origemRecebimento?: string;
+  arquivada: boolean;
+  boleto?: {
+    nossoNumero: string;
+    codigoBarras: string;
+    linhaDigitavel: string;
+  };
+  pix?: {
+    txid: string;
+    pixCopiaECola: string;
+  };
 }
 
 export interface CobrancasResponse {

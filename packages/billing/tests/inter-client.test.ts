@@ -196,8 +196,8 @@ describe('InterClient — listarCobrancas', () => {
     await client.listarCobrancas({ dataInicio: '2026-05-01', dataFim: '2026-05-31' });
 
     const apiCall = fetchMock.mock.calls[1] as [string, RequestInit];
-    expect(apiCall[0]).toContain('dataInicio=2026-05-01');
-    expect(apiCall[0]).toContain('dataFim=2026-05-31');
+    expect(apiCall[0]).toContain('dataInicial=2026-05-01');
+    expect(apiCall[0]).toContain('dataFinal=2026-05-31');
   });
 
   it('adiciona filtro de status quando fornecido', async () => {
