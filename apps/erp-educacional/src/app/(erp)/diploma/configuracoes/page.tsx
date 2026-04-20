@@ -10,17 +10,17 @@ import {
   RefreshCw,
   FlaskConical,
   Rocket,
-  GraduationCap,
+  ExternalLink,
 } from 'lucide-react'
+import Link from 'next/link'
 import { useDiplomaConfig } from '@/hooks/useDiplomaConfig'
 import AbaInstituicao from '@/components/config/AbaInstituicao'
 import AbaVisual from '@/components/config/AbaVisual'
 import AbaIntegracao from '@/components/config/AbaIntegracao'
 import AbaRegras from '@/components/config/AbaRegras'
-import AbaVisualHistorico from '@/components/config/AbaVisualHistorico'
 import type { AmbienteSistema } from '@/types/diploma-config'
 
-type TabId = 'instituicao' | 'visual' | 'historico' | 'assinatura' | 'regras'
+type TabId = 'instituicao' | 'visual' | 'assinatura' | 'regras'
 
 const TABS: { id: TabId; label: string; icon: React.ReactNode; description: string }[] = [
   {
@@ -34,12 +34,6 @@ const TABS: { id: TabId; label: string; icon: React.ReactNode; description: stri
     label: 'Visual RVDD',
     icon: <Palette size={16} />,
     description: 'Cores, fonte e layout',
-  },
-  {
-    id: 'historico',
-    label: 'Visual Histórico',
-    icon: <GraduationCap size={16} />,
-    description: 'Aparência do histórico escolar',
   },
   {
     id: 'assinatura',
@@ -125,6 +119,21 @@ export default function DiplomaConfigPage() {
         )}
       </div>
 
+      {/* Aviso: Visual Histórico movido */}
+      <div className="mb-4 flex items-center gap-3 px-4 py-3 bg-sky-50 border border-sky-200 rounded-xl text-sky-700 text-sm">
+        <ExternalLink size={15} className="shrink-0" />
+        <span className="flex-1">
+          A configuração visual do <strong>Histórico Escolar</strong> foi movida para o módulo Secretaria.
+        </span>
+        <Link
+          href="/secretaria/configuracoes/documentos"
+          className="flex items-center gap-1 font-medium text-sky-700 hover:text-sky-900 underline underline-offset-2"
+        >
+          Acessar
+          <ExternalLink size={13} />
+        </Link>
+      </div>
+
       {/* Error */}
       {error && (
         <div className="mb-6 flex items-center gap-3 p-4 bg-red-50 border border-red-200 rounded-xl text-red-700 text-sm">
@@ -191,9 +200,6 @@ export default function DiplomaConfigPage() {
               )}
               {abaAtiva === 'visual' && (
                 <AbaVisual config={config} saving={saving} ambiente={ambiente} onSave={saveConfig} />
-              )}
-              {abaAtiva === 'historico' && (
-                <AbaVisualHistorico config={config} saving={saving} onSave={saveConfig} />
               )}
               {abaAtiva === 'assinatura' && (
                 <AbaIntegracao config={config} saving={saving} onSave={saveConfig} />

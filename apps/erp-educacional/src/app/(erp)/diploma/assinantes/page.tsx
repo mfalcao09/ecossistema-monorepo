@@ -40,6 +40,7 @@ interface Assinante {
   id: string;
   nome: string;
   cpf: string;
+  email: string | null;
   cargo: string;
   outro_cargo: string | null;
   tipo_certificado: "eCPF" | "eCNPJ";
@@ -57,6 +58,7 @@ interface Instituicao {
 const FORM_VAZIO = {
   nome: "",
   cpf: "",
+  email: "",
   cargo: "reitor" as string,
   outro_cargo: "",
   tipo_certificado: "eCPF" as "eCPF" | "eCNPJ",
@@ -403,6 +405,7 @@ function ModalAssinante({ editando, instituicaoId, totalEcnpjAtual, onSalvar, on
       ? {
           nome: editando.nome,
           cpf: formatCPF(editando.cpf),
+          email: editando.email ?? "",
           cargo: editando.cargo,
           outro_cargo: editando.outro_cargo ?? "",
           tipo_certificado: editando.tipo_certificado,
@@ -471,9 +474,12 @@ function ModalAssinante({ editando, instituicaoId, totalEcnpjAtual, onSalvar, on
     setErro("");
 
     try {
+      const emailLimpo = form.email.trim() || null;
+
       const payload = {
         nome: nomeLimpo,
         cpf: docLimpo,
+        email: emailLimpo,
         cargo: isEcnpj ? "outro" : form.cargo,
         outro_cargo: isEcnpj ? "IES Emissora" : (form.cargo === "outro" ? form.outro_cargo.trim() : null),
         tipo_certificado: form.tipo_certificado,
@@ -639,6 +645,23 @@ function ModalAssinante({ editando, instituicaoId, totalEcnpjAtual, onSalvar, on
                 isEcnpj && iesEmissora ? "bg-gray-50 text-gray-600 cursor-not-allowed" : ""
               }`}
             />
+          </div>
+
+          {/* E-mail — obrigatório para BRy Easy Signer */}
+          <div>
+            <label className="block text-sm font-semibold text-gray-700 mb-1">
+              E-mail <span className="text-red-500">*</span>
+            </label>
+            <input
+              type="email"
+              value={form.email}
+              onChange={(e) => setForm((p) => ({ ...p, email: e.target.value }))}
+              placeholder="email@instituicao.edu.br"
+              className="w-full border border-gray-300 rounded-lg px-3 py-2.5 text-sm focus:outline-none focus:ring-2 focus:ring-primary-500"
+            />
+            <p className="mt-1 text-xs text-gray-400">
+              Usado para notificações BRy Easy Signer e envio do convite de assinatura de documentos PDF.
+            </p>
           </div>
 
           {/* Cargo — só aparece para eCPF */}
@@ -1058,6 +1081,10 @@ export default function AssinantesPage() {
                   <div className="flex items-center gap-3 mt-0.5">
                     <span className="text-xs text-gray-500">{cargoLabel}</span>
                     <span className="text-xs text-gray-400">CPF: {formatCPF(a.cpf)}</span>
+                    {a.email
+                      ? <span className="text-xs text-gray-400">{a.email}</span>
+                      : <span className="text-xs text-red-400 font-medium">e-mail pendente</span>
+                    }
                   </div>
                 </div>
 
