@@ -43,9 +43,12 @@ function createMtlsFetch(certPem: string, keyPem: string): FetchFn {
       const method = (init?.method ?? 'GET').toUpperCase();
       const body = init?.body as string | undefined;
 
-      const incomingHeaders = init?.headers
-        ? Object.fromEntries(new Headers(init.headers as HeadersInit).entries())
-        : {};
+      const incomingHeaders: Record<string, string> = {};
+      if (init?.headers) {
+        (new Headers(init.headers as HeadersInit)).forEach((value, key) => {
+          incomingHeaders[key] = value;
+        });
+      }
 
       const reqOptions: https.RequestOptions = {
         hostname: parsedUrl.hostname,
@@ -95,7 +98,7 @@ export class InterClient {
     this.clientId = opts.clientId;
     this.clientSecret = opts.clientSecret;
     this.contaCorrente = opts.contaCorrente;
-    this.fetch = opts.fetchFn ?? createMtlsFetch(opts.certPem, opts.keyPem);
+    this.fetch = opts.fetchFn ?? createMtlsFetch(opts.certPem!, opts.keyPem!);
   }
 
   private async getToken(): Promise<string> {
@@ -145,8 +148,8 @@ export class InterClient {
         'Authorization': `Bearer ${token}`,
         'Content-Type': 'application/json',
         ...contaCorrenteHeader,
-        ...(init?.headers ?? {}),
-      },
+        ...(init?.headers as Record<string, string> | undefined ?? {}),
+      } as HeadersInit,
     });
 
     if (!res.ok) {
