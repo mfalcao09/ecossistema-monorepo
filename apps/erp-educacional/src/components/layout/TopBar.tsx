@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import {
   GraduationCap, Settings, Users,
   ClipboardList, BookOpen, DollarSign, ShoppingBag,
-  Library, LogOut, User, Archive, MessageSquare,
+  Library, LogOut, User, Archive, MessageSquare, ScrollText,
 } from "lucide-react";
 import { createClient } from "@/lib/supabase/client";
 
@@ -44,6 +44,17 @@ const MODULOS = [
     cor: "bg-indigo-500",
     corTexto: "text-indigo-600",
     corBg: "bg-indigo-50",
+    ativo: true,
+  },
+  {
+    id: "secretaria",
+    label: "Secretaria",
+    descricao: "Histórico, Atestados, Documentos",
+    href: "/secretaria",
+    icon: ScrollText,
+    cor: "bg-amber-500",
+    corTexto: "text-amber-600",
+    corBg: "bg-amber-50",
     ativo: true,
   },
   {
