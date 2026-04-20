@@ -29,18 +29,27 @@
 - [x] `apps/erp-educacional/src/app/api/atendimento/me/permissions/route.ts`:
   - GET retorna mapa completo `{ "module::action": boolean }` para hidratar `useCan`
 
-### ⏳ Fase 2 — Backend APIs (pendente)
+### ✅ Fase 2 — Backend APIs (2026-04-21)
 
-- [ ] `GET/POST /api/atendimento/roles`
-- [ ] `GET/PATCH/DELETE /api/atendimento/roles/[id]`
-- [ ] `GET/PATCH /api/atendimento/roles/[id]/permissions`
-- [ ] `GET/POST /api/atendimento/teams`
-- [ ] `GET/PATCH/DELETE /api/atendimento/teams/[id]`
-- [ ] `POST/DELETE /api/atendimento/teams/[id]/members`
-- [ ] `POST /api/atendimento/invites` (gera token + email)
-- [ ] `GET /api/atendimento/invites/accept?token=`
-- [ ] Aplicar `withPermission` em todas as rotas de `/api/atendimento/*` sensíveis
-- [ ] Middleware matcher: `/api/atendimento/api/*` (change aditiva em `middleware.ts`)
+- [x] `GET/POST /api/atendimento/roles`
+- [x] `GET/PATCH/DELETE /api/atendimento/roles/[id]` (system bloqueia edit/delete)
+- [x] `GET/PATCH /api/atendimento/roles/[id]/permissions` (upsert em lote)
+- [x] `GET/POST /api/atendimento/teams`
+- [x] `GET/PATCH/DELETE /api/atendimento/teams/[id]`
+- [x] `POST/DELETE /api/atendimento/teams/[id]/members`
+- [x] `GET/POST /api/atendimento/invites` (token 64 hex, TTL 7 dias)
+- [x] `DELETE /api/atendimento/invites/[id]` (revoke)
+- [x] `GET/POST /api/atendimento/invites/accept?token=`
+- [x] `withPermission` aplicado em todas as rotas novas
+- [x] Middleware: bypass para `GET /api/atendimento/invites/accept` (aceite sem sessão)
+
+**Observação:** não adicionei matcher específico `/api/atendimento/*` no middleware
+— as rotas já passam pelo middleware global (auth Supabase) e `withPermission` é
+aplicado no nível do handler (mais granular). Change mínima intencional.
+
+**Pendência:** integrar envio por email (Resend ou Supabase magic link) em
+`POST /api/atendimento/invites`. Hoje retorna `accept_url` para o operador
+copiar manualmente — OK para FIC single-tenant, upgrade para Fase 2 SaaS.
 
 ### ⏳ Fase 3 — UI Cargos
 
