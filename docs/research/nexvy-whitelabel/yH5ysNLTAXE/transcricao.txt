@@ -1,0 +1,13 @@
+Com certeza! Segue a transcrição do vídeo, na íntegra:
+
+[00:00] Oi, pessoal, eu sou o Ramirez, sou CS aqui do time de parcerias da Helena. E hoje, a gente vai falar um pouquinho sobre o nosso serviço de transcrição de áudio por inteligência artificial e mostrar como que ele pode ajudar no dia a dia da sua equipe. Então, fica nesse vídeo para você ver mais informações sobre essa funcionalidade.
+
+[00:26] A principal vantagem da funcionalidade de transcrição de áudio por inteligência artificial é otimizar a rotina do seu time de atendimento. Então, ao invés de escutar um áudio de dois, três minutos que o cliente enviou, o seu time pode ler as informações que foram mencionadas. E isso vai permitir também que o seu time possa copiar uma parte dessas informações e colocar em uma página de chamado ou reportar internamente para um outro setor sem precisar ficar digitando que o seu cliente mencionou. Então, isso vai otimizar a rotina do seu time de atendimento.
+
+[01:04] Mas, por um outro lado, é importante também que sempre que possível a gente possa escutar o áudio para entender como tá o humor daquele cliente que tá conversando com a gente. Principalmente numa situação que pode ser ali de maior conflito, numa negociação ou caso tenha acontecido um problema, um bug na plataforma. Então, é sempre importante que a gente possa também escutar o áudio em algum momento mais delicado para entender como ele está o humor desse cliente naquele momento e não agir com base na nossa percepção sobre o que está escrito na transcrição do áudio, tá bom?
+
+[01:40] Agora, eu vou mostrar para vocês como fazer a habilitação do serviço de transcrição de áudio na sua conta. Para ativar o recurso da transcrição de áudio, basta clicar em "Apps" e depois em "Mais Apps". Aqui você encontra a opção então "Transcrição de áudio" e clica no botão "Habilitar". Ativa essa chave e salva.
+
+[02:02] Para desabilitar, é o mesmo processo: desmarca essa chave e salva. Lembre-se de conferir com o seu CS qual o valor que será adicionado à sua mensalidade, uma vez que a cobrança da transcrição de áudio por inteligência artificial acontece por usuário ativo no seu ambiente, tá bem?
+
+[02:21] Bom, pessoal, é isso. Caso você tenha mais dúvidas, acesse o portal do parceiro para saná-las. Até a próxima!

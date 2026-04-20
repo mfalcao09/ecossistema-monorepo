@@ -1,0 +1,32 @@
+Aqui está um mapeamento exaustivo dos momentos importantes no vídeo:
+
+[00:00] Título do vídeo "Usuário ADM".
+[00:05] Charles Pereira apresenta o conteúdo sobre o sub-menu "Usuário ADM".
+[00:41] Plataforma "Parceiro CRM & WhatsApp" com a tela "Usuários administrativos" aberta.
+[00:59] Clique no botão "+ Novo" para adicionar um novo usuário.
+[01:00] Formulário "Informações do usuário" é exibido.
+[01:02] Menu suspenso "Perfil de acesso" é aberto, mostrando as opções "Super administrador", "Financeiro" e "Suporte".
+[01:06] O perfil "Super administrador" é selecionado e os dados de "Charles Pereira" são inseridos.
+[01:14] Clique no botão "Salvar".
+[01:15] O usuário "Charles Pereira" é adicionado com o perfil "Super administrador".
+[01:25] A tela "Contas" é exibida, mostrando uma conta de exemplo.
+[01:32] Menu "Admin" é aberto, exibindo todas as opções de menu acessíveis pelo super administrador.
+[01:43] Retorno à tela "Usuários administrativos" para alterar o perfil de Charles Pereira.
+[01:48] A tela "Contas" é exibida novamente após a alteração.
+[01:55] Menu "Admin" é aberto novamente, mostrando as opções limitadas para o perfil "Financeiro".
+[02:02] Retorno à tela "Usuários administrativos".
+[02:07] Clique em "Alterar" para modificar o perfil de Charles Pereira.
+[02:10] O perfil de acesso é alterado para "Suporte".
+[02:13] Clique no botão "Salvar".
+[02:14] O usuário "Charles Pereira" agora tem o perfil "Suporte".
+[02:19] A tela "Contas" é exibida novamente.
+[02:25] Menu "Admin" é aberto, mostrando as opções limitadas para o perfil "Suporte".
+[02:30] Demonstração do menu "Admin" com as opções "Contas", "Canais", "Ações e menus personalizados" e "Portal de parceiros".
+[03:00] Clique na opção "Contas".
+[03:02] A tela "Contas" é exibida.
+[03:04] Clique no botão "Acessar" para a conta de exemplo.
+[03:04] Um pop-up "Acessar conta" é exibido, mostrando a lista de usuários para personificação.
+[03:06] O usuário "Atendimento Helena" é selecionado para personificação.
+[03:08] A plataforma é acessada como "Atendimento Helena", e um cronômetro é exibido no canto superior direito.
+[03:43] Charles Pereira retorna à tela "Usuários administrativos" para encerrar o vídeo.
+[03:57] Tela final com o logo "Academia Helena".

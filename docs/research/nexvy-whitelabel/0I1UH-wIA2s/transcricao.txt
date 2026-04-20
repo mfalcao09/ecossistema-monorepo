@@ -1,0 +1,15 @@
+Olá. Nesse vídeo eu vou mostrar a vocês o que é necessário para ter uma conta de demonstração. Fiquem atento aos detalhes.
+[00:13] Para ter uma conta de demonstração, você tem que colocar o link da sua, do seu ambiente com barra trial no final.
+[00:26] Então, se aparecer a mensagem de Criação de contas indisponível no momento, como está aqui na tela, é porque você ainda não tem um canal de demonstração ativo.
+[00:41] Vou mostrar para vocês agora, como que vocês vão fazer essa ativação. Vocês vão vir em Admin, canais.
+[00:50] Vão procurar pelo número. Vão clicar em alterar. É importante dar um nome para esse canal.
+[01:04] Porque toda vez, né, que você precisar de fazer alguma ação, vai ficar mais fácil para pesquisar.
+[01:14] Aqui embaixo, marque canal de demonstração. Feito isso, é só salvar.
+[01:24] Quando você marca um número como demonstração, ele vai sumir da conta atual que você subiu ele ali, da API oficial. Mas não se preocupe.
+[01:38] Toda conta que for cadastrada como demonstração, esse número estará lá disponível. Vamos testar?
+[01:43] Vou clicar aqui. E ela já me permite criar uma conta.
+[01:54] Vou continuar. E ele vai criar um ambiente para essa empresa.
+[02:07] Validar e vou continuar. Prontinho.
+[02:14] Agora já temos uma conta demonstração. Se eu vier em Ajustes, Contas, Canais de atendimento, o número que eu marquei já fica disponível para utilização.
+[02:24] E se você mesmo quiser criar uma conta demonstração e permitir que o seu cliente cadastre o número próprio para testar, siga passo a passo da criação de contas que também está aqui na comunidade. Lembre-se de colocar a situação como demonstração.
+[02:44] Agora que você já sabe como permitir que o seu cliente crie uma conta de demonstração, tornará o seu processo ainda mais ágil. Se ficar dúvidas, um momento com seu sucesso do cliente. Muito obrigada pela sua atenção e até a próxima.

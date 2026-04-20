@@ -1,0 +1,32 @@
+Aqui está o registro de eventos do vídeo:
+
+[00:00] Título do vídeo: Conta de demonstração configuração
+[00:05] Larissa Lopes, Coordenadora de Sucesso do Cliente
+[00:13] Mostrando a interface do sistema
+[00:14] O sistema exibe uma mensagem de "Indisponível", pois a criação de contas de demonstração está temporariamente indisponível.
+[00:42] Clicando em "Admin"
+[00:44] Clicando em "Canais"
+[00:47] Pesquisando o canal pelo número
+[00:54] Clicando em "Alterar"
+[00:58] O formulário "Editar canal" é exibido
+[01:08] Inserindo o nome do canal "Canal de Demonstração"
+[01:13] Ativando a opção "Canal de demonstração"
+[01:18] Clicando em "Salvar"
+[01:23] Canal de demonstração salvo
+[01:40] Acessando o link para criar uma nova conta
+[01:44] A tela de "Cadastro" é exibida
+[01:49] Preenchendo o nome completo
+[01:50] Preenchendo o e-mail corporativo
+[01:51] Preenchendo o telefone para contato
+[01:52] Preenchendo o nome da empresa
+[01:53] Selecionando o setor de atuação
+[01:54] Marcando a caixa de "Concordo com os termos de uso e política de privacidade"
+[01:55] Clicando em "Continuar"
+[01:56] A mensagem "Quase pronto! O ambiente está sendo preparado. Aguarde alguns instantes." é exibida
+[02:02] A tela de "Validação de acesso" é exibida
+[02:04] Inserindo o código de validação
+[02:05] Clicando em "Validar e continuar"
+[02:06] A mensagem "Tudo certo! Você está sendo redirecionado. Aguarde alguns instantes." é exibida
+[02:08] A tela de "Atendimentos" é exibida, mostrando que a conta foi criada com sucesso
+[02:14] Clicando em "Ajustes" e depois em "Canais de atendimento"
+[02:17] A tela de "Configurações" exibe o "Canal de atendimento" como "Demonstração"
