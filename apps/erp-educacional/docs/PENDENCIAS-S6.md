@@ -73,13 +73,22 @@ copiar manualmente — OK para FIC single-tenant, upgrade para Fase 2 SaaS.
   - Diff de membros no save (add/remove seletivo)
 - [ ] Status "realtime" — hoje lê `availability_status` do snapshot. Upgrade com `agent_statuses` + Supabase Realtime fica para Fase 2.
 
-### ⏳ Fase 5 — Testes + PR
+### ✅ Fase 5 — Testes + Feature flag + PR (2026-04-21)
 
-- [ ] Unit: `requirePermission('pipelines', 'edit')` por cargo
-- [ ] Integration: 403 para Atendente em `POST /api/atendimento/roles`
-- [ ] Integration: invite fluxo completo (criar → aceitar → vincular)
-- [ ] Feature flag `ATENDIMENTO_RBAC_ENABLED` documentada em `.env.example`
-- [ ] PR `feat(atendimento): S6 Cargos + Permissões Granulares + Equipes + Convites`
+- [x] Unit `__tests__/atendimento-permissions.test.ts`:
+  - fail-open com flag desligada
+  - fail-closed quando agent sem role/ sem agent
+  - Atendente pode edit mas não delete pipelines
+  - Admin passa em tudo granted
+  - Atendente restrito bloqueado em pipelines/automations
+  - `assertPermission` lança `PermissionDeniedError`
+  - `loadPermissionsForUser` popula mapa
+- [x] Smoke `__tests__/atendimento-permissions-smoke.test.ts`: valida
+  taxonomia (15 slugs, actions válidas, 'view' em todo módulo, sem duplicatas)
+- [x] `.env.example` atualizado com `ATENDIMENTO_RBAC_ENABLED` e variante pública
+- [ ] Integration 403 (real DB): requer banco ligado — fica para smoke pós-deploy
+- [ ] Integration invite fluxo completo: idem, fica para QA manual
+- [ ] PR — a abrir ao fim da sessão
 
 ## Deploy / aplicação
 
