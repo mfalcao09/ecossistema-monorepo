@@ -15,6 +15,10 @@ BASE_DIR  = Path("/Users/marcelosilva/Projects/GitHub/ecossistema-monorepo/docs/
 VIDEOS_DIR = BASE_DIR / "_videos"
 MODEL     = "gemini-2.5-flash"
 
+# Cookies opcionais para yt-dlp (bypass bot detection + acesso a vídeos unlisted).
+# Export via extensão "Get cookies.txt LOCALLY" no browser logado.
+COOKIES_FILE = os.environ.get("YT_DLP_COOKIES", "")  # caminho absoluto para cookies.txt
+
 URLS = [
     # Lote 1 — original (console.nexvy.tech, já processados)
     "https://www.youtube.com/watch?v=O-T-9NAK9tU",
@@ -146,67 +150,103 @@ def download_video(url: str, vid: str) -> Path:
         "-o", out_tmpl,
         "--write-info-json",
         "--no-playlist",
-        url
     ]
+    if COOKIES_FILE:
+        cmd.extend(["--cookies", COOKIES_FILE])
+    cmd.append(url)
     subprocess.run(cmd, check=True)
     return mp4_path
 
+
+def gemini_upload_file(mp4: Path):
+    """Upload MP4 local para Gemini Files API. Retorna objeto File pronto para uso."""
+    print(f"  [gemini-upload] enviando {mp4.name} ({mp4.stat().st_size // (1024*1024)}MB)...")
+    uploaded = client.files.upload(file=str(mp4))
+    # aguarda processing → ACTIVE
+    while uploaded.state and uploaded.state.name == "PROCESSING":
+        time.sleep(5)
+        uploaded = client.files.get(name=uploaded.name)
+    if not uploaded.state or uploaded.state.name != "ACTIVE":
+        raise RuntimeError(f"Upload Gemini falhou: state={uploaded.state}")
+    print(f"  [gemini-upload] ok ({uploaded.name})")
+    return uploaded
+
+
+def gemini_generate(source, prompt: str, is_upload: bool = False) -> str:
+    """source: URL string se is_upload=False, objeto File se True."""
+    if is_upload:
+        part = types.Part(file_data=types.FileData(file_uri=source.uri, mime_type=source.mime_type))
+    else:
+        part = types.Part(file_data=types.FileData(file_uri=source, mime_type="video/*"))
+    def _call():
+        resp = client.models.generate_content(
+            model=MODEL,
+            contents=types.Content(parts=[part, types.Part(text=prompt)]),
+            config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=0))
+        )
+        return resp.text
+    return gemini_with_retry(_call)
+
 # ── Etapa 2: Transcrição ──────────────────────────────────────────────────────
 
-def transcribe(url: str, out_file: Path) -> str:
+TRANSCRIBE_PROMPT = (
+    "Transcreva INTEGRALMENTE e na íntegra tudo que é falado neste vídeo.\n"
+    "- Transcrição palavra por palavra, sem omitir nada\n"
+    "- Inclua timestamps no formato [MM:SS] a cada trecho de ~30 segundos\n"
+    "- Mantenha exatamente as palavras ditas, inclusive hesitações e marcadores de discurso\n"
+    "- Não resuma, não parafraseie — transcreva literalmente\n"
+    "- Idioma: preserve o idioma original do vídeo"
+)
+
+
+def _gemini_with_upload_fallback(url: str, prompt: str, mp4_path: Path = None, uploaded_cache: dict = None):
+    """Tenta Gemini via URL. Se 403 PERMISSION_DENIED e mp4 existe, faz upload local.
+    uploaded_cache: dict opcional {vid: uploaded_file} para reusar upload entre chamadas."""
+    vid = mp4_path.stem if mp4_path else None
+    # se já tem upload em cache, usa direto
+    if uploaded_cache is not None and vid and vid in uploaded_cache:
+        return gemini_generate(uploaded_cache[vid], prompt, is_upload=True)
+    try:
+        return gemini_generate(url, prompt, is_upload=False)
+    except Exception as e:
+        msg = str(e)
+        if ("403" in msg or "PERMISSION_DENIED" in msg) and mp4_path and mp4_path.exists():
+            print(f"  [403 fallback] fazendo upload local do MP4...")
+            uploaded = gemini_upload_file(mp4_path)
+            if uploaded_cache is not None and vid:
+                uploaded_cache[vid] = uploaded
+            return gemini_generate(uploaded, prompt, is_upload=True)
+        raise
+
+
+def transcribe(url: str, out_file: Path, mp4_path: Path = None, uploaded_cache: dict = None) -> str:
     if out_file.exists():
         print(f"  [skip] transcrição já existe")
         return out_file.read_text()
     print(f"  [gemini] transcrevendo...")
-    prompt = (
-        "Transcreva INTEGRALMENTE e na íntegra tudo que é falado neste vídeo.\n"
-        "- Transcrição palavra por palavra, sem omitir nada\n"
-        "- Inclua timestamps no formato [MM:SS] a cada trecho de ~30 segundos\n"
-        "- Mantenha exatamente as palavras ditas, inclusive hesitações e marcadores de discurso\n"
-        "- Não resuma, não parafraseie — transcreva literalmente\n"
-        "- Idioma: preserve o idioma original do vídeo"
-    )
-    def _call():
-        resp = client.models.generate_content(
-            model=MODEL,
-            contents=types.Content(parts=[
-                types.Part(file_data=types.FileData(file_uri=url, mime_type="video/*")),
-                types.Part(text=prompt)
-            ]),
-            config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=0))
-        )
-        return resp.text
-    text = gemini_with_retry(_call)
+    text = _gemini_with_upload_fallback(url, TRANSCRIBE_PROMPT, mp4_path, uploaded_cache)
     out_file.write_text(text, encoding="utf-8")
     print(f"  [ok] transcrição: {len(text)} chars → {out_file.name}")
     return text
 
 # ── Etapa 3: Timestamps ───────────────────────────────────────────────────────
 
-def get_timestamps(url: str, out_file: Path):
+TIMESTAMPS_PROMPT = (
+    "Analise este vídeo completamente e retorne um mapeamento EXAUSTIVO de todos os momentos importantes.\n"
+    "Para CADA mudança de tela, nova funcionalidade, passo importante, clique relevante ou informação "
+    "em destaque, retorne uma linha no formato:\n"
+    "[MM:SS] Descrição breve do que está sendo mostrado na tela\n"
+    "Seja o mais detalhado possível. Retorne SOMENTE as linhas [MM:SS], sem texto adicional."
+)
+
+
+def get_timestamps(url: str, out_file: Path, mp4_path: Path = None, uploaded_cache: dict = None):
     if out_file.exists():
         print(f"  [skip] timestamps já existem")
         raw = out_file.read_text()
         return parse_timestamps(raw)
     print(f"  [gemini] extraindo timestamps...")
-    prompt = (
-        "Analise este vídeo completamente e retorne um mapeamento EXAUSTIVO de todos os momentos importantes.\n"
-        "Para CADA mudança de tela, nova funcionalidade, passo importante, clique relevante ou informação "
-        "em destaque, retorne uma linha no formato:\n"
-        "[MM:SS] Descrição breve do que está sendo mostrado na tela\n"
-        "Seja o mais detalhado possível. Retorne SOMENTE as linhas [MM:SS], sem texto adicional."
-    )
-    def _call():
-        resp = client.models.generate_content(
-            model=MODEL,
-            contents=types.Content(parts=[
-                types.Part(file_data=types.FileData(file_uri=url, mime_type="video/*")),
-                types.Part(text=prompt)
-            ]),
-            config=types.GenerateContentConfig(thinking_config=types.ThinkingConfig(thinking_budget=0))
-        )
-        return resp.text
-    raw = gemini_with_retry(_call)
+    raw = _gemini_with_upload_fallback(url, TIMESTAMPS_PROMPT, mp4_path, uploaded_cache)
     out_file.write_text(raw, encoding="utf-8")
     timestamps = parse_timestamps(raw)
     print(f"  [ok] {len(timestamps)} timestamps → {out_file.name}")
@@ -330,12 +370,15 @@ def process_video(url: str, idx: int, total: int):
         with open(info_file) as f:
             info = json.load(f)
 
-    # Transcrição
-    transcribe(url, out_dir / "transcricao.txt")
+    # Cache do upload Gemini (reusa entre transcribe e timestamps)
+    uploaded_cache: dict = {}
 
-    # Timestamps
+    # Transcrição (tenta URL, fallback upload se 403)
+    transcribe(url, out_dir / "transcricao.txt", mp4_path=mp4, uploaded_cache=uploaded_cache)
+
+    # Timestamps (tenta URL, fallback upload se 403 — reusa upload se já feito)
     time.sleep(3)  # respeita rate limit entre chamadas
-    timestamps = get_timestamps(url, out_dir / "timestamps.txt")
+    timestamps = get_timestamps(url, out_dir / "timestamps.txt", mp4_path=mp4, uploaded_cache=uploaded_cache)
 
     if not timestamps:
         print(f"  [warn] nenhum timestamp encontrado — pulando frames")

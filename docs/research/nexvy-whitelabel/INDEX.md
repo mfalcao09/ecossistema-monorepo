@@ -9,15 +9,15 @@
 ## Resumo
 
 - **Total de vídeos na fila:** 58
-- **Processados completos (frames + transcrição + timestamps):** 43
-- **Processados parciais (transcrição + timestamps, sem frames — yt-dlp bot-blocked):** 2
-- **Bloqueados (Gemini 403 PERMISSION_DENIED — vídeos unlisted):** 13
-- **Total de frames extraídos:** 1249
-- **Total de timestamps catalogados:** 1331
+- **Processados completos (frames + transcrição + timestamps):** 58
+- **Processados parciais (transcrição + timestamps, sem frames — yt-dlp bot-blocked):** 0
+- **Bloqueados (Gemini 403 PERMISSION_DENIED — vídeos unlisted):** 0
+- **Total de frames extraídos:** 1726
+- **Total de timestamps catalogados:** 1691
 
 ---
 
-## Vídeos Processados — Completos (43)
+## Vídeos Processados — Completos (58)
 
 | # | Título | ID | Frames | Timestamps | Pasta |
 |---|--------|----|--------|------------|-------|
@@ -49,59 +49,36 @@
 | 26 | Panorâma Geral de Relatórios da helenaCRM | [iTuVYvn347I](https://www.youtube.com/watch?v=iTuVYvn347I) | 15 | 15 | [iTuVYvn347I/](iTuVYvn347I/README.md) |
 | 27 | Como executar exportação e identificar a origem de leads na helenaCRM | [B8E5ab6SATs](https://www.youtube.com/watch?v=B8E5ab6SATs) | 31 | 31 | [B8E5ab6SATs/](B8E5ab6SATs/README.md) |
 | 28 | Cadastro de campo personalizado em Contatos no CRM da helencaCRM | [TBl14qCjbcM](https://www.youtube.com/watch?v=TBl14qCjbcM) | 33 | 33 | [TBl14qCjbcM/](TBl14qCjbcM/README.md) |
-| 29 | Configuração do recurso de Mensagens Agendadas na helencaCRM | [oOq8AVnwx7g](https://www.youtube.com/watch?v=oOq8AVnwx7g) | 13 | 13 | [oOq8AVnwx7g/](oOq8AVnwx7g/README.md) |
-| 30 | Utilizando os Cards no CRM para organizar seus atendimentos na helenaCRM | [ssG53BDi1K0](https://www.youtube.com/watch?v=ssG53BDi1K0) | 40 | 40 | [ssG53BDi1K0/](ssG53BDi1K0/README.md) |
-| 31 | Como cadastrar e controlar contatos no CRM da helenaCRM | [VAa4tqrsFqI](https://www.youtube.com/watch?v=VAa4tqrsFqI) | 58 | 58 | [VAa4tqrsFqI/](VAa4tqrsFqI/README.md) |
-| 32 | Saiba como consultar e editar contatos no CRM da helenaCRM | [g0_lGAnSzdY](https://www.youtube.com/watch?v=g0_lGAnSzdY) | 43 | 43 | [g0_lGAnSzdY/](g0_lGAnSzdY/README.md) |
-| 33 | Ações de Fluxo no Chatbot da plataforma helenaCRM | [RFn_fw6wYOw](https://www.youtube.com/watch?v=RFn_fw6wYOw) | 27 | 27 | [RFn_fw6wYOw/](RFn_fw6wYOw/README.md) |
-| 34 | Ações de Contato no Chatbot da plataforma helenaCRM | [Xf6tFnM4va4](https://www.youtube.com/watch?v=Xf6tFnM4va4) | 7 | 7 | [Xf6tFnM4va4/](Xf6tFnM4va4/README.md) |
-| 35 | Ações de Mensagem no Chatbot da plataforma helenaCRM | [6RFcmRoD4E0](https://www.youtube.com/watch?v=6RFcmRoD4E0) | 27 | 27 | [6RFcmRoD4E0/](6RFcmRoD4E0/README.md) |
-| 36 | Ações De Atendimento no Chatbot da plataforma helenaCRM | [AMDg3hbrui0](https://www.youtube.com/watch?v=AMDg3hbrui0) | 17 | 17 | [AMDg3hbrui0/](AMDg3hbrui0/README.md) |
-| 37 | Uso prático da Sequência na plataforma helenaCRM | [CDOdwqe_-KE](https://www.youtube.com/watch?v=CDOdwqe_-KE) | 78 | 78 | [CDOdwqe_-KE/](CDOdwqe_-KE/README.md) |
-| 38 | Como etiquetar contatos com o chatbot da helenaCRM | [SHTF1dwAtuc](https://www.youtube.com/watch?v=SHTF1dwAtuc) | 24 | 24 | [SHTF1dwAtuc/](SHTF1dwAtuc/README.md) |
-| 39 | Construtor Avançado de Chatbots na helenaCRM | [YpFcjGiMw2I](https://www.youtube.com/watch?v=YpFcjGiMw2I) | 36 | 0 | [YpFcjGiMw2I/](YpFcjGiMw2I/README.md) |
-| 40 | Contexto de como usar Mensagens Agendadas no seu negócio na helenaCRM | [JHONOag6fEo](https://www.youtube.com/watch?v=JHONOag6fEo) | 6 | 6 | [JHONOag6fEo/](JHONOag6fEo/README.md) |
-| 41 | Transcrição de Áudio com IA na helenaCRM | [yH5ysNLTAXE](https://www.youtube.com/watch?v=yH5ysNLTAXE) | 16 | 16 | [yH5ysNLTAXE/](yH5ysNLTAXE/README.md) |
-| 42 | Ativação e utilização do Chat Interno na helenaCRM | [X115LzVAliA](https://www.youtube.com/watch?v=X115LzVAliA) | 18 | 18 | [X115LzVAliA/](X115LzVAliA/README.md) |
-| 43 | Mensagens agendadas como funciona na prática na helenaCRM | [Bm9r57cOqMM](https://www.youtube.com/watch?v=Bm9r57cOqMM) | 24 | 24 | [Bm9r57cOqMM/](Bm9r57cOqMM/README.md) |
-
----
-
-## Processados Parciais — sem frames (2)
-
-| # | Título | ID | Timestamps | Pasta |
-|---|--------|----|------------|-------|
-| 1 | VCsSLNj7vzE (sem frames — yt-dlp bot detection) | [VCsSLNj7vzE](https://www.youtube.com/watch?v=VCsSLNj7vzE) | 90 | [VCsSLNj7vzE/](VCsSLNj7vzE/README.md) |
-| 2 | Lus6OhCWhrg (sem frames — yt-dlp bot detection) | [Lus6OhCWhrg](https://www.youtube.com/watch?v=Lus6OhCWhrg) | 27 | [Lus6OhCWhrg/](Lus6OhCWhrg/README.md) |
-
-> **Por que só parciais:** yt-dlp foi bloqueado pelo YouTube com _"Sign in to confirm you're not a bot"_ para esses vídeos.
-> Gemini 2.5 Flash conseguiu transcrever diretamente via URL, mas sem MP4 local, não foi possível cortar frames.
-
-
----
-
-## Bloqueados (13)
-
-| # | ID | URL |
-|---|----|----|
-| 1 | PvfppQNxQZs | https://www.youtube.com/watch?v=PvfppQNxQZs |
-| 2 | hu38xgDc-l8 | https://www.youtube.com/watch?v=hu38xgDc-l8 |
-| 3 | XdikJZkmY7Q | https://www.youtube.com/watch?v=XdikJZkmY7Q |
-| 4 | db54n8_3_Sg | https://www.youtube.com/watch?v=db54n8_3_Sg |
-| 5 | -X2jMXU_zos | https://www.youtube.com/watch?v=-X2jMXU_zos |
-| 6 | jbgM0hgvTPc | https://www.youtube.com/watch?v=jbgM0hgvTPc |
-| 7 | 0I1UH-wIA2s | https://www.youtube.com/watch?v=0I1UH-wIA2s |
-| 8 | t1aj8gLs9cI | https://www.youtube.com/watch?v=t1aj8gLs9cI |
-| 9 | G0XsZWjQV8c | https://www.youtube.com/watch?v=G0XsZWjQV8c |
-| 10 | bvpz84EThEU | https://www.youtube.com/watch?v=bvpz84EThEU |
-| 11 | qrRvyH0k6l8 | https://www.youtube.com/watch?v=qrRvyH0k6l8 |
-| 12 | -W1Gvw7_QzM | https://www.youtube.com/watch?v=-W1Gvw7_QzM |
-| 13 | S1liAttRAtw | https://www.youtube.com/watch?v=S1liAttRAtw |
-
-> **Por que bloqueados:** Gemini retornou 403 PERMISSION_DENIED ao tentar acessar estes vídeos.
-> Todos da playlist "Parceiros" (PLAvjoRyIXgEtbo6wgn46QAtdC6x5VsFFQ) — provavelmente unlisted/restritos.
-> Para desbloquear: rodar yt-dlp com `--cookies-from-browser` numa conta que tenha acesso, depois reprocessar.
-
+| 29 | [Refazer] Como importar contatos para a plataforma | [PvfppQNxQZs](https://www.youtube.com/watch?v=PvfppQNxQZs) | 19 | 19 | [PvfppQNxQZs/](PvfppQNxQZs/README.md) |
+| 30 | Configuração do recurso de Mensagens Agendadas na helencaCRM | [oOq8AVnwx7g](https://www.youtube.com/watch?v=oOq8AVnwx7g) | 13 | 13 | [oOq8AVnwx7g/](oOq8AVnwx7g/README.md) |
+| 31 | Criação e utilização do Painel de CRM na helencaCRM | [hu38xgDc-l8](https://www.youtube.com/watch?v=hu38xgDc-l8) | 39 | 39 | [hu38xgDc-l8/](hu38xgDc-l8/README.md) |
+| 32 | Utilizando os Cards no CRM para organizar seus atendimentos na helenaCRM | [ssG53BDi1K0](https://www.youtube.com/watch?v=ssG53BDi1K0) | 40 | 40 | [ssG53BDi1K0/](ssG53BDi1K0/README.md) |
+| 33 | Como cadastrar e controlar contatos no CRM da helenaCRM | [VAa4tqrsFqI](https://www.youtube.com/watch?v=VAa4tqrsFqI) | 58 | 58 | [VAa4tqrsFqI/](VAa4tqrsFqI/README.md) |
+| 34 | Saiba como consultar e editar contatos no CRM da helenaCRM | [g0_lGAnSzdY](https://www.youtube.com/watch?v=g0_lGAnSzdY) | 43 | 43 | [g0_lGAnSzdY/](g0_lGAnSzdY/README.md) |
+| 35 | Ações de Fluxo no Chatbot da plataforma helenaCRM | [RFn_fw6wYOw](https://www.youtube.com/watch?v=RFn_fw6wYOw) | 27 | 27 | [RFn_fw6wYOw/](RFn_fw6wYOw/README.md) |
+| 36 | Ações de Contato no Chatbot da plataforma helenaCRM | [Xf6tFnM4va4](https://www.youtube.com/watch?v=Xf6tFnM4va4) | 7 | 7 | [Xf6tFnM4va4/](Xf6tFnM4va4/README.md) |
+| 37 | Ações de Mensagem no Chatbot da plataforma helenaCRM | [6RFcmRoD4E0](https://www.youtube.com/watch?v=6RFcmRoD4E0) | 27 | 27 | [6RFcmRoD4E0/](6RFcmRoD4E0/README.md) |
+| 38 | Ações De Atendimento no Chatbot da plataforma helenaCRM | [AMDg3hbrui0](https://www.youtube.com/watch?v=AMDg3hbrui0) | 17 | 17 | [AMDg3hbrui0/](AMDg3hbrui0/README.md) |
+| 39 | Uso prático da Sequência na plataforma helenaCRM | [CDOdwqe_-KE](https://www.youtube.com/watch?v=CDOdwqe_-KE) | 78 | 78 | [CDOdwqe_-KE/](CDOdwqe_-KE/README.md) |
+| 40 | Como etiquetar contatos com o chatbot da helenaCRM | [SHTF1dwAtuc](https://www.youtube.com/watch?v=SHTF1dwAtuc) | 24 | 24 | [SHTF1dwAtuc/](SHTF1dwAtuc/README.md) |
+| 41 | Construtor Avançado de Chatbots na helenaCRM | [YpFcjGiMw2I](https://www.youtube.com/watch?v=YpFcjGiMw2I) | 36 | 0 | [YpFcjGiMw2I/](YpFcjGiMw2I/README.md) |
+| 42 | Contexto de como usar Mensagens Agendadas no seu negócio na helenaCRM | [JHONOag6fEo](https://www.youtube.com/watch?v=JHONOag6fEo) | 6 | 6 | [JHONOag6fEo/](JHONOag6fEo/README.md) |
+| 43 | Transcrição de Áudio com IA na helenaCRM | [yH5ysNLTAXE](https://www.youtube.com/watch?v=yH5ysNLTAXE) | 16 | 16 | [yH5ysNLTAXE/](yH5ysNLTAXE/README.md) |
+| 44 | Ativação e utilização do Chat Interno na helenaCRM | [X115LzVAliA](https://www.youtube.com/watch?v=X115LzVAliA) | 18 | 18 | [X115LzVAliA/](X115LzVAliA/README.md) |
+| 45 | Mensagens agendadas como funciona na prática na helenaCRM | [Bm9r57cOqMM](https://www.youtube.com/watch?v=Bm9r57cOqMM) | 24 | 24 | [Bm9r57cOqMM/](Bm9r57cOqMM/README.md) |
+| 46 | Como criar e configurar suas campanhas na helenaCRM | [VCsSLNj7vzE](https://www.youtube.com/watch?v=VCsSLNj7vzE) | 90 | 90 | [VCsSLNj7vzE/](VCsSLNj7vzE/README.md) |
+| 47 | [Parceiros] Gestão de usuários admin na plataforma | [XdikJZkmY7Q](https://www.youtube.com/watch?v=XdikJZkmY7Q) | 30 | 30 | [XdikJZkmY7Q/](XdikJZkmY7Q/README.md) |
+| 48 | [Parceiros] Como acessar relatórios de faturamento | [db54n8_3_Sg](https://www.youtube.com/watch?v=db54n8_3_Sg) | 16 | 16 | [db54n8_3_Sg/](db54n8_3_Sg/README.md) |
+| 49 | [Parceiros] Particularidades do Canal de demonstração | [-X2jMXU_zos](https://www.youtube.com/watch?v=-X2jMXU_zos) | 16 | 16 | [-X2jMXU_zos/](-X2jMXU_zos/README.md) |
+| 50 | [Parceiros] Ações e Menus Personalizados | [jbgM0hgvTPc](https://www.youtube.com/watch?v=jbgM0hgvTPc) | 29 | 29 | [jbgM0hgvTPc/](jbgM0hgvTPc/README.md) |
+| 51 | [Parceiros] Configuração da Conta de Demonstração | [0I1UH-wIA2s](https://www.youtube.com/watch?v=0I1UH-wIA2s) | 30 | 30 | [0I1UH-wIA2s/](0I1UH-wIA2s/README.md) |
+| 52 | [Parceiros] Criação de Conta | [t1aj8gLs9cI](https://www.youtube.com/watch?v=t1aj8gLs9cI) | 34 | 34 | [t1aj8gLs9cI/](t1aj8gLs9cI/README.md) |
+| 53 | [Parceiros] Inicio da cobrança | [G0XsZWjQV8c](https://www.youtube.com/watch?v=G0XsZWjQV8c) | 17 | 17 | [G0XsZWjQV8c/](G0XsZWjQV8c/README.md) |
+| 54 | [Parceiros] Customização da Plataforma White Label | [bvpz84EThEU](https://www.youtube.com/watch?v=bvpz84EThEU) | 33 | 33 | [bvpz84EThEU/](bvpz84EThEU/README.md) |
+| 55 | [Parceiros] - Planos e Funcionalidades | [qrRvyH0k6l8](https://www.youtube.com/watch?v=qrRvyH0k6l8) | 55 | 55 | [qrRvyH0k6l8/](qrRvyH0k6l8/README.md) |
+| 56 | [Parceiros] Criação de Página no Facebook | [-W1Gvw7_QzM](https://www.youtube.com/watch?v=-W1Gvw7_QzM) | 26 | 26 | [-W1Gvw7_QzM/](-W1Gvw7_QzM/README.md) |
+| 57 | [Parceiros] - Panorama Geral do Perfil | [S1liAttRAtw](https://www.youtube.com/watch?v=S1liAttRAtw) | 16 | 16 | [S1liAttRAtw/](S1liAttRAtw/README.md) |
+| 58 | Conheça o módulo Central de Atendimento da HelenaCRM | [Lus6OhCWhrg](https://www.youtube.com/watch?v=Lus6OhCWhrg) | 27 | 27 | [Lus6OhCWhrg/](Lus6OhCWhrg/README.md) |
 ---
 
 ## Screenshots da Sessão de Mapeamento
