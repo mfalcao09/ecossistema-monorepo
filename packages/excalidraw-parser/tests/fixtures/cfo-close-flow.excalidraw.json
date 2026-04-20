@@ -1,0 +1,74 @@
+{
+  "type": "excalidraw",
+  "version": 2,
+  "source": "fixture",
+  "elements": [
+    {
+      "id": "rect-cron",
+      "type": "rectangle",
+      "x": 0, "y": 0, "width": 200, "height": 80,
+      "boundElements": [{"id": "text-cron", "type": "text"}, {"id": "arrow-1", "type": "arrow"}]
+    },
+    {
+      "id": "text-cron",
+      "type": "text",
+      "x": 10, "y": 20,
+      "text": "pg_cron 18h BRT",
+      "containerId": "rect-cron"
+    },
+    {
+      "id": "rect-chief",
+      "type": "rectangle",
+      "x": 300, "y": 0, "width": 200, "height": 80,
+      "boundElements": [{"id": "text-chief", "type": "text"}, {"id": "arrow-1", "type": "arrow"}, {"id": "arrow-2", "type": "arrow"}]
+    },
+    {
+      "id": "text-chief",
+      "type": "text",
+      "x": 310, "y": 20,
+      "text": "CFO-IA Chief",
+      "containerId": "rect-chief"
+    },
+    {
+      "id": "diamond-bam",
+      "type": "diamond",
+      "x": 600, "y": 0, "width": 200, "height": 120,
+      "boundElements": [{"id": "text-bam", "type": "text"}, {"id": "arrow-2", "type": "arrow"}]
+    },
+    {
+      "id": "text-bam",
+      "type": "text",
+      "x": 610, "y": 40,
+      "text": "BAM check?",
+      "containerId": "diamond-bam"
+    },
+    {
+      "id": "arrow-1",
+      "type": "arrow",
+      "x": 200, "y": 40,
+      "startBinding": {"elementId": "rect-cron", "focus": 0, "gap": 5},
+      "endBinding": {"elementId": "rect-chief", "focus": 0, "gap": 5},
+      "text": "invoca"
+    },
+    {
+      "id": "arrow-2",
+      "type": "arrow",
+      "x": 500, "y": 40,
+      "startBinding": {"elementId": "rect-chief", "focus": 0, "gap": 5},
+      "endBinding": {"elementId": "diamond-bam", "focus": 0, "gap": 5}
+    },
+    {
+      "id": "text-note",
+      "type": "text",
+      "x": 900, "y": 200,
+      "text": "nota: HITL Marcelo se variance > 20%"
+    },
+    {
+      "id": "text-deleted",
+      "type": "text",
+      "x": 900, "y": 300,
+      "text": "deletado — deve sumir",
+      "isDeleted": true
+    }
+  ]
+}
