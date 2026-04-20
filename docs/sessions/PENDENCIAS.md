@@ -27,6 +27,12 @@
 | P-006 | S08 | refactor | low | `dual-write-pipeline` hoje escreve primary e mirror com o mesmo service-role client (ECOSYSTEM). Para escrever em outros projetos (ex: ERP-FIC, Intentus), expandir para carregar clients adicionais via `ecosystem_credentials.SUPABASE_SERVICE_ROLE_KEY_*` | dual-write real cross-project | 2026-04-17 |
 | P-007 | S08 | refactor | low | `dual_write_queue` tem linhas para retry mas nenhum worker drena. Criar pg_cron job ou EF que processa `status='pending' AND next_attempt_at <= now()` | resiliência de mirror fails | 2026-04-17 |
 | P-008 | S08 | test | med | Rodar `scripts/smoke-test-efs.sh` contra prod após P-001 estar feito. Script testa 5 EFs (12 asserts) | validação E2E completa | 2026-04-17 |
+| P-009 | F1-S01 | config | high | Setar 4 env vars no Railway Orchestrator: `META_WHATSAPP_TOKEN`, `META_PHONE_NUMBER_ID`, `META_WEBHOOK_VERIFY_TOKEN=ecossistema-whatsapp-verify`, `MARCELO_WHATSAPP_NUMBER=55...` | HITL outbound WA não funciona sem token | 2026-04-19 |
+| P-010 | F1-S01 | config | high | Registrar webhook no Meta WABA Dashboard: URL `https://<railway-url>/webhooks/whatsapp` + verify token `ecossistema-whatsapp-verify` + subscribe `messages` | HITL inbound WA não funciona | 2026-04-19 |
+| P-019 | Diploma-0 | seed | crit | Fornecer e-mails dos 4 assinantes FIC (LUCIMAR, ALECIANA, MARCELO, eCNPJ FIC) e cadastrá-los via `/diploma/assinantes` com email preenchido — BRy Easy Signer exige email para enviar link | fluxo de assinatura BRy inteiro | 2026-04-17 |
+| P-020 | Diploma-0 | config | crit | Confirmar que `BRY_CLIENT_ID` e `BRY_CLIENT_SECRET` estão setadas na Vercel (projeto `diploma-digital`) para o ambiente de Produção — sem isso `bry_configurado` retorna false e nenhuma assinatura XML funciona | assinatura XAdES diplomas | 2026-04-17 |
+| P-021 | Diploma-0 | seed | crit | Apagar diploma da Kauana (`5e197846-8d55-4105-94db-b15ce99bf69b`) do banco e reprocessar do zero — hoje está com status falso (`aguardando_envio_registradora`) mas XMLs nunca foram assinados | piloto real E2E | 2026-04-17 |
+| P-022 | Diploma-0 | feature | high | Implementar geração real de PDFs: Histórico Escolar, Termo de Expedição, Termo de Registro. Marcelo tem layouts (um já no sistema em Configurações > visual de histórico). Discutir modelo antes de implementar | Fase 0.4 — bloqueia P-021 | 2026-04-17 |
 
 ## Resolvidas
 
