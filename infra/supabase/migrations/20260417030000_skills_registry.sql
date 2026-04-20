@@ -1,7 +1,7 @@
 -- Migration: skills_registry
 -- Criado em: 2026-04-17 · V9 Fase 0 · Sessão S04
 -- DB alvo: ECOSYSTEM (gqckbunsfjgerbuiyzvn)
--- Referência: MASTERPLAN-V9 Parte XII (packages/@ecossistema/skills-registry) + briefing S04
+-- Referência: MASTERPLAN-V9 Parte XII (packages/skills-registry) + briefing S04
 
 create table if not exists skills_registry (
     id              uuid primary key default gen_random_uuid(),

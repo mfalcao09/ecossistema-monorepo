@@ -1,4 +1,5 @@
 {
+  "installCommand": "npm install",
   "functions": {
     "api/financeiro/*.py": {
       "maxDuration": 30

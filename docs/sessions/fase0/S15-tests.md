@@ -479,14 +479,14 @@ updates:
 * @mfalcao09
 
 # Segurança e governança
-/packages/@ecossistema/constitutional-hooks/ @mfalcao09
-/packages/@ecossistema/credentials/          @mfalcao09
+/packages/constitutional-hooks/ @mfalcao09
+/packages/credentials/          @mfalcao09
 /infra/supabase/migrations/                  @mfalcao09
 /docs/masterplans/                           @mfalcao09
 /docs/adr/                                   @mfalcao09
 
 # C-Suite templates — requer review
-/packages/@ecossistema/c-suite-templates/    @mfalcao09
+/packages/c-suite-templates/    @mfalcao09
 ```
 
 ---

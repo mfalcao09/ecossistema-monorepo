@@ -31,7 +31,7 @@ Esses clients serão usados pelo orchestrator (S10), hooks (S1), memory (S7) e a
 ## Escopo exato
 
 ```
-packages/@ecossistema/
+packages/
 ├── credentials/
 │   ├── package.json
 │   ├── README.md

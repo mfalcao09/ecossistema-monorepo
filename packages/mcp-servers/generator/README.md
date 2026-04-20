@@ -15,7 +15,7 @@ pnpm create-mcp-server whatsapp \
 
 Resultado:
 
-- Copia `packages/@ecossistema/mcp-servers/template/` para `packages/@ecossistema/mcp-servers/whatsapp-mcp/`
+- Copia `packages/mcp-servers/template/` para `packages/mcp-servers/whatsapp-mcp/`
 - Substitui `template-mcp` → `whatsapp-mcp`, `template_mcp` → `whatsapp_mcp` em todos os arquivos
 - Cria stubs `tools/send_message.py` e `tools/list_conversations.py`
 - Cria `resources/inbox_recent.py` stub
@@ -34,7 +34,7 @@ Resultado:
 ## Desenvolvimento
 
 ```bash
-cd packages/@ecossistema/mcp-servers/generator
+cd packages/mcp-servers/generator
 pnpm install
 node bin/create-mcp-server.js test-server --dry-run
 ```

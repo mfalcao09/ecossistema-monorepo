@@ -334,7 +334,7 @@ export const dispararReguaCobranca = tool({
 ## Instanciação via generator
 
 ```bash
-cd packages/@ecossistema/c-suite-templates
+cd packages/c-suite-templates
 pnpm create-csuite-agent --business fic --role cfo
 # Cria apps/fic/agents/cfo/ com:
 #   agent.config.yaml

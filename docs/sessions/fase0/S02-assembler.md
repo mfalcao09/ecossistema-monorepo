@@ -25,7 +25,7 @@ Criar o pacote `@ecossistema/prompt-assembler` que, dado (a) config do agente e 
 ## Escopo exato
 
 ```
-packages/@ecossistema/prompt-assembler/
+packages/prompt-assembler/
 ├── package.json
 ├── tsconfig.json
 ├── README.md

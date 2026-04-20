@@ -27,7 +27,7 @@ Implementar o **Phantom Magic Link Vault** — credenciais **nunca** fluem via c
 ## Escopo exato
 
 ```
-packages/@ecossistema/magic-link-vault/
+packages/magic-link-vault/
 ├── package.json
 ├── README.md
 ├── src/

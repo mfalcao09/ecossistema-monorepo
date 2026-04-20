@@ -1,7 +1,7 @@
 # MEMORY.md — Índice Canônico de Memória
 
-> **Atualizado:** 2026-04-17 (pós-reconciliação Fase 0 — 11 sessões executadas)
-> **Status:** V9 canônica ativa · Monorepo + Vercel em produção · Fase 0 Dia 1-2 com **11/11 sessões com código** · **4 merges em main** · **7 PRs abertos aguardando drenagem**
+> **Atualizado:** 2026-04-19 (F1-S01 Jarvis Routing + decisão arquitetural Jarvis)
+> **Status:** V9 canônica ativa · Fase 0 MERGEADA · **Fase 1 iniciada** — F1-S01 em PR #25
 
 ---
 
@@ -88,33 +88,27 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 
 ## Fase 0 — Status de execução
 
-| Sessão | Título | Status | PR | Branch | Notas |
-|---|---|---|---|---|---|
-| **S01** | Constitutional Hooks | ✅ Merged | #3 | (deletada) | 11 hooks, 70 testes, 93% cov |
-| **S02** | Prompt Assembler (Phantom 9-layer) | 🔶 PR aberto | #10 | `claude/wonderful-maxwell` | 9 layers + templates CEO/CFO/D-Gov + testes por layer |
-| **S03** | FastMCP Template | ✅ Merged | #2 | (deletada) | 27 testes, generator E2E, Railway deploy |
-| **S04** | Migrations V9 D1 | ✅ Merged | #4 | (deletada) | memory 3-tier + creds v2 + skills + audit; aplicado em ECOSYSTEM |
-| **S05** | LiteLLM proxy | 🔶 PR aberto | #1 | `claude/busy-mendel` | Scaffold + deploy Railway via OpenRouter |
-| **S06** | ADRs + Runbooks | ✅ Merged | #5 | (deletada) | 15 ADRs (001-015) + 6 runbooks; ADR-001 legado renumerado como ADR-016 |
-| **S07** | Memory package | 🔶 PR aberto | #7 | `claude/angry-germain` | v0.2.0 Mem0 + pgvector + hybrid retrieval + composição TS |
-| **S08** | 5 Edge Functions D2 | 🔶 PR aberto | #6 | `claude/strange-ellis` | SC-29 v2 + SC-10 + SC-19 + SC-04 + SC-03 |
-| **S09** | Langfuse self-host | 🔶 PR aberto | #8 | `claude/zealous-chandrasekhar` | PG + ClickHouse + Redis + MinIO; 4 fixes runtime |
-| **S10** | Orchestrator FastAPI | 🔶 PR aberto | #11 | `claude/romantic-gauss` | SSE + HITL + session resumption + 4 test modules |
-| **S11** | C-Suite Templates | 🔶 PR aberto | #9 | `claude/vigorous-liskov` | 4 templates + generator CLI + CFO-FIC instanciado |
-| S12–S18 | — | ⏳ Não iniciado | — | — | Só abrir após drenar os 7 PRs abertos |
+| Sessão | Título | Status | PR | Notas |
+|---|---|---|---|---|
+| **S01** | Constitutional Hooks | ✅ Merged | #3 | 11 hooks, 70 testes, 93% cov |
+| **S02** | Prompt Assembler (Phantom 9-layer) | ✅ Merged | #10 | 9 layers + templates CEO/CFO/D-Gov + testes por layer |
+| **S03** | FastMCP Template | ✅ Merged | #2 | 27 testes, generator E2E, Railway deploy |
+| **S04** | Migrations V9 D1 | ✅ Merged | #4 | memory 3-tier + creds v2 + skills + audit; aplicado em ECOSYSTEM |
+| **S05** | LiteLLM proxy | ✅ Merged | #1 | Scaffold + deploy Railway via OpenRouter |
+| **S06** | ADRs + Runbooks | ✅ Merged | #5 | 15 ADRs (001-015) + 6 runbooks; ADR-001 legado renumerado como ADR-016 |
+| **S07** | Memory package | ✅ Merged | #7 | v0.2.0 Mem0 + pgvector + hybrid retrieval + composição TS do orquestrador |
+| **S08** | 5 Edge Functions D2 | ✅ Merged | #6 | SC-29 v2 + SC-10 + SC-19 + SC-04 + SC-03 |
+| **S09** | Langfuse self-host | ✅ Merged | #8 | PG + ClickHouse + Redis + MinIO; 4 fixes runtime |
+| **S10** | Orchestrator FastAPI | ✅ Merged | #11 | SSE + HITL + session resumption + 4 test modules |
+| **S11** | C-Suite Templates | ✅ Merged | #9 | 4 templates + generator CLI + CFO-FIC instanciado (path corrigido pós-merge, ver saneamento) |
+| **S14** | Memory Consolidator Worker | ✅ Pronto para PR | — | Railway worker sleeptime: extract+dedupe+decay+detect+briefing; 39 testes, 81.6% cov; migration 20260418000000 |
+| S12–S13, S15–S18 | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
 
-### Ordem de merge recomendada para drenar (baseada em dependências)
+### Saneamento pós-drenagem (2026-04-17)
 
-1. **S04 ✅** → desbloqueia S07, S08, S11, S16
-2. **S06 ✅** → sem deps, mergeado em paralelo
-3. **S08 (#6)** → usa tabelas do S04 (audit_log, skills_registry, credentials v2)
-4. **S07 (#7)** → usa tabelas memory_3tier do S04
-5. **S02 (#10)** → sem deps, desbloqueia S11 e S10
-6. **S05 (#1)** → sem deps TS, mas S10 precisa runtime
-7. **S09 (#8)** → sem deps, mas S10/S13 consomem como cliente
-8. **S11 (#9)** → depende de S02 (assembler) + S04 (skills_registry)
-9. **S10 (#11)** → depende de S02 + S05 + S07 + S09 para runtime completo
-10. **Só então** abrir S12-S18.
+- **S11 estava em `packages/@ecossistema/c-suite-templates/`** (fora do workspace) — movido para `packages/c-suite-templates/` + `pnpm install` validado. `pnpm -r list` confirma que `@ecossistema/c-suite-templates@0.1.0` está registrado no workspace.
+- **9 briefings + masterplan** tinham o path antigo no escopo literal — corrigidos para convenção FLAT (`packages/<nome>/`). Logs históricos (`docs/sessions/logs/LOG-*.md`) mantidos como evidência.
+- **CI verde** em main (Vercel intentus + diploma-digital) após todos os merges.
 
 ### ADRs canônicos publicados (S06)
 
@@ -221,8 +215,34 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 
 ---
 
+## Fase 1 — Status de execução
+
+| Sessão | Título | Status | PR | Notas |
+|---|---|---|---|---|
+| **F1-S01** | Jarvis WA Routing — inbound/outbound + HITL | ✅ Em PR | #25 | 19/19 testes · approval_requests Supabase ✅ · P-009/P-010 abertas |
+| F1-S02 | jarvis-app — Expo + Action Button + voz | ⏳ Próxima | — | iPhone 15 Pro Max · Evolution API backend |
+
+### Decisão arquitetural Jarvis (2026-04-19) — NÃO REVERTER
+
+**Jarvis não é um número WABA próprio.** É um assistente "Siri-like" que habita o iPhone do Marcelo.
+
+- **Evolution API** (Railway, linked device QR) lê o WhatsApp pessoal do Marcelo
+- **jarvis-app** (Expo + módulo Swift nativo) roda no iPhone 15 Pro Max
+- **Action Button** → abre Jarvis em modo voz (sem "Hey Siri")
+- **App Intents** → Apple Intelligence aprende a chamar Jarvis em contexto (iPhone 15 Pro Max tem suporte)
+- **Canal HITL F1-S01** (número WABA) → substituído por push APNs quando jarvis-app estiver pronto
+
+### Supabase ECOSYSTEM — migrações F1 aplicadas
+
+| Migration | Status | Data |
+|---|---|---|
+| `approval_requests` | ✅ Aplicada via MCP | 2026-04-19 |
+
+---
+
 ## Logs de sessões anteriores
 - `docs/sessions/logs/LOG-2026-04-15-consolidacao-monorepo.md`
 - `docs/sessions/logs/LOG-2026-04-15-contexto-pre-masterplan.md`
 - `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md`
 - `docs/sessions/logs/LOG-2026-04-17-s3-mcp-template.md`
+- `docs/sessions/logs/LOG-2026-04-19-F1-S01-jarvis-routing.md`

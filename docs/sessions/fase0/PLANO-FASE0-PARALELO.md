@@ -130,9 +130,9 @@ Essa última regra é o principal limitante do paralelismo. A solução: **conce
 
 | # | Sessão | Worktree | Escopo | Bloqueia? |
 |---|---|---|---|---|
-| 1 | **S1-Hooks** | eco-hooks | `packages/@ecossistema/constitutional-hooks/` | não |
-| 2 | **S2-Assembler** | eco-assembler | `packages/@ecossistema/prompt-assembler/` | não |
-| 3 | **S3-MCP-Template** | eco-mcp-template | `packages/@ecossistema/mcp-servers/template/` | não |
+| 1 | **S1-Hooks** | eco-hooks | `packages/constitutional-hooks/` | não |
+| 2 | **S2-Assembler** | eco-assembler | `packages/prompt-assembler/` | não |
+| 3 | **S3-MCP-Template** | eco-mcp-template | `packages/mcp-servers/template/` | não |
 | 4 | **S4-Migrations** ⭐ | eco-migrations-d1 | `infra/supabase/migrations/20260416*.sql` + runner | **SIM — slot DB do dia** |
 | 5 | **S5-LiteLLM** | eco-litellm | `infra/railway/litellm/` (Dockerfile + config) | não |
 | 6 | **S6-ADRs** | eco-docs-d1 | `docs/adr/*.md` + `docs/runbooks/*.md` | não |
@@ -143,12 +143,12 @@ Essa última regra é o principal limitante do paralelismo. A solução: **conce
 
 | # | Sessão | Worktree | Escopo | Bloqueia? |
 |---|---|---|---|---|
-| 7 | **S7-Memory** | eco-memory | `packages/@ecossistema/memory/` (usa migrations dia 1) | não |
+| 7 | **S7-Memory** | eco-memory | `packages/memory/` (usa migrations dia 1) | não |
 | 8 | **S8-EdgeFunctions** ⭐ | eco-efs-d2 | `infra/supabase/functions/credential-gateway-v2/`, `webhook-hardening/`, `pii-mask/`, `skills-registry-crud/`, `dual-write-pipeline/` | **SIM — slot EF do dia** |
 | 9 | **S9-Langfuse** | eco-langfuse | `infra/railway/langfuse/` + ClickHouse | não |
 | 10 | **S10-Orchestrator** | eco-orchestrator | `apps/orchestrator/` (FastAPI expondo Managed Agents) | não |
-| 11 | **S11-CSuite** | eco-csuite | `packages/@ecossistema/c-suite-templates/` (templates CEO + CFO primeiro) | não |
-| 12 | **S12-Vault** | eco-vault | `packages/@ecossistema/magic-link-vault/` (Phantom pattern) | não |
+| 11 | **S11-CSuite** | eco-csuite | `packages/c-suite-templates/` (templates CEO + CFO primeiro) | não |
+| 12 | **S12-Vault** | eco-vault | `packages/magic-link-vault/` (Phantom pattern) | não |
 
 ⭐ S8 concentra todas as EFs novas do dia pra evitar conflito de deploy.
 
@@ -156,7 +156,7 @@ Essa última regra é o principal limitante do paralelismo. A solução: **conce
 
 | # | Sessão | Worktree | Escopo |
 |---|---|---|---|
-| 13 | **S13-Clients** | eco-clients-d3 | `packages/@ecossistema/credentials/`, `litellm-client/`, `observability/` |
+| 13 | **S13-Clients** | eco-clients-d3 | `packages/credentials/`, `litellm-client/`, `observability/` |
 | 14 | **S14-Consolidator** | eco-consolidator | `apps/memory-consolidator/` (Railway worker sleeptime) |
 | 15 | **S15-Testes** | eco-tests-d3 | `packages/*/tests/` + `infra/ci/` (workflows GitHub) |
 | 16 | **S16-Piloto-CFO-FIC** | eco-pilot-cfo | `apps/erp-educacional/agents/cfo.ts` (CFO-FIC E2E real) |
@@ -194,7 +194,7 @@ Cada sessão tem briefing próprio em `docs/sessions/fase0/S{N}-{nome}.md`. Abai
 ### S1 — Constitutional Hooks
 
 **Worktree:** `eco-hooks` · **Branch:** `feature/constitutional-hooks`
-**Escopo:** criar `packages/@ecossistema/constitutional-hooks/` com 11 hooks (Art. II, III, IV, VIII, IX, XII, XIV, XVIII, XIX, XX, XXII) em TypeScript.
+**Escopo:** criar `packages/constitutional-hooks/` com 11 hooks (Art. II, III, IV, VIII, IX, XII, XIV, XVIII, XIX, XX, XXII) em TypeScript.
 **Dependências:** nenhuma.
 **Entregáveis:**
 - 11 arquivos `art-{roman}.ts` com testes unitários
@@ -206,7 +206,7 @@ Cada sessão tem briefing próprio em `docs/sessions/fase0/S{N}-{nome}.md`. Abai
 ### S2 — Prompt Assembler (Phantom 9-layer)
 
 **Worktree:** `eco-assembler` · **Branch:** `feature/prompt-assembler`
-**Escopo:** `packages/@ecossistema/prompt-assembler/` implementando o Phantom 9-layer assembler.
+**Escopo:** `packages/prompt-assembler/` implementando o Phantom 9-layer assembler.
 **Dependências:** nenhuma.
 **Entregáveis:**
 - `assemble(agentConfig, queryContext)` função pura
@@ -218,7 +218,7 @@ Cada sessão tem briefing próprio em `docs/sessions/fase0/S{N}-{nome}.md`. Abai
 ### S3 — FastMCP Template
 
 **Worktree:** `eco-mcp-template` · **Branch:** `feature/mcp-template`
-**Escopo:** scaffold base em `packages/@ecossistema/mcp-servers/template/` para todos os futuros MCP servers (Python + FastMCP v3).
+**Escopo:** scaffold base em `packages/mcp-servers/template/` para todos os futuros MCP servers (Python + FastMCP v3).
 **Dependências:** nenhuma.
 **Entregáveis:**
 - Template Python com `@mcp.tool`, `@mcp.resource`, `@mcp.prompt`
@@ -293,7 +293,7 @@ Cada sessão tem briefing próprio em `docs/sessions/fase0/S{N}-{nome}.md`. Abai
 ### S7 — Memory Package
 
 **Worktree:** `eco-memory` · **Branch:** `feature/memory-package`
-**Escopo:** `packages/@ecossistema/memory/` — wrapper Mem0 v3 + cliente das 3 tabelas pgvector.
+**Escopo:** `packages/memory/` — wrapper Mem0 v3 + cliente das 3 tabelas pgvector.
 **Dependências:** S4 completo (migrations aplicadas).
 **Entregáveis:**
 - Cliente tipado Mem0 com filters estritos (`user_id`, `agent_id`, `run_id`)
@@ -350,7 +350,7 @@ Cada sessão tem briefing próprio em `docs/sessions/fase0/S{N}-{nome}.md`. Abai
 ### S11 — C-Suite Templates (primeiros 2)
 
 **Worktree:** `eco-csuite` · **Branch:** `feature/csuite-templates`
-**Escopo:** `packages/@ecossistema/c-suite-templates/` — CEO-IA e CFO-IA primeiro.
+**Escopo:** `packages/c-suite-templates/` — CEO-IA e CFO-IA primeiro.
 **Dependências:** S2 (prompt assembler) como base.
 **Entregáveis:**
 - `CEO-IA/base-prompt.md` + variants/{educacao,imobiliario,saas}.md
@@ -363,7 +363,7 @@ Cada sessão tem briefing próprio em `docs/sessions/fase0/S{N}-{nome}.md`. Abai
 ### S12 — Magic Link Vault (Phantom pattern)
 
 **Worktree:** `eco-vault` · **Branch:** `feature/magic-link-vault`
-**Escopo:** `packages/@ecossistema/magic-link-vault/` — coleta secrets sem chat.
+**Escopo:** `packages/magic-link-vault/` — coleta secrets sem chat.
 **Dependências:** nenhuma (standalone).
 **Entregáveis:**
 - AES-256-GCM crypto em TypeScript (`crypto.ts`)
