@@ -1,0 +1,38 @@
+[00:00] Início da apresentação sobre a diferença de implantação de canais de API Z-API
+[00:05] Larissa Lopes, Coordenadora de Sucesso do Cliente, inicia a apresentação sobre a diferença de implantação de canais de API Z-API
+[00:56] Larissa Lopes, no ambiente de trabalho, inicia a navegação na plataforma para mostrar a implantação do canal Z-API
+[01:00] Na tela, a Larissa Lopes mostra a tela "Configurações" na área de "Contas".
+[01:08] Na tela, a Larissa Lopes mostra a tela "Configurações" na área de "Canais de atendimento".
+[01:10] Larissa Lopes clica no sinal de mais "+" para adicionar um novo canal.
+[01:15] Larissa Lopes seleciona a opção "Z-API (Integrar via QR Code)" para configurar a conta integrada.
+[01:23] Larissa Lopes está na tela para configurar a conta integrada.
+[01:27] Larissa Lopes clica em "Continuar" para prosseguir com a configuração.
+[01:39] Larissa Lopes completa a integração da conta Z-API e é exibida a mensagem "Integração realizada com sucesso".
+[01:43] Larissa Lopes clica em "Finalizar" para concluir o processo.
+[01:49] A Larissa Lopes exibe a tela "Canais de atendimento" com a conta Z-API integrada já configurada.
+[02:04] Larissa Lopes mostra a tela "Canais de atendimento" novamente.
+[02:07] Larissa Lopes clica no sinal de mais "+" para adicionar um novo canal.
+[02:15] Larissa Lopes seleciona a opção "Z-API (Conta própria)" para configurar a conta própria.
+[02:22] A tela exibe os campos "ID da instância", "Token da instância" e "Token de segurança" para serem preenchidos.
+[02:25] Larissa Lopes navega para a tela "Dashboard" da Z-API.
+[02:28] Larissa Lopes clica em "Instâncias Web" no menu lateral.
+[02:29] Larissa Lopes clica no botão "Adicionar" para adicionar uma nova instância.
+[02:30] Larissa Lopes insere um nome para a instância e clica para copiar o "Token de integração".
+[02:44] Larissa Lopes clica em "Salvar" para salvar as alterações.
+[02:47] Larissa Lopes copia o "ID" da instância que acabou de criar.
+[02:49] Na tela da plataforma, Larissa Lopes cola o "Token da instância".
+[02:51] Na tela da plataforma, Larissa Lopes cola o "ID da instância".
+[02:53] Larissa Lopes navega novamente para a tela "Instâncias Web" da Z-API.
+[03:00] Larissa Lopes navega para a área de "Segurança" para obter o "Token de segurança".
+[03:07] Na tela da plataforma, Larissa Lopes cola o "Token de segurança".
+[03:10] Larissa Lopes retorna à tela da Z-API para exibir a seção "Token de segurança da conta" e mostra onde o token está localizado.
+[03:22] Larissa Lopes confirma a alteração e recebe o código de confirmação.
+[03:26] Larissa Lopes insere o código de confirmação.
+[03:28] Larissa Lopes clica em "Sim" para remover o token.
+[03:32] Larissa Lopes copia o novo "Client Token" para a integração.
+[03:41] Larissa Lopes cola o "Token de segurança" na plataforma.
+[03:43] A tela exibe as instruções para realizar a leitura do QR Code do WhatsApp.
+[03:47] Larissa Lopes clica em "Continuar" para prosseguir.
+[03:59] A Larissa Lopes completa a integração da conta Z-API e é exibida a mensagem "Integração realizada com sucesso".
+[04:01] Larissa Lopes clica em "Finalizar" para concluir o processo.
+[04:06] A Larissa Lopes encerra a apresentação e explica a diferença na cobrança entre as contas.

@@ -1,0 +1,26 @@
+[ 00:00] Olá, eu sou Larissa Lopes. Atua na equipe de sucesso do cliente aqui na Helena. E hoje eu vou apresentar pra vocês sobre o nosso menu e ações personalizadas que estão dentro da plataforma.
+[ 00:19] Esse ícone de menu, ele permite que você faça uma plataforma personalizada, de fato. Então vocês deixam de ser uma instância da Helena, tendo aquilo que a Helena permite que já tem inativo
+[ 00:30] e façam com que vocês consigam adaptar a plataforma de vocês. Então vocês vão colocar ali um dashboard personalizado, um, um ícone de VoIP, enfim. Vocês têm várias possibilidades.
+[ 00:45] Já vou começar, né? Vou falar pra vocês algumas especificações. Se vocês quiserem utilizar um menu, né, um sub-menu
+[ 00:55] dentro, abrindo dentro da nossa própria página, é necessário que vocês deixem ou abram automaticamente, é necessário que vocês deixem ela bem adaptada. Então vocês vão ter que deixar o login já feito, então vocês têm que preparar
+[ 01:13] a plataforma que vai abrir. Então, se for um look, enfim. Eh, eu vou deixar, então vai estar aqui nessa postagem
+[ 01:21] as especificações certinhas, eh, um direcionamento de como faz, né, como você deixa preparado, para que tenha esse redirecionamento. Certo? Então, agora eu vou mostrar pra vocês
+[ 01:31] como que faz. Então, vocês vão aqui no admin. Então, lembrando também, gente, esse ícone, ele aparece apenas para o Super Admin. Então, isso permite que vocês tenham
+[ 01:46] todo esse domínio, vocês podem vender essa personalização para o cliente de vocês, e vocês podem vender com ou sem. Então, vocês podem adaptar os planos de vocês.
+[ 01:56] Vocês vão vir aqui no admin, ações e menus personalizados. Vocês vão em novo, e vocês podem escolher um menu. Então, vocês vão colocar um nome. Lembrando também, que vocês só conseguem colocar, né, esses sub-menus dentro de uma das categorias existentes da Helena. Atualmente não é possível que se crie
+[ 02:18] uma categoria. Eu vou colocar aqui. Eu posso, vou escolher um ícone. Então, a gente já deixa aqui uma quantidade de ícones específicos que vocês podem utilizar
+[ 02:32] de acordo com o que fica mais fácil para vocês. Eu vou colocar aqui, então, um outro ícone. Vou colocar um ícone. Eu vou salvar e vou escolher o comportamento, que é o que eu falei com vocês, né? Vocês podem abrir aqui
+[ 02:49] ou abrir em uma nova aba. Não deixem de que se quiser que seja logado, de configurar corretamente. Então, você vai dar permissão de quem vai poder ver esses ícones, né?
+[ 03:00] Você pode escolher quem pode ver. E lembrando que elas vão interligando, né? Se você permite para o atendente restrito ver, as plataformas subentende que o atendente também pode ver.
+[ 03:10] Eu vou escolher aqui na categoria Ajustes, e vou configurar uma URL. Então, eu vou colocar aqui uma URL.
+[ 03:22] E vou escolher se eu quero para todas as contas, ou se eu vou selecionar uma conta específica. Então, isso permite que vocês deixem cada vez mais personalizada a plataforma de vocês.
+[ 03:35] Aqui eu escolhi uma. Perfeito. E vou salvar. O mesmo eu posso fazer para um
+[ 03:45] uma ação. Então, a ação, ela vai aparecer ali na tela de atendimento. Eu vou colocar aqui um voip. Vou colocar um ícone. Pronto, vou escolher um telefone.
+[ 03:59] Eu vou colocar aqui, se ele vai abrir uma nova aba, se ele vai, né, redirecionar para a página, ou se ele vai abrir um pop-up. Vou colocar aqui. Para quem que eu posso ver? OK.
+[ 04:16] E vou ver em qual posição que ele vai estar. Então, eu vou colocar aqui que vai estar no cabeçalho do atendimento e no painel. E aqui eu vou colocar o mesmo ícone lá de cima.
+[ 04:31] Porque eu não tenho o VoIP e eu posso escolher para qual conta ela vai. OK. Eu vou buscar a conta. Beleza. E vou salvar.
+[ 04:45] Prontinho. Já estou aqui na conta, então eu vou mostrar para vocês. Deixa eu dar um recarregado aqui na página. Vou mostrar pra vocês onde que vai aparecer.
+[ 04:57] Aqui apareceu. Então, eu vou, tenho aqui, né? Eu vou redirecionar, como, né, não está correto a minha configuração, ela não vai aparecer aqui.
+[ 05:05] E aqui eu atendi, então eu vou, vamos ver se eu consigo um atendimento que. Vamos ver.
+[ 05:14] E já tenho aqui o meu iconezinho. Então, pessoal, por hoje é isso. Se vocês ficarem com dúvidas, se tem alguma configuração, ou
+[ 05:27] né, em qualquer outra ação, entre em contato com o nosso suporte através do 31 4003-7752, né? Ou também fale com o seu CS, que vai ser nesse mesmo número. Até a próxima.

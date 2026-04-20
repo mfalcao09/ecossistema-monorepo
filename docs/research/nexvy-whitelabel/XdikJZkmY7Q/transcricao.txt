@@ -1,0 +1,24 @@
+[ 00:00 ] Olá, sejam bem-vindos. Nesse conteúdo, eu vou explicar de forma simples e clara como funciona o sub-menu usuário ADM.
+[ 00:13 ] Imagina bem, você recebe a chamada de um cliente dizendo que o atendimento dele não está chegando na plataforma. Você pode acessar a plataforma
+[ 00:26 ] com acesso daquele usuário que fez a reclamação, verificar a situação, fazer todas as correções
+[ 00:37 ] e posterior a isso, informar: tudo certo, pode seguir com o atendimento. Essa é a função do usuário ADM na plataforma.
+[ 00:41 ] Eu vou mostrar para você como isso funciona. Bom, estamos aqui na plataforma e eu vou mostrar para você os tipos de usuário ADM que você pode liberar para os seus colaboradores poderem acessar as contas, darem manutenção, fazerem um acompanhamento financeiro e demais funções dentro da plataforma.
+[ 00:59 ] Eu vou criar aqui, ó, um novo usuário. Eu tenho essas três opções: suporte, financeiro e super administrador.
+[ 01:07 ] Tá? Então eu vou criar um perfil de acesso de super administrador, né? Pro meu acesso, Charles Pereira. Eu vou aqui usar o meu e-mail e vou salvar.
+[ 01:14 ] Pronto. Eu criei o meu acesso para Charles Pereira aqui, ó. E vou agora acessar a plataforma com esse usuário Charles Pereira no super administrador.
+[ 01:26 ] OK? Então eu estou acessando a conta como usuário super administrador. Veja bem, o acesso dele é todo liberado, assim como o administrador principal.
+[ 01:39 ] Então aqui, ó, você consegue acessar todos os menus e as ações, inclusive incluir outros usuários aqui, ó, tá vendo?
+[ 01:47 ] Agora vamos ver também o acesso financeiro. Pronto, veja bem, eu já estou com o acesso
+[ 01:55 ] de financeiro e como eu tinha dito, o menu, por exemplo, ó, ele ficou limitado apenas a relatório de faturamento
+[ 02:02 ] e a custo de infraestrutura. Agora eu vou mostrar para você o acesso, quando eu alterar do financeiro aqui para o suporte,
+[ 02:11 ] qual a diferença para esse acesso do Charles, né? Salvar aqui, ó. Agora ele tem um acesso de suporte.
+[ 02:20 ] E aí eu vou mostrar para você como fica esse acesso. Pronto, eu estou logado agora com suporte, e como eu tinha dito, o menu ele altera. Veja bem, eu tenho acesso à contas,
+[ 02:30 ] eu tenho acesso aos canais, e tem acesso às ações e menus personalizados. Isso por quê? Porque o apoio de suporte, ele pode ser dado no acompanhamento de uma conta,
+[ 02:44 ] e até na criação de canais, ou qualquer ação necessária para esses canais, também de ações e menus personalizados na plataforma. Agora eu vou mostrar para você como funciona o acesso da personificação.
+[ 02:53 ] A personificação é eu acessar a plataforma como um outro perfil, né? Eu vou mostrar para vocês como eu tenho acesso de suporte, eu vou poder acessar as contas, tá? Então vou clicar aqui em conta,
+[ 03:02 ] e eu vou acessar essa conta exemplo como um atendimento da Helena. Então quando eu acesso a conta personificado,
+[ 03:10 ] que eu estarei logado com aquele usuário, e para mim aparece um relógio aqui, ó, um cronômetro mostrando o tempo que eu posso ficar.
+[ 03:20 ] Cabe ressaltar que todo esse acesso, ele é rastreado, ou seja, quando você vai fazer uma auditoria, buscar os logs,
+[ 03:31 ] confirma que eu, como Charles, acessei a conta com o perfil do atendimento Helena. Pra que serve o usuário ADM? Para que você tenha liberdade
+[ 03:38 ] de criar acessos para a sua equipe, dando limites para que ela possa atuar onde você quer que ela atue.
+[ 03:45 ] Eu espero ter ficado claro. Esse é o menu usuário ADM da plataforma. Eu espero ter explicado bem. E qualquer dúvida, você entra em contato conosco. Você tem o nosso contato, tem o nosso WhatsApp, você tem as nossas redes, entra em contato conosco.
