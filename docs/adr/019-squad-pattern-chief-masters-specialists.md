@@ -1,4 +1,4 @@
-# ADR-017: Squad Pattern — Chief / Masters / Specialists no c-suite-templates
+# ADR-019: Squad Pattern — Chief / Masters / Specialists no c-suite-templates
 
 - **Status:** aceito
 - **Data:** 2026-04-20

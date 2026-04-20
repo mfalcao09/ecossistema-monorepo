@@ -79,7 +79,7 @@ pnpm create-csuite-agent --list
    - `hooks.ts` — artigos constitucionais aplicáveis
    - `evolved-config-seed/` — persona, user-profile, domain-knowledge, strategies/
 
-2. (Opcional, ADR-017) Adicionar subdirs de squad pattern:
+2. (Opcional, ADR-019) Adicionar subdirs de squad pattern:
    - `masters/*.md` — subpersonas tier 1 invocadas pelo chief
    - `tasks/*.md` — ações atômicas reutilizáveis
    - `workflows/*.yaml` — pipelines multi-agente declarativos
@@ -89,7 +89,7 @@ pnpm create-csuite-agent --list
 
 4. Criar teste em `tests/instantiator.test.ts`
 
-## Squad pattern (ADR-017)
+## Squad pattern (ADR-019)
 
 Cada template C-level pode expor uma hierarquia **Chief (tier 0) → Masters (tier 1) → Specialists (tier 2)**:
 

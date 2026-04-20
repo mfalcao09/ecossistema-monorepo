@@ -71,7 +71,7 @@ steps:
     action: send_whatsapp
     target: [ceo-ia.{{inputs.business}}, marcelo]
     body: "{{steps.consolidate.outputs.relatorio_md}}"
-    channel: whatsapp-gateway   # Baileys Nível 2 (ADR-017 pairing)
+    channel: whatsapp-gateway   # Baileys Nível 2 (ADR-017 WhatsApp pairing)
 
 handoff:
   escalate_to: claudinho-vp
