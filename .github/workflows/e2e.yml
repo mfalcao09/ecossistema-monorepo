@@ -2,13 +2,13 @@ name: E2E Suite
 
 on:
   schedule:
-    - cron: '0 3 * * *'
+    - cron: "0 3 * * *"
   workflow_dispatch:
     inputs:
       scenario:
-        description: 'Run specific scenario (leave blank for all)'
+        description: "Run specific scenario (leave blank for all)"
         required: false
-        default: ''
+        default: ""
 
 concurrency:
   group: e2e-suite
@@ -34,12 +34,12 @@ jobs:
 
       - uses: pnpm/action-setup@v4
         with:
-          version: 9
+          version: 9.0.0
 
       - uses: actions/setup-node@v4
         with:
-          node-version: '20'
-          cache: 'pnpm'
+          node-version: "20"
+          cache: "pnpm"
 
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
