@@ -73,15 +73,33 @@ pnpm create-csuite-agent --list
 ## Adicionar um novo role (template)
 
 1. Criar `templates/c-suite/{ROLE}-IA/` com:
-   - `base-prompt.md` — missão, mentalidade, boundaries, artigos
+   - `base-prompt.md` — missão, mentalidade, boundaries, artigos (Chief tier 0)
    - `variants/educacao.md`, `imobiliario.md`, `saas.md`
    - `skills.yaml` — whitelist/blacklist, HITL triggers, budget
    - `hooks.ts` — artigos constitucionais aplicáveis
    - `evolved-config-seed/` — persona, user-profile, domain-knowledge, strategies/
 
-2. Adicionar ao `roleToTemplateKey()` em `src/instantiator.ts` se necessário
+2. (Opcional, ADR-017) Adicionar subdirs de squad pattern:
+   - `masters/*.md` — subpersonas tier 1 invocadas pelo chief
+   - `tasks/*.md` — ações atômicas reutilizáveis
+   - `workflows/*.yaml` — pipelines multi-agente declarativos
+   - `checklists/*.md` — quality gates (ex: `bam-alignment.md`)
 
-3. Criar teste em `tests/instantiator.test.ts`
+3. Adicionar ao `roleToTemplateKey()` em `src/instantiator.ts` se necessário
+
+4. Criar teste em `tests/instantiator.test.ts`
+
+## Squad pattern (ADR-017)
+
+Cada template C-level pode expor uma hierarquia **Chief (tier 0) → Masters (tier 1) → Specialists (tier 2)**:
+
+- **Chief** = `base-prompt.md` + `evolved-config-seed/` (já existia)
+- **Masters** = `masters/*.md` — cada master é uma subpersona com escopo delimitado (ex: `fpa.md`, `tax.md` no CFO)
+- **Specialists** = executores no `@ecossistema/task-registry` (Inter, PyNFe, BRy) — não duplicam aqui
+
+Tasks, workflows e checklists são **opcionais** por template — roles sem demanda (ex: D-Governanca hoje) podem omitir.
+
+Piloto: CFO-IA (S16 — CFO-FIC).
 
 ---
 
