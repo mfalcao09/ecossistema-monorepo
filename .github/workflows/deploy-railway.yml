@@ -1,0 +1,21 @@
+name: Deploy Railway Services
+on:
+  workflow_dispatch:
+    inputs:
+      service:
+        description: 'Serviço a deployar'
+        required: true
+        type: choice
+        options: [orchestrator, litellm, langfuse, consolidator]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Railway CLI
+        run: npm install -g @railway/cli
+      - name: Deploy
+        run: railway up --service ${{ github.event.inputs.service }}
+        env:
+          RAILWAY_TOKEN: ${{ secrets.RAILWAY_TOKEN }}
