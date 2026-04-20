@@ -51,12 +51,14 @@ aplicado no nível do handler (mais granular). Change mínima intencional.
 `POST /api/atendimento/invites`. Hoje retorna `accept_url` para o operador
 copiar manualmente — OK para FIC single-tenant, upgrade para Fase 2 SaaS.
 
-### ⏳ Fase 3 — UI Cargos
+### ✅ Fase 3 — UI Cargos (2026-04-21)
 
-- [ ] Rota `/atendimento/configuracoes/cargos/page.tsx`
-- [ ] `components/atendimento/permissions/PermissionMatrix.tsx` (15×5 toggles)
-- [ ] Modal editar cargo (nome + descrição + matrix + "Copiar de outro")
-- [ ] Presets system com edit desabilitado + aviso
+- [x] Layout `/atendimento/configuracoes` com abas (Cargos / Usuários / Equipes)
+- [x] Rota `/atendimento/configuracoes/cargos/page.tsx`
+- [x] `components/atendimento/permissions/PermissionMatrix.tsx` (15×5 toggles + bulk por módulo + resumo granted/total)
+- [x] Drawer editar cargo (nome, descrição, matrix, copiar permissões de outro cargo, excluir)
+- [x] Modal criar novo cargo
+- [x] Presets system exibem badge "preset" com cadeado e matrix readOnly
 
 ### ⏳ Fase 4 — UI Usuários + Equipes
 
