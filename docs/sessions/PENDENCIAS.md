@@ -29,6 +29,8 @@
 | P-008 | S08 | test | med | Rodar `scripts/smoke-test-efs.sh` contra prod após P-001 estar feito. Script testa 5 EFs (12 asserts) | validação E2E completa | 2026-04-17 |
 | P-009 | F1-S01 | config | high | Setar 4 env vars no Railway Orchestrator: `META_WHATSAPP_TOKEN`, `META_PHONE_NUMBER_ID`, `META_WEBHOOK_VERIFY_TOKEN=ecossistema-whatsapp-verify`, `MARCELO_WHATSAPP_NUMBER=55...` | HITL outbound WA não funciona sem token | 2026-04-19 |
 | P-010 | F1-S01 | config | high | Registrar webhook no Meta WABA Dashboard: URL `https://<railway-url>/webhooks/whatsapp` + verify token `ecossistema-whatsapp-verify` + subscribe `messages` | HITL inbound WA não funciona | 2026-04-19 |
+| P-014 | F1-S02 | config | med | Setar `contaCorrente` da FIC nas opções do `InterClient` em produção (necessário para X-Conta-Corrente header nos endpoints de cobrança) | emissão de boletos em prod | 2026-04-20 |
+| P-015 | F1-S02 | config | med | Renovar certificado mTLS Inter sandbox antes de 20/05/2026 — acessar portal Inter, integração "TESTE BOLETO API FIC 3", baixar novo par cert+key e atualizar vault (inter-sandbox-cert-fic3, inter-sandbox-key-fic3) | testes e2e sandbox | 2026-04-20 |
 | P-017 | S08+S12 | config | med | Ativar `webhook_targets` (setar `is_active=true`, URLs Railway reais e secrets) para Inter, BRy, Stripe, Evolution conforme cada provider for integrado | uso de `webhook-hardening` em produção | 2026-04-18 |
 | P-018 | S08 | refactor | low | `drain_dual_write_queue()` suporta apenas `insert` no ECOSYSTEM. Para upsert/update/delete ou mirrors cross-project (Intentus), criar `drain-mirror-queue` EF que usa `INTENTUS_SERVICE_ROLE_KEY` | resiliência total de mirror fails | 2026-04-18 |
 | P-019 | Diploma-0 | seed | crit | Fornecer e-mails dos 4 assinantes FIC (LUCIMAR, ALECIANA, MARCELO, eCNPJ FIC) e cadastrá-los via `/diploma/assinantes` com email preenchido — BRy Easy Signer exige email para enviar link | fluxo de assinatura BRy inteiro | 2026-04-17 |
@@ -40,6 +42,9 @@
 
 | ID | Sessão | Ação | Resolvida em | Commit / PR |
 |---|---|---|---|---|
+| P-011 | F1-S02 | Migration `idempotency_cache` aplicada no Supabase ECOSYSTEM | 2026-04-20 | 57daa10 — Closes P-011 |
+| P-012 | F1-S02 | Credenciais Inter sandbox FIC 3 gravadas no vault (client_id, secret, cert, key) | 2026-04-20 | 57daa10 — Closes P-012 |
+| P-013 | F1-S02 | E2e Inter sandbox verde: OAuth2+mTLS, emitirBoleto, listarCobrancas | 2026-04-20 | 57daa10 — Closes P-013 |
 
 ---
 
