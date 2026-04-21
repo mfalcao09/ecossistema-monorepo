@@ -277,13 +277,15 @@ function snapshotDisciplinaParaDadosDiploma(d: SnapshotDisciplina): Disciplina {
   if (s.includes('reprov')) situacao = 'Reprovado'
   else if (s.includes('curs') || s.includes('pendente') || s.includes('tranc')) situacao = 'Pendente'
 
-  // Forma integralização — só aceita valores do XSD
-  const formaIntegralizacaoMap: Record<string, 'Cursado' | 'Aproveitamento' | 'Dispensa'> = {
+  // Forma integralização — só aceita valores do XSD v1.05
+  // (Cursado | Validado | Aproveitado)
+  const formaIntegralizacaoMap: Record<string, 'Cursado' | 'Validado' | 'Aproveitado'> = {
     cursado: 'Cursado',
-    aproveitamento: 'Aproveitamento',
-    aproveitado: 'Aproveitamento',
-    dispensado: 'Dispensa',
-    dispensa: 'Dispensa',
+    aproveitamento: 'Aproveitado',
+    aproveitado: 'Aproveitado',
+    validado: 'Validado',
+    dispensado: 'Aproveitado',
+    dispensa: 'Aproveitado',
   }
   const fiKey = (d.forma_integralizacao || '').toLowerCase()
   const formaIntegralizacao =
