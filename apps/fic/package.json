@@ -1,0 +1,22 @@
+{
+  "name": "@ecossistema/fic",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "FIC — Faculdades Integradas de Cassilândia: agentes, tools e serviços",
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run",
+    "test:e2e": "vitest run --reporter=verbose agents/cfo/tests/e2e-sandbox",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@supabase/supabase-js": "^2.45.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0",
+    "vitest": "^2.0.0"
+  }
+}
