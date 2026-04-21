@@ -6,9 +6,15 @@ import {
   PERMISSION_MODULES,
   type PermissionAction,
   type PermissionModule,
-} from "@/lib/atendimento/permissions";
+} from "@/lib/atendimento/permissions-constants";
 
-const ALL_ACTIONS: readonly PermissionAction[] = ["view", "create", "edit", "delete", "export"] as const;
+const ALL_ACTIONS: readonly PermissionAction[] = [
+  "view",
+  "create",
+  "edit",
+  "delete",
+  "export",
+] as const;
 const ACTION_LABELS: Record<PermissionAction, string> = {
   view: "Ver",
   create: "Criar",
@@ -81,7 +87,10 @@ export function PermissionMatrix({
                 {ACTION_LABELS[act]}
               </th>
             ))}
-            <th scope="col" className="px-3 py-3 text-right font-semibold text-gray-700">
+            <th
+              scope="col"
+              className="px-3 py-3 text-right font-semibold text-gray-700"
+            >
               Resumo
             </th>
           </tr>
@@ -104,7 +113,10 @@ export function PermissionMatrix({
                   const applicable = mod.actions.includes(act);
                   if (!applicable) {
                     return (
-                      <td key={act} className="px-3 py-3 text-center text-gray-200">
+                      <td
+                        key={act}
+                        className="px-3 py-3 text-center text-gray-200"
+                      >
                         —
                       </td>
                     );
@@ -115,19 +127,31 @@ export function PermissionMatrix({
                       <button
                         type="button"
                         disabled={readOnly}
-                        onClick={() => onChange({ module: mod.slug, action: act, granted: !on })}
+                        onClick={() =>
+                          onChange({
+                            module: mod.slug,
+                            action: act,
+                            granted: !on,
+                          })
+                        }
                         className={[
                           "inline-flex h-7 w-7 items-center justify-center rounded-full border transition",
                           on
                             ? "border-emerald-200 bg-emerald-500 text-white hover:bg-emerald-600"
                             : "border-gray-200 bg-white text-gray-300 hover:border-gray-300 hover:text-gray-400",
-                          readOnly ? "cursor-not-allowed opacity-60" : "cursor-pointer",
+                          readOnly
+                            ? "cursor-not-allowed opacity-60"
+                            : "cursor-pointer",
                         ].join(" ")}
                         aria-pressed={on}
                         aria-label={`${ACTION_LABELS[act]} ${mod.name}`}
                         title={`${ACTION_LABELS[act]} ${mod.name}`}
                       >
-                        {on ? <Check size={14} strokeWidth={3} /> : <X size={14} />}
+                        {on ? (
+                          <Check size={14} strokeWidth={3} />
+                        ) : (
+                          <X size={14} />
+                        )}
                       </button>
                     </td>
                   );

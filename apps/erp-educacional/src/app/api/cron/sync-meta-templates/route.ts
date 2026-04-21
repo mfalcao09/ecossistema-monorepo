@@ -1,6 +1,6 @@
 /**
  * Cron: sync de templates Meta → Supabase.
- * Schedule: */30 * * * *  (a cada 30min) — ver vercel.json.
+ * Schedule: a cada 30min (ver vercel.json — "0,30 * * * *" equivalente ao "star/30").
  *
  * Autenticação: header Authorization: Bearer <CRON_SECRET>
  * (Vercel Cron envia automaticamente quando CRON_SECRET está em env vars)
@@ -8,7 +8,7 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { syncInboxTemplates } from "../../atendimento/templates/sync/route";
+import { syncInboxTemplates } from "@/lib/atendimento/sync-templates";
 
 function isAuthorized(request: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
@@ -30,11 +30,16 @@ export async function GET(request: NextRequest) {
     .eq("enabled", true);
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: error.message },
+      { status: 500 },
+    );
   }
 
   const inboxIds = (data ?? []).map((r) => r.id);
-  console.log(`[cron/sync-meta-templates] iniciando sync de ${inboxIds.length} inbox(es)`);
+  console.log(
+    `[cron/sync-meta-templates] iniciando sync de ${inboxIds.length} inbox(es)`,
+  );
   const results = await Promise.all(inboxIds.map(syncInboxTemplates));
 
   const totals = results.reduce(

@@ -3,7 +3,7 @@
  */
 
 import { describe, expect, it } from "vitest";
-import { computeNextOccurrence } from "@/app/api/cron/dispatch-scheduled-messages/route";
+import { computeNextOccurrence } from "@/lib/atendimento/recurrence";
 
 describe("computeNextOccurrence", () => {
   const base = new Date("2026-04-21T12:00:00.000Z");

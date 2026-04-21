@@ -16,12 +16,16 @@ import { useCallback, useEffect, useState } from "react";
 import type {
   PermissionAction,
   PermissionModule,
-} from "@/lib/atendimento/permissions";
+} from "@/lib/atendimento/permissions-constants";
 
 type PermissionMap = Record<string, boolean>;
 
 const CACHE_TTL_MS = 5 * 60 * 1000;
-let globalCache: { map: PermissionMap | null; fetchedAt: number; inFlight: Promise<PermissionMap> | null } = {
+let globalCache: {
+  map: PermissionMap | null;
+  fetchedAt: number;
+  inFlight: Promise<PermissionMap> | null;
+} = {
   map: null,
   fetchedAt: 0,
   inFlight: null,
@@ -90,7 +94,10 @@ export function useCan(
 }
 
 /** Variante sync quando o caller já carregou o mapa completo. */
-export function useAllPermissions(): { permissions: PermissionMap | null; refresh: () => void } {
+export function useAllPermissions(): {
+  permissions: PermissionMap | null;
+  refresh: () => void;
+} {
   const [perms, setPerms] = useState<PermissionMap | null>(globalCache.map);
 
   const refresh = useCallback(() => {
