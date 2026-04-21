@@ -21,6 +21,8 @@ import {
   CargaHorariaRelogioComEtiqueta,
   TFormaAcesso,
 } from './tipos';
+import { aplicarSnapshotSobreDadosDiploma } from '../diploma/snapshot-to-dados-diploma';
+import type { DadosSnapshot } from '../diploma/snapshot';
 
 // ============================================================
 // CÓDIGO DE VALIDAÇÃO DO HISTÓRICO — Anexo III IN 05/2020 MEC
@@ -447,6 +449,8 @@ export async function montarDadosDiploma(
       registradora_codigo_mec,
       diplomado_id,
       curso_id,
+      dados_snapshot_extracao,
+      dados_snapshot_travado,
       diplomados (
         id, nome, nome_social, cpf, ra,
         data_nascimento, sexo, nacionalidade,
@@ -951,6 +955,27 @@ export async function montarDadosDiploma(
     assinantes,
   };
 
+  // ============================================================
+  // Fase 2 do Snapshot Imutável (2026-04-22)
+  // ============================================================
+  //
+  // Se o diploma tem snapshot (criado pela Fase 1), sobrescreve os campos
+  // que vêm da extração (diplomado, curso básico, disciplinas, atividades,
+  // estágios, ingresso, assinantes) com os valores do snapshot —
+  // garantindo que os XMLs refletem EXATAMENTE os dados consolidados
+  // na extração confirmada, independente do que está nas tabelas
+  // normalizadas (que podem ter sido editadas).
+  //
+  // Dados institucionais (IES emissora, atos regulatórios, códigos e-MEC,
+  // códigos IBGE, filiação, ENADE) continuam vindo das tabelas — não são
+  // dados extraídos do diploma individual.
+  //
+  // Diplomas legados (sem snapshot) → helper é no-op, fluxo atual intocado.
+  const snapshotRaw =
+    (diplomaData as { dados_snapshot_extracao?: unknown }).dados_snapshot_extracao ?? null;
+  const snapshot = snapshotRaw as DadosSnapshot | null;
+  const dadosDiplomaFinal = aplicarSnapshotSobreDadosDiploma(dadosDiploma, snapshot);
+
   // ── Validação de regras de NEGÓCIO (Bug #H — princípio do override humano) ──
   // Estas regras são SEMÂNTICAS (próprias da FIC), não estruturais (XSD).
   // Quando uma regra é violada, lançamos ValidacaoNegocioError que o route
@@ -967,12 +992,12 @@ export async function montarDadosDiploma(
     './validation/regras-negocio'
   );
   const violacoes = avaliarRegrasNegocio(
-    dadosDiploma,
+    dadosDiplomaFinal,
     options.pular_regras_negocio ?? []
   );
   if (violacoes.length > 0) {
     throw new ValidacaoNegocioError(violacoes);
   }
 
-  return dadosDiploma;
+  return dadosDiplomaFinal;
 }

@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { protegerRota } from '@/lib/security/api-guard'
 import { sanitizarErro } from '@/lib/security/sanitize-error'
 import { processoSchema } from '@/lib/security/zod-schemas'
+import { montarSnapshotExtracao } from '@/lib/diploma/snapshot'
 
 interface ProcessoResponse {
   id: string
@@ -327,7 +328,50 @@ export const POST = protegerRota(
 
       // ═══════════════════════════════════════════════════════════
       // 3) Criar o diploma vinculando processo + diplomado
+      //    Inclui o SNAPSHOT IMUTÁVEL da extração (F0.6).
+      //    O snapshot é a fonte única para gerar XMLs e PDFs oficiais.
       // ═══════════════════════════════════════════════════════════
+
+      // Busca dados do curso (usado para compor o snapshot)
+      const { data: cursoRow } = await supabase
+        .from('cursos')
+        .select(
+          'id, nome, grau, titulo_conferido, modalidade, carga_horaria_total, ' +
+            'tipo_reconhecimento, numero_reconhecimento, data_reconhecimento, dou_reconhecimento, ' +
+            'tipo_renovacao, numero_renovacao, data_renovacao'
+        )
+        .eq('id', curso_id)
+        .maybeSingle()
+
+      // Monta snapshot canônico — em try/catch para não bloquear criação do
+      // diploma caso algum campo inesperado quebre. Se falhar, diploma é
+      // criado sem snapshot e log avisa (poderá ser reconstruído depois).
+      let dadosSnapshot: ReturnType<typeof montarSnapshotExtracao> | null = null
+      try {
+        dadosSnapshot = montarSnapshotExtracao({
+          processo_id: processo.id,
+          extracao_sessao_id: body.extracao_sessao_id ?? null,
+          diplomado: { ...dados_diplomado, cpf: cpfLimpo },
+          curso: cursoRow ?? null,
+          dados_academicos: {
+            ...(dados_academicos ?? {}),
+            turno: turno ?? dados_academicos?.turno ?? null,
+            periodo_letivo: periodo_letivo ?? dados_academicos?.periodo_letivo ?? null,
+            data_colacao_grau: data_colacao ?? dados_academicos?.data_colacao_grau ?? null,
+          },
+          disciplinas,
+          atividades_complementares,
+          estagios,
+          assinantes: Array.isArray(assinantes_info) ? assinantes_info : [],
+        })
+      } catch (snapErr) {
+        console.error(
+          '[API/processos] Falha ao montar snapshot — diploma será criado sem snapshot:',
+          snapErr
+        )
+        dadosSnapshot = null
+      }
+
       const { data: diploma, error: errDiploma } = await supabase
         .from('diplomas')
         .insert({
@@ -348,6 +392,11 @@ export const POST = protegerRota(
           carga_horaria_integralizada: dados_academicos?.carga_horaria_integralizada
             ? parseInt(dados_academicos.carga_horaria_integralizada) || null
             : null,
+          // Snapshot imutável (F0.6) — rascunho, editável até ser travado
+          dados_snapshot_extracao: dadosSnapshot,
+          dados_snapshot_versao: dadosSnapshot ? 1 : null,
+          dados_snapshot_gerado_em: dadosSnapshot ? new Date().toISOString() : null,
+          dados_snapshot_travado: false,
         })
         .select('id')
         .single()
