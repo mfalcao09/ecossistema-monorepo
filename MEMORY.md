@@ -246,3 +246,4 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 - `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md`
 - `docs/sessions/logs/LOG-2026-04-17-s3-mcp-template.md`
 - `docs/sessions/logs/LOG-2026-04-19-F1-S01-jarvis-routing.md`
+- `docs/sessions/logs/LOG-2026-04-21-s6-cargos-permissoes.md` — Atendimento S6: cargos + permissões granulares (PR #45, 5 commits, ~3.6k linhas)
