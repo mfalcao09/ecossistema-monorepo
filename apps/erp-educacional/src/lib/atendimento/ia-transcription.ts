@@ -22,6 +22,34 @@ const GEMINI_URL =
   "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent";
 const GRAPH_BASE = "https://graph.facebook.com/v19.0";
 
+// Allowlist: hosts Meta/Facebook CDN de onde buscamos mídias. Defesa anti-SSRF:
+// o Graph API autenticado retorna `meta.url` apontando para um destes — qualquer
+// outro host significa payload manipulado e deve ser rejeitado.
+const META_MEDIA_HOST_SUFFIXES = [
+  "fbcdn.net",
+  "facebook.com",
+  "whatsapp.net",
+  "cdninstagram.com",
+];
+
+function isValidMediaId(mediaId: string): boolean {
+  // Meta media IDs são numéricos (~18 dígitos). Restringe strict para evitar SSRF.
+  return /^[0-9]{1,40}$/.test(mediaId);
+}
+
+function isTrustedMetaMediaUrl(rawUrl: string): boolean {
+  try {
+    const u = new URL(rawUrl);
+    if (u.protocol !== "https:") return false;
+    const host = u.hostname.toLowerCase();
+    return META_MEDIA_HOST_SUFFIXES.some(
+      (suffix) => host === suffix || host.endsWith("." + suffix),
+    );
+  } catch {
+    return false;
+  }
+}
+
 export async function isIaTranscriptionEnabled(): Promise<boolean> {
   const admin = createAdminClient();
   const { data } = await admin
@@ -36,13 +64,29 @@ async function downloadMetaAudio(
   mediaId: string,
   accessToken: string,
 ): Promise<{ bytes: ArrayBuffer; mime: string } | null> {
+  // Defesa SSRF: mediaId vem do webhook (já validado via HMAC em /webhook)
+  // mas revalidamos aqui — qualquer char não-dígito significa payload corrompido.
+  if (!isValidMediaId(mediaId)) {
+    console.warn("[ia-transcription] invalid mediaId rejected");
+    return null;
+  }
+
   try {
-    const metaRes = await fetch(`${GRAPH_BASE}/${mediaId}`, {
-      headers: { Authorization: `Bearer ${accessToken}` },
-    });
+    const metaRes = await fetch(
+      `${GRAPH_BASE}/${encodeURIComponent(mediaId)}`,
+      {
+        headers: { Authorization: `Bearer ${accessToken}` },
+      },
+    );
     if (!metaRes.ok) return null;
     const meta = (await metaRes.json()) as { url?: string; mime_type?: string };
     if (!meta.url) return null;
+
+    // Defesa SSRF: o CDN URL retornado pelo Graph deve ser de um host Meta conhecido.
+    if (!isTrustedMetaMediaUrl(meta.url)) {
+      console.warn("[ia-transcription] untrusted meta media url rejected");
+      return null;
+    }
 
     const audioRes = await fetch(meta.url, {
       headers: { Authorization: `Bearer ${accessToken}` },
@@ -79,6 +123,11 @@ export async function transcribeAudio(params: {
   if (params.media_id && params.access_token) {
     inline = await downloadMetaAudio(params.media_id, params.access_token);
   } else if (params.audio_url) {
+    // Defesa SSRF: só permite URL de Meta CDN (match de downloadMetaAudio).
+    // Qualquer outro host = provável SSRF / payload manipulado.
+    if (!isTrustedMetaMediaUrl(params.audio_url)) {
+      return { ok: false, error: "untrusted_audio_url" };
+    }
     try {
       const r = await fetch(params.audio_url);
       if (r.ok) {
