@@ -51,6 +51,16 @@
 | P-127 | ATND-S9 | refactor | low | Worker cron usa loop seq — paralelizar com `Promise.allSettled` quando volume crescer (>50 execuções pendentes/min) | escala | 2026-04-21 |
 | P-128 | ATND-S9 | doc | low | Documentar contrato JSON do export/import em `apps/erp-educacional/docs/DS-VOICE-EXPORT-FORMAT.md` | reuso multi-instância | 2026-04-21 |
 | P-129 | ATND-S9 | refactor | low | Integração ChatPanel (placeholder do S10) — toolbar com botão "DS Voice" abrindo picker da biblioteca, inserir item no compose | UX agente | 2026-04-21 |
+| P-130 | S10-atnd | decisão | crit | **Definir provedor LLM para DS Agente.** Código usa `openai` npm (GPT-4o-mini + text-embedding-3-small 1536-dim), mas provedor não está decidido. Avaliar OpenAI / Anthropic Claude / Groq / local. Interface isolada em `openai-client.ts` — trocar = reescrever só esse arquivo. Configurar API key do provedor escolhido. | DS Agente inteiro (sem LLM não responde nem indexa) | 2026-04-21 |
+| P-131 | S10-atnd | config | high | Configurar tags de ativação reais (UUIDs das labels "matricula", "duvida" etc.) no cadastro do agente FIC via painel DS Agente | agente FIC ignorar conversas sem tag | 2026-04-21 |
+| P-132 | S10-atnd | deploy | high | Ativar flags `ATENDIMENTO_DS_AGENTE_ENABLED=true` (server) e `NEXT_PUBLIC_ATENDIMENTO_DS_AGENTE_ENABLED=true` (client) em staging → validar no Playground → ativar em prod | DS Agente visível + ativo no webhook | 2026-04-21 |
+| P-133 | S10-atnd | seed | med | Fazer upload do Regulamento Acadêmico FIC em PDF via `seed_fic_knowledge.py` ou UI Knowledge Panel (após P-130 resolvida) | base RAG com regulamento completo | 2026-04-21 |
+| P-134 | S10-atnd | config | med | Definir e configurar guardrails do agente FIC: tópicos proibidos, como tratar dados pessoais, respostas fora do escopo | segurança de conteúdo | 2026-04-21 |
+| P-135 | S10-atnd | config | med | Configurar alerta quando `error IS NOT NULL` em `ds_agent_executions` (Sentry ou webhook Slack) | visibilidade de falhas em prod | 2026-04-21 |
+| P-136 | S10-atnd | refactor | med | Rate-limit por `conversation_id` no `runAgentForConversation` para evitar loop bot→bot | estabilidade com múltiplos agentes | 2026-04-21 |
+| P-137 | S10-atnd | refactor | low | Suporte a imagens (`process_images=true`): extrair texto via Vision antes do RAG | conversas com fotos | 2026-04-21 |
+| P-138 | S10-atnd | test | med | Teste de carga: 50 conversas simultâneas em staging para validar fire-and-forget e latência | performance em produção | 2026-04-21 |
+| P-139 | S10-atnd | refactor | low | Adicionar métricas DS Agente ao relatório S7 (handoffs/dia, tokens/dia, custo estimado) | dashboard gerencial | 2026-04-21 |
 
 ## Resolvidas
 
