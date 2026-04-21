@@ -14,6 +14,8 @@ import {
 } from "lucide-react";
 import { createBrowserClient } from "@supabase/ssr";
 
+import BreadcrumbPipeline from "@/components/atendimento/shared/BreadcrumbPipeline";
+
 // ── Tipos ────────────────────────────────────────────────────────────────────
 
 interface Mensagem {
@@ -35,6 +37,7 @@ interface ConversaDetalhe {
   ticket_number?: number;
   window_expires_at?: string;
   assignee_id?: string;
+  deal_id?: string | null;
   atendimento_contacts: { id: string; name: string; phone_number: string } | null;
   atendimento_inboxes: { id: string; name: string; channel_type: string } | null;
   atendimento_queues:  { id: string; name: string; color_hex: string } | null;
@@ -271,6 +274,10 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
                     <span className="ml-2 text-green-600 font-medium">#{conversa.ticket_number}</span>
                   )}
                 </p>
+                {/* S4: breadcrumb pipeline › stage (só aparece se deal_id estiver definido) */}
+                <div className="mt-0.5">
+                  <BreadcrumbPipeline dealId={conversa?.deal_id ?? null} />
+                </div>
               </div>
             </div>
 
