@@ -5,7 +5,7 @@
 > Use `select bootstrap_session('tarefa', 'erp', 15)` no início da sessão.
 > Última sync automática: 2026-04-14
 
-> Atualizado: 22/04/2026 (F0.5 — PDF Texto Selecionável + Plano Snapshot) | Sessão mais recente: F0.5 (Secretaria + Puppeteer + toggle Papel Timbrado — produção `diploma-digital-4r3nca9e0`) | Plano arquitetural Snapshot Imutável APROVADO para F0.6 (~14h em 3 fases) | Retroactive pass: ✅ completo
+> Atualizado: 22/04/2026 (F0.6 Fase 1 — Snapshot Imutável em produção) | Sessão mais recente: F0.6/Fase1 (migrations + lib + endpoints + UI AbaSnapshot — produção `diploma-digital-qsd0n5815`) | Próxima: F0.6/Fase2 (builders XML lendo snapshot, ~3h15) | Retroactive pass: ✅ completo
 
 ## Estado Atual
 - **Masterplan ativo:** diploma-digital-v4 → [masterplans/diploma-digital-v4.md](masterplans/diploma-digital-v4.md)
@@ -45,6 +45,7 @@
 
 | # | Data | Entregou | Sprint/Epic |
 |---|------|----------|-------------|
+| F0.6/F1 | 22/04 | **🎉 Snapshot Imutável Fase 1**: 2 migrations (diplomas.dados_snapshot_extracao jsonb + diploma_snapshot_edicoes audit) + src/lib/diploma/snapshot.ts (builder+patches+diff+travar) + POST /api/processos populando snapshot + 3 endpoints REST (GET/PATCH/travar) + UI AbaSnapshot (status card+viewer+editor+histórico+travar). Produção: `diploma-digital-qsd0n5815`. Diplomas legados preservados (aviso amigável). Próximas: F2 builders XML, F3 Puppeteer PDFs | Fase0.6/Snapshot-F1 |
 | F0.5 | 22/04 | **🎉 PDF Texto Selecionável via Puppeteer + Plano Snapshot**: rota `/print/historico/[id]` + endpoint POST `/pdf` (Puppeteer+Chromium headless) + LivePreview com props `dadosAluno/dadosCurso/dadosAssinantes` + botão "Salvar PDF" (download direto, sem diálogo) + botão "Imprimir" (iframe escondido) + toggle "Papel já timbrado" + @sparticuz/chromium@147 + puppeteer-core@24. **Plano arquitetural Snapshot Imutável APROVADO** (14h em 3 fases): artefatos oficiais lêem de `dados_snapshot_extracao` JSONB imutável, 2 APIs BRy distintas (XAdES+HUB Signer) leem do mesmo snapshot, auditoria em `diploma_snapshot_edicoes`. Produção: `diploma-digital-4r3nca9e0` | Fase0.5/PDF+Arquitetura |
 | F0.4 | 17/04 | **🎉 Fase 0.4 PDFs COMPLETA — Módulo Secretaria**: Secretaria (layout+emissão+configurações) + secretaria/emissao/historico (busca+download PDF) + API POST /api/secretaria/emissao/historico/[diplomaId] + timbrado e margens no pdf-generator.ts (PDFBuilderOpts+mmToPt) + timbrado nos 3 PDFs via api/diplomas/[id]/documentos + remove aba historico de diploma/config + PR #19 aberta. Branch: claude/vigorous-mccarthy-8ca1e4 | Fase0.4/PDFs |
 | 095 | 15/04 | **🎉 Sprint 7 — Pacote Registradora COMPLETO**: assinatura-pdf.ts (HUB Signer BRy) + POST /documentos/assinar + webhook /bry-assinatura-pdf + UI Etapa 3 (ZIP+XML upload) + pacote-registradora fix (ZIP binário). Commit `817c47e`, deploy READY. | S7/Pacote |
