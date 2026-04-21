@@ -30,3 +30,16 @@ export function isLinksRedirectEnabled(): boolean {
     "NEXT_PUBLIC_ATENDIMENTO_LINKS_REDIRECT_ENABLED",
   );
 }
+
+/**
+ * S9 — DS Voice (biblioteca + funis + gatilhos).
+ *   - Sidebar "DS Voice" só aparece com flag ligada
+ *   - Webhook Meta só dispara triggers com flag ligada
+ *   - Worker cron process-funnel-steps pula execução com flag desligada
+ */
+export function isDsVoiceEnabled(): boolean {
+  return readFlag(
+    "ATENDIMENTO_DS_VOICE_ENABLED",
+    "NEXT_PUBLIC_ATENDIMENTO_DS_VOICE_ENABLED",
+  );
+}
