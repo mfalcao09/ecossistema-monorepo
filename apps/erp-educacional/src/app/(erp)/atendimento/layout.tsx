@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   MessageSquare, LayoutDashboard, Users,
   Radio, Zap, BarChart2, FlaskConical,
-  FileText, Calendar,
+  FileText, Calendar, MessagesSquare, Link as LinkIcon,
 } from "lucide-react";
 
 interface MenuItem {
@@ -17,6 +17,9 @@ interface MenuItem {
   beta?: boolean
 }
 
+const CHAT_INTERNO_ENABLED = process.env.NEXT_PUBLIC_ATENDIMENTO_CHAT_INTERNO_ENABLED === "true";
+const LINKS_REDIRECT_ENABLED = process.env.NEXT_PUBLIC_ATENDIMENTO_LINKS_REDIRECT_ENABLED === "true";
+
 const menuItems: MenuItem[] = [
   { label: "Dashboard",    href: "/atendimento",              icon: LayoutDashboard, exact: true },
   { label: "Conversas",    href: "/atendimento/conversas",    icon: MessageSquare,   badge: "WA" },
@@ -25,6 +28,18 @@ const menuItems: MenuItem[] = [
   { label: "Templates",    href: "/atendimento/templates",    icon: FileText,        badge: "WABA" },
   { label: "Agendamentos", href: "/atendimento/agendamentos", icon: Calendar },
   { label: "Automações",   href: "/atendimento/automacoes",   icon: Zap,             badge: "IA" },
+  ...(CHAT_INTERNO_ENABLED ? [{
+    label: "Chat interno",
+    href: "/atendimento/chat-interno",
+    icon: MessagesSquare,
+    beta: true,
+  } satisfies MenuItem] : []),
+  ...(LINKS_REDIRECT_ENABLED ? [{
+    label: "Links",
+    href: "/atendimento/links-redirecionamento",
+    icon: LinkIcon,
+    beta: true,
+  } satisfies MenuItem] : []),
   { label: "Relatórios",   href: "/atendimento/relatorios",   icon: BarChart2,       beta: true },
 ];
 
