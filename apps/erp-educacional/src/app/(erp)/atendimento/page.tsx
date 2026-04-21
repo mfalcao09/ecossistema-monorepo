@@ -1,157 +1,25 @@
-"use client";
+/**
+ * Home do módulo Atendimento — S7 Dashboards.
+ *
+ * Flag ATENDIMENTO_DASHBOARDS_ENABLED:
+ *   - on  → novo dashboard consolidado com KPIs + gráficos + origem dos leads
+ *   - off → fallback para layout anterior (cards estáticos)
+ */
 
-import { MessageSquare, Clock, CheckCircle2, AlertCircle, Inbox, Zap, Users, Radio } from "lucide-react";
-import Link from "next/link";
+import { DashboardHome } from "@/components/atendimento/dashboards/DashboardHome";
+import { LegacyHome } from "@/components/atendimento/dashboards/LegacyHome";
 
-// ─── Cards de estatísticas (dados mockados — Sprint 3 conecta ao Supabase) ────
-const stats = [
-  {
-    label: "Conversas Abertas",
-    value: "–",
-    icon: MessageSquare,
-    cor: "bg-green-500",
-    corBg: "bg-green-50",
-    corTexto: "text-green-700",
-    href: "/atendimento/conversas?status=open",
-  },
-  {
-    label: "Aguardando Resposta",
-    value: "–",
-    icon: Clock,
-    cor: "bg-amber-500",
-    corBg: "bg-amber-50",
-    corTexto: "text-amber-700",
-    href: "/atendimento/conversas?status=pending",
-  },
-  {
-    label: "Resolvidas Hoje",
-    value: "–",
-    icon: CheckCircle2,
-    cor: "bg-blue-500",
-    corBg: "bg-blue-50",
-    corTexto: "text-blue-700",
-    href: "/atendimento/conversas?status=resolved",
-  },
-  {
-    label: "Não Atribuídas",
-    value: "–",
-    icon: AlertCircle,
-    cor: "bg-red-500",
-    corBg: "bg-red-50",
-    corTexto: "text-red-700",
-    href: "/atendimento/conversas?assignee=none",
-  },
-];
+function isDashboardsEnabled(): boolean {
+  const v = process.env.ATENDIMENTO_DASHBOARDS_ENABLED;
+  if (v === undefined) return process.env.NODE_ENV !== "production";
+  return v === "1" || v.toLowerCase() === "true";
+}
 
-// ─── Ações rápidas ─────────────────────────────────────────────────────────────
-const acoes = [
-  {
-    label: "Ver Conversas",
-    descricao: "Lista completa de conversas por canal",
-    icon: Inbox,
-    href: "/atendimento/conversas",
-    cor: "bg-green-500",
-  },
-  {
-    label: "Gerenciar Contatos",
-    descricao: "Alunos, candidatos, responsáveis",
-    icon: Users,
-    href: "/atendimento/contatos",
-    cor: "bg-blue-500",
-  },
-  {
-    label: "Configurar Canais",
-    descricao: "WhatsApp, Instagram, Messenger",
-    icon: Radio,
-    href: "/atendimento/canais",
-    cor: "bg-purple-500",
-  },
-  {
-    label: "Automações",
-    descricao: "Regras de roteamento e respostas automáticas",
-    icon: Zap,
-    href: "/atendimento/automacoes",
-    cor: "bg-amber-500",
-  },
-];
-
-export default function AtendimentoDashboardPage() {
+export default function AtendimentoHomePage() {
+  const enabled = isDashboardsEnabled();
   return (
-    <div className="max-w-5xl mx-auto space-y-8">
-      {/* ── Cabeçalho ── */}
-      <div>
-        <h1 className="text-2xl font-bold text-gray-900">Atendimento</h1>
-        <p className="text-sm text-gray-500 mt-1">
-          Central de atendimento omnichannel — WhatsApp, Instagram e mais
-        </p>
-      </div>
-
-      {/* ── Cards de estatísticas ── */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {stats.map((s) => {
-          const Icon = s.icon;
-          return (
-            <Link key={s.label} href={s.href} className="block">
-              <div className={`rounded-xl p-4 ${s.corBg} border border-transparent hover:border-gray-200 transition-colors`}>
-                <div className="flex items-center justify-between mb-3">
-                  <div className={`w-8 h-8 rounded-lg ${s.cor} flex items-center justify-center`}>
-                    <Icon size={15} className="text-white" />
-                  </div>
-                </div>
-                <p className={`text-2xl font-bold ${s.corTexto}`}>{s.value}</p>
-                <p className="text-xs text-gray-500 mt-0.5">{s.label}</p>
-              </div>
-            </Link>
-          );
-        })}
-      </div>
-
-      {/* ── Banner Sprint em andamento ── */}
-      <div className="rounded-xl border border-green-200 bg-green-50 p-5 flex items-start gap-4">
-        <div className="w-10 h-10 bg-green-500 rounded-xl flex items-center justify-center flex-shrink-0">
-          <MessageSquare size={20} className="text-white" />
-        </div>
-        <div>
-          <p className="text-sm font-bold text-green-800">Sprint 1 — Estrutura de Banco Concluída ✅</p>
-          <p className="text-sm text-green-700 mt-1">
-            9 tabelas criadas no Supabase: inboxes, contacts, conversations, messages, labels,
-            agents, automation_rules, conversation_labels, whatsapp_templates.
-            Próximo: Sprint 2 — Integração WhatsApp (webhook + Meta API).
-          </p>
-          <div className="flex flex-wrap gap-2 mt-3">
-            <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded-full font-medium">✅ Migration aplicada</span>
-            <span className="text-xs bg-green-200 text-green-800 px-2 py-0.5 rounded-full font-medium">✅ RLS configurado</span>
-            <span className="text-xs bg-amber-100 text-amber-800 px-2 py-0.5 rounded-full font-medium">⏳ Sprint 2 — WhatsApp Webhook</span>
-          </div>
-        </div>
-      </div>
-
-      {/* ── Ações rápidas ── */}
-      <div>
-        <h2 className="text-sm font-semibold text-gray-500 uppercase tracking-wide mb-3">
-          Acesso Rápido
-        </h2>
-        <div className="grid grid-cols-2 gap-3">
-          {acoes.map((a) => {
-            const Icon = a.icon;
-            return (
-              <Link
-                key={a.label}
-                href={a.href}
-                className="flex items-center gap-3 p-4 rounded-xl border border-gray-200 hover:border-gray-300 hover:bg-gray-50 transition-colors"
-              >
-                <div className={`w-9 h-9 rounded-xl ${a.cor} flex items-center justify-center flex-shrink-0`}>
-                  <Icon size={17} className="text-white" />
-                </div>
-                <div>
-                  <p className="text-sm font-semibold text-gray-900">{a.label}</p>
-                  <p className="text-xs text-gray-400">{a.descricao}</p>
-                </div>
-              </Link>
-            );
-          })}
-        </div>
-      </div>
+    <div className="max-w-6xl mx-auto">
+      {enabled ? <DashboardHome /> : <LegacyHome />}
     </div>
   );
 }

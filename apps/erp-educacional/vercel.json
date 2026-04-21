@@ -41,6 +41,10 @@
     {
       "path": "/api/cron/dispatch-scheduled-messages",
       "schedule": "* * * * *"
+    },
+    {
+      "path": "/api/cron/aggregate-metrics-daily",
+      "schedule": "10 0 * * *"
     }
   ]
 }
