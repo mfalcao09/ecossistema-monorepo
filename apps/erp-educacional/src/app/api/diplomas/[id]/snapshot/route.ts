@@ -9,6 +9,27 @@ import {
   type DadosSnapshot,
 } from '@/lib/diploma/snapshot'
 
+// Tipo local do row retornado pelo Supabase (colunas explícitas do select).
+// Usado via cast pois o inferidor do Supabase JS não infere corretamente quando
+// o .select() recebe string concatenada.
+interface DiplomaSnapshotRow {
+  id: string
+  status: string | null
+  dados_snapshot_extracao: unknown | null
+  dados_snapshot_versao: number | null
+  dados_snapshot_gerado_em: string | null
+  dados_snapshot_travado: boolean | null
+  dados_snapshot_travado_em: string | null
+  dados_snapshot_travado_por: string | null
+}
+
+interface DiplomaSnapshotEditCheckRow {
+  id: string
+  dados_snapshot_extracao: unknown | null
+  dados_snapshot_versao: number | null
+  dados_snapshot_travado: boolean | null
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // GET /api/diplomas/[id]/snapshot
 // Retorna o snapshot atual + metadados (versão, travado, última edição)
@@ -20,7 +41,7 @@ export const GET = protegerRota(async (request) => {
     return NextResponse.json({ error: 'ID do diploma não fornecido' }, { status: 400 })
   }
 
-  const { data: diploma, error } = await supabase
+  const { data: diplomaRaw, error } = await supabase
     .from('diplomas')
     .select(
       'id, status, dados_snapshot_extracao, dados_snapshot_versao, ' +
@@ -30,12 +51,13 @@ export const GET = protegerRota(async (request) => {
     .eq('id', diplomaId)
     .single()
 
-  if (error || !diploma) {
+  if (error || !diplomaRaw) {
     return NextResponse.json(
       { error: sanitizarErro(error?.message ?? 'Diploma não encontrado', 404) },
       { status: 404 }
     )
   }
+  const diploma = diplomaRaw as unknown as DiplomaSnapshotRow
 
   // Busca últimas 10 edições (mais recentes primeiro)
   const { data: edicoes } = await supabase
@@ -100,7 +122,7 @@ export const PATCH = protegerRota(async (request, { userId }) => {
   }
 
   // Busca diploma atual
-  const { data: diploma, error: errDiploma } = await supabase
+  const { data: diplomaRaw, error: errDiploma } = await supabase
     .from('diplomas')
     .select(
       'id, dados_snapshot_extracao, dados_snapshot_versao, dados_snapshot_travado'
@@ -108,12 +130,13 @@ export const PATCH = protegerRota(async (request, { userId }) => {
     .eq('id', diplomaId)
     .single()
 
-  if (errDiploma || !diploma) {
+  if (errDiploma || !diplomaRaw) {
     return NextResponse.json(
       { error: sanitizarErro(errDiploma?.message ?? 'Diploma não encontrado', 404) },
       { status: 404 }
     )
   }
+  const diploma = diplomaRaw as unknown as DiplomaSnapshotEditCheckRow
 
   if (!diploma.dados_snapshot_extracao) {
     return NextResponse.json(

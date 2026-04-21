@@ -3,6 +3,15 @@ import { createClient } from '@/lib/supabase/server'
 import { protegerRota } from '@/lib/security/api-guard'
 import { sanitizarErro } from '@/lib/security/sanitize-error'
 
+// Tipo local — cast necessário pois o Supabase JS não infere corretamente
+// com .select() de string concatenada.
+interface DiplomaTravarRow {
+  id: string
+  dados_snapshot_extracao: unknown | null
+  dados_snapshot_versao: number | null
+  dados_snapshot_travado: boolean | null
+}
+
 // ═══════════════════════════════════════════════════════════════════════════
 // POST /api/diplomas/[id]/snapshot/travar
 //
@@ -30,7 +39,7 @@ export const POST = protegerRota(async (request, { userId }) => {
     return NextResponse.json({ error: 'ID do diploma não fornecido' }, { status: 400 })
   }
 
-  const { data: diploma, error: errDiploma } = await supabase
+  const { data: diplomaRaw, error: errDiploma } = await supabase
     .from('diplomas')
     .select(
       'id, dados_snapshot_extracao, dados_snapshot_versao, dados_snapshot_travado'
@@ -38,12 +47,13 @@ export const POST = protegerRota(async (request, { userId }) => {
     .eq('id', diplomaId)
     .single()
 
-  if (errDiploma || !diploma) {
+  if (errDiploma || !diplomaRaw) {
     return NextResponse.json(
       { error: sanitizarErro(errDiploma?.message ?? 'Diploma não encontrado', 404) },
       { status: 404 }
     )
   }
+  const diploma = diplomaRaw as unknown as DiplomaTravarRow
 
   if (!diploma.dados_snapshot_extracao) {
     return NextResponse.json(
