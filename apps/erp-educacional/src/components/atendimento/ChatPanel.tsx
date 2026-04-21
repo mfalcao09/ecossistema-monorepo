@@ -13,6 +13,10 @@ import {
   Phone, MoreVertical
 } from "lucide-react";
 import { createBrowserClient } from "@supabase/ssr";
+import ClosedWindowBanner from "./inbox/ClosedWindowBanner";
+import SelectTemplateModal from "./inbox/SelectTemplateModal";
+
+import BreadcrumbPipeline from "@/components/atendimento/shared/BreadcrumbPipeline";
 
 // ── Tipos ────────────────────────────────────────────────────────────────────
 
@@ -35,6 +39,7 @@ interface ConversaDetalhe {
   ticket_number?: number;
   window_expires_at?: string;
   assignee_id?: string;
+  deal_id?: string | null;
   atendimento_contacts: { id: string; name: string; phone_number: string } | null;
   atendimento_inboxes: { id: string; name: string; channel_type: string } | null;
   atendimento_queues:  { id: string; name: string; color_hex: string } | null;
@@ -78,6 +83,7 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
   const [texto,     setTexto]     = useState("");
   const [enviando,  setEnviando]  = useState(false);
   const [loading,   setLoading]   = useState(false);
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
 
   const bottomRef  = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -271,6 +277,10 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
                     <span className="ml-2 text-green-600 font-medium">#{conversa.ticket_number}</span>
                   )}
                 </p>
+                {/* S4: breadcrumb pipeline › stage (só aparece se deal_id estiver definido) */}
+                <div className="mt-0.5">
+                  <BreadcrumbPipeline dealId={conversa?.deal_id ?? null} />
+                </div>
               </div>
             </div>
 
@@ -427,6 +437,12 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
         </div>
       )}
 
+      {/* ── Banner janela WABA fechada ──────────────────────────────── */}
+      <ClosedWindowBanner
+        windowExpiresAt={conversa?.window_expires_at}
+        onPickTemplate={() => setShowTemplateModal(true)}
+      />
+
       {/* ── Toolbar de envio ────────────────────────────────────────── */}
       <div className={`flex-shrink-0 border-t border-gray-200 bg-white p-3 ${isResolved ? "opacity-50 pointer-events-none" : ""}`}>
         {/* Toolbar de anexos */}
@@ -498,6 +514,21 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
           )}
         </div>
       </div>
+
+      {/* ── Modal de seleção de template (janela fechada) ──────────── */}
+      {showTemplateModal && conversa?.atendimento_contacts?.id && (
+        <SelectTemplateModal
+          contactId={conversa.atendimento_contacts.id}
+          conversationId={conversa.id}
+          inboxId={conversa.atendimento_inboxes?.id}
+          onClose={() => setShowTemplateModal(false)}
+          onSent={() => {
+            setShowTemplateModal(false);
+            void carregar();
+            onConversaAtualizada?.();
+          }}
+        />
+      )}
     </div>
   );
 }
