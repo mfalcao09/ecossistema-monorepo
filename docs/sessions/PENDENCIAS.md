@@ -41,6 +41,7 @@
 | P-112 | S8a-atnd | security | low | RLS fina em `api_keys` / `webhook_inbound_endpoints` / `webhook_outbound_urls` filtrando por `account_id` quando Fase 2 SaaS. Hoje `auth_only_*` (authenticated) | Fase 2 multi-tenant | 2026-04-21 |
 | P-113 | PR#33 | refactor | med | Estender `packages/c-suite-templates/src/instantiator.ts` para copiar subdirs opcionais do squad pattern (`masters/`, `tasks/`, `workflows/`, `checklists/` — ADR-019) de `templates/c-suite/{ROLE}-IA/` para `apps/{business}/agents/{role}/` na instanciação. Atualmente só copia chief + variants + evolved-config-seed | S16 piloto CFO-FIC consumir os novos artefatos via instanciação automática (hoje precisa copiar manual) | 2026-04-20 |
 | P-114 | PR#33 | doc | low | Plano B arquivado: criar package `@ecossistema/squads` genérico (schema estilo aiox — `squad.yaml` + `config.yaml` + `agents/*.md`) quando aparecer o primeiro squad **não-mapeável em 1 C-level** (ex: squad compliance-LGPD cross-business, squad onboarding-aluno). Gatilho: 3º squad não-C-Suite identificado. Referência ADR-019 § Revisão | expansão não-C-Suite | 2026-04-20 |
+| P-115 | S14 | config | low | Renomear projeto Railway `innovative-communication` (ID `82386f7a-e9f6-4f7d-b020-fc600ed2aac4`) para `memory-consolidator`. Railway → Settings → Name. Cosmético, não afeta URLs nem cron jobs | — | 2026-04-21 |
 
 ## Resolvidas
 

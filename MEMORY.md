@@ -101,9 +101,10 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 | **S09** | Langfuse self-host | ✅ Merged | #8 | PG + ClickHouse + Redis + MinIO; 4 fixes runtime |
 | **S10** | Orchestrator FastAPI | ✅ Merged | #11 | SSE + HITL + session resumption + 4 test modules |
 | **S11** | C-Suite Templates | ✅ Merged | #9 | 4 templates + generator CLI + CFO-FIC instanciado (path corrigido pós-merge, ver saneamento) |
-| **S16** | CFO-FIC E2E Pilot | ✅ Código + migrations aplicadas | — | 5 tools + 8/8 testes; creds Inter pendentes (seg 21/04) |
+| **S14** | Memory Consolidator Worker | ✅ Deployed | #17 | ACTIVE em Railway (`apps/memory-consolidator`); migration `20260418000000_consolidator.sql` aplicada; 2 jobs pg_cron agendados (morning 05:00 UTC, briefing 10:00 UTC); 6/6 vars preenchidas (tokens no vault ECOSYSTEM); smoke tests `/health` + `/jobs/morning` OK (2026-04-18) |
+| **S16** | CFO-FIC E2E Pilot | ✅ Código + migrations aplicadas | #54 | 5 tools + 8/8 testes; creds Inter pendentes (seg 21/04) |
 | **S19** | WhatsApp Meta Cloud API | ⏳ Pronto para executar | — | Apenas WhatsApp; creds Inter ficam fora desta sessão |
-| S12–S18 (exceto S16) | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
+| S12–S13, S15, S17–S18 | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
 
 ### Saneamento pós-drenagem (2026-04-17)
 
