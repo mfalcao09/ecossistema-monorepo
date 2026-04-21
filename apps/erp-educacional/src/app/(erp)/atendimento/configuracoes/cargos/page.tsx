@@ -2,12 +2,15 @@
 
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { Lock, Plus, Shield, Trash2, Copy, X as XIcon } from "lucide-react";
-import { PermissionMatrix, type PermissionEntry } from "@/components/atendimento/permissions/PermissionMatrix";
+import {
+  PermissionMatrix,
+  type PermissionEntry,
+} from "@/components/atendimento/permissions/PermissionMatrix";
 import {
   PERMISSION_MODULES,
   type PermissionAction,
   type PermissionModule,
-} from "@/lib/atendimento/permissions";
+} from "@/lib/atendimento/permissions-constants";
 
 type Role = {
   id: string;
@@ -18,7 +21,11 @@ type Role = {
   updated_at: string;
 };
 
-type PermissionRow = { module: PermissionModule; action: PermissionAction; granted: boolean };
+type PermissionRow = {
+  module: PermissionModule;
+  action: PermissionAction;
+  granted: boolean;
+};
 
 type PermissionMap = Record<string, boolean>;
 
@@ -33,7 +40,10 @@ function permsToMap(rows: PermissionRow[]): PermissionMap {
   return map;
 }
 
-async function jsonFetch<T = unknown>(url: string, init?: RequestInit): Promise<T> {
+async function jsonFetch<T = unknown>(
+  url: string,
+  init?: RequestInit,
+): Promise<T> {
   const res = await fetch(url, {
     ...init,
     credentials: "include",
@@ -85,7 +95,8 @@ export default function CargosPage() {
         <div>
           <h2 className="text-lg font-semibold text-gray-900">Cargos</h2>
           <p className="text-sm text-gray-500">
-            3 presets do sistema + cargos customizados. Paridade Nexvy (15 módulos × 5 ações).
+            3 presets do sistema + cargos customizados. Paridade Nexvy (15
+            módulos × 5 ações).
           </p>
         </div>
         <button
@@ -123,7 +134,9 @@ export default function CargosPage() {
                   </span>
                 )}
               </div>
-              <p className="text-sm text-gray-500">{r.description ?? "Sem descrição"}</p>
+              <p className="text-sm text-gray-500">
+                {r.description ?? "Sem descrição"}
+              </p>
             </button>
           ))}
         </div>
@@ -182,7 +195,9 @@ function RoleDrawer({
     let cancelled = false;
     setLoading(true);
     setErr(null);
-    jsonFetch<{ permissions: PermissionRow[] }>(`/api/atendimento/roles/${role.id}/permissions`)
+    jsonFetch<{ permissions: PermissionRow[] }>(
+      `/api/atendimento/roles/${role.id}/permissions`,
+    )
       .then((body) => {
         if (!cancelled) setPerms(permsToMap(body.permissions));
       })
@@ -198,32 +213,35 @@ function RoleDrawer({
   }, [role.id]);
 
   const onCellChange = useCallback((entry: PermissionEntry) => {
-    setPerms((prev) => ({ ...prev, [`${entry.module}::${entry.action}`]: entry.granted }));
+    setPerms((prev) => ({
+      ...prev,
+      [`${entry.module}::${entry.action}`]: entry.granted,
+    }));
   }, []);
 
-  const onToggleModule = useCallback((module: PermissionModule, granted: boolean) => {
-    const mod = PERMISSION_MODULES.find((m) => m.slug === module);
-    if (!mod) return;
-    setPerms((prev) => {
-      const next = { ...prev };
-      for (const act of mod.actions) next[`${module}::${act}`] = granted;
-      return next;
-    });
-  }, []);
-
-  const onCopyFrom = useCallback(
-    async (sourceId: string) => {
-      try {
-        const body = await jsonFetch<{ permissions: PermissionRow[] }>(
-          `/api/atendimento/roles/${sourceId}/permissions`,
-        );
-        setPerms(permsToMap(body.permissions));
-      } catch (e) {
-        setErr((e as Error).message);
-      }
+  const onToggleModule = useCallback(
+    (module: PermissionModule, granted: boolean) => {
+      const mod = PERMISSION_MODULES.find((m) => m.slug === module);
+      if (!mod) return;
+      setPerms((prev) => {
+        const next = { ...prev };
+        for (const act of mod.actions) next[`${module}::${act}`] = granted;
+        return next;
+      });
     },
     [],
   );
+
+  const onCopyFrom = useCallback(async (sourceId: string) => {
+    try {
+      const body = await jsonFetch<{ permissions: PermissionRow[] }>(
+        `/api/atendimento/roles/${sourceId}/permissions`,
+      );
+      setPerms(permsToMap(body.permissions));
+    } catch (e) {
+      setErr((e as Error).message);
+    }
+  }, []);
 
   const save = async () => {
     setSaving(true);
@@ -263,11 +281,14 @@ function RoleDrawer({
   };
 
   const onDelete = async () => {
-    if (!confirm(`Excluir o cargo "${role.name}"? Essa ação é irreversível.`)) return;
+    if (!confirm(`Excluir o cargo "${role.name}"? Essa ação é irreversível.`))
+      return;
     setSaving(true);
     setErr(null);
     try {
-      await jsonFetch(`/api/atendimento/roles/${role.id}`, { method: "DELETE" });
+      await jsonFetch(`/api/atendimento/roles/${role.id}`, {
+        method: "DELETE",
+      });
       onSaved();
       onClose();
     } catch (e) {
@@ -284,7 +305,9 @@ function RoleDrawer({
         <header className="flex items-center justify-between border-b border-gray-200 px-6 py-4">
           <div>
             <div className="flex items-center gap-2">
-              <h3 className="text-lg font-semibold text-gray-900">{role.name}</h3>
+              <h3 className="text-lg font-semibold text-gray-900">
+                {role.name}
+              </h3>
               {role.is_system && (
                 <span className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
                   <Lock size={10} /> preset — permissões não editáveis
@@ -304,7 +327,9 @@ function RoleDrawer({
 
         <div className="flex-1 overflow-y-auto px-6 py-5 space-y-6">
           {err && (
-            <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">{err}</div>
+            <div className="rounded-md border border-red-200 bg-red-50 p-3 text-sm text-red-700">
+              {err}
+            </div>
           )}
 
           {!role.is_system && (
@@ -334,7 +359,9 @@ function RoleDrawer({
           {!role.is_system && (
             <div className="flex flex-wrap items-center gap-2 rounded-md bg-gray-50 p-3">
               <Copy size={14} className="text-gray-400" />
-              <span className="text-xs text-gray-600">Copiar permissões de outro cargo:</span>
+              <span className="text-xs text-gray-600">
+                Copiar permissões de outro cargo:
+              </span>
               {roles
                 .filter((r) => r.id !== role.id)
                 .map((r) => (
@@ -351,7 +378,9 @@ function RoleDrawer({
           )}
 
           <div>
-            <h4 className="mb-2 text-sm font-semibold text-gray-900">Permissões</h4>
+            <h4 className="mb-2 text-sm font-semibold text-gray-900">
+              Permissões
+            </h4>
             {loading ? (
               <div className="text-sm text-gray-500">Carregando matrix...</div>
             ) : (
@@ -441,7 +470,8 @@ function CreateRoleModal({
       >
         <h3 className="text-lg font-semibold text-gray-900">Novo cargo</h3>
         <p className="mt-1 text-sm text-gray-500">
-          Crie um cargo custom. Você poderá configurar as permissões logo após salvar.
+          Crie um cargo custom. Você poderá configurar as permissões logo após
+          salvar.
         </p>
 
         {err && (

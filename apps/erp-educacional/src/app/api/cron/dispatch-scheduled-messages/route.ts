@@ -17,6 +17,10 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { loadWabaCredentials } from "@/lib/atendimento/waba-credentials";
 import {
+  computeNextOccurrence,
+  type RecurrenceRule,
+} from "@/lib/atendimento/recurrence";
+import {
   renderTemplateBody,
   type MetaComponent,
 } from "@/lib/atendimento/meta-templates";
@@ -39,37 +43,10 @@ interface ScheduledMessage {
   attempts: number;
 }
 
-interface RecurrenceRule {
-  freq: "DAILY" | "WEEKLY" | "MONTHLY";
-  interval?: number;
-  until?: string;
-}
-
 function isAuthorized(request: NextRequest): boolean {
   const secret = process.env.CRON_SECRET;
   if (!secret) return process.env.NODE_ENV !== "production";
   return request.headers.get("authorization") === `Bearer ${secret}`;
-}
-
-/**
- * Calcula o próximo disparo de uma regra de recorrência.
- * Retorna null se já passou do `until`.
- */
-export function computeNextOccurrence(
-  current: Date,
-  rule: RecurrenceRule,
-): Date | null {
-  const next = new Date(current);
-  const interval = rule.interval ?? 1;
-  if (rule.freq === "DAILY") {
-    next.setUTCDate(next.getUTCDate() + interval);
-  } else if (rule.freq === "WEEKLY") {
-    next.setUTCDate(next.getUTCDate() + 7 * interval);
-  } else if (rule.freq === "MONTHLY") {
-    next.setUTCMonth(next.getUTCMonth() + interval);
-  }
-  if (rule.until && next > new Date(rule.until)) return null;
-  return next;
 }
 
 export async function GET(request: NextRequest) {
@@ -92,7 +69,10 @@ export async function GET(request: NextRequest) {
     .limit(BATCH_LIMIT);
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: error.message },
+      { status: 500 },
+    );
   }
 
   const sm = (pending ?? []) as ScheduledMessage[];
@@ -110,7 +90,9 @@ export async function GET(request: NextRequest) {
 
   console.log(`[cron/dispatch] processando ${sm.length} agendamento(s)`);
 
-  const results = await Promise.allSettled(sm.map((m) => dispatchOne(admin, m)));
+  const results = await Promise.allSettled(
+    sm.map((m) => dispatchOne(admin, m)),
+  );
 
   const summary = results.reduce(
     (acc, r) => {
@@ -166,7 +148,8 @@ async function dispatchOne(
       return await markFailed(admin, m, errMsg);
     }
 
-    const toNumber = (contact.phone_number_e164 ?? contact.phone_number)!.replace(/\D/g, "");
+    const toNumber = (contact.phone_number_e164 ??
+      contact.phone_number)!.replace(/\D/g, "");
 
     // Monta payload Meta
     let metaBody: Record<string, unknown>;
@@ -174,7 +157,11 @@ async function dispatchOne(
 
     if (m.content_type === "template" && template) {
       if (template.status !== "APPROVED") {
-        return await markFailed(admin, m, `template_not_approved:${template.status}`);
+        return await markFailed(
+          admin,
+          m,
+          `template_not_approved:${template.status}`,
+        );
       }
       renderedContent = renderTemplateBody(
         template.components as MetaComponent[],
@@ -192,7 +179,10 @@ async function dispatchOne(
                 components: [
                   {
                     type: "body",
-                    parameters: m.variables.map((text) => ({ type: "text", text })),
+                    parameters: m.variables.map((text) => ({
+                      type: "text",
+                      text,
+                    })),
                   },
                 ],
               }
@@ -290,7 +280,10 @@ async function dispatchOne(
 
     // Recorrência: cria próximo agendamento
     if (m.recurrence_rule) {
-      const next = computeNextOccurrence(new Date(m.scheduled_at), m.recurrence_rule);
+      const next = computeNextOccurrence(
+        new Date(m.scheduled_at),
+        m.recurrence_rule,
+      );
       if (next) {
         await admin.from("atendimento_scheduled_messages").insert({
           contact_id: m.contact_id,
