@@ -42,11 +42,6 @@
 | P-113 | PR#33 | refactor | med | Estender `packages/c-suite-templates/src/instantiator.ts` para copiar subdirs opcionais do squad pattern (`masters/`, `tasks/`, `workflows/`, `checklists/` — ADR-019) de `templates/c-suite/{ROLE}-IA/` para `apps/{business}/agents/{role}/` na instanciação. Atualmente só copia chief + variants + evolved-config-seed | S16 piloto CFO-FIC consumir os novos artefatos via instanciação automática (hoje precisa copiar manual) | 2026-04-20 |
 | P-114 | PR#33 | doc | low | Plano B arquivado: criar package `@ecossistema/squads` genérico (schema estilo aiox — `squad.yaml` + `config.yaml` + `agents/*.md`) quando aparecer o primeiro squad **não-mapeável em 1 C-level** (ex: squad compliance-LGPD cross-business, squad onboarding-aluno). Gatilho: 3º squad não-C-Suite identificado. Referência ADR-019 § Revisão | expansão não-C-Suite | 2026-04-20 |
 | P-115 | S14 | config | low | Renomear projeto Railway `innovative-communication` (ID `82386f7a-e9f6-4f7d-b020-fc600ed2aac4`) para `memory-consolidator`. Railway → Settings → Name. Cosmético, não afeta URLs nem cron jobs | — | 2026-04-21 |
-| P-116 | ATND-S9 | deploy | high | Aplicar migration `infra/supabase/migrations/20260428_atendimento_s9_ds_voice.sql` em branch Supabase do projeto `bvryaopfjiyxjgsuhjsb` (ERP) → validar 9 tabelas `ds_voice_*` + RLS + publication realtime → merge prod | habilitação S9 | 2026-04-21 |
-| P-117 | ATND-S9 | seed | high | Re-rodar `python apps/erp-educacional/scripts/seed_atendimento_permissions.py \| psql "$SUPABASE_DB_URL"` para popular grants `ds_voice` (Atendente padrão view+create+edit; Atendente restrito só view) | RBAC ds_voice | 2026-04-21 |
-| P-118 | ATND-S9 | config | high | Setar `ATENDIMENTO_DS_VOICE_ENABLED=true` (server) + `NEXT_PUBLIC_ATENDIMENTO_DS_VOICE_ENABLED=true` (client) na Vercel — sem flag, sidebar não aparece, webhook pula triggers e cron pula execução | exposição da feature | 2026-04-21 |
-| P-119 | ATND-S9 | config | high | Confirmar bucket `atendimento` no Supabase Storage com prefixo `ds-voice/` write permitido para service_role; criar policy de leitura pública (RLS Storage) ou migrar para signed URLs | upload + envio Meta | 2026-04-21 |
-| P-120 | ATND-S9 | config | med | Setar `CRON_SECRET` na Vercel (reusar do S5/S8a se já existe) — sem isso `/api/cron/process-funnel-steps` retorna 401 | drain de funis | 2026-04-21 |
 | P-121 | ATND-S9 | config | med | Habilitar app `ia_transcription` em `app_installations` via `/atendimento/integracoes` + setar `GEMINI_API_KEY` na Vercel — sem essas duas peças `transcribeAudio` retorna `no_gemini_api_key` | transcrição IA de áudios recebidos | 2026-04-21 |
 | P-122 | ATND-S9 | refactor | med | Decidir entre coluna `transcription_text` em `atendimento_messages` ou usar `metadata.transcription` JSONB (atual). UI do chat (S10) precisa renderizar abaixo do bubble do áudio | UI chat S10 | 2026-04-21 |
 | P-123 | ATND-S9 | test | med | E2E: criar funil 3-steps + trigger keyword "matricula" → POST webhook fake HMAC válido contendo "Quero info de matricula" → assert exec criada + cron drena step 0 + atendimento_messages outgoing inserido | QA real S9 | 2026-04-21 |
@@ -59,9 +54,13 @@
 
 ## Resolvidas
 
-| ID              | Sessão | Ação | Resolvida em | Commit / PR |
-| --------------- | ------ | ---- | ------------ | ----------- |
-| _nenhuma ainda_ |        |      |              |             |
+| ID    | Sessão  | Ação                                                                                                                                                                                                                                                   | Resolvida em | Commit / PR |
+| ----- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------ | ----------- |
+| P-116 | ATND-S9 | Migration `20260428_atendimento_s9_ds_voice.sql` aplicada via Supabase MCP no projeto `ifdnjieklngcfodmtied` (diploma-digital — ERP) junto com pré-reqs S4/S5/S6/S7/S8a/S8b. 9 tabelas `ds_voice_*` validadas + RLS + realtime publication (6 tabelas) | 2026-04-21   | PR #59      |
+| P-117 | ATND-S9 | Seed `role_permissions` aplicado via `execute_sql` — 192 linhas (3 cargos × 64 combos). `ds_voice` grants: Admin all, Atendente view+create+edit, Atendente restrito view                                                                              | 2026-04-21   | PR #59      |
+| P-118 | ATND-S9 | `ATENDIMENTO_DS_VOICE_ENABLED=true` e `NEXT_PUBLIC_ATENDIMENTO_DS_VOICE_ENABLED=true` setadas na Vercel em Development + Preview + Production (projeto `prj_VIEmyVHGD61ow5uf5pmBJp5W7eAX`)                                                             | 2026-04-21   | PR #59      |
+| P-119 | ATND-S9 | Bucket `atendimento` criado no Supabase Storage (public, 100MB limit, 25 mime types) + 4 policies: `service_role` ALL, `authenticated` write/update/delete em `ds-voice/*`, leitura pública                                                            | 2026-04-21   | PR #59      |
+| P-120 | ATND-S9 | Resolvido reusando `ADMIN_SECRET` já existente (10d ago) — `/api/cron/process-funnel-steps` aceita ambos via `process.env.CRON_SECRET ?? process.env.ADMIN_SECRET`                                                                                     | 2026-04-21   | PR #59      |
 
 ---
 
