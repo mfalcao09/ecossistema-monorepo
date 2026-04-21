@@ -1,0 +1,85 @@
+# Workflow: Monthly Close (CFO-IA)
+# Invocado por pg_cron no último dia útil do mês, 18h BRT, por negócio.
+
+id: wf-monthly-close
+version: 1.0
+owner: cfo-ia
+invocation:
+  trigger: pg_cron
+  schedule: "0 21 * * *"   # 18h BRT = 21h UTC; master-tax filtra last-business-day
+  inputs:
+    - name: business
+      type: enum
+      values: [fic, klesis, intentus, splendori, nexvy]
+      required: true
+    - name: competencia
+      type: string
+      format: "YYYY-MM"
+      required: true
+
+preconditions:
+  - id: lancamentos-integrados
+    check: "count({business}_pagamentos WHERE competencia = :competencia) > 0"
+    on_fail: halt
+  - id: reconciliacao-fechada
+    check: "abs(inter.saldo - supabase.saldo) < 100"
+    on_fail: halt
+  - id: ultimo-dia-util
+    check: "is_last_business_day(today, 'BR-MS')"
+    on_fail: skip
+
+steps:
+  - id: fpa-analysis
+    agent: cfo-ia.master-fpa
+    task: tasks/close-month.md#step-3
+    inputs: { business: "{{inputs.business}}", competencia: "{{inputs.competencia}}" }
+    outputs: [dre, fluxo_caixa, variance, cenario_base]
+    timeout_minutes: 15
+
+  - id: tax-apuracao
+    agent: cfo-ia.master-tax
+    task: tasks/close-month.md#step-4
+    inputs: { business: "{{inputs.business}}", competencia: "{{inputs.competencia}}" }
+    outputs: [apuracao, guias, flags]
+    timeout_minutes: 10
+    parallel_with: fpa-analysis   # independentes, rodam em paralelo
+
+  - id: bam-check
+    agent: cfo-ia.chief
+    checklist: checklists/bam-alignment.md
+    inputs: { fpa: "{{steps.fpa-analysis.outputs}}", tax: "{{steps.tax-apuracao.outputs}}" }
+    on_fail: escalate_to_claudinho
+
+  - id: consolidate
+    agent: cfo-ia.chief
+    task: tasks/close-month.md#step-6
+    inputs:
+      fpa: "{{steps.fpa-analysis.outputs}}"
+      tax: "{{steps.tax-apuracao.outputs}}"
+      bam: "{{steps.bam-check.outputs}}"
+    outputs: [relatorio_md, recomendacoes]
+
+  - id: persist
+    agent: cfo-ia.chief
+    action: dual_write
+    primary: "ecosystem_memory.cfo.{{inputs.business}}.close.{{inputs.competencia}}"
+    mirror: "{business}_reports.monthly_close"
+    article: XIV
+
+  - id: notify
+    agent: cfo-ia.chief
+    action: send_whatsapp
+    target: [ceo-ia.{{inputs.business}}, marcelo]
+    body: "{{steps.consolidate.outputs.relatorio_md}}"
+    channel: whatsapp-gateway   # Baileys Nível 2 (ADR-017 WhatsApp pairing)
+
+handoff:
+  escalate_to: claudinho-vp
+  escalate_when:
+    - variance_abs_pct > 50
+    - bam_check.fail
+    - tax.guia_vencida_sem_pagamento
+
+postconditions:
+  - audit_log has entry { workflow: wf-monthly-close, hash: sha256(relatorio_md) }
+  - memory entry exists at namespace
