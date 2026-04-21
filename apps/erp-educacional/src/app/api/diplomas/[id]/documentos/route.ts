@@ -3,6 +3,16 @@ import { createClient } from '@/lib/supabase/server'
 import { protegerRota } from '@/lib/security/api-guard'
 import { sanitizarErro } from '@/lib/security/sanitize-error'
 import {
+  renderPdfFromPrintRoute,
+  parseCookieHeader,
+  derivePrintContext,
+} from '@/lib/diploma/render-pdf'
+
+// Fase 3 do Snapshot Imutável: geração dos 3 PDFs via Puppeteer (~10s cada,
+// executadas em paralelo). Runtime Node.js (Chromium não roda em Edge).
+export const maxDuration = 120
+export const runtime = 'nodejs'
+import {
   gerarHistoricoEscolarPDF,
   gerarTermoExpedicaoPDF,
   gerarTermoResponsabilidadePDF,
@@ -192,19 +202,74 @@ export const POST = protegerRota(
         assinantes,
       }
 
-      // Opções de timbrado — compartilhadas pelos 3 documentos
+      // Opções de timbrado — usadas pelo caminho legado (pdf-lib)
       const pdfOpts = {
         timbradoUrl: iesConfig?.historico_arquivo_timbrado_url ?? undefined,
         margemTopo: iesConfig?.historico_margem_topo ?? undefined,
         margemInferior: iesConfig?.historico_margem_inferior ?? undefined,
       }
 
-      // Gerar os 3 PDFs em paralelo
-      const [pdfHistorico, pdfTermoExpedicao, pdfTermoResponsabilidade] = await Promise.all([
-        gerarHistoricoEscolarPDF(dadosHistorico, pdfOpts),
-        gerarTermoExpedicaoPDF(dadosTermoExpedicao, pdfOpts),
-        gerarTermoResponsabilidadePDF(dadosResponsabilidade, pdfOpts),
-      ])
+      // ═══════════════════════════════════════════════════════════════════
+      // Fase 3 do Snapshot Imutável (2026-04-22)
+      //
+      // Se o diploma tem snapshot (criado pela Fase 1), gera os 3 PDFs
+      // via Puppeteer + templates React (HistoricoTemplate, TermoExpedicao,
+      // TermoResponsabilidade) navegando nas 3 rotas /print/*.
+      //
+      // Diplomas LEGADOS (sem snapshot) continuam no pdf-lib.
+      //
+      // As 3 rotas /print/* já leem snapshot com prioridade e caem no
+      // fluxo normal quando ausente — mas aqui bifurcamos cedo para
+      // garantir zero-regressão em legados.
+      // ═══════════════════════════════════════════════════════════════════
+      const temSnapshot = Boolean(
+        (diploma as { dados_snapshot_extracao?: unknown }).dados_snapshot_extracao
+      )
+
+      let pdfHistorico: Uint8Array
+      let pdfTermoExpedicao: Uint8Array
+      let pdfTermoResponsabilidade: Uint8Array
+
+      if (temSnapshot) {
+        // Fluxo novo — Puppeteer + React templates via 3 rotas /print/*
+        const cookies = parseCookieHeader(request.headers.get('cookie'))
+        const { origin, cookieDomain, cookieSecure } = derivePrintContext(request)
+
+        const [resHist, resExp, resResp] = await Promise.all([
+          renderPdfFromPrintRoute({
+            printUrl: `${origin}/print/historico/${diplomaId}`,
+            cookies,
+            cookieDomain,
+            cookieSecure,
+          }),
+          renderPdfFromPrintRoute({
+            printUrl: `${origin}/print/termo-expedicao/${diplomaId}`,
+            cookies,
+            cookieDomain,
+            cookieSecure,
+          }),
+          renderPdfFromPrintRoute({
+            printUrl: `${origin}/print/termo-responsabilidade/${diplomaId}`,
+            cookies,
+            cookieDomain,
+            cookieSecure,
+          }),
+        ])
+
+        pdfHistorico = new Uint8Array(resHist.pdfBytes)
+        pdfTermoExpedicao = new Uint8Array(resExp.pdfBytes)
+        pdfTermoResponsabilidade = new Uint8Array(resResp.pdfBytes)
+      } else {
+        // Fluxo legado — pdf-lib (mantido para diplomas sem snapshot)
+        const [h, e, r] = await Promise.all([
+          gerarHistoricoEscolarPDF(dadosHistorico, pdfOpts),
+          gerarTermoExpedicaoPDF(dadosTermoExpedicao, pdfOpts),
+          gerarTermoResponsabilidadePDF(dadosResponsabilidade, pdfOpts),
+        ])
+        pdfHistorico = h
+        pdfTermoExpedicao = e
+        pdfTermoResponsabilidade = r
+      }
 
       // ── 8. Upload ao storage (bucket 'documentos') ──
       const timestamp = Date.now()
