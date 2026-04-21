@@ -263,11 +263,11 @@ function snapshotDisciplinaParaDadosDiploma(d: SnapshotDisciplina): Disciplina {
     cargaHoraria.push({ tipo: 'HoraRelogio', valor: 0 })
   }
 
-  // Docentes
+  // Docentes — normaliza titulação para o enum TTitulacao do XSD
   const docentes: DocenteInfo[] = d.docente_nome
     ? [{
         nome: d.docente_nome,
-        titulacao: d.docente_titulacao || 'Graduação',
+        titulacao: normalizarTitulacao(d.docente_titulacao),
       }]
     : []
 
@@ -302,6 +302,21 @@ function snapshotDisciplinaParaDadosDiploma(d: SnapshotDisciplina): Disciplina {
     forma_integralizacao: formaIntegralizacao,
     docentes,
   }
+}
+
+/** Normaliza titulação de docente para o enum TTitulacao do XSD v1.05 */
+function normalizarTitulacao(
+  raw: string | null | undefined,
+): 'Graduação' | 'Tecnólogo' | 'Especialização' | 'Mestrado' | 'Doutorado' {
+  if (!raw) return 'Graduação'
+  const s = raw.toLowerCase().trim()
+  if (s.includes('douto')) return 'Doutorado'
+  if (s.includes('pos-doc') || s.includes('pós-doc') || s.includes('pós doc')) return 'Doutorado'
+  if (s.includes('mestr')) return 'Mestrado'
+  if (s.includes('especiali') || s.includes('especialização') || s.includes('pós') || s.includes('pos-grad') || s.includes('pós-grad') || s.includes('mba')) return 'Especialização'
+  if (s.includes('tecnó') || s.includes('tecno')) return 'Tecnólogo'
+  if (s.includes('gradu') || s.includes('bachar') || s.includes('licen')) return 'Graduação'
+  return 'Graduação'
 }
 
 /** Normaliza string de forma de acesso para o enum do XSD */
