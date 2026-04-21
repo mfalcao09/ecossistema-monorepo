@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 import {
   MessageSquare, LayoutDashboard, Users,
   Radio, Zap, BarChart2, FlaskConical,
-  FileText, Calendar, MessagesSquare, Link as LinkIcon,
+  FileText, Calendar, MessagesSquare, Link as LinkIcon, Webhook, Key, Workflow,
 } from "lucide-react";
 
 interface MenuItem {
@@ -40,6 +40,9 @@ const menuItems: MenuItem[] = [
     icon: LinkIcon,
     beta: true,
   } satisfies MenuItem] : []),
+  { label: "Webhooks",     href: "/atendimento/webhooks",     icon: Webhook },
+  { label: "API Keys",     href: "/atendimento/api-keys",     icon: Key },
+  { label: "Apps",         href: "/atendimento/integracoes",  icon: Workflow },
   { label: "Relatórios",   href: "/atendimento/relatorios",   icon: BarChart2,       beta: true },
 ];
 

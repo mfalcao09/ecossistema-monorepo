@@ -24,6 +24,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createHmac } from 'crypto'
 import { createAdminClient } from '@/lib/supabase/admin'
+import { runAutomations } from '@/lib/atendimento/automation-engine'
 
 // ── Tipos de payload da Meta ─────────────────────────────────────────────────
 
@@ -387,6 +388,31 @@ async function processarMensagemRecebida(
         tipo: msg.type,
         wamid: msg.id,
       })
+
+      // ── S8a: dispara motor de automações (fire-and-forget — não bloqueia ACK Meta)
+      if (process.env.ATENDIMENTO_AUTOMATIONS_ENABLED === 'true') {
+        runAutomations({
+          type: 'message_received',
+          message: {
+            id: msg.id,
+            content: conteudoTexto,
+            content_type: contentType,
+            type: msg.type,
+          },
+          conversation: {
+            id: conversationId,
+            inbox_id: inboxId,
+            contact_id: contactId,
+          },
+          contact: {
+            id: contactId,
+            name: nomeContato,
+            phone_number: remetente,
+          },
+        }).catch((err) => {
+          console.error('[WEBHOOK] runAutomations failed (não afeta ACK)', err)
+        })
+      }
     }
 
   } catch (err) {
