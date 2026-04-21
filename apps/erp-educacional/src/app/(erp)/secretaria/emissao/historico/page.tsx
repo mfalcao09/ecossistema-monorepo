@@ -123,6 +123,8 @@ export default function EmissaoHistoricoPage() {
   const [previaNome, setPreviaNome] = useState("");
   const [previaDiplomaId, setPreviaDiplomaId] = useState<string | null>(null);
   const [dadosPrevia, setDadosPrevia] = useState<DadosPrevia | null>(null);
+  // Toggle "papel já timbrado" — oculta o timbrado digital no preview e no PDF
+  const [ocultarTimbrado, setOcultarTimbrado] = useState(false);
 
   const buscar = useCallback(async (q: string) => {
     if (!q.trim()) { setResultados([]); return; }
@@ -176,6 +178,7 @@ export default function EmissaoHistoricoPage() {
     setPreviaAberta(false);
     setDadosPrevia(null);
     setPreviaDiplomaId(null);
+    setOcultarTimbrado(false);
   };
 
   // Loading states para os botões de download/print
@@ -193,7 +196,11 @@ export default function EmissaoHistoricoPage() {
     try {
       const res = await fetchSeguro(
         `/api/secretaria/emissao/historico/${diplomaId}/pdf`,
-        { method: "POST" }
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ semTimbrado: ocultarTimbrado }),
+        }
       );
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
@@ -322,10 +329,13 @@ export default function EmissaoHistoricoPage() {
   const tamanhoFonteCorpo = cfg?.historico_tamanho_fonte_corpo ?? 7;
   // Espelha lógica do AbaVisualHistorico: timbrados PDF legados não são
   // renderizáveis como background — trata como vazio (sem timbrado).
+  // Toggle "ocultarTimbrado" também força vazio (papel já é timbrado).
   const timbradoRaw = cfg?.historico_arquivo_timbrado_url ?? "";
-  const timbradoUrl = timbradoRaw && !timbradoRaw.toLowerCase().endsWith(".pdf")
-    ? timbradoRaw
-    : "";
+  const timbradoUrl = ocultarTimbrado
+    ? ""
+    : timbradoRaw && !timbradoRaw.toLowerCase().endsWith(".pdf")
+      ? timbradoRaw
+      : "";
   const margens = {
     topo: cfg?.historico_margem_topo ?? 25,
     inferior: cfg?.historico_margem_inferior ?? 20,
@@ -355,7 +365,22 @@ export default function EmissaoHistoricoPage() {
                   · {previaNome}
                 </span>
               </h2>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
+                {/* Toggle: Papel já timbrado — oculta o timbrado digital */}
+                <label
+                  className="flex items-center gap-2 cursor-pointer select-none text-xs text-gray-700 hover:text-gray-900"
+                  title="Quando marcado, o PDF/impressão sai sem o timbrado digital — útil para imprimir em folha A4 já timbrada fisicamente."
+                >
+                  <input
+                    type="checkbox"
+                    checked={ocultarTimbrado}
+                    onChange={(e) => setOcultarTimbrado(e.target.checked)}
+                    disabled={baixandoPdf || imprimindo}
+                    className="w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-400 focus:ring-offset-0 disabled:opacity-50"
+                  />
+                  <span>Papel já timbrado</span>
+                </label>
+                <div className="h-5 w-px bg-gray-200" />
                 <button
                   onClick={() => previaDiplomaId && salvarPdfDireto(previaDiplomaId)}
                   disabled={baixandoPdf || imprimindo || !previaDiplomaId}
