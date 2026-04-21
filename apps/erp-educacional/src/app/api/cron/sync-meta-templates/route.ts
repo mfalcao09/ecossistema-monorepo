@@ -1,6 +1,6 @@
 /**
  * Cron: sync de templates Meta → Supabase.
- * Schedule: */30 * * * *  (a cada 30min) — ver vercel.json.
+ * Schedule: a cada 30min (ver vercel.json — "0,30 * * * *" equivalente ao "star/30").
  *
  * Autenticação: header Authorization: Bearer <CRON_SECRET>
  * (Vercel Cron envia automaticamente quando CRON_SECRET está em env vars)
