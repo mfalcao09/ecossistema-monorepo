@@ -291,12 +291,20 @@ function snapshotDisciplinaParaDadosDiploma(d: SnapshotDisciplina): Disciplina {
       ? formaIntegralizacaoMap[fiKey] || 'Cursado'
       : undefined
 
+  // Nota no snapshot é string ("8.50"); Disciplina.nota no XSD é number.
+  // parseFloat com fallback (NaN → undefined) garante tipo correto.
+  let notaNum: number | undefined
+  if (d.nota) {
+    const n = parseFloat(String(d.nota).replace(',', '.'))
+    notaNum = Number.isFinite(n) ? n : undefined
+  }
+
   return {
     codigo: d.codigo || '',
     nome: d.nome,
     periodo_letivo: d.periodo || '',
     carga_horaria: cargaHoraria,
-    nota: d.nota || undefined,
+    nota: notaNum,
     conceito: d.conceito || undefined,
     situacao,
     forma_integralizacao: formaIntegralizacao,
