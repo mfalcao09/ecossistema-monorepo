@@ -1,0 +1,3326 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Plano de Reformulação Total — Módulo de Atendimento FIC</title>
+<style>
+/* ===== Design tokens Nexvy ===== */
+:root {
+  --primary: #345EF3;
+  --primary-hover: #2B4ECF;
+  --primary-bg: #EEF1FE;
+  --bg: #FFFFFF;
+  --bg-subtle: #F5F7FA;
+  --bg-muted: #F0F2F5;
+  --border: #E4E7EC;
+  --border-strong: #D0D5DD;
+  --text: #1D2939;
+  --text-muted: #667085;
+  --text-subtle: #98A2B3;
+  --success: #12B76A;
+  --warning: #F79009;
+  --danger: #F04438;
+  --info: #0BA5EC;
+  --font-body: 'Roboto', 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', ui-monospace, SFMono-Regular, Menlo, monospace;
+  --radius-sm: 6px;
+  --radius-md: 8px;
+  --radius-lg: 10px;
+  --shadow-sm: 0 1px 2px rgba(16,24,40,0.06);
+  --shadow-md: 0 4px 8px -2px rgba(16,24,40,0.1);
+  --sidebar-w: 320px;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0; padding: 0;
+  font-family: var(--font-body);
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text);
+  background: var(--bg-subtle);
+}
+
+/* ===== Layout ===== */
+.wrap {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) 1fr;
+  min-height: 100vh;
+}
+
+/* Sidebar TOC */
+aside.toc {
+  background: var(--bg);
+  border-right: 1px solid var(--border);
+  padding: 24px 20px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  font-size: 13px;
+}
+aside.toc .header {
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+aside.toc .header h2 {
+  margin: 0 0 4px 0;
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--primary);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+}
+aside.toc .header p {
+  margin: 0;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+aside.toc ul {
+  list-style: none;
+  padding-left: 0;
+  margin: 0;
+}
+aside.toc > ul > li { margin-bottom: 4px; }
+aside.toc ul ul {
+  padding-left: 12px;
+  margin-top: 4px;
+  margin-bottom: 8px;
+}
+aside.toc a {
+  color: var(--text);
+  text-decoration: none;
+  display: block;
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  transition: all 0.15s ease;
+  line-height: 1.4;
+}
+aside.toc a:hover {
+  background: var(--primary-bg);
+  color: var(--primary);
+}
+aside.toc ul ul a {
+  color: var(--text-muted);
+  font-size: 12.5px;
+}
+aside.toc ul ul ul a {
+  color: var(--text-subtle);
+  font-size: 12px;
+}
+
+/* Main */
+main {
+  padding: 56px 64px 80px;
+  max-width: 1080px;
+  margin: 0 auto;
+  background: var(--bg);
+  min-height: 100vh;
+  box-shadow: var(--shadow-md);
+}
+
+@media (max-width: 1100px) {
+  .wrap { grid-template-columns: 1fr; }
+  aside.toc { display: none; }
+  main { padding: 32px 24px; }
+}
+
+/* ===== Typography ===== */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--text);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.25;
+  scroll-margin-top: 24px;
+}
+h1 {
+  font-size: 32px;
+  margin-top: 0;
+  margin-bottom: 8px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid var(--primary);
+}
+h2 {
+  font-size: 24px;
+  margin-top: 48px;
+  margin-bottom: 12px;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+h3 {
+  font-size: 19px;
+  margin-top: 32px;
+  margin-bottom: 8px;
+  color: var(--primary);
+}
+h4 { font-size: 16px; margin-top: 24px; margin-bottom: 6px; }
+h5 { font-size: 14px; text-transform: uppercase; letter-spacing: 0.04em; color: var(--text-muted); margin-top: 20px; margin-bottom: 4px; }
+
+p { margin: 8px 0 14px; }
+
+a { color: var(--primary); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a.anchor {
+  visibility: hidden;
+  margin-left: 8px;
+  color: var(--text-subtle);
+  font-weight: 400;
+  font-size: 0.8em;
+}
+h1:hover a.anchor, h2:hover a.anchor, h3:hover a.anchor, h4:hover a.anchor {
+  visibility: visible;
+}
+
+strong { color: var(--text); font-weight: 700; }
+em { color: var(--text); }
+
+/* ===== Lists ===== */
+ul, ol { padding-left: 24px; margin: 10px 0 16px; }
+li { margin: 4px 0; }
+li::marker { color: var(--primary); }
+
+/* ===== Code ===== */
+code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  background: var(--primary-bg);
+  color: #1A3FC7;
+  padding: 2px 6px;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(52, 94, 243, 0.12);
+}
+pre {
+  background: #0F1729;
+  color: #E4E7EC;
+  padding: 16px 20px;
+  border-radius: var(--radius-lg);
+  overflow-x: auto;
+  margin: 16px 0;
+  font-size: 13px;
+  line-height: 1.55;
+  box-shadow: var(--shadow-sm);
+}
+pre code {
+  background: transparent;
+  color: inherit;
+  border: none;
+  padding: 0;
+  font-size: inherit;
+}
+
+/* ===== Tables ===== */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 16px 0 24px;
+  font-size: 13.5px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg);
+  box-shadow: var(--shadow-sm);
+}
+thead {
+  background: var(--primary-bg);
+}
+th {
+  text-align: left;
+  padding: 12px 16px;
+  font-weight: 700;
+  color: var(--text);
+  border-bottom: 2px solid var(--primary);
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+td {
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--border);
+  vertical-align: top;
+}
+tr:last-child td { border-bottom: none; }
+tr:hover td { background: var(--bg-subtle); }
+
+/* ===== Blockquote ===== */
+blockquote {
+  border-left: 4px solid var(--primary);
+  background: var(--primary-bg);
+  margin: 16px 0;
+  padding: 12px 20px;
+  color: var(--text);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
+}
+blockquote p { margin: 4px 0; }
+
+/* ===== Horizontal rule ===== */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 40px 0;
+}
+
+/* ===== Status/emoji markers (inline) ===== */
+/* Auto-color ✅🔄❌⏭️🔴🟡🟢🟠 left alone — emojis keep their own color */
+
+/* Callout boxes via [!TIP], [!WARNING] etc — não usamos no MD, mas preparado */
+.callout {
+  padding: 12px 16px;
+  border-radius: var(--radius-md);
+  margin: 16px 0;
+  border-left: 4px solid var(--info);
+  background: rgba(11, 165, 236, 0.08);
+}
+
+/* ===== Print ===== */
+@media print {
+  .wrap { display: block; }
+  aside.toc { display: none; }
+  main { box-shadow: none; padding: 0; max-width: 100%; }
+  pre, table { page-break-inside: avoid; }
+  h1, h2, h3 { page-break-after: avoid; }
+  a { color: var(--text); text-decoration: none; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 0.8em; color: var(--text-muted); }
+  body { background: white; font-size: 11pt; }
+}
+
+/* ===== Hero ===== */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, #1E40AF 100%);
+  color: white;
+  padding: 40px 48px;
+  border-radius: var(--radius-lg);
+  margin-bottom: 40px;
+  box-shadow: var(--shadow-md);
+}
+.hero h1 {
+  color: white;
+  border-bottom: none;
+  margin: 0 0 8px;
+  padding: 0;
+  font-size: 32px;
+}
+.hero .subtitle {
+  font-size: 16px;
+  opacity: 0.95;
+  margin: 0;
+}
+.hero .meta {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+  margin-top: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,0.2);
+  font-size: 13px;
+}
+.hero .meta span { opacity: 0.9; }
+.hero .meta strong { opacity: 1; }
+
+/* ===== Code highlight (pygments) ===== */
+.highlight .hll { background-color: #49483e }
+.highlight .c { color: #75715e; font-style: italic }
+.highlight .k { color: #66d9ef }
+.highlight .n { color: #f8f8f2 }
+.highlight .p { color: #f8f8f2 }
+.highlight .s { color: #e6db74 }
+.highlight .na { color: #a6e22e }
+.highlight .nb { color: #ae81ff }
+.highlight .nc { color: #a6e22e }
+.highlight .nf { color: #a6e22e }
+.highlight .s1 { color: #e6db74 }
+.highlight .s2 { color: #e6db74 }
+
+/* Footer */
+.footer {
+  margin-top: 60px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 13px;
+  text-align: center;
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <aside class="toc">
+    <div class="header">
+      <h2>Navegação</h2>
+      <p>Plano mestre — S089</p>
+    </div>
+    <div class="toc">
+<ul>
+<li><a href="#plano-de-reformulacao-total-modulo-de-atendimento-fic">Plano de Reformulação Total — Módulo de Atendimento FIC</a><ul>
+<li><a href="#sumario-executivo">Sumário executivo</a><ul>
+<li><a href="#o-que-temos-hoje">O que temos hoje</a></li>
+<li><a href="#o-que-estamos-construindo">O que estamos construindo</a></li>
+<li><a href="#o-que-diferencia-este-plano">O que diferencia este plano</a></li>
+<li><a href="#horizonte">Horizonte</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#parte-1-estado-atual-da-fic-inventario">Parte 1 — Estado atual da FIC (inventário)</a><ul>
+<li><a href="#11-frontend-srcapperpatendimento">1.1 Frontend (/src/app/(erp)/atendimento/)</a></li>
+<li><a href="#12-backend-srcappapiatendimento">1.2 Backend (/src/app/api/atendimento/)</a></li>
+<li><a href="#13-database-supabase-ecosystem-project">1.3 Database (Supabase ecosystem project)</a><ul>
+<li><a href="#tabelas-existentes-s1-s3">Tabelas existentes (S1-S3)</a></li>
+<li><a href="#tabelas-a-criar-roadmap">Tabelas a criar (roadmap)</a></li>
+<li><a href="#campos-a-adicionar-a-tabelas-existentes">Campos a adicionar a tabelas existentes</a></li>
+</ul>
+</li>
+<li><a href="#14-integracoes-externas">1.4 Integrações externas</a></li>
+<li><a href="#15-packages-reutilizaveis-do-ecossistema">1.5 Packages reutilizáveis do ecossistema</a></li>
+<li><a href="#16-documentacao-viva">1.6 Documentação viva</a></li>
+</ul>
+</li>
+<li><a href="#parte-2-benchmark-consolidado-nexvydkw-helenacrm">Parte 2 — Benchmark consolidado (Nexvy/DKW + helenaCRM)</a><ul>
+<li><a href="#21-fonte-primaria-do-benchmark">2.1 Fonte primária do benchmark</a></li>
+<li><a href="#22-design-tokens-canonicos-extraidos">2.2 Design tokens canônicos (extraídos)</a></li>
+<li><a href="#23-inventario-completo-de-features-do-benchmark">2.3 Inventário COMPLETO de features do benchmark</a><ul>
+<li><a href="#a-dashboard-home-video-lus6ohcwhrg-screenshots-painel-principal-">A. Dashboard / Home (vídeo Lus6OhCWhrg, screenshots painel-principal-*)</a></li>
+<li><a href="#b-conversas-inbox-videos-lus6ohcwhrg-_l92finjcui-gtx_qla1zeg-xeemwygaypo">B. Conversas / Inbox (vídeos Lus6OhCWhrg, _L92FINjcUI, GTX_QLA1zeg, XeemWygayPo)</a></li>
+<li><a href="#c-crm-kanban-negocios-videos-y3cfr97j2bo-n8n8laxuzlc-hu38xgdc-l8-ssg53bdi1k0-vaa4tqrsfqi-g0_lganszdy">C. CRM Kanban / Negócios (vídeos y3CFR97J2Bo, N8n8LaxuZLc, hu38xgDc-l8, ssG53BDi1K0, VAa4tqrsFqI, g0_lGAnSzdY)</a></li>
+<li><a href="#d-contatos-crm-base-videos-vaa4tqrsfqi-g0_lganszdy-tbl14qcjbcm-pvfppqnxqzs">D. Contatos / CRM base (vídeos VAa4tqrsFqI, g0_lGAnSzdY, TBl14qCjbcM, PvfppQNxQZs)</a></li>
+<li><a href="#e-agendamentos-videos-ooq8avnwx7g-bm9r57coqmm-jhonoag6feo">E. Agendamentos (vídeos oOq8AVnwx7g, Bm9r57cOqMM, JHONOag6fEo)</a></li>
+<li><a href="#f-templates-waba-videos-olr6prkexso-1lrbxanv31i">F. Templates WABA (vídeos Olr6prKExSo, 1lrBXAnV31I)</a></li>
+<li><a href="#g-automacoes-ifthen-videos-shtf1dwatuc-etiquetar-via-chatbot-diversos-mencoes">G. Automações IF/THEN (vídeos SHTF1dwAtuc — etiquetar via chatbot, diversos menções)</a></li>
+<li><a href="#h-webhooks-e-api-rest-publica-videos-w1gvw7_qzm-mencoes-em-lus6ohcwhrg">H. Webhooks e API REST pública (vídeos -W1Gvw7_QzM, menções em Lus6OhCWhrg)</a></li>
+<li><a href="#i-links-de-redirecionamento-mencao-em-plano-v2">I. Links de Redirecionamento (menção em plano v2)</a></li>
+<li><a href="#j-ds-voice-biblioteca-de-conteudo-videos-implicitos-em-cdodwqe_-ke-sequencia-olr6prkexso-modelo-mensagem">J. DS Voice — biblioteca de conteúdo (vídeos implícitos em CDOdwqe_-KE Sequência + Olr6prKExSo Modelo Mensagem)</a></li>
+<li><a href="#k-ds-agente-ia-autonoma-videos-y3cfr97j2bo">K. DS Agente (IA autônoma) (vídeos y3CFR97J2Bo)</a></li>
+<li><a href="#l-ds-bot-visual-flow-builder-videos-ypfcjgimw2i-construtor-avancado-rfn_fw6wyow-acoes-fluxo-xf6tfnm4va4-acoes-contato-6rfcmrod4e0-acoes-mensagem-amdg3hbrui0-acoes-atendimento">L. DS Bot — Visual Flow Builder (vídeos YpFcjGiMw2I Construtor Avançado + RFn_fw6wYOw Ações Fluxo + Xf6tFnM4va4 Ações Contato + 6RFcmRoD4E0 Ações Mensagem + AMDg3hbrui0 Ações Atendimento)</a></li>
+<li><a href="#m-chat-interno-team-chat-mencao-em-plano-v2-x115lzvalia">M. Chat Interno (team chat) (menção em plano v2 + X115LzVAliA)</a></li>
+<li><a href="#n-relatorios-dashboards-videos-dnakezwr_ly-0_0i72w2s68-t2bf8-5uui8-olmqtujz724-ituvyvn347i-b8e5ab6sats">N. Relatórios / Dashboards (vídeos dNaKezWr_LY, 0_0i72W2s68, t2bF8-5uui8, olMQTujz724, iTuVYvn347I, B8E5ab6SATs)</a></li>
+<li><a href="#o-usuarios-cargos-permissoes-videos-lctsvm1mzo-lsdxrms7agk-_keel_5wg5k-xwd-0gj6r6e-xdikjzkmy7q">O. Usuários / Cargos / Permissões (vídeos -LctSvm1Mzo, LsdXRmS7Agk, _KeeL_5wG5k, XWd-0Gj6R6E, XdikJZkmY7Q)</a></li>
+<li><a href="#p-canais-videos-ogs_byugdwc-z-api-qlgurigjc44-instagram">P. Canais (vídeos oGs_ByuGDWc Z-API, QlGUrIGjc44 Instagram)</a></li>
+<li><a href="#q-campanhas-videos-vcsslnj7vze-90-timestamps-mais-longo">Q. Campanhas (vídeos VCsSLNj7vzE — 90 timestamps, mais longo)</a></li>
+<li><a href="#r-integracoes-apps-videos-ogs_byugdwc-custos-z-api">R. Integrações / Apps (vídeos oGs_ByuGDWc Custos Z-API)</a></li>
+<li><a href="#s-configuracoes-gerais-video-s1liattratw-perfil-parceiro-bvpz84etheu-customizacao">S. Configurações gerais (vídeo S1liAttRAtw Perfil Parceiro, bvpz84EThEU Customização)</a></li>
+<li><a href="#t-painel-parceiro-whitelabel-11-videos-parceiros">T. Painel Parceiro / Whitelabel (11 vídeos "[Parceiros]")</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#parte-3-arquitetura-alvo">Parte 3 — Arquitetura alvo</a><ul>
+<li><a href="#31-visao-sistemica-como-o-atendimento-conversa-com-o-resto-do-erp">3.1 Visão sistêmica (como o atendimento conversa com o resto do ERP)</a></li>
+<li><a href="#32-stack-tecnica">3.2 Stack técnica</a></li>
+<li><a href="#33-estrategia-de-multi-tenancy">3.3 Estratégia de multi-tenancy</a></li>
+<li><a href="#34-fluxo-de-dados-critico-recepcao-de-mensagem-waba">3.4 Fluxo de dados crítico: recepção de mensagem WABA</a></li>
+</ul>
+</li>
+<li><a href="#parte-4-roadmap-por-sprints-s4-s10">Parte 4 — Roadmap por Sprints (S4 → S10+)</a><ul>
+<li><a href="#sprint-s4-crm-kanban-lead-detail-protocolos-proximo">Sprint S4 — CRM Kanban + Lead Detail + Protocolos (🎯 próximo)</a><ul>
+<li><a href="#entregas">Entregas</a></li>
+</ul>
+</li>
+<li><a href="#sprint-s5-templates-waba-agendamentos-envio-ativo">Sprint S5 — Templates WABA + Agendamentos + Envio Ativo</a><ul>
+<li><a href="#entregas_1">Entregas</a></li>
+</ul>
+</li>
+<li><a href="#sprint-s6-contatos-completo-cargospermissoes-configuracoes">Sprint S6 — Contatos completo + Cargos/Permissões + Configurações</a><ul>
+<li><a href="#entregas_2">Entregas</a></li>
+</ul>
+</li>
+<li><a href="#sprint-s7-dashboards-relatorios-widgets">Sprint S7 — Dashboards, Relatórios, Widgets</a><ul>
+<li><a href="#entregas_3">Entregas</a></li>
+</ul>
+</li>
+<li><a href="#sprint-s8-automacoes-webhooks-api-rest-n8n-chat-interno-links">Sprint S8 — Automações + Webhooks + API REST + n8n + Chat Interno + Links</a><ul>
+<li><a href="#entregas_4">Entregas</a></li>
+</ul>
+</li>
+<li><a href="#sprint-s9-ds-voice-biblioteca-de-conteudo">Sprint S9 — DS Voice (biblioteca de conteúdo)</a><ul>
+<li><a href="#entregas_5">Entregas</a></li>
+</ul>
+</li>
+<li><a href="#sprint-s10-ds-agente-ds-bot-ia-autonoma">Sprint S10 — DS Agente + DS Bot (IA autônoma)</a><ul>
+<li><a href="#entregas_6">Entregas</a></li>
+</ul>
+</li>
+<li><a href="#fase-4-paralela-condicional">Fase 4 (paralela, condicional)</a></li>
+</ul>
+</li>
+<li><a href="#parte-5-design-system-pratico">Parte 5 — Design system prático</a><ul>
+<li><a href="#51-estrutura-de-pastas-a-criar">5.1 Estrutura de pastas a criar</a></li>
+<li><a href="#52-convencoes-de-nomenclatura-alinhadas-ao-nexvy-para-reduzir-friccao-cognitiva">5.2 Convenções de nomenclatura (alinhadas ao Nexvy para reduzir fricção cognitiva)</a></li>
+<li><a href="#53-padroes-de-ui-criticos">5.3 Padrões de UI críticos</a></li>
+</ul>
+</li>
+<li><a href="#parte-6-como-usar-o-acervo-de-pesquisa-as-5-sugestoes-em-acao">Parte 6 — Como usar o acervo de pesquisa (as 5 sugestões em ação)</a><ul>
+<li><a href="#sugestao-1-decisao-de-escopo-baseada-em-mustnicediferencial">Sugestão 1 — Decisão de escopo baseada em must/nice/diferencial</a></li>
+<li><a href="#sugestao-2-design-tokens-como-baseline-unico">Sugestão 2 — Design tokens como baseline único</a></li>
+<li><a href="#sugestao-3-referencia-visual-em-dois-niveis">Sugestão 3 — Referência visual em dois níveis</a></li>
+<li><a href="#sugestao-4-grep-para-achar-onde-cada-feature-e-explicada">Sugestão 4 — Grep para achar onde cada feature é explicada</a></li>
+<li><a href="#sugestao-5-videos-parceiros-como-gabarito-de-painel-parceiro">Sugestão 5 — Vídeos Parceiros como gabarito de Painel Parceiro</a></li>
+</ul>
+</li>
+<li><a href="#parte-7-acoes-imediatas-proximas-72h">Parte 7 — Ações imediatas (próximas 72h)</a><ul>
+<li><a href="#t-0-hoje-2026-04-20">T-0 (hoje, 2026-04-20)</a></li>
+<li><a href="#t1-dia-util-seguinte">T+1 (dia útil seguinte)</a></li>
+<li><a href="#t2-sprint-kickoff-s4">T+2 (sprint kickoff S4)</a></li>
+<li><a href="#t5-meio-sprint-s4">T+5 (meio sprint S4)</a></li>
+<li><a href="#t7-deploy-s4">T+7 (deploy S4)</a></li>
+</ul>
+</li>
+<li><a href="#parte-8-apendices">Parte 8 — Apêndices</a><ul>
+<li><a href="#a-cross-reference-video-sprint">A. Cross-reference vídeo ↔ sprint</a></li>
+<li><a href="#b-tabela-resumo-de-gap-por-categoria">B. Tabela resumo de gap por categoria</a></li>
+<li><a href="#c-links-canonicos">C. Links canônicos</a></li>
+<li><a href="#d-metricas-de-sucesso-do-modulo-definidas-agora-medidas-apos-s7">D. Métricas de sucesso do módulo (definidas agora, medidas após S7)</a></li>
+</ul>
+</li>
+</ul>
+</div>
+
+  </aside>
+  <main>
+    <div class="hero">
+      <h1>Plano de Reformulação Total — Módulo de Atendimento FIC</h1>
+      <p class="subtitle">O melhor módulo de atendimento educacional do Brasil · baseado em benchmark DKW/Nexvy/helenaCRM</p>
+      <div class="meta">
+        <span><strong>Criado:</strong> 2026-04-20 · Sessão S089</span>
+        <span><strong>Supersede:</strong> plano v2 (13/04)</span>
+        <span><strong>Base:</strong> 58 vídeos · 1.726 frames · 225 screenshots</span>
+      </div>
+    </div>
+    <h1 id="plano-de-reformulacao-total-modulo-de-atendimento-fic">Plano de Reformulação Total — Módulo de Atendimento FIC<a class="anchor" href="#plano-de-reformulacao-total-modulo-de-atendimento-fic" title="Permanent link">#</a></h1>
+<blockquote>
+<p><strong>Criado:</strong> 2026-04-20 · Sessão S089
+<strong>Substitui:</strong> <code>ATENDIMENTO-PLANO-v2-SESSAO088.md</code> (mantido como histórico)
+<strong>Base:</strong> Estado atual S1-S3 em produção + benchmark de 58 vídeos DKW/Nexvy/helenaCRM + 225 screenshots + plano v2 de 13/04
+<strong>Objetivo:</strong> Transformar o módulo Atendimento do ERP-FIC no <strong>melhor módulo de atendimento educacional do Brasil</strong>, integrando WhatsApp/Instagram/CRM/IA/agenda em um único fluxo conectado ao ensino (matrículas, secretaria, financeiro, diploma).</p>
+</blockquote>
+<hr>
+<h2 id="sumario-executivo">Sumário executivo<a class="anchor" href="#sumario-executivo" title="Permanent link">#</a></h2>
+<h3 id="o-que-temos-hoje">O que temos hoje<a class="anchor" href="#o-que-temos-hoje" title="Permanent link">#</a></h3>
+<p><strong>Sprint 1-3 em produção</strong> na FIC (<code>gestao.ficcassilandia.com.br/atendimento</code>):
+- 9 tabelas base + 3 de filas no Supabase (schema rico, pronto para escalar)
+- Webhook WhatsApp <strong>Meta Cloud API v19.0</strong> funcionando (HMAC-SHA256, phone_number_id <code>938274582707248</code>)
+- Inbox 3 painéis (lista + chat + info) com Realtime Supabase, envio otimístico
+- Filas seed: Secretaria (azul) / Financeiro (laranja) / Matrículas (verde)
+- TopBar com 6 abas (Conversas / Contatos / Canais / Automações / Relatórios)
+- 4 agentes cadastrados (Fabiano, Jhiully, Cristina, Marcelo), n8n ID 2967 ativo</p>
+<h3 id="o-que-estamos-construindo">O que estamos construindo<a class="anchor" href="#o-que-estamos-construindo" title="Permanent link">#</a></h3>
+<p><strong>Um concorrente direto da Nexvy/helenaCRM</strong>, mas com <strong>vantagem assimétrica</strong>: integração nativa com o ERP educacional (alunos, matrículas, financeiro, diploma). Nenhum concorrente tem isso.</p>
+<h3 id="o-que-diferencia-este-plano">O que diferencia este plano<a class="anchor" href="#o-que-diferencia-este-plano" title="Permanent link">#</a></h3>
+<ol>
+<li><strong>Vantagem de contexto</strong>: 58 vídeos DKW processados (1726 frames + transcrições integrais + timestamps exaustivos) = nenhuma feature do concorrente escapa</li>
+<li><strong>Design tokens prontos</strong> do Nexvy (Primary <code>#345EF3</code>, Roboto 14px, MUI v4, radius 10px/8px) como baseline — <strong>pulamos toda a fase de descoberta de UX</strong></li>
+<li><strong>Alinhamento de linguagem</strong>: todas as features mapeadas 1:1 com os nomes que a Nexvy usa (o Marcelo já conhece a interface — migração cognitiva zero)</li>
+<li><strong>Inteligência bidirecional</strong>: o módulo Atendimento conversa com Diploma, Financeiro, Secretaria, Alunos — não é uma ilha</li>
+<li><strong>Roadmap de multi-tenant</strong>: desde S1 as tabelas têm <code>account_id</code> nullable — ao virar SaaS (Nexvy-like whitelabel próprio), basta preencher</li>
+</ol>
+<h3 id="horizonte">Horizonte<a class="anchor" href="#horizonte" title="Permanent link">#</a></h3>
+<ul>
+<li><strong>Fase 1 (8 semanas — até meados de junho):</strong> S4 Kanban CRM + S5 Templates/Agendamentos + S6 Contatos/Cargos — <strong>paridade funcional com helenaCRM</strong></li>
+<li><strong>Fase 2 (6 semanas — até final de julho):</strong> S7 Dashboards + S8 Automações/Webhooks/n8n + S9 DS Voice (biblioteca) — <strong>recursos diferenciadores</strong></li>
+<li><strong>Fase 3 (8 semanas — até final de setembro):</strong> S10 DS Agente OpenAI + DS Bot visual + integração RAG FIC + Jarvis voice</li>
+<li><strong>Fase 4 (paralela, trigger quando Nexvy saturar):</strong> Multi-tenant + Painel Parceiro + SaaS público (Klésis como 1º tenant de teste)</li>
+</ul>
+<hr>
+<h1 id="parte-1-estado-atual-da-fic-inventario">Parte 1 — Estado atual da FIC (inventário)<a class="anchor" href="#parte-1-estado-atual-da-fic-inventario" title="Permanent link">#</a></h1>
+<h2 id="11-frontend-srcapperpatendimento">1.1 Frontend (<code>/src/app/(erp)/atendimento/</code>)<a class="anchor" href="#11-frontend-srcapperpatendimento" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Rota</th>
+<th>Arquivo</th>
+<th>Status</th>
+<th>Sprint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/atendimento</code></td>
+<td><code>layout.tsx</code></td>
+<td>✅ TopBar 6 abas</td>
+<td>S1</td>
+</tr>
+<tr>
+<td><code>/atendimento</code></td>
+<td><code>page.tsx</code></td>
+<td>🔄 Skeleton dashboard</td>
+<td>S7</td>
+</tr>
+<tr>
+<td><code>/atendimento/conversas</code></td>
+<td><code>conversas/page.tsx</code></td>
+<td>✅ Inbox 3 painéis funcionando</td>
+<td>S3</td>
+</tr>
+<tr>
+<td><code>/atendimento/contatos</code></td>
+<td><code>contatos/page.tsx</code></td>
+<td>🔄 Tabela básica, busca, tags</td>
+<td>S1</td>
+</tr>
+<tr>
+<td><code>/atendimento/canais</code></td>
+<td><code>canais/page.tsx</code></td>
+<td>🔄 Cards de inbox (WABA+IG+Email+SMS+API)</td>
+<td>S1</td>
+</tr>
+<tr>
+<td><code>/atendimento/automacoes</code></td>
+<td><code>automacoes/page.tsx</code></td>
+<td>❌ Vazio</td>
+<td>S8</td>
+</tr>
+<tr>
+<td><code>/atendimento/relatorios</code></td>
+<td><code>relatorios/page.tsx</code></td>
+<td>❌ Vazio</td>
+<td>S7</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Componentes-chave existentes:</strong>
+- <code>ConversasList.tsx</code> (sidebar 320px) — 5 abas (Todas/Em atendimento/Aguardando/Minhas/Não atribuídas), badges unread, filtros canal/status
+- <code>ChatPanel.tsx</code> — bubbles in/out, status icons (sent/delivered/read/failed/pending), Realtime Supabase, envio otimístico
+- <code>ContactInfoPanel.tsx</code> — info contato, fila com cor, atendente, datas</p>
+<p><strong>Ausentes (a construir):</strong>
+- <code>KanbanBoard.tsx</code>, <code>DealCard.tsx</code>, <code>LeadDetailModal.tsx</code> (S4)
+- <code>TemplateGrid.tsx</code>, <code>TemplateEditor.tsx</code>, <code>WABAPreview.tsx</code> (S5)
+- <code>ScheduleCalendar.tsx</code>, <code>ScheduleModal.tsx</code> (S5)
+- <code>ContactTable.tsx</code> (versão completa com bulk actions), <code>ImportCSVModal.tsx</code>, <code>CustomFieldsEditor.tsx</code> (S6)
+- <code>PermissionMatrix.tsx</code>, <code>RoleEditor.tsx</code> (S6)
+- <code>AutomationRuleBuilder.tsx</code>, <code>ConditionChain.tsx</code>, <code>ActionChain.tsx</code> (S8)
+- <code>FlowBuilder.tsx</code> (canvas para DS Bot — S10)
+- <code>AgentConfigPanel.tsx</code> (DS Agente — S10)</p>
+<h2 id="12-backend-srcappapiatendimento">1.2 Backend (<code>/src/app/api/atendimento/</code>)<a class="anchor" href="#12-backend-srcappapiatendimento" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Rota</th>
+<th>Método</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/conversas</code></td>
+<td>GET</td>
+<td>✅ Lista com 5 abas + busca + paginação</td>
+</tr>
+<tr>
+<td><code>/conversas/[id]</code></td>
+<td>GET · PATCH</td>
+<td>✅ Detalhe + atualiza status/assignee/queue/priority</td>
+</tr>
+<tr>
+<td><code>/conversas/[id]/messages</code></td>
+<td>POST</td>
+<td>✅ Envio outbound via Meta API</td>
+</tr>
+<tr>
+<td><code>/webhook</code></td>
+<td>GET · POST</td>
+<td>✅ Verify Token + HMAC-SHA256 + fallback inbox</td>
+</tr>
+<tr>
+<td><code>/debug-write</code></td>
+<td>POST</td>
+<td>✅ Debug only</td>
+</tr>
+</tbody>
+</table>
+<p><strong>A construir em cada sprint:</strong>
+- S4: <code>/pipelines</code>, <code>/pipelines/[id]/deals</code>, <code>/deals/[id]</code>, <code>/deals/[id]/activities</code>, <code>/deals/[id]/notes</code>, <code>/protocols</code>
+- S5: <code>/templates</code>, <code>/templates/sync-meta</code>, <code>/scheduled-messages</code>, <code>/scheduled-messages/worker</code> (cron)
+- S6: <code>/contacts/import</code>, <code>/contacts/export</code>, <code>/contacts/merge</code>, <code>/roles</code>, <code>/role-permissions</code>, <code>/saved-views</code>
+- S7: <code>/metrics/daily</code>, <code>/reports/[type]</code> (vendas/atividades/conversas/sdr/closer), <code>/widgets</code>
+- S8: <code>/webhooks/inbound/[slug]</code>, <code>/webhooks/outbound</code>, <code>/api-keys</code>, <code>/api/public/v1/*</code> (API REST pública), <code>/link-redirects/[slug]</code>
+- S9: <code>/ds-voice/messages</code>, <code>/ds-voice/audios</code>, <code>/ds-voice/media</code>, <code>/ds-voice/funnels</code>, <code>/ds-voice/triggers</code>
+- S10: <code>/ds-agente/[id]</code>, <code>/ds-bot/flows/[id]</code>, <code>/ds-bot/execute</code></p>
+<h2 id="13-database-supabase-ecosystem-project">1.3 Database (Supabase <code>ecosystem</code> project)<a class="anchor" href="#13-database-supabase-ecosystem-project" title="Permanent link">#</a></h2>
+<h3 id="tabelas-existentes-s1-s3">Tabelas existentes (S1-S3)<a class="anchor" href="#tabelas-existentes-s1-s3" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tabela</th>
+<th>Linhas produção</th>
+<th>Observação</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>atendimento_inboxes</code></td>
+<td>~3</td>
+<td>WABA FIC ativo, IG ativo, WhatsApp Antigo desconectado</td>
+</tr>
+<tr>
+<td><code>atendimento_contacts</code></td>
+<td>~245</td>
+<td>Base real importada</td>
+</tr>
+<tr>
+<td><code>atendimento_conversations</code></td>
+<td>~50+</td>
+<td>Fluxo real rodando</td>
+</tr>
+<tr>
+<td><code>atendimento_messages</code></td>
+<td>~1k+</td>
+<td>Histórico WABA 24h+</td>
+</tr>
+<tr>
+<td><code>atendimento_labels</code></td>
+<td>6</td>
+<td>Seed Alunos/1700/Matrícula/Financeiro/Secretaria/Reprovada</td>
+</tr>
+<tr>
+<td><code>atendimento_conversation_labels</code></td>
+<td>M2M</td>
+<td></td>
+</tr>
+<tr>
+<td><code>atendimento_agents</code></td>
+<td>4</td>
+<td>Fabiano / Jhiully / Cristina / Marcelo</td>
+</tr>
+<tr>
+<td><code>atendimento_automation_rules</code></td>
+<td>2</td>
+<td>Seed Financeiro + Matrícula keywords</td>
+</tr>
+<tr>
+<td><code>atendimento_whatsapp_templates</code></td>
+<td>0</td>
+<td>Schema pronto, vazio</td>
+</tr>
+<tr>
+<td><code>atendimento_queues</code></td>
+<td>3</td>
+<td>Secretaria (azul) / Financeiro (laranja) / Matrículas (verde)</td>
+</tr>
+<tr>
+<td><code>atendimento_queue_members</code></td>
+<td>0</td>
+<td>A popular</td>
+</tr>
+<tr>
+<td><code>atendimento_agent_statuses</code></td>
+<td>0</td>
+<td>A popular</td>
+</tr>
+</tbody>
+</table>
+<h3 id="tabelas-a-criar-roadmap">Tabelas a criar (roadmap)<a class="anchor" href="#tabelas-a-criar-roadmap" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Tabelas novas</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>S4</strong></td>
+<td><code>pipelines</code>, <code>pipeline_stages</code>, <code>deals</code>, <code>deal_activities</code>, <code>deal_history_events</code>, <code>deal_notes</code>, <code>protocols</code>, <code>campaigns</code>, <code>contact_custom_fields</code>, <code>stage_task_cadences</code>, <code>products</code></td>
+</tr>
+<tr>
+<td><strong>S5</strong></td>
+<td><code>whatsapp_templates</code> (expansão), <code>scheduled_messages</code>, <code>calendar_events</code></td>
+</tr>
+<tr>
+<td><strong>S6</strong></td>
+<td><code>contact_company_custom_fields</code>, <code>saved_views</code>, <code>agent_roles</code>, <code>role_permissions</code>, <code>account_settings</code></td>
+</tr>
+<tr>
+<td><strong>S7</strong></td>
+<td><code>metrics_snapshots</code>, <code>widgets</code>, <code>report_definitions</code></td>
+</tr>
+<tr>
+<td><strong>S8</strong></td>
+<td><code>webhook_inbound_endpoints</code>, <code>webhook_outbound_urls</code>, <code>automation_executions</code>, <code>link_redirects</code>, <code>api_keys</code>, <code>team_chats</code>, <code>team_messages</code></td>
+</tr>
+<tr>
+<td><strong>S9</strong></td>
+<td><code>ds_voice_folders</code>, <code>ds_voice_messages</code>, <code>ds_voice_audios</code>, <code>ds_voice_media</code>, <code>ds_voice_documents</code>, <code>ds_voice_funnels</code>, <code>ds_voice_funnel_steps</code>, <code>ds_voice_triggers</code></td>
+</tr>
+<tr>
+<td><strong>S10</strong></td>
+<td><code>ds_agents</code>, <code>ds_agent_knowledge</code>, <code>ds_bots</code>, <code>ds_bot_flows</code>, <code>ds_bot_nodes</code>, <code>ds_bot_executions</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="campos-a-adicionar-a-tabelas-existentes">Campos a adicionar a tabelas existentes<a class="anchor" href="#campos-a-adicionar-a-tabelas-existentes" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tabela</th>
+<th>Campos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>conversations</code></td>
+<td><code>deal_id FK</code>, <code>protocol_count</code>, já tem <code>queue_id/ticket_number/window_expires_at/last_read_at/waiting_since</code></td>
+</tr>
+<tr>
+<td><code>messages</code></td>
+<td><code>media_type</code>, <code>media_url</code>, <code>waba_template_id</code>, <code>connection_token</code></td>
+</tr>
+<tr>
+<td><code>agents</code></td>
+<td><code>role_id FK</code>, <code>voip_number</code> (futuro), <code>pause_reason</code> já existe</td>
+</tr>
+<tr>
+<td><code>contacts</code></td>
+<td><code>color_hex</code>, <code>has_duplicates BOOL</code>, <code>source VARCHAR</code>, <code>aluno_id FK → alunos</code></td>
+</tr>
+<tr>
+<td><code>inboxes</code></td>
+<td><code>connection_token</code>, <code>waba_account_id</code> (já tem <code>provider_config</code> JSONB)</td>
+</tr>
+</tbody>
+</table>
+<h2 id="14-integracoes-externas">1.4 Integrações externas<a class="anchor" href="#14-integracoes-externas" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Integração</th>
+<th>Status</th>
+<th>Credenciais</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Meta Cloud API (WhatsApp)</td>
+<td>✅ S2</td>
+<td><code>WHATSAPP_TOKEN</code> + <code>WHATSAPP_PHONE_NUMBER_ID=&lt;phone-number-id&gt;</code> + <code>WHATSAPP_APP_SECRET</code> + <code>WHATSAPP_VERIFY_TOKEN=&lt;verify-token&gt;</code> · WABA ID: <code>&lt;waba-id&gt;</code> (valores reais no vault ECOSYSTEM)</td>
+</tr>
+<tr>
+<td>Meta Business Partner (Nexvy)</td>
+<td>🔄 ADR-017 aceito 19/04</td>
+<td>Business Verification aprovada, aplicação MBP em andamento</td>
+</tr>
+<tr>
+<td>n8n</td>
+<td>✅ ID 2967 "N8N – AF EDUCACIONAL"</td>
+<td>Integração pronta pra ser plugada em S8</td>
+</tr>
+<tr>
+<td>Instagram Business</td>
+<td>🔄 Conectado no Nexvy, precisa conectar no ERP</td>
+<td>Via Meta Graph API</td>
+</tr>
+<tr>
+<td>Google Calendar</td>
+<td>❌</td>
+<td>OAuth2 Google em S5+</td>
+</tr>
+<tr>
+<td>Typebot / Flow Builder</td>
+<td>❌</td>
+<td>Custom visual builder em S10</td>
+</tr>
+<tr>
+<td>OpenAI (DS Agente)</td>
+<td>❌</td>
+<td><code>OPENAI_API_KEY</code> via credential-gateway em S10</td>
+</tr>
+<tr>
+<td>Deepgram (STT)</td>
+<td>❌</td>
+<td>Fase 3 Jarvis E3</td>
+</tr>
+<tr>
+<td>ElevenLabs (TTS)</td>
+<td>❌</td>
+<td>Fase 3 Jarvis E3</td>
+</tr>
+</tbody>
+</table>
+<h2 id="15-packages-reutilizaveis-do-ecossistema">1.5 Packages reutilizáveis do ecossistema<a class="anchor" href="#15-packages-reutilizaveis-do-ecossistema" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Package</th>
+<th>Uso no atendimento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>@ecossistema/credentials</code></td>
+<td>Guarda tokens Meta, n8n, OpenAI (SC-29 Vault)</td>
+</tr>
+<tr>
+<td><code>@ecossistema/agentes</code></td>
+<td>Prompts DS Agente (S10)</td>
+</tr>
+<tr>
+<td><code>@ecossistema/memory</code></td>
+<td>Contexto do aluno no DS Agente</td>
+</tr>
+<tr>
+<td><code>@ecossistema/rag</code></td>
+<td>Base de conhecimento FIC (regulamento, FAQ, processos)</td>
+</tr>
+<tr>
+<td><code>@ecossistema/tools</code></td>
+<td>Wrappers Supabase/n8n/Meta</td>
+</tr>
+<tr>
+<td><code>@ecossistema/billing</code></td>
+<td>Ponte "Solicitar pagamento" no chat (Inter boletos)</td>
+</tr>
+<tr>
+<td><code>@ecossistema/task-registry</code></td>
+<td>Registrar tarefas automáticas</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Nota crítica:</strong> <code>apps/intentus/src/components/chat/*</code> tem 2.7k linhas de UI chat mas é <strong>isolado, imobiliária-first</strong>. Serve como <strong>referência de padrão</strong>, não template reutilizável.</p>
+<h2 id="16-documentacao-viva">1.6 Documentação viva<a class="anchor" href="#16-documentacao-viva" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Documento</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ADR-017-nexvy-meta-business-partner.md</code></td>
+<td>✅ aceito 19/04</td>
+</tr>
+<tr>
+<td><code>NEXVY-REFERENCIA-ATENDIMENTO.md</code> (memory)</td>
+<td>✅ 20+ prints primeiro batch</td>
+</tr>
+<tr>
+<td><code>ATENDIMENTO-PLANO-v2-SESSAO088.md</code> (memory)</td>
+<td>✅ 10 sprints detalhados</td>
+</tr>
+<tr>
+<td><strong>Este documento (S089)</strong></td>
+<td>✅ sucede o v2 — fonte única de verdade</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="parte-2-benchmark-consolidado-nexvydkw-helenacrm">Parte 2 — Benchmark consolidado (Nexvy/DKW + helenaCRM)<a class="anchor" href="#parte-2-benchmark-consolidado-nexvydkw-helenacrm" title="Permanent link">#</a></h1>
+<h2 id="21-fonte-primaria-do-benchmark">2.1 Fonte primária do benchmark<a class="anchor" href="#21-fonte-primaria-do-benchmark" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Ativo</th>
+<th>Localização</th>
+<th>Conteúdo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>58 vídeos processados</strong></td>
+<td><code>docs/research/nexvy-whitelabel/</code></td>
+<td>1.726 frames + 58 transcrições + 58 timestamps exaustivos</td>
+</tr>
+<tr>
+<td><strong>225 screenshots manuais</strong></td>
+<td><code>docs/research/nexvy-whitelabel/screenshots/</code></td>
+<td>Navegação guiada console.nexvy.tech</td>
+</tr>
+<tr>
+<td><strong>Plano UI 24 seções</strong></td>
+<td><code>PLANO-LEVANTAMENTO-NEXVY.md</code> (branch <code>claude/competent-saha-13df32</code>, commit <code>7ec1c94</code>)</td>
+<td>Design tokens + componentes identificados</td>
+</tr>
+<tr>
+<td><strong>INDEX.md</strong></td>
+<td><code>docs/research/nexvy-whitelabel/INDEX.md</code></td>
+<td>Mapa navegável</td>
+</tr>
+</tbody>
+</table>
+<h2 id="22-design-tokens-canonicos-extraidos">2.2 Design tokens canônicos (extraídos)<a class="anchor" href="#22-design-tokens-canonicos-extraidos" title="Permanent link">#</a></h2>
+<pre class="highlight"><code class="language-css">/* Cores primárias */
+--primary:      #345EF3;  /* Azul royal — CTA, links, ativo */
+--primary-hover:#2B4ECF;
+--primary-bg:   #EEF1FE;  /* Fundo claro de badges/highlights primários */
+
+/* Cinzas / neutros */
+--bg:           #FFFFFF;
+--bg-subtle:    #F5F7FA;  /* Fundo de painéis secundários */
+--bg-muted:     #F0F2F5;  /* Chat list background */
+--border:       #E4E7EC;
+--text:         #1D2939;  /* Texto primário */
+--text-muted:   #667085;
+--text-subtle:  #98A2B3;
+
+/* Semânticos */
+--success:      #12B76A;  /* Online, enviada */
+--warning:      #F79009;  /* Pausado, aguardando */
+--danger:       #F04438;  /* Offline, falha */
+--info:         #0BA5EC;
+
+/* Tipografia */
+--font-body:    'Roboto', 'Inter', -apple-system, sans-serif;
+--font-size-xs: 12px;
+--font-size-sm: 13px;
+--font-size:    14px;     /* Base Nexvy */
+--font-size-md: 15px;
+--font-size-lg: 16px;
+
+/* Raios e espaçamento */
+--radius-sm:    6px;
+--radius-md:    8px;     /* Cards, inputs */
+--radius-lg:    10px;    /* Modais, painéis */
+--radius-full:  999px;
+
+/* Sombras */
+--shadow-sm:    0 1px 2px rgba(16,24,40,0.06);
+--shadow-md:    0 4px 8px -2px rgba(16,24,40,0.1);
+--shadow-lg:    0 12px 16px -4px rgba(16,24,40,0.08);
+
+/* Medidas de layout */
+--sidebar-w:    245px;   /* Menu lateral principal Nexvy */
+--list-w:       320px;   /* Lista de conversas */
+--info-w:       360px;   /* Painel direito de contato */
+--kanban-col-w: 300px;   /* Coluna Kanban */
+--topbar-h:     56px;</code></pre>
+<p><strong>Tailwind config sugerido:</strong> criar <code>apps/erp-educacional/tailwind.config.ts</code> com estas tokens em <code>theme.extend.colors/fontSize/borderRadius</code>.</p>
+<h2 id="23-inventario-completo-de-features-do-benchmark">2.3 Inventário COMPLETO de features do benchmark<a class="anchor" href="#23-inventario-completo-de-features-do-benchmark" title="Permanent link">#</a></h2>
+<p>Organizado por área funcional, cruzando os 58 vídeos. Status: ✅ já temos · 🔄 parcial · ❌ construir.</p>
+<h3 id="a-dashboard-home-video-lus6ohcwhrg-screenshots-painel-principal-">A. Dashboard / Home (vídeo <code>Lus6OhCWhrg</code>, screenshots <code>painel-principal-*</code>)<a class="anchor" href="#a-dashboard-home-video-lus6ohcwhrg-screenshots-painel-principal-" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe visto no benchmark</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Widget Canais (conectado/desconectado)</td>
+<td>❌ S7</td>
+<td>Cards coloridos por canal + contador conversas</td>
+</tr>
+<tr>
+<td>Widget CRM (total negócios por pipeline)</td>
+<td>❌ S7</td>
+<td>Barra percentual por etapa + valor financeiro total</td>
+</tr>
+<tr>
+<td>Widget Conversas (abertas/aguardando/resolvidas)</td>
+<td>❌ S7</td>
+<td>3 números grandes + mini-gráfico últimos 7 dias</td>
+</tr>
+<tr>
+<td>Widget Atividades (próximas/hoje/atrasadas)</td>
+<td>❌ S7</td>
+<td>Contadores + botão "Criar atividade"</td>
+</tr>
+<tr>
+<td>Widget Agentes IA (ativos/erros)</td>
+<td>❌ S10</td>
+<td>Badge "N agentes em atividade · M erros recentes"</td>
+</tr>
+<tr>
+<td>Widget de boas-vindas personalizável</td>
+<td>❌ S7</td>
+<td>Card com nome do usuário + saudação</td>
+</tr>
+</tbody>
+</table>
+<h3 id="b-conversas-inbox-videos-lus6ohcwhrg-_l92finjcui-gtx_qla1zeg-xeemwygaypo">B. Conversas / Inbox (vídeos <code>Lus6OhCWhrg</code>, <code>_L92FINjcUI</code>, <code>GTX_QLA1zeg</code>, <code>XeemWygayPo</code>)<a class="anchor" href="#b-conversas-inbox-videos-lus6ohcwhrg-_l92finjcui-gtx_qla1zeg-xeemwygaypo" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>3 painéis (lista 320px + chat + info 360px)</strong></td>
+<td>✅ S3</td>
+<td>Divisão clássica replicada</td>
+</tr>
+<tr>
+<td>5 abas padrão (Todas/Em atendimento/Aguardando/Minhas/Não atribuídas)</td>
+<td>✅ S3</td>
+<td>Com badge unread por aba</td>
+</tr>
+<tr>
+<td><strong>Fila "Novos" / "Meus" / "Outros"</strong> (helenaCRM)</td>
+<td>🔄</td>
+<td>Equivalente às 5 abas, renomear opcional</td>
+</tr>
+<tr>
+<td>Abas customizadas (saved views)</td>
+<td>❌ S6</td>
+<td>Modal "Nova Aba" com filtros (pipeline + coluna + tags + responsáveis)</td>
+</tr>
+<tr>
+<td>Busca global (nome/número/ID ticket)</td>
+<td>🔄</td>
+<td>Já tem busca, falta filtro por ticket#</td>
+</tr>
+<tr>
+<td>Filtros avançados (canal/status/tags/período)</td>
+<td>🔄 S3</td>
+<td>Canal e status ok; tags e período a adicionar</td>
+</tr>
+<tr>
+<td>Filtro tempo sem resposta (urgência)</td>
+<td>❌</td>
+<td>Badge vermelho se <code>now - last_agent_message &gt; 30min</code></td>
+</tr>
+<tr>
+<td><strong>Chat com bubbles in/out</strong></td>
+<td>✅ S3</td>
+<td></td>
+</tr>
+<tr>
+<td>Status icon (sent/delivered/read/failed/pending)</td>
+<td>✅ S3</td>
+<td>Ícones cinza→azul→duplo azul</td>
+</tr>
+<tr>
+<td><strong>Toolbar 5 tipos</strong> (Texto/Emoji/Áudio/Anexo/Template/DS Voice)</td>
+<td>🔄 S3</td>
+<td>Apenas texto hoje</td>
+</tr>
+<tr>
+<td>Gravação de áudio direto no chat</td>
+<td>❌ S5</td>
+<td>Botão microfone → modal gravação + preview</td>
+</tr>
+<tr>
+<td>Upload de anexo (imagem/vídeo/doc)</td>
+<td>❌ S5</td>
+<td>Drag-and-drop + progresso</td>
+</tr>
+<tr>
+<td>Textarea expansível</td>
+<td>🔄</td>
+<td>Auto-resize + contagem de caracteres (limite WABA)</td>
+</tr>
+<tr>
+<td>Status icons em tempo real (webhook delivery)</td>
+<td>🔄 S3</td>
+<td>Meta webhook <code>statuses</code> → atualizar <code>messages.status</code></td>
+</tr>
+<tr>
+<td><strong>Header chat — breadcrumb pipeline</strong></td>
+<td>❌ S4</td>
+<td>"Pipeline Alunos › Matrícula › Aguardando documentos"</td>
+</tr>
+<tr>
+<td>Header chat — gerenciar agente (transferir)</td>
+<td>🔄</td>
+<td>Dropdown atendente → reassign</td>
+</tr>
+<tr>
+<td>Header chat — ações (Agendar msg / Transferir / Deletar / Snooze)</td>
+<td>❌</td>
+<td>Menu ⋮ com 4 ações</td>
+</tr>
+<tr>
+<td><strong>Banner "Janela WABA fechada"</strong></td>
+<td>❌ S5</td>
+<td>Sobre o input: "Janela de 24h expirou — envie um template" + CTA</td>
+</tr>
+<tr>
+<td>Modal "Iniciar Conversa" (fila + canal + contato)</td>
+<td>❌ S3</td>
+<td>Search contact + dropdown fila + dropdown canal</td>
+</tr>
+<tr>
+<td><strong>Número de ticket sequencial</strong> <code>#1897217</code></td>
+<td>✅ S3</td>
+<td><code>ticket_number BIGSERIAL</code> já existe</td>
+</tr>
+<tr>
+<td>Painel direito — Aba Informações</td>
+<td>🔄 S3</td>
+<td>Dados básicos, faltam campos custom</td>
+</tr>
+<tr>
+<td>Painel direito — Aba Histórico</td>
+<td>❌ S4</td>
+<td>Timeline de eventos (stage_transfer, tag_add, note, etc)</td>
+</tr>
+<tr>
+<td>Painel direito — Aba Negócios</td>
+<td>❌ S4</td>
+<td>Lista de deals vinculados ao contato</td>
+</tr>
+<tr>
+<td>Painel direito — Aba Protocolos</td>
+<td>❌ S4</td>
+<td>Sub-tickets dentro da conversa</td>
+</tr>
+<tr>
+<td>Status dos agentes (online/offline/pausado)</td>
+<td>✅ S3</td>
+<td><code>agent_statuses</code>, falta UI renderizando bolinha colorida</td>
+</tr>
+<tr>
+<td><strong>Transcrição de áudio com IA</strong> (yH5ysNLTAXE)</td>
+<td>❌ S9</td>
+<td>App habilitável; transcreve áudios recebidos inline</td>
+</tr>
+<tr>
+<td><strong>Mensagem fixada</strong> no topo do chat</td>
+<td>❌</td>
+<td>Toggle em mensagem → fixa no topo</td>
+</tr>
+<tr>
+<td>Responder a uma mensagem específica (quote reply)</td>
+<td>❌</td>
+<td>Ação "Responder" em hover de bubble</td>
+</tr>
+<tr>
+<td>Reação com emoji a mensagem</td>
+<td>❌</td>
+<td>Hover + picker de emoji</td>
+</tr>
+<tr>
+<td>Solicitar pagamento via chat (<code>Lus6OhCWhrg</code> 04:21)</td>
+<td>❌ S4</td>
+<td>Botão "Solicitar pagamento" → modal valor → gera boleto Inter → envia PDF</td>
+</tr>
+<tr>
+<td>Grupos WhatsApp (gerenciar via plataforma)</td>
+<td>❌ Fora escopo atual</td>
+<td>HelenaCRM integra grupos</td>
+</tr>
+</tbody>
+</table>
+<h3 id="c-crm-kanban-negocios-videos-y3cfr97j2bo-n8n8laxuzlc-hu38xgdc-l8-ssg53bdi1k0-vaa4tqrsfqi-g0_lganszdy">C. CRM Kanban / Negócios (vídeos <code>y3CFR97J2Bo</code>, <code>N8n8LaxuZLc</code>, <code>hu38xgDc-l8</code>, <code>ssG53BDi1K0</code>, <code>VAa4tqrsFqI</code>, <code>g0_lGAnSzdY</code>)<a class="anchor" href="#c-crm-kanban-negocios-videos-y3cfr97j2bo-n8n8laxuzlc-hu38xgdc-l8-ssg53bdi1k0-vaa4tqrsfqi-g0_lganszdy" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Painéis/Pipelines múltiplos</strong></td>
+<td>❌ S4</td>
+<td>Criar painel com chave auto (ex: "Comercial" → "COME")</td>
+</tr>
+<tr>
+<td>Criação de painel com permissão por cargo</td>
+<td>❌ S4</td>
+<td>"Quem pode administrar" / "Quem pode acessar" / "Quem visualiza cards"</td>
+</tr>
+<tr>
+<td>Opção "Disponível para atendente restrito"</td>
+<td>❌ S4</td>
+<td>Toggle que esconde painel de cargos restritos</td>
+</tr>
+<tr>
+<td><strong>Fases/etapas</strong> customizáveis por painel</td>
+<td>❌ S4</td>
+<td>Adicionar/renomear/excluir + cor de atraso</td>
+</tr>
+<tr>
+<td>Cor de atraso por fase (SLA visual)</td>
+<td>❌ S4</td>
+<td>Card amarelo &gt; X dias, vermelho &gt; Y dias</td>
+</tr>
+<tr>
+<td>Duplicar estrutura de painel</td>
+<td>❌ S4</td>
+<td>Clone pipeline stages+settings</td>
+</tr>
+<tr>
+<td>Fixar painel no topo</td>
+<td>❌ S4</td>
+<td><code>is_pinned BOOL</code> na <code>pipelines</code></td>
+</tr>
+<tr>
+<td><strong>Kanban</strong> — colunas 300px + drag &amp; drop</td>
+<td>❌ S4</td>
+<td>react-beautiful-dnd ou dnd-kit</td>
+</tr>
+<tr>
+<td>Horizontal scroll + height calc</td>
+<td>❌ S4</td>
+<td><code>calc(100vh - topbar - subtabs)</code></td>
+</tr>
+<tr>
+<td><strong>Card do deal</strong></td>
+<td>❌ S4</td>
+<td>Nome contato + telefone + fila + responsável + etapa + valor + tempo na etapa</td>
+</tr>
+<tr>
+<td>Toggle "Visualizar mensagens nos cards"</td>
+<td>❌ S4</td>
+<td>Mode compact vs preview última mensagem</td>
+</tr>
+<tr>
+<td>7 ações rápidas no card (hover ou ⋮)</td>
+<td>❌ S4</td>
+<td>Ver Conversa / Ligar / Trocar agente / Trocar etapa / Adicionar nota / Criar atividade / Arquivar</td>
+</tr>
+<tr>
+<td><strong>Menu ⋮ por coluna</strong> (Editar / Transferir / Baixar CSV / Automações)</td>
+<td>❌ S4</td>
+<td>Dropdown na header da coluna</td>
+</tr>
+<tr>
+<td>Filtros Kanban (Tags / Campanhas / Filas / Período)</td>
+<td>❌ S4</td>
+<td>Pills no topo + chip de filtro ativo</td>
+</tr>
+<tr>
+<td>Checkboxes rápidos (não lidas / com tarefa pendente)</td>
+<td>❌ S4</td>
+<td>Atalhos de filtro</td>
+</tr>
+<tr>
+<td><strong>Lead Detail Modal</strong> (2 colunas — perfil + 4 abas)</td>
+<td>❌ S4</td>
+<td>Modal full-height ao clicar no card</td>
+</tr>
+<tr>
+<td>Aba Negócios (progresso + cadência + seletor de deal)</td>
+<td>❌ S4</td>
+<td>Barra horizontal de etapas + tarefas a fazer por etapa</td>
+</tr>
+<tr>
+<td>Aba Atividades (Criar: tipo+responsável+data+duração+nota rich+anexo)</td>
+<td>❌ S4</td>
+<td>Modal com quill/tiptap editor</td>
+</tr>
+<tr>
+<td>Aba Histórico (log imutável)</td>
+<td>❌ S4</td>
+<td><code>deal_history_events</code> — stage_transfer, note, tag, ticket_transferred, etc</td>
+</tr>
+<tr>
+<td>Aba Notas (textarea + anexo por deal)</td>
+<td>❌ S4</td>
+<td><code>deal_notes</code></td>
+</tr>
+<tr>
+<td><strong>Central de Atividades</strong> (página dedicada)</td>
+<td>❌ S4</td>
+<td>4 contadores (Próximas/Hoje/Atrasadas/Concluídas) + filtros Categoria/Status/Tipo</td>
+</tr>
+<tr>
+<td><strong>Produtos comerciais</strong> (CRUD Nome+Valor)</td>
+<td>❌ S4</td>
+<td>Vinculáveis a deals para estimar ticket</td>
+</tr>
+<tr>
+<td><strong>Protocolos</strong> (sub-ticket dentro de conversa)</td>
+<td>❌ S4</td>
+<td>Número sequencial auto, status, responsável — para FIC isso é "nº do processo" da matrícula</td>
+</tr>
+<tr>
+<td>Campos customizados por contato (inline no modal)</td>
+<td>❌ S4-S6</td>
+<td>Ex: CPF, nome da mãe, curso, turma</td>
+</tr>
+<tr>
+<td><strong>IA Copilot</strong> (prompt → cria pipeline/etapas)</td>
+<td>❌ S10</td>
+<td>Comando natural → agente executa com aprovação (y3CFR97J2Bo 06:20–08:50)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="d-contatos-crm-base-videos-vaa4tqrsfqi-g0_lganszdy-tbl14qcjbcm-pvfppqnxqzs">D. Contatos / CRM base (vídeos <code>VAa4tqrsFqI</code>, <code>g0_lGAnSzdY</code>, <code>TBl14qCjbcM</code>, <code>PvfppQNxQZs</code>)<a class="anchor" href="#d-contatos-crm-base-videos-vaa4tqrsfqi-g0_lganszdy-tbl14qcjbcm-pvfppqnxqzs" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tabela com busca + filtro tags</td>
+<td>✅ S1</td>
+<td>UI básica</td>
+</tr>
+<tr>
+<td><strong>Cadastro manual de contato</strong></td>
+<td>❌ S4</td>
+<td>Form (nome/tel/email/tags/custom_fields)</td>
+</tr>
+<tr>
+<td><strong>Editar contato</strong> inline</td>
+<td>❌ S4</td>
+<td>Click-to-edit em cada célula</td>
+</tr>
+<tr>
+<td><strong>Cor hex por tag</strong></td>
+<td>❌ S6</td>
+<td>Color picker ao criar tag</td>
+</tr>
+<tr>
+<td><strong>Import CSV</strong> (drag-and-drop)</td>
+<td>❌ S6</td>
+<td>Upload → preview → mapping → validação → insert batch</td>
+</tr>
+<tr>
+<td><strong>Detecção de duplicatas</strong> (phone normalizado E.164)</td>
+<td>❌ S6</td>
+<td>Flag <code>has_duplicates</code></td>
+</tr>
+<tr>
+<td>Merge modal (escolher campos canônicos)</td>
+<td>❌ S6</td>
+<td>Lado a lado + radio button por campo</td>
+</tr>
+<tr>
+<td><strong>Export CSV</strong> (filtrado por tag/período)</td>
+<td>❌ S6</td>
+<td>Download stream</td>
+</tr>
+<tr>
+<td><strong>Ações em massa</strong> (bulk select + bulk delete/tag/fila)</td>
+<td>❌ S6</td>
+<td>Checkbox por linha + actions bar</td>
+</tr>
+<tr>
+<td><strong>Campos customizados da empresa</strong> (globais)</td>
+<td>❌ S6</td>
+<td>Admin define "Nome do Campo + Tipo + Obrigatório" — aparece em todo contato</td>
+</tr>
+<tr>
+<td>Campos customizados do contato (valor)</td>
+<td>❌ S4</td>
+<td>Cada contato preenche</td>
+</tr>
+<tr>
+<td><strong>Origem do lead</strong> (tráfego / orgânico / indicação / etc)</td>
+<td>❌ S6</td>
+<td>Campo <code>source</code> + relatório de origem (B8E5ab6SATs)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="e-agendamentos-videos-ooq8avnwx7g-bm9r57coqmm-jhonoag6feo">E. Agendamentos (vídeos <code>oOq8AVnwx7g</code>, <code>Bm9r57cOqMM</code>, <code>JHONOag6fEo</code>)<a class="anchor" href="#e-agendamentos-videos-ooq8avnwx7g-bm9r57coqmm-jhonoag6feo" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Calendário Mês/Semana/Dia/Lista</strong></td>
+<td>❌ S5</td>
+<td>FullCalendar.js ou custom</td>
+</tr>
+<tr>
+<td>Filtros (responsável / tipo / status)</td>
+<td>❌ S5</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Mensagem agendada</strong> (tipo + canal + horário + variáveis)</td>
+<td>❌ S5</td>
+<td>WABA/IG/API · <code>{{primeiroNome}}</code> etc</td>
+</tr>
+<tr>
+<td>Worker de disparo (cron Railway ou Vercel Queue)</td>
+<td>❌ S5</td>
+<td>Lê <code>scheduled_messages WHERE scheduled_at &lt;= now() AND status='pending'</code></td>
+</tr>
+<tr>
+<td>Modo recorrente (diário/semanal/mensal)</td>
+<td>❌ S5</td>
+<td><code>scheduled_messages.recurrence JSONB</code></td>
+</tr>
+<tr>
+<td>Tipos: Texto / Imagem / Áudio / <strong>DS Voice</strong></td>
+<td>❌ S5/S9</td>
+<td>Integração com biblioteca</td>
+</tr>
+<tr>
+<td><strong>Evento Google Calendar</strong> (OAuth bidirecional)</td>
+<td>❌ S5+</td>
+<td>Criar evento → sincroniza calendar FIC</td>
+</tr>
+<tr>
+<td><strong>Google Meet automático</strong></td>
+<td>❌ S5+</td>
+<td>Link no evento</td>
+</tr>
+<tr>
+<td>Lembrete automático (1h antes / 1d antes)</td>
+<td>❌ S5</td>
+<td><code>reminders JSONB</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="f-templates-waba-videos-olr6prkexso-1lrbxanv31i">F. Templates WABA (vídeos <code>Olr6prKExSo</code>, <code>1lrBXAnV31I</code>)<a class="anchor" href="#f-templates-waba-videos-olr6prkexso-1lrbxanv31i" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Grid de templates</strong> (cards preview estilo WhatsApp)</td>
+<td>❌ S5</td>
+<td>Lado esquerdo card de preview, direito metadata</td>
+</tr>
+<tr>
+<td>3 categorias (Utilitário / Marketing / Autenticação)</td>
+<td>❌ S5</td>
+<td>Enum + filtro</td>
+</tr>
+<tr>
+<td>Criar template (form + preview ao vivo)</td>
+<td>❌ S5</td>
+<td>Variáveis <code>{{1}}</code>, <code>{{2}}</code> ...</td>
+</tr>
+<tr>
+<td>Botões <strong>Quick Reply</strong> OU CTA (mutuamente exclusivos)</td>
+<td>❌ S5</td>
+<td>Regra de negócio Meta</td>
+</tr>
+<tr>
+<td><strong>Status de aprovação</strong> (Rascunho → Pendente → Aprovado / Rejeitado)</td>
+<td>❌ S5</td>
+<td>Sincroniza com Meta a cada N minutos</td>
+</tr>
+<tr>
+<td><strong>Sync com Meta API</strong> (GET templates → upsert em <code>whatsapp_templates</code>)</td>
+<td>❌ S5</td>
+<td>Cron diário + botão manual</td>
+</tr>
+<tr>
+<td>Envio de template no chat (quando janela fechada)</td>
+<td>❌ S5</td>
+<td>Modal select template + preenche variáveis</td>
+</tr>
+</tbody>
+</table>
+<h3 id="g-automacoes-ifthen-videos-shtf1dwatuc-etiquetar-via-chatbot-diversos-mencoes">G. Automações IF/THEN (vídeos <code>SHTF1dwAtuc</code> — etiquetar via chatbot, diversos menções)<a class="anchor" href="#g-automacoes-ifthen-videos-shtf1dwatuc-etiquetar-via-chatbot-diversos-mencoes" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema <code>automation_rules</code></td>
+<td>✅ S1</td>
+<td>2 seeds (Financeiro, Matrícula keyword)</td>
+</tr>
+<tr>
+<td>Execução no webhook processor</td>
+<td>🔄</td>
+<td>Parcial, só keyword matching simples</td>
+</tr>
+<tr>
+<td><strong>UI builder visual</strong> (gatilho + condições + ações)</td>
+<td>❌ S8</td>
+<td>Form multi-step ou canvas simples</td>
+</tr>
+<tr>
+<td><strong>Gatilhos suportados</strong></td>
+<td>❌ S8</td>
+<td><code>message_received</code>, <code>conversation_created</code>, <code>status_changed</code>, <code>tag_added</code>, <code>deal_stage_changed</code>, <code>time_elapsed</code></td>
+</tr>
+<tr>
+<td><strong>Condições encadeáveis</strong> (AND/OR)</td>
+<td>❌ S8</td>
+<td>Chain builder</td>
+</tr>
+<tr>
+<td><strong>Ações disponíveis</strong></td>
+<td>❌ S8</td>
+<td>Atribuir agente, trocar fila, adicionar/remover tag, criar deal, mover etapa kanban, enviar mensagem, disparar n8n, chamar webhook externo, criar atividade</td>
+</tr>
+<tr>
+<td>Regras específicas por coluna do Kanban</td>
+<td>❌ S8</td>
+<td>"Ao entrar na etapa X, executar Y"</td>
+</tr>
+<tr>
+<td><strong>Auto-assign</strong> (menor carga de agente online)</td>
+<td>❌ S8</td>
+<td>Round-robin ponderado</td>
+</tr>
+<tr>
+<td>Mensagem de boas-vindas (auto-reply primeira mensagem)</td>
+<td>❌ S8</td>
+<td>Já parcial em <code>queues.greeting_message</code></td>
+</tr>
+<tr>
+<td>Log de execuções (<code>automation_executions</code>)</td>
+<td>❌ S8</td>
+<td>Para debug</td>
+</tr>
+</tbody>
+</table>
+<h3 id="h-webhooks-e-api-rest-publica-videos-w1gvw7_qzm-mencoes-em-lus6ohcwhrg">H. Webhooks e API REST pública (vídeos <code>-W1Gvw7_QzM</code>, menções em <code>Lus6OhCWhrg</code>)<a class="anchor" href="#h-webhooks-e-api-rest-publica-videos-w1gvw7_qzm-mencoes-em-lus6ohcwhrg" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Webhook de entrada</strong> (endpoint + tags automáticas)</td>
+<td>❌ S8</td>
+<td>URL única por endpoint + regras (ex: "campo X contém Y → tag Z")</td>
+</tr>
+<tr>
+<td><strong>Webhook de saída</strong> (URL + eventos + tentativas)</td>
+<td>❌ S8</td>
+<td>Eventos Comercial (deal.created, deal.stage_changed) + Canal (conversation.assigned, message.received)</td>
+</tr>
+<tr>
+<td><strong>API REST pública</strong></td>
+<td>❌ S8</td>
+<td>Autenticação via <code>api-key</code> header + <code>Connection-Token</code> por canal</td>
+</tr>
+<tr>
+<td>Endpoint Mensagens (envio ativo via API)</td>
+<td>❌ S8</td>
+<td>POST <code>/api/public/v1/messages</code></td>
+</tr>
+<tr>
+<td>Endpoints Dashboard (10 métricas)</td>
+<td>❌ S8</td>
+<td>GET <code>/api/public/v1/dashboard/*</code></td>
+</tr>
+<tr>
+<td>Endpoints CRM (Contatos / Tickets / Negócios)</td>
+<td>❌ S8</td>
+<td>CRUD</td>
+</tr>
+<tr>
+<td>Rate limiting e rotação de chaves</td>
+<td>❌ S8</td>
+<td>Redis/Upstash + <code>api_keys.last_rotated_at</code></td>
+</tr>
+<tr>
+<td><strong>Integração n8n plugada na fila</strong> (ID 2967 já ativo)</td>
+<td>❌ S8</td>
+<td>Campo <code>queues.n8n_integration_id</code> já existe</td>
+</tr>
+</tbody>
+</table>
+<h3 id="i-links-de-redirecionamento-mencao-em-plano-v2">I. Links de Redirecionamento (menção em plano v2)<a class="anchor" href="#i-links-de-redirecionamento-mencao-em-plano-v2" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Slug único rastreável (<code>/l/xyz</code>)</td>
+<td>❌ S8</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>4 tipos de distribuição</strong></td>
+<td>❌ S8</td>
+<td>Sequencial / Aleatório / Ordenado / Por Horário</td>
+</tr>
+<tr>
+<td>Distribuição multi-canal</td>
+<td>❌ S8</td>
+<td>Pode apontar pra WhatsApp, IG, Messenger</td>
+</tr>
+<tr>
+<td><code>schedule_config JSONB</code> (horário por agente)</td>
+<td>❌ S8</td>
+<td></td>
+</tr>
+<tr>
+<td>Relatório de cliques</td>
+<td>❌ S8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="j-ds-voice-biblioteca-de-conteudo-videos-implicitos-em-cdodwqe_-ke-sequencia-olr6prkexso-modelo-mensagem">J. DS Voice — biblioteca de conteúdo (vídeos implícitos em <code>CDOdwqe_-KE</code> Sequência + <code>Olr6prKExSo</code> Modelo Mensagem)<a class="anchor" href="#j-ds-voice-biblioteca-de-conteudo-videos-implicitos-em-cdodwqe_-ke-sequencia-olr6prkexso-modelo-mensagem" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Biblioteca de Mensagens de texto</strong></td>
+<td>❌ S9</td>
+<td>CRUD + pastas + variáveis</td>
+</tr>
+<tr>
+<td>Variáveis <code>{Nome}</code> <code>{Primeiro Nome}</code> <code>{Saudação}</code> etc</td>
+<td>❌ S9</td>
+<td>Parse ao enviar</td>
+</tr>
+<tr>
+<td>Toggles (ativo / padrão / apenas agentes X)</td>
+<td>❌ S9</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Biblioteca de Áudios</strong> ≤16MB</td>
+<td>❌ S9</td>
+<td>Upload .mp3/.ogg + toggle "enviar como gravação" (push-to-talk)</td>
+</tr>
+<tr>
+<td><strong>Biblioteca de Mídias</strong> (imagens ≤5MB / vídeos ≤100MB)</td>
+<td>❌ S9</td>
+<td>Com caption</td>
+</tr>
+<tr>
+<td><strong>Biblioteca de Documentos</strong> ≤100MB</td>
+<td>❌ S9</td>
+<td>Aviso incompatibilidade Instagram</td>
+</tr>
+<tr>
+<td><strong>Construtor de Funis / Sequências</strong></td>
+<td>❌ S9</td>
+<td>Steps ordenados com delay (drip)</td>
+</tr>
+<tr>
+<td>Duração total calculada</td>
+<td>❌ S9</td>
+<td>Soma delays</td>
+</tr>
+<tr>
+<td><strong>Gatilhos de funil</strong> (palavra-chave → dispara)</td>
+<td>❌ S9</td>
+<td>Form condição + funil destino + toggles WABA/IG</td>
+</tr>
+<tr>
+<td>Export/Import .json (backup)</td>
+<td>❌ S9</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Ícone DS Voice na toolbar do chat</strong></td>
+<td>❌ S9</td>
+<td>Modal seleciona item da biblioteca</td>
+</tr>
+</tbody>
+</table>
+<h3 id="k-ds-agente-ia-autonoma-videos-y3cfr97j2bo">K. DS Agente (IA autônoma) (vídeos <code>y3CFR97J2Bo</code>)<a class="anchor" href="#k-ds-agente-ia-autonoma-videos-y3cfr97j2bo" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Integração OpenAI</strong> (GPT-4o ou similar)</td>
+<td>❌ S10</td>
+<td>Via <code>@ecossistema/credentials</code> + <code>@ecossistema/agentes</code></td>
+</tr>
+<tr>
+<td>System prompt por agente</td>
+<td>❌ S10</td>
+<td>Editor textarea + placeholder</td>
+</tr>
+<tr>
+<td><strong>RAG</strong> (base de conhecimento FIC)</td>
+<td>❌ S10</td>
+<td><code>@ecossistema/rag</code> — FAQ matrícula, regulamento, grade</td>
+</tr>
+<tr>
+<td>Parâmetros (temperature, max_tokens=100, max_history=10, delay)</td>
+<td>❌ S10</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Regras de ativação</strong> (tag E/OU tag → ativa agente)</td>
+<td>❌ S10</td>
+<td>Lógica condicional</td>
+</tr>
+<tr>
+<td>Toggle "Dividir resposta em blocos"</td>
+<td>❌ S10</td>
+<td>Quebra em múltiplas mensagens naturais</td>
+</tr>
+<tr>
+<td>Toggle "Processar imagens" (GPT-4o vision)</td>
+<td>❌ S10</td>
+<td>Lê comprovante, documento</td>
+</tr>
+<tr>
+<td>Toggle "Desabilitar quando agente humano respondeu"</td>
+<td>❌ S10</td>
+<td>Hand-off inteligente</td>
+</tr>
+<tr>
+<td><strong>Base de conhecimento</strong> (upload PDFs/DOCs)</td>
+<td>❌ S10</td>
+<td>Ingestion → embeddings Supabase pgvector</td>
+</tr>
+<tr>
+<td>Widget Home "N agentes ativos · M erros"</td>
+<td>❌ S10</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>BANT qualification flow</strong> (y3CFR97J2Bo)</td>
+<td>❌ S10</td>
+<td>Budget / Authority / Need / Timeline — aplicado a matrícula</td>
+</tr>
+<tr>
+<td>Follow-up generativo (cadência no-show automática)</td>
+<td>❌ S10</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="l-ds-bot-visual-flow-builder-videos-ypfcjgimw2i-construtor-avancado-rfn_fw6wyow-acoes-fluxo-xf6tfnm4va4-acoes-contato-6rfcmrod4e0-acoes-mensagem-amdg3hbrui0-acoes-atendimento">L. DS Bot — Visual Flow Builder (vídeos <code>YpFcjGiMw2I</code> Construtor Avançado + <code>RFn_fw6wYOw</code> Ações Fluxo + <code>Xf6tFnM4va4</code> Ações Contato + <code>6RFcmRoD4E0</code> Ações Mensagem + <code>AMDg3hbrui0</code> Ações Atendimento)<a class="anchor" href="#l-ds-bot-visual-flow-builder-videos-ypfcjgimw2i-construtor-avancado-rfn_fw6wyow-acoes-fluxo-xf6tfnm4va4-acoes-contato-6rfcmrod4e0-acoes-mensagem-amdg3hbrui0-acoes-atendimento" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Canvas de fluxo</strong> (nodes + edges)</td>
+<td>❌ S10</td>
+<td>React Flow ou similar</td>
+</tr>
+<tr>
+<td><strong>Componentes Bubbles</strong> (output)</td>
+<td>❌ S10</td>
+<td>Texto / Imagem / Vídeo / Áudio / Incorporar (iframe)</td>
+</tr>
+<tr>
+<td><strong>Componentes Inputs</strong> (coleta)</td>
+<td>❌ S10</td>
+<td>Texto / Número / Email / Website / Data / Telefone / Botão / Arquivo</td>
+</tr>
+<tr>
+<td><strong>Ações de Fluxo</strong></td>
+<td>❌ S10</td>
+<td>Ir para nó / Voltar / Encerrar / Aguardar resposta</td>
+</tr>
+<tr>
+<td><strong>Ações de Contato</strong></td>
+<td>❌ S10</td>
+<td>Adicionar/remover tag / Atualizar campo custom / Mover etapa pipeline</td>
+</tr>
+<tr>
+<td><strong>Ações de Mensagem</strong></td>
+<td>❌ S10</td>
+<td>Enviar template WABA / Enviar item biblioteca DS Voice / Encaminhar</td>
+</tr>
+<tr>
+<td><strong>Ações de Atendimento</strong></td>
+<td>❌ S10</td>
+<td>Transferir fila / Atribuir agente / Abrir protocolo / Fechar conversa</td>
+</tr>
+<tr>
+<td><strong>3 formas de criar</strong></td>
+<td>❌ S10</td>
+<td>Do zero / Modelo / Importar JSON</td>
+</tr>
+<tr>
+<td>Versioning (draft → publish)</td>
+<td>❌ S10</td>
+<td></td>
+</tr>
+<tr>
+<td>Testar fluxo em sandbox</td>
+<td>❌ S10</td>
+<td>Chat fake</td>
+</tr>
+<tr>
+<td><strong>Vincular bot a fila/canal</strong></td>
+<td>❌ S10</td>
+<td>Campo <code>queues.ds_bot_id</code> ou <code>queues.ds_agent_id</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="m-chat-interno-team-chat-mencao-em-plano-v2-x115lzvalia">M. Chat Interno (team chat) (menção em plano v2 + <code>X115LzVAliA</code>)<a class="anchor" href="#m-chat-interno-team-chat-mencao-em-plano-v2-x115lzvalia" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>2 painéis (lista conversas + chat)</td>
+<td>❌ S8</td>
+<td>Supabase Realtime</td>
+</tr>
+<tr>
+<td>Grupos e DMs</td>
+<td>❌ S8</td>
+<td><code>team_chats</code> + <code>team_chat_members</code></td>
+</tr>
+<tr>
+<td>Mensagens em tempo real</td>
+<td>❌ S8</td>
+<td></td>
+</tr>
+<tr>
+<td>Anexos</td>
+<td>❌ S8</td>
+<td></td>
+</tr>
+<tr>
+<td>Menções @agente</td>
+<td>❌ S8</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="n-relatorios-dashboards-videos-dnakezwr_ly-0_0i72w2s68-t2bf8-5uui8-olmqtujz724-ituvyvn347i-b8e5ab6sats">N. Relatórios / Dashboards (vídeos <code>dNaKezWr_LY</code>, <code>0_0i72W2s68</code>, <code>t2bF8-5uui8</code>, <code>olMQTujz724</code>, <code>iTuVYvn347I</code>, <code>B8E5ab6SATs</code>)<a class="anchor" href="#n-relatorios-dashboards-videos-dnakezwr_ly-0_0i72w2s68-t2bf8-5uui8-olmqtujz724-ituvyvn347i-b8e5ab6sats" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>6 tipos de relatório</strong></td>
+<td>❌ S7</td>
+<td>Vendas / Atividades / Conversas / Ligações / SDR / Closer</td>
+</tr>
+<tr>
+<td><strong>3 abas Indicadores</strong></td>
+<td>❌ S7</td>
+<td>Resultados / Usuários / Geral</td>
+</tr>
+<tr>
+<td>Aba Resultados — taxa fechamento, ticket médio, total vendas</td>
+<td>❌ S7</td>
+<td></td>
+</tr>
+<tr>
+<td>Aba Usuários — ranking agentes por métrica</td>
+<td>❌ S7</td>
+<td></td>
+</tr>
+<tr>
+<td>Aba Geral — visão consolidada</td>
+<td>❌ S7</td>
+<td></td>
+</tr>
+<tr>
+<td>Filtros (Data range / Usuário / Tipo)</td>
+<td>❌ S7</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Gráficos customizáveis</strong> (modal "Adicionar Gráfico")</td>
+<td>❌ S7</td>
+<td>ApexCharts (barras/linhas/pie)</td>
+</tr>
+<tr>
+<td><strong>Exportação origem leads</strong> (B8E5ab6SATs)</td>
+<td>❌ S7</td>
+<td>CSV agrupado por <code>source</code></td>
+</tr>
+<tr>
+<td>Job diário (cron) → <code>metrics_snapshots</code></td>
+<td>❌ S7</td>
+<td>Agregação noturna</td>
+</tr>
+<tr>
+<td><strong>NPS e tempo médio de resposta</strong></td>
+<td>❌ S7</td>
+<td>Específicos atendimento</td>
+</tr>
+<tr>
+<td>Widgets externos incorporados (iframe com <code>{{user.email}}</code>)</td>
+<td>❌ S7</td>
+<td>Para plugar Metabase, Power BI, Looker Studio</td>
+</tr>
+</tbody>
+</table>
+<h3 id="o-usuarios-cargos-permissoes-videos-lctsvm1mzo-lsdxrms7agk-_keel_5wg5k-xwd-0gj6r6e-xdikjzkmy7q">O. Usuários / Cargos / Permissões (vídeos <code>-LctSvm1Mzo</code>, <code>LsdXRmS7Agk</code>, <code>_KeeL_5wG5k</code>, <code>XWd-0Gj6R6E</code>, <code>XdikJZkmY7Q</code>)<a class="anchor" href="#o-usuarios-cargos-permissoes-videos-lctsvm1mzo-lsdxrms7agk-_keel_5wg5k-xwd-0gj6r6e-xdikjzkmy7q" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Schema <code>agents</code></td>
+<td>✅ S1</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>3 níveis visto em Lus6OhCWhrg</strong>: Administrador / Atendimento / Atendimento restrito</td>
+<td>❌ S6</td>
+<td>Presets de cargo</td>
+</tr>
+<tr>
+<td><strong>Cargos customizáveis</strong> (agent_roles + role_permissions)</td>
+<td>❌ S6</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>13 módulos de permissão</strong> (granular)</td>
+<td>❌ S6</td>
+<td>Dashboard, Conversas, Contatos, CRM/Pipelines, Agendamentos, Templates, Automações, Webhooks, Canais, Usuários, Cargos, DS Voice, DS Agente/Bot, Relatórios, Configurações</td>
+</tr>
+<tr>
+<td>Cada módulo: Ver / Criar / Editar / Deletar / Exportar</td>
+<td>❌ S6</td>
+<td>Matrix permissions</td>
+</tr>
+<tr>
+<td><strong>Convite de usuário por email</strong></td>
+<td>❌ S6</td>
+<td>Link mágico Supabase Auth</td>
+</tr>
+<tr>
+<td><strong>Equipes/Grupos</strong> (vídeos <code>HYKeZWyBCwY</code>, <code>wgsaW6I9KIM</code>)</td>
+<td>❌ S6</td>
+<td>Agrupar agentes por departamento</td>
+</tr>
+<tr>
+<td>Agente pausado (pause_reason enum)</td>
+<td>✅ S3</td>
+<td>UI a renderizar</td>
+</tr>
+</tbody>
+</table>
+<h3 id="p-canais-videos-ogs_byugdwc-z-api-qlgurigjc44-instagram">P. Canais (vídeos <code>oGs_ByuGDWc</code> Z-API, <code>QlGUrIGjc44</code> Instagram)<a class="anchor" href="#p-canais-videos-ogs_byugdwc-z-api-qlgurigjc44-instagram" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Lista de canais cadastrados</td>
+<td>✅ S1</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Card de canal</strong> (logo provider + status + número + ações)</td>
+<td>🔄</td>
+<td></td>
+</tr>
+<tr>
+<td>Cadastrar WABA Meta Cloud</td>
+<td>🔄 S2</td>
+<td>Manual via SQL hoje — UI em S6</td>
+</tr>
+<tr>
+<td><strong>Conectar Instagram</strong> (OAuth Meta)</td>
+<td>❌ S6</td>
+<td>Graph API + Page ID</td>
+</tr>
+<tr>
+<td>Conectar Email (IMAP/SMTP)</td>
+<td>❌ S8+</td>
+<td></td>
+</tr>
+<tr>
+<td>Conectar SMS (provedor brasileiro ou Twilio)</td>
+<td>❌ S8+</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Webhook de sincronização</strong> por canal</td>
+<td>✅</td>
+<td>Meta configurado</td>
+</tr>
+<tr>
+<td>Horário de atendimento por canal (<code>working_hours JSONB</code>)</td>
+<td>🔄 Schema</td>
+<td>UI em S6</td>
+</tr>
+<tr>
+<td><strong>Mensagem de boas-vindas / ausência</strong> por canal</td>
+<td>🔄 Schema</td>
+<td>UI em S6</td>
+</tr>
+<tr>
+<td>Teste de envio (botão "Enviar mensagem teste")</td>
+<td>❌ S5</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="q-campanhas-videos-vcsslnj7vze-90-timestamps-mais-longo">Q. Campanhas (vídeos <code>VCsSLNj7vzE</code> — 90 timestamps, mais longo)<a class="anchor" href="#q-campanhas-videos-vcsslnj7vze-90-timestamps-mais-longo" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>CRUD de campanhas</strong></td>
+<td>❌ S4</td>
+<td>Nome + descrição + público-alvo + canal + template</td>
+</tr>
+<tr>
+<td>Público-alvo (filtro de contatos: tags/pipeline/período)</td>
+<td>❌ S4</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Disparo em massa</strong> (respeita rate limit WABA)</td>
+<td>❌ S5</td>
+<td>Worker Railway com queue</td>
+</tr>
+<tr>
+<td>Relatório por campanha (enviados/entregues/lidos/respondidos/opt-out)</td>
+<td>❌ S7</td>
+<td></td>
+</tr>
+<tr>
+<td>Vincular campanha a deal/contato</td>
+<td>❌ S4</td>
+<td>Campo <code>deals.campaign_id</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="r-integracoes-apps-videos-ogs_byugdwc-custos-z-api">R. Integrações / Apps (vídeos <code>oGs_ByuGDWc</code> Custos Z-API)<a class="anchor" href="#r-integracoes-apps-videos-ogs_byugdwc-custos-z-api" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Página "Apps"</strong> (grid de integrações habilitáveis)</td>
+<td>❌ S8</td>
+<td>Cada app: habilitar/desabilitar + config</td>
+</tr>
+<tr>
+<td>Config por app (JSON customizável)</td>
+<td>❌ S8</td>
+<td><code>app_installations</code></td>
+</tr>
+<tr>
+<td>App: Transcrição de áudio com IA</td>
+<td>❌ S9</td>
+<td></td>
+</tr>
+<tr>
+<td>App: Google Calendar</td>
+<td>❌ S5</td>
+<td></td>
+</tr>
+<tr>
+<td>App: Meta ADS Tracking (DS Track)</td>
+<td>⏭️ Fora escopo</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="s-configuracoes-gerais-video-s1liattratw-perfil-parceiro-bvpz84etheu-customizacao">S. Configurações gerais (vídeo <code>S1liAttRAtw</code> Perfil Parceiro, <code>bvpz84EThEU</code> Customização)<a class="anchor" href="#s-configuracoes-gerais-video-s1liattratw-perfil-parceiro-bvpz84etheu-customizacao" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Perfil do usuário (avatar, nome, senha)</td>
+<td>🔄</td>
+<td>Usa Supabase Auth</td>
+</tr>
+<tr>
+<td><strong>Configurações da conta</strong> (<code>account_settings</code>)</td>
+<td>❌ S6</td>
+<td>Moeda, Fuso, Horário comercial, Feriados</td>
+</tr>
+<tr>
+<td>Saudação automática (ao aceitar / transferir)</td>
+<td>❌ S8</td>
+<td></td>
+</tr>
+<tr>
+<td>Sincronizar responsável conversa ↔ negócio</td>
+<td>❌ S4</td>
+<td>Toggle</td>
+</tr>
+<tr>
+<td>Restringir visualização de histórico</td>
+<td>❌ S6</td>
+<td>Toggle por cargo</td>
+</tr>
+<tr>
+<td>Logotipo e identidade (para futuro multi-tenant)</td>
+<td>❌ Fase 2</td>
+<td>Prep white-label</td>
+</tr>
+</tbody>
+</table>
+<h3 id="t-painel-parceiro-whitelabel-11-videos-parceiros">T. Painel Parceiro / Whitelabel (11 vídeos "[Parceiros]")<a class="anchor" href="#t-painel-parceiro-whitelabel-11-videos-parceiros" title="Permanent link">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Status FIC</th>
+<th>Detalhe</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Gestão de usuários admin</strong> (XdikJZkmY7Q)</td>
+<td>❌ Fase 4</td>
+<td>Se virar SaaS</td>
+</tr>
+<tr>
+<td><strong>Relatórios de faturamento</strong> (db54n8_3_Sg)</td>
+<td>❌ Fase 4</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Canal de demonstração</strong> (-X2jMXU_zos)</td>
+<td>❌ Fase 4</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Ações e menus personalizados</strong> (jbgM0hgvTPc)</td>
+<td>❌ Fase 4</td>
+<td>White-label do menu</td>
+</tr>
+<tr>
+<td><strong>Configuração conta demo</strong> (0I1UH-wIA2s)</td>
+<td>❌ Fase 4</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Criação de conta (onboarding)</strong> (t1aj8gLs9cI)</td>
+<td>❌ Fase 4</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Início da cobrança</strong> (G0XsZWjQV8c)</td>
+<td>❌ Fase 4</td>
+<td></td>
+</tr>
+<tr>
+<td><strong>Customização White Label</strong> (bvpz84EThEU) — logos, cores, textos de login</td>
+<td>❌ Fase 4</td>
+<td>Submenus: Detalhes / Apps / Imagens / Documentação / Integração</td>
+</tr>
+<tr>
+<td><strong>Planos e funcionalidades</strong> (qrRvyH0k6l8)</td>
+<td>❌ Fase 4</td>
+<td>Feature gating por plano</td>
+</tr>
+<tr>
+<td><strong>Criação de página no Facebook</strong> (-W1Gvw7_QzM)</td>
+<td>❌ Fase 4</td>
+<td>Guia para novos parceiros</td>
+</tr>
+<tr>
+<td><strong>Panorama do perfil</strong> (S1liAttRAtw)</td>
+<td>❌ Fase 4</td>
+<td>Dashboard do parceiro</td>
+</tr>
+<tr>
+<td><strong>Tokens de parceiro</strong></td>
+<td>❌ Fase 4</td>
+<td>API para automações de conta</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h1 id="parte-3-arquitetura-alvo">Parte 3 — Arquitetura alvo<a class="anchor" href="#parte-3-arquitetura-alvo" title="Permanent link">#</a></h1>
+<h2 id="31-visao-sistemica-como-o-atendimento-conversa-com-o-resto-do-erp">3.1 Visão sistêmica (como o atendimento conversa com o resto do ERP)<a class="anchor" href="#31-visao-sistemica-como-o-atendimento-conversa-com-o-resto-do-erp" title="Permanent link">#</a></h2>
+<pre class="highlight"><code>┌─────────────────────────────────────────────────────────────────┐
+│  WhatsApp (Meta) · Instagram · Email · SMS · API · Widget web  │
+└────────────────────────────┬────────────────────────────────────┘
+                             │ (webhooks entrada)
+        ┌────────────────────▼────────────────────┐
+        │  /api/atendimento/webhook               │
+        │  + Automation engine (pre-processing)   │
+        │  + Contact upsert + Label auto-apply    │
+        └────────────────────┬────────────────────┘
+                             │
+    ┌────────────────────────┼────────────────────────┐
+    ▼                        ▼                        ▼
+┌─────────┐          ┌──────────────┐        ┌──────────────┐
+│ Filas   │──(dist)──│  Conversations│←──────│  Deals       │
+│ (queue) │          │  + Messages   │       │  (pipeline)  │
+└────┬────┘          └──────┬────────┘       └──────┬───────┘
+     │                      │                       │
+     │                      ▼                       │
+     │              ┌──────────────┐                 │
+     │              │  DS Agente   │←─RAG FIC────────┼──┐
+     │              │  DS Bot      │                 │  │
+     │              └──────────────┘                 │  │
+     │                                               │  │
+     └──► Inbox UI ◄── Painel Atendente ──► Kanban ──┘  │
+                                                        │
+    ┌───────────────────────────────────────────────────┘
+    │ (saídas para ecossistema)
+    ▼
+┌─────────────┐   ┌─────────────┐   ┌──────────────┐   ┌─────────┐
+│ Alunos /    │   │ Financeiro  │   │ Diploma      │   │ n8n     │
+│ Matrícula   │   │ (Inter)     │   │ Digital      │   │ ID 2967 │
+└─────────────┘   └─────────────┘   └──────────────┘   └─────────┘</code></pre>
+<p><strong>Pontos de integração com o ERP:</strong>
+1. <code>contacts.aluno_id FK → alunos</code> — o contato vira aluno quando matricula
+2. Deal <code>source='WhatsApp Matrícula'</code> → ao chegar na etapa "Aprovado" → <strong>trigger automático</strong> cria registro em <code>alunos</code> + abre processo <code>diploma_pipeline</code>
+3. "Solicitar pagamento" no chat → chama <code>@ecossistema/billing</code> → gera boleto Inter → envia PDF no WhatsApp
+4. Protocolo de conversa = número de processo acadêmico (mantém rastreabilidade)
+5. DS Agente responde dúvidas de aluno com <strong>contexto do RAG da FIC</strong> (regulamento, grade, calendário) + estado no ERP (aluno X tem mensalidade atrasada? está em qual semestre?)</p>
+<h2 id="32-stack-tecnica">3.2 Stack técnica<a class="anchor" href="#32-stack-tecnica" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Camada</th>
+<th>Tecnologia</th>
+<th>Versão</th>
+<th>Decisão</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Frontend</td>
+<td>Next.js App Router</td>
+<td>15+ (Node 24 LTS)</td>
+<td>✅ canonical V4</td>
+</tr>
+<tr>
+<td>UI components</td>
+<td>shadcn/ui + Radix + Tailwind v4</td>
+<td>última</td>
+<td>Substitui MUI v4 do Nexvy (mais moderno, bundle menor)</td>
+</tr>
+<tr>
+<td>Drag &amp; drop</td>
+<td><code>@dnd-kit</code></td>
+<td>v6</td>
+<td>Kanban S4</td>
+</tr>
+<tr>
+<td>Canvas (DS Bot)</td>
+<td><code>@xyflow/react</code> (React Flow)</td>
+<td>v12</td>
+<td>S10</td>
+</tr>
+<tr>
+<td>Rich editor</td>
+<td>TipTap</td>
+<td>v2</td>
+<td>Notas/atividades</td>
+</tr>
+<tr>
+<td>Charts</td>
+<td>Recharts ou Tremor</td>
+<td>última</td>
+<td>Relatórios S7</td>
+</tr>
+<tr>
+<td>State</td>
+<td>Server Actions + TanStack Query</td>
+<td>v5</td>
+<td></td>
+</tr>
+<tr>
+<td>Realtime</td>
+<td>Supabase Realtime</td>
+<td></td>
+<td>Chat + kanban live</td>
+</tr>
+<tr>
+<td>Backend API</td>
+<td>Next.js Route Handlers (Fluid Compute)</td>
+<td></td>
+<td>Deploy Vercel — Fluid habilitado</td>
+</tr>
+<tr>
+<td>Worker/cron</td>
+<td>Vercel Queues (public beta) OU Railway worker</td>
+<td></td>
+<td>Para disparo agendado S5 + sync Meta S5 + metrics S7</td>
+</tr>
+<tr>
+<td>Database</td>
+<td>Supabase Postgres (ECOSYSTEM + ERP)</td>
+<td></td>
+<td>Multi-project connection via <code>@ecossistema/credentials</code></td>
+</tr>
+<tr>
+<td>Filas internas</td>
+<td>pg_cron + <code>dual_write_queue</code> pattern</td>
+<td></td>
+<td>Sem Redis por enquanto</td>
+</tr>
+<tr>
+<td>IA</td>
+<td>OpenAI GPT-4o + Anthropic Claude (DS Agente)</td>
+<td></td>
+<td>Via <code>@ecossistema/agentes</code></td>
+</tr>
+<tr>
+<td>Embeddings</td>
+<td>Supabase pgvector + OpenAI <code>text-embedding-3-small</code></td>
+<td></td>
+<td>RAG S10</td>
+</tr>
+<tr>
+<td>File storage</td>
+<td>Vercel Blob (público) + Supabase Storage (privado)</td>
+<td></td>
+<td>Uploads, mídia DS Voice</td>
+</tr>
+<tr>
+<td>Transcrição áudio</td>
+<td>Gemini 2.5 Flash ou Whisper</td>
+<td></td>
+<td>App S9</td>
+</tr>
+<tr>
+<td>Auth</td>
+<td>Supabase Auth + RLS</td>
+<td></td>
+<td>Com cargos customizáveis S6</td>
+</tr>
+<tr>
+<td>Credenciais</td>
+<td><code>@ecossistema/credentials</code> (SC-29 Vault)</td>
+<td></td>
+<td>Tokens Meta/n8n/OpenAI protegidos</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Por que desviar do Nexvy em stack:</strong>
+- Eles usam MUI v4 (JSS, desatualizado). Nós usamos shadcn/ui + Tailwind v4 (ergonomia melhor, dark mode nativo, menor bundle)
+- Design tokens preservados idênticos → visualmente indistinguível para quem já usa Nexvy</p>
+<h2 id="33-estrategia-de-multi-tenancy">3.3 Estratégia de multi-tenancy<a class="anchor" href="#33-estrategia-de-multi-tenancy" title="Permanent link">#</a></h2>
+<p><strong>Regra única:</strong> toda tabela atendimento_* tem <code>account_id UUID NULL</code>.</p>
+<ul>
+<li><strong>Fase 1-3 (FIC only):</strong> <code>account_id = NULL</code> em tudo · RLS permissivo <code>auth.role() = 'authenticated'</code></li>
+<li><strong>Fase 4 (SaaS):</strong> migration <code>account_id NOT NULL DEFAULT fic_account_id</code> · RLS <code>account_id = (auth.jwt() -&gt;&gt; 'account_id')::uuid</code></li>
+</ul>
+<p>Zero refactor no código de aplicação — só mudança de RLS + middleware injeta <code>account_id</code> no JWT.</p>
+<h2 id="34-fluxo-de-dados-critico-recepcao-de-mensagem-waba">3.4 Fluxo de dados crítico: recepção de mensagem WABA<a class="anchor" href="#34-fluxo-de-dados-critico-recepcao-de-mensagem-waba" title="Permanent link">#</a></h2>
+<pre class="highlight"><code>1. Meta POST → /api/atendimento/webhook
+2. Verifica X-Hub-Signature-256 (HMAC WHATSAPP_APP_SECRET)
+3. Parse payload.entry[0].changes[0].value
+4. For each message:
+   a. Upsert `contacts` por phone_number_e164
+   b. Get or create `conversations` (by contact_id + inbox_id)
+      - Se nova → aplicar fila default + executar automation_rules 'conversation_created'
+   c. Insert `messages` (message_type='incoming', status='read' implícito)
+   d. Trigger auto: update conversations.last_activity_at + unread_count
+   e. Run automation_rules WHERE event_name='message_created'
+      - Match keyword → tag automática
+      - Se DS Agente ativo → enqueue agent job
+   f. Broadcast Supabase Realtime → frontend atualiza lista
+5. For each status (delivered/read/failed):
+   a. Update messages.status WHERE channel_message_id = wamid
+   b. Broadcast Realtime</code></pre>
+<p><strong>Pontos críticos a reforçar em S4+:</strong>
+- Media download real (hoje só salva URL) → download do Meta + upload pra Vercel Blob
+- Idempotência por <code>messages_channel_message_id_unique</code>
+- Retry em falha do Meta via <code>dual_write_queue</code></p>
+<hr>
+<h1 id="parte-4-roadmap-por-sprints-s4-s10">Parte 4 — Roadmap por Sprints (S4 → S10+)<a class="anchor" href="#parte-4-roadmap-por-sprints-s4-s10" title="Permanent link">#</a></h1>
+<p><strong>Premissa:</strong> 1 sprint = 1 semana útil. Cada sprint entrega deploy em produção com feature flag se necessário.</p>
+<h2 id="sprint-s4-crm-kanban-lead-detail-protocolos-proximo">Sprint S4 — CRM Kanban + Lead Detail + Protocolos (🎯 próximo)<a class="anchor" href="#sprint-s4-crm-kanban-lead-detail-protocolos-proximo" title="Permanent link">#</a></h2>
+<p><strong>Meta:</strong> Kanban do ATENDIMENTOS-GERAL da FIC migrado do Nexvy para o ERP, com drag-and-drop, lead detail completo e protocolos funcionando.</p>
+<h3 id="entregas">Entregas<a class="anchor" href="#entregas" title="Permanent link">#</a></h3>
+<p><strong>DB Migrations (<code>20260421_atendimento_s4_kanban.sql</code>):</strong>
+<pre class="highlight"><code class="language-sql">CREATE TABLE pipelines (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  account_id UUID NULL,
+  key VARCHAR(32) NOT NULL,
+  name VARCHAR(100) NOT NULL,
+  description TEXT,
+  color_hex VARCHAR(7),
+  is_pinned BOOL DEFAULT false,
+  admin_role_ids UUID[],      -- quem pode administrar
+  access_role_ids UUID[],     -- quem pode acessar
+  cards_visibility VARCHAR DEFAULT 'owner',  -- 'all' | 'owner' | 'team'
+  visible_to_restricted BOOL DEFAULT true,
+  sort_order INT DEFAULT 0,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE pipeline_stages (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  pipeline_id UUID REFERENCES pipelines ON DELETE CASCADE,
+  name VARCHAR(100) NOT NULL,
+  sort_order INT NOT NULL,
+  color_hex VARCHAR(7),
+  sla_warning_days INT,      -- amarelo após X dias
+  sla_danger_days INT,       -- vermelho após Y dias
+  is_won BOOL DEFAULT false, -- etapa final de sucesso
+  is_lost BOOL DEFAULT false -- etapa final de falha
+);
+
+CREATE TABLE deals (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  account_id UUID NULL,
+  pipeline_id UUID REFERENCES pipelines,
+  stage_id UUID REFERENCES pipeline_stages,
+  contact_id UUID REFERENCES atendimento_contacts,
+  assignee_id UUID,
+  queue_id UUID REFERENCES atendimento_queues,
+  campaign_id UUID,  -- FK futuro em S4 também
+  title VARCHAR(200),
+  value_cents BIGINT,
+  currency VARCHAR(3) DEFAULT 'BRL',
+  source VARCHAR,
+  custom_fields JSONB DEFAULT '{}',
+  entered_stage_at TIMESTAMPTZ DEFAULT NOW(),
+  won_at TIMESTAMPTZ,
+  lost_at TIMESTAMPTZ,
+  lost_reason TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW(),
+  updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE deal_activities (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  deal_id UUID REFERENCES deals ON DELETE CASCADE,
+  type VARCHAR,  -- call/meeting/task/email/whatsapp
+  title VARCHAR(200),
+  description TEXT,
+  scheduled_at TIMESTAMPTZ,
+  duration_minutes INT,
+  assignee_id UUID,
+  completed_at TIMESTAMPTZ,
+  attachment_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE deal_notes (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  deal_id UUID REFERENCES deals ON DELETE CASCADE,
+  author_id UUID,
+  body TEXT,
+  attachment_url TEXT,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE deal_history_events (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  deal_id UUID REFERENCES deals ON DELETE CASCADE,
+  actor_id UUID,
+  event_type VARCHAR,  -- stage_transfer/note_added/tag_added/ticket_transferred/etc
+  payload JSONB,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE protocols (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  conversation_id UUID REFERENCES atendimento_conversations,
+  protocol_number BIGSERIAL,
+  subject VARCHAR(200),
+  status VARCHAR DEFAULT 'open',  -- open/resolved/canceled
+  assignee_id UUID,
+  resolved_at TIMESTAMPTZ,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE campaigns (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  account_id UUID NULL,
+  name VARCHAR(200),
+  description TEXT,
+  audience_filter JSONB,  -- tags, pipeline, period
+  channel VARCHAR,
+  template_id UUID,
+  status VARCHAR DEFAULT 'draft',  -- draft/scheduled/running/done
+  scheduled_at TIMESTAMPTZ,
+  stats JSONB DEFAULT '{}',  -- sent/delivered/read/replied
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE contact_custom_fields (
+  contact_id UUID REFERENCES atendimento_contacts ON DELETE CASCADE,
+  field_key VARCHAR(64),
+  field_value TEXT,
+  PRIMARY KEY (contact_id, field_key)
+);
+
+ALTER TABLE atendimento_conversations ADD COLUMN deal_id UUID REFERENCES deals;
+ALTER TABLE atendimento_conversations ADD COLUMN protocol_count INT DEFAULT 0;
+ALTER TABLE atendimento_contacts ADD COLUMN aluno_id UUID;  -- FK futuro
+ALTER TABLE atendimento_contacts ADD COLUMN source VARCHAR;
+ALTER TABLE atendimento_contacts ADD COLUMN color_hex VARCHAR(7);
+
+-- Seed pipelines FIC
+INSERT INTO pipelines (key, name, description, is_pinned, sort_order) VALUES
+  ('ATND',  'ATENDIMENTOS-GERAL', 'Pipeline principal de atendimentos da FIC', true, 0),
+  ('ALUN',  'Alunos', 'Pipeline de matrícula e jornada do aluno', false, 1);
+
+-- Seed stages ATENDIMENTOS-GERAL (4 etapas reais FIC)
+INSERT INTO pipeline_stages (pipeline_id, name, sort_order, color_hex, sla_warning_days) VALUES
+  ((SELECT id FROM pipelines WHERE key='ATND'), 'AGUARDANDO', 0, '#98A2B3', 2),
+  ((SELECT id FROM pipelines WHERE key='ATND'), 'SECRETARIA', 1, '#345EF3', 3),
+  ((SELECT id FROM pipelines WHERE key='ATND'), 'FINANCEIRO', 2, '#F79009', 5),
+  ((SELECT id FROM pipelines WHERE key='ATND'), 'NOVAS MATRÍCULAS', 3, '#12B76A', 7);
+
+-- Seed stages Alunos (7 etapas sugeridas)
+INSERT INTO pipeline_stages (pipeline_id, name, sort_order, color_hex, sla_warning_days) VALUES
+  ((SELECT id FROM pipelines WHERE key='ALUN'), 'Interesse',       0, '#98A2B3', 3),
+  ((SELECT id FROM pipelines WHERE key='ALUN'), 'Visita',          1, '#345EF3', 7),
+  ((SELECT id FROM pipelines WHERE key='ALUN'), 'Documentação',    2, '#F79009', 10),
+  ((SELECT id FROM pipelines WHERE key='ALUN'), 'Financeiro',      3, '#F79009', 5),
+  ((SELECT id FROM pipelines WHERE key='ALUN'), 'Matrícula ativa', 4, '#12B76A', NULL),
+  ((SELECT id FROM pipelines WHERE key='ALUN'), 'Cursando',        5, '#12B76A', NULL),
+  ((SELECT id FROM pipelines WHERE key='ALUN'), 'Formado',         6, '#0BA5EC', NULL);</code></pre></p>
+<p><strong>Frontend:</strong>
+- <code>/atendimento/crm</code> (nova rota substituindo dashboard genérico)
+- <code>KanbanBoard.tsx</code> — colunas draggable com <code>@dnd-kit</code>
+- <code>DealCard.tsx</code> — card com modo compact/preview
+- <code>LeadDetailModal.tsx</code> — 2 colunas + 4 abas (Negócios/Atividades/Histórico/Notas)
+- <code>DealActivityEditor.tsx</code> — TipTap rich editor + anexo
+- <code>ProtocolModal.tsx</code> — abrir protocolo dentro de uma conversa
+- <code>PipelineSelector.tsx</code> — drawer 480px lateral
+- <code>StageColumnMenu.tsx</code> — menu ⋮ por coluna (Editar/Transferir/CSV/Automações)</p>
+<p><strong>Backend:</strong>
+- <code>GET/POST/PATCH /api/atendimento/pipelines</code>
+- <code>GET /api/atendimento/pipelines/[id]/deals?stage=X&amp;filters=...</code>
+- <code>PATCH /api/atendimento/deals/[id]</code> (mover etapa dispara trigger history)
+- <code>POST /api/atendimento/deals/[id]/activities</code>
+- <code>POST /api/atendimento/deals/[id]/notes</code>
+- <code>POST /api/atendimento/conversations/[id]/protocols</code></p>
+<p><strong>Screenshots de referência no benchmark:</strong>
+- <code>docs/research/nexvy-whitelabel/y3CFR97J2Bo/</code> — visão geral CRM (109 frames)
+- <code>docs/research/nexvy-whitelabel/hu38xgDc-l8/</code> — painel criação passo a passo
+- <code>docs/research/nexvy-whitelabel/ssG53BDi1K0/</code> — cards no CRM (40 frames)
+- <code>docs/research/nexvy-whitelabel/VAa4tqrsFqI/</code> — cadastrar contatos (58 frames)
+- <code>docs/research/nexvy-whitelabel/g0_lGAnSzdY/</code> — consultar/editar (43 frames)</p>
+<p><strong>Critério de aceite:</strong>
+- Marcelo consegue migrar as 171 deals reais do Nexvy para o ERP via import CSV
+- Arrastar card entre colunas persiste no DB e gera evento em <code>deal_history_events</code>
+- Abrir conversa no chat mostra breadcrumb "Pipeline X › Etapa Y" clicável
+- Criar atividade com agendamento aparece na Central de Atividades</p>
+<p><strong>Risco:</strong> drag-and-drop performance com 171+ cards por coluna → virtualizar com <code>react-virtuoso</code>.</p>
+<hr>
+<h2 id="sprint-s5-templates-waba-agendamentos-envio-ativo">Sprint S5 — Templates WABA + Agendamentos + Envio Ativo<a class="anchor" href="#sprint-s5-templates-waba-agendamentos-envio-ativo" title="Permanent link">#</a></h2>
+<p><strong>Meta:</strong> FIC consegue disparar template WABA aprovado pela Meta + agendar mensagens recorrentes + integrar Google Calendar.</p>
+<h3 id="entregas_1">Entregas<a class="anchor" href="#entregas_1" title="Permanent link">#</a></h3>
+<p><strong>DB:</strong>
+- Expandir <code>atendimento_whatsapp_templates</code> com todos os campos (<code>has_buttons</code>, <code>button_type</code>, <code>language_code</code>, <code>rejected_reason</code>)
+- <code>scheduled_messages</code> (contact_id/template_id/scheduled_at/recurrence_rule/status)
+- <code>calendar_events</code> (google_event_id + refresh_token)</p>
+<p><strong>Frontend:</strong>
+- <code>/atendimento/templates</code> — grid cards preview
+- <code>TemplatePreview.tsx</code> — mockup WhatsApp real com bubbles
+- <code>TemplateEditor.tsx</code> — form 3-step (categoria → componentes → botões)
+- <code>/atendimento/agendamentos</code> — calendário (mês/semana/dia/lista)
+- <code>ScheduleModal.tsx</code> — tipo/canal/contato/template/horário
+- Banner "Janela WABA fechada" no chat → abre modal <code>SelectTemplateModal</code></p>
+<p><strong>Backend:</strong>
+- Worker <code>syncMetaTemplates</code> (Vercel Queues ou Railway cron a cada 30min)
+- <code>POST /api/atendimento/templates/[id]/send</code> (envia template direto)
+- <code>POST /api/atendimento/scheduled-messages</code> + worker <code>processScheduledMessages</code>
+- <code>GET /auth/google/connect</code> + OAuth callback → salva refresh_token em <code>@ecossistema/credentials</code>
+- <code>POST /api/atendimento/calendar-events</code> (cria evento Google)</p>
+<p><strong>Referências do benchmark:</strong>
+- <code>oOq8AVnwx7g/</code> configuração mensagens agendadas
+- <code>Bm9r57cOqMM/</code> mensagens agendadas na prática
+- <code>Olr6prKExSo/</code> modelo mensagem
+- <code>1lrBXAnV31I/</code> contexto modelos</p>
+<p><strong>Dependência externa:</strong> Marcelo precisa <strong>criar 1º template WABA na Meta</strong> e aguardar aprovação (24-48h) antes de começar envio ativo.</p>
+<hr>
+<h2 id="sprint-s6-contatos-completo-cargospermissoes-configuracoes">Sprint S6 — Contatos completo + Cargos/Permissões + Configurações<a class="anchor" href="#sprint-s6-contatos-completo-cargospermissoes-configuracoes" title="Permanent link">#</a></h2>
+<p><strong>Meta:</strong> CRM de contatos pronto para a Secretaria usar no dia-a-dia + sistema de permissões granular para os 4 agentes FIC.</p>
+<h3 id="entregas_2">Entregas<a class="anchor" href="#entregas_2" title="Permanent link">#</a></h3>
+<p><strong>DB:</strong>
+- <code>contact_company_custom_fields</code> (campos globais), <code>saved_views</code>, <code>agent_roles</code>, <code>role_permissions</code>, <code>account_settings</code>
+- Migration de seeds: 3 cargos padrão (Admin, Atendente, Atendente restrito), permissions matrix baseada nas 13 categorias</p>
+<p><strong>Frontend:</strong>
+- <code>/atendimento/contatos</code> — reforma com bulk actions, import/export CSV, color tags, merge de duplicatas
+- <code>CustomFieldsEditor.tsx</code> (admin define campos globais)
+- <code>SavedViewModal.tsx</code> (criar aba customizada)
+- <code>/atendimento/configuracoes/usuarios</code> — CRUD + convite
+- <code>/atendimento/configuracoes/cargos</code> — editor visual de permissões
+- <code>/atendimento/configuracoes/geral</code> — horário comercial, saudação automática, etc</p>
+<p><strong>Backend:</strong>
+- <code>/api/atendimento/contacts/import</code> (parse CSV → validação → upsert batch)
+- <code>/api/atendimento/contacts/merge</code> (modal de seleção de campo canônico)
+- <code>/api/atendimento/roles</code> + <code>/api/atendimento/roles/[id]/permissions</code>
+- Middleware <code>requirePermission('module', 'action')</code> em todas as rotas sensíveis</p>
+<p><strong>Referências:</strong>
+- <code>TBl14qCjbcM/</code> campo personalizado (33 frames)
+- <code>PvfppQNxQZs/</code> importar contatos (19 frames)
+- <code>-LctSvm1Mzo/</code>, <code>LsdXRmS7Agk/</code> usuários conceitos (24 frames total)
+- <code>_KeeL_5wG5k/</code> equipes (17 frames)
+- <code>XWd-0Gj6R6E/</code> permissões (12 frames)</p>
+<hr>
+<h2 id="sprint-s7-dashboards-relatorios-widgets">Sprint S7 — Dashboards, Relatórios, Widgets<a class="anchor" href="#sprint-s7-dashboards-relatorios-widgets" title="Permanent link">#</a></h2>
+<p><strong>Meta:</strong> Diretoria FIC consegue abrir o atendimento e ver em 5s o pulso do mês.</p>
+<h3 id="entregas_3">Entregas<a class="anchor" href="#entregas_3" title="Permanent link">#</a></h3>
+<p><strong>DB:</strong>
+- <code>metrics_snapshots</code> (daily aggregation — 20+ métricas por dia)
+- <code>widgets</code> (URLs externas com <code>{{user.email}}</code> etc)
+- <code>report_definitions</code> (gráficos customizáveis salvos)</p>
+<p><strong>Frontend:</strong>
+- <code>/atendimento</code> (home) — 6 widgets (Canais / CRM / Conversas / Atividades / Agentes IA / Widget config)
+- <code>/atendimento/relatorios</code> — 6 tipos relatório (Vendas/Atividades/Conversas/Ligações/SDR/Closer) + 3 abas Indicadores
+- <code>ReportBuilder.tsx</code> — adicionar gráfico customizado
+- <code>WidgetFrame.tsx</code> — iframe com token</p>
+<p><strong>Backend:</strong>
+- Worker <code>aggregateMetricsDaily</code> (cron 02:00 BRT)
+- <code>/api/atendimento/reports/[type]?from=X&amp;to=Y&amp;user=Z</code>
+- <code>/api/atendimento/widgets/[id]/token</code> (gera JWT curto para iframe)</p>
+<p><strong>Referências:</strong>
+- <code>dNaKezWr_LY/</code> relatórios (10 frames)
+- <code>0_0i72W2s68/</code> aba Resultados (9 frames)
+- <code>t2bF8-5uui8/</code> aba Usuários (23 frames)
+- <code>olMQTujz724/</code> aba Geral (39 frames)
+- <code>iTuVYvn347I/</code> panorama (15 frames)
+- <code>B8E5ab6SATs/</code> origem leads (31 frames)</p>
+<hr>
+<h2 id="sprint-s8-automacoes-webhooks-api-rest-n8n-chat-interno-links">Sprint S8 — Automações + Webhooks + API REST + n8n + Chat Interno + Links<a class="anchor" href="#sprint-s8-automacoes-webhooks-api-rest-n8n-chat-interno-links" title="Permanent link">#</a></h2>
+<p><strong>Meta:</strong> FIC pluga o n8n ID 2967 no ERP + equipe usa chat interno para alinhar atendimentos + API pública pronta para integradores.</p>
+<h3 id="entregas_4">Entregas<a class="anchor" href="#entregas_4" title="Permanent link">#</a></h3>
+<p><strong>DB:</strong>
+- <code>webhook_inbound_endpoints</code>, <code>webhook_outbound_urls</code>, <code>webhook_attempts</code> (para retry)
+- <code>automation_executions</code> (log de regras executadas)
+- <code>link_redirects</code> (slug + distribution_config JSONB)
+- <code>api_keys</code> (hash + scopes + last_rotated_at)
+- <code>team_chats</code>, <code>team_chat_members</code>, <code>team_messages</code></p>
+<p><strong>Frontend:</strong>
+- <code>/atendimento/automacoes</code> — builder visual (gatilho + condições + ações)
+- <code>/atendimento/webhooks</code> — Entrada / Saída com teste ao vivo
+- <code>/atendimento/integracoes</code> — página "Apps" + config n8n
+- <code>/atendimento/api-keys</code> — gerar/rotacionar
+- <code>/atendimento/links-redirecionamento</code> — CRUD
+- <code>/atendimento/chat-interno</code> — 2 painéis Realtime</p>
+<p><strong>Backend:</strong>
+- <code>/api/atendimento/webhooks/inbound/[slug]</code> (público, sem auth)
+- Dispatcher webhook saída (retry exponencial)
+- <code>/api/public/v1/*</code> — Messages, Dashboard (10 endpoints), CRM Contacts/Tickets/Deals
+- Autenticação: header <code>api-key</code> + <code>Connection-Token</code></p>
+<p><strong>Referências:</strong>
+- <code>SHTF1dwAtuc/</code> etiquetar via chatbot (24 frames)
+- <code>X115LzVAliA/</code> chat interno (18 frames)
+- <code>VCsSLNj7vzE/</code> campanhas (90 frames — também entra aqui parcialmente)</p>
+<hr>
+<h2 id="sprint-s9-ds-voice-biblioteca-de-conteudo">Sprint S9 — DS Voice (biblioteca de conteúdo)<a class="anchor" href="#sprint-s9-ds-voice-biblioteca-de-conteudo" title="Permanent link">#</a></h2>
+<p><strong>Meta:</strong> Atendentes FIC não digitam mais do zero — usam biblioteca de textos/áudios/mídias com variáveis.</p>
+<h3 id="entregas_5">Entregas<a class="anchor" href="#entregas_5" title="Permanent link">#</a></h3>
+<ul>
+<li>8 tabelas <code>ds_voice_*</code></li>
+<li>CRUD + UI + pastas</li>
+<li>Funis (drip sequences com delay)</li>
+<li>Gatilhos (keyword → dispara funil)</li>
+<li>Integração no chat (ícone na toolbar)</li>
+<li>Integração em agendamentos (tipo DS Voice)</li>
+<li>App "Transcrição de áudio com IA" (habilita transcrição automática via Gemini/Whisper)</li>
+</ul>
+<p><strong>Referências:</strong>
+- <code>CDOdwqe_-KE/</code> sequência (78 frames)
+- <code>yH5ysNLTAXE/</code> transcrição áudio (16 frames)</p>
+<hr>
+<h2 id="sprint-s10-ds-agente-ds-bot-ia-autonoma">Sprint S10 — DS Agente + DS Bot (IA autônoma)<a class="anchor" href="#sprint-s10-ds-agente-ds-bot-ia-autonoma" title="Permanent link">#</a></h2>
+<p><strong>Meta:</strong> DS Agente responde dúvidas de matrícula 24/7 com contexto do aluno + DS Bot qualifica leads antes do humano.</p>
+<h3 id="entregas_6">Entregas<a class="anchor" href="#entregas_6" title="Permanent link">#</a></h3>
+<ul>
+<li><code>ds_agents</code> + integração OpenAI + RAG (<code>@ecossistema/rag</code>)</li>
+<li>Base de conhecimento FIC (regulamento, FAQ matrícula, grade curricular) — ingestion pipeline</li>
+<li><code>ds_bots</code> + editor React Flow + componentes Bubbles/Inputs/Actions</li>
+<li>Regras de ativação por tag</li>
+<li>Hand-off humano (desabilita bot quando agente responder)</li>
+<li>Widget home "N agentes ativos · M erros"</li>
+<li>IA Copilot (comando natural → ação no sistema — visto em <code>y3CFR97J2Bo</code>)</li>
+</ul>
+<p><strong>Pré-requisitos:</strong> RAG engine Railway funcionando + <code>@ecossistema/agentes</code> integrado.</p>
+<hr>
+<h2 id="fase-4-paralela-condicional">Fase 4 (paralela, condicional)<a class="anchor" href="#fase-4-paralela-condicional" title="Permanent link">#</a></h2>
+<ul>
+<li>Multi-tenant real (migration <code>account_id NOT NULL</code>)</li>
+<li>Painel Parceiro (white-label interface)</li>
+<li>Sistema de planos e cobrança (integrar Inter)</li>
+<li>Onboarding de novos clientes</li>
+<li>Sign up público</li>
+<li>Customização de logos/cores por tenant</li>
+</ul>
+<p><strong>Trigger:</strong> Marcelo decide que Klésis (outro negócio dele) ou terceiros vão usar. Até lá, foco em FIC.</p>
+<hr>
+<h1 id="parte-5-design-system-pratico">Parte 5 — Design system prático<a class="anchor" href="#parte-5-design-system-pratico" title="Permanent link">#</a></h1>
+<h2 id="51-estrutura-de-pastas-a-criar">5.1 Estrutura de pastas a criar<a class="anchor" href="#51-estrutura-de-pastas-a-criar" title="Permanent link">#</a></h2>
+<pre class="highlight"><code>apps/erp-educacional/src/
+├── components/
+│   ├── atendimento/
+│   │   ├── inbox/
+│   │   │   ├── ConversasList.tsx        [EXISTE]
+│   │   │   ├── ChatPanel.tsx            [EXISTE]
+│   │   │   ├── ContactInfoPanel.tsx     [EXISTE]
+│   │   │   ├── MessageBubble.tsx        [EXISTE]
+│   │   │   ├── ChatToolbar.tsx          [S5 — 5 tipos]
+│   │   │   ├── ClosedWindowBanner.tsx   [S5]
+│   │   │   └── StartConversationModal.tsx [S3-S4]
+│   │   ├── kanban/                       [S4]
+│   │   │   ├── KanbanBoard.tsx
+│   │   │   ├── DealCard.tsx
+│   │   │   ├── StageColumn.tsx
+│   │   │   ├── PipelineSelector.tsx
+│   │   │   └── LeadDetailModal.tsx
+│   │   ├── contatos/                     [S6]
+│   │   │   ├── ContactTable.tsx
+│   │   │   ├── ImportCSVModal.tsx
+│   │   │   └── MergeDuplicatesModal.tsx
+│   │   ├── templates/                    [S5]
+│   │   ├── agendamentos/                 [S5]
+│   │   ├── automacoes/                   [S8]
+│   │   ├── ds-voice/                     [S9]
+│   │   ├── ds-agente/                    [S10]
+│   │   ├── ds-bot/                       [S10]
+│   │   └── shared/
+│   │       ├── QueueBadge.tsx            [cor + nome da fila]
+│   │       ├── AgentStatusDot.tsx        [verde/cinza/laranja]
+│   │       ├── TicketNumberPill.tsx      [#1897217]
+│   │       └── BreadcrumbPipeline.tsx    [Pipeline › Etapa]</code></pre>
+<h2 id="52-convencoes-de-nomenclatura-alinhadas-ao-nexvy-para-reduzir-friccao-cognitiva">5.2 Convenções de nomenclatura (alinhadas ao Nexvy para reduzir fricção cognitiva)<a class="anchor" href="#52-convencoes-de-nomenclatura-alinhadas-ao-nexvy-para-reduzir-friccao-cognitiva" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Conceito</th>
+<th>Termo FIC (usar)</th>
+<th>Termo técnico DB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Conversa</td>
+<td>"Atendimento" ou "Conversa"</td>
+<td><code>conversation</code></td>
+</tr>
+<tr>
+<td>Ticket ID</td>
+<td>"Protocolo" ou "Ticket"</td>
+<td><code>ticket_number</code> (sequencial)</td>
+</tr>
+<tr>
+<td>Sub-processo</td>
+<td>"Protocolo"</td>
+<td><code>protocol</code></td>
+</tr>
+<tr>
+<td>Etiqueta</td>
+<td>"Tag"</td>
+<td><code>label</code></td>
+</tr>
+<tr>
+<td>Fila</td>
+<td>"Fila"</td>
+<td><code>queue</code></td>
+</tr>
+<tr>
+<td>Agente</td>
+<td>"Atendente"</td>
+<td><code>agent</code></td>
+</tr>
+<tr>
+<td>Pipeline</td>
+<td>"Pipeline" ou "Painel"</td>
+<td><code>pipeline</code></td>
+</tr>
+<tr>
+<td>Etapa</td>
+<td>"Etapa" ou "Fase"</td>
+<td><code>stage</code></td>
+</tr>
+<tr>
+<td>Deal</td>
+<td>"Negócio"</td>
+<td><code>deal</code></td>
+</tr>
+<tr>
+<td>Template WABA</td>
+<td>"Modelo de Mensagem"</td>
+<td><code>whatsapp_template</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="53-padroes-de-ui-criticos">5.3 Padrões de UI críticos<a class="anchor" href="#53-padroes-de-ui-criticos" title="Permanent link">#</a></h2>
+<p><strong>Chat bubble (igual WhatsApp):</strong>
+<pre class="highlight"><code class="language-tsx">// Incoming (cliente)
+&lt;div className="bg-white rounded-tr-lg rounded-b-lg rounded-tl-none shadow-sm max-w-[70%] p-3 ml-2"&gt;
+  &lt;p className="text-sm text-slate-900"&gt;{content}&lt;/p&gt;
+  &lt;time className="text-[11px] text-slate-400"&gt;{time}&lt;/time&gt;
+&lt;/div&gt;
+
+// Outgoing (agente)
+&lt;div className="bg-[#DCF8C6] rounded-tl-lg rounded-b-lg rounded-tr-none shadow-sm max-w-[70%] p-3 mr-2 ml-auto"&gt;
+  &lt;p className="text-sm"&gt;{content}&lt;/p&gt;
+  &lt;div className="flex items-center gap-1"&gt;
+    &lt;time className="text-[11px] text-slate-500"&gt;{time}&lt;/time&gt;
+    &lt;StatusIcon status={status} /&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre></p>
+<p><strong>Status icons (Meta padrão):</strong>
+- <code>pending</code> → ⏱️ cinza
+- <code>sent</code> → ✓ cinza
+- <code>delivered</code> → ✓✓ cinza
+- <code>read</code> → ✓✓ azul <code>#345EF3</code>
+- <code>failed</code> → ⚠️ vermelho</p>
+<p><strong>Badge de fila (cor + nome):</strong>
+<pre class="highlight"><code class="language-tsx">&lt;Badge style={{ backgroundColor: queue.color_hex + '20', color: queue.color_hex }}&gt;
+  {queue.name}
+&lt;/Badge&gt;</code></pre></p>
+<hr>
+<h1 id="parte-6-como-usar-o-acervo-de-pesquisa-as-5-sugestoes-em-acao">Parte 6 — Como usar o acervo de pesquisa (as 5 sugestões em ação)<a class="anchor" href="#parte-6-como-usar-o-acervo-de-pesquisa-as-5-sugestoes-em-acao" title="Permanent link">#</a></h1>
+<h2 id="sugestao-1-decisao-de-escopo-baseada-em-mustnicediferencial">Sugestão 1 — Decisão de escopo baseada em must/nice/diferencial<a class="anchor" href="#sugestao-1-decisao-de-escopo-baseada-em-mustnicediferencial" title="Permanent link">#</a></h2>
+<p><strong>Antes de aprovar cada sprint</strong>, o time abre <code>PLANO-LEVANTAMENTO-NEXVY.md</code> (no worktree) OU este documento e classifica cada feature em:</p>
+<ul>
+<li>🔴 <strong>Must-have</strong>: paridade funcional com helenaCRM (sem isso a FIC não migra)</li>
+<li>🟡 <strong>Nice-to-have</strong>: feature esperada mas que podemos simplificar</li>
+<li>🟢 <strong>Diferencial</strong>: nenhum concorrente tem, nosso ganho competitivo</li>
+</ul>
+<p><strong>Exemplo aplicado ao S4:</strong>
+- 🔴 Kanban, Lead Detail 4 abas, mover deal entre etapas, protocolos → must
+- 🟡 Toggle visualizar mensagens nos cards, menu ⋮ por coluna → nice
+- 🟢 Breadcrumb que conecta Kanban ↔ Chat ↔ Registro Aluno → diferencial (nenhum concorrente tem esse loop no educacional)</p>
+<h2 id="sugestao-2-design-tokens-como-baseline-unico">Sugestão 2 — Design tokens como baseline único<a class="anchor" href="#sugestao-2-design-tokens-como-baseline-unico" title="Permanent link">#</a></h2>
+<p><strong>Regra:</strong> nenhum componente novo hard-codea cores/fontes. Tudo passa por <code>tailwind.config.ts</code> com as tokens da Parte 2.2.</p>
+<p><strong>Ação imediata S4 dia 1:</strong>
+1. Abrir <code>apps/erp-educacional/tailwind.config.ts</code>
+2. Adicionar todas as tokens da Parte 2.2 em <code>theme.extend</code>
+3. Criar um <code>storybook</code> (ou página <code>/dev/tokens</code>) que renderiza toda a paleta para validar visualmente</p>
+<h2 id="sugestao-3-referencia-visual-em-dois-niveis">Sugestão 3 — Referência visual em dois níveis<a class="anchor" href="#sugestao-3-referencia-visual-em-dois-niveis" title="Permanent link">#</a></h2>
+<p><strong>Nível 1 — Screenshots navegados (<code>screenshots/</code>):</strong>
+- 225 PNGs nomeados por data (Captura de Tela 2026-04-19 às HH.MM.SS.png)
+- Buscar por tela: <code>ls docs/research/nexvy-whitelabel/screenshots/ | head -20</code></p>
+<p><strong>Nível 2 — Frames extraídos por vídeo (<code>&lt;video-id&gt;/frame_*.jpg</code>):</strong>
+- Cada frame tem timestamp + descrição Gemini
+- Abrir README.md da pasta do vídeo relevante</p>
+<p><strong>Quando usar cada:</strong>
+- Screenshot: "como é a tela de criar fila?" → pegar PNG
+- Frame: "mostre-me passo a passo o fluxo de criar painel" → README.md do vídeo hu38xgDc-l8</p>
+<h2 id="sugestao-4-grep-para-achar-onde-cada-feature-e-explicada">Sugestão 4 — Grep para achar onde cada feature é explicada<a class="anchor" href="#sugestao-4-grep-para-achar-onde-cada-feature-e-explicada" title="Permanent link">#</a></h2>
+<p><strong>Exemplo real:</strong>
+<pre class="highlight"><code class="language-bash"># Achar todas as menções a "campo personalizado"
+grep -ril "campo personalizado" docs/research/nexvy-whitelabel/*/transcricao.txt
+
+# Achar vídeo que explica distribuição sequencial
+grep -l "sequencial" docs/research/nexvy-whitelabel/*/timestamps.txt
+
+# Achar exatos timestamps sobre janela WABA
+grep -n "janela" docs/research/nexvy-whitelabel/*/transcricao.txt</code></pre></p>
+<p><strong>Comando útil para o time:</strong>
+<pre class="highlight"><code class="language-bash"># Busca por tópico em todos os vídeos — retorna vídeo + trecho relevante
+search_benchmark() {
+  local term="$1"
+  for vid in docs/research/nexvy-whitelabel/*/transcricao.txt; do
+    match=$(grep -ni "$term" "$vid" | head -3)
+    [ -n "$match" ] &amp;&amp; echo "=== $(dirname $vid) ===" &amp;&amp; echo "$match"
+  done
+}</code></pre></p>
+<p>Salvar em <code>apps/erp-educacional/scripts/search_benchmark.sh</code> para uso recorrente.</p>
+<h2 id="sugestao-5-videos-parceiros-como-gabarito-de-painel-parceiro">Sugestão 5 — Vídeos Parceiros como gabarito de Painel Parceiro<a class="anchor" href="#sugestao-5-videos-parceiros-como-gabarito-de-painel-parceiro" title="Permanent link">#</a></h2>
+<p><strong>11 vídeos "[Parceiros]"</strong> = tudo que precisamos saber para Fase 4 (multi-tenant):</p>
+<table>
+<thead>
+<tr>
+<th>Feature multi-tenant</th>
+<th>Vídeo gabarito</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Criar conta de tenant</td>
+<td><code>t1aj8gLs9cI/</code> (34 frames)</td>
+</tr>
+<tr>
+<td>Onboarding (conta demo)</td>
+<td><code>0I1UH-wIA2s/</code> (30 frames)</td>
+</tr>
+<tr>
+<td>Planos e feature gating</td>
+<td><code>qrRvyH0k6l8/</code> (55 frames)</td>
+</tr>
+<tr>
+<td>Cobrança recorrente</td>
+<td><code>G0XsZWjQV8c/</code> (17 frames)</td>
+</tr>
+<tr>
+<td>Faturamento/relatórios</td>
+<td><code>db54n8_3_Sg/</code> (16 frames)</td>
+</tr>
+<tr>
+<td>Gestão de admins parceiros</td>
+<td><code>XdikJZkmY7Q/</code> (30 frames)</td>
+</tr>
+<tr>
+<td>Customização white-label</td>
+<td><code>bvpz84EThEU/</code> (33 frames)</td>
+</tr>
+<tr>
+<td>Ações/menus personalizados</td>
+<td><code>jbgM0hgvTPc/</code> (29 frames)</td>
+</tr>
+<tr>
+<td>Canal de demo</td>
+<td><code>-X2jMXU_zos/</code> (16 frames)</td>
+</tr>
+<tr>
+<td>Dashboard parceiro</td>
+<td><code>S1liAttRAtw/</code> (16 frames)</td>
+</tr>
+<tr>
+<td>Configuração FB</td>
+<td><code>-W1Gvw7_QzM/</code> (26 frames)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Quando virar SaaS (Fase 4), reler essas 11 pastas = spec completo.</strong></p>
+<hr>
+<h1 id="parte-7-acoes-imediatas-proximas-72h">Parte 7 — Ações imediatas (próximas 72h)<a class="anchor" href="#parte-7-acoes-imediatas-proximas-72h" title="Permanent link">#</a></h1>
+<h2 id="t-0-hoje-2026-04-20">T-0 (hoje, 2026-04-20)<a class="anchor" href="#t-0-hoje-2026-04-20" title="Permanent link">#</a></h2>
+<ol>
+<li>✅ Este documento criado e salvo em <code>apps/erp-educacional/docs/PLANO-REFORMULACAO-ATENDIMENTO-FIC.md</code></li>
+<li>🔄 Marcelo revisa e dá OK/ajustes</li>
+<li>🔄 Commit + push para <code>main</code></li>
+<li>🔄 Atualizar <code>MEMORY.md</code> com link para este plano</li>
+</ol>
+<h2 id="t1-dia-util-seguinte">T+1 (dia útil seguinte)<a class="anchor" href="#t1-dia-util-seguinte" title="Permanent link">#</a></h2>
+<ol>
+<li><strong>Migração data real do Nexvy</strong>:</li>
+<li>Exportar 245 contatos + 171 deals do Nexvy (console.nexvy.tech → API → export CSV)</li>
+<li>Script <code>pnpm nexvy:import</code> em <code>apps/erp-educacional/scripts/</code> que faz upsert respeitando dedup</li>
+<li><strong>Criar 1º template WABA na Meta</strong> (ex: "Olá {{1}}, tudo bem? Sou da FIC, vi seu interesse em {{2}}..."):</li>
+<li>Submeter aprovação → aguarda 24-48h → desbloqueia Sprint S5</li>
+<li><strong>Design tokens em produção</strong>:</li>
+<li>Atualizar <code>tailwind.config.ts</code> com todas as tokens da Parte 2.2</li>
+<li>Criar <code>/app/(erp)/dev/tokens/page.tsx</code> para QA visual</li>
+</ol>
+<h2 id="t2-sprint-kickoff-s4">T+2 (sprint kickoff S4)<a class="anchor" href="#t2-sprint-kickoff-s4" title="Permanent link">#</a></h2>
+<ol>
+<li><strong>Migration <code>20260421_atendimento_s4_kanban.sql</code></strong> aplicada em staging → testar → prod</li>
+<li><strong>Seed das 2 pipelines FIC</strong> + 11 stages + 6 campos custom iniciais (CPF / Nome da Mãe / Curso / Turma / Semestre / Origem)</li>
+<li><strong>Componentes base do Kanban</strong> (<code>KanbanBoard</code>, <code>DealCard</code>, <code>StageColumn</code>) em PR separado para review</li>
+</ol>
+<h2 id="t5-meio-sprint-s4">T+5 (meio sprint S4)<a class="anchor" href="#t5-meio-sprint-s4" title="Permanent link">#</a></h2>
+<ol>
+<li><strong>Drag &amp; drop com persistência</strong> funcionando em staging</li>
+<li><strong>Lead Detail Modal</strong> — 2 colunas + 4 abas navegáveis (mesmo que abas vazias, só esqueleto)</li>
+<li><strong>Protocolos</strong> — modal no chat + número sequencial</li>
+</ol>
+<h2 id="t7-deploy-s4">T+7 (deploy S4)<a class="anchor" href="#t7-deploy-s4" title="Permanent link">#</a></h2>
+<ol>
+<li>Deploy produção com feature flag <code>ATENDIMENTO_CRM_KANBAN_ENABLED=true</code></li>
+<li>Treinamento 30min com os 4 atendentes FIC + feedback</li>
+<li>Registrar pendências em <code>docs/sessions/PENDENCIAS.md</code></li>
+<li>Kickoff S5</li>
+</ol>
+<hr>
+<h1 id="parte-8-apendices">Parte 8 — Apêndices<a class="anchor" href="#parte-8-apendices" title="Permanent link">#</a></h1>
+<h2 id="a-cross-reference-video-sprint">A. Cross-reference vídeo ↔ sprint<a class="anchor" href="#a-cross-reference-video-sprint" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Sprint</th>
+<th>Vídeos do benchmark obrigatórios (leitura antes de começar)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>S4</td>
+<td><code>y3CFR97J2Bo</code>, <code>N8n8LaxuZLc</code>, <code>hu38xgDc-l8</code>, <code>ssG53BDi1K0</code>, <code>VAa4tqrsFqI</code>, <code>g0_lGAnSzdY</code>, <code>Lus6OhCWhrg</code>, <code>TBl14qCjbcM</code>, <code>PvfppQNxQZs</code></td>
+</tr>
+<tr>
+<td>S5</td>
+<td><code>Olr6prKExSo</code>, <code>1lrBXAnV31I</code>, <code>oOq8AVnwx7g</code>, <code>Bm9r57cOqMM</code>, <code>JHONOag6fEo</code>, <code>VCsSLNj7vzE</code></td>
+</tr>
+<tr>
+<td>S6</td>
+<td><code>-LctSvm1Mzo</code>, <code>LsdXRmS7Agk</code>, <code>_KeeL_5wG5k</code>, <code>XWd-0Gj6R6E</code>, <code>HYKeZWyBCwY</code>, <code>wgsaW6I9KIM</code>, <code>XeemWygayPo</code>, <code>GTX_QLA1zeg</code></td>
+</tr>
+<tr>
+<td>S7</td>
+<td><code>dNaKezWr_LY</code>, <code>0_0i72W2s68</code>, <code>t2bF8-5uui8</code>, <code>olMQTujz724</code>, <code>iTuVYvn347I</code>, <code>B8E5ab6SATs</code></td>
+</tr>
+<tr>
+<td>S8</td>
+<td><code>SHTF1dwAtuc</code>, <code>X115LzVAliA</code>, <code>oGs_ByuGDWc</code>, <code>QlGUrIGjc44</code></td>
+</tr>
+<tr>
+<td>S9</td>
+<td><code>CDOdwqe_-KE</code>, <code>yH5ysNLTAXE</code></td>
+</tr>
+<tr>
+<td>S10</td>
+<td><code>RFn_fw6wYOw</code>, <code>Xf6tFnM4va4</code>, <code>6RFcmRoD4E0</code>, <code>AMDg3hbrui0</code>, <code>YpFcjGiMw2I</code>, <code>y3CFR97J2Bo</code> (re-ver focado em IA Copilot)</td>
+</tr>
+<tr>
+<td>Fase 4</td>
+<td>Todos os 11 <code>[Parceiros]</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="b-tabela-resumo-de-gap-por-categoria">B. Tabela resumo de gap por categoria<a class="anchor" href="#b-tabela-resumo-de-gap-por-categoria" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Categoria</th>
+<th>Features mapeadas</th>
+<th>Já temos</th>
+<th>Falta</th>
+<th>% coberto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dashboard</td>
+<td>6</td>
+<td>0</td>
+<td>6</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Inbox/Conversas</td>
+<td>27</td>
+<td>14</td>
+<td>13</td>
+<td>52%</td>
+</tr>
+<tr>
+<td>CRM Kanban</td>
+<td>22</td>
+<td>0</td>
+<td>22</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Contatos</td>
+<td>12</td>
+<td>2</td>
+<td>10</td>
+<td>17%</td>
+</tr>
+<tr>
+<td>Agendamentos</td>
+<td>9</td>
+<td>0</td>
+<td>9</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Templates WABA</td>
+<td>7</td>
+<td>1 (schema)</td>
+<td>6</td>
+<td>14%</td>
+</tr>
+<tr>
+<td>Automações</td>
+<td>9</td>
+<td>2</td>
+<td>7</td>
+<td>22%</td>
+</tr>
+<tr>
+<td>Webhooks/API</td>
+<td>8</td>
+<td>1</td>
+<td>7</td>
+<td>13%</td>
+</tr>
+<tr>
+<td>Links Redirecionamento</td>
+<td>5</td>
+<td>0</td>
+<td>5</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>DS Voice</td>
+<td>11</td>
+<td>0</td>
+<td>11</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>DS Agente</td>
+<td>11</td>
+<td>0</td>
+<td>11</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>DS Bot</td>
+<td>12</td>
+<td>0</td>
+<td>12</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Chat Interno</td>
+<td>5</td>
+<td>0</td>
+<td>5</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Relatórios</td>
+<td>11</td>
+<td>0</td>
+<td>11</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Usuários/Cargos</td>
+<td>8</td>
+<td>2</td>
+<td>6</td>
+<td>25%</td>
+</tr>
+<tr>
+<td>Canais</td>
+<td>9</td>
+<td>3</td>
+<td>6</td>
+<td>33%</td>
+</tr>
+<tr>
+<td>Campanhas</td>
+<td>5</td>
+<td>0</td>
+<td>5</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Integrações</td>
+<td>3</td>
+<td>0</td>
+<td>3</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Configurações</td>
+<td>6</td>
+<td>0</td>
+<td>6</td>
+<td>0%</td>
+</tr>
+<tr>
+<td>Painel Parceiro</td>
+<td>12</td>
+<td>0</td>
+<td>12</td>
+<td>0% (Fase 4)</td>
+</tr>
+<tr>
+<td><strong>TOTAL</strong></td>
+<td><strong>198</strong></td>
+<td><strong>25</strong></td>
+<td><strong>173</strong></td>
+<td><strong>12,6%</strong></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Leitura:</strong> temos 12,6% da plataforma Nexvy replicada hoje. Após S4-S10 atingimos ~85%. Após Fase 4, 100%.</p>
+<h2 id="c-links-canonicos">C. Links canônicos<a class="anchor" href="#c-links-canonicos" title="Permanent link">#</a></h2>
+<ul>
+<li><strong>Benchmark completo</strong>: <code>docs/research/nexvy-whitelabel/</code></li>
+<li><strong>Plano UI detalhado</strong>: <code>docs/research/nexvy-whitelabel/PLANO-LEVANTAMENTO-NEXVY.md</code> (branch <code>claude/competent-saha-13df32</code>)</li>
+<li><strong>INDEX 58 vídeos</strong>: <code>docs/research/nexvy-whitelabel/INDEX.md</code></li>
+<li><strong>Plano v2 histórico</strong>: <code>apps/erp-educacional/memory/ATENDIMENTO-PLANO-v2-SESSAO088.md</code></li>
+<li><strong>ADR Meta MBP</strong>: <code>docs/adr/017-nexvy-meta-business-partner.md</code></li>
+<li><strong>Migrations atendimento</strong>: <code>infra/supabase/migrations/20260412_atendimento_modulo_init.sql</code> + <code>20260413_atendimento_s3_queues.sql</code></li>
+</ul>
+<h2 id="d-metricas-de-sucesso-do-modulo-definidas-agora-medidas-apos-s7">D. Métricas de sucesso do módulo (definidas agora, medidas após S7)<a class="anchor" href="#d-metricas-de-sucesso-do-modulo-definidas-agora-medidas-apos-s7" title="Permanent link">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>Métrica</th>
+<th>Meta mês 3 pós-S10</th>
+<th>Como medir</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mensagens atendidas/dia</td>
+<td>200+</td>
+<td><code>messages WHERE DATE(created_at) = today</code></td>
+</tr>
+<tr>
+<td>Tempo médio primeira resposta</td>
+<td>&lt; 5min</td>
+<td>delta entre conversation.created_at e primeira msg outgoing</td>
+</tr>
+<tr>
+<td>Taxa de resolução sem intervenção humana (DS Agente)</td>
+<td>&gt; 40%</td>
+<td>conversations resolvidas por ações automação</td>
+</tr>
+<tr>
+<td>NPS atendimento</td>
+<td>&gt; 70</td>
+<td>pesquisa pós-resolução</td>
+</tr>
+<tr>
+<td>Deals criados via atendimento → matrícula</td>
+<td>&gt; 30%</td>
+<td>deals na etapa "Matrícula ativa" / total</td>
+</tr>
+<tr>
+<td>Uso do Kanban pela equipe</td>
+<td>100% dos atendentes semanal</td>
+<td>deals com <code>updated_at</code> nos últimos 7d por agente</td>
+</tr>
+<tr>
+<td>Integração com ERP (aluno criado via atendimento)</td>
+<td>&gt; 20/mês</td>
+<td>alunos WHERE source LIKE 'atendimento%'</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<p><em>Fim do plano. Este documento é a fonte única de verdade para o módulo Atendimento FIC. Toda decisão contrária a ele deve ser formalizada em novo ADR.</em>
+<em>Última atualização: 2026-04-20 · Sessão S089 · Claude Sonnet 4.6</em></p>
+    <div class="footer">
+      Fonte única de verdade para o módulo Atendimento FIC · Gerado a partir de <code>PLANO-REFORMULACAO-ATENDIMENTO-FIC.md</code>
+    </div>
+  </main>
+</div>
+</body>
+</html>
