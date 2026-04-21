@@ -30,7 +30,9 @@ export type PermissionModule =
   | "ds_voice"
   | "ds_ai"
   | "reports"
-  | "settings";
+  | "settings"
+  | "team_chats"
+  | "link_redirects";
 
 export const PERMISSION_MODULES: readonly {
   slug: PermissionModule;
@@ -100,6 +102,8 @@ export const PERMISSION_MODULES: readonly {
   },
   { slug: "reports", name: "Relatórios", actions: ["view", "export"] },
   { slug: "settings", name: "Configurações", actions: ["view", "edit"] },
+  { slug: "team_chats", name: "Chat Interno", actions: ["view", "create", "edit", "delete"] },
+  { slug: "link_redirects", name: "Links de Redirecionamento", actions: ["view", "create", "edit", "delete"] },
 ] as const;
 
 export type PermissionSet = Map<string, boolean>;

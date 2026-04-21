@@ -61,6 +61,8 @@ MODULES: list[Module] = [
     Module("ds_ai",        "DS Agente / DS Bot (IA)",        ("view", "create", "edit", "delete")),
     Module("reports",      "Relatórios",                     ("view", "export")),
     Module("settings",     "Configurações gerais",           ("view", "edit")),
+    Module("team_chats",   "Chat Interno (S8b)",             ("view", "create", "edit", "delete")),
+    Module("link_redirects","Links de Redirecionamento (S8b)",("view", "create", "edit", "delete")),
 ]
 
 
@@ -91,6 +93,8 @@ def agent_grants() -> dict[str, set[str]]:
         "ds_ai":        {"view"},
         "reports":      {"view"},                                      # sem export
         "settings":     set(),
+        "team_chats":   {"view", "create", "edit"},                    # atendente usa chat interno
+        "link_redirects":{"view"},                                      # vê links, não cria
     }
 
 
@@ -112,6 +116,8 @@ def agent_restricted_grants() -> dict[str, set[str]]:
         "ds_ai":        set(),
         "reports":      set(),
         "settings":     set(),
+        "team_chats":   {"view", "create"},                            # pode conversar, sem apagar
+        "link_redirects":set(),
     }
 
 
