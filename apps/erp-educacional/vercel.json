@@ -33,6 +33,14 @@
     {
       "path": "/api/financeiro/cron-expirar-pix",
       "schedule": "1 0 * * *"
+    },
+    {
+      "path": "/api/cron/sync-meta-templates",
+      "schedule": "*/30 * * * *"
+    },
+    {
+      "path": "/api/cron/dispatch-scheduled-messages",
+      "schedule": "* * * * *"
     }
   ]
 }
