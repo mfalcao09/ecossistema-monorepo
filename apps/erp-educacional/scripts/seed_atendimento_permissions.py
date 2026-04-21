@@ -90,7 +90,7 @@ def agent_grants() -> dict[str, set[str]]:
         "users":        set(),
         "roles":        set(),
         "ds_voice":     {"view", "create", "edit"},                    # S9: atendente curadoria biblioteca
-        "ds_ai":        {"view"},
+        "ds_ai":        {"view", "create", "edit"},                    # S10: atendente pode gerir agentes
         "reports":      {"view"},                                      # sem export
         "settings":     set(),
         "team_chats":   {"view", "create", "edit"},                    # atendente usa chat interno
