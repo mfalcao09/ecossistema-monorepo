@@ -1,0 +1,16 @@
+[ 00:00 ] By utilizing automation, you'll be able to focus on what really matters for your business to soar. Ready to get started? Just click here to access our automation feature.
+[ 00:10 ] You've got two options. Either create your own automation from scratch or use one of our handy templates. If you're new to Pipedrive, the templates are a great way to get familiar with the automation feature. You can see how fast it is to set up, usually about two minutes or so.
+[ 00:26 ] The setup process is straightforward. Just follow the template plate set up prompts and make your selections and keep going. You'll then get to choose the trigger conditions.
+[ 00:36 ] Then you can add any other necessary information and save it. Oh, and don't forget, all fields are required unless marked as optional.
+[ 00:47 ] Yay, you did it. Now you're on the automation canvas page. This is where you can see all the juicy little details of your workflow and make any tweaks or add any missing steps.
+[ 00:59 ] Once you make it active, your brand new automation is ready to roll. Now you can get back to crushing it. And if you ever need to make changes, no worries.
+[ 01:09 ] You can easily edit your automation from the automation page at any time. Excited to start creating your own automation? Just follow these simple steps.
+[ 01:20 ] First, click here and give it a name and a description if you like. Then click add trigger and pick the item and event that will trigger your automation in the sidebar. Let's say, for example, you want to send an email when someone's label changes to customer.
+[ 01:31 ] And then once they reply to it or click the link, you want a follow-up email sent. To do so, just select person updated as the trigger and specify the condition, the label has to change to customer.
+[ 01:49 ] Now, add the action, which in this case is send an email. And if you'd like, you can even use an email template to make things easier.
+[ 02:00 ] Then you can add any other necessary information. Next, you can add another condition, but don't forget to add a delay so that the email status is checked after a specific time has passed.
+[ 02:20 ] Maybe three days after the first email, for example. One last thing though, add an action to send that follow-up email of yours.
+[ 02:40 ] Finally, save the automation and select who it can be triggered by. Give everything a quick once over to make sure it's all set, and then activate.
+[ 02:57 ] Once you save it, you'll find your automation listed on the automatic list view. You can easily navigate and manage your automations by adding labels, filtering by triggers, actions, statuses, and owners, or using the search bar.
+[ 03:10 ] Plus, you can sort them any way you like. You can also edit, delete, or mark them as active or inactive. Inactive automations are grayed out in your Pipedrive account.
+[ 03:22 ] With the automation history feature, you can keep track of what your automations are up to and easily view a complete record of all action performed. So, now that you know the ropes, start creating your automatons in Pipedrive and watch the magic unfold.

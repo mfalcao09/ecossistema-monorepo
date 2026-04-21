@@ -1,0 +1,154 @@
+[ 00:00 ] Se o marketing da sua empresa gera um bom volume de leads, mas o seu time de SDRs perde muito tempo com leads desengajados e fora do perfil, este vídeo é para você.
+[ 00:10 ] Eu vou te ensinar como automatizar o fluxo de qualificação de leads da sua empresa com o Chatbot do Pipedrive.
+[ 00:17 ] porque vendas é o motor, né? Se você para o seu motor, cara, sua empresa para.
+[ 00:24 ] Meu nome é Felipe Traina, eu sou o CEO da Salestime, e nesse canal você encontra toda semana um novo vídeo sobre vendas consultivas, tecnologia para vendas e estratégias que realmente funcionam.
+[ 00:35 ] Se você não quiser ficar de fora dos próximos vídeos, aproveita para se inscrever agora. E se você quiser me acompanhar no dia a dia, você pode me seguir lá no Instagram.
+[ 00:42 ] Qualificar um lead pode dar trabalho, principalmente quando a sua empresa recebe um alto volume de leads gerados pelo marketing.
+[ 00:51 ] Nós temos de todos os tipos. Aquele lead que mal responde às tentativas de contato e o engraçado é que ele pediu para falar com você.
+[ 00:59 ] Nós temos o lead que não preenche corretamente os seus dados de contato, então nós não conseguimos nem mandar mensagem para o WhatsApp, nem ligar, muitas vezes nem enviar e-mail.
+[ 01:07 ] E também temos aqueles leads curiosos, que estão ali só para esgotar o tempo do SDR, roubar o tempo do SDR mesmo e nunca dão em nada.
+[ 01:17 ] Inclusive, se você é SDR, me conta aqui, quais foram as pérolas que você já pegou no seu processo de qualificação? Escreve aqui nos comentários.
+[ 01:24 ] O ponto é que este lead, ele rouba o tempo do seu time de SDRs.
+[ 01:30 ] Afetando, consequentemente, no número de reuniões que será agendadas para o seu time de vendas.
+[ 01:35 ] E qual é o resultado disso tudo? O time de vendas reclama que o SDR não está agendando uma reunião com a pessoa que está no momento de compra.
+[ 01:43 ] O SDR reclama que o marketing não está fornecendo os leads qualificados, tem muito lead frio, fora do perfil. Enquanto o time de marketing reclama que o SDR não sabe qualificar e o time de vendas não sabe vender.
+[ 01:55 ] Ninguém se responsabiliza aqui e vira aquela guerra de quem tem mais razão.
+[ 02:01 ] Isso acontece na sua empresa? Comenta aqui para mim. Pouquíssimas empresas possuem critérios de qualificação bem definidos.
+[ 02:09 ] A maioria nem sabe o que é uma qualificação, confundem qualificar com diagnosticar o lead.
+[ 02:15 ] Por isso, antes mesmo de te ensinar a automatizar o seu processo de qualificação,
+[ 02:20 ] eu vou te ensinar o que é uma qualificação de verdade. Em um processo de vendas, qualificar significa separar o lead bom do lead ruim.
+[ 02:28 ] Mas para entender o que é um lead bom, eu preciso definir os critérios que determinam que ele é um lead bom.
+[ 02:35 ] Por exemplo, aqui na Salestime. Para definir um lead bom, nós entendemos que é conversar com [ 02:45 ] CEOs, diretores de vendas ou gestores de vendas, ou seja, estou falando que o cargo precisa ser essas opções. Segundo, a empresa precisa ter pelo menos uma pessoa 100% dedicada ao processo comercial.
+[ 02:58 ] Terceiro, a empresa precisa faturar mínimo de R$70.000 por mês ou mais.
+[ 03:04 ] Então, estes três itens nos ajudam a entender qual é o lead bom do lead ruim, até mesmo pra gente priorizar o nosso atendimento no comercial.
+[ 03:13 ] Com base nessas informações, o nosso time tem direcionamentos para desqualificar o lead ou explorar um pouco mais o cenário.
+[ 03:22 ] Por exemplo, se a gente identifica que nós estamos falando com um SDR ou um closer, nós sabemos que essa pessoa não tem uma tomada de decisão.
+[ 03:30 ] Então, nós vamos precisar ali apresentar provavelmente duas vezes a proposta para que ela avance no processo.
+[ 03:36 ] Segundo, se nós sabemos que a empresa não tem uma pessoa 100% dedicada no processo, nós já entendemos aqui internamente que é uma, existe uma alta taxa de insucesso com empresas que não têm uma pessoa dedicada ali.
+[ 03:49 ] Então, eu vou questionar, "Está nos seus planos contratar uma pessoa?". Se a pessoa disser que não, então o SDR tem autonomia para desqualificar aquele lead naquele momento.
+[ 03:57 ] Se ele disser que sim, então a gente consegue avançar no processo. E por fim, o faturamento, se a gente entende que a empresa fatura menos de R$70.000 por mês, a gente vai investigar se ela tem,
+[ 04:10 ] pelo menos, algum budget reservado ali para fazer um investimento nesse projeto. Se ela não tiver, então não é o momento de investir, por exemplo, numa terceirização de pré-vendas.
+[ 04:19 ] Aí a gente direciona ela ou para uma consultoria, ou para uma mentoria para que a gente ajude ela a captar mais recursos no mercado antes de fazer um investimento um pouco mais alto.
+[ 04:27 ] Então, com essas informações, eu tenho mais precisão para direcionar o meu lead ou para o meu time de vendas, ou deixar ele maturando um pouquinho mais o meu marketing ali nutrindo junto com o SDR.
+[ 04:37 ] Agora você já sabe o que é uma qualificação. Mas se você tem dúvidas de quais perguntas você deve realizar no seu processo de qualificação,
+[ 04:44 ] assista esse vídeo aqui. Eu gravei um vídeo sobre a metodologia de qualificação BANT.
+[ 04:51 ] Ela vai te ensinar exatamente quais perguntas você precisa fazer. E claro, se você tiver ainda assim, dificuldades e precisar de uma ajuda de um especialista para te acompanhar na construção desse processo de qualificação,
+[ 05:01 ] eu vou deixar um link aqui na descrição desse vídeo para você entrar em contato com o nosso time de especialistas. Agora que você já tem a base, o próximo passo é a automatizar o seu processo de qualificação utilizando o Chatbot do Pipedrive.
+[ 05:12 ] Então, vem para minha tela agora. Primeiro passo é criar uma conta no Pipedrive. Para isso você vai pegar o link que eu disponibilizei aqui na descrição desse vídeo para vocês.
+[ 05:20 ] Copio o link no navegador. E depois você vai clicar aqui em "Teste grátis".
+[ 05:27 ] Por que usar o link? O link vai disponibilizar para você 30 dias grátis. Você pode usar a ferramenta antes mesmo de pagar.
+[ 05:33 ] Se não estiver aparecendo os 30 dias, copia novamente o link, vê se você copiou certinho e volta aqui que vai dar certo.
+[ 05:39 ] Depois de copiar o link e clicar em "Teste grátis", você vai colocar a sua informação de e-mail e o Pipedrive vai pedir algumas informações de cadastro. Bom, eu já tenho minha conta, então vou pular essa etapa.
+[ 05:49 ] Vamos aqui para o CRM. Assim que você acessar o CRM, você vai clicar aqui no canto esquerdo, no botãozinho de leads.
+[ 05:58 ] Normalmente ele já entra nessa tela de negócios, então você vai clicar aqui no leads. Felipe, é a primeira vez que eu estou vendo essa ferramenta, não tenho ideia do que é um CRM, do que é o Pipedrive.
+[ 06:09 ] Clica nesse outro vídeo aqui, onde eu explico exatamente o que é o Pipedrive, que é um CRM focado em melhorar a sua gestão de vendas, a sua gestão de follow-ups, a sua gestão de negócios.
+[ 06:20 ] Então com certeza ele vai te ajudar no dia a dia. Assiste esse vídeo, depois você volta aqui para o Chatbot, beleza?
+[ 06:27 ] Bom, dando sequência. Clicou aqui em leads, você vai clicar em "Configurar Chatbot".
+[ 06:33 ] Primeiro você vai escolher aqui, né, definir a identidade visual. Então você pode pegar algumas configurações já pré-estabelecidas ou personalizar as cores.
+[ 06:43 ] Eu vou usar essa corzinha aqui. Vou dar um "Continuar". Próximo passo, vou configurar então a imagem do chat, que é esse robozinho que aparece aqui.
+[ 06:52 ] E o idioma, vou manter os dois, vou avançar. Terceiro ponto é escolher o modelo de conversa.
+[ 06:58 ] O chatbot aqui, ele já traz alguns modelos para você usar, que é "Encontre mais leads", "Marque mais reuniões", "Qualifique e encaminhe leads", eh, ele põe até com uma flagzinha "Avançado", né, porque vai ter alguns fluxos, e "Converse com leads", que é utilizando o chat ao vivo.
+[ 07:16 ] Nós vamos clicar aqui nesse botão "Qualifique e encaminhe leads". Clique no "Criar playbook".
+[ 07:23 ] E agora o Pipedrive, ele gerou para nós aqui um chatbot.
+[ 07:30 ] O que que é isso aqui? Isso aqui é um fluxo, é um fluxo de ações que ele vai executar, enquanto a pessoa vai conversando aqui no chatbot. Só que qual que é a mágica? Ele faz isso de forma automática.
+[ 07:40 ] E a gente consegue colocar alguns objetivos aqui no final. Então, no dia a dia, imagine lá, você tá recebendo vários leads que provavelmente alguns são desqualificados, pessoas que estão ali só tomando o seu tempo.
+[ 07:54 ] Esse chat já vai servir de filtro. Ele vai começar a eliminar aquela galera que não faz sentido o seu time perder tempo, então isso vai te dar mais produtividade e é uma pré-qualificação automática.
+[ 08:05 ] Então, como é que funciona aqui? O chat, ele funciona da seguinte forma. Primeiro, você tem uma mensagem de saudação. O que que é essa mensagem?
+[ 08:11 ] Se a pessoa acessou o seu site e ela passou ali cinco segundos no site, essa mensagem vai fazer um pop-up ali automaticamente na tela da pessoa.
+[ 08:21 ] Então, o que que você pode fazer aqui? Você pode colocar uma mensagem personalizada. Então, "Oi, fulano, como é que eu posso te ajudar?".
+[ 08:27 ] Eh, aqui na verdade você não pode pôr o nome, que você não sabe o nome da pessoa, não captou essa informação. Mas que nem ele colocou, "Bem-vindo à nossa página!". Uma mensagem legal. Você pode, já chegar, "Oi, como é que eu posso te ajudar?". Então, isso estimula a pessoa a iniciar uma conversa.
+[ 08:42 ] Próximo passo, uma pergunta. No caso, né, volto a reforçar, isso aqui é um exemplo que ele criou, é um template.
+[ 08:50 ] Você pode usar o mesmo exemplo ou você pode ir personalizando, tá certo? Então, quando eu clico aqui na pergunta, ele vai abrir para mim a caixinha.
+[ 08:58 ] Então, o que que o que que eu trouxe hoje no nosso site hoje? Ah, Felipe, não quero fazer essa pergunta, não é assim que eu faço. É só você clicar aqui e editar da forma como você quiser, tá bom?
+[ 09:07 ] Então, dá para você colocar imagem, dá para você colocar em negrito, enfim, brinque à vontade.
+[ 09:12 ] Então, o que que nós estamos fazendo aqui? A gente já tá começando a pré-qualificar a pessoa. Então, eu pergunto, "O que que o trouxe aqui no site hoje?".
+[ 09:20 ] Eu dou três opções, "Quero comprar", "Só estou navegando" ou "Procurando pelo suporte". Eu vou cancelar aqui.
+[ 09:29 ] De acordo com as respostas, eu posso dar um direcionamento. Então, por exemplo, todo esse fluxo que aparece aqui embaixo, é para a opção "Quero comprar".
+[ 09:39 ] Porém, se a pessoa marca a opção "Só estou navegando", o que que o chat vai fazer?
+[ 09:44 ] Ele vai marcar esse lead como desqualificado e vai mandar uma mensagem para a pessoa. "Ótimo, eu estarei aqui se você precisar de ajuda".
+[ 09:52 ] Ah, Felipe, eu gostaria de fazer mais perguntas quando a pessoa responde isso. Legal, é só você clicar nessa caixinha verde.
+[ 09:59 ] E aqui você vai adicionando perguntas, capturas ou chat ao vivo. Então, daqui a pouco a gente vai ver mais desses exemplos.
+[ 10:06 ] Legal, então, e procurando pelo suporte, também. Posso desqualificar a pessoa e deixar uma mensagem mais específica, deixando um e-mail do suporte aqui, por exemplo.
+[ 10:15 ] Legal, agora eu quero avançar então, no, "Quero comprar". O que que ele vai fazer? Ele vai mandar uma mensagem para a pessoa, "Pô, que bom!".
+[ 10:21 ] E agora ele vai começar a coletar algumas informações importantes de contato.
+[ 10:27 ] "Você poderia deixar um e-mail de contato caso a conexão caia?". É muito importante, por quê? Muitas vezes a pessoa começa a, começa a conversar com você no chat.
+[ 10:38 ] Ela passa o e-mail, só que no mesmo, no meio do chat ela desiste. Mas se ela já te passou o e-mail, você consegue resgatar essa informação para voltar em contato com ela depois.
+[ 10:46 ] Então, aqui eu peço o e-mail, poderia também pedir o telefone, poderia também já pedir o nome da pessoa. Então, você pode colocar a quantidade de perguntas que você acha necessário.
+[ 10:55 ] E qual que é a mágica aqui? Esse campo "pessoa", por que que ele aparece assim, "pessoa", "by", "e-mail"? Porque é um campo do CRM.
+[ 11:03 ] Então, quando a pessoa preencher essa informação, essa informação já vai ser preenchida lá no cadastro da pessoa, no campo e-mail.
+[ 11:10 ] Então, eu não preciso depois atualizar. Então, olha que legal! É bacana. Tenho isso aqui em mãos.
+[ 11:15 ] Vou para uma próxima pergunta. "Qual o tamanho da sua empresa?". E aqui ele já cria uma série de variações.
+[ 11:21 ] Então, desde um a dez funcionários até mais de mil funcionários. E para cada classificação, ele já vai pré-qualificando ou coletando mais informações.
+[ 11:35 ] Então, se a pessoa tem de um até 50 funcionários, ele já mapeou que não faz parte do processo para falar com um vendedor.
+[ 11:45 ] Então, ele já direciona para uma página mais self-service. Então, ele marca o lead como desqualificado.
+[ 11:50 ] E manda uma mensagem. "Olha, com base na sua situação, eu acho que o nosso plano básico é a solução perfeita para você. Vá até a página X, Y, Z para saber mais".
+[ 11:58 ] Então, tô direcionando ele para outro caminho. Agora, se essa pessoa já se encaixa dentro de um fluxo mais atraente, então eu começo a fazer mais perguntas.
+[ 12:08 ] Se é de 50 a 100 funcionários, até 1000 funcionários, eu já mando uma mensagem, "Olha, vou marcar uma ligação com alguém da nossa equipe".
+[ 12:15 ] "Me passa o seu nome, obrigado, me passa o nome da tua empresa." Então, eu vou coletando mais informações.
+[ 12:21 ] Com essas informações em mãos, eu vou então aqui marcar esse lead agora como um lead qualificado.
+[ 12:30 ] Então, o chat está qualificando ele e vai direcionar ele agora para o meu funil de vendas. E aqui eu tenho dois caminhos, né?
+[ 12:35 ] Eu posso marcar ele para ele entrar no, no módulo de leads, ou até mesmo no módulo de negócios, onde eu defino o meu processo.
+[ 12:44 ] E independente dos dois aqui, a diferença é que quando eu coloco o módulo de negócios, eu já posso determinar a etapa do funil de vendas.
+[ 12:51 ] Enquanto do lead, ele vai ficar ali aguardando um contato. E eu posso colocar um prefixo, ou seja, no nome do negócio que vai aparecer depois lá no meu funil, para ajudar o vendedor que está recebendo esse contato, a entender melhor de onde que ele tá vindo.
+[ 13:06 ] Bacana. Além disso, né, eu posso já atribuir um proprietário.
+[ 13:13 ] E eu posso optar aqui por notificar essa pessoa por e-mail ou até mesmo já disponibilizar uma agenda dessa pessoa.
+[ 13:21 ] Então, quando eu clico aqui em "Agendar uma reunião", eu posso criar uma agenda para essa pessoa.
+[ 13:28 ] Posso vir aqui, determinar que essa pessoa tenha a agenda de, vamos pegar aqui das nove ao meio-dia, segunda, terça, quarta, quinta.
+[ 13:38 ] Continuar para detalhes da reunião. Vamos deixar tudo teste aqui mesmo.
+[ 13:45 ] Então, eu consigo pegar essa informação. Perfeito. Vamos voltar agora para o nosso chat.
+[ 13:54 ] E deixar habilitado aqui. O que que isso significa? Quando a pessoa chegar até esse passo aqui, o chat vai indicar para a pessoa o link para ela mesma agendar a reunião com o time de vendas.
+[ 14:08 ] Então, é como se essa pré-qualificação já tivesse ocorrido, então ela já vai conseguir uma agenda junto com o seu time de especialistas.
+[ 14:13 ] Aí bacana. E ele deixa uma mensagem, "Olha, quando você gostaria de marcar a reunião? Escolha o seu horário".
+[ 14:18 ] E aqui embaixo, "Olha, obrigado, você vai receber um e-mail, confirmando a reunião em breve, caso tenha mais perguntas, escreva para X, Y, Z".
+[ 14:26 ] Aí o e-mail que ele direcionou. O mesmo ele faz para essa opção.
+[ 14:30 ] E aqui na última opção, ele só coloca uma mensagem diferente. "Olha, com base na sua situação, eu acho que você pode se beneficiar de um plano totalmente personalizado. Eu vou agendar uma ligação com alguém da nossa equipe para você".
+[ 14:40 ] E aí ele coleta as informações, enfim, até chegar no ponto de deixar o lead qualificado.
+[ 14:46 ] Então, olha que legal! Você consegue pré-configurar uma série de perguntas que vão coletar informações para o seu time.
+[ 14:55 ] E que vão ajudar o seu time a priorizar o atendimento. Por quê? Você poderia simplesmente colocar aqui, "Ah, Felipe, eu quero que mesmo a pessoa que tá só navegando, procurando pelo suporte,
+[ 15:06 ] continue fazendo a, aqui a pré-qualificação e depois vá para o meu CRM para a gente entrar em contato". Só que, o seu time, ele vai priorizar o atendimento com quem quer comprar.
+[ 15:19 ] Quem só tá vendo ou quem tá só procurando o suporte, cara, você não precisa dar prioridade para atender primeiro. Então, com esse tipo de informação, você começa a aumentar a produtividade e inteligência do seu time ali de qualificação.
+[ 15:33 ] Você viu como é fácil criar o seu processo de qualificação de forma automatizada usando o Chatbot do Pipedrive?
+[ 15:40 ] Agora você tem que tomar um cuidado! Porque assim como ele é fácil, é muito fácil a gente ficar acrescentando um monte de perguntas aqui.
+[ 15:48 ] E é aí que entra aquele ponto que eu citei lá atrás. Muitas empresas confundem qualificar com diagnosticar.
+[ 15:54 ] Quanto mais perguntas você colocar no seu fluxo de qualificação, menos conversão você vai ter.
+[ 16:01 ] Vai chegar uma hora a pessoa falar, "Puxa, eu quero falar com alguém". Vou ficar respondendo um monte de questionário aqui, ela vai sair.
+[ 16:05 ] Então, por isso, é importante você concentrar, neste primeiro momento, as perguntas que te ajudam a separar o lead bom do lead ruim.
+[ 16:15 ] Sendo assim, você vai então, aumentar a taxa de conversão. E o legal, você depois vai colocar isso aqui dentro de um fluxo de automação, que eu já vou mostrar rapidinho para vocês, já já.
+[ 16:28 ] Mas antes, eu quero que vocês vejam na prática agora como é que funciona esse Chatbot. Você consegue testar antes mesmo de disponibilizar no seu site.
+[ 16:36 ] Então, aqui no no canto direito, veja que ele fica disponibilizando para mim o chat. Então, eu consigo clicar nele.
+[ 16:42 ] E iniciar uma conversa. Então, vamos lá. Bem-vindo à nossa página. O que trouxe ao nosso site hoje? Ah, quero comprar.
+[ 16:50 ] Então, ele finge que tá escrevendo. Que bom. Tá seguindo aqui, ó.
+[ 16:56 ] Você poderia deixar um e-mail de contato? Aí eu vou lá e escrevo, "Felipe@".
+[ 17:08 ] Vamos pôr aqui, "felipe.traina@salestime.com.br". Legal.
+[ 17:20 ] Qual o tamanho da sua empresa? Então, eu vou colocar aqui de 100 a 1000 funcionários, porque eu quero passar no processo.
+[ 17:30 ] Vou marcar uma ligação com alguém da nossa equipe. Qual o seu nome? Então, "Felipe".
+[ 17:39 ] Obrigado. Qual o nome da sua empresa? Salestime.
+[ 17:49 ] Depois ele vai perguntar, então, "Obrigado. Eh, você vai receber um e-mail confirmando a reunião em breve. Caso tenha mais perguntas, escreva para", aí o e-mail que ele direcionou.
+[ 17:57 ] Então, eu caí exatamente neste fluxo aqui, ó, que é o de 100 a 1000 funcionários.
+[ 18:04 ] Que no final ele realmente, ele direciona aqui, ele já criou um lead.
+[ 18:10 ] Bacana. Então, você consegue testar o teu fluxo. E depois você consegue, obviamente, né, eu vou salvar aqui, mas depois eu consigo ver lá no, na minha tela de leads, se esse cara entrou ou não.
+[ 18:22 ] Bom, terminou o fluxo. Clique no "Salvar", tá? Lembre sempre de clicar no "Salvar" para você não perder nenhuma informação.
+[ 18:28 ] Então, eu vou voltar aqui no fluxo. Perfil e tema é onde a gente vai configurar novamente, se caso você queira, eh, editar o tema.
+[ 18:36 ] E ponto importante, instalação. Você vai instalar esse chatbot no seu site para que ele apareça para o seu lead.
+[ 18:44 ] Então, se você manja de WordPress, enfim, do site, como instalar isso manualmente, você vai pegar as instruções que ele passa aqui embaixo, e você vai seguir o processo.
+[ 18:53 ] Caso essa não seja a sua praia, você tem a opção de clicar nesse botão e enviar as instruções de instalação para a pessoa técnica que toma conta disso para você.
+[ 19:04 ] Então, coloca aqui o e-mail dela, clique em "Enviar", ela vai receber essas configurações.
+[ 19:10 ] Depois que você receber as configurações, você vai pegar o chat, o, o link do seu site.
+[ 19:15 ] Então, por exemplo, o meu site é o salestime.com.br. Você vai pegar o site, colocar aqui embaixo e clicar no "Verificar".
+[ 19:22 ] Então, se o link estiver ok, ele vai aparecer um verdinho aqui. No caso, eu não, o meu chat tá no, na minha conta do Pipedrive.
+[ 19:30 ] Então, na Salestime nós temos aqui, ó, o chat. Porém, ele está na, em outra conta, isso aqui é uma conta de demonstração.
+[ 19:37 ] No caso de vocês, vai aparecer aqui um chequezinho ok. O próximo passo, assim que o seu chatbot já estiver funcionando, é acessar a sua caixa de entrada de leads e trabalhar os leads que vão entrando aqui.
+[ 19:50 ] Lembrando que se você configurar para ele entrar na caixa de leads, então você vai sempre acessar essa etapa, "Caixa de leads".
+[ 19:57 ] Mas se você configurar para ele entrar no negócio do Pipedrive, você vai entrar nesta outra tela.
+[ 20:04 ] Legal? E o que que é bacana aqui? Assim que essa, esse lead é criado, você consegue criar automações no Pipedrive, por exemplo, aqui,
+[ 20:13 ] clica no botãozinho de mais, automações. E você pode desenvolver automações que vão disparar um e-mail automático para esse lead.
+[ 20:23 ] Então, você pode criar aqui as automações que quando o lead for adicionado, eu quero então a condição eu posso filtrar, né? Eu posso colocar aqui a origem, não, não tem, aqui a fonte é. Cadê? Chatbot.
+[ 20:47 ] Eu posso colocar que quando a fonte da minha origem for chatbot, eu quero, então, a condição instantânea. Ele vai verificar, "A fonte é Chatbot?".
+[ 20:53 ] É. Então ele vai enviar o e-mail automático para esse lead, do tipo, "Olha, obrigado por ter entrado em contato com a gente, em breve a gente já vai falar com vocês".
+[ 21:03 ] E aí, com isso, você vai automatizando também o seu processo de vendas.
+[ 21:31 ] Agora que você já sabe como automatizar o seu processo de qualificação, você precisa colocar isso em prática.
+[ 21:37 ] E para começar, novamente, clique aqui embaixo, caso você não tenha feito ainda. Pegue o link do Pipedrive e faça sua conta grátis ali por 30 dias.
+[ 21:46 ] Se você precisar de ajuda para configurar o Pipedrive, nós temos esse serviço aqui na Salestime. A gente configura toda a ferramenta para você.
+[ 21:52 ] A gente faz uma reunião de diagnóstico para entender os teus processos, as suas informações e depois a gente implementa tudo isso dentro da ferramenta.
+[ 21:59 ] E na sequência a gente capacita você e o seu time. É só entrar em contato com a gente, o link tá aqui na descrição. Eu tenho certeza que a gente pode te ajudar.
+[ 22:07 ] E para você dar o próximo passo na sua gestão, eu vou indicar esse próximo vídeo aqui para você. Corre lá, eu te vejo no próximo vídeo.

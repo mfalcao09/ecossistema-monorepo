@@ -1,0 +1,32 @@
+Com certeza! Aqui está a análise completa do vídeo, com todos os momentos importantes e suas descrições:
+
+[00:00] Abertura do vídeo com a logo da Pipedrive.
+[00:01] Tela branca com a logo da Pipedrive, um ícone de ciclo e a logo da Asana, indicando a integração.
+[00:04] Tela da Pipedrive mostrando o painel de "Deals" com um deal chamado "GDG DevFest Deal" no valor de $19.500.
+[00:05] O cursor clica no botão "Won" (Ganho) para indicar que o negócio foi fechado.
+[00:06] A tela muda para a interface da Asana, na visão "Event Managers".
+[00:07] Um novo projeto chamado "GDG DevFest" aparece na lista de projetos.
+[00:09] O cursor clica no projeto "GDG DevFest".
+[00:10] A tela do projeto "GDG DevFest" é exibida, mostrando detalhes como organização, contato, valor e uma descrição.
+[00:12] Retorno à tela da Pipedrive, no painel de "Deals".
+[00:13] Um deal chamado "GDG DevFest Deal" é arrastado da coluna "Contact Made" para a coluna "Demo Scheduled".
+[00:15] A tela muda para a interface da Asana, na visão "Creative requests" e aba "Board".
+[00:16] Um novo card de tarefa chamado "GDG DevFest Demo Deck Design" aparece na coluna "To do".
+[00:17] O cursor clica na tarefa "GDG DevFest Demo Deck Design".
+[00:18] A tela de detalhes da tarefa é exibida, mostrando informações como "Assignee", "Due date", "Projects", "Dependencies", "Priority", "Status", "Description", "Organization", "Contact" e "Value".
+[00:20] Retorno à tela da Pipedrive, na visão "Leads Inbox".
+[00:21] Um novo lead chamado "GDG DevFest lead" é adicionado à lista.
+[00:22] O cursor clica no lead "GDG DevFest lead".
+[00:23] A tela de detalhes do lead "GDG DevFest lead" é exibida, mostrando informações como valor, data de fechamento esperada, fonte do lead, proprietário e detalhes de contato.
+[00:25] A tela muda para a interface da Asana, na visão "Event Planning" e aba "Board".
+[00:26] Um novo card de tarefa chamado "Intro meeting presentation for GDG DevFest lead" aparece na coluna "To do".
+[00:27] O cursor clica na tarefa "Intro meeting presentation for GDG DevFest lead".
+[00:28] A tela de detalhes da tarefa é exibida, mostrando informações como "Assignee", "Due date", "Projects", "Dependencies", "Description", "Organization", "Contact" e "Lead Value".
+[00:30] Retorno à tela da Pipedrive, com uma interface minimalista.
+[00:31] O cursor clica em um menu de três pontos no canto superior direito.
+[00:32] Um menu suspenso aparece com a opção "→ Asana".
+[00:33] Uma janela pop-up "→ Asana" é exibida, mostrando uma lista de tarefas ou projetos para sincronização.
+[00:34] Marcas de seleção são adicionadas a alguns itens da lista e o botão verde de confirmação é clicado.
+[00:36] A interface da Pipedrive retorna, e um botão "View in Asana" (Ver no Asana) aparece na parte inferior.
+[00:38] A tela se divide, mostrando a logo da Pipedrive no lado esquerdo com "Up next" e "Read more now:" no lado direito.
+[00:48] Fim do vídeo.

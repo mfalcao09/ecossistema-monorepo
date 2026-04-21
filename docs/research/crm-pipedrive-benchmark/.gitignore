@@ -1,0 +1,9 @@
+# Arquivos pesados que NÃO devem ir pro git
+_videos/
+*.mp4
+*.info.json
+frame_*.jpg
+process.log
+
+# O resto (README.md, transcricao.txt, timestamps.txt, INDEX.md, process_videos.py) vai normal
+process.log*

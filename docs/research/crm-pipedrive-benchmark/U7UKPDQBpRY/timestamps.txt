@@ -1,0 +1,17 @@
+[00:00] Cliente no PipeDrive
+[00:01] Conversa no WhatsApp
+[00:04] Troca de informações entre PipeDrive e WhatsApp
+[00:07] Salva tempo
+[00:08] Melhora a transparência
+[00:10] Aumenta a geração de leads
+[00:13] Conversa no PipeDrive
+[00:15] Mensagens no PipeDrive
+[00:17] Conversas no PipeDrive
+[00:19] Conversa por WhatsApp
+[00:22] Atribua a um membro da sua equipa
+[00:27] Conversa com um possível cliente
+[00:30] Cria um contacto
+[00:32] Adiciona um novo lead
+[00:36] Imagens decorativas
+[00:38] Conversa com um possível cliente
+[00:43] Página do WhatsApp by Twilio no PipeDrive

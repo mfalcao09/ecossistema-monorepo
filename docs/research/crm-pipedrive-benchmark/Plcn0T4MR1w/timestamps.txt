@@ -1,0 +1,33 @@
+Aqui está um mapeamento exaustivo dos momentos importantes no vídeo:
+
+[00:00] Início da apresentação. Tela inicial do Pipedrive, mostrando o pipeline de vendas.
+[00:01] Navegação para a aba "Pessoas" na seção "Contatos".
+[00:03] Seleção de um filtro na lista de pessoas.
+[00:04] Criação de um novo filtro, especificando condições para a seleção de pessoas.
+[00:07] Edição de um filtro existente, mostrando a personalização de condições e visibilidade.
+[00:11] Visualização da lista de contatos filtrados.
+[00:16] Seleção de vários contatos para envio de e-mail em grupo.
+[00:18] Ativação da opção de envio de e-mail em grupo.
+[00:20] Navegação para a caixa de e-mails, especificamente para criar um novo e-mail.
+[00:22] Seleção de um modelo de e-mail para a mensagem em grupo.
+[00:26] Edição do modelo de e-mail, mostrando a utilização de marcadores de mesclagem (merge tags).
+[00:30] Demonstração de como inserir marcadores de mesclagem (merge tags) de pessoa no modelo.
+[00:33] Retorno à lista de contatos com a opção de envio de e-mail em grupo ativada.
+[00:41] Clique no botão "Enviar e-mail em grupo".
+[00:42] Tela de "Enviar e-mail em grupo" com a lista de destinatários.
+[00:47] Demonstração de busca e filtragem de destinatários.
+[00:49] Seleção de um modelo de e-mail para o envio em grupo.
+[00:53] Configuração da visibilidade do e-mail dentro da empresa.
+[00:57] Habilitando e desabilitando o rastreamento de e-mail.
+[01:03] Notificação de informações ausentes (e-mail ou campo de mesclagem vazio) para alguns contatos.
+[01:08] Exemplo de erro com campo de mesclagem vazio.
+[01:10] Exemplo de erro com e-mail ausente.
+[01:21] Remoção de contatos com informações ausentes da lista de destinatários.
+[01:26] Clique no botão "Enviar 11 mensagens".
+[01:28] Navegação para a seção "Outbox" da caixa de e-mails para monitorar o envio em grupo.
+[01:30] Visualização do status de envio dos e-mails em grupo.
+[01:45] Navegação para a seção "Caixa de entrada" do e-mail.
+[01:47] Visualização de um e-mail específico enviado em grupo na caixa de entrada.
+[01:53] Navegação para o perfil de um contato individual, mostrando o e-mail enviado registrado na linha do tempo.
+[01:57] Detalhes do e-mail enviado no perfil do contato.
+[02:00] Finalização da apresentação.

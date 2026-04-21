@@ -1,0 +1,53 @@
+[00:00] Visão geral do pipeline de vendas, mostrando diferentes estágios de negócios.
+[00:03] Arrastando e soltando um negócio de um estágio para outro.
+[00:08] Arrastando um negócio para o estágio 'Negociações Iniciadas'.
+[00:10] Arrastando um negócio para o estágio 'Contrato Assinado'.
+[00:12] Arrastando um negócio de 'Contatos' para 'Proposta Feita'.
+[00:15] Arrastando um negócio de 'Negociações Iniciadas' para 'Contrato Assinado'.
+[00:18] Clicando no ícone '+' para agendar uma atividade.
+[00:20] Tela de agendamento de atividade.
+[00:21] Alterando o tipo de atividade para 'Ligação'.
+[00:25] Selecionando o tipo de atividade 'Reunião'.
+[00:26] Alterando a data da atividade.
+[00:29] Alterando a descrição da atividade.
+[00:30] Adicionando um link de reunião Zoom.
+[00:33] Vinculando a atividade a uma pessoa de contato e organização.
+[00:38] Salvando e enviando convites para a atividade.
+[00:39] Visualizando atividades pendentes no pipeline de vendas.
+[00:43] Visualizando uma atividade atrasada no pipeline.
+[00:45] Navegando para a visualização de atividades.
+[00:47] Visão em lista de todas as atividades.
+[00:48] Filtros de atividade por tipo.
+[00:52] Filtros de atividade por usuário.
+[00:54] Filtros de atividade por período de tempo.
+[00:56] Filtro de usuário mostrando opções de seleção.
+[00:59] Visão de calendário das atividades.
+[01:06] Agendando uma atividade diretamente do calendário.
+[01:08] Arrastando e soltando uma atividade para um novo horário.
+[01:12] Redimensionando uma atividade para alterar sua duração.
+[01:14] Adicionando uma atividade sem horário específico.
+[01:21] Marcando uma atividade como concluída na visualização de lista.
+[01:24] Marcando uma atividade como concluída no pipeline de vendas.
+[01:28] Marcando uma atividade como concluída na página de detalhes do negócio.
+[01:31] Marcando uma atividade como concluída na caixa de entrada do Pipedrive.
+[01:34] Agendando a próxima atividade imediatamente após concluir uma.
+[01:38] Adicionando detalhes e notas para a próxima atividade.
+[01:48] Salvando a próxima atividade.
+[01:50] Acessando as configurações da empresa.
+[01:52] Navegando para as configurações de sincronização do calendário.
+[01:56] Opções de sincronização do calendário com diferentes provedores.
+[02:00] Configurando a sincronização do calendário (sincronização de duas vias).
+[02:11] Sincronização de uma via do calendário.
+[02:15] Retornando à visão geral do pipeline.
+[02:17] Acessando as configurações de tipos de atividade.
+[02:20] Adicionando um novo tipo de atividade.
+[02:25] Retornando ao pipeline de vendas.
+[02:27] Acessando as configurações de notificações.
+[02:30] Configurando lembretes de atividades por e-mail.
+[02:33] Visualização do aplicativo móvel Pipedrive, mostrando a programação.
+[02:37] Rolando a lista de atividades no aplicativo móvel.
+[02:39] Usando a funcionalidade 'Propor Horários'.
+[02:40] Selecionando horários disponíveis para uma reunião.
+[02:46] Inserindo detalhes da reunião e informações do convidado.
+[02:50] Copiando o link para compartilhar os horários propostos.
+[02:54] Horários de reunião marcados como agendados.

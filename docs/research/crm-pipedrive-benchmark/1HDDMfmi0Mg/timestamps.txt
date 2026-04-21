@@ -1,0 +1,42 @@
+[00:00] Como ganhar um negócio com o Pipedrive.
+[00:05] Como gerenciar todos os seus negócios e tarefas com a ferramenta de gerenciamento de projetos do Pipedrive.
+[00:15] Painel de Projetos.
+[00:20] Visão de quadro de projetos.
+[00:27] Criar novo projeto.
+[00:30] Adicionar novo quadro.
+[00:33] Filtrar projetos.
+[00:36] Personalizar cartões de projeto.
+[00:41] Progresso geral do projeto e prazos.
+[00:54] Visão em lista de projetos.
+[00:58] Filtros rápidos.
+[01:06] Opção de arquivar um projeto.
+[01:12] Projetos arquivados.
+[01:21] Opções para salvar projetos.
+[01:25] Configurações de salvamento de projetos.
+[01:36] Criar um novo projeto a partir de uma negociação.
+[01:42] Detalhes do projeto.
+[01:52] Iniciar um projeto do zero.
+[02:07] Acessar o painel lateral.
+[02:14] Visão detalhada do projeto.
+[02:18] Andamento do projeto.
+[02:29] Detalhes do projeto.
+[02:37] Configurações de campos personalizados.
+[02:40] Negociações vinculadas ao projeto.
+[02:44] Visão detalhada da negociação.
+[02:54] Gerenciamento do plano de projeto.
+[02:59] Criação de tarefas e atividades.
+[03:04] Agendar uma atividade.
+[03:08] Criar uma lista de tarefas.
+[03:12] Adicionar subtarefas.
+[03:17] Opção de adicionar subtarefas.
+[03:31] Mover atividade.
+[03:39] Visão em lista de tarefas.
+[03:49] Upload de arquivos.
+[03:53] Adicionar notas.
+[03:59] Gerenciar e-mails.
+[04:06] Recurso de documentos inteligentes.
+[04:12] Guia de modelos.
+[04:18] Criar modelo de projeto.
+[04:22] Adicionar modelo de planejamento de orçamento.
+[04:41] Converter projeto existente em modelo.
+[04:48] Selecionar modelo de projeto.

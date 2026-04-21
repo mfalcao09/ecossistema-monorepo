@@ -1,0 +1,34 @@
+[00:00] Visão geral do pipeline de vendas, mostrando diferentes estágios de negócio.
+[00:05] Acesso ao modo de previsão no Pipedrive.
+[00:07] Visão de previsão no Pipedrive, mostrando negócios por mês.
+[00:10] Arrastando um negócio para um mês específico na visão de previsão.
+[00:15] Configurando a data de fechamento esperada de um negócio.
+[00:23] Arrastando um negócio sem data de fechamento esperada para um mês específico.
+[00:26] Definindo a data de fechamento esperada ao arrastar e soltar.
+[00:28] Editando a data de fechamento esperada na visão de detalhes do negócio.
+[00:32] Editando a data de fechamento esperada na visão de lista de negócios.
+[00:38] Criação de um campo de data personalizado para um negócio.
+[00:43] Selecionando um campo de data personalizado para o modo de previsão.
+[00:46] Valores totais e previstos na visão de previsão.
+[00:57] Abrindo as opções de personalização da visão de previsão.
+[01:00] Selecionando a opção "Negócios abertos primeiro" para priorizar negócios ativos.
+[01:06] Priorizando negócios com mais progresso no pipeline na visão de previsão.
+[01:10] Visão detalhada de um negócio com a barra de progresso no pipeline.
+[01:15] Um negócio com data de fechamento esperada vazia.
+[01:17] Valores previstos para todos os negócios, incluindo abertos e ganhos.
+[01:20] Visão detalhada de um negócio, mostrando informações e notas.
+[01:24] Arrastando um negócio para um mês diferente na visão de previsão para atualizar a data de fechamento esperada.
+[01:31] O calendário aparece para confirmar a nova data de fechamento esperada.
+[01:35] Filtrando negócios por pipeline específico.
+[01:38] Abrindo o menu de filtros complexos para negócios.
+[01:40] Selecionando um filtro personalizado para negócios.
+[01:42] Aplicando um filtro para mostrar apenas negócios ganhos.
+[01:44] A probabilidade de um negócio, mostrando a porcentagem de chance de ganho.
+[01:48] Configurando a probabilidade de ganho de um negócio para cada estágio do pipeline.
+[01:53] A probabilidade é exibida no cabeçalho do estágio.
+[01:55] Configurando uma probabilidade de 50% para o estágio "Qualificado".
+[01:59] O valor ponderado dos negócios é exibido no cabeçalho.
+[02:00] O valor total dos negócios é exibido no cabeçalho.
+[02:04] O valor ponderado dos negócios é exibido no cabeçalho.
+[02:07] O valor total dos negócios é exibido no cabeçalho.
+[02:11] Conclusão do tutorial.

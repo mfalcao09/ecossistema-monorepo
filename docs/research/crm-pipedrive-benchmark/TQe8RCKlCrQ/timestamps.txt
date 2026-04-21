@@ -1,0 +1,18 @@
+[00:00] Logotipo Pipe Drive
+[00:03] Logotipo Pipe Drive e Monday.com
+[00:08] Texto: Consiga essa integração para aumentar a sua produtividade
+[00:11] Texto: Consiga essa integração para economizar seu tempo
+[00:13] Texto: Consiga essa integração para planejar e monitorar tarefas
+[00:14] Texto: Consiga essa integração para gerenciar sua equipe
+[00:16] Texto: Consiga essa integração para sincronizar todos os dados
+[00:17] Texto: Consiga essa integração para melhorar os fluxos de trabalho
+[00:18] Texto: Consiga essa integração para reestruturar todos os processos
+[00:18] Texto: Consiga essa integração para automatizar as tarefas
+[00:20] Texto: Consiga essa integração para copiar dados do Pipe Drive
+[00:23] Telas de automação do monday.com
+[00:25] Texto: Configure sincronizações e fluxos de trabalho preferenciais
+[00:32] Menu suspenso de mapeamento de campos
+[00:33] Texto: Escolha os campos para mapear do Pipe Drive para o Monday
+[00:43] Tela de gerenciamento de tarefas no monday.com
+[00:43] Texto: Obtenha itens criados automaticamente no monday.com
+[00:50] Logotipo Pipe Drive e Monday.com

@@ -1,0 +1,79 @@
+Com prazer! Aqui está a análise detalhada do vídeo:
+
+[00:00] Apresentação do instrutor James Campbell
+[00:01] Boas-vindas ao Pipedrive
+[00:04] Início da demonstração do Pipedrive
+[00:13] Foco no pipeline de vendas do Pipedrive
+[00:18] Título: "Vendas simplificadas: Libere o poder do Pipedrive em apenas 6 minutos"
+[00:21] Visão do pipeline de vendas com "deals" em diferentes estágios
+[00:28] Explicação do pipeline como um "mapa do tesouro"
+[00:36] Customização do pipeline
+[00:39] Renomeando estágios do pipeline
+[00:41] Adicionando um novo estágio ao pipeline
+[00:42] Excluindo um estágio do pipeline
+[00:44] Reorganizando a ordem dos estágios do pipeline
+[00:46] Criando múltiplos pipelines
+[00:48] Selecionando um pipeline existente ("Sucesso do Cliente")
+[00:53] Explicação dos "deals" (negócios/oportunidades) no pipeline
+[01:03] Arrastando e soltando um "deal" para um novo estágio
+[01:05] Marcando um "deal" como "Perdido"
+[01:10] Marcando um "deal" como "Ganho"
+[01:16] Utilizando filtros para encontrar "deals" (por exemplo, "Todos os deals ganhos")
+[01:23] Adicionando um novo "deal" individualmente
+[01:28] Preenchendo os detalhes de um novo "deal"
+[01:32] Selecionando o estágio inicial do "deal"
+[01:42] Importando dados em massa para o Pipedrive
+[01:45] Opções para importar dados: de uma planilha ou de outro software
+[01:53] Utilizando a "List View" (Exibição em lista)
+[01:56] Filtrando a exibição em lista por proprietário
+[02:00] Editando múltiplos "deals" em massa
+[02:04] Retornando ao "Pipeline View"
+[02:13] Apresentação da área de "Leads" para qualificação de prospects
+[02:16] Visão da "Leads Inbox" (Caixa de entrada de leads)
+[02:21] Detalhes de um "lead" individual
+[02:26] Convertendo um "lead" em um "deal"
+[02:30] O "lead" convertido aparece no pipeline de "deals"
+[02:36] Abrindo a "Detail View" (Exibição detalhada) de um "deal"
+[02:45] Barra de progresso do "deal" na parte superior
+[02:52] Seções da barra lateral na "Detail View" (detalhes, organização, pessoa)
+[03:04] Gerenciando a visibilidade e a ordem das seções da barra lateral
+[03:10] Detalhes do "deal", informações da organização e contatos
+[03:18] Customizando campos dentro das seções (por exemplo, informações da pessoa)
+[03:22] Adicionando um campo personalizado à seção "Pessoa"
+[03:29] Hub de comunicações relacionadas ao "deal" (notas, atividades, chamadas, e-mails)
+[03:36] Agendando uma chamada
+[03:38] Enviando um e-mail
+[03:40] Upload de arquivos e documentos
+[03:41] Seção "Focus" mostrando ações pendentes (atividades, rascunhos de e-mail)
+[03:49] Seção "History" (Histórico) exibindo todos os itens e atualizações do "deal"
+[04:00] Gerenciando comunicações por e-mail na "Sales Inbox"
+[04:05] Enviando um e-mail diretamente da "Detail View" de um "deal"
+[04:10] Criando um novo contato a partir de um e-mail recebido
+[04:17] Vinculando um e-mail a um contato existente ou a um "deal"
+[04:24] Utilizando modelos de e-mail e campos de mesclagem para personalizar mensagens
+[04:35] Rastreamento de aberturas de e-mail e cliques em links
+[04:39] Enviando e-mails em grupo
+[04:47] Gerenciando atividades no Pipedrive (calendário e lista)
+[04:50] Visão do calendário de atividades
+[04:59] Agendando uma atividade a partir do "Pipeline View"
+[05:03] Agendando uma atividade a partir da "Detail View"
+[05:06] Sincronização com o provedor de calendário preferido
+[05:11] Visão em lista das atividades (tarefas pendentes, vencidas, de hoje)
+[05:18] Utilizando a ferramenta de agendamento de calendário para propor horários de reunião
+[05:24] Compartilhando um link para agendamento de reunião
+[05:28] Acessando "Insights" para medir o sucesso
+[05:30] Visão do "My Dashboard" (Meu painel) com diferentes relatórios
+[05:35] Exemplos de relatórios: "Deals won over time" (Negócios ganhos ao longo do tempo), "Lead performance report" (Relatório de desempenho de leads)
+[05:41] Criando um novo relatório (por exemplo, "Deal progress" - Progresso do negócio)
+[05:49] Utilizando "Goals" (Metas) para definir alvos
+[05:54] Configurando uma nova meta baseada em "Deals"
+[05:58] Recapitulação das funcionalidades do Pipedrive
+[06:03] Apresentação da funcionalidade de "Automações"
+[06:06] Utilizando um modelo de automação: "Engage with deals that are progressing" (Engajar com negócios em progresso)
+[06:10] Configurando o gatilho e a ação da automação (enviar e-mail quando o "deal" muda de estágio)
+[06:17] Visão do fluxo de automação criado
+[06:21] Criando uma automação personalizada do zero
+[06:25] Conclusão da demonstração e agradecimento
+[06:30] Convite para explorar a base de conhecimento e vídeos tutoriais
+[06:39] Boas-vindas aos usuários do Pipedrive e "Happy selling!"
+[06:40] Logotipo Pipedrive

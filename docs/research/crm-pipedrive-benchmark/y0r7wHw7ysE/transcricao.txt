@@ -1,0 +1,38 @@
+Claro! Aqui está a transcrição completa do vídeo:
+
+[00:00] Before you proceed with the import, let's start by making sure your data and account are set up correctly.
+[00:06] Step one: Understand how data is organized in Pipedrive.
+[00:10] This step is important because it helps you name your spreadsheet columns the right way, use Pipedrive's terms correctly, and understand how its structure might be different from what you're used to.
+[00:20] If you haven't looked into this yet, we recommend watching the short tutorial attached.
+[00:26] If you're already familiar with this, make sure your file shows the clear relationships between different types of data.
+[00:30] For example, if you're importing contacts that are linked to deals, those links need to be clear.
+[00:37] Use a shared name or unique ID to match them correctly.
+[00:41] Step two: Prepare your account.
+[00:46] Now that you know how data works in Pipedrive, it's time to get your account ready.
+[00:48] Start by checking your pipeline stages.
+[00:50] If you want deals to be imported directly into a specific stage, make sure to include the correct stage number in your spreadsheet.
+[00:57] Next, review your data fields.
+[01:00] Each field should have its own column.
+[01:02] This helps Pipedrive recognize and match the data correctly.
+[01:08] Finally, make sure all relevant users and data owners have been added to the account.
+[01:13] This ensures the imported data is assigned to the right people.
+[01:17] Step three: Prepare your spreadsheet.
+[01:21] Start by removing any duplicate entries to avoid importing the same data twice.
+[01:27] Make sure each column has a clear and accurate header, like first name, deal title, or organization name.
+[01:33] Delete any blank columns you don't need.
+[01:36] Check for data issues, like letters in date fields or incorrect number formats.
+[01:42] Also, make sure your date format is consistent across the sheet.
+[01:46] Use either day, month, year or month, date, year, but don't mix both.
+[01:51] And lastly, review your contact and organization fields.
+[01:55] Avoid using placeholders like TBD or unknown, and just make sure the information is clean and complete.
+[02:01] Once everything is ready,
+[02:04] download your file in either CSV or XLS format to prepare for the upload.
+[02:09] Now let's quickly recap what you need for a successful import.
+[02:12] Your pipelines, stages, and custom fields are set up.
+[02:14] All users and data owners are added to the account.
+[02:17] Duplicate entries are removed.
+[02:19] Blank columns are deleted.
+[02:21] Column headers are clear and accurate.
+[02:24] Date formats are consistent throughout the file.
+[02:27] Relationships between items are clearly defined.
+[02:31] With all this in place, you're ready to move on to the import.

@@ -1,0 +1,22 @@
+Claro! Aqui está o mapeamento EXAUSTIVO dos momentos importantes do vídeo:
+
+[00:00] Visão geral do Trello, mostrando diferentes projetos em várias fases.
+[00:01] Foca em um cartão do Trello, "School district deal Site 74" na coluna "Survey Scheduled".
+[00:02] Arrastando o cartão "School district deal Site 74" da coluna "Survey Scheduled" para a coluna "Survey performed".
+[00:04] Foca no cartão "Site 111989" na coluna "Form submitted".
+[00:05] Clicando no cartão "Site 111989", abrindo a visão detalhada do cartão.
+[00:06] Mostrando o conteúdo do cartão "Site 111989", incluindo descrição e anexos.
+[00:09] Transição para a visão do Pipedrive, mostrando um pipeline de negócios.
+[00:10] Mostra um gráfico de insights no Pipedrive, exibindo atividades completadas e planejadas por usuário e tipo.
+[00:12] Clicando no gráfico, abrindo uma tabela detalhada de atividades de Jason, incluindo assunto, tipo, data de vencimento, contato e organização.
+[00:14] O vídeo mostra cinco pessoas vestindo capas de super-herói, voando, representando o poder de cada ferramenta individualmente.
+[00:17] Ícone do Pipedrive, seguido de um ícone de sincronização, e o ícone do Trello, ilustrando a integração entre as plataformas.
+[00:20] Visão do Pipedrive, na seção "Workflow automation", mostrando modelos de automação.
+[00:21] Selecionando o modelo "Create in Trello (3)".
+[00:23] Clicando em "Continue" em uma janela pop-up para configurar a automação.
+[00:24] Configurando o gatilho "Every time a deal is added to stage" e "Trello Configuration".
+[00:26] O vídeo mostra seis pessoas vestindo capas de super-herói, voando juntas, representando o poder combinado das ferramentas.
+[00:30] A tela mostra a página da integração "Trello by Pipedrive" no Pipedrive Marketplace.
+[00:31] Clicando no botão "Proceed to install" para instalar a integração.
+[00:33] Logo da Pipedrive.
+[00:37] Cena final, que mostra um design de fundo de ondas em cor azul escura e branca.

@@ -1,0 +1,41 @@
+Aqui está um mapeamento exaustivo dos momentos importantes do vídeo:
+
+[00:00] Visão geral do Pipedrive com o painel de ofertas exibido.
+[00:06] Título: "Step 1: Understand how data is organized in Pipedrive".
+[00:11] Navegação para a caixa de entrada de leads no Pipedrive.
+[00:15] Exibição da caixa de entrada de leads com dados de exemplo.
+[00:18] Navegação para a seção Pessoas em Contatos.
+[00:19] Exibição da lista de Pessoas em Contatos com dados de exemplo.
+[00:21] Navegação para a seção Organizações em Contatos.
+[00:22] Exibição da lista de Organizações em Contatos com dados de exemplo.
+[00:26] Exibição de uma planilha de dados de exemplo para importação.
+[00:30] Detalhe de colunas da planilha mostrando informações de Pessoa e Organização.
+[00:41] Título: "Step 2: Prepare your account".
+[00:46] Voltar ao painel de ofertas do Pipedrive.
+[00:48] Destaque das etapas do pipeline no painel de ofertas.
+[00:57] Clicar no menu do perfil para acessar as configurações.
+[00:58] Clicar em "Company settings" no menu.
+[00:59] Acessar as "Company settings" e navegar para "Data fields".
+[01:01] Exibição da seção "Data fields" para Leads/Deals, com campos customizados.
+[01:07] Navegação para "Manage users" na seção Company Overview.
+[01:08] Exibição da seção "Manage users" com usuários ativos.
+[01:16] Título: "Step 3: Prepare your spreadsheet".
+[01:21] Exibição da planilha de dados de exemplo, com destaque para a remoção de duplicatas.
+[01:24] Demonstração de exclusão de uma linha duplicada na planilha.
+[01:26] Destaque para os cabeçalhos das colunas na planilha.
+[01:34] Demonstração de exclusão de uma coluna em branco.
+[01:38] Destaque para valores em dinheiro e formato de data na planilha.
+[01:41] Exemplo de correção de formato de data na planilha.
+[01:50] Destaque para as colunas de Pessoa e Organização.
+[01:57] Exemplo de valores a serem evitados ("TBD", "Unknown").
+[02:01] Abrir o menu "File" na planilha para download.
+[02:04] Selecionar a opção "Download" e os formatos de arquivo (CSV/XLS).
+[02:10] Slide de resumo: "Make sure that:".
+[02:12] Checklist: "Your pipelines, stages, and custom fields are set up".
+[02:14] Checklist: "All users and data owners are added to the account".
+[02:17] Checklist: "Duplicate entries are removed".
+[02:19] Checklist: "Blank columns are deleted".
+[02:22] Checklist: "Column headers are clear and accurate".
+[02:25] Checklist: "Date formats are consistent throughout the file".
+[02:28] Checklist: "Relationships between items are clearly defined".
+[02:32] Logotipo da Pipedrive.

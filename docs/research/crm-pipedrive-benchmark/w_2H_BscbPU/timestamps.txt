@@ -1,0 +1,14 @@
+[00:00] O palestrante está falando em uma sala de madeira com um nome e título embaixo: "Timo Rein, co-fundador da Pipedrive"
+[00:16] Tela de abertura: "Sales Pipeline Course, Chapter 3. Get your pipeline stages right"
+[00:21] Dica 1: "Start by thinking about customer behaviours" com um ícone de pessoa pensante, e uma linha que ilustra um processo de decisão.
+[00:28] Dica 2: "Write down the matching sales stages" com uma linha que representa o processo de vendas.
+[00:35] Dica 3: "Discuss the stages with your sales team" com vários post-its coloridos.
+[00:41] Dica 4: "Compare them with your typical sales scenarios" com linhas que representam diferentes cenários de vendas.
+[00:49] Dica 5: "Review the stages with your team" com várias pessoas concordando com o processo.
+[00:57] Dica 6: "Revise the stages in a month or two" com uma lupa aumentando a visualização em um dos estágios.
+[01:18] "Lead created" é o primeiro passo.
+[01:20] "Contact made" é o segundo passo.
+[01:22] "Needs and wants discovered" é o terceiro passo.
+[01:24] "Offer made" é o quarto passo.
+[01:26] "Offer accepted" é o quinto passo.
+[01:50] Tela de encerramento: "pipedrive" e "Download free ebook:"

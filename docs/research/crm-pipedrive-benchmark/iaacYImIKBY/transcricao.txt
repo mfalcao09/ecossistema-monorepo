@@ -1,0 +1,41 @@
+Certo! Aqui está a transcrição completa do vídeo, com os timestamps a cada 30 segundos:
+
+[00:00] So, we've got a not so fun fact for you. More often than not, it takes up to three days to set up a call or meeting with an already interested client. Three days. I'd guess that's way more time than you'd like to spend.
+
+[00:15] You've probably seen it many times, the back and forth emails looking for a good time to talk, and oftentimes, links to video calls can get lost in the void. Well, wouldn't you know it, that's why Pipedrive Scheduler exists.
+
+[00:29] This is going to be a much faster and more efficient way to book video calls and meetings with your prospects. You just provide one link and let people book a time that works for the both of you, including an automated calendar invite with an optional link to the video call. But, of course, you don'0:45]t have to include any video solutions if that's not your cup of tea yet. This is still just the fastest way for someone to book your time. But so by now, you're probably wondering, how in the Shazam bot does this scheduler know when I'm free or not free?
+
+[00:55] Well, that's why you should watch the rest of the video to learn how it all works. Now, there are a few ways to access the scheduler feature in Pipedrive, but the quickest way to find this is in the main menu here.
+
+[01:07] Another good spot is from the email composer in your actual sales inbox, or from the detail views if your contacts or deals. And finally, in your activities menu. So, you know, it's basically everywhere.
+
+[01:21] But once you're here, you'll be given two options. One option lets you pick a specific time, say in this case, a one-time call or meeting, and the other allows you to set up a general availability that works something kind of like your office hours.
+
+[01:34] That's what we'll be setting up for this demo. And so here, this is where we're gonna customize the schedule by choosing the duration of the meeting times and like the start and end date. And let's just start from now and continue on forever.
+
+[01:50] And we could also specify the days of the week in which we're actually typically available. So, as you can see here, we just click and drag our mouse over the available hours, and we could just leave a gap wherever needed.
+
+[02:05] Making sure to leave enough time for a nice hard earned lunch break. And it's also really easy to just copy this same set of hours over to the other days of the week. So, here, let's just set our schedule from Monday to Thursday. But if you need to, you could totally just set a whole different set of hours for each different day.
+
+[02:20] Next is our buffer times. These allow you to set up times before and after your meetings to avoid any overlap. It's also great in case you need extra prep time between your meetings. Now, this section lets you choose at what time of the hour your meetings can take place.
+
+[02:36] And you could also set up how far into the future people can book your time. Now, here is where we set up the meeting details. Now, the first step here is to give the meeting a name, and yes, of course, we do integrate with video call solutions.
+
+[02:51] So, whether you're using Zoom, Microsoft Teams, or Google Meet, we've got you covered. Simply click on your video call app choice and select to install and seamlessly set up your video calls right from the scheduler.
+
+[03:04] It's kind of almost too easy. Continuing in the meeting detail screen, we'll add the remaining details of our meeting. And so, we'll leave a location blank for now, since it's a Zoom call. But we'll add a description of our meeting, as well as any fields that we actually want our invitees to fill out here.
+
+[03:19] You can also select what type of an activity this is gonna be logged as in the Pipedrive system, since you can customize your activity types. Then you can also add a personal note that's only visible to you inside of Pipedrive. And with all those ducks in a row, I think we're ready to share.
+
+[03:35] And so we get this unique link to the schedule that we can just send someone directly. Or what the pros will often do is they'll just hyperlink this into their own email signature. And so that means just at any point in time during their email conversations, somebody can book a time with them.
+
+[03:51] But say you're just starting an email from scratch, don't you even worry. Your new schedule is now easily accessible from the Propose Times menu from your email composer. Not bad, right?
+
+[04:05] But so, how does this look for the people you're actually inviting? Well, once they receive your email, they can simply choose the time that works best for them. And then if you have fields for them to fill out, this is where they would do that.
+
+[04:15] And then both they and you will receive an email with a calendar invite. And speaking of calendars, it would be a great idea to sync your Pipedrive account with your calendar so that scheduler always knows your availability.
+
+[04:29] So, using the scheduler in combination with your calendar sync, not only guarantees that you'll never overbook anybody, but it also guarantees you're just making the most of everyone's time. And that's the Pipedrive scheduler, everybody. Now it's time to get started and make the most of all that time you're saving.
+
+[04:45] (Música)

@@ -1,0 +1,45 @@
+[00:00] Visão geral do pipeline de vendas no Pipedrive.
+[00:07] Acessando a página de produtos.
+[00:09] Catálogo de produtos.
+[00:12] Detalhes do produto "Livro do Amor".
+[00:14] Abas de Preços, Negócios, Variações e Arquivos.
+[00:18] Detalhes de preços do produto.
+[00:19] Negócios vinculados ao produto.
+[00:20] Adicionando produtos a um negócio existente.
+[00:27] Detalhes do negócio.
+[00:30] Acessando as configurações de Produtos.
+[00:35] Opções de configuração de produtos.
+[00:39] Adicionando um novo produto.
+[00:46] Preenchendo os detalhes do novo produto.
+[00:50] Novo produto adicionado ao catálogo.
+[00:52] Editando os detalhes do novo produto.
+[00:54] Adicionando campos personalizados ao produto.
+[01:05] Tipos de campos personalizados.
+[01:10] Opção de importar dados de produtos.
+[01:13] Tela de importação de dados.
+[01:21] Mapeamento de colunas da planilha para campos do Pipedrive.
+[01:27] Adicionando um novo negócio no Pipedrive.
+[01:31] Adicionando um produto ao novo negócio.
+[01:36] Adicionando múltiplos produtos ao negócio.
+[01:42] Edição em massa de produtos.
+[01:48] Filtrando produtos por letra inicial.
+[01:51] Criando um novo filtro personalizado para produtos.
+[02:00] Selecionando vários produtos para adicionar a um negócio.
+[02:05] Adicionando vários produtos a um novo negócio.
+[02:11] Preenchendo os detalhes do novo negócio e produtos.
+[02:20] Editando quantidades e preços dos produtos.
+[02:40] Adicionando uma nova linha de produto.
+[02:45] Adicionando um novo produto (ainda não existente) durante a adição de produtos ao negócio.
+[02:51] Desativando um produto no negócio.
+[02:54] Adicionando uma nota para o produto desativado.
+[03:00] Removendo um produto do negócio.
+[03:16] Configuração de impostos inclusos nos produtos.
+[03:32] Adicionando produtos a um negócio existente na visualização de detalhes do negócio.
+[03:40] Pesquisando um produto para adicionar.
+[03:45] Página de detalhes de um produto existente.
+[03:47] Adicionando variações de preço para o produto.
+[03:55] Adicionando arquivos relacionados ao produto.
+[04:05] Filtrando negócios com base em produtos específicos.
+[04:10] Selecionando um produto específico para filtrar os negócios.
+[04:14] Lista de negócios filtrada por produto.
+[04:16] Fim do vídeo.

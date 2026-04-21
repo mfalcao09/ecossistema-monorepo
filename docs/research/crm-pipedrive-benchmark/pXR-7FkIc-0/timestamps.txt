@@ -1,0 +1,51 @@
+[00:00] Visão de funil de vendas (pipeline view) do Pipedrive.
+[00:09] Menu lateral esquerdo mostrando as diferentes seções do Pipedrive: Negócios, Contatos, Atividades, E-mails, Estatísticas, Produtos, Automação, e Extensões do Marketplace.
+[00:11] Seção de contatos (contacts people).
+[00:14] Seção de negócios (deals pipeline view).
+[00:16] Seção de atividades (activities).
+[00:18] Uma planilha sendo mostrada.
+[00:19] Retornando para a visão de lista de negócios (deals list view).
+[00:20] Rolagem da tela para baixo para mostrar a quantidade de dados.
+[00:23] Mudança do status de um negócio de "Open" para "Lost" e vice-versa.
+[00:29] Mudança da visão de lista (list view) para a visão de funil (pipeline view).
+[00:36] Mudança da visão de funil (pipeline view) para a visão de lista (list view).
+[00:41] Interação com as colunas da visão de lista, como "Pipeline" e "Expected close date".
+[00:54] Rolagem da tela para baixo para mostrar mais dados na lista.
+[00:59] Menu de filtros sendo aberto.
+[01:03] Seleção de filtro pré-definido "All open deals".
+[01:07] Criação de um novo filtro.
+[01:11] Adição de uma condição para o filtro, selecionando "Deal status".
+[01:14] Escolha da condição "is Open" para o status do negócio.
+[01:18] Adição de uma segunda condição para o filtro, selecionando "Owner".
+[01:21] Escolha do nome "Mario" como proprietário do negócio.
+[01:35] Nome do filtro sendo alterado para "My custom Filter".
+[01:44] Mudança da visibilidade do filtro de "Private" para "Shared".
+[01:49] Salvar o filtro.
+[01:52] Rolagem da tela para baixo para mostrar os resultados do filtro.
+[01:57] Classificação dos negócios pela coluna "Value".
+[02:02] Hover sobre o nome do contato "Bob Brown" para mostrar detalhes.
+[02:06] Abertura do menu de personalização de colunas (Choose columns).
+[02:09] Seleção da coluna "Phone" para ser exibida.
+[02:11] Alternância para a aba "Person" para escolher campos relacionados à pessoa de contato.
+[02:16] Seleção da coluna "Job Title" para ser exibida.
+[02:23] Salvar as configurações de coluna.
+[02:26] Colunas "Phone" e "Job Title" agora exibidas na visão de lista.
+[02:30] Abertura do menu de edição do filtro personalizado (Edit filter).
+[02:35] Adição de uma nova condição "Owner".
+[02:37] Seleção de "James Campbell" como outro proprietário para a condição "ANY".
+[02:44] Marcação da opção "Save selected columns with the filter".
+[02:51] Salvar o filtro atualizado.
+[02:55] Seleção do filtro personalizado para mostrar as colunas salvas automaticamente.
+[03:04] Menu de ações em massa sendo aberto, incluindo "Export filter results".
+[03:09] Seleção de múltiplos negócios para edição em massa.
+[03:12] Painel de edição em massa (Bulk edit) sendo preenchido.
+[03:15] Mudança do "Expected close date" para 31 de janeiro de 2021.
+[03:18] Confirmação da ação de exclusão em massa.
+[03:29] Seção de gerenciamento de usuários (Manage users) nas configurações, mostrando permissões de exclusão.
+[03:36] Visão de lista de contatos (Contacts people).
+[03:40] Edição em massa de contatos.
+[03:48] Visão de lista de atividades (Activities list view).
+[03:52] Edição em massa de atividades.
+[03:57] Abertura do menu de personalização de colunas para atividades.
+[04:02] Salvar as configurações de coluna para atividades.
+[04:07] Visão de lista de atividades com as colunas personalizadas.

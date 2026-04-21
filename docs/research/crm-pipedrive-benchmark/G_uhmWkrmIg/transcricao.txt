@@ -1,0 +1,23 @@
+[00:00] Hello Pipe drivers. In this quick video, we're going to talk about the products feature available in Pipedrive for all user plans.
+[00:08] With this, you can create a customizable catalog of products or services, whatever it would be that you're selling. And then you can add prices to those products and link them to deals.
+[00:18] When adding products to a deal, the deal value will be calculated automatically based on the sum of the product prices in that deal. You can create custom products in multiple currencies, link multiple products to a deal at once,
+[00:30] and it supports price variations and product durations. To add a product to your Pipedrive account, go to the Products tab and click Add product.
+[00:41] In this dialog, you can fill in the details about the product and configure its visibility settings. The product name and unit price are mandatory fields. Once you save the product, there are some additional details you can fill in such as the category and the owner as well.
+[00:55] But, of course, you could also add custom fields to your products. So whatever it is you have to keep tabs of, you're in good hands, people.
+[01:05] Once you've created any custom fields you need to keep track of, you can manually add your product catalog or you can import a spreadsheet if you have one.
+[01:12] It is worth mentioning though, that while you can import a spreadsheet of products into Pipedrive, you can't attach these products to deals through the import process. Currently, this could only be done manually or through our API, if you happen to know how to utilize that.
+[01:27] But, once your catalog is ready to go, you'll be pleased to see that you can add products to your deals when you create them.
+[01:35] However, you'll also be able to add them or remove them from deals at any time while tracking that in the history.
+[01:42] Now, let's take a gander at this product list view. You can edit product details directly here, technically. Also, in bulk, you can filter for products alphabetically in the top of the screen here, or create custom filters, same as the usual list views.
+[01:56] To learn more about filtering, click on the link in the corner of this video. So, let's add several products to a deal.
+[02:04] That's right. Several products at once. Some people kind of use this as their initiation step of creating a deal. During the call, they'll know which products to offer and go from there.
+[02:14] Deleting of products could be done by an admin user only, just so you know, unless the admin user grants that permission to regular users. When bulk adding products to deals, you can enter the title of the deal that you wish to link your product to.
+[02:28] If the deal does not exist, a new deal will be created with the selected products attached. The price and currency of the products will default to the price that you save in the original product's profile, but you can customize this to another currency and price before linking it to the deal, if you'd like.
+[02:42] You can click the add new line to attach additional products to the chosen deal if, for instance, other potential products come up during the conversation. You can also still add a product but disable it from the deal, allowing you to document a note as to why the customer didn't want that product.
+[02:58] It's just good for record keeping. Obviously, you could just delete it from the deal entirely as well. It's also worth noting that any custom prices defined in this window will only apply to that deal and will not be saved as the price entry in the products detail list view.
+[03:12] The original configured product remains unchanged. If you select tax inclusive for your products, the tax will already be included in the subtotal according to the percentage you enter in the tax field.
+[03:25] Tax exclusive is coming soon. If you select no tax, well, no tax will be added.
+[03:32] You can also link products to deals in a deal detail view by clicking on add products. Now, if you want to find the product that you had added, you could either search for it or go into your product list view and find it.
+[03:46] So, you wanted to add a few pricing variations, or you wanted to edit some of the information, add some followers or participants, maybe add some files such as some user manuals or schematics that are related particularly to this product.
+[04:00] In Deals and Contact list views, you also have the ability to use custom filters for product related fields. For example, you can pull a list of deals where a specific product is attached to it.
+[04:10] And that's a wrap. To learn more about the products feature, click on the link at the end of this video. Thanks for watching.

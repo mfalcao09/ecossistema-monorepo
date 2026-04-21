@@ -1,0 +1,9 @@
+[00:00] Título do vídeo
+[00:04] Introdução
+[00:06] Visão geral do Pipedrive e JustCall integration.
+[00:09] Demonstração de chamada telefónica a partir do Pipedrive.
+[00:11] Demonstração de mensagem de texto a partir do Pipedrive.
+[00:18] Registro automático de actividades de chamada.
+[00:26] Edição de registos de chamadas.
+[00:30] Acesso rápido a JustCall a partir do Pipedrive.
+[00:34] Logotipo do Pipedrive.

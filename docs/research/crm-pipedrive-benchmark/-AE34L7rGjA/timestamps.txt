@@ -1,0 +1,40 @@
+[00:00] Título do vídeo
+[00:02] Visão geral do Trello com cards de "Site Survey" em diferentes estágios.
+[00:04] Detalhes de um card do Trello.
+[00:06] Imagem ampliada de um local de construção.
+[00:08] Comparação entre Trello e Pipedrive.
+[00:09] Visão geral da interface do Trello.
+[00:13] Visão geral da interface do Pipedrive.
+[00:15] Exibição de valor potencial para um período no Pipedrive.
+[00:17] Dashboard de insights do Pipedrive, mostrando atividades completas e planejadas.
+[00:19] Tabela de atividades no Pipedrive.
+[00:20] Configuração de auto-criação de cartão Trello a partir de um negócio do Pipedrive.
+[00:24] Adicionando uma nova lista no Trello.
+[00:26] Tela inicial do Trello, mostrando templates.
+[00:27] Página de configurações do Pipedrive, com a opção "Marketplace apps".
+[00:29] Marketplace do Pipedrive, pesquisando por "Trello".
+[00:30] Página de instalação do Trello no Marketplace do Pipedrive.
+[00:31] Página de "Power-Ups" do Trello para adicionar o Pipedrive.
+[00:32] Seleção do quadro do Trello a ser conectado.
+[00:33] Mensagem de autorização do Pipedrive no Trello.
+[00:35] Configurações de permissões do Pipedrive para o Trello.
+[00:36] Menu de "Power-Ups" no Trello, mostrando a integração com o Pipedrive.
+[00:37] Opções de configuração do Pipedrive Power-Up.
+[00:38] Configurações de campos visíveis do Pipedrive no Trello.
+[00:41] Menu de "Power-Ups" no Trello.
+[00:43] Configuração de automação para criar um cartão Trello a partir de um negócio do Pipedrive.
+[00:44] Visão geral da interface do Pipedrive com os negócios.
+[00:45] Menu de configurações do Pipedrive, selecionando "Workflow automation".
+[00:47] Página de automação de fluxo de trabalho no Pipedrive, com templates para criar cartões no Trello.
+[00:48] Configuração de gatilho para a criação de um cartão Trello ao adicionar um negócio a um estágio.
+[00:50] Seleção do estágio do Pipedrive que ativará o gatilho.
+[00:52] Seleção da lista do Trello onde o cartão será criado.
+[00:53] Salvar o fluxo de trabalho de automação.
+[00:54] Página da Pipedrive Academy sobre automação de fluxo de trabalho.
+[00:55] Configuração de automação no Trello para criar cartões.
+[00:56] Movendo um negócio para o status "Ganho" no Pipedrive.
+[00:58] O novo cartão Trello criado automaticamente a partir do Pipedrive.
+[01:00] Detalhes do cartão Trello, mostrando a integração com dados do Pipedrive.
+[01:03] Visão geral da interface do Pipedrive, mostrando as informações do negócio.
+[01:05] Criando um cartão Trello manualmente a partir de um negócio do Pipedrive.
+[01:07] Configuração de automação no Trello para criar cartões.

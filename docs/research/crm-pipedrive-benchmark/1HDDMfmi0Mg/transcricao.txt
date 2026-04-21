@@ -1,0 +1,27 @@
+[ 00:00 ] So, you've just won a deal. Congratulations Pipedriver.
+[ 00:05 ] You can now rely on Pipedrive's ease of use to manage all of your deals and tasks without losing focus and duplicating data with our project management tool.
+[ 00:15 ] Let's navigate to the projects tab. By default, you will see all of your projects in the board view. This is really going to feel familiar to the deals pipeline.
+[ 00:25 ] It's here that you can create and edit projects and add new boards or edit the existing one. You can also filter projects by their status or labels and customize the project cards here.
+[ 00:37 ] So from this view, you can get a clear understanding of the overall progress of your projects and their deadlines. And that's what we all love about Kanban views, right? It's nice and visual.
+[ 00:48 ] Now, projects that are past their due date and require your attention are highlighted in red. And you betcha, there's a list view also. Plus quick filters.
+[ 00:58 ] You can also sort the project by date or phase and change the width of the columns or the order.
+[ 01:06 ] If you don't want to delete the project, you can archive it and later find all of the archived projects over here, just in case you ever need it again in the future. But how do you create a new project?
+[ 01:17 ] Well, there are several ways and it all depends on your needs. You can create a project from your deals pipeline and then select save to projects. You can mark a deal as won and create a project at the same time, or add a project but still keep a deal open if needed.
+[ 01:34 ] Or you can start new projects from the deal itself. Just create a project directly from the one deal dropdown. This way you'll be able to access all the relevant sales and customer information directly related to your projects, giving you a holistic view into the story.
+[ 01:51 ] Or you can kick off a project from scratch since it doesn't really have to be associated with any after-sales project only, you could open projects for anything. Just fill in all the necessary data and start reaching your goals faster.
+[ 02:04 ] It's also worth noting that in a deal detail page, you can use this side panel for your projects to connect or create new projects to a deal.
+[ 02:13 ] So let's finally have a closer look at the detail view of your project. Over here you can see the phase that your project is in right now, as well as move it to the next one.
+[ 02:24 ] You can also track the project's progress, which updates when you complete activities. Here is where the project details are.
+[ 02:30 ] You can see all the items your project is linked to, and here you can also add custom fields that really make your project fit your needs.
+[ 02:40 ] Also, from within your project, you will see all linked deals in your sidebar, and clicking on them will open the contextual detail view of the deal.
+[ 02:49 ] This way you've got all your sales info right there at your fingertips. And on the right, you can manage the project plan. You have all of the phases along with the calendar activities and tasks.
+[ 03:00 ] Your activities like meetings, calls, or emails will appear on your calendar and activity list view. And with the tasks, you can create to-dos alongside your larger project activities and keep your checklist of duties clear and sorted.
+[ 03:15 ] While some tasks are straightforward, others are more complex and may require subtasks to be completed, which you can easily add here, or here.
+[ 03:29 ] And you can also drag and drop activities and tasks within the phase or into another phase, and track the progress of each phase individually.
+[ 03:38 ] Quick tip: You can also view, filter, or create your tasks in the Tasks list view.
+[ 03:45 ] What's more, you can easily keep your team in sync, store all of your project-related files up here, or leave notes for your colleagues over here by simply using the at mention and tagging them.
+[ 03:57 ] And here you can manage all those project related emails. And just to take it a step further, you can create and send documents using Pipedrive Smart Docs feature directly from the documents tab.
+[ 04:10 ] But we've saved the best for last. So here's another pretty cool feature. In the templates tab, you can create, yes, you guessed it, a project template. You can link it to a specific board and then set up your project plan including tasks, subtasks, activities, and even a due date, which could be set to start, well, for example, five days after or before the start date of your project.
+[ 04:39 ] You can also convert an existing project into a template from the project detail view.
+[ 04:47 ] And the next time you're starting a new project, just choose a template from the dropdown list, and that's it. You'll save yourself lots of time.
+[ 04:58 ] So from now on, your team can better collaborate and manage deals and projects from one place. You will have end-to-end visibility on the whole process and can trust that your data is all in one tool and always up to date.

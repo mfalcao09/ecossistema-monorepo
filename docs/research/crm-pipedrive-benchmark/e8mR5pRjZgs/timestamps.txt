@@ -1,0 +1,58 @@
+[00:00] Visão Geral da Análise de Receita
+[00:01] Previsão de receita de julho de 2021
+[00:02] Previsão de receita de agosto de 2021
+[00:03] Previsão de receita de setembro de 2021
+[00:04] Previsão de receita de outubro de 2021
+[00:05] Previsão de receita de novembro de 2021
+[00:06] Previsão de receita de dezembro de 2021
+[00:07] Previsão de receita de janeiro de 2022
+[00:08] Previsão de receita de fevereiro de 2022
+[00:10] Negócios em andamento
+[00:18] Abertura do menu de configurações da empresa
+[00:20] Tela de configurações da empresa
+[00:23] Abertura da tela de campos de dados
+[00:28] Abrindo o menu de edição do campo "Valor"
+[00:30] O campo "Valor" é um campo monetário.
+[00:38] Ativando a opção "Obrigatório" para o campo "Valor"
+[00:41] Escolhendo todas as fases do funil de vendas para o campo "Valor"
+[00:43] Desativando a opção "Obrigatório"
+[00:44] Ativando a opção "Importante" para o campo "Valor"
+[00:46] Desativando a opção "Importante"
+[00:48] Desativando a opção "Obrigatório"
+[00:49] Ativando a opção "Sempre visível na visão detalhada de negócios"
+[00:50] Desativando a opção "Sempre visível na visão detalhada de negócios"
+[00:51] Abrindo o menu para adicionar um novo lead, negócio, atividade, pessoa, organização, produto ou nota
+[00:52] Selecionando a opção "Lead"
+[00:53] Selecionando a opção "Negócio"
+[00:54] Selecionando a opção "Atividade"
+[00:54] Selecionando a opção "Pessoa"
+[00:55] Selecionando a opção "Organização"
+[00:56] Selecionando a opção "Produto"
+[00:57] Abrindo o menu de edição do campo "Valor"
+[01:00] Ativando a opção "Obrigatório"
+[01:01] Selecionando todos os funis de vendas e todas as fases para o campo "Valor"
+[01:05] Desmarcando a opção "Todos os funis de vendas, todas as fases"
+[01:06] Selecionando o funil de vendas "Yellow Ltd" e todas as suas fases
+[01:09] Selecionando apenas as fases "Qualificado", "Contato feito", "Demo Agendada", "Proposta feita", "Negociações Iniciadas", "Marcando o negócio como ganho", "Marcando o negócio como perdido"
+[01:11] Salvando as alterações
+[01:12] Indicador de campo "Obrigatório" e "Importante" na lista de campos
+[01:20] Adicionando um campo personalizado
+[01:21] Escolhendo adicionar um campo de pessoa
+[01:24] Adicionando um nome ao campo de pessoa
+[01:25] Escolhendo o tipo de campo "Texto"
+[01:27] Desativando a opção "Sempre visível na visão detalhada de pessoa"
+[01:28] Ativando a opção "Aparece na visão 'Adicionar pessoa'"
+[01:29] Ativando a opção "Aparece nas visões 'Adicionar lead' e 'Adicionar negócio'"
+[01:30] Ativando a opção "Obrigatório"
+[01:31] Ativando a opção "Importante"
+[01:36] Salvando as alterações
+[01:37] Visão detalhada de um negócio
+[01:39] Indicador de campo "Obrigatório"
+[01:41] Indicador de campo "Importante"
+[01:47] Preenchendo o campo "Valor"
+[01:54] Preenchendo o campo "Referenciador"
+[02:00] Abrindo o menu para gerenciar campos importantes
+[02:02] Acessando a tela de campos de dados
+[02:04] Editando o campo "Valor"
+[02:05] Desativando a opção "Obrigatório"
+[02:07] Confirmando as alterações.

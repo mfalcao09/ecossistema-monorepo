@@ -1,0 +1,18 @@
+[00:00] Logotipo do Pipedrive.
+[00:03] Integração direta do Pipedrive com o Microsoft Teams.
+[00:07] Funcionários olhando um painel com notas adesivas coloridas.
+[00:13] Mostra como as atualizações são feitas no Pipedrive.
+[00:13] Negócio ganho.
+[00:15] Atualização de contato.
+[00:16] Nova atividade.
+[00:18] Um bot envia automaticamente uma notificação para o canal do Teams.
+[00:21] Agendar reuniões.
+[00:23] Opção para tornar uma reunião do Microsoft Teams.
+[00:24] Link para participar de uma reunião do Microsoft Teams.
+[00:25] Convite para uma reunião agendada do Microsoft Teams.
+[00:27] Botão para participar de uma reunião do Microsoft Teams na visualização de notas.
+[00:32] Instalar a integração do Microsoft Teams no Pipedrive Marketplace.
+[00:33] Janela de instalação do Pipedrive no Microsoft Teams.
+[00:36] Pessoas comemorando em um escritório.
+[00:40] Logotipo do Pipedrive e texto "Up next".
+[00:41] Texto "Read more now:" e "pipedrive.com".

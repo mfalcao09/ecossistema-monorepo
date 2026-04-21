@@ -1,0 +1,25 @@
+[00:00] O palestrante Timo Rein, cofundador da Pipedrive, apresenta o vídeo.
+[00:06] Início do capítulo 1 do curso de pipeline de vendas.
+[00:07] O título do capítulo 1 é "Entenda o jogo dos números".
+[00:10] O palestrante explica que o pipeline de vendas é um conceito útil para vendas.
+[00:20] O texto "Um pipeline de vendas descreve as etapas que um prospecto segue para fazer uma compra" aparece na tela.
+[00:25] O palestrante explica a necessidade de definir as etapas ou estágios do pipeline de vendas.
+[00:43] O palestrante apresenta as etapas de um pipeline de vendas: prospecto escolhido, reunião agendada, proposta enviada e negócio ganho.
+[00:44] O texto "Prospecto escolhido" aparece na tela.
+[00:45] O texto "Reunião agendada" aparece na tela.
+[00:47] O texto "Proposta enviada" aparece na tela.
+[00:48] O texto "Negócio ganho" aparece na tela, em verde, indicando o estágio final.
+[00:50] O palestrante explica a importância de descobrir o número de contatos necessários para fazer uma venda.
+[00:56] O palestrante usa um exemplo com 8 pessoas no pipeline.
+[00:59] 8 ícones de pessoas são adicionados abaixo da etapa "Prospecto escolhido".
+[01:00] 4 ícones de pessoas se movem para a etapa "Reunião agendada".
+[01:06] 2 ícones de pessoas se movem para a etapa "Proposta enviada".
+[01:12] 1 ícone de pessoa se move para a etapa "Negócio ganho".
+[01:18] O palestrante explica que na vida real, as conversões são validadas pelo trabalho de vendas.
+[01:27] As porcentagens de conversão são exibidas em cada estágio: 50% em todos.
+[01:31] O número de pessoas necessárias em cada estágio para 1 venda é mostrado: 8, 4, 2, 1.
+[01:34] O número de pessoas necessárias em cada estágio para 2 vendas é mostrado: 16, 8, 4, 2.
+[01:38] O número de pessoas necessárias em cada estágio para 10 vendas é mostrado: 80, 40, 20, 10.
+[01:43] O palestrante explica que isso é conhecido como "o jogo dos números".
+[01:52] O palestrante menciona que aumentar as conversões, buscar negócios maiores e acelerar leads são tópicos futuros.
+[02:00] Tela final com o logo da Pipedrive e a sugestão para baixar o e-book gratuito.

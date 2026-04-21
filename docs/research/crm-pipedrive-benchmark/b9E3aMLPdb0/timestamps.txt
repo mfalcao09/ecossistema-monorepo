@@ -1,0 +1,75 @@
+[00:00] Painel de negociações exibido na tela.
+[00:06] Tela de "Insights" aberta, mostrando gráficos e relatórios.
+[00:09] Menu "Adicionar novo" clicado.
+[00:10] Opção "Meta" selecionada no menu "Adicionar novo".
+[00:11] Caixa de diálogo "Adicionar meta 1/2" exibida.
+[00:13] "Entidade" "Negociação" selecionada.
+[00:15] "Entidade" "Atividade" selecionada.
+[00:16] "Tipo de meta" "Adicionado" selecionado.
+[00:19] "Tipo de meta" "Progredido" selecionado.
+[00:20] "Tipo de meta" "Vencido" selecionado.
+[00:22] "Entidade" "Atividade" selecionada.
+[00:23] "Tipo de meta" "Adicionado" selecionado.
+[00:24] "Tipo de meta" "Concluído" selecionado.
+[00:25] "Entidade" "Previsão" selecionada.
+[00:30] "Tipo de meta" "Previsão de receita" selecionado.
+[00:35] "Entidade" "Atividade" selecionada.
+[00:38] "Tipo de meta" "Concluído" selecionado.
+[00:39] Botão "Continuar" clicado.
+[00:40] Caixa de diálogo "Adicionar meta 2/2 - Atividades concluídas" exibida.
+[00:41] Menu suspenso "Atribuído a" clicado, opção "Usuário" selecionada.
+[00:43] Opção "Empresa (todos)" selecionada no menu suspenso "Atribuído a".
+[00:44] Opção "Equipe" selecionada no menu suspenso "Atribuído a".
+[00:46] Menu suspenso de seleção de equipe clicado, opção "Equipe APAC" selecionada.
+[00:48] Opção "Equipe EMEA" selecionada no menu suspenso de seleção de equipe.
+[00:49] Opção "Equipe LATAM" selecionada no menu suspenso de seleção de equipe.
+[00:51] Menu suspenso "Tipo de atividade" clicado, "Chamada" selecionado.
+[00:53] "Reunião" selecionada no menu suspenso "Tipo de atividade".
+[00:55] "Email" selecionado no menu suspenso "Tipo de atividade".
+[00:56] Menu suspenso "Pipeline" clicado, opção "Todos os pipelines" selecionada.
+[00:58] Opção "Pipeline de vendas" selecionada no menu suspenso "Pipeline".
+[00:59] Opção "Sucesso do cliente" selecionada no menu suspenso "Pipeline".
+[01:00] Menu suspenso "Frequência" clicado, "Semanal" selecionado.
+[01:03] Opção "Mensal" selecionada no menu suspenso "Frequência".
+[01:04] Opção "Trimestral" selecionada no menu suspenso "Frequência".
+[01:05] Opção "Anual" selecionada no menu suspenso "Frequência".
+[01:06] Opção "Mensal" selecionada novamente.
+[01:08] Calendário para "Duração" aberto.
+[01:10] Data "28/07/2023" selecionada no calendário.
+[01:11] Campo "Contagem" preenchido com "15".
+[01:17] Opção "Especificar metas de período individuais" marcada.
+[01:22] Botão "Salvar" clicado.
+[01:23] Detalhes da meta "Atividades concluídas da equipe LATAM" exibidos na tela.
+[01:39] Visão do construtor visual exibida.
+[01:42] Colunas do gráfico de barras destacadas ao passar o mouse.
+[01:48] Coluna de maio de 2023 clicada.
+[01:49] Visão modal das atividades de maio de 2023 exibida.
+[01:54] Aba "Atividades" selecionada.
+[02:00] Aba "Resumo" selecionada.
+[02:06] Menu "Adicionar ao painel" clicado.
+[02:07] Opção "Meu painel" selecionada no menu "Adicionar ao painel".
+[02:11] Aba "Meu painel" selecionada na barra lateral.
+[02:14] Meta arrastada e solta no painel.
+[02:17] Painel exibindo a meta "Atividades concluídas da equipe LATAM".
+[02:26] Botão "Editar detalhes da meta" clicado.
+[02:27] Caixa de diálogo "Editar meta de atividades concluídas da equipe LATAM" exibida.
+[02:30] Título da meta "Atividades concluídas da equipe LATAM" selecionado para edição.
+[02:37] Botão "Editar detalhes da meta" clicado novamente.
+[02:38] Caixa de diálogo "Editar meta de atividades concluídas da equipe LATAM" exibida.
+[02:44] Menu de ações "três pontos" clicado.
+[02:46] Opção "Excluir" selecionada no menu de ações.
+[02:48] Caixa de diálogo de confirmação "Tem certeza de que deseja excluir a meta Atividades concluídas da equipe LATAM?" exibida.
+[02:50] Botão "Excluir meta" clicado.
+[02:59] Menu de ações "três pontos" na seção "Metas" clicado.
+[03:00] Opção "Excluir metas em massa" selecionada.
+[03:01] Caixa de diálogo "Excluir metas em massa" exibida.
+[03:05] Metas "Negociações ganhas Sheila" e "Atividades concluídas Hassan" selecionadas.
+[03:07] Botão "Excluir metas selecionadas" clicado.
+[03:10] Menu de ações "três pontos" clicado.
+[03:11] Opção "Duplicar" selecionada.
+[03:12] Caixa de diálogo "Duplicar meta" exibida.
+[03:15] Campo "Nome" exibindo nome da meta duplicada.
+[03:17] Botão "Salvar" clicado.
+[03:45] Caixa de diálogo "Editar (Cópia) Atividades concluídas meta da equipe LATAM" exibida.
+[03:46] Menu suspenso de seleção de equipe clicado, "Equipe EMEA" selecionada.
+[03:48] Botão "Salvar" clicado.

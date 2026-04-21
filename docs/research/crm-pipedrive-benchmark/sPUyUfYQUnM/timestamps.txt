@@ -1,0 +1,24 @@
+[00:00] Visão geral dos e-mails rastreados
+[00:03] Um e-mail é rastreado 3 vezes, de acordo com o ícone no lado esquerdo do e-mail.
+[00:10] O ícone azul indica o rastreamento do link no e-mail.
+[00:16] Um vendedor está ligando para alguém.
+[00:20] Tela de Negócios e o movimento de uma venda.
+[00:26] Ir para Configurações, Pessoal e Integração de E-mail.
+[00:29] Clicar em “Sincronização de e-mail” no menu lateral para verificar se o e-mail está conectado.
+[00:34] Ativar “Rastreamento de abertura” e “Rastreamento de link”.
+[00:37] Ativar “Notificações para atividades de rastreamento”.
+[00:45] Enviar e-mail: ícones de rastreamento de e-mail e rastreamento de link.
+[00:48] Clicar nos ícones para ativá-los.
+[01:02] Escrever um novo e-mail: os ícones de rastreamento permanecem ativados por padrão.
+[01:08] A cor do ícone de rastreamento muda para azul quando o e-mail é aberto.
+[01:13] A notificação “Você tem novas notificações de rastreamento de e-mail” aparece.
+[01:18] Passar o mouse sobre o ícone do olho mostra “Aberto 1 vez”.
+[01:21] Visualizar o e-mail na aba “Mail”: o ícone de rastreamento mostra “Aberto 1 vez”.
+[01:23] Visualizar o e-mail na aba “Detalhes”: o ícone de rastreamento mostra “Aberto 1 vez”.
+[01:27] Passar o mouse sobre o ícone do link mostra “Link clicado 1 vez”.
+[01:31] Filtrar por e-mails rastreados.
+[01:36] Enviar um e-mail em massa na aba “Pessoas”.
+[01:38] Clicar em “Enviar e-mail em massa”.
+[01:40] Os ícones de rastreamento de abertura e link são ativados por padrão.
+[01:50] Clicar em “Enviar 25 mensagens”.
+[02:04] A janela de envio mostra o progresso do envio dos e-mails em massa.

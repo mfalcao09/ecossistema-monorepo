@@ -1,0 +1,76 @@
+[00:00] Visão geral do Pipedrive.
+[00:03] Editando o pipeline de vendas.
+[00:04] Renomeando um estágio do pipeline.
+[00:06] Visão geral do Pipedrive com o novo nome do estágio.
+[00:20] Entrando no modo de edição do pipeline.
+[00:23] Adicionando um novo pipeline.
+[00:24] Editando os estágios do novo pipeline.
+[00:36] Exemplo de estágios redundantes no pipeline.
+[00:41] Removendo um estágio do pipeline.
+[00:43] Movendo um negócio para "Perdido".
+[00:50] Selecionando um motivo para o negócio ser "Perdido".
+[00:56] Navegando para as configurações da empresa.
+[00:57] Configurando os motivos de "Perdido".
+[01:00] Adicionando um novo motivo de "Perdido".
+[01:03] Filtrando negócios "Perdidos" por motivo.
+[01:06] Criando um novo filtro para negócios "Perdidos".
+[01:10] Selecionando o motivo "Sem Resposta" para o filtro.
+[01:14] Acessando as configurações da empresa novamente.
+[01:18] Navegando para "Campos de Dados".
+[01:21] Visualizando campos personalizados para "Organização".
+[01:30] Editando um campo personalizado existente.
+[01:35] Visualizando campos personalizados para "Negócio/Lead".
+[01:39] Editando um campo personalizado para "Lead Source".
+[01:46] Adicionando um novo negócio e preenchendo o campo "Lead Source".
+[02:02] Navegando para "Gerenciar Usuários".
+[02:08] Convidando novos usuários para o Pipedrive.
+[02:11] Visualizando e editando os conjuntos de permissões.
+[02:22] Acessando a seção de "Insights" (Relatórios e Dashboards).
+[02:26] Explorando os relatórios pré-definidos.
+[02:37] Criando um novo relatório.
+[02:40] Ajustando os filtros do relatório.
+[02:47] Segmentando o relatório por "Produto".
+[02:51] Salvando o relatório em um dashboard existente ou criando um novo.
+[02:58] Visualizando o dashboard.
+[03:00] Reorganizando e redimensionando os widgets do dashboard.
+[03:06] Aplicando um filtro de usuário no dashboard.
+[03:13] Compartilhando o dashboard publicamente.
+[03:17] Revogando o acesso a um link compartilhado.
+[03:20] Adicionando um novo link de compartilhamento com um nome.
+[03:27] Acessando a seção de "Automação de Fluxo de Trabalho".
+[03:32] Visualizando modelos de automação de fluxo de trabalho.
+[03:52] Configurando um modelo de automação para enviar e-mail quando um negócio é perdido.
+[04:03] Acessando a "Caixa de Entrada de Leads".
+[04:10] Visualizando leads na caixa de entrada.
+[04:14] Agendando uma atividade para um lead.
+[04:22] Retornando ao pipeline de vendas.
+[04:28] Visualizando os detalhes de um negócio, incluindo a aba "Documentos" (e-assinaturas).
+[04:36] Navegando de volta para a "Caixa de Entrada de Leads".
+[04:39] Convertendo um lead em um negócio.
+[04:47] Visão geral da "Caixa de Entrada de Leads" com a "LeadBooster" e seus recursos.
+[04:54] Abrindo o "Prospector".
+[04:57] Abrindo o "Live Chat".
+[05:00] Abrindo o "Chatbot".
+[05:02] Editando as mensagens e o fluxo do chatbot.
+[05:05] Interação com o chatbot de um cliente.
+[05:11] Visualizando conversas no "Live Chat".
+[05:16] Atribuindo uma conversa de live chat a um vendedor.
+[05:27] Detalhe de uma conversa no Live Chat.
+[05:32] Editando o tempo de espera no chatbot antes de transferir para o Live Chat.
+[05:35] Simulação de interação do cliente com o chatbot e pedido de Live Chat.
+[05:38] Mudando o status online/offline no Live Chat.
+[05:43] Visualização do Live Chat no aplicativo móvel.
+[05:46] Retornando ao "Prospector".
+[05:49] Explorando o Prospector para encontrar novos leads.
+[05:54] Aplicando filtros de busca no Prospector (tamanho da organização, indústria).
+[06:01] Visualizando resultados da busca no Prospector e adicionando pessoas como leads.
+[06:05] Revelando detalhes de contato de um lead com créditos do Prospector.
+[06:14] Acessando a funcionalidade "Visitantes do Site".
+[06:17] Visualizando empresas que visitaram o site.
+[06:21] Detalhes da visita de uma empresa ao site (tempo, páginas, fonte).
+[06:25] Criando um lead a partir de um visitante do site.
+[06:33] Preenchendo os detalhes para criar o lead.
+[06:35] Filtrando visitantes do site por "visitantes recomendados".
+[06:44] Navegando para o "Marketplace".
+[06:49] Explorando o Marketplace para integrações e aplicativos.
+[06:54] Final do vídeo, logo Pipedrive.

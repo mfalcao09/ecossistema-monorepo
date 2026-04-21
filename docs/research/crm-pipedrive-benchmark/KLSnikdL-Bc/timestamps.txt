@@ -1,0 +1,23 @@
+[00:00] Visão geral do pipeline de vendas, mostrando diferentes estágios de negócio.
+[00:01] Menu de configurações gerais é aberto.
+[00:02] A tela de configurações da empresa é exibida.
+[00:06] A opção "Calendar sync" é selecionada no menu lateral.
+[00:09] A tela de sincronização do calendário é carregada.
+[00:10] Opções para conectar o calendário são exibidas, incluindo Google e Microsoft.
+[00:13] Um calendário é selecionado para conexão.
+[00:14] O diálogo "Setup Calendar Sync" é exibido, mostrando opções de sincronização.
+[00:16] Opções para sincronização de mão dupla ou de mão única são apresentadas.
+[00:18] É selecionada a opção para sincronizar atividades do Pipedrive no calendário e eventos do calendário no Pipedrive.
+[00:22] O tipo de atividade "Task" é definido como padrão para eventos do calendário.
+[00:26] A opção "Meeting" é selecionada como tipo de atividade padrão.
+[00:28] Opções para sincronizar tipos de atividades específicas são mostradas.
+[00:30] A sincronização de "Email" e "Textline Message" é desativada.
+[00:36] É selecionada a opção para sincronizar informações vinculadas.
+[00:44] O botão "Start syncing" é clicado.
+[00:45] A sincronização é concluída e o status "Active" é exibido.
+[00:46] A lista de atividades do Pipedrive é exibida, mostrando os eventos sincronizados.
+[00:53] A visualização do calendário do Pipedrive é exibida, mostrando os eventos sincronizados.
+[00:56] Um evento existente no calendário do Pipedrive é clicado, abrindo um pop-up de edição.
+[00:57] Um novo evento, "Meeting with George", está sendo agendado no calendário do Pipedrive.
+[01:01] Detalhes do evento, como convidados e descrição, estão sendo adicionados, incluindo um link de reunião Zoom.
+[01:05] O vídeo termina com o logotipo da Pipedrive.

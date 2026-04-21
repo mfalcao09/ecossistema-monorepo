@@ -1,0 +1,41 @@
+[00:00] Painel de Leads Inbox
+[00:05] Painel de negociações
+[00:09] Escolhendo pipeline
+[00:10] Painel de negociações (leads separados)
+[00:20] Insights (visualização de negócios iniciados)
+[00:30] Voltando para o painel de Leads Inbox
+[00:32] Menu Leads Inbox
+[00:40] Filtrando Leads por fontes
+[00:44] Importando Leads (Adicionar Lead)
+[00:48] Importando dados de planilhas
+[00:50] Upload de arquivo de leads
+[00:52] Mapeamento de colunas da planilha para dados do Pipedrive
+[00:58] Visualização prévia da importação de dados
+[01:00] Painel de Leads Inbox atualizado
+[01:04] Filtrando Leads por proprietário
+[01:06] Filtrando Leads por labels
+[01:08] Filtrando Leads por fonte
+[01:11] Detalhes do Lead (painel lateral direito)
+[01:14] Adicionando uma label (Hot)
+[01:21] Adicionando valor ao Lead
+[01:28] Adicionando uma atividade (Call)
+[01:33] Enviando e-mail ao Lead
+[01:40] Escolhendo template de e-mail
+[01:47] Customizando colunas do painel Leads Inbox
+[01:51] Adicionando coluna "Pessoa"
+[01:54] Adicionando coluna "Organização"
+[01:57] Leads Inbox com novas colunas
+[02:07] Excluindo Lead (Archive Lead)
+[02:14] Deletando Lead
+[02:18] Marcando atividade como concluída
+[02:27] Convertendo Lead em Deal
+[02:30] Escolhendo pipeline e etapa
+[02:35] Deal criado a partir do Lead
+[02:43] Painel de Deals (pipeline)
+[02:51] Menu Lead Booster
+[02:54] Live Chat (Lead Booster)
+[02:56] Web Forms (Lead Booster)
+[02:57] Prospector (Lead Booster)
+[02:58] Web Visitors (Lead Booster)
+[03:00] Retornando ao Chatbot
+[03:07] Painel do Chatbot

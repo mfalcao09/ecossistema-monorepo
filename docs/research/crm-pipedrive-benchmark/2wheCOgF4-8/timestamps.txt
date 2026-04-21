@@ -1,0 +1,12 @@
+[00:00] Visão geral do Pipedrive com o menu "Deals" aberto
+[00:01] Menu de configurações gerais
+[00:05] Configurações da empresa
+[00:09] Sincronização de e-mail
+[00:16] Sincronização de contato
+[00:18] Sincronização de calendário
+[00:27] Marketplace de aplicativos e integrações
+[00:33] Todas as categorias de aplicativos
+[00:46] Categoria "Contabilidade e faturamento"
+[00:51] Instalação do aplicativo "Dear Lucy"
+[01:04] Aplicativos e integrações do Marketplace
+[01:12] Aplicativos mais populares

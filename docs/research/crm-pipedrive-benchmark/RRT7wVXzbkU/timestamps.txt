@@ -1,0 +1,51 @@
+[00:00] Visão geral das automações
+[00:06] Visão geral do Pipedrive
+[00:08] Acessando a página de Automações
+[00:11] Acessando o recurso "Adicionar automação"
+[00:15] Guias de categorias de automação
+[00:18] Modelos de automação do Slack
+[00:22] Modelos de automação de campanhas
+[00:26] Coleções de modelos de automação
+[00:29] Modelos de "Foco em negócios"
+[00:33] Criando uma automação com modelos
+[00:36] Configurando o título e o estágio do pipeline
+[00:41] Selecionando o estágio do pipeline
+[00:46] Salvando a automação
+[00:49] Visão geral do fluxo de trabalho da automação
+[00:54] Alternando entre visualizações do fluxo de trabalho
+[01:00] Ativando a automação
+[01:06] Acessando a guia "Fluxos de trabalho"
+[01:10] Visualização da lista de automações
+[01:13] Acessando a guia "Modelos"
+[01:18] Clicando em "Adicionar automação" para criar um novo fluxo de trabalho
+[01:20] Renomeando a automação
+[01:23] Adicionando uma descrição à automação
+[01:25] Adicionando um gatilho ao fluxo de trabalho
+[01:27] Selecionando um gatilho de categoria
+[01:30] Demonstração de alteração de rótulo de contato
+[01:34] Exemplo de e-mail de acompanhamento
+[01:43] Selecionando o gatilho "Pessoa atualizada"
+[01:46] Adicionando uma condição ao fluxo de trabalho
+[01:50] Definindo a condição para a alteração do rótulo
+[01:52] Adicionando uma ação ao fluxo de trabalho
+[01:56] Selecionando a ação "Enviar e-mail usando modelo"
+[02:00] Opções de rastreamento de e-mail
+[02:04] Selecionando o destinatário do e-mail
+[02:06] Escolhendo um modelo de e-mail
+[02:10] Ativando as opções de rastreamento de e-mail
+[02:14] Adicionando um atraso ao fluxo de trabalho
+[02:19] Definindo a duração do atraso
+[02:26] Adicionando uma condição para o link do e-mail
+[02:30] Adicionando uma condição para o e-mail ser respondido
+[02:39] Adicionando a ação final do e-mail de acompanhamento
+[02:44] Configurando o e-mail de acompanhamento
+[02:50] Salvando a automação e selecionando as opções de gatilho
+[02:55] Ativando a automação
+[02:59] Acessando a guia "Fluxos de trabalho" para visualizar a automação criada
+[03:03] Opções de filtragem para automações
+[03:07] Filtro de status da automação
+[03:10] Opções de classificação da automação
+[03:15] Alternando o status da automação
+[03:22] Acessando a guia "Histórico" para visualizar as execuções da automação
+[03:25] Detalhes da execução da automação
+[03:31] Visão geral da página de Automações

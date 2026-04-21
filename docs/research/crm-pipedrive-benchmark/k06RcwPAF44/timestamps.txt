@@ -1,0 +1,38 @@
+Claro! Aqui está o mapeamento detalhado dos momentos importantes do vídeo:
+
+[00:00] Visão geral do pipeline de vendas, mostrando diferentes etapas do funil de vendas (Qualificado, Contato Feito, Reunião Agendada, Negociações Iniciadas, Contrato Assinado).
+[00:06] Destaque para a importância de informações detalhadas sobre os clientes para o sucesso das vendas.
+[00:12] Demonstração de como abrir um detalhe de negócio ("Bass Industries lead").
+[00:15] Introdução à funcionalidade Smart Contact Data.
+[00:19] Visualização da seção "Smart Contact Data info" expandida para uma pessoa.
+[00:20] Rolagem da tela para mostrar mais detalhes do Smart Contact Data para a pessoa.
+[00:27] Clique no botão "Smart Data Search" para buscar informações sobre o contato.
+[00:28] Exibição dos resultados da pesquisa para a pessoa, incluindo cargo, empresa, localização, links para LinkedIn e Gravatar.
+[00:30] Clique em "Refresh data" para atualizar as informações.
+[00:30] Anotação de que o recurso agora está ativado por padrão para todos os usuários.
+[00:31] Rolagem da tela para cima para mostrar mais informações.
+[00:34] Visualização da seção "Smart Contact Data info" para a organização ("Pipedrive").
+[00:36] Clique em "Show more" para expandir os detalhes da organização.
+[00:38] Exibição dos resultados da pesquisa para a organização, incluindo telefone, site, categoria industrial, legal name, sub-indústria, códigos, total de funcionários, identificação do empregador, localização, links para LinkedIn, Twitter e Facebook.
+[00:46] Destaque para a necessidade de um endereço de e-mail "Work" para o Smart Contact Data funcionar.
+[00:48] Demonstração de como garantir que um e-mail esteja marcado como "Work".
+[00:50] Edição de um campo de e-mail e seleção do tipo "Work".
+[00:54] Salvar as alterações do tipo de e-mail.
+[00:56] Explicação de que o Pipedrive só verifica um e-mail "Work" por vez.
+[01:00] Clique em "Refresh data" para atualizar as informações da pessoa.
+[01:02] Rolagem da tela para mostrar mais informações da organização.
+[01:04] Destaque para a organização das informações recuperadas.
+[01:06] Clique em "Show less" para recolher os detalhes da organização.
+[01:08] Rolagem da tela para cima e clique em "Refresh data" para atualizar as informações da organização.
+[01:10] Demonstração de atualização de dados para a organização.
+[01:13] Clique em "Show more" para expandir os detalhes da pessoa.
+[01:14] Demonstração de atualização de dados para a pessoa.
+[01:15] Edição de um e-mail para marcar como "Work".
+[01:16] Exemplo de como um segundo e-mail "Work" pode ser adicionado.
+[01:17] O Pipedrive usará apenas o primeiro e-mail "Work" para a pesquisa.
+[01:21] Destaque de que é um recurso opt-in e os dados não são armazenados automaticamente.
+[01:22] Retorno à visão geral do pipeline de vendas.
+[01:23] Animação de um ciclista celebrando, simbolizando a eficiência e o ganho de tempo com o Smart Contact Data.
+[01:29] Finalização do vídeo com a mensagem de que o recurso oferece uma vantagem na comunicação e mais tempo para fechar negócios.
+
+Espero que isso ajude!

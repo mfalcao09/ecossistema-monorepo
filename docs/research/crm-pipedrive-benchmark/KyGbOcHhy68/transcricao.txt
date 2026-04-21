@@ -1,0 +1,664 @@
+[00:00] Wonderful.
+[00:09] Hello.
+[00:10] Good morning, good afternoon.
+[00:13] Let's see as folks start to come into our virtual room here.
+[00:19] Hello, please tell us where you're located, where you're watching us from today.
+[00:26] in the chat here.
+[00:27] Awesome, oh wow.
+[00:32] We have Germany, Brazil, Virginia in the States, Mexico, Ireland, oh wow.
+[00:41] I see someone from Minneapolis, that's my hometown.
+[00:46] That's my home state of Minnesota.
+[00:50] Cool. Keep, keep them coming, folks.
+[00:52] Oh, we got someone from our home our state of Florida, Stacey.
+[00:59] Cool.
+[01:00] Awesome, well everyone's coming in slowly.
+[01:04] Uh we can uh start off with giving our introductions.
+[01:06] Uh my name is Stacey.
+[01:08] I'm a Customer Success Specialist here at PipeDrive on the growth team.
+[01:13] And I have the uh special opportunity to usually meet with active users,
+[01:20] curious about different features, uh as well as uh I've been at PipeDrive here uh four years now.
+[01:27] So, I'll hand it off over to my uh comrade here, Janelle.
+[01:30] Thanks, Stacey. Hi, everyone.
+[01:32] My name's Janelle Larson, and I am a Customer Success Manager at PipeDrive.
+[01:38] I um have been with PipeDrive just over 18 months, and in my previous life,
+[01:46] I ran a small portable storage company in Milwaukee, Wisconsin.
+[01:54] So, um I sat in the shoes that you guys are in.
+[01:57] I've managed a sales team, I've been on I've been a salesperson.
+[02:00] I've done the the marketing, the business operations, and the customer support.
+[02:05] I also worked on a customized CRM for our franchise group.
+[02:11] So, um that's how I sort of ended up at PipeDrive, and I really um look forward to the rest of the webinars and the questions you're going to give us later.
+[02:15] Awesome.
+[02:17] Uh now let's just take the opportunity to introduce this tool that we're going to be using to all communicate with each other.
+[02:22] As you could see, there's a lovely chat where everyone's been dropping their locations.
+[02:28] Uh lower in the uh lower right corner, there's also a tab button for questions.
+[02:35] So, if you have any questions about what we're talking about, any features we're referring to,
+[02:40] go ahead and add your questions there.
+[02:44] Uh little bit uh in the next second.
+[02:46] Yes, you will be receiving a recording of this later.
+[02:48] You can expect to receive an email after this is wrapped up.
+[02:50] In addition to that, you you will see a poll pop up here that we want to get your opinion and uh observation and everything else.
+[03:00] As well as we want your feedback after this is wrapped up.
+[03:03] Awesome. So, um,
+[03:08] I think this is a good time for our poll, Janelle, right?
+[03:10] I think for the first one, yes.
+[03:12] Awesome, so we should have a poll popping up here.
+[03:18] Let us know which uh PipeDrive plan that you're currently on.
+[03:22] Go ahead and submit your vote.
+[03:27] Got some results coming in.
+[03:32] Okay.
+[03:35] Professional coming in at the top.
+[03:39] We have some folks on our uh first tier plan, essential, advanced switch to the second, okay.
+[03:47] Great.
+[03:51] Awesome.
+[03:52] All right, while folks are still voting, I think we could probably go into our uh agenda here.
+[03:58] And I'll go ahead and share my screen.
+[04:05] One second here, folks.
+[04:26] So, the uh first items we're going to discuss is uh our automations feature.
+[04:34] As well as uh next we're going to discuss the visibility groups, pipeline specific custom fields, pipeline visibility.
+[04:44] Next after that, automatic assignment, and then uh crowd favorite, questions and answers.
+[04:59] I saw in one of the questions someone asked how long the webinar is going to be.
+[05:04] We're going to round at at an hour.
+[05:08] Yes, so we have about 55 minutes to provide you with some information and also uh answer your questions that you might have for us.
+[05:17] Wonderful.
+[05:19] So, we're going to get started and head into our first topic on the agenda, which is our lovely uh automations.
+[05:31] So, I will go ahead and share my screen so you can see.
+[05:43] Awesome.
+[05:45] So, with our uh advanced plans and higher, you can uh start to utilize our wonderful feature, the uh workflow automations feature.
+[06:01] And once again, if you have any questions, you can go ahead and send them over to the questions tab.
+[06:05] So, the automations feature is a wonderful feature that you can utilize to uh replace our replicate anything that you're doing in your existing workflow.
+[06:14] With the automation feature, especially if you have different teams that you're going to be handing over deals or transactions to, you can utilize this feature to uh automate some of those actions.
+[06:26] One uh example of this would be to use the automation to change a deal over to another PipeDrive user once it has maybe completed a certain status change.
+[06:37] With this, uh the automation, you would just need one identifying trigger that would set everything into play.
+[06:45] For this example, we're going to utilize the deal updated uh trigger point.
+[06:51] Now after applying the trigger, you're able to uh apply different conditions.
+[07:00] With understanding that uh within PipeDrive, you're able to create more than one pipeline, and also you might have more than one user.
+[07:07] With the conditions, you can apply the different uh uh fields or parameters.
+[07:15] In this example, we can use the status change of a deal changing into the one position.
+[07:23] And from here maybe I want to uh change ownership of that deal over to another PipeDrive user.
+[07:31] I can go in and maybe add a delay for a certain scenario, but I want to add an immediate action of uh changing ownership.
+[07:41] So, you can see here from my action list, I have uh more detailed options here.
+[07:50] What I'm going to do is select the option to update uh deal fields.
+[07:56] Do the field in particular that I want to change is the owner.
+[08:00] So for this example, maybe I'm changing uh ownership from the sales team over to the operations team.
+[08:09] So I would maybe list my particular operations manager.
+[08:18] That will be taking ownership of this deal.
+[08:23] And of course, turning it on to uh activate it.
+[08:28] And then just to show you as an example of this workflow automation, we can go to a deal.
+[08:35] And you could see here in the example, after the animation uh disappears, that the ownership has changed to uh new PipeDrive user.
+[08:52] So this can be applied and helpful in a number of different ways, uh also maybe even moving that deal over to another pipeline if that would be helpful.
+[09:03] Awesome.
+[09:04] Handing it back over to you, Janelle.
+[09:07] Thanks, Stacey. Just a reminder here.
+[09:10] Please put your questions in the question panel and we'll get to that after we finish up with our uh next two topics.
+[09:21] I know many of you on this webinar today manage a team.
+[09:26] And there's occasions when you want only certain users to see certain data within their PipeDrive account.
+[09:33] This helps that user cut down on all the extra stuff they don't need to see so they can focus on the work that they need to do that day.
+[09:42] Let's take some real life use cases or examples here.
+[09:44] And I see this with my customers.
+[09:47] Um they maybe have a sales team that works in PipeDrive, but they don'9t want the sales team members to see each other's deals.
+[09:55] They want to keep that separate, or maybe in your PipeDrive account, you have two teams that are using it.
+[09:59] Say you have a sales team and you have an HR team.
+[10:04] You only want the HR team to see the stuff applicable to them, and you only want the sales team to see pipelines and data that's applicable to their work.
+[10:13] We want to cut down on that visual clutter, so each PipeDrive user is focusing on the work they need to do to close deals to get things taken care of.
+[10:23] So, one of the ways we tackle this in PipeDrive is by using visibility groups.
+[10:29] Visibility groups, they allow you to group users together, and then you can dictate what items they're allowed to see in PipeDrive.
+[10:39] So, when I'm talking about items in PipeDrive, it's deals, leads, people, organizations, and products.
+[10:48] Those are the five items we're talking about in general.
+[10:51] Now, I find with visibility groups, the very best and maybe the only way to understand them is to look at them in an account.
+[10:58] So, I'm going to go ahead here and share my screen.
+[11:08] Just let me get my computer organized here a bit.
+[11:10] And right now everyone should give me a thumbs up if you're seeing my demo account.
+[11:15] I'm on the Catering Sales Pipeline.
+[11:19] Okay, awesome. So far, so good.
+[11:23] Okay. So, I'm going to go in and show you some of the visibility groups within PipeDrive here.
+[11:29] Now, when I do this, I'm going to go up to my picture in the upper right hand corner and click on it.
+[11:34] If you haven't uploaded your picture yet, think about doing that.
+[11:36] And I'm going to go to Manage Users.
+[11:39] Now, under Manage Users, I'm going to go over to visibility groups right here.
+[11:45] Now, if you guys are playing along in your office or in your home office, if you don't see visibility groups, it's because you need account setting rights, okay?
+[11:57] Um one thing I'll throw in here is I did see a quick question in the chat.
+[12:00] You were asking what level of plan we're demoing on.
+[12:03] I am demoing on the professional plan today, but I will also refer to other plans as we're going through because uh visibility groups is included in all of your PipeDrive plans.
+[12:13] So, let's think of a visibility group once away as a way to assign users to a group, and then you can dictate what they're allowed to see.
+[12:22] That's the visibility part. In PipeDrive, our visibility groups have two main features.
+[12:31] One is a pipeline visibility, okay?
+[12:33] That's what I'm circling here.
+[12:34] And the other one is item visibility.
+[12:36] And remember, items are leads, deals, people, organizations, and products.
+[12:44] All plans have the default group.
+[12:48] So, let's dive down a little bit deeper into some of the custom visibility groups I've set up.
+[12:54] Now, if you're on the Professional, Power, or Enterprise group, you're going to have extra visibility groups that are allowed for you.
+[13:06] I set this up in a way that I see in many of my customers accounts.
+[13:10] I have set up a sales manager visibility group where I have two sales managers.
+[13:16] Then I have set up the sales team visibility group where I have two team members.
+[13:22] The sales manager visibility group is what I call the parent group.
+[13:28] And it can see all the items in the child group, the sales team visibility group.
+[13:33] Best practice here when you set up visibility groups is make the parent visibility group have the highest visibility, meaning they get to see the most, and generally you then take the sales team visibility group or the child visibility group, and they get to see a more restricted view of the PipeDrive account.
+[13:53] And remember, we're doing this to help focus the user in on only seeing what's applicable, so they can focus in on their work.
+[14:04] So, let's dive just a bit deeper into the sales team visibility group.
+[14:08] I just brought it up, and as I said before, here's the sales the parent group.
+[14:12] So, remember, everything that's in the child group, the parent group is going to be able to see.
+[14:19] That's why we set up that relationship in the beginning.
+[14:22] Now, in my demo account here, I have two sales people, I have Molly and I have Nell.
+[14:29] As I had mentioned, there's two ways to control visibility through groups, and the first one is visibility of pipelines.
+[14:37] So, for my sales team visibility group, I only want them to see my sales pipelines.
+[14:42] So, I've given them access to four of our seven pipelines.
+[14:47] So, before we get much further, let's go ahead and look at another user, okay?
+[14:52] I'm going to bring up Nell.
+[14:53] If you remember, Nell right here is a sales team member.
+[14:59] Now, give me a thumbs up if you can see Nell's account with the initials NC in the upper right hand corner.
+[15:05] Excellent, thank you.
+[15:10] So, if I go into Nell's account, Nell can only see the four pipelines that her visibility group was given.
+[15:19] Now, if you notice, this is going to be able to clean up all of what Nell is able to see.
+[15:23] Now, Nell may not have a lot of deals in some of these other pipelines, as you can see, she mostly works in the catering pipeline.
+[15:32] Not to make you guys dizzy, I'm going to go back to Janelle's account, which I'm speaking of myself in third person here today.
+[15:38] Because Janelle is the full admin, and that's why with account setting, why she can set these up.
+[15:46] So, we've already restricted our sales team visibility group to those four pipelines, but I really want to clear their view up so they can focus on their deals and what needs to get done today.
+[15:56] To do that, I can further go down and define item visibility.
+[16:03] Items being leads, deals, people, organizations, and products.
+[16:08] For today's conversation, I'm only going to focus on deals.
+[16:12] But remember, what I'm saying applies to all of the other items.
+[16:18] So, the item options you have here, you can if you're on the Power plan and up, you're going to have four options.
+[16:25] And that's where I'm going to start.
+[16:26] If you are on the essential or advanced plan, you're only going to have item owner and all users.
+[16:34] But let's just go over what do these options mean?
+[16:40] Okay, one thing to state that no matter which option, visibility option you choose for deals, for this group, the deal owner always can see their own deals.
+[16:53] The deal administrator can see deals.
+[16:56] Anybody who follows the deal can still see the deal, and the parent visibility group.
+[17:03] So, what that means is my most restrictive visibility here, the deals, and I'm going to concentrate on Nell.
+[17:10] Nell owns deals.
+[17:11] In the most restrictive visibility group, Nell's deals are going to be able to be seen by all the deal admins, Nell, because she's the deal owner, the people in the parent group, and the parent group here is the sales manager visibility group, and then followers.
+[17:28] So, this is your most restrictive selection, and this is the one I've put in my demo account for today.
+[17:35] What this means is Nell can see her deals, but Molly cannot.
+[17:41] Molly can see her deals, but Nell cannot see Molly's deals.
+[17:46] If I wanted to open up the visibility a little bit more, say this team is more collaborative, and Molly and Nell work together.
+[17:53] Then I would want to give the deal visibility to include the visibility group.
+[18:00] So Nell and Molly could see each other's leads.
+[18:04] Well, deals.
+[18:06] I'm on deals.
+[18:07] There's another option here, which you can add visibility then into the subgroups.
+[18:13] And then finally, you can have visibility where everyone can see everybody else's deals.
+[18:20] For this group, because I really want to keep it the minimum amount of clutter for my sales people.
+[18:29] I'm just going to have Nell be able to see her own deals, and no one else's.
+[18:34] So, let's go back to Nell and see how she's doing in her account.
+[18:41] Now, remember, Nell is already restricted just to seeing her four pipelines, but I've also restricted Nell to just see her own deals.
+[18:50] These are her seven deals in this pipeline.
+[18:54] Through that restricted visibility group, Nell cannot see Molly's deals, even though they're in the same visibility group.
+[19:04] And Nell cannot see Marty's deals, or Janelle's deals.
+[19:10] So, what I like about this is Nell has a really focused view on what she needs to work on when she comes in to her account in the morning.
+[19:22] I'm going to exit out of this sales visibility group, and let's just go up and talk a little bit more about the group above it, the sales manager visibility group.
+[19:35] Now, best practice is to give them a little more visibility.
+[19:38] So, this group gets to see six out of the seven pipelines.
+[19:42] And for the items for this group, I'm going to make my screen a bit bigger there.
+[19:49] I have given the visibility that they're able to see the deals in each other's accounts.
+[19:56] So, they can work collaboratively together.
+[20:00] So, let's just take a quick look on what this looks like in Janelle's account.
+[20:05] So, Janelle is an admin, so she's going to be able to see everyone's deals.
+[20:11] She's also going to be able to see Molly's deals, and she's also going to be able to see Marty's deals, even if Janelle was not an admin, she could see Marty's deals because they're in the same visibility group.
+[20:25] Visibility groups as much as visibility groups are about catering or categorizing users.
+[20:31] There's also other occasions where you want certain data fields to be seen and updated, but only in certain pipelines.
+[20:41] For example, let's say you have a marketing source, where you you're first marketing source, um is where you capture, where did you get that lead from?
+[20:53] That would be an example where you maybe only want to put it in your sales pipelines, or maybe in your account, you have a PO number, a purchase order number, and you only want that in certain sales pipelines.
+[21:05] But on top of that, you only want certain people to be able to access it.
+[21:10] So, what I'm going to do here is I'm going to go and take us into some customized fields.
+[21:16] So, how PipeDrive tackles this issue is by showing custom fields only in specific pipelines, and then you can hide custom fields from other pipelines.
+[21:28] This is going to help unclutter your deal view, and let's take a deeper look.
+[21:35] Now, everyone, based on your account settings, may not be able to get into your custom fields, but if you can, go into Company Settings, and we're going to draw down here to data fields.
+[21:46] And let's just jump into this first field, this first um,
+[21:54] custom field that I have here, which is first marketing source.
+[21:58] As a side note, when I work with my customers, I recommend this is a field in almost everyone's account because you sort of want to know where your deals and leads come from.
+[22:06] So, the first thing I can do here is restrict where we see this custom field.
+[22:11] Like I said before, I only want to put this custom field into my sales pipelines, okay?
+[22:20] So, let's go ahead and take a look at what that looks like when I'm in a deal.
+[22:25] I'm going to bring my um, my deals back up here.
+[22:31] And let's say I go into this Miller Plumbing deal.
+[22:36] I'm going to draw down, and I'm going to say, what was the first marketing source?
+[22:40] This one already had LinkedIn and, so let's just say I was wrong on that and it really was a referral.
+[22:46] And I'm going to save it.
+[22:48] If you notice now, I am in the catering pipeline and I get to see the first marketing source.
+[22:54] However, if I go to a different pipeline, I'm going to say when I look down, I don't see first marketing source because it is a field that's not accessible from that pipeline.
+[23:05] Going back into my custom fields here.
+[23:14] I'm going to bring you down to this PO number field.
+[23:19] This purchase order field.
+[23:20] This is a field I want to be able for everyone to see in the pipelines that's applicable.
+[23:28] I'm just putting it in two pipelines, but I only want the admin to be able to assign the PO number.
+[23:36] I don't want the sales people that are or the other um members of this account being able to accidentally update that number, so I want to keep it as they can view it but not edit it.
+[23:49] So, let's go back to Nell and see how she's doing in her account.
+[23:57] So, if I go into the deal, we're going to go into Miller again, because that was actually one of Nell's deals.
+[24:06] And if you remember, that first marketing source had already been input.
+[24:09] And of course, Nell can change it if she needs to, and save it.
+[24:16] But if we look at this PO number, Nell is not able to click in here and make any changes.
+[24:22] If you notice it, it's a read only field, because only the admin can go ahead and manage that field.
+[24:34] If you're looking for the features that I've just demonstrated, the custom fields by pipeline and by user, you're going to find that in the professional, power, or enterprise plan.
+[24:46] Stacey, before I go any further, is there anything else in visibility groups I missed, because it is a monstrous subject.
+[24:55] Yes, I I don't believe there's anything you missed.
+[24:58] Uh there's so much more we could talk about that, but uh since we only have so much time, I think that's it for for now.
+[25:06] Okay. Remember, guys, if you have questions, put it in that question panel and we'll get to it after our last subject here.
+[25:13] So, our last subject really is going to go into automatic assignments.
+[25:21] Part of managing a team for you guys may be distributing leads or deals among your team members, okay?
+[25:29] Sometimes leads come in overnight, like through a a web contact form, and they need to be assigned, or maybe you need to distribute your leads or deals evenly among team members.
+[25:44] In the past, this has had to be done manually by someone on your team, which means every morning, they're going to go into their leads inbox.
+[25:54] Which I'm going to pop into mine.
+[25:55] And speaking of leads inbox, how many of you guys use the leads inbox in your account?
+[26:01] Uh check that poll tab, and we should have a poll coming up on that in just a second here.
+[26:06] Yes, we want to get your feedback.
+[26:08] We know uh this is often a forgotten area of PipeDrive, so let us know if you're utilizing it.
+[26:14] If not, definitely check out this portion so you can utilize it more.
+[26:17] Yep, and the leads inbox is included in all plans.
+[26:20] I think of the leads inbox as a great place to keep non-qualified leads.
+[26:26] So, I'm going to talk in my example here when we dive a little bit deeper into automatic assignment.
+[26:32] I'm going to be bringing it up from the leads perspective.
+[26:36] Automatic assignment can be used on deals when they're created or if there's been a change in a deal, or when a lead is created.
+[26:42] So, I'm going to just jump into web forms here.
+[26:48] And this is an add-on PipeDrive, so you may not all have it, but I was talking about that contact form, and this is probably one of my number one use cases for automatic assignment.
+[26:57] On your website, you have a contact form, and you ask people to fill it out.
+[27:01] So, I'm going to go ahead and fill this one out, and I'm going to just, pretend I'm a customer, it's 2:00 in the morning, filling something out.
+[27:10] And when you come in the morning, it's going to be in your inbox.
+[27:23] Phone number is optional, you can do a message.
+[27:26] This is what I want you to look at, industry.
+[27:29] Industry in my account is a custom field.
+[27:32] So, I'm going to come in and I'm going to Nell, my customer is going to be from agriculture.
+[27:37] And at 2:00 in the morning, she submitted that lead to me on my website.
+[27:46] The next morning, in the past, someone has had to come in in the leads inbox and say, wow, we got a lead over the last night.
+[27:54] I need to assign it to someone.
+[27:57] If you want to take this step out of your process and automate it, automatic automatic.
+[28:03] Now I've lost my words.
+[28:05] Sorry, automatic assignment is best for you.
+[28:08] Some of you may have heard of automatic assignment before, it's also called a round robin.
+[28:12] So, let's see in PipeDrive, how do you get to automatic assignment?
+[28:16] There's a couple of ways.
+[28:17] You can go down and click the more button in the bottom left hand corner and go up to automatic assignment.
+[28:23] And once again, all your automatic assignment, you can do it when a deal is added, a deal is updated, or a lead is added.
+[28:30] I'm concentrating my demo today on when a lead is added.
+[28:35] Let's take a look at some of the rules.
+[28:38] So, the first thing you need to do is you need to establish a rule by defining certain conditions and then assign who is the owner of it.
+[28:49] So, let's take a look at how I've set this up in my demo account.
+[28:53] Right here, I'm using industry.
+[28:55] If you remember, you saw that in my contact form.
+[28:58] I'm saying if the industry is agriculture, I'm going to assign it to user Nell Carlson.
+[29:04] My next rule, which by the way, these are set in a priority.
+[29:08] So, you execute the rules in the order you see them.
+[29:12] If the industry is manufacturing, I'm going to pick Marty Burns to be the owner of that lead.
+[29:20] Finally, I have my last rule, which is if industry is not empty, which means they submitted an industry, but it wasn't agriculture, it would have been assigned to Nell, it's not manufacturing, or it would have gone to Molly.
+[29:38] Marty. So now this one goes to Molly.
+[29:40] And something to remember here, you can add lots of conditions to this.
+[29:44] You also can add a team, not just a person to who gets things assigned.
+[29:50] So let's take a little bit of a look how this worked in the lead that I input.
+[29:57] This lead came in and it was agriculture, so I'm going to look in my leads inbox.
+[30:03] My custom field for industry was agriculture, and I know if it's agriculture, it is to be assigned to Nell, and it was.
+[30:14] One thing when you do automatic assignment, sometimes you need to go back and look at it and say, hey, is it working based off the rules that I have established?
+[30:28] The best way to do that, and another way to get into automatic assignment is to go up to the top and click on your picture.
+[30:35] Going down to tools and apps, you can get to automatic assignment that way also.
+[30:42] We have a history here.
+[30:44] So, once you've established your rules, go into your history and you can look at your history today, all your history, and I'm looking just at assigned here.
+[30:54] I can see what we ran this morning, that test coming in from Stacey, hopefully my customer, that Nell is going to close a deal on, the rule that was applied, and who was the assignee.
+[31:05] You also can see who was not assigned.
+[31:10] That is the way that you would sort of want to test to see how things are working.
+[31:21] I'm going to take a quick moment here and stop sharing my screen because I see, oops, that is not.
+[31:29] There we go.
+[31:30] I'm back.
+[31:32] Stop sharing my screen, because I see we're getting some good questions over here in the questions.
+[31:37] Stacey, do you want to start us off on these?
+[31:40] Yes, so now is a good time to start taking our questions.
+[31:45] If you haven't already, uh go ahead and head over to the questions tab and ask away any questions that uh might have come up uh during our time together so far.
+[31:56] And vote them up on the best ones.
+[31:58] Yes, what we'll do is check out the questions based on those that are uh voted up the highest.
+[32:04] So, uh we'll start here with our first one from uh, oh, the upvote just changed.
+[32:10] So, let's see.
+[32:12] So, don't hold us to it is what she's saying.
+[32:16] Okay, this one is pretty it's a pretty good question.
+[32:22] You should see it up on your screen.
+[32:24] What is the best way to learn PipeDrive?
+[32:27] So, I'm going to go ahead and share my screen to show you a few different tools outside of uh learning via one of our wonderful webinars that we're having here today.
+[32:41] There's a few other tools that are accessible in your PipeDrive account that you might not be aware of.
+[32:46] Um if you click on the uh quick help question mark here in the upper right hand corner of your screen, you can always uh be able to utilize the knowledge-based articles as well as the academy videos that often get overlooked, but if you're more of a visual type of learner, that's a great way to learn about these different features we're uh speaking about today.
+[33:10] As well as any page that you might be on, you'll locate a few different articles that might be helpful and then our PipeDrive support team is available to connect with you via chat if need be, if you need some direct assistance or have a simple question that you would like to get answered.
+[33:26] And then um for folks that have account managers that fall into that certain threshold, you always have those options available, but there's a few different resources that you can reach out to for your questions there.
+[33:41] I know, and I ask regularly.
+[33:48] We have another question here from Mike.
+[33:51] How can you set triggers to email to be sent out and can we set up something to alert me the email has been opened or viewed.
+[34:00] Mike, I think that's an awesome question.
+[34:05] We actually uh recently this year have added a few different updates to our workflow automation tool that will allow you to actually set up an email sequence based on the response or lack thereof to your first email.
+[34:20] So, if you do have your uh if you do have access to the advanced plan or higher, you would be able to access that tool.
+[34:30] Just to show you how it would look, I'm going to go ahead and share my screen to navigate back over to our automations.
+[34:40] And I know we didn't talk too much about automations, but there's so much to explain in there and so much that you can do.
+[34:54] Um if you are interested in trying out the automations, you haven't before, you'll notice that you have a list of pre-made templates to kind of help guide you with the uh feature.
+[35:05] But going into some of my saved automations that I have here, I have a few that are set up to uh send a uh an email sequence, and kind of going back to the basics of the automation, uh you can trigger an automation to uh send out the action of the email based on an item being created, updated, or maybe deleted.
+[35:25] For those uh scenarios, more than likely, you're probably going to be either creating an item or updating an item.
+[35:31] So, with those uh existing contacts that you're probably wanting to set up that sequence, the better opportunity would be to uh either update that contact, or maybe when you're creating the contact, you can uh set it up where you're uh actually sending out an email, and you would need to send out a uh email template, and then also turn on the tracking capabilities.
+[35:54] From there, you would be able to identify uh with your conditions if that email has been replied to.
+[36:02] It's almost like a uh sentence type of format, if the email has not been replied to, you can kind of continue on with sending your email sequence.
+[36:09] Uh just because if you haven't already noted, based on my description, uh PipeDrive also has uh tracking capabilities to those emails that you're sending out.
+[36:20] So, if you haven't already, uh go over to your email sync, if you do have access to the tool, and turn on your tracking capabilities here.
+[36:31] And also in your sales assistant, if you click on the gear button here and manage notifications, you can actually uh be notified of whenever your emails are opened, or any uh links are clicked on within that email.
+[36:47] And Stacey, did it just say something?
+[36:48] I love that feature, because if you sent out an email, say like you sent out a proposal, and you've like really been waiting for a response, and you then if you track it, the sales assistant will notify you within PipeDrive that it has been opened, and that is golden.
+[37:10] One, you know that data about the deal you're trying to work, and two then you know, well, maybe they read, I'm going to reach out to them this afternoon.
+[37:19] So, if you haven't worked with sales assistant, it's it's pretty powerful, and I know we're building out that sales assistant with more features as we move forward.
+[37:31] Okay.
+[37:32] Oh yes.
+[37:34] And we have a question here.
+[37:36] How do I add multiple organizations to one PipeDrive account?
+[37:41] I think I like your example, so thank you for sharing that with us.
+[37:45] For example, the Apple project has John contracting and Smith contracting, how do I do both?
+[37:52] So, I'm interpreting this question is how do you put two organizations in on one deal, okay?
+[37:56] So, I'm going to go ahead and share my screen.
+[38:00] I'm going to share my screen quick, and I'll give you my here we go.
+[38:15] So, this would primarily uh take place within your automations feature, of course.
+[38:23] Um, but you would need to identify a trigger that would take place, um, either with using a an action as a trigger, and I'll go ahead and I'll go ahead and share my screen, so I can show you this as an example.
+[38:40] You would need to identify an action that would uh set off your whole automation into play.
+[38:51] But also think of it in a sense of uh, um, even when it comes to your automations, whether it's a deal being updated, you can with your instant conditions, you can actually pull up filters.
+[39:10] Uh for maybe a contact even uh falling into a certain filter.
+[39:20] So, imagine when a deal falls into a certain filter, the instant, it falls into one of my specific uh filters here.
+[39:35] Maybe I added a label, I can initiate uh an activity being uh created on behalf of a sales representative.
+[39:51] So, that's definitely something that you can work out with the automation.
+[39:58] Um but you would want to set that up as an automated action, so setting up the rule that would set that whole thing into play.
+[40:11] I hope that answers your question.
+[40:17] We have a question next from Valerie.
+[40:22] Can we please allow the same contact person to be on multiple organizations and companies?
+[40:29] Our clients have multiple companies.
+[40:33] I would definitely love to take this and I've heard it before.
+[40:40] Thank you for voting it up.
+[40:41] Back to product for feedback.
+[40:42] Working in like when I work with my customers, I always say but I'm I want to give you a solution that's you can do today right now in PipeDrive.
+[40:49] And then that would be custom fields.
+[40:51] You would probably want to put a custom field under that contact person and assign and put, you know, all the organizations they're associated with.
+[41:04] Or you can make it a multi-drop down, and just you could list every organization they're associated with.
+[41:14] Stacey, do you think I should show that or was was that a good enough explanation?
+[41:19] I think that was good for the time being.
+[41:22] Yes, because we are, good point.
+[41:25] We only got a little more time left, so I'm going to hand it back to you on the next question.
+[41:31] Okay.
+[41:34] And um Marvin has a question here that won't take up too much time to answer.
+[41:40] Um Marvin asks, do you have consulting services which can manage automations for us?
+[41:48] Great question, uh I will go ahead and share my screen just to show you some resources.
+[41:54] When it comes to this, in the sense of uh, lots of different resources within PipeDrive.
+[42:04] Um as you saw that uh Janelle pointed out the marketplace stores are integrations and softwares that connect to PipeDrive, but in addition to that, you can also find our uh verified partners that you can utilize for any type of training, uh consultation, either migrating your data over from another software.
+[42:35] Um in the sense of if you might be one of those accounts that might not fall into the threshold where you get an account manager, this can be a great uh resource for you.
+[42:47] If you notice there, Paul Miner is one of uh our partner favorites.
+[42:54] He has a lot of great YouTube videos that uh breaks down different features, but you can also seek these services out for uh training, training with your team, what have you?
+[43:08] But always um if anything, if you had a question about anything, be sure to reach out to our PipeDrive support so we can provide you um with the around to go with.
+[43:20] Okay, our next question, let's see.
+[43:25] I clicked in the wrong things, but so now it's not, oh wait, let me see.
+[43:30] Close, there we go.
+[43:32] Love technology when it works.
+[43:34] Okay, so this question is is asking about the WhatsApp, is it compatible with PipeDrive?
+[43:43] And if you go, I'll share my screen quick, and I'll give you my, here, here we go.
+[43:53] I'm going to share my screen quick, and also we have several questions here about automations or integrations.
+[44:03] So, if it's okay, I'm going to just address my overall issue, because there's a few more questions in the chat about integrations, okay?
+[44:17] First place to always check for integrations is PipeDrive's Marketplace.
+[44:23] And we do have an integration with the WhatsApp, okay?
+[44:27] This integration is written by a third party.
+[44:31] So, you can go you can look at this integration.
+[44:34] You can see what the rating is on it.
+[44:38] You can also go down, look at descriptions, resources, and getting support.
+[44:44] Looking at integration, the next place you go to is the app you want to integrate with.
+[44:53] Look at their Marketplace, and see if they have any resources.
+[45:00] See if they have an app that shares back with PipeDrive.
+[45:04] Third, I like to recommend it something like a Zapier, where it's a non-programming language, that um, integrates two pieces of software together, and we have a lot that integrates with PipeDrive through Zapier.
+[45:21] I know there's other software out there, that's my example.
+[45:24] And then the fourth is the API is open.
+[45:29] Okay.
+[45:30] Did I miss anything there, Stacey?
+[45:33] No, no, I think you you've got it.
+[45:36] And we have about uh four minutes left.
+[45:41] So, um we may maybe have time for maybe one more question.
+[45:48] Let's see, um, it looks like a lot of people want a webinar just on automations.
+[46:00] So, it looks like you're going to be coming back to the screen.
+[46:06] Maybe, maybe.
+[46:09] Um, so we have another question here from Marvin.
+[46:17] Uh, would you do another webinar just about automations?
+[46:21] And I also noticed here that um Scott, I didn't answer your Scotty, I did not answer your question in full detail, because you wanted some specifics.
+[46:31] So I will try my best to connect with you and uh set something up so we can go into that in further detail.
+[46:40] But if you notice uh if you go over to uh back over to our uh PipeDrive screen and the quick help button, in the Academy section, we actually have some webinars that we've conducted in the past that focus and really go into depth uh with our automations feature.
+[47:04] There's a lot that you can do within there, um from the basics all the way to uh some detailed approaches.
+[47:11] So, uh definitely check that out.
+[47:14] Um, but I will let our uh leadership know that you want to learn way more about automations that we probably couldn't cover in this uh webinar today.
+[47:29] And just to throw something in there.
+[47:33] I've PipeDrive does have a really nice meeting scheduler, okay?
+[47:39] I have used both, okay?
+[47:40] I've used Calendly and I've used the meeting scheduler.
+[47:44] The meeting scheduler, it does a good job.
+[47:48] I recommend you take a peek at PipeDrive's meeting scheduler, because that may be solving what you need, and you may not have to then buy another piece of software.
+[47:59] Especially when it comes to the reporting aspect of that, that you can capture and insights after all of those uh activities and events have been completed.
+[48:14] So, um don't forget about the power of scheduler.
+[48:19] Yeah.
+[48:20] Yep, and you can find it in the knowledge base if you want to know more about it.
+[48:24] Okay.
+[48:25] Uh, let's take a question here from Amber.
+[48:29] Uh, do you have a YouTube channel or something similar for trainings and more.
+[48:36] Stacey, you're nodding your head yes.
+[48:38] I know we have one, but I don't know what it is.
+[48:40] Do you?
+[48:42] We do have a YouTube channel, and recently uh our product head Sean was on there, uh debuting some of our most recent updates and some some aspects of PipeDrive that you can expect to see, um in the coming year and coming quarter.
+[49:01] So, we do have a YouTube channel that uh features a lot of good updates about features, webinars, but also be sure to pay attention to our Academy, because that's a dedicated area that you can find a lot of video content.
+[49:15] We have an awesome uh getting started with PipeDrive course that features uh James, as well as uh some of our other comrades within PipeDrive explaining some of the basics and then even more um elevated levels of PipeDrive.
+[49:28] So, uh definitely check that out.
+[49:33] Um but I will let our uh leadership know that you want to learn way more about automations that we probably couldn't cover in this uh webinar today.
+[49:50] And we have a question here.
+[49:52] How do I add multiple organizations to one PipeDrive account?
+[49:57] And if you go, I'll share my screen quick and I'll give you my here, here we go.
+[50:07] I'm going to share my screen quick and also we've had several questions here about automations, so I'm going to or integrations.
+[50:18] So, if it's okay, I'm going to just address my overall issue, because there's a few more questions in the chat about integrations, okay?
+[50:31] First place to always check for integrations is PipeDrive's Marketplace.
+[50:38] And we do have an integration with the WhatsApp, okay?
+[50:43] This integration is written by a third party.
+[50:48] So, you can go you can look at this integration.
+[50:52] You can see what the rating is on it.
+[50:56] You can also go down, look at descriptions, resources, and getting support.
+[51:02] Looking at integration, the next place you go to is the app you want to integrate with.
+[51:09] Look at their Marketplace and see if they have any resources.
+[51:15] See if they have an app that shares back with PipeDrive.
+[51:21] Third, I like to recommend it something like a Zapier, where it's a non-programming language that um integrates two pieces of software together, and we have a lot that integrates with PipeDrive through Zapier.
+[51:38] I know there's other software out there that's my example, and then the fourth is the API is open.
+[51:44] Okay.
+[51:46] Did I miss anything there, Stacey?
+[51:49] No, no, I think you covered it, and we have about uh four minutes left.
+[51:57] So, um we might maybe have time for maybe one more question.
+[52:04] Let's see, um, it looks like a lot of people want a webinar just on automations.
+[52:13] So, it looks like you're going to be coming back to the screen.
+[52:19] Maybe, maybe.
+[52:21] Um, so we have another question here from Marvin.
+[52:27] Uh, would you do another webinar just about automations?
+[52:33] And I also noticed here that um Scott, I didn't answer your Scotty, I did not answer your question in full detail because you wanted some specifics, so I will try my best to connect with you and uh set something up so we can go into that in further detail.
+[52:49] But if you notice, uh if you go over to uh back over to our uh PipeDrive screen and the quick help button, in the Academy section, we actually have some webinars that we've conducted in the past that focus and really go into depth uh with our automations feature.
+[53:08] There's a lot that you can do within there, um for the basics all the way to uh some detailed approaches.
+[53:19] So, uh definitely check that out.
+[53:23] Um, but I will let our uh leadership know that you want to learn way more about automations that we probably couldn't cover in this uh webinar today.
+[53:39] And just to throw something in there.
+[53:43] I PipeDrive does have a really nice meeting scheduler, okay?
+[53:48] I have used both, okay?
+[53:50] I've used Calendly and I've used the meeting scheduler.
+[53:54] The meeting scheduler, it does a good job.
+[53:59] I recommend you take a peek at PipeDrive's meeting scheduler, because that may be solving what you need, and you may not have to then buy another piece of software.
+[54:10] Especially when it comes to the reporting aspect of that, that you can capture and insights after all of those uh activities and events have been completed.
+[54:25] So, um don't forget about the power of scheduler.
+[54:29] Yep, yep, and you can find it in the knowledge base if you want to know more about it.
+[54:34] Okay.
+[54:36] And we have a question here from Amber.
+[54:40] Uh, do you have a YouTube channel or something similar for trainings and more.
+[54:46] Stacey, you're nodding your head yes.
+[54:48] I know we have one, but I don't know what it is.
+[54:50] Do you?
+[54:51] We do have a YouTube channel, and recently, uh, our product head, Sean, was on there, uh, debuting some of our most recent updates and some some aspects of PipeDrive that you can expect to see, um, in the coming year and coming quarter.
+[55:12] So, we do have a YouTube channel that uh features a lot of good updates about features, webinars, but also be sure to pay attention to our Academy, because that's a dedicated area that you can find a lot of video content.
+[55:27] We have an awesome, uh, getting started with PipeDrive course that features, uh, James, as well as, uh, some of our other comrades within PipeDrive explaining some of the basics and then even more, um, elevated levels of PipeDrive.
+[55:49] So, uh, definitely check that out.
+[55:54] Um, but I will let our, uh, leadership know that you want to learn way more about automations that we probably couldn't cover in this, uh, webinar today.
+[56:10] And, uh, Janelle, did it just say something?
+[56:13] I love that feature, because if you sent out an email, say like you sent out a proposal, and you've like really been waiting for a response, and you then, if you track it, the sales assistant will notify you within PipeDrive, that it has been opened.
+[56:32] And that is golden.
+[56:34] One, you know that data about the deal you're trying to work, and two, then you know, well, maybe they read, I'm going to reach out to them this afternoon.
+[56:44] So, if you haven't worked with Sales Assistant, it's it's pretty powerful, and I know we're building out that Sales Assistant with more features as we move forward.
+[56:59] Okay.
+[57:00] Oh yes.
+[57:02] And we have a question here.
+[57:05] How do I add multiple organizations to one PipeDrive account?
+[57:12] I think I like your example, so thank you for sharing that with us.
+[57:17] For example, the Apple project has John contracting and Smith contracting, how do I do both?
+[57:26] So, I'm interpreting this question is how do you put two organizations in on one deal, okay?
+[57:33] So, I'm going to go ahead and share my screen.
+[57:38] I'm going to share my screen quick, and I'll give you my, here, here we go.
+[57:48] I'm going to share my screen quick, and also we've had several questions here about automations.
+[57:56] So, I'm going to or integrations.
+[58:02] So, if it's okay, I'm going to just address my overall issue, because there's a few more questions in the chat about integrations, okay?
+[58:14] First place to always check for integrations is PipeDrive's Marketplace.
+[58:22] And we do have an integration with the WhatsApp, okay?
+[58:26] This integration is written by a third party.
+[58:31] So, you can go you can look at this integration.
+[58:34] You can see what the rating is on it.
+[58:38] You can also go down, look at descriptions, resources, and getting support.
+[58:44] Looking at integration, the next place you go to is the app you want to integrate with.
+[58:53] Look at their Marketplace and see if they have any resources.
+[58:59] See if they have an app that shares back with PipeDrive.
+[59:04] Third, I like to recommend it something like a Zapier, where it's a non-programming language that integrates two pieces of software together, and we have a lot that integrates with PipeDrive through Zapier.
+[59:21] I know there's other software out there that's my example.
+[59:24] And then the fourth is the API is open.
+[59:30] Okay.
+[59:31] Did I miss anything there, Stacey?
+[59:35] No, no, I think you covered it, and we have about uh four minutes left.
+[59:43] So, um we might maybe have time for maybe one more question.
+[59:52] Let's see, um, it looks like a lot of people want a webinar just on automations.
+[59:59] So, it looks like you're going to be coming back to the screen.
+[01:00:07] Maybe, maybe.
+[01:00:10] Um, so we have another question here from Marvin.
+[01:00:16] Uh, would you do another webinar just about automations?
+[01:00:20] And I also noticed here that um Scott, I didn't answer your Scotty, I did not answer your question in full detail because you wanted some specifics, so I will try my best to connect with you and uh set something up so we can go into that in further detail.
+[01:00:36] But if you notice, uh if you go over to uh back over to our uh PipeDrive screen and the quick help button, in the Academy section, we actually have some webinars that we've conducted in the past that focus and really go into depth uh with our automations feature.
+[01:00:57] There's a lot that you can do within there, um from the basics all the way to uh some detailed approaches.
+[01:01:09] So, uh definitely check that out.
+[01:01:13] Um, but I will let our, uh, leadership know that you want to learn way more about automations that we probably couldn't cover in this, uh, webinar today.
+[01:01:29] And, uh, Janelle, did it just say something?
+[01:01:32] I love that feature, because if you sent out an email, say like you sent out a proposal, and you've like really been waiting for a response, and you then, if you track it, the sales assistant will notify you within PipeDrive, that it has been opened.
+[01:01:53] And that is golden.
+[01:01:56] One, you know that data about the deal you're trying to work, and two, then you know, well, maybe they read, I'm going to reach out to them this afternoon.
+[01:02:07] So, if you haven't worked with Sales Assistant, it's it's pretty powerful, and I know we're building out that Sales Assistant with more features as we move forward.
+[01:02:22] Okay.
+[01:02:23] Oh yes.
+[01:02:25] And we have a question here.
+[01:02:28] How do I add multiple organizations to one PipeDrive account?
+[01:02:34] I think I like your example, so thank you for sharing that with us.
+[01:02:39] For example, the Apple project has John contracting and Smith contracting, how do I do both?
+[01:02:49] So, I'm interpreting this question is how do you put two organizations in on one deal, okay?
+[01:02:55] So, I'm going to go ahead and share my screen.
+[01:03:00] I'm going to share my screen quick, and I'll give you my, here, here we go.
+[01:03:10] I'm going to share my screen quick, and also we've had several questions here about automations.
+[01:03:18] So, I'm going to or integrations.
+[01:03:24] So, if it's okay, I'm going to just address my overall issue, because there's a few more questions in the chat about integrations, okay?
+[01:03:36] First place to always check for integrations is PipeDrive's Marketplace.
+[01:03:44] And we do have an integration with the WhatsApp, okay?
+[01:03:48] This integration is written by a third party.
+[01:03:53] So, you can go you can look at this integration.
+[01:03:57] You can see what the rating is on it.
+[01:04:02] You can also go down, look at descriptions, resources, and getting support.
+[01:04:08] Looking at integration, the next place you go to is the app you want to integrate with.
+[01:04:17] Look at their Marketplace and see if they have any resources.
+[01:04:23] See if they have an app that shares back with PipeDrive.
+[01:04:29] Third, I like to recommend it something like a Zapier, where it's a non-programming language that integrates two pieces of software together, and we have a lot that integrates with PipeDrive through Zapier.
+[01:04:46] I know there's other software out there that's my example.
+[01:04:49] And then the fourth is the API is open.
+[01:04:55] Okay.
+[01:04:56] Did I miss anything there, Stacey?
+[01:05:00] No, no, I think you covered it, and we have about uh four minutes left.
+[01:05:08] So, um we might maybe have time for maybe one more question.
+[01:05:17] Let's see, um, it looks like a lot of people want a webinar just on automations.
+[01:05:25] So, it looks like you're going to be coming back to the screen.
+[01:05:32] Maybe, maybe.
+[01:05:35] Um, so we have another question here from Marvin.
+[01:05:40] Uh, would you do another webinar just about automations?
+[01:05:44] And I also noticed here that um Scott, I didn't answer your Scotty, I did not answer your question in full detail because you wanted some specifics, so I will try my best to connect with you and uh set something up so we can go into that in further detail.
+[01:06:00] But if you notice, uh if you go over to uh back over to our uh PipeDrive screen and the quick help button, in the Academy section, we actually have some webinars that we've conducted in the past that focus and really go into depth uh with our automations feature.
+[01:06:21] There's a lot that you can do within there, um from the basics all the way to uh some detailed approaches.
+[01:06:33] So, uh definitely check that out.
+[01:06:37] Um, but I will let our, uh, leadership know that you want to learn way more about automations that we probably couldn't cover in this, uh, webinar today.
+[01:06:53] And, uh, Janelle, did it just say something?
+[01:06:56] I love that feature, because if you sent out an email, say like you sent out a proposal, and you've like really been waiting for a response, and you then, if you track it, the sales assistant will notify you within PipeDrive, that it has been opened.
+[01:07:17] And that is golden.
+[01:07:20] One, you know that data about the deal you're trying to work, and two, then you know, well, maybe they read, I'm going to reach out to them this afternoon.
+[01:07:31] So, if you haven't worked with Sales Assistant, it's it's pretty powerful, and I know we're building out that Sales Assistant with more features as we move forward.
+[01:07:46] Okay.
+[01:07:47] Oh yes.
+[01:07:49] And we have a question here.
+[01:07:52] How do I add multiple organizations to one PipeDrive account?
+[01:07:58] I think I like your example, so thank you for sharing that with us.
+[01:08:03] For example, the Apple project has John contracting and Smith contracting, how do I do both?
+[01:08:13] So, I'm interpreting this question is how do you put two organizations in on one deal, okay?
+[01:08:19] So, I'm going to go ahead and share my screen.
+[01:08:24] I'm going to share my screen quick, and I'll give you my, here, here we go.
+[01:08:33] I'm going to share my screen quick, and also we've had several questions here about automations.
+[01:08:41] So, I'm going to or integrations.
+[01:08:47] So, if it's okay, I'm going to just address my overall issue, because there's a few more questions in the chat about integrations, okay?
+[01:09:00] First place to always check for integrations is PipeDrive's Marketplace.
+[01:09:08] And we do have an integration with the WhatsApp, okay?
+[01:09:12] This integration is written by a third party.
+[01:09:17] So, you can go you can look at this integration.
+[01:09:20] You can see what the rating is on it.
+[01:09:25] You can also go down, look at descriptions, resources, and getting support.
+[01:09:31] Looking at integration, the next place you go to is the app you want to integrate with.
+[01:09:40] Look at their Marketplace and see if they have any resources.
+[01:09:46] See if they have an app that shares back with PipeDrive.
+[01:09:52] Third, I like to recommend it something like a Zapier, where it's a non-programming language that integrates two pieces of software together, and we have a lot that integrates with PipeDrive through Zapier.
+[01:10:09] I know there's other software out there that's my example.
+[01:10:12] And then the fourth is the API is open.
+[01:10:18] Okay.
+[01:10:19] Did I miss anything there, Stacey?
+[01:10:22] No, no, I think you covered it, and we have about uh four minutes left.
+[01:10:30] So, um we might maybe have time for maybe one more question.
+[01:10:39] Let's see, um, it looks like a lot of people want a webinar just on automations.
+[01:10:47] So, it looks like you're going to be coming back to the screen.
+[01:10:54] Maybe, maybe.
+[01:10:57] Um, so we have another question here from Marvin.
+[01:11:02] Uh, would you do another webinar just about automations?
+[01:11:06] And I also noticed here that um Scott, I didn't answer your Scotty, I did not answer your question in full detail because you wanted some specifics, so I will try my best to connect with you and uh set something up so we can go into that in further detail.
+[01:11:22] But if you notice, uh if you go over to uh back over to our uh PipeDrive screen and the quick help button, in the Academy section, we actually have some webinars that we've conducted in the past that focus and really go into depth uh with our automations feature.
+[01:11:43] There's a lot that you can do within there, um from the basics all the way to uh some detailed approaches.
+[01:11:55] So, uh definitely check that out.
+[01:11:59] Um, but I will let our, uh, leadership know that you want to learn way more about automations that we probably couldn't cover in this, uh, webinar today.
+[01:12:15] And, uh, Janelle, did it just say something?
+[01:12:18] I love that feature, because if you sent out an email, say like you sent out a proposal, and you've like really been waiting for a response, and you then, if you track it, the sales assistant will notify you within PipeDrive, that it has been opened.
+[01:12:39] And that is golden.
+[01:12:42] One, you know that data about the deal you're trying to work, and two, then you know, well, maybe they read, I'm going to reach out to them this afternoon.
+[01:12:53] So, if you haven't worked with Sales Assistant, it's it's pretty powerful, and I know we're building out that Sales Assistant with more features as we move forward.
+[01:13:08] Okay.
+[01:13:09] Oh yes.
+[01:13:11] And we have a question here.
+[01:13:14] How do I add multiple organizations to one PipeDrive account?
+[01:13:20] I think I like your example, so thank you for sharing that with us.
+[01:13:25] For example, the Apple project has John contracting and Smith contracting, how do I do both?
+[01:13:35] So, I'm interpreting this question is how do you put two organizations in on one deal, okay?
+[01:13:41] So, I'm going to go ahead and share my screen.
+[01:13:46] I'm going to share my screen quick, and I'll give you my, here, here we go.
+[01:13:56] I'm going to share my screen quick, and also we've had several questions here about automations.
+[01:14:04] So, I'm going to or integrations.
+[01:14:10] So, if it's okay, I'm going to just address my overall issue, because there's a few more questions in the chat about integrations, okay?
+[01:14:23] First place to always check for integrations is PipeDrive's Marketplace.
+[01:14:31] And we do have an integration with the WhatsApp, okay?
+[01:14:35] This integration is written by a third party.
+[01:14:40] So, you can go you can look at this integration.
+[01:14:43] You can see what the rating is on it.
+[01:14:48] You can also go down, look at descriptions, resources, and getting support.
+[01:14:54] Looking at integration, the next place you go to is the app you want to integrate with.
+[01:15:03] Look at their Marketplace and see if they have any resources.
+[01:15:09] See if they have an app that shares back with PipeDrive.
+[01:15:15] Third, I like to recommend it something like a Zapier, where it's a non-programming language that integrates two pieces of software together, and we have a lot that integrates with PipeDrive through Zapier.
+[01:15:32] I know there's other software out there that's my example.
+[01:15:35] And then the fourth is the API is open.
+[01:15:40] Okay.
+[01:15:41] Did I miss anything there, Stacey?
+[01:15:45] No, no, I think you covered it, and we have about uh four minutes left.
+[01:15:53] So, um we might maybe have time for maybe one more question.
+[01:16:02] Let's see, um, it looks like a lot of people want a webinar just on automations.
+[01:16:10] So, it looks like you're going to be coming back to the screen.
+[01:16:17] Maybe, maybe.
+[01:16:20] Um, so we have another question here from Marvin.
+[01:16:25] Uh, would you do another webinar just about automations?
+[01:16:29] And I also noticed here that um Scott, I didn't answer your Scotty, I did not answer your question in full detail because you wanted some specifics, so I will try my best to connect with you and uh set something up so we can go into that in further detail.
+[01:16:45] But if you notice, uh if you go over to uh back over to our uh PipeDrive screen and the quick help button, in the Academy section, we actually have some webinars that we've conducted in the past that focus and really go into depth uh with our automations feature.
+[01:17:06] There's a lot that you can do within there, um from the basics all the way to uh some detailed approaches.
+[01:17:18] So, uh definitely check that out.
+[01:17:22] Um, but I will let our, uh, leadership know that you want to learn way more about automations that we probably couldn't cover in this, uh, webinar today.
+[01:17:38] And, uh, Janelle, did it just say something?
+[01:17:41] I love that feature, because if you sent out an email, say like you sent out a proposal, and you've like really been waiting for a response, and you then, if you track it, the sales assistant will notify you within PipeDrive, that it has been opened.
+[01:18:02] And that is golden.
+[01:18:05] One, you know that data about the deal you're trying to work, and two, then you know, well, maybe they read, I'm going to reach out to them this afternoon.
+[01:18:16] So, if you haven't worked with Sales Assistant, it's it's pretty powerful, and I know we're building out that Sales Assistant with more features as we move forward.

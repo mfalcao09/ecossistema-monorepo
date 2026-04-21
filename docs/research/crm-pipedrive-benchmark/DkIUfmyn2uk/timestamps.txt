@@ -1,0 +1,23 @@
+[00:00] O palestrante Timo Rein, cofundador da Pipedrive, aparece na tela.
+[00:00] Um gráfico aparece na parte inferior esquerda da tela.
+[00:01] As palavras "Sales Pipeline Course Chapter 8" aparecem no meio da tela.
+[00:04] As palavras "Empty the pipeline to keep it flowing" aparecem no meio da tela.
+[00:09] O palestrante Timo Rein aparece novamente na tela.
+[00:14] O palestrante Timo Rein está falando.
+[00:25] Uma transição de cena ocorre.
+[00:26] A frase "Sales Pipeline Course Chapter 8: Empty the pipeline to keep it flowing" é exibida.
+[00:29] Uma transição de cena ocorre.
+[00:30] O palestrante Timo Rein é mostrado novamente.
+[00:30] A frase "Ask yourself: Would a customer laugh at the idea of being in your pipeline?" é exibida.
+[00:37] A frase "Ask your prospect for a decision" é exibida.
+[00:39] Um gráfico animado de uma placa de rua com duas setas, uma verde e uma amarela, é exibido.
+[00:43] O palestrante Timo Rein é mostrado novamente.
+[00:43] O palestrante Timo Rein está falando.
+[01:02] A frase "How to keep your pipeline clean" é exibida.
+[01:03] Um gráfico animado mostrando uma pipeline sendo limpa é exibido.
+[01:05] O palestrante Timo Rein é mostrado novamente.
+[01:05] O palestrante Timo Rein está falando.
+[01:17] Um gráfico animado mostrando uma pipeline com dinheiro e um telefone é exibido.
+[01:25] O palestrante Timo Rein é mostrado novamente.
+[01:25] O palestrante Timo Rein está falando.
+[01:43] A frase "Download free ebook: pipedrive" é exibida.

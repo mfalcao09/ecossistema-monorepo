@@ -1,0 +1,75 @@
+Aqui está o mapeamento exaustivo de todos os momentos importantes do vídeo:
+
+[00:00] Homem falando sobre como automatizar o processo de qualificação de leads
+[00:10] Texto "FLUXO DE QUALIFICAÇÃO AUTOMATIZADO COM CHATBOT DO PIPEDRIVE" aparece na tela
+[00:17] Vídeos curtos de pessoas trabalhando em escritório e falando
+[00:23] Logo da "salestime"
+[00:24] Homem se apresentando como Felipe Traina, CEO da Salestime
+[00:28] Informações sobre o canal e convite para se inscrever
+[00:41] Mulher trabalhando em notebook com expressão de frustração
+[00:47] Homem explica sobre leads gerados pelo marketing
+[00:56] Homem com imagem em preto e branco explicando que os leads não respondem
+[01:10] Homem com fone de ouvido em frente ao notebook, com aparência de tédio
+[01:17] Homem explica sobre leads que roubam tempo dos SDRs
+[01:25] Texto "ROUBA TEMPO DOS SDRs" aparece na tela
+[01:37] Homens discutindo em reunião de negócios
+[01:55] Texto "NINGUÉM SE RESPONSABILIZA!" aparece na tela
+[02:04] Texto "CRITÉRIOS DE QUALIFICAÇÃO BEM DEFINIDOS" aparece na tela
+[02:19] Texto "O QUE É UMA QUALIFICAÇÃO DE VERDADE?" aparece na tela
+[02:25] Texto "SEPARAR O LEAD BOM DO LEAD RUIM" aparece na tela
+[02:40] Animação de pessoa sentada em mesa de escritório, com o texto "CONVERSAR COM DIRETORES E GESTORES"
+[02:52] Animação de duas pessoas em uma apresentação, com o texto "PESSOA 100% DEDICADA AO COMERCIAL"
+[02:58] Animação de pessoa em mesa de escritório com dinheiro, com o texto "FATURAMENTO MÍNIMO DE R$70K/MÊS"
+[03:17] Texto "DESQUALIFICAR OU EXPLORAR O CENÁRIO" aparece na tela
+[04:44] Sugestão de vídeo "METODOLOGIA BANT EM 10 MINUTOS"
+[05:13] Tela do navegador com a mensagem "Está na Navegação Anônima"
+[05:15] Homem mostra como criar uma conta no Pipedrive
+[05:22] Página inicial do Pipedrive e clique em "Teste grátis"
+[05:49] Tela do Pipedrive com o menu Leads e a opção Chatbot
+[06:08] Sugestão de vídeo "PIPEDRIVE GUIA COMPLETO PARA INICIANTES"
+[06:29] Clique em "Configurar Chatbot"
+[06:33] Tela de configuração de perfil e tema do chatbot
+[06:45] Tela de configuração de identidade visual do chatbot
+[06:55] Tela de escolha do modelo de conversa do chatbot
+[07:18] Clique em "Qualifique e encaminhe leads"
+[07:23] Editor de Playbook do chatbot com o fluxo de conversa
+[07:53] Texto "O CHAT FUNCIONARÁ COMO UM FILTRO" aparece na tela
+[08:06] Homem explica o fluxo de saudação e perguntas
+[08:10] Janela de edição da mensagem de saudação
+[08:44] Janela de edição da pergunta inicial "O que o trouxe ao nosso site hoje?" e opções de resposta
+[09:28] Homem mostra como o chatbot reage a diferentes respostas, desqualificando leads ou pedindo mais informações
+[09:56] Homem mostra como adicionar novos cartões (mensagens, perguntas, capturas, chat ao vivo) no fluxo do chatbot
+[10:15] Homem mostra como o chatbot solicita informações de contato (e-mail)
+[11:02] Janela de edição do campo de captura para o e-mail, vinculando-o ao CRM
+[11:16] Homem mostra como o chatbot pergunta o tamanho da empresa e direciona o fluxo com base na resposta
+[11:27] Homem explica como o chatbot define se o lead é qualificado ou desqualificado e o direciona para uma página de autoatendimento
+[12:11] Homem explica como o chatbot direciona leads qualificados para uma ligação com a equipe de vendas e solicita o nome da pessoa
+[12:35] Homem mostra como agendar uma reunião diretamente pelo chatbot
+[12:45] Homem explica a diferença de direcionar leads para o módulo de "Leads" ou "Negócios" no Pipedrive
+[12:57] Homem mostra como atribuir um proprietário e adicionar um prefixo ao lead
+[13:09] Homem explica as opções de notificação por e-mail e agendamento de reunião
+[13:27] Homem mostra a tela de definição de disponibilidade para reuniões
+[13:40] Homem mostra a tela de detalhes da reunião e compartilhamento
+[14:14] Homem explica as mensagens de convite e encerramento do agendamento de reunião
+[15:33] Homem reforça a facilidade de criar o processo de qualificação com o chatbot
+[15:40] Texto "TOME CUIDADO!" aparece na tela
+[15:58] Texto "MUITAS PERGUNTAS = MENOR CONVERSÃO" aparece na tela
+[16:36] Homem interage com o chatbot de demonstração no site
+[17:00] Homem digita seu e-mail no chatbot
+[17:21] Homem digita o tamanho da empresa no chatbot
+[17:34] Homem digita o nome no chatbot
+[17:41] Homem digita o nome da empresa no chatbot
+[17:51] Homem recebe mensagem de confirmação da reunião no chatbot
+[18:22] Homem clica em "Salvar" no chatbot
+[18:30] Homem mostra a aba "Perfil e tema" e "Instalação" no editor do chatbot
+[18:49] Homem mostra o código de instalação manual do chatbot para o site
+[18:56] Homem mostra a opção de enviar instruções de instalação para um colega
+[19:14] Homem acessa o site da Salestime para mostrar o chatbot em ação
+[19:32] Chatbot da Salestime aparece no canto inferior direito do site
+[19:42] Homem mostra a caixa de entrada de leads no Pipedrive
+[20:00] Homem mostra a tela de negócios no Pipedrive
+[20:05] Homem mostra os leads criados pelo chatbot na caixa de entrada
+[20:13] Homem acessa as automações do Pipedrive
+[20:25] Homem cria uma automação para enviar um e-mail quando um lead é criado pelo chatbot
+[21:31] Homem encerra o vídeo, convidando a ação e oferecendo ajuda da Salestime
+[22:00] Tela final com informações da Salestime e sugestão de próximos vídeos.

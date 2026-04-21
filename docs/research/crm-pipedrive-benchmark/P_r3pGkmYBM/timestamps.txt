@@ -1,0 +1,150 @@
+[00:00] Início do vídeo: "Tutorial Completo Pipedrive - Do Zero a Funis de Vendas e Automações!"
+[00:01] Apresentação do Pipedrive e do palestrante, com destaque para a oferta de 30 dias grátis e apoio para implementação.
+[00:40] Tela de cadastro no Pipedrive com a oferta de 30 dias grátis.
+[01:04] Preenchendo o e-mail para cadastro no Pipedrive.
+[01:10] Aceitando os termos e clicando em "Sign up in two minutes".
+[01:15] Tela de verificação do e-mail com campo para inserir o código.
+[01:21] Visualizando o e-mail com o código de verificação do Pipedrive.
+[01:29] Inserindo o código de verificação no Pipedrive.
+[01:32] Preenchendo os dados pessoais (nome, senha, cargo, experiência com CRM, telefone).
+[01:59] Preenchendo os dados da empresa (nome, tamanho, indústria, número de usuários).
+[02:33] Selecionando os objetivos do teste do CRM e clicando em "Create account".
+[02:37] Tela de criação da conta.
+[02:46] Mensagem de boas-vindas ao Pipedrive.
+[02:49] Pop-up "How did you first hear about Pipedrive?".
+[02:53] Guia de primeiros passos do Pipedrive, iniciando com "Let's go".
+[02:56] Navegando pelas etapas de configuração inicial (Contatos, Atividades, Deals).
+[03:02] Removendo os dados de amostra.
+[03:05] Interface principal do Pipedrive com sugestões de tarefas.
+[03:09] Fechando o assistente de vendas na lateral direita.
+[03:15] Explicando como voltar para a visão de funil através do ícone do cifrão.
+[03:28] Visão do funil de vendas padrão do Pipedrive.
+[03:41] Editando o nome do funil (Pipeline) para "Funil de Vendas".
+[03:46] Editando as etapas do funil de vendas.
+[04:13] Adicionando e renomeando etapas no funil de vendas (Atendimento, Reunião Agendada, Proposta Comercial, Negociação, Contrato Enviado).
+[05:17] Explicando a configuração de estagnação (Rolling in (days)) para cada etapa.
+[05:36] Salvando as configurações do funil de vendas.
+[05:40] Explicando como alterar o idioma da conta Pipedrive.
+[05:45] Clicando no ícone do usuário e acessando "Personal preferences".
+[05:50] Selecionando "Português (Brazil)" no campo Language.
+[05:59] Idioma alterado para português.
+[06:03] Voltando para a visão do funil de vendas.
+[06:08] Funil de vendas configurado.
+[06:19] Adicionando um novo negócio ao funil de vendas.
+[06:23] Preenchendo os detalhes do negócio (Pessoa de contato, Organização, Título, Etapa do funil).
+[06:33] Preenchendo nome da pessoa (Flávia Silva) e nome da organização (Padaria XXX).
+[06:46] Inserindo o nome da empresa como "Padaria XXX" e o título "Padaria XXX - Sistema Y".
+[07:39] Inserindo um número de telefone fictício.
+[07:48] Inserindo um e-mail fictício.
+[08:01] Ignorando o valor inicial do negócio.
+[08:06] Selecionando a etapa "Atendimento" para o novo negócio.
+[08:12] Ignorando as etiquetas e outros campos opcionais.
+[08:18] Salvando o novo negócio.
+[08:21] Negócio "Padaria XXX - Sistema Y" adicionado à etapa "Atendimento".
+[08:26] Explicando o sistema de arrastar e soltar (drag and drop) do Pipedrive.
+[08:52] Clicando no negócio para visualizar seus detalhes.
+[09:36] Interface de detalhes do negócio.
+[09:43] Destacando o proprietário e o botão de seguidores.
+[10:00] Botões "Ganho" e "Perdido" para encerrar o negócio.
+[10:10] Explicando os grupos de visibilidade.
+[10:16] Visão geral das abas de atividade, anotações, agendador de reuniões, etc.
+[10:30] Barras de tempo de permanência em cada etapa do funil.
+[10:55] Resumo da negociação e acesso aos detalhes da pessoa e organização.
+[11:14] Adicionando etiquetas de temperatura ao negócio (Frio, Morno, Quente).
+[11:41] Aplicando a etiqueta "Frio" ao negócio.
+[11:46] Etiqueta "Frio" visível no card do negócio no funil.
+[12:01] Voltando aos detalhes do negócio.
+[12:07] Campos personalizados de dados do negócio.
+[12:20] Definindo a data de fechamento esperada do negócio.
+[12:33] Campo de data de fechamento esperada configurado.
+[12:49] Criando uma nova atividade (Chamada, Reunião, Tarefa, Prazo, E-mail, Almoço).
+[12:59] Escolhendo o tipo "Reunião" para a atividade.
+[13:08] Exemplos de outros tipos de atividades (Tarefa, E-mail, Almoço).
+[13:19] Acessando as configurações da empresa para personalizar os tipos de atividade.
+[13:25] Clicando em "Atividades" nas configurações da empresa.
+[13:30] Desativando o tipo de atividade "Prazo" e adicionando um novo tipo "Follow-Up".
+[13:45] Adicionando o tipo de atividade "Follow-Up" com ícone.
+[13:58] Adicionando o tipo de atividade "Reunião de Apresentação" com ícone.
+[14:24] Voltando aos detalhes do negócio e criando uma "Reunião de Apresentação".
+[15:10] Inserindo os detalhes da reunião (Data, Hora de início, Hora de término, Título).
+[15:32] Definindo a data e hora da reunião.
+[16:04] Definindo a prioridade da reunião como "Alta".
+[16:11] Adicionando localização e integração com chamada de vídeo (Google Meet).
+[16:29] Selecionando "Reunião do Google Meet" para a chamada de vídeo.
+[16:45] Instalando a integração do Google Meet com o Pipedrive.
+[16:53] Autorizando a conexão do Pipedrive com a conta Google.
+[17:07] Confirmando as permissões de acesso do Pipedrive à conta Google.
+[17:16] Link do Google Meet gerado e visível na atividade.
+[17:28] Informação sobre a necessidade de conta paga para convidar participantes.
+[17:45] Salvando a atividade da reunião.
+[18:00] Atividade da reunião adicionada ao histórico do negócio.
+[18:14] Marcando a atividade como concluída e adicionando uma descrição.
+[19:18] Descrição da reunião adicionada e atividade marcada como concluída.
+[19:30] Abertura automática de tela para agendar nova atividade após conclusão (desativável).
+[19:40] Desativando a abertura automática de agendamento de atividade.
+[19:45] Atividade concluída no histórico do negócio.
+[19:53] Retornando ao funil de vendas.
+[20:00] Card da negociação na etapa "Reunião Agendada".
+[20:07] Criando campos personalizados para motivos de perda de negócio.
+[20:18] Acessando "Campos de dados" nas configurações da empresa.
+[20:25] Navegando pelas camadas (Lead/Negócio, Pessoa, Organização, Produto, Projeto).
+[20:31] Criando um campo personalizado em "Lead/Negócio".
+[20:35] Nomeando o campo como "O lead é qualificado?" e criando um grupo "Dados de Qualificação".
+[21:17] Selecionando o tipo de campo como "Opção única" e adicionando as opções "Sim" e "Não".
+[21:39] Definindo regras de qualidade para o campo, tornando-o obrigatório em certas etapas.
+[22:08] Salvando o campo personalizado.
+[22:32] Campo "Dados de Qualificação" criado e visível no resumo do negócio.
+[22:45] Movendo o negócio para a etapa "Proposta Comercial".
+[22:56] Pop-up de campos obrigatórios exigindo o preenchimento do campo "O lead é qualificado?".
+[23:09] Preenchendo "Sim" e salvando, permitindo que o negócio avance.
+[23:24] Negócio "Padaria XXX - Sistema Y" na etapa "Proposta Comercial".
+[23:33] Detalhes do negócio na etapa "Proposta Comercial".
+[23:40] Campo "Dados de Qualificação" preenchido e visível.
+[23:48] Adicionando produtos ao negócio.
+[24:06] Clicando em "Produtos" no menu lateral.
+[24:19] Adicionando um novo produto (Consultoria Premium).
+[24:35] Adicionando outro produto (Consultoria Básica).
+[25:10] Ambos os produtos listados.
+[25:11] Voltando ao card do negócio.
+[25:20] Clicando em "Produtos" no card.
+[25:28] Selecionando "Consultoria Básica" e "Consultoria Premium" para o negócio.
+[25:40] Valor total dos produtos (R$ 800) exibido no card.
+[25:52] Salvando os produtos adicionados.
+[26:15] Valor total dos produtos atualizado no card do negócio.
+[26:22] Valor total da fase "Proposta Comercial" (R$ 800) exibido.
+[26:32] Voltando aos detalhes do negócio.
+[26:40] Abas "Anotações", "Arquivos", "Documentos" e "Fatura".
+[26:47] Seção "Arquivos" para upload de documentos.
+[27:02] Seção "Documentos" com "Smart Docs" para criação de propostas e contratos automáticos.
+[27:26] Seção "Fatura" para integração com QuickBooks.
+[27:32] Alterando a cor do tema do Pipedrive.
+[27:46] Alterando o tema para "Escuro" e salvando.
+[27:52] Menu lateral esquerdo do Pipedrive.
+[27:59] Personalizando o menu lateral (reordenando itens, adicionando/removendo).
+[28:27] Menu lateral personalizado.
+[28:28] Sincronização de calendário.
+[28:53] Caixa de entrada de vendas (e-mail) sincronizada.
+[29:08] E-mails recebidos na caixa de entrada de vendas.
+[29:15] Vinculando um e-mail a um negócio específico.
+[29:29] E-mail vinculado ao negócio "Padaria XXX - Sistema Y".
+[29:36] E-mail vinculado visível no histórico do negócio.
+[29:48] Painel de relatórios (Insights) do Pipedrive.
+[29:56] Criando um relatório com a ajuda da IA do Pipedrive.
+[30:03] Selecionando o prompt "Quantos negócios foram criados este ano?".
+[30:13] Relatório gerado pela IA.
+[30:18] Editando o relatório para exibir em gráfico de barras.
+[30:43] Criando uma meta de vendas.
+[30:48] Escolhendo o tipo de meta (Negócio, Atividade, Previsão) e tipo de meta de negócio (Ganho).
+[30:56] Definindo os detalhes da meta (Responsável, Funil de vendas, Frequência, Duração, Métrica de rastreamento, Valor).
+[31:07] Salvando a meta de vendas.
+[31:08] Meta de vendas "Negócios ganhos Brenner" criada e visível no painel de insights.
+[31:28] Criando um novo painel de insights (Qualificação).
+[31:40] Painel "Qualificação" criado.
+[31:48] Retornando ao funil de vendas.
+[31:54] Movendo o negócio "Padaria XXX - Sistema Y" para "Perdido".
+[32:04] Selecionando um motivo de perda para o negócio.
+[32:16] Negócio "Padaria XXX - Sistema Y" marcado como perdido.
+[32:28] Negócio perdido não aparece mais no funil.
+[32:32] Pesquisando pelo negócio perdido na barra de busca.
+[32:38] Negócio perdido aparece com status "Perdido".
+[32:41] Finalização do tutorial e convite para o curso completo.

@@ -1,0 +1,92 @@
+Aqui está um registro detalhado dos momentos importantes no vídeo, seguindo o formato solicitado:
+
+[00:00] Visão geral do Smart Docs no Pipedrive.
+[00:01] Personalização de modelos para cotações, propostas e contratos.
+[00:04] Edição de um documento PDF, incluindo alteração do título e categorização.
+[00:06] Visão geral da ferramenta Google Docs para criação de modelos.
+[00:11] Visualização do histórico de versões e assinaturas de um documento.
+[00:16] Monitoramento do status da assinatura com detalhes sobre quem visualizou e assinou.
+[00:19] Animação de um documento, caneta e ícones de adicionar/download.
+[00:25] Visão do pipeline de vendas no Pipedrive.
+[00:27] Detalhes de um negócio selecionado, mostrando abas como "Notas", "Atividade" e "Documentos".
+[00:30] Acesso à aba "Documentos" nos detalhes do negócio.
+[00:35] Informações sobre os planos do Pipedrive que incluem Smart Docs e a opção de Add-on.
+[00:46] Opção de tour pelo Smart Docs para novos usuários.
+[00:54] Menu "Saiba mais" para acessar o tour e outros recursos.
+[00:57] Opções para carregar documentos do dispositivo ou conectar armazenamento em nuvem.
+[01:06] Seleção de um arquivo PDF para upload do dispositivo.
+[01:09] Tela de pré-visualização do documento com opções de edição de título e categoria.
+[01:19] Menu suspenso para selecionar a categoria do documento (Contratos, Cotações, Propostas, Outros, Não categorizados).
+[01:34] Botão "Compartilhar" para opções de compartilhamento.
+[01:40] Menu de opções de compartilhamento: Gerar link, Solicitar assinaturas, Baixar PDF.
+[01:50] Tela "Compartilhar link" com opções para ativar/desativar o link, rastrear visualizações e notificações por e-mail.
+[02:04] Opção para remover o logo do Pipedrive (apenas para administradores).
+[02:14] Visão do documento compartilhado, incluindo aviso de cookies.
+[02:29] Notificação no Pipedrive sobre a visualização do documento pelo destinatário.
+[02:36] Retorno aos detalhes de outro negócio.
+[02:40] Acesso à aba "Documentos" novamente.
+[02:46] Opção para conectar armazenamento em nuvem (Google Drive, OneDrive, SharePoint).
+[02:48] Escolha entre contas existentes ou conectar nova conta.
+[02:51] Seleção de uma conta Google existente.
+[02:57] Tela de permissões para Pipedrive CRM acessar a conta Google.
+[03:06] Escolha entre "Drive pessoal" ou "Drives compartilhados" para armazenamento.
+[03:10] Seleção de "Demo Shared Drive" para armazenamento em equipe.
+[03:24] Botão "Criar novo" para criar um novo documento, planilha ou apresentação.
+[03:29] Tela de edição de documento com campos do Pipedrive para preenchimento automático.
+[03:45] Edição do título do documento utilizando um campo do Pipedrive.
+[03:55] Adição do termo "Proposta" ao título do documento.
+[04:12] Seleção da categoria "Propostas" para o documento.
+[04:19] Adição de texto e campos do Pipedrive ao corpo do documento.
+[04:26] Inserção de nomes e campos de valor de negócio no corpo do documento.
+[04:30] Demonstração de diferentes tipos de campos do Pipedrive (Pessoa, Organização, Negócio, Tempo).
+[04:38] Inserção de um campo de valor de negócio com desconto no corpo do documento.
+[04:54] Seleção da opção "Solicitar assinaturas" no menu "Compartilhar".
+[05:00] Tela para adicionar signatários e definir a ordem de assinatura.
+[05:06] Reorganização da ordem de assinatura dos signatários.
+[05:14] Tela para adicionar campos de signatário (Assinatura, Iniciais, Campo de texto, Caixa de seleção).
+[05:20] Adição de campos de iniciais, assinatura e campo de texto para comentários.
+[05:31] Marcação de um campo como obrigatório.
+[05:41] Confirmação para enviar e-mails de solicitação de assinatura.
+[05:44] Visão do status do documento atualizado no Pipedrive (aguardando assinatura).
+[05:52] Opções adicionais para um documento específico: Editar, Gerar link, Solicitar assinaturas, Baixar PDF, Excluir.
+[06:05] Email de solicitação de assinatura recebido pelo destinatário.
+[06:11] Destinatário clica para revisar e assinar, concedendo permissão de cookies.
+[06:13] Tela de assinatura do documento, incluindo digitação do nome e confirmação.
+[06:17] Email com código de autenticação para o signatário.
+[06:20] Inserção do código de autenticação para finalizar a assinatura.
+[06:24] Status do documento atualizado para "1/2 assinado" no Pipedrive.
+[06:29] Acesso aos detalhes dos signatários, incluindo visualizações e status.
+[06:37] Opção para enviar lembrete a um signatário.
+[06:42] Aba "Trilha de auditoria" mostrando histórico de ações (Iniciado, Visualizado, Assinado).
+[06:48] Status do documento atualizado para "2/2 assinado" no Pipedrive.
+[06:55] Email de confirmação de que o documento foi assinado por todos.
+[07:01] Visão da galeria de modelos do Google Docs.
+[07:07] Acesso à aba "Modelos" no Pipedrive.
+[07:11] Botão "Criar novo" para criar um novo modelo (Documento, Planilha, Apresentação).
+[07:14] Tela de edição de modelo com campos do Pipedrive e opções de configuração/permissões.
+[07:20] Inserção de um campo de título de negócio no título do modelo.
+[07:23] Seleção da categoria "Propostas" para o modelo.
+[07:25] Inserção de campos de data e nomes de pessoas no corpo do modelo.
+[07:31] Inserção de campos de nome de proprietário e campos personalizados (ID de Cliente, Desconto) no modelo.
+[07:33] Aba "Permissões" para definir quem da equipe pode usar ou editar o modelo.
+[07:37] Atribuição de permissões de "Uso" ou "Edição" para membros da equipe.
+[07:44] Criação de um documento a partir do modelo.
+[07:46] Visualização do documento gerado a partir do modelo, com campos preenchidos automaticamente.
+[07:47] Utilização de modelos existentes do Google Docs, Google Slides ou Google Sheets.
+[08:00] Seleção de um modelo de "Ordem de Compra" do Google Drive.
+[08:02] Tela de edição de modelo de planilha.
+[08:04] Acesso às configurações do Pipedrive (Engrenagem no canto superior direito).
+[08:06] Acesso a "Documentos" na seção "Ferramentas e aplicativos" para configurações.
+[08:09] Aba "Minhas contas" para conectar/desconectar contas de nuvem e alterar localização de armazenamento.
+[08:15] Aba "Configurações da empresa" para opções que afetam toda a equipe.
+[08:18] Opção para definir localização de armazenamento padrão para todos os usuários da empresa.
+[08:21] Seleção de "Demos Shared Drive" como localização de armazenamento padrão.
+[08:24] Opção para restringir contas pessoais e adicionar domínios permitidos.
+[08:27] Adição de um domínio permitido.
+[08:28] Opção para remover o logo do Pipedrive dos documentos.
+[08:30] Opção para limpar campos de documento não preenchidos.
+[08:34] Opção para definir permissões para criação de modelos Smart Docs.
+[08:39] Acesso a "Gerenciar usuários" e aba "Conjuntos de permissões" para controle de acesso.
+[08:44] Acesso a "DocuSign" na seção "Integrações" para gerenciar assinaturas eletrônicas.
+[08:47] Visão geral da integração DocuSign, incluindo benefícios e funcionalidades.
+[08:57] Tela do Marketplace do Pipedrive com o aplicativo Smart Docs.

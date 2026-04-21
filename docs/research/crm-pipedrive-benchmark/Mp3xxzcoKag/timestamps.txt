@@ -1,0 +1,28 @@
+[00:00] Visão geral do pipeline de vendas no Pipedrive
+[00:07] Abrindo a visão detalhada de um negócio
+[00:15] Personalizando campos de negócios
+[00:23] Retornando à visão geral do pipeline
+[00:25] Reabrindo a visão detalhada de um negócio
+[00:30] Acessando a visão detalhada de um contato
+[00:36] Acessando a visão detalhada de uma organização
+[00:44] Visualizando a lista de produtos
+[00:49] Adicionando produtos a um negócio
+[00:54] Acessando as configurações da empresa
+[01:00] Navegando para a seção "Campos de dados"
+[01:10] Criando um novo campo personalizado "Lead source" (fonte de lead)
+[01:15] Configurando o campo "Lead source" como importante
+[01:19] Visualizando o campo "Lead source" marcado como importante na visão detalhada do negócio
+[01:23] Editando o campo "Lead source" para torná-lo obrigatório
+[01:28] Tentando criar um novo negócio sem preencher o campo "Lead source" (obrigatório)
+[01:31] Editando novamente o campo "Lead source" para adicionar regras de obrigatoriedade por etapa do pipeline
+[01:38] Tentando mover um negócio para uma etapa que exige o preenchimento do campo "Lead source"
+[01:42] Adicionando um novo campo personalizado "Job title" (cargo) diretamente da visão detalhada de um contato
+[01:57] Marcando o campo "Job title" como sempre visível na barra lateral
+[02:04] Visualizando o campo "Job title" na barra lateral da visão detalhada do contato
+[02:10] Adicionando o campo "Job title" à visualização de lista de contatos
+[02:18] Editando um campo "Job title" diretamente na visualização de lista
+[02:22] Editando múltiplos campos "Job title" em massa na visualização de lista
+[02:30] Verificando as permissões de exportação de dados nas configurações de gerenciamento de usuários
+[02:37] Exportando resultados filtrados da visualização de lista de contatos
+[02:44] Filtrando relatórios de desempenho e dashboards por campos personalizados
+[03:00] Mostrando os diferentes tipos de campos que podem ser criados

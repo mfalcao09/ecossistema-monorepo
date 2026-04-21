@@ -1,0 +1,146 @@
+Aqui está um mapeamento detalhado de todos os momentos importantes do vídeo:
+
+[00:00] Apresentação do tema do vídeo: como configurar e utilizar o Pipedrive.
+[00:08] Transição para a tela de introdução do vídeo com o título "Pipedrive: Configuração e Utilização".
+[00:27] Transição com cena de vídeo e efeitos sonoros.
+[00:31] Transição com a logo da Salestime.
+[00:34] O apresentador se apresenta como CEO da Salestime.
+[00:37] Informações sobre o conteúdo do canal Salestime e convite para se inscrever e seguir no Instagram.
+[00:53] Introdução sobre o Pipedrive ser um dos CRMs mais utilizados.
+[01:00] Captura de tela da página inicial do Pipedrive destacando sua intuitividade e eficiência.
+[01:06] Captura de tela do Pipedrive mostrando o uso por mais de 100.000 empresas em 179 países, com avaliações de software.
+[01:22] Animação de ilustração com o texto "Organizar e configurar processos de vendas".
+[01:36] Animação de ilustração com o texto "Personalizar o CRM de acordo com suas necessidades".
+[01:43] Animação de ilustração com o texto "Gerenciar grandes times".
+[01:50] Animação de ilustração com o texto "Análise de dados".
+[01:57] Retorno à captura de tela da página inicial do Pipedrive e o apresentador reforça os benefícios.
+[02:05] Primeiro passo: criação da conta no Pipedrive.
+[02:11] Mencionando o link de 30 dias grátis na descrição do vídeo.
+[02:24] Tela de registro do Pipedrive, o apresentador insere o e-mail.
+[02:40] Explicação sobre a vantagem de usar o link de 30 dias grátis.
+[02:41] Preenchimento do e-mail de trabalho.
+[02:52] Tela de verificação de código enviado por e-mail.
+[03:00] Inserção do código de verificação.
+[03:01] Tela de preenchimento de informações da conta (nome, senha, telefone).
+[03:19] Tela de preenchimento de informações pessoais (cargo, experiência em vendas, objetivo principal).
+[03:27] Tela de informações da empresa (nome, tamanho, setor).
+[03:48] Escolha do número de pessoas que usarão o Pipedrive e opção de convidar colegas de equipe.
+[04:01] Tela "Criando uma conta..."
+[04:07] Conta criada no Pipedrive, com vídeo de boas-vindas.
+[04:22] Navegação para a tela de negócios no Pipedrive.
+[04:23] Primeiro passo no Pipedrive: configurar o funil de vendas.
+[04:29] Tela de negócios (Kanban) no Pipedrive.
+[04:50] Clique no botão "Editar funil" no canto superior direito.
+[04:54] Tela de edição do funil, mostrando as etapas e suas configurações.
+[05:04] Nome das etapas do funil de vendas ("Mapeamento", "Prospecção", "Qualificação", "Apresentação", "Proposta", "Fechamento").
+[05:15] Edição do nome da etapa "Mapeamento".
+[05:21] Explicação sobre a "Probabilidade" de fechamento em cada etapa.
+[05:35] Ativação da opção "Probabilidade de negócio" para cálculo automático.
+[05:40] Explicação da opção "Estagnando em (dias)" para alertar sobre negócios parados.
+[06:00] Configuração do campo "Estagnando em (dias)" para 5 dias.
+[06:29] Adição de uma nova etapa ao funil.
+[06:37] Remoção de uma etapa adicionada, com aviso para realocar negócios.
+[06:58] Clique em "Salvar alterações".
+[07:03] Retorno à tela de negócios após salvar as alterações do funil.
+[07:14] Importância de ter um funil para cada canal de vendas.
+[07:40] Visão geral da gestão visual dentro do funil de vendas.
+[08:04] Explicação dos ícones de status das atividades: cinza (pendente, dentro do prazo), verde (para hoje), amarelo (sem atividade), vermelho (em atraso).
+[08:50] Clique em um negócio ("Negócio Google") para ver os detalhes.
+[08:51] Tela de detalhes do negócio, mostrando histórico e foco nas atividades.
+[09:05] Visualização do histórico de atividades do negócio.
+[09:22] Adição de uma anotação no negócio.
+[09:30] Salvar a anotação.
+[09:40] Exemplo de uso da metodologia BANT na anotação.
+[10:14] O apresentador agenda uma nova atividade de "Reunião de negociação".
+[10:40] Seleção da data e horário da reunião.
+[10:52] Opções de integração com plataformas de vídeo chamadas (Zoom, Microsoft Teams, Google Meet).
+[11:00] Seleção de Google Meet e adição de convidados.
+[11:20] Adição de uma descrição para a reunião.
+[11:29] Visualização da agenda pessoal ao lado do Pipedrive para evitar conflitos de horário.
+[11:50] Salvar a atividade agendada.
+[11:55] A nova atividade aparece no foco do negócio.
+[12:15] Visualização do histórico de atividades atualizado.
+[12:18] Conexão da conta de e-mail ao Pipedrive.
+[12:30] Opção de upload de arquivos no negócio.
+[12:51] Funcionalidade Smart Docs (documentos) do Pipedrive, com opções de preenchimento automático e assinaturas eletrônicas.
+[13:30] Visão dos detalhes do negócio: valor, previsão de fechamento, origem.
+[13:40] Adição de produtos ao negócio, com preço, quantidade e impostos.
+[13:51] Adição de um novo produto ("Treinamento") e seu valor.
+[14:10] O valor total do negócio é atualizado.
+[14:20] Previsão de data de fechamento do negócio.
+[14:30] Visualização e edição da fonte da oportunidade (origem, canal, etc.).
+[14:50] Visualização e edição das informações da pessoa de contato (telefone, e-mail, redes sociais).
+[15:15] Personalização de campos de pessoa, como adicionar um campo "Cargo".
+[15:25] Criação do campo "Cargo" como obrigatório e tipo "Autocompletar".
+[15:46] Salvar o campo personalizado.
+[15:52] Preenchimento do campo "Cargo" para a pessoa de contato.
+[16:05] Personalização de campos da organização (endereço, etiquetas, site).
+[16:21] Criação de um campo "LinkedIn" para a organização.
+[16:35] Visualização das informações de contato da pessoa e organização.
+[16:45] Retorno à tela de negócios, com informações gerais do negócio (idade, atividades principais, participantes).
+[17:23] Adição de outro participante ao negócio.
+[17:30] Salvar o novo participante.
+[17:55] Visão da seção "CCO Inteligente" (endereços específicos para e-mail).
+[18:03] Explicação da integração de e-mails: e-mails trocados automaticamente são puxados para o histórico do negócio.
+[18:18] Endereço de e-mail específico para cada negócio para copiar oculto e registrar conversas.
+[18:30] Importância de preencher todas as informações dos negócios para análise.
+[18:55] Opção de marcar o negócio como "Ganha" ou "Perdido".
+[19:00] Clique em "Ganha" e preenchimento de campo obrigatório.
+[19:07] O negócio é marcado como ganho, e uma animação é exibida.
+[19:16] Exemplo de negócio marcado como "Perdido".
+[19:24] Clique em "Perdido" e preenchimento do campo obrigatório.
+[19:29] Preenchimento do motivo da perda do negócio.
+[19:51] Salvar o motivo da perda.
+[19:55] O motivo da perda é registrado no histórico do negócio.
+[20:10] Retorno à tela de negócios.
+[20:45] Convite para consultoria de vendas da Salestime.
+[21:10] Boas-vindas ao Pipedrive Projects.
+[21:30] Segundo passo no Pipedrive: crie uma automação.
+[21:37] Navegação para a seção de Automações.
+[21:40] Modelos de automação preexistentes.
+[21:55] Dica importante: execute o processo manualmente antes de automatizar.
+[22:20] Exemplo de automação: enviar e-mail para o time de execução quando um negócio é marcado como ganho.
+[22:45] Navegação para a seção de Automações.
+[22:50] Clique em "Automação" para criar uma nova.
+[22:55] Inserção do título da automação: "Notifica time de produto quando negócio é ganho".
+[23:09] Salvar o título da automação.
+[23:13] Configuração do gatilho da automação: "Negócio atualizado".
+[23:25] Configuração da condição instantânea: "Status do negócio mudar para ganho".
+[23:55] Configuração da ação: "Criar atividade".
+[24:06] Seleção dos campos da atividade a serem preenchidos automaticamente.
+[24:52] Configuração dos detalhes da atividade: assunto, tipo, data de vencimento, atribuído a, negócio vinculado, organização vinculada, pessoas vinculadas e anotação.
+[25:50] Inserção de variável para o nome do negócio.
+[26:02] Inserção de um template de anotação.
+[26:13] Salvar a automação.
+[26:17] Ativação da automação para qualquer usuário.
+[26:34] Salvar e ativar a automação.
+[26:45] A nova automação aparece na lista de automações ativas.
+[26:50] Teste da automação: marcação de um negócio como "Ganha".
+[26:59] Animação de comemoração ao marcar o negócio como ganho.
+[27:04] A atividade "Novo Projeto" é criada automaticamente no negócio.
+[27:26] Apresentação do terceiro passo: como extrair relatórios e insights.
+[27:48] Navegação para a seção "Insights".
+[27:54] Criação de um novo painel de relatórios (opção "Gerar relatório padrão").
+[28:03] Visão geral do painel de relatórios padrão.
+[28:18] Criação de um novo painel de relatórios personalizado.
+[28:28] Criação de um novo relatório de "Negócio", tipo "Conversão".
+[29:03] Visualização do relatório de conversão de funil.
+[29:16] Renomear o relatório para "Funil de vendas - Prospecção Ativa".
+[29:32] Configuração dos filtros do relatório para "pipeline" e "Prospecção Ativa".
+[29:43] Análise da taxa de ganho e conversão etapa por etapa.
+[29:48] Configuração dos critérios de exibição do relatório.
+[30:00] Filtros do relatório: negócio criado em, status (ganho, perdido, aberto).
+[30:15] Salvar o relatório.
+[30:26] Adição de outro relatório: "Taxa de Conversão" para o painel de vendas.
+[30:31] Opções de visualização do relatório (quantidade de negócios ou valor).
+[30:45] Configuração das etapas do funil a serem incluídas no relatório.
+[31:00] Salvar o relatório.
+[31:16] Visualização dos relatórios adicionados no painel de vendas.
+[31:20] Criação de uma meta de negócio ganho.
+[31:28] Configuração da meta (responsável, funil, frequência, duração, valor).
+[32:19] Definição do valor da meta para cada mês.
+[32:47] Salvar a meta.
+[32:51] A meta de negócios ganhos é adicionada ao painel.
+[33:25] Encerramento do vídeo e convite para dúvidas e contato com a Salestime.
+[33:40] Apresentação do tema do vídeo: como configurar e utilizar o Pipedrive.
+[34:15] Encerramento do vídeo e convite para dúvidas e contato com a Salestime.

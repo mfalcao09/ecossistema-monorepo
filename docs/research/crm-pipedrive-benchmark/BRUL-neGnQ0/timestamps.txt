@@ -1,0 +1,18 @@
+[00:00] Logotipo do Pipedrive.
+[00:01] Logotipo do Pipedrive, ícone de sincronização e ícone do DocuSign.
+[00:05] Interface do DocuSign, mostrando um modelo de proposta de contrato.
+[00:07] Adicionar campo de assinatura.
+[00:08] Campo de assinatura adicionado ao documento.
+[00:10] Opções de edição de campos.
+[00:13] Tela de "Request Signatures" (Solicitar Assinaturas).
+[00:14] Opção "Request Signatures" selecionada no menu.
+[00:15] Tela de "Add recipients" (Adicionar destinatários) para criar envelopes DocuSign.
+[00:16] Tela de "Edit message" (Editar mensagem) para o email do envelope DocuSign.
+[00:18] Tela de "Get Instant Status Updates" (Obter Atualizações de Status Instantâneas).
+[00:20] Tela de "Manage DocuSign envelopes in Pipedrive" (Gerenciar envelopes DocuSign no Pipedrive).
+[00:22] Clicar em "Send" (Enviar) para o envelope DocuSign.
+[00:23] Notificação "DocuSign envelope sent" (Envelope DocuSign enviado).
+[00:25] Clicar em "Close" (Fechar) na notificação.
+[00:27] Tela do Pipedrive Marketplace, mostrando o aplicativo DocuSign.
+[00:28] Clicar em "Install now" (Instalar agora).
+[00:30] Tela final com o logotipo do Pipedrive e "Read more now".

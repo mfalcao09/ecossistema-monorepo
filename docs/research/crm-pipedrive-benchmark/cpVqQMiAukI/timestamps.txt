@@ -1,0 +1,29 @@
+Aqui está um mapeamento exaustivo dos momentos importantes no vídeo:
+
+[00:00] Visão geral do Pipedrive Deals.
+[00:04] Menu de configurações da empresa.
+[00:09] Configurações da empresa.
+[00:10] Guia Visibilidade dos usuários.
+[00:20] Opção "Proprietários e seguidores" selecionada.
+[00:22] Visão de e-mail do negócio, mostrando a opção "Compartilhar com sua empresa".
+[00:26] A opção "Manter esta conversa privada" é apresentada.
+[00:40] A guia Visibilidade dos usuários é apresentada novamente.
+[00:45] O sistema solicitará que você altere a configuração de visibilidade.
+[00:50] Visão detalhada do negócio, incluindo detalhes da pessoa e e-mails.
+[00:55] Detalhes do seguidor mostrados.
+[01:00] Guia Visibilidade dos usuários.
+[01:06] Grupos e subgrupos de visibilidade.
+[01:14] Visibilidade padrão do grupo.
+[01:17] Opções de visibilidade para negócios, pessoas, organizações e produtos.
+[01:31] Opção de visibilidade "Somente proprietário" é apresentada.
+[01:36] Opção de visibilidade "Grupo de visibilidade do proprietário" é apresentada.
+[01:42] Opção de visibilidade "Grupo e subgrupos do proprietário" é apresentada.
+[01:48] Opção de visibilidade "Empresa inteira" é apresentada.
+[02:00] Visão de e-mail do negócio, mostrando a opção "Compartilhar com sua empresa".
+[02:06] As opções de visibilidade do item individual são apresentadas.
+[02:15] Guia Conjuntos de permissões.
+[02:22] A tela "Adicionar usuários" é apresentada.
+[02:29] E-mail de convite para usuário adicionado.
+[02:32] Prévia do convite.
+[02:36] Usuário adicionado com sucesso.
+[02:44] Tela final.

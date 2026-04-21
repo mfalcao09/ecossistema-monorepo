@@ -1,0 +1,51 @@
+[ 00:00] How's it going, Pipedrivers? Today we're looking at a much-requested demo for workflow automation.
+[ 00:06] We're going to show you how to automate things whenever you update a contact.
+[ 00:10] To be more specific, let's say we have a massive amount of leads or contacts that we don't really want to create deals for,
+[ 00:17] as there's just so many of them and we don't want to clutter up our pipeline.
+[ 00:20] Now let's say we even have a custom field that tracks whether or not a contact is a decision-maker or not.
+[ 00:27] Once we know that contact is a decision maker,
+[ 00:30] that's when we really kick off our process and we open a deal for them in our pipeline.
+[ 00:34] Well, rather than manually creating that deal and scheduling the activity for it and all that good stuff,
+[ 00:40] what if as soon as we updated this custom field, the deal and activity were automatically created.
+[ 00:48] Let's make this happen. For this, let's just create a custom workflow.
+[ 00:52] And so, we're going to add a trigger.
+[ 00:54] And in this case, it will be when a person is updated.
+[ 00:57] Not created or deleted, but updated.
+[ 01:00] And when it comes to updates, we want to set this to only perform this automation when this person's custom field has changed to yes.
+[ 01:10] If we were to set this to is instead of changed,
+[ 01:14] then this could be kind of bad, because, for example, if we take a contact person and say they're decision-maker field is set to yes already,
+[ 01:23] then if we go and perform any updates to this contact whatsoever, then this is considered an update
+[ 01:31] and so it would perform the automation every single time because this custom field is set to yes.
+[ 01:38] But we want to have this condition set to has changed to avoid that. Now we're in business.
+[ 01:42] And this automation will only be performed when this custom field has actually been changed to yes.
+[ 01:48] Then we're going to add an action.
+[ 01:50] And that action will be to create a deal.
+[ 01:53] Here is where you can predefine all fields for the deal that's created.
+[ 01:57] What will be necessary for this scenario is linked person, pipeline stage, and owner.
+[ 02:04] So since the title for the deal is mandatory, we'll just have this be the person's name plus deal.
+[ 02:11] And the person this is linked to should be the person we updated.
+[ 02:16] And the stage, let's put that in our VIP pipeline here.
+[ 02:20] And so, who owns this deal in Pipedrive? It can be a specific person
+[ 02:24] or you can have it be a default like whoever owns the contact person that we're updating.
+[ 02:30] So we'll apply that, and then we'll also want to create an activity for that new deal, right?
+[ 02:36] So let's add another action.
+[ 02:38] And that will be to create a new activity.
+[ 02:40] And so for this scenario, we want to control who the activity is assigned to, what deal it's linked to, the contact it's linked to, and your availability status.
+[ 02:52] For the subject again, we'll just use the contact person's name plus some text.
+[ 02:59] And the type we'll use, we'll let's just make this a call.
+[ 03:02] And the due date can be predefined or a custom amount of days, weeks, months or even years for that matter.
+[ 03:08] You can skip weekends if your custom date happens to fall on one,
+[ 03:12] and instead the activity is going to be scheduled for the following Monday.
+[ 03:17] But so, assigned to, will be the owner of the deal that we're creating here.
+[ 03:23] And we want to link it to the deal we're creating and that deal contact person.
+[ 03:31] Availability status, if you didn't already know, this just means that you're marked as busy or available on your calendar.
+[ 03:39] If you're syncing this between Pipedrive and Google or Outlook or something like that.
+[ 03:43] And so, availability is also taken into account when you're using scheduling tools like the Pipedrive scheduler.
+[ 03:49] But I digress. We'll make ourselves busy.
+[ 03:52] Make sure you decide whether this is triggered by just yourself or everyone in Pipedrive.
+[ 04:00] Let's go test it out.
+[ 04:09] And so, you'll see right before your very eyes, the moment this custom field is updated,
+[ 04:14] a new deal is ready for the same contact, already including a pre-scheduled activity to reach out.
+[ 04:22] Not too shabby, right?
+[ 04:24] We hope this has been helpful and at least inspires you to craft your own customized workflows to save you and your team ship loads of time in the future.
+[ 04:32] Until next time, Pipedrivers.

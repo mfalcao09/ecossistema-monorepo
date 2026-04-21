@@ -1,0 +1,32 @@
+[00:00] Configurando o tempo de deterioração do estágio do pipeline
+[00:06] Visualização do pipeline com negócios "deteriorados" (em vermelho)
+[00:10] Visualização da linha do tempo de contatos
+[00:14] Interagindo com eventos na linha do tempo de contatos
+[00:18] Visualização do pipeline com destaque para negócios "deteriorados"
+[00:23] Detalhes de um negócio "deteriorado"
+[00:29] Acessando as configurações do pipeline
+[00:31] Ativando e definindo o tempo de deterioração para um estágio
+[00:36] Definindo o tempo de deterioração para "Lead In" para 3 dias
+[00:43] Salvando as configurações do pipeline
+[00:46] Visualizando o pipeline após 3 dias
+[00:48] Observando negócios que "deterioraram" no estágio "Lead In"
+[00:52] Negócios perdidos no estágio "Lead In"
+[01:03] Agendando uma nova atividade para um negócio "deteriorado"
+[01:06] Escolhendo agendar uma atividade para um negócio "deteriorado"
+[01:09] Agendando uma atividade para um negócio que "deteriorou"
+[01:15] Visualizando os detalhes de um negócio
+[01:17] O rótulo "DETERIORANDO POR X DIAS" é removido ao registrar uma atividade
+[01:21] Marcando uma atividade como concluída para remover o rótulo de deterioração
+[01:23] Agendando uma nova atividade para um negócio
+[01:26] O rótulo "DETERIORANDO POR X DIAS" é removido após agendar uma atividade
+[01:28] Visualizando o pipeline sem negócios "deteriorados" no estágio "Lead In"
+[01:31] O Pipeline mostra negócios com atividades pendentes no topo
+[01:39] Visualizando uma atividade planejada para um negócio no futuro
+[01:43] Agendando uma atividade para um negócio
+[01:48] Editando as notas de um negócio, removendo o rótulo de deterioração
+[01:54] Salvando as notas editadas
+[01:59] Visão geral do pipeline com os tempos de deterioração definidos
+[02:00] Retornando às configurações do pipeline para revisão
+[02:02] Visão geral de como definir tempos de deterioração diferentes para cada estágio
+[02:09] Salvando as configurações do pipeline
+[02:11] Visão final do pipeline, enfatizando o controle sobre os negócios
