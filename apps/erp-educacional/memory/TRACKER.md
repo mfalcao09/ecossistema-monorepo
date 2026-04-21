@@ -5,7 +5,7 @@
 > Use `select bootstrap_session('tarefa', 'erp', 15)` no início da sessão.
 > Última sync automática: 2026-04-14
 
-> Atualizado: 22/04/2026 (F0.6 Fase 2 — XMLs lendo snapshot em produção) | Sessão mais recente: F0.6/Fase2 (helper snapshot-to-dados-diploma + patch montador.ts — produção `diploma-digital-ihudd6c9e`) | Próxima: F0.6/Fase3 (Puppeteer + templates React para PDFs, ~4h) | Retroactive pass: ✅ completo
+> Atualizado: 22/04/2026 (F0.6 ENCERRADA — arquitetura Snapshot Imutável completa em produção) | Sessão mais recente: F0.6/Fase3 (render-pdf.ts + 2 templates React + 2 rotas /print/* + patch endpoint documentos — produção `diploma-digital-i8arc5f78`) | Próxima: smoke end-to-end piloto Kauana + merge PR #19 | Retroactive pass: ✅ completo
 
 ## Estado Atual
 - **Masterplan ativo:** diploma-digital-v4 → [masterplans/diploma-digital-v4.md](masterplans/diploma-digital-v4.md)
@@ -45,6 +45,7 @@
 
 | # | Data | Entregou | Sprint/Epic |
 |---|------|----------|-------------|
+| F0.6/F3 | 22/04 | **🎉 F0.6 ENCERRADA — PDFs via Puppeteer + templates React**: render-pdf.ts (160 linhas, helper Puppeteer reutilizável) + TermoExpedicaoTemplate.tsx (texto oficial Port. MEC 70/2025) + TermoResponsabilidadeTemplate.tsx (5 cláusulas referenciando snapshot) + 2 rotas /print/termo-* (Client Components, fetch endpoint /dados) + patch POST /api/diplomas/[id]/documentos (bifurcação: snapshot→Puppeteer, legado→pdf-lib, maxDuration 120). Compatibilidade 100% preservada: BRy HUB Signer, bucket documentos, Secretaria, API XAdES. **Arquitetura snapshot completa em 1 sessão (~14h estimadas)**. Produção: `diploma-digital-i8arc5f78` | Fase0.6/Snapshot-F3 |
 | F0.6/F2 | 22/04 | **🎉 Snapshot Imutável Fase 2 — XMLs lendo snapshot**: src/lib/diploma/snapshot-to-dados-diploma.ts (350 linhas) com aplicarSnapshotSobreDadosDiploma + normalizações de enum (TTitulacao, TFormaAcesso, forma_integralizacao). Patch em montador.ts: SELECT inclui snapshot + aplica helper antes das regras de negócio. 5 bugs fixados durante build. Preserva 100% builders XML, legados e APIs BRy. Produção: `diploma-digital-ihudd6c9e` | Fase0.6/Snapshot-F2 |
 | F0.6/F1 | 22/04 | **🎉 Snapshot Imutável Fase 1**: 2 migrations (diplomas.dados_snapshot_extracao jsonb + diploma_snapshot_edicoes audit) + src/lib/diploma/snapshot.ts (builder+patches+diff+travar) + POST /api/processos populando snapshot + 3 endpoints REST (GET/PATCH/travar) + UI AbaSnapshot (status card+viewer+editor+histórico+travar). Produção: `diploma-digital-qsd0n5815`. Diplomas legados preservados (aviso amigável). Próximas: F2 builders XML, F3 Puppeteer PDFs | Fase0.6/Snapshot-F1 |
 | F0.5 | 22/04 | **🎉 PDF Texto Selecionável via Puppeteer + Plano Snapshot**: rota `/print/historico/[id]` + endpoint POST `/pdf` (Puppeteer+Chromium headless) + LivePreview com props `dadosAluno/dadosCurso/dadosAssinantes` + botão "Salvar PDF" (download direto, sem diálogo) + botão "Imprimir" (iframe escondido) + toggle "Papel já timbrado" + @sparticuz/chromium@147 + puppeteer-core@24. **Plano arquitetural Snapshot Imutável APROVADO** (14h em 3 fases): artefatos oficiais lêem de `dados_snapshot_extracao` JSONB imutável, 2 APIs BRy distintas (XAdES+HUB Signer) leem do mesmo snapshot, auditoria em `diploma_snapshot_edicoes`. Produção: `diploma-digital-4r3nca9e0` | Fase0.5/PDF+Arquitetura |
