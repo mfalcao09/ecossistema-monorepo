@@ -1,0 +1,42 @@
+Claro, aqui está o mapeamento exaustivo do vídeo:
+
+[00:00] Início do vídeo.
+[00:01] Tela de apresentação: "Classificação de atendimento".
+[00:05] Breno Santos, Analista de Sucesso do Cliente, se apresenta.
+[00:14] Breno explica o que é a classificação de atendimento.
+[00:33] Breno inicia a demonstração na plataforma.
+[00:34] Tela de "Aplicativos integrados" na plataforma.
+[00:39] Clique em "Apps" > "Mais apps".
+[00:43] Foco no aplicativo "Classificação de atendimento".
+[00:45] Clique em "Habilitar" para ativar o aplicativo.
+[00:47] Janela de configuração do aplicativo.
+[00:48] Habilita o aplicativo "Classificação de atendimento".
+[00:50] Aplicativo habilitado com sucesso.
+[00:58] Navegação para a aba "Atendimentos".
+[01:02] Seleciona um atendimento ativo.
+[01:05] Clique na opção "Concluir" no atendimento.
+[01:09] Janela de "Preferência" com opções de arquivamento e classificação.
+[01:11] Seleciona a opção "Classificar atendimento ao concluir".
+[01:17] Retorna ao atendimento e clica novamente em "Concluir".
+[01:21] Opção "Classificar e concluir" e "Concluir" são exibidas.
+[01:23] Seleciona "Classificar e concluir".
+[01:26] Mensagem de atenção sobre a conclusão do atendimento.
+[01:27] Clique em "Concluir" na mensagem de atenção.
+[01:28] Janela "Classificar atendimento" com as categorias padrão (Objetivo atingido, Objetivo perdido, Dúvidas, Outro).
+[01:47] Clique em "Alterar classificações de atendimento".
+[01:51] Tela "Classificações de encerramento" para adicionar novas classificações.
+[01:59] Adiciona uma nova classificação chamada "Venda realizada".
+[02:05] Seleciona a categoria "Objetivo atingido" para "Venda realizada".
+[02:08] Atribui um valor (R$) para a classificação "Venda realizada".
+[02:11] Insere o valor "1000" para "Venda realizada".
+[02:13] Clique em "Salvar".
+[02:15] A classificação "Venda realizada" aparece sob "Objetivo atingido".
+[02:20] Seleciona "Venda realizada" e confirma o valor de "1000".
+[02:37] Breno explica as categorias "Objetivo atingido".
+[02:49] Breno explica a categoria "Objetivo perdido".
+[03:03] Breno explica a categoria "Dúvidas".
+[03:11] Breno explica a categoria "Outro".
+[03:22] Seleciona a classificação "Venda realizada" com valor de 1000.
+[03:25] Clique em "Concluir".
+[03:27] Atendimento concluído e classificado como "Venda realizada" com valor de R$ 1000.
+[03:39] Tela final da Academia Helena.

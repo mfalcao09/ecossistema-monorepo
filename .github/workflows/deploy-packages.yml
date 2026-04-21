@@ -1,0 +1,69 @@
+name: Publish Packages
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/**"
+
+concurrency:
+  group: publish-packages
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    name: Detect & publish changed packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 2
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9.0.0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "pnpm"
+          registry-url: "https://npm.pkg.github.com"
+          scope: "@ecossistema"
+
+      - name: Detect changed packages
+        id: detect
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD \
+            | grep '^packages/' \
+            | awk -F'/' '{print $2}' \
+            | sort -u \
+            | tr '\n' ' ')
+          echo "packages=$CHANGED" >> $GITHUB_OUTPUT
+          echo "Changed packages: $CHANGED"
+
+      - name: Install dependencies
+        if: steps.detect.outputs.packages != ''
+        run: pnpm install --frozen-lockfile
+
+      - name: Build & publish changed packages
+        if: steps.detect.outputs.packages != ''
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          for pkg in ${{ steps.detect.outputs.packages }}; do
+            if [ -d "packages/$pkg" ] && [ -f "packages/$pkg/package.json" ]; then
+              echo "::group::Publishing @ecossistema/$pkg"
+              cd "packages/$pkg"
+              pnpm build
+              pnpm publish --no-git-checks --access restricted || echo "::warning::Publish skipped (version unchanged)"
+              cd ../..
+              echo "::endgroup::"
+            fi
+          done
+
+      - name: No changes detected
+        if: steps.detect.outputs.packages == ''
+        run: echo "No packages changed — skipping publish."

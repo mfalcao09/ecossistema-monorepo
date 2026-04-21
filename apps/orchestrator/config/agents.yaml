@@ -21,7 +21,22 @@ agents:
     business: fic
     permission_mode: default
     description: "Gestão financeira FIC: cobranças, boletos, inadimplência, Inter."
-    stub: true
+    config_path: "apps/fic/agents/cfo/agent.config.yaml"
+    tools:
+      - check_inadimplentes
+      - emit_boleto_aluno
+      - send_whatsapp_cobranca
+      - gerar_relatorio_inadimplencia
+      - disparar_regua_cobranca
+    mcps:
+      - supabase-mcp
+      - credential-mcp
+      - memory-mcp
+    skills:
+      - regua-cobranca
+      - reconciliacao-bancaria
+      - emissao-boletos-mensal
+    stub: false   # S16 — instanciado e tools implementadas (sandbox)
 
   - id: cao-ia
     name: "CAO-IA — Diretor Acadêmico"

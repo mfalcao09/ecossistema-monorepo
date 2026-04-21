@@ -1,0 +1,30 @@
+[ 00:00] Olá! Seja bem-vindo a mais um tutorial.
+[ 00:06] Neste tutorial nós falaremos sobre o cadastro de equipes, como cadastrar equipes na plataforma, entender como funcionam os níveis de acesso aos atendimentos e a diferença entre usuário e supervisor.
+[ 00:19] Essa funcionalidade, ela ajuda a organizar a distribuição de atendimento, melhorar a comunicação interna e garante que cada membro visualize apenas as interações relacionadas à sua função, aumentando a eficiência operacional da equipe, do time.
+[ 00:34] Um ponto é: somente o usuário administrador pode cadastrar uma equipe.
+[ 00:39] Aqui na plataforma, você vai em Ajustes, Equipes.
+[ 00:44] Aqui eu tenho umas equipes pré-definidas.
+[ 00:47] Como eu estou com acesso de administrador, eu tenho a facilidade e posso criar novas equipes.
+[ 00:53] Então, você tem aqui na criação da equipe, você tem o nome que você vai dar para essa equipe.
+[ 01:00] Você pode atribuir ela como a equipe padrão.
+[ 01:03] Somente uma equipe pode ser padrão na plataforma.
+[ 01:06] Se eu atribuir a essa equipe que eu vou criar o a equipe padrão, automaticamente a equipe que estava como padrão, aqui como no geral, ela vai ser transferida para essa equipe.
+[ 01:17] Tá? Aqui eu posso atribuir o canal de atendimento.
+[ 01:20] Os acessos aos atendimentos, né? Eu tenho todos, equipe e atendente.
+[ 01:25] Né? Como que funciona?
+[ 01:26] Todos, qualquer atendente da equipe pode visualizar todas as conversas pendentes, em andamento e concluído.
+[ 01:34] As equipes, no caso de equipes, se eu setar como equipe, as conversas ficam visíveis apenas para os usuários daquela equipe específica.
+[ 01:42] E o atendente, somente o atendente responsável e o supervisor têm acesso às conversas naquela equipe.
+[ 01:48] Temos aqui também a distribuição de atendimento, onde você tem um vídeo também explicando como funciona.
+[ 01:54] É um um vídeo extra na plataforma que ensina como usar a distribuição de atendimento.
+[ 02:00] E aqui você pode setar os usuários, né? Colocando ele como usuário ou supervisor.
+[ 02:05] Né? Lembrando que o o supervisor, ele tem acesso a todas as conversas e o usuário, apenas a conversa dele.
+[ 02:11] Da mesma forma, e aqui tem a lista de nomes dos seus eh colaboradores da plataforma que você pode, eh, dar a atribuição tanto de usuário quanto supervisor para eles.
+[ 02:24] Voltando no foco do tipo de acesso, eu quero reforçar o seguinte:
+[ 02:29] Todos é ideal para empresas que desejam transparência total.
+[ 02:32] Quando você coloca a equipe, restringe a visualização apenas aos membros daquela equipe.
+[ 02:37] E o atendente, restrito ao atendente responsável ou ao supervisor da equipe.
+[ 02:41] Uma dica: escolha o tipo de acesso que mais combina com a estratégia da sua empresa.
+[ 02:47] Todos para maior transparência, equipe para maior controle interno e atendente para atendimento mais exclusivos.
+[ 02:54] Aqui nós falamos sobre o menu Ajustes Equipes.
+[ 02:57] Se você tiver dúvida, procure o seu CS, ou então na comunidade do YouTube.

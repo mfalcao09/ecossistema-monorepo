@@ -1,0 +1,7 @@
+[00:00] Olá, sejam muito bem-vindos a mais um vídeo. Hoje vamos falar sobre tempo de segurança de mensagem. O que é isso, pessoal? O tempo de segurança é uma funcionalidade que permite inserir um tempo de segurança de alguns segundos, antes de enviar as mensagens aos contatos. Esse intervalo, ele permite que você repense, revise, a sua mensagem. E se necessário, cancele o envio antes que ela seja enviada definitivamente.
+
+[00:35] Esse intervalo de tempo permite que você repense ou revise a mensagem e se necessário, cancele o envio antes que ela seja enviada definitivamente. Como liberar essa funcionalidade ao cliente? Eu vou mostrar para vocês como que o parceiro, ele libera a essa funcionalidade. A gente vai aqui no menu Admin, a gente vai em contas.
+
+[01:03] Você digita, né, a o nome da sua conta e vai no canto superior direito, você vai em alterar. Mais ou menos no meio da tela, aqui em APPs, no canto direito, a no finalzinho, no rodapé, tem a opção tempo de segurança. Nós vamos marcar essa flag, né, flager aqui e salvar.
+
+[01:26] Então, pessoal, dessa forma, nós conseguimos habilitar a funcionalidade para ficar ativa na plataforma. É só salvar e tá habilitado. Muito obrigada, nos vemos no próximo vídeo.

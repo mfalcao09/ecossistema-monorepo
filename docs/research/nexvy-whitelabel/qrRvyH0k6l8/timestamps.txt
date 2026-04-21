@@ -1,0 +1,55 @@
+[00:00] Título do vídeo "Planos e Funcionalidades".
+[00:05] A apresentadora Larisa Lopes dá as boas-vindas e explica que irá ensinar a criar planos próprios.
+[00:33] Larisa mostra a tela inicial da plataforma Helena.
+[00:35] Clica no botão "Admin".
+[00:36] Clica em "Planos".
+[00:39] Clica no botão "+ Novo".
+[00:41] Abre a tela "Novo Plano" para configurar um novo plano.
+[00:50] Larisa digita "Avançado" no campo "Nome do Plano".
+[00:55] Digita "1.500,00" no campo "Preço Base (R$)".
+[01:02] Marca a opção "Agente de IA".
+[01:03] Marca a opção "Companhias".
+[01:06] Marca a opção "Transcrição de áudio com IA".
+[01:09] Marca a opção "Asaas".
+[01:21] Marca a opção "CRM".
+[01:23] Marca a opção "Grupos".
+[01:24] Marca a opção "Sequências".
+[01:25] Marca a opção "Classificação de atendimentos".
+[01:26] Marca a opção "Carterização de contatos".
+[01:27] Marca a opção "Mensagens agendadas".
+[01:28] Marca a opção "Tempo de segurança".
+[01:34] Clica na opção "Completo" para a modalidade do plano.
+[02:12] Altera a quantidade de "Chatbots de atendimento" para "10".
+[02:18] Altera a quantidade de "Chatbots de automação" para "10".
+[02:35] Altera a quantidade de "Painéis" para "10".
+[02:38] Altera a quantidade de "Sequências" para "10".
+[02:40] Altera a quantidade de "Agentes de IA" para "10".
+[02:47] Altera a quantidade de "Usuários" para "10".
+[02:54] Clica em "Permitir adicionais" para usuários.
+[03:04] Digita "35,00" no campo "Valor do adicional" para usuários.
+[03:09] Clica em "Permitir adicionais" para Canais de WhatsApp.
+[03:13] Digita "60,00" no campo "Valor do adicional" para Canais de WhatsApp.
+[03:15] Clica em "Permitir adicionais" para Canais de Instagram.
+[03:17] Digita "50,00" no campo "Valor do adicional" para Canais de Instagram.
+[03:19] Clica em "Permitir adicionais" para Canais de Messenger.
+[03:20] Digita "50,00" no campo "Valor do adicional" para Canais de Messenger.
+[03:26] Marca a opção "Campos Personalizados".
+[03:33] Marca a opção "Webhook + API".
+[03:45] Marca a opção "Canal não oficial".
+[03:51] Clica no botão "Salvar".
+[03:53] O plano "Avançado" é criado com sucesso.
+[03:59] Clica em "Admin".
+[04:00] Clica em "Contas".
+[04:02] Clica no botão "+ Novo".
+[04:04] A tela de criação de conta é exibida.
+[04:07] Clica no menu suspenso "Plano".
+[04:08] Seleciona o plano "Avançado".
+[04:09] A tela exibe os detalhes do plano "Avançado".
+[04:17] Aumenta a quantidade de "Usuários" para "11". O valor total é atualizado.
+[04:19] Aumenta a quantidade de "Usuários" para "12". O valor total é atualizado.
+[04:21] Aumenta a quantidade de "Canais de WhatsApp" para "2". O valor total é atualizado.
+[04:22] Aumenta a quantidade de "Canais de WhatsApp" para "3". O valor total é atualizado.
+[04:24] Aumenta a quantidade de "Canais do Instagram" para "2". O valor total é atualizado.
+[04:25] Aumenta a quantidade de "Canais do Instagram" para "3". O valor total é atualizado.
+[04:26] Aumenta a quantidade de "Canais do Messenger" para "2". O valor total é atualizado.
+[04:31] Larisa encerra o vídeo reforçando a importância dos planos.

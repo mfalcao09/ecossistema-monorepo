@@ -7,11 +7,6 @@ import {
   parseCookieHeader,
   derivePrintContext,
 } from '@/lib/diploma/render-pdf'
-
-// Fase 3 do Snapshot Imutável: geração dos 3 PDFs via Puppeteer (~10s cada,
-// executadas em paralelo). Runtime Node.js (Chromium não roda em Edge).
-export const maxDuration = 120
-export const runtime = 'nodejs'
 import {
   gerarHistoricoEscolarPDF,
   gerarTermoExpedicaoPDF,
@@ -22,6 +17,11 @@ import {
   type DisciplinaPDF,
   type AssinantePDF,
 } from '@/lib/documentos/pdf-generator'
+
+// Fase 3 do Snapshot Imutável: geração dos 3 PDFs via Puppeteer (~10s cada,
+// executadas em paralelo). Runtime Node.js (Chromium não roda em Edge).
+export const maxDuration = 120
+export const runtime = 'nodejs'
 
 // ═══════════════════════════════════════════════════════════════════
 // POST /api/diplomas/[id]/documentos

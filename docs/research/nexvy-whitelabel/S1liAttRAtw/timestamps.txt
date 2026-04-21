@@ -1,0 +1,16 @@
+[00:00] Título do vídeo.
+[00:05] Instrutora apresentando o vídeo e o tema do vídeo.
+[00:07] A tela muda para mostrar o nome da instrutora e a função dela.
+[00:11] Instrutora mostrando as funcionalidades do menu de perfil da plataforma.
+[00:20] Instruções para a tela "Editar meus dados".
+[00:36] Instruções para a tela "Trocar conta".
+[00:43] Instruções para a tela "Preciso de ajuda".
+[00:52] Instruções para a tela "Preferências".
+[01:30] Instruções para a tela "Termos de uso e política de privacidade".
+[01:41] Instruções para a tela "Limpar cache".
+[01:57] Instruções para a tela "Bloquear sessão".
+[02:18] Instruções para a tela "Retomar sessão".
+[02:32] Instruções para a tela "Dispositivos".
+[02:43] Instruções para a tela "Sair".
+[02:47] Instrutora se despedindo do público.
+[02:54] Logotipo da empresa.

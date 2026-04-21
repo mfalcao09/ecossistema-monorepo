@@ -1,0 +1,28 @@
+# Gitleaks config — suprime falsos-positivos do ecossistema
+#
+# Regras: herda defaults + adiciona allowlists de PATH específicos.
+# Escopos isentos de scan (UUIDs fixture não são secrets):
+#   - Migrations SQL (seeds determinísticos)
+#   - Scripts de seed (Python/TS)
+#   - Arquivos de teste
+#   - Docs de pesquisa/benchmark
+#   - Memory markdown
+#
+# Secrets reais (tokens Meta, chaves Inter, creds Supabase, AWS keys, etc)
+# seguem sendo pegos pelas regras default nos demais caminhos.
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Ecossistema monorepo — paths isentos"
+
+paths = [
+  '''.*supabase/migrations/.*\.sql$''',
+  '''.*infra/supabase/migrations/.*\.sql$''',
+  '''.*scripts/seed_.*\.(py|ts|sql)$''',
+  '''.*/tests?/.*\.(test|spec)\.(ts|tsx|js|jsx)$''',
+  '''.*/__tests__/.*\.(test|spec)\.(ts|tsx|js|jsx)$''',
+  '''.*/docs/research/.*''',
+  '''.*/memory/.*\.md$''',
+]

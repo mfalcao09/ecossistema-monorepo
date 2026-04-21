@@ -101,8 +101,10 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 | **S09** | Langfuse self-host | ✅ Merged | #8 | PG + ClickHouse + Redis + MinIO; 4 fixes runtime |
 | **S10** | Orchestrator FastAPI | ✅ Merged | #11 | SSE + HITL + session resumption + 4 test modules |
 | **S11** | C-Suite Templates | ✅ Merged | #9 | 4 templates + generator CLI + CFO-FIC instanciado (path corrigido pós-merge, ver saneamento) |
-| **S14** | Memory Consolidator Worker | ✅ Pronto para PR | — | Railway worker sleeptime: extract+dedupe+decay+detect+briefing; 39 testes, 81.6% cov; migration 20260418000000 |
-| S12–S13, S15–S18 | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
+| **S14** | Memory Consolidator Worker | ✅ Deployed | #17 | ACTIVE em Railway (`apps/memory-consolidator`); migration `20260418000000_consolidator.sql` aplicada; 2 jobs pg_cron agendados (morning 05:00 UTC, briefing 10:00 UTC); 6/6 vars preenchidas (tokens no vault ECOSYSTEM); smoke tests `/health` + `/jobs/morning` OK (2026-04-18) |
+| **S16** | CFO-FIC E2E Pilot | ✅ Código + migrations aplicadas | #54 | 5 tools + 8/8 testes; creds Inter pendentes (seg 21/04) |
+| **S19** | WhatsApp Meta Cloud API | ⏳ Pronto para executar | — | Apenas WhatsApp; creds Inter ficam fora desta sessão |
+| S12–S13, S15, S17–S18 | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
 
 ### Saneamento pós-drenagem (2026-04-17)
 
@@ -195,7 +197,8 @@ Cada worktree/pasta tem seu próprio `.railway/` com o link do projeto. `railway
    - `idempotency_cache` (Art. III, com `created_at` indexado)
 2. **S07 (memory)** precisa entregar `@ecossistema/memory` com método `add()`.
 3. **S08 (Edge Functions)** precisa entregar `credentials-proxy` (SC-29 Modo B) para MCP servers buscarem credenciais em runtime.
-4. **S16 (piloto CFO-FIC)** é o primeiro teste real — não ativar em outros agentes antes.
+4. **S16 (piloto CFO-FIC)** ✅ concluído — 5 tools, 8/8 testes, migrations FIC+ECOSYSTEM aplicadas. Pendência: credenciais Inter sandbox (seg–sex 8h–20h Brasília; próxima janela 2026-04-21). Evolution API descartada → S19 usa Meta Cloud API.
+5. **S19 (WhatsApp Meta API)** — briefing pronto, escopo exclusivo WhatsApp. Inter NÃO faz parte desta sessão.
 
 ### Ambiente dev confirmado
 
@@ -246,3 +249,4 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 - `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md`
 - `docs/sessions/logs/LOG-2026-04-17-s3-mcp-template.md`
 - `docs/sessions/logs/LOG-2026-04-19-F1-S01-jarvis-routing.md`
+- `docs/sessions/logs/LOG-2026-04-21-s6-cargos-permissoes.md` — Atendimento S6: cargos + permissões granulares (PR #45, 5 commits, ~3.6k linhas)
