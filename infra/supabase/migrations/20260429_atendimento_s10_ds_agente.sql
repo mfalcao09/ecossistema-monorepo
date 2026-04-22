@@ -16,11 +16,11 @@
 --
 -- Tabelas novas:
 --   - ds_agents              (config do agente: prompt, params, ativação)
---   - ds_agent_knowledge     (chunks com embedding 1536 dim)
+--   - ds_agent_knowledge     (chunks com embedding 768 dim)
 --   - ds_agent_executions    (log de cada inferência: latência, tokens, hand-off)
 --
 -- Extensão:
---   - pgvector                (vector(1536), índice HNSW para cosine similarity)
+--   - pgvector                (vector(768), índice HNSW para cosine similarity)
 --
 -- RLS:
 --   - Permissiva (Fase 1 single-tenant FIC). Aperta no multi-tenant — P-130.
@@ -112,8 +112,8 @@ CREATE TABLE IF NOT EXISTS public.ds_agent_knowledge (
   content         TEXT        NOT NULL,           -- chunk text (500-800 tokens)
   source_url      TEXT,                            -- origem opcional (URL/path)
 
-  -- Embedding gerado por text-embedding-3-small (1536 dim)
-  embedding       vector(1536),
+  -- Embedding gerado por text-embedding-004 (768 dim)
+  embedding       vector(768),
 
   -- Metadados extras (página PDF, seção, etc.)
   metadata        JSONB       NOT NULL DEFAULT '{}'::jsonb,
@@ -131,13 +131,13 @@ CREATE INDEX IF NOT EXISTS idx_ds_knowledge_embedding_hnsw
   USING hnsw (embedding vector_cosine_ops)
   WITH (m = 16, ef_construction = 64);
 
-COMMENT ON TABLE  public.ds_agent_knowledge IS 'S10 — Chunks RAG por agente (vector 1536 = text-embedding-3-small)';
+COMMENT ON TABLE  public.ds_agent_knowledge IS 'S10 — Chunks RAG por agente (vector 768 = text-embedding-004)';
 
 -- RPC para busca vetorial (cosine similarity).
 -- Retorna top_k chunks mais relevantes para o agent_id, com score 0..1.
 CREATE OR REPLACE FUNCTION public.match_ds_agent_knowledge(
   p_agent_id  UUID,
-  p_embedding vector(1536),
+  p_embedding vector(768),
   p_top_k     INT DEFAULT 5,
   p_min_score NUMERIC DEFAULT 0.0
 )
