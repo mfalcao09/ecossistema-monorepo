@@ -1,6 +1,11 @@
 /**
  * GET  /api/atendimento/calendar-events?from=&to=   — lista local
- * POST /api/atendimento/calendar-events              — cria evento no Google + local
+ * POST /api/atendimento/calendar-events              — cria evento no Microsoft Graph + local
+ *
+ * Refactor Etapa 2-B: Google Calendar → Microsoft Graph (app-only).
+ * Não há mais fluxo OAuth por-usuário — o ERP chama Graph como o app
+ * `ecossistema-agentes-fic` e cria o evento no mailbox do atendente
+ * logado (`auth.users.email` = UPN no tenant FIC).
  *
  * Body POST: { summary, description?, contact_id?, deal_id?, conversation_id?,
  *   start_at, end_at, timezone?, attendees?: string[], create_meet? }
@@ -10,7 +15,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { getValidAccessToken } from "@/lib/atendimento/google-oauth";
+import { createCalendarEvent } from "@/lib/atendimento/calendar-provider";
 
 const createSchema = z.object({
   summary: z.string().min(1).max(512),
@@ -39,7 +44,7 @@ export async function GET(request: NextRequest) {
     .from("atendimento_calendar_events")
     .select(
       "id, summary, description, location, start_at, end_at, timezone, meeting_url, attendees, status, " +
-        "contact_id, deal_id, conversation_id, google_event_id, created_at",
+        "contact_id, deal_id, conversation_id, provider, provider_event_id, organizer_email, created_at",
     )
     .order("start_at", { ascending: true })
     .limit(500);
@@ -61,6 +66,20 @@ export async function POST(request: NextRequest) {
   } = await supabase.auth.getUser();
   if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
+  // O mailbox do organizador = email do supabase user. Assume que esse email
+  // bate com o UPN do usuário no tenant FIC (P-163).
+  const organizerEmail = user.email;
+  if (!organizerEmail) {
+    return NextResponse.json(
+      {
+        error: "user_without_email",
+        message:
+          "Usuário logado sem e-mail — não é possível determinar o mailbox M365.",
+      },
+      { status: 400 },
+    );
+  }
+
   const parsed = createSchema.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) {
     return NextResponse.json(
@@ -69,70 +88,44 @@ export async function POST(request: NextRequest) {
     );
   }
 
-  const admin = createAdminClient();
-  const accessToken = await getValidAccessToken(admin, user.id);
-  if (!accessToken) {
-    return NextResponse.json(
-      { error: "google_not_connected", connect_url: "/api/auth/google/connect" },
-      { status: 428 },
-    );
-  }
-
   const d = parsed.data;
-  const eventBody: Record<string, unknown> = {
-    summary: d.summary,
-    description: d.description,
-    start: { dateTime: d.start_at, timeZone: d.timezone },
-    end: { dateTime: d.end_at, timeZone: d.timezone },
-    attendees: d.attendees.map((email) => ({ email })),
-  };
-  if (d.create_meet) {
-    eventBody.conferenceData = {
-      createRequest: {
-        requestId: `atnd-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
-        conferenceSolutionKey: { type: "hangoutsMeet" },
-      },
-    };
-  }
+  const admin = createAdminClient();
 
-  const googleRes = await fetch(
-    "https://www.googleapis.com/calendar/v3/calendars/primary/events?conferenceDataVersion=1&sendUpdates=all",
-    {
-      method: "POST",
-      headers: {
-        Authorization: `Bearer ${accessToken}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(eventBody),
-    },
-  );
-
-  const googleJson = await googleRes.json().catch(() => ({}));
-  if (!googleRes.ok) {
-    console.error("[calendar-events] Google API erro", googleRes.status, googleJson);
+  let graphEvent: Awaited<ReturnType<typeof createCalendarEvent>>;
+  try {
+    graphEvent = await createCalendarEvent(organizerEmail, {
+      subject: d.summary,
+      bodyHtml: d.description,
+      startIso: d.start_at,
+      endIso: d.end_at,
+      timezone: d.timezone,
+      attendees: d.attendees.map((email) => ({ email })),
+      createOnlineMeeting: d.create_meet,
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : String(err);
+    console.error(
+      `[calendar-events] Graph API erro organizer=${organizerEmail}: ${msg}`,
+    );
     return NextResponse.json(
-      { error: "google_api_error", status: googleRes.status, google: googleJson },
+      { error: "graph_api_error", message: msg },
       { status: 502 },
     );
   }
-
-  const meetingUrl: string | undefined =
-    googleJson.hangoutLink ??
-    googleJson.conferenceData?.entryPoints?.find(
-      (e: { entryPointType?: string }) => e.entryPointType === "video",
-    )?.uri;
 
   const { data: inserted, error: insErr } = await admin
     .from("atendimento_calendar_events")
     .insert({
       summary: d.summary,
       description: d.description,
-      google_event_id: googleJson.id,
-      google_calendar_id: "primary",
+      provider: "microsoft",
+      provider_event_id: graphEvent.id,
+      provider_calendar_id: "primary",
+      organizer_email: organizerEmail,
       start_at: d.start_at,
       end_at: d.end_at,
       timezone: d.timezone,
-      meeting_url: meetingUrl,
+      meeting_url: graphEvent.onlineMeetingJoinUrl ?? null,
       attendees: d.attendees.map((email) => ({ email, responseStatus: "needsAction" })),
       contact_id: d.contact_id ?? null,
       deal_id: d.deal_id ?? null,
@@ -148,5 +141,11 @@ export async function POST(request: NextRequest) {
       { status: 500 },
     );
   }
-  return NextResponse.json({ event: inserted }, { status: 201 });
+  return NextResponse.json(
+    {
+      event: inserted,
+      graph: { id: graphEvent.id, webLink: graphEvent.webLink },
+    },
+    { status: 201 },
+  );
 }
