@@ -43,6 +43,10 @@
       "schedule": "* * * * *"
     },
     {
+      "path": "/api/cron/drain-automation-messages",
+      "schedule": "* * * * *"
+    },
+    {
       "path": "/api/cron/aggregate-metrics-daily",
       "schedule": "10 0 * * *"
     },
