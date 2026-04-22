@@ -38,6 +38,8 @@ const DS_VOICE_ENABLED =
   process.env.NEXT_PUBLIC_ATENDIMENTO_DS_VOICE_ENABLED === "true";
 const DS_AGENTE_ENABLED =
   process.env.NEXT_PUBLIC_ATENDIMENTO_DS_AGENTE_ENABLED === "true";
+const DS_BOT_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_DS_BOT_ENABLED === "true";
 
 const menuItems: MenuItem[] = [
   {
@@ -77,6 +79,17 @@ const menuItems: MenuItem[] = [
     icon: Zap,
     badge: "IA",
   },
+  ...(DS_BOT_ENABLED
+    ? [
+        {
+          label: "DS Bot",
+          href: "/atendimento/ds-bot",
+          icon: Bot,
+          badge: "IA",
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
   ...(CHAT_INTERNO_ENABLED
     ? [
         {
