@@ -13,8 +13,11 @@ import {
   View,
 } from "react-native";
 
+import { SignInScreen } from "./src/components/SignInScreen";
+import { useAuth } from "./src/hooks/useAuth";
 import { useChat } from "./src/hooks/useChat";
 import { useVoice } from "./src/hooks/useVoice";
+import { hasSupabaseConfig } from "./src/services/supabase";
 import type { ChatMessage } from "./src/types";
 
 type ExtraConfig = {
@@ -39,14 +42,39 @@ function resolveConfig(): ExtraConfig {
 }
 
 export default function App() {
+  const auth = useAuth();
+  const supabaseConfigured = hasSupabaseConfig();
+
+  // Gate de auth: spinner enquanto carrega sessão persistida,
+  // SignInScreen quando não há sessão (ou Supabase não configurado),
+  // ChatApp quando há sessão válida.
+  if (auth.loading) {
+    return (
+      <View style={styles.loadingContainer}>
+        <StatusBar style="light" />
+        <ActivityIndicator color="#64FFDA" size="large" />
+      </View>
+    );
+  }
+
+  if (!auth.session || !supabaseConfigured) {
+    return <SignInScreen auth={auth} supabaseConfigured={supabaseConfigured} />;
+  }
+
+  return <ChatApp auth={auth} />;
+}
+
+function ChatApp({ auth }: { auth: ReturnType<typeof useAuth> }) {
   const resolved = useMemo(resolveConfig, []);
+  // Token prioriza JWT do Supabase (auth real). Mantém fallback ao env var
+  // para manter compatibilidade com dev local sem Supabase configurado.
   const config = useMemo(
     () => ({
       baseUrl: resolved.orchestratorUrl!,
-      token: resolved.orchestratorToken!,
+      token: auth.accessToken ?? resolved.orchestratorToken ?? "",
       agentId: resolved.agentId,
     }),
-    [resolved],
+    [resolved, auth.accessToken],
   );
 
   const { messages, sending, error, send, reset } = useChat({ config });
@@ -122,6 +150,9 @@ export default function App() {
             <Text style={styles.resetText}>limpar</Text>
           </Pressable>
         )}
+        <Pressable onPress={auth.signOut} hitSlop={12}>
+          <Text style={styles.resetText}>sair</Text>
+        </Pressable>
       </View>
 
       {missingConfig ? (
@@ -253,6 +284,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#0B0F14",
+  },
+  loadingContainer: {
+    flex: 1,
+    backgroundColor: "#0B0F14",
+    alignItems: "center",
+    justifyContent: "center",
   },
   header: {
     paddingTop: 64,
