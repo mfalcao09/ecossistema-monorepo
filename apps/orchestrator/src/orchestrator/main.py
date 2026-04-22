@@ -31,6 +31,7 @@ from orchestrator.hooks.loader import HooksBridge
 from orchestrator.routes.agents import router as agents_router
 from orchestrator.routes.health import router as health_router
 from orchestrator.routes.sessions import router as sessions_router
+from orchestrator.routes.voice import router as voice_router
 from orchestrator.routes.webhooks import router as webhooks_router
 
 # ── Logging estruturado ──────────────────────────────────────────────────────
@@ -106,6 +107,7 @@ app.include_router(health_router)
 app.include_router(agents_router)
 app.include_router(webhooks_router)
 app.include_router(sessions_router)
+app.include_router(voice_router)
 
 
 # ── Raiz ──────────────────────────────────────────────────────────────────────
