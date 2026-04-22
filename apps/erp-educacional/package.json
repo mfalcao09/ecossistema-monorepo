@@ -21,6 +21,7 @@
     "@sparticuz/chromium": "^147.0.1",
     "@supabase/ssr": "^0.4.0",
     "@supabase/supabase-js": "^2.43.0",
+    "@xyflow/react": "^12.3.5",
     "@tiptap/pm": "^2.6.6",
     "@tiptap/react": "^2.6.6",
     "@tiptap/starter-kit": "^2.6.6",
