@@ -31,6 +31,7 @@ import {
   isIaTranscriptionEnabled,
   transcribeAudio,
 } from "@/lib/atendimento/ia-transcription";
+import { runAgentForConversation } from "@/lib/atendimento/ds-agente-runner";
 
 // ── Tipos de payload da Meta ─────────────────────────────────────────────────
 
@@ -498,6 +499,23 @@ async function processarMensagemRecebida(
             );
           }
         })();
+      }
+
+      // ── S10: dispara DS Agente IA (fire-and-forget — após automações S8a + DS Voice S9)
+      if (
+        process.env.ATENDIMENTO_DS_AGENTE_ENABLED === "true" &&
+        conteudoTexto
+      ) {
+        runAgentForConversation(conversationId, {
+          id: msg.id,
+          content: conteudoTexto,
+          content_type: contentType,
+        }).catch((err) => {
+          console.error(
+            "[WEBHOOK] runAgentForConversation failed (não afeta ACK)",
+            err,
+          );
+        });
       }
     }
   } catch (err) {
