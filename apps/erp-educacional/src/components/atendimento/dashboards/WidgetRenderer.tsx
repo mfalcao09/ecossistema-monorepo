@@ -23,6 +23,21 @@ import {
   QualityByUser,
   QualityByTeam,
 } from "./widgets/ComponentWidgets";
+import {
+  AgentWorkloadLive,
+  LiveQueueStatus,
+  MessagesThroughput,
+  ChannelPerformance,
+  KanbanPipelineMini,
+  ScheduledMessagesPending,
+  ConversationFunnel,
+  TransferChainTrace,
+  QuickRepliesUsage,
+  AutomationExecutionAudit,
+  ReplyTimeHeatmap,
+  ClassificationTagsCloud,
+  AiAssistantStatus,
+} from "./widgets/BenchmarkWidgets";
 import { WidgetFrame } from "./WidgetFrame";
 import {
   Wifi,
@@ -33,6 +48,18 @@ import {
   CheckCircle2,
   Users,
   Users2,
+  ListOrdered,
+  MessageCircle,
+  Radio,
+  Kanban,
+  CalendarClock,
+  Filter,
+  ArrowRightLeft,
+  Zap,
+  Workflow,
+  Grid3x3,
+  Tag,
+  Brain,
 } from "lucide-react";
 
 interface Props {
@@ -50,6 +77,23 @@ const COMPONENT_ICONS: Record<string, React.ReactNode> = {
   crm_mini: <Briefcase size={14} className="text-purple-500" />,
   quality_by_user: <Users size={14} className="text-slate-500" />,
   quality_by_team: <Users2 size={14} className="text-slate-500" />,
+  agent_workload_live: <Users size={14} className="text-emerald-500" />,
+  live_queue_status: <ListOrdered size={14} className="text-amber-500" />,
+  messages_throughput: <MessageCircle size={14} className="text-blue-500" />,
+  channel_performance: <Radio size={14} className="text-emerald-500" />,
+  kanban_pipeline_mini: <Kanban size={14} className="text-purple-500" />,
+  scheduled_messages_pending: (
+    <CalendarClock size={14} className="text-blue-500" />
+  ),
+  conversation_funnel: <Filter size={14} className="text-emerald-500" />,
+  transfer_chain_trace: (
+    <ArrowRightLeft size={14} className="text-indigo-500" />
+  ),
+  quick_replies_usage: <Zap size={14} className="text-amber-500" />,
+  automation_execution_audit: <Workflow size={14} className="text-slate-500" />,
+  reply_time_heatmap: <Grid3x3 size={14} className="text-emerald-500" />,
+  classification_tags_cloud: <Tag size={14} className="text-slate-500" />,
+  ai_assistant_status: <Brain size={14} className="text-indigo-500" />,
 };
 
 export function WidgetRenderer({ widget, canEdit, onRemove }: Props) {
@@ -114,6 +158,7 @@ function kpiBody(slug: string, range: number) {
 
 function renderBody(slug: string | null, range: number) {
   switch (slug) {
+    // ── PR A (catálogo inicial) ─────────────────────────────────────────────
     case "chart_volume_line":
       return <ChartVolumeLine rangeDays={range} />;
     case "chart_lead_origin_pie":
@@ -140,6 +185,33 @@ function renderBody(slug: string | null, range: number) {
       return <QualityByUser />;
     case "quality_by_team":
       return <QualityByTeam />;
+    // ── PR B (benchmark Nexvy × outros SaaS) ────────────────────────────────
+    case "agent_workload_live":
+      return <AgentWorkloadLive />;
+    case "live_queue_status":
+      return <LiveQueueStatus />;
+    case "messages_throughput":
+      return <MessagesThroughput rangeDays={range} />;
+    case "channel_performance":
+      return <ChannelPerformance rangeDays={range} />;
+    case "kanban_pipeline_mini":
+      return <KanbanPipelineMini />;
+    case "scheduled_messages_pending":
+      return <ScheduledMessagesPending />;
+    case "conversation_funnel":
+      return <ConversationFunnel rangeDays={range} />;
+    case "transfer_chain_trace":
+      return <TransferChainTrace />;
+    case "quick_replies_usage":
+      return <QuickRepliesUsage rangeDays={range} />;
+    case "automation_execution_audit":
+      return <AutomationExecutionAudit rangeDays={range} />;
+    case "reply_time_heatmap":
+      return <ReplyTimeHeatmap rangeDays={range} />;
+    case "classification_tags_cloud":
+      return <ClassificationTagsCloud rangeDays={range} />;
+    case "ai_assistant_status":
+      return <AiAssistantStatus />;
     default:
       return (
         <div className="flex items-center justify-center h-full text-xs text-slate-400">
