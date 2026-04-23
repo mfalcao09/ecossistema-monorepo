@@ -1,7 +1,7 @@
 {
   "name": "@ecossistema/billing",
   "version": "0.1.0",
-  "description": "Motor de cobran\u00e7a reutiliz\u00e1vel \u2014 Banco Inter, idempot\u00eancia, webhook. Art. III + VIII",
+  "description": "Motor de cobrança reutilizável — Banco Inter, idempotência, webhook. Art. III + VIII",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -23,10 +23,11 @@
     "test:coverage": "vitest run --coverage",
     "clean": "rm -rf dist"
   },
-  "dependencies": {
-    "@supabase/supabase-js": "^2.45.0"
+  "peerDependencies": {
+    "@supabase/supabase-js": ">=2.43.0 <3"
   },
   "devDependencies": {
+    "@supabase/supabase-js": "^2.45.0",
     "@types/node": "^22.0.0",
     "@vitest/coverage-v8": "^2.0.0",
     "typescript": "^5.6.0",

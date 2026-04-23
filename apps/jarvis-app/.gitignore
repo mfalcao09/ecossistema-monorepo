@@ -10,4 +10,6 @@ web-build/
 *.key
 *.mobileprovision
 *.orig.*
+.env
+.env.local
 .env*.local

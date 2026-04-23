@@ -12,21 +12,25 @@
 
 ## 🟠 Config manual antes de ativar em produção
 
-1. [ ] **Aplicar migration em Supabase branch `atnd-s5` → prod** — aplicar `20260421_atendimento_s5_templates_expand.sql` em prod **1 dia depois** de S4 (slot de migração do dia é da S4). Valida `window_expires_at`, `atendimento_scheduled_messages`, `atendimento_calendar_events`, `atendimento_google_tokens` e os triggers.
+1. [ ] **Aplicar migrations em Supabase branch → prod** — aplicar na ordem:
+   - `20260421_atendimento_s5_templates_expand.sql` (base S5)
+   - `20260502_atendimento_etapa1_fk_calendar_deal.sql` (Etapa 1-D)
+   - `20260503_atendimento_etapa1_vault_refs.sql` (Etapa 1-D)
+   - `20260504_atendimento_etapa2b_ms_graph.sql` (**Etapa 2-B — troca Google por Microsoft Graph**)
+     A migration 20260504 renomeia `google_event_id` → `provider_event_id` e dropa a tabela `atendimento_google_tokens` (obsoleta no fluxo app-only MS Graph).
 
 2. [ ] **Env vars Vercel (projeto erp-educacional):**
    - `CRON_SECRET` — segredo para autenticar os cron handlers (`/api/cron/sync-meta-templates`, `/api/cron/dispatch-scheduled-messages`). Gerar com `openssl rand -hex 32`.
-   - `GOOGLE_CLIENT_ID` — OAuth client do Google Cloud Project.
-   - `GOOGLE_CLIENT_SECRET` — idem.
-   - `GOOGLE_OAUTH_REDIRECT_URI` — `https://<domínio>/api/auth/google/callback` (adicionar também a URL de preview e local dev).
+   - **Credenciais Microsoft Graph** — uma das duas opções:
+     - **(A) via vault SC-29 (preferida):** setar `CREDENTIAL_GATEWAY_URL` + `CREDENTIAL_GATEWAY_TOKEN`. As credenciais `OFFICE365_FIC_{TENANT_ID,CLIENT_ID,CLIENT_SECRET}` já estão cadastradas no vault ECOSYSTEM (ADR-018, app `ecossistema-agentes-fic`).
+     - **(B) direto em env vars:** `MS_GRAPH_TENANT_ID` (default FIC = `c157f62b-4c1f-450e-96e5-3110bed2ecb6`) + `MS_GRAPH_CLIENT_ID` + `MS_GRAPH_CLIENT_SECRET`.
 
-3. [ ] **Google Cloud Console:**
-   - Criar projeto "FIC Atendimento" (ou reusar existente).
-   - Habilitar **Google Calendar API** e **People API**.
-   - OAuth consent screen: External, escopo `.../auth/calendar.events` + `userinfo.email`.
-   - Criar OAuth Client ID (Web application) com redirect URIs: produção + `http://localhost:3000/api/auth/google/callback`.
+3. [ ] **Microsoft Entra (tenant FIC) — SEM AÇÃO se usar app existente:**
+   - O app `ecossistema-agentes-fic` já tem `Calendars.ReadWrite` (Application) com admin consent.
+   - **P-163:** confirmar que `auth.users.email` do Supabase ERP bate com o UPN do atendente no tenant FIC (e-mail FIC tipo `nome@fic.edu.br`). Se não bater, adicionar coluna `users.ms_upn TEXT` + UI para mapear.
+   - Se o secret estiver expirado, renovar no portal Azure e atualizar o vault.
 
-4. [ ] **provider_config do inbox WhatsApp FIC** — garantir que contém `waba_id`, `phone_number_id` e `access_token`. Sem `waba_id`, sync de templates falha.
+4. [ ] **provider_config do inbox WhatsApp FIC** — garantir que contém `waba_id`, `phone_number_id` e `access_token` (ou `access_token_vault_ref` apontando para o vault — Etapa 1-D).
 
 5. [ ] **Primeiro sync manual** — após config, abrir `/atendimento/templates` e clicar **Sincronizar Meta** para popular a tabela com templates já existentes no WABA Manager.
 
@@ -34,7 +38,7 @@
 
 ## 🟡 Débitos técnicos herdados da S5
 
-- **DT-S5-01 — Vault ECOSYSTEM para refresh_token Google.** Hoje armazenado em `atendimento_google_tokens` em texto. Migrar para `@ecossistema/credentials` (SC-29) quando o gateway suportar escrita (Modo A). Dono: orquestrador.
+- **DT-S5-01 — ~~Vault ECOSYSTEM para refresh_token Google~~ RESOLVIDO (Etapa 2-B, 2026-04-22):** fluxo Google OAuth removido e substituído por Microsoft Graph app-only. Sem refresh*token per-user — MSAL cacheia token do app em memória. Tabela `atendimento_google_tokens` dropada na migration 20260504. Credenciais do app (`OFFICE365_FIC*\*`) no vault SC-29 via `resolveOffice365Credentials`.
 - **DT-S5-02 — Criptografar `access_token` WABA do inbox.** `provider_config->>'access_token'` está em texto. Migrar para vault com a mesma convenção.
 - **DT-S5-03 — Webhook Meta para status de template.** Hoje sync é pull (cron 30min). Quando a Meta enviar `message_template_status_update` no webhook, processar incrementalmente em `webhook/route.ts`.
 - **DT-S5-04 — FK `atendimento_calendar_events.deal_id`** — migration deixou como UUID solto aguardando S4 criar `atendimento_deals`. Adicionar `REFERENCES public.atendimento_deals(id) ON DELETE SET NULL` após o merge da S4.
@@ -50,7 +54,7 @@
 - [ ] `pnpm install` no worktree → `pnpm --filter diploma-digital test` — 3 arquivos unit (`tests/atendimento/meta-templates.test.ts`, `scheduled-recurrence.test.ts`, `date-utils.test.ts`).
 - [ ] E2E manual após piloto: `fic_boas_vindas_matricula` APPROVED + número real de aluno + abrir chat com `window_expires_at` forçado no passado → banner aparece → selecionar template → enviar → mensagem chega no WhatsApp real.
 - [ ] Smoke scheduled: criar agendamento para `now() + 2min` → aguardar cron → mensagem aparece no chat.
-- [ ] Smoke calendar: conectar Google → criar evento → verificar no Google Calendar real + hangoutLink gerado.
+- [ ] Smoke calendar (**MS Graph, Etapa 2-B**): logar como atendente com e-mail FIC → `POST /api/atendimento/calendar-events` → verificar evento no Outlook/OWA do atendente + `join_url` do Teams gerado quando `create_meet=true`.
 - [ ] **Integration/E2E testes automatizados** — ainda não instrumentados no app. Reutilizar setup de `tests/e2e-fase0/` em uma sessão futura.
 
 ---

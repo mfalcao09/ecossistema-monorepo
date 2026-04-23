@@ -20,6 +20,12 @@ dependencies = [
     "supabase>=2.7.0",
     "pyyaml>=6.0.1",
     "structlog>=24.4.0",
+    # Voz (F1-S03 PR 3/4) — STT e TTS via providers gerenciados.
+    # Mantidos como deps opcionais em tempo de execução: se as API keys não
+    # estiverem setadas, as rotas /voice/* retornam 503 sem crashar o app.
+    "groq>=0.11.0",
+    "elevenlabs>=1.10.0",
+    "python-multipart>=0.0.9",
 ]
 
 [project.optional-dependencies]

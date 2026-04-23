@@ -33,15 +33,74 @@ describe("parseExcalidraw", () => {
   });
 
   it("rejeita JSON sem type=excalidraw", () => {
-    expect(() => parseExcalidraw('{"type":"other","version":2,"elements":[]}')).toThrow(
-      /excalidraw/,
+    expect(() =>
+      parseExcalidraw('{"type":"other","version":2,"elements":[]}'),
+    ).toThrow(/excalidraw/);
+  });
+
+  it("encapsula erro de JSON malformado em mensagem amigável", () => {
+    expect(() => parseExcalidraw("{not valid json")).toThrow(
+      /Failed to parse Excalidraw JSON/,
     );
+  });
+
+  it("aceita arquivo sem elements como diagrama vazio", () => {
+    const parsed = parseExcalidraw('{"type":"excalidraw","version":2}');
+    expect(parsed).toEqual({ nodes: [], edges: [], floatingTexts: [] });
+  });
+
+  it("seta sem binding (orphan arrow) vira edge com fromId/toId null", () => {
+    const orphan = {
+      type: "excalidraw",
+      version: 2,
+      elements: [
+        {
+          id: "arrow-orphan",
+          type: "arrow",
+          x: 0,
+          y: 0,
+          text: "sem âncora",
+        },
+      ],
+    };
+    const parsed = parseExcalidraw(JSON.stringify(orphan));
+    expect(parsed.edges).toHaveLength(1);
+    expect(parsed.edges[0]).toMatchObject({
+      id: "arrow-orphan",
+      fromId: null,
+      toId: null,
+      label: "sem âncora",
+    });
+  });
+
+  it("text com containerId apontando para shape inexistente vira floating", () => {
+    const dangling = {
+      type: "excalidraw",
+      version: 2,
+      elements: [
+        {
+          id: "text-dangling",
+          type: "text",
+          x: 0,
+          y: 0,
+          text: "órfão de container",
+          containerId: "shape-que-nao-existe",
+        },
+      ],
+    };
+    const parsed = parseExcalidraw(JSON.stringify(dangling));
+    expect(parsed.nodes).toHaveLength(0);
+    expect(parsed.floatingTexts).toHaveLength(1);
+    expect(parsed.floatingTexts[0].text).toBe("órfão de container");
   });
 });
 
 describe("toMarkdown", () => {
   it("renderiza seções Formas/Conexões/Notas com rótulos resolvidos", () => {
-    const md = toMarkdown(parseExcalidraw(fixture), "Fluxo de fechamento CFO-FIC");
+    const md = toMarkdown(
+      parseExcalidraw(fixture),
+      "Fluxo de fechamento CFO-FIC",
+    );
 
     expect(md).toContain("# Fluxo de fechamento CFO-FIC");
     expect(md).toContain("**CFO-IA Chief** _(rectangle)_");

@@ -11,17 +11,9 @@
 
 import { NextRequest, NextResponse } from "next/server";
 import { createAdminClient } from "@/lib/supabase/admin";
-import {
-  dashboardsEnabled,
-  tokenHash,
-  verifyWidgetToken,
-} from "@/lib/atendimento/dashboards";
+import { tokenHash, verifyWidgetToken } from "@/lib/atendimento/dashboards";
 
 export async function GET(request: NextRequest) {
-  if (!dashboardsEnabled()) {
-    return new Response("disabled", { status: 503 });
-  }
-
   const token = new URL(request.url).searchParams.get("token");
   if (!token) return new Response("token_missing", { status: 400 });
 
@@ -59,7 +51,9 @@ export async function GET(request: NextRequest) {
 
   const today = new Date();
   const to = today.toISOString().slice(0, 10);
-  const fromDate = new Date(today.getTime() - (widget.range_days - 1) * 86400000);
+  const fromDate = new Date(
+    today.getTime() - (widget.range_days - 1) * 86400000,
+  );
   const from = fromDate.toISOString().slice(0, 10);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -71,7 +65,10 @@ export async function GET(request: NextRequest) {
     .order("day", { ascending: true });
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: error.message },
+      { status: 500 },
+    );
   }
 
   // Increment use_count (fire-and-forget)

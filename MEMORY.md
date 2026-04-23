@@ -11,27 +11,30 @@ Monorepo `mfalcao09/ecossistema-monorepo` é a fonte única de verdade.
 V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 
 ### Produção operacional
+
 - ERP-Educacional (gestao + diploma FIC) via Vercel ✅
 - Intentus via Vercel ✅
 - 133 Edge Functions Intentus Supabase ✅
 - RAG-engine Railway ✅
 
 ### Documentos canônicos
-| Nível | Arquivo |
-|---|---|
-| **Masterplan ativo** | `docs/masterplans/MASTERPLAN-V9.md` |
-| **V8.2 (base herdada)** | `docs/masterplans/MASTERPLAN-ECOSSISTEMA-v8.2.md` |
-| **Plano tático** | `docs/masterplans/PLANO-EXECUCAO-V4.md` |
-| **Plano Fase 0** | `docs/sessions/fase0/PLANO-FASE0-PARALELO.md` |
-| **Briefings (18)** | `docs/sessions/fase0/S01-*.md` ... `S18-*.md` |
-| **Pendências (todas sessões)** | `docs/sessions/PENDENCIAS.md` |
-| **Research** | `docs/research/CONSOLIDADO-FINDINGS-2026-04-15.md` |
+
+| Nível                          | Arquivo                                            |
+| ------------------------------ | -------------------------------------------------- |
+| **Masterplan ativo**           | `docs/masterplans/MASTERPLAN-V9.md`                |
+| **V8.2 (base herdada)**        | `docs/masterplans/MASTERPLAN-ECOSSISTEMA-v8.2.md`  |
+| **Plano tático**               | `docs/masterplans/PLANO-EXECUCAO-V4.md`            |
+| **Plano Fase 0**               | `docs/sessions/fase0/PLANO-FASE0-PARALELO.md`      |
+| **Briefings (18)**             | `docs/sessions/fase0/S01-*.md` ... `S18-*.md`      |
+| **Pendências (todas sessões)** | `docs/sessions/PENDENCIAS.md`                      |
+| **Research**                   | `docs/research/CONSOLIDADO-FINDINGS-2026-04-15.md` |
 
 ---
 
 ## Decisões canônicas (não reverter sem conversar com Marcelo)
 
 ### V9 (2026-04-16)
+
 1. **Herança preservada** — 22 Artigos + 13 MPs + 29 SCs + 17 Ondas + 7 Camadas + Dual-Write + ECOSYSTEM+per-projeto + Fase B + 5 Negócios + D1-D6 do V4
 2. **4 camadas técnicas de execução** (L1 Agentes / L2 Railway / L3 EFs / L4 Dados)
 3. **C-Suite per negócio** + 6 Diretores de Área no ecossistema (~30-35 agentes total)
@@ -42,6 +45,7 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 8. **Descartados:** 6 Meta-Padrões V7 (Nexus/Mesh/Autonomous Orchestration) — narrativas ficcionais
 
 ### V4 (2026-04-15) — mantidas
+
 - D1 Managed Agents + Railway híbrido
 - D2 ECOSYSTEM compartilhado + DBs per-projeto
 - D3 Jarvis em 4 estágios (CLI → WhatsApp → Voz → Always-on)
@@ -62,6 +66,7 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 ## Próximas ações imediatas (Marcelo)
 
 1. Abrir 6 worktrees do Dia 1:
+
    ```bash
    for name in hooks assembler mcp-template migrations-d1 litellm docs-d1; do
      git worktree add ../eco-$name feature/$name
@@ -88,23 +93,23 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 
 ## Fase 0 — Status de execução
 
-| Sessão | Título | Status | PR | Notas |
-|---|---|---|---|---|
-| **S01** | Constitutional Hooks | ✅ Merged | #3 | 11 hooks, 70 testes, 93% cov |
-| **S02** | Prompt Assembler (Phantom 9-layer) | ✅ Merged | #10 | 9 layers + templates CEO/CFO/D-Gov + testes por layer |
-| **S03** | FastMCP Template | ✅ Merged | #2 | 27 testes, generator E2E, Railway deploy |
-| **S04** | Migrations V9 D1 | ✅ Merged | #4 | memory 3-tier + creds v2 + skills + audit; aplicado em ECOSYSTEM |
-| **S05** | LiteLLM proxy | ✅ Merged | #1 | Scaffold + deploy Railway via OpenRouter |
-| **S06** | ADRs + Runbooks | ✅ Merged | #5 | 15 ADRs (001-015) + 6 runbooks; ADR-001 legado renumerado como ADR-016 |
-| **S07** | Memory package | ✅ Merged | #7 | v0.2.0 Mem0 + pgvector + hybrid retrieval + composição TS do orquestrador |
-| **S08** | 5 Edge Functions D2 | ✅ Merged | #6 | SC-29 v2 + SC-10 + SC-19 + SC-04 + SC-03 |
-| **S09** | Langfuse self-host | ✅ Merged | #8 | PG + ClickHouse + Redis + MinIO; 4 fixes runtime |
-| **S10** | Orchestrator FastAPI | ✅ Merged | #11 | SSE + HITL + session resumption + 4 test modules |
-| **S11** | C-Suite Templates | ✅ Merged | #9 | 4 templates + generator CLI + CFO-FIC instanciado (path corrigido pós-merge, ver saneamento) |
-| **S14** | Memory Consolidator Worker | ✅ Deployed | #17 | ACTIVE em Railway (`apps/memory-consolidator`); migration `20260418000000_consolidator.sql` aplicada; 2 jobs pg_cron agendados (morning 05:00 UTC, briefing 10:00 UTC); 6/6 vars preenchidas (tokens no vault ECOSYSTEM); smoke tests `/health` + `/jobs/morning` OK (2026-04-18) |
-| **S16** | CFO-FIC E2E Pilot | ✅ Código + migrations aplicadas | #54 | 5 tools + 8/8 testes; creds Inter pendentes (seg 21/04) |
-| **S19** | WhatsApp Meta Cloud API | ⏳ Pronto para executar | — | Apenas WhatsApp; creds Inter ficam fora desta sessão |
-| S12–S13, S15, S17–S18 | — | ⏳ Pronto para abrir | — | Pré-requisitos todos verdes |
+| Sessão                | Título                             | Status                           | PR  | Notas                                                                                                                                                                                                                                                                             |
+| --------------------- | ---------------------------------- | -------------------------------- | --- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **S01**               | Constitutional Hooks               | ✅ Merged                        | #3  | 11 hooks, 70 testes, 93% cov                                                                                                                                                                                                                                                      |
+| **S02**               | Prompt Assembler (Phantom 9-layer) | ✅ Merged                        | #10 | 9 layers + templates CEO/CFO/D-Gov + testes por layer                                                                                                                                                                                                                             |
+| **S03**               | FastMCP Template                   | ✅ Merged                        | #2  | 27 testes, generator E2E, Railway deploy                                                                                                                                                                                                                                          |
+| **S04**               | Migrations V9 D1                   | ✅ Merged                        | #4  | memory 3-tier + creds v2 + skills + audit; aplicado em ECOSYSTEM                                                                                                                                                                                                                  |
+| **S05**               | LiteLLM proxy                      | ✅ Merged                        | #1  | Scaffold + deploy Railway via OpenRouter                                                                                                                                                                                                                                          |
+| **S06**               | ADRs + Runbooks                    | ✅ Merged                        | #5  | 15 ADRs (001-015) + 6 runbooks; ADR-001 legado renumerado como ADR-016                                                                                                                                                                                                            |
+| **S07**               | Memory package                     | ✅ Merged                        | #7  | v0.2.0 Mem0 + pgvector + hybrid retrieval + composição TS do orquestrador                                                                                                                                                                                                         |
+| **S08**               | 5 Edge Functions D2                | ✅ Merged                        | #6  | SC-29 v2 + SC-10 + SC-19 + SC-04 + SC-03                                                                                                                                                                                                                                          |
+| **S09**               | Langfuse self-host                 | ✅ Merged                        | #8  | PG + ClickHouse + Redis + MinIO; 4 fixes runtime                                                                                                                                                                                                                                  |
+| **S10**               | Orchestrator FastAPI               | ✅ Merged                        | #11 | SSE + HITL + session resumption + 4 test modules                                                                                                                                                                                                                                  |
+| **S11**               | C-Suite Templates                  | ✅ Merged                        | #9  | 4 templates + generator CLI + CFO-FIC instanciado (path corrigido pós-merge, ver saneamento)                                                                                                                                                                                      |
+| **S14**               | Memory Consolidator Worker         | ✅ Deployed                      | #17 | ACTIVE em Railway (`apps/memory-consolidator`); migration `20260418000000_consolidator.sql` aplicada; 2 jobs pg_cron agendados (morning 05:00 UTC, briefing 10:00 UTC); 6/6 vars preenchidas (tokens no vault ECOSYSTEM); smoke tests `/health` + `/jobs/morning` OK (2026-04-18) |
+| **S16**               | CFO-FIC E2E Pilot                  | ✅ Código + migrations aplicadas | #54 | 5 tools + 8/8 testes; creds Inter pendentes (seg 21/04)                                                                                                                                                                                                                           |
+| **S19**               | WhatsApp Meta Cloud API            | ⏳ Pronto para executar          | —   | Apenas WhatsApp; creds Inter ficam fora desta sessão                                                                                                                                                                                                                              |
+| S12–S13, S15, S17–S18 | —                                  | ⏳ Pronto para abrir             | —   | Pré-requisitos todos verdes                                                                                                                                                                                                                                                       |
 
 ### Saneamento pós-drenagem (2026-04-17)
 
@@ -114,24 +119,24 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 
 ### ADRs canônicos publicados (S06)
 
-| # | ADR | Referência V9 |
-|---|---|---|
-| 001 | Managed Agents como runtime primário | § Parte I §6 D1 |
-| 002 | Monorepo com pnpm workspaces | § Parte XII |
-| 003 | Supabase ECOSYSTEM + DBs per-projeto | § Parte XI §39 |
-| 004 | LiteLLM como gateway único | § Parte VIII §33 |
-| 005 | Langfuse self-host para observability | § Parte IX §34 |
-| 006 | FastMCP v3 como framework MCP | § Parte VIII §30 |
-| 007 | Mem0 v3 + pgvector 3-tier | § Parte VIII §27 §32 |
-| 008 | SC-29 como Edge Function determinística | § Parte VII |
-| 009 | 22 Artigos como hooks executáveis | § Parte V §11 |
-| 010 | C-Suite per negócio + 6 Diretores de Área | § Parte VI §14-§18 |
-| 011 | Jarvis 4-stage — pipecat + LiveKit | § Parte X |
-| 012 | Stack BR canônica | § Parte IX §37 |
-| 013 | Phantom 9-layer prompt assembler | § Parte VIII §24 |
-| 014 | Mem0 v3 ADD-only como algoritmo | § Parte VIII §27 |
-| 015 | Cardinal Rule — código é encanamento | § Parte VIII §25 |
-| 016 | Protocolo de sessões paralelas (ex-ADR-001) | § Parte XIV §44 |
+| #   | ADR                                         | Referência V9        |
+| --- | ------------------------------------------- | -------------------- |
+| 001 | Managed Agents como runtime primário        | § Parte I §6 D1      |
+| 002 | Monorepo com pnpm workspaces                | § Parte XII          |
+| 003 | Supabase ECOSYSTEM + DBs per-projeto        | § Parte XI §39       |
+| 004 | LiteLLM como gateway único                  | § Parte VIII §33     |
+| 005 | Langfuse self-host para observability       | § Parte IX §34       |
+| 006 | FastMCP v3 como framework MCP               | § Parte VIII §30     |
+| 007 | Mem0 v3 + pgvector 3-tier                   | § Parte VIII §27 §32 |
+| 008 | SC-29 como Edge Function determinística     | § Parte VII          |
+| 009 | 22 Artigos como hooks executáveis           | § Parte V §11        |
+| 010 | C-Suite per negócio + 6 Diretores de Área   | § Parte VI §14-§18   |
+| 011 | Jarvis 4-stage — pipecat + LiveKit          | § Parte X            |
+| 012 | Stack BR canônica                           | § Parte IX §37       |
+| 013 | Phantom 9-layer prompt assembler            | § Parte VIII §24     |
+| 014 | Mem0 v3 ADD-only como algoritmo             | § Parte VIII §27     |
+| 015 | Cardinal Rule — código é encanamento        | § Parte VIII §25     |
+| 016 | Protocolo de sessões paralelas (ex-ADR-001) | § Parte XIV §44      |
 
 ### Runbooks operacionais publicados (S06)
 
@@ -144,7 +149,7 @@ V9 aprovada por Marcelo. 18 briefings prontos para execução em paralelo.
 
 ### Convenções canônicas confirmadas
 
-- **Estrutura de packages: FLAT.** `pnpm-workspace.yaml` usa `packages/*` (e, para coleções, `packages/<grupo>/*`). Pacotes ficam em `packages/<nome>/` — **não** em `packages/@ecossistema/<nome>/`. O `name` no package.json continua `@ecossistema/<nome>`. *(S01 canonizou; S3 alinhado no merge.)*
+- **Estrutura de packages: FLAT.** `pnpm-workspace.yaml` usa `packages/*` (e, para coleções, `packages/<grupo>/*`). Pacotes ficam em `packages/<nome>/` — **não** em `packages/@ecossistema/<nome>/`. O `name` no package.json continua `@ecossistema/<nome>`. _(S01 canonizou; S3 alinhado no merge.)_
 - **Import paths em TS:** usar `./foo.js` (ESM + NodeNext), não `./foo`.
 - **Testes:** vitest em TS; pytest em Python. Overrides via `setSupabaseClient(mock)` / `setLiteLLMClient(mock)` para isolar CI.
 
@@ -212,6 +217,7 @@ Cada worktree/pasta tem seu próprio `.railway/` com o link do projeto. `railway
 ## Regra "salva contexto"
 
 Se Marcelo digitar `salva contexto` ou `vou encerrar`:
+
 1. Parar trabalho
 2. Atualizar MEMORY.md + criar log em `docs/sessions/logs/LOG-YYYY-MM-DD-*.md`
 3. Commit + push
@@ -220,10 +226,10 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 
 ## Fase 1 — Status de execução
 
-| Sessão | Título | Status | PR | Notas |
-|---|---|---|---|---|
-| **F1-S01** | Jarvis WA Routing — inbound/outbound + HITL | ✅ Em PR | #25 | 19/19 testes · approval_requests Supabase ✅ · P-009/P-010 abertas |
-| F1-S02 | jarvis-app — Expo + Action Button + voz | ⏳ Próxima | — | iPhone 15 Pro Max · Evolution API backend |
+| Sessão     | Título                                      | Status     | PR  | Notas                                                              |
+| ---------- | ------------------------------------------- | ---------- | --- | ------------------------------------------------------------------ |
+| **F1-S01** | Jarvis WA Routing — inbound/outbound + HITL | ✅ Em PR   | #25 | 19/19 testes · approval_requests Supabase ✅ · P-009/P-010 abertas |
+| F1-S02     | jarvis-app — Expo + Action Button + voz     | ⏳ Próxima | —   | iPhone 15 Pro Max · Evolution API backend                          |
 
 ### Decisão arquitetural Jarvis (2026-04-19) — NÃO REVERTER
 
@@ -237,16 +243,55 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 
 ### Supabase ECOSYSTEM — migrações F1 aplicadas
 
-| Migration | Status | Data |
-|---|---|---|
+| Migration           | Status              | Data       |
+| ------------------- | ------------------- | ---------- |
 | `approval_requests` | ✅ Aplicada via MCP | 2026-04-19 |
 
 ---
 
+## Atendimento FIC — sessões mergeadas (leva 1 + leva 2)
+
+| Sessão      | Título                                         | PR      | Commit main   | Notas                                           |
+| ----------- | ---------------------------------------------- | ------- | ------------- | ----------------------------------------------- |
+| ATND-S4     | Kanban CRM + Lead Detail + Protocolos          | #44     | `e7328d6`     | DB aplicado 2026-04-21                          |
+| ATND-S5     | Templates WABA + Agendamentos + Calendar       | #46     | `1a2a02e`     | DB aplicado 2026-04-21                          |
+| ATND-S6     | Cargos + Permissões Granulares + Equipes       | #45     | `f783907`     | DB aplicado + seed 192 perms                    |
+| ATND-S7     | Dashboards + Relatórios + Widgets externos     | #48     | `588fdf1`     | DB aplicado + 6 widgets seed                    |
+| ATND-S8a    | Automações + Webhooks + API Pública + n8n      | #51     | `30f3e10`     | DB aplicado — `app_installations` criada        |
+| ATND-S8b    | Chat Interno Realtime + Links Redirecionamento | #50     | `1d06e7d`     | DB aplicado                                     |
+| **ATND-S9** | **DS Voice — biblioteca + funis + gatilhos**   | **#59** | **`36aa635`** | **Merged + prod READY em 2026-04-21 23:23 UTC** |
+
+### ATND-S9 DS Voice — detalhes (2026-04-21)
+
+**Entregas A–J:** migration (9 tabelas `ds_voice_*`), parser variables isomórfico {Nome}/{Primeiro Nome}/{Saudação}/{Hora} com 22 testes unit, UI `/atendimento/ds-voice` 6 abas (Mensagens·Áudios·Mídias·Documentos·Funis·Gatilhos), editor funis + simulação preview server-side, worker cron `* * * * *` com backoff exponencial, app `ia_transcription` Gemini 2.5 Flash, hook cirúrgico webhook Meta após `runAutomations` (S8a preservado), export/import JSON, feature flag `ATENDIMENTO_DS_VOICE_ENABLED`.
+
+**Pendências resolvidas em prod (P-116..P-120):**
+
+- Migration S9 + pré-reqs S4/S5/S6/S7/S8a/S8b aplicadas via Supabase MCP no ERP `ifdnjieklngcfodmtied`
+- Seed `role_permissions` (192 linhas: Admin all, Atendente view+create+edit, Restrito view)
+- Flags Vercel `ATENDIMENTO_DS_VOICE_ENABLED` + `NEXT_PUBLIC_*` em dev/preview/prod
+- Bucket Supabase Storage `atendimento` (public, 100MB, 25 mime types, 4 policies isolando prefixo `ds-voice/`)
+- `CRON_SECRET` coberto pelo `ADMIN_SECRET` existente (worker aceita ambos)
+
+**Pendências abertas (P-121..P-129):** `GEMINI_API_KEY` + enable `ia_transcription`, UI chat render transcrição (S10), E2E teste funil+trigger, drag-drop pastas, presence UI editor funis, RLS Storage por path, paralelizar cron Promise.allSettled, documentar contrato JSON export/import, integração ChatPanel S10.
+
+**Descoberta canônica:** ERP/diploma-digital Supabase é `ifdnjieklngcfodmtied` (sa-east-1), **não** `bvryaopfjiyxjgsuhjsb` (esse é Intentus, us-west-2). Corrigido em `apps/erp-educacional/CLAUDE.md` (nova seção "IDs Supabase canônicos" com tabela dos 4 projetos), `docs/rag-agentes-erp.md`, `docs/context/context_portflio_de_negcios_de_marcelo_silva.md`.
+
+**SSRF fix (CodeQL crítico, PR #59):** `apps/erp-educacional/src/lib/atendimento/ia-transcription.ts` ganhou:
+
+- `isValidMediaId(): /^[0-9]{1,40}$/` — Meta media IDs são numéricos
+- `isTrustedMetaMediaUrl()` — allowlist `fbcdn.net|facebook.com|whatsapp.net|cdninstagram.com` + HTTPS obrigatório
+- `encodeURIComponent(mediaId)` no path do Graph API
+- Validação aplicada também em `transcribeAudio` path `audio_url`
+
+---
+
 ## Logs de sessões anteriores
+
 - `docs/sessions/logs/LOG-2026-04-15-consolidacao-monorepo.md`
 - `docs/sessions/logs/LOG-2026-04-15-contexto-pre-masterplan.md`
 - `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md`
 - `docs/sessions/logs/LOG-2026-04-17-s3-mcp-template.md`
 - `docs/sessions/logs/LOG-2026-04-19-F1-S01-jarvis-routing.md`
-- `docs/sessions/logs/LOG-2026-04-21-s6-cargos-permissoes.md` — Atendimento S6: cargos + permissões granulares (PR #45, 5 commits, ~3.6k linhas)
+- `docs/sessions/logs/LOG-2026-04-21-s6-cargos-permissoes.md` — Atendimento S6 (PR #45)
+- `docs/sessions/logs/LOG-2026-04-21-s9-ds-voice.md` — Atendimento S9 DS Voice: entrega em prod (PR #59) + pré-reqs DB S4-S8b aplicadas
