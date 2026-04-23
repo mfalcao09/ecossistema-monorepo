@@ -4,7 +4,7 @@ import { useCallback, useMemo } from "react";
 import { Responsive, WidthProvider, type Layout } from "react-grid-layout";
 import "react-grid-layout/css/styles.css";
 import "react-resizable/css/styles.css";
-import type { DashboardWidgetRow } from "@/lib/atendimento/dashboards";
+import type { DashboardWidgetRow } from "@/lib/atendimento/dashboards-client";
 import { WidgetRenderer } from "./WidgetRenderer";
 
 // Cast para contornar mismatch entre @types/react-grid-layout e @types/react 18.

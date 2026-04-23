@@ -10,7 +10,7 @@ import {
   Trash2,
   Users as UsersIcon,
 } from "lucide-react";
-import type { Dashboard } from "@/lib/atendimento/dashboards";
+import type { Dashboard } from "@/lib/atendimento/dashboards-client";
 
 interface Props {
   current: Dashboard | null;

@@ -5,7 +5,7 @@ import type {
   Dashboard,
   CatalogWidget,
   DashboardWidgetRow,
-} from "@/lib/atendimento/dashboards";
+} from "@/lib/atendimento/dashboards-client";
 
 interface FetchState<T> {
   data: T;

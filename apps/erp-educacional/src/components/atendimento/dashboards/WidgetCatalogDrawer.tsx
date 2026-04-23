@@ -1,7 +1,7 @@
 "use client";
 
 import { X } from "lucide-react";
-import type { CatalogWidget } from "@/lib/atendimento/dashboards";
+import type { CatalogWidget } from "@/lib/atendimento/dashboards-client";
 
 interface Props {
   open: boolean;

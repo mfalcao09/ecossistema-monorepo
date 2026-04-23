@@ -30,7 +30,10 @@ import {
   Moon,
 } from "lucide-react";
 import { LineChart } from "../charts";
-import { formatSeconds, formatCentsBRL } from "@/lib/atendimento/dashboards";
+import {
+  formatSeconds,
+  formatCentsBRL,
+} from "@/lib/atendimento/dashboards-client";
 import { useMetrics } from "./useMetrics";
 
 // ── Fetch helper ─────────────────────────────────────────────────────────────

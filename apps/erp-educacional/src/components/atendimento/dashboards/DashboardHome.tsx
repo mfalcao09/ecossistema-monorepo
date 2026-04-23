@@ -8,7 +8,7 @@ import type {
   CatalogWidget,
   Dashboard,
   WidgetLayout,
-} from "@/lib/atendimento/dashboards";
+} from "@/lib/atendimento/dashboards-client";
 import { useCan } from "@/hooks/atendimento/use-can";
 import {
   useCatalog,

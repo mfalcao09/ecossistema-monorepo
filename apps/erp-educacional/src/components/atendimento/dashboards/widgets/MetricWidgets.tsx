@@ -18,7 +18,7 @@ import {
   formatSeconds,
   formatCentsBRL,
   formatBP,
-} from "@/lib/atendimento/dashboards";
+} from "@/lib/atendimento/dashboards-client";
 import { useMetrics } from "./useMetrics";
 
 interface BaseProps {

@@ -1,6 +1,6 @@
 "use client";
 
-import type { DashboardWidgetRow } from "@/lib/atendimento/dashboards";
+import type { DashboardWidgetRow } from "@/lib/atendimento/dashboards-client";
 import {
   KpiConversationsOpen,
   KpiFirstResponse,
