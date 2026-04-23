@@ -19,10 +19,10 @@
  *   - Timeout duro de 5 minutos (300s) — se passar, mostra erro de timeout
  */
 
-"use client"
+"use client";
 
-import { useCallback, useEffect, useMemo, useRef, useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { useParams, useRouter } from "next/navigation";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -33,34 +33,34 @@ import {
   Save,
   Sparkles,
   Trash2,
-} from "lucide-react"
+} from "lucide-react";
 
 import {
   CardArquivoClassificacao,
   type ArquivoClassificavel,
-} from "@/components/diploma/revisao/CardArquivoClassificacao"
-import { GateFicComprobatorios } from "@/components/diploma/revisao/GateFicComprobatorios"
-import { DialogVisualizarDocumento } from "@/components/diploma/revisao/DialogVisualizarDocumento"
+} from "@/components/diploma/revisao/CardArquivoClassificacao";
+import { GateFicComprobatorios } from "@/components/diploma/revisao/GateFicComprobatorios";
+import { DialogVisualizarDocumento } from "@/components/diploma/revisao/DialogVisualizarDocumento";
 import {
   DialogSelecionarArquivo,
   type ArquivoSessao,
-} from "@/components/diploma/revisao/DialogSelecionarArquivo"
+} from "@/components/diploma/revisao/DialogSelecionarArquivo";
 import {
   FormularioRevisao,
   type DadosRevisao,
   type CursoCadastro,
-} from "@/components/diploma/revisao/FormularioRevisao"
-import { ModalOverrideCriacao } from "@/components/diploma/revisao/ModalOverrideCriacao"
+} from "@/components/diploma/revisao/FormularioRevisao";
+import { ModalOverrideCriacao } from "@/components/diploma/revisao/ModalOverrideCriacao";
 import {
   COMPROBATORIOS_OBRIGATORIOS_FIC,
   type TipoXsdComprobatorio,
-} from "@/lib/diploma/regras-fic"
-import type { ViolacaoGate } from "@/lib/diploma/gate-criacao-processo"
+} from "@/lib/diploma/regras-fic";
+import type { ViolacaoGate } from "@/lib/diploma/gate-criacao-processo";
 import {
   construirConfirmacoes,
   type ConfirmacaoComprobatorio,
   type ComprobatorioDetectadoRaw,
-} from "@/lib/diploma/mapa-comprobatorios"
+} from "@/lib/diploma/mapa-comprobatorios";
 
 // ─── Tipos ──────────────────────────────────────────────────────────────────
 
@@ -71,51 +71,51 @@ type StatusSessao =
   | "erro"
   | "descartado"
   | "aguardando_revisao"
-  | "convertido_em_processo"
+  | "convertido_em_processo";
 
 interface ProcessoArquivoRow {
-  id: string
-  nome_original: string
-  mime_type: string
-  tamanho_bytes: number | null
-  storage_path: string
-  destino_xml: boolean
-  destino_acervo: boolean
-  tipo_xsd: TipoXsdComprobatorio | null
-  created_at: string
+  id: string;
+  nome_original: string;
+  mime_type: string;
+  tamanho_bytes: number | null;
+  storage_path: string;
+  destino_xml: boolean;
+  destino_acervo: boolean;
+  tipo_xsd: TipoXsdComprobatorio | null;
+  created_at: string;
 }
 
 interface SessaoExtracao {
-  id: string
-  processo_id: string | null
-  status: StatusSessao
+  id: string;
+  processo_id: string | null;
+  status: StatusSessao;
   arquivos: Array<{
-    storage_path: string
-    bucket: string
-    nome_original: string
-    mime_type: string
-    tamanho_bytes?: number
-  }>
-  dados_extraidos: Record<string, unknown> | null
-  dados_confirmados?: Record<string, unknown> | null
-  campos_faltando: Record<string, unknown> | null
-  confianca_geral: number | null
-  erro_mensagem: string | null
-  iniciado_em: string | null
-  finalizado_em: string | null
-  processing_ms: number | null
-  version: number
-  processo_arquivos?: ProcessoArquivoRow[]
+    storage_path: string;
+    bucket: string;
+    nome_original: string;
+    mime_type: string;
+    tamanho_bytes?: number;
+  }>;
+  dados_extraidos: Record<string, unknown> | null;
+  dados_confirmados?: Record<string, unknown> | null;
+  campos_faltando: Record<string, unknown> | null;
+  confianca_geral: number | null;
+  erro_mensagem: string | null;
+  iniciado_em: string | null;
+  finalizado_em: string | null;
+  processing_ms: number | null;
+  version: number;
+  processo_arquivos?: ProcessoArquivoRow[];
 }
 
 // ─── Constantes ─────────────────────────────────────────────────────────────
 
-const POLL_INTERVAL_MS = 3000
+const POLL_INTERVAL_MS = 3000;
 // Sessão 031: ampliado de 5min → 7min como rede de segurança complementar
 // à paralelização no Railway (document-converter server.js). Cobre casos com
 // muitos arquivos (16+) e/ou arquivos grandes + instabilidade pontual do Gemini.
-const TIMEOUT_MS = 7 * 60 * 1000 // 7 minutos
-const ETAPA_ROTACAO_MS = 4000
+const TIMEOUT_MS = 7 * 60 * 1000; // 7 minutos
+const ETAPA_ROTACAO_MS = 4000;
 
 const ETAPAS_LOADING = [
   { texto: "Enviando arquivos para a IA...", icone: Sparkles },
@@ -125,81 +125,85 @@ const ETAPAS_LOADING = [
   { texto: "Extraindo certidões e títulos...", icone: Sparkles },
   { texto: "Validando informações cruzadas...", icone: Sparkles },
   { texto: "Quase lá — montando o formulário...", icone: Sparkles },
-] as const
+] as const;
 
 // ─── Componente ─────────────────────────────────────────────────────────────
 
 export default function RevisaoExtracaoPage() {
-  const router = useRouter()
-  const params = useParams<{ sessaoId: string }>()
-  const sessaoId = params?.sessaoId
+  const router = useRouter();
+  const params = useParams<{ sessaoId: string }>();
+  const sessaoId = params?.sessaoId;
 
-  const [sessao, setSessao] = useState<SessaoExtracao | null>(null)
-  const [erroFetch, setErroFetch] = useState<string | null>(null)
-  const [etapaIndex, setEtapaIndex] = useState(0)
-  const [tempoDecorrido, setTempoDecorrido] = useState(0)
-  const [timeoutEstourado, setTimeoutEstourado] = useState(false)
+  const [sessao, setSessao] = useState<SessaoExtracao | null>(null);
+  const [erroFetch, setErroFetch] = useState<string | null>(null);
+  const [etapaIndex, setEtapaIndex] = useState(0);
+  const [tempoDecorrido, setTempoDecorrido] = useState(0);
+  const [timeoutEstourado, setTimeoutEstourado] = useState(false);
 
   // ── Estado editável da revisão (Etapa 3) ───────────────────────────────
-  const [dadosRevisao, setDadosRevisao] = useState<DadosRevisao>({})
-  const [arquivosClassif, setArquivosClassif] = useState<ArquivoClassificavel[]>([])
-  const [dirty, setDirty] = useState(false)
+  const [dadosRevisao, setDadosRevisao] = useState<DadosRevisao>({});
+  const [arquivosClassif, setArquivosClassif] = useState<
+    ArquivoClassificavel[]
+  >([]);
+  const [dirty, setDirty] = useState(false);
   const [autoSaveStatus, setAutoSaveStatus] = useState<
     "idle" | "saving" | "saved" | "error"
-  >("idle")
-  const [ultimoSalvamento, setUltimoSalvamento] = useState<Date | null>(null)
-  const [formBloqueado, setFormBloqueado] = useState(false)
-  const [hidratado, setHidratado] = useState(false)
+  >("idle");
+  const [ultimoSalvamento, setUltimoSalvamento] = useState<Date | null>(null);
+  const [formBloqueado, setFormBloqueado] = useState(false);
+  const [hidratado, setHidratado] = useState(false);
 
   // ── Estado de cursos (cadastro) para auto-fill ──────────────────────────
-  const [cursos, setCursos] = useState<CursoCadastro[]>([])
-  const [cursoSelecionadoId, setCursoSelecionadoId] = useState<string | null>(null)
-  const autoMatchFeito = useRef(false)
+  const [cursos, setCursos] = useState<CursoCadastro[]>([]);
+  const [cursoSelecionadoId, setCursoSelecionadoId] = useState<string | null>(
+    null,
+  );
+  const autoMatchFeito = useRef(false);
 
   // Estado do fluxo "Criar processo"
-  const [criando, setCriando] = useState(false)
-  const [erroCriacao, setErroCriacao] = useState<string | null>(null)
+  const [criando, setCriando] = useState(false);
+  const [erroCriacao, setErroCriacao] = useState<string | null>(null);
   const [modalOverride, setModalOverride] = useState<{
-    violacoes: ViolacaoGate[]
-    bloqueantes: ViolacaoGate[]
-  } | null>(null)
+    violacoes: ViolacaoGate[];
+    bloqueantes: ViolacaoGate[];
+  } | null>(null);
 
   // ── Estado de confirmação de comprobatórios (sessão 043) ─────────────────
   const [confirmacoes, setConfirmacoes] = useState<
     Map<TipoXsdComprobatorio, ConfirmacaoComprobatorio>
-  >(new Map())
-  const confirmacoesBuildFeito = useRef(false)
+  >(new Map());
+  const confirmacoesBuildFeito = useRef(false);
 
   // Dialog de visualização de comprobatório
   const [dialogComprobatorio, setDialogComprobatorio] =
-    useState<ConfirmacaoComprobatorio | null>(null)
-  const [previewUrl, setPreviewUrl] = useState<string | null>(null)
-  const [previewMime, setPreviewMime] = useState<string | null>(null)
-  const [carregandoPreview, setCarregandoPreview] = useState(false)
+    useState<ConfirmacaoComprobatorio | null>(null);
+  const [previewUrl, setPreviewUrl] = useState<string | null>(null);
+  const [previewMime, setPreviewMime] = useState<string | null>(null);
+  const [carregandoPreview, setCarregandoPreview] = useState(false);
 
   // Substituição de arquivo no dialog (sessão 065)
-  const [substituindoArquivo, setSubstituindoArquivo] = useState(false)
+  const [substituindoArquivo, setSubstituindoArquivo] = useState(false);
 
   // Descarte da extração (sessão 066)
-  const [descartando, setDescartando] = useState(false)
+  const [descartando, setDescartando] = useState(false);
 
   // Dialog de seleção manual de arquivo (sessão 044)
   const [tipoSelecaoManual, setTipoSelecaoManual] =
-    useState<TipoXsdComprobatorio | null>(null)
+    useState<TipoXsdComprobatorio | null>(null);
 
   // Ref pra evitar setState após unmount
-  const ativo = useRef(true)
+  const ativo = useRef(true);
   useEffect(() => {
-    ativo.current = true
+    ativo.current = true;
     return () => {
-      ativo.current = false
-    }
-  }, [])
+      ativo.current = false;
+    };
+  }, []);
 
   // Contador de falhas consecutivas do fetch — só exibe painel de erro
   // quando ultrapassar o limiar (sessão 034 fix assertivo).
-  const [falhasConsecutivas, setFalhasConsecutivas] = useState(0)
-  const FALHAS_LIMIAR_ERRO = 3
+  const [falhasConsecutivas, setFalhasConsecutivas] = useState(0);
+  const FALHAS_LIMIAR_ERRO = 3;
 
   // ── Fetch com retry interno + timeout client-side (sessão 037) ──────────
   //
@@ -222,57 +226,59 @@ export default function RevisaoExtracaoPage() {
   // real (>35s = algo muito errado), mas não aborta requisições legítimas
   // no caminho heavy. Também: backoff mais generoso (500ms, 1.5s, 3s) e
   // mensagem amigável em PT quando o catch final for um AbortError.
-  const FETCH_TIMEOUT_MS = 35_000
+  const FETCH_TIMEOUT_MS = 35_000;
   const fetchSessao = useCallback(async () => {
-    if (!sessaoId) return
+    if (!sessaoId) return;
 
-    const MAX_RETRIES = 3
-    let ultimoErro: unknown = null
+    const MAX_RETRIES = 3;
+    let ultimoErro: unknown = null;
 
     for (let tentativa = 1; tentativa <= MAX_RETRIES; tentativa++) {
-      const controller = new AbortController()
-      const timeoutRef = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
+      const controller = new AbortController();
+      const timeoutRef = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS);
       try {
         const res = await fetch(`/api/extracao/sessoes/${sessaoId}`, {
           cache: "no-store",
           signal: controller.signal,
-        })
+        });
 
         if (!res.ok) {
-          const corpo = await res.json().catch(() => ({}))
-          throw new Error(corpo?.erro || `Falha ao buscar sessão (HTTP ${res.status})`)
+          const corpo = await res.json().catch(() => ({}));
+          throw new Error(
+            corpo?.erro || `Falha ao buscar sessão (HTTP ${res.status})`,
+          );
         }
 
-        const data = (await res.json()) as SessaoExtracao
+        const data = (await res.json()) as SessaoExtracao;
         if (ativo.current) {
-          setSessao(data)
-          setErroFetch(null)
-          setFalhasConsecutivas(0)
+          setSessao(data);
+          setErroFetch(null);
+          setFalhasConsecutivas(0);
         }
-        return
+        return;
       } catch (err) {
-        ultimoErro = err
+        ultimoErro = err;
         // Retry em erros de rede (TypeError "Failed to fetch"), abort do
         // AbortController (timeout client-side) ou HTTP 5xx. 4xx e outros
         // não vão melhorar com retry.
-        const msg = err instanceof Error ? err.message : String(err)
+        const msg = err instanceof Error ? err.message : String(err);
         const ehAbort =
           (err instanceof DOMException && err.name === "AbortError") ||
-          /abort/i.test(msg)
+          /abort/i.test(msg);
         const ehRede =
           err instanceof TypeError ||
           ehAbort ||
-          /Failed to fetch|NetworkError|HTTP 5\d\d/.test(msg)
+          /Failed to fetch|NetworkError|HTTP 5\d\d/.test(msg);
 
-        if (!ehRede || tentativa === MAX_RETRIES) break
+        if (!ehRede || tentativa === MAX_RETRIES) break;
 
         // Backoff mais generoso: 500ms, 1.5s, 3s. Cold start de rota heavy
         // pode pegar o 1º retry; dar tempo pra serverless "esquentar".
-        const delay = tentativa === 1 ? 500 : tentativa === 2 ? 1500 : 3000
-        await new Promise((r) => setTimeout(r, delay))
-        if (!ativo.current) return
+        const delay = tentativa === 1 ? 500 : tentativa === 2 ? 1500 : 3000;
+        await new Promise((r) => setTimeout(r, delay));
+        if (!ativo.current) return;
       } finally {
-        clearTimeout(timeoutRef)
+        clearTimeout(timeoutRef);
       }
     }
 
@@ -282,37 +288,37 @@ export default function RevisaoExtracaoPage() {
       // Sessão 037: "signal is aborted without reason" não diz nada ao
       // usuário final — e no caso de timeout do heavy fetch, muito
       // provavelmente os dados já estão gravados e um retry funciona.
-      let mensagem: string
+      let mensagem: string;
       if (ultimoErro instanceof Error) {
-        const raw = ultimoErro.message
+        const raw = ultimoErro.message;
         const ehAbortRaw =
           (ultimoErro instanceof DOMException &&
             ultimoErro.name === "AbortError") ||
-          /signal is aborted|AbortError|aborted without reason/i.test(raw)
+          /signal is aborted|AbortError|aborted without reason/i.test(raw);
         mensagem = ehAbortRaw
           ? "Tempo limite ao carregar a sessão. Os dados podem já estar prontos — clique em Tentar novamente."
-          : raw
+          : raw;
       } else {
-        mensagem = "Erro inesperado ao carregar a sessão."
+        mensagem = "Erro inesperado ao carregar a sessão.";
       }
-      setErroFetch(mensagem)
-      setFalhasConsecutivas((prev) => prev + 1)
+      setErroFetch(mensagem);
+      setFalhasConsecutivas((prev) => prev + 1);
     }
-  }, [sessaoId])
+  }, [sessaoId]);
 
   // Handler do botão "Tentar novamente" — reset do contador + fetch limpo
   const tentarNovamente = useCallback(() => {
-    setErroFetch(null)
-    setFalhasConsecutivas(0)
-    fetchSessao()
-  }, [fetchSessao])
+    setErroFetch(null);
+    setFalhasConsecutivas(0);
+    fetchSessao();
+  }, [fetchSessao]);
 
   // Ref pra status atual — usado pelo intervalo pra parar quando sair de
   // 'processando' sem precisar re-criar o intervalo a cada render.
-  const statusRef = useRef<StatusSessao | null>(null)
+  const statusRef = useRef<StatusSessao | null>(null);
   useEffect(() => {
-    statusRef.current = sessao?.status ?? null
-  }, [sessao?.status])
+    statusRef.current = sessao?.status ?? null;
+  }, [sessao?.status]);
 
   // ── Polling resiliente + Realtime + visibilitychange (sessão 034) ───────
   //
@@ -330,56 +336,56 @@ export default function RevisaoExtracaoPage() {
   //   4) erroFetch visível também durante "processando" (não só antes da
   //      primeira carga).
   useEffect(() => {
-    if (!sessaoId) return
+    if (!sessaoId) return;
 
-    let cancelado = false
-    let timeoutId: ReturnType<typeof setTimeout> | null = null
-    const inicio = Date.now()
+    let cancelado = false;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
+    const inicio = Date.now();
 
     // Fetch encadeado (não setInterval): cada fetch agenda o próximo só
     // depois de terminar — evita acúmulo se uma chamada demorar.
     const tick = async () => {
-      if (cancelado || !ativo.current) return
+      if (cancelado || !ativo.current) return;
 
       // Já saiu de processando? Para o loop.
       if (statusRef.current && statusRef.current !== "processando") {
-        return
+        return;
       }
 
-      const decorrido = Date.now() - inicio
-      setTempoDecorrido(decorrido)
+      const decorrido = Date.now() - inicio;
+      setTempoDecorrido(decorrido);
 
       if (decorrido > TIMEOUT_MS) {
-        setTimeoutEstourado(true)
-        ativo.current = false
-        return
+        setTimeoutEstourado(true);
+        ativo.current = false;
+        return;
       }
 
-      await fetchSessao()
+      await fetchSessao();
 
-      if (cancelado || !ativo.current) return
-      if (statusRef.current && statusRef.current !== "processando") return
+      if (cancelado || !ativo.current) return;
+      if (statusRef.current && statusRef.current !== "processando") return;
 
-      timeoutId = setTimeout(tick, POLL_INTERVAL_MS)
-    }
+      timeoutId = setTimeout(tick, POLL_INTERVAL_MS);
+    };
 
     // Disparo inicial
     fetchSessao().then(() => {
-      if (cancelado) return
-      if (statusRef.current && statusRef.current !== "processando") return
-      timeoutId = setTimeout(tick, POLL_INTERVAL_MS)
-    })
+      if (cancelado) return;
+      if (statusRef.current && statusRef.current !== "processando") return;
+      timeoutId = setTimeout(tick, POLL_INTERVAL_MS);
+    });
 
     // ── Realtime via Supabase (camada 1) — import dinâmico ──
     // Sessão 034: import dinâmico para isolar o módulo do bundle inicial.
     // Se o cliente Supabase tiver qualquer hiccup de inicialização, não
     // afeta o fetch principal nem quebra o polling.
-    let canalRef: { removeChannel: () => void } | null = null
+    let canalRef: { removeChannel: () => void } | null = null;
     import("@/lib/supabase/client")
       .then(({ createClient }) => {
-        if (cancelado) return
+        if (cancelado) return;
         try {
-          const supabase = createClient()
+          const supabase = createClient();
           const canal = supabase
             .channel(`extracao_sessao_${sessaoId}`)
             .on(
@@ -391,80 +397,84 @@ export default function RevisaoExtracaoPage() {
                 filter: `id=eq.${sessaoId}`,
               },
               () => {
-                if (cancelado || !ativo.current) return
-                fetchSessao()
+                if (cancelado || !ativo.current) return;
+                fetchSessao();
               },
             )
-            .subscribe()
+            .subscribe();
           canalRef = {
             removeChannel: () => {
               try {
-                supabase.removeChannel(canal)
+                supabase.removeChannel(canal);
               } catch {
                 /* noop */
               }
             },
-          }
+          };
         } catch (e) {
           // Realtime é best-effort. Polling + visibilitychange cobrem o caso.
-          console.warn("[revisao] Realtime indisponível, usando polling:", e)
+          console.warn("[revisao] Realtime indisponível, usando polling:", e);
         }
       })
       .catch((e) => {
-        console.warn("[revisao] Falha ao carregar Supabase client:", e)
-      })
+        console.warn("[revisao] Falha ao carregar Supabase client:", e);
+      });
 
     // ── visibilitychange (camada 3) ──
     // Quando a aba volta ao foco, força fetch imediato. Pega casos onde
     // throttling de background congelou o setTimeout.
     const onVisibility = () => {
-      if (document.visibilityState === "visible" && ativo.current && !cancelado) {
-        fetchSessao()
+      if (
+        document.visibilityState === "visible" &&
+        ativo.current &&
+        !cancelado
+      ) {
+        fetchSessao();
       }
-    }
-    document.addEventListener("visibilitychange", onVisibility)
+    };
+    document.addEventListener("visibilitychange", onVisibility);
 
     return () => {
-      cancelado = true
-      if (timeoutId) clearTimeout(timeoutId)
-      document.removeEventListener("visibilitychange", onVisibility)
-      canalRef?.removeChannel()
-    }
+      cancelado = true;
+      if (timeoutId) clearTimeout(timeoutId);
+      document.removeEventListener("visibilitychange", onVisibility);
+      canalRef?.removeChannel();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessaoId])
+  }, [sessaoId]);
 
-  const processandoAtivo = sessao?.status === "processando"
+  const processandoAtivo = sessao?.status === "processando";
 
   // ── Rotação das etapas de loading ────────────────────────────────────────
   useEffect(() => {
-    if (!processandoAtivo) return
+    if (!processandoAtivo) return;
     const iv = setInterval(() => {
-      setEtapaIndex((prev) => (prev + 1) % ETAPAS_LOADING.length)
-    }, ETAPA_ROTACAO_MS)
-    return () => clearInterval(iv)
-  }, [processandoAtivo])
+      setEtapaIndex((prev) => (prev + 1) % ETAPAS_LOADING.length);
+    }, ETAPA_ROTACAO_MS);
+    return () => clearInterval(iv);
+  }, [processandoAtivo]);
 
   // ── Hidratação do estado editável a partir da sessão (1x) ───────────────
   useEffect(() => {
-    if (hidratado || !sessao) return
+    if (hidratado || !sessao) return;
     if (
       sessao.status !== "rascunho" &&
       sessao.status !== "concluido" &&
       sessao.status !== "aguardando_revisao" &&
-      sessao.status !== "convertido_em_processo"   // sessão 074: revisão pós-conversão (auditoria XSD)
+      sessao.status !== "convertido_em_processo" // sessão 074: revisão pós-conversão (auditoria XSD)
     ) {
-      return
+      return;
     }
 
     // dados_confirmados pode ser {} (objeto vazio) — nesse caso, usar dados_extraidos
-    const confirmados = sessao.dados_confirmados as DadosRevisao | null
-    const extraidos = sessao.dados_extraidos as DadosRevisao | null
+    const confirmados = sessao.dados_confirmados as DadosRevisao | null;
+    const extraidos = sessao.dados_extraidos as DadosRevisao | null;
     const temConfirmados =
-      confirmados != null && Object.keys(confirmados).length > 0
-    const fonte = temConfirmados ? confirmados : extraidos ?? {}
-    setDadosRevisao(fonte)
+      confirmados != null && Object.keys(confirmados).length > 0;
+    const fonte = temConfirmados ? confirmados : (extraidos ?? {});
+    setDadosRevisao(fonte);
 
-    const rows: ProcessoArquivoRow[] = sessao.processo_arquivos ?? []
+    const rows: ProcessoArquivoRow[] = sessao.processo_arquivos ?? [];
     setArquivosClassif(
       rows.map((r) => ({
         id: r.id,
@@ -475,152 +485,243 @@ export default function RevisaoExtracaoPage() {
         destino_acervo: r.destino_acervo ?? false,
         tipo_xsd: r.tipo_xsd,
       })),
-    )
-    setHidratado(true)
+    );
+    setHidratado(true);
 
     // ── Construir confirmações a partir de comprobatorios_detectados ──────
     if (!confirmacoesBuildFeito.current) {
-      confirmacoesBuildFeito.current = true
-      const extraidos = sessao.dados_extraidos as Record<string, unknown> | null
-      const detectadosRaw = (extraidos?.comprobatorios_detectados ?? []) as ComprobatorioDetectadoRaw[]
-      const arquivosRef = sessao.arquivos ?? []
+      confirmacoesBuildFeito.current = true;
+      const extraidos = sessao.dados_extraidos as Record<
+        string,
+        unknown
+      > | null;
+      const detectadosRaw = (extraidos?.comprobatorios_detectados ??
+        []) as ComprobatorioDetectadoRaw[];
+      const arquivosRef = sessao.arquivos ?? [];
 
       if (detectadosRaw.length > 0) {
         // Se já tem confirmações salvas em dados_confirmados, restaurar status
-        const confirmadosSalvos = (fonte as Record<string, unknown>)?.confirmacoes_comprobatorios as
-          | Record<string, string>
-          | undefined
+        const confirmadosSalvos = (fonte as Record<string, unknown>)
+          ?.confirmacoes_comprobatorios as Record<string, string> | undefined;
 
-        const mapa = construirConfirmacoes(detectadosRaw, arquivosRef)
+        const mapa = construirConfirmacoes(detectadosRaw, arquivosRef);
 
         // Restaurar status 'confirmado' de sessões anteriores (auto-save)
         if (confirmadosSalvos) {
           for (const [tipo, status] of Object.entries(confirmadosSalvos)) {
-            const entry = mapa.get(tipo as TipoXsdComprobatorio)
+            const entry = mapa.get(tipo as TipoXsdComprobatorio);
             if (entry && status === "confirmado") {
-              entry.status = "confirmado"
+              entry.status = "confirmado";
             }
           }
         }
 
-        setConfirmacoes(mapa)
+        setConfirmacoes(mapa);
       }
     }
-  }, [sessao, hidratado])
+  }, [sessao, hidratado]);
 
   // ── Verificar se processo possui diploma(s) bloqueado(s) (publicado/assinado) ──
   // Se sim, bloqueia o formulário de revisão imediatamente ao carregar.
-  const lockCheckFeito = useRef(false)
+  const lockCheckFeito = useRef(false);
   useEffect(() => {
-    if (lockCheckFeito.current || !sessao?.processo_id) return
-    lockCheckFeito.current = true
-    const STATUS_BLOQUEADO = new Set(['assinado', 'registrado', 'rvdd_gerado', 'publicado'])
-    let cancelado = false
+    if (lockCheckFeito.current || !sessao?.processo_id) return;
+    lockCheckFeito.current = true;
+    const STATUS_BLOQUEADO = new Set([
+      "assinado",
+      "registrado",
+      "rvdd_gerado",
+      "publicado",
+    ]);
+    let cancelado = false;
     async function verificarLock() {
       try {
-        const res = await fetch(`/api/processos/${sessao!.processo_id}`, { cache: 'no-store' })
-        if (!res.ok || cancelado) return
-        const dados = await res.json()
-        const contagem: Record<string, number> = dados?.contagem_status ?? {}
-        const bloqueado = Object.keys(contagem).some((s) => STATUS_BLOQUEADO.has(s) && contagem[s] > 0)
-        if (bloqueado && !cancelado) setFormBloqueado(true)
+        const res = await fetch(`/api/processos/${sessao!.processo_id}`, {
+          cache: "no-store",
+        });
+        if (!res.ok || cancelado) return;
+        const dados = await res.json();
+        const contagem: Record<string, number> = dados?.contagem_status ?? {};
+        const bloqueado = Object.keys(contagem).some(
+          (s) => STATUS_BLOQUEADO.has(s) && contagem[s] > 0,
+        );
+        if (bloqueado && !cancelado) setFormBloqueado(true);
       } catch {
         // silencioso — não bloqueia por erro de rede
       }
     }
-    verificarLock()
-    return () => { cancelado = true }
-  }, [sessao?.processo_id])
+    verificarLock();
+    return () => {
+      cancelado = true;
+    };
+  }, [sessao?.processo_id]);
 
   // ── Buscar lista de cursos do cadastro ──────────────────────────────────
   useEffect(() => {
-    let cancelado = false
+    let cancelado = false;
     async function carregarCursos() {
       try {
-        const res = await fetch("/api/cursos", { cache: "no-store" })
-        if (!res.ok) return
-        const data = await res.json()
-        if (!cancelado && Array.isArray(data)) setCursos(data)
-      } catch {
-        // silencioso — cursos é opcional
+        const res = await fetch("/api/cursos", { cache: "no-store" });
+        if (!res.ok) {
+          // Log visível — ajuda diagnóstico se auto-fill falhar
+          console.warn(
+            "[revisao] /api/cursos falhou:",
+            res.status,
+            await res.text().catch(() => ""),
+          );
+          return;
+        }
+        const data = await res.json();
+        if (!cancelado && Array.isArray(data)) {
+          console.info("[revisao] cursos carregados:", data.length);
+          setCursos(data);
+        }
+      } catch (e) {
+        console.warn("[revisao] erro ao carregar /api/cursos:", e);
       }
     }
-    carregarCursos()
-    return () => { cancelado = true }
-  }, [])
+    carregarCursos();
+    return () => {
+      cancelado = true;
+    };
+  }, []);
 
   // ── Buscar assinantes cadastrados e injetar no dadosRevisao ────────────
-  const assinantesCarregados = useRef(false)
+  const assinantesCarregados = useRef(false);
   useEffect(() => {
-    if (assinantesCarregados.current || !hidratado) return
+    if (assinantesCarregados.current || !hidratado) return;
     // Se já tem assinantes no dado (ex: dados_confirmados salvos), pular
     if (dadosRevisao.assinantes && dadosRevisao.assinantes.length > 0) {
-      assinantesCarregados.current = true
-      return
+      assinantesCarregados.current = true;
+      return;
     }
-    assinantesCarregados.current = true
-    let cancelado = false
+    assinantesCarregados.current = true;
+    let cancelado = false;
     async function carregarAssinantes() {
       try {
-        const res = await fetch("/api/assinantes", { cache: "no-store" })
-        if (!res.ok || cancelado) return
-        const lista = await res.json()
-        if (!Array.isArray(lista) || lista.length === 0 || cancelado) return
-        const ativos = lista.filter((a: { ativo: boolean }) => a.ativo)
-        if (ativos.length === 0) return
+        const res = await fetch("/api/assinantes", { cache: "no-store" });
+        if (!res.ok || cancelado) return;
+        const lista = await res.json();
+        if (!Array.isArray(lista) || lista.length === 0 || cancelado) return;
+        const ativos = lista.filter((a: { ativo: boolean }) => a.ativo);
+        if (ativos.length === 0) return;
         const ecpfs = ativos
-          .filter((a: { tipo_certificado: string }) => a.tipo_certificado === "eCPF")
-          .sort((a: { ordem_assinatura: number }, b: { ordem_assinatura: number }) => a.ordem_assinatura - b.ordem_assinatura)
-        const ecnpj = ativos.find((a: { tipo_certificado: string }) => a.tipo_certificado === "eCNPJ")
+          .filter(
+            (a: { tipo_certificado: string }) => a.tipo_certificado === "eCPF",
+          )
+          .sort(
+            (
+              a: { ordem_assinatura: number },
+              b: { ordem_assinatura: number },
+            ) => a.ordem_assinatura - b.ordem_assinatura,
+          );
+        const ecnpj = ativos.find(
+          (a: { tipo_certificado: string }) => a.tipo_certificado === "eCNPJ",
+        );
         if (!cancelado) {
           setDadosRevisao((prev) => ({
             ...prev,
-            assinantes: ecpfs.map((a: { id: string; nome: string; cpf: string; cargo: string; outro_cargo: string | null }) => ({
-              id: a.id,
-              nome: a.nome,
-              cpf: a.cpf,
-              cargo: a.outro_cargo || a.cargo,
-            })),
+            assinantes: ecpfs.map(
+              (a: {
+                id: string;
+                nome: string;
+                cpf: string;
+                cargo: string;
+                outro_cargo: string | null;
+              }) => ({
+                id: a.id,
+                nome: a.nome,
+                cpf: a.cpf,
+                cargo: a.outro_cargo || a.cargo,
+              }),
+            ),
             ecnpj_emissora: ecnpj
-              ? ecnpj.cpf?.replace(/\D/g, "").replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/, "$1.$2.$3/$4-$5")
+              ? ecnpj.cpf
+                  ?.replace(/\D/g, "")
+                  .replace(
+                    /^(\d{2})(\d{3})(\d{3})(\d{4})(\d{2})$/,
+                    "$1.$2.$3/$4-$5",
+                  )
               : prev.ecnpj_emissora,
-          }))
+          }));
         }
       } catch {
         // silencioso — assinantes preenchidos manualmente se falhar
       }
     }
-    carregarAssinantes()
-    return () => { cancelado = true }
-  }, [hidratado, dadosRevisao.assinantes])
+    carregarAssinantes();
+    return () => {
+      cancelado = true;
+    };
+  }, [hidratado, dadosRevisao.assinantes]);
 
   // ── Auto-match: tentar associar curso extraído ao cadastro (1x) ────────
+  //
+  // Bug corrigido (2026-04-22, piloto Kauana):
+  //   1. Quando `dadosRevisao.curso_id` já existia, só setava o ID e retornava
+  //      — não aplicava os campos do cadastro. Resultado: IES (nome/CNPJ/codigo_mec)
+  //      e demais campos normalizados do curso (codigo_emec, grau, etc.) ficavam
+  //      vazios, mesmo com curso cadastrado no banco. Fix: sempre chamar
+  //      `aplicarCursoCadastro()`.
+  //   2. O Gemini às vezes extrai `curso.curso` ("FISIOTERAPIA") em vez de
+  //      `curso.nome`. Fix: usar ambos como fallback no match por nome.
   useEffect(() => {
-    if (autoMatchFeito.current || !hidratado || cursos.length === 0) return
-    autoMatchFeito.current = true
+    if (autoMatchFeito.current || !hidratado || cursos.length === 0) return;
+    autoMatchFeito.current = true;
 
-    // Se já tem curso_id salvo (ex: dados_confirmados), usar direto
+    const cursoDados = dadosRevisao.curso as
+      | Record<string, unknown>
+      | undefined;
+    const nomeExtraido = (
+      (cursoDados?.nome as string | undefined) ||
+      (cursoDados?.curso as string | undefined) ||
+      ""
+    )
+      .toLowerCase()
+      .trim();
+
+    console.info("[revisao] auto-match executando", {
+      cursos: cursos.length,
+      curso_id_salvo: dadosRevisao.curso_id ?? null,
+      nome_extraido: nomeExtraido || null,
+    });
+
+    // 1) Se já tem curso_id salvo (ex: dados_confirmados), usar direto
+    //    E TAMBÉM aplicar cadastro — garante IES e campos normalizados.
     if (dadosRevisao.curso_id) {
-      const existe = cursos.find((c) => c.id === dadosRevisao.curso_id)
+      const existe = cursos.find((c) => c.id === dadosRevisao.curso_id);
       if (existe) {
-        setCursoSelecionadoId(existe.id)
-        return
+        console.info("[revisao] auto-match por curso_id:", existe.nome);
+        setCursoSelecionadoId(existe.id);
+        aplicarCursoCadastro(existe);
+        return;
       }
     }
 
-    // Tentar match por nome do curso extraído
-    const nomeExtraido = dadosRevisao.curso?.nome?.toLowerCase()?.trim()
-    if (!nomeExtraido) return
-
-    const match = cursos.find((c) =>
-      c.nome.toLowerCase().trim().includes(nomeExtraido) ||
-      nomeExtraido.includes(c.nome.toLowerCase().trim()),
-    )
-    if (match) {
-      setCursoSelecionadoId(match.id)
-      aplicarCursoCadastro(match)
+    // 2) Tentar match por nome do curso extraído
+    if (!nomeExtraido) {
+      console.warn(
+        "[revisao] auto-match: sem nome extraído — usuário terá que selecionar manualmente",
+      );
+      return;
     }
-  }, [hidratado, cursos]) // eslint-disable-line react-hooks/exhaustive-deps
+
+    const match = cursos.find(
+      (c) =>
+        c.nome.toLowerCase().trim().includes(nomeExtraido) ||
+        nomeExtraido.includes(c.nome.toLowerCase().trim()),
+    );
+    if (match) {
+      console.info("[revisao] auto-match por nome:", match.nome);
+      setCursoSelecionadoId(match.id);
+      aplicarCursoCadastro(match);
+    } else {
+      console.warn(
+        "[revisao] auto-match: nenhum curso cadastrado casou com",
+        nomeExtraido,
+      );
+    }
+  }, [hidratado, cursos]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // ── Mapas de normalização: enum do banco → valor XSD do select ─────────
   // O banco armazena enums lowercase (ex: "bacharel"), mas os selects do
@@ -633,14 +734,14 @@ export default function RevisaoExtracaoPage() {
     tecnologo: "Tecnólogo",
     tecnólogo: "Tecnólogo",
     "curso sequencial": "Curso sequencial",
-  }
+  };
 
   const MODALIDADE_DB_PARA_XSD: Record<string, string> = {
     presencial: "Presencial",
     ead: "EAD",
     "a distância": "EAD",
     "a distancia": "EAD",
-  }
+  };
 
   // titulo_conferido no banco pode ser livre (ex: "Bacharel em Ciências Contábeis")
   // mas o select XSD espera apenas o grau (ex: "Bacharel")
@@ -651,27 +752,28 @@ export default function RevisaoExtracaoPage() {
     tecnologo: "Tecnólogo",
     médico: "Médico",
     medico: "Médico",
-  }
+  };
 
   function normalizarGrau(val: string | null | undefined): string | null {
-    if (!val) return null
-    return GRAU_DB_PARA_XSD[val.toLowerCase().trim()] ?? val
+    if (!val) return null;
+    return GRAU_DB_PARA_XSD[val.toLowerCase().trim()] ?? val;
   }
 
   function normalizarModalidade(val: string | null | undefined): string | null {
-    if (!val) return null
-    return MODALIDADE_DB_PARA_XSD[val.toLowerCase().trim()] ?? val
+    if (!val) return null;
+    return MODALIDADE_DB_PARA_XSD[val.toLowerCase().trim()] ?? val;
   }
 
   function normalizarTitulo(val: string | null | undefined): string | null {
-    if (!val) return null
-    const lower = val.toLowerCase().trim()
+    if (!val) return null;
+    const lower = val.toLowerCase().trim();
     // Tenta match direto primeiro
-    if (TITULO_DB_PARA_XSD[lower]) return TITULO_DB_PARA_XSD[lower]
+    if (TITULO_DB_PARA_XSD[lower]) return TITULO_DB_PARA_XSD[lower];
     // Se é texto livre (ex: "Bacharel em Ciências Contábeis"), extrai o primeiro token
-    const primeiroToken = lower.split(/\s+/)[0]
-    if (TITULO_DB_PARA_XSD[primeiroToken]) return TITULO_DB_PARA_XSD[primeiroToken]
-    return val
+    const primeiroToken = lower.split(/\s+/)[0];
+    if (TITULO_DB_PARA_XSD[primeiroToken])
+      return TITULO_DB_PARA_XSD[primeiroToken];
+    return val;
   }
 
   // ── Aplicar dados do curso cadastrado ao formulário ────────────────────
@@ -684,11 +786,18 @@ export default function RevisaoExtracaoPage() {
         nome: c.nome,
         codigo_emec: c.codigo_emec ?? prev.curso?.codigo_emec ?? null,
         grau: normalizarGrau(c.grau) ?? prev.curso?.grau ?? null,
-        titulo_conferido: normalizarTitulo(c.titulo_conferido) ?? prev.curso?.titulo_conferido ?? null,
-        modalidade: normalizarModalidade(c.modalidade) ?? prev.curso?.modalidade ?? null,
-        carga_horaria: c.carga_horaria_total ?? prev.curso?.carga_horaria ?? null,
-        hora_aula_min: c.duracao_hora_aula_minutos ?? prev.curso?.hora_aula_min ?? null,
-        codigo_curriculo: c.codigo_curriculo ?? prev.curso?.codigo_curriculo ?? null,
+        titulo_conferido:
+          normalizarTitulo(c.titulo_conferido) ??
+          prev.curso?.titulo_conferido ??
+          null,
+        modalidade:
+          normalizarModalidade(c.modalidade) ?? prev.curso?.modalidade ?? null,
+        carga_horaria:
+          c.carga_horaria_total ?? prev.curso?.carga_horaria ?? null,
+        hora_aula_min:
+          c.duracao_hora_aula_minutos ?? prev.curso?.hora_aula_min ?? null,
+        codigo_curriculo:
+          c.codigo_curriculo ?? prev.curso?.codigo_curriculo ?? null,
       },
       ies: {
         ...prev.ies,
@@ -696,23 +805,23 @@ export default function RevisaoExtracaoPage() {
         cnpj: c.instituicoes?.cnpj ?? prev.ies?.cnpj ?? null,
         codigo_mec: c.instituicoes?.codigo_mec ?? prev.ies?.codigo_mec ?? null,
       },
-    }))
-    setDirty(true)
+    }));
+    setDirty(true);
   }
 
   // ── Handler de seleção manual de curso ─────────────────────────────────
   const handleCursoSelecionado = useCallback(
     (cursoId: string) => {
       if (!cursoId) {
-        setCursoSelecionadoId(null)
-        return
+        setCursoSelecionadoId(null);
+        return;
       }
-      setCursoSelecionadoId(cursoId)
-      const c = cursos.find((x) => x.id === cursoId)
-      if (c) aplicarCursoCadastro(c)
+      setCursoSelecionadoId(cursoId);
+      const c = cursos.find((x) => x.id === cursoId);
+      if (c) aplicarCursoCadastro(c);
     },
     [cursos], // eslint-disable-line react-hooks/exhaustive-deps
-  )
+  );
 
   // ── Memo: arquivos com tipo_xsd derivado das confirmações (sessão 049) ──
   // O sidebar de comprobatórios atualiza `confirmacoes` (Map in-memory),
@@ -722,49 +831,49 @@ export default function RevisaoExtracaoPage() {
   // na UI. Este memo garante que o auto-save e o flush pré-converter enviem
   // o tipo_xsd correto ao banco.
   const arquivosComConfirmacoes = useMemo(() => {
-    if (confirmacoes.size === 0) return arquivosClassif
+    if (confirmacoes.size === 0) return arquivosClassif;
 
     // Constrói mapa: nome_original → tipo_xsd confirmado
-    const nomeParaTipo = new Map<string, TipoXsdComprobatorio>()
+    const nomeParaTipo = new Map<string, TipoXsdComprobatorio>();
     for (const [, c] of confirmacoes) {
       if (c.status === "confirmado" && c.nome_arquivo) {
-        nomeParaTipo.set(c.nome_arquivo, c.tipo_xsd)
+        nomeParaTipo.set(c.nome_arquivo, c.tipo_xsd);
         // Também match case-insensitive
-        nomeParaTipo.set(c.nome_arquivo.toLowerCase(), c.tipo_xsd)
+        nomeParaTipo.set(c.nome_arquivo.toLowerCase(), c.tipo_xsd);
       }
     }
 
-    if (nomeParaTipo.size === 0) return arquivosClassif
+    if (nomeParaTipo.size === 0) return arquivosClassif;
 
     return arquivosClassif.map((a) => {
       const tipoConfirmado =
         nomeParaTipo.get(a.nome_original) ??
-        nomeParaTipo.get(a.nome_original.toLowerCase())
+        nomeParaTipo.get(a.nome_original.toLowerCase());
       if (tipoConfirmado) {
         return {
           ...a,
           tipo_xsd: tipoConfirmado,
           destino_xml: true, // Comprobatório confirmado → vai pro XML
-        }
+        };
       }
-      return a
-    })
-  }, [arquivosClassif, confirmacoes])
+      return a;
+    });
+  }, [arquivosClassif, confirmacoes]);
 
   // ── Debounced auto-save (1.5s após última edição) ───────────────────────
-  const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null)
+  const autoSaveTimer = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
-    if (!dirty || !hidratado || !sessaoId) return
-    if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current)
+    if (!dirty || !hidratado || !sessaoId) return;
+    if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current);
 
     autoSaveTimer.current = setTimeout(async () => {
-      setAutoSaveStatus("saving")
+      setAutoSaveStatus("saving");
       try {
         // Serializar confirmações de comprobatórios para persistência
-        const confirmacoesSerialized: Record<string, string> = {}
+        const confirmacoesSerialized: Record<string, string> = {};
         for (const [tipo, c] of confirmacoes) {
-          confirmacoesSerialized[tipo] = c.status
+          confirmacoesSerialized[tipo] = c.status;
         }
 
         const res = await fetch(`/api/extracao/sessoes/${sessaoId}`, {
@@ -783,90 +892,97 @@ export default function RevisaoExtracaoPage() {
               tipo_xsd: a.tipo_xsd,
             })),
           }),
-        })
+        });
         if (!res.ok) {
-          const body = await res.json().catch(() => ({}))
+          const body = await res.json().catch(() => ({}));
           // 403 DIPLOMA_PUBLICADO → bloquear formulário imediatamente
-          if (res.status === 403 && body?.erro === 'DIPLOMA_PUBLICADO') {
-            setFormBloqueado(true)
+          if (res.status === 403 && body?.erro === "DIPLOMA_PUBLICADO") {
+            setFormBloqueado(true);
           }
-          throw new Error(body?.erro ?? `HTTP ${res.status}`)
+          throw new Error(body?.erro ?? `HTTP ${res.status}`);
         }
-        setAutoSaveStatus("saved")
-        setUltimoSalvamento(new Date())
-        setDirty(false)
+        setAutoSaveStatus("saved");
+        setUltimoSalvamento(new Date());
+        setDirty(false);
         // mantém "saved" permanente — timestamp fica visível
       } catch (e) {
-        console.error("[auto-save] falhou:", e)
-        setAutoSaveStatus("error")
+        console.error("[auto-save] falhou:", e);
+        setAutoSaveStatus("error");
       }
-    }, 1500)
+    }, 1500);
 
     return () => {
-      if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current)
-    }
-  }, [dadosRevisao, arquivosComConfirmacoes, confirmacoes, dirty, hidratado, sessaoId])
+      if (autoSaveTimer.current) clearTimeout(autoSaveTimer.current);
+    };
+  }, [
+    dadosRevisao,
+    arquivosComConfirmacoes,
+    confirmacoes,
+    dirty,
+    hidratado,
+    sessaoId,
+  ]);
 
   // ── Handlers dos componentes filhos ─────────────────────────────────────
   const handleDadosChange = useCallback((novos: DadosRevisao) => {
-    setDadosRevisao(novos)
-    setDirty(true)
-  }, [])
+    setDadosRevisao(novos);
+    setDirty(true);
+  }, []);
 
   const handleArquivoChange = useCallback(
     (id: string, patch: Partial<ArquivoClassificavel>) => {
       setArquivosClassif((prev) =>
         prev.map((a) => (a.id === id ? { ...a, ...patch } : a)),
-      )
-      setDirty(true)
+      );
+      setDirty(true);
     },
     [],
-  )
+  );
 
   // ── Handlers de comprobatórios (sessão 043) ──────────────────────────────
 
   /** Abre o dialog de visualização de um comprobatório. Gera signed URL. */
   const handleVisualizarComprobatorio = useCallback(
     async (c: ConfirmacaoComprobatorio) => {
-      setDialogComprobatorio(c)
-      setPreviewUrl(null)
-      setPreviewMime(null)
-      setCarregandoPreview(true)
+      setDialogComprobatorio(c);
+      setPreviewUrl(null);
+      setPreviewMime(null);
+      setCarregandoPreview(true);
 
       try {
         // Encontrar o arquivo na sessão para obter storage_path e mime_type
         const arquivo =
-          c.arquivo_index != null ? sessao?.arquivos?.[c.arquivo_index] : null
+          c.arquivo_index != null ? sessao?.arquivos?.[c.arquivo_index] : null;
 
         if (!arquivo) {
-          setCarregandoPreview(false)
-          return
+          setCarregandoPreview(false);
+          return;
         }
 
-        setPreviewMime(arquivo.mime_type)
+        setPreviewMime(arquivo.mime_type);
 
         // Gerar signed URL via Supabase client (import dinâmico)
-        const { createClient } = await import("@/lib/supabase/client")
-        const supabase = createClient()
+        const { createClient } = await import("@/lib/supabase/client");
+        const supabase = createClient();
         const { data, error } = await supabase.storage
           .from(arquivo.bucket || "processo-arquivos")
-          .createSignedUrl(arquivo.storage_path, 600) // 10 min
+          .createSignedUrl(arquivo.storage_path, 600); // 10 min
 
         if (error || !data?.signedUrl) {
-          console.error("[preview] Erro ao gerar signed URL:", error)
-          setCarregandoPreview(false)
-          return
+          console.error("[preview] Erro ao gerar signed URL:", error);
+          setCarregandoPreview(false);
+          return;
         }
 
-        setPreviewUrl(data.signedUrl)
+        setPreviewUrl(data.signedUrl);
       } catch (e) {
-        console.error("[preview] Erro:", e)
+        console.error("[preview] Erro:", e);
       } finally {
-        setCarregandoPreview(false)
+        setCarregandoPreview(false);
       }
     },
     [sessao?.arquivos],
-  )
+  );
 
   /**
    * Substitui o arquivo do comprobatório sendo visualizado.
@@ -878,47 +994,47 @@ export default function RevisaoExtracaoPage() {
    */
   const handleSubstituirArquivo = useCallback(
     async (file: File) => {
-      const idx = dialogComprobatorio?.arquivo_index
-      if (idx == null || !sessaoId) return
+      const idx = dialogComprobatorio?.arquivo_index;
+      if (idx == null || !sessaoId) return;
 
-      setSubstituindoArquivo(true)
-      setPreviewUrl(null)
-      setPreviewMime(null)
-      setCarregandoPreview(true)
+      setSubstituindoArquivo(true);
+      setPreviewUrl(null);
+      setPreviewMime(null);
+      setCarregandoPreview(true);
 
       try {
-        const { createClient } = await import("@/lib/supabase/client")
-        const supabase = createClient()
+        const { createClient } = await import("@/lib/supabase/client");
+        const supabase = createClient();
 
         // Caminho: sessaoId/sub_{idx}_{timestamp}_{nome}
-        const ext = file.name.includes(".") ? file.name.split(".").pop() : ""
-        const novoPath = `${sessaoId}/sub_${idx}_${Date.now()}${ext ? "." + ext : ""}`
-        const bucket = sessao?.arquivos?.[idx]?.bucket ?? "processo-arquivos"
+        const ext = file.name.includes(".") ? file.name.split(".").pop() : "";
+        const novoPath = `${sessaoId}/sub_${idx}_${Date.now()}${ext ? "." + ext : ""}`;
+        const bucket = sessao?.arquivos?.[idx]?.bucket ?? "processo-arquivos";
 
         const { error: uploadError } = await supabase.storage
           .from(bucket)
-          .upload(novoPath, file, { upsert: true, contentType: file.type })
+          .upload(novoPath, file, { upsert: true, contentType: file.type });
 
         if (uploadError) {
-          console.error("[substituir] Erro no upload:", uploadError)
-          alert("Erro ao enviar o arquivo. Tente novamente.")
-          return
+          console.error("[substituir] Erro no upload:", uploadError);
+          alert("Erro ao enviar o arquivo. Tente novamente.");
+          return;
         }
 
         // Gera signed URL para preview imediato
         const { data: signed, error: signErr } = await supabase.storage
           .from(bucket)
-          .createSignedUrl(novoPath, 600)
+          .createSignedUrl(novoPath, 600);
 
         if (signErr || !signed?.signedUrl) {
-          console.error("[substituir] Erro ao gerar signed URL:", signErr)
-          return
+          console.error("[substituir] Erro ao gerar signed URL:", signErr);
+          return;
         }
 
         // Atualiza sessao.arquivos para que futuras aberturas do preview usem o novo arquivo
         setSessao((prev) => {
-          if (!prev) return prev
-          const novosArquivos = [...(prev.arquivos ?? [])]
+          if (!prev) return prev;
+          const novosArquivos = [...(prev.arquivos ?? [])];
           novosArquivos[idx] = {
             ...novosArquivos[idx],
             storage_path: novoPath,
@@ -926,76 +1042,89 @@ export default function RevisaoExtracaoPage() {
             nome_original: file.name,
             mime_type: file.type,
             tamanho_bytes: file.size,
-          }
-          return { ...prev, arquivos: novosArquivos }
-        })
+          };
+          return { ...prev, arquivos: novosArquivos };
+        });
 
         // Atualiza arquivosClassif para refletir o novo arquivo nos cards
         setArquivosClassif((prev) =>
           prev.map((a, i) =>
             i === idx
-              ? { ...a, nome_original: file.name, mime_type: file.type, tamanho_bytes: file.size }
+              ? {
+                  ...a,
+                  nome_original: file.name,
+                  mime_type: file.type,
+                  tamanho_bytes: file.size,
+                }
               : a,
           ),
-        )
+        );
 
         // Atualiza dialog com novo nome de arquivo
         setDialogComprobatorio((prev) =>
           prev != null ? { ...prev, nome_arquivo: file.name } : prev,
-        )
+        );
 
-        setPreviewMime(file.type)
-        setPreviewUrl(signed.signedUrl)
-        setDirty(true)
+        setPreviewMime(file.type);
+        setPreviewUrl(signed.signedUrl);
+        setDirty(true);
       } catch (e) {
-        console.error("[substituir] Erro inesperado:", e)
-        alert("Erro inesperado ao substituir o arquivo.")
+        console.error("[substituir] Erro inesperado:", e);
+        alert("Erro inesperado ao substituir o arquivo.");
       } finally {
-        setSubstituindoArquivo(false)
-        setCarregandoPreview(false)
+        setSubstituindoArquivo(false);
+        setCarregandoPreview(false);
       }
     },
     [dialogComprobatorio?.arquivo_index, sessaoId, sessao?.arquivos],
-  )
+  );
 
   /** Descarta a sessão de extração e redireciona para a lista de processos. */
   const descartarExtracao = useCallback(async () => {
-    if (!sessaoId) return
+    if (!sessaoId) return;
     const confirmado = window.confirm(
       "⚠️ Tem certeza que deseja excluir esta importação?\n\nTodos os arquivos enviados e os dados extraídos serão descartados permanentemente. Esta ação não pode ser desfeita.",
-    )
-    if (!confirmado) return
-    setDescartando(true)
+    );
+    if (!confirmado) return;
+    setDescartando(true);
     try {
       const res = await fetch(`/api/extracao/sessoes/${sessaoId}/descartar`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         cache: "no-store",
-      })
+      });
       if (!res.ok) {
-        const erro = await res.json().catch(() => ({}))
-        throw new Error((erro as { erro?: string })?.erro || "Falha ao descartar a extração")
+        const erro = await res.json().catch(() => ({}));
+        throw new Error(
+          (erro as { erro?: string })?.erro || "Falha ao descartar a extração",
+        );
       }
       // Limpa o localStorage para que o banner de recovery não reapareça
       try {
-        localStorage.removeItem("diploma:ultima-sessao")
-      } catch { /* ignore */ }
-      router.push("/diploma/processos")
+        localStorage.removeItem("diploma:ultima-sessao");
+      } catch {
+        /* ignore */
+      }
+      router.push("/diploma/processos");
     } catch (e) {
-      alert(e instanceof Error ? e.message : "Erro ao descartar a extração")
+      alert(e instanceof Error ? e.message : "Erro ao descartar a extração");
     } finally {
-      setDescartando(false)
+      setDescartando(false);
     }
-  }, [sessaoId, router])
+  }, [sessaoId, router]);
 
   /** Confirma um comprobatório (muda status para 'confirmado' + salva destinos). */
   const handleConfirmarComprobatorio = useCallback(
-    (c: ConfirmacaoComprobatorio, destinoXml: boolean, destinoAcervo: boolean) => {
+    (
+      c: ConfirmacaoComprobatorio,
+      destinoXml: boolean,
+      destinoAcervo: boolean,
+    ) => {
       setConfirmacoes((prev) => {
-        const next = new Map(prev)
-        next.set(c.tipo_xsd, { ...c, status: "confirmado" })
-        return next
-      })
+        const next = new Map(prev);
+        next.set(c.tipo_xsd, { ...c, status: "confirmado" });
+        return next;
+      });
       // Salva os destinos escolhidos no card do arquivo.
       // ⚠️ IMPORTANTE: usa nome_arquivo (nome-based) — NÃO arquivo_index.
       // Motivo: arquivo_index é calculado contra sessao.arquivos (JSONB do Railway)
@@ -1010,89 +1139,91 @@ export default function RevisaoExtracaoPage() {
               ? { ...a, destino_xml: destinoXml, destino_acervo: destinoAcervo }
               : a,
           ),
-        )
+        );
       }
-      setDialogComprobatorio(null)
-      setDirty(true)
+      setDialogComprobatorio(null);
+      setDirty(true);
     },
     [],
-  )
+  );
 
   /** Troca o tipo XSD de um comprobatório detectado. */
   const handleTrocarTipoComprobatorio = useCallback(
     (c: ConfirmacaoComprobatorio, novoTipo: TipoXsdComprobatorio) => {
       setConfirmacoes((prev) => {
-        const next = new Map(prev)
+        const next = new Map(prev);
         // Remove o tipo antigo
-        next.delete(c.tipo_xsd)
+        next.delete(c.tipo_xsd);
         // Adiciona com o novo tipo (como detectado, precisa reconfirmar)
         next.set(novoTipo, {
           ...c,
           tipo_xsd: novoTipo,
           status: "detectado",
-        })
-        return next
-      })
-      setDialogComprobatorio(null)
-      setDirty(true)
+        });
+        return next;
+      });
+      setDialogComprobatorio(null);
+      setDirty(true);
     },
     [],
-  )
+  );
 
   // ── Seleção manual de arquivo para comprobatório pendente (sessão 044) ───
 
   /** Lista de arquivos da sessão para o picker manual */
   const arquivosSessaoParaPicker = useMemo((): ArquivoSessao[] => {
-    if (!sessao?.arquivos) return []
-    const extraidos = sessao.dados_extraidos as Record<string, unknown> | null
+    if (!sessao?.arquivos) return [];
+    const extraidos = sessao.dados_extraidos as Record<string, unknown> | null;
     const porArquivo = (extraidos?.por_arquivo ?? []) as Array<{
-      nome_original: string
-      tipo_documento_detectado?: string | null
-    }>
+      nome_original: string;
+      tipo_documento_detectado?: string | null;
+    }>;
 
     return sessao.arquivos.map((arq, index) => {
-      const info = porArquivo.find((p) => p.nome_original === arq.nome_original)
+      const info = porArquivo.find(
+        (p) => p.nome_original === arq.nome_original,
+      );
       return {
         index,
         nome_original: arq.nome_original,
         mime_type: arq.mime_type,
         tipo_detectado: info?.tipo_documento_detectado ?? null,
-      }
-    })
-  }, [sessao?.arquivos, sessao?.dados_extraidos])
+      };
+    });
+  }, [sessao?.arquivos, sessao?.dados_extraidos]);
 
   /** Quando o operador seleciona manualmente um arquivo para um tipo pendente */
   const handleSelecionarArquivoManual = useCallback(
     (tipo: TipoXsdComprobatorio, arquivo: ArquivoSessao) => {
       // Cria a confirmação como "detectado" (amarelo) — operador ainda precisa confirmar
       setConfirmacoes((prev) => {
-        const next = new Map(prev)
+        const next = new Map(prev);
         next.set(tipo, {
           tipo_xsd: tipo,
           status: "detectado",
           nome_arquivo: arquivo.nome_original,
           arquivo_index: arquivo.index,
           confianca: undefined, // manual — sem confiança IA (undefined = campo omitido na serialização)
-        })
-        return next
-      })
-      setTipoSelecaoManual(null)
-      setDirty(true)
+        });
+        return next;
+      });
+      setTipoSelecaoManual(null);
+      setDirty(true);
     },
     [],
-  )
+  );
 
   // ── Gate: contar comprobatórios confirmados (sessão 043) ─────────────────
   const gateComprobatorios = useMemo(() => {
-    let confirmados = 0
-    const total = COMPROBATORIOS_OBRIGATORIOS_FIC.length
+    let confirmados = 0;
+    const total = COMPROBATORIOS_OBRIGATORIOS_FIC.length;
 
     for (const regra of COMPROBATORIOS_OBRIGATORIOS_FIC) {
-      const tipos = regra.kind === "simples" ? [regra.tipo] : regra.tipos
+      const tipos = regra.kind === "simples" ? [regra.tipo] : regra.tipos;
       const temConfirmado = tipos.some(
         (t) => confirmacoes.get(t)?.status === "confirmado",
-      )
-      if (temConfirmado) confirmados++
+      );
+      if (temConfirmado) confirmados++;
     }
 
     return {
@@ -1100,22 +1231,22 @@ export default function RevisaoExtracaoPage() {
       total,
       todosConfirmados: confirmados === total,
       faltam: total - confirmados,
-    }
-  }, [confirmacoes])
+    };
+  }, [confirmacoes]);
 
   // ── Criar processo (POST /converter) ────────────────────────────────────
   const criarProcesso = useCallback(
     async (overrideJustificativa?: string) => {
-      if (!sessaoId || criando) return
-      setCriando(true)
-      setErroCriacao(null)
+      if (!sessaoId || criando) return;
+      setCriando(true);
+      setErroCriacao(null);
 
       // Força flush do auto-save antes de converter: salva tudo sincronamente.
       if (dirty) {
         try {
-          const confirmacoesSerialized: Record<string, string> = {}
+          const confirmacoesSerialized: Record<string, string> = {};
           for (const [tipo, c] of confirmacoes) {
-            confirmacoesSerialized[tipo] = c.status
+            confirmacoesSerialized[tipo] = c.status;
           }
 
           await fetch(`/api/extracao/sessoes/${sessaoId}`, {
@@ -1134,66 +1265,71 @@ export default function RevisaoExtracaoPage() {
                 tipo_xsd: a.tipo_xsd,
               })),
             }),
-          })
-          setDirty(false)
+          });
+          setDirty(false);
         } catch {
           // segue; o converter vai validar no banco
         }
       }
 
       try {
-        const res = await fetch(
-          `/api/extracao/sessoes/${sessaoId}/converter`,
-          {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            cache: "no-store",
-            body: JSON.stringify({
-              override_justificativa: overrideJustificativa ?? null,
-            }),
-          },
-        )
+        const res = await fetch(`/api/extracao/sessoes/${sessaoId}/converter`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          cache: "no-store",
+          body: JSON.stringify({
+            override_justificativa: overrideJustificativa ?? null,
+          }),
+        });
 
-        const body = await res.json().catch(() => ({}))
+        const body = await res.json().catch(() => ({}));
 
         if (res.status === 422 && body?.erro === "GATE_BLOQUEADO") {
           setModalOverride({
             violacoes: body.violacoes ?? [],
             bloqueantes: body.bloqueantes ?? [],
-          })
-          setCriando(false)
-          return
+          });
+          setCriando(false);
+          return;
         }
 
         if (!res.ok) {
-          throw new Error(
-            body?.mensagem ?? body?.erro ?? `HTTP ${res.status}`,
-          )
+          throw new Error(body?.mensagem ?? body?.erro ?? `HTTP ${res.status}`);
         }
 
-        const processoId = body?.processo_id
+        const processoId = body?.processo_id;
         if (!processoId) {
-          throw new Error("Resposta sem processo_id")
+          throw new Error("Resposta sem processo_id");
         }
 
         // Sucesso → vai para o pipeline do diploma (interface principal pós-revisão)
         // FIX s075: não redirecionar para lista; manter no fluxo diploma
-        setModalOverride(null)
-        const diplomaId = body?.diploma_id
+        setModalOverride(null);
+        const diplomaId = body?.diploma_id;
         if (diplomaId) {
-          router.push(`/diploma/diplomas/${diplomaId}`)
+          router.push(`/diploma/diplomas/${diplomaId}`);
         } else {
           // ja_convertido: processo já existia → recarregar revisão atual
-          router.refresh()
+          router.refresh();
         }
       } catch (e) {
-        console.error("[criar processo]", e)
-        setErroCriacao(e instanceof Error ? e.message : "Erro ao criar processo")
-        setCriando(false)
+        console.error("[criar processo]", e);
+        setErroCriacao(
+          e instanceof Error ? e.message : "Erro ao criar processo",
+        );
+        setCriando(false);
       }
     },
-    [sessaoId, criando, dirty, dadosRevisao, arquivosComConfirmacoes, confirmacoes, router],
-  )
+    [
+      sessaoId,
+      criando,
+      dirty,
+      dadosRevisao,
+      arquivosComConfirmacoes,
+      confirmacoes,
+      router,
+    ],
+  );
 
   // ── Render: faltando ID na URL (defensivo) ───────────────────────────────
   if (!sessaoId) {
@@ -1201,7 +1337,7 @@ export default function RevisaoExtracaoPage() {
       <div className="container mx-auto max-w-2xl px-4 py-12 text-center">
         <p className="text-red-600">ID da sessão não fornecido na URL.</p>
       </div>
-    )
+    );
   }
 
   // ── Render: erro de fetch persistente ────────────────────────────────────
@@ -1217,7 +1353,7 @@ export default function RevisaoExtracaoPage() {
         onVoltar={() => router.push("/diploma/processos")}
         onTentarNovamente={tentarNovamente}
       />
-    )
+    );
   }
 
   // ── Render: timeout ──────────────────────────────────────────────────────
@@ -1230,7 +1366,7 @@ export default function RevisaoExtracaoPage() {
         }
         onVoltar={() => router.push("/diploma/processos")}
       />
-    )
+    );
   }
 
   // ── Render: sessão em erro ───────────────────────────────────────────────
@@ -1241,7 +1377,7 @@ export default function RevisaoExtracaoPage() {
         mensagem={sessao.erro_mensagem || "Erro desconhecido. Tente novamente."}
         onVoltar={() => router.push("/diploma/processos")}
       />
-    )
+    );
   }
 
   // ── Render: loading enquanto busca o estado inicial ──────────────────────
@@ -1251,7 +1387,7 @@ export default function RevisaoExtracaoPage() {
         <Loader2 className="mx-auto h-10 w-10 animate-spin text-violet-600" />
         <p className="mt-4 text-sm text-gray-500">Carregando sessão...</p>
       </div>
-    )
+    );
   }
 
   // ── Render: processando — barra + etapas animadas ────────────────────────
@@ -1263,7 +1399,7 @@ export default function RevisaoExtracaoPage() {
         tempoDecorrido={tempoDecorrido}
         erroFetch={erroFetch}
       />
-    )
+    );
   }
 
   // ── Render: pronto (rascunho) — formulário + classificação + gate ────────
@@ -1302,7 +1438,11 @@ export default function RevisaoExtracaoPage() {
           </div>
 
           {/* Indicador de auto-save */}
-          <AutoSaveIndicator status={autoSaveStatus} dirty={dirty} ultimoSalvamento={ultimoSalvamento} />
+          <AutoSaveIndicator
+            status={autoSaveStatus}
+            dirty={dirty}
+            ultimoSalvamento={ultimoSalvamento}
+          />
         </div>
 
         {/* Banner de formulário bloqueado (diploma publicado/assinado) */}
@@ -1310,9 +1450,12 @@ export default function RevisaoExtracaoPage() {
           <div className="flex items-start gap-3 rounded-lg border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900 dark:border-amber-700 dark:bg-amber-950/30 dark:text-amber-200">
             <Lock className="mt-0.5 h-4 w-4 shrink-0 text-amber-600 dark:text-amber-400" />
             <div>
-              <p className="font-semibold">Formulário bloqueado — diploma publicado ou assinado</p>
+              <p className="font-semibold">
+                Formulário bloqueado — diploma publicado ou assinado
+              </p>
               <p className="text-xs opacity-75 mt-0.5">
-                O processo possui diploma(s) em estágio avançado. A revisão dos dados de extração está em modo somente leitura.
+                O processo possui diploma(s) em estágio avançado. A revisão dos
+                dados de extração está em modo somente leitura.
               </p>
             </div>
           </div>
@@ -1327,7 +1470,9 @@ export default function RevisaoExtracaoPage() {
               onChange={formBloqueado ? () => {} : handleDadosChange}
               cursos={cursos}
               cursoSelecionadoId={cursoSelecionadoId}
-              onCursoSelecionado={formBloqueado ? () => {} : handleCursoSelecionado}
+              onCursoSelecionado={
+                formBloqueado ? () => {} : handleCursoSelecionado
+              }
             />
 
             {/* Arquivos processados (somente listagem) */}
@@ -1336,7 +1481,8 @@ export default function RevisaoExtracaoPage() {
                 Arquivos processados
               </h3>
               <p className="mb-4 text-xs text-gray-500">
-                Para definir o destino de cada arquivo (XML ou Acervo), confirme o documento no painel ao lado.
+                Para definir o destino de cada arquivo (XML ou Acervo), confirme
+                o documento no painel ao lado.
               </p>
 
               {arquivosClassif.length === 0 ? (
@@ -1349,7 +1495,11 @@ export default function RevisaoExtracaoPage() {
                     <CardArquivoClassificacao
                       key={arq.id}
                       arquivo={arq}
-                      onChange={formBloqueado ? () => {} : (patch) => handleArquivoChange(arq.id, patch)}
+                      onChange={
+                        formBloqueado
+                          ? () => {}
+                          : (patch) => handleArquivoChange(arq.id, patch)
+                      }
                     />
                   ))}
                 </div>
@@ -1387,13 +1537,15 @@ export default function RevisaoExtracaoPage() {
                 <div className="mt-4 rounded-md border border-amber-200 bg-amber-50 p-3 text-sm text-amber-800 dark:border-amber-800 dark:bg-amber-950/20 dark:text-amber-300">
                   <p className="font-semibold">Revisão pós-auditoria</p>
                   <p className="mt-0.5 text-xs opacity-80">
-                    Você está revisando os dados de extração de um processo já confirmado.
-                    Alterações são salvas automaticamente.
+                    Você está revisando os dados de extração de um processo já
+                    confirmado. Alterações são salvas automaticamente.
                   </p>
                 </div>
                 {sessao.processo_id && (
                   <button
-                    onClick={() => router.push(`/diploma/processos/${sessao.processo_id}`)}
+                    onClick={() =>
+                      router.push(`/diploma/processos/${sessao.processo_id}`)
+                    }
                     className="mt-3 flex w-full items-center justify-center gap-2 rounded-md bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-700"
                   >
                     Ver processo
@@ -1407,7 +1559,11 @@ export default function RevisaoExtracaoPage() {
               // Fluxo legado (processo_id null): botão "Criar processo" como antes.
               <button
                 onClick={() => criarProcesso()}
-                disabled={criando || !gateComprobatorios.todosConfirmados || formBloqueado}
+                disabled={
+                  criando ||
+                  !gateComprobatorios.todosConfirmados ||
+                  formBloqueado
+                }
                 className={`mt-4 flex w-full items-center justify-center gap-2 rounded-md px-5 py-2.5 text-sm font-semibold shadow-sm disabled:cursor-not-allowed disabled:opacity-60 ${
                   gateComprobatorios.todosConfirmados
                     ? "bg-violet-600 text-white hover:bg-violet-700"
@@ -1416,9 +1572,13 @@ export default function RevisaoExtracaoPage() {
               >
                 {criando && <Loader2 className="h-4 w-4 animate-spin" />}
                 {criando
-                  ? sessao.processo_id ? "Confirmando dados..." : "Criando processo..."
+                  ? sessao.processo_id
+                    ? "Confirmando dados..."
+                    : "Criando processo..."
                   : gateComprobatorios.todosConfirmados
-                    ? sessao.processo_id ? "Confirmar dados" : "Criar processo"
+                    ? sessao.processo_id
+                      ? "Confirmar dados"
+                      : "Criar processo"
                     : `Confirmar ${gateComprobatorios.faltam} doc(s) restante(s)`}
               </button>
             )}
@@ -1451,7 +1611,7 @@ export default function RevisaoExtracaoPage() {
         const arquivoAtual =
           dialogComprobatorio?.arquivo_index != null
             ? arquivosClassif[dialogComprobatorio.arquivo_index]
-            : null
+            : null;
         return (
           <DialogVisualizarDocumento
             confirmacao={dialogComprobatorio}
@@ -1466,7 +1626,7 @@ export default function RevisaoExtracaoPage() {
             substituindo={substituindoArquivo}
             onFechar={() => setDialogComprobatorio(null)}
           />
-        )
+        );
       })()}
 
       {/* Dialog de seleção manual de arquivo (sessão 044) */}
@@ -1485,12 +1645,12 @@ export default function RevisaoExtracaoPage() {
           bloqueantes={modalOverride.bloqueantes}
           onCancelar={() => setModalOverride(null)}
           onConfirmar={async (justificativa) => {
-            await criarProcesso(justificativa)
+            await criarProcesso(justificativa);
           }}
         />
       )}
     </>
-  )
+  );
 }
 
 // ─── Subcomponente: indicador de auto-save ──────────────────────────────────
@@ -1500,21 +1660,23 @@ function AutoSaveIndicator({
   dirty,
   ultimoSalvamento,
 }: {
-  status: "idle" | "saving" | "saved" | "error"
-  dirty: boolean
-  ultimoSalvamento: Date | null
+  status: "idle" | "saving" | "saved" | "error";
+  dirty: boolean;
+  ultimoSalvamento: Date | null;
 }) {
   // Formata "às HH:MM de DD/MM/AA"
   const timestampStr = ultimoSalvamento
     ? (() => {
-        const hh = ultimoSalvamento.getHours().toString().padStart(2, "0")
-        const mm = ultimoSalvamento.getMinutes().toString().padStart(2, "0")
-        const dd = ultimoSalvamento.getDate().toString().padStart(2, "0")
-        const mo = (ultimoSalvamento.getMonth() + 1).toString().padStart(2, "0")
-        const aa = ultimoSalvamento.getFullYear().toString().slice(2)
-        return `às ${hh}:${mm} de ${dd}/${mo}/${aa}`
+        const hh = ultimoSalvamento.getHours().toString().padStart(2, "0");
+        const mm = ultimoSalvamento.getMinutes().toString().padStart(2, "0");
+        const dd = ultimoSalvamento.getDate().toString().padStart(2, "0");
+        const mo = (ultimoSalvamento.getMonth() + 1)
+          .toString()
+          .padStart(2, "0");
+        const aa = ultimoSalvamento.getFullYear().toString().slice(2);
+        return `às ${hh}:${mm} de ${dd}/${mo}/${aa}`;
       })()
-    : null
+    : null;
 
   if (status === "saving") {
     return (
@@ -1524,10 +1686,12 @@ function AutoSaveIndicator({
           Salvando...
         </div>
         {timestampStr && (
-          <span className="text-[11px] text-gray-400">Salvo automaticamente, {timestampStr}</span>
+          <span className="text-[11px] text-gray-400">
+            Salvo automaticamente, {timestampStr}
+          </span>
         )}
       </div>
-    )
+    );
   }
   if (status === "saved") {
     return (
@@ -1540,7 +1704,7 @@ function AutoSaveIndicator({
           <span className="text-[11px] text-gray-400">{timestampStr}</span>
         )}
       </div>
-    )
+    );
   }
   if (status === "error") {
     return (
@@ -1550,10 +1714,12 @@ function AutoSaveIndicator({
           Erro ao salvar
         </div>
         {timestampStr && (
-          <span className="text-[11px] text-gray-400">Último salvo {timestampStr}</span>
+          <span className="text-[11px] text-gray-400">
+            Último salvo {timestampStr}
+          </span>
         )}
       </div>
-    )
+    );
   }
   if (dirty) {
     return (
@@ -1563,13 +1729,15 @@ function AutoSaveIndicator({
           Alterações não salvas
         </div>
         {timestampStr && (
-          <span className="text-[11px] text-gray-400">Último salvo {timestampStr}</span>
+          <span className="text-[11px] text-gray-400">
+            Último salvo {timestampStr}
+          </span>
         )}
       </div>
-    )
+    );
   }
   // idle sem ultimoSalvamento → nada
-  if (!timestampStr) return null
+  if (!timestampStr) return null;
   // idle com timestamp → mostra permanente
   return (
     <div className="flex flex-col items-end gap-0.5">
@@ -1579,7 +1747,7 @@ function AutoSaveIndicator({
       </div>
       <span className="text-[11px] text-gray-400">{timestampStr}</span>
     </div>
-  )
+  );
 }
 
 // ─── Subcomponente: painel de processamento ─────────────────────────────────
@@ -1590,17 +1758,17 @@ function ProcessandoPainel({
   tempoDecorrido,
   erroFetch,
 }: {
-  totalArquivos: number
-  etapaIndex: number
-  tempoDecorrido: number
-  erroFetch?: string | null
+  totalArquivos: number;
+  etapaIndex: number;
+  tempoDecorrido: number;
+  erroFetch?: string | null;
 }) {
-  const etapa = ETAPAS_LOADING[etapaIndex]
-  const Icone = etapa.icone
+  const etapa = ETAPAS_LOADING[etapaIndex];
+  const Icone = etapa.icone;
 
   // Progresso fake suave: vai de 0 a 90% nos primeiros 2 min, e fica em 90% até o fim
-  const progressoFake = Math.min(90, (tempoDecorrido / (2 * 60 * 1000)) * 90)
-  const segundos = Math.floor(tempoDecorrido / 1000)
+  const progressoFake = Math.min(90, (tempoDecorrido / (2 * 60 * 1000)) * 90);
+  const segundos = Math.floor(tempoDecorrido / 1000);
 
   return (
     <div className="container mx-auto max-w-2xl px-4 py-16">
@@ -1618,7 +1786,8 @@ function ProcessandoPainel({
           Nossa IA está trabalhando
         </h1>
         <p className="mt-2 text-center text-sm text-gray-500 dark:text-gray-400">
-          Processando {totalArquivos} {totalArquivos === 1 ? "arquivo" : "arquivos"}
+          Processando {totalArquivos}{" "}
+          {totalArquivos === 1 ? "arquivo" : "arquivos"}
           {segundos > 0 && ` • ${segundos}s decorridos`}
         </p>
 
@@ -1658,7 +1827,7 @@ function ProcessandoPainel({
         )}
       </div>
     </div>
-  )
+  );
 }
 
 // ─── Subcomponente: painel de erro ──────────────────────────────────────────
@@ -1669,17 +1838,21 @@ function ErroPainel({
   onVoltar,
   onTentarNovamente,
 }: {
-  titulo: string
-  mensagem: string
-  onVoltar: () => void
-  onTentarNovamente?: () => void
+  titulo: string;
+  mensagem: string;
+  onVoltar: () => void;
+  onTentarNovamente?: () => void;
 }) {
   return (
     <div className="container mx-auto max-w-2xl px-4 py-16">
       <div className="rounded-xl border border-red-200 bg-red-50 p-8 text-center dark:border-red-900 dark:bg-red-950/30">
         <AlertTriangle className="mx-auto h-12 w-12 text-red-500" />
-        <h1 className="mt-4 text-xl font-bold text-red-900 dark:text-red-200">{titulo}</h1>
-        <p className="mt-2 text-sm text-red-700 dark:text-red-300">{mensagem}</p>
+        <h1 className="mt-4 text-xl font-bold text-red-900 dark:text-red-200">
+          {titulo}
+        </h1>
+        <p className="mt-2 text-sm text-red-700 dark:text-red-300">
+          {mensagem}
+        </p>
         <div className="mt-6 flex flex-wrap items-center justify-center gap-3">
           {onTentarNovamente && (
             <button
@@ -1699,5 +1872,5 @@ function ErroPainel({
         </div>
       </div>
     </div>
-  )
+  );
 }
