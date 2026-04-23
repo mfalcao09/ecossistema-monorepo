@@ -42,12 +42,21 @@ function statusLabel(status: CobrancaPendente["status"]): {
 } {
   switch (status) {
     case "vencido":
-      return { label: "Vencido", className: "bg-red-50 text-red-700 border-red-200" };
+      return {
+        label: "Vencido",
+        className: "bg-red-50 text-red-700 border-red-200",
+      };
     case "enviado":
-      return { label: "Enviado", className: "bg-blue-50 text-blue-700 border-blue-200" };
+      return {
+        label: "Enviado",
+        className: "bg-blue-50 text-blue-700 border-blue-200",
+      };
     case "gerado":
     default:
-      return { label: "Aguardando", className: "bg-gray-50 text-gray-700 border-gray-200" };
+      return {
+        label: "Aguardando",
+        className: "bg-gray-50 text-gray-700 border-gray-200",
+      };
   }
 }
 
@@ -156,9 +165,8 @@ export default function SolicitarPagamentoModal({
                 Nenhuma cobrança pendente.
               </p>
               <p>
-                Este aluno está em dia. Para emitir uma cobrança avulsa (taxa
-                de 2ª via, multa de trancamento etc.), use o módulo
-                Financeiro.
+                Este aluno está em dia. Para emitir uma cobrança avulsa (taxa de
+                2ª via, multa de trancamento etc.), use o módulo Financeiro.
               </p>
             </div>
           )}
@@ -200,7 +208,10 @@ export default function SolicitarPagamentoModal({
                       <p className="text-xs text-gray-500">
                         Vence em {formatData(c.data_vencimento)}
                         {c.your_number && (
-                          <span className="text-gray-400"> · {c.your_number}</span>
+                          <span className="text-gray-400">
+                            {" "}
+                            · {c.your_number}
+                          </span>
                         )}
                       </p>
                     </div>

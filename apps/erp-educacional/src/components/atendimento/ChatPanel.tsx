@@ -8,9 +8,20 @@
 
 import { useState, useEffect, useRef, useCallback } from "react";
 import {
-  Send, CheckCheck, Clock, AlertCircle, Paperclip, Smile,
-  ChevronDown, UserCheck, CheckSquare, Archive, RotateCcw,
-  Phone, MoreVertical, DollarSign
+  Send,
+  CheckCheck,
+  Clock,
+  AlertCircle,
+  Paperclip,
+  Smile,
+  ChevronDown,
+  UserCheck,
+  CheckSquare,
+  Archive,
+  RotateCcw,
+  Phone,
+  MoreVertical,
+  DollarSign,
 } from "lucide-react";
 import { createBrowserClient } from "@supabase/ssr";
 import ClosedWindowBanner from "./inbox/ClosedWindowBanner";
@@ -41,33 +52,54 @@ interface ConversaDetalhe {
   window_expires_at?: string;
   assignee_id?: string;
   deal_id?: string | null;
-  atendimento_contacts: { id: string; name: string; phone_number: string } | null;
-  atendimento_inboxes: { id: string; name: string; channel_type: string } | null;
-  atendimento_queues:  { id: string; name: string; color_hex: string } | null;
-  atendimento_agents:  { id: string; name: string } | null;
+  atendimento_contacts: {
+    id: string;
+    name: string;
+    phone_number: string;
+  } | null;
+  atendimento_inboxes: {
+    id: string;
+    name: string;
+    channel_type: string;
+  } | null;
+  atendimento_queues: { id: string; name: string; color_hex: string } | null;
+  atendimento_agents: { id: string; name: string } | null;
 }
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
 function formatarHora(iso: string): string {
   try {
-    return new Date(iso).toLocaleTimeString("pt-BR", { hour: "2-digit", minute: "2-digit" });
-  } catch { return ""; }
+    return new Date(iso).toLocaleTimeString("pt-BR", {
+      hour: "2-digit",
+      minute: "2-digit",
+    });
+  } catch {
+    return "";
+  }
 }
 
 function formatarData(iso: string): string {
   try {
     return new Date(iso).toLocaleDateString("pt-BR", {
-      day: "numeric", month: "long", year: "numeric"
+      day: "numeric",
+      month: "long",
+      year: "numeric",
     });
-  } catch { return ""; }
+  } catch {
+    return "";
+  }
 }
 
 function StatusIcone({ status }: { status: string }) {
-  if (status === "read")      return <CheckCheck size={12} className="text-blue-400" />;
-  if (status === "delivered") return <CheckCheck size={12} className="text-gray-400" />;
-  if (status === "sent")      return <CheckCheck size={12} className="text-gray-300" />;
-  if (status === "failed")    return <AlertCircle size={12} className="text-red-400" />;
+  if (status === "read")
+    return <CheckCheck size={12} className="text-blue-400" />;
+  if (status === "delivered")
+    return <CheckCheck size={12} className="text-gray-400" />;
+  if (status === "sent")
+    return <CheckCheck size={12} className="text-gray-300" />;
+  if (status === "failed")
+    return <AlertCircle size={12} className="text-red-400" />;
   return <Clock size={12} className="text-gray-300" />;
 }
 
@@ -78,22 +110,25 @@ interface Props {
   onConversaAtualizada?: () => void;
 }
 
-export default function ChatPanel({ conversationId, onConversaAtualizada }: Props) {
-  const [conversa,  setConversa]  = useState<ConversaDetalhe | null>(null);
+export default function ChatPanel({
+  conversationId,
+  onConversaAtualizada,
+}: Props) {
+  const [conversa, setConversa] = useState<ConversaDetalhe | null>(null);
   const [mensagens, setMensagens] = useState<Mensagem[]>([]);
-  const [texto,     setTexto]     = useState("");
-  const [enviando,  setEnviando]  = useState(false);
-  const [loading,   setLoading]   = useState(false);
+  const [texto, setTexto] = useState("");
+  const [enviando, setEnviando] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [showTemplateModal, setShowTemplateModal] = useState(false);
   const [showPagamentoModal, setShowPagamentoModal] = useState(false);
 
-  const bottomRef  = useRef<HTMLDivElement>(null);
+  const bottomRef = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   // Supabase realtime
   const supabase = createBrowserClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
   );
 
   // ── Carregar conversa + mensagens ────────────────────────────────────
@@ -101,8 +136,11 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
     if (!conversationId) return;
     setLoading(true);
     try {
-      const res  = await fetch(`/api/atendimento/conversas/${conversationId}`);
-      const data = await res.json() as { conversa: ConversaDetalhe; mensagens: Mensagem[] };
+      const res = await fetch(`/api/atendimento/conversas/${conversationId}`);
+      const data = (await res.json()) as {
+        conversa: ConversaDetalhe;
+        mensagens: Mensagem[];
+      };
       setConversa(data.conversa);
       setMensagens(data.mensagens ?? []);
     } catch (err) {
@@ -136,12 +174,12 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
         },
         (payload) => {
           const nova = payload.new as Mensagem;
-          setMensagens(prev => {
+          setMensagens((prev) => {
             // Evitar duplicata (pode já ter chegado pelo fetch otimístico)
-            if (prev.some(m => m.id === nova.id)) return prev;
+            if (prev.some((m) => m.id === nova.id)) return prev;
             return [...prev, nova];
           });
-        }
+        },
       )
       .on(
         "postgres_changes",
@@ -153,14 +191,18 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
         },
         (payload) => {
           const atualizada = payload.new as Mensagem;
-          setMensagens(prev =>
-            prev.map(m => m.id === atualizada.id ? { ...m, ...atualizada } : m)
+          setMensagens((prev) =>
+            prev.map((m) =>
+              m.id === atualizada.id ? { ...m, ...atualizada } : m,
+            ),
           );
-        }
+        },
       )
       .subscribe();
 
-    return () => { supabase.removeChannel(channel); };
+    return () => {
+      supabase.removeChannel(channel);
+    };
   }, [conversationId, supabase]);
 
   // ── Auto-scroll ao final ─────────────────────────────────────────────
@@ -186,27 +228,30 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
       sender_type: "agent",
       created_at: new Date().toISOString(),
     };
-    setMensagens(prev => [...prev, tempMsg]);
+    setMensagens((prev) => [...prev, tempMsg]);
 
     try {
-      const res  = await fetch(`/api/atendimento/conversas/${conversationId}/messages`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ content: conteudo }),
-      });
-      const data = await res.json() as { mensagem: Mensagem };
+      const res = await fetch(
+        `/api/atendimento/conversas/${conversationId}/messages`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ content: conteudo }),
+        },
+      );
+      const data = (await res.json()) as { mensagem: Mensagem };
 
       // Substituir mensagem temporária pela real
       if (data.mensagem) {
-        setMensagens(prev =>
-          prev.map(m => m.id === tempId ? data.mensagem : m)
+        setMensagens((prev) =>
+          prev.map((m) => (m.id === tempId ? data.mensagem : m)),
         );
       }
     } catch (err) {
       console.error("[ChatPanel] erro ao enviar", err);
       // Marcar como falha
-      setMensagens(prev =>
-        prev.map(m => m.id === tempId ? { ...m, status: "failed" } : m)
+      setMensagens((prev) =>
+        prev.map((m) => (m.id === tempId ? { ...m, status: "failed" } : m)),
       );
     } finally {
       setEnviando(false);
@@ -227,12 +272,14 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
   }
 
   // ── Agrupar mensagens por data ───────────────────────────────────────
-  const mensagensAgrupadas = mensagens.reduce<{
-    data: string;
-    items: Mensagem[];
-  }[]>((acc, msg) => {
+  const mensagensAgrupadas = mensagens.reduce<
+    {
+      data: string;
+      items: Mensagem[];
+    }[]
+  >((acc, msg) => {
     const data = formatarData(msg.created_at);
-    const grupo = acc.find(g => g.data === data);
+    const grupo = acc.find((g) => g.data === data);
     if (grupo) grupo.items.push(msg);
     else acc.push({ data, items: [msg] });
     return acc;
@@ -251,13 +298,12 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
     );
   }
 
-  const contato    = conversa?.atendimento_contacts;
+  const contato = conversa?.atendimento_contacts;
   const isResolved = conversa?.status === "resolved";
   const jaTemAgente = !!conversa?.atendimento_agents;
 
   return (
     <div className="flex-1 flex flex-col h-full overflow-hidden bg-white">
-
       {/* ── Header da conversa ──────────────────────────────────────── */}
       <div className="flex items-center gap-3 px-4 py-3 border-b border-gray-200 bg-white flex-shrink-0">
         {loading ? (
@@ -276,7 +322,9 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
                 <p className="text-[11px] text-gray-400 truncate">
                   {contato?.phone_number}
                   {conversa?.ticket_number && (
-                    <span className="ml-2 text-green-600 font-medium">#{conversa.ticket_number}</span>
+                    <span className="ml-2 text-green-600 font-medium">
+                      #{conversa.ticket_number}
+                    </span>
                   )}
                 </p>
                 {/* S4: breadcrumb pipeline › stage (só aparece se deal_id estiver definido) */}
@@ -288,15 +336,24 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
 
             {/* Status badge */}
             {conversa?.status && (
-              <span className={`text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0 ${
-                conversa.status === "open"     ? "bg-green-100 text-green-700"  :
-                conversa.status === "pending"  ? "bg-amber-100 text-amber-700"  :
-                conversa.status === "resolved" ? "bg-gray-100 text-gray-500"    :
-                "bg-blue-100 text-blue-700"
-              }`}>
-                {conversa.status === "open"     ? "Aberta"     :
-                 conversa.status === "pending"  ? "Aguardando" :
-                 conversa.status === "resolved" ? "Resolvida"  : "Adiada"}
+              <span
+                className={`text-[10px] font-bold px-2 py-1 rounded-full flex-shrink-0 ${
+                  conversa.status === "open"
+                    ? "bg-green-100 text-green-700"
+                    : conversa.status === "pending"
+                      ? "bg-amber-100 text-amber-700"
+                      : conversa.status === "resolved"
+                        ? "bg-gray-100 text-gray-500"
+                        : "bg-blue-100 text-blue-700"
+                }`}
+              >
+                {conversa.status === "open"
+                  ? "Aberta"
+                  : conversa.status === "pending"
+                    ? "Aguardando"
+                    : conversa.status === "resolved"
+                      ? "Resolvida"
+                      : "Adiada"}
               </span>
             )}
 
@@ -315,7 +372,10 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
 
             {/* Ações */}
             <div className="flex items-center gap-1 flex-shrink-0">
-              <button className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors" title="Ligar">
+              <button
+                className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+                title="Ligar"
+              >
                 <Phone size={14} />
               </button>
 
@@ -351,8 +411,11 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
       <div className="flex-1 overflow-y-auto p-4 space-y-1 bg-[#f0f2f5]">
         {loading ? (
           <div className="space-y-3">
-            {[1, 2, 3].map(i => (
-              <div key={i} className={`flex ${i % 2 === 0 ? "justify-end" : "justify-start"}`}>
+            {[1, 2, 3].map((i) => (
+              <div
+                key={i}
+                className={`flex ${i % 2 === 0 ? "justify-end" : "justify-start"}`}
+              >
                 <div className="h-12 w-48 bg-white rounded-xl animate-pulse" />
               </div>
             ))}
@@ -363,18 +426,20 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
             <p className="text-xs mt-1">Envie uma mensagem para iniciar</p>
           </div>
         ) : (
-          mensagensAgrupadas.map(grupo => (
+          mensagensAgrupadas.map((grupo) => (
             <div key={grupo.data}>
               {/* Separador de data */}
               <div className="flex items-center gap-3 my-4">
                 <div className="flex-1 h-px bg-gray-300/50" />
-                <span className="text-[10px] text-gray-500 bg-[#f0f2f5] px-2 font-medium">{grupo.data}</span>
+                <span className="text-[10px] text-gray-500 bg-[#f0f2f5] px-2 font-medium">
+                  {grupo.data}
+                </span>
                 <div className="flex-1 h-px bg-gray-300/50" />
               </div>
 
-              {grupo.items.map(msg => {
-                const isOutgoing  = msg.message_type === "outgoing";
-                const isActivity  = msg.message_type === "activity";
+              {grupo.items.map((msg) => {
+                const isOutgoing = msg.message_type === "outgoing";
+                const isActivity = msg.message_type === "activity";
 
                 // Mensagem de sistema/atividade (centralizada)
                 if (isActivity) {
@@ -405,12 +470,18 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
                           {msg.content}
                         </p>
                       ) : (
-                        <p className="text-sm text-gray-500 italic">{msg.content}</p>
+                        <p className="text-sm text-gray-500 italic">
+                          {msg.content}
+                        </p>
                       )}
 
                       {/* Hora + status */}
-                      <div className={`flex items-center gap-1 mt-1 ${isOutgoing ? "justify-end" : "justify-start"}`}>
-                        <span className="text-[10px] text-gray-400">{formatarHora(msg.created_at)}</span>
+                      <div
+                        className={`flex items-center gap-1 mt-1 ${isOutgoing ? "justify-end" : "justify-start"}`}
+                      >
+                        <span className="text-[10px] text-gray-400">
+                          {formatarHora(msg.created_at)}
+                        </span>
                         {isOutgoing && <StatusIcone status={msg.status} />}
                       </div>
                     </div>
@@ -446,13 +517,21 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
       />
 
       {/* ── Toolbar de envio ────────────────────────────────────────── */}
-      <div className={`flex-shrink-0 border-t border-gray-200 bg-white p-3 ${isResolved ? "opacity-50 pointer-events-none" : ""}`}>
+      <div
+        className={`flex-shrink-0 border-t border-gray-200 bg-white p-3 ${isResolved ? "opacity-50 pointer-events-none" : ""}`}
+      >
         {/* Toolbar de anexos */}
         <div className="flex items-center gap-1 mb-2">
-          <button className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors" title="Anexar arquivo">
+          <button
+            className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+            title="Anexar arquivo"
+          >
             <Paperclip size={14} />
           </button>
-          <button className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors" title="Emoji">
+          <button
+            className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors"
+            title="Emoji"
+          >
             <Smile size={14} />
           </button>
           <button
@@ -473,14 +552,18 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
           <textarea
             ref={textareaRef}
             value={texto}
-            onChange={e => setTexto(e.target.value)}
-            onKeyDown={e => {
+            onChange={(e) => setTexto(e.target.value)}
+            onKeyDown={(e) => {
               if (e.key === "Enter" && !e.shiftKey) {
                 e.preventDefault();
                 enviar();
               }
             }}
-            placeholder={isResolved ? "Conversa resolvida" : "Digite sua mensagem… (Enter para enviar)"}
+            placeholder={
+              isResolved
+                ? "Conversa resolvida"
+                : "Digite sua mensagem… (Enter para enviar)"
+            }
             rows={2}
             disabled={isResolved || enviando}
             className="flex-1 text-sm border border-gray-200 rounded-xl px-3 py-2 resize-none focus:outline-none focus:ring-2 focus:ring-green-500 disabled:bg-gray-50 disabled:text-gray-400"

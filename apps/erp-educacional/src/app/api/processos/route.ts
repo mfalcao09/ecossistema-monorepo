@@ -5,6 +5,10 @@ import { sanitizarErro } from "@/lib/security/sanitize-error";
 import { processoSchema } from "@/lib/security/zod-schemas";
 import { montarSnapshotExtracao } from "@/lib/diploma/snapshot";
 
+// Sessão 2026-04-23 — fix produção travando 300s (ver commit).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 interface ProcessoResponse {
   id: string;
   diploma_id?: string;
@@ -25,7 +29,12 @@ interface ProcessoResponse {
 // GET - Listar processos com dados agregados
 export const GET = protegerRota(
   async (request, { userId, tenantId }) => {
+    const t0 = Date.now();
+    console.log("[api/processos] enter handler");
     const supabase = await createClient();
+    console.log("[api/processos] supabase client ready", {
+      dt: Date.now() - t0,
+    });
     const { searchParams } = new URL(request.url);
     const status = searchParams.get("status") || "";
     const search = searchParams.get("search") || "";

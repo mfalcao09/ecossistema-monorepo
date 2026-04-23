@@ -10,16 +10,16 @@ Replicar o módulo **DS Voice** do Nexvy dentro do ERP FIC: biblioteca de mensag
 
 ## Commits da sessão
 
-| # | SHA | Descrição |
-|---|---|---|
-| 1 | `6d8bc62` | migration 9 tabelas `ds_voice_*` + RLS + realtime publication |
-| 2 | `0e3af08` | parser `variables.ts` isomórfico + 22 testes unit (vitest) |
-| 3 | `47fc2e4` | APIs CRUD (20 rotas) + worker cron + webhook hook + IA transcription |
-| 4 | `46f7418` | UI biblioteca (6 abas) + funis editor + gatilhos + menu sidebar + cron vercel.json |
-| 5 | `3010748` | PENDENCIAS.md P-116..P-129 |
-| 6 | `c44de30` | fecha P-116..P-120 (pendências críticas aplicadas em prod) |
-| 7 | `c1732eb` | correção `apps/erp-educacional/CLAUDE.md` + contextos (ERP = `ifdnjieklngcfodmtied`) |
-| 8 | `b4c7ea6` | fix CodeQL SSRF: allowlist Meta CDN hosts em `ia-transcription.ts` |
+| #   | SHA       | Descrição                                                                            |
+| --- | --------- | ------------------------------------------------------------------------------------ |
+| 1   | `6d8bc62` | migration 9 tabelas `ds_voice_*` + RLS + realtime publication                        |
+| 2   | `0e3af08` | parser `variables.ts` isomórfico + 22 testes unit (vitest)                           |
+| 3   | `47fc2e4` | APIs CRUD (20 rotas) + worker cron + webhook hook + IA transcription                 |
+| 4   | `46f7418` | UI biblioteca (6 abas) + funis editor + gatilhos + menu sidebar + cron vercel.json   |
+| 5   | `3010748` | PENDENCIAS.md P-116..P-129                                                           |
+| 6   | `c44de30` | fecha P-116..P-120 (pendências críticas aplicadas em prod)                           |
+| 7   | `c1732eb` | correção `apps/erp-educacional/CLAUDE.md` + contextos (ERP = `ifdnjieklngcfodmtied`) |
+| 8   | `b4c7ea6` | fix CodeQL SSRF: allowlist Meta CDN hosts em `ia-transcription.ts`                   |
 
 Após rebase em main + force-push (`3a26e64`), squash merge em `36aa635`.
 
@@ -88,13 +88,13 @@ if (msg.type === 'audio') {
 
 ## Pendências críticas (P-116..P-120) — todas resolvidas em prod
 
-| ID | Resolução |
-|---|---|
-| P-116 | Migration S9 + pré-reqs S4/S5/S6/S7/S8a/S8b aplicadas via Supabase MCP `apply_migration` no ERP `ifdnjieklngcfodmtied`. Validação: 9 `ds_voice_tables`, 6 realtime publication, RLS ativo. |
-| P-117 | Seed `role_permissions` aplicado via `execute_sql` (192 linhas). `ds_voice` grants: Admin all, Atendente view+create+edit, Restrito view only. |
-| P-118 | `ATENDIMENTO_DS_VOICE_ENABLED=true` + `NEXT_PUBLIC_*` nos 3 envs (dev/preview/prod) do projeto `prj_VIEmyVHGD61ow5uf5pmBJp5W7eAX`. Preview via Vercel REST API (CLI 51.6.1 interativa prompt). |
+| ID    | Resolução                                                                                                                                                                                                   |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| P-116 | Migration S9 + pré-reqs S4/S5/S6/S7/S8a/S8b aplicadas via Supabase MCP `apply_migration` no ERP `ifdnjieklngcfodmtied`. Validação: 9 `ds_voice_tables`, 6 realtime publication, RLS ativo.                  |
+| P-117 | Seed `role_permissions` aplicado via `execute_sql` (192 linhas). `ds_voice` grants: Admin all, Atendente view+create+edit, Restrito view only.                                                              |
+| P-118 | `ATENDIMENTO_DS_VOICE_ENABLED=true` + `NEXT_PUBLIC_*` nos 3 envs (dev/preview/prod) do projeto `prj_VIEmyVHGD61ow5uf5pmBJp5W7eAX`. Preview via Vercel REST API (CLI 51.6.1 interativa prompt).              |
 | P-119 | Bucket Storage `atendimento` criado (public, 100MB, 25 mime types) + 4 policies em `storage.objects`: `service_role` ALL; `authenticated` INSERT/UPDATE/DELETE em `ds-voice/*`; `anon+auth` SELECT público. |
-| P-120 | Resolvido reusando `ADMIN_SECRET` existente (10d ago) — worker cron aceita `CRON_SECRET ?? ADMIN_SECRET`. |
+| P-120 | Resolvido reusando `ADMIN_SECRET` existente (10d ago) — worker cron aceita `CRON_SECRET ?? ADMIN_SECRET`.                                                                                                   |
 
 ## Descoberta canônica
 
@@ -127,6 +127,7 @@ CodeQL PR #59 flagou SSRF crítico em `ia-transcription.ts:40` — `fetch(${GRAP
 ## CI / merge
 
 Todos os 11 checks verdes no commit final:
+
 - `lint-and-test`, `lint-python`, `Secrets scan (gitleaks)`
 - `Dependency audit (Node.js)`, `Dependency audit (Python)`
 - `CodeQL analysis (typescript)`, `CodeQL analysis (python)`, `CodeQL` aggregate
@@ -154,4 +155,4 @@ Branch protection exigiu rebase up-to-date (`mergeStateStatus: BEHIND` → rebas
 
 ---
 
-*Log consolidado no encerramento da sessão. Dual-write: memória em `ecosystem_memory` (Supabase ECOSYSTEM `gqckbunsfjgerbuiyzvn`) e `MEMORY.md` (neste commit).*
+_Log consolidado no encerramento da sessão. Dual-write: memória em `ecosystem_memory` (Supabase ECOSYSTEM `gqckbunsfjgerbuiyzvn`) e `MEMORY.md` (neste commit)._

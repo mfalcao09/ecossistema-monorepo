@@ -6,7 +6,7 @@
  * Mais `error` para falhas de rede/autenticação.
  */
 
-export type MessageRole = 'user' | 'assistant' | 'system';
+export type MessageRole = "user" | "assistant" | "system";
 
 export interface ChatMessage {
   id: string;
@@ -19,13 +19,13 @@ export interface ChatMessage {
 }
 
 export type OrchestratorEventType =
-  | 'init'
-  | 'thinking'
-  | 'tool_use'
-  | 'tool_result'
-  | 'assistant_message'
-  | 'end'
-  | 'error';
+  | "init"
+  | "thinking"
+  | "tool_use"
+  | "tool_result"
+  | "assistant_message"
+  | "end"
+  | "error";
 
 export interface OrchestratorEvent<T = unknown> {
   type: OrchestratorEventType;

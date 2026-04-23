@@ -72,7 +72,11 @@ export function useAlunoContext(conversationId: string | null): State & {
         | { aluno: AlunoBrief; cobrancas: CobrancaPendente[] }
         | { erro: string; message?: string };
 
-      if (res.status === 409 && "erro" in data && data.erro === "contact_sem_aluno") {
+      if (
+        res.status === 409 &&
+        "erro" in data &&
+        data.erro === "contact_sem_aluno"
+      ) {
         setState({
           aluno: null,
           cobrancasPendentes: [],

@@ -17,7 +17,7 @@
    - `20260502_atendimento_etapa1_fk_calendar_deal.sql` (Etapa 1-D)
    - `20260503_atendimento_etapa1_vault_refs.sql` (Etapa 1-D)
    - `20260504_atendimento_etapa2b_ms_graph.sql` (**Etapa 2-B — troca Google por Microsoft Graph**)
-   A migration 20260504 renomeia `google_event_id` → `provider_event_id` e dropa a tabela `atendimento_google_tokens` (obsoleta no fluxo app-only MS Graph).
+     A migration 20260504 renomeia `google_event_id` → `provider_event_id` e dropa a tabela `atendimento_google_tokens` (obsoleta no fluxo app-only MS Graph).
 
 2. [ ] **Env vars Vercel (projeto erp-educacional):**
    - `CRON_SECRET` — segredo para autenticar os cron handlers (`/api/cron/sync-meta-templates`, `/api/cron/dispatch-scheduled-messages`). Gerar com `openssl rand -hex 32`.
@@ -38,7 +38,7 @@
 
 ## 🟡 Débitos técnicos herdados da S5
 
-- **DT-S5-01 — ~~Vault ECOSYSTEM para refresh_token Google~~ RESOLVIDO (Etapa 2-B, 2026-04-22):** fluxo Google OAuth removido e substituído por Microsoft Graph app-only. Sem refresh_token per-user — MSAL cacheia token do app em memória. Tabela `atendimento_google_tokens` dropada na migration 20260504. Credenciais do app (`OFFICE365_FIC_*`) no vault SC-29 via `resolveOffice365Credentials`.
+- **DT-S5-01 — ~~Vault ECOSYSTEM para refresh_token Google~~ RESOLVIDO (Etapa 2-B, 2026-04-22):** fluxo Google OAuth removido e substituído por Microsoft Graph app-only. Sem refresh*token per-user — MSAL cacheia token do app em memória. Tabela `atendimento_google_tokens` dropada na migration 20260504. Credenciais do app (`OFFICE365_FIC*\*`) no vault SC-29 via `resolveOffice365Credentials`.
 - **DT-S5-02 — Criptografar `access_token` WABA do inbox.** `provider_config->>'access_token'` está em texto. Migrar para vault com a mesma convenção.
 - **DT-S5-03 — Webhook Meta para status de template.** Hoje sync é pull (cron 30min). Quando a Meta enviar `message_template_status_update` no webhook, processar incrementalmente em `webhook/route.ts`.
 - **DT-S5-04 — FK `atendimento_calendar_events.deal_id`** — migration deixou como UUID solto aguardando S4 criar `atendimento_deals`. Adicionar `REFERENCES public.atendimento_deals(id) ON DELETE SET NULL` após o merge da S4.

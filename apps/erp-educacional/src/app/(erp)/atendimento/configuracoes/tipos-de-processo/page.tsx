@@ -12,7 +12,16 @@
  */
 
 import { useCallback, useEffect, useState } from "react";
-import { Plus, Loader2, Edit3, Trash2, ToggleLeft, ToggleRight, Check, X } from "lucide-react";
+import {
+  Plus,
+  Loader2,
+  Edit3,
+  Trash2,
+  ToggleLeft,
+  ToggleRight,
+  Check,
+  X,
+} from "lucide-react";
 
 interface ProcessType {
   id: string;
@@ -82,7 +91,10 @@ export default function TiposDeProcessoPage() {
           description: newDesc.trim() || undefined,
         }),
       });
-      const data = (await res.json()) as { process_type?: ProcessType; erro?: string };
+      const data = (await res.json()) as {
+        process_type?: ProcessType;
+        erro?: string;
+      };
       if (!res.ok || !data.process_type) {
         setCreateErr(data.erro ?? `HTTP ${res.status}`);
         return;
@@ -164,8 +176,8 @@ export default function TiposDeProcessoPage() {
           </h2>
           <p className="text-sm text-gray-500 mt-0.5">
             Taxonomia usada em protocolos (= processos acadêmicos). Tipos
-            referenciados por protocolos existentes não podem ser excluídos
-            — só desativados.
+            referenciados por protocolos existentes não podem ser excluídos — só
+            desativados.
           </p>
         </div>
         <button
@@ -190,7 +202,9 @@ export default function TiposDeProcessoPage() {
                 type="text"
                 value={newKey}
                 onChange={(e) =>
-                  setNewKey(e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, "_"))
+                  setNewKey(
+                    e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, "_"),
+                  )
                 }
                 placeholder="ex: reingresso_especial"
                 className="w-full rounded-md border border-gray-300 px-2 py-1 text-sm"

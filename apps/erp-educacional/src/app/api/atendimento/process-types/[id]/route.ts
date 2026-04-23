@@ -72,7 +72,8 @@ export const DELETE = withPermission(
       .eq("id", id)
       .select()
       .single();
-    if (error) return NextResponse.json({ erro: error.message }, { status: 500 });
+    if (error)
+      return NextResponse.json({ erro: error.message }, { status: 500 });
     return NextResponse.json({
       process_type: data,
       deleted: false,

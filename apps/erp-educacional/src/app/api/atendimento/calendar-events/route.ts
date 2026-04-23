@@ -35,7 +35,8 @@ export async function GET(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  if (!user)
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const admin = createAdminClient();
   const q = request.nextUrl.searchParams;
@@ -55,7 +56,8 @@ export async function GET(request: NextRequest) {
   if (to) query = query.lte("start_at", to);
 
   const { data, error } = await query;
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error)
+    return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ items: data ?? [] });
 }
 
@@ -64,7 +66,8 @@ export async function POST(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  if (!user)
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   // O mailbox do organizador = email do supabase user. Assume que esse email
   // bate com o UPN do usuário no tenant FIC (P-163).
@@ -126,7 +129,10 @@ export async function POST(request: NextRequest) {
       end_at: d.end_at,
       timezone: d.timezone,
       meeting_url: graphEvent.onlineMeetingJoinUrl ?? null,
-      attendees: d.attendees.map((email) => ({ email, responseStatus: "needsAction" })),
+      attendees: d.attendees.map((email) => ({
+        email,
+        responseStatus: "needsAction",
+      })),
       contact_id: d.contact_id ?? null,
       deal_id: d.deal_id ?? null,
       conversation_id: d.conversation_id ?? null,

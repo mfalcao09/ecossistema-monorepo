@@ -34,7 +34,10 @@ interface PendingMessage {
   content: string;
   message_type: string;
   content_type: string;
-  template_params: { template_id?: string; vars?: Record<string, unknown> } | null;
+  template_params: {
+    template_id?: string;
+    vars?: Record<string, unknown>;
+  } | null;
 }
 
 interface ConversationRow {
@@ -82,9 +85,7 @@ export async function GET(request: NextRequest) {
   }
 
   // 2. Carrega dados das conversations (contact phone + inbox provider_config)
-  const conversationIds = [
-    ...new Set(messages.map((m) => m.conversation_id)),
-  ];
+  const conversationIds = [...new Set(messages.map((m) => m.conversation_id))];
 
   const { data: convsRaw, error: convErr } = await admin
     .from("atendimento_conversations")

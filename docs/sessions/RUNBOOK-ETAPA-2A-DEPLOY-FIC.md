@@ -11,18 +11,18 @@
 
 Colete isso no ambiente local + tenha acesso a:
 
-| Item | Onde | Propósito |
-|---|---|---|
-| `supabase` CLI ≥ 1.200 + login | `supabase login` | Aplicar migrations |
-| `vercel` CLI ≥ 52 + login | `vercel login` + `vercel link` no `apps/erp-educacional/` | Setar env vars |
-| `gh` CLI | já configurado | Checar CI dos PRs |
-| Acesso Dashboard Supabase ECOSYSTEM (`gqckbunsfjgerbuiyzvn`) | login do Marcelo | Popular vault |
-| Acesso Dashboard Supabase ERP (`ifdnjieklngcfodmtied`) | login do Marcelo | Aplicar migrations |
-| Acesso Meta Business Manager → WhatsApp → FIC WABA | login do Marcelo | Template + provider_config |
-| Azure portal → Entra → app `ecossistema-agentes-fic` | login do Marcelo | Verificar secret válido |
-| Acesso Google AI Studio | login do Marcelo | Confirmar/gerar `GEMINI_API_KEY` |
-| Email `@fic.edu.br` dos 4 atendentes | pessoalmente ou RH | Mapear `users.email` → UPN M365 |
-| Credenciais cadastradas no vault | já cadastradas 2026-04-20 (ADR-018) | `OFFICE365_FIC_{TENANT,CLIENT_ID,CLIENT_SECRET}` |
+| Item                                                         | Onde                                                      | Propósito                                        |
+| ------------------------------------------------------------ | --------------------------------------------------------- | ------------------------------------------------ |
+| `supabase` CLI ≥ 1.200 + login                               | `supabase login`                                          | Aplicar migrations                               |
+| `vercel` CLI ≥ 52 + login                                    | `vercel login` + `vercel link` no `apps/erp-educacional/` | Setar env vars                                   |
+| `gh` CLI                                                     | já configurado                                            | Checar CI dos PRs                                |
+| Acesso Dashboard Supabase ECOSYSTEM (`gqckbunsfjgerbuiyzvn`) | login do Marcelo                                          | Popular vault                                    |
+| Acesso Dashboard Supabase ERP (`ifdnjieklngcfodmtied`)       | login do Marcelo                                          | Aplicar migrations                               |
+| Acesso Meta Business Manager → WhatsApp → FIC WABA           | login do Marcelo                                          | Template + provider_config                       |
+| Azure portal → Entra → app `ecossistema-agentes-fic`         | login do Marcelo                                          | Verificar secret válido                          |
+| Acesso Google AI Studio                                      | login do Marcelo                                          | Confirmar/gerar `GEMINI_API_KEY`                 |
+| Email `@fic.edu.br` dos 4 atendentes                         | pessoalmente ou RH                                        | Mapear `users.email` → UPN M365                  |
+| Credenciais cadastradas no vault                             | já cadastradas 2026-04-20 (ADR-018)                       | `OFFICE365_FIC_{TENANT,CLIENT_ID,CLIENT_SECRET}` |
 
 ### Credenciais que precisam estar em mãos
 
@@ -715,6 +715,7 @@ Tempo: ~10min por 100 documentos RAG (rate-limited pela quota free Gemini).
 ## Apêndice B — Lista de PENDENCIAS que esta Etapa fecha/cria
 
 **Fechadas pela Etapa 2-A:**
+
 - P-160 (seed WABA vault) — via Bloco 2.1
 - P-162 (env vars gateway) — via Bloco 3.1
 - P-163 (mapping users.email) — via Bloco 4
@@ -723,6 +724,7 @@ Tempo: ~10min por 100 documentos RAG (rate-limited pela quota free Gemini).
 - P-167 (seed Admin permissions) — via Bloco 6
 
 **Novas pendências que podem surgir:**
+
 - P-169 (se UPN FIC divergir do email Supabase): criar coluna `users.ms_upn`
 - P-170 (se quota Gemini free esgotar): habilitar billing Google Cloud
 
@@ -730,17 +732,17 @@ Tempo: ~10min por 100 documentos RAG (rate-limited pela quota free Gemini).
 
 ## Checkpoints resumo
 
-| Checkpoint | Bloco | Validação |
-|---|---|---|
-| 3 PRs merged + CI verde | 0 | `gh pr list --state merged` |
-| Backup manual criado | 1.0 | Dashboard Supabase → Backups |
-| 13 migrations aplicadas | 1.1-1.13 | `SELECT count(*) FROM schema_migrations` |
-| Vault populated | 2 | `SELECT name FROM ecosystem_credentials WHERE name LIKE '%FIC%'` |
-| Env vars setadas | 3 | `vercel env ls` |
-| UPN mapeado | 4 | Graph `/users/{email}` retorna 200 |
-| provider_config + template submitted | 5 | Dashboard Meta |
-| Admin com settings | 6 | `SELECT ... FROM role_permissions` |
-| Smoke tests passam | 7 | 7.1-7.7 todos ✅ |
+| Checkpoint                           | Bloco    | Validação                                                        |
+| ------------------------------------ | -------- | ---------------------------------------------------------------- |
+| 3 PRs merged + CI verde              | 0        | `gh pr list --state merged`                                      |
+| Backup manual criado                 | 1.0      | Dashboard Supabase → Backups                                     |
+| 13 migrations aplicadas              | 1.1-1.13 | `SELECT count(*) FROM schema_migrations`                         |
+| Vault populated                      | 2        | `SELECT name FROM ecosystem_credentials WHERE name LIKE '%FIC%'` |
+| Env vars setadas                     | 3        | `vercel env ls`                                                  |
+| UPN mapeado                          | 4        | Graph `/users/{email}` retorna 200                               |
+| provider_config + template submitted | 5        | Dashboard Meta                                                   |
+| Admin com settings                   | 6        | `SELECT ... FROM role_permissions`                               |
+| Smoke tests passam                   | 7        | 7.1-7.7 todos ✅                                                 |
 
 ---
 

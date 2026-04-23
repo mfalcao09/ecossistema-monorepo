@@ -37,11 +37,20 @@ interface ProcessoRow {
 function statusPill(status: ProcessoRow["status"]) {
   switch (status) {
     case "open":
-      return { label: "Aberto", className: "bg-blue-50 text-blue-700 border-blue-200" };
+      return {
+        label: "Aberto",
+        className: "bg-blue-50 text-blue-700 border-blue-200",
+      };
     case "resolved":
-      return { label: "Resolvido", className: "bg-green-50 text-green-700 border-green-200" };
+      return {
+        label: "Resolvido",
+        className: "bg-green-50 text-green-700 border-green-200",
+      };
     case "canceled":
-      return { label: "Cancelado", className: "bg-gray-50 text-gray-600 border-gray-200" };
+      return {
+        label: "Cancelado",
+        className: "bg-gray-50 text-gray-600 border-gray-200",
+      };
   }
 }
 

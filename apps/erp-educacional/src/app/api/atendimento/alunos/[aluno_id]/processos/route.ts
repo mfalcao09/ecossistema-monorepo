@@ -28,10 +28,7 @@ export const GET = withPermission(
   if (alunoErr)
     return NextResponse.json({ erro: alunoErr.message }, { status: 500 });
   if (!aluno)
-    return NextResponse.json(
-      { erro: "aluno não encontrado" },
-      { status: 404 },
-    );
+    return NextResponse.json({ erro: "aluno não encontrado" }, { status: 404 });
 
   // Protocols do aluno + join com tipo + conversation origin
   const { data, error } = await ctx.supabase
@@ -56,8 +53,7 @@ export const GET = withPermission(
     .order("created_at", { ascending: false })
     .limit(200);
 
-  if (error)
-    return NextResponse.json({ erro: error.message }, { status: 500 });
+  if (error) return NextResponse.json({ erro: error.message }, { status: 500 });
 
   return NextResponse.json({
     aluno,

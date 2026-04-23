@@ -9,9 +9,9 @@
  *     → mantém session_id para follow-ups (usa /resume nas próximas)
  */
 
-import { useCallback, useRef, useState } from 'react';
+import { useCallback, useRef, useState } from "react";
 
-import { runAgent, type OrchestratorConfig } from '../services/orchestrator';
+import { runAgent, type OrchestratorConfig } from "../services/orchestrator";
 import type {
   AssistantMessageData,
   ChatMessage,
@@ -19,7 +19,7 @@ import type {
   ErrorEventData,
   InitEventData,
   OrchestratorEvent,
-} from '../types';
+} from "../types";
 
 interface UseChatOptions {
   config: OrchestratorConfig;
@@ -66,27 +66,27 @@ export function useChat({ config }: UseChatOptions): UseChatResult {
   const handleEvent = useCallback(
     (event: OrchestratorEvent) => {
       switch (event.type) {
-        case 'init': {
+        case "init": {
           const data = event.data as InitEventData;
           if (data?.session_id) setSessionId(data.session_id);
           break;
         }
-        case 'assistant_message': {
+        case "assistant_message": {
           const data = event.data as AssistantMessageData;
           if (data?.text) appendAssistantChunk(data.text);
           if (data?.session_id) setSessionId(data.session_id);
           break;
         }
-        case 'end': {
+        case "end": {
           const data = event.data as EndEventData;
           if (data?.session_id) setSessionId(data.session_id);
           finalizeAssistant();
           setSending(false);
           break;
         }
-        case 'error': {
+        case "error": {
           const data = event.data as ErrorEventData;
-          setError(data?.message ?? 'Erro desconhecido');
+          setError(data?.message ?? "Erro desconhecido");
           finalizeAssistant();
           setSending(false);
           break;
@@ -108,15 +108,15 @@ export function useChat({ config }: UseChatOptions): UseChatResult {
 
       const userMsg: ChatMessage = {
         id: `u-${Date.now()}`,
-        role: 'user',
+        role: "user",
         content: query.trim(),
         createdAt: new Date().toISOString(),
       };
 
       const assistantMsg: ChatMessage = {
         id: `a-${Date.now()}`,
-        role: 'assistant',
-        content: '',
+        role: "assistant",
+        content: "",
         streaming: true,
         createdAt: new Date().toISOString(),
       };
@@ -126,7 +126,7 @@ export function useChat({ config }: UseChatOptions): UseChatResult {
 
       closeRef.current = runAgent(config, {
         query: query.trim(),
-        userId: 'marcelo',
+        userId: "marcelo",
         sessionId,
         onEvent: handleEvent,
         onError: (err) => {

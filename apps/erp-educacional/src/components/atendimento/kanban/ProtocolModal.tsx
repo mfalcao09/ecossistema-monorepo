@@ -66,9 +66,7 @@ export default function ProtocolModal({
     if (!open || !conversationId) return;
     fetch(`/api/atendimento/conversas/${conversationId}/protocols`)
       .then((r) => r.json())
-      .then((j: { protocols?: Protocol[] }) =>
-        setProtocols(j.protocols ?? []),
-      )
+      .then((j: { protocols?: Protocol[] }) => setProtocols(j.protocols ?? []))
       .catch(console.error);
   }, [open, conversationId]);
 
@@ -259,9 +257,7 @@ export default function ProtocolModal({
                   value={newTypeKey}
                   onChange={(e) =>
                     setNewTypeKey(
-                      e.target.value
-                        .toLowerCase()
-                        .replace(/[^a-z0-9_]/g, "_"),
+                      e.target.value.toLowerCase().replace(/[^a-z0-9_]/g, "_"),
                     )
                   }
                   placeholder="key (ex: reingresso_especial)"

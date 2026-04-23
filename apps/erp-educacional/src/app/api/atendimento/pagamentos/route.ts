@@ -111,10 +111,7 @@ export const GET = withPermission(
     .limit(50);
 
   if (cobrancasErr)
-    return NextResponse.json(
-      { erro: cobrancasErr.message },
-      { status: 500 },
-    );
+    return NextResponse.json({ erro: cobrancasErr.message }, { status: 500 });
 
   return NextResponse.json({
     aluno: aluno as unknown as AlunoBrief,

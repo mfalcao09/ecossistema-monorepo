@@ -18,10 +18,7 @@
 
 import { NextResponse, type NextRequest } from "next/server";
 import { z } from "zod";
-import {
-  checkIdempotency,
-  setIdempotency,
-} from "@ecossistema/billing";
+import { checkIdempotency, setIdempotency } from "@ecossistema/billing";
 import { withPermission } from "@/lib/atendimento/permissions";
 
 /**
@@ -141,10 +138,7 @@ export const POST = withPermission(
     .eq("id", conv.contact_id)
     .maybeSingle();
   if (!contact?.aluno_id) {
-    return NextResponse.json(
-      { erro: "contact_sem_aluno" },
-      { status: 409 },
-    );
+    return NextResponse.json({ erro: "contact_sem_aluno" }, { status: 409 });
   }
 
   const { data: cobranca } = await ctx.supabase
@@ -176,10 +170,7 @@ export const POST = withPermission(
     .eq("id", contact.aluno_id)
     .maybeSingle();
   if (!aluno)
-    return NextResponse.json(
-      { erro: "aluno não encontrado" },
-      { status: 500 },
-    );
+    return NextResponse.json({ erro: "aluno não encontrado" }, { status: 500 });
 
   // 2. Delega emissão PIX ao endpoint Python existente.
   //    Ele já lida com mTLS Inter, multa/juros, idempotência 1-PIX-por-dia.
@@ -252,7 +243,10 @@ export const POST = withPermission(
       `[enviar-pix] falha inserindo atendimento_messages: ${msgErr.message}`,
     );
     return NextResponse.json(
-      { erro: "PIX gerado, mas falha ao enfileirar mensagem", details: msgErr.message },
+      {
+        erro: "PIX gerado, mas falha ao enfileirar mensagem",
+        details: msgErr.message,
+      },
       { status: 500 },
     );
   }
