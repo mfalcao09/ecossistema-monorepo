@@ -78,10 +78,16 @@ const DEFAULT_SECOES: HistoricoSecoesConfig = {
 
 export default function PrintHistoricoPage({
   params,
+  searchParams,
 }: {
   params: Promise<{ diplomaId: string }>
+  searchParams: Promise<{ semTimbrado?: string }>
 }) {
   const { diplomaId } = use(params)
+  const sp = use(searchParams)
+  // Quando o endpoint /pdf recebe { semTimbrado: true }, ele anexa
+  // ?semTimbrado=1 nesta URL → o LivePreview renderiza sem timbrado.
+  const semTimbrado = sp?.semTimbrado === "1"
   const [dados, setDados] = useState<DadosHistorico | null>(null)
   const [erro, setErro] = useState<string | null>(null)
 
@@ -135,9 +141,13 @@ export default function PrintHistoricoPage({
   const tamanhoFonteCabecalho = cfg?.historico_tamanho_fonte_cabecalho ?? 9
   const tamanhoFonteCorpo = cfg?.historico_tamanho_fonte_corpo ?? 7
   const timbradoRaw = cfg?.historico_arquivo_timbrado_url ?? ""
-  const timbradoUrl = timbradoRaw && !timbradoRaw.toLowerCase().endsWith(".pdf")
-    ? timbradoRaw
-    : ""
+  // ?semTimbrado=1 força vazio (user marcou "papel já timbrado" na emissão).
+  // Também trata URL vazia e PDF legado como ausência de timbrado.
+  const timbradoUrl = semTimbrado
+    ? ""
+    : timbradoRaw && !timbradoRaw.toLowerCase().endsWith(".pdf")
+      ? timbradoRaw
+      : ""
   const margens = {
     topo: cfg?.historico_margem_topo ?? 25,
     inferior: cfg?.historico_margem_inferior ?? 20,

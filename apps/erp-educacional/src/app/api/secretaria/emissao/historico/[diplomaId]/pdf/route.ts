@@ -55,6 +55,21 @@ export const POST = protegerRota(
       return NextResponse.json({ error: 'ID do diploma não fornecido' }, { status: 400 })
     }
 
+    // Body opcional — { semTimbrado?: boolean }
+    // Quando true, a rota de print recebe ?semTimbrado=1 e renderiza
+    // o LivePreview sem o background do timbrado digital (caso de
+    // impressão em papel A4 já timbrado fisicamente).
+    let semTimbrado = false
+    try {
+      const contentType = request.headers.get('content-type') ?? ''
+      if (contentType.includes('application/json')) {
+        const body = await request.json().catch(() => ({}))
+        semTimbrado = Boolean((body as { semTimbrado?: boolean }).semTimbrado)
+      }
+    } catch {
+      // body opcional — default false
+    }
+
     // Origem que o Puppeteer vai navegar — mesma do user (cookies são
     // por domínio; se o user está em gestao.ficcassilandia.com.br,
     // o Puppeteer precisa bater nesse domínio).
@@ -64,7 +79,9 @@ export const POST = protegerRota(
       return NextResponse.json({ error: 'Host não identificado' }, { status: 400 })
     }
     const origin = `${proto}://${host}`
-    const printUrl = `${origin}/print/historico/${diplomaId}`
+    const printUrl = semTimbrado
+      ? `${origin}/print/historico/${diplomaId}?semTimbrado=1`
+      : `${origin}/print/historico/${diplomaId}`
 
     // Cookies do usuário — permitem ao Puppeteer passar pelo middleware
     // de autenticação Supabase (mesma sessão).

@@ -19,6 +19,7 @@ import {
 } from "@/components/diploma/ModalOverrideRegra";
 import { PainelAuditoria } from "@/components/diploma/PainelAuditoria";
 import { EditorFluxoAssinaturas } from "@/components/diploma/EditorFluxoAssinaturas";
+import AbaSnapshot from "@/components/diploma/AbaSnapshot";
 import { useAuditoria } from "@/hooks/useAuditoria";
 import { fetchSeguro } from "@/lib/security/fetch-seguro";
 
@@ -1759,7 +1760,7 @@ export default function DiplomaDetalhePage() {
   const [extracao, setExtracao] = useState<ExtracaoSessao | null>(null);
   const [docDigital, setDocDigital] = useState<DocDigital | null>(null);
   const [fluxoAssinaturas, setFluxoAssinaturas] = useState<FluxoAssinaturaUI[]>([]);
-  const [abaAtiva, setAbaAtiva] = useState<"dados" | "xmls" | "documentos" | "acervo" | "historico">("dados");
+  const [abaAtiva, setAbaAtiva] = useState<"dados" | "snapshot" | "xmls" | "documentos" | "acervo" | "historico">("dados");
   const [expandirDados, setExpandirDados] = useState(false);
   const [editandoCurriculo, setEditandoCurriculo] = useState(false);
   const [valorCurriculo, setValorCurriculo] = useState("");
@@ -1919,7 +1920,7 @@ export default function DiplomaDetalhePage() {
 
           {/* Abas */}
           <div className="flex gap-1 bg-gray-100 rounded-xl p-1 w-fit overflow-x-auto">
-            {(["dados", "xmls", "documentos", "acervo", "historico"] as const).map((aba) => (
+            {(["dados", "snapshot", "xmls", "documentos", "acervo", "historico"] as const).map((aba) => (
               <button
                 key={aba}
                 onClick={() => setAbaAtiva(aba)}
@@ -1928,6 +1929,7 @@ export default function DiplomaDetalhePage() {
                 }`}
               >
                 {aba === "dados" && "Dados"}
+                {aba === "snapshot" && "Snapshot"}
                 {aba === "xmls" && `XMLs (${xmls.length})`}
                 {aba === "documentos" && "Documentos"}
                 {aba === "acervo" && "Acervo"}
@@ -2183,6 +2185,11 @@ export default function DiplomaDetalhePage() {
                 </>
               )}
             </div>
+          )}
+
+          {/* Aba: Snapshot Imutável (Fase 0.6) — fonte única dos artefatos oficiais */}
+          {abaAtiva === "snapshot" && (
+            <AbaSnapshot diplomaId={diploma.id} onAtualizar={carregar} />
           )}
 
           {/* Aba: Documentos Complementares (Fase 4) */}
