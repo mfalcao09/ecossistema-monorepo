@@ -80,6 +80,7 @@
 | P-170 | F1-S03 PR1 | test | med | Validar em **deploy real** que `.npmrc` com `node-linker=hoisted` não quebra os apps Vercel (`intentus-plataform`, `diploma-digital`) nem `erp-educacional`. CI passou no PR #56 (preview deploys verdes), mas smoke em prod ainda não foi feito. Testar após próximo deploy de cada | regressões em prod pós-hoisted | 2026-04-21 |
 | P-171 | F1-S03 PR1 | doc | low | Adicionar ao runbook operacional o workaround `gh api -X PUT repos/:o/:r/pulls/:n/merge -f merge_method=merge` para mergear PRs de dentro de worktree filho (gh CLI falha com `'main' is already used by worktree`). Aconteceu no PR #56 | DX ao mergear de worktrees Claude | 2026-04-21 |
 | P-172 | F1-S03 PR1 | refactor | low | Dentro de `apps/jarvis-app/`, trocar placeholder de `Pressable` que só loga console por um `TextInput + FlatList` mínimo para preparar PR 2/4 (chat texto via SSE contra `apps/orchestrator`). Escolhido ficar em placeholder para manter PR 1 minimalista | início PR 2/4 | 2026-04-21 |
+| P-150 | S11-atnd | refactor | med | Plugar `ds-bot-runner` no webhook Meta (`src/app/api/atendimento/webhook/route.ts`) DEPOIS de `runAutomations` (S8a) e DEPOIS de `runDsVoiceTriggers` (S9). Criar módulo `ds-bot-webhook-hook.ts` com `dispatchDsBotForIncomingMessage(conversation, message)` que chama `findTriggeredBot` + `startExecution`/`resumeExecution`. Respeitar flag `ATENDIMENTO_DS_BOT_ENABLED`. | bots responderem automaticamente (hoje só via playground manual) | 2026-04-22 |
 
 ## Resolvidas
 
