@@ -49,6 +49,15 @@ class Settings(BaseSettings):
     jwt_secret: str = "dev-secret-change-in-prod"
     owner_token_hash: str = ""  # sha256 hex de "owner_<token>"
 
+    # Supabase Auth (F1-S03 PR 4/4) — JWTs emitidos pelo projeto ECOSYSTEM
+    # chegam com HS256 + audience 'authenticated'. O SUPABASE_JWT_SECRET
+    # vive em Supabase Dashboard → Project Settings → API → JWT Settings.
+    supabase_jwt_secret: str = ""
+
+    # Allowlist de e-mails permitidos. Vazio = desabilitado (aceita qualquer
+    # JWT válido). Formato: "mrcelooo@gmail.com,outro@ex.com" (comma-separated).
+    allowed_emails: str = ""
+
     # Runtime
     orchestrator_port: int = 8000
     log_level: str = "INFO"

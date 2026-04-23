@@ -5,6 +5,7 @@
     "version": "0.1.0",
     "orientation": "portrait",
     "userInterfaceStyle": "automatic",
+    "scheme": "jarvis",
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
@@ -26,12 +27,18 @@
         {
           "microphonePermission": "Jarvis precisa do microfone para você falar com o Claudinho."
         }
-      ]
+      ],
+      "expo-secure-store"
     ],
     "extra": {
       "orchestratorUrl": "http://localhost:8000",
       "orchestratorToken": "",
-      "agentId": "claudinho"
+      "agentId": "claudinho",
+      "supabaseUrl": "",
+      "supabaseAnonKey": "",
+      "eas": {
+        "projectId": ""
+      }
     }
   }
 }
