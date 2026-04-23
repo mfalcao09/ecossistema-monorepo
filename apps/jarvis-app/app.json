@@ -18,7 +18,9 @@
     },
     "plugins": [],
     "extra": {
-      "orchestratorUrl": "http://localhost:8000"
+      "orchestratorUrl": "http://localhost:8000",
+      "orchestratorToken": "",
+      "agentId": "claudinho"
     }
   }
 }
