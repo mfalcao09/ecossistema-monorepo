@@ -24,6 +24,17 @@ import {
 } from "@ecossistema/billing";
 import { withPermission } from "@/lib/atendimento/permissions";
 
+/**
+ * Workaround de identidade de tipo: `@ecossistema/billing` é buildado contra
+ * sua própria cópia de `@supabase/supabase-js` em devDependencies. Mesmo com
+ * peerDependency, os `.d.ts` do `dist/` apontam pra paths absolutos — TS 5
+ * trata como tipos distintos no Vercel build. Cast `as unknown as
+ * SupabaseClient` usa a identidade de tipo do consumidor. Tech debt P-169:
+ * quando o billing for rebuildado na nova cadeia de release ou consolidar
+ * em @ecossistema/supabase-core compartilhado, remover o cast.
+ */
+type BillingSupabase = Parameters<typeof checkIdempotency>[1];
+
 const postSchema = z.object({
   conversation_id: z.string().uuid(),
   cobranca_id: z.string().uuid(),
@@ -100,7 +111,10 @@ export const POST = withPermission(
 
   const idempotencyKey = req.headers.get("idempotency-key")?.trim() ?? "";
   if (idempotencyKey) {
-    const cached = await checkIdempotency(idempotencyKey, ctx.supabase);
+    const cached = await checkIdempotency(
+      idempotencyKey,
+      ctx.supabase as unknown as BillingSupabase,
+    );
     if (cached) {
       return NextResponse.json(
         { cached: true, ...(cached.result as Record<string, unknown>) },
@@ -253,7 +267,11 @@ export const POST = withPermission(
   };
 
   if (idempotencyKey) {
-    await setIdempotency(idempotencyKey, result, ctx.supabase);
+    await setIdempotency(
+      idempotencyKey,
+      result,
+      ctx.supabase as unknown as BillingSupabase,
+    );
   }
 
   return NextResponse.json(result, { status: 201 });
