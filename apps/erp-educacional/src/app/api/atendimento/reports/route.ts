@@ -18,7 +18,6 @@ import { z } from "zod";
 import { protegerRota } from "@/lib/security/api-guard";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
-  dashboardsEnabled,
   normalizeRange,
   toCSV,
   REPORT_TYPES,
@@ -93,10 +92,13 @@ async function runLeadOrigin(
   to: string,
 ) {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const { data, error } = await (admin as any).rpc("get_lead_origin_breakdown", {
-    range_start: from,
-    range_end: to,
-  });
+  const { data, error } = await (admin as any).rpc(
+    "get_lead_origin_breakdown",
+    {
+      range_start: from,
+      range_end: to,
+    },
+  );
   if (error) throw new Error(error.message);
   return data ?? [];
 }
@@ -158,13 +160,6 @@ function addOneDay(iso: string): string {
 
 // ── Handlers ──────────────────────────────────────────────────────────────────
 export const GET = protegerRota(async (request: NextRequest) => {
-  if (!dashboardsEnabled()) {
-    return NextResponse.json(
-      { ok: false, error: "ATENDIMENTO_DASHBOARDS_ENABLED off" },
-      { status: 503 },
-    );
-  }
-
   const url = new URL(request.url);
   const admin = createAdminClient();
   const run = url.searchParams.get("run") as ReportType | null;
@@ -233,24 +228,25 @@ export const GET = protegerRota(async (request: NextRequest) => {
     .order("updated_at", { ascending: false });
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: error.message },
+      { status: 500 },
+    );
   }
   return NextResponse.json({ ok: true, definitions: data ?? [] });
 });
 
 export const POST = protegerRota(
   async (request: NextRequest, { userId }) => {
-    if (!dashboardsEnabled()) {
-      return NextResponse.json(
-        { ok: false, error: "ATENDIMENTO_DASHBOARDS_ENABLED off" },
-        { status: 503 },
-      );
-    }
     const body = await request.json().catch(() => null);
     const parsed = createSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { ok: false, error: "payload_invalido", detalhes: parsed.error.flatten() },
+        {
+          ok: false,
+          error: "payload_invalido",
+          detalhes: parsed.error.flatten(),
+        },
         { status: 400 },
       );
     }
@@ -272,7 +268,10 @@ export const POST = protegerRota(
       .select("*")
       .single();
     if (error) {
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { ok: false, error: error.message },
+        { status: 500 },
+      );
     }
     return NextResponse.json({ ok: true, definition: data });
   },

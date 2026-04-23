@@ -32,9 +32,31 @@ class Settings(BaseSettings):
     meta_webhook_verify_token: str = "ecossistema-whatsapp-verify"
     marcelo_whatsapp_number: str = ""  # ex: "5567999990000"
 
+    # Voz (F1-S03 PR 3/4)
+    # STT: Groq Whisper large-v3 turbo — https://console.groq.com
+    # TTS: ElevenLabs — https://elevenlabs.io
+    # Se vazias, rotas /voice/* retornam 503 sem crashar o serviço.
+    groq_api_key: str = ""
+    elevenlabs_api_key: str = ""
+    # Voice ID da ElevenLabs. Default = Rachel (neutro, pt-BR razoável).
+    # Marcelo pode trocar por uma voz customizada depois.
+    elevenlabs_voice_id: str = "21m00Tcm4TlvDq8ikWAM"
+    elevenlabs_model_id: str = "eleven_multilingual_v2"
+    # Modelo Groq para transcrição. turbo é ~2x mais rápido que large-v3.
+    groq_stt_model: str = "whisper-large-v3-turbo"
+
     # Auth
     jwt_secret: str = "dev-secret-change-in-prod"
     owner_token_hash: str = ""  # sha256 hex de "owner_<token>"
+
+    # Supabase Auth (F1-S03 PR 4/4) — JWTs emitidos pelo projeto ECOSYSTEM
+    # chegam com HS256 + audience 'authenticated'. O SUPABASE_JWT_SECRET
+    # vive em Supabase Dashboard → Project Settings → API → JWT Settings.
+    supabase_jwt_secret: str = ""
+
+    # Allowlist de e-mails permitidos. Vazio = desabilitado (aceita qualquer
+    # JWT válido). Formato: "mrcelooo@gmail.com,outro@ex.com" (comma-separated).
+    allowed_emails: str = ""
 
     # Runtime
     orchestrator_port: int = 8000

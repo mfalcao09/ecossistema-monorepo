@@ -46,7 +46,7 @@ class Module:
 
 # Ordem importa para render visual do PermissionMatrix (Dashboard primeiro).
 MODULES: list[Module] = [
-    Module("dashboard",    "Dashboard",                      ("view",)),
+    Module("dashboard",    "Dashboard",                      ("view", "create", "edit", "delete")),
     Module("conversations","Conversas",                      ("view", "create", "edit", "delete", "export")),
     Module("contacts",     "Contatos",                       ("view", "create", "edit", "delete", "export")),
     Module("pipelines",    "CRM / Pipelines",                ("view", "create", "edit", "delete", "export")),
@@ -78,7 +78,7 @@ def admin_grants() -> dict[str, set[str]]:
 def agent_grants() -> dict[str, set[str]]:
     """Atendente padrão: conversa/CRM full, templates view-only, sem admin."""
     return {
-        "dashboard":    {"view"},
+        "dashboard":    {"view", "create", "edit"},                    # cria suas próprias dashboards; sem delete p/ evitar acidente
         "conversations":{"view", "create", "edit", "export"},          # sem delete
         "contacts":     {"view", "create", "edit", "export"},          # sem delete
         "pipelines":    {"view", "create", "edit", "export"},          # sem delete
@@ -90,7 +90,7 @@ def agent_grants() -> dict[str, set[str]]:
         "users":        set(),
         "roles":        set(),
         "ds_voice":     {"view", "create", "edit"},                    # S9: atendente curadoria biblioteca
-        "ds_ai":        {"view"},
+        "ds_ai":        {"view", "create", "edit"},                    # S10: atendente pode gerir agentes
         "reports":      {"view"},                                      # sem export
         "settings":     set(),
         "team_chats":   {"view", "create", "edit"},                    # atendente usa chat interno

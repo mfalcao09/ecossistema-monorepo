@@ -18,6 +18,7 @@ import {
   Key,
   Workflow,
   Megaphone,
+  Bot,
 } from "lucide-react";
 
 interface MenuItem {
@@ -35,6 +36,10 @@ const LINKS_REDIRECT_ENABLED =
   process.env.NEXT_PUBLIC_ATENDIMENTO_LINKS_REDIRECT_ENABLED === "true";
 const DS_VOICE_ENABLED =
   process.env.NEXT_PUBLIC_ATENDIMENTO_DS_VOICE_ENABLED === "true";
+const DS_AGENTE_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_DS_AGENTE_ENABLED === "true";
+const DS_BOT_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_DS_BOT_ENABLED === "true";
 
 const menuItems: MenuItem[] = [
   {
@@ -74,6 +79,17 @@ const menuItems: MenuItem[] = [
     icon: Zap,
     badge: "IA",
   },
+  ...(DS_BOT_ENABLED
+    ? [
+        {
+          label: "DS Bot",
+          href: "/atendimento/ds-bot",
+          icon: Bot,
+          badge: "IA",
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
   ...(CHAT_INTERNO_ENABLED
     ? [
         {
@@ -90,6 +106,17 @@ const menuItems: MenuItem[] = [
           label: "Links",
           href: "/atendimento/links-redirecionamento",
           icon: LinkIcon,
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
+  ...(DS_AGENTE_ENABLED
+    ? [
+        {
+          label: "DS Agente",
+          href: "/atendimento/ds-agente",
+          icon: Bot,
+          badge: "IA",
           beta: true,
         } satisfies MenuItem,
       ]
