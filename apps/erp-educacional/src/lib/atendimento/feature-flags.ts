@@ -43,3 +43,15 @@ export function isDsVoiceEnabled(): boolean {
     "NEXT_PUBLIC_ATENDIMENTO_DS_VOICE_ENABLED",
   );
 }
+
+/**
+ * S11 — DS Bot (visual flow builder + runtime).
+ *   - Sidebar "DS Bot" só aparece com flag ligada
+ *   - Webhook Meta só dispacha para bots com flag ligada
+ */
+export function isDsBotEnabled(): boolean {
+  return readFlag(
+    "ATENDIMENTO_DS_BOT_ENABLED",
+    "NEXT_PUBLIC_ATENDIMENTO_DS_BOT_ENABLED",
+  );
+}
