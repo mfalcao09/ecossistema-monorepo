@@ -1,5 +1,5 @@
 {
-  "installCommand": "npm install",
+  "installCommand": "cd ../.. && npx -y pnpm@9.0.0 install --frozen-lockfile",
   "functions": {
     "api/financeiro/*.py": {
       "maxDuration": 30
