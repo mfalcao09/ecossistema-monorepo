@@ -243,10 +243,46 @@ Se Marcelo digitar `salva contexto` ou `vou encerrar`:
 
 ---
 
+## Atendimento FIC — sessões mergeadas (leva 1 + leva 2)
+
+| Sessão | Título | PR | Commit main | Notas |
+|---|---|---|---|---|
+| ATND-S4 | Kanban CRM + Lead Detail + Protocolos | #44 | `e7328d6` | DB aplicado 2026-04-21 |
+| ATND-S5 | Templates WABA + Agendamentos + Calendar | #46 | `1a2a02e` | DB aplicado 2026-04-21 |
+| ATND-S6 | Cargos + Permissões Granulares + Equipes | #45 | `f783907` | DB aplicado + seed 192 perms |
+| ATND-S7 | Dashboards + Relatórios + Widgets externos | #48 | `588fdf1` | DB aplicado + 6 widgets seed |
+| ATND-S8a | Automações + Webhooks + API Pública + n8n | #51 | `30f3e10` | DB aplicado — `app_installations` criada |
+| ATND-S8b | Chat Interno Realtime + Links Redirecionamento | #50 | `1d06e7d` | DB aplicado |
+| **ATND-S9** | **DS Voice — biblioteca + funis + gatilhos** | **#59** | **`36aa635`** | **Merged + prod READY em 2026-04-21 23:23 UTC** |
+
+### ATND-S9 DS Voice — detalhes (2026-04-21)
+
+**Entregas A–J:** migration (9 tabelas `ds_voice_*`), parser variables isomórfico {Nome}/{Primeiro Nome}/{Saudação}/{Hora} com 22 testes unit, UI `/atendimento/ds-voice` 6 abas (Mensagens·Áudios·Mídias·Documentos·Funis·Gatilhos), editor funis + simulação preview server-side, worker cron `* * * * *` com backoff exponencial, app `ia_transcription` Gemini 2.5 Flash, hook cirúrgico webhook Meta após `runAutomations` (S8a preservado), export/import JSON, feature flag `ATENDIMENTO_DS_VOICE_ENABLED`.
+
+**Pendências resolvidas em prod (P-116..P-120):**
+- Migration S9 + pré-reqs S4/S5/S6/S7/S8a/S8b aplicadas via Supabase MCP no ERP `ifdnjieklngcfodmtied`
+- Seed `role_permissions` (192 linhas: Admin all, Atendente view+create+edit, Restrito view)
+- Flags Vercel `ATENDIMENTO_DS_VOICE_ENABLED` + `NEXT_PUBLIC_*` em dev/preview/prod
+- Bucket Supabase Storage `atendimento` (public, 100MB, 25 mime types, 4 policies isolando prefixo `ds-voice/`)
+- `CRON_SECRET` coberto pelo `ADMIN_SECRET` existente (worker aceita ambos)
+
+**Pendências abertas (P-121..P-129):** `GEMINI_API_KEY` + enable `ia_transcription`, UI chat render transcrição (S10), E2E teste funil+trigger, drag-drop pastas, presence UI editor funis, RLS Storage por path, paralelizar cron Promise.allSettled, documentar contrato JSON export/import, integração ChatPanel S10.
+
+**Descoberta canônica:** ERP/diploma-digital Supabase é `ifdnjieklngcfodmtied` (sa-east-1), **não** `bvryaopfjiyxjgsuhjsb` (esse é Intentus, us-west-2). Corrigido em `apps/erp-educacional/CLAUDE.md` (nova seção "IDs Supabase canônicos" com tabela dos 4 projetos), `docs/rag-agentes-erp.md`, `docs/context/context_portflio_de_negcios_de_marcelo_silva.md`.
+
+**SSRF fix (CodeQL crítico, PR #59):** `apps/erp-educacional/src/lib/atendimento/ia-transcription.ts` ganhou:
+- `isValidMediaId(): /^[0-9]{1,40}$/` — Meta media IDs são numéricos
+- `isTrustedMetaMediaUrl()` — allowlist `fbcdn.net|facebook.com|whatsapp.net|cdninstagram.com` + HTTPS obrigatório
+- `encodeURIComponent(mediaId)` no path do Graph API
+- Validação aplicada também em `transcribeAudio` path `audio_url`
+
+---
+
 ## Logs de sessões anteriores
 - `docs/sessions/logs/LOG-2026-04-15-consolidacao-monorepo.md`
 - `docs/sessions/logs/LOG-2026-04-15-contexto-pre-masterplan.md`
 - `docs/sessions/logs/LOG-2026-04-16-v9-e-plano-fase0.md`
 - `docs/sessions/logs/LOG-2026-04-17-s3-mcp-template.md`
 - `docs/sessions/logs/LOG-2026-04-19-F1-S01-jarvis-routing.md`
-- `docs/sessions/logs/LOG-2026-04-21-s6-cargos-permissoes.md` — Atendimento S6: cargos + permissões granulares (PR #45, 5 commits, ~3.6k linhas)
+- `docs/sessions/logs/LOG-2026-04-21-s6-cargos-permissoes.md` — Atendimento S6 (PR #45)
+- `docs/sessions/logs/LOG-2026-04-21-s9-ds-voice.md` — Atendimento S9 DS Voice: entrega em prod (PR #59) + pré-reqs DB S4-S8b aplicadas
