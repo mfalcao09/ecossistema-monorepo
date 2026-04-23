@@ -21,7 +21,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { protegerRota } from "@/lib/security/api-guard";
 import { createAdminClient } from "@/lib/supabase/admin";
 import {
-  dashboardsEnabled,
   isMetricKey,
   normalizeRange,
   METRIC_KEYS,
@@ -35,13 +34,6 @@ function isNumericMetric(m: MetricKey): m is NumericMetric {
 }
 
 export const GET = protegerRota(async (request: NextRequest) => {
-  if (!dashboardsEnabled()) {
-    return NextResponse.json(
-      { ok: false, error: "ATENDIMENTO_DASHBOARDS_ENABLED off" },
-      { status: 503 },
-    );
-  }
-
   const url = new URL(request.url);
   const { from, to, days } = normalizeRange(
     url.searchParams.get("from"),
@@ -51,7 +43,10 @@ export const GET = protegerRota(async (request: NextRequest) => {
 
   const metricsParam = url.searchParams.get("metrics");
   const metrics: MetricKey[] = metricsParam
-    ? metricsParam.split(",").map((m) => m.trim()).filter(isMetricKey)
+    ? metricsParam
+        .split(",")
+        .map((m) => m.trim())
+        .filter(isMetricKey)
     : [...METRIC_KEYS];
 
   const admin = createAdminClient();
@@ -71,7 +66,10 @@ export const GET = protegerRota(async (request: NextRequest) => {
     .order("day", { ascending: true });
 
   if (error) {
-    return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+    return NextResponse.json(
+      { ok: false, error: error.message },
+      { status: 500 },
+    );
   }
 
   const snapshots = (data ?? []) as Array<Record<string, unknown>>;
@@ -89,7 +87,11 @@ export const GET = protegerRota(async (request: NextRequest) => {
           seen += 1;
         }
       }
-      if (m.startsWith("avg_") || m.startsWith("p50_") || m.startsWith("p90_")) {
+      if (
+        m.startsWith("avg_") ||
+        m.startsWith("p50_") ||
+        m.startsWith("p90_")
+      ) {
         totals[m] = seen > 0 ? Math.round(sum / seen) : 0;
       } else {
         totals[m] = sum;

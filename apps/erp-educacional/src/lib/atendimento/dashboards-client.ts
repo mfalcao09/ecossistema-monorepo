@@ -1,0 +1,234 @@
+/**
+ * Client-safe helpers do S7 / ADR-020.
+ *
+ * Isomórfico — NÃO importa `node:crypto` nem Supabase server.
+ * Pode ser consumido por client components sem arrastar Node APIs para o bundle.
+ *
+ * A parte server-only (signWidgetToken / verifyWidgetToken / tokenHash) fica
+ * em `dashboards.ts`, que re-exporta tudo daqui.
+ */
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Métricas conhecidas (as que o RPC compute_daily_metrics produz)
+// ─────────────────────────────────────────────────────────────────────────────
+export const METRIC_KEYS = [
+  "conversations_opened",
+  "conversations_closed",
+  "conversations_pending",
+  "conversations_snoozed",
+  "conversations_open_end",
+  "messages_in",
+  "messages_out",
+  "templates_sent",
+  "avg_first_response_sec",
+  "p50_first_response_sec",
+  "p90_first_response_sec",
+  "avg_resolution_sec",
+  "p50_resolution_sec",
+  "p90_resolution_sec",
+  "deals_created",
+  "deals_won",
+  "deals_lost",
+  "deals_value_won_cents",
+  "deals_value_lost_cents",
+  "conversion_rate_bp",
+  "leads_by_source",
+  "volume_by_inbox",
+  "active_agents",
+  "avg_conversations_per_agent",
+] as const;
+
+export type MetricKey = (typeof METRIC_KEYS)[number];
+
+export const REPORT_TYPES = [
+  "volume",
+  "sla",
+  "funnel",
+  "agent_performance",
+  "lead_origin",
+  "custom",
+] as const;
+export type ReportType = (typeof REPORT_TYPES)[number];
+
+export const WIDGET_TYPES = [
+  "kpi_card",
+  "line_chart",
+  "bar_chart",
+  "pie_chart",
+  "funnel",
+  "table",
+  "heatmap",
+  "component",
+] as const;
+export type WidgetType = (typeof WIDGET_TYPES)[number];
+
+export function isMetricKey(v: unknown): v is MetricKey {
+  return (
+    typeof v === "string" && (METRIC_KEYS as readonly string[]).includes(v)
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Range de datas
+// ─────────────────────────────────────────────────────────────────────────────
+export function normalizeRange(
+  fromStr: string | null,
+  toStr: string | null,
+  fallbackDays = 30,
+): { from: string; to: string; days: number } {
+  const today = new Date();
+  const to =
+    toStr && /^\d{4}-\d{2}-\d{2}$/.test(toStr)
+      ? new Date(toStr + "T00:00:00Z")
+      : today;
+  const from =
+    fromStr && /^\d{4}-\d{2}-\d{2}$/.test(fromStr)
+      ? new Date(fromStr + "T00:00:00Z")
+      : new Date(to.getTime() - fallbackDays * 86400000);
+  const clampedFrom = from > to ? to : from;
+  const maxRange = 365;
+  const days = Math.min(
+    Math.max(
+      1,
+      Math.round((to.getTime() - clampedFrom.getTime()) / 86400000) + 1,
+    ),
+    maxRange,
+  );
+  const finalFrom = new Date(to.getTime() - (days - 1) * 86400000);
+  return {
+    from: finalFrom.toISOString().slice(0, 10),
+    to: to.toISOString().slice(0, 10),
+    days,
+  };
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Formatadores pt-BR
+// ─────────────────────────────────────────────────────────────────────────────
+export function formatSeconds(secs: number | null | undefined): string {
+  if (secs === null || secs === undefined) return "—";
+  if (secs < 60) return `${Math.round(secs)} s`;
+  if (secs < 3600) return `${Math.round(secs / 60)} min`;
+  const h = Math.floor(secs / 3600);
+  const m = Math.round((secs % 3600) / 60);
+  return m === 0 ? `${h} h` : `${h} h ${m} min`;
+}
+
+export function formatCentsBRL(cents: number | null | undefined): string {
+  if (cents === null || cents === undefined) return "R$ 0,00";
+  return (cents / 100).toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+}
+
+export function formatBP(bp: number | null | undefined): string {
+  if (bp === null || bp === undefined) return "—";
+  return `${(bp / 100).toFixed(2)}%`;
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// ADR-020 — Dashboards personalizados (tipos)
+// ─────────────────────────────────────────────────────────────────────────────
+export const WIDGET_CATEGORIES = [
+  "kpi",
+  "chart",
+  "activity",
+  "onboarding",
+  "status",
+  "agent_ia",
+  "crm",
+  "quality",
+  "custom",
+] as const;
+export type WidgetCategory = (typeof WIDGET_CATEGORIES)[number];
+
+export interface WidgetLayout {
+  x?: number;
+  y?: number;
+  w: number;
+  h: number;
+  minW?: number;
+  minH?: number;
+  maxW?: number;
+  maxH?: number;
+}
+
+export interface CatalogWidget {
+  slug: string;
+  label: string;
+  description: string | null;
+  category: WidgetCategory;
+  widget_type: WidgetType;
+  metric_key: MetricKey | null;
+  component_slug: string | null;
+  default_layout: WidgetLayout;
+  default_config: Record<string, unknown>;
+  icon: string | null;
+  active: boolean;
+  order_weight: number;
+  min_permission: string;
+}
+
+export interface Dashboard {
+  id: string;
+  owner_user_id: string | null;
+  name: string;
+  slug: string | null;
+  description: string | null;
+  icon: string;
+  is_shared: boolean;
+  is_default: boolean;
+  pinned_order: number;
+  layout_cols: number;
+  share_role_ids: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DashboardWidgetRow {
+  id: string;
+  dashboard_id: string | null;
+  account_id: string | null;
+  owner_id: string | null;
+  title: string;
+  widget_type: WidgetType;
+  metric_key: MetricKey | null;
+  catalog_slug: string | null;
+  filters: Record<string, unknown>;
+  range_days: number;
+  layout: WidgetLayout;
+  component_config: Record<string, unknown>;
+  sort_order: number;
+  is_public: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export function isWidgetCategory(v: unknown): v is WidgetCategory {
+  return (
+    typeof v === "string" &&
+    (WIDGET_CATEGORIES as readonly string[]).includes(v)
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
+// CSV helper (puro — sem Node APIs)
+// ─────────────────────────────────────────────────────────────────────────────
+export function toCSV(
+  rows: Array<Record<string, unknown>>,
+  columns?: string[],
+): string {
+  if (rows.length === 0) return "";
+  const cols = columns ?? Object.keys(rows[0]);
+  const escape = (v: unknown): string => {
+    if (v === null || v === undefined) return "";
+    const s = typeof v === "object" ? JSON.stringify(v) : String(v);
+    return /[",\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+  };
+  const header = cols.join(",");
+  const body = rows
+    .map((r) => cols.map((c) => escape(r[c])).join(","))
+    .join("\n");
+  return header + "\n" + body;
+}

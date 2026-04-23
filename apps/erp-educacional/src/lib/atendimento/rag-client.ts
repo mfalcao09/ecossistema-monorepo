@@ -23,7 +23,7 @@
 
 import "server-only";
 import { createAdminClient } from "@/lib/supabase/admin";
-import { generateEmbedding } from "@/lib/atendimento/openai-client";
+import { generateEmbedding } from "@/lib/atendimento/gemini-client";
 
 // ──────────────────────────────────────────────────────────────
 // Tipos

@@ -22,7 +22,11 @@ export const GET = protegerRota(
 
     const { data, error } = await supabase
       .from('protocols')
-      .select('id, protocol_number, subject, status, assignee_id, resolved_at, created_by, created_at')
+      .select(
+        'id, protocol_number, subject, description, status, assignee_id, resolved_at, created_by, created_at, ' +
+          'process_type_id, aluno_id, ' +
+          'process_type:atendimento_process_types ( id, key, name )',
+      )
       .eq('conversation_id', convId)
       .order('created_at', { ascending: false })
 
@@ -39,7 +43,12 @@ export const POST = protegerRota(
     const convId = getConversationId(req)
     const supabase = createAdminClient()
 
-    let body: { subject?: string; assignee_id?: string }
+    let body: {
+      subject?: string
+      description?: string
+      assignee_id?: string
+      process_type_id?: string
+    }
     try { body = await req.json() } catch {
       return NextResponse.json({ erro: 'JSON inválido' }, { status: 400 })
     }
@@ -48,15 +57,37 @@ export const POST = protegerRota(
       return NextResponse.json({ erro: 'subject obrigatório' }, { status: 400 })
     }
 
+    // S4.5: auto-vincular aluno_id do contact (se existir)
+    const { data: conv } = await supabase
+      .from('atendimento_conversations')
+      .select('contact_id')
+      .eq('id', convId)
+      .maybeSingle()
+
+    let alunoId: string | null = null
+    if (conv?.contact_id) {
+      const { data: contact } = await supabase
+        .from('atendimento_contacts')
+        .select('aluno_id')
+        .eq('id', conv.contact_id)
+        .maybeSingle()
+      alunoId = contact?.aluno_id ?? null
+    }
+
     const { data, error } = await supabase
       .from('protocols')
       .insert({
         conversation_id: convId,
         subject:         body.subject,
+        description:     body.description?.trim() || null,
         assignee_id:     body.assignee_id ?? null,
+        process_type_id: body.process_type_id ?? null,
+        aluno_id:        alunoId,
         created_by:      ctx.userId,
       })
-      .select('*')
+      .select(
+        '*, process_type:atendimento_process_types ( id, key, name )',
+      )
       .single()
 
     if (error || !data) {
