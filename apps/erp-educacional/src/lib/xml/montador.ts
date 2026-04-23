@@ -4,8 +4,8 @@
  * Conforme XSD v1.05
  */
 
-import { SupabaseClient } from '@supabase/supabase-js';
-import crypto from 'crypto';
+import { SupabaseClient } from "@supabase/supabase-js";
+import crypto from "crypto";
 import {
   DadosDiploma,
   Disciplina,
@@ -20,7 +20,9 @@ import {
   CargaHorariaComEtiqueta,
   CargaHorariaRelogioComEtiqueta,
   TFormaAcesso,
-} from './tipos';
+} from "./tipos";
+import { aplicarSnapshotSobreDadosDiploma } from "../diploma/snapshot-to-dados-diploma";
+import type { DadosSnapshot } from "../diploma/snapshot";
 
 // ============================================================
 // CÓDIGO DE VALIDAÇÃO DO HISTÓRICO — Anexo III IN 05/2020 MEC
@@ -66,10 +68,10 @@ export interface ParamsCodigoValidacaoHistorico {
  * chamadas subsequentes. Ver montarDadosDiploma() para a lógica de persistência.
  */
 export function gerarCodigoValidacaoHistorico(
-  params: ParamsCodigoValidacaoHistorico
+  params: ParamsCodigoValidacaoHistorico,
 ): string {
   const limparDigitos = (s: string | null | undefined): string =>
-    (s || '').replace(/\D/g, '');
+    (s || "").replace(/\D/g, "");
 
   const ra = limparDigitos(params.ra);
   const cpf = limparDigitos(params.cpf);
@@ -78,15 +80,17 @@ export function gerarCodigoValidacaoHistorico(
 
   if (!ra || !cpf || !codigoCurso || !cnpj) {
     throw new Error(
-      'gerarCodigoValidacaoHistorico: RA, CPF, CodigoCursoEMEC e CNPJ são obrigatórios'
+      "gerarCodigoValidacaoHistorico: RA, CPF, CodigoCursoEMEC e CNPJ são obrigatórios",
     );
   }
 
   // Converte 'YYYY-MM-DD' → 'DDMMAAAA'
-  const matchData = params.dataEmissaoHistorico.match(/^(\d{4})-(\d{2})-(\d{2})/);
+  const matchData = params.dataEmissaoHistorico.match(
+    /^(\d{4})-(\d{2})-(\d{2})/,
+  );
   if (!matchData) {
     throw new Error(
-      `gerarCodigoValidacaoHistorico: data inválida (esperado YYYY-MM-DD, recebido "${params.dataEmissaoHistorico}")`
+      `gerarCodigoValidacaoHistorico: data inválida (esperado YYYY-MM-DD, recebido "${params.dataEmissaoHistorico}")`,
     );
   }
   const [, ano, mes, dia] = matchData;
@@ -96,21 +100,21 @@ export function gerarCodigoValidacaoHistorico(
   const matchHora = params.horaEmissaoHistorico.match(/^(\d{1,2}):(\d{1,2})/);
   if (!matchHora) {
     throw new Error(
-      `gerarCodigoValidacaoHistorico: hora inválida (esperado HH:MM, recebido "${params.horaEmissaoHistorico}")`
+      `gerarCodigoValidacaoHistorico: hora inválida (esperado HH:MM, recebido "${params.horaEmissaoHistorico}")`,
     );
   }
   const [, hh, mm] = matchHora;
-  const horaFormatada = `${hh.padStart(2, '0')}${mm.padStart(2, '0')}`;
+  const horaFormatada = `${hh.padStart(2, "0")}${mm.padStart(2, "0")}`;
 
   const dataeHora = `${dataFormatada}${horaFormatada}`; // DDMMAAAAHHMM (12 dígitos)
 
   // Concatena SEM separadores e calcula SHA256
   const input = `${ra}${cpf}${codigoCurso}${cnpj}${dataeHora}`;
-  const hash = crypto.createHash('sha256').update(input, 'utf8').digest('hex');
+  const hash = crypto.createHash("sha256").update(input, "utf8").digest("hex");
   const hex12 = hash.substring(0, 12);
 
   // .trim() defensivo: evita prefixo "1606 .abc..." caso o banco devolva whitespace
-  const codigoMec = (params.codigoMecEmissora || '').trim();
+  const codigoMec = (params.codigoMecEmissora || "").trim();
   return `${codigoMec}.${hex12}`;
 }
 
@@ -124,24 +128,27 @@ export function gerarCodigoValidacaoHistorico(
 export function gerarDataHoraBrasil(): { data: string; hora: string } {
   const agora = new Date();
   // Usa Intl para extrair componentes no fuso de SP
-  const fmt = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'America/Sao_Paulo',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
-    hour: '2-digit',
-    minute: '2-digit',
-    second: '2-digit',
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+    hour: "2-digit",
+    minute: "2-digit",
+    second: "2-digit",
     hour12: false,
   });
-  const parts = fmt.formatToParts(agora).reduce((acc, p) => {
-    if (p.type !== 'literal') acc[p.type] = p.value;
-    return acc;
-  }, {} as Record<string, string>);
+  const parts = fmt.formatToParts(agora).reduce(
+    (acc, p) => {
+      if (p.type !== "literal") acc[p.type] = p.value;
+      return acc;
+    },
+    {} as Record<string, string>,
+  );
 
   const data = `${parts.year}-${parts.month}-${parts.day}`;
   // Intl pode retornar '24' em vez de '00' para meia-noite em alguns runtimes
-  const horaRaw = parts.hour === '24' ? '00' : parts.hour;
+  const horaRaw = parts.hour === "24" ? "00" : parts.hour;
   const hora = `${horaRaw}:${parts.minute}:${parts.second}`;
   return { data, hora };
 }
@@ -152,7 +159,7 @@ export function gerarDataHoraBrasil(): { data: string; hora: string } {
  */
 export function gerarCodigoValidacao(): string {
   throw new Error(
-    'gerarCodigoValidacao() está depreciado. O código do diploma é gerado pela registradora; use gerarCodigoValidacaoHistorico() para o histórico da emissora.'
+    "gerarCodigoValidacao() está depreciado. O código do diploma é gerado pela registradora; use gerarCodigoValidacaoHistorico() para o histórico da emissora.",
   );
 }
 
@@ -192,9 +199,9 @@ function linhaAtoCursoParaAto(row: {
   numero_dou: string | null;
 }): AtoRegulatorio {
   return {
-    tipo: row.tipo_ato || '',
-    numero: row.numero || '',
-    data: row.data || '',
+    tipo: row.tipo_ato || "",
+    numero: row.numero || "",
+    data: row.data || "",
     veiculo_publicacao: row.veiculo_publicacao || undefined,
     data_publicacao: row.data_publicacao_dou || undefined,
     secao_publicacao: row.secao_dou || undefined,
@@ -217,32 +224,34 @@ function linhaAtoCursoParaAto(row: {
  */
 async function buscarAtosCurso(
   supabase: SupabaseClient,
-  cursoId: string
+  cursoId: string,
 ): Promise<AtosCurso> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = await supabase
-    .from('atos_curso')
+    .from("atos_curso")
     .select(
-      'tipo, tipo_ato, numero, data, veiculo_publicacao, numero_dou, data_publicacao_dou, secao_dou, pagina_dou'
+      "tipo, tipo_ato, numero, data, veiculo_publicacao, numero_dou, data_publicacao_dou, secao_dou, pagina_dou",
     )
-    .eq('curso_id', cursoId)
-    .order('data', { ascending: true });
+    .eq("curso_id", cursoId)
+    .order("data", { ascending: true });
 
   if (error) {
-    throw new Error(`Erro ao buscar atos regulatórios do curso: ${error.message}`);
+    throw new Error(
+      `Erro ao buscar atos regulatórios do curso: ${error.message}`,
+    );
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const rows = (data || []) as any[];
 
   // Autorização — primeira (mais antiga)
-  const autRow = rows.find((r) => r.tipo === 'Autorizacao');
+  const autRow = rows.find((r) => r.tipo === "Autorizacao");
 
   // Reconhecimento — primeiro (mais antigo)
-  const recRow = rows.find((r) => r.tipo === 'Reconhecimento');
+  const recRow = rows.find((r) => r.tipo === "Reconhecimento");
 
   // Renovação — última (mais recente) — opcional
-  const renovRows = rows.filter((r) => r.tipo === 'RenovacaoReconhecimento');
+  const renovRows = rows.filter((r) => r.tipo === "RenovacaoReconhecimento");
   const renovMaisRecente =
     renovRows.length > 0 ? renovRows[renovRows.length - 1] : undefined;
 
@@ -269,9 +278,9 @@ function linhaCredenciamentoParaAto(row: {
   numero_dou: string | null;
 }): AtoRegulatorio {
   return {
-    tipo: row.tipo_ato || '',
-    numero: row.numero || '',
-    data: row.data || '',
+    tipo: row.tipo_ato || "",
+    numero: row.numero || "",
+    data: row.data || "",
     veiculo_publicacao: row.veiculo_publicacao || undefined,
     data_publicacao: row.data_publicacao_dou || undefined,
     secao_publicacao: row.secao_dou || undefined,
@@ -294,16 +303,16 @@ function linhaCredenciamentoParaAto(row: {
  */
 async function buscarAtosIES(
   supabase: SupabaseClient,
-  instituicaoId: string
+  instituicaoId: string,
 ): Promise<AtosIES> {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data, error } = await supabase
-    .from('credenciamentos')
+    .from("credenciamentos")
     .select(
-      'tipo, tipo_ato, numero, data, veiculo_publicacao, numero_dou, data_publicacao_dou, secao_dou, pagina_dou'
+      "tipo, tipo_ato, numero, data, veiculo_publicacao, numero_dou, data_publicacao_dou, secao_dou, pagina_dou",
     )
-    .eq('instituicao_id', instituicaoId)
-    .order('data', { ascending: true });
+    .eq("instituicao_id", instituicaoId)
+    .order("data", { ascending: true });
 
   if (error) {
     throw new Error(`Erro ao buscar credenciamentos da IES: ${error.message}`);
@@ -313,17 +322,17 @@ async function buscarAtosIES(
   const rows = (data || []) as any[];
 
   // Credenciamento: primeiro registro com tipo='credenciamento' (já ordenado ASC por data)
-  const credRow = rows.find((r) => r.tipo === 'credenciamento');
+  const credRow = rows.find((r) => r.tipo === "credenciamento");
   if (!credRow) {
     throw new Error(
       `Nenhum ato de credenciamento encontrado para a IES (instituicao_id=${instituicaoId}). ` +
-        'O XSD v1.05 exige pelo menos 1 <Credenciamento>. Cadastre o ato em Configurações > Instituição > Credenciamentos.'
+        "O XSD v1.05 exige pelo menos 1 <Credenciamento>. Cadastre o ato em Configurações > Instituição > Credenciamentos.",
     );
   }
 
   // Recredenciamento: último registro com tipo='recredenciamento' na lista ordenada ASC
   // (equivale ao mais recente). Se não houver, o elemento <Recredenciamento> é omitido.
-  const recredRows = rows.filter((r) => r.tipo === 'recredenciamento');
+  const recredRows = rows.filter((r) => r.tipo === "recredenciamento");
   const recredMaisRecente =
     recredRows.length > 0 ? recredRows[recredRows.length - 1] : undefined;
 
@@ -346,17 +355,17 @@ function montarEndereco(
   codigo_municipio: string | null,
   nome_municipio: string,
   uf: string,
-  cep: string
+  cep: string,
 ): EnderecoXSD {
   return {
-    logradouro: logradouro || '',
+    logradouro: logradouro || "",
     numero: numero || undefined,
     complemento: complemento || undefined,
-    bairro: bairro || '',
-    codigo_municipio: codigo_municipio || '',
-    nome_municipio: nome_municipio || '',
-    uf: uf || '',
-    cep: cep || '',
+    bairro: bairro || "",
+    codigo_municipio: codigo_municipio || "",
+    nome_municipio: nome_municipio || "",
+    uf: uf || "",
+    cep: cep || "",
   };
 }
 
@@ -371,12 +380,12 @@ function montarAtoRegulatorio(
   data_publicacao?: string | null,
   secao?: string | null,
   pagina?: string | null,
-  numero_dou?: string | null
+  numero_dou?: string | null,
 ): AtoRegulatorio {
   return {
-    tipo: tipo || '',
-    numero: numero || '',
-    data: data || '',
+    tipo: tipo || "",
+    numero: numero || "",
+    data: data || "",
     veiculo_publicacao: veiculo_publicacao || undefined,
     data_publicacao: data_publicacao || undefined,
     secao_publicacao: secao || undefined,
@@ -390,18 +399,18 @@ function montarAtoRegulatorio(
  */
 function mapearFormaAcesso(formaAcesso: string | null): TFormaAcesso {
   const mapa: Record<string, TFormaAcesso> = {
-    'vestibular': 'Vestibular',
-    'enem': 'Enem',
-    'ENEM': 'Enem',
-    'avaliação seriada': 'Avaliação Seriada',
-    'seleção simplificada': 'Seleção Simplificada',
-    'transferência ex officio': 'Transferência Ex Officio',
-    'decisão judicial': 'Decisão judicial',
-    'vagas remanescentes': 'Seleção para Vagas Remanescentes',
-    'programas especiais': 'Seleção para Vagas de Programas Especiais',
+    vestibular: "Vestibular",
+    enem: "Enem",
+    ENEM: "Enem",
+    "avaliação seriada": "Avaliação Seriada",
+    "seleção simplificada": "Seleção Simplificada",
+    "transferência ex officio": "Transferência Ex Officio",
+    "decisão judicial": "Decisão judicial",
+    "vagas remanescentes": "Seleção para Vagas Remanescentes",
+    "programas especiais": "Seleção para Vagas de Programas Especiais",
   };
-  const lower = (formaAcesso || '').toLowerCase();
-  return mapa[lower] || mapa[formaAcesso || ''] || 'Vestibular';
+  const lower = (formaAcesso || "").toLowerCase();
+  return mapa[lower] || mapa[formaAcesso || ""] || "Vestibular";
 }
 
 /**
@@ -418,18 +427,18 @@ export interface MontarDadosDiplomaOptions {
    * com justificativa via modal. NÃO é utilizado para pular validação
    * de schema XSD — apenas regras semânticas.
    */
-  pular_regras_negocio?: import('./validation/regras-negocio').CodigoRegra[];
+  pular_regras_negocio?: import("./validation/regras-negocio").CodigoRegra[];
 }
 
 export async function montarDadosDiploma(
   supabase: SupabaseClient,
   diplomaId: string,
-  options: MontarDadosDiplomaOptions = {}
+  options: MontarDadosDiplomaOptions = {},
 ): Promise<DadosDiploma> {
   // 1. Busca diploma com joins
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: diplomaDataTyped, error: diplomaError } = await supabase
-    .from('diplomas')
+    .from("diplomas")
     .select(
       `
       id,
@@ -447,6 +456,8 @@ export async function montarDadosDiploma(
       registradora_codigo_mec,
       diplomado_id,
       curso_id,
+      dados_snapshot_extracao,
+      dados_snapshot_travado,
       diplomados (
         id, nome, nome_social, cpf, ra,
         data_nascimento, sexo, nacionalidade,
@@ -469,9 +480,9 @@ export async function montarDadosDiploma(
         secao_publicacao_renovacao, pagina_publicacao_renovacao, numero_dou_renovacao,
         enfase, codigo_curso
       )
-    `
+    `,
     )
-    .eq('id', diplomaId)
+    .eq("id", diplomaId)
     .single();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const diplomaData = diplomaDataTyped as any;
@@ -481,15 +492,15 @@ export async function montarDadosDiploma(
   }
 
   if (!diplomaData.diplomados || !diplomaData.diplomados.nome) {
-    throw new Error('Dados do diplomado incompletos ou ausentes');
+    throw new Error("Dados do diplomado incompletos ou ausentes");
   }
 
   if (!diplomaData.diplomados.cpf) {
-    throw new Error('CPF do diplomado é obrigatório');
+    throw new Error("CPF do diplomado é obrigatório");
   }
 
   if (!diplomaData.cursos) {
-    throw new Error('Dados do curso incompletos ou ausentes');
+    throw new Error("Dados do curso incompletos ou ausentes");
   }
 
   // 2. Busca instituição EMISSORA (FIC) — usa codigo_mec para garantir que pega a correta
@@ -502,23 +513,23 @@ export async function montarDadosDiploma(
   //
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const { data: iesDataTyped, error: iesError } = await supabase
-    .from('instituicoes')
+    .from("instituicoes")
     .select(
       `
       id, nome, cnpj, codigo_mec,
       logradouro, numero, complemento, bairro, municipio, codigo_municipio, uf, cep,
       mantenedora_nome, mantenedora_cnpj, mantenedora_razao_social, mantenedora_endereco
-    `
+    `,
     )
-    .eq('codigo_mec', '1606')
-    .eq('ativo', true)
+    .eq("codigo_mec", "1606")
+    .eq("ativo", true)
     .limit(1)
     .single();
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const iesData = iesDataTyped as any;
 
   if (iesError || !iesData) {
-    throw new Error('Nenhuma instituição ativa encontrada');
+    throw new Error("Nenhuma instituição ativa encontrada");
   }
 
   // 2b. Busca atos regulatórios (Credenciamento + Recredenciamento mais recente)
@@ -527,39 +538,42 @@ export async function montarDadosDiploma(
 
   // 3. Busca filiações
   const { data: filiacoesData } = await supabase
-    .from('filiacoes')
-    .select('nome, nome_social, sexo')
-    .eq('diplomado_id', diplomaData.diplomado_id);
+    .from("filiacoes")
+    .select("nome, nome_social, sexo")
+    .eq("diplomado_id", diplomaData.diplomado_id);
 
   const filiacao: Genitor[] = (filiacoesData || []).map((f: any) => ({
     nome: f.nome,
     nome_social: f.nome_social || undefined,
-    sexo: f.sexo as 'M' | 'F',
+    sexo: f.sexo as "M" | "F",
   }));
 
   // Se não tem filiações na tabela, tenta montar a partir dos campos legados
   if (filiacao.length === 0) {
     // Buscar dos campos legados se existirem no diplomado
     const { data: diplomadoExtra } = await supabase
-      .from('diplomados')
-      .select('id')
-      .eq('id', diplomaData.diplomado_id)
+      .from("diplomados")
+      .select("id")
+      .eq("id", diplomaData.diplomado_id)
       .single();
     // Placeholder — filiação será preenchida manualmente
   }
 
   // 4. Busca assinantes ativos
   const { data: assinantesData } = await supabase
-    .from('assinantes')
-    .select('nome, cpf, cargo, tipo_certificado, ordem_assinatura')
-    .eq('ativo', true)
-    .order('ordem_assinatura', { ascending: true });
+    .from("assinantes")
+    .select("nome, cpf, cargo, tipo_certificado, ordem_assinatura")
+    .eq("ativo", true)
+    .order("ordem_assinatura", { ascending: true });
 
   const assinantes: Assinante[] = (assinantesData || []).map((a: any) => ({
     nome: a.nome,
     cpf: a.cpf,
     cargo: a.cargo,
-    tipo_certificado: a.tipo_certificado === 'eCNPJ' || a.tipo_certificado?.includes('CNPJ') ? 'eCNPJ' : 'eCPF',
+    tipo_certificado:
+      a.tipo_certificado === "eCNPJ" || a.tipo_certificado?.includes("CNPJ")
+        ? "eCNPJ"
+        : "eCPF",
     ordem_assinatura: a.ordem_assinatura,
   }));
 
@@ -573,118 +587,146 @@ export async function montarDadosDiploma(
   // Solução: buscar sem .order() do Supabase e ordenar como inteiro no JS,
   // com tiebreaker pelo código da disciplina para resultado determinístico.
   const { data: disciplinasDataRaw } = await supabase
-    .from('diploma_disciplinas')
+    .from("diploma_disciplinas")
     .select(
       `
       codigo, nome, periodo, situacao,
       carga_horaria_aula, carga_horaria_relogio,
       nota, conceito, forma_integralizacao,
       docente_nome, docente_titulacao, docente_cpf
-    `
+    `,
     )
-    .eq('diploma_id', diplomaId);
+    .eq("diploma_id", diplomaId);
 
-  const disciplinasData = (disciplinasDataRaw || []).slice().sort((a: any, b: any) => {
-    const pa = parseInt(String(a.periodo ?? '0'), 10);
-    const pb = parseInt(String(b.periodo ?? '0'), 10);
-    // Períodos não-numéricos (NaN) caem para o FIM da lista, agrupados.
-    // Isso é intencional: dados malformados ficam visíveis no rodapé do
-    // histórico ao invés de quebrar a emissão. O operador identifica e corrige.
-    const safeA = Number.isFinite(pa) ? pa : Number.MAX_SAFE_INTEGER;
-    const safeB = Number.isFinite(pb) ? pb : Number.MAX_SAFE_INTEGER;
-    if (safeA !== safeB) return safeA - safeB;
-    // Tiebreaker: código da disciplina (ordem alfabética estável)
-    return String(a.codigo ?? '').localeCompare(String(b.codigo ?? ''));
-  });
+  const disciplinasData = (disciplinasDataRaw || [])
+    .slice()
+    .sort((a: any, b: any) => {
+      const pa = parseInt(String(a.periodo ?? "0"), 10);
+      const pb = parseInt(String(b.periodo ?? "0"), 10);
+      // Períodos não-numéricos (NaN) caem para o FIM da lista, agrupados.
+      // Isso é intencional: dados malformados ficam visíveis no rodapé do
+      // histórico ao invés de quebrar a emissão. O operador identifica e corrige.
+      const safeA = Number.isFinite(pa) ? pa : Number.MAX_SAFE_INTEGER;
+      const safeB = Number.isFinite(pb) ? pb : Number.MAX_SAFE_INTEGER;
+      if (safeA !== safeB) return safeA - safeB;
+      // Tiebreaker: código da disciplina (ordem alfabética estável)
+      return String(a.codigo ?? "").localeCompare(String(b.codigo ?? ""));
+    });
 
   const disciplinas: Disciplina[] = (disciplinasData || []).map((d: any) => {
     // Monta array de carga horária
     const cargaHoraria: CargaHorariaComEtiqueta[] = [];
     if (d.carga_horaria_aula) {
-      cargaHoraria.push({ tipo: 'HoraAula', valor: d.carga_horaria_aula });
+      cargaHoraria.push({ tipo: "HoraAula", valor: d.carga_horaria_aula });
     }
     if (d.carga_horaria_relogio) {
-      cargaHoraria.push({ tipo: 'HoraRelogio', valor: d.carga_horaria_relogio });
+      cargaHoraria.push({
+        tipo: "HoraRelogio",
+        valor: d.carga_horaria_relogio,
+      });
     }
     if (cargaHoraria.length === 0) {
-      cargaHoraria.push({ tipo: 'HoraRelogio', valor: 0 });
+      cargaHoraria.push({ tipo: "HoraRelogio", valor: 0 });
     }
 
     // Monta docentes
     const docentes: DocenteInfo[] = d.docente_nome
-      ? [{
-          nome: d.docente_nome,
-          titulacao: d.docente_titulacao || 'Graduação',
-          cpf: d.docente_cpf || undefined,
-        }]
+      ? [
+          {
+            nome: d.docente_nome,
+            titulacao: d.docente_titulacao || "Graduação",
+            cpf: d.docente_cpf || undefined,
+          },
+        ]
       : [];
 
     // Mapeia situação
-    let situacao: 'Aprovado' | 'Pendente' | 'Reprovado' = 'Aprovado';
-    if (d.situacao === 'Reprovado') situacao = 'Reprovado';
-    else if (d.situacao === 'Cursando' || d.situacao === 'Pendente') situacao = 'Pendente';
+    let situacao: "Aprovado" | "Pendente" | "Reprovado" = "Aprovado";
+    if (d.situacao === "Reprovado") situacao = "Reprovado";
+    else if (d.situacao === "Cursando" || d.situacao === "Pendente")
+      situacao = "Pendente";
 
     return {
       codigo: d.codigo,
       nome: d.nome,
-      periodo_letivo: d.periodo || '',
+      periodo_letivo: d.periodo || "",
       carga_horaria: cargaHoraria,
       nota: d.nota || undefined,
       conceito: d.conceito || undefined,
       situacao,
-      forma_integralizacao: situacao === 'Aprovado' ? (d.forma_integralizacao as any || 'Cursado') : undefined,
+      forma_integralizacao:
+        situacao === "Aprovado"
+          ? (d.forma_integralizacao as any) || "Cursado"
+          : undefined,
       docentes,
     };
   });
 
   if (disciplinas.length === 0) {
-    throw new Error('Nenhuma disciplina encontrada para este diploma. Popule a tabela diploma_disciplinas.');
+    throw new Error(
+      "Nenhuma disciplina encontrada para este diploma. Popule a tabela diploma_disciplinas.",
+    );
   }
 
   // 6. Busca atividades complementares
   const { data: atividadesData } = await supabase
-    .from('diploma_atividades_complementares')
-    .select('codigo, tipo, carga_horaria_relogio, data_inicio, data_fim, descricao')
-    .eq('diploma_id', diplomaId);
+    .from("diploma_atividades_complementares")
+    .select(
+      "codigo, tipo, carga_horaria_relogio, data_inicio, data_fim, descricao",
+    )
+    .eq("diploma_id", diplomaId);
 
-  const atividades: AtividadeComplementar[] = (atividadesData || []).map((a: any) => ({
-    codigo: a.codigo,
-    data_inicio: a.data_inicio,
-    data_fim: a.data_fim,
-    tipo: a.tipo,
-    descricao: a.descricao || undefined,
-    carga_horaria_relogio: [{ valor: a.carga_horaria_relogio }] as CargaHorariaRelogioComEtiqueta[],
-    docentes_validacao: [],
-  }));
+  const atividades: AtividadeComplementar[] = (atividadesData || []).map(
+    (a: any) => ({
+      codigo: a.codigo,
+      data_inicio: a.data_inicio,
+      data_fim: a.data_fim,
+      tipo: a.tipo,
+      descricao: a.descricao || undefined,
+      carga_horaria_relogio: [
+        { valor: a.carga_horaria_relogio },
+      ] as CargaHorariaRelogioComEtiqueta[],
+      docentes_validacao: [],
+    }),
+  );
 
   // 7. Busca estágios
   const { data: estagiosData } = await supabase
-    .from('diploma_estagios')
-    .select('codigo_unidade_curricular, data_inicio, data_fim, concedente_cnpj, concedente_razao_social, carga_horaria_relogio')
-    .eq('diploma_id', diplomaId);
+    .from("diploma_estagios")
+    .select(
+      "codigo_unidade_curricular, data_inicio, data_fim, concedente_cnpj, concedente_razao_social, carga_horaria_relogio",
+    )
+    .eq("diploma_id", diplomaId);
 
   const estagios: Estagio[] = (estagiosData || []).map((e: any) => ({
     codigo_unidade_curricular: e.codigo_unidade_curricular,
     data_inicio: e.data_inicio,
     data_fim: e.data_fim,
-    concedente: e.concedente_cnpj ? {
-      tipo: 'PJ' as const,
-      razao_social: e.concedente_razao_social,
-      cnpj: e.concedente_cnpj,
-    } : undefined,
-    carga_horaria_relogio: [{ valor: e.carga_horaria_relogio }] as CargaHorariaRelogioComEtiqueta[],
+    concedente: e.concedente_cnpj
+      ? {
+          tipo: "PJ" as const,
+          razao_social: e.concedente_razao_social,
+          cnpj: e.concedente_cnpj,
+        }
+      : undefined,
+    carga_horaria_relogio: [
+      { valor: e.carga_horaria_relogio },
+    ] as CargaHorariaRelogioComEtiqueta[],
     docentes_orientadores: [],
   }));
 
   // 8. Busca ENADE
   const { data: enadeData } = await supabase
-    .from('diploma_enade')
-    .select('situacao, condicao, condicao_nao_habilitado, ano_edicao')
-    .eq('diploma_id', diplomaId);
+    .from("diploma_enade")
+    .select("situacao, condicao, condicao_nao_habilitado, ano_edicao")
+    .eq("diploma_id", diplomaId);
 
   const enade: EnadeInfo[] = (enadeData || []).map((e: any) => ({
-    tipo: (e.situacao || 'Habilitado') as 'Habilitado' | 'NaoHabilitado' | 'Irregular',
-    condicao: (e.condicao || 'Concluinte') as 'Ingressante' | 'Concluinte',
+    tipo: (e.situacao || "Habilitado") as
+      | "Habilitado"
+      | "NaoHabilitado"
+      | "Irregular",
+    condicao: (e.condicao || "Concluinte") as "Ingressante" | "Concluinte",
     edicao: String(e.ano_edicao || new Date().getFullYear()),
     motivo: e.condicao_nao_habilitado || undefined,
   }));
@@ -693,7 +735,8 @@ export async function montarDadosDiploma(
   const mantEnd = iesData.mantenedora_endereco as any;
   const mantenedora = iesData.mantenedora_razao_social
     ? {
-        razao_social: iesData.mantenedora_razao_social || iesData.mantenedora_nome,
+        razao_social:
+          iesData.mantenedora_razao_social || iesData.mantenedora_nome,
         cnpj: iesData.mantenedora_cnpj || iesData.cnpj,
         endereco: montarEndereco(
           mantEnd?.logradouro || iesData.logradouro,
@@ -703,7 +746,7 @@ export async function montarDadosDiploma(
           mantEnd?.codigo_municipio || iesData.codigo_municipio,
           mantEnd?.municipio || iesData.municipio,
           mantEnd?.uf || iesData.uf,
-          mantEnd?.cep || iesData.cep
+          mantEnd?.cep || iesData.cep,
         ),
       }
     : undefined;
@@ -740,9 +783,10 @@ export async function montarDadosDiploma(
   // Timezone: usamos explicitamente 'America/Sao_Paulo' porque o servidor Vercel
   // roda em UTC — new Date() direto daria DDMMAAAA errado após ~21h BRT.
 
-  let dataEmissaoHistorico: string = diplomaData.data_emissao_historico || '';
-  let horaEmissaoHistorico: string = diplomaData.hora_emissao_historico || '';
-  let codigoValidacaoHistorico: string = diplomaData.codigo_validacao_historico || '';
+  let dataEmissaoHistorico: string = diplomaData.data_emissao_historico || "";
+  let horaEmissaoHistorico: string = diplomaData.hora_emissao_historico || "";
+  let codigoValidacaoHistorico: string =
+    diplomaData.codigo_validacao_historico || "";
 
   const timestampFaltante =
     !dataEmissaoHistorico || !horaEmissaoHistorico || !codigoValidacaoHistorico;
@@ -752,11 +796,11 @@ export async function montarDadosDiploma(
     // A RPC decide atomicamente se persiste estes ou retorna o tuplo já existente.
     const { data: dataCandidata, hora: horaCandidata } = gerarDataHoraBrasil();
     const codigoCandidato = gerarCodigoValidacaoHistorico({
-      ra: diplomaData.diplomados.ra || '',
+      ra: diplomaData.diplomados.ra || "",
       cpf: diplomaData.diplomados.cpf,
-      codigoCursoEMEC: cur.codigo_emec || '',
-      cnpjEmissora: iesData.cnpj || '',
-      codigoMecEmissora: iesData.codigo_mec || '1606',
+      codigoCursoEMEC: cur.codigo_emec || "",
+      cnpjEmissora: iesData.cnpj || "",
+      codigoMecEmissora: iesData.codigo_mec || "1606",
       dataEmissaoHistorico: dataCandidata,
       horaEmissaoHistorico: horaCandidata,
     });
@@ -767,19 +811,19 @@ export async function montarDadosDiploma(
     // retorna o tuplo dela — garantindo que ambas as requisições gerem o XML
     // com o MESMO hash (reprodutibilidade obrigatória para auditorias MEC).
     const { data: rpcResult, error: rpcErr } = await supabase.rpc(
-      'persistir_timestamp_historico',
+      "persistir_timestamp_historico",
       {
         p_diploma_id: diplomaId,
         p_data: dataCandidata,
         p_hora: horaCandidata,
         p_codigo: codigoCandidato,
-      }
+      },
     );
 
     if (rpcErr) {
       throw new Error(
         `Falha ao persistir timestamp/código do histórico via RPC: ${rpcErr.message}. ` +
-          'Código de validação não pode ser gerado sem persistência — auditoria do MEC exige reprodutibilidade.'
+          "Código de validação não pode ser gerado sem persistência — auditoria do MEC exige reprodutibilidade.",
       );
     }
 
@@ -794,10 +838,15 @@ export async function montarDadosDiploma(
       | null
       | undefined;
 
-    if (!row || !row.data_emissao_historico || !row.hora_emissao_historico || !row.codigo_validacao_historico) {
+    if (
+      !row ||
+      !row.data_emissao_historico ||
+      !row.hora_emissao_historico ||
+      !row.codigo_validacao_historico
+    ) {
       throw new Error(
-        'persistir_timestamp_historico: RPC retornou linha inválida ou vazia. ' +
-          'Esperado tuplo (data, hora, código) — todas não-nulas.'
+        "persistir_timestamp_historico: RPC retornou linha inválida ou vazia. " +
+          "Esperado tuplo (data, hora, código) — todas não-nulas.",
       );
     }
 
@@ -809,18 +858,20 @@ export async function montarDadosDiploma(
   // 9. Monta e retorna objeto completo
   const dadosDiploma: DadosDiploma = {
     diplomado: {
-      ra: diplomaData.diplomados.ra || '',
+      ra: diplomaData.diplomados.ra || "",
       nome: diplomaData.diplomados.nome,
       nome_social: diplomaData.diplomados.nome_social || undefined,
-      sexo: diplomaData.diplomados.sexo as 'M' | 'F',
-      nacionalidade: diplomaData.diplomados.nacionalidade || 'Brasileira',
-      codigo_municipio_ibge: diplomaData.diplomados.codigo_municipio_ibge || '',
-      naturalidade_municipio: diplomaData.diplomados.naturalidade_municipio || '',
-      naturalidade_uf: diplomaData.diplomados.naturalidade_uf || '',
+      sexo: diplomaData.diplomados.sexo as "M" | "F",
+      nacionalidade: diplomaData.diplomados.nacionalidade || "Brasileira",
+      codigo_municipio_ibge: diplomaData.diplomados.codigo_municipio_ibge || "",
+      naturalidade_municipio:
+        diplomaData.diplomados.naturalidade_municipio || "",
+      naturalidade_uf: diplomaData.diplomados.naturalidade_uf || "",
       cpf: diplomaData.diplomados.cpf,
       data_nascimento: diplomaData.diplomados.data_nascimento,
       rg_numero: diplomaData.diplomados.rg_numero || undefined,
-      rg_orgao_expedidor: diplomaData.diplomados.rg_orgao_expedidor || undefined,
+      rg_orgao_expedidor:
+        diplomaData.diplomados.rg_orgao_expedidor || undefined,
       rg_uf: diplomaData.diplomados.rg_uf || undefined,
       filiacao: filiacao.length > 0 ? filiacao : undefined,
     },
@@ -828,13 +879,19 @@ export async function montarDadosDiploma(
     curso: {
       nome: cur.nome,
       codigo_emec: cur.codigo_emec,
-      modalidade: cur.modalidade === 'EAD' ? 'EAD' : 'Presencial',
-      titulo_conferido: cur.titulo_conferido || 'Bacharel',
-      grau_conferido: cur.grau || 'Bacharelado',
+      modalidade: cur.modalidade === "EAD" ? "EAD" : "Presencial",
+      titulo_conferido: cur.titulo_conferido || "Bacharel",
+      grau_conferido: cur.grau || "Bacharelado",
       enfase: cur.enfase || undefined,
       endereco: montarEndereco(
-        cur.logradouro, cur.numero, null, cur.bairro,
-        cur.codigo_municipio, cur.municipio, cur.uf, cur.cep
+        cur.logradouro,
+        cur.numero,
+        null,
+        cur.bairro,
+        cur.codigo_municipio,
+        cur.municipio,
+        cur.uf,
+        cur.cep,
       ),
       // Bug #G — fonte primária: tabela `atos_curso`. Fallback para campos
       // planos da `cursos` (deprecados) garante compatibilidade com cursos
@@ -842,27 +899,39 @@ export async function montarDadosDiploma(
       autorizacao:
         atosCurso.autorizacao ??
         montarAtoRegulatorio(
-          cur.tipo_autorizacao, cur.numero_autorizacao, cur.data_autorizacao,
-          cur.veiculo_publicacao_autorizacao, cur.data_publicacao_autorizacao,
-          cur.secao_publicacao_autorizacao?.toString(), cur.pagina_publicacao_autorizacao?.toString(),
-          cur.numero_dou_autorizacao
+          cur.tipo_autorizacao,
+          cur.numero_autorizacao,
+          cur.data_autorizacao,
+          cur.veiculo_publicacao_autorizacao,
+          cur.data_publicacao_autorizacao,
+          cur.secao_publicacao_autorizacao?.toString(),
+          cur.pagina_publicacao_autorizacao?.toString(),
+          cur.numero_dou_autorizacao,
         ),
       reconhecimento:
         atosCurso.reconhecimento ??
         montarAtoRegulatorio(
-          cur.tipo_reconhecimento, cur.numero_reconhecimento, cur.data_reconhecimento,
-          cur.veiculo_publicacao_reconhecimento, cur.data_publicacao_reconhecimento,
-          cur.secao_publicacao_reconhecimento?.toString(), cur.pagina_publicacao_reconhecimento?.toString(),
-          cur.numero_dou_reconhecimento
+          cur.tipo_reconhecimento,
+          cur.numero_reconhecimento,
+          cur.data_reconhecimento,
+          cur.veiculo_publicacao_reconhecimento,
+          cur.data_publicacao_reconhecimento,
+          cur.secao_publicacao_reconhecimento?.toString(),
+          cur.pagina_publicacao_reconhecimento?.toString(),
+          cur.numero_dou_reconhecimento,
         ),
       renovacao_reconhecimento:
         atosCurso.renovacao_reconhecimento ??
         (cur.tipo_renovacao
           ? montarAtoRegulatorio(
-              cur.tipo_renovacao, cur.numero_renovacao, cur.data_renovacao,
-              cur.veiculo_publicacao_renovacao, cur.data_publicacao_renovacao,
-              cur.secao_publicacao_renovacao?.toString(), cur.pagina_publicacao_renovacao?.toString(),
-              cur.numero_dou_renovacao
+              cur.tipo_renovacao,
+              cur.numero_renovacao,
+              cur.data_renovacao,
+              cur.veiculo_publicacao_renovacao,
+              cur.data_publicacao_renovacao,
+              cur.secao_publicacao_renovacao?.toString(),
+              cur.pagina_publicacao_renovacao?.toString(),
+              cur.numero_dou_renovacao,
             )
           : undefined),
     },
@@ -872,8 +941,14 @@ export async function montarDadosDiploma(
       codigo_mec: iesData.codigo_mec,
       cnpj: iesData.cnpj,
       endereco: montarEndereco(
-        iesData.logradouro, iesData.numero, iesData.complemento, iesData.bairro,
-        iesData.codigo_municipio, iesData.municipio, iesData.uf, iesData.cep
+        iesData.logradouro,
+        iesData.numero,
+        iesData.complemento,
+        iesData.bairro,
+        iesData.codigo_municipio,
+        iesData.municipio,
+        iesData.uf,
+        iesData.cep,
       ),
       // Atos regulatórios lidos da tabela dedicada `credenciamentos` (Bug #7)
       credenciamento: atosIES.credenciamento,
@@ -890,7 +965,7 @@ export async function montarDadosDiploma(
       // Enquanto a integração com a registradora não está pronta, mantemos o valor atual
       // do banco ou string vazia — a registradora preencherá. NÃO geramos um código aleatório
       // aqui (isso era o bug antigo que gerava valores inválidos tipo '1606.a7aa1732a573').
-      codigo_validacao: diplomaData.codigo_validacao || '',
+      codigo_validacao: diplomaData.codigo_validacao || "",
       data_colacao_grau: diplomaData.data_colacao_grau,
       data_conclusao: diplomaData.data_conclusao,
       // Bug #E — fix 2026-04-07 (Onda 2 / Caminho C):
@@ -908,25 +983,30 @@ export async function montarDadosDiploma(
       // interno do banco diploma_diplomas.ambiente que está em pt-BR
       // ('producao' | 'homologacao' | 'teste').
       ambiente:
-        process.env.NODE_ENV === 'production'
-          ? 'producao'
-          : ((diplomaData.ambiente as 'producao' | 'homologacao' | 'teste' | undefined) ||
-             'producao'),
+        process.env.NODE_ENV === "production"
+          ? "producao"
+          : (diplomaData.ambiente as
+              | "producao"
+              | "homologacao"
+              | "teste"
+              | undefined) || "producao",
     },
 
     historico: {
-      codigo_curriculo: diplomaData.codigo_curriculo || cur.codigo_curso || '001',
+      codigo_curriculo:
+        diplomaData.codigo_curriculo || cur.codigo_curso || "001",
       // Código persistido — gerado uma única vez via SHA256 Anexo III (ver bloco acima)
       codigo_validacao_historico: codigoValidacaoHistorico,
       data_emissao: dataEmissaoHistorico,
       hora_emissao: horaEmissaoHistorico,
       carga_horaria_curso: cur.carga_horaria_total || 0,
-      carga_horaria_integralizada: diplomaData.carga_horaria_integralizada || cur.carga_horaria_total || 0,
-      tipo_carga_horaria: 'HoraRelogio',
-      data_ingresso: diplomaData.data_ingresso || '',
+      carga_horaria_integralizada:
+        diplomaData.carga_horaria_integralizada || cur.carga_horaria_total || 0,
+      tipo_carga_horaria: "HoraRelogio",
+      data_ingresso: diplomaData.data_ingresso || "",
       forma_acesso: mapearFormaAcesso(diplomaData.forma_acesso),
       situacao_discente: {
-        tipo: 'Formado',
+        tipo: "Formado",
         data_conclusao: diplomaData.data_conclusao,
         data_colacao_grau: diplomaData.data_colacao_grau,
         // Bug #E — DataExpedicaoDiploma é derivada automaticamente pelo
@@ -942,14 +1022,39 @@ export async function montarDadosDiploma(
     // IES Registradora — montada a partir dos campos do diploma
     ies_registradora: diplomaData.registradora_cnpj
       ? {
-          nome: diplomaData.registradora_nome || '',
-          codigo_mec: diplomaData.registradora_codigo_mec || '',
+          nome: diplomaData.registradora_nome || "",
+          codigo_mec: diplomaData.registradora_codigo_mec || "",
           cnpj: diplomaData.registradora_cnpj,
         }
       : undefined,
 
     assinantes,
   };
+
+  // ============================================================
+  // Fase 2 do Snapshot Imutável (2026-04-22)
+  // ============================================================
+  //
+  // Se o diploma tem snapshot (criado pela Fase 1), sobrescreve os campos
+  // que vêm da extração (diplomado, curso básico, disciplinas, atividades,
+  // estágios, ingresso, assinantes) com os valores do snapshot —
+  // garantindo que os XMLs refletem EXATAMENTE os dados consolidados
+  // na extração confirmada, independente do que está nas tabelas
+  // normalizadas (que podem ter sido editadas).
+  //
+  // Dados institucionais (IES emissora, atos regulatórios, códigos e-MEC,
+  // códigos IBGE, filiação, ENADE) continuam vindo das tabelas — não são
+  // dados extraídos do diploma individual.
+  //
+  // Diplomas legados (sem snapshot) → helper é no-op, fluxo atual intocado.
+  const snapshotRaw =
+    (diplomaData as { dados_snapshot_extracao?: unknown })
+      .dados_snapshot_extracao ?? null;
+  const snapshot = snapshotRaw as DadosSnapshot | null;
+  const dadosDiplomaFinal = aplicarSnapshotSobreDadosDiploma(
+    dadosDiploma,
+    snapshot,
+  );
 
   // ── Validação de regras de NEGÓCIO (Bug #H — princípio do override humano) ──
   // Estas regras são SEMÂNTICAS (próprias da FIC), não estruturais (XSD).
@@ -963,16 +1068,15 @@ export async function montarDadosDiploma(
   // IMPORTANTE: NUNCA inclua aqui validações que dependem do XSD obrigatório
   // (minOccurs, enum, tipo). Essas são responsabilidade do `validador.ts`
   // e não podem ser sobrescritas — o XML não passaria na registradora.
-  const { avaliarRegrasNegocio, ValidacaoNegocioError } = await import(
-    './validation/regras-negocio'
-  );
+  const { avaliarRegrasNegocio, ValidacaoNegocioError } =
+    await import("./validation/regras-negocio");
   const violacoes = avaliarRegrasNegocio(
-    dadosDiploma,
-    options.pular_regras_negocio ?? []
+    dadosDiplomaFinal,
+    options.pular_regras_negocio ?? [],
   );
   if (violacoes.length > 0) {
     throw new ValidacaoNegocioError(violacoes);
   }
 
-  return dadosDiploma;
+  return dadosDiplomaFinal;
 }

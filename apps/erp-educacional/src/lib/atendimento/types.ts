@@ -106,13 +106,23 @@ export interface DealHistoryEvent {
   created_at: string;
 }
 
+export interface ProcessTypeBrief {
+  id: string;
+  key: string;
+  name: string;
+}
+
 export interface Protocol {
   id: string;
   conversation_id: string;
   protocol_number: number;
   subject: string;
+  description: string | null;
   status: "open" | "resolved" | "canceled";
   assignee_id: string | null;
   resolved_at: string | null;
   created_at: string;
+  process_type_id: string | null;
+  process_type: ProcessTypeBrief | null;
+  aluno_id: string | null;
 }

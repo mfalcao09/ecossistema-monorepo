@@ -11,10 +11,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { protegerRota } from "@/lib/security/api-guard";
 import { createAdminClient } from "@/lib/supabase/admin";
-import {
-  dashboardsEnabled,
-  signWidgetToken,
-} from "@/lib/atendimento/dashboards";
+import { signWidgetToken } from "@/lib/atendimento/dashboards";
 
 const shareSchema = z.object({
   widget_id: z.string().uuid(),
@@ -23,17 +20,15 @@ const shareSchema = z.object({
 
 export const POST = protegerRota(
   async (request, { userId }) => {
-    if (!dashboardsEnabled()) {
-      return NextResponse.json(
-        { ok: false, error: "ATENDIMENTO_DASHBOARDS_ENABLED off" },
-        { status: 503 },
-      );
-    }
     const body = await request.json().catch(() => null);
     const parsed = shareSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { ok: false, error: "payload_invalido", detalhes: parsed.error.flatten() },
+        {
+          ok: false,
+          error: "payload_invalido",
+          detalhes: parsed.error.flatten(),
+        },
         { status: 400 },
       );
     }
@@ -72,7 +67,10 @@ export const POST = protegerRota(
       .select("id, expires_at")
       .single();
     if (error) {
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { ok: false, error: error.message },
+        { status: 500 },
+      );
     }
 
     const base = process.env.NEXT_PUBLIC_APP_URL || "";
@@ -91,12 +89,6 @@ export const POST = protegerRota(
 
 export const DELETE = protegerRota(
   async (request) => {
-    if (!dashboardsEnabled()) {
-      return NextResponse.json(
-        { ok: false, error: "ATENDIMENTO_DASHBOARDS_ENABLED off" },
-        { status: 503 },
-      );
-    }
     const id = new URL(request.url).searchParams.get("id");
     if (!id) {
       return NextResponse.json(
@@ -111,7 +103,10 @@ export const DELETE = protegerRota(
       .update({ revoked_at: new Date().toISOString() })
       .eq("id", id);
     if (error) {
-      return NextResponse.json({ ok: false, error: error.message }, { status: 500 });
+      return NextResponse.json(
+        { ok: false, error: error.message },
+        { status: 500 },
+      );
     }
     return NextResponse.json({ ok: true });
   },

@@ -1,5 +1,5 @@
 {
-  "installCommand": "npm install",
+  "installCommand": "cd ../.. && npx -y pnpm@9.0.0 install --frozen-lockfile",
   "functions": {
     "api/financeiro/*.py": {
       "maxDuration": 30
@@ -43,8 +43,16 @@
       "schedule": "* * * * *"
     },
     {
+      "path": "/api/cron/drain-automation-messages",
+      "schedule": "* * * * *"
+    },
+    {
       "path": "/api/cron/aggregate-metrics-daily",
       "schedule": "10 0 * * *"
+    },
+    {
+      "path": "/api/cron/process-funnel-steps",
+      "schedule": "* * * * *"
     }
   ]
 }
