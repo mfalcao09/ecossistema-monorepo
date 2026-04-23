@@ -9,16 +9,6 @@
 import crypto from "node:crypto";
 
 // ─────────────────────────────────────────────────────────────────────────────
-// Feature flag
-// ─────────────────────────────────────────────────────────────────────────────
-export function dashboardsEnabled(): boolean {
-  // Se a env não estiver definida, default é ligado em dev e desligado em prod.
-  const v = process.env.ATENDIMENTO_DASHBOARDS_ENABLED;
-  if (v === undefined) return process.env.NODE_ENV !== "production";
-  return v === "1" || v.toLowerCase() === "true";
-}
-
-// ─────────────────────────────────────────────────────────────────────────────
 // Métricas conhecidas (as que o RPC compute_daily_metrics produz)
 // ─────────────────────────────────────────────────────────────────────────────
 export const METRIC_KEYS = [
@@ -72,7 +62,9 @@ export const WIDGET_TYPES = [
 export type WidgetType = (typeof WIDGET_TYPES)[number];
 
 export function isMetricKey(v: unknown): v is MetricKey {
-  return typeof v === "string" && (METRIC_KEYS as readonly string[]).includes(v);
+  return (
+    typeof v === "string" && (METRIC_KEYS as readonly string[]).includes(v)
+  );
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -84,12 +76,14 @@ export function normalizeRange(
   fallbackDays = 30,
 ): { from: string; to: string; days: number } {
   const today = new Date();
-  const to = toStr && /^\d{4}-\d{2}-\d{2}$/.test(toStr)
-    ? new Date(toStr + "T00:00:00Z")
-    : today;
-  const from = fromStr && /^\d{4}-\d{2}-\d{2}$/.test(fromStr)
-    ? new Date(fromStr + "T00:00:00Z")
-    : new Date(to.getTime() - fallbackDays * 86400000);
+  const to =
+    toStr && /^\d{4}-\d{2}-\d{2}$/.test(toStr)
+      ? new Date(toStr + "T00:00:00Z")
+      : today;
+  const from =
+    fromStr && /^\d{4}-\d{2}-\d{2}$/.test(fromStr)
+      ? new Date(fromStr + "T00:00:00Z")
+      : new Date(to.getTime() - fallbackDays * 86400000);
   const clampedFrom = from > to ? to : from;
   const maxRange = 365;
   const days = Math.min(
@@ -214,9 +208,97 @@ export function formatBP(bp: number | null | undefined): string {
 }
 
 // ─────────────────────────────────────────────────────────────────────────────
+// ADR-020 — Dashboards personalizados (tipos)
+// ─────────────────────────────────────────────────────────────────────────────
+export const WIDGET_CATEGORIES = [
+  "kpi",
+  "chart",
+  "activity",
+  "onboarding",
+  "status",
+  "agent_ia",
+  "crm",
+  "quality",
+  "custom",
+] as const;
+export type WidgetCategory = (typeof WIDGET_CATEGORIES)[number];
+
+export interface WidgetLayout {
+  x?: number;
+  y?: number;
+  w: number;
+  h: number;
+  minW?: number;
+  minH?: number;
+  maxW?: number;
+  maxH?: number;
+}
+
+export interface CatalogWidget {
+  slug: string;
+  label: string;
+  description: string | null;
+  category: WidgetCategory;
+  widget_type: WidgetType;
+  metric_key: MetricKey | null;
+  component_slug: string | null;
+  default_layout: WidgetLayout;
+  default_config: Record<string, unknown>;
+  icon: string | null;
+  active: boolean;
+  order_weight: number;
+  min_permission: string;
+}
+
+export interface Dashboard {
+  id: string;
+  owner_user_id: string | null;
+  name: string;
+  slug: string | null;
+  description: string | null;
+  icon: string;
+  is_shared: boolean;
+  is_default: boolean;
+  pinned_order: number;
+  layout_cols: number;
+  share_role_ids: string[];
+  created_at: string;
+  updated_at: string;
+}
+
+export interface DashboardWidgetRow {
+  id: string;
+  dashboard_id: string | null;
+  account_id: string | null;
+  owner_id: string | null;
+  title: string;
+  widget_type: WidgetType;
+  metric_key: MetricKey | null;
+  catalog_slug: string | null;
+  filters: Record<string, unknown>;
+  range_days: number;
+  layout: WidgetLayout;
+  component_config: Record<string, unknown>;
+  sort_order: number;
+  is_public: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+export function isWidgetCategory(v: unknown): v is WidgetCategory {
+  return (
+    typeof v === "string" &&
+    (WIDGET_CATEGORIES as readonly string[]).includes(v)
+  );
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 // CSV helper
 // ─────────────────────────────────────────────────────────────────────────────
-export function toCSV(rows: Array<Record<string, unknown>>, columns?: string[]): string {
+export function toCSV(
+  rows: Array<Record<string, unknown>>,
+  columns?: string[],
+): string {
   if (rows.length === 0) return "";
   const cols = columns ?? Object.keys(rows[0]);
   const escape = (v: unknown): string => {
@@ -225,6 +307,8 @@ export function toCSV(rows: Array<Record<string, unknown>>, columns?: string[]):
     return /[",\n;]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
   };
   const header = cols.join(",");
-  const body = rows.map((r) => cols.map((c) => escape(r[c])).join(",")).join("\n");
+  const body = rows
+    .map((r) => cols.map((c) => escape(r[c])).join(","))
+    .join("\n");
   return header + "\n" + body;
 }
