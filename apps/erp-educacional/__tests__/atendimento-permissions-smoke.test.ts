@@ -7,7 +7,7 @@ import { describe, expect, it } from "vitest";
 import { PERMISSION_MODULES } from "@/lib/atendimento/permissions";
 
 describe("PERMISSION_MODULES taxonomia", () => {
-  it("contém os 15 módulos canônicos", () => {
+  it("contém os 17 módulos canônicos", () => {
     const slugs = PERMISSION_MODULES.map((m) => m.slug).sort();
     expect(slugs).toEqual(
       [
@@ -18,11 +18,13 @@ describe("PERMISSION_MODULES taxonomia", () => {
         "ds_ai",
         "ds_voice",
         "inboxes",
+        "link_redirects",
         "pipelines",
         "reports",
         "roles",
         "schedules",
         "settings",
+        "team_chats",
         "templates",
         "users",
         "webhooks",
@@ -31,7 +33,13 @@ describe("PERMISSION_MODULES taxonomia", () => {
   });
 
   it("toda action declarada está no conjunto válido", () => {
-    const validActions = new Set(["view", "create", "edit", "delete", "export"]);
+    const validActions = new Set([
+      "view",
+      "create",
+      "edit",
+      "delete",
+      "export",
+    ]);
     for (const mod of PERMISSION_MODULES) {
       for (const act of mod.actions) {
         expect(validActions.has(act), `${mod.slug}.${act}`).toBe(true);

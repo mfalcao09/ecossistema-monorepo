@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Users, Shield, UsersRound } from "lucide-react";
+import { Users, Shield, UsersRound, FileText } from "lucide-react";
 
 const tabs = [
-  { href: "/atendimento/configuracoes/cargos",    label: "Cargos",    icon: Shield },
-  { href: "/atendimento/configuracoes/usuarios",  label: "Usuários",  icon: Users },
-  { href: "/atendimento/configuracoes/equipes",   label: "Equipes",   icon: UsersRound },
+  { href: "/atendimento/configuracoes/cargos",              label: "Cargos",           icon: Shield },
+  { href: "/atendimento/configuracoes/usuarios",            label: "Usuários",         icon: Users },
+  { href: "/atendimento/configuracoes/equipes",             label: "Equipes",          icon: UsersRound },
+  { href: "/atendimento/configuracoes/tipos-de-processo",   label: "Tipos de processo", icon: FileText },
 ];
 
 export default function ConfiguracoesLayout({ children }: { children: React.ReactNode }) {
