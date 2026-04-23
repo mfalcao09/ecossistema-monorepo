@@ -9,7 +9,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
       - uses: supabase/setup-cli@v1
         with: { version: latest }
       - run: supabase functions deploy --project-ref ${{ secrets.SUPABASE_ECOSYSTEM_PROJECT_REF }}
