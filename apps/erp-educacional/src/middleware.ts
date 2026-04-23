@@ -61,6 +61,22 @@ export async function middleware(request: NextRequest) {
     return NextResponse.next()
   }
 
+  // ── Bypass: webhooks inbound customizados (S8a) ─────────
+  // /api/atendimento/webhooks/inbound/<slug>/hit recebe POSTs externos
+  // autenticados via HMAC-SHA256 com secret do endpoint
+  // (webhook_inbound_endpoints.secret). Sem sessão Supabase.
+  if (/^\/api\/atendimento\/webhooks\/inbound\/[^/]+\/hit\/?$/.test(pathname)) {
+    return NextResponse.next()
+  }
+
+  // ── Bypass: landing de aceite de convite (S6) ───────────
+  // GET /api/atendimento/invites/accept?token=... é a porta de entrada
+  // do convite — precisa exibir dados (email, cargo) antes de logar.
+  // O POST (aceitar) exige sessão e é checado no próprio handler.
+  if (pathname === '/api/atendimento/invites/accept' && request.method === 'GET') {
+    return NextResponse.next()
+  }
+
   // ── Validação de ameaça Cloudflare para rotas críticas ──
   // Em produção, valida scores de ameaça para APIs
   if (pathname.startsWith('/api/') && process.env.NODE_ENV === 'production') {

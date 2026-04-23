@@ -1,0 +1,44 @@
+{
+  "expo": {
+    "name": "Jarvis",
+    "slug": "jarvis-app",
+    "version": "0.1.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "automatic",
+    "scheme": "jarvis",
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.ecossistema.jarvis",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Jarvis precisa do microfone para você falar com o Claudinho."
+      }
+    },
+    "android": {
+      "package": "com.ecossistema.jarvis",
+      "permissions": ["RECORD_AUDIO"]
+    },
+    "web": {
+      "bundler": "metro"
+    },
+    "plugins": [
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Jarvis precisa do microfone para você falar com o Claudinho."
+        }
+      ],
+      "expo-secure-store"
+    ],
+    "extra": {
+      "orchestratorUrl": "http://localhost:8000",
+      "orchestratorToken": "",
+      "agentId": "claudinho",
+      "supabaseUrl": "",
+      "supabaseAnonKey": "",
+      "eas": {
+        "projectId": ""
+      }
+    }
+  }
+}

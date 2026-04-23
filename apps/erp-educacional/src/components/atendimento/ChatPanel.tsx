@@ -10,9 +10,14 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import {
   Send, CheckCheck, Clock, AlertCircle, Paperclip, Smile,
   ChevronDown, UserCheck, CheckSquare, Archive, RotateCcw,
-  Phone, MoreVertical
+  Phone, MoreVertical, DollarSign
 } from "lucide-react";
 import { createBrowserClient } from "@supabase/ssr";
+import ClosedWindowBanner from "./inbox/ClosedWindowBanner";
+import SelectTemplateModal from "./inbox/SelectTemplateModal";
+import SolicitarPagamentoModal from "./chat/SolicitarPagamentoModal";
+
+import BreadcrumbPipeline from "@/components/atendimento/shared/BreadcrumbPipeline";
 
 // ── Tipos ────────────────────────────────────────────────────────────────────
 
@@ -35,6 +40,7 @@ interface ConversaDetalhe {
   ticket_number?: number;
   window_expires_at?: string;
   assignee_id?: string;
+  deal_id?: string | null;
   atendimento_contacts: { id: string; name: string; phone_number: string } | null;
   atendimento_inboxes: { id: string; name: string; channel_type: string } | null;
   atendimento_queues:  { id: string; name: string; color_hex: string } | null;
@@ -78,6 +84,8 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
   const [texto,     setTexto]     = useState("");
   const [enviando,  setEnviando]  = useState(false);
   const [loading,   setLoading]   = useState(false);
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
+  const [showPagamentoModal, setShowPagamentoModal] = useState(false);
 
   const bottomRef  = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -271,6 +279,10 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
                     <span className="ml-2 text-green-600 font-medium">#{conversa.ticket_number}</span>
                   )}
                 </p>
+                {/* S4: breadcrumb pipeline › stage (só aparece se deal_id estiver definido) */}
+                <div className="mt-0.5">
+                  <BreadcrumbPipeline dealId={conversa?.deal_id ?? null} />
+                </div>
               </div>
             </div>
 
@@ -427,6 +439,12 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
         </div>
       )}
 
+      {/* ── Banner janela WABA fechada ──────────────────────────────── */}
+      <ClosedWindowBanner
+        windowExpiresAt={conversa?.window_expires_at}
+        onPickTemplate={() => setShowTemplateModal(true)}
+      />
+
       {/* ── Toolbar de envio ────────────────────────────────────────── */}
       <div className={`flex-shrink-0 border-t border-gray-200 bg-white p-3 ${isResolved ? "opacity-50 pointer-events-none" : ""}`}>
         {/* Toolbar de anexos */}
@@ -436,6 +454,13 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
           </button>
           <button className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors" title="Emoji">
             <Smile size={14} />
+          </button>
+          <button
+            onClick={() => setShowPagamentoModal(true)}
+            className="p-1.5 rounded-lg text-gray-400 hover:bg-green-50 hover:text-green-700 transition-colors"
+            title="Solicitar pagamento (PIX/boleto)"
+          >
+            <DollarSign size={14} />
           </button>
           <span className="flex-1" />
           <span className="text-[10px] text-gray-400">
@@ -498,6 +523,29 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
           )}
         </div>
       </div>
+
+      {/* ── Modal de seleção de template (janela fechada) ──────────── */}
+      {showTemplateModal && conversa?.atendimento_contacts?.id && (
+        <SelectTemplateModal
+          contactId={conversa.atendimento_contacts.id}
+          conversationId={conversa.id}
+          inboxId={conversa.atendimento_inboxes?.id}
+          onClose={() => setShowTemplateModal(false)}
+          onSent={() => {
+            setShowTemplateModal(false);
+            void carregar();
+            onConversaAtualizada?.();
+          }}
+        />
+      )}
+
+      {/* ── Modal Solicitar Pagamento (S4.5) ────────────────────────── */}
+      {showPagamentoModal && conversa?.id && (
+        <SolicitarPagamentoModal
+          conversationId={conversa.id}
+          onClose={() => setShowPagamentoModal(false)}
+        />
+      )}
     </div>
   );
 }

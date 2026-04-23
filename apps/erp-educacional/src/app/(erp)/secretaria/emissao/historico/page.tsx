@@ -2,8 +2,17 @@
 
 import { useState, useCallback, useEffect } from "react";
 import {
-  Search, GraduationCap, Loader2, FileText, Printer, Download,
-  Eye, AlertCircle, RefreshCw, User, X,
+  Search,
+  GraduationCap,
+  Loader2,
+  FileText,
+  Printer,
+  Download,
+  Eye,
+  AlertCircle,
+  RefreshCw,
+  User,
+  X,
 } from "lucide-react";
 import LivePreview, {
   type LivePreviewDadosAluno,
@@ -64,17 +73,65 @@ interface DadosPrevia {
 const DEFAULT_COLUNAS: HistoricoColunaConfig[] = [
   { campo: "codigo", label: "Código", visivel: true, ordem: 1, largura: 8 },
   { campo: "nome", label: "Disciplina", visivel: true, ordem: 2, largura: 30 },
-  { campo: "carga_horaria_aula", label: "C.H.", visivel: true, ordem: 3, largura: 8 },
+  {
+    campo: "carga_horaria_aula",
+    label: "C.H.",
+    visivel: true,
+    ordem: 3,
+    largura: 8,
+  },
   { campo: "nota", label: "Média", visivel: true, ordem: 4, largura: 8 },
   { campo: "periodo", label: "P/Letivo", visivel: true, ordem: 5, largura: 8 },
-  { campo: "situacao", label: "Sit. Fin.", visivel: true, ordem: 6, largura: 10 },
+  {
+    campo: "situacao",
+    label: "Sit. Fin.",
+    visivel: true,
+    ordem: 6,
+    largura: 10,
+  },
   { campo: "etiqueta", label: "Obs.", visivel: false, ordem: 7, largura: 8 },
-  { campo: "conceito", label: "Conceito", visivel: false, ordem: 8, largura: 8 },
-  { campo: "conceito_especifico", label: "Conc. Específico", visivel: false, ordem: 9, largura: 10 },
-  { campo: "conceito_rm", label: "Conceito RM", visivel: false, ordem: 10, largura: 8 },
-  { campo: "forma_integralizacao", label: "Forma Integr.", visivel: false, ordem: 11, largura: 10 },
-  { campo: "docente_nome", label: "Docente", visivel: false, ordem: 12, largura: 18 },
-  { campo: "docente_titulacao", label: "Titulação", visivel: false, ordem: 13, largura: 10 },
+  {
+    campo: "conceito",
+    label: "Conceito",
+    visivel: false,
+    ordem: 8,
+    largura: 8,
+  },
+  {
+    campo: "conceito_especifico",
+    label: "Conc. Específico",
+    visivel: false,
+    ordem: 9,
+    largura: 10,
+  },
+  {
+    campo: "conceito_rm",
+    label: "Conceito RM",
+    visivel: false,
+    ordem: 10,
+    largura: 8,
+  },
+  {
+    campo: "forma_integralizacao",
+    label: "Forma Integr.",
+    visivel: false,
+    ordem: 11,
+    largura: 10,
+  },
+  {
+    campo: "docente_nome",
+    label: "Docente",
+    visivel: false,
+    ordem: 12,
+    largura: 18,
+  },
+  {
+    campo: "docente_titulacao",
+    label: "Titulação",
+    visivel: false,
+    ordem: 13,
+    largura: 10,
+  },
 ];
 
 const DEFAULT_FORMATACAO: HistoricoFormatacaoRegra[] = [];
@@ -119,20 +176,29 @@ export default function EmissaoHistoricoPage() {
 
   // Estado do dialog de prévia (modo real com LivePreview)
   const [previaAberta, setPreviaAberta] = useState(false);
-  const [previaCarregandoId, setPreviaCarregandoId] = useState<string | null>(null);
+  const [previaCarregandoId, setPreviaCarregandoId] = useState<string | null>(
+    null,
+  );
   const [previaNome, setPreviaNome] = useState("");
   const [previaDiplomaId, setPreviaDiplomaId] = useState<string | null>(null);
   const [dadosPrevia, setDadosPrevia] = useState<DadosPrevia | null>(null);
+  // Toggle "papel já timbrado" — oculta o timbrado digital no preview e no PDF
+  const [ocultarTimbrado, setOcultarTimbrado] = useState(false);
 
   const buscar = useCallback(async (q: string) => {
-    if (!q.trim()) { setResultados([]); return; }
+    if (!q.trim()) {
+      setResultados([]);
+      return;
+    }
     setCarregando(true);
     setErro("");
     try {
       const params = new URLSearchParams({ search: q });
       const res = await fetch(`/api/diplomas?${params}`);
       const data = await res.json();
-      const lista: DiplomaResultado[] = Array.isArray(data) ? data : (data.diplomas ?? []);
+      const lista: DiplomaResultado[] = Array.isArray(data)
+        ? data
+        : (data.diplomas ?? []);
       setResultados(lista);
     } catch {
       setErro("Erro ao buscar. Tente novamente.");
@@ -157,10 +223,14 @@ export default function EmissaoHistoricoPage() {
     setPreviaDiplomaId(diplomaId);
     setErro("");
     try {
-      const res = await fetch(`/api/secretaria/emissao/historico/${diplomaId}/dados`);
+      const res = await fetch(
+        `/api/secretaria/emissao/historico/${diplomaId}/dados`,
+      );
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
-        throw new Error((data as { error?: string }).error ?? "Erro ao carregar dados");
+        throw new Error(
+          (data as { error?: string }).error ?? "Erro ao carregar dados",
+        );
       }
       const data: DadosPrevia = await res.json();
       setDadosPrevia(data);
@@ -176,6 +246,7 @@ export default function EmissaoHistoricoPage() {
     setPreviaAberta(false);
     setDadosPrevia(null);
     setPreviaDiplomaId(null);
+    setOcultarTimbrado(false);
   };
 
   // Loading states para os botões de download/print
@@ -193,11 +264,17 @@ export default function EmissaoHistoricoPage() {
     try {
       const res = await fetchSeguro(
         `/api/secretaria/emissao/historico/${diplomaId}/pdf`,
-        { method: "POST" }
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ semTimbrado: ocultarTimbrado }),
+        },
       );
       if (!res.ok) {
         const body = await res.json().catch(() => ({}));
-        throw new Error((body as { error?: string }).error ?? "Erro ao gerar PDF");
+        throw new Error(
+          (body as { error?: string }).error ?? "Erro ao gerar PDF",
+        );
       }
 
       const blob = await res.blob();
@@ -230,9 +307,9 @@ export default function EmissaoHistoricoPage() {
 
       // Clona todos os <link> e <style> da página atual
       const stylesheets = Array.from(
-        document.querySelectorAll('link[rel="stylesheet"], style')
+        document.querySelectorAll('link[rel="stylesheet"], style'),
       )
-        .map(s => s.outerHTML)
+        .map((s) => s.outerHTML)
         .join("");
 
       // Cria iframe escondido
@@ -310,9 +387,11 @@ export default function EmissaoHistoricoPage() {
 
   // ── Extrai config com fallbacks seguros ──
   const cfg = dadosPrevia?.config;
-  const camposAluno = cfg?.historico_campos_aluno_config ?? DEFAULT_CAMPOS_ALUNO;
+  const camposAluno =
+    cfg?.historico_campos_aluno_config ?? DEFAULT_CAMPOS_ALUNO;
   const colunas = cfg?.historico_colunas_config ?? DEFAULT_COLUNAS;
-  const formatacao = cfg?.historico_formatacao_condicional ?? DEFAULT_FORMATACAO;
+  const formatacao =
+    cfg?.historico_formatacao_condicional ?? DEFAULT_FORMATACAO;
   const secoes = cfg?.historico_secoes_config ?? DEFAULT_SECOES;
   const corCabecalho = cfg?.historico_cor_cabecalho ?? "#1A3A6B";
   const corLinhaAlternada = cfg?.historico_cor_linha_alternada ?? "#F5F5F5";
@@ -322,10 +401,13 @@ export default function EmissaoHistoricoPage() {
   const tamanhoFonteCorpo = cfg?.historico_tamanho_fonte_corpo ?? 7;
   // Espelha lógica do AbaVisualHistorico: timbrados PDF legados não são
   // renderizáveis como background — trata como vazio (sem timbrado).
+  // Toggle "ocultarTimbrado" também força vazio (papel já é timbrado).
   const timbradoRaw = cfg?.historico_arquivo_timbrado_url ?? "";
-  const timbradoUrl = timbradoRaw && !timbradoRaw.toLowerCase().endsWith(".pdf")
-    ? timbradoRaw
-    : "";
+  const timbradoUrl = ocultarTimbrado
+    ? ""
+    : timbradoRaw && !timbradoRaw.toLowerCase().endsWith(".pdf")
+      ? timbradoRaw
+      : "";
   const margens = {
     topo: cfg?.historico_margem_topo ?? 25,
     inferior: cfg?.historico_margem_inferior ?? 20,
@@ -344,7 +426,7 @@ export default function EmissaoHistoricoPage() {
         >
           <div
             className="relative bg-gray-100 rounded-2xl shadow-2xl w-[95vw] max-w-[960px] h-[92vh] flex flex-col overflow-hidden"
-            onClick={e => e.stopPropagation()}
+            onClick={(e) => e.stopPropagation()}
           >
             {/* Header */}
             <div className="flex items-center justify-between px-5 py-3 bg-white border-b border-gray-200 flex-shrink-0">
@@ -355,17 +437,39 @@ export default function EmissaoHistoricoPage() {
                   · {previaNome}
                 </span>
               </h2>
-              <div className="flex items-center gap-2">
+              <div className="flex items-center gap-3">
+                {/* Toggle: Papel já timbrado — oculta o timbrado digital */}
+                <label
+                  className="flex items-center gap-2 cursor-pointer select-none text-xs text-gray-700 hover:text-gray-900"
+                  title="Quando marcado, o PDF/impressão sai sem o timbrado digital — útil para imprimir em folha A4 já timbrada fisicamente."
+                >
+                  <input
+                    type="checkbox"
+                    checked={ocultarTimbrado}
+                    onChange={(e) => setOcultarTimbrado(e.target.checked)}
+                    disabled={baixandoPdf || imprimindo}
+                    className="w-4 h-4 rounded border-gray-300 text-amber-500 focus:ring-amber-400 focus:ring-offset-0 disabled:opacity-50"
+                  />
+                  <span>Papel já timbrado</span>
+                </label>
+                <div className="h-5 w-px bg-gray-200" />
                 <button
-                  onClick={() => previaDiplomaId && salvarPdfDireto(previaDiplomaId)}
+                  onClick={() =>
+                    previaDiplomaId && salvarPdfDireto(previaDiplomaId)
+                  }
                   disabled={baixandoPdf || imprimindo || !previaDiplomaId}
                   className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-amber-500 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   title="Baixar PDF direto para o computador (texto selecionável)"
                 >
                   {baixandoPdf ? (
-                    <><Loader2 size={13} className="animate-spin" /> Gerando PDF...</>
+                    <>
+                      <Loader2 size={13} className="animate-spin" /> Gerando
+                      PDF...
+                    </>
                   ) : (
-                    <><Download size={13} /> Salvar PDF</>
+                    <>
+                      <Download size={13} /> Salvar PDF
+                    </>
                   )}
                 </button>
                 <button
@@ -375,9 +479,14 @@ export default function EmissaoHistoricoPage() {
                   title="Abrir diálogo de impressão"
                 >
                   {imprimindo ? (
-                    <><Loader2 size={13} className="animate-spin" /> Preparando...</>
+                    <>
+                      <Loader2 size={13} className="animate-spin" />{" "}
+                      Preparando...
+                    </>
                   ) : (
-                    <><Printer size={13} /> Imprimir</>
+                    <>
+                      <Printer size={13} /> Imprimir
+                    </>
                   )}
                 </button>
                 <button
@@ -394,7 +503,10 @@ export default function EmissaoHistoricoPage() {
               <div className="flex justify-center">
                 <div
                   id="preview-historico-emissao"
-                  style={{ transform: "scale(0.85)", transformOrigin: "top center" }}
+                  style={{
+                    transform: "scale(0.85)",
+                    transformOrigin: "top center",
+                  }}
                 >
                   <LivePreview
                     camposAluno={camposAluno}
@@ -428,7 +540,9 @@ export default function EmissaoHistoricoPage() {
         <div className="mb-6">
           <div className="flex items-center gap-2 mb-1">
             <GraduationCap size={22} className="text-amber-500" />
-            <h1 className="text-xl font-bold text-gray-900">Histórico Escolar Digital</h1>
+            <h1 className="text-xl font-bold text-gray-900">
+              Histórico Escolar Digital
+            </h1>
           </div>
           <p className="text-sm text-gray-500">
             Busque o aluno pelo nome, CPF ou RA para emitir o histórico escolar.
@@ -447,7 +561,10 @@ export default function EmissaoHistoricoPage() {
             autoFocus
           />
           {carregando && (
-            <Loader2 size={15} className="absolute right-3.5 top-3 text-amber-400 animate-spin" />
+            <Loader2
+              size={15}
+              className="absolute right-3.5 top-3 text-amber-400 animate-spin"
+            />
           )}
         </div>
 
@@ -455,7 +572,10 @@ export default function EmissaoHistoricoPage() {
         {erro && (
           <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 mb-4 text-sm text-red-700">
             <AlertCircle size={15} /> {erro}
-            <button onClick={() => setErro("")} className="ml-auto text-red-400 hover:text-red-600">
+            <button
+              onClick={() => setErro("")}
+              className="ml-auto text-red-400 hover:text-red-600"
+            >
               <RefreshCw size={13} />
             </button>
           </div>
@@ -467,16 +587,24 @@ export default function EmissaoHistoricoPage() {
             <div className="w-14 h-14 bg-amber-50 rounded-full flex items-center justify-center mx-auto mb-3">
               <User size={24} className="text-amber-400" />
             </div>
-            <p className="text-sm font-medium text-gray-600">Digite o nome ou CPF do aluno</p>
-            <p className="text-xs text-gray-400 mt-1">O sistema buscará diplomas cadastrados</p>
+            <p className="text-sm font-medium text-gray-600">
+              Digite o nome ou CPF do aluno
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              O sistema buscará diplomas cadastrados
+            </p>
           </div>
         )}
 
         {/* Sem resultados */}
         {buscaAtiva && !carregando && resultados.length === 0 && !erro && (
           <div className="text-center py-16">
-            <p className="text-sm font-medium text-gray-600">Nenhum resultado encontrado</p>
-            <p className="text-xs text-gray-400 mt-1">Tente buscar por nome completo ou CPF exato</p>
+            <p className="text-sm font-medium text-gray-600">
+              Nenhum resultado encontrado
+            </p>
+            <p className="text-xs text-gray-400 mt-1">
+              Tente buscar por nome completo ou CPF exato
+            </p>
           </div>
         )}
 
@@ -484,15 +612,21 @@ export default function EmissaoHistoricoPage() {
         {resultados.length > 0 && (
           <div className="bg-white rounded-xl border border-gray-200 overflow-hidden divide-y divide-gray-100">
             {resultados.map((diploma) => (
-              <div key={diploma.id} className="flex items-center gap-4 px-5 py-4">
+              <div
+                key={diploma.id}
+                className="flex items-center gap-4 px-5 py-4"
+              >
                 <div className="w-9 h-9 rounded-full bg-amber-50 flex items-center justify-center flex-shrink-0">
                   <GraduationCap size={16} className="text-amber-500" />
                 </div>
 
                 <div className="flex-1 min-w-0">
-                  <p className="text-sm font-semibold text-gray-900 truncate">{diploma.diplomado_nome}</p>
+                  <p className="text-sm font-semibold text-gray-900 truncate">
+                    {diploma.diplomado_nome}
+                  </p>
                   <p className="text-xs text-gray-400">
-                    {formatCPF(diploma.diplomado_cpf)} · {diploma.curso_nome} · {diploma.curso_grau}
+                    {formatCPF(diploma.diplomado_cpf)} · {diploma.curso_nome} ·{" "}
+                    {diploma.curso_grau}
                   </p>
                   <p className="text-xs text-gray-400 mt-0.5">
                     Conclusão: {formatDate(diploma.data_conclusao)} ·{" "}
@@ -504,14 +638,21 @@ export default function EmissaoHistoricoPage() {
 
                 <div className="flex items-center gap-2 flex-shrink-0">
                   <button
-                    onClick={() => abrirPrevia(diploma.id, diploma.diplomado_nome)}
+                    onClick={() =>
+                      abrirPrevia(diploma.id, diploma.diplomado_nome)
+                    }
                     disabled={previaCarregandoId === diploma.id}
                     className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-white bg-amber-500 rounded-lg hover:bg-amber-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
                   >
                     {previaCarregandoId === diploma.id ? (
-                      <><Loader2 size={13} className="animate-spin" /> Abrindo...</>
+                      <>
+                        <Loader2 size={13} className="animate-spin" />{" "}
+                        Abrindo...
+                      </>
                     ) : (
-                      <><Eye size={13} /> Prévia & Imprimir</>
+                      <>
+                        <Eye size={13} /> Prévia & Imprimir
+                      </>
                     )}
                   </button>
                 </div>
@@ -522,7 +663,10 @@ export default function EmissaoHistoricoPage() {
 
         <p className="text-xs text-gray-400 text-center mt-6">
           O visual do histórico é definido em{" "}
-          <a href="/secretaria/configuracoes/documentos" className="text-amber-600 hover:underline">
+          <a
+            href="/secretaria/configuracoes/documentos"
+            className="text-amber-600 hover:underline"
+          >
             Configurações → Modelos de Documentos
           </a>
         </p>

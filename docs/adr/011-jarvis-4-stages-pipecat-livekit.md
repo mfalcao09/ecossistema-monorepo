@@ -1,7 +1,7 @@
 # ADR-011: Jarvis 4-stage — pipecat + LiveKit Agents
 
-- **Status:** aceito
-- **Data:** 2026-04-16
+- **Status:** aceito · **revisado 2026-04-20** (E3 shell Electron/Swift → Expo)
+- **Data:** 2026-04-16 (original) · **2026-04-20** (revisão E3)
 - **Decisores:** Marcelo Silva (CEO), Claudinho (VP)
 - **Relacionado:** MASTERPLAN-V9 § Parte X, PLANO-EXECUCAO-V4 D3, `docs/analises/ANALISE-MULTIAGENT-VOICE-OBS.md`
 
@@ -43,7 +43,7 @@ Cada estágio tem requisitos técnicos distintos — precisamos de stack de voz 
 |---|---|
 | **E1** | Claude Code + Managed Agents + skills + hooks constitucionais |
 | **E2** | **Evolution API (Cloud API) + pipecat + Supabase + C-Suite routing** |
-| **E3** | **pipecat + Groq Whisper + ElevenLabs + openWakeWord + Silero VAD + app Electron ou Swift** |
+| **E3** | **pipecat + Groq Whisper + ElevenLabs + openWakeWord + Silero VAD + app Expo (iOS + Android + macOS/Web)** |
 | **E4** | **livekit/agents + Omi-like + wake-word + sensors + proactive triggers** |
 
 ## Consequências
@@ -78,9 +78,26 @@ Cada estágio tem requisitos técnicos distintos — precisamos de stack de voz 
 
 - E1 é o atual — estabilizar Claude Code + hooks (Fase 0 inteira)
 - E2 no Sprint 1-2 pós-Fase 0: WhatsApp Evolution + pipecat + routing C-Suite (sessão futura)
-- E3 no Sprint 5-6: app Electron ou Swift + push-to-talk (sessão futura)
+- E3 no Sprint 5-6: app Expo (React Native) + push-to-talk — scaffold em `apps/jarvis-app/` (PR 1 em 2026-04-20)
 - E4 na Fase 3 (semanas 13-24): always-on + proactive triggers
 
 ## Revisão
 
 Revisar ao fim do E2 (quando WhatsApp entrar em produção). Reavaliar LiveKit vs concorrentes emergentes (OpenAI Realtime evolution, etc).
+
+### Revisão 2026-04-20 — shell do E3: Electron/Swift → Expo
+
+**O que mudou:** a camada de voz (pipecat + Groq Whisper + ElevenLabs + openWakeWord + Silero VAD) permanece; **só o shell do app** passa de Electron ou Swift para **Expo (React Native)**.
+
+**Motivo:** Marcelo quer usar o Jarvis **fora do escritório** (celular) além de no Mac. Expo entrega iOS + Android + web/macOS com um único código, o que Electron (só desktop) e Swift (só Apple) não entregam.
+
+**Como isso afeta a stack:**
+
+- Client lib: `@pipecat-ai/client-js` / `@pipecat-ai/client-react-native` (ambos Apache-2.0, publicados pelo mesmo time do pipecat)
+- Áudio: `expo-av` para gravação/playback; `react-native-webrtc` quando precisar de streaming contínuo (E4)
+- Wake-word: openWakeWord continua rodando no backend (pipecat recebe o stream do client e faz VAD + wake-word server-side)
+- Auth: Expo permite deep-link de magic-link do Supabase sem fricção
+
+**Trade-off aceito:** latência em React Native é ~50-100ms maior que Swift nativo. Para E3 (push-to-talk) isso é irrelevante porque o usuário já está segurando o botão. Se E4 (always-on com wake-word no device) mostrar que RN é insuficiente, a gente pode portar só a camada de captura para módulo nativo sem trocar o shell.
+
+**Precedente:** apps de voz como Granola, Fireflies e outros usam Expo/RN + pipecat ou similar com sucesso.

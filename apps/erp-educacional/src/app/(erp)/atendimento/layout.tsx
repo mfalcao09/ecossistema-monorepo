@@ -3,29 +3,140 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
-  MessageSquare, LayoutDashboard, Users,
-  Radio, Zap, BarChart2, FlaskConical,
+  MessageSquare,
+  LayoutDashboard,
+  Users,
+  Radio,
+  Zap,
+  BarChart2,
+  FlaskConical,
+  FileText,
+  Calendar,
+  MessagesSquare,
+  Link as LinkIcon,
+  Webhook,
+  Key,
+  Workflow,
+  Megaphone,
+  Bot,
 } from "lucide-react";
 
 interface MenuItem {
-  label: string
-  href: string
-  icon: React.ElementType
-  exact?: boolean
-  badge?: string
-  beta?: boolean
+  label: string;
+  href: string;
+  icon: React.ElementType;
+  exact?: boolean;
+  badge?: string;
+  beta?: boolean;
 }
 
+const CHAT_INTERNO_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_CHAT_INTERNO_ENABLED === "true";
+const LINKS_REDIRECT_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_LINKS_REDIRECT_ENABLED === "true";
+const DS_VOICE_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_DS_VOICE_ENABLED === "true";
+const DS_AGENTE_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_DS_AGENTE_ENABLED === "true";
+const DS_BOT_ENABLED =
+  process.env.NEXT_PUBLIC_ATENDIMENTO_DS_BOT_ENABLED === "true";
+
 const menuItems: MenuItem[] = [
-  { label: "Dashboard",    href: "/atendimento",              icon: LayoutDashboard, exact: true },
-  { label: "Conversas",    href: "/atendimento/conversas",    icon: MessageSquare,   badge: "WA" },
-  { label: "Contatos",     href: "/atendimento/contatos",     icon: Users },
-  { label: "Canais",       href: "/atendimento/canais",       icon: Radio },
-  { label: "Automações",   href: "/atendimento/automacoes",   icon: Zap,             badge: "IA" },
-  { label: "Relatórios",   href: "/atendimento/relatorios",   icon: BarChart2,       beta: true },
+  {
+    label: "Dashboard",
+    href: "/atendimento",
+    icon: LayoutDashboard,
+    exact: true,
+  },
+  {
+    label: "Conversas",
+    href: "/atendimento/conversas",
+    icon: MessageSquare,
+    badge: "WA",
+  },
+  { label: "Contatos", href: "/atendimento/contatos", icon: Users },
+  { label: "Canais", href: "/atendimento/canais", icon: Radio },
+  {
+    label: "Templates",
+    href: "/atendimento/templates",
+    icon: FileText,
+    badge: "WABA",
+  },
+  ...(DS_VOICE_ENABLED
+    ? [
+        {
+          label: "DS Voice",
+          href: "/atendimento/ds-voice",
+          icon: Megaphone,
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
+  { label: "Agendamentos", href: "/atendimento/agendamentos", icon: Calendar },
+  {
+    label: "Automações",
+    href: "/atendimento/automacoes",
+    icon: Zap,
+    badge: "IA",
+  },
+  ...(DS_BOT_ENABLED
+    ? [
+        {
+          label: "DS Bot",
+          href: "/atendimento/ds-bot",
+          icon: Bot,
+          badge: "IA",
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
+  ...(CHAT_INTERNO_ENABLED
+    ? [
+        {
+          label: "Chat interno",
+          href: "/atendimento/chat-interno",
+          icon: MessagesSquare,
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
+  ...(LINKS_REDIRECT_ENABLED
+    ? [
+        {
+          label: "Links",
+          href: "/atendimento/links-redirecionamento",
+          icon: LinkIcon,
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
+  ...(DS_AGENTE_ENABLED
+    ? [
+        {
+          label: "DS Agente",
+          href: "/atendimento/ds-agente",
+          icon: Bot,
+          badge: "IA",
+          beta: true,
+        } satisfies MenuItem,
+      ]
+    : []),
+  { label: "Webhooks", href: "/atendimento/webhooks", icon: Webhook },
+  { label: "API Keys", href: "/atendimento/api-keys", icon: Key },
+  { label: "Apps", href: "/atendimento/integracoes", icon: Workflow },
+  {
+    label: "Relatórios",
+    href: "/atendimento/relatorios",
+    icon: BarChart2,
+    beta: true,
+  },
 ];
 
-export default function AtendimentoLayout({ children }: { children: React.ReactNode }) {
+export default function AtendimentoLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
 
   return (
@@ -38,8 +149,12 @@ export default function AtendimentoLayout({ children }: { children: React.ReactN
               <MessageSquare size={18} className="text-white" />
             </div>
             <div className="text-center">
-              <p className="text-sm font-bold text-gray-900 leading-none">Atendimento</p>
-              <p className="text-xs text-gray-400 mt-0.5">WhatsApp · Instagram · IA</p>
+              <p className="text-sm font-bold text-gray-900 leading-none">
+                Atendimento
+              </p>
+              <p className="text-xs text-gray-400 mt-0.5">
+                WhatsApp · Instagram · IA
+              </p>
             </div>
           </div>
         </div>
@@ -71,8 +186,7 @@ export default function AtendimentoLayout({ children }: { children: React.ReactN
                 {/* Badge Beta */}
                 {item.beta && (
                   <span className="inline-flex items-center gap-0.5 px-1 py-0.5 text-[9px] font-bold uppercase rounded-full bg-amber-100 text-amber-700 border border-amber-300 leading-none flex-shrink-0">
-                    <FlaskConical size={8} />
-                    β
+                    <FlaskConical size={8} />β
                   </span>
                 )}
               </Link>
@@ -81,14 +195,18 @@ export default function AtendimentoLayout({ children }: { children: React.ReactN
         </nav>
 
         <div className="p-3 border-t border-gray-100">
-          <p className="text-xs text-gray-400 text-center">Módulo Atendimento · NEXVY</p>
+          <p className="text-xs text-gray-400 text-center">
+            Módulo Atendimento · NEXVY
+          </p>
         </div>
       </aside>
 
       {/* Conteúdo principal — sem padding na tela de conversas (ocupa 100% do espaço) */}
-      <main className={`flex-1 overflow-auto ${
-        pathname.startsWith('/atendimento/conversas') ? '' : 'p-6'
-      }`}>
+      <main
+        className={`flex-1 overflow-auto ${
+          pathname.startsWith("/atendimento/conversas") ? "" : "p-6"
+        }`}
+      >
         {children}
       </main>
     </div>

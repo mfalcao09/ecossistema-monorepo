@@ -12,7 +12,7 @@ updated_at: 2026-04-13 05:04:03.614794+00
 
 Intentus Real Estate: Plataforma SaaS imobiliária. Repo: intentus-plataform. Stack: React+Vite+TS+shadcn+Supabase. Supabase ID: bvryaopfjiyxjgsuhjsb. Deploy Vercel.
 
-ERP-Educacional / FIC: Faculdades Integradas de Cassilândia. Diploma Digital (Portaria MEC 70/2025). Stack: Next.js+Supabase. Prazo graduação: 1 jul 2025 (urgente!).
+ERP-Educacional / FIC: Faculdades Integradas de Cassilândia. Diploma Digital (Portaria MEC 70/2025). Stack: Next.js+Supabase. Supabase ID: ifdnjieklngcfodmtied (sa-east-1). Prazo graduação: 1 jul 2025 (urgente!).
 
 Colégio Klésis: Sem repo dedicado. Usa skills edu-management + brand-comms.
 
@@ -20,4 +20,4 @@ Splendori: Desenvolvimento imobiliário. Repo: AF DESENVOLVIMENTO IMOBILIÁRIO. 
 
 Nexvy: Produto SaaS a criar. Sem repo ainda.
 
-IMPORTANTE: Supabase ERP (bvryaopfjiyxjgsuhjsb) ≠ Supabase ECOSYSTEM (gqckbunsfjgerbuiyzvn). Nunca misturar.
+IMPORTANTE: 3 Supabase distintos — ERP/diploma-digital (ifdnjieklngcfodmtied, sa-east-1) ≠ ECOSYSTEM (gqckbunsfjgerbuiyzvn, us-east-2) ≠ Intentus (bvryaopfjiyxjgsuhjsb, us-west-2). Nunca misturar.
