@@ -89,8 +89,8 @@ def agent_grants() -> dict[str, set[str]]:
         "inboxes":      {"view"},
         "users":        set(),
         "roles":        set(),
-        "ds_voice":     {"view"},
-        "ds_ai":        {"view"},
+        "ds_voice":     {"view", "create", "edit"},                    # S9: atendente curadoria biblioteca
+        "ds_ai":        {"view", "create", "edit"},                    # S10: atendente pode gerir agentes
         "reports":      {"view"},                                      # sem export
         "settings":     set(),
         "team_chats":   {"view", "create", "edit"},                    # atendente usa chat interno
@@ -112,7 +112,7 @@ def agent_restricted_grants() -> dict[str, set[str]]:
         "inboxes":      set(),
         "users":        set(),
         "roles":        set(),
-        "ds_voice":     set(),
+        "ds_voice":     {"view"},                                      # S9: atendente restrito só consulta biblioteca
         "ds_ai":        set(),
         "reports":      set(),
         "settings":     set(),
