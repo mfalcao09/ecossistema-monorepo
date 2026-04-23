@@ -5,7 +5,7 @@
  *   1. Verifica se o agente deve ser ativado (tags + canal + handoff guard)
  *   2. Busca chunks RAG relevantes
  *   3. Monta prompt (system + RAG + histórico + pergunta)
- *   4. Chama OpenAI
+ *   4. Chama Gemini
  *   5. Faz split "humanizado" se configurado
  *   6. Envia mensagem(ns) via insert em atendimento_messages (sender_type=bot)
  *   7. Registra em ds_agent_executions
@@ -20,7 +20,7 @@ import {
   chatCompletion,
   splitMessageNaturally,
   type ChatMessage,
-} from "@/lib/atendimento/openai-client";
+} from "@/lib/atendimento/gemini-client";
 import { retrieveRelevantChunks } from "@/lib/atendimento/rag-client";
 
 // ──────────────────────────────────────────────────────────────

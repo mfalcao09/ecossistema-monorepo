@@ -4,6 +4,7 @@
  */
 
 import type { SupabaseClient } from "@supabase/supabase-js";
+import { resolveGoogleRefreshToken } from "./credentials-resolver";
 
 const AUTH_URL = "https://accounts.google.com/o/oauth2/v2/auth";
 const TOKEN_URL = "https://oauth2.googleapis.com/token";
@@ -109,7 +110,7 @@ export async function getValidAccessToken(
 ): Promise<string | null> {
   const { data: row } = await admin
     .from("atendimento_google_tokens")
-    .select("refresh_token, access_token, expires_at")
+    .select("refresh_token, refresh_token_vault_ref, access_token, expires_at")
     .eq("user_id", userId)
     .maybeSingle();
   if (!row) return null;
@@ -118,7 +119,14 @@ export async function getValidAccessToken(
     row.access_token && row.expires_at && new Date(row.expires_at).getTime() > Date.now() + 60_000;
   if (isValid) return row.access_token;
 
-  const refreshed = await refreshAccessToken(row.refresh_token);
+  // P-066: refresh_token resolvido via vault SC-29 se *_vault_ref presente,
+  // com fallback para o valor plaintext.
+  const refreshToken = await resolveGoogleRefreshToken({
+    refresh_token: row.refresh_token,
+    refresh_token_vault_ref: row.refresh_token_vault_ref,
+  });
+
+  const refreshed = await refreshAccessToken(refreshToken);
   const newExpiry = new Date(Date.now() + refreshed.expires_in * 1000).toISOString();
   await admin
     .from("atendimento_google_tokens")
