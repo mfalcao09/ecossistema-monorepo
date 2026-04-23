@@ -12,21 +12,18 @@
  * (que suporta POST body — o nativo só aceita GET).
  */
 
-import EventSource from 'react-native-sse';
+import EventSource from "react-native-sse";
 
-import type {
-  OrchestratorEvent,
-  OrchestratorEventType,
-} from '../types';
+import type { OrchestratorEvent, OrchestratorEventType } from "../types";
 
 const EVENT_TYPES: OrchestratorEventType[] = [
-  'init',
-  'thinking',
-  'tool_use',
-  'tool_result',
-  'assistant_message',
-  'end',
-  'error',
+  "init",
+  "thinking",
+  "tool_use",
+  "tool_result",
+  "assistant_message",
+  "end",
+  "error",
 ];
 
 export interface OrchestratorConfig {
@@ -57,7 +54,7 @@ export function runAgent(
   config: OrchestratorConfig,
   options: RunOptions,
 ): () => void {
-  const agentId = config.agentId ?? 'claudinho';
+  const agentId = config.agentId ?? "claudinho";
   const resuming = Boolean(options.sessionId);
 
   const endpoint = resuming
@@ -71,7 +68,7 @@ export function runAgent(
       })
     : JSON.stringify({
         query: options.query,
-        user_id: options.userId ?? 'marcelo',
+        user_id: options.userId ?? "marcelo",
         session_id: options.sessionId ?? null,
         context: options.context ?? {},
       });
@@ -80,10 +77,10 @@ export function runAgent(
   // type parameter para o EventSource<T> — senão addEventListener só aceita os
   // default ('message'|'open'|'close'|'error').
   const es = new EventSource<OrchestratorEventType>(endpoint, {
-    method: 'POST',
+    method: "POST",
     headers: {
-      Accept: 'text/event-stream',
-      'Content-Type': 'application/json',
+      Accept: "text/event-stream",
+      "Content-Type": "application/json",
       Authorization: `Bearer ${config.token}`,
     },
     body,
@@ -97,7 +94,7 @@ export function runAgent(
     options.onClose?.();
   };
 
-  es.addEventListener('error', (evt: unknown) => {
+  es.addEventListener("error", (evt: unknown) => {
     // react-native-sse emite 'error' tanto pra HTTP 4xx/5xx quanto pra network failures.
     const message = extractErrorMessage(evt);
     options.onError?.(new Error(message));
@@ -108,7 +105,7 @@ export function runAgent(
     es.addEventListener(type, (evt: unknown) => {
       const data = parseEventData((evt as { data?: string })?.data);
       options.onEvent({ type, data });
-      if (type === 'end') {
+      if (type === "end") {
         close();
       }
     });
@@ -127,13 +124,13 @@ function parseEventData(raw: string | undefined): unknown {
 }
 
 function extractErrorMessage(evt: unknown): string {
-  if (!evt || typeof evt !== 'object') return 'Stream error';
+  if (!evt || typeof evt !== "object") return "Stream error";
   const record = evt as Record<string, unknown>;
   const message = record.message;
-  if (typeof message === 'string') return message;
+  if (typeof message === "string") return message;
   const xhrStatus = record.xhrStatus;
-  if (typeof xhrStatus === 'number') {
+  if (typeof xhrStatus === "number") {
     return `HTTP ${xhrStatus}`;
   }
-  return 'Stream error';
+  return "Stream error";
 }

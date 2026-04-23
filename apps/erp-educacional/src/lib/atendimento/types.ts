@@ -21,7 +21,7 @@ export interface PipelineStage {
   sort_order: number;
   color_hex: string | null;
   sla_warning_days: number | null;
-  sla_danger_days:  number | null;
+  sla_danger_days: number | null;
   is_won: boolean;
   is_lost: boolean;
 }
@@ -60,7 +60,7 @@ export interface Deal {
   created_at: string;
   updated_at: string;
   atendimento_contacts?: Contact | null;
-  atendimento_queues?:   Queue | null;
+  atendimento_queues?: Queue | null;
   // Modo preview (opt-in na query)
   atendimento_conversations?: Array<{
     id: string;

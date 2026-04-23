@@ -70,7 +70,11 @@ export async function loadWabaCredentials(
   const phoneNumberId = cfg.phone_number_id;
   const wabaId = cfg.waba_id;
 
-  if (!phoneNumberId || !wabaId || (!cfg.access_token && !cfg.access_token_vault_ref)) {
+  if (
+    !phoneNumberId ||
+    !wabaId ||
+    (!cfg.access_token && !cfg.access_token_vault_ref)
+  ) {
     throw new WabaCredentialsError(
       "provider_config incompleto — requer phone_number_id, waba_id, (access_token | access_token_vault_ref)",
       inboxId,

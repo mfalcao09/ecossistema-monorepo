@@ -5,19 +5,37 @@ import { usePathname } from "next/navigation";
 import { Users, Shield, UsersRound, FileText } from "lucide-react";
 
 const tabs = [
-  { href: "/atendimento/configuracoes/cargos",              label: "Cargos",           icon: Shield },
-  { href: "/atendimento/configuracoes/usuarios",            label: "Usuários",         icon: Users },
-  { href: "/atendimento/configuracoes/equipes",             label: "Equipes",          icon: UsersRound },
-  { href: "/atendimento/configuracoes/tipos-de-processo",   label: "Tipos de processo", icon: FileText },
+  { href: "/atendimento/configuracoes/cargos", label: "Cargos", icon: Shield },
+  {
+    href: "/atendimento/configuracoes/usuarios",
+    label: "Usuários",
+    icon: Users,
+  },
+  {
+    href: "/atendimento/configuracoes/equipes",
+    label: "Equipes",
+    icon: UsersRound,
+  },
+  {
+    href: "/atendimento/configuracoes/tipos-de-processo",
+    label: "Tipos de processo",
+    icon: FileText,
+  },
 ];
 
-export default function ConfiguracoesLayout({ children }: { children: React.ReactNode }) {
+export default function ConfiguracoesLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const pathname = usePathname();
 
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       <header className="border-b border-gray-200 pb-4">
-        <h1 className="text-2xl font-bold text-gray-900">Configurações do Atendimento</h1>
+        <h1 className="text-2xl font-bold text-gray-900">
+          Configurações do Atendimento
+        </h1>
         <p className="mt-1 text-sm text-gray-500">
           Cargos, usuários e equipes do módulo.
         </p>

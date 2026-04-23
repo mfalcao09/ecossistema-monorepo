@@ -19,8 +19,7 @@ import { GoogleGenAI, type Content } from "@google/genai";
 // ──────────────────────────────────────────────────────────────
 // Configuração canônica (env-overridable)
 // ──────────────────────────────────────────────────────────────
-const DEFAULT_CHAT_MODEL =
-  process.env.GEMINI_CHAT_MODEL ?? "gemini-2.5-pro"; // "gemini-3.1-pro" quando disponível
+const DEFAULT_CHAT_MODEL = process.env.GEMINI_CHAT_MODEL ?? "gemini-2.5-pro"; // "gemini-3.1-pro" quando disponível
 const DEFAULT_EMBEDDING_MODEL =
   process.env.GEMINI_EMBEDDING_MODEL ?? "text-embedding-004";
 export const EMBEDDING_DIMENSIONS = 768;
@@ -115,7 +114,8 @@ function splitSystemAndHistory(messages: ChatMessage[]): {
   }
 
   return {
-    systemInstruction: systemParts.length > 0 ? systemParts.join("\n\n") : undefined,
+    systemInstruction:
+      systemParts.length > 0 ? systemParts.join("\n\n") : undefined,
     contents,
   };
 }
