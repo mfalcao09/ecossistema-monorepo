@@ -1,9 +1,23 @@
 "use client";
 
 import { useState } from "react";
-import { NODE_CATEGORIES, NODE_LABELS, type DsBotNodeType, type NodeCategory } from "@/lib/atendimento/ds-bot-types";
+import {
+  NODE_CATEGORIES,
+  NODE_LABELS,
+  type DsBotNodeType,
+  type NodeCategory,
+} from "@/lib/atendimento/ds-bot-types";
 
-const CATEGORY_ORDER: NodeCategory[] = ["bubble", "input", "logic", "flow", "contact", "message", "attendance", "agent"];
+const CATEGORY_ORDER: NodeCategory[] = [
+  "bubble",
+  "input",
+  "logic",
+  "flow",
+  "contact",
+  "message",
+  "attendance",
+  "agent",
+];
 
 const CATEGORY_ICON: Record<NodeCategory, string> = {
   trigger: "▶️",
@@ -18,7 +32,10 @@ const CATEGORY_ICON: Record<NodeCategory, string> = {
 };
 
 export default function NodePalette() {
-  const [open, setOpen] = useState<Record<string, boolean>>({ bubble: true, input: true });
+  const [open, setOpen] = useState<Record<string, boolean>>({
+    bubble: true,
+    input: true,
+  });
 
   function onDragStart(event: React.DragEvent, nodeType: DsBotNodeType) {
     event.dataTransfer.setData("application/dsbot-node-type", nodeType);
@@ -28,7 +45,9 @@ export default function NodePalette() {
   return (
     <aside className="w-64 shrink-0 border-r border-gray-200 bg-gray-50 overflow-y-auto">
       <div className="p-3 border-b border-gray-200">
-        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Componentes</h3>
+        <h3 className="text-xs font-semibold text-gray-500 uppercase tracking-wide">
+          Componentes
+        </h3>
         <p className="text-[11px] text-gray-500 mt-1">Arraste para o canvas</p>
       </div>
       {CATEGORY_ORDER.map((cat) => {

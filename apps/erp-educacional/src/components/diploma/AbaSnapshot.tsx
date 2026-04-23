@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /**
  * Aba Snapshot — Diploma Digital
@@ -11,7 +11,7 @@
  * Fase 1 do plano Snapshot Imutável (2026-04-22).
  */
 
-import { useCallback, useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react";
 import {
   AlertCircle,
   CheckCircle2,
@@ -25,71 +25,108 @@ import {
   RefreshCw,
   ShieldCheck,
   X,
-} from "lucide-react"
-import { fetchSeguro } from "@/lib/security/fetch-seguro"
+} from "lucide-react";
+import { fetchSeguro } from "@/lib/security/fetch-seguro";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Tipos (espelho do backend)
 // ═══════════════════════════════════════════════════════════════════════════
 
 interface EdicaoAuditoria {
-  id: string
-  usuario_id: string
-  justificativa: string
-  campos_alterados: Record<string, { antes: unknown; depois: unknown }>
-  versao_antes: number
-  versao_depois: number
-  created_at: string
+  id: string;
+  usuario_id: string;
+  justificativa: string;
+  campos_alterados: Record<string, { antes: unknown; depois: unknown }>;
+  versao_antes: number;
+  versao_depois: number;
+  created_at: string;
 }
 
 interface SnapshotResponse {
-  diploma_id: string
-  status_diploma: string
+  diploma_id: string;
+  status_diploma: string;
   snapshot: {
-    versao: number
-    snapshot_id?: string
-    extracao_sessao_id?: string | null
-    gerado_em: string
-    diplomado: Record<string, unknown>
-    curso: Record<string, unknown>
-    dados_academicos: Record<string, unknown>
-    disciplinas: Array<Record<string, unknown>>
-    atividades_complementares: Array<Record<string, unknown>>
-    estagios: Array<Record<string, unknown>>
-    assinantes: Array<Record<string, unknown>>
-  } | null
-  versao: number | null
-  gerado_em: string | null
-  travado: boolean
-  travado_em: string | null
-  travado_por: string | null
-  edicoes: EdicaoAuditoria[]
-  pode_editar: boolean
+    versao: number;
+    snapshot_id?: string;
+    extracao_sessao_id?: string | null;
+    gerado_em: string;
+    diplomado: Record<string, unknown>;
+    curso: Record<string, unknown>;
+    dados_academicos: Record<string, unknown>;
+    disciplinas: Array<Record<string, unknown>>;
+    atividades_complementares: Array<Record<string, unknown>>;
+    estagios: Array<Record<string, unknown>>;
+    assinantes: Array<Record<string, unknown>>;
+  } | null;
+  versao: number | null;
+  gerado_em: string | null;
+  travado: boolean;
+  travado_em: string | null;
+  travado_por: string | null;
+  edicoes: EdicaoAuditoria[];
+  pode_editar: boolean;
 }
 
 // Campos disponíveis para edição simples (Fase 1). Mais campos podem ser
 // habilitados depois sem mudar o backend (ele aceita qualquer path válido).
-const CAMPOS_EDITAVEIS: Array<{ path: string; label: string; grupo: string }> = [
-  { path: "diplomado.nome", label: "Nome", grupo: "Diplomado" },
-  { path: "diplomado.nome_social", label: "Nome social", grupo: "Diplomado" },
-  { path: "diplomado.cpf", label: "CPF", grupo: "Diplomado" },
-  { path: "diplomado.rg_numero", label: "RG número", grupo: "Diplomado" },
-  { path: "diplomado.rg_orgao", label: "RG órgão", grupo: "Diplomado" },
-  { path: "diplomado.rg_uf", label: "RG UF", grupo: "Diplomado" },
-  { path: "diplomado.data_nascimento", label: "Data de nascimento", grupo: "Diplomado" },
-  { path: "diplomado.nacionalidade", label: "Nacionalidade", grupo: "Diplomado" },
-  { path: "diplomado.naturalidade_municipio", label: "Naturalidade (município)", grupo: "Diplomado" },
-  { path: "diplomado.naturalidade_uf", label: "Naturalidade (UF)", grupo: "Diplomado" },
-  { path: "curso.nome", label: "Curso", grupo: "Curso" },
-  { path: "curso.grau", label: "Grau", grupo: "Curso" },
-  { path: "curso.titulo_conferido", label: "Título conferido", grupo: "Curso" },
-  { path: "curso.modalidade", label: "Modalidade", grupo: "Curso" },
-  { path: "dados_academicos.turno", label: "Turno", grupo: "Acadêmicos" },
-  { path: "dados_academicos.data_ingresso", label: "Data de ingresso", grupo: "Acadêmicos" },
-  { path: "dados_academicos.data_conclusao", label: "Data de conclusão", grupo: "Acadêmicos" },
-  { path: "dados_academicos.data_colacao_grau", label: "Data de colação", grupo: "Acadêmicos" },
-  { path: "dados_academicos.forma_acesso", label: "Forma de acesso", grupo: "Acadêmicos" },
-]
+const CAMPOS_EDITAVEIS: Array<{ path: string; label: string; grupo: string }> =
+  [
+    { path: "diplomado.nome", label: "Nome", grupo: "Diplomado" },
+    { path: "diplomado.nome_social", label: "Nome social", grupo: "Diplomado" },
+    { path: "diplomado.cpf", label: "CPF", grupo: "Diplomado" },
+    { path: "diplomado.rg_numero", label: "RG número", grupo: "Diplomado" },
+    { path: "diplomado.rg_orgao", label: "RG órgão", grupo: "Diplomado" },
+    { path: "diplomado.rg_uf", label: "RG UF", grupo: "Diplomado" },
+    {
+      path: "diplomado.data_nascimento",
+      label: "Data de nascimento",
+      grupo: "Diplomado",
+    },
+    {
+      path: "diplomado.nacionalidade",
+      label: "Nacionalidade",
+      grupo: "Diplomado",
+    },
+    {
+      path: "diplomado.naturalidade_municipio",
+      label: "Naturalidade (município)",
+      grupo: "Diplomado",
+    },
+    {
+      path: "diplomado.naturalidade_uf",
+      label: "Naturalidade (UF)",
+      grupo: "Diplomado",
+    },
+    { path: "curso.nome", label: "Curso", grupo: "Curso" },
+    { path: "curso.grau", label: "Grau", grupo: "Curso" },
+    {
+      path: "curso.titulo_conferido",
+      label: "Título conferido",
+      grupo: "Curso",
+    },
+    { path: "curso.modalidade", label: "Modalidade", grupo: "Curso" },
+    { path: "dados_academicos.turno", label: "Turno", grupo: "Acadêmicos" },
+    {
+      path: "dados_academicos.data_ingresso",
+      label: "Data de ingresso",
+      grupo: "Acadêmicos",
+    },
+    {
+      path: "dados_academicos.data_conclusao",
+      label: "Data de conclusão",
+      grupo: "Acadêmicos",
+    },
+    {
+      path: "dados_academicos.data_colacao_grau",
+      label: "Data de colação",
+      grupo: "Acadêmicos",
+    },
+    {
+      path: "dados_academicos.forma_acesso",
+      label: "Forma de acesso",
+      grupo: "Acadêmicos",
+    },
+  ];
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Componente principal
@@ -99,69 +136,69 @@ export default function AbaSnapshot({
   diplomaId,
   onAtualizar,
 }: {
-  diplomaId: string
-  onAtualizar?: () => void
+  diplomaId: string;
+  onAtualizar?: () => void;
 }) {
-  const [data, setData] = useState<SnapshotResponse | null>(null)
-  const [carregando, setCarregando] = useState(true)
-  const [erro, setErro] = useState("")
-  const [sucesso, setSucesso] = useState("")
-  const [viewerAberto, setViewerAberto] = useState(false)
-  const [editorAberto, setEditorAberto] = useState(false)
-  const [travandoEmProgresso, setTravando] = useState(false)
-  const [confirmandoTrava, setConfirmandoTrava] = useState(false)
+  const [data, setData] = useState<SnapshotResponse | null>(null);
+  const [carregando, setCarregando] = useState(true);
+  const [erro, setErro] = useState("");
+  const [sucesso, setSucesso] = useState("");
+  const [viewerAberto, setViewerAberto] = useState(false);
+  const [editorAberto, setEditorAberto] = useState(false);
+  const [travandoEmProgresso, setTravando] = useState(false);
+  const [confirmandoTrava, setConfirmandoTrava] = useState(false);
 
   const carregar = useCallback(async () => {
-    setCarregando(true)
-    setErro("")
+    setCarregando(true);
+    setErro("");
     try {
-      const res = await fetch(`/api/diplomas/${diplomaId}/snapshot`)
+      const res = await fetch(`/api/diplomas/${diplomaId}/snapshot`);
       if (!res.ok) {
-        const body = await res.json().catch(() => ({}))
+        const body = await res.json().catch(() => ({}));
         throw new Error(
-          (body as { error?: string }).error ?? `HTTP ${res.status}`
-        )
+          (body as { error?: string }).error ?? `HTTP ${res.status}`,
+        );
       }
-      const json: SnapshotResponse = await res.json()
-      setData(json)
+      const json: SnapshotResponse = await res.json();
+      setData(json);
     } catch (e) {
-      setErro(e instanceof Error ? e.message : "Erro ao carregar snapshot")
+      setErro(e instanceof Error ? e.message : "Erro ao carregar snapshot");
     } finally {
-      setCarregando(false)
+      setCarregando(false);
     }
-  }, [diplomaId])
+  }, [diplomaId]);
 
   useEffect(() => {
-    carregar()
-  }, [carregar])
+    carregar();
+  }, [carregar]);
 
   const travar = async () => {
-    setTravando(true)
-    setErro("")
-    setSucesso("")
+    setTravando(true);
+    setErro("");
+    setSucesso("");
     try {
       const res = await fetchSeguro(
         `/api/diplomas/${diplomaId}/snapshot/travar`,
-        { method: "POST" }
-      )
-      const body = await res.json()
+        { method: "POST" },
+      );
+      const body = await res.json();
       if (!res.ok) {
         throw new Error(
-          (body as { error?: string }).error ?? "Erro ao travar snapshot"
-        )
+          (body as { error?: string }).error ?? "Erro ao travar snapshot",
+        );
       }
       setSucesso(
-        "Snapshot travado com sucesso. Os fluxos de assinatura (XML e PDF) podem ser iniciados."
-      )
-      setConfirmandoTrava(false)
-      await carregar()
-      onAtualizar?.()
+        "Snapshot travado com sucesso. Os fluxos de assinatura (XML e PDF) podem ser iniciados.",
+      );
+      setConfirmandoTrava(false);
+      await carregar();
+      onAtualizar?.();
     } catch (e) {
-      setErro(e instanceof Error ? e.message : "Erro ao travar snapshot")
+      setErro(e instanceof Error ? e.message : "Erro ao travar snapshot");
     } finally {
-      setTravando(false)
+      setTravando(false);
     }
-  }
+  };
 
   if (carregando) {
     return (
@@ -169,7 +206,7 @@ export default function AbaSnapshot({
         <Loader2 size={18} className="animate-spin mr-2" />
         Carregando snapshot…
       </div>
-    )
+    );
   }
 
   if (erro && !data) {
@@ -184,7 +221,7 @@ export default function AbaSnapshot({
           <RefreshCw size={12} /> Tentar novamente
         </button>
       </div>
-    )
+    );
   }
 
   // Diploma legado (sem snapshot)
@@ -196,20 +233,20 @@ export default function AbaSnapshot({
         </div>
         <p className="leading-relaxed">
           Este diploma não possui dados consolidados em formato snapshot. Isso
-          pode acontecer em diplomas legados (migrados antes da implementação
-          do snapshot imutável) ou em diplomas criados antes da Fase 0.6.
+          pode acontecer em diplomas legados (migrados antes da implementação do
+          snapshot imutável) ou em diplomas criados antes da Fase 0.6.
         </p>
         <p className="mt-2 leading-relaxed">
-          O fluxo atual continua funcional — os artefatos serão gerados a
-          partir das tabelas normalizadas como no fluxo legado.
+          O fluxo atual continua funcional — os artefatos serão gerados a partir
+          das tabelas normalizadas como no fluxo legado.
         </p>
       </div>
-    )
+    );
   }
 
-  const snap = data.snapshot
-  const travado = data.travado
-  const podeEditar = data.pode_editar
+  const snap = data.snapshot;
+  const travado = data.travado;
+  const podeEditar = data.pode_editar;
 
   return (
     <div className="space-y-4">
@@ -258,7 +295,8 @@ export default function AbaSnapshot({
                   travado ? "text-emerald-800" : "text-amber-800"
                 }`}
               >
-                Snapshot {travado ? "travado" : "em rascunho"} · versão {data.versao}
+                Snapshot {travado ? "travado" : "em rascunho"} · versão{" "}
+                {data.versao}
               </h3>
               <span className="text-xs text-gray-400">
                 ({snap.disciplinas.length} disciplinas)
@@ -272,12 +310,13 @@ export default function AbaSnapshot({
               {travado ? (
                 <>
                   Travado em {formatDate(data.travado_em)}. Este é o documento
-                  oficial imutável — fontes de dados para geração de XMLs e PDFs.
+                  oficial imutável — fontes de dados para geração de XMLs e
+                  PDFs.
                 </>
               ) : (
                 <>
-                  Edição permitida com justificativa auditada. Ao confirmar,
-                  os fluxos de assinatura (XML e PDF) serão liberados.
+                  Edição permitida com justificativa auditada. Ao confirmar, os
+                  fluxos de assinatura (XML e PDF) serão liberados.
                 </>
               )}
             </p>
@@ -294,7 +333,9 @@ export default function AbaSnapshot({
       {/* Resumo dos dados principais */}
       <div className="bg-white border border-gray-200 rounded-2xl p-5">
         <div className="flex items-center justify-between mb-4">
-          <h4 className="text-sm font-bold text-gray-900">Resumo do snapshot</h4>
+          <h4 className="text-sm font-bold text-gray-900">
+            Resumo do snapshot
+          </h4>
           <div className="flex items-center gap-2">
             <button
               onClick={() => setViewerAberto(true)}
@@ -318,7 +359,11 @@ export default function AbaSnapshot({
           <ResumoCampo label="CPF" valor={str(snap.diplomado.cpf)} />
           <ResumoCampo
             label="RG"
-            valor={[snap.diplomado.rg_numero, snap.diplomado.rg_orgao, snap.diplomado.rg_uf]
+            valor={[
+              snap.diplomado.rg_numero,
+              snap.diplomado.rg_orgao,
+              snap.diplomado.rg_uf,
+            ]
               .filter(Boolean)
               .join(" ")}
           />
@@ -348,7 +393,10 @@ export default function AbaSnapshot({
       {podeEditar && (
         <div className="bg-gradient-to-br from-violet-50 to-blue-50 border border-violet-200 rounded-2xl p-5">
           <div className="flex items-start gap-3">
-            <ShieldCheck size={20} className="text-violet-600 mt-0.5 flex-shrink-0" />
+            <ShieldCheck
+              size={20}
+              className="text-violet-600 mt-0.5 flex-shrink-0"
+            />
             <div className="flex-1">
               <h4 className="text-sm font-bold text-violet-900">
                 Confirmar e liberar assinaturas
@@ -401,7 +449,8 @@ export default function AbaSnapshot({
       {data.edicoes.length > 0 && (
         <div className="bg-white border border-gray-200 rounded-2xl p-5">
           <h4 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <ClipboardList size={14} /> Histórico de edições ({data.edicoes.length})
+            <ClipboardList size={14} /> Histórico de edições (
+            {data.edicoes.length})
           </h4>
           <ul className="space-y-3">
             {data.edicoes.map((ed) => (
@@ -411,7 +460,8 @@ export default function AbaSnapshot({
               >
                 <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
                   <Clock size={11} />
-                  {formatDate(ed.created_at)} · v{ed.versao_antes} → v{ed.versao_depois}
+                  {formatDate(ed.created_at)} · v{ed.versao_antes} → v
+                  {ed.versao_depois}
                 </div>
                 <p className="text-sm text-gray-700">{ed.justificativa}</p>
                 <div className="mt-1 text-xs text-gray-500">
@@ -438,38 +488,48 @@ export default function AbaSnapshot({
           snapshot={snap}
           onClose={() => setEditorAberto(false)}
           onSalvou={async () => {
-            setEditorAberto(false)
-            setSucesso("Edição registrada com sucesso.")
-            await carregar()
-            onAtualizar?.()
+            setEditorAberto(false);
+            setSucesso("Edição registrada com sucesso.");
+            await carregar();
+            onAtualizar?.();
           }}
         />
       )}
     </div>
-  )
+  );
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Subcomponentes
 // ═══════════════════════════════════════════════════════════════════════════
 
-function ResumoCampo({ label, valor }: { label: string; valor: string | null | undefined }) {
+function ResumoCampo({
+  label,
+  valor,
+}: {
+  label: string;
+  valor: string | null | undefined;
+}) {
   return (
     <div>
       <dt className="text-xs text-gray-500">{label}</dt>
       <dd className="text-sm font-medium text-gray-900">
-        {valor && valor.trim() !== "" ? valor : <span className="text-gray-400">—</span>}
+        {valor && valor.trim() !== "" ? (
+          valor
+        ) : (
+          <span className="text-gray-400">—</span>
+        )}
       </dd>
     </div>
-  )
+  );
 }
 
 function JSONViewerModal({
   data,
   onClose,
 }: {
-  data: unknown
-  onClose: () => void
+  data: unknown;
+  onClose: () => void;
 }) {
   return (
     <div
@@ -496,7 +556,7 @@ function JSONViewerModal({
         </pre>
       </div>
     </div>
-  )
+  );
 }
 
 function EditorModal({
@@ -505,31 +565,31 @@ function EditorModal({
   onClose,
   onSalvou,
 }: {
-  diplomaId: string
-  snapshot: SnapshotResponse["snapshot"]
-  onClose: () => void
-  onSalvou: () => void
+  diplomaId: string;
+  snapshot: SnapshotResponse["snapshot"];
+  onClose: () => void;
+  onSalvou: () => void;
 }) {
-  const [path, setPath] = useState<string>(CAMPOS_EDITAVEIS[0].path)
-  const [valor, setValor] = useState<string>("")
-  const [justificativa, setJustificativa] = useState("")
-  const [salvando, setSalvando] = useState(false)
-  const [erro, setErro] = useState("")
+  const [path, setPath] = useState<string>(CAMPOS_EDITAVEIS[0].path);
+  const [valor, setValor] = useState<string>("");
+  const [justificativa, setJustificativa] = useState("");
+  const [salvando, setSalvando] = useState(false);
+  const [erro, setErro] = useState("");
 
   // Pré-popula o valor atual quando muda o campo
   useEffect(() => {
-    if (!snapshot) return
-    const atual = getByPath(snapshot, path)
-    setValor(atual == null ? "" : String(atual))
-  }, [path, snapshot])
+    if (!snapshot) return;
+    const atual = getByPath(snapshot, path);
+    setValor(atual == null ? "" : String(atual));
+  }, [path, snapshot]);
 
   const salvar = async () => {
-    setErro("")
+    setErro("");
     if (justificativa.trim().length < 20) {
-      setErro("Justificativa precisa ter pelo menos 20 caracteres")
-      return
+      setErro("Justificativa precisa ter pelo menos 20 caracteres");
+      return;
     }
-    setSalvando(true)
+    setSalvando(true);
     try {
       const res = await fetchSeguro(`/api/diplomas/${diplomaId}/snapshot`, {
         method: "PATCH",
@@ -538,22 +598,22 @@ function EditorModal({
           patches: { [path]: valor.trim() === "" ? null : valor.trim() },
           justificativa: justificativa.trim(),
         }),
-      })
-      const body = await res.json()
+      });
+      const body = await res.json();
       if (!res.ok) {
         throw new Error(
-          (body as { error?: string }).error ?? "Erro ao salvar edição"
-        )
+          (body as { error?: string }).error ?? "Erro ao salvar edição",
+        );
       }
-      onSalvou()
+      onSalvou();
     } catch (e) {
-      setErro(e instanceof Error ? e.message : "Erro ao salvar edição")
+      setErro(e instanceof Error ? e.message : "Erro ao salvar edição");
     } finally {
-      setSalvando(false)
+      setSalvando(false);
     }
-  }
+  };
 
-  const campoAtual = CAMPOS_EDITAVEIS.find((c) => c.path === path)
+  const campoAtual = CAMPOS_EDITAVEIS.find((c) => c.path === path);
 
   return (
     <div
@@ -565,7 +625,9 @@ function EditorModal({
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex items-center justify-between px-5 py-3 border-b">
-          <h3 className="text-sm font-bold text-gray-900">Editar campo do snapshot</h3>
+          <h3 className="text-sm font-bold text-gray-900">
+            Editar campo do snapshot
+          </h3>
           <button
             onClick={onClose}
             className="p-1.5 text-gray-400 hover:text-gray-700 hover:bg-gray-100 rounded"
@@ -599,7 +661,9 @@ function EditorModal({
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">
               Novo valor{" "}
-              <span className="font-normal text-gray-400">({campoAtual?.label})</span>
+              <span className="font-normal text-gray-400">
+                ({campoAtual?.label})
+              </span>
             </label>
             <input
               type="text"
@@ -613,7 +677,9 @@ function EditorModal({
           <div>
             <label className="block text-xs font-medium text-gray-700 mb-1">
               Justificativa <span className="text-red-500">*</span>{" "}
-              <span className="font-normal text-gray-400">(mín. 20 caracteres)</span>
+              <span className="font-normal text-gray-400">
+                (mín. 20 caracteres)
+              </span>
             </label>
             <textarea
               value={justificativa}
@@ -658,52 +724,55 @@ function EditorModal({
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Helpers
 // ═══════════════════════════════════════════════════════════════════════════
 
-function gruposDeCampos(): Array<{ nome: string; campos: typeof CAMPOS_EDITAVEIS }> {
-  const map = new Map<string, typeof CAMPOS_EDITAVEIS>()
+function gruposDeCampos(): Array<{
+  nome: string;
+  campos: typeof CAMPOS_EDITAVEIS;
+}> {
+  const map = new Map<string, typeof CAMPOS_EDITAVEIS>();
   for (const c of CAMPOS_EDITAVEIS) {
-    const arr = map.get(c.grupo) ?? []
-    arr.push(c)
-    map.set(c.grupo, arr)
+    const arr = map.get(c.grupo) ?? [];
+    arr.push(c);
+    map.set(c.grupo, arr);
   }
-  return Array.from(map.entries()).map(([nome, campos]) => ({ nome, campos }))
+  return Array.from(map.entries()).map(([nome, campos]) => ({ nome, campos }));
 }
 
 function getByPath(obj: unknown, path: string): unknown {
   const tokens = path.split(".").flatMap((t) => {
-    const m = t.match(/^([^\[]+)(?:\[(\d+)\])?$/)
-    if (!m) return [t]
-    return m[2] !== undefined ? [m[1], Number(m[2])] : [m[1]]
-  })
-  let ref: any = obj
+    const m = t.match(/^([^\[]+)(?:\[(\d+)\])?$/);
+    if (!m) return [t];
+    return m[2] !== undefined ? [m[1], Number(m[2])] : [m[1]];
+  });
+  let ref: any = obj;
   for (const t of tokens) {
-    if (ref == null) return null
-    ref = ref[t]
+    if (ref == null) return null;
+    ref = ref[t];
   }
-  return ref
+  return ref;
 }
 
 function str(v: unknown): string {
-  if (v == null) return ""
-  return String(v)
+  if (v == null) return "";
+  return String(v);
 }
 
 function formatDate(s: string | null | undefined): string {
-  if (!s) return "—"
+  if (!s) return "—";
   // ISO-8601 completo ou só data
-  const d = new Date(s.length === 10 ? `${s}T12:00:00` : s)
-  if (Number.isNaN(d.getTime())) return s
+  const d = new Date(s.length === 10 ? `${s}T12:00:00` : s);
+  if (Number.isNaN(d.getTime())) return s;
   return d.toLocaleString("pt-BR", {
     day: "2-digit",
     month: "2-digit",
     year: "numeric",
     hour: "2-digit",
     minute: "2-digit",
-  })
+  });
 }

@@ -13,10 +13,12 @@
 **Paridade funcional com Nexvy:** ~80% (198 features mapeadas, ~160 implementadas)
 
 **Pendentes de merge:**
+
 - **PR #60** — S10 DS Agente OpenAI + RAG — aberto, aguardando review/merge
 - **S11 DS Bot** — código gerado mas **untracked** no worktree (stash `stash@{0}`); precisa commit + PR
 
 **Ignoradas (decisão):**
+
 - S12 multi-tenant · S13 white-label/planos/SaaS — stand-by
 
 ---
@@ -42,11 +44,11 @@ Antes de qualquer fix, consolidar S10 e S11 em main para ter base limpa.
 
 Fixes que **quebram operação real** se não forem resolvidos antes do go-live.
 
-| ID | Débito | Esforço | Arquivo-chave |
-|---|---|---|---|
+| ID        | Débito                                                                                                                                                                                                                                                         | Esforço | Arquivo-chave                                                                |
+| --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- | ---------------------------------------------------------------------------- |
 | **P-108** | `send_message` action do engine S8a insere row `pending` mas **não dispara Meta API**. Resolução: criar worker cron que drena `atendimento_messages WHERE status='pending' AND source='automation'` chamando `POST /conversas/[id]/messages` + marcando `sent` | 0.5 dia | `automation-engine.ts` + novo `/api/cron/drain-automation-messages/route.ts` |
-| **P-066** | `refresh_token` Google e `access_token` WABA em plain text no DB. Migrar para `@ecossistema/credentials` (SC-29 vault) | 1 dia | `lib/atendimento/google-oauth.ts` + `waba-credentials.ts` |
-| **P-068** | FK `atendimento_calendar_events.deal_id` apontando para NULL (S5 deixou aguardando S4). ALTER simples adicionando `REFERENCES public.atendimento_deals(id) ON DELETE SET NULL` | 10min | migration nova `20260502_fk_calendar_events_deals.sql` |
+| **P-066** | `refresh_token` Google e `access_token` WABA em plain text no DB. Migrar para `@ecossistema/credentials` (SC-29 vault)                                                                                                                                         | 1 dia   | `lib/atendimento/google-oauth.ts` + `waba-credentials.ts`                    |
+| **P-068** | FK `atendimento_calendar_events.deal_id` apontando para NULL (S5 deixou aguardando S4). ALTER simples adicionando `REFERENCES public.atendimento_deals(id) ON DELETE SET NULL`                                                                                 | 10min   | migration nova `20260502_fk_calendar_events_deals.sql`                       |
 
 **Duração estimada:** 1.5-2 dias.
 
@@ -60,12 +62,12 @@ Fixes que **quebram operação real** se não forem resolvidos antes do go-live.
 
 Sprint **"S4.5 FIC Integration"** — código pequeno mas bloqueia uso real pelos atendentes.
 
-| Feature | Esforço | Entrega |
-|---|---|---|
-| **Vincular `atendimento_contacts.aluno_id` ↔ tabela `alunos`** | 1 dia | ContactInfoPanel mostra: CPF, curso, turma, mensalidade atual, status de matrícula, vínculo com processo diploma |
-| **Botão "Solicitar pagamento" no chat** | 1 dia | Toolbar chat → modal valor/vencimento → chama `@ecossistema/billing` (Inter) → gera boleto → envia PDF no WhatsApp |
-| **Trigger auto: Deal "Matrícula ativa" → cria/atualiza `alunos`** | 0.5 dia | Trigger SQL ou automation rule S8a que dispara quando deal entra na etapa terminal do pipeline Alunos |
-| **Protocolo = número processo acadêmico** | 0.5 dia | `ALTER TABLE protocols ADD COLUMN processo_academico_id` + UI mostra número do processo |
+| Feature                                                           | Esforço | Entrega                                                                                                            |
+| ----------------------------------------------------------------- | ------- | ------------------------------------------------------------------------------------------------------------------ |
+| **Vincular `atendimento_contacts.aluno_id` ↔ tabela `alunos`**    | 1 dia   | ContactInfoPanel mostra: CPF, curso, turma, mensalidade atual, status de matrícula, vínculo com processo diploma   |
+| **Botão "Solicitar pagamento" no chat**                           | 1 dia   | Toolbar chat → modal valor/vencimento → chama `@ecossistema/billing` (Inter) → gera boleto → envia PDF no WhatsApp |
+| **Trigger auto: Deal "Matrícula ativa" → cria/atualiza `alunos`** | 0.5 dia | Trigger SQL ou automation rule S8a que dispara quando deal entra na etapa terminal do pipeline Alunos              |
+| **Protocolo = número processo acadêmico**                         | 0.5 dia | `ALTER TABLE protocols ADD COLUMN processo_academico_id` + UI mostra número do processo                            |
 
 **Duração:** 3-4 dias (1 sprint curta).
 
@@ -74,6 +76,7 @@ Sprint **"S4.5 FIC Integration"** — código pequeno mas bloqueia uso real pelo
 Executar itens do `CHECKLIST-POS-LEVA-1.md` + novos de S9/S10/S11:
 
 **Migrations em Supabase (serializadas, 1 por dia conforme ADR-016 Regra 5):**
+
 - [ ] P-028 · S4 Kanban (`20260421000000_atendimento_s4_kanban.sql`)
 - [ ] P-050 · S6 Cargos (`20260421_atendimento_s6_cargos.sql`)
 - [ ] P-060 · S5 Templates (`20260421_atendimento_s5_templates_expand.sql`)
@@ -85,6 +88,7 @@ Executar itens do `CHECKLIST-POS-LEVA-1.md` + novos de S9/S10/S11:
 - [ ] S11 DS Bot (via PR a abrir)
 
 **Env vars Vercel (projeto erp-educacional):**
+
 - [ ] `ATENDIMENTO_RBAC_ENABLED` + `NEXT_PUBLIC_*` (P-052)
 - [ ] `NEXT_PUBLIC_ATENDIMENTO_CRM_KANBAN_ENABLED` (P-031)
 - [ ] `NEXT_PUBLIC_ATENDIMENTO_DASHBOARDS_ENABLED`
@@ -98,18 +102,22 @@ Executar itens do `CHECKLIST-POS-LEVA-1.md` + novos de S9/S10/S11:
 - [ ] `GOOGLE_CLIENT_ID` + `GOOGLE_CLIENT_SECRET` + `GOOGLE_OAUTH_REDIRECT_URI` (P-061)
 
 **Google Cloud Console (P-062):**
+
 - [ ] Projeto "FIC Atendimento" com Calendar API + People API
 - [ ] OAuth consent External + Client ID Web com redirects prod+localhost
 
 **Provider config WhatsApp FIC (P-063):**
+
 - [ ] SQL: UPDATE `atendimento_inboxes.provider_config` com `waba_id`, `phone_number_id`, `access_token` reais
 
 **LLM provider para DS Agente (P-130 — decisão):**
+
 - [ ] Decidir: OpenAI / Anthropic Claude / Groq / local
 - [ ] Configurar API key no vault
 - [ ] Se trocar de OpenAI, reescrever apenas `openai-client.ts`
 
 **Template WABA piloto (P-040):**
+
 - [ ] Criar `fic_boas_vindas_matricula` no Meta Business Manager (aguarda 24-48h aprovação)
 
 **Duração:** 4-5 dias total (3-4 dias B + 1 dia A paralelo enquanto Meta aprova template).
@@ -122,15 +130,15 @@ Executar itens do `CHECKLIST-POS-LEVA-1.md` + novos de S9/S10/S11:
 
 Popular o ERP com dados reais e treinar os 4 atendentes FIC.
 
-| Item | Ação |
-|---|---|
-| **P-034 + P-042** Importar 245 contatos + 171 deals reais | Exportar CSV do Nexvy → rodar `scripts/nexvy_import.ts --dry-run` → revisar → rodar sem dry-run |
-| **P-051** Seed 165 permissions (3 presets cargos) | `python scripts/seed_atendimento_permissions.py \| psql` |
-| Sync Meta templates aprovados | Após P-040 aprovar, abrir `/atendimento/templates` → botão "Sincronizar Meta" |
-| **Seed 5 automações pré-configuradas** | Criar na UI regras canônicas FIC: (1) keyword "matrícula" → tag + deal pipeline Matrículas, (2) keyword "financeiro" → transfere fila, (3) msg recebida fora horário comercial → auto-reply, (4) deal "Aprovado" → notifica responsável, (5) contato inativo 7d → re-engajamento |
-| **P-041** QA visual `/dev/tokens` em staging | Conferir paridade com console.nexvy.tech |
-| **Treinamento dos 4 atendentes** | 2h presencial (Fabiano, Jhiully, Cristina, Marcelo) + vídeo gravado para consulta |
-| **Soft launch controlado** | 1 atendente opera no ERP por 1 semana, 3 continuam no Nexvy em paralelo. Monitorar Sentry + feedback diário |
+| Item                                                      | Ação                                                                                                                                                                                                                                                                             |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **P-034 + P-042** Importar 245 contatos + 171 deals reais | Exportar CSV do Nexvy → rodar `scripts/nexvy_import.ts --dry-run` → revisar → rodar sem dry-run                                                                                                                                                                                  |
+| **P-051** Seed 165 permissions (3 presets cargos)         | `python scripts/seed_atendimento_permissions.py \| psql`                                                                                                                                                                                                                         |
+| Sync Meta templates aprovados                             | Após P-040 aprovar, abrir `/atendimento/templates` → botão "Sincronizar Meta"                                                                                                                                                                                                    |
+| **Seed 5 automações pré-configuradas**                    | Criar na UI regras canônicas FIC: (1) keyword "matrícula" → tag + deal pipeline Matrículas, (2) keyword "financeiro" → transfere fila, (3) msg recebida fora horário comercial → auto-reply, (4) deal "Aprovado" → notifica responsável, (5) contato inativo 7d → re-engajamento |
+| **P-041** QA visual `/dev/tokens` em staging              | Conferir paridade com console.nexvy.tech                                                                                                                                                                                                                                         |
+| **Treinamento dos 4 atendentes**                          | 2h presencial (Fabiano, Jhiully, Cristina, Marcelo) + vídeo gravado para consulta                                                                                                                                                                                                |
+| **Soft launch controlado**                                | 1 atendente opera no ERP por 1 semana, 3 continuam no Nexvy em paralelo. Monitorar Sentry + feedback diário                                                                                                                                                                      |
 
 **Duração:** 2 dias (config/seed) + 1 semana (soft launch).
 
@@ -177,18 +185,18 @@ Auditoria antes do full launch:
 
 ## 📊 Cronograma consolidado (estimativa)
 
-| Semana | Etapa | Entrega |
-|---|---|---|
-| **Semana 1 — dias 1-2** | Etapa 0 + Etapa 1-D | S10/S11 em main · débitos críticos resolvidos |
-| **Semana 1 — dias 3-5** | Etapa 2-B (código FIC-specific) | Integração aluno/boleto/processo |
-| **Semana 2 — dias 1-3** | Etapa 2-A (deploy) | Migrations + env vars + Google Cloud + WABA |
-| **Semana 2 — dias 4-5** | Etapa 2-A continua (espera aprovação Meta) | Template WABA aprovado · LLM escolhido |
-| **Semana 3 — dias 1-2** | Etapa 3-C (dados + seed) | Import Nexvy · seed permissions · automações pré-config |
-| **Semana 3 — dias 3-5** | Etapa 3-C (treinamento + soft launch) | Atendentes treinados · 1 atendente piloto no ERP |
-| **Semana 4 — dias 1-5** | Etapa 3-C (soft launch) | Feedback consolidado · ajustes |
-| **Semana 5 — dias 1-3** | Etapa 4-E (opcionais) | DS Voice populado · DS Agente FIC-Secretaria live |
-| **Semana 5 — dias 4-5** | Etapa 4-E (check-up) | Auditoria · runbook |
-| **Semana 6** | Etapa 4-E (full launch) | FIC 100% ERP · Nexvy desligado · ADR-021 |
+| Semana                  | Etapa                                      | Entrega                                                 |
+| ----------------------- | ------------------------------------------ | ------------------------------------------------------- |
+| **Semana 1 — dias 1-2** | Etapa 0 + Etapa 1-D                        | S10/S11 em main · débitos críticos resolvidos           |
+| **Semana 1 — dias 3-5** | Etapa 2-B (código FIC-specific)            | Integração aluno/boleto/processo                        |
+| **Semana 2 — dias 1-3** | Etapa 2-A (deploy)                         | Migrations + env vars + Google Cloud + WABA             |
+| **Semana 2 — dias 4-5** | Etapa 2-A continua (espera aprovação Meta) | Template WABA aprovado · LLM escolhido                  |
+| **Semana 3 — dias 1-2** | Etapa 3-C (dados + seed)                   | Import Nexvy · seed permissions · automações pré-config |
+| **Semana 3 — dias 3-5** | Etapa 3-C (treinamento + soft launch)      | Atendentes treinados · 1 atendente piloto no ERP        |
+| **Semana 4 — dias 1-5** | Etapa 3-C (soft launch)                    | Feedback consolidado · ajustes                          |
+| **Semana 5 — dias 1-3** | Etapa 4-E (opcionais)                      | DS Voice populado · DS Agente FIC-Secretaria live       |
+| **Semana 5 — dias 4-5** | Etapa 4-E (check-up)                       | Auditoria · runbook                                     |
+| **Semana 6**            | Etapa 4-E (full launch)                    | FIC 100% ERP · Nexvy desligado · ADR-021                |
 
 **Duração total:** 5-6 semanas (conservador). Agressivo: 3-4 semanas se soft launch for curto.
 
@@ -196,13 +204,13 @@ Auditoria antes do full launch:
 
 ## 🛡️ Riscos + mitigações
 
-| Risco | Mitigação |
-|---|---|
+| Risco                                    | Mitigação                                                                                                               |
+| ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
 | PR #60 S10 com conflito grande ao rebase | Separar em commits menores se necessário; se travar, apagar DS Agente temporariamente (não é crítico para FIC imediata) |
-| S11 DS Bot não reproduz no worktree | Stash `stash@{0}` preservado; se perder, apagar ramo e re-gerar (briefing S11 está em main) |
-| Meta não aprovar template em 48h | Submeter 3 templates alternativos simultaneamente (UTILITY puro → maior chance) |
-| LLM provider P-130 indecidido | Default: Anthropic Claude (Marcelo já tem vault + confiança). Reescreve `openai-client.ts` por 1h de trabalho |
-| Atendentes resistentes a mudança | Treinamento presencial + 1 atendente campeão interno + rollback plan pronto |
+| S11 DS Bot não reproduz no worktree      | Stash `stash@{0}` preservado; se perder, apagar ramo e re-gerar (briefing S11 está em main)                             |
+| Meta não aprovar template em 48h         | Submeter 3 templates alternativos simultaneamente (UTILITY puro → maior chance)                                         |
+| LLM provider P-130 indecidido            | Default: Anthropic Claude (Marcelo já tem vault + confiança). Reescreve `openai-client.ts` por 1h de trabalho           |
+| Atendentes resistentes a mudança         | Treinamento presencial + 1 atendente campeão interno + rollback plan pronto                                             |
 
 ---
 
@@ -216,4 +224,4 @@ Auditoria antes do full launch:
 
 ---
 
-*Documento criado em 2026-04-22 · Sessão S089 · Plano aprovado por Marcelo para execução em 4 etapas (+ Etapa 0 housekeeping)*
+_Documento criado em 2026-04-22 · Sessão S089 · Plano aprovado por Marcelo para execução em 4 etapas (+ Etapa 0 housekeeping)_

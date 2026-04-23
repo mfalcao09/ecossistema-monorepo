@@ -1,15 +1,15 @@
-import { NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import { protegerRota } from '@/lib/security/api-guard'
-import { sanitizarErro } from '@/lib/security/sanitize-error'
+import { NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { protegerRota } from "@/lib/security/api-guard";
+import { sanitizarErro } from "@/lib/security/sanitize-error";
 
 // Tipo local — cast necessário pois o Supabase JS não infere corretamente
 // com .select() de string concatenada.
 interface DiplomaTravarRow {
-  id: string
-  dados_snapshot_extracao: unknown | null
-  dados_snapshot_versao: number | null
-  dados_snapshot_travado: boolean | null
+  id: string;
+  dados_snapshot_extracao: unknown | null;
+  dados_snapshot_versao: number | null;
+  dados_snapshot_travado: boolean | null;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -28,41 +28,49 @@ interface DiplomaTravarRow {
 //   • Ainda não está travado (idempotência amigável)
 // ═══════════════════════════════════════════════════════════════════════════
 export const POST = protegerRota(async (request, { userId }) => {
-  const supabase = await createClient()
+  const supabase = await createClient();
 
-  const pathname = new URL(request.url).pathname
-  const segments = pathname.split('/')
-  const idx = segments.indexOf('diplomas')
-  const diplomaId = idx >= 0 ? segments[idx + 1] : null
+  const pathname = new URL(request.url).pathname;
+  const segments = pathname.split("/");
+  const idx = segments.indexOf("diplomas");
+  const diplomaId = idx >= 0 ? segments[idx + 1] : null;
 
   if (!diplomaId) {
-    return NextResponse.json({ error: 'ID do diploma não fornecido' }, { status: 400 })
+    return NextResponse.json(
+      { error: "ID do diploma não fornecido" },
+      { status: 400 },
+    );
   }
 
   const { data: diplomaRaw, error: errDiploma } = await supabase
-    .from('diplomas')
+    .from("diplomas")
     .select(
-      'id, dados_snapshot_extracao, dados_snapshot_versao, dados_snapshot_travado'
+      "id, dados_snapshot_extracao, dados_snapshot_versao, dados_snapshot_travado",
     )
-    .eq('id', diplomaId)
-    .single()
+    .eq("id", diplomaId)
+    .single();
 
   if (errDiploma || !diplomaRaw) {
     return NextResponse.json(
-      { error: sanitizarErro(errDiploma?.message ?? 'Diploma não encontrado', 404) },
-      { status: 404 }
-    )
+      {
+        error: sanitizarErro(
+          errDiploma?.message ?? "Diploma não encontrado",
+          404,
+        ),
+      },
+      { status: 404 },
+    );
   }
-  const diploma = diplomaRaw as unknown as DiplomaTravarRow
+  const diploma = diplomaRaw as unknown as DiplomaTravarRow;
 
   if (!diploma.dados_snapshot_extracao) {
     return NextResponse.json(
       {
         error:
-          'Diploma sem snapshot — não pode ser travado (possivelmente legado ou erro na criação).',
+          "Diploma sem snapshot — não pode ser travado (possivelmente legado ou erro na criação).",
       },
-      { status: 422 }
-    )
+      { status: 422 },
+    );
   }
 
   if (diploma.dados_snapshot_travado) {
@@ -70,26 +78,26 @@ export const POST = protegerRota(async (request, { userId }) => {
     return NextResponse.json({
       ja_travado: true,
       versao: diploma.dados_snapshot_versao,
-    })
+    });
   }
 
-  const agora = new Date().toISOString()
+  const agora = new Date().toISOString();
 
   const { error: errUpdate } = await supabase
-    .from('diplomas')
+    .from("diplomas")
     .update({
       dados_snapshot_travado: true,
       dados_snapshot_travado_em: agora,
       dados_snapshot_travado_por: userId,
     })
-    .eq('id', diplomaId)
-    .eq('dados_snapshot_travado', false) // optimistic — evita race
+    .eq("id", diplomaId)
+    .eq("dados_snapshot_travado", false); // optimistic — evita race
 
   if (errUpdate) {
     return NextResponse.json(
       { error: sanitizarErro(errUpdate.message, 500) },
-      { status: 500 }
-    )
+      { status: 500 },
+    );
   }
 
   return NextResponse.json({
@@ -97,5 +105,5 @@ export const POST = protegerRota(async (request, { userId }) => {
     travado_em: agora,
     travado_por: userId,
     versao: diploma.dados_snapshot_versao,
-  })
-})
+  });
+});
