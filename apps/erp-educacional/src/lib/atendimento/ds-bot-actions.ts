@@ -27,10 +27,21 @@ export type ExecuteNodeResult =
 // Pequena guarda — nodes que o dispatcher do runner NÃO deveria mandar pra cá.
 // Se vier, retorna no-op.
 const UNHANDLED_HERE = new Set([
-  "trigger", "conditional", "agent_handoff",
-  "flow_end", "flow_goto", "flow_back", "flow_wait",
-  "input_text", "input_number", "input_email", "input_website",
-  "input_date", "input_phone", "input_button", "input_file",
+  "trigger",
+  "conditional",
+  "agent_handoff",
+  "flow_end",
+  "flow_goto",
+  "flow_back",
+  "flow_wait",
+  "input_text",
+  "input_number",
+  "input_email",
+  "input_website",
+  "input_date",
+  "input_phone",
+  "input_button",
+  "input_file",
 ]);
 
 export async function executeNodeHandler(
@@ -46,83 +57,183 @@ export async function executeNodeHandler(
       // ──────── Bubbles ────────
       case "bubble_text": {
         const d = node.data as { text: string; interpolate?: boolean };
-        const text = d.interpolate === false ? d.text : interpolate(d.text, ctx.variables);
+        const text =
+          d.interpolate === false ? d.text : interpolate(d.text, ctx.variables);
         return { kind: "next", side_effects: [{ type: "send_text", text }] };
       }
       case "bubble_image": {
         const d = node.data as { url: string; caption?: string };
-        return { kind: "next", side_effects: [{ type: "send_media", media_type: "image", url: d.url, caption: d.caption }] };
+        return {
+          kind: "next",
+          side_effects: [
+            {
+              type: "send_media",
+              media_type: "image",
+              url: d.url,
+              caption: d.caption,
+            },
+          ],
+        };
       }
       case "bubble_video": {
         const d = node.data as { url: string; caption?: string };
-        return { kind: "next", side_effects: [{ type: "send_media", media_type: "video", url: d.url, caption: d.caption }] };
+        return {
+          kind: "next",
+          side_effects: [
+            {
+              type: "send_media",
+              media_type: "video",
+              url: d.url,
+              caption: d.caption,
+            },
+          ],
+        };
       }
       case "bubble_audio": {
         const d = node.data as { url: string };
-        return { kind: "next", side_effects: [{ type: "send_media", media_type: "audio", url: d.url }] };
+        return {
+          kind: "next",
+          side_effects: [
+            { type: "send_media", media_type: "audio", url: d.url },
+          ],
+        };
       }
       case "bubble_embed": {
         const d = node.data as { url: string };
-        return { kind: "next", side_effects: [{ type: "send_embed", url: d.url }] };
+        return {
+          kind: "next",
+          side_effects: [{ type: "send_embed", url: d.url }],
+        };
       }
 
       // ──────── Contato ────────
       case "contact_add_tag": {
         const d = node.data as { tag: string };
         if (ctx.contact_id) await addTag(ctx.contact_id, d.tag);
-        return { kind: "next", side_effects: [{ type: "add_tag", tag: d.tag }] };
+        return {
+          kind: "next",
+          side_effects: [{ type: "add_tag", tag: d.tag }],
+        };
       }
       case "contact_remove_tag": {
         const d = node.data as { tag: string };
         if (ctx.contact_id) await removeTag(ctx.contact_id, d.tag);
-        return { kind: "next", side_effects: [{ type: "remove_tag", tag: d.tag }] };
+        return {
+          kind: "next",
+          side_effects: [{ type: "remove_tag", tag: d.tag }],
+        };
       }
       case "contact_update_field": {
-        const d = node.data as { field: string; value: string; interpolate?: boolean };
-        const value = d.interpolate === false ? d.value : interpolate(d.value, ctx.variables);
-        if (ctx.contact_id) await updateContactField(ctx.contact_id, d.field, value);
-        return { kind: "next", side_effects: [{ type: "update_contact_field", field: d.field, value }] };
+        const d = node.data as {
+          field: string;
+          value: string;
+          interpolate?: boolean;
+        };
+        const value =
+          d.interpolate === false
+            ? d.value
+            : interpolate(d.value, ctx.variables);
+        if (ctx.contact_id)
+          await updateContactField(ctx.contact_id, d.field, value);
+        return {
+          kind: "next",
+          side_effects: [
+            { type: "update_contact_field", field: d.field, value },
+          ],
+        };
       }
 
       // ──────── Mensagem ────────
       case "message_waba_template": {
-        const d = node.data as { template_id: string; variables?: Record<string, string> };
+        const d = node.data as {
+          template_id: string;
+          variables?: Record<string, string>;
+        };
         const interpolated: Record<string, string> = {};
         for (const [k, v] of Object.entries(d.variables ?? {})) {
           interpolated[k] = interpolate(v, ctx.variables);
         }
-        return { kind: "next", side_effects: [{ type: "send_waba_template", template_id: d.template_id, variables: interpolated }] };
+        return {
+          kind: "next",
+          side_effects: [
+            {
+              type: "send_waba_template",
+              template_id: d.template_id,
+              variables: interpolated,
+            },
+          ],
+        };
       }
       case "message_ds_voice": {
         const d = node.data as { library_item_id: string };
-        return { kind: "next", side_effects: [{ type: "send_ds_voice", library_item_id: d.library_item_id }] };
+        return {
+          kind: "next",
+          side_effects: [
+            { type: "send_ds_voice", library_item_id: d.library_item_id },
+          ],
+        };
       }
       case "message_forward": {
         const d = node.data as { message_id: string };
-        return { kind: "next", side_effects: [{ type: "forward_message", message_id: d.message_id }] };
+        return {
+          kind: "next",
+          side_effects: [{ type: "forward_message", message_id: d.message_id }],
+        };
       }
 
       // ──────── Atendimento ────────
       case "attendance_transfer_queue": {
         const d = node.data as { queue_id: string; note?: string };
-        if (ctx.conversation_id) await transferQueue(ctx.conversation_id, d.queue_id);
-        return { kind: "next", side_effects: [{ type: "transfer_queue", queue_id: d.queue_id, note: d.note }] };
+        if (ctx.conversation_id)
+          await transferQueue(ctx.conversation_id, d.queue_id);
+        return {
+          kind: "next",
+          side_effects: [
+            { type: "transfer_queue", queue_id: d.queue_id, note: d.note },
+          ],
+        };
       }
       case "attendance_assign_agent": {
         const d = node.data as { agent_id: string; note?: string };
-        if (ctx.conversation_id) await assignAgent(ctx.conversation_id, d.agent_id);
-        return { kind: "next", side_effects: [{ type: "assign_agent", agent_id: d.agent_id, note: d.note }] };
+        if (ctx.conversation_id)
+          await assignAgent(ctx.conversation_id, d.agent_id);
+        return {
+          kind: "next",
+          side_effects: [
+            { type: "assign_agent", agent_id: d.agent_id, note: d.note },
+          ],
+        };
       }
       case "attendance_open_protocol": {
-        const d = node.data as { subject: string; priority?: "low" | "normal" | "high" };
+        const d = node.data as {
+          subject: string;
+          priority?: "low" | "normal" | "high";
+        };
         const subject = interpolate(d.subject, ctx.variables);
-        if (ctx.conversation_id) await openProtocol(ctx.conversation_id, subject, d.priority ?? "normal");
-        return { kind: "next", side_effects: [{ type: "open_protocol", subject, priority: d.priority ?? "normal" }] };
+        if (ctx.conversation_id)
+          await openProtocol(
+            ctx.conversation_id,
+            subject,
+            d.priority ?? "normal",
+          );
+        return {
+          kind: "next",
+          side_effects: [
+            {
+              type: "open_protocol",
+              subject,
+              priority: d.priority ?? "normal",
+            },
+          ],
+        };
       }
       case "attendance_close": {
         const d = node.data as { reason?: string };
         if (ctx.conversation_id) await closeConversation(ctx.conversation_id);
-        return { kind: "next", side_effects: [{ type: "close_conversation", reason: d.reason }] };
+        return {
+          kind: "next",
+          side_effects: [{ type: "close_conversation", reason: d.reason }],
+        };
       }
 
       default: {
@@ -143,7 +254,10 @@ export async function executeNodeHandler(
 async function addTag(contact_id: string, tag: string): Promise<void> {
   const client = createAdminClient();
   try {
-    await client.rpc("atendimento_contact_add_tag", { p_contact_id: contact_id, p_tag: tag });
+    await client.rpc("atendimento_contact_add_tag", {
+      p_contact_id: contact_id,
+      p_tag: tag,
+    });
   } catch {
     // fallback: update column tags array
     await client.from("atendimento_contacts").update({}).eq("id", contact_id);
@@ -153,16 +267,28 @@ async function addTag(contact_id: string, tag: string): Promise<void> {
 async function removeTag(contact_id: string, tag: string): Promise<void> {
   const client = createAdminClient();
   try {
-    await client.rpc("atendimento_contact_remove_tag", { p_contact_id: contact_id, p_tag: tag });
-  } catch { /* silencioso */ }
+    await client.rpc("atendimento_contact_remove_tag", {
+      p_contact_id: contact_id,
+      p_tag: tag,
+    });
+  } catch {
+    /* silencioso */
+  }
 }
 
-async function updateContactField(contact_id: string, field: string, value: string): Promise<void> {
+async function updateContactField(
+  contact_id: string,
+  field: string,
+  value: string,
+): Promise<void> {
   const client = createAdminClient();
   // Campos nativos
   const native = new Set(["name", "email", "phone", "notes"]);
   if (native.has(field)) {
-    await client.from("atendimento_contacts").update({ [field]: value }).eq("id", contact_id);
+    await client
+      .from("atendimento_contacts")
+      .update({ [field]: value })
+      .eq("id", contact_id);
     return;
   }
   // Custom fields via JSONB merge (requer coluna `custom_fields`)
@@ -171,16 +297,31 @@ async function updateContactField(contact_id: string, field: string, value: stri
     .select("custom_fields")
     .eq("id", contact_id)
     .maybeSingle();
-  const merged = { ...(data?.custom_fields as Record<string, unknown> ?? {}), [field]: value };
-  await client.from("atendimento_contacts").update({ custom_fields: merged }).eq("id", contact_id);
+  const merged = {
+    ...((data?.custom_fields as Record<string, unknown>) ?? {}),
+    [field]: value,
+  };
+  await client
+    .from("atendimento_contacts")
+    .update({ custom_fields: merged })
+    .eq("id", contact_id);
 }
 
-async function transferQueue(conversation_id: string, queue_id: string): Promise<void> {
+async function transferQueue(
+  conversation_id: string,
+  queue_id: string,
+): Promise<void> {
   const client = createAdminClient();
-  await client.from("atendimento_conversations").update({ queue_id }).eq("id", conversation_id);
+  await client
+    .from("atendimento_conversations")
+    .update({ queue_id })
+    .eq("id", conversation_id);
 }
 
-async function assignAgent(conversation_id: string, agent_id: string): Promise<void> {
+async function assignAgent(
+  conversation_id: string,
+  agent_id: string,
+): Promise<void> {
   const client = createAdminClient();
   await client
     .from("atendimento_conversations")
@@ -201,7 +342,9 @@ async function openProtocol(
       priority,
       status: "open",
     });
-  } catch { /* tabela pode não existir em deploys sem S4 */ }
+  } catch {
+    /* tabela pode não existir em deploys sem S4 */
+  }
 }
 
 async function closeConversation(conversation_id: string): Promise<void> {

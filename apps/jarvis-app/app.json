@@ -8,15 +8,26 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.ecossistema.jarvis"
+      "bundleIdentifier": "com.ecossistema.jarvis",
+      "infoPlist": {
+        "NSMicrophoneUsageDescription": "Jarvis precisa do microfone para você falar com o Claudinho."
+      }
     },
     "android": {
-      "package": "com.ecossistema.jarvis"
+      "package": "com.ecossistema.jarvis",
+      "permissions": ["RECORD_AUDIO"]
     },
     "web": {
       "bundler": "metro"
     },
-    "plugins": [],
+    "plugins": [
+      [
+        "expo-audio",
+        {
+          "microphonePermission": "Jarvis precisa do microfone para você falar com o Claudinho."
+        }
+      ]
+    ],
     "extra": {
       "orchestratorUrl": "http://localhost:8000",
       "orchestratorToken": "",

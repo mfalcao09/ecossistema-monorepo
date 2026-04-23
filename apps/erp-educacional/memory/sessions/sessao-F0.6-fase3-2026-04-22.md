@@ -11,6 +11,7 @@ Fazer os 3 PDFs complementares (Histórico, Termo Expedição, Termo Responsabil
 ## ✅ Entregas
 
 ### Backend
+
 - **`src/lib/diploma/render-pdf.ts`** (~160 linhas)
   - `renderPdfFromPrintRoute()` — helper Puppeteer reutilizável
   - Cookies de sessão repassados para auth Supabase
@@ -19,15 +20,18 @@ Fazer os 3 PDFs complementares (Histórico, Termo Expedição, Termo Responsabil
   - Helpers: `parseCookieHeader()`, `derivePrintContext()`
 
 ### Templates React
+
 - **`TermoExpedicaoTemplate.tsx`** — texto jurídico oficial (Port. MEC 70/2025) + dados do diplomado em destaque + tabela de registro + data por extenso
 - **`TermoResponsabilidadeTemplate.tsx`** — 5 cláusulas declaratórias (I-V) referenciando o snapshot imutável
 
 ### Rotas
+
 - **`/print/termo-expedicao/[diplomaId]/page.tsx`** — Client Component
 - **`/print/termo-responsabilidade/[diplomaId]/page.tsx`** — Client Component
 - Ambos fazem fetch do endpoint `/dados` (mesma fonte da Secretaria) e priorizam snapshot
 
 ### Endpoint modificado
+
 - **`POST /api/diplomas/[id]/documentos`**:
   - `maxDuration: 120`, `runtime: 'nodejs'`
   - Bifurcação: `temSnapshot` → 3× `renderPdfFromPrintRoute` em paralelo; senão → pdf-lib legado

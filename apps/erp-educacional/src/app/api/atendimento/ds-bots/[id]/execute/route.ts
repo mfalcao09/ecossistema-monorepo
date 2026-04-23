@@ -10,7 +10,10 @@ import { z } from "zod";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { isDsBotEnabled } from "@/lib/atendimento/feature-flags";
-import { startExecution, resumeExecution } from "@/lib/atendimento/ds-bot-runner";
+import {
+  startExecution,
+  resumeExecution,
+} from "@/lib/atendimento/ds-bot-runner";
 import type { DsBotFlow } from "@/lib/atendimento/ds-bot-types";
 
 const schema = z.discriminatedUnion("action", [
@@ -26,16 +29,27 @@ const schema = z.discriminatedUnion("action", [
   }),
 ]);
 
-export async function POST(request: NextRequest, ctx: { params: Promise<{ id: string }> }) {
-  if (!isDsBotEnabled()) return NextResponse.json({ error: "feature_disabled" }, { status: 403 });
+export async function POST(
+  request: NextRequest,
+  ctx: { params: Promise<{ id: string }> },
+) {
+  if (!isDsBotEnabled())
+    return NextResponse.json({ error: "feature_disabled" }, { status: 403 });
   const supabase = await createServerClient();
-  const { data: { user } } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  if (!user)
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const { id } = await ctx.params;
   const body = await request.json().catch(() => null);
   const parsed = schema.safeParse(body);
-  if (!parsed.success) return NextResponse.json({ error: "invalid", issues: parsed.error.issues }, { status: 400 });
+  if (!parsed.success)
+    return NextResponse.json(
+      { error: "invalid", issues: parsed.error.issues },
+      { status: 400 },
+    );
 
   const admin = createAdminClient();
 
@@ -45,7 +59,8 @@ export async function POST(request: NextRequest, ctx: { params: Promise<{ id: st
       .select("id, flow_json, start_node_id, version")
       .eq("id", id)
       .maybeSingle();
-    if (error || !bot) return NextResponse.json({ error: "not_found" }, { status: 404 });
+    if (error || !bot)
+      return NextResponse.json({ error: "not_found" }, { status: 404 });
 
     const result = await startExecution(
       {
@@ -65,6 +80,10 @@ export async function POST(request: NextRequest, ctx: { params: Promise<{ id: st
     return NextResponse.json(result);
   }
 
-  const result = await resumeExecution(parsed.data.execution_id, parsed.data.input, admin);
+  const result = await resumeExecution(
+    parsed.data.execution_id,
+    parsed.data.input,
+    admin,
+  );
   return NextResponse.json(result);
 }

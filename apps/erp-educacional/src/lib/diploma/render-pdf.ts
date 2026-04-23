@@ -12,8 +12,8 @@
  * aguarda render e gera o PDF.
  */
 
-import chromium from '@sparticuz/chromium'
-import puppeteer from 'puppeteer-core'
+import chromium from "@sparticuz/chromium";
+import puppeteer from "puppeteer-core";
 
 // ═══════════════════════════════════════════════════════════════════════════
 // Tipos públicos
@@ -21,25 +21,25 @@ import puppeteer from 'puppeteer-core'
 
 export interface RenderPdfOptions {
   /** URL absoluta da rota de print (ex: https://gestao.../print/historico/xxx) */
-  printUrl: string
+  printUrl: string;
   /** Cookies de sessão (name/value) para repassar ao Puppeteer e
    *  permitir que a rota de print passe pelo middleware de auth. */
-  cookies: Array<{ name: string; value: string }>
+  cookies: Array<{ name: string; value: string }>;
   /** Domínio para atribuir os cookies (gestao.ficcassilandia.com.br) */
-  cookieDomain: string
+  cookieDomain: string;
   /** Cookie secure flag — true se origin for https */
-  cookieSecure: boolean
+  cookieSecure: boolean;
   /** Timeout de navegação (default 30s) */
-  navigationTimeoutMs?: number
+  navigationTimeoutMs?: number;
   /** Timeout de espera pelo marcador data-print-ready (default 15s) */
-  readySelectorTimeoutMs?: number
+  readySelectorTimeoutMs?: number;
   /** Pausa adicional após marker pronto, para background-images (default 500ms) */
-  afterReadyDelayMs?: number
+  afterReadyDelayMs?: number;
 }
 
 export interface RenderPdfResult {
   /** Bytes do PDF gerado */
-  pdfBytes: Buffer
+  pdfBytes: Buffer;
 }
 
 // ═══════════════════════════════════════════════════════════════════════════
@@ -62,71 +62,67 @@ export async function renderPdfFromPrintRoute(
     navigationTimeoutMs = 30000,
     readySelectorTimeoutMs = 15000,
     afterReadyDelayMs = 500,
-  } = opts
+  } = opts;
 
-  let browser: Awaited<ReturnType<typeof puppeteer.launch>> | null = null
+  let browser: Awaited<ReturnType<typeof puppeteer.launch>> | null = null;
 
   try {
     browser = await puppeteer.launch({
-      args: [
-        ...chromium.args,
-        '--hide-scrollbars',
-        '--disable-web-security',
-      ],
+      args: [...chromium.args, "--hide-scrollbars", "--disable-web-security"],
       executablePath: await chromium.executablePath(),
       headless: true,
-    })
+    });
 
-    const page = await browser.newPage()
+    const page = await browser.newPage();
 
     // Viewport = A4 @ 96 dpi, deviceScale 2 para nitidez
-    await page.setViewport({ width: 794, height: 1123, deviceScaleFactor: 2 })
+    await page.setViewport({ width: 794, height: 1123, deviceScaleFactor: 2 });
 
     // Cookies de sessão — repassa auth do usuário ao browser headless
     if (cookies.length > 0) {
       await page.setCookie(
-        ...cookies.map(c => ({
+        ...cookies.map((c) => ({
           name: c.name,
           value: c.value,
           domain: cookieDomain,
-          path: '/',
+          path: "/",
           httpOnly: false,
           secure: cookieSecure,
-          sameSite: 'Lax' as const,
+          sameSite: "Lax" as const,
         })),
-      )
+      );
     }
 
     // Navega e aguarda rede ociosa
     await page.goto(printUrl, {
-      waitUntil: 'networkidle0',
+      waitUntil: "networkidle0",
       timeout: navigationTimeoutMs,
-    })
+    });
 
     // Marcador explícito que o template React mostra quando os dados
     // foram fetched e o DOM está pronto para virar PDF.
     await page.waitForSelector('[data-print-ready="true"]', {
       timeout: readySelectorTimeoutMs,
-    })
+    });
 
     // Background-images (timbrado) podem levar alguns ms após DOM pronto
     if (afterReadyDelayMs > 0) {
-      await new Promise(r => setTimeout(r, afterReadyDelayMs))
+      await new Promise((r) => setTimeout(r, afterReadyDelayMs));
     }
 
     const pdfBytes = await page.pdf({
-      format: 'A4',
+      format: "A4",
       printBackground: true,
       preferCSSPageSize: true,
       margin: { top: 0, right: 0, bottom: 0, left: 0 },
-    })
+    });
 
-    return { pdfBytes: Buffer.from(pdfBytes) }
+    return { pdfBytes: Buffer.from(pdfBytes) };
   } finally {
     // Sempre fecha — libera RAM da função serverless
     if (browser) {
       try {
-        await browser.close()
+        await browser.close();
       } catch {
         /* noop — best effort */
       }
@@ -142,32 +138,32 @@ export async function renderPdfFromPrintRoute(
 export function parseCookieHeader(
   header: string | null | undefined,
 ): Array<{ name: string; value: string }> {
-  if (!header) return []
+  if (!header) return [];
   return header
-    .split(';')
-    .map(c => c.trim())
+    .split(";")
+    .map((c) => c.trim())
     .filter(Boolean)
-    .map(c => {
-      const eq = c.indexOf('=')
-      if (eq < 0) return null
-      const name = c.substring(0, eq).trim()
-      const value = c.substring(eq + 1).trim()
-      return name ? { name, value } : null
+    .map((c) => {
+      const eq = c.indexOf("=");
+      if (eq < 0) return null;
+      const name = c.substring(0, eq).trim();
+      const value = c.substring(eq + 1).trim();
+      return name ? { name, value } : null;
     })
-    .filter((x): x is { name: string; value: string } => x !== null)
+    .filter((x): x is { name: string; value: string } => x !== null);
 }
 
 /** Monta a URL base + cookie domain a partir do request */
 export function derivePrintContext(request: Request): {
-  origin: string
-  cookieDomain: string
-  cookieSecure: boolean
+  origin: string;
+  cookieDomain: string;
+  cookieSecure: boolean;
 } {
-  const host = request.headers.get('host') ?? ''
-  const proto = request.headers.get('x-forwarded-proto') ?? 'https'
+  const host = request.headers.get("host") ?? "";
+  const proto = request.headers.get("x-forwarded-proto") ?? "https";
   return {
     origin: `${proto}://${host}`,
-    cookieDomain: host.split(':')[0],
-    cookieSecure: proto === 'https',
-  }
+    cookieDomain: host.split(":")[0],
+    cookieSecure: proto === "https",
+  };
 }

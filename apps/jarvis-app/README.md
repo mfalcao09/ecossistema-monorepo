@@ -4,13 +4,19 @@ App Expo (iOS + Android + Web) do **Jarvis Estágio 3** — chat (PR 2) e push-t
 
 ## Status
 
-**PR 2/4 — chat texto via SSE.** Conectado ao `apps/orchestrator` (FastAPI). Mensagens vão via `POST /agents/{agentId}/run` com stream SSE. Sessão persistida via `session_id` para follow-ups usarem `/resume`.
+**PR 3/4 — push-to-talk (STT + TTS).**
+
+- 🎙 Segura o mic → grava → solta → Groq Whisper transcreve → injeta no chat
+- 🔊 Quando o stream do assistant termina, ElevenLabs sintetiza e toca automaticamente
+- Graceful degradation: se `GROQ_API_KEY` / `ELEVENLABS_API_KEY` não estiverem setadas, mic desabilita + resposta não toca (texto continua funcionando)
 
 **PRs anteriores:**
+
 - [PR 1/4 — scaffold Expo](https://github.com/mfalcao09/ecossistema-monorepo/pull/56) ✅ merged
+- [PR 2/4 — chat texto SSE](https://github.com/mfalcao09/ecossistema-monorepo/pull/67) ✅ merged
 
 **Próximos:**
-- **PR 3/4** — push-to-talk real (pipecat + Groq Whisper + ElevenLabs)
+
 - **PR 4/4** — auth magic-link + EAS build no celular do Marcelo
 
 ## Como rodar
@@ -21,20 +27,22 @@ Em outro terminal:
 
 ```bash
 cd apps/orchestrator
-# primeira vez: pip install -e . (ou uv sync)
+uv venv --python 3.12 && source .venv/bin/activate && uv pip install -e .
+
+# Obrigatórios
+export ANTHROPIC_API_KEY=sk-ant-...
+export OWNER_TOKEN_HASH=$(echo -n "owner_dev_local_seguro_1234" | shasum -a 256 | awk '{print $1}')
+
+# Voz (opcionais — sem eles, PR 3 degrada graciosamente pra chat-só)
+export GROQ_API_KEY=gsk_...          # https://console.groq.com
+export ELEVENLABS_API_KEY=sk_...     # https://elevenlabs.io
+
 uvicorn orchestrator.main:app --host 0.0.0.0 --port 8000 --reload
 ```
 
 A flag `--host 0.0.0.0` é crítica — sem ela o celular não consegue acessar via IP LAN.
 
-Crie o `OWNER_TOKEN_HASH` no ambiente do orchestrator:
-
-```bash
-# No terminal do orchestrator:
-export OWNER_TOKEN_HASH=$(echo -n "owner_dev_local_seguro_1234" | shasum -a 256 | awk '{print $1}')
-```
-
-Agora o token `owner_dev_local_seguro_1234` é válido no Bearer header.
+Check rápido: `curl http://localhost:8000/voice/health` deve retornar `{"stt_available": true, "tts_available": true, ...}`.
 
 ### 2. Configurar o jarvis-app
 
@@ -60,6 +68,7 @@ pnpm --filter @ecossistema/jarvis-app start
 ```
 
 Opções:
+
 - `w` → abre no navegador (usa `localhost` funciona)
 - `i` → abre no simulador iOS (precisa Xcode instalado)
 - Escaneia o QR Code com **Expo Go** no iPhone → usa o IP LAN
@@ -71,30 +80,36 @@ iPhone (Expo Go)
       │
       ▼ HTTPS (wifi LAN)
 App.tsx
-   useChat (state + streaming)
-      │
+   useChat (state + SSE streaming)
+   useVoice (expo-audio: record + playback)
+      │           │                │
+      │           ▼ POST /voice/transcribe (multipart m4a)
+      │        Groq Whisper → { text }
+      │           │
+      │           ▼ text vira input pro useChat
       ▼
-src/services/orchestrator.ts
-   react-native-sse (SSE client com POST body)
+src/services/orchestrator.ts (react-native-sse, POST body)
       │
       ▼ Authorization: Bearer owner_...
 apps/orchestrator (FastAPI)
    POST /agents/claudinho/run → EventSourceResponse
+   POST /voice/transcribe     → Groq Whisper large-v3 turbo
+   POST /voice/synthesize     → ElevenLabs multilingual v2
       │
-      ▼
-Managed Agents (Anthropic)
+      ▼ text do assistant final
+ElevenLabs → data:audio/mpeg;base64 → expo-audio toca
 ```
 
 ## Eventos SSE recebidos
 
 O `useChat` processa:
 
-| Evento | Ação |
-|---|---|
-| `init` | grava `session_id` |
+| Evento              | Ação                                                   |
+| ------------------- | ------------------------------------------------------ |
+| `init`              | grava `session_id`                                     |
 | `assistant_message` | concatena `data.text` na mensagem assistant streamando |
-| `end` | marca mensagem como `streaming: false` |
-| `error` | mostra banner vermelho |
+| `end`               | marca mensagem como `streaming: false`                 |
+| `error`             | mostra banner vermelho                                 |
 
 Eventos `thinking`, `tool_use`, `tool_result` são ignorados por enquanto — PR 3+ vai tratar.
 
