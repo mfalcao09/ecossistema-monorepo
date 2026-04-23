@@ -6,19 +6,11 @@
  */
 
 import { RelatoriosClient } from "@/components/atendimento/dashboards/RelatoriosClient";
-import { LegacyReports } from "@/components/atendimento/dashboards/LegacyReports";
-
-function isDashboardsEnabled(): boolean {
-  const v = process.env.ATENDIMENTO_DASHBOARDS_ENABLED;
-  if (v === undefined) return process.env.NODE_ENV !== "production";
-  return v === "1" || v.toLowerCase() === "true";
-}
 
 export default function RelatoriosPage() {
-  const enabled = isDashboardsEnabled();
   return (
     <div className="max-w-6xl mx-auto">
-      {enabled ? <RelatoriosClient /> : <LegacyReports />}
+      <RelatoriosClient />
     </div>
   );
 }
