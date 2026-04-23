@@ -10,11 +10,12 @@ import { useState, useEffect, useRef, useCallback } from "react";
 import {
   Send, CheckCheck, Clock, AlertCircle, Paperclip, Smile,
   ChevronDown, UserCheck, CheckSquare, Archive, RotateCcw,
-  Phone, MoreVertical
+  Phone, MoreVertical, DollarSign
 } from "lucide-react";
 import { createBrowserClient } from "@supabase/ssr";
 import ClosedWindowBanner from "./inbox/ClosedWindowBanner";
 import SelectTemplateModal from "./inbox/SelectTemplateModal";
+import SolicitarPagamentoModal from "./chat/SolicitarPagamentoModal";
 
 import BreadcrumbPipeline from "@/components/atendimento/shared/BreadcrumbPipeline";
 
@@ -84,6 +85,7 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
   const [enviando,  setEnviando]  = useState(false);
   const [loading,   setLoading]   = useState(false);
   const [showTemplateModal, setShowTemplateModal] = useState(false);
+  const [showPagamentoModal, setShowPagamentoModal] = useState(false);
 
   const bottomRef  = useRef<HTMLDivElement>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
@@ -453,6 +455,13 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
           <button className="p-1.5 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-gray-700 transition-colors" title="Emoji">
             <Smile size={14} />
           </button>
+          <button
+            onClick={() => setShowPagamentoModal(true)}
+            className="p-1.5 rounded-lg text-gray-400 hover:bg-green-50 hover:text-green-700 transition-colors"
+            title="Solicitar pagamento (PIX/boleto)"
+          >
+            <DollarSign size={14} />
+          </button>
           <span className="flex-1" />
           <span className="text-[10px] text-gray-400">
             {conversa?.atendimento_inboxes?.name ?? "WhatsApp"}
@@ -527,6 +536,14 @@ export default function ChatPanel({ conversationId, onConversaAtualizada }: Prop
             void carregar();
             onConversaAtualizada?.();
           }}
+        />
+      )}
+
+      {/* ── Modal Solicitar Pagamento (S4.5) ────────────────────────── */}
+      {showPagamentoModal && conversa?.id && (
+        <SolicitarPagamentoModal
+          conversationId={conversa.id}
+          onClose={() => setShowPagamentoModal(false)}
         />
       )}
     </div>
