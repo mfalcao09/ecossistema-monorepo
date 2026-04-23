@@ -1,6 +1,6 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { useMemo, useState, useEffect, useCallback } from "react";
 import {
   Plus,
   Radio,
@@ -8,6 +8,7 @@ import {
   AlertTriangle,
   MoreVertical,
   Search,
+  Loader2,
 } from "lucide-react";
 import { CANAIS, type TipoCanal } from "./_components/canais-catalogo";
 import {
@@ -29,41 +30,39 @@ interface CanalConectado {
   receberMensagens: boolean;
 }
 
-const MOCK_CONECTADOS: CanalConectado[] = [
-  {
-    id: "1",
-    tipo: "whatsapp-cloud",
-    nome: "WhatsApp Comercial FIC",
-    identificador: "+55 67 9999-0000",
-    cor: "#16a34a",
-    ambiente: "producao",
-    status: "ativo",
-    ultimaAtividade: "há 2 minutos",
-    receberMensagens: true,
-  },
-  {
-    id: "2",
-    tipo: "whatsapp-qr",
-    nome: "WhatsApp Secretaria",
-    identificador: "+55 67 8888-0000",
-    cor: "#10b981",
-    ambiente: "demo",
-    status: "demo",
-    ultimaAtividade: "há 1 hora",
-    receberMensagens: false,
-  },
-  {
-    id: "3",
-    tipo: "instagram",
-    nome: "Instagram FIC Oficial",
-    identificador: "@fic.cassilandia",
-    cor: "#ec4899",
-    ambiente: "producao",
-    status: "desconectado",
-    ultimaAtividade: "há 3 dias",
-    receberMensagens: false,
-  },
-];
+// ---------------------------------------------------------------------------
+// Helpers
+// ---------------------------------------------------------------------------
+
+function formatRelativeTime(isoDate: string | null | undefined): string {
+  if (!isoDate) return "nunca";
+  const diff = Date.now() - new Date(isoDate).getTime();
+  const mins = Math.floor(diff / 60000);
+  if (mins < 1) return "agora";
+  if (mins < 60) return `há ${mins} min`;
+  const hours = Math.floor(mins / 60);
+  if (hours < 24) return `há ${hours}h`;
+  const days = Math.floor(hours / 24);
+  return `há ${days}d`;
+}
+
+function mapApiCanal(item: Record<string, unknown>): CanalConectado {
+  return {
+    id: item.id as string,
+    tipo: item.tipo as TipoCanal,
+    nome: item.nome as string,
+    identificador: (item.identificador as string) ?? "Aguardando conexão",
+    cor: item.cor as string,
+    ambiente: item.ambiente as "demo" | "producao",
+    status: item.status as StatusCanal,
+    ultimaAtividade: formatRelativeTime(
+      item.ultima_atividade_at as string | null,
+    ),
+    receberMensagens: item.receber_mensagens as boolean,
+  };
+}
+
+// ---------------------------------------------------------------------------
 
 const STATUS_CONFIG: Record<
   StatusCanal,
@@ -95,12 +94,37 @@ const STATUS_CONFIG: Record<
   },
 };
 
+// ---------------------------------------------------------------------------
+// Page
+// ---------------------------------------------------------------------------
+
 export default function CanaisPage() {
-  const [canais, setCanais] = useState<CanalConectado[]>(MOCK_CONECTADOS);
+  const [canais, setCanais] = useState<CanalConectado[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [isSaving, setIsSaving] = useState(false);
   const [dialogOpen, setDialogOpen] = useState(false);
   const [filtro, setFiltro] = useState<TipoCanal | "todos">("todos");
   const [busca, setBusca] = useState("");
 
+  // ── Fetch ────────────────────────────────────────────────────────────────
+  const fetchCanais = useCallback(async () => {
+    try {
+      const res = await fetch("/api/atendimento/canais");
+      if (!res.ok) return;
+      const data = (await res.json()) as Record<string, unknown>[];
+      setCanais(data.map(mapApiCanal));
+    } catch (err) {
+      console.error("[CanaisPage:fetch]", err);
+    } finally {
+      setIsLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    void fetchCanais();
+  }, [fetchCanais]);
+
+  // ── Contadores ───────────────────────────────────────────────────────────
   const contadores = useMemo(
     () => ({
       total: canais.length,
@@ -112,6 +136,7 @@ export default function CanaisPage() {
     [canais],
   );
 
+  // ── Filtro ───────────────────────────────────────────────────────────────
   const canaisFiltrados = useMemo(() => {
     return canais.filter((c) => {
       if (filtro !== "todos" && c.tipo !== filtro) return false;
@@ -121,29 +146,59 @@ export default function CanaisPage() {
     });
   }, [canais, filtro, busca]);
 
-  function handleNovoCanal(payload: NovoCanalPayload) {
-    const novo: CanalConectado = {
-      id: String(Date.now()),
-      tipo: payload.tipo,
-      nome: payload.nome,
-      identificador: identificadorPlaceholder(payload),
-      cor: payload.cor,
-      ambiente: payload.ambiente,
-      status: payload.ambiente === "demo" ? "demo" : "aguardando",
-      ultimaAtividade: "agora",
-      receberMensagens: true,
-    };
-    setCanais([novo, ...canais]);
+  // ── Criar canal ──────────────────────────────────────────────────────────
+  async function handleNovoCanal(payload: NovoCanalPayload) {
+    setIsSaving(true);
+    try {
+      // 1. Criar canal (+ inbox operacional para whatsapp-cloud em produção)
+      const res = await fetch("/api/atendimento/canais", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (!res.ok) throw new Error(await res.text());
+      const canalData = (await res.json()) as Record<string, unknown>;
+
+      // 2. Embedded Signup: trocar code → token permanente e ativar canal
+      if (
+        payload.tipo === "whatsapp-cloud" &&
+        payload.config["embedded_code"]
+      ) {
+        await fetch(
+          `/api/atendimento/canais/${canalData.id as string}/connect-meta`,
+          {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              code: payload.config["embedded_code"],
+              waba_id: payload.config["waba_id"],
+              phone_number_id: payload.config["phone_number_id"],
+            }),
+          },
+        );
+      }
+
+      // 3. Recarregar lista
+      await fetchCanais();
+    } catch (err) {
+      console.error("[handleNovoCanal]", err);
+      // TODO: toast de erro
+    } finally {
+      setIsSaving(false);
+    }
   }
 
+  // ── Toggle receber mensagens (optimistic — PATCH a implementar) ──────────
   function toggleReceber(id: string) {
-    setCanais(
-      canais.map((c) =>
+    setCanais((prev) =>
+      prev.map((c) =>
         c.id === id ? { ...c, receberMensagens: !c.receberMensagens } : c,
       ),
     );
+    // TODO: PATCH /api/atendimento/canais/[id] com { receber_mensagens }
   }
 
+  // ── Render ───────────────────────────────────────────────────────────────
   return (
     <div className="max-w-6xl mx-auto space-y-6">
       {/* Cabeçalho */}
@@ -159,9 +214,14 @@ export default function CanaisPage() {
         </div>
         <button
           onClick={() => setDialogOpen(true)}
-          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 shadow-sm"
+          disabled={isSaving}
+          className="flex items-center gap-2 px-4 py-2 bg-blue-600 text-white rounded-lg text-sm font-semibold hover:bg-blue-700 shadow-sm disabled:opacity-60"
         >
-          <Plus size={16} />
+          {isSaving ? (
+            <Loader2 size={16} className="animate-spin" />
+          ) : (
+            <Plus size={16} />
+          )}
           Adicionar canal
         </button>
       </div>
@@ -191,64 +251,80 @@ export default function CanaisPage() {
         />
       </div>
 
-      {/* Toolbar (busca + filtro) */}
-      {canais.length > 0 && (
-        <div className="flex flex-col sm:flex-row gap-3">
-          <div className="relative flex-1">
-            <Search
-              size={15}
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
-            />
-            <input
-              type="text"
-              value={busca}
-              onChange={(e) => setBusca(e.target.value)}
-              placeholder="Buscar por nome…"
-              className="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-            />
-          </div>
-          <select
-            value={filtro}
-            onChange={(e) => setFiltro(e.target.value as TipoCanal | "todos")}
-            className="px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
-          >
-            <option value="todos">Todos os tipos</option>
-            {CANAIS.filter((c) => c.status === "disponivel").map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.nome}
-              </option>
-            ))}
-          </select>
+      {/* Loading */}
+      {isLoading && (
+        <div className="flex items-center justify-center py-16">
+          <Loader2 size={28} className="animate-spin text-slate-400" />
         </div>
       )}
 
-      {/* Lista / Empty state */}
-      {canais.length === 0 ? (
-        <EmptyState onAdd={() => setDialogOpen(true)} />
-      ) : canaisFiltrados.length === 0 ? (
-        <div className="text-center py-12 text-sm text-slate-500">
-          Nenhum canal encontrado com esses filtros.
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
-          {canaisFiltrados.map((c) => (
-            <CardCanalConectado
-              key={c.id}
-              canal={c}
-              onToggle={() => toggleReceber(c.id)}
-            />
-          ))}
-        </div>
+      {/* Toolbar + lista */}
+      {!isLoading && (
+        <>
+          {canais.length > 0 && (
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="relative flex-1">
+                <Search
+                  size={15}
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-slate-400"
+                />
+                <input
+                  type="text"
+                  value={busca}
+                  onChange={(e) => setBusca(e.target.value)}
+                  placeholder="Buscar por nome…"
+                  className="w-full pl-9 pr-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+                />
+              </div>
+              <select
+                value={filtro}
+                onChange={(e) =>
+                  setFiltro(e.target.value as TipoCanal | "todos")
+                }
+                className="px-3 py-2 text-sm border border-slate-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-200 focus:border-blue-500"
+              >
+                <option value="todos">Todos os tipos</option>
+                {CANAIS.filter((c) => c.status === "disponivel").map((c) => (
+                  <option key={c.id} value={c.id}>
+                    {c.nome}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
+
+          {canais.length === 0 ? (
+            <EmptyState onAdd={() => setDialogOpen(true)} />
+          ) : canaisFiltrados.length === 0 ? (
+            <div className="text-center py-12 text-sm text-slate-500">
+              Nenhum canal encontrado com esses filtros.
+            </div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3">
+              {canaisFiltrados.map((c) => (
+                <CardCanalConectado
+                  key={c.id}
+                  canal={c}
+                  onToggle={() => toggleReceber(c.id)}
+                />
+              ))}
+            </div>
+          )}
+        </>
       )}
 
       <AddChannelDialog
         open={dialogOpen}
         onClose={() => setDialogOpen(false)}
-        onCreated={handleNovoCanal}
+        onCreated={(payload) => void handleNovoCanal(payload)}
       />
     </div>
   );
 }
+
+// ---------------------------------------------------------------------------
+// Sub-componentes
+// ---------------------------------------------------------------------------
 
 function Contador({
   icone: Icone,
@@ -365,21 +441,4 @@ function EmptyState({ onAdd }: { onAdd: () => void }) {
       </button>
     </div>
   );
-}
-
-function identificadorPlaceholder(payload: NovoCanalPayload): string {
-  switch (payload.tipo) {
-    case "whatsapp-cloud":
-    case "whatsapp-qr":
-      return "Aguardando conexão";
-    case "instagram":
-    case "messenger":
-      return "@conectando";
-    case "email":
-      return (payload.config.email as string) || "—";
-    case "telegram":
-      return "Bot Telegram";
-    default:
-      return "—";
-  }
 }

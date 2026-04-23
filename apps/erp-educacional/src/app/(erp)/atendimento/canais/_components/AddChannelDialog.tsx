@@ -1,6 +1,22 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useEffect, type FormEvent } from "react";
+
+// ── Tipos globais Facebook SDK ──────────────────────────────────────────────
+declare global {
+  interface Window {
+    FB?: {
+      init: (opts: Record<string, unknown>) => void;
+      login: (
+        callback: (response: {
+          authResponse?: { code?: string; accessToken?: string };
+        }) => void,
+        opts: Record<string, unknown>,
+      ) => void;
+    };
+    fbAsyncInit?: () => void;
+  }
+}
 import {
   X,
   ChevronLeft,
@@ -501,8 +517,92 @@ function FluxoMetaCloudApi({
   config: Record<string, string | boolean>;
   set: (k: string, v: string | boolean) => void;
 }) {
-  const webhookUrl = "https://erp.fic.edu.br/api/atendimento/webhooks/meta";
+  const webhookUrl = "https://erp.fic.edu.br/api/atendimento/webhook";
   const verifyToken = "fic-meta-webhook-2026";
+  const modoEmbedded = config["mode"] !== "manual"; // padrão: embedded
+
+  type EmbeddedStatus = "idle" | "aguardando" | "sucesso" | "erro";
+  const [embeddedStatus, setEmbeddedStatus] = useState<EmbeddedStatus>("idle");
+  const [erroMsg, setErroMsg] = useState("");
+
+  // ── Carregar Facebook SDK ──────────────────────────────────────────────
+  useEffect(() => {
+    if (document.getElementById("facebook-jssdk")) return;
+
+    window.fbAsyncInit = function () {
+      window.FB!.init({
+        appId: "1289456453376034",
+        version: "v20.0",
+        cookie: true,
+        xfbml: false,
+      });
+    };
+
+    const script = document.createElement("script");
+    script.id = "facebook-jssdk";
+    script.src = "https://connect.facebook.net/pt_BR/sdk.js";
+    script.async = true;
+    script.defer = true;
+    document.body.appendChild(script);
+  }, []);
+
+  // ── Receber waba_id + phone_number_id via postMessage ─────────────────
+  useEffect(() => {
+    function handleMessage(event: MessageEvent) {
+      if (event.origin !== "https://www.facebook.com") return;
+      try {
+        const data =
+          typeof event.data === "string"
+            ? (JSON.parse(event.data) as Record<string, unknown>)
+            : (event.data as Record<string, unknown>);
+        if (data?.type === "WA_EMBEDDED_SIGNUP") {
+          const wabaId = data["waba_id"] as string | undefined;
+          const phoneNumberId = data["phone_number_id"] as string | undefined;
+          if (wabaId) set("waba_id", wabaId);
+          if (phoneNumberId) set("phone_number_id", phoneNumberId);
+        }
+      } catch {
+        // ignora erros de parse de outras mensagens
+      }
+    }
+    window.addEventListener("message", handleMessage);
+    return () => window.removeEventListener("message", handleMessage);
+  }, [set]);
+
+  function handleEmbeddedSignup() {
+    setEmbeddedStatus("aguardando");
+    setErroMsg("");
+
+    if (!window.FB) {
+      setEmbeddedStatus("erro");
+      setErroMsg(
+        "SDK do Facebook não carregou. Recarregue a página e tente novamente.",
+      );
+      return;
+    }
+
+    window.FB.login(
+      (response) => {
+        if (response.authResponse?.code) {
+          set("embedded_code", response.authResponse.code);
+          set("mode", "embedded");
+          setEmbeddedStatus("sucesso");
+        } else {
+          setEmbeddedStatus("erro");
+          setErroMsg("Autorização cancelada ou negada pelo usuário.");
+        }
+      },
+      {
+        config_id: "1140027898257109",
+        response_type: "code",
+        override_default_response_type: true,
+        extras: {
+          featureName: "whatsapp_embedded_signup",
+          sessionInfoVersion: "3",
+        },
+      },
+    );
+  }
 
   return (
     <div className="space-y-4">
@@ -516,41 +616,136 @@ function FluxoMetaCloudApi({
         }}
       />
 
-      <CredencialField
-        label="App ID"
-        id="app_id"
-        config={config}
-        set={set}
-        placeholder="1289456453376034"
-      />
-      <CredencialField
-        label="Phone Number ID"
-        id="phone_id"
-        config={config}
-        set={set}
-        placeholder="1100247799842409"
-      />
-      <CredencialField
-        label="WhatsApp Business Account ID (WABA)"
-        id="waba_id"
-        config={config}
-        set={set}
-        placeholder="956493510675203"
-      />
-      <CredencialField
-        label="Token Permanente"
-        id="token"
-        config={config}
-        set={set}
-        mascarado
-      />
-      <CredencialField
-        label="App Secret"
-        id="app_secret"
-        config={config}
-        set={set}
-        mascarado
-      />
+      {/* Seletor de modo */}
+      <div className="grid grid-cols-2 gap-2">
+        <button
+          type="button"
+          onClick={() => {
+            set("mode", "embedded");
+            setEmbeddedStatus("idle");
+          }}
+          className={`p-3 text-left rounded-lg border transition-all ${
+            modoEmbedded
+              ? "border-blue-500 bg-blue-50 ring-2 ring-blue-200"
+              : "border-slate-200 hover:border-slate-300"
+          }`}
+        >
+          <p className="text-sm font-semibold text-slate-900">⚡ Automático</p>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Conectar com Embedded Signup
+          </p>
+        </button>
+        <button
+          type="button"
+          onClick={() => {
+            set("mode", "manual");
+            setEmbeddedStatus("idle");
+          }}
+          className={`p-3 text-left rounded-lg border transition-all ${
+            !modoEmbedded
+              ? "border-blue-500 bg-blue-50 ring-2 ring-blue-200"
+              : "border-slate-200 hover:border-slate-300"
+          }`}
+        >
+          <p className="text-sm font-semibold text-slate-900">🔧 Manual</p>
+          <p className="text-xs text-slate-500 mt-0.5">
+            Inserir credenciais manualmente
+          </p>
+        </button>
+      </div>
+
+      {/* Fluxo Embedded Signup */}
+      {modoEmbedded ? (
+        <div className="space-y-3">
+          {embeddedStatus !== "sucesso" ? (
+            <button
+              type="button"
+              onClick={handleEmbeddedSignup}
+              disabled={embeddedStatus === "aguardando"}
+              className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-[#1877F2] text-white rounded-lg font-semibold hover:bg-[#166FE5] disabled:opacity-60 transition-opacity"
+            >
+              <Facebook size={18} />
+              {embeddedStatus === "aguardando"
+                ? "Aguardando autorização na janela Meta…"
+                : "Conectar com Meta (Embedded Signup)"}
+            </button>
+          ) : (
+            <div className="p-4 rounded-lg bg-green-50 border border-green-200 flex items-center gap-3">
+              <Check className="text-green-600 flex-shrink-0" size={18} />
+              <div>
+                <p className="text-sm font-semibold text-green-900">
+                  Meta autorizado com sucesso!
+                </p>
+                <p className="text-xs text-green-700 mt-0.5">
+                  {config["phone_number_id"]
+                    ? `Phone Number ID: ${String(config["phone_number_id"])}`
+                    : "Número será confirmado após salvar."}
+                </p>
+                <button
+                  type="button"
+                  onClick={() => {
+                    set("embedded_code", "");
+                    set("waba_id", "");
+                    set("phone_number_id", "");
+                    setEmbeddedStatus("idle");
+                  }}
+                  className="mt-1 text-xs text-green-700 underline"
+                >
+                  Reconectar
+                </button>
+              </div>
+            </div>
+          )}
+          {erroMsg && (
+            <p className="text-xs text-red-600 bg-red-50 border border-red-200 rounded-lg px-3 py-2">
+              {erroMsg}
+            </p>
+          )}
+          <p className="text-xs text-slate-400">
+            Uma janela do Facebook será aberta. Autorize o acesso e o número
+            será conectado automaticamente sem inserir credenciais manualmente.
+          </p>
+        </div>
+      ) : (
+        /* Fluxo Manual */
+        <>
+          <CredencialField
+            label="App ID"
+            id="app_id"
+            config={config}
+            set={set}
+            placeholder="1289456453376034"
+          />
+          <CredencialField
+            label="Phone Number ID"
+            id="phone_id"
+            config={config}
+            set={set}
+            placeholder="1100247799842409"
+          />
+          <CredencialField
+            label="WhatsApp Business Account ID (WABA)"
+            id="waba_id"
+            config={config}
+            set={set}
+            placeholder="956493510675203"
+          />
+          <CredencialField
+            label="Token Permanente"
+            id="token"
+            config={config}
+            set={set}
+            mascarado
+          />
+          <CredencialField
+            label="App Secret"
+            id="app_secret"
+            config={config}
+            set={set}
+            mascarado
+          />
+        </>
+      )}
 
       <div className="border-t border-slate-200 pt-4">
         <p className="text-xs font-semibold text-slate-700 mb-2">
@@ -984,6 +1179,14 @@ function validarConfig(
 ): boolean {
   switch (canal.fluxoConexao) {
     case "meta-cloud-api":
+      // Modo embedded: code obtido via FB.login + waba_id + phone_number_id via postMessage
+      if (config["mode"] !== "manual") {
+        return (
+          typeof config["embedded_code"] === "string" &&
+          (config["embedded_code"] as string).trim().length > 0
+        );
+      }
+      // Modo manual: 5 campos obrigatórios
       return ["app_id", "phone_id", "waba_id", "token", "app_secret"].every(
         (k) =>
           typeof config[k] === "string" &&
