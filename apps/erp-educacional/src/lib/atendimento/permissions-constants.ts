@@ -39,7 +39,11 @@ export const PERMISSION_MODULES: readonly {
   name: string;
   actions: readonly PermissionAction[];
 }[] = [
-  { slug: "dashboard", name: "Dashboard", actions: ["view"] },
+  {
+    slug: "dashboard",
+    name: "Dashboard",
+    actions: ["view", "create", "edit", "delete"],
+  },
   {
     slug: "conversations",
     name: "Conversas",
@@ -102,8 +106,16 @@ export const PERMISSION_MODULES: readonly {
   },
   { slug: "reports", name: "Relatórios", actions: ["view", "export"] },
   { slug: "settings", name: "Configurações", actions: ["view", "edit"] },
-  { slug: "team_chats", name: "Chat Interno", actions: ["view", "create", "edit", "delete"] },
-  { slug: "link_redirects", name: "Links de Redirecionamento", actions: ["view", "create", "edit", "delete"] },
+  {
+    slug: "team_chats",
+    name: "Chat Interno",
+    actions: ["view", "create", "edit", "delete"],
+  },
+  {
+    slug: "link_redirects",
+    name: "Links de Redirecionamento",
+    actions: ["view", "create", "edit", "delete"],
+  },
 ] as const;
 
 export type PermissionSet = Map<string, boolean>;

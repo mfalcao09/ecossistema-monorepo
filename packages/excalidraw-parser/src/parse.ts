@@ -10,55 +10,91 @@ import type {
 
 const SHAPE_TYPES: ShapeType[] = ["rectangle", "ellipse", "diamond"];
 
-function isShape(el: ExcalidrawElement): el is ExcalidrawElement & { type: ShapeType } {
+function isShape(
+  el: ExcalidrawElement,
+): el is ExcalidrawElement & { type: ShapeType } {
   return (SHAPE_TYPES as string[]).includes(el.type);
 }
 
-function labelForShape(el: ExcalidrawElement, all: ExcalidrawElement[]): string {
-  const textChild = all.find(
-    (t) => t.type === "text" && t.containerId === el.id && !t.isDeleted,
-  );
-  return (textChild?.text ?? "").trim();
+function safeText(value: unknown): string {
+  return typeof value === "string" ? value.trim() : "";
 }
 
-function labelForArrow(el: ExcalidrawElement): string {
-  return (el.text ?? "").trim();
+function parseInput(input: ExcalidrawFile | string): ExcalidrawFile {
+  if (typeof input !== "string") return input;
+  try {
+    return JSON.parse(input) as ExcalidrawFile;
+  } catch (cause) {
+    throw new Error(
+      `Failed to parse Excalidraw JSON: ${(cause as Error).message}`,
+      { cause },
+    );
+  }
 }
 
 export function parseExcalidraw(input: ExcalidrawFile | string): ParsedDiagram {
-  const file: ExcalidrawFile = typeof input === "string" ? JSON.parse(input) : input;
+  const file = parseInput(input);
+
+  if (!file || typeof file !== "object") {
+    throw new Error(`Expected Excalidraw object, got ${typeof file}`);
+  }
   if (file.type !== "excalidraw") {
     throw new Error(`Expected type "excalidraw", got "${file.type}"`);
   }
 
-  const elements = file.elements.filter((el) => !el.isDeleted);
-  const shapeIds = new Set(elements.filter(isShape).map((el) => el.id));
+  const rawElements = Array.isArray(file.elements) ? file.elements : [];
+  const elements = rawElements.filter((el) => el && !el.isDeleted);
 
-  const nodes: Node[] = elements.filter(isShape).map((el) => ({
-    id: el.id,
-    shape: el.type as ShapeType,
-    label: labelForShape(el, elements),
-  }));
+  // Pré-indexa text children por containerId em O(N) para evitar O(N²) em labelForShape
+  const textByContainerId = new Map<string, ExcalidrawElement>();
+  for (const el of elements) {
+    if (
+      el.type === "text" &&
+      el.containerId &&
+      !textByContainerId.has(el.containerId)
+    ) {
+      textByContainerId.set(el.containerId, el);
+    }
+  }
 
-  const edges: Edge[] = elements
-    .filter((el) => el.type === "arrow")
-    .map((el) => ({
+  const shapeIds = new Set<string>();
+  for (const el of elements) {
+    if (isShape(el)) shapeIds.add(el.id);
+  }
+
+  const nodes: Node[] = [];
+  for (const el of elements) {
+    if (!isShape(el)) continue;
+    nodes.push({
+      id: el.id,
+      shape: el.type as ShapeType,
+      label: safeText(textByContainerId.get(el.id)?.text),
+    });
+  }
+
+  const edges: Edge[] = [];
+  for (const el of elements) {
+    if (el.type !== "arrow") continue;
+    edges.push({
       id: el.id,
       fromId: el.startBinding?.elementId ?? null,
       toId: el.endBinding?.elementId ?? null,
-      label: labelForArrow(el),
-    }));
+      label: safeText(el.text),
+    });
+  }
 
-  const containedTextIds = new Set(
-    elements
-      .filter((el) => el.type === "text" && el.containerId && shapeIds.has(el.containerId))
-      .map((el) => el.id),
-  );
-
-  const floatingTexts: FloatingText[] = elements
-    .filter((el) => el.type === "text" && !containedTextIds.has(el.id))
-    .map((el) => ({ id: el.id, text: (el.text ?? "").trim() }))
-    .filter((t) => t.text.length > 0);
+  // Texto solto: text element NÃO ligado a nenhuma shape (containerId ausente OU
+  // apontando para shape inexistente/deletada). Se containerId aponta pra outro
+  // text, considera solto também (não há nó pai).
+  const floatingTexts: FloatingText[] = [];
+  for (const el of elements) {
+    if (el.type !== "text") continue;
+    const isBoundToShape = el.containerId && shapeIds.has(el.containerId);
+    if (isBoundToShape) continue;
+    const text = safeText(el.text);
+    if (text.length === 0) continue;
+    floatingTexts.push({ id: el.id, text });
+  }
 
   return { nodes, edges, floatingTexts };
 }

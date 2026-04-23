@@ -38,14 +38,20 @@ function nowIso(): string {
   return new Date().toISOString();
 }
 
-function getStartNodeId(flow: DsBotFlow, fallback?: string | null): string | null {
+function getStartNodeId(
+  flow: DsBotFlow,
+  fallback?: string | null,
+): string | null {
   if (fallback && flow.nodes.find((n) => n.id === fallback)) return fallback;
   const trigger = flow.nodes.find((n) => n.type === "trigger");
   if (trigger) return trigger.id;
   return flow.nodes[0]?.id ?? null;
 }
 
-function findNode(flow: DsBotFlow, id: string | null | undefined): DsBotNode | null {
+function findNode(
+  flow: DsBotFlow,
+  id: string | null | undefined,
+): DsBotNode | null {
   if (!id) return null;
   return flow.nodes.find((n) => n.id === id) ?? null;
 }
@@ -96,19 +102,36 @@ export function evaluateClause(
   const right = resolveRef(clause.right, variables, context);
 
   switch (clause.op) {
-    case "eq":           return String(left) === String(right);
-    case "neq":          return String(left) !== String(right);
-    case "gt":           return Number(left) > Number(right);
-    case "gte":          return Number(left) >= Number(right);
-    case "lt":           return Number(left) < Number(right);
-    case "lte":          return Number(left) <= Number(right);
-    case "contains":     return String(left ?? "").includes(String(right ?? ""));
-    case "not_contains": return !String(left ?? "").includes(String(right ?? ""));
-    case "starts_with":  return String(left ?? "").startsWith(String(right ?? ""));
-    case "ends_with":    return String(left ?? "").endsWith(String(right ?? ""));
-    case "is_empty":     return left === undefined || left === null || String(left).trim() === "";
-    case "is_not_empty": return !(left === undefined || left === null || String(left).trim() === "");
-    default:             return false;
+    case "eq":
+      return String(left) === String(right);
+    case "neq":
+      return String(left) !== String(right);
+    case "gt":
+      return Number(left) > Number(right);
+    case "gte":
+      return Number(left) >= Number(right);
+    case "lt":
+      return Number(left) < Number(right);
+    case "lte":
+      return Number(left) <= Number(right);
+    case "contains":
+      return String(left ?? "").includes(String(right ?? ""));
+    case "not_contains":
+      return !String(left ?? "").includes(String(right ?? ""));
+    case "starts_with":
+      return String(left ?? "").startsWith(String(right ?? ""));
+    case "ends_with":
+      return String(left ?? "").endsWith(String(right ?? ""));
+    case "is_empty":
+      return left === undefined || left === null || String(left).trim() === "";
+    case "is_not_empty":
+      return !(
+        left === undefined ||
+        left === null ||
+        String(left).trim() === ""
+      );
+    default:
+      return false;
   }
 }
 
@@ -141,7 +164,9 @@ export async function findTriggeredBot(
 ): Promise<TriggeredBot | null> {
   const { data, error } = await client
     .from("ds_bots")
-    .select("id, flow_json, start_node_id, version, trigger_type, trigger_value, channels, enabled")
+    .select(
+      "id, flow_json, start_node_id, version, trigger_type, trigger_value, channels, enabled",
+    )
     .eq("enabled", true);
 
   if (error || !data) return null;
@@ -157,7 +182,10 @@ export async function findTriggeredBot(
         break;
       case "keyword": {
         const kw = (bot.trigger_value ?? "").toLowerCase().trim();
-        match = !!kw && !!input.message_text && input.message_text.toLowerCase().includes(kw);
+        match =
+          !!kw &&
+          !!input.message_text &&
+          input.message_text.toLowerCase().includes(kw);
         break;
       }
       case "tag_added":
@@ -203,7 +231,13 @@ export async function startExecution(
   opts: StartExecutionOptions,
   client = createAdminClient(),
 ): Promise<RunStepResult> {
-  const { bot, conversation_id, contact_id, channel, initial_variables = {} } = opts;
+  const {
+    bot,
+    conversation_id,
+    contact_id,
+    channel,
+    initial_variables = {},
+  } = opts;
   const start = getStartNodeId(bot.flow, bot.start_node_id);
 
   const { data, error } = await client
@@ -234,13 +268,18 @@ export async function startExecution(
     };
   }
 
-  return runUntilAwait(data.id, bot.flow, {
-    conversation_id,
-    contact_id,
-    channel,
-    variables: initial_variables,
-    history: [],
-  }, client);
+  return runUntilAwait(
+    data.id,
+    bot.flow,
+    {
+      conversation_id,
+      contact_id,
+      channel,
+      variables: initial_variables,
+      history: [],
+    },
+    client,
+  );
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -253,15 +292,31 @@ export async function resumeExecution(
 ): Promise<RunStepResult> {
   const { data: exec, error } = await client
     .from("ds_bot_executions")
-    .select("id, bot_id, current_node_id, awaiting_input, variables, history, status, channel, conversation_id, contact_id")
+    .select(
+      "id, bot_id, current_node_id, awaiting_input, variables, history, status, channel, conversation_id, contact_id",
+    )
     .eq("id", execution_id)
     .single();
 
   if (error || !exec) {
-    return { execution_id, status: "error", current_node_id: null, side_effects: [], variables: {}, error: error?.message ?? "Execução não encontrada" };
+    return {
+      execution_id,
+      status: "error",
+      current_node_id: null,
+      side_effects: [],
+      variables: {},
+      error: error?.message ?? "Execução não encontrada",
+    };
   }
   if (exec.status !== "running" && exec.status !== "awaiting") {
-    return { execution_id, status: exec.status, current_node_id: exec.current_node_id, side_effects: [], variables: exec.variables ?? {}, error: "Execução não-ativa" };
+    return {
+      execution_id,
+      status: exec.status,
+      current_node_id: exec.current_node_id,
+      side_effects: [],
+      variables: exec.variables ?? {},
+      error: "Execução não-ativa",
+    };
   }
 
   const { data: bot, error: botErr } = await client
@@ -270,14 +325,35 @@ export async function resumeExecution(
     .eq("id", exec.bot_id)
     .single();
   if (botErr || !bot) {
-    return { execution_id, status: "error", current_node_id: null, side_effects: [], variables: {}, error: "Bot não encontrado" };
+    return {
+      execution_id,
+      status: "error",
+      current_node_id: null,
+      side_effects: [],
+      variables: {},
+      error: "Bot não encontrado",
+    };
   }
 
   const flow = bot.flow_json as DsBotFlow;
   const current = findNode(flow, exec.current_node_id);
   if (!current) {
-    await client.from("ds_bot_executions").update({ status: "error", error: "current_node_id inválido", completed_at: nowIso() }).eq("id", execution_id);
-    return { execution_id, status: "error", current_node_id: null, side_effects: [], variables: exec.variables ?? {}, error: "current_node_id inválido" };
+    await client
+      .from("ds_bot_executions")
+      .update({
+        status: "error",
+        error: "current_node_id inválido",
+        completed_at: nowIso(),
+      })
+      .eq("id", execution_id);
+    return {
+      execution_id,
+      status: "error",
+      current_node_id: null,
+      side_effects: [],
+      variables: exec.variables ?? {},
+      error: "current_node_id inválido",
+    };
   }
 
   // Guarda input em variável do input-node atual
@@ -287,10 +363,16 @@ export async function resumeExecution(
   let processed_input: unknown = user_input;
 
   if (current.type.startsWith("input_")) {
-    const data = current.data as { variable?: string; options?: Array<{ id: string; value: string; label: string }> };
+    const data = current.data as {
+      variable?: string;
+      options?: Array<{ id: string; value: string; label: string }>;
+    };
     if (current.type === "input_button" && data.options) {
       const match = data.options.find(
-        (o) => o.id === user_input || o.value === user_input || o.label.toLowerCase() === user_input.toLowerCase(),
+        (o) =>
+          o.id === user_input ||
+          o.value === user_input ||
+          o.label.toLowerCase() === user_input.toLowerCase(),
       );
       sourceHandle = match?.id ?? null;
       processed_input = match?.value ?? user_input;
@@ -299,7 +381,12 @@ export async function resumeExecution(
     if (data.variable) variables[data.variable] = processed_input;
   }
 
-  history.push({ node_id: current.id, at: nowIso(), event: "input_received", payload: { user_input, processed_input } });
+  history.push({
+    node_id: current.id,
+    at: nowIso(),
+    event: "input_received",
+    payload: { user_input, processed_input },
+  });
 
   const next_id = nextFromEdge(flow, current.id, sourceHandle ?? null);
 
@@ -316,16 +403,27 @@ export async function resumeExecution(
     .eq("id", execution_id);
 
   if (!next_id) {
-    return { execution_id, status: "completed", current_node_id: null, side_effects: [], variables };
+    return {
+      execution_id,
+      status: "completed",
+      current_node_id: null,
+      side_effects: [],
+      variables,
+    };
   }
 
-  return runUntilAwait(execution_id, flow, {
-    conversation_id: exec.conversation_id,
-    contact_id: exec.contact_id,
-    channel: exec.channel,
-    variables,
-    history,
-  }, client);
+  return runUntilAwait(
+    execution_id,
+    flow,
+    {
+      conversation_id: exec.conversation_id,
+      contact_id: exec.contact_id,
+      channel: exec.channel,
+      variables,
+      history,
+    },
+    client,
+  );
 }
 
 // ──────────────────────────────────────────────────────────────
@@ -354,18 +452,44 @@ async function runUntilAwait(
 
   for (let i = 0; i < MAX_STEPS_PER_CYCLE; i++) {
     if (!current) {
-      await client.from("ds_bot_executions")
-        .update({ status: "completed", completed_at: nowIso(), variables, history })
+      await client
+        .from("ds_bot_executions")
+        .update({
+          status: "completed",
+          completed_at: nowIso(),
+          variables,
+          history,
+        })
         .eq("id", execution_id);
-      return { execution_id, status: "completed", current_node_id: null, side_effects: effects, variables };
+      return {
+        execution_id,
+        status: "completed",
+        current_node_id: null,
+        side_effects: effects,
+        variables,
+      };
     }
 
     const node = findNode(flow, current);
     if (!node) {
-      await client.from("ds_bot_executions")
-        .update({ status: "error", error: `Node ${current} não encontrado`, completed_at: nowIso(), variables, history })
+      await client
+        .from("ds_bot_executions")
+        .update({
+          status: "error",
+          error: `Node ${current} não encontrado`,
+          completed_at: nowIso(),
+          variables,
+          history,
+        })
         .eq("id", execution_id);
-      return { execution_id, status: "error", current_node_id: current, side_effects: effects, variables, error: "Node não encontrado" };
+      return {
+        execution_id,
+        status: "error",
+        current_node_id: current,
+        side_effects: effects,
+        variables,
+        error: "Node não encontrado",
+      };
     }
 
     history.push({ node_id: node.id, at: nowIso(), event: "entered" });
@@ -383,45 +507,117 @@ async function runUntilAwait(
     const res: NodeExecutionResult = await dispatchNode(node, flow, execCtx);
 
     if (res.kind === "error") {
-      await client.from("ds_bot_executions")
-        .update({ status: "error", error: res.error, completed_at: nowIso(), variables, history })
+      await client
+        .from("ds_bot_executions")
+        .update({
+          status: "error",
+          error: res.error,
+          completed_at: nowIso(),
+          variables,
+          history,
+        })
         .eq("id", execution_id);
-      return { execution_id, status: "error", current_node_id: current, side_effects: effects, variables, error: res.error };
+      return {
+        execution_id,
+        status: "error",
+        current_node_id: current,
+        side_effects: effects,
+        variables,
+        error: res.error,
+      };
     }
 
     if (res.side_effects?.length) effects.push(...res.side_effects);
 
     if (res.kind === "await") {
       history.push({ node_id: node.id, at: nowIso(), event: "awaiting" });
-      await client.from("ds_bot_executions")
-        .update({ status: "awaiting", awaiting_input: true, current_node_id: current, variables, history })
+      await client
+        .from("ds_bot_executions")
+        .update({
+          status: "awaiting",
+          awaiting_input: true,
+          current_node_id: current,
+          variables,
+          history,
+        })
         .eq("id", execution_id);
-      return { execution_id, status: "awaiting", current_node_id: current, side_effects: effects, variables };
+      return {
+        execution_id,
+        status: "awaiting",
+        current_node_id: current,
+        side_effects: effects,
+        variables,
+      };
     }
 
     if (res.kind === "end") {
-      await client.from("ds_bot_executions")
-        .update({ status: "completed", completed_at: nowIso(), current_node_id: current, variables, history })
+      await client
+        .from("ds_bot_executions")
+        .update({
+          status: "completed",
+          completed_at: nowIso(),
+          current_node_id: current,
+          variables,
+          history,
+        })
         .eq("id", execution_id);
-      return { execution_id, status: "completed", current_node_id: current, side_effects: effects, variables };
+      return {
+        execution_id,
+        status: "completed",
+        current_node_id: current,
+        side_effects: effects,
+        variables,
+      };
     }
 
     if (res.kind === "handoff") {
-      history.push({ node_id: node.id, at: nowIso(), event: "completed", payload: { handoff_agent_id: res.agent_id } });
-      await client.from("ds_bot_executions")
-        .update({ status: "completed", completed_at: nowIso(), current_node_id: current, variables, history })
+      history.push({
+        node_id: node.id,
+        at: nowIso(),
+        event: "completed",
+        payload: { handoff_agent_id: res.agent_id },
+      });
+      await client
+        .from("ds_bot_executions")
+        .update({
+          status: "completed",
+          completed_at: nowIso(),
+          current_node_id: current,
+          variables,
+          history,
+        })
         .eq("id", execution_id);
-      return { execution_id, status: "completed", current_node_id: current, side_effects: effects, variables };
+      return {
+        execution_id,
+        status: "completed",
+        current_node_id: current,
+        side_effects: effects,
+        variables,
+      };
     }
 
     // next
     current = res.next_node_id;
   }
 
-  await client.from("ds_bot_executions")
-    .update({ status: "error", error: "Max steps excedido (loop?)", completed_at: nowIso(), variables, history })
+  await client
+    .from("ds_bot_executions")
+    .update({
+      status: "error",
+      error: "Max steps excedido (loop?)",
+      completed_at: nowIso(),
+      variables,
+      history,
+    })
     .eq("id", execution_id);
-  return { execution_id, status: "error", current_node_id: current, side_effects: effects, variables, error: "Max steps excedido" };
+  return {
+    execution_id,
+    status: "error",
+    current_node_id: current,
+    side_effects: effects,
+    variables,
+    error: "Max steps excedido",
+  };
 }
 
 async function readCurrentNodeId(
@@ -452,7 +648,9 @@ async function dispatchNode(
 
   // Conditional — avalia e escolhe saída
   if (node.type === "conditional") {
-    const truthy = evaluateConditional(node as ConditionalNode, ctx.variables, { channel: ctx.channel });
+    const truthy = evaluateConditional(node as ConditionalNode, ctx.variables, {
+      channel: ctx.channel,
+    });
     const next = nextFromEdge(flow, node.id, truthy ? "true" : "false");
     return { kind: "next", next_node_id: next };
   }
@@ -466,8 +664,13 @@ async function dispatchNode(
     return { kind: "next", next_node_id: target ?? null };
   }
   if (node.type === "flow_back") {
-    const last = [...ctx.history].reverse().find((h) => h.node_id !== node.id && h.event === "entered");
-    return { kind: "next", next_node_id: last?.node_id ?? nextFromEdge(flow, node.id) };
+    const last = [...ctx.history]
+      .reverse()
+      .find((h) => h.node_id !== node.id && h.event === "entered");
+    return {
+      kind: "next",
+      next_node_id: last?.node_id ?? nextFromEdge(flow, node.id),
+    };
   }
   if (node.type === "flow_wait") {
     return { kind: "await" }; // retomada por /resume ou timeout externo
@@ -483,18 +686,29 @@ async function dispatchNode(
   if (node.type.startsWith("input_")) {
     const data = node.data as { question?: string };
     const effects: SideEffect[] = [];
-    if (data.question) effects.push({ type: "send_text", text: interpolate(data.question, ctx.variables) });
+    if (data.question)
+      effects.push({
+        type: "send_text",
+        text: interpolate(data.question, ctx.variables),
+      });
     return { kind: "await", side_effects: effects };
   }
 
   // Bubbles + ações: delega pro actions module (stateless)
   const handlerRes: ExecuteNodeResult = await executeNodeHandler(node, ctx);
   if (handlerRes.kind === "error") return handlerRes;
-  return { kind: "next", next_node_id: nextFromEdge(flow, node.id), side_effects: handlerRes.side_effects };
+  return {
+    kind: "next",
+    next_node_id: nextFromEdge(flow, node.id),
+    side_effects: handlerRes.side_effects,
+  };
 }
 
 // Helper exposto para actions usarem (simples, não Mustache-completo)
-export function interpolate(template: string, variables: Record<string, unknown>): string {
+export function interpolate(
+  template: string,
+  variables: Record<string, unknown>,
+): string {
   return template.replace(/\{\{\s*([\w.]+)\s*\}\}/g, (_, key) => {
     const v = variables[key];
     return v === undefined || v === null ? "" : String(v);
