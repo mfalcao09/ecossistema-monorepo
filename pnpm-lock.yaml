@@ -50,6 +50,9 @@ importers:
       '@dnd-kit/utilities':
         specifier: ^3.2.2
         version: 3.2.2(react@18.3.1)
+      '@ecossistema/billing':
+        specifier: workspace:*
+        version: link:../../packages/billing
       '@ecossistema/credentials':
         specifier: workspace:*
         version: link:../../packages/credentials
@@ -592,11 +595,10 @@ importers:
         version: 5.9.3
 
   packages/billing:
-    dependencies:
+    devDependencies:
       '@supabase/supabase-js':
         specifier: ^2.45.0
         version: 2.103.3
-    devDependencies:
       '@types/node':
         specifier: ^22.0.0
         version: 22.19.17
