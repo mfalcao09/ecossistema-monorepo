@@ -1,7 +1,7 @@
 {
   "name": "@ecossistema/constitutional-hooks",
   "version": "0.1.0",
-  "description": "11 hooks executáveis que transformam Artigos Constitucionais V9 em compliance verificável (PreToolUse / PostToolUse / SessionEnd) — espinha dorsal da V9",
+  "description": "11 hooks execut\u00e1veis que transformam Artigos Constitucionais V9 em compliance verific\u00e1vel (PreToolUse / PostToolUse / SessionEnd) \u2014 espinha dorsal da V9",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,10 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "README.md"],
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -28,8 +31,8 @@
   },
   "devDependencies": {
     "@types/node": "^22.0.0",
-    "@vitest/coverage-v8": "^2.0.0",
+    "@vitest/coverage-v8": "^3.2.4",
     "typescript": "^5.6.0",
-    "vitest": "^2.0.0"
+    "vitest": "^3.2.4"
   }
 }

@@ -1,7 +1,7 @@
 {
   "name": "@ecossistema/prompt-assembler",
   "version": "0.1.0",
-  "description": "Phantom 9-layer system-prompt assembler for C-Suite and Diretores (V9 § 24)",
+  "description": "Phantom 9-layer system-prompt assembler for C-Suite and Diretores (V9 \u00a7 24)",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -11,7 +11,11 @@
       "import": "./dist/index.js"
     }
   },
-  "files": ["dist", "templates", "README.md"],
+  "files": [
+    "dist",
+    "templates",
+    "README.md"
+  ],
   "scripts": {
     "build": "tsc",
     "dev": "tsc --watch",
@@ -25,7 +29,7 @@
   },
   "devDependencies": {
     "typescript": "^5.6.0",
-    "vitest": "^2.0.0",
-    "@vitest/coverage-v8": "^2.0.0"
+    "vitest": "^3.2.4",
+    "@vitest/coverage-v8": "^3.2.4"
   }
 }

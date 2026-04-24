@@ -1,7 +1,7 @@
 {
   "name": "@ecossistema/magic-link-vault",
   "version": "0.1.0",
-  "description": "Phantom Magic Link Vault — AES-256-GCM + one-time tokens. Credenciais nunca fluem via chat. V9 § 26.",
+  "description": "Phantom Magic Link Vault \u2014 AES-256-GCM + one-time tokens. Credenciais nunca fluem via chat. V9 \u00a7 26.",
   "type": "module",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -25,6 +25,6 @@
   "dependencies": {},
   "devDependencies": {
     "typescript": "^5.6.0",
-    "vitest": "^2.0.0"
+    "vitest": "^3.2.4"
   }
 }
