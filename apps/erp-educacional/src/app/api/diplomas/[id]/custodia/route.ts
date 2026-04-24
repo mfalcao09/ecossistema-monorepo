@@ -6,35 +6,49 @@
  * ============================================================
  */
 
-import { NextRequest, NextResponse } from 'next/server'
-import { verificarAuth, erroNaoEncontrado, erroInterno } from '@/lib/security/api-guard'
-import { obterCadeiaCustodia, verificarIntegridadeCadeia } from '@/lib/security/cadeia-custodia'
+import { NextRequest, NextResponse } from "next/server";
+import {
+  verificarAuth,
+  erroNaoEncontrado,
+  erroInterno,
+} from "@/lib/security/api-guard";
+import {
+  obterCadeiaCustodia,
+  verificarIntegridadeCadeia,
+} from "@/lib/security/cadeia-custodia";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   // ── Autenticação ───────────────────────────────────────────────────────
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
   // ── Autorização (verificar permissão 'diplomas' 'acessar') ────────────
   // TODO: Implementar verificação de permissão quando o sistema estiver pronto
   // const temPermissao = auth.permissions?.some(p => p.modulo === 'diplomas' && p.acao === 'acessar')
   // if (!temPermissao) return erroNaoAutorizado()
 
-  const { id: diplomaId } = await params
+  const { id: diplomaId } = await params;
 
   try {
     // ── Obter cadeia completa ──────────────────────────────────────────
-    const cadeia = await obterCadeiaCustodia(diplomaId)
+    const cadeia = await obterCadeiaCustodia(diplomaId);
 
     if (!cadeia || cadeia.length === 0) {
-      return erroNaoEncontrado('Nenhum registro de custódia encontrado para este diploma')
+      return erroNaoEncontrado(
+        "Nenhum registro de custódia encontrado para este diploma",
+      );
     }
 
     // ── Verificar integridade ──────────────────────────────────────────
-    const { integra, erros } = await verificarIntegridadeCadeia(diplomaId)
+    const { integra, erros } = await verificarIntegridadeCadeia(diplomaId);
 
     // ── Retornar resposta ──────────────────────────────────────────────
     return NextResponse.json({
@@ -46,9 +60,9 @@ export async function GET(
         erros,
       },
       total_registros: cadeia.length,
-    })
+    });
   } catch (err) {
-    console.error('[API] Erro ao obter cadeia de custódia:', err)
-    return erroInterno()
+    console.error("[API] Erro ao obter cadeia de custódia:", err);
+    return erroInterno();
   }
 }

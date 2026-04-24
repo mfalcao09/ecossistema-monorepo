@@ -3,6 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { protegerRota } from "@/lib/security/api-guard";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 // POST /api/config/testar-bry
 // Testa a conexão com o BRy KMS usando as credenciais salvas na diploma_config
 export const POST = protegerRota(async (_request: NextRequest) => {
@@ -18,17 +23,26 @@ export const POST = protegerRota(async (_request: NextRequest) => {
   const config = configs?.[0];
 
   if (!config) {
-    return NextResponse.json({ ok: false, erro: "Configuração não encontrada." }, { status: 404 });
+    return NextResponse.json(
+      { ok: false, erro: "Configuração não encontrada." },
+      { status: 404 },
+    );
   }
 
   if (config.assinatura_provedor !== "bry") {
-    return NextResponse.json({ ok: false, erro: "Provedor configurado não é BRy." }, { status: 400 });
+    return NextResponse.json(
+      { ok: false, erro: "Provedor configurado não é BRy." },
+      { status: 400 },
+    );
   }
 
   if (!config.assinatura_api_key_enc || !config.assinatura_endpoint) {
     return NextResponse.json(
-      { ok: false, erro: "API Token ou endpoint não configurados. Salve as credenciais primeiro." },
-      { status: 400 }
+      {
+        ok: false,
+        erro: "API Token ou endpoint não configurados. Salve as credenciais primeiro.",
+      },
+      { status: 400 },
     );
   }
 
@@ -67,8 +81,11 @@ export const POST = protegerRota(async (_request: NextRequest) => {
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Erro desconhecido";
     if (msg.includes("timeout") || msg.includes("AbortError")) {
-      return NextResponse.json({ ok: false, erro: "Tempo de resposta esgotado. O endpoint está acessível?" });
+      return NextResponse.json({
+        ok: false,
+        erro: "Tempo de resposta esgotado. O endpoint está acessível?",
+      });
     }
     return NextResponse.json({ ok: false, erro: `Erro de rede: ${msg}` });
   }
-})
+});

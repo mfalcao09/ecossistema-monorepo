@@ -1,8 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient as createAdminClient } from '@supabase/supabase-js'
-import { verificarAuth, erroNaoEncontrado, erroInterno } from '@/lib/security/api-guard'
-import { buscarDiplomaCompleto } from '@/lib/diplomas/buscar-completo'
-import { executarAuditoria } from '@/lib/auditoria'
+import { NextRequest, NextResponse } from "next/server";
+import { createClient as createAdminClient } from "@supabase/supabase-js";
+import {
+  verificarAuth,
+  erroNaoEncontrado,
+  erroInterno,
+} from "@/lib/security/api-guard";
+import { buscarDiplomaCompleto } from "@/lib/diplomas/buscar-completo";
+import { executarAuditoria } from "@/lib/auditoria";
 import type {
   InputAuditoria,
   DadosDiplomadoAuditoria,
@@ -11,14 +15,19 @@ import type {
   DadosHistoricoAuditoria,
   DadosDisciplinaAuditoria,
   DadosComprobatorioAuditoria,
-} from '@/lib/auditoria/tipos'
+} from "@/lib/auditoria/tipos";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 function getAdmin() {
   return createAdminClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  )
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
 }
 
 /**
@@ -32,21 +41,21 @@ function getAdmin() {
  */
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(req)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(req);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
-  const admin = getAdmin()
+  const { id } = await params;
+  const admin = getAdmin();
 
   // ── 1. Buscar diploma completo (diplomado, curso, disciplinas, enade) ──────
-  const completo = await buscarDiplomaCompleto(id)
+  const completo = await buscarDiplomaCompleto(id);
   if (!completo) {
-    return erroNaoEncontrado()
+    return erroNaoEncontrado();
   }
 
-  const { diploma, diplomado, curso, disciplinas, enade } = completo
+  const { diploma, diplomado, curso, disciplinas, enade } = completo;
 
   // ── 2. Parallel: campos extras não incluídos em buscarDiplomaCompleto ──────
   const [
@@ -59,79 +68,88 @@ export async function GET(
   ] = await Promise.all([
     // nome_pai e nome_mae da tabela diplomados (legado)
     admin
-      .from('diplomados')
-      .select('nome_pai, nome_mae')
-      .eq('id', diplomado.id)
+      .from("diplomados")
+      .select("nome_pai, nome_mae")
+      .eq("id", diplomado.id)
       .single()
-      .then((r) => r.data as { nome_pai: string | null; nome_mae: string | null } | null),
+      .then(
+        (r) =>
+          r.data as { nome_pai: string | null; nome_mae: string | null } | null,
+      ),
 
     // filiacoes — fonte canônica dos genitores (gerada pela RPC converter)
     admin
-      .from('filiacoes')
-      .select('nome, sexo, ordem')
-      .eq('diplomado_id', diplomado.id)
-      .order('ordem', { ascending: true })
+      .from("filiacoes")
+      .select("nome, sexo, ordem")
+      .eq("diplomado_id", diplomado.id)
+      .order("ordem", { ascending: true })
       .then(
         (r) =>
-          (r.data ?? []) as Array<{ nome: string; sexo: string | null; ordem: number }>
+          (r.data ?? []) as Array<{
+            nome: string;
+            sexo: string | null;
+            ordem: number;
+          }>,
       ),
 
     // tipo_autorizacao, numero_autorizacao, data_autorizacao do curso
     admin
-      .from('cursos')
-      .select('tipo_autorizacao, numero_autorizacao, data_autorizacao')
-      .eq('id', curso.id)
+      .from("cursos")
+      .select("tipo_autorizacao, numero_autorizacao, data_autorizacao")
+      .eq("id", curso.id)
       .single()
       .then(
         (r) =>
           r.data as {
-            tipo_autorizacao: string | null
-            numero_autorizacao: string | null
-            data_autorizacao: string | null
-          } | null
+            tipo_autorizacao: string | null;
+            numero_autorizacao: string | null;
+            data_autorizacao: string | null;
+          } | null,
       ),
 
     // IES emissora — instituicoes ativa (mesma fonte do XML generator)
     admin
-      .from('instituicoes')
+      .from("instituicoes")
       .select(
-        'id, nome, cnpj, codigo_mec, logradouro, numero, bairro, municipio, codigo_municipio, uf, cep'
+        "id, nome, cnpj, codigo_mec, logradouro, numero, bairro, municipio, codigo_municipio, uf, cep",
       )
-      .eq('ativo', true)
+      .eq("ativo", true)
       .limit(1)
       .single()
       .then((r) => r.data as Record<string, unknown> | null),
 
     // Credenciamento da IES (tipo='credenciamento', mais antigo)
     admin
-      .from('credenciamentos')
-      .select('tipo, tipo_ato, numero, data')
-      .order('data', { ascending: true })
+      .from("credenciamentos")
+      .select("tipo, tipo_ato, numero, data")
+      .order("data", { ascending: true })
       .then((r) => (r.data ?? []) as Array<Record<string, string | null>>),
 
     // Comprobatórios vinculados ao processo do diploma
     diploma.processo_id
       ? admin
-          .from('diploma_documentos_comprobatorios')
-          .select('id, tipo_xsd, arquivo_origem_id, deleted_at')
-          .eq('processo_id', diploma.processo_id)
-          .is('deleted_at', null)
+          .from("diploma_documentos_comprobatorios")
+          .select("id, tipo_xsd, arquivo_origem_id, deleted_at")
+          .eq("processo_id", diploma.processo_id)
+          .is("deleted_at", null)
           .then(
             (r) =>
               (r.data ?? []) as Array<{
-                id: string
-                tipo_xsd: string | null
-                arquivo_origem_id: string | null
-                deleted_at: string | null
-              }>
+                id: string;
+                tipo_xsd: string | null;
+                arquivo_origem_id: string | null;
+                deleted_at: string | null;
+              }>,
           )
-      : Promise.resolve([] as Array<{
-          id: string
-          tipo_xsd: string | null
-          arquivo_origem_id: string | null
-          deleted_at: string | null
-        }>),
-  ])
+      : Promise.resolve(
+          [] as Array<{
+            id: string;
+            tipo_xsd: string | null;
+            arquivo_origem_id: string | null;
+            deleted_at: string | null;
+          }>,
+        ),
+  ]);
 
   // ── 3. Montar DadosDiplomadoAuditoria ─────────────────────────────────────
   const dadosDiplomado: DadosDiplomadoAuditoria = {
@@ -150,13 +168,13 @@ export async function GET(
     // FIX s075: prioriza filiacoes (canônico), fallback para diplomados.nome_pai/mae (legado)
     nome_pai:
       diplomadoExtras?.nome_pai ??
-      filiacoesData.find((f) => f.sexo === 'M')?.nome ??
+      filiacoesData.find((f) => f.sexo === "M")?.nome ??
       null,
     nome_mae:
       diplomadoExtras?.nome_mae ??
-      filiacoesData.find((f) => f.sexo === 'F')?.nome ??
+      filiacoesData.find((f) => f.sexo === "F")?.nome ??
       null,
-  }
+  };
 
   // ── 4. Montar DadosCursoAuditoria ─────────────────────────────────────────
   const dadosCurso: DadosCursoAuditoria = {
@@ -171,10 +189,10 @@ export async function GET(
     tipo_reconhecimento: (curso as any).tipo_reconhecimento ?? null,
     numero_reconhecimento: (curso as any).numero_reconhecimento ?? null,
     data_reconhecimento: (curso as any).data_reconhecimento ?? null,
-  }
+  };
 
   // ── 5. Montar DadosIesAuditoria ───────────────────────────────────────────
-  const credRow = credenciamentosData.find((r) => r.tipo === 'credenciamento')
+  const credRow = credenciamentosData.find((r) => r.tipo === "credenciamento");
   const dadosIes: DadosIesAuditoria = {
     nome: (iesData?.nome as string) ?? null,
     codigo_mec: (iesData?.codigo_mec as string) ?? null,
@@ -189,26 +207,31 @@ export async function GET(
     tipo_credenciamento: credRow?.tipo_ato ?? null,
     numero_credenciamento: credRow?.numero ?? null,
     data_credenciamento: credRow?.data ?? null,
-  }
+  };
 
   // ── 6. Montar DadosHistoricoAuditoria ─────────────────────────────────────
-  const dadosDisciplinas: DadosDisciplinaAuditoria[] = disciplinas.map((disc) => ({
-    id: (disc as any).id,
-    codigo: (disc as any).codigo ?? null,
-    nome: (disc as any).nome ?? '',
-    periodo: (disc as any).periodo ?? null,
-    situacao: (disc as any).situacao ?? '',
-    carga_horaria_aula: (disc as any).carga_horaria_aula ?? null,
-    carga_horaria_relogio: (disc as any).carga_horaria_relogio ?? null,
-    docente_nome: (disc as any).docente_nome ?? null,
-    docente_titulacao: (disc as any).docente_titulacao ?? null,
-  }))
+  const dadosDisciplinas: DadosDisciplinaAuditoria[] = disciplinas.map(
+    (disc) => ({
+      id: (disc as any).id,
+      codigo: (disc as any).codigo ?? null,
+      nome: (disc as any).nome ?? "",
+      periodo: (disc as any).periodo ?? null,
+      situacao: (disc as any).situacao ?? "",
+      carga_horaria_aula: (disc as any).carga_horaria_aula ?? null,
+      carga_horaria_relogio: (disc as any).carga_horaria_relogio ?? null,
+      docente_nome: (disc as any).docente_nome ?? null,
+      docente_titulacao: (disc as any).docente_titulacao ?? null,
+    }),
+  );
 
   // FIX s075: se carga_horaria_integralizada for null no diploma, calcular da soma das disciplinas
   const chFromDisciplinas =
     disciplinas.length > 0
-      ? disciplinas.reduce((sum, d) => sum + ((d as any).carga_horaria_aula ?? 0), 0)
-      : null
+      ? disciplinas.reduce(
+          (sum, d) => sum + ((d as any).carga_horaria_aula ?? 0),
+          0,
+        )
+      : null;
 
   const dadosHistorico: DadosHistoricoAuditoria = {
     diploma_id: diploma.id,
@@ -219,18 +242,20 @@ export async function GET(
     data_colacao_grau: diploma.data_colacao_grau ?? null,
     data_expedicao: diploma.data_expedicao ?? null,
     carga_horaria_integralizada:
-      diploma.carga_horaria_integralizada ?? (chFromDisciplinas && chFromDisciplinas > 0 ? chFromDisciplinas : null),
+      diploma.carga_horaria_integralizada ??
+      (chFromDisciplinas && chFromDisciplinas > 0 ? chFromDisciplinas : null),
     enade_presente: enade != null,
     disciplinas: dadosDisciplinas,
-  }
+  };
 
   // ── 7. Montar DadosComprobatorioAuditoria[] ───────────────────────────────
-  const dadosComprobatorios: DadosComprobatorioAuditoria[] = comprobatoriosData.map((c) => ({
-    id: c.id,
-    tipo_xsd: c.tipo_xsd ?? null,
-    arquivo_storage_path: null, // não relevante para auditoria
-    tem_arquivo: c.arquivo_origem_id != null,
-  }))
+  const dadosComprobatorios: DadosComprobatorioAuditoria[] =
+    comprobatoriosData.map((c) => ({
+      id: c.id,
+      tipo_xsd: c.tipo_xsd ?? null,
+      arquivo_storage_path: null, // não relevante para auditoria
+      tem_arquivo: c.arquivo_origem_id != null,
+    }));
 
   // ── 8. Executar auditoria ─────────────────────────────────────────────────
   const input: InputAuditoria = {
@@ -239,9 +264,9 @@ export async function GET(
     ies: dadosIes,
     historico: dadosHistorico,
     comprobatorios: dadosComprobatorios,
-  }
+  };
 
-  const resultado = executarAuditoria(input)
+  const resultado = executarAuditoria(input);
 
-  return NextResponse.json(resultado)
+  return NextResponse.json(resultado);
 }

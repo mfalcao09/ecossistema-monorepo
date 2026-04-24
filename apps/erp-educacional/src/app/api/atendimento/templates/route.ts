@@ -10,6 +10,11 @@ import { z } from "zod";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 const createSchema = z.object({
   inbox_id: z.string().uuid(),
   name: z
@@ -90,7 +95,9 @@ export async function POST(request: NextRequest) {
       category: parsed.data.category,
       status: "DRAFT",
       components: parsed.data.components,
-      has_buttons: parsed.data.components.some((c: { type?: string }) => c.type === "BUTTONS"),
+      has_buttons: parsed.data.components.some(
+        (c: { type?: string }) => c.type === "BUTTONS",
+      ),
     })
     .select()
     .single();

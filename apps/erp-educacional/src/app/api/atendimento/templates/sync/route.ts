@@ -17,6 +17,11 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { syncInboxTemplates } from "@/lib/atendimento/sync-templates";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 async function handler(request: NextRequest) {
   // Autenticação via sessão (usuário admin logado)
   const supabase = await createServerClient();

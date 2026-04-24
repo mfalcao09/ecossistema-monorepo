@@ -11,6 +11,10 @@ import { logDataModification } from "@/lib/security/security-logger";
 import { registrarCustodiaAsync } from "@/lib/security/cadeia-custodia";
 import { getBryConfig, aplicarCarimboDoTempo } from "@/lib/bry";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+
 // ─────────────────────────────────────────────────────────────────────────────
 // POST /api/diplomas/[id]/assinar/carimbo
 //
@@ -32,7 +36,7 @@ export const maxDuration = 60;
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   // ── Auth + CSRF + Rate Limit ──────────────────────────────────────────────
   const auth = await verificarAuth(req);
@@ -45,7 +49,7 @@ export async function POST(
   if (!rateLimit.allowed) {
     const response = NextResponse.json(
       { erro: "Muitas requisições. Tente novamente em instantes." },
-      { status: 429 }
+      { status: 429 },
     );
     adicionarHeadersRetryAfter(response.headers, rateLimit);
     return response;
@@ -56,7 +60,7 @@ export async function POST(
   if (!bryConfig) {
     return NextResponse.json(
       { erro: "Credenciais BRy não configuradas." },
-      { status: 503 }
+      { status: 503 },
     );
   }
 
@@ -70,7 +74,7 @@ export async function POST(
     if (!xml_gerado_id) {
       return NextResponse.json(
         { erro: "Campo obrigatório: xml_gerado_id" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -90,7 +94,7 @@ export async function POST(
         {
           erro: `Diploma no status "${diploma.status}" — carimbo só pode ser aplicado após assinatura`,
         },
-        { status: 422 }
+        { status: 422 },
       );
     }
 
@@ -104,7 +108,7 @@ export async function POST(
     if (outboxErr || !outboxAll || outboxAll.length === 0) {
       return NextResponse.json(
         { erro: "Nenhum passo de assinatura encontrado para este XML" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -118,14 +122,16 @@ export async function POST(
         {
           erro: `Nem todos os passos estão finalizados. Pendentes: ${pendentes}`,
         },
-        { status: 422 }
+        { status: 422 },
       );
     }
 
     // ── Buscar XML assinado ─────────────────────────────────────────────────
     const { data: xml, error: xmlErr } = await supabase
       .from("xml_gerados")
-      .select("id, tipo, conteudo_xml, arquivo_url, status, carimbo_tempo_base64")
+      .select(
+        "id, tipo, conteudo_xml, arquivo_url, status, carimbo_tempo_base64",
+      )
       .eq("id", xml_gerado_id)
       .eq("diploma_id", diplomaId)
       .single();
@@ -133,7 +139,7 @@ export async function POST(
     if (xmlErr || !xml) {
       return NextResponse.json(
         { erro: "XML não encontrado para este diploma" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -163,7 +169,7 @@ export async function POST(
       if (!xmlResponse.ok) {
         return NextResponse.json(
           { erro: "Não foi possível baixar o XML assinado do storage" },
-          { status: 500 }
+          { status: 500 },
         );
       }
       xmlContent = await xmlResponse.text();
@@ -175,7 +181,7 @@ export async function POST(
     if (!xmlContent) {
       return NextResponse.json(
         { erro: "XML sem conteúdo — assine antes de aplicar carimbo" },
-        { status: 422 }
+        { status: 422 },
       );
     }
 
@@ -197,7 +203,7 @@ export async function POST(
       console.error("[Carimbo] Erro ao salvar:", updateErr);
       return NextResponse.json(
         { erro: "Carimbo gerado com sucesso mas falha ao salvar no banco" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 

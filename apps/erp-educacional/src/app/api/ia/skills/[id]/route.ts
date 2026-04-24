@@ -5,112 +5,119 @@
  * DELETE /api/ia/skills/[id]    → soft-delete (ativo = false)
  */
 
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@supabase/supabase-js'
-import { verificarAuth } from '@/lib/security/api-guard'
-import { indexarSkill } from '@/lib/ai/rag'
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@supabase/supabase-js";
+import { verificarAuth } from "@/lib/security/api-guard";
+import { indexarSkill } from "@/lib/ai/rag";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 function getAdminClient() {
   return createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
-    { auth: { autoRefreshToken: false, persistSession: false } }
-  )
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
 }
 
 function estimarTokens(texto: string): number {
-  return Math.ceil(texto.length / 4)
+  return Math.ceil(texto.length / 4);
 }
 
 // ── GET: buscar skill por ID ────────────────────────────────────────────────
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(req)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(req);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
-  const admin = getAdminClient()
+  const { id } = await params;
+  const admin = getAdminClient();
 
   const { data, error } = await admin
-    .from('ia_skills')
-    .select(`
+    .from("ia_skills")
+    .select(
+      `
       *,
       ia_agente_skills (
         id, agente_id, prioridade, modo,
         ia_configuracoes ( id, nome_agente, modulo, funcionalidade )
       )
-    `)
-    .eq('id', id)
-    .single()
+    `,
+    )
+    .eq("id", id)
+    .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 404 })
+    return NextResponse.json({ error: error.message }, { status: 404 });
   }
 
-  return NextResponse.json(data)
+  return NextResponse.json(data);
 }
 
 // ── PUT: atualizar skill ────────────────────────────────────────────────────
 export async function PUT(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(req)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(req);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
-  const admin = getAdminClient()
-  const body = await req.json()
+  const { id } = await params;
+  const admin = getAdminClient();
+  const body = await req.json();
 
-  const { nome, slug, descricao, conteudo, tipo, categoria, ativo } = body
+  const { nome, slug, descricao, conteudo, tipo, categoria, ativo } = body;
 
   if (slug && !/^[a-z0-9-]+$/.test(slug)) {
     return NextResponse.json(
-      { error: 'Slug deve conter apenas letras minúsculas, números e hífens' },
-      { status: 400 }
-    )
+      { error: "Slug deve conter apenas letras minúsculas, números e hífens" },
+      { status: 400 },
+    );
   }
 
   // Buscar versão atual para incrementar
   const { data: atual } = await admin
-    .from('ia_skills')
-    .select('versao, conteudo')
-    .eq('id', id)
-    .single()
+    .from("ia_skills")
+    .select("versao, conteudo")
+    .eq("id", id)
+    .single();
 
-  const conteudoMudou = conteudo && conteudo !== atual?.conteudo
-  const novaVersao = conteudoMudou ? (atual?.versao ?? 1) + 1 : undefined
+  const conteudoMudou = conteudo && conteudo !== atual?.conteudo;
+  const novaVersao = conteudoMudou ? (atual?.versao ?? 1) + 1 : undefined;
 
-  const updates: Record<string, unknown> = {}
-  if (nome !== undefined)      updates.nome = nome
-  if (slug !== undefined)      updates.slug = slug
-  if (descricao !== undefined) updates.descricao = descricao
+  const updates: Record<string, unknown> = {};
+  if (nome !== undefined) updates.nome = nome;
+  if (slug !== undefined) updates.slug = slug;
+  if (descricao !== undefined) updates.descricao = descricao;
   if (conteudo !== undefined) {
-    updates.conteudo = conteudo
-    updates.tamanho_tokens = estimarTokens(conteudo)
+    updates.conteudo = conteudo;
+    updates.tamanho_tokens = estimarTokens(conteudo);
   }
-  if (tipo !== undefined)      updates.tipo = tipo
-  if (categoria !== undefined) updates.categoria = categoria
-  if (ativo !== undefined)     updates.ativo = ativo
-  if (novaVersao !== undefined) updates.versao = novaVersao
+  if (tipo !== undefined) updates.tipo = tipo;
+  if (categoria !== undefined) updates.categoria = categoria;
+  if (ativo !== undefined) updates.ativo = ativo;
+  if (novaVersao !== undefined) updates.versao = novaVersao;
 
   const { data, error } = await admin
-    .from('ia_skills')
+    .from("ia_skills")
     .update(updates)
-    .eq('id', id)
+    .eq("id", id)
     .select()
-    .single()
+    .single();
 
   if (error) {
-    if (error.code === '23505') {
+    if (error.code === "23505") {
       return NextResponse.json(
-        { error: 'Já existe uma skill com este slug' },
-        { status: 409 }
-      )
+        { error: "Já existe uma skill com este slug" },
+        { status: 409 },
+      );
     }
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
   // Re-indexar automaticamente no RAG se o conteúdo mudou
@@ -120,39 +127,41 @@ export async function PUT(
         id,
         data.nome,
         data.conteudo,
-        data.versao
-      )
-      console.log(`[RAG] Skill "${data.nome}" re-indexada: ${resultado.chunks_gerados} chunks`)
+        data.versao,
+      );
+      console.log(
+        `[RAG] Skill "${data.nome}" re-indexada: ${resultado.chunks_gerados} chunks`,
+      );
     } catch (err) {
-      console.error(`[RAG] Falha ao re-indexar skill ${id}:`, err)
+      console.error(`[RAG] Falha ao re-indexar skill ${id}:`, err);
       // Continua — skill foi atualizada, indexação pode ser refeita depois
     }
   }
 
-  return NextResponse.json(data)
+  return NextResponse.json(data);
 }
 
 // ── DELETE: desativar skill (soft-delete) ───────────────────────────────────
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(req)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(req);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
-  const admin = getAdminClient()
+  const { id } = await params;
+  const admin = getAdminClient();
 
   const { data, error } = await admin
-    .from('ia_skills')
+    .from("ia_skills")
     .update({ ativo: false })
-    .eq('id', id)
-    .select('id, nome, ativo')
-    .single()
+    .eq("id", id)
+    .select("id, nome, ativo")
+    .single();
 
   if (error) {
-    return NextResponse.json({ error: error.message }, { status: 500 })
+    return NextResponse.json({ error: error.message }, { status: 500 });
   }
 
-  return NextResponse.json({ ok: true, skill: data })
+  return NextResponse.json({ ok: true, skill: data });
 }

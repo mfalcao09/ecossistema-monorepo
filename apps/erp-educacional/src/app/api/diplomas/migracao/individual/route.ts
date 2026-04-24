@@ -3,6 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { verificarAuth, erroInterno } from "@/lib/security/api-guard";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 // ─────────────────────────────────────────────────────────────────────────────
 // GET /api/diplomas/migracao/individual?tipo=codigo|cpf|nome&valor=...
 //   Busca um diploma legado ou já existente pelo código, CPF ou nome
@@ -25,16 +30,21 @@ export async function GET(req: NextRequest) {
   const valor = searchParams.get("valor")?.trim();
 
   if (!tipo || !valor) {
-    return NextResponse.json({ error: "Parâmetros tipo e valor são obrigatórios." }, { status: 400 });
+    return NextResponse.json(
+      { error: "Parâmetros tipo e valor são obrigatórios." },
+      { status: 400 },
+    );
   }
 
   let query = supabase
     .from("diplomas")
-    .select(`
+    .select(
+      `
       id, status, codigo_validacao, is_legado, legado_importado_em,
       diplomados ( nome, cpf ),
       cursos ( nome, grau )
-    `)
+    `,
+    )
     .limit(5);
 
   if (tipo === "codigo") {
@@ -49,7 +59,10 @@ export async function GET(req: NextRequest) {
   const { data: diplomas, error } = await query;
 
   if (error) {
-    console.error('[API] Erro ao buscar diploma para migração individual:', error.message);
+    console.error(
+      "[API] Erro ao buscar diploma para migração individual:",
+      error.message,
+    );
     return erroInterno();
   }
 
@@ -61,7 +74,9 @@ export async function GET(req: NextRequest) {
   }
 
   const d = diplomas[0];
-  const diplomado = Array.isArray(d.diplomados) ? d.diplomados[0] : d.diplomados;
+  const diplomado = Array.isArray(d.diplomados)
+    ? d.diplomados[0]
+    : d.diplomados;
   const curso = Array.isArray(d.cursos) ? d.cursos[0] : d.cursos;
 
   return NextResponse.json({
@@ -92,7 +107,10 @@ export async function POST(req: NextRequest) {
 
   const { diploma_id } = body;
   if (!diploma_id) {
-    return NextResponse.json({ error: "diploma_id é obrigatório." }, { status: 400 });
+    return NextResponse.json(
+      { error: "diploma_id é obrigatório." },
+      { status: 400 },
+    );
   }
 
   // Verificar que o diploma existe
@@ -103,15 +121,27 @@ export async function POST(req: NextRequest) {
     .single();
 
   if (dipErr || !diploma) {
-    return NextResponse.json({ error: "Diploma não encontrado." }, { status: 404 });
+    return NextResponse.json(
+      { error: "Diploma não encontrado." },
+      { status: 404 },
+    );
   }
 
   // Acionar geração da RVDD via endpoint existente
-  const baseUrl = process.env.NEXT_PUBLIC_APP_URL
-    ?? (process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "http://localhost:3000");
+  const baseUrl =
+    process.env.NEXT_PUBLIC_APP_URL ??
+    (process.env.VERCEL_URL
+      ? `https://${process.env.VERCEL_URL}`
+      : "http://localhost:3000");
 
   // Atualiza status do diploma para permitir geração da RVDD (se necessário)
-  const statusesValidos = ["assinado", "aguardando_registro", "registrado", "rvdd_gerado", "publicado"];
+  const statusesValidos = [
+    "assinado",
+    "aguardando_registro",
+    "registrado",
+    "rvdd_gerado",
+    "publicado",
+  ];
   if (!statusesValidos.includes(diploma.status)) {
     // Para diplomas legados, force o status para rvdd_gerado
     if (diploma.is_legado) {
@@ -120,9 +150,12 @@ export async function POST(req: NextRequest) {
         .update({ status: "rvdd_gerado" })
         .eq("id", diploma_id);
     } else {
-      return NextResponse.json({
-        error: `Diploma precisa estar assinado para gerar RVDD. Status atual: "${diploma.status}".`,
-      }, { status: 422 });
+      return NextResponse.json(
+        {
+          error: `Diploma precisa estar assinado para gerar RVDD. Status atual: "${diploma.status}".`,
+        },
+        { status: 422 },
+      );
     }
   }
 
@@ -131,16 +164,19 @@ export async function POST(req: NextRequest) {
     const rvddRes = await fetch(`${baseUrl}/api/diplomas/${diploma_id}/rvdd`, {
       method: "POST",
       headers: {
-        "Cookie": req.headers.get("cookie") ?? "",
+        Cookie: req.headers.get("cookie") ?? "",
       },
     });
 
     const rvddData = await rvddRes.json();
 
     if (!rvddRes.ok) {
-      return NextResponse.json({
-        error: rvddData.error ?? "Erro ao gerar RVDD.",
-      }, { status: 500 });
+      return NextResponse.json(
+        {
+          error: rvddData.error ?? "Erro ao gerar RVDD.",
+        },
+        { status: 500 },
+      );
     }
 
     // Marcar como migrado (se ainda não estava)
@@ -160,7 +196,6 @@ export async function POST(req: NextRequest) {
       rvdd_url: rvddData.rvdd_url,
       codigo_validacao: diploma.codigo_validacao,
     });
-
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Erro ao gerar RVDD.";
     return NextResponse.json({ error: msg }, { status: 500 });

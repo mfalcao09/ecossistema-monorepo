@@ -1,10 +1,22 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
-import { verificarAuth, erroNaoEncontrado, erroInterno } from "@/lib/security/api-guard";
+import {
+  verificarAuth,
+  erroNaoEncontrado,
+  erroInterno,
+} from "@/lib/security/api-guard";
 import { validarCSRF } from "@/lib/security/csrf";
-import { verificarRateLimitERP, adicionarHeadersRateLimit, adicionarHeadersRetryAfter } from "@/lib/security/rate-limit";
+import {
+  verificarRateLimitERP,
+  adicionarHeadersRateLimit,
+  adicionarHeadersRetryAfter,
+} from "@/lib/security/rate-limit";
 import { getBryConfig, bryInitialize } from "@/lib/bry";
 import type { PerfilAssinatura, TipoAssinanteBry } from "@/lib/bry";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // POST /api/diplomas/[id]/assinar/initialize
@@ -28,7 +40,7 @@ export const maxDuration = 60;
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   // ── Auth + CSRF + Rate Limit ──────────────────────────────────────────────
   const auth = await verificarAuth(req);
@@ -41,7 +53,7 @@ export async function POST(
   if (!rateLimit.allowed) {
     const response = NextResponse.json(
       { erro: "Muitas requisições. Tente novamente em instantes." },
-      { status: 429 }
+      { status: 429 },
     );
     adicionarHeadersRetryAfter(response.headers, rateLimit);
     return response;
@@ -54,7 +66,7 @@ export async function POST(
       {
         erro: "Credenciais BRy não configuradas. Configure BRY_CLIENT_ID e BRY_CLIENT_SECRET nas variáveis de ambiente.",
       },
-      { status: 503 }
+      { status: 503 },
     );
   }
 
@@ -87,8 +99,10 @@ export async function POST(
     // Validações básicas
     if (!xml_gerado_id || !certificate || !tipo_assinante || !perfil) {
       return NextResponse.json(
-        { erro: "Campos obrigatórios: xml_gerado_id, certificate, tipo_assinante, perfil" },
-        { status: 400 }
+        {
+          erro: "Campos obrigatórios: xml_gerado_id, certificate, tipo_assinante, perfil",
+        },
+        { status: 400 },
       );
     }
 
@@ -115,7 +129,7 @@ export async function POST(
     if (!statusPermitidos.includes(diploma.status)) {
       return NextResponse.json(
         { erro: `Diploma não pode ser assinado no status "${diploma.status}"` },
-        { status: 422 }
+        { status: 422 },
       );
     }
 
@@ -130,7 +144,7 @@ export async function POST(
     if (xmlErr || !xml) {
       return NextResponse.json(
         { erro: "XML não encontrado para este diploma" },
-        { status: 404 }
+        { status: 404 },
       );
     }
 
@@ -145,7 +159,7 @@ export async function POST(
       if (!xmlResponse.ok) {
         return NextResponse.json(
           { erro: "Não foi possível baixar o conteúdo do XML do storage" },
-          { status: 500 }
+          { status: 500 },
         );
       }
       xmlContent = await xmlResponse.text();
@@ -154,7 +168,7 @@ export async function POST(
     if (!xmlContent) {
       return NextResponse.json(
         { erro: "XML sem conteúdo — gere o XML antes de assinar" },
-        { status: 422 }
+        { status: 422 },
       );
     }
 
@@ -185,18 +199,26 @@ export async function POST(
         status: "inicializado",
         nonce,
         signed_attributes: bryResponse.signedAttributes[0]?.content ?? null,
-        initialized_document: bryResponse.initializedDocuments[0]?.content ?? null,
+        initialized_document:
+          bryResponse.initializedDocuments[0]?.content ?? null,
         certificate,
         initialized_at: new Date().toISOString(),
       },
-      { onConflict: "xml_gerado_id,passo" }
+      { onConflict: "xml_gerado_id,passo" },
     );
 
     // Atualizar status do diploma para "em andamento" se ainda não está
-    if (diploma.status === "xml_gerado" || diploma.status === "aguardando_assinatura_emissora" || diploma.status === "assinatura_com_erro") {
+    if (
+      diploma.status === "xml_gerado" ||
+      diploma.status === "aguardando_assinatura_emissora" ||
+      diploma.status === "assinatura_com_erro"
+    ) {
       await supabase
         .from("diplomas")
-        .update({ status: "em_assinatura", updated_at: new Date().toISOString() })
+        .update({
+          status: "em_assinatura",
+          updated_at: new Date().toISOString(),
+        })
         .eq("id", diplomaId);
     }
 
@@ -209,7 +231,6 @@ export async function POST(
     });
     adicionarHeadersRateLimit(response.headers, rateLimit);
     return response;
-
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Erro interno";
     console.error("[BRy Initialize Error]", msg);

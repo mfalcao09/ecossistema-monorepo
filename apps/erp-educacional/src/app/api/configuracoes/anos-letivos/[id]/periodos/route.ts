@@ -4,14 +4,19 @@
 // POST: cria novo período para o ano letivo
 // =============================================================================
 
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 import {
   listarPeriodosDoAno,
   criarPeriodoLetivo,
-} from '@/lib/supabase/anos-letivos'
-import type { PeriodoLetivoCreateInput } from '@/types/configuracoes'
-import { verificarAuth } from '@/lib/security/api-guard'
-import { sanitizarErro } from '@/lib/security/sanitize-error'
+} from "@/lib/supabase/anos-letivos";
+import type { PeriodoLetivoCreateInput } from "@/types/configuracoes";
+import { verificarAuth } from "@/lib/security/api-guard";
+import { sanitizarErro } from "@/lib/security/sanitize-error";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 /**
  * GET /api/configuracoes/anos-letivos/[id]/periodos
@@ -19,25 +24,28 @@ import { sanitizarErro } from '@/lib/security/sanitize-error'
  */
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(req)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(req);
+  if (auth instanceof NextResponse) return auth;
 
   try {
-    const { id } = await params
+    const { id } = await params;
 
-    const periodos = await listarPeriodosDoAno(id)
+    const periodos = await listarPeriodosDoAno(id);
 
-    return NextResponse.json(periodos, { status: 200 })
+    return NextResponse.json(periodos, { status: 200 });
   } catch (error) {
-    console.error('Erro ao listar períodos letivos:', error)
+    console.error("Erro ao listar períodos letivos:", error);
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : 'Erro ao listar períodos letivos',
+        error:
+          error instanceof Error
+            ? error.message
+            : "Erro ao listar períodos letivos",
       },
-      { status: 500 }
-    )
+      { status: 500 },
+    );
   }
 }
 
@@ -55,67 +63,67 @@ export async function GET(
  */
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(req)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(req);
+  if (auth instanceof NextResponse) return auth;
 
   try {
-    const { id } = await params
-    const body = await req.json()
+    const { id } = await params;
+    const body = await req.json();
 
     // Validações básicas
-    if (!body.numero || typeof body.numero !== 'number') {
+    if (!body.numero || typeof body.numero !== "number") {
       return NextResponse.json(
         { error: 'Campo "numero" é obrigatório e deve ser um número' },
-        { status: 400 }
-      )
+        { status: 400 },
+      );
     }
 
-    if (!body.nome || typeof body.nome !== 'string') {
+    if (!body.nome || typeof body.nome !== "string") {
       return NextResponse.json(
         { error: 'Campo "nome" é obrigatório e deve ser uma string' },
-        { status: 400 }
-      )
+        { status: 400 },
+      );
     }
 
     if (!body.data_inicio) {
       return NextResponse.json(
         { error: 'Campo "data_inicio" é obrigatório' },
-        { status: 400 }
-      )
+        { status: 400 },
+      );
     }
 
     if (!body.data_fim) {
       return NextResponse.json(
         { error: 'Campo "data_fim" é obrigatório' },
-        { status: 400 }
-      )
+        { status: 400 },
+      );
     }
 
     // Validação de datas
-    const dataInicio = new Date(body.data_inicio)
-    const dataFim = new Date(body.data_fim)
+    const dataInicio = new Date(body.data_inicio);
+    const dataFim = new Date(body.data_fim);
 
     if (isNaN(dataInicio.getTime())) {
       return NextResponse.json(
         { error: 'Campo "data_inicio" deve ser uma data válida (ISO 8601)' },
-        { status: 400 }
-      )
+        { status: 400 },
+      );
     }
 
     if (isNaN(dataFim.getTime())) {
       return NextResponse.json(
         { error: 'Campo "data_fim" deve ser uma data válida (ISO 8601)' },
-        { status: 400 }
-      )
+        { status: 400 },
+      );
     }
 
     if (dataInicio >= dataFim) {
       return NextResponse.json(
         { error: 'Campo "data_inicio" deve ser anterior a "data_fim"' },
-        { status: 400 }
-      )
+        { status: 400 },
+      );
     }
 
     const input: PeriodoLetivoCreateInput = {
@@ -124,18 +132,21 @@ export async function POST(
       nome: body.nome,
       data_inicio: body.data_inicio,
       data_fim: body.data_fim,
-    }
+    };
 
-    const periodo = await criarPeriodoLetivo(input)
+    const periodo = await criarPeriodoLetivo(input);
 
-    return NextResponse.json(periodo, { status: 201 })
+    return NextResponse.json(periodo, { status: 201 });
   } catch (error) {
-    console.error('Erro ao criar período letivo:', error)
+    console.error("Erro ao criar período letivo:", error);
     return NextResponse.json(
       {
-        error: error instanceof Error ? error.message : 'Erro ao criar período letivo',
+        error:
+          error instanceof Error
+            ? error.message
+            : "Erro ao criar período letivo",
       },
-      { status: 500 }
-    )
+      { status: 500 },
+    );
   }
 }

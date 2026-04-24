@@ -1,9 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { verificarAuth, erroNaoEncontrado } from "@/lib/security/api-guard";
-import { verificarRateLimitERP, adicionarHeadersRateLimit, adicionarHeadersRetryAfter } from "@/lib/security/rate-limit";
+import {
+  verificarRateLimitERP,
+  adicionarHeadersRateLimit,
+  adicionarHeadersRetryAfter,
+} from "@/lib/security/rate-limit";
 import { getBryConfig, getPassosAssinaturaDinamicos } from "@/lib/bry";
 import type { TipoDocumentoBry, AssinanteBanco } from "@/lib/bry";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ─────────────────────────────────────────────────────────────────────────────
 // GET /api/diplomas/[id]/assinar
@@ -31,7 +40,7 @@ function mapTipoXml(tipo: string): TipoDocumentoBry | null {
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const auth = await verificarAuth(req);
   if (auth instanceof NextResponse) return auth;
@@ -40,7 +49,7 @@ export async function GET(
   if (!rateLimit.allowed) {
     const response = NextResponse.json(
       { erro: "Muitas requisições." },
-      { status: 429 }
+      { status: 429 },
     );
     adicionarHeadersRetryAfter(response.headers, rateLimit);
     return response;
@@ -89,13 +98,16 @@ export async function GET(
     const xmlsComPassos = (xmls ?? []).map((xml) => {
       const tipoBry = mapTipoXml(xml.tipo);
       const passos = tipoBry
-        ? getPassosAssinaturaDinamicos(tipoBry, (assinantes ?? []) as AssinanteBanco[])
+        ? getPassosAssinaturaDinamicos(
+            tipoBry,
+            (assinantes ?? []) as AssinanteBanco[],
+          )
         : [];
 
       // Mesclar com outbox existente
       const passosComStatus = passos.map((p) => {
         const ob = outbox?.find(
-          (o) => o.xml_gerado_id === xml.id && o.passo === p.passo
+          (o) => o.xml_gerado_id === xml.id && o.passo === p.passo,
         );
         return {
           ...p,
@@ -130,13 +142,16 @@ export async function GET(
       diploma_id: diplomaId,
       status_diploma: diploma.status,
       bry_configurado: bryConfigurado,
-      bry_ambiente: bryConfig?.isHomologacao ? "homologacao" : bryConfig ? "producao" : null,
+      bry_ambiente: bryConfig?.isHomologacao
+        ? "homologacao"
+        : bryConfig
+          ? "producao"
+          : null,
       xmls: xmlsComPassos,
       assinantes: assinantesResumo,
     });
     adicionarHeadersRateLimit(response.headers, rateLimit);
     return response;
-
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Erro interno";
     const response = NextResponse.json({ erro: msg }, { status: 500 });
@@ -154,7 +169,7 @@ export async function GET(
 
 export async function POST(
   _req: NextRequest,
-  _ctx: { params: Promise<{ id: string }> }
+  _ctx: { params: Promise<{ id: string }> },
 ) {
   return NextResponse.json(
     {
@@ -165,6 +180,6 @@ export async function POST(
         finalize: "POST /api/diplomas/{id}/assinar/finalize",
       },
     },
-    { status: 410 }
+    { status: 410 },
   );
 }

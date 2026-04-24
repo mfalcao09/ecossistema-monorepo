@@ -1,8 +1,17 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import { callOpenRouter, callOpenRouterImage } from '@/lib/ai/openrouter'
-import { verificarAuth } from '@/lib/security/api-guard'
-import { verificarRateLimitERP, adicionarHeadersRateLimit, adicionarHeadersRetryAfter } from '@/lib/security/rate-limit'
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { callOpenRouter, callOpenRouterImage } from "@/lib/ai/openrouter";
+import { verificarAuth } from "@/lib/security/api-guard";
+import {
+  verificarRateLimitERP,
+  adicionarHeadersRateLimit,
+  adicionarHeadersRetryAfter,
+} from "@/lib/security/rate-limit";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ─── Schema completo de campos ────────────────────────────────────────────────
 const CAMPOS_SCHEMA = `
@@ -35,7 +44,9 @@ objetivo_curso, periodo_divisao_turmas,
 numero_etapas (int), duracao_hora_aula_minutos (int), dias_letivos (int), relevancia (int), enfase
 `;
 
-const PROMPT_EXTRACAO = (fonte: string) => `Você é um especialista em dados acadêmicos de IES brasileiras.
+const PROMPT_EXTRACAO = (
+  fonte: string,
+) => `Você é um especialista em dados acadêmicos de IES brasileiras.
 
 Analise o conteúdo abaixo (fonte: ${fonte}) e extraia TODOS os cursos encontrados.
 
@@ -70,9 +81,15 @@ Regras:
 async function extrairConteudo(
   bytes: Uint8Array,
   fileName: string,
-  mimeType: string
+  mimeType: string,
 ): Promise<{ tipo: "texto" | "imagem"; conteudo: string; mediaType?: string }> {
-  const imageTypes = ["image/png", "image/jpeg", "image/jpg", "image/gif", "image/webp"];
+  const imageTypes = [
+    "image/png",
+    "image/jpeg",
+    "image/jpg",
+    "image/gif",
+    "image/webp",
+  ];
 
   if (imageTypes.includes(mimeType) || mimeType === "application/pdf") {
     const base64 = Buffer.from(bytes).toString("base64");
@@ -87,7 +104,8 @@ async function extrairConteudo(
   } catch {
     texto = Buffer.from(bytes).toString("latin1");
   }
-  if (texto.length > 60000) texto = texto.substring(0, 60000) + "\n...[truncado]";
+  if (texto.length > 60000)
+    texto = texto.substring(0, 60000) + "\n...[truncado]";
   return { tipo: "texto", conteudo: texto };
 }
 
@@ -96,9 +114,17 @@ async function extrairCursosDoArquivo(
   bytes: Uint8Array,
   fileName: string,
   mimeType: string,
-  instrucaoUsuario?: string
-): Promise<{ cursos: Record<string, unknown>[]; duvidas: string[]; observacoes: string }> {
-  const { tipo, conteudo, mediaType } = await extrairConteudo(bytes, fileName, mimeType);
+  instrucaoUsuario?: string,
+): Promise<{
+  cursos: Record<string, unknown>[];
+  duvidas: string[];
+  observacoes: string;
+}> {
+  const { tipo, conteudo, mediaType } = await extrairConteudo(
+    bytes,
+    fileName,
+    mimeType,
+  );
 
   // Bloco de instrução do usuário (orientação para corrigir extração)
   const blocoInstrucao = instrucaoUsuario
@@ -111,17 +137,35 @@ async function extrairCursosDoArquivo(
       conteudo,
       mediaType!,
       PROMPT_EXTRACAO(fileName) + blocoInstrucao,
-      { modulo: "cadastro", funcionalidade: "extracao_cursos", maxTokens: 8192 }
+      {
+        modulo: "cadastro",
+        funcionalidade: "extracao_cursos",
+        maxTokens: 8192,
+      },
     );
   } else {
     rawText = await callOpenRouter(
-      [{ role: "user", content: `${PROMPT_EXTRACAO(fileName)}${blocoInstrucao}\n\nCONTEÚDO:\n\`\`\`\n${conteudo}\n\`\`\`` }],
-      { modulo: "cadastro", funcionalidade: "extracao_cursos", maxTokens: 8192 }
+      [
+        {
+          role: "user",
+          content: `${PROMPT_EXTRACAO(fileName)}${blocoInstrucao}\n\nCONTEÚDO:\n\`\`\`\n${conteudo}\n\`\`\``,
+        },
+      ],
+      {
+        modulo: "cadastro",
+        funcionalidade: "extracao_cursos",
+        maxTokens: 8192,
+      },
     );
   }
 
   const jsonMatch = rawText.match(/\{[\s\S]*\}/);
-  if (!jsonMatch) return { cursos: [], duvidas: [], observacoes: `Não foi possível extrair dados de ${fileName}` };
+  if (!jsonMatch)
+    return {
+      cursos: [],
+      duvidas: [],
+      observacoes: `Não foi possível extrair dados de ${fileName}`,
+    };
 
   try {
     const parsed = JSON.parse(jsonMatch[0]);
@@ -131,23 +175,34 @@ async function extrairCursosDoArquivo(
       observacoes: parsed.observacoes ?? "",
     };
   } catch {
-    return { cursos: [], duvidas: [], observacoes: `Erro ao parsear dados de ${fileName}` };
+    return {
+      cursos: [],
+      duvidas: [],
+      observacoes: `Erro ao parsear dados de ${fileName}`,
+    };
   }
 }
 
 // ─── Análise cruzada entre múltiplas fontes ───────────────────────────────────
 async function analisarCruzado(
-  todosOsCursos: Array<{ curso: Record<string, unknown>; fonte: string }>
+  todosOsCursos: Array<{ curso: Record<string, unknown>; fonte: string }>,
 ): Promise<{
   resultado: CursoAnalisado[];
   duvidas_gerais: string[];
 }> {
   // Agrupa por identificador (codigo_emec ou nome normalizado)
-  const grupos = new Map<string, Array<{ curso: Record<string, unknown>; fonte: string }>>();
+  const grupos = new Map<
+    string,
+    Array<{ curso: Record<string, unknown>; fonte: string }>
+  >();
 
   for (const item of todosOsCursos) {
-    const chave = String(item.curso.codigo_emec || "").trim() ||
-                  String(item.curso.nome || "").toLowerCase().trim().replace(/\s+/g, "_");
+    const chave =
+      String(item.curso.codigo_emec || "").trim() ||
+      String(item.curso.nome || "")
+        .toLowerCase()
+        .trim()
+        .replace(/\s+/g, "_");
     if (!chave) continue;
     if (!grupos.has(chave)) grupos.set(chave, []);
     grupos.get(chave)!.push(item);
@@ -171,7 +226,9 @@ async function analisarCruzado(
         if (!camposIgnorar.has(k)) todosCampos.add(k);
       }
       // Dados extras
-      const extras = item.curso._dados_extras as Record<string, unknown> | undefined;
+      const extras = item.curso._dados_extras as
+        | Record<string, unknown>
+        | undefined;
       if (extras) {
         for (const [k, v] of Object.entries(extras)) {
           if (!dadosExtras[k]) dadosExtras[k] = [];
@@ -182,7 +239,11 @@ async function analisarCruzado(
 
     // Para cada campo, compara valores entre fontes
     for (const campo of Array.from(todosCampos)) {
-      const valoresPorFonte: Array<{ valor: unknown; fonte: string; confianca: string }> = [];
+      const valoresPorFonte: Array<{
+        valor: unknown;
+        fonte: string;
+        confianca: string;
+      }> = [];
 
       for (const item of itens) {
         const valor = item.curso[campo];
@@ -198,15 +259,24 @@ async function analisarCruzado(
       if (valoresPorFonte.length === 0) continue;
 
       // Verifica divergência
-      const valoresUnicos = Array.from(new Set(valoresPorFonte.map((v) => String(v.valor).trim().toLowerCase())));
+      const valoresUnicos = Array.from(
+        new Set(
+          valoresPorFonte.map((v) => String(v.valor).trim().toLowerCase()),
+        ),
+      );
 
       if (valoresUnicos.length > 1) {
         // Há divergência — registra
         divergencias.push({
           campo,
-          valores: valoresPorFonte.map((v) => ({ valor: v.valor, fonte: v.fonte, confianca: v.confianca })),
-          valor_sugerido: valoresPorFonte.find((v) => v.confianca === "alta")?.valor ??
-                          valoresPorFonte[0].valor,
+          valores: valoresPorFonte.map((v) => ({
+            valor: v.valor,
+            fonte: v.fonte,
+            confianca: v.confianca,
+          })),
+          valor_sugerido:
+            valoresPorFonte.find((v) => v.confianca === "alta")?.valor ??
+            valoresPorFonte[0].valor,
           aprovado: false,
         });
         // Por enquanto usa o primeiro valor
@@ -219,11 +289,20 @@ async function analisarCruzado(
 
     // Identifica campos ausentes importantes
     const CAMPOS_IMPORTANTES = [
-      "nome", "codigo_emec", "grau", "titulo_conferido", "modalidade", "carga_horaria_total",
-      "numero_reconhecimento", "data_reconhecimento", "municipio", "uf", "situacao_emec",
+      "nome",
+      "codigo_emec",
+      "grau",
+      "titulo_conferido",
+      "modalidade",
+      "carga_horaria_total",
+      "numero_reconhecimento",
+      "data_reconhecimento",
+      "municipio",
+      "uf",
+      "situacao_emec",
     ];
     const camposAusentes = CAMPOS_IMPORTANTES.filter(
-      (c) => !dadosMesclados[c] || dadosMesclados[c] === ""
+      (c) => !dadosMesclados[c] || dadosMesclados[c] === "",
     );
 
     resultado.push({
@@ -263,47 +342,69 @@ interface CursoAnalisado {
 // POST — processa múltiplos arquivos e retorna relatório de análise cruzada
 // ═══════════════════════════════════════════════════════════════════════════════
 export async function POST(request: NextRequest) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
   // Rate limit: 5 per minute for AI processing
-  const rateLimit = await verificarRateLimitERP(request, 'ia_chat', auth.userId)
+  const rateLimit = await verificarRateLimitERP(
+    request,
+    "ia_chat",
+    auth.userId,
+  );
   if (!rateLimit.allowed) {
     const response = NextResponse.json(
-      { erro: 'Muitas requisições. Tente novamente em instantes.' },
-      { status: 429 }
-    )
-    adicionarHeadersRetryAfter(response.headers, rateLimit)
-    return response
+      { erro: "Muitas requisições. Tente novamente em instantes." },
+      { status: 429 },
+    );
+    adicionarHeadersRetryAfter(response.headers, rateLimit);
+    return response;
   }
 
   try {
-    const formData = await request.formData()
-    const files = formData.getAll('files') as File[]
-    const instituicaoId = formData.get('instituicao_id') as string | null
-    const instrucaoUsuario = (formData.get('instrucao_usuario') as string | null) ?? undefined
+    const formData = await request.formData();
+    const files = formData.getAll("files") as File[];
+    const instituicaoId = formData.get("instituicao_id") as string | null;
+    const instrucaoUsuario =
+      (formData.get("instrucao_usuario") as string | null) ?? undefined;
 
     if (!files || files.length === 0) {
-      return NextResponse.json({ error: "Nenhum arquivo enviado" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Nenhum arquivo enviado" },
+        { status: 400 },
+      );
     }
 
     const errosArquivos: string[] = [];
-    const todosOsCursos: Array<{ curso: Record<string, unknown>; fonte: string }> = [];
+    const todosOsCursos: Array<{
+      curso: Record<string, unknown>;
+      fonte: string;
+    }> = [];
     const todasDuvidas: string[] = [];
     const todasObservacoes: string[] = [];
 
     // Processa cada arquivo em lotes de 5 (máximo 25 arquivos)
     const arquivosParaProcessar = files.slice(0, 25);
     const BATCH_SIZE = 5;
-    const resultados: PromiseSettledResult<{ result: Awaited<ReturnType<typeof extrairCursosDoArquivo>>; nome: string }>[] = [];
+    const resultados: PromiseSettledResult<{
+      result: Awaited<ReturnType<typeof extrairCursosDoArquivo>>;
+      nome: string;
+    }>[] = [];
     for (let i = 0; i < arquivosParaProcessar.length; i += BATCH_SIZE) {
       const lote = arquivosParaProcessar.slice(i, i + BATCH_SIZE);
       const loteResultados = await Promise.allSettled(
         lote.map(async (file) => {
           const buffer = await file.arrayBuffer();
           const bytes = new Uint8Array(buffer);
-          return { result: await extrairCursosDoArquivo(bytes, file.name, file.type, instrucaoUsuario), nome: file.name };
-        })
+          return {
+            result: await extrairCursosDoArquivo(
+              bytes,
+              file.name,
+              file.type,
+              instrucaoUsuario,
+            ),
+            nome: file.name,
+          };
+        }),
       );
       resultados.push(...loteResultados);
     }
@@ -315,47 +416,65 @@ export async function POST(request: NextRequest) {
           todosOsCursos.push({ curso, fonte: nome });
         }
         todasDuvidas.push(...result.duvidas);
-        if (result.observacoes) todasObservacoes.push(`[${nome}]: ${result.observacoes}`);
+        if (result.observacoes)
+          todasObservacoes.push(`[${nome}]: ${result.observacoes}`);
       } else {
         errosArquivos.push(`Erro ao processar arquivo: ${r.reason}`);
       }
     }
 
     if (todosOsCursos.length === 0) {
-      return NextResponse.json({
-        error: "Nenhum curso identificado nos arquivos enviados.",
-        erros: errosArquivos,
-        observacoes: todasObservacoes,
-      }, { status: 422 });
+      return NextResponse.json(
+        {
+          error: "Nenhum curso identificado nos arquivos enviados.",
+          erros: errosArquivos,
+          observacoes: todasObservacoes,
+        },
+        { status: 422 },
+      );
     }
 
     // Análise cruzada entre fontes
-    const { resultado: cursosAnalisados, duvidas_gerais } = await analisarCruzado(todosOsCursos);
+    const { resultado: cursosAnalisados, duvidas_gerais } =
+      await analisarCruzado(todosOsCursos);
 
     // Cruza com cursos existentes no banco
     const supabase = await createClient();
-    let query = supabase.from("cursos").select("id, nome, codigo_emec").eq("ativo", true);
+    let query = supabase
+      .from("cursos")
+      .select("id, nome, codigo_emec")
+      .eq("ativo", true);
     if (instituicaoId) query = query.eq("instituicao_id", instituicaoId);
     const { data: cursosExistentes } = await query;
 
     // Determina ação para cada curso
     for (const analisado of cursosAnalisados) {
-      const nomeNorm = String(analisado.dados.nome || "").toLowerCase().trim();
+      const nomeNorm = String(analisado.dados.nome || "")
+        .toLowerCase()
+        .trim();
       const codigoEmec = String(analisado.dados.codigo_emec || "").trim();
 
       const match = cursosExistentes?.find((existente) => {
         if (codigoEmec && existente.codigo_emec === codigoEmec) return true;
         const nomeEx = (existente.nome || "").toLowerCase().trim();
-        return nomeEx === nomeNorm || nomeEx.includes(nomeNorm) || nomeNorm.includes(nomeEx);
+        return (
+          nomeEx === nomeNorm ||
+          nomeEx.includes(nomeNorm) ||
+          nomeNorm.includes(nomeEx)
+        );
       });
 
       analisado._match = match ? { id: match.id, nome: match.nome } : null;
       analisado._acao = match ? "atualizar" : "criar";
     }
 
-    const totalDivergencias = cursosAnalisados.reduce((acc, c) => acc + c.divergencias.length, 0);
+    const totalDivergencias = cursosAnalisados.reduce(
+      (acc, c) => acc + c.divergencias.length,
+      0,
+    );
     const totalCamposExtras = cursosAnalisados.reduce(
-      (acc, c) => acc + Object.keys(c.dados_extras).length, 0
+      (acc, c) => acc + Object.keys(c.dados_extras).length,
+      0,
     );
 
     const response = NextResponse.json({
@@ -363,24 +482,33 @@ export async function POST(request: NextRequest) {
       cursos: cursosAnalisados,
       total: cursosAnalisados.length,
       para_criar: cursosAnalisados.filter((c) => c._acao === "criar").length,
-      para_atualizar: cursosAnalisados.filter((c) => c._acao === "atualizar").length,
+      para_atualizar: cursosAnalisados.filter((c) => c._acao === "atualizar")
+        .length,
       total_divergencias: totalDivergencias,
       total_campos_extras: totalCamposExtras,
-      duvidas: Array.from(new Set([...todasDuvidas, ...duvidas_gerais])).slice(0, 10),
+      duvidas: Array.from(new Set([...todasDuvidas, ...duvidas_gerais])).slice(
+        0,
+        10,
+      ),
       observacoes: todasObservacoes,
       erros_arquivos: errosArquivos,
     });
     adicionarHeadersRateLimit(response.headers, rateLimit);
     return response;
-
   } catch (error) {
     console.error("Erro no agente IA:", error);
     const mensagem = error instanceof Error ? error.message : String(error);
-    const isConfigError = mensagem.includes("não configurada") || mensagem.includes("OpenRouter");
-    const response = NextResponse.json({
-      error: isConfigError ? "Serviço de IA não disponível" : "Erro interno do servidor",
-      detalhe: isConfigError ? mensagem : undefined,
-    }, { status: isConfigError ? 503 : 500 });
+    const isConfigError =
+      mensagem.includes("não configurada") || mensagem.includes("OpenRouter");
+    const response = NextResponse.json(
+      {
+        error: isConfigError
+          ? "Serviço de IA não disponível"
+          : "Erro interno do servidor",
+        detalhe: isConfigError ? mensagem : undefined,
+      },
+      { status: isConfigError ? 503 : 500 },
+    );
     adicionarHeadersRateLimit(response.headers, rateLimit);
     return response;
   }
@@ -394,11 +522,19 @@ export async function PUT(request: NextRequest) {
     const { cursos, instituicao_id } = await request.json();
 
     if (!cursos || !Array.isArray(cursos) || cursos.length === 0) {
-      return NextResponse.json({ error: "Nenhum curso para salvar" }, { status: 400 });
+      return NextResponse.json(
+        { error: "Nenhum curso para salvar" },
+        { status: 400 },
+      );
     }
 
     const supabase = await createClient();
-    const resultados: Array<{ nome: string; acao: string; id?: string; erro?: string }> = [];
+    const resultados: Array<{
+      nome: string;
+      acao: string;
+      id?: string;
+      erro?: string;
+    }> = [];
 
     for (const item of cursos) {
       if (!item._selecionado || item._acao === "ignorar") continue;
@@ -406,10 +542,22 @@ export async function PUT(request: NextRequest) {
       // Remove campos internos e monta objeto limpo
       const dados = item.dados as Record<string, unknown>;
       const dadosLimpos: Record<string, unknown> = {};
-      const CAMPOS_INTERNOS = new Set(["_acao", "_selecionado", "_match", "_fonte", "_confianca", "_dados_extras"]);
+      const CAMPOS_INTERNOS = new Set([
+        "_acao",
+        "_selecionado",
+        "_match",
+        "_fonte",
+        "_confianca",
+        "_dados_extras",
+      ]);
 
       for (const [k, v] of Object.entries(dados)) {
-        if (!CAMPOS_INTERNOS.has(k) && v !== "" && v !== undefined && v !== null) {
+        if (
+          !CAMPOS_INTERNOS.has(k) &&
+          v !== "" &&
+          v !== undefined &&
+          v !== null
+        ) {
           dadosLimpos[k] = v;
         }
       }
@@ -456,8 +604,11 @@ export async function PUT(request: NextRequest) {
     });
   } catch (error) {
     console.error("Erro ao salvar cursos:", error);
-    return NextResponse.json({
-      error: "Erro interno do servidor",
-    }, { status: 500 });
+    return NextResponse.json(
+      {
+        error: "Erro interno do servidor",
+      },
+      { status: 500 },
+    );
   }
 }

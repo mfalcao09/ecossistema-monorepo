@@ -4,15 +4,17 @@
 // POST: criar novo parâmetro
 // =============================================================================
 
-import { NextRequest, NextResponse } from 'next/server'
-import {
-  listarParametros,
-  criarParametro,
-} from '@/lib/supabase/parametros'
-import type { ParametroCreateInput } from '@/types/configuracoes'
-import { protegerRota } from '@/lib/security/api-guard'
-import { sanitizarErro } from '@/lib/security/sanitize-error'
-import { parametroSchema } from '@/lib/security/zod-schemas'
+import { NextRequest, NextResponse } from "next/server";
+import { listarParametros, criarParametro } from "@/lib/supabase/parametros";
+import type { ParametroCreateInput } from "@/types/configuracoes";
+import { protegerRota } from "@/lib/security/api-guard";
+import { sanitizarErro } from "@/lib/security/sanitize-error";
+import { parametroSchema } from "@/lib/security/zod-schemas";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 /**
  * GET /api/configuracoes/parametros
@@ -20,26 +22,30 @@ import { parametroSchema } from '@/lib/security/zod-schemas'
  * Query params:
  *   - modulo?: string (opcional, filtra por módulo)
  */
-export const GET = protegerRota(async (request: NextRequest) => {
-  try {
-    const { searchParams } = new URL(request.url)
-    const modulo = searchParams.get('modulo') || undefined
+export const GET = protegerRota(
+  async (request: NextRequest) => {
+    try {
+      const { searchParams } = new URL(request.url);
+      const modulo = searchParams.get("modulo") || undefined;
 
-    const parametros = await listarParametros(modulo)
+      const parametros = await listarParametros(modulo);
 
-    return NextResponse.json({
-      success: true,
-      data: parametros,
-      count: parametros.length,
-    })
-  } catch (error) {
-    const message = error instanceof Error ? error.message : 'Erro desconhecido'
-    return NextResponse.json(
-      { success: false, error: message },
-      { status: 500 }
-    )
-  }
-}, { skipCSRF: true })
+      return NextResponse.json({
+        success: true,
+        data: parametros,
+        count: parametros.length,
+      });
+    } catch (error) {
+      const message =
+        error instanceof Error ? error.message : "Erro desconhecido";
+      return NextResponse.json(
+        { success: false, error: message },
+        { status: 500 },
+      );
+    }
+  },
+  { skipCSRF: true },
+);
 
 /**
  * POST /api/configuracoes/parametros
@@ -48,32 +54,37 @@ export const GET = protegerRota(async (request: NextRequest) => {
  */
 export const POST = protegerRota(async (request: NextRequest) => {
   try {
-    const body = await request.json()
+    const body = await request.json();
 
     // Validação com Zod
-    const parsed = parametroSchema.safeParse(body)
+    const parsed = parametroSchema.safeParse(body);
     if (!parsed.success) {
       return NextResponse.json(
-        { success: false, error: 'Dados inválidos', detalhes: parsed.error.flatten().fieldErrors },
-        { status: 400 }
-      )
+        {
+          success: false,
+          error: "Dados inválidos",
+          detalhes: parsed.error.flatten().fieldErrors,
+        },
+        { status: 400 },
+      );
     }
 
-    const parametro = await criarParametro(parsed.data as ParametroCreateInput)
+    const parametro = await criarParametro(parsed.data as ParametroCreateInput);
 
     return NextResponse.json(
       {
         success: true,
         data: parametro,
-        message: 'Parâmetro criado com sucesso',
+        message: "Parâmetro criado com sucesso",
       },
-      { status: 201 }
-    )
+      { status: 201 },
+    );
   } catch (error) {
-    const message = error instanceof Error ? error.message : 'Erro desconhecido'
+    const message =
+      error instanceof Error ? error.message : "Erro desconhecido";
     return NextResponse.json(
       { success: false, error: message },
-      { status: 500 }
-    )
+      { status: 500 },
+    );
   }
-})
+});

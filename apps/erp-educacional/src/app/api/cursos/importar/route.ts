@@ -1,6 +1,11 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { verificarAuth } from '@/lib/security/api-guard'
-import { sanitizarErro } from '@/lib/security/sanitize-error'
+import { NextRequest, NextResponse } from "next/server";
+import { verificarAuth } from "@/lib/security/api-guard";
+import { sanitizarErro } from "@/lib/security/sanitize-error";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ─── Mapeamento de colunas do e-MEC → campos internos ─────────────────────────
 // O CSV do e-MEC usa separador ";" e encoding ISO-8859-1 (ou Windows-1252)
@@ -22,21 +27,26 @@ function parseDateBR(v: string): string {
 
 function mapGrau(v: string): string {
   const map: Record<string, string> = {
-    "bacharelado": "bacharel",
-    "licenciatura": "licenciado",
-    "tecnológico": "tecnologo",
-    "tecnologico": "tecnologo",
-    "especialização": "especialista",
-    "especializacao": "especialista",
-    "mestrado": "mestre",
-    "doutorado": "doutor",
+    bacharelado: "bacharel",
+    licenciatura: "licenciado",
+    tecnológico: "tecnologo",
+    tecnologico: "tecnologo",
+    especialização: "especialista",
+    especializacao: "especialista",
+    mestrado: "mestre",
+    doutorado: "doutor",
   };
   return map[v.toLowerCase().trim()] ?? "bacharel";
 }
 
 function mapModalidade(v: string): string {
   const lower = v.toLowerCase();
-  if (lower.includes("distância") || lower.includes("distancia") || lower.includes("ead")) return "ead";
+  if (
+    lower.includes("distância") ||
+    lower.includes("distancia") ||
+    lower.includes("ead")
+  )
+    return "ead";
   if (lower.includes("híbrido") || lower.includes("hibrido")) return "hibrido";
   return "presencial";
 }
@@ -204,46 +214,49 @@ function splitCSVLine(line: string): string[] {
 
 // POST /api/cursos/importar — recebe CSV do e-MEC, retorna prévia dos cursos parseados
 export async function POST(request: NextRequest) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
   try {
-    const formData = await request.formData()
-    const file = formData.get('file') as File | null
+    const formData = await request.formData();
+    const file = formData.get("file") as File | null;
     if (!file)
-      return NextResponse.json({ error: 'Arquivo não enviado' }, { status: 400 })
+      return NextResponse.json(
+        { error: "Arquivo não enviado" },
+        { status: 400 },
+      );
 
     // Lê como ArrayBuffer e decodifica em Windows-1252 / Latin-1
-    const buffer = await file.arrayBuffer()
-    const decoder = new TextDecoder('windows-1252')
-    const text = decoder.decode(buffer)
+    const buffer = await file.arrayBuffer();
+    const decoder = new TextDecoder("windows-1252");
+    const text = decoder.decode(buffer);
 
-    const lines = text.split(/\r?\n/).filter(l => l.trim())
+    const lines = text.split(/\r?\n/).filter((l) => l.trim());
     if (lines.length < 2)
       return NextResponse.json(
-        { error: 'CSV vazio ou sem dados' },
-        { status: 400 }
-      )
+        { error: "CSV vazio ou sem dados" },
+        { status: 400 },
+      );
 
     // Linha 0 = cabeçalho, linha 1+ = dados
-    const cursos: Record<string, unknown>[] = []
-    const erros: string[] = []
+    const cursos: Record<string, unknown>[] = [];
+    const erros: string[] = [];
 
     for (let i = 1; i < lines.length; i++) {
-      const cols = splitCSVLine(lines[i])
-      const curso = parseCursoFromRow(cols)
+      const cols = splitCSVLine(lines[i]);
+      const curso = parseCursoFromRow(cols);
       if (curso) {
-        cursos.push(curso)
+        cursos.push(curso);
       } else if (lines[i].trim()) {
-        erros.push(`Linha ${i + 1}: não foi possível parsear`)
+        erros.push(`Linha ${i + 1}: não foi possível parsear`);
       }
     }
 
-    return NextResponse.json({ cursos, total: cursos.length, erros })
+    return NextResponse.json({ cursos, total: cursos.length, erros });
   } catch (err) {
     return NextResponse.json(
       { error: sanitizarErro(String(err), 500) },
-      { status: 500 }
-    )
+      { status: 500 },
+    );
   }
 }

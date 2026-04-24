@@ -24,106 +24,121 @@
  * ============================================================
  */
 
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from "next/server";
 import {
   verificarRevogacao,
   obterEstatisticasCache,
   type RevocationCheckResult,
-} from '@/lib/security/certificate-revocation'
+} from "@/lib/security/certificate-revocation";
 import {
   validarCadeiaCertificado,
   formatarResultadoValidacao,
   type ResultadoValidacaoCadeia,
-} from '@/lib/security/certificate-chain'
-import { verificarAssinaturaXML, extrairCertificados } from '@/lib/security/icp-brasil'
-import { verificarAuthComPermissao, erroNaoEncontrado, erroInterno } from '@/lib/security/api-guard'
-import { logSecurityEvent } from '@/lib/security/security-logger'
-import { registrarAuditoria } from '@/lib/security/audit-trail'
-import { AcaoAuditoria, EntidadeAuditavel } from '@/lib/security/audit-trail.types'
-import { sanitizarErro } from '@/lib/security/sanitize-error'
+} from "@/lib/security/certificate-chain";
+import {
+  verificarAssinaturaXML,
+  extrairCertificados,
+} from "@/lib/security/icp-brasil";
+import {
+  verificarAuthComPermissao,
+  erroNaoEncontrado,
+  erroInterno,
+} from "@/lib/security/api-guard";
+import { logSecurityEvent } from "@/lib/security/security-logger";
+import { registrarAuditoria } from "@/lib/security/audit-trail";
+import {
+  AcaoAuditoria,
+  EntidadeAuditavel,
+} from "@/lib/security/audit-trail.types";
+import { sanitizarErro } from "@/lib/security/sanitize-error";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ── TIPOS ─────────────────────────────────────────────────────────
 
 interface VerificacaoCertificadoRequest {
   /** Se deve verificar revogação via CRL/OCSP */
-  verificarRevogacao?: boolean
+  verificarRevogacao?: boolean;
 
   /** Se deve verificar cadeia completa */
-  verificarCadeia?: boolean
+  verificarCadeia?: boolean;
 
   /** XML do diploma (se for análise offline) */
-  xml?: string
+  xml?: string;
 }
 
 interface ResultadoVerificacaoCertificado {
   /** ID do diploma */
-  diplomaId: string
+  diplomaId: string;
 
   /** Se os certificados são válidos */
-  valido: boolean
+  valido: boolean;
 
   /** Se algum certificado foi revogado */
-  algumRevogado: boolean
+  algumRevogado: boolean;
 
   /** Detalhes de cada certificado verificado */
-  certificados: ResultadoCertificado[]
+  certificados: ResultadoCertificado[];
 
   /** Resultado da validação de cadeia (se solicitado) */
-  cadeia?: ResultadoValidacaoCadeia
+  cadeia?: ResultadoValidacaoCadeia;
 
   /** Estatísticas de cache */
   cache: {
-    crlCacheSize: number
-    ocspCacheSize: number
-  }
+    crlCacheSize: number;
+    ocspCacheSize: number;
+  };
 
   /** Timestamp da verificação */
-  verificadoEm: string
+  verificadoEm: string;
 
   /** Tempo de execução em ms */
-  tempoExecucaoMs: number
+  tempoExecucaoMs: number;
 }
 
 interface ResultadoCertificado {
   /** Índice do certificado na cadeia */
-  indice: number
+  indice: number;
 
   /** CN do titular */
-  titular: string
+  titular: string;
 
   /** Serial number */
-  serial: string
+  serial: string;
 
   /** Resultado da verificação de revogação */
-  revogacao: RevocationCheckResult
+  revogacao: RevocationCheckResult;
 
   /** Validade temporal */
-  validoTemporalmente: boolean
+  validoTemporalmente: boolean;
 }
 
 // ── HANDLER POST ──────────────────────────────────────────────────
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ): Promise<NextResponse> {
-  const inicio = Date.now()
-  const { id } = await params
-  const diplomaId = id
+  const inicio = Date.now();
+  const { id } = await params;
+  const diplomaId = id;
 
   try {
     // ── 1. Validação de autenticação ──────────────────
-    const auth = await verificarAuthComPermissao(req, 'diplomas', 'acessar')
+    const auth = await verificarAuthComPermissao(req, "diplomas", "acessar");
 
     if (auth instanceof NextResponse) {
-      return auth
+      return auth;
     }
 
     // ── 2. Parse do request ──────────────────────────
-    let body: VerificacaoCertificadoRequest = {}
+    let body: VerificacaoCertificadoRequest = {};
 
     try {
-      body = await req.json()
+      body = await req.json();
     } catch {
       // Body opcional — usar valores padrão
     }
@@ -132,50 +147,55 @@ export async function POST(
       verificarRevogacao: shouldVerifyRevocation = true,
       verificarCadeia: shouldVerifyChain = true,
       xml: xmlContent,
-    } = body
+    } = body;
 
     // ── 3. Obter diploma e XMLs ──────────────────────
-    const diplomaXML = xmlContent || (await obterXMLDiploma(diplomaId))
+    const diplomaXML = xmlContent || (await obterXMLDiploma(diplomaId));
 
     if (!diplomaXML) {
       return NextResponse.json(
-        { erro: 'Diploma não encontrado ou sem XMLs assinados' },
-        { status: 404 }
-      )
+        { erro: "Diploma não encontrado ou sem XMLs assinados" },
+        { status: 404 },
+      );
     }
 
     // ── 4. Extrair certificados do XML ───────────────
     // Extrair certificados em formato de informação
-    const certificadosInfo = extrairCertificados(diplomaXML)
+    const certificadosInfo = extrairCertificados(diplomaXML);
 
     // Também extrair PEMs brutos para verificação de revogação
-    const certificadosPEM: string[] = []
-    const certBlockMatches = diplomaXML.match(/<(?:ds:)?X509Certificate[^>]*>([\s\S]*?)<\/(?:ds:)?X509Certificate>/gi) || []
+    const certificadosPEM: string[] = [];
+    const certBlockMatches =
+      diplomaXML.match(
+        /<(?:ds:)?X509Certificate[^>]*>([\s\S]*?)<\/(?:ds:)?X509Certificate>/gi,
+      ) || [];
     for (const block of certBlockMatches) {
-      const match = block.match(/>([^<]+)</)
+      const match = block.match(/>([^<]+)</);
       if (match) {
         // Reformatar para PEM
-        const certData = match[1].replace(/\s+/g, '')
-        certificadosPEM.push(`-----BEGIN CERTIFICATE-----\n${certData.match(/.{1,64}/g)?.join('\n') || certData}\n-----END CERTIFICATE-----`)
+        const certData = match[1].replace(/\s+/g, "");
+        certificadosPEM.push(
+          `-----BEGIN CERTIFICATE-----\n${certData.match(/.{1,64}/g)?.join("\n") || certData}\n-----END CERTIFICATE-----`,
+        );
       }
     }
 
-    const certificados = certificadosInfo
+    const certificados = certificadosInfo;
 
     if (certificados.length === 0) {
       await logSecurityEvent({
-        tipo: 'DATA_ACCESS',
-        ip: req.headers.get('x-forwarded-for') || 'unknown',
+        tipo: "DATA_ACCESS",
+        ip: req.headers.get("x-forwarded-for") || "unknown",
         userId: auth.userId,
-        risco: 'baixo',
+        risco: "baixo",
         rota: req.nextUrl.pathname,
         metodo: req.method,
         detalhes: {
-          acao: 'verificar-certificado',
+          acao: "verificar-certificado",
           diplomaId,
-          resultado: 'nenhum-certificado',
+          resultado: "nenhum-certificado",
         },
-      })
+      });
 
       return NextResponse.json(
         {
@@ -187,94 +207,102 @@ export async function POST(
           verificadoEm: new Date().toISOString(),
           tempoExecucaoMs: Date.now() - inicio,
         },
-        { status: 200 }
-      )
+        { status: 200 },
+      );
     }
 
     // ── 5. Verificar cada certificado ────────────────
-    const resultadosCertificados: ResultadoCertificado[] = []
-    let algumRevogado = false
+    const resultadosCertificados: ResultadoCertificado[] = [];
+    let algumRevogado = false;
 
     for (let i = 0; i < certificados.length; i++) {
-      const certInfo = certificados[i]
+      const certInfo = certificados[i];
 
       try {
         // Verificar revogação
-        let revogacaoResult: RevocationCheckResult | null = null
+        let revogacaoResult: RevocationCheckResult | null = null;
 
         if (shouldVerifyRevocation) {
-          const certPEM = i < certificadosPEM.length ? certificadosPEM[i] : undefined
-          const issuerPEM = i + 1 < certificadosPEM.length ? certificadosPEM[i + 1] : undefined
-          revogacaoResult = certPEM ? await verificarRevogacao(certPEM, issuerPEM) : {
-            revogado: false,
-            metodo: 'nenhum',
-            status: 'desconhecido',
-            verificadoEm: new Date(),
-            detalhes: 'Certificado PEM não disponível',
-          }
+          const certPEM =
+            i < certificadosPEM.length ? certificadosPEM[i] : undefined;
+          const issuerPEM =
+            i + 1 < certificadosPEM.length ? certificadosPEM[i + 1] : undefined;
+          revogacaoResult = certPEM
+            ? await verificarRevogacao(certPEM, issuerPEM)
+            : {
+                revogado: false,
+                metodo: "nenhum",
+                status: "desconhecido",
+                verificadoEm: new Date(),
+                detalhes: "Certificado PEM não disponível",
+              };
         } else {
           revogacaoResult = {
             revogado: false,
-            metodo: 'nenhum',
-            status: 'desconhecido',
+            metodo: "nenhum",
+            status: "desconhecido",
             verificadoEm: new Date(),
-            detalhes: 'Verificação de revogação desabilitada',
-          }
+            detalhes: "Verificação de revogação desabilitada",
+          };
         }
 
         // Verificar validade temporal
-        const validoTemporalmente = verificarValidadeTemporalCertificado(certInfo)
+        const validoTemporalmente =
+          verificarValidadeTemporalCertificado(certInfo);
 
         const resultado: ResultadoCertificado = {
           indice: i,
-          titular: certInfo.titular || 'Desconhecido',
-          serial: certInfo.serial || 'Desconhecido',
+          titular: certInfo.titular || "Desconhecido",
+          serial: certInfo.serial || "Desconhecido",
           revogacao: revogacaoResult,
           validoTemporalmente,
-        }
+        };
 
-        resultadosCertificados.push(resultado)
+        resultadosCertificados.push(resultado);
 
         if (revogacaoResult.revogado) {
-          algumRevogado = true
+          algumRevogado = true;
         }
       } catch (erro) {
-        console.error(`[API] Erro ao verificar certificado ${i}:`, erro)
+        console.error(`[API] Erro ao verificar certificado ${i}:`, erro);
 
         resultadosCertificados.push({
           indice: i,
-          titular: certInfo.titular || 'Desconhecido',
-          serial: certInfo.serial || 'Desconhecido',
+          titular: certInfo.titular || "Desconhecido",
+          serial: certInfo.serial || "Desconhecido",
           revogacao: {
             revogado: false,
-            metodo: 'nenhum',
-            status: 'erro',
+            metodo: "nenhum",
+            status: "erro",
             verificadoEm: new Date(),
-            detalhes: erro instanceof Error ? erro.message : 'Erro desconhecido',
+            detalhes:
+              erro instanceof Error ? erro.message : "Erro desconhecido",
           },
           validoTemporalmente: false,
-        })
+        });
       }
     }
 
     // ── 6. Validar cadeia (opcional) ──────────────────
-    let resultadoCadeia: ResultadoValidacaoCadeia | undefined
+    let resultadoCadeia: ResultadoValidacaoCadeia | undefined;
 
     if (shouldVerifyChain) {
       try {
         // Usar certificadosPEM já extraídos acima
         resultadoCadeia = await validarCadeiaCertificado(
           certificadosPEM,
-          shouldVerifyRevocation
-        )
+          shouldVerifyRevocation,
+        );
       } catch (erro) {
-        console.error('[API] Erro ao validar cadeia:', erro)
+        console.error("[API] Erro ao validar cadeia:", erro);
         // Continuar mesmo se falhar na cadeia
       }
     }
 
     // ── 7. Determinar resultado final ────────────────
-    const valido = !algumRevogado && resultadosCertificados.every(r => r.validoTemporalmente)
+    const valido =
+      !algumRevogado &&
+      resultadosCertificados.every((r) => r.validoTemporalmente);
 
     const resposta: ResultadoVerificacaoCertificado = {
       diplomaId,
@@ -285,7 +313,7 @@ export async function POST(
       cache: obterEstatisticasCache(),
       verificadoEm: new Date().toISOString(),
       tempoExecucaoMs: Date.now() - inicio,
-    }
+    };
 
     // ── 8. Log de auditoria ──────────────────────────
     try {
@@ -294,59 +322,62 @@ export async function POST(
         acao: AcaoAuditoria.VISUALIZAR,
         entidade: EntidadeAuditavel.ASSINATURA,
         entidade_id: diplomaId,
-        ip: req.headers.get('x-forwarded-for') || undefined,
+        ip: req.headers.get("x-forwarded-for") || undefined,
         detalhes: {
-          verificacao_tipo: 'revogacao-certificado',
+          verificacao_tipo: "revogacao-certificado",
           certificados_verificados: resultadosCertificados.length,
           algum_revogado: algumRevogado,
           cadeia_verificada: shouldVerifyChain,
           resultado_final: valido,
           tempo_ms: Date.now() - inicio,
         },
-      })
+      });
     } catch (erro) {
-      console.error('[API] Erro ao registrar auditoria:', erro)
+      console.error("[API] Erro ao registrar auditoria:", erro);
     }
 
     // ── 9. Log de segurança ──────────────────────────
     await logSecurityEvent({
-      tipo: 'DATA_ACCESS',
-      ip: req.headers.get('x-forwarded-for') || 'unknown',
+      tipo: "DATA_ACCESS",
+      ip: req.headers.get("x-forwarded-for") || "unknown",
       userId: auth.userId,
-      risco: 'baixo',
+      risco: "baixo",
       rota: req.nextUrl.pathname,
       metodo: req.method,
       detalhes: {
-        acao: 'verificar-certificado',
+        acao: "verificar-certificado",
         diplomaId,
-        resultado: algumRevogado ? 'revogado' : 'valido',
+        resultado: algumRevogado ? "revogado" : "valido",
         certificados: resultadosCertificados.length,
       },
-    })
+    });
 
     // ── 10. Resposta ──────────────────────────────────
-    const statusCode = valido ? 200 : 200 // 200 mesmo que revogado (informação, não erro)
+    const statusCode = valido ? 200 : 200; // 200 mesmo que revogado (informação, não erro)
 
-    return NextResponse.json(resposta, { status: statusCode })
+    return NextResponse.json(resposta, { status: statusCode });
   } catch (erro) {
-    console.error('[API] Erro na verificação de certificado:', erro)
+    console.error("[API] Erro na verificação de certificado:", erro);
 
-    const errorMessage = erro instanceof Error ? sanitizarErro(erro.message) : 'Erro ao verificar certificados'
+    const errorMessage =
+      erro instanceof Error
+        ? sanitizarErro(erro.message)
+        : "Erro ao verificar certificados";
 
     await logSecurityEvent({
-      tipo: 'ADMIN_ACTION',
-      ip: req.headers.get('x-forwarded-for') || 'unknown',
-      risco: 'alto',
+      tipo: "ADMIN_ACTION",
+      ip: req.headers.get("x-forwarded-for") || "unknown",
+      risco: "alto",
       rota: req.nextUrl.pathname,
       metodo: req.method,
       detalhes: {
-        acao: 'verificar-certificado-erro',
+        acao: "verificar-certificado-erro",
         diplomaId,
         erro: errorMessage,
       },
-    })
+    });
 
-    return erroInterno(errorMessage)
+    return erroInterno(errorMessage);
   }
 }
 
@@ -359,29 +390,29 @@ export async function POST(
  */
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ): Promise<NextResponse> {
-  const { id } = await params
-  const diplomaId = id
+  const { id } = await params;
+  const diplomaId = id;
 
   try {
-    const auth = await verificarAuthComPermissao(req, 'diplomas', 'acessar')
+    const auth = await verificarAuthComPermissao(req, "diplomas", "acessar");
 
     if (auth instanceof NextResponse) {
-      return auth
+      return auth;
     }
 
     // Retornar status de cache e dicas para usar POST
     return NextResponse.json({
-      mensagem: 'Use POST para verificar certificados',
+      mensagem: "Use POST para verificar certificados",
       cache: obterEstatisticasCache(),
-      documentacao: '/api/docs/certificado-verificacao',
-    })
+      documentacao: "/api/docs/certificado-verificacao",
+    });
   } catch (erro) {
     return NextResponse.json(
-      { erro: 'Erro ao obter informações' },
-      { status: 500 }
-    )
+      { erro: "Erro ao obter informações" },
+      { status: 500 },
+    );
   }
 }
 
@@ -397,33 +428,31 @@ async function obterXMLDiploma(diplomaId: string): Promise<string | null> {
     // SELECT xml_gerado FROM xml_gerados WHERE diploma_id = $1 AND tipo = 'DiplomaDigital'
 
     // Por ora, retornar null (será necessário integrar com banco)
-    console.log(`[API] Obtendo XML para diploma ${diplomaId}`)
-    return null
+    console.log(`[API] Obtendo XML para diploma ${diplomaId}`);
+    return null;
   } catch (erro) {
-    console.error('[API] Erro ao obter XML:', erro)
-    return null
+    console.error("[API] Erro ao obter XML:", erro);
+    return null;
   }
 }
 
 /**
  * Verifica se certificado é válido temporalmente
  */
-function verificarValidadeTemporalCertificado(
-  certInfo: any
-): boolean {
+function verificarValidadeTemporalCertificado(certInfo: any): boolean {
   try {
-    const agora = new Date()
+    const agora = new Date();
 
     const validoDe = certInfo.valido_de
       ? new Date(certInfo.valido_de)
-      : new Date(agora.getTime() - 365 * 24 * 60 * 60 * 1000)
+      : new Date(agora.getTime() - 365 * 24 * 60 * 60 * 1000);
 
     const validoAte = certInfo.valido_ate
       ? new Date(certInfo.valido_ate)
-      : new Date(agora.getTime() + 365 * 24 * 60 * 60 * 1000)
+      : new Date(agora.getTime() + 365 * 24 * 60 * 60 * 1000);
 
-    return agora >= validoDe && agora <= validoAte
+    return agora >= validoDe && agora <= validoAte;
   } catch {
-    return false
+    return false;
   }
 }

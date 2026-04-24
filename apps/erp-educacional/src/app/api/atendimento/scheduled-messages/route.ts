@@ -10,14 +10,31 @@ import { z } from "zod";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 const createSchema = z.object({
   contact_id: z.string().uuid(),
   inbox_id: z.string().uuid(),
   content: z.string().optional(),
-  content_type: z.enum(["text", "template", "image", "audio", "video", "file"]).default("text"),
+  content_type: z
+    .enum(["text", "template", "image", "audio", "video", "file"])
+    .default("text"),
   template_id: z.string().uuid().optional(),
   variables: z.array(z.string()).default([]),
-  channel: z.enum(["whatsapp", "instagram", "messenger", "telegram", "email", "sms", "api"]).default("whatsapp"),
+  channel: z
+    .enum([
+      "whatsapp",
+      "instagram",
+      "messenger",
+      "telegram",
+      "email",
+      "sms",
+      "api",
+    ])
+    .default("whatsapp"),
   scheduled_at: z.string().datetime({ offset: true }),
   timezone: z.string().default("America/Campo_Grande"),
   recurrence_rule: z.record(z.any()).optional(),
@@ -28,7 +45,8 @@ export async function GET(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  if (!user)
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const admin = createAdminClient();
   const q = request.nextUrl.searchParams;
@@ -58,7 +76,8 @@ export async function GET(request: NextRequest) {
   if (contactId) query = query.eq("contact_id", contactId);
 
   const { data, error, count } = await query;
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error)
+    return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ items: data ?? [], total: count ?? 0 });
 }
 
@@ -67,7 +86,8 @@ export async function POST(request: NextRequest) {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  if (!user) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
+  if (!user)
+    return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
   const parsed = createSchema.safeParse(await request.json().catch(() => ({})));
   if (!parsed.success) {
@@ -79,10 +99,16 @@ export async function POST(request: NextRequest) {
 
   const d = parsed.data;
   if (d.content_type === "text" && !d.content?.trim()) {
-    return NextResponse.json({ error: "content_required_for_text" }, { status: 400 });
+    return NextResponse.json(
+      { error: "content_required_for_text" },
+      { status: 400 },
+    );
   }
   if (d.content_type === "template" && !d.template_id) {
-    return NextResponse.json({ error: "template_id_required_for_template" }, { status: 400 });
+    return NextResponse.json(
+      { error: "template_id_required_for_template" },
+      { status: 400 },
+    );
   }
 
   const admin = createAdminClient();
@@ -105,6 +131,7 @@ export async function POST(request: NextRequest) {
     .select()
     .single();
 
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error)
+    return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ scheduled_message: data }, { status: 201 });
 }

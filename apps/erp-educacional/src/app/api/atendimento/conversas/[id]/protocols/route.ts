@@ -10,6 +10,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { protegerRota } from "@/lib/security/api-guard";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 function getConversationId(req: NextRequest): string {
   const parts = req.nextUrl.pathname.split("/");
   return parts[parts.length - 2];

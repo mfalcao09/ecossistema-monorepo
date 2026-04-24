@@ -1,13 +1,22 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { withPermission } from "@/lib/atendimento/permissions";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 type Params = { params: Promise<{ id: string }> };
 
 interface CreateMessageBody {
   body: string;
   reply_to_id?: string | null;
-  mentions?: string[];                                  // agent_ids mencionados
-  refs?: Array<{ type: "conversation" | "deal" | "contact"; id: string; label?: string }>;
+  mentions?: string[]; // agent_ids mencionados
+  refs?: Array<{
+    type: "conversation" | "deal" | "contact";
+    id: string;
+    label?: string;
+  }>;
 }
 
 /**
@@ -17,7 +26,13 @@ interface CreateMessageBody {
  * Autorização: autenticado + membro do chat.
  */
 
-async function assertMember(supabase: Awaited<ReturnType<typeof import("@/lib/supabase/server").createClient>>, chatId: string, userId: string) {
+async function assertMember(
+  supabase: Awaited<
+    ReturnType<typeof import("@/lib/supabase/server").createClient>
+  >,
+  chatId: string,
+  userId: string,
+) {
   const { data: agent } = await supabase
     .from("atendimento_agents")
     .select("id")
@@ -35,13 +50,19 @@ async function assertMember(supabase: Awaited<ReturnType<typeof import("@/lib/su
   return member ? agent.id : null;
 }
 
-export const GET = withPermission("team_chats", "view")(async (req: NextRequest, ctx) => {
+export const GET = withPermission(
+  "team_chats",
+  "view",
+)(async (req: NextRequest, ctx) => {
   const { params } = ctx as unknown as Params;
   const { id: chatId } = await params;
 
   const agentId = await assertMember(ctx.supabase, chatId, ctx.userId);
   if (!agentId) {
-    return NextResponse.json({ erro: "Não é membro desse chat." }, { status: 403 });
+    return NextResponse.json(
+      { erro: "Não é membro desse chat." },
+      { status: 403 },
+    );
   }
 
   const url = new URL(req.url);
@@ -50,7 +71,9 @@ export const GET = withPermission("team_chats", "view")(async (req: NextRequest,
 
   let query = ctx.supabase
     .from("team_messages")
-    .select("id, chat_id, author_id, body, reply_to_id, mentions, refs, reactions, edited_at, deleted_at, created_at, atendimento_agents:author_id(id, name, avatar_url)")
+    .select(
+      "id, chat_id, author_id, body, reply_to_id, mentions, refs, reactions, edited_at, deleted_at, created_at, atendimento_agents:author_id(id, name, avatar_url)",
+    )
     .eq("chat_id", chatId)
     .order("created_at", { ascending: false })
     .limit(limit);
@@ -64,13 +87,19 @@ export const GET = withPermission("team_chats", "view")(async (req: NextRequest,
   return NextResponse.json({ messages: (data ?? []).reverse() });
 });
 
-export const POST = withPermission("team_chats", "create")(async (req: NextRequest, ctx) => {
+export const POST = withPermission(
+  "team_chats",
+  "create",
+)(async (req: NextRequest, ctx) => {
   const { params } = ctx as unknown as Params;
   const { id: chatId } = await params;
 
   const agentId = await assertMember(ctx.supabase, chatId, ctx.userId);
   if (!agentId) {
-    return NextResponse.json({ erro: "Não é membro desse chat." }, { status: 403 });
+    return NextResponse.json(
+      { erro: "Não é membro desse chat." },
+      { status: 403 },
+    );
   }
 
   const body = (await req.json().catch(() => null)) as CreateMessageBody | null;
@@ -78,7 +107,10 @@ export const POST = withPermission("team_chats", "create")(async (req: NextReque
     return NextResponse.json({ erro: "body obrigatório." }, { status: 400 });
   }
   if (body.body.length > 8000) {
-    return NextResponse.json({ erro: "Mensagem maior que 8000 chars." }, { status: 400 });
+    return NextResponse.json(
+      { erro: "Mensagem maior que 8000 chars." },
+      { status: 400 },
+    );
   }
 
   // Valida reply_to_id (se fornecido, deve pertencer ao mesmo chat)
@@ -89,12 +121,23 @@ export const POST = withPermission("team_chats", "create")(async (req: NextReque
       .eq("id", body.reply_to_id)
       .maybeSingle();
     if (!parent || parent.chat_id !== chatId) {
-      return NextResponse.json({ erro: "reply_to_id inválido." }, { status: 400 });
+      return NextResponse.json(
+        { erro: "reply_to_id inválido." },
+        { status: 400 },
+      );
     }
   }
 
-  const mentions = Array.isArray(body.mentions) ? body.mentions.filter((x): x is string => typeof x === "string") : [];
-  const refs = Array.isArray(body.refs) ? body.refs.filter((r) => r && typeof r.id === "string" && typeof r.type === "string").slice(0, 10) : [];
+  const mentions = Array.isArray(body.mentions)
+    ? body.mentions.filter((x): x is string => typeof x === "string")
+    : [];
+  const refs = Array.isArray(body.refs)
+    ? body.refs
+        .filter(
+          (r) => r && typeof r.id === "string" && typeof r.type === "string",
+        )
+        .slice(0, 10)
+    : [];
 
   const { data, error } = await ctx.supabase
     .from("team_messages")
@@ -106,7 +149,9 @@ export const POST = withPermission("team_chats", "create")(async (req: NextReque
       mentions,
       refs,
     })
-    .select("id, chat_id, author_id, body, reply_to_id, mentions, refs, reactions, created_at")
+    .select(
+      "id, chat_id, author_id, body, reply_to_id, mentions, refs, reactions, created_at",
+    )
     .single();
 
   if (error) return NextResponse.json({ erro: error.message }, { status: 500 });

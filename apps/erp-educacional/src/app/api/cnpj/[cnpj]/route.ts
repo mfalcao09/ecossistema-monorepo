@@ -1,7 +1,12 @@
-import { verificarAuth } from '@/lib/security/api-guard'
+import { verificarAuth } from "@/lib/security/api-guard";
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ============================================================
 // API de CNPJ — Multi-API com Fallback + Cache no Supabase
@@ -61,7 +66,7 @@ async function buscarNoCache(cnpj: string): Promise<CNPJResult | null> {
 async function salvarNoCache(
   cnpj: string,
   result: CNPJResult,
-  dadosCompletos: Record<string, unknown>
+  dadosCompletos: Record<string, unknown>,
 ): Promise<void> {
   try {
     const supabase = await createClient();
@@ -82,7 +87,7 @@ async function salvarNoCache(
         data_consulta: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       },
-      { onConflict: "cnpj" }
+      { onConflict: "cnpj" },
     );
   } catch {
     // Falha no cache não deve bloquear a resposta
@@ -100,7 +105,7 @@ async function buscarBrasilAPI(cnpj: string): Promise<CNPJResult | null> {
 
     const response = await fetch(
       `https://brasilapi.com.br/api/cnpj/v1/${cnpj}`,
-      { signal: controller.signal, cache: "no-store" }
+      { signal: controller.signal, cache: "no-store" },
     );
     clearTimeout(timeout);
 
@@ -137,14 +142,11 @@ async function buscarReceitaWS(cnpj: string): Promise<CNPJResult | null> {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
 
-    const response = await fetch(
-      `https://receitaws.com.br/v1/cnpj/${cnpj}`,
-      {
-        signal: controller.signal,
-        cache: "no-store",
-        headers: { Accept: "application/json" },
-      }
-    );
+    const response = await fetch(`https://receitaws.com.br/v1/cnpj/${cnpj}`, {
+      signal: controller.signal,
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
     clearTimeout(timeout);
 
     if (!response.ok) return null;
@@ -183,14 +185,11 @@ async function buscarCNPJws(cnpj: string): Promise<CNPJResult | null> {
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 10000);
 
-    const response = await fetch(
-      `https://publica.cnpj.ws/cnpj/${cnpj}`,
-      {
-        signal: controller.signal,
-        cache: "no-store",
-        headers: { Accept: "application/json" },
-      }
-    );
+    const response = await fetch(`https://publica.cnpj.ws/cnpj/${cnpj}`, {
+      signal: controller.signal,
+      cache: "no-store",
+      headers: { Accept: "application/json" },
+    });
     clearTimeout(timeout);
 
     if (!response.ok) return null;
@@ -207,7 +206,9 @@ async function buscarCNPJws(cnpj: string): Promise<CNPJResult | null> {
       bairro: estabelecimento.bairro || "",
       municipio: estabelecimento.cidade?.nome || "",
       uf: estabelecimento.estado?.sigla || "",
-      cep: estabelecimento.cep ? String(estabelecimento.cep).replace(/\D/g, "") : "",
+      cep: estabelecimento.cep
+        ? String(estabelecimento.cep).replace(/\D/g, "")
+        : "",
       fonte: "cnpjws",
     };
 
@@ -224,17 +225,17 @@ async function buscarCNPJws(cnpj: string): Promise<CNPJResult | null> {
 // ----------------------------------------------------------
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ cnpj: string }> }
+  { params }: { params: Promise<{ cnpj: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
   const { cnpj } = await params;
   const cnpjClean = cnpj.replace(/\D/g, "");
 
   if (cnpjClean.length !== 14) {
     return NextResponse.json(
       { error: "CNPJ deve ter 14 dígitos" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -264,6 +265,6 @@ export async function GET(
       error: "CNPJ não encontrado em nenhuma fonte de dados",
       tentativas: providers.map((p) => p.name).join(", "),
     },
-    { status: 404 }
+    { status: 404 },
   );
 }

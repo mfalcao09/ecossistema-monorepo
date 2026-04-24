@@ -1,7 +1,12 @@
-import { verificarAuth } from '@/lib/security/api-guard'
+import { verificarAuth } from "@/lib/security/api-guard";
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ============================================================
 // API de Código MEC — Busca dados vinculados IES + Mantenedora
@@ -70,7 +75,7 @@ async function buscarNoCache(codigo: string): Promise<MECVinculoResult | null> {
 
 async function salvarNoCache(
   codigo: string,
-  result: MECVinculoResult
+  result: MECVinculoResult,
 ): Promise<void> {
   try {
     const supabase = await createClient();
@@ -95,7 +100,7 @@ async function salvarNoCache(
         data_consulta: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       },
-      { onConflict: "codigo_mec" }
+      { onConflict: "codigo_mec" },
     );
   } catch {
     console.error("Erro ao salvar cache MEC:", codigo);
@@ -117,7 +122,8 @@ async function buscarEMEC(codigo: string): Promise<MECVinculoResult | null> {
       signal: controller.signal,
       cache: "no-store",
       headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
+        "User-Agent":
+          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
         Accept: "text/html,application/xhtml+xml",
       },
     });
@@ -133,14 +139,22 @@ async function buscarEMEC(codigo: string): Promise<MECVinculoResult | null> {
     // Limpar sigla do nome: "(1606) FACULDADES INTEGRADAS DE CASSILÂNDIA - FIC"
     const nomeClean = nomeIES.replace(/^\(\d+\)\s*/, "");
     const siglaParts = nomeClean.split(" - ");
-    const sigla = siglaParts.length > 1 ? siglaParts[siglaParts.length - 1].trim() : "";
-    const nomeSemSigla = siglaParts.length > 1 ? siglaParts.slice(0, -1).join(" - ").trim() : nomeClean.trim();
+    const sigla =
+      siglaParts.length > 1 ? siglaParts[siglaParts.length - 1].trim() : "";
+    const nomeSemSigla =
+      siglaParts.length > 1
+        ? siglaParts.slice(0, -1).join(" - ").trim()
+        : nomeClean.trim();
 
     // Extrair dados da Mantenedora
     const nomeMantenedora = extractBetween(html, "Mantenedora:", "</td>") || "";
-    const nomeMantenedoraClean = nomeMantenedora.replace(/^\(\d+\)\s*/, "").trim();
+    const nomeMantenedoraClean = nomeMantenedora
+      .replace(/^\(\d+\)\s*/, "")
+      .trim();
     const codigoMantenedoraMatch = nomeMantenedora.match(/^\((\d+)\)/);
-    const codigoMantenedora = codigoMantenedoraMatch ? codigoMantenedoraMatch[1] : "";
+    const codigoMantenedora = codigoMantenedoraMatch
+      ? codigoMantenedoraMatch[1]
+      : "";
 
     const cnpjMantenedora = extractBetween(html, "CNPJ:", "</td>") || "";
 
@@ -150,8 +164,10 @@ async function buscarEMEC(codigo: string): Promise<MECVinculoResult | null> {
         nome: nomeSemSigla,
         sigla,
         situacao: extractBetween(html, "Situação:", "</td>") || "",
-        categoria: extractBetween(html, "Categoria Administrativa:", "</td>") || "",
-        organizacao: extractBetween(html, "Organização Acadêmica:", "</td>") || "",
+        categoria:
+          extractBetween(html, "Categoria Administrativa:", "</td>") || "",
+        organizacao:
+          extractBetween(html, "Organização Acadêmica:", "</td>") || "",
         logradouro: extractBetween(html, "Endereço:", "</td>") || "",
         numero: extractAfterLabel(html, "Nº:") || "",
         complemento: extractBetween(html, "Complemento:", "</td>") || "",
@@ -164,8 +180,10 @@ async function buscarEMEC(codigo: string): Promise<MECVinculoResult | null> {
         codigo_mec: codigoMantenedora,
         nome: nomeMantenedoraClean,
         cnpj: cnpjMantenedora.replace(/\D/g, ""),
-        natureza_juridica: extractBetween(html, "Natureza Jurídica:", "</td>") || "",
-        representante_legal: extractBetween(html, "Representante Legal:", "</td>") || "",
+        natureza_juridica:
+          extractBetween(html, "Natureza Jurídica:", "</td>") || "",
+        representante_legal:
+          extractBetween(html, "Representante Legal:", "</td>") || "",
       },
       fonte: "emec",
       fromCache: false,
@@ -240,18 +258,15 @@ const VINCULOS_CONHECIDOS: Record<string, MECVinculoResult> = {
 // ----------------------------------------------------------
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ codigo: string }> }
+  { params }: { params: Promise<{ codigo: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
   const { codigo } = await params;
   const codigoClean = codigo.replace(/\D/g, "");
 
   if (!codigoClean) {
-    return NextResponse.json(
-      { error: "Código MEC inválido" },
-      { status: 400 }
-    );
+    return NextResponse.json({ error: "Código MEC inválido" }, { status: 400 });
   }
 
   // 1. Cache local
@@ -276,6 +291,6 @@ export async function GET(
   // 4. Nenhuma fonte
   return NextResponse.json(
     { error: "IES não encontrada para o código MEC informado" },
-    { status: 404 }
+    { status: 404 },
   );
 }

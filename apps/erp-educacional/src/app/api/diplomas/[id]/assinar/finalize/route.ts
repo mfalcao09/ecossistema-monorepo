@@ -2,11 +2,19 @@ import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { verificarAuth, erroNaoEncontrado } from "@/lib/security/api-guard";
 import { validarCSRF } from "@/lib/security/csrf";
-import { verificarRateLimitERP, adicionarHeadersRateLimit, adicionarHeadersRetryAfter } from "@/lib/security/rate-limit";
+import {
+  verificarRateLimitERP,
+  adicionarHeadersRateLimit,
+  adicionarHeadersRetryAfter,
+} from "@/lib/security/rate-limit";
 import { logDataModification } from "@/lib/security/security-logger";
 import { registrarCustodiaAsync } from "@/lib/security/cadeia-custodia";
 import { getBryConfig, bryFinalize, verificarEAvancarPacote } from "@/lib/bry";
 import type { PerfilAssinatura } from "@/lib/bry";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
 
 // ─────────────────────────────────────────────────────────────────────────────
 // POST /api/diplomas/[id]/assinar/finalize
@@ -29,7 +37,7 @@ export const maxDuration = 60;
 
 export async function POST(
   req: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const auth = await verificarAuth(req);
   if (auth instanceof NextResponse) return auth;
@@ -41,7 +49,7 @@ export async function POST(
   if (!rateLimit.allowed) {
     const response = NextResponse.json(
       { erro: "Muitas requisições. Tente novamente em instantes." },
-      { status: 429 }
+      { status: 429 },
     );
     adicionarHeadersRetryAfter(response.headers, rateLimit);
     return response;
@@ -51,7 +59,7 @@ export async function POST(
   if (!bryConfig) {
     return NextResponse.json(
       { erro: "Credenciais BRy não configuradas." },
-      { status: 503 }
+      { status: 503 },
     );
   }
 
@@ -78,8 +86,10 @@ export async function POST(
 
     if (!xml_gerado_id || !signature_value || !certificate || !perfil) {
       return NextResponse.json(
-        { erro: "Campos obrigatórios: xml_gerado_id, signature_value, certificate, perfil" },
-        { status: 400 }
+        {
+          erro: "Campos obrigatórios: xml_gerado_id, signature_value, certificate, perfil",
+        },
+        { status: 400 },
       );
     }
 
@@ -93,22 +103,31 @@ export async function POST(
 
     if (outboxErr || !outbox) {
       return NextResponse.json(
-        { erro: `Passo ${passo} não encontrado no outbox — execute Initialize primeiro` },
-        { status: 404 }
+        {
+          erro: `Passo ${passo} não encontrado no outbox — execute Initialize primeiro`,
+        },
+        { status: 404 },
       );
     }
 
-    if (outbox.status !== "inicializado" && outbox.status !== "assinado_extensao") {
+    if (
+      outbox.status !== "inicializado" &&
+      outbox.status !== "assinado_extensao"
+    ) {
       return NextResponse.json(
-        { erro: `Passo ${passo} está no status "${outbox.status}" — esperado "inicializado"` },
-        { status: 422 }
+        {
+          erro: `Passo ${passo} está no status "${outbox.status}" — esperado "inicializado"`,
+        },
+        { status: 422 },
       );
     }
 
     if (!outbox.initialized_document) {
       return NextResponse.json(
-        { erro: "initializedDocument ausente no outbox — re-execute Initialize" },
-        { status: 422 }
+        {
+          erro: "initializedDocument ausente no outbox — re-execute Initialize",
+        },
+        { status: 422 },
       );
     }
 
@@ -130,7 +149,10 @@ export async function POST(
     }
 
     if (!xmlContent) {
-      return NextResponse.json({ erro: "XML sem conteúdo — gere o XML antes de assinar" }, { status: 422 });
+      return NextResponse.json(
+        { erro: "XML sem conteúdo — gere o XML antes de assinar" },
+        { status: 422 },
+      );
     }
 
     // ── Chamar BRy Finalize ─────────────────────────────────────────────────
@@ -182,7 +204,8 @@ export async function POST(
       .select("status")
       .eq("xml_gerado_id", xml_gerado_id);
 
-    todosPassosFinalizados = outboxAll?.every((o) => o.status === "finalizado") ?? false;
+    todosPassosFinalizados =
+      outboxAll?.every((o) => o.status === "finalizado") ?? false;
 
     if (todosPassosFinalizados) {
       const nomeArquivo = `assinado/${diplomaId}/${xml_gerado_id}_assinado.xml`;
@@ -217,10 +240,12 @@ export async function POST(
             })
             .eq("id", xml_gerado_id);
         }
-
       } else if (downloadUrl) {
         // BRy retornou link em vez de conteúdo inline — baixar e re-upload
-        console.log("[Finalize] xmlAssinadoBase64 ausente, baixando de downloadUrl:", downloadUrl);
+        console.log(
+          "[Finalize] xmlAssinadoBase64 ausente, baixando de downloadUrl:",
+          downloadUrl,
+        );
         try {
           const dlResp = await fetch(downloadUrl, {
             signal: AbortSignal.timeout(15_000),
@@ -253,15 +278,19 @@ export async function POST(
                 .eq("id", xml_gerado_id);
             }
           } else {
-            console.warn("[Finalize] downloadUrl retornou status:", dlResp.status);
+            console.warn(
+              "[Finalize] downloadUrl retornou status:",
+              dlResp.status,
+            );
           }
         } catch (dlErr) {
           console.warn("[Finalize] Falha ao baixar XML de downloadUrl:", dlErr);
           // Continuar — o auto-carimbo tentará usar arquivo_url do banco se existir
         }
-
       } else {
-        console.warn("[Finalize] Todos passos OK mas sem xmlAssinadoBase64 nem downloadUrl — XML não salvo no storage");
+        console.warn(
+          "[Finalize] Todos passos OK mas sem xmlAssinadoBase64 nem downloadUrl — XML não salvo no storage",
+        );
       }
     }
 
@@ -315,7 +344,6 @@ export async function POST(
     });
     adicionarHeadersRateLimit(response.headers, rateLimit);
     return response;
-
   } catch (err) {
     const msg = err instanceof Error ? err.message : "Erro interno";
     console.error("[BRy Finalize Error]", msg);

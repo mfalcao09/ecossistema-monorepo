@@ -3,6 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { verificarAuth } from "@/lib/security/api-guard";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 // ─────────────────────────────────────────────────────────────────────────────
 // GET /api/diplomas/migracao/[jobId]
 //   Retorna status atual de um job de migração (usado para polling no frontend)
@@ -10,7 +15,7 @@ import { sanitizarErro } from "@/lib/security/sanitize-error";
 
 export async function GET(
   req: NextRequest,
-  { params }: { params: Promise<{ jobId: string }> }
+  { params }: { params: Promise<{ jobId: string }> },
 ) {
   const auth = await verificarAuth(req);
   if (auth instanceof NextResponse) return auth;
