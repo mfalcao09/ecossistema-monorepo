@@ -188,7 +188,7 @@ export function CADEditor({
         if (el.closed && pts.length >= 3) {
           // Draw filled polygon via SVG path
           const pathStr = buildSvgPath(pts, true);
-          const path = new fabricModule.current!.Path(pathStr, {
+          const path = new fabricModule.current!.fabric.Path(pathStr, {
             fill: hexToRgba(style.fill, style.fillOpacity),
             stroke: style.stroke,
             strokeWidth,
@@ -208,7 +208,7 @@ export function CADEditor({
               if (lenM < 0.5) continue;
               const mid = midpoint(el.coordinates[i], el.coordinates[next]);
               const midPx = geoToCanvasPx(map, mid);
-              const label = new fabricModule.current!.FabricText(
+              const label = new fabricModule.current!.fabric.Text(
                 formatLength(lenM),
                 {
                   left: midPx.x,
@@ -231,7 +231,7 @@ export function CADEditor({
           if (el.label) {
             const center = coordsCenter(el.coordinates);
             const cPx = geoToCanvasPx(map, center);
-            const text = new fabricModule.current!.FabricText(el.label, {
+            const text = new fabricModule.current!.fabric.Text(el.label, {
               left: cPx.x,
               top: cPx.y,
               fontSize: 12,
@@ -249,7 +249,7 @@ export function CADEditor({
         } else {
           // Polyline / line
           const points = pts.map((p) => ({ x: p.x, y: p.y }));
-          const pline = new fabricModule.current!.Polyline(points, {
+          const pline = new fabricModule.current!.fabric.Polyline(points, {
             fill: "transparent",
             stroke: style.stroke,
             strokeWidth,
@@ -267,7 +267,7 @@ export function CADEditor({
               if (lenM < 0.5) continue;
               const mid = midpoint(el.coordinates[i], el.coordinates[i + 1]);
               const midPx = geoToCanvasPx(map, mid);
-              const lbl = new fabricModule.current!.FabricText(
+              const lbl = new fabricModule.current!.fabric.Text(
                 formatLength(lenM),
                 {
                   left: midPx.x,
@@ -293,7 +293,7 @@ export function CADEditor({
             geoToCanvasPx(map, [lng, lat]),
           );
           const selPath = buildSvgPath(selPts, el.closed);
-          const selObj = new fabricModule.current!.Path(selPath, {
+          const selObj = new fabricModule.current!.fabric.Path(selPath, {
             fill: "transparent",
             stroke: "#f59e0b",
             strokeWidth: 2,
@@ -306,7 +306,7 @@ export function CADEditor({
           // Vertex handles
           for (const c of el.coordinates) {
             const cpx = geoToCanvasPx(map, c);
-            const circle = new fabricModule.current!.Circle({
+            const circle = new fabricModule.current!.fabric.Circle({
               left: cpx.x - 5,
               top: cpx.y - 5,
               radius: 5,
@@ -397,7 +397,7 @@ export function CADEditor({
         canvasElRef.current.height = h;
       }
 
-      fabricInstance = new fabricMod.Canvas(canvasElRef.current!, {
+      fabricInstance = new fabricMod.fabric.Canvas(canvasElRef.current!, {
         selection: false,
         renderOnAddRemove: false,
         skipOffscreen: true,
@@ -499,9 +499,9 @@ export function CADEditor({
     map: MapboxMap,
     fabricMod: typeof import("fabric"),
   ) {
-    let snapIndicator: typeof fabricMod.Circle.prototype | null = null;
+    let snapIndicator: typeof fabricMod.fabric.Circle.prototype | null = null;
     const drawing = drawingRef.current;
-    let previewLine: typeof fabricMod.Polyline.prototype | null = null;
+    let previewLine: typeof fabricMod.fabric.Polyline.prototype | null = null;
 
     function getSnapPoint(canvasX: number, canvasY: number): [number, number] {
       const rawGeo = canvasPxToGeo(map, canvasX, canvasY);
@@ -530,7 +530,7 @@ export function CADEditor({
       }
       if (snapped) {
         const spx = geoToCanvasPx(map, snapped);
-        snapIndicator = new fabricMod.Circle({
+        snapIndicator = new fabricMod.fabric.Circle({
           left: spx.x - 6,
           top: spx.y - 6,
           radius: 6,
@@ -633,7 +633,7 @@ export function CADEditor({
           ...drawing.points.map(([lng, lat]) => geoToCanvasPx(map, [lng, lat])),
           { x: pointer.x, y: pointer.y },
         ];
-        previewLine = new fabricMod.Polyline(
+        previewLine = new fabricMod.fabric.Polyline(
           allPts.map((p) => ({ x: p.x, y: p.y })),
           {
             fill: "transparent",
