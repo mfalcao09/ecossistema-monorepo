@@ -1004,11 +1004,25 @@ export default function RevisaoExtracaoPage() {
 
       try {
         const { createClient } = await import("@/lib/supabase/client");
+        const { resolverTenantAtivo } = await import("@/lib/extracao/upload");
         const supabase = createClient();
 
-        // Caminho: sessaoId/sub_{idx}_{timestamp}_{nome}
+        // Descobre quem está logado + o tenant ativo — necessário para montar
+        // um path que passe pela policy RLS processo_arquivos_tenant_*.
+        const {
+          data: { user },
+          error: userErr,
+        } = await supabase.auth.getUser();
+        if (userErr || !user) {
+          alert("Sessão expirada. Faça login novamente.");
+          return;
+        }
+        const tenantId = await resolverTenantAtivo(supabase, user.id);
+
+        // Path: {tenant_id}/{user_id}/sub_{idx}_{timestamp}.{ext} — casado com
+        // o formato dos uploads iniciais (lib/extracao/upload.ts).
         const ext = file.name.includes(".") ? file.name.split(".").pop() : "";
-        const novoPath = `${sessaoId}/sub_${idx}_${Date.now()}${ext ? "." + ext : ""}`;
+        const novoPath = `${tenantId}/${user.id}/sub_${idx}_${Date.now()}${ext ? "." + ext : ""}`;
         const bucket = sessao?.arquivos?.[idx]?.bucket ?? "processo-arquivos";
 
         const { error: uploadError } = await supabase.storage

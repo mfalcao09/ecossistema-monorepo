@@ -70,8 +70,13 @@ const nextConfig = {
               "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), display-capture=(), document-domain=()",
           },
           // Cross-Origin headers para isolamento
+          // NOTA: Cross-Origin-Embedder-Policy REMOVIDO em 2026-04-24. Com
+          // COEP=credentialless, o Chrome truncava o fetch cross-origin pro
+          // Supabase Storage quando o response trazia Set-Cookie (__cf_bm do
+          // Cloudflare) — o preview de PDFs retornava só 1 KB em vez dos ~1 MB.
+          // O app não usa SharedArrayBuffer nem APIs que exigem isolamento via
+          // COEP, então o trade-off compensa.
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-          { key: "Cross-Origin-Embedder-Policy", value: "credentialless" },
           { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
           // Content Security Policy — endurecido para produção
           {
@@ -92,6 +97,9 @@ const nextConfig = {
               // Conexões: whitelist estrita
               "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.upstash.io https://challenges.cloudflare.com https://openrouter.ai https://www.bry.com.br https://*.amazonaws.com",
               // Frames: self + blob (prévia PDF inline) + Cloudflare Turnstile
+              // NOTA: iframe do Supabase Storage é feito via /api/storage-proxy
+              // (same-origin) — necessário porque COEP=credentialless bloqueia
+              // cross-origin quando Cloudflare sets __cf_bm cookie no response.
               "frame-src 'self' blob: https://challenges.cloudflare.com",
               // Workers: self (para Web Crypto e Service Workers)
               "worker-src 'self' blob:",

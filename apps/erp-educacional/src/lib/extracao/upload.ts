@@ -5,60 +5,57 @@
  * sessão autenticada do usuário (anon key + JWT). Isso evita o limite de 4.5 MB
  * do Vercel serverless e é mais rápido — o byte stream nunca passa pelo Next.js.
  *
- * Path pattern: `{userId}/{timestamp}-{nome-sanitizado}`
- *   - O primeiro segmento é o auth.uid() do usuário (RLS por dono)
- *   - timestamp evita colisão de nomes
- *   - sanitização remove acentos e caracteres especiais
- *
- * Decisões (sessão 030):
- *   - Cliente único da Supabase pra paralelizar uploads
- *   - Upload paralelo (Promise.all) com no máximo `MAX_CONCURRENCY` simultâneos
- *   - Cada arquivo retorna seu próprio metadata pro POST /api/extracao/iniciar
- *   - Em caso de falha parcial, os arquivos já uploadados ficam órfãos no
- *     bucket (limpeza futura via cron — fora do escopo desta sprint)
+ * Path pattern: `{tenantId}/{userId}/{timestamp}-{nome-sanitizado}`
+ *   - Primeiro segmento é o tenant (IES dona) — casado com a policy RLS
+ *     processo_arquivos_tenant_* que valida membership via usuario_papeis.
+ *     Isso permite que qualquer usuário com papel ativo no tenant veja os
+ *     arquivos da sessão (ver PR #89 — acesso compartilhado dentro do tenant).
+ *   - Segundo segmento é o userId do uploader (auditoria de quem subiu).
+ *   - timestamp evita colisão de nomes.
+ *   - sanitização remove acentos e caracteres especiais.
  */
 
-import { createClient } from '@/lib/supabase/client'
+import { createClient } from "@/lib/supabase/client";
 
-export const PROCESSO_ARQUIVOS_BUCKET = 'processo-arquivos'
+export const PROCESSO_ARQUIVOS_BUCKET = "processo-arquivos";
 
 /** 25 MB — bate com o file_size_limit do bucket */
-export const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024
+export const MAX_FILE_SIZE_BYTES = 25 * 1024 * 1024;
 
 /** MIME types aceitos pelo bucket */
 export const ALLOWED_MIME_TYPES = [
-  'application/pdf',
-  'image/png',
-  'image/jpeg',
-  'image/jpg',
-  'image/webp',
-  'image/heic',
-  'image/heif',
-] as const
+  "application/pdf",
+  "image/png",
+  "image/jpeg",
+  "image/jpg",
+  "image/webp",
+  "image/heic",
+  "image/heif",
+] as const;
 
 /** Quantos uploads simultâneos no máximo (evita saturar conexão) */
-const MAX_CONCURRENCY = 3
+const MAX_CONCURRENCY = 3;
 
 /**
  * Metadados do arquivo após upload, no formato esperado por
  * POST /api/extracao/iniciar.
  */
 export interface ArquivoUploadado {
-  storage_path: string
-  bucket: string
-  nome_original: string
-  mime_type: string
-  tamanho_bytes: number
+  storage_path: string;
+  bucket: string;
+  nome_original: string;
+  mime_type: string;
+  tamanho_bytes: number;
 }
 
 export interface UploadProgressEvento {
-  arquivoIndex: number
-  nomeOriginal: string
-  status: 'pendente' | 'enviando' | 'concluido' | 'erro'
-  erro?: string
+  arquivoIndex: number;
+  nomeOriginal: string;
+  status: "pendente" | "enviando" | "concluido" | "erro";
+  erro?: string;
 }
 
-export type UploadProgressCallback = (evento: UploadProgressEvento) => void
+export type UploadProgressCallback = (evento: UploadProgressEvento) => void;
 
 /**
  * Sanitiza um nome de arquivo:
@@ -69,22 +66,61 @@ export type UploadProgressCallback = (evento: UploadProgressEvento) => void
  */
 export function sanitizarNomeArquivo(nome: string): string {
   return nome
-    .normalize('NFD')
-    .replace(/[\u0300-\u036f]/g, '') // remove acentos
-    .replace(/[^a-zA-Z0-9.\-_]/g, '-')
-    .replace(/-+/g, '-')
-    .replace(/^-|-$/g, '')
-    .slice(0, 100)
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "") // remove acentos
+    .replace(/[^a-zA-Z0-9.\-_]/g, "-")
+    .replace(/-+/g, "-")
+    .replace(/^-|-$/g, "")
+    .slice(0, 100);
 }
 
 /**
  * Constrói o storage path completo para um arquivo:
- *   {userId}/{timestamp}-{nome-sanitizado}
+ *   {tenantId}/{userId}/{timestamp}-{nome-sanitizado}
  */
-export function montarStoragePath(userId: string, file: File): string {
-  const timestamp = Date.now()
-  const nomeSeguro = sanitizarNomeArquivo(file.name)
-  return `${userId}/${timestamp}-${nomeSeguro}`
+export function montarStoragePath(
+  tenantId: string,
+  userId: string,
+  file: File,
+): string {
+  const timestamp = Date.now();
+  const nomeSeguro = sanitizarNomeArquivo(file.name);
+  return `${tenantId}/${userId}/${timestamp}-${nomeSeguro}`;
+}
+
+/**
+ * Resolve o tenant_id da membership ativa do usuário em `usuario_papeis`.
+ * Se o usuário tiver múltiplas memberships ativas (multi-tenant), retorna a
+ * primeira encontrada — o piloto FIC tem exatamente um tenant por usuário no
+ * módulo Diploma. Multi-tenant selector fica como follow-up quando existir
+ * um segundo tenant emissor.
+ */
+export async function resolverTenantAtivo(
+  supabase: ReturnType<typeof createClient>,
+  userId: string,
+): Promise<string> {
+  const { data, error } = await supabase
+    .from("usuario_papeis")
+    .select("tenant_id, data_fim")
+    .eq("user_id", userId)
+    .or(
+      "data_fim.is.null,data_fim.gte." + new Date().toISOString().slice(0, 10),
+    )
+    .limit(1)
+    .maybeSingle();
+
+  if (error) {
+    throw new Error(
+      `Não foi possível identificar sua instituição (${error.message}).`,
+    );
+  }
+  if (!data?.tenant_id) {
+    throw new Error(
+      "Sua conta não tem papel ativo em nenhuma instituição. " +
+        "Peça ao administrador para atribuir um papel.",
+    );
+  }
+  return data.tenant_id;
 }
 
 /**
@@ -93,13 +129,17 @@ export function montarStoragePath(userId: string, file: File): string {
  */
 export function validarArquivoLocal(file: File): string | null {
   if (file.size > MAX_FILE_SIZE_BYTES) {
-    const mb = (file.size / 1024 / 1024).toFixed(1)
-    return `Arquivo muito grande (${mb} MB). Máximo: 25 MB.`
+    const mb = (file.size / 1024 / 1024).toFixed(1);
+    return `Arquivo muito grande (${mb} MB). Máximo: 25 MB.`;
   }
-  if (!ALLOWED_MIME_TYPES.includes(file.type as (typeof ALLOWED_MIME_TYPES)[number])) {
-    return `Tipo de arquivo não aceito (${file.type || 'desconhecido'}). Use PDF ou imagem.`
+  if (
+    !ALLOWED_MIME_TYPES.includes(
+      file.type as (typeof ALLOWED_MIME_TYPES)[number],
+    )
+  ) {
+    return `Tipo de arquivo não aceito (${file.type || "desconhecido"}). Use PDF ou imagem.`;
   }
-  return null
+  return null;
 }
 
 /**
@@ -115,97 +155,100 @@ export async function uploadArquivosParaProcesso(
   onProgress?: UploadProgressCallback,
 ): Promise<ArquivoUploadado[]> {
   if (files.length === 0) {
-    throw new Error('Nenhum arquivo fornecido para upload.')
+    throw new Error("Nenhum arquivo fornecido para upload.");
   }
 
-  const supabase = createClient()
+  const supabase = createClient();
 
   // Pega o userId da sessão atual (necessário pro path do RLS)
   const {
     data: { user },
     error: authErr,
-  } = await supabase.auth.getUser()
+  } = await supabase.auth.getUser();
 
   if (authErr || !user) {
-    throw new Error('Sessão expirada. Faça login novamente.')
+    throw new Error("Sessão expirada. Faça login novamente.");
   }
 
-  const userId = user.id
+  const userId = user.id;
+
+  // Resolve o tenant ativo do usuário — primeiro segmento do path no bucket.
+  // Falha cedo se o usuário não tiver papel ativo em nenhum tenant (situação
+  // que quebraria o upload pela policy RLS processo_arquivos_tenant_insert).
+  const tenantId = await resolverTenantAtivo(supabase, userId);
 
   // Valida todos antes de subir qualquer um (fail fast)
   files.forEach((file, idx) => {
-    const erro = validarArquivoLocal(file)
+    const erro = validarArquivoLocal(file);
     if (erro) {
-      throw new Error(`Arquivo "${file.name}": ${erro}`)
+      throw new Error(`Arquivo "${file.name}": ${erro}`);
     }
     onProgress?.({
       arquivoIndex: idx,
       nomeOriginal: file.name,
-      status: 'pendente',
-    })
-  })
+      status: "pendente",
+    });
+  });
 
   // Upload com paralelismo limitado: processa em chunks de MAX_CONCURRENCY.
   // Tracks de paths já uploadados pra cleanup em caso de falha (review Buchecha).
-  const resultado: ArquivoUploadado[] = new Array(files.length)
-  const pathsUploadados: string[] = []
+  const resultado: ArquivoUploadado[] = new Array(files.length);
+  const pathsUploadados: string[] = [];
 
   try {
     for (let i = 0; i < files.length; i += MAX_CONCURRENCY) {
-      const chunk = files.slice(i, i + MAX_CONCURRENCY)
-      const indices = chunk.map((_, j) => i + j)
+      const chunk = files.slice(i, i + MAX_CONCURRENCY);
+      const indices = chunk.map((_, j) => i + j);
 
       await Promise.all(
         chunk.map(async (file, chunkIdx) => {
-          const arquivoIndex = indices[chunkIdx]
-          const storagePath = montarStoragePath(userId, file)
+          const arquivoIndex = indices[chunkIdx];
+          const storagePath = montarStoragePath(tenantId, userId, file);
 
           onProgress?.({
             arquivoIndex,
             nomeOriginal: file.name,
-            status: 'enviando',
-          })
+            status: "enviando",
+          });
 
           const { error: upErr } = await supabase.storage
             .from(PROCESSO_ARQUIVOS_BUCKET)
             .upload(storagePath, file, {
-              cacheControl: '3600',
+              cacheControl: "3600",
               upsert: false,
               contentType: file.type,
-            })
+            });
 
           if (upErr) {
             onProgress?.({
               arquivoIndex,
               nomeOriginal: file.name,
-              status: 'erro',
+              status: "erro",
               erro: upErr.message,
-            })
-            throw new Error(
-              `Falha ao enviar "${file.name}": ${upErr.message}`,
-            )
+            });
+            throw new Error(`Falha ao enviar "${file.name}": ${upErr.message}`);
           }
 
           // Sucesso — registra pra eventual cleanup e popula resultado
-          pathsUploadados.push(storagePath)
+          pathsUploadados.push(storagePath);
           resultado[arquivoIndex] = {
             storage_path: storagePath,
             bucket: PROCESSO_ARQUIVOS_BUCKET,
             nome_original: file.name,
             mime_type: file.type,
             tamanho_bytes: file.size,
-          }
+          };
 
           onProgress?.({
             arquivoIndex,
             nomeOriginal: file.name,
-            status: 'concluido',
-          })
+            status: "concluido",
+          });
         }),
-      )
+      );
     }
 
-    return resultado
+    return resultado;
   } catch (err) {
     // Cleanup best-effort: remove os arquivos que já tinham subido pra evitar
     // órfãos no bucket. Se a remoção falhar, ignoramos silenciosamente —
@@ -214,11 +257,11 @@ export async function uploadArquivosParaProcesso(
       try {
         await supabase.storage
           .from(PROCESSO_ARQUIVOS_BUCKET)
-          .remove(pathsUploadados)
+          .remove(pathsUploadados);
       } catch {
         // Não vaza o erro de cleanup; o erro original é mais relevante.
       }
     }
-    throw err
+    throw err;
   }
 }

@@ -80,7 +80,11 @@ export async function GET(req: NextRequest) {
     return NextResponse.json({ error: 'URL não autorizada' }, { status: 403 })
   }
 
-  // ── Fetch do arquivo ────────────────────────────────────────────────────
+  // ── Fetch do arquivo (streaming pass-through) ──────────────────────────
+  // IMPORTANTE: NÃO usar arrayBuffer() — bufferizar 1+MB em memória dentro do
+  // Vercel Fluid Compute trava o handler (observado 2026-04-24: requests com
+  // PDFs de 999KB ficavam Pending por 25s+ e eram canceladas pelo browser).
+  // Passamos o ReadableStream direto no NextResponse — é pass-through zero-copy.
   try {
     const response = await fetch(url)
 
@@ -93,18 +97,22 @@ export async function GET(req: NextRequest) {
       )
     }
 
-    const buffer = await response.arrayBuffer()
     const contentType =
       response.headers.get('content-type') || 'application/octet-stream'
+    const contentLength = response.headers.get('content-length')
 
-    // Retorna SEM X-Frame-Options ou CSP restritivo
-    return new NextResponse(buffer, {
+    const headers: Record<string, string> = {
+      'Content-Type': contentType,
+      'Content-Disposition': 'inline',
+      'Cache-Control': 'public, max-age=3600, s-maxage=3600',
+    }
+    if (contentLength) {
+      headers['Content-Length'] = contentLength
+    }
+
+    return new NextResponse(response.body, {
       status: 200,
-      headers: {
-        'Content-Type': contentType,
-        'Content-Disposition': 'inline',
-        'Cache-Control': 'public, max-age=3600, s-maxage=3600',
-      },
+      headers,
     })
   } catch (err) {
     console.error('[storage-proxy] Erro ao buscar arquivo:', err)
