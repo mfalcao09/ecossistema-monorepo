@@ -103,14 +103,32 @@ export function DialogVisualizarDocumento({
   const dialogRef = useRef<HTMLDivElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  // ── Preview direto via signed URL ────────────────────────────────────
-  // Historicamente usávamos /api/storage-proxy porque o Supabase Storage
-  // retornava X-Frame-Options que bloqueavam iframe cross-origin. Hoje
-  // o Storage não retorna mais esses headers restritivos (confirmado em
-  // 2026-04-24: access-control-allow-origin:*, sem X-Frame-Options, sem
-  // CSP) e o proxy trava em arrayBuffer() no Vercel para PDFs >500KB.
-  // A CSP frame-src agora inclui https://*.supabase.co explicitamente.
+  // ── Proxy URL: redireciona via /api/storage-proxy (same-origin) ──────
+  // Motivo: o Next.js config do ERP seta COEP=credentialless, o que faz o
+  // Chrome bloquear iframes cross-origin quando o response traz Set-Cookie
+  // (Cloudflare seta __cf_bm no signed URL do Supabase). Passar pelo proxy
+  // local resolve porque fica same-origin. O proxy agora funciona bem para
+  // os arquivos que existem fisicamente no S3 — bloqueios antigos eram por
+  // metadata apontando pra objetos inexistentes (fixado 2026-04-24 via EF
+  // migrate-processo-arquivos-tenant com supabase.storage.move()).
+  const [proxyUrl, setProxyUrl] = useState<string | null>(null)
   const [blobErro, setBlobErro] = useState(false)
+
+  useEffect(() => {
+    if (!previewUrl) {
+      setProxyUrl(null)
+      setBlobErro(false)
+      return
+    }
+    try {
+      const proxy = `/api/storage-proxy?url=${encodeURIComponent(previewUrl)}`
+      setProxyUrl(proxy)
+      setBlobErro(false)
+    } catch (err) {
+      console.error("[preview] Erro ao montar proxy URL:", err)
+      setBlobErro(true)
+    }
+  }, [previewUrl])
 
   // Reset quando abre com nova confirmação
   useEffect(() => {
@@ -197,7 +215,7 @@ export function DialogVisualizarDocumento({
         {/* Preview do documento */}
         <div className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-950">
           {/* Estado: carregando */}
-          {carregandoPreview && (
+          {(carregandoPreview || (previewUrl && !proxyUrl && !blobErro)) && (
             <div className="flex h-96 items-center justify-center">
               <Loader2 className="h-8 w-8 animate-spin text-violet-600" />
               <span className="ml-3 text-sm text-gray-500">
@@ -234,12 +252,12 @@ export function DialogVisualizarDocumento({
             </div>
           )}
 
-          {/* Imagem — signed URL direto (CORS * vindo do Supabase) */}
-          {!carregandoPreview && previewUrl && !blobErro && ehImagem && (
+          {/* Imagem — via proxy same-origin */}
+          {!carregandoPreview && proxyUrl && ehImagem && (
             <div className="flex items-center justify-center p-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={previewUrl}
+                src={proxyUrl}
                 alt={confirmacao.nome_arquivo ?? "Documento"}
                 className="max-h-[60vh] max-w-full rounded-md object-contain shadow-md"
                 onError={() => setBlobErro(true)}
@@ -247,17 +265,17 @@ export function DialogVisualizarDocumento({
             </div>
           )}
 
-          {/* PDF — iframe direto no signed URL */}
-          {!carregandoPreview && previewUrl && !blobErro && ehPdf && (
+          {/* PDF — iframe via proxy same-origin (COEP bloqueia cross-origin) */}
+          {!carregandoPreview && proxyUrl && ehPdf && (
             <iframe
-              src={`${previewUrl}#toolbar=0&navpanes=0&scrollbar=1`}
+              src={`${proxyUrl}#toolbar=0&navpanes=0&scrollbar=1`}
               title={confirmacao.nome_arquivo ?? "Preview PDF"}
               className="h-[60vh] w-full border-0"
             />
           )}
 
           {/* Outros formatos */}
-          {!carregandoPreview && previewUrl && !blobErro && !ehImagem && !ehPdf && (
+          {!carregandoPreview && proxyUrl && !ehImagem && !ehPdf && (
             <div className="flex h-96 flex-col items-center justify-center gap-3 text-gray-400">
               <FileText className="h-10 w-10" />
               <p className="text-sm">
