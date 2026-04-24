@@ -53,6 +53,7 @@ Numeração é **sequencial e irreversível**. Nunca reusar número.
 |---|---|---|---|
 | 016 | [Protocolo de sessões paralelas](016-protocolo-sessoes-paralelas.md) | ✅ aceito | Paralelismo de execução |
 | 017 | [WhatsApp pairing via Baileys direto](017-whatsapp-pairing-baileys-direto.md) | ✅ aceito | Integração WhatsApp |
+| 018 | [Office 365 Graph integration (app-only)](018-office365-graph-integration.md) | ✅ aceito | Integração M365 |
 
 ## Convenções
 
