@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 /**
  * Sprint 2 / Sessão 043 — Dialog de visualização e confirmação de documento
@@ -14,7 +14,7 @@
  * O preview usa signed URL do Supabase Storage (gerada pela page.tsx).
  */
 
-import { useCallback, useEffect, useRef, useState } from "react"
+import { useCallback, useEffect, useRef, useState } from "react";
 import {
   X,
   CheckCircle2,
@@ -24,12 +24,12 @@ import {
   Loader2,
   RefreshCw,
   Upload,
-} from "lucide-react"
-import type { ConfirmacaoComprobatorio } from "@/lib/diploma/mapa-comprobatorios"
+} from "lucide-react";
+import type { ConfirmacaoComprobatorio } from "@/lib/diploma/mapa-comprobatorios";
 import {
   TIPOS_XSD_COMPROBATORIO,
   type TipoXsdComprobatorio,
-} from "@/lib/diploma/regras-fic"
+} from "@/lib/diploma/regras-fic";
 
 // ─── Labels amigáveis ──────────────────────────────────────────────────────
 
@@ -43,40 +43,40 @@ const LABEL_TIPO_XSD: Record<TipoXsdComprobatorio, string> = {
   TituloEleitor: "Título de eleitor",
   AtoNaturalizacao: "Ato de naturalização",
   Outros: "Outros",
-}
+};
 
 // ─── Tipos ──────────────────────────────────────────────────────────────────
 
 interface Props {
   /** A confirmação sendo visualizada (null = dialog fechado) */
-  confirmacao: ConfirmacaoComprobatorio | null
+  confirmacao: ConfirmacaoComprobatorio | null;
   /** URL assinada para o preview do arquivo */
-  previewUrl: string | null
+  previewUrl: string | null;
   /** MIME type do arquivo para decidir como renderizar */
-  mimeType: string | null
+  mimeType: string | null;
   /** Se está carregando a URL do preview */
-  carregandoPreview: boolean
+  carregandoPreview: boolean;
   /** Valor inicial do checkbox "Embutir no XML" */
-  destinoXmlInicial?: boolean
+  destinoXmlInicial?: boolean;
   /** Valor inicial do checkbox "Enviar ao Acervo" */
-  destinoAcervoInicial?: boolean
+  destinoAcervoInicial?: boolean;
   /** Callback: operador confirmou o documento (com destinos escolhidos) */
   onConfirmar: (
     confirmacao: ConfirmacaoComprobatorio,
     destinoXml: boolean,
     destinoAcervo: boolean,
-  ) => void
+  ) => void;
   /** Callback: operador quer trocar o tipo XSD */
   onTrocarTipo: (
     confirmacao: ConfirmacaoComprobatorio,
     novoTipo: TipoXsdComprobatorio,
-  ) => void
+  ) => void;
   /** Callback: operador quer substituir o arquivo por um novo */
-  onSubstituirArquivo?: (file: File) => Promise<void>
+  onSubstituirArquivo?: (file: File) => Promise<void>;
   /** Indica que o upload de substituição está em andamento */
-  substituindo?: boolean
+  substituindo?: boolean;
   /** Callback: fechar o dialog */
-  onFechar: () => void
+  onFechar: () => void;
 }
 
 // ─── Componente ─────────────────────────────────────────────────────────────
@@ -94,92 +94,112 @@ export function DialogVisualizarDocumento({
   substituindo = false,
   onFechar,
 }: Props) {
-  const [checkConfirmacao, setCheckConfirmacao] = useState(false)
-  const [checkDestXml, setCheckDestXml] = useState(destinoXmlInicial)
-  const [checkDestAcervo, setCheckDestAcervo] = useState(destinoAcervoInicial)
-  const [modoTrocar, setModoTrocar] = useState(false)
+  const [checkConfirmacao, setCheckConfirmacao] = useState(false);
+  const [checkDestXml, setCheckDestXml] = useState(destinoXmlInicial);
+  const [checkDestAcervo, setCheckDestAcervo] = useState(destinoAcervoInicial);
+  const [modoTrocar, setModoTrocar] = useState(false);
   const [novoTipoSelecionado, setNovoTipoSelecionado] =
-    useState<TipoXsdComprobatorio | null>(null)
-  const dialogRef = useRef<HTMLDivElement>(null)
-  const fileInputRef = useRef<HTMLInputElement>(null)
+    useState<TipoXsdComprobatorio | null>(null);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
 
-  // ── Proxy URL: redireciona via /api/storage-proxy (same-origin) ──────
-  // Motivo: o Next.js config do ERP seta COEP=credentialless, o que faz o
-  // Chrome bloquear iframes cross-origin quando o response traz Set-Cookie
-  // (Cloudflare seta __cf_bm no signed URL do Supabase). Passar pelo proxy
-  // local resolve porque fica same-origin. O proxy agora funciona bem para
-  // os arquivos que existem fisicamente no S3 — bloqueios antigos eram por
-  // metadata apontando pra objetos inexistentes (fixado 2026-04-24 via EF
-  // migrate-processo-arquivos-tenant com supabase.storage.move()).
-  const [proxyUrl, setProxyUrl] = useState<string | null>(null)
-  const [blobErro, setBlobErro] = useState(false)
+  // ── Blob URL: fetch client-side → Blob → ObjectURL ─────────────────
+  // Histórico: /api/storage-proxy (server-side fetch + pass-through) travava
+  // no Vercel Fluid Compute com PDFs >500KB (2.6min Pending observado
+  // 2026-04-24), mesmo com streaming. Tentar iframe direto do signed URL
+  // cruza COEP=credentialless do app e é bloqueado pelo Chrome.
+  //
+  // Solução: o próprio browser baixa o signed URL (fetch CORS habilitado
+  // pelo Supabase — Access-Control-Allow-Origin:*), converte para Blob e
+  // cria uma ObjectURL. Essa URL é same-origin do app (prefixo blob:),
+  // então casa com CSP `frame-src 'self' blob:` e passa pelo COEP.
+  const [proxyUrl, setProxyUrl] = useState<string | null>(null);
+  const [blobErro, setBlobErro] = useState(false);
 
   useEffect(() => {
     if (!previewUrl) {
-      setProxyUrl(null)
-      setBlobErro(false)
-      return
+      setProxyUrl(null);
+      setBlobErro(false);
+      return;
     }
-    try {
-      const proxy = `/api/storage-proxy?url=${encodeURIComponent(previewUrl)}`
-      setProxyUrl(proxy)
-      setBlobErro(false)
-    } catch (err) {
-      console.error("[preview] Erro ao montar proxy URL:", err)
-      setBlobErro(true)
-    }
-  }, [previewUrl])
+
+    let cancelled = false;
+    let objectUrl: string | null = null;
+
+    setBlobErro(false);
+    setProxyUrl(null);
+    (async () => {
+      try {
+        const res = await fetch(previewUrl);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const blob = await res.blob();
+        if (cancelled) return;
+        objectUrl = URL.createObjectURL(blob);
+        setProxyUrl(objectUrl);
+      } catch (err) {
+        if (!cancelled) {
+          console.error("[preview] Erro ao baixar arquivo:", err);
+          setBlobErro(true);
+        }
+      }
+    })();
+
+    return () => {
+      cancelled = true;
+      if (objectUrl) URL.revokeObjectURL(objectUrl);
+    };
+  }, [previewUrl]);
 
   // Reset quando abre com nova confirmação
   useEffect(() => {
-    setCheckConfirmacao(false)
-    setCheckDestXml(destinoXmlInicial)
-    setCheckDestAcervo(destinoAcervoInicial)
-    setModoTrocar(false)
-    setNovoTipoSelecionado(null)
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [confirmacao?.tipo_xsd, confirmacao?.arquivo_index])
+    setCheckConfirmacao(false);
+    setCheckDestXml(destinoXmlInicial);
+    setCheckDestAcervo(destinoAcervoInicial);
+    setModoTrocar(false);
+    setNovoTipoSelecionado(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [confirmacao?.tipo_xsd, confirmacao?.arquivo_index]);
 
   // Quando o arquivo é substituído (previewUrl muda), resetar checkbox de confirmação
   // para forçar o operador a confirmar o novo arquivo
   useEffect(() => {
     if (!substituindo) {
-      setCheckConfirmacao(false)
+      setCheckConfirmacao(false);
     }
-  }, [previewUrl, substituindo])
+  }, [previewUrl, substituindo]);
 
   // Se já está confirmado, pré-marcar o checkbox
   useEffect(() => {
     if (confirmacao?.status === "confirmado") {
-      setCheckConfirmacao(true)
+      setCheckConfirmacao(true);
     }
-  }, [confirmacao?.status])
+  }, [confirmacao?.status]);
 
   // Fechar com ESC
   useEffect(() => {
-    if (!confirmacao) return
+    if (!confirmacao) return;
     const handler = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onFechar()
-    }
-    document.addEventListener("keydown", handler)
-    return () => document.removeEventListener("keydown", handler)
-  }, [confirmacao, onFechar])
+      if (e.key === "Escape") onFechar();
+    };
+    document.addEventListener("keydown", handler);
+    return () => document.removeEventListener("keydown", handler);
+  }, [confirmacao, onFechar]);
 
   // Click outside para fechar
   const handleBackdropClick = useCallback(
     (e: React.MouseEvent) => {
       if (dialogRef.current && !dialogRef.current.contains(e.target as Node)) {
-        onFechar()
+        onFechar();
       }
     },
     [onFechar],
-  )
+  );
 
-  if (!confirmacao) return null
+  if (!confirmacao) return null;
 
-  const ehImagem = mimeType?.startsWith("image/")
-  const ehPdf = mimeType === "application/pdf"
-  const jaConfirmado = confirmacao.status === "confirmado"
+  const ehImagem = mimeType?.startsWith("image/");
+  const ehPdf = mimeType === "application/pdf";
+  const jaConfirmado = confirmacao.status === "confirmado";
 
   return (
     <div
@@ -199,7 +219,10 @@ export function DialogVisualizarDocumento({
             <p className="mt-0.5 text-sm text-gray-500">
               {confirmacao.nome_arquivo ?? "Arquivo não identificado"}
               {confirmacao.confianca != null && (
-                <> · Confiança da IA: {(confirmacao.confianca * 100).toFixed(0)}%</>
+                <>
+                  {" "}
+                  · Confiança da IA: {(confirmacao.confianca * 100).toFixed(0)}%
+                </>
               )}
             </p>
           </div>
@@ -323,7 +346,7 @@ export function DialogVisualizarDocumento({
                 <button
                   onClick={() => {
                     if (novoTipoSelecionado && confirmacao) {
-                      onTrocarTipo(confirmacao, novoTipoSelecionado)
+                      onTrocarTipo(confirmacao, novoTipoSelecionado);
                     }
                   }}
                   disabled={!novoTipoSelecionado}
@@ -351,13 +374,18 @@ export function DialogVisualizarDocumento({
                 />
                 <span className="text-sm text-gray-700 dark:text-gray-300">
                   Confirmo que este arquivo é de fato{" "}
-                  <strong>{LABEL_TIPO_XSD[confirmacao.tipo_xsd]?.toLowerCase() ?? confirmacao.tipo_xsd}</strong>
+                  <strong>
+                    {LABEL_TIPO_XSD[confirmacao.tipo_xsd]?.toLowerCase() ??
+                      confirmacao.tipo_xsd}
+                  </strong>
                 </span>
               </label>
 
               {/* Destinos do arquivo */}
               <div className="rounded-md border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800/30 px-4 py-3 space-y-2">
-                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">Destinos do arquivo</p>
+                <p className="text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wide">
+                  Destinos do arquivo
+                </p>
                 <label className="flex cursor-pointer items-center gap-3">
                   <input
                     type="checkbox"
@@ -387,7 +415,7 @@ export function DialogVisualizarDocumento({
                 <button
                   onClick={() => {
                     if (checkConfirmacao && confirmacao) {
-                      onConfirmar(confirmacao, checkDestXml, checkDestAcervo)
+                      onConfirmar(confirmacao, checkDestXml, checkDestAcervo);
                     }
                   }}
                   disabled={!checkConfirmacao || substituindo}
@@ -415,11 +443,11 @@ export function DialogVisualizarDocumento({
                       accept="image/*,application/pdf"
                       className="hidden"
                       onChange={async (e) => {
-                        const file = e.target.files?.[0]
-                        if (!file) return
+                        const file = e.target.files?.[0];
+                        if (!file) return;
                         // Limpa o input para permitir re-seleção do mesmo arquivo
-                        e.target.value = ""
-                        await onSubstituirArquivo(file)
+                        e.target.value = "";
+                        await onSubstituirArquivo(file);
                       }}
                     />
                     <button
@@ -442,5 +470,5 @@ export function DialogVisualizarDocumento({
         </div>
       </div>
     </div>
-  )
+  );
 }
