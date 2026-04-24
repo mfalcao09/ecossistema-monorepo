@@ -1,0 +1,25 @@
+{
+  "name": "@ecossistema/whatsapp-types",
+  "version": "0.1.0",
+  "description": "Tipos TypeScript compartilhados da camada WhatsApp — schema DB, eventos Realtime, HTTP API do gateway. Referência: ADR-017.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    }
+  },
+  "files": ["dist", "README.md"],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  }
+}

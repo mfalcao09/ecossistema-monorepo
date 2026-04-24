@@ -1,0 +1,34 @@
+{
+  "name": "@ecossistema/whatsapp-gateway",
+  "version": "0.1.0",
+  "description": "Gateway WhatsApp — Baileys direto (Nível 2, ADR-017). Multi-instância, auth state em Supabase, provider-agnóstico pra swap futuro.",
+  "private": true,
+  "type": "module",
+  "main": "./dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch --env-file=.env.local src/index.ts",
+    "start": "node --env-file-if-exists=.env.local dist/index.js",
+    "lint": "tsc --noEmit",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@ecossistema/whatsapp-types": "workspace:*",
+    "@hapi/boom": "^10.0.1",
+    "@hono/node-server": "^1.13.0",
+    "@hono/zod-validator": "^0.4.0",
+    "@supabase/supabase-js": "^2.45.0",
+    "@whiskeysockets/baileys": "latest",
+    "hono": "^4.6.0",
+    "pino": "^9.0.0",
+    "pino-pretty": "^11.0.0",
+    "qrcode": "^1.5.4",
+    "zod": "^3.23.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "@types/qrcode": "^1.5.5",
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0"
+  }
+}
