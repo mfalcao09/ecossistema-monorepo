@@ -52,6 +52,7 @@ Numeração é **sequencial e irreversível**. Nunca reusar número.
 | # | ADR | Status | Tema |
 |---|---|---|---|
 | 016 | [Protocolo de sessões paralelas](016-protocolo-sessoes-paralelas.md) | ✅ aceito | Paralelismo de execução |
+| 017 | [WhatsApp pairing via Baileys direto](017-whatsapp-pairing-baileys-direto.md) | ✅ aceito | Integração WhatsApp |
 
 ## Convenções
 
