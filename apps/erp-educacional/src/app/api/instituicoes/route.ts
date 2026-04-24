@@ -1,8 +1,17 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
-import { verificarAuth, erroBadRequest, erroInterno } from "@/lib/security/api-guard";
+import {
+  verificarAuth,
+  erroBadRequest,
+  erroInterno,
+} from "@/lib/security/api-guard";
 import { validarCSRF } from "@/lib/security/csrf";
 import { validar, schemas } from "@/lib/security/validation";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // GET - Listar todas as instituições (requer autenticação)
 export async function GET(request: NextRequest) {
@@ -31,8 +40,8 @@ export async function POST(request: NextRequest) {
   const auth = await verificarAuth(request);
   if (auth instanceof NextResponse) return auth;
 
-  const csrfError = validarCSRF(request)
-  if (csrfError) return csrfError
+  const csrfError = validarCSRF(request);
+  if (csrfError) return csrfError;
 
   // Parsear e validar body
   let body: unknown;
@@ -46,7 +55,7 @@ export async function POST(request: NextRequest) {
   if (!resultado.ok) {
     return NextResponse.json(
       { error: "Dados inválidos", detalhes: resultado.erros },
-      { status: 400 }
+      { status: 400 },
     );
   }
 

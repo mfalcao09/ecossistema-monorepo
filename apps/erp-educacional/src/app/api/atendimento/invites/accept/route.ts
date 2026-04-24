@@ -1,6 +1,11 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 /**
  * GET  /api/atendimento/invites/accept?token=...
  *   → valida token (auth NÃO obrigatória), retorna dados do convite para
@@ -15,7 +20,8 @@ import { createClient } from "@/lib/supabase/server";
 
 export async function GET(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");
-  if (!token) return NextResponse.json({ erro: "Token obrigatório." }, { status: 400 });
+  if (!token)
+    return NextResponse.json({ erro: "Token obrigatório." }, { status: 400 });
 
   const supabase = await createClient();
   const nowIso = new Date().toISOString();
@@ -27,10 +33,17 @@ export async function GET(req: NextRequest) {
     .maybeSingle();
 
   if (error) return NextResponse.json({ erro: error.message }, { status: 500 });
-  if (!data) return NextResponse.json({ erro: "Convite não encontrado." }, { status: 404 });
-  if (data.revoked_at) return NextResponse.json({ erro: "Convite revogado." }, { status: 410 });
-  if (data.accepted_at) return NextResponse.json({ erro: "Convite já aceito." }, { status: 410 });
-  if (data.expires_at < nowIso) return NextResponse.json({ erro: "Convite expirado." }, { status: 410 });
+  if (!data)
+    return NextResponse.json(
+      { erro: "Convite não encontrado." },
+      { status: 404 },
+    );
+  if (data.revoked_at)
+    return NextResponse.json({ erro: "Convite revogado." }, { status: 410 });
+  if (data.accepted_at)
+    return NextResponse.json({ erro: "Convite já aceito." }, { status: 410 });
+  if (data.expires_at < nowIso)
+    return NextResponse.json({ erro: "Convite expirado." }, { status: 410 });
 
   const { data: role } = await supabase
     .from("agent_roles")
@@ -47,7 +60,8 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const token = req.nextUrl.searchParams.get("token");
-  if (!token) return NextResponse.json({ erro: "Token obrigatório." }, { status: 400 });
+  if (!token)
+    return NextResponse.json({ erro: "Token obrigatório." }, { status: 400 });
 
   const supabase = await createClient();
   const {
@@ -69,11 +83,19 @@ export async function POST(req: NextRequest) {
     .eq("token", token)
     .maybeSingle();
 
-  if (invErr) return NextResponse.json({ erro: invErr.message }, { status: 500 });
-  if (!invite) return NextResponse.json({ erro: "Convite não encontrado." }, { status: 404 });
-  if (invite.revoked_at) return NextResponse.json({ erro: "Convite revogado." }, { status: 410 });
-  if (invite.accepted_at) return NextResponse.json({ erro: "Convite já aceito." }, { status: 410 });
-  if (invite.expires_at < nowIso) return NextResponse.json({ erro: "Convite expirado." }, { status: 410 });
+  if (invErr)
+    return NextResponse.json({ erro: invErr.message }, { status: 500 });
+  if (!invite)
+    return NextResponse.json(
+      { erro: "Convite não encontrado." },
+      { status: 404 },
+    );
+  if (invite.revoked_at)
+    return NextResponse.json({ erro: "Convite revogado." }, { status: 410 });
+  if (invite.accepted_at)
+    return NextResponse.json({ erro: "Convite já aceito." }, { status: 410 });
+  if (invite.expires_at < nowIso)
+    return NextResponse.json({ erro: "Convite expirado." }, { status: 410 });
 
   // Casa email — se user logou com email diferente, rejeita
   const userEmail = user.email?.toLowerCase() ?? "";
@@ -99,7 +121,8 @@ export async function POST(req: NextRequest) {
       .eq("id", existing.id)
       .select("id")
       .single();
-    if (updErr) return NextResponse.json({ erro: updErr.message }, { status: 500 });
+    if (updErr)
+      return NextResponse.json({ erro: updErr.message }, { status: 500 });
     agentId = upd.id;
   } else {
     const { data: ins, error: insErr } = await supabase
@@ -112,7 +135,8 @@ export async function POST(req: NextRequest) {
       })
       .select("id")
       .single();
-    if (insErr) return NextResponse.json({ erro: insErr.message }, { status: 500 });
+    if (insErr)
+      return NextResponse.json({ erro: insErr.message }, { status: 500 });
     agentId = ins.id;
   }
 
@@ -132,7 +156,8 @@ export async function POST(req: NextRequest) {
     .update({ accepted_at: nowIso, accepted_by: user.id })
     .eq("id", invite.id);
 
-  if (acceptErr) return NextResponse.json({ erro: acceptErr.message }, { status: 500 });
+  if (acceptErr)
+    return NextResponse.json({ erro: acceptErr.message }, { status: 500 });
 
   return NextResponse.json({ ok: true, agent_id: agentId });
 }

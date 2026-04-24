@@ -1,6 +1,11 @@
-import { protegerRota } from '@/lib/security/api-guard'
+import { protegerRota } from "@/lib/security/api-guard";
 import { NextRequest, NextResponse } from "next/server";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ============================================================
 // API de Processamento de Documentos
@@ -66,10 +71,19 @@ function parseCredenciamento(texto: string): CredenciamentoData {
 
   // --- DATAS (dd de mês de yyyy) ---
   const meses: Record<string, string> = {
-    janeiro: "01", fevereiro: "02", "março": "03", marco: "03",
-    abril: "04", maio: "05", junho: "06", julho: "07",
-    agosto: "08", setembro: "09", outubro: "10",
-    novembro: "11", dezembro: "12",
+    janeiro: "01",
+    fevereiro: "02",
+    março: "03",
+    marco: "03",
+    abril: "04",
+    maio: "05",
+    junho: "06",
+    julho: "07",
+    agosto: "08",
+    setembro: "09",
+    outubro: "10",
+    novembro: "11",
+    dezembro: "12",
   };
 
   const datasEncontradas: string[] = [];
@@ -108,7 +122,10 @@ function parseCredenciamento(texto: string): CredenciamentoData {
   if (/di[aá]rio\s+oficial/i.test(txt) || /\bDOU\b/.test(txt)) {
     result.veiculo_publicacao = "DOU";
     campos_encontrados.push("veiculo_publicacao");
-  } else if (/di[aá]rio\s+oficial\s+do\s+estado/i.test(txt) || /\bDOE\b/.test(txt)) {
+  } else if (
+    /di[aá]rio\s+oficial\s+do\s+estado/i.test(txt) ||
+    /\bDOE\b/.test(txt)
+  ) {
     result.veiculo_publicacao = "DOE";
     campos_encontrados.push("veiculo_publicacao");
   }
@@ -131,10 +148,7 @@ function parseCredenciamento(texto: string): CredenciamentoData {
   }
 
   // Seção do DOU
-  const secaoPatterns = [
-    /Se[çc][aã]o\s+(\d+)/i,
-    /S[Ee][ÇC][ÃA]O\s+(\d+)/i,
-  ];
+  const secaoPatterns = [/Se[çc][aã]o\s+(\d+)/i, /S[Ee][ÇC][ÃA]O\s+(\d+)/i];
   for (const pattern of secaoPatterns) {
     const m = txt.match(pattern);
     if (m) {
@@ -145,10 +159,7 @@ function parseCredenciamento(texto: string): CredenciamentoData {
   }
 
   // Página do DOU
-  const paginaPatterns = [
-    /[Pp][aá]gina\s+(\d+)/i,
-    /p[aá]g[.\s]+(\d+)/i,
-  ];
+  const paginaPatterns = [/[Pp][aá]gina\s+(\d+)/i, /p[aá]g[.\s]+(\d+)/i];
   for (const pattern of paginaPatterns) {
     const m = txt.match(pattern);
     if (m) {
@@ -198,7 +209,8 @@ function parseCredenciamento(texto: string): CredenciamentoData {
 
   // "Data de Publicação: 20/12/2022"
   if (!result.data_publicacao_dou) {
-    const mecPubPattern = /Data\s+de\s+Publica[çc][aã]o:\s*(\d{2}\/\d{2}\/\d{4})/i;
+    const mecPubPattern =
+      /Data\s+de\s+Publica[çc][aã]o:\s*(\d{2}\/\d{2}\/\d{4})/i;
     const mecMatch = txt.match(mecPubPattern);
     if (mecMatch) {
       const parts = mecMatch[1].split("/");
@@ -238,27 +250,29 @@ function parseCredenciamento(texto: string): CredenciamentoData {
 // ----------------------------------------------------------
 // HANDLER PRINCIPAL
 // ----------------------------------------------------------
-export const POST = protegerRota(async (request: NextRequest, { userId, tenantId }) => {
-  try {
-    const formData = await request.formData();
-    const textoManual = formData.get("texto") as string | null;
+export const POST = protegerRota(
+  async (request: NextRequest, { userId, tenantId }) => {
+    try {
+      const formData = await request.formData();
+      const textoManual = formData.get("texto") as string | null;
 
-    if (!textoManual || !textoManual.trim()) {
+      if (!textoManual || !textoManual.trim()) {
+        return NextResponse.json(
+          { error: "Nenhum texto para processar", campos_encontrados: [] },
+          { status: 400 },
+        );
+      }
+
+      // Processa o texto e extrai dados de credenciamento
+      const resultado = parseCredenciamento(textoManual);
+
+      return NextResponse.json(resultado);
+    } catch (err) {
+      console.error("Erro ao processar documento:", err);
       return NextResponse.json(
-        { error: "Nenhum texto para processar", campos_encontrados: [] },
-        { status: 400 }
+        { erro: sanitizarErro("Erro ao processar o documento", 500) },
+        { status: 500 },
       );
     }
-
-    // Processa o texto e extrai dados de credenciamento
-    const resultado = parseCredenciamento(textoManual);
-
-    return NextResponse.json(resultado);
-  } catch (err) {
-    console.error("Erro ao processar documento:", err);
-    return NextResponse.json(
-      { erro: sanitizarErro("Erro ao processar o documento", 500) },
-      { status: 500 }
-    );
-  }
-})
+  },
+);

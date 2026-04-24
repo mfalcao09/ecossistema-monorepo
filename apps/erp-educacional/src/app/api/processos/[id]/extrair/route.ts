@@ -3,6 +3,11 @@ import { NextRequest, NextResponse } from "next/server";
 import { verificarAuth, erroNaoEncontrado } from "@/lib/security/api-guard";
 import { callOpenRouter, callOpenRouterImage } from "@/lib/ai/openrouter";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 interface ExtracaoDados {
   dados_extraidos: {
     diplomado?: {
@@ -136,12 +141,12 @@ CONFIANÇA: Atribua alta (0.9+) se o texto é claro; média (0.7-0.8) se está p
 // POST - Extração com IA
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
+  const { id } = await params;
   const supabase = await createClient();
   const processoId = id;
 
@@ -227,7 +232,7 @@ export async function POST(
     if (!extracao) {
       return NextResponse.json(
         { error: "Erro ao criar/buscar sessão de extração" },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -243,7 +248,7 @@ export async function POST(
           arquivo_base64,
           arquivo_mime,
           PROMPT_EXTRACAO,
-          { modelo: "anthropic/claude-opus-4" }
+          { modelo: "anthropic/claude-opus-4" },
         );
 
         // Parse da resposta JSON
@@ -257,9 +262,10 @@ export async function POST(
         return NextResponse.json(
           {
             error: "Erro ao processar documento com IA",
-            details: iaError instanceof Error ? iaError.message : "Desconhecido",
+            details:
+              iaError instanceof Error ? iaError.message : "Desconhecido",
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
     }
@@ -269,7 +275,10 @@ export async function POST(
         // Construir contexto da conversa
         const historicoChat = extracao.historico_chat || [];
         const historicoFormatado = historicoChat
-          .map((msg: any) => `${msg.role === "user" ? "Usuário" : "Assistente"}: ${msg.content}`)
+          .map(
+            (msg: any) =>
+              `${msg.role === "user" ? "Usuário" : "Assistente"}: ${msg.content}`,
+          )
           .join("\n");
 
         const promptContinuacao = `Você é um assistente de extração de dados acadêmicos. Continuando a conversa anterior:
@@ -284,7 +293,7 @@ Retorne o JSON com a mesma estrutura de antes.`;
 
         const resposta = await callOpenRouter(
           [{ role: "user", content: promptContinuacao }],
-          { modelo: "anthropic/claude-opus-4" }
+          { modelo: "anthropic/claude-opus-4" },
         );
 
         const jsonMatch = resposta.match(/\{[\s\S]*\}/);
@@ -297,15 +306,16 @@ Retorne o JSON com a mesma estrutura de antes.`;
         return NextResponse.json(
           {
             error: "Erro ao processar resposta",
-            details: iaError instanceof Error ? iaError.message : "Desconhecido",
+            details:
+              iaError instanceof Error ? iaError.message : "Desconhecido",
           },
-          { status: 500 }
+          { status: 500 },
         );
       }
     } else {
       return NextResponse.json(
         { error: "Arquivo ou resposta_usuario é obrigatório" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -404,7 +414,7 @@ Retorne o JSON com a mesma estrutura de antes.`;
                 error: "Erro ao criar diplomado",
                 details: diplomadoError?.message || "Desconhecido",
               },
-              { status: 500 }
+              { status: 500 },
             );
           }
 
@@ -422,7 +432,10 @@ Retorne o JSON com a mesma estrutura de antes.`;
             .insert({
               diplomado_id: novoDiplomado.id,
               processo_id: processoId,
-              status: statusExtracao === "confirmacao_pendente" ? "pronto_para_xml" : "em_extracao",
+              status:
+                statusExtracao === "confirmacao_pendente"
+                  ? "pronto_para_xml"
+                  : "em_extracao",
               data_conclusao: dataConclusao,
             })
             .select()
@@ -435,7 +448,7 @@ Retorne o JSON com a mesma estrutura de antes.`;
                 error: "Erro ao criar diploma",
                 details: diplomaError?.message || "Desconhecido",
               },
-              { status: 500 }
+              { status: 500 },
             );
           }
 
@@ -468,9 +481,12 @@ Retorne o JSON com a mesma estrutura de antes.`;
           return NextResponse.json(
             {
               error: "Erro ao criar diplomado automaticamente",
-              details: autoCreateError instanceof Error ? autoCreateError.message : "Desconhecido",
+              details:
+                autoCreateError instanceof Error
+                  ? autoCreateError.message
+                  : "Desconhecido",
             },
-            { status: 500 }
+            { status: 500 },
           );
         }
       }
@@ -494,7 +510,7 @@ Retorne o JSON com a mesma estrutura de antes.`;
         console.error("Erro ao atualizar sessão:", updateError);
         return NextResponse.json(
           { error: "Erro ao salvar dados extraídos" },
-          { status: 500 }
+          { status: 500 },
         );
       }
 
@@ -503,7 +519,10 @@ Retorne o JSON com a mesma estrutura de antes.`;
         await supabase
           .from("diplomas")
           .update({
-            status: statusExtracao === "confirmacao_pendente" ? "pronto_para_xml" : "em_extracao",
+            status:
+              statusExtracao === "confirmacao_pendente"
+                ? "pronto_para_xml"
+                : "em_extracao",
             updated_at: new Date().toISOString(),
           })
           .eq("id", currentDiplomaId);
@@ -518,7 +537,10 @@ Retorne o JSON com a mesma estrutura de antes.`;
       mensagem_ia: mensagemIA,
       dados_extraidos: dadosExtraidos?.dados_extraidos || null,
       campos_faltando: dadosExtraidos?.campos_faltando || [],
-      status: dadosExtraidos?.campos_faltando.length === 0 ? "confirmacao_pendente" : "em_progresso",
+      status:
+        dadosExtraidos?.campos_faltando.length === 0
+          ? "confirmacao_pendente"
+          : "em_progresso",
       confianca_geral: dadosExtraidos?.confianca_geral || 0,
     };
 
@@ -530,7 +552,7 @@ Retorne o JSON com a mesma estrutura de antes.`;
         error: "Erro interno do servidor",
         details: error instanceof Error ? error.message : "Desconhecido",
       },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

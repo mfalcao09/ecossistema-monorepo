@@ -9,6 +9,11 @@ import {
   type DadosSnapshot,
 } from "@/lib/diploma/snapshot";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 // Tipo local do row retornado pelo Supabase (colunas explícitas do select).
 // Usado via cast pois o inferidor do Supabase JS não infere corretamente quando
 // o .select() recebe string concatenada.

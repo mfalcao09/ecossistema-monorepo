@@ -1,6 +1,15 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
-import { verificarAuth, erroNaoEncontrado, erroInterno } from "@/lib/security/api-guard";
+import {
+  verificarAuth,
+  erroNaoEncontrado,
+  erroInterno,
+} from "@/lib/security/api-guard";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 interface DiplomaListItem {
   id: string;
@@ -14,12 +23,12 @@ interface DiplomaListItem {
 // GET - Listar diplomas do processo
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
+  const { id } = await params;
   const supabase = await createClient();
 
   // Verifica se processo existe
@@ -36,19 +45,24 @@ export async function GET(
   // Busca diplomas com dados relacionados
   const { data: diplomas, error: diplomasError } = await supabase
     .from("diplomas")
-    .select(`
+    .select(
+      `
       id,
       diplomado_id,
       status,
       data_conclusao,
       diplomados(nome),
       extracao_sessoes(confianca_geral)
-    `)
+    `,
+    )
     .eq("processo_id", id)
     .order("created_at", { ascending: false });
 
   if (diplomasError) {
-    console.error('[API] Erro ao buscar diplomas do processo:', diplomasError.message);
+    console.error(
+      "[API] Erro ao buscar diplomas do processo:",
+      diplomasError.message,
+    );
     return erroInterno();
   }
 
@@ -67,12 +81,12 @@ export async function GET(
 // POST - Adicionar diplomados ao processo
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
+  const { id } = await params;
   const supabase = await createClient();
   const body = await request.json();
 
@@ -101,7 +115,7 @@ export async function POST(
   if (idsParaInserir.length === 0) {
     return NextResponse.json(
       { error: "diplomado_id ou diplomados_ids é obrigatório" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -114,8 +128,7 @@ export async function POST(
 
   const { data: novosDiplomas, error: insertError } = await supabase
     .from("diplomas")
-    .insert(diplomasParaInserir)
-    .select(`
+    .insert(diplomasParaInserir).select(`
       id,
       diplomado_id,
       status,
@@ -125,7 +138,10 @@ export async function POST(
     `);
 
   if (insertError) {
-    console.error('[API] Erro ao inserir diplomas no processo:', insertError.message);
+    console.error(
+      "[API] Erro ao inserir diplomas no processo:",
+      insertError.message,
+    );
     return erroInterno();
   }
 
@@ -151,12 +167,12 @@ export async function POST(
 // DELETE - Remover diplomado do processo
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
+  const { id } = await params;
   const supabase = await createClient();
   const body = await request.json();
 
@@ -165,7 +181,7 @@ export async function DELETE(
   if (!diploma_id) {
     return NextResponse.json(
       { error: "diploma_id é obrigatório" },
-      { status: 400 }
+      { status: 400 },
     );
   }
 
@@ -183,7 +199,7 @@ export async function DELETE(
   if (diploma.processo_id !== id) {
     return NextResponse.json(
       { error: "Recurso não encontrado" },
-      { status: 404 }
+      { status: 404 },
     );
   }
 
@@ -194,7 +210,10 @@ export async function DELETE(
     .eq("id", diploma_id);
 
   if (deleteError) {
-    console.error('[API] Erro ao deletar diploma do processo:', deleteError.message);
+    console.error(
+      "[API] Erro ao deletar diploma do processo:",
+      deleteError.message,
+    );
     return erroInterno();
   }
 
@@ -209,7 +228,10 @@ export async function DELETE(
     const novoTotal = Math.max(0, (processo.total_diplomas || 1) - 1);
     await supabase
       .from("processos_emissao")
-      .update({ total_diplomas: novoTotal, updated_at: new Date().toISOString() })
+      .update({
+        total_diplomas: novoTotal,
+        updated_at: new Date().toISOString(),
+      })
       .eq("id", id);
   }
 

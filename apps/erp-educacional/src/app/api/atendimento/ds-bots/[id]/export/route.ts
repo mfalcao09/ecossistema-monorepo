@@ -6,6 +6,11 @@ import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 import { isDsBotEnabled } from "@/lib/atendimento/feature-flags";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 export async function GET(
   _: NextRequest,
   ctx: { params: Promise<{ id: string }> },

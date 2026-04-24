@@ -10,6 +10,11 @@ import { z } from "zod";
 import { createClient as createServerClient } from "@/lib/supabase/server";
 import { createAdminClient } from "@/lib/supabase/admin";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 const patchSchema = z.object({
   name: z.string().min(1).max(512).optional(),
   category: z.enum(["MARKETING", "UTILITY", "AUTHENTICATION"]).optional(),
@@ -39,7 +44,8 @@ export async function GET(
     .select("*")
     .eq("id", id)
     .maybeSingle();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error)
+    return NextResponse.json({ error: error.message }, { status: 500 });
   if (!data) return NextResponse.json({ error: "not_found" }, { status: 404 });
   return NextResponse.json({ template: data });
 }
@@ -64,10 +70,14 @@ export async function PATCH(
     .select("status")
     .eq("id", id)
     .maybeSingle();
-  if (!current) return NextResponse.json({ error: "not_found" }, { status: 404 });
+  if (!current)
+    return NextResponse.json({ error: "not_found" }, { status: 404 });
   if (current.status !== "DRAFT") {
     return NextResponse.json(
-      { error: "immutable", message: "Templates já submetidos são imutáveis — duplique e edite" },
+      {
+        error: "immutable",
+        message: "Templates já submetidos são imutáveis — duplique e edite",
+      },
       { status: 409 },
     );
   }
@@ -89,7 +99,8 @@ export async function PATCH(
     .eq("id", id)
     .select()
     .single();
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error)
+    return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ template: data });
 }
 
@@ -107,14 +118,16 @@ export async function DELETE(
     .select("status, meta_template_id")
     .eq("id", id)
     .maybeSingle();
-  if (!current) return NextResponse.json({ error: "not_found" }, { status: 404 });
+  if (!current)
+    return NextResponse.json({ error: "not_found" }, { status: 404 });
 
   if (current.status === "DRAFT" && !current.meta_template_id) {
     const { error } = await admin
       .from("atendimento_whatsapp_templates")
       .delete()
       .eq("id", id);
-    if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+    if (error)
+      return NextResponse.json({ error: error.message }, { status: 500 });
     return NextResponse.json({ deleted: true });
   }
 
@@ -123,6 +136,7 @@ export async function DELETE(
     .from("atendimento_whatsapp_templates")
     .update({ status: "DISABLED" })
     .eq("id", id);
-  if (error) return NextResponse.json({ error: error.message }, { status: 500 });
+  if (error)
+    return NextResponse.json({ error: error.message }, { status: 500 });
   return NextResponse.json({ disabled: true });
 }

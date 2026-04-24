@@ -9,6 +9,11 @@ import { createAdminClient } from "@/lib/supabase/admin";
 import { isDsBotEnabled } from "@/lib/atendimento/feature-flags";
 import type { DsBotFlow } from "@/lib/atendimento/ds-bot-types";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 const schema = z.object({
   schema: z.literal("ds-bot@1"),
   name: z.string().min(1).max(140),

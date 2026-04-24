@@ -3,6 +3,11 @@ import { createClient } from "@/lib/supabase/server";
 import { protegerRota } from "@/lib/security/api-guard";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 // ═══════════════════════════════════════════════════════════════════
 // GET /api/diplomas/[id]/comprobatorios
 //

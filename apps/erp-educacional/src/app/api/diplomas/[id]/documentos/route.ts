@@ -18,6 +18,10 @@ import {
   type AssinantePDF,
 } from "@/lib/documentos/pdf-generator";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+
 // Fase 3 do Snapshot Imutável: geração dos 3 PDFs via Puppeteer (~10s cada,
 // executadas em paralelo). Runtime Node.js (Chromium não roda em Edge).
 export const maxDuration = 120;

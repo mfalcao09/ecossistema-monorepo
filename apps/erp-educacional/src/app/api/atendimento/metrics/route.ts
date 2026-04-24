@@ -27,6 +27,11 @@ import {
   type MetricKey,
 } from "@/lib/atendimento/dashboards";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 type NumericMetric = Exclude<MetricKey, "leads_by_source" | "volume_by_inbox">;
 
 function isNumericMetric(m: MetricKey): m is NumericMetric {

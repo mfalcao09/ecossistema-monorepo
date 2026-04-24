@@ -1,17 +1,26 @@
 import { createClient } from "@/lib/supabase/server";
 import { NextRequest, NextResponse } from "next/server";
-import { verificarAuth, erroNaoEncontrado, erroInterno } from "@/lib/security/api-guard";
+import {
+  verificarAuth,
+  erroNaoEncontrado,
+  erroInterno,
+} from "@/lib/security/api-guard";
 import { validarCSRF } from "@/lib/security/csrf";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // GET - Buscar instituição por ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  const { id } = await params
+  const { id } = await params;
   const supabase = await createClient();
 
   const { data, error } = await supabase
@@ -21,7 +30,7 @@ export async function GET(
     .single();
 
   if (error) {
-    console.error('[API] Erro ao buscar instituição:', error.message);
+    console.error("[API] Erro ao buscar instituição:", error.message);
     return erroNaoEncontrado();
   }
 
@@ -31,15 +40,15 @@ export async function GET(
 // PUT - Atualizar instituição
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  const csrfError = validarCSRF(request)
-  if (csrfError) return csrfError
+  const csrfError = validarCSRF(request);
+  if (csrfError) return csrfError;
 
-  const { id } = await params
+  const { id } = await params;
   const supabase = await createClient();
   const body = await request.json();
 
@@ -58,7 +67,7 @@ export async function PUT(
     .single();
 
   if (error) {
-    console.error('[API] Erro ao atualizar instituição:', error.message);
+    console.error("[API] Erro ao atualizar instituição:", error.message);
     return erroInterno();
   }
 
@@ -68,7 +77,7 @@ export async function PUT(
 // PATCH - alias para PUT (compatibilidade com o cliente)
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   return PUT(request, { params });
 }
@@ -76,15 +85,15 @@ export async function PATCH(
 // DELETE - Excluir instituição (soft delete via campo ativo)
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuth(request)
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuth(request);
+  if (auth instanceof NextResponse) return auth;
 
-  const csrfError = validarCSRF(request)
-  if (csrfError) return csrfError
+  const csrfError = validarCSRF(request);
+  if (csrfError) return csrfError;
 
-  const { id } = await params
+  const { id } = await params;
   const supabase = await createClient();
 
   const { error } = await supabase
@@ -93,7 +102,7 @@ export async function DELETE(
     .eq("id", id);
 
   if (error) {
-    console.error('[API] Erro ao deletar instituição:', error.message);
+    console.error("[API] Erro ao deletar instituição:", error.message);
     return erroInterno();
   }
 

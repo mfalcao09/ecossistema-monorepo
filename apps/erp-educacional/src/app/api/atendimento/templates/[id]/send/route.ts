@@ -24,6 +24,11 @@ import {
   type MetaComponent,
 } from "@/lib/atendimento/meta-templates";
 
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
+
 const schema = z.object({
   contact_id: z.string().uuid(),
   variables: z.array(z.string()).default([]),
@@ -73,7 +78,9 @@ export async function POST(
     );
   }
 
-  const expectedVars = countTemplateVariables(template.components as MetaComponent[]);
+  const expectedVars = countTemplateVariables(
+    template.components as MetaComponent[],
+  );
   if (parsed.data.variables.length < expectedVars) {
     return NextResponse.json(
       {

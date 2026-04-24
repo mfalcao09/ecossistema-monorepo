@@ -8,9 +8,20 @@ export const maxDuration = 60;
 import { montarDadosDiploma } from "@/lib/xml/montador";
 import { gerarXMLs } from "@/lib/xml/gerador";
 import type { DocumentosComprobatoriosNonEmpty } from "@/lib/xml";
-import { validarHistoricoEscolar, validarDocAcademicaRegistro } from "@/lib/xml/validador";
-import { erroNaoEncontrado, erroInterno, verificarAuth } from "@/lib/security/api-guard";
-import { verificarRateLimitERP, adicionarHeadersRateLimit, adicionarHeadersRetryAfter } from "@/lib/security/rate-limit";
+import {
+  validarHistoricoEscolar,
+  validarDocAcademicaRegistro,
+} from "@/lib/xml/validador";
+import {
+  erroNaoEncontrado,
+  erroInterno,
+  verificarAuth,
+} from "@/lib/security/api-guard";
+import {
+  verificarRateLimitERP,
+  adicionarHeadersRateLimit,
+  adicionarHeadersRetryAfter,
+} from "@/lib/security/rate-limit";
 import { registrarCustodiaAsync } from "@/lib/security/cadeia-custodia";
 import {
   REGRAS_NEGOCIO,
@@ -23,6 +34,10 @@ import {
   type DocumentoComprobatorioParaXml,
 } from "@/lib/pdfa/converter-service";
 import crypto from "crypto";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
 
 /**
  * Payload de override humano enviado pelo frontend após o operador
@@ -48,17 +63,17 @@ function sha256(text: string): string {
 // POST — Gera os 3 XMLs reais (DiplomaDigital, HistoricoEscolar, DocAcademicaRegistro)
 export async function POST(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
   const auth = await verificarAuth(request);
   if (auth instanceof NextResponse) return auth;
 
   // Rate limit: 10 per minute for XML generation
-  const rateLimit = await verificarRateLimitERP(request, 'export', auth.userId);
+  const rateLimit = await verificarRateLimitERP(request, "export", auth.userId);
   if (!rateLimit.allowed) {
     const response = NextResponse.json(
-      { erro: 'Muitas requisições. Tente novamente em instantes.' },
-      { status: 429 }
+      { erro: "Muitas requisições. Tente novamente em instantes." },
+      { status: 429 },
     );
     adicionarHeadersRetryAfter(response.headers, rateLimit);
     return response;
@@ -73,19 +88,32 @@ export async function POST(
     // Bug #H — overrides humanos opcionais para regras de negócio.
     // Quando presente, cada item indica que o operador confirmou no modal
     // a sobrescrita daquela regra com justificativa textual.
-    const overrides: OverrideRegra[] = Array.isArray(body.overrides) ? body.overrides : [];
+    const overrides: OverrideRegra[] = Array.isArray(body.overrides)
+      ? body.overrides
+      : [];
 
     if (!diploma_id) {
-      return NextResponse.json({ error: "diploma_id é obrigatório" }, { status: 400 });
+      return NextResponse.json(
+        { error: "diploma_id é obrigatório" },
+        { status: 400 },
+      );
     }
 
     // Validação básica dos overrides recebidos. Justificativa < 10 chars
     // será rejeitada também pelo CHECK do banco, mas validamos cedo.
     for (const ov of overrides) {
-      if (!ov?.codigo || typeof ov.justificativa !== "string" || ov.justificativa.trim().length < 10) {
+      if (
+        !ov?.codigo ||
+        typeof ov.justificativa !== "string" ||
+        ov.justificativa.trim().length < 10
+      ) {
         return NextResponse.json(
-          { error: "Override inválido", detalhes: "Cada override exige `codigo` e `justificativa` (mínimo 10 caracteres)." },
-          { status: 400 }
+          {
+            error: "Override inválido",
+            detalhes:
+              "Cada override exige `codigo` e `justificativa` (mínimo 10 caracteres).",
+          },
+          { status: 400 },
         );
       }
     }
@@ -133,25 +161,34 @@ export async function POST(
       // Bug #H — violação de regra de negócio: devolve 422 estruturado
       // com a lista de violações para o frontend abrir o modal de override.
       if (err instanceof ValidacaoNegocioError) {
-        return NextResponse.json({
-          error: "Validação de regra de negócio",
-          tipo: "regra_negocio",
-          violacoes: err.violacoes.map((v) => ({
-            codigo: v.codigo,
-            mensagem: v.mensagem,
-            severidade: v.severidade,
-            valores_originais: v.valores_originais,
-          })),
-          mensagem_usuario:
-            "Encontramos divergências nos dados. Você pode revisar e corrigir, " +
-            "ou confirmar que está ciente e prosseguir com justificativa.",
-        }, { status: 422 });
+        return NextResponse.json(
+          {
+            error: "Validação de regra de negócio",
+            tipo: "regra_negocio",
+            violacoes: err.violacoes.map((v) => ({
+              codigo: v.codigo,
+              mensagem: v.mensagem,
+              severidade: v.severidade,
+              valores_originais: v.valores_originais,
+            })),
+            mensagem_usuario:
+              "Encontramos divergências nos dados. Você pode revisar e corrigir, " +
+              "ou confirmar que está ciente e prosseguir com justificativa.",
+          },
+          { status: 422 },
+        );
       }
 
-      return NextResponse.json({
-        error: "Dados incompletos para geração do XML",
-        detalhes: err instanceof Error ? err.message : "Verifique se todos os dados obrigatórios estão preenchidos.",
-      }, { status: 422 });
+      return NextResponse.json(
+        {
+          error: "Dados incompletos para geração do XML",
+          detalhes:
+            err instanceof Error
+              ? err.message
+              : "Verifique se todos os dados obrigatórios estão preenchidos.",
+        },
+        { status: 422 },
+      );
     }
 
     // ── 4b. Persiste os overrides aprovados em validacao_overrides ────────
@@ -172,10 +209,13 @@ export async function POST(
 
       if (overrideError) {
         console.error("Erro ao registrar overrides:", overrideError);
-        return NextResponse.json({
-          error: "Não foi possível registrar a justificativa do override",
-          detalhes: overrideError.message,
-        }, { status: 500 });
+        return NextResponse.json(
+          {
+            error: "Não foi possível registrar a justificativa do override",
+            detalhes: overrideError.message,
+          },
+          { status: 500 },
+        );
       }
     }
 
@@ -188,7 +228,7 @@ export async function POST(
       const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
       if (!url || !serviceKey) {
         throw new Error(
-          "SUPABASE_SERVICE_ROLE_KEY não configurada — necessária para PDF/A de comprobatórios"
+          "SUPABASE_SERVICE_ROLE_KEY não configurada — necessária para PDF/A de comprobatórios",
         );
       }
       return createAdminClient(url, serviceKey, {
@@ -198,15 +238,21 @@ export async function POST(
 
     let comprobatorios: DocumentoComprobatorioParaXml[];
     try {
-      comprobatorios = await obterTodosPdfABase64DoProcesso(processoId, supabaseAdmin);
+      comprobatorios = await obterTodosPdfABase64DoProcesso(
+        processoId,
+        supabaseAdmin,
+      );
     } catch (err) {
       // Falha dura na conversão PDF/A — propaga como 502 (dependência externa)
       if (err instanceof PdfAConversionError) {
         console.error("[gerar-xml] Falha ao obter PDF/A comprobatórios:", err);
-        return NextResponse.json({
-          error: "Falha ao converter documentos comprobatórios para PDF/A",
-          detalhes: err.message,
-        }, { status: 502 });
+        return NextResponse.json(
+          {
+            error: "Falha ao converter documentos comprobatórios para PDF/A",
+            detalhes: err.message,
+          },
+          { status: 502 },
+        );
       }
       throw err;
     }
@@ -216,29 +262,34 @@ export async function POST(
     // bloqueia com 422 — operador precisa selecionar ao menos um documento
     // ou justificar explicitamente a ausência (caminho raro/excepcional).
     const overrideComprobatoriosVazio = overrides.some(
-      (o) => o.codigo === REGRAS_NEGOCIO.DOCUMENTACAO_COMPROBATORIA_VAZIA
+      (o) => o.codigo === REGRAS_NEGOCIO.DOCUMENTACAO_COMPROBATORIA_VAZIA,
     );
 
     if (comprobatorios.length === 0 && !overrideComprobatoriosVazio) {
-      return NextResponse.json({
-        error: "Validação de regra de negócio",
-        tipo: "regra_negocio",
-        violacoes: [{
-          codigo: REGRAS_NEGOCIO.DOCUMENTACAO_COMPROBATORIA_VAZIA,
-          mensagem:
-            "Nenhum documento comprobatório foi selecionado para este processo. " +
-            "O XML DocAcademicaRegistro exige ao menos um <Documento> (XSD v1.05).",
-          severidade: "erro" as const,
-          valores_originais: {
-            processo_id: processoId,
-            comprobatorios_ativos: 0,
-          },
-        }],
-        mensagem_usuario:
-          "Você precisa selecionar ao menos um documento comprobatório (ex: RG, " +
-          "CNH, certidão) antes de gerar o XML. Em casos excepcionais é possível " +
-          "prosseguir com justificativa registrada.",
-      }, { status: 422 });
+      return NextResponse.json(
+        {
+          error: "Validação de regra de negócio",
+          tipo: "regra_negocio",
+          violacoes: [
+            {
+              codigo: REGRAS_NEGOCIO.DOCUMENTACAO_COMPROBATORIA_VAZIA,
+              mensagem:
+                "Nenhum documento comprobatório foi selecionado para este processo. " +
+                "O XML DocAcademicaRegistro exige ao menos um <Documento> (XSD v1.05).",
+              severidade: "erro" as const,
+              valores_originais: {
+                processo_id: processoId,
+                comprobatorios_ativos: 0,
+              },
+            },
+          ],
+          mensagem_usuario:
+            "Você precisa selecionar ao menos um documento comprobatório (ex: RG, " +
+            "CNH, certidão) antes de gerar o XML. Em casos excepcionais é possível " +
+            "prosseguir com justificativa registrada.",
+        },
+        { status: 422 },
+      );
     }
 
     // ── 6. Gera os 2 XMLs da Emissora ─────────────────────────────────────
@@ -261,11 +312,13 @@ export async function POST(
 
     // ── 7. Valida os XMLs gerados ────────────────────────────────────────
     const validacoes = {
-      historico_escolar:     validarHistoricoEscolar(xmls.historico_escolar),
-      doc_academica_registro: validarDocAcademicaRegistro(xmls.doc_academica_registro),
+      historico_escolar: validarHistoricoEscolar(xmls.historico_escolar),
+      doc_academica_registro: validarDocAcademicaRegistro(
+        xmls.doc_academica_registro,
+      ),
     };
 
-    const todosValidos = Object.values(validacoes).every(v => v.valido);
+    const todosValidos = Object.values(validacoes).every((v) => v.valido);
 
     // ── 8. Salva XMLs na tabela xml_gerados ─────────────────────────────
     //
@@ -311,7 +364,9 @@ export async function POST(
         hash_sha256: sha256(xmls.doc_academica_registro),
         validado_xsd: validacoes.doc_academica_registro.valido,
         erros_validacao: validacoes.doc_academica_registro.erros,
-        status: validacoes.doc_academica_registro.valido ? "validado" : "rascunho",
+        status: validacoes.doc_academica_registro.valido
+          ? "validado"
+          : "rascunho",
       });
     }
     // else: caminho override com 0 docs → doc_academica NÃO é persistido (fix #7)
@@ -331,13 +386,15 @@ export async function POST(
 
     // ── 8. Atualiza status do diploma ────────────────────────────────────
     const novoStatus = todosValidos ? "xml_gerado" : "xml_com_erros";
-    await supabase.from("diplomas")
+    await supabase
+      .from("diplomas")
       .update({ status: novoStatus, updated_at: new Date().toISOString() })
       .eq("id", diploma_id);
 
     // ── 9. Atualiza status da sessão de extração (se existir) ────────────
     if (extracao?.id) {
-      await supabase.from("extracao_sessoes")
+      await supabase
+        .from("extracao_sessoes")
         .update({ status: "confirmado", updated_at: new Date().toISOString() })
         .eq("id", extracao.id);
     }
@@ -357,62 +414,83 @@ export async function POST(
 
     void registrarCustodiaAsync({
       diplomaId: diploma_id,
-      etapa: 'xml_gerado',
-      status: todosValidos ? 'sucesso' : 'erro',
+      etapa: "xml_gerado",
+      status: todosValidos ? "sucesso" : "erro",
       request,
       userId: auth.userId,
       detalhes: {
         xmls_count: xmlsGerados?.length || 0,
         validacoes,
-        hashes: (xmlsGerados || []).map(x => ({ tipo: x.tipo, hash: x.hash_sha256 })),
+        hashes: (xmlsGerados || []).map((x) => ({
+          tipo: x.tipo,
+          hash: x.hash_sha256,
+        })),
         // Fix #1 — auditoria de override + PDF/A
         override_ativo: overrides.length > 0,
         overrides_regras: overrides.map((o) => o.codigo),
-        comprobatorios_vazios_com_override: overrideComprobatoriosVazio && comprobatorios.length === 0,
+        comprobatorios_vazios_com_override:
+          overrideComprobatoriosVazio && comprobatorios.length === 0,
         pdfa: pdfaCounts,
       },
-    })
+    });
 
     const docAcademicaPersistido = comprobatoriosNonEmpty !== null;
 
-    const response = NextResponse.json({
-      sucesso: true,
-      todos_validos: todosValidos,
-      xml_ids: (xmlsGerados || []).map((x) => x.id),
-      xmls: (xmlsGerados || []).map((x) => ({
-        id: x.id,
-        tipo: x.tipo,
-        status: x.status,
-        validado_xsd: x.validado_xsd,
-        hash_sha256: x.hash_sha256,
-      })),
-      validacoes: {
-        historico_escolar:     { valido: validacoes.historico_escolar.valido,     erros: validacoes.historico_escolar.erros },
-        doc_academica_registro: docAcademicaPersistido
-          ? { valido: validacoes.doc_academica_registro.valido, erros: validacoes.doc_academica_registro.erros }
-          : { valido: false, erros: ["Não persistido — caminho override sem comprobatórios (fix #7)"], pendente: true },
+    const response = NextResponse.json(
+      {
+        sucesso: true,
+        todos_validos: todosValidos,
+        xml_ids: (xmlsGerados || []).map((x) => x.id),
+        xmls: (xmlsGerados || []).map((x) => ({
+          id: x.id,
+          tipo: x.tipo,
+          status: x.status,
+          validado_xsd: x.validado_xsd,
+          hash_sha256: x.hash_sha256,
+        })),
+        validacoes: {
+          historico_escolar: {
+            valido: validacoes.historico_escolar.valido,
+            erros: validacoes.historico_escolar.erros,
+          },
+          doc_academica_registro: docAcademicaPersistido
+            ? {
+                valido: validacoes.doc_academica_registro.valido,
+                erros: validacoes.doc_academica_registro.erros,
+              }
+            : {
+                valido: false,
+                erros: [
+                  "Não persistido — caminho override sem comprobatórios (fix #7)",
+                ],
+                pendente: true,
+              },
+        },
+        comprobatorios: {
+          total: comprobatorios.length,
+          pdfa_cached: pdfaCounts.cached,
+          pdfa_fresh: pdfaCounts.fresh,
+          doc_academica_persistido: docAcademicaPersistido,
+        },
+        mensagem: !docAcademicaPersistido
+          ? "Histórico gerado. DocAcademicaRegistro NÃO persistido — caminho override sem comprobatórios. Selecione documentos para gerar o doc_academica completo."
+          : todosValidos
+            ? "2 XMLs gerados e validados com sucesso conforme XSD v1.05 do MEC."
+            : "XMLs gerados com avisos de validação. Verifique os erros antes de assinar.",
       },
-      comprobatorios: {
-        total: comprobatorios.length,
-        pdfa_cached: pdfaCounts.cached,
-        pdfa_fresh: pdfaCounts.fresh,
-        doc_academica_persistido: docAcademicaPersistido,
-      },
-      mensagem: !docAcademicaPersistido
-        ? "Histórico gerado. DocAcademicaRegistro NÃO persistido — caminho override sem comprobatórios. Selecione documentos para gerar o doc_academica completo."
-        : todosValidos
-          ? "2 XMLs gerados e validados com sucesso conforme XSD v1.05 do MEC."
-          : "XMLs gerados com avisos de validação. Verifique os erros antes de assinar.",
-    }, { status: 201 });
+      { status: 201 },
+    );
     adicionarHeadersRateLimit(response.headers, rateLimit);
     return response;
-
   } catch (error) {
     console.error("Erro no endpoint gerar-xml:", error);
-    const response = NextResponse.json({
-      error: "Erro interno do servidor",
-      details: error instanceof Error ? error.message : "Desconhecido",
-    }, { status: 500 });
+    const response = NextResponse.json(
+      {
+        error: "Erro interno do servidor",
+        details: error instanceof Error ? error.message : "Desconhecido",
+      },
+      { status: 500 },
+    );
     adicionarHeadersRateLimit(response.headers, rateLimit);
     return response;
   }

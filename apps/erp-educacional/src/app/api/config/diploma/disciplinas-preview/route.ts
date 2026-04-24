@@ -1,17 +1,24 @@
-import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
-import { protegerRota, erroInterno } from '@/lib/security/api-guard'
+import { NextRequest, NextResponse } from "next/server";
+import { createClient } from "@/lib/supabase/server";
+import { protegerRota, erroInterno } from "@/lib/security/api-guard";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // GET /api/config/diploma/disciplinas-preview
 // Query real discipline data from Supabase for live preview
-export const GET = protegerRota(async (request: NextRequest) => {
-  try {
-    const supabase = await createClient()
+export const GET = protegerRota(
+  async (request: NextRequest) => {
+    try {
+      const supabase = await createClient();
 
-    // Query real discipline data, ordered by period and order
-    const { data, error } = await supabase
-      .from('diploma_disciplinas')
-      .select(`
+      // Query real discipline data, ordered by period and order
+      const { data, error } = await supabase
+        .from("diploma_disciplinas")
+        .select(
+          `
         codigo,
         nome,
         periodo,
@@ -27,25 +34,28 @@ export const GET = protegerRota(async (request: NextRequest) => {
         etiqueta,
         docente_nome,
         docente_titulacao
-      `)
-      .order('periodo', { ascending: true })
-      .order('ordem', { ascending: true })
-      .limit(15)
+      `,
+        )
+        .order("periodo", { ascending: true })
+        .order("ordem", { ascending: true })
+        .limit(15);
 
-    if (error) {
-      console.error('[API] Erro ao buscar disciplinas:', error.message)
-      return erroInterno()
+      if (error) {
+        console.error("[API] Erro ao buscar disciplinas:", error.message);
+        return erroInterno();
+      }
+
+      // If no data found, return empty array (frontend will use sample data as fallback)
+      return NextResponse.json({
+        disciplinas: data || [],
+        total: data?.length || 0,
+        origem: "banco_dados",
+        timestamp: new Date().toISOString(),
+      });
+    } catch (error) {
+      console.error("[API] Erro ao obter preview de disciplinas:", error);
+      return erroInterno();
     }
-
-    // If no data found, return empty array (frontend will use sample data as fallback)
-    return NextResponse.json({
-      disciplinas: data || [],
-      total: data?.length || 0,
-      origem: 'banco_dados',
-      timestamp: new Date().toISOString(),
-    })
-  } catch (error) {
-    console.error('[API] Erro ao obter preview de disciplinas:', error)
-    return erroInterno()
-  }
-}, { skipCSRF: true })
+  },
+  { skipCSRF: true },
+);

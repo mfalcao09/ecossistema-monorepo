@@ -5,36 +5,52 @@
 // ERP Educacional FIC
 // =============================================================================
 
-import { NextRequest, NextResponse } from 'next/server'
-import { verificarAuthComPermissao, erroNaoEncontrado, erroInterno } from '@/lib/security/api-guard'
-import { validarCSRF } from '@/lib/security/csrf'
-import { buscarPessoa, atualizarPessoa, excluirPessoa } from '@/lib/supabase/pessoas'
-import { logDataAccess, logDataModification } from '@/lib/security/security-logger'
+import { NextRequest, NextResponse } from "next/server";
+import {
+  verificarAuthComPermissao,
+  erroNaoEncontrado,
+  erroInterno,
+} from "@/lib/security/api-guard";
+import { validarCSRF } from "@/lib/security/csrf";
+import {
+  buscarPessoa,
+  atualizarPessoa,
+  excluirPessoa,
+} from "@/lib/supabase/pessoas";
+import {
+  logDataAccess,
+  logDataModification,
+} from "@/lib/security/security-logger";
+
+// Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
+// sem isso, rotas serverless travam em cold-start (ate 300s default).
+export const dynamic = "force-dynamic";
+export const maxDuration = 20;
 
 // ─── GET /api/pessoas/[id] ────────────────────────────────────────────────────
 
 export async function GET(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuthComPermissao(request, 'pessoas', 'acessar')
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuthComPermissao(request, "pessoas", "acessar");
+  if (auth instanceof NextResponse) return auth;
 
   try {
-    const { id } = await params
-    const pessoa = await buscarPessoa(id)
+    const { id } = await params;
+    const pessoa = await buscarPessoa(id);
 
     if (!pessoa) {
-      return erroNaoEncontrado()
+      return erroNaoEncontrado();
     }
 
     // Log data access (PII) (non-blocking)
-    void logDataAccess(request, auth.userId, 'pessoas', 'read', [id])
+    void logDataAccess(request, auth.userId, "pessoas", "read", [id]);
 
-    return NextResponse.json(pessoa)
+    return NextResponse.json(pessoa);
   } catch (error) {
-    console.error('[GET /api/pessoas/[id]]', error)
-    return erroInterno()
+    console.error("[GET /api/pessoas/[id]]", error);
+    return erroInterno();
   }
 }
 
@@ -42,32 +58,34 @@ export async function GET(
 
 export async function PUT(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuthComPermissao(request, 'pessoas', 'alterar')
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuthComPermissao(request, "pessoas", "alterar");
+  if (auth instanceof NextResponse) return auth;
 
-  const csrfError = validarCSRF(request)
-  if (csrfError) return csrfError
+  const csrfError = validarCSRF(request);
+  if (csrfError) return csrfError;
 
   try {
-    const { id } = await params
-    const body = await request.json()
+    const { id } = await params;
+    const body = await request.json();
 
-    const existente = await buscarPessoa(id)
+    const existente = await buscarPessoa(id);
     if (!existente) {
-      return erroNaoEncontrado()
+      return erroNaoEncontrado();
     }
 
-    const pessoa = await atualizarPessoa({ ...body, id })
+    const pessoa = await atualizarPessoa({ ...body, id });
 
     // Log data modification (non-blocking)
-    void logDataModification(request, auth.userId, 'pessoas', 'update', 1, { campos: Object.keys(body) })
+    void logDataModification(request, auth.userId, "pessoas", "update", 1, {
+      campos: Object.keys(body),
+    });
 
-    return NextResponse.json(pessoa)
+    return NextResponse.json(pessoa);
   } catch (error) {
-    console.error('[PUT /api/pessoas/[id]]', error)
-    return erroInterno()
+    console.error("[PUT /api/pessoas/[id]]", error);
+    return erroInterno();
   }
 }
 
@@ -75,30 +93,33 @@ export async function PUT(
 
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string }> }
+  { params }: { params: Promise<{ id: string }> },
 ) {
-  const auth = await verificarAuthComPermissao(request, 'pessoas', 'remover')
-  if (auth instanceof NextResponse) return auth
+  const auth = await verificarAuthComPermissao(request, "pessoas", "remover");
+  if (auth instanceof NextResponse) return auth;
 
-  const csrfError = validarCSRF(request)
-  if (csrfError) return csrfError
+  const csrfError = validarCSRF(request);
+  if (csrfError) return csrfError;
 
   try {
-    const { id } = await params
+    const { id } = await params;
 
-    const existente = await buscarPessoa(id)
+    const existente = await buscarPessoa(id);
     if (!existente) {
-      return erroNaoEncontrado()
+      return erroNaoEncontrado();
     }
 
-    await excluirPessoa(id)
+    await excluirPessoa(id);
 
     // Log data deletion (non-blocking)
-    void logDataModification(request, auth.userId, 'pessoas', 'delete', 1)
+    void logDataModification(request, auth.userId, "pessoas", "delete", 1);
 
-    return NextResponse.json({ sucesso: true, mensagem: 'Pessoa excluída com sucesso.' })
+    return NextResponse.json({
+      sucesso: true,
+      mensagem: "Pessoa excluída com sucesso.",
+    });
   } catch (error) {
-    console.error('[DELETE /api/pessoas/[id]]', error)
-    return erroInterno()
+    console.error("[DELETE /api/pessoas/[id]]", error);
+    return erroInterno();
   }
 }
