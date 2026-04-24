@@ -33,6 +33,7 @@ Este é o monorepo do Ecossistema de Inovação e IA do Marcelo Silva (V4, 2026-
 ## Protocolo de memória
 
 Enquanto a Fase 0 não termina, memória persiste via:
+
 - `MEMORY.md` neste repo (índice humano-legível)
 - `ecosystem_memory` no Supabase ECOSYSTEM (fonte primária futura)
 - Salvar decisões importantes IMEDIATAMENTE, não só no "vou encerrar"
@@ -45,45 +46,80 @@ Se o usuário disser **"salva contexto"** ou **"vou encerrar"**: parar trabalho,
 2. **Human-in-the-loop** — ações irreversíveis (deploy prod, DROP TABLE, revogar credencial) → parar e pedir aprovação
 3. **Idempotência** — operações críticas (boleto, webhook) nunca duplicam
 4. **Dual-write** — decisões importantes vão para Supabase ECOSYSTEM antes de .md
-5. **Testes antes de deploy** — smoke test mínimo antes de ativar qualquer agente em produção
+5. **Preview antes de produção** — cada push em `main` vai pra `hom.*` primeiro; promoção pra produção (branch `production` ou `vercel promote`) só depois de Marcelo validar no preview
 6. **Conventional commits** — `feat:`, `fix:`, `docs:`, `refactor:`, `chore:`
 7. **Co-authored commits** — `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`
 8. **Registro de pendências** — antes de encerrar qualquer sessão, registrar em `docs/sessions/PENDENCIAS.md` toda pendência identificada (config manual, ACL a popular, seed faltando, deploy pendente, débito técnico, teste não executado). Nunca encerrar uma sessão deixando pendência só na conversa — ela some. Se uma sessão anterior deixou pendência que você pode fechar, feche e mova a linha para "Resolvidas" no mesmo PR
 
-## Fluxo canônico de sessão (SINGLE-CHECKOUT — sem worktree)
+## Fluxo canônico de sessão (PUSH-DIRETO-EM-MAIN — sem PR, sem CI gate)
 
-Desde 2026-04-23 o fluxo padrão é **sem worktrees**. Uma sessão Claude = trabalha direto no checkout principal.
+Desde 2026-04-24 o fluxo padrão é **push direto em `main`**, com validação via Vercel Preview no domínio `hom.*`, e promoção explícita pra produção via branch `production`.
 
-**Ao abrir nova sessão:**
-1. Configurar Claude Desktop: modo **Local**, pasta `erp-educacional`, branch `main`
-2. NÃO criar worktree (toggle "worktree" desligado)
-3. `git checkout -b feat/<escopo-curto>` — branch curta, nome descritivo
+### Fluxo dia-a-dia
+
+**Ao abrir sessão:**
+
+1. Claude Desktop: modo **Local**, pasta do projeto, branch `main`
+2. NÃO criar worktree, NÃO criar feature branch — trabalhar direto em `main`
 
 **Durante a sessão:**
-- Commits direto na feature branch
-- Push regular (`git push -u origin feat/xxx`)
 
-**Ao encerrar a sessão (CRÍTICO — antes de desconectar):**
-1. `git push` final
-2. `gh pr create` — criar PR com descrição do que foi feito
-3. Aguardar CI verde
-4. `gh pr merge --squash --delete-branch --admin` — mergear e limpar remote
-5. `git checkout main && git pull && git branch -D feat/xxx` — voltar a main e limpar local
-6. Se ficou algo incompleto: registrar em `docs/sessions/PENDENCIAS.md`
+```bash
+git add <arquivos>
+git commit -m "feat(erp): ..."
+git push origin main
+```
 
-**Regra de ouro:** nenhuma sessão pode terminar com branch órfã. Ou mergeia, ou fecha o PR com motivo, ou registra em PENDENCIAS.
+- Cada push em `main` → Vercel faz build e publica em:
+  - `hom.ficcassilandia.com.br` (ERP-Educacional)
+  - `hom.intentusrealestate.com.br` (Intentus)
+- Marcelo testa no subdomínio `hom.*` antes de decidir promover
+- Sem PR, sem review, sem CI gate — confia no build da Vercel + teste manual no preview
+
+**Promoção pra produção (duas opções):**
+
+**A) Push em branch `production`** (padrão)
+
+```bash
+git checkout production && git pull
+git merge main
+git push origin production
+git checkout main
+```
+
+Vercel builda `production` → atualiza `gestao.ficcassilandia.com.br` e `app.intentusrealestate.com.br`.
+
+**B) `vercel promote` via CLI** (exceção, comando expresso)
+Só se o Marcelo pedir literalmente **"promove pra produção"** ou **"sobe pra prod"** — nunca por iniciativa própria do agente. Toda promoção via CLI requer frase explícita.
+
+**Ao encerrar a sessão:**
+
+1. `git push origin main` final
+2. Se ficou algo incompleto ou com efeito colateral (migration não aplicada, env var a criar, subdomínio a configurar): registrar em `docs/sessions/PENDENCIAS.md`
+3. Sem PR, sem cleanup de branch — você nunca saiu de `main`
+
+**Regra de ouro:** pendência que some da conversa tem que aparecer no `PENDENCIAS.md`. Novo fluxo é mais rápido — a disciplina de registrar fica mais importante, não menos.
+
+### CI minimalista (2 workflows cirúrgicos apenas)
+
+Existem apenas dois workflows em `.github/workflows/` que rodam validação:
+
+1. **`cross-app-check.yml`** — roda quando `packages/**` ou lockfiles mudam. Builda `erp-educacional` + `intentus` em paralelo pra garantir que mudança em package compartilhado não quebrou alguma app. **Não bloqueia deploy** — badge vermelho é sinal, não gate.
+
+2. **`migration-check.yml`** — roda quando uma migration SQL é adicionada em `infra/supabase/migrations/**` ou `apps/*/supabase/migrations/**`. Lint com `sqlfluff` dialect=postgres pra pegar syntax error antes do deploy no Supabase.
+
+Os outros workflows (`deploy-edge-functions.yml`, `deploy-packages.yml`, `deploy-railway.yml`) são **automações de deploy**, não CI gates — rodam em push quando pastas específicas mudam.
+
+**Se quiser adicionar um 3º workflow,** tem que ter trigger path-filtrado (nunca roda em push genérico) e ser cirúrgico — cada workflow extra é friction. Se é "quero rodar testes", rode local; não volte a um modelo de CI geral.
+
+### Worktrees
 
 **Worktrees são exceção**, não regra. Use apenas se:
+
 - Precisa rodar dev server/testes longos em paralelo com outra sessão editando
 - Está comparando duas versões lado-a-lado
-- Em caso de uso: `git worktree add ../tmp-worktree feat/xxx` com **nome significativo** (não aleatório) e delete imediatamente após uso.
 
-**Merge de PR de worktree filho** (workaround P-171 quando CLI falha com 'main already used'):
-```
-gh pr update-branch N     # GitHub sincroniza branch com main
-gh pr checks N --watch    # aguarda CI verde
-gh pr merge N --squash --delete-branch --admin
-```
+Caso de uso: `git worktree add ../tmp-<nome> feat/xxx` com **nome significativo** e `git worktree remove` imediatamente após.
 
 ## Ações bloqueadas (qualquer contexto)
 

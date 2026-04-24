@@ -1,0 +1,48 @@
+name: Cross-app build check
+
+# Dispara APENAS quando packages/* ou pnpm-lock.yaml mudam.
+# Objetivo cirúrgico: confirmar que uma mudança em package compartilhado
+# não quebra o build de nenhuma das apps (erp-educacional, intentus).
+#
+# NÃO é um gate — roda em paralelo ao deploy da Vercel. Se falhar, o badge
+# fica vermelho mas o push já passou. Ver CLAUDE.md → "Fluxo canônico".
+
+on:
+  push:
+    branches: [main, production]
+    paths:
+      - "packages/**"
+      - "pnpm-lock.yaml"
+      - "pnpm-workspace.yaml"
+      - "turbo.json"
+  workflow_dispatch: {}
+
+concurrency:
+  group: cross-app-check-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-apps:
+    name: Build erp-educacional + intentus
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+
+      - uses: pnpm/action-setup@v6
+        with:
+          version: 9.0.0
+
+      - uses: actions/setup-node@v6
+        with:
+          node-version: 24
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build ERP-Educacional
+        run: pnpm --filter erp-educacional build
+
+      - name: Build Intentus
+        run: pnpm --filter intentus build

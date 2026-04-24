@@ -1,0 +1,51 @@
+name: Migration SQL check
+
+# Dispara APENAS quando uma nova migration Supabase é adicionada/modificada.
+# Objetivo cirúrgico: validar sintaxe SQL antes de rodar em Supabase real.
+# Vercel/push-direto NÃO executam migration — elas correm via supabase CLI
+# ou Dashboard. Esse check pega erros de SQL estático antes do deploy.
+#
+# NÃO é um gate — roda em paralelo. Ver CLAUDE.md → "Fluxo canônico".
+
+on:
+  push:
+    branches: [main, production]
+    paths:
+      - "infra/supabase/migrations/**.sql"
+      - "apps/erp-educacional/supabase/migrations/**.sql"
+      - "apps/intentus/supabase/migrations/**.sql"
+  workflow_dispatch: {}
+
+jobs:
+  sqlfluff:
+    name: Lint SQL (sqlfluff, postgres dialect)
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          fetch-depth: 2
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.12"
+
+      - name: Install sqlfluff
+        run: pip install sqlfluff --quiet
+
+      - name: Lint changed migrations
+        run: |
+          CHANGED=$(git diff --name-only HEAD^ HEAD -- \
+            'infra/supabase/migrations/*.sql' \
+            'apps/*/supabase/migrations/*.sql' 2>/dev/null || true)
+          if [ -z "$CHANGED" ]; then
+            echo "No migration files changed — skipping."
+            exit 0
+          fi
+          echo "Linting changed migrations:"
+          echo "$CHANGED"
+          # Rules permissive: parsing errors only, sem style nazista
+          sqlfluff lint --dialect postgres --rules parsing,L001 $CHANGED || {
+            echo "::warning::sqlfluff encontrou problemas — revisar antes de aplicar em Supabase"
+            exit 1
+          }
