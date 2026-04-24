@@ -1,8 +1,6 @@
 import {
   MessageCircle,
   QrCode,
-  Instagram,
-  Facebook,
   Mail,
   Send,
   Globe,
@@ -10,6 +8,7 @@ import {
   ThumbsDown,
   type LucideIcon,
 } from "lucide-react";
+import { Facebook, Instagram } from "@/components/icons/BrandIcons";
 
 export type TipoCanal =
   | "whatsapp-cloud"

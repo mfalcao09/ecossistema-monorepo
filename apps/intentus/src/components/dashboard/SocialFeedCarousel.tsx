@@ -1,5 +1,6 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { Instagram, ExternalLink, ImageOff } from "lucide-react";
+import { ExternalLink, ImageOff } from "lucide-react";
+import { Instagram } from "@/components/icons/BrandIcons";
 import { useSocialFeed } from "@/hooks/useSocialFeed";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 

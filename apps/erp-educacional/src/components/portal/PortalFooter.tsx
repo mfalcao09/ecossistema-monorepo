@@ -1,20 +1,24 @@
-import { Facebook, Instagram, Mail } from "lucide-react"
-import Image from "next/image"
-import Link from "next/link"
+import { Mail } from "lucide-react";
+import { Facebook, Instagram } from "@/components/icons/BrandIcons";
+import Image from "next/image";
+import Link from "next/link";
 
 export default function PortalFooter() {
-  const currentYear = new Date().getFullYear()
+  const currentYear = new Date().getFullYear();
 
   return (
     <footer className="bg-white border-t border-slate-200">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="flex flex-col md:flex-row items-center md:items-start justify-between gap-10">
-
           {/* ── Esquerda: Logo + tagline + ícones sociais ── */}
           <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8">
             {/* Logo grande */}
             <div className="flex flex-col items-center sm:items-start">
-              <Link href="https://ficcassilandia.com.br" target="_blank" rel="noopener noreferrer">
+              <Link
+                href="https://ficcassilandia.com.br"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
                 <Image
                   src="/logo-fic2.png"
                   alt="FIC — Faculdades Integradas de Cassilândia"
@@ -100,7 +104,8 @@ export default function PortalFooter() {
       <div className="border-t border-slate-200">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <p className="text-xs text-slate-400">
-            &copy; {currentYear} FIC &mdash; Faculdades Integradas de Cassilândia &middot; CNPJ: 17.218.946/0001-90
+            &copy; {currentYear} FIC &mdash; Faculdades Integradas de
+            Cassilândia &middot; CNPJ: 17.218.946/0001-90
           </p>
           <p className="text-xs text-slate-400">
             Portaria MEC 70/2025 &middot; ICP-Brasil
@@ -108,5 +113,5 @@ export default function PortalFooter() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

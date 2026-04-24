@@ -28,8 +28,8 @@ import {
   Eye,
   EyeOff,
   ExternalLink,
-  Facebook,
 } from "lucide-react";
+import { Facebook } from "@/components/icons/BrandIcons";
 import {
   CANAIS,
   BADGE_STYLES,
