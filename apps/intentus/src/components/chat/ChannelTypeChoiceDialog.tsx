@@ -1,9 +1,26 @@
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from "@/components/ui/dialog";
 import { Card, CardContent } from "@/components/ui/card";
-import { MessageCircle, QrCode, Instagram, Send as TelegramIcon, Globe } from "lucide-react";
+import {
+  MessageCircle,
+  QrCode,
+  Send as TelegramIcon,
+  Globe,
+} from "lucide-react";
+import { Instagram } from "@/components/icons/BrandIcons";
 import { Badge } from "@/components/ui/badge";
 
-export type ChannelConnectionMode = "hunion_whatsapp" | "qrcode" | "hunion_instagram" | "telegram" | "webchat";
+export type ChannelConnectionMode =
+  | "hunion_whatsapp"
+  | "qrcode"
+  | "hunion_instagram"
+  | "telegram"
+  | "webchat";
 
 interface Props {
   open: boolean;
@@ -58,13 +75,19 @@ const options: {
   },
 ];
 
-export function ChannelTypeChoiceDialog({ open, onOpenChange, onSelect }: Props) {
+export function ChannelTypeChoiceDialog({
+  open,
+  onOpenChange,
+  onSelect,
+}: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent className="max-w-2xl">
         <DialogHeader>
           <DialogTitle>Adicionar Canal</DialogTitle>
-          <DialogDescription>Escolha o tipo de canal que deseja conectar</DialogDescription>
+          <DialogDescription>
+            Escolha o tipo de canal que deseja conectar
+          </DialogDescription>
         </DialogHeader>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mt-2">
           {options.map((opt) => (
@@ -78,18 +101,25 @@ export function ChannelTypeChoiceDialog({ open, onOpenChange, onSelect }: Props)
             >
               <CardContent className="flex items-start gap-3 p-4">
                 <div className="rounded-lg bg-muted p-2.5 shrink-0">
-                  <opt.icon className={`h-6 w-6 ${opt.iconClass || "text-muted-foreground"}`} />
+                  <opt.icon
+                    className={`h-6 w-6 ${opt.iconClass || "text-muted-foreground"}`}
+                  />
                 </div>
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2">
                     <span className="font-medium text-sm">{opt.title}</span>
                     {opt.badge && (
-                      <Badge variant="secondary" className="text-[10px] px-1.5 py-0">
+                      <Badge
+                        variant="secondary"
+                        className="text-[10px] px-1.5 py-0"
+                      >
                         {opt.badge}
                       </Badge>
                     )}
                   </div>
-                  <p className="text-xs text-muted-foreground mt-0.5">{opt.description}</p>
+                  <p className="text-xs text-muted-foreground mt-0.5">
+                    {opt.description}
+                  </p>
                 </div>
               </CardContent>
             </Card>
