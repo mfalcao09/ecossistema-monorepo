@@ -70,8 +70,13 @@ const nextConfig = {
               "camera=(), microphone=(), geolocation=(), payment=(), usb=(), bluetooth=(), serial=(), hid=(), accelerometer=(), gyroscope=(), magnetometer=(), display-capture=(), document-domain=()",
           },
           // Cross-Origin headers para isolamento
+          // NOTA: Cross-Origin-Embedder-Policy REMOVIDO em 2026-04-24. Com
+          // COEP=credentialless, o Chrome truncava o fetch cross-origin pro
+          // Supabase Storage quando o response trazia Set-Cookie (__cf_bm do
+          // Cloudflare) — o preview de PDFs retornava só 1 KB em vez dos ~1 MB.
+          // O app não usa SharedArrayBuffer nem APIs que exigem isolamento via
+          // COEP, então o trade-off compensa.
           { key: "Cross-Origin-Opener-Policy", value: "same-origin" },
-          { key: "Cross-Origin-Embedder-Policy", value: "credentialless" },
           { key: "Cross-Origin-Resource-Policy", value: "same-origin" },
           // Content Security Policy — endurecido para produção
           {
