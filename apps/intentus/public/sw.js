@@ -1,46 +1,50 @@
 // ============================================================
-// Intentus Real Estate — Service Worker v1
+// Intentus Real Estate — Service Worker
 // App Shell + Runtime Cache + Push + Offline Sync
+//
+// CACHE_VERSION é substituído no build pelo plugin sw-version-replacer
+// (vite.config.ts) usando VERCEL_GIT_COMMIT_SHA. Se você ver "__SW_VERSION__"
+// literal aqui em produção, o plugin falhou — investigar imediatamente.
 // ============================================================
 
-const CACHE_VERSION = "intentus-v1";
+const CACHE_VERSION = "__SW_VERSION__";
 const STATIC_CACHE = `static-${CACHE_VERSION}`;
 const DYNAMIC_CACHE = `dynamic-${CACHE_VERSION}`;
-const OFFLINE_QUEUE_KEY = "intentus-offline-queue";
 
-// Assets to pre-cache (app shell)
-const APP_SHELL = [
-  "/",
-  "/offline.html",
-  "/manifest.json",
-  "/favicon.ico",
-];
+// App shell mínimo — NÃO incluir "/" porque o HTML referencia chunks com hash
+// que mudam a cada deploy. Cachear "/" provoca mistura de bundles entre deploys.
+const APP_SHELL = ["/offline.html", "/manifest.json", "/favicon.ico"];
 
 // ==================== INSTALL ====================
 self.addEventListener("install", (event) => {
-  console.log("[SW] Install v1");
+  console.log(`[SW] Install ${CACHE_VERSION}`);
   event.waitUntil(
     caches
       .open(STATIC_CACHE)
       .then((cache) => cache.addAll(APP_SHELL))
-      .then(() => self.skipWaiting())
+      .then(() => self.skipWaiting()),
   );
 });
 
 // ==================== ACTIVATE ====================
 self.addEventListener("activate", (event) => {
-  console.log("[SW] Activate v1");
+  console.log(`[SW] Activate ${CACHE_VERSION}`);
   event.waitUntil(
     caches
       .keys()
       .then((keys) =>
         Promise.all(
+          // Deletar TODOS os caches que não pertencem à versão atual.
+          // Isso garante limpeza completa quando uma nova versão entra em produção.
           keys
-            .filter((k) => k !== STATIC_CACHE && k !== DYNAMIC_CACHE)
-            .map((k) => caches.delete(k))
-        )
+            .filter((k) => !k.endsWith(`-${CACHE_VERSION}`))
+            .map((k) => {
+              console.log(`[SW] Deleting old cache: ${k}`);
+              return caches.delete(k);
+            }),
+        ),
       )
-      .then(() => self.clients.claim())
+      .then(() => self.clients.claim()),
   );
 });
 
@@ -49,52 +53,48 @@ self.addEventListener("fetch", (event) => {
   const { request } = event;
   const url = new URL(request.url);
 
-  // Skip non-GET and cross-origin
+  // Skip non-GET e cross-origin
   if (request.method !== "GET") return;
   if (url.origin !== self.location.origin) return;
 
-  // Skip Supabase API calls and Edge Functions
-  if (url.pathname.startsWith("/functions/") || url.pathname.startsWith("/rest/") || url.pathname.startsWith("/auth/")) {
+  // Skip Supabase API calls e Edge Functions
+  if (
+    url.pathname.startsWith("/functions/") ||
+    url.pathname.startsWith("/rest/") ||
+    url.pathname.startsWith("/auth/")
+  ) {
     return;
   }
 
-  // Navigation requests → Network-first, fallback to cache, then offline page
+  // CRÍTICO: NÃO interceptar /assets/* (chunks Vite com hash no nome).
+  // Esses arquivos são imutáveis (Vercel serve com Cache-Control: immutable
+  // max-age=31536000) e diferentes deploys produzem nomes diferentes.
+  // Interceptar provoca mistura de bundles -> "useContext null" error.
+  if (url.pathname.startsWith("/assets/")) {
+    return; // browser faz fetch direto, Vercel faz o cache
+  }
+
+  // Navegação (HTML) -> Network-first SEM cachear, fallback offline.html
+  // HTML referencia chunks por hash que muda a cada deploy. Não cachear.
   if (request.mode === "navigate") {
     event.respondWith(
-      fetch(request)
-        .then((response) => {
-          const clone = response.clone();
-          caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, clone));
-          return response;
-        })
-        .catch(() =>
-          caches.match(request).then((cached) => cached || caches.match("/offline.html"))
-        )
+      fetch(request).catch(() =>
+        caches
+          .match("/offline.html")
+          .then(
+            (cached) =>
+              cached ||
+              new Response("<h1>Offline</h1>", {
+                status: 503,
+                headers: { "Content-Type": "text/html" },
+              }),
+          ),
+      ),
     );
     return;
   }
 
-  // JS/CSS bundles → Stale-while-revalidate
-  if (url.pathname.match(/\.(js|css)$/) || url.pathname.startsWith("/assets/")) {
-    event.respondWith(
-      caches.match(request).then((cached) => {
-        const networkFetch = fetch(request)
-          .then((response) => {
-            if (response.ok) {
-              const clone = response.clone();
-              caches.open(STATIC_CACHE).then((cache) => cache.put(request, clone));
-            }
-            return response;
-          })
-          .catch(() => cached);
-
-        return cached || networkFetch;
-      })
-    );
-    return;
-  }
-
-  // Images → Cache-first
+  // Imagens -> Cache-first
   if (url.pathname.match(/\.(png|jpg|jpeg|svg|gif|webp|ico)$/)) {
     event.respondWith(
       caches.match(request).then(
@@ -103,16 +103,18 @@ self.addEventListener("fetch", (event) => {
           fetch(request).then((response) => {
             if (response.ok) {
               const clone = response.clone();
-              caches.open(DYNAMIC_CACHE).then((cache) => cache.put(request, clone));
+              caches
+                .open(DYNAMIC_CACHE)
+                .then((cache) => cache.put(request, clone));
             }
             return response;
-          })
-      )
+          }),
+      ),
     );
     return;
   }
 
-  // Fonts → Cache-first with long TTL
+  // Fontes -> Cache-first com TTL longa
   if (url.pathname.match(/\.(woff2?|ttf|otf|eot)$/)) {
     event.respondWith(
       caches.match(request).then(
@@ -121,11 +123,13 @@ self.addEventListener("fetch", (event) => {
           fetch(request).then((response) => {
             if (response.ok) {
               const clone = response.clone();
-              caches.open(STATIC_CACHE).then((cache) => cache.put(request, clone));
+              caches
+                .open(STATIC_CACHE)
+                .then((cache) => cache.put(request, clone));
             }
             return response;
-          })
-      )
+          }),
+      ),
     );
     return;
   }
@@ -158,8 +162,12 @@ self.addEventListener("push", (event) => {
           notificationId: payload.notificationId || null,
         },
         actions: payload.actions || [],
-        requireInteraction: payload.priority === "high" || payload.priority === "urgent",
-        vibrate: payload.priority === "urgent" ? [200, 100, 200, 100, 200] : [200, 100, 200],
+        requireInteraction:
+          payload.priority === "high" || payload.priority === "urgent",
+        vibrate:
+          payload.priority === "urgent"
+            ? [200, 100, 200, 100, 200]
+            : [200, 100, 200],
       };
     }
   } catch (e) {
@@ -179,7 +187,7 @@ self.addEventListener("push", (event) => {
       actions: data.actions || [],
       requireInteraction: data.requireInteraction || false,
       vibrate: data.vibrate || [200, 100, 200],
-    })
+    }),
   );
 });
 
@@ -191,22 +199,22 @@ self.addEventListener("notificationclick", (event) => {
   const url = event.notification.data?.url || "/";
 
   event.waitUntil(
-    self.clients.matchAll({ type: "window", includeUncontrolled: true }).then((clients) => {
-      // Try to focus existing window
-      for (const client of clients) {
-        if (client.url.includes(self.location.origin) && "focus" in client) {
-          client.focus();
-          client.postMessage({
-            type: "NOTIFICATION_CLICK",
-            url,
-            notificationId: event.notification.data?.notificationId,
-          });
-          return;
+    self.clients
+      .matchAll({ type: "window", includeUncontrolled: true })
+      .then((clients) => {
+        for (const client of clients) {
+          if (client.url.includes(self.location.origin) && "focus" in client) {
+            client.focus();
+            client.postMessage({
+              type: "NOTIFICATION_CLICK",
+              url,
+              notificationId: event.notification.data?.notificationId,
+            });
+            return;
+          }
         }
-      }
-      // Open new window
-      return self.clients.openWindow(url);
-    })
+        return self.clients.openWindow(url);
+      }),
   );
 });
 
@@ -221,7 +229,6 @@ self.addEventListener("sync", (event) => {
 
 async function processOfflineQueue() {
   try {
-    // Read queue from IndexedDB
     const db = await openDB();
     const tx = db.transaction("offline_queue", "readwrite");
     const store = tx.objectStore("offline_queue");
@@ -241,7 +248,6 @@ async function processOfflineQueue() {
             });
 
             if (response.ok) {
-              // Remove from queue
               const delTx = db.transaction("offline_queue", "readwrite");
               delTx.objectStore("offline_queue").delete(item.id);
               console.log(`[SW] Synced item ${item.id}`);
@@ -265,7 +271,10 @@ function openDB() {
     req.onupgradeneeded = () => {
       const db = req.result;
       if (!db.objectStoreNames.contains("offline_queue")) {
-        db.createObjectStore("offline_queue", { keyPath: "id", autoIncrement: true });
+        db.createObjectStore("offline_queue", {
+          keyPath: "id",
+          autoIncrement: true,
+        });
       }
       if (!db.objectStoreNames.contains("cached_data")) {
         db.createObjectStore("cached_data", { keyPath: "key" });
@@ -287,5 +296,10 @@ self.addEventListener("message", (event) => {
     caches.open(DYNAMIC_CACHE).then((cache) => {
       urls.forEach((url) => cache.add(url).catch(() => {}));
     });
+  }
+
+  // Permite ao app consultar a versão atual do SW (útil para debug e UI)
+  if (event.data?.type === "GET_VERSION") {
+    event.ports[0]?.postMessage({ version: CACHE_VERSION });
   }
 });
