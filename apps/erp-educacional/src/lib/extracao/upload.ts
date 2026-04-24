@@ -95,7 +95,7 @@ export function montarStoragePath(
  * módulo Diploma. Multi-tenant selector fica como follow-up quando existir
  * um segundo tenant emissor.
  */
-async function resolverTenantAtivo(
+export async function resolverTenantAtivo(
   supabase: ReturnType<typeof createClient>,
   userId: string,
 ): Promise<string> {

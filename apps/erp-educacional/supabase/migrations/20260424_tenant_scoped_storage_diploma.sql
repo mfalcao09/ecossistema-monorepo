@@ -22,10 +22,20 @@
 --   4) Cria policies tenant-scoped processo_arquivos_tenant_*
 --   5) Dropa policies antigas processo_arquivos_*_own (baseadas em auth.uid())
 --
--- Esta migration NÃO toca nos arquivos físicos do Storage. O rename dos
--- legados (storage.objects.name e storage_path no JSONB) é feito na migration
--- seguinte: 20260424_tenant_scoped_storage_diploma_legacy_data.sql (ordem
--- importa em repo fresh: rodar a legacy_data DEPOIS desta).
+-- Esta migration NÃO toca nos arquivos físicos do Storage. UPDATE em
+-- storage.objects.name via SQL atualiza APENAS o metadata — o blob físico no
+-- S3 continua no path antigo e signed URLs retornam "Object not found" (bug
+-- observado em prod 2026-04-24). O rename correto é via supabase-js
+-- `storage.from(bucket).move(oldPath, newPath)`, que faz COPY+DELETE atômico
+-- no S3 subjacente + atualiza metadata.
+--
+-- Em 2026-04-24 essa migração de dados foi executada em prod via Edge Function
+-- one-shot `migrate-processo-arquivos-tenant` (verify_jwt=false + secret
+-- header): 480 objetos renomeados para `{FIC_UUID}/{user_id}/...` e 398
+-- storage_path em extracao_sessoes.arquivos atualizados via RPC. A EF foi
+-- depois neutralizada (stub 410 Gone). Para reproduzir em repo fresh ou outro
+-- ambiente, use um script Node com service role chamando storage.move() em
+-- loop — não tente via SQL direto.
 -- =============================================================================
 
 -- -----------------------------------------------------------------------------

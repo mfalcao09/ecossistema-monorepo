@@ -103,31 +103,14 @@ export function DialogVisualizarDocumento({
   const dialogRef = useRef<HTMLDivElement>(null)
   const fileInputRef = useRef<HTMLInputElement>(null)
 
-  // ── Proxy URL: redireciona via /api/storage-proxy para evitar CORS ────
-  // O Supabase Storage retorna X-Frame-Options e CSP que bloqueiam
-  // iframes e fetch cross-origin. O proxy server-side busca o arquivo
-  // e retorna sem esses headers, permitindo exibição inline.
-  // Espelha a solução que funciona no portal público (rvdd-proxy).
-  const [proxyUrl, setProxyUrl] = useState<string | null>(null)
+  // ── Preview direto via signed URL ────────────────────────────────────
+  // Historicamente usávamos /api/storage-proxy porque o Supabase Storage
+  // retornava X-Frame-Options que bloqueavam iframe cross-origin. Hoje
+  // o Storage não retorna mais esses headers restritivos (confirmado em
+  // 2026-04-24: access-control-allow-origin:*, sem X-Frame-Options, sem
+  // CSP) e o proxy trava em arrayBuffer() no Vercel para PDFs >500KB.
+  // A CSP frame-src agora inclui https://*.supabase.co explicitamente.
   const [blobErro, setBlobErro] = useState(false)
-
-  useEffect(() => {
-    if (!previewUrl) {
-      setProxyUrl(null)
-      setBlobErro(false)
-      return
-    }
-
-    // Monta URL do proxy local — sem fetch cross-origin
-    try {
-      const proxy = `/api/storage-proxy?url=${encodeURIComponent(previewUrl)}`
-      setProxyUrl(proxy)
-      setBlobErro(false)
-    } catch (err) {
-      console.error("[preview] Erro ao montar proxy URL:", err)
-      setBlobErro(true)
-    }
-  }, [previewUrl])
 
   // Reset quando abre com nova confirmação
   useEffect(() => {
@@ -214,7 +197,7 @@ export function DialogVisualizarDocumento({
         {/* Preview do documento */}
         <div className="flex-1 overflow-auto bg-gray-50 dark:bg-gray-950">
           {/* Estado: carregando */}
-          {(carregandoPreview || (previewUrl && !proxyUrl && !blobErro)) && (
+          {carregandoPreview && (
             <div className="flex h-96 items-center justify-center">
               <Loader2 className="h-8 w-8 animate-spin text-violet-600" />
               <span className="ml-3 text-sm text-gray-500">
@@ -251,29 +234,30 @@ export function DialogVisualizarDocumento({
             </div>
           )}
 
-          {/* Imagem — via proxy para evitar CORS */}
-          {!carregandoPreview && proxyUrl && ehImagem && (
+          {/* Imagem — signed URL direto (CORS * vindo do Supabase) */}
+          {!carregandoPreview && previewUrl && !blobErro && ehImagem && (
             <div className="flex items-center justify-center p-4">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src={proxyUrl}
+                src={previewUrl}
                 alt={confirmacao.nome_arquivo ?? "Documento"}
                 className="max-h-[60vh] max-w-full rounded-md object-contain shadow-md"
+                onError={() => setBlobErro(true)}
               />
             </div>
           )}
 
-          {/* PDF — iframe via proxy (espelha solução do portal público) */}
-          {!carregandoPreview && proxyUrl && ehPdf && (
+          {/* PDF — iframe direto no signed URL */}
+          {!carregandoPreview && previewUrl && !blobErro && ehPdf && (
             <iframe
-              src={`${proxyUrl}#toolbar=0&navpanes=0&scrollbar=1`}
+              src={`${previewUrl}#toolbar=0&navpanes=0&scrollbar=1`}
               title={confirmacao.nome_arquivo ?? "Preview PDF"}
               className="h-[60vh] w-full border-0"
             />
           )}
 
           {/* Outros formatos */}
-          {!carregandoPreview && proxyUrl && !ehImagem && !ehPdf && (
+          {!carregandoPreview && previewUrl && !blobErro && !ehImagem && !ehPdf && (
             <div className="flex h-96 flex-col items-center justify-center gap-3 text-gray-400">
               <FileText className="h-10 w-10" />
               <p className="text-sm">

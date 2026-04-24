@@ -91,8 +91,8 @@ const nextConfig = {
               "font-src 'self' data:",
               // Conexões: whitelist estrita
               "connect-src 'self' https://*.supabase.co wss://*.supabase.co https://*.upstash.io https://challenges.cloudflare.com https://openrouter.ai https://www.bry.com.br https://*.amazonaws.com",
-              // Frames: self + blob (prévia PDF inline) + Cloudflare Turnstile
-              "frame-src 'self' blob: https://challenges.cloudflare.com",
+              // Frames: self + blob (prévia PDF inline) + Supabase Storage (signed URLs) + Cloudflare Turnstile
+              "frame-src 'self' blob: https://*.supabase.co https://challenges.cloudflare.com",
               // Workers: self (para Web Crypto e Service Workers)
               "worker-src 'self' blob:",
               // Bloqueia plugins (Flash, Java, etc.)
