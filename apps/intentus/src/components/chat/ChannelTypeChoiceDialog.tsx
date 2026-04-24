@@ -9,10 +9,10 @@ import { Card, CardContent } from "@/components/ui/card";
 import {
   MessageCircle,
   QrCode,
+  Instagram,
   Send as TelegramIcon,
   Globe,
 } from "lucide-react";
-import { Instagram } from "@/components/icons/BrandIcons";
 import { Badge } from "@/components/ui/badge";
 
 export type ChannelConnectionMode =

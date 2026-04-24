@@ -16,8 +16,8 @@ import {
   RefreshCw,
   Smartphone,
   MessageCircle,
+  Instagram,
 } from "lucide-react";
-import { Instagram } from "@/components/icons/BrandIcons";
 import { toast } from "sonner";
 import { Card, CardContent } from "@/components/ui/card";
 import { supabase } from "@/integrations/supabase/client";

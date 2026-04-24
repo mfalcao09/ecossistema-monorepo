@@ -1,5 +1,4 @@
-import { Mail } from "lucide-react";
-import { Facebook, Instagram } from "@/components/icons/BrandIcons";
+import { Facebook, Instagram, Mail } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
