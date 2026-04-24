@@ -1,0 +1,77 @@
+Aqui está uma transcrição do vídeo:
+
+[00:00] Olá, boa tarde, como vocês estão? Carolzinha tá aqui com a gente hoje, então de início, muito prazer, o meu nome é Fabiana, sou analista de treinamento da Digisac e hoje eu vou realizar uma apresentação para vocês, um treinamento referente ao protocolo de atendimento e a Carolzinha está aqui com a gente. Ela vai ficar no chat.
+
+[00:25] Prazer, pessoal, eu sou a Ana Carolina, eu sou analista aqui da Digisac também, então eu vou estar acompanhando o chat em tempo real, qualquer dúvida podem mandar que eu vou responder.
+
+[00:36] Perfeito, muito obrigada Carol. Então, gente, fiquem à vontade para enviar todas as dúvidas no chat, que a Carol tá aqui para realizar todo esse retorno para vocês, tá bom? Em tempo real. Então, vamos lá.
+
+[00:54] Então, novamente, sejam bem-vindos à imersão Digisac, então, todas as quartas-feiras às 15 horas, né? Exato, horário exato, oferecemos um treinamento com o propósito de educar e orientar nossos clientes sobre funcionalidades disponíveis na Digisac, proporcionando em tempo real uma conscientização sobre todos esses recursos, tá bom?
+
+[01:21] Então, hoje, de início, eu vou falar um pouquinho referente ao nosso mês, né? Então, é o último dia do mês de julho. Então, no dia 03/07, a gente falou um pouquinho referente a assuntos de chamados, no dia 10/07, a gente falou referente ao agendamento de mensagens. No dia 17/07 sobre respostas rápidas, que é um recurso super legal. E também, no dia 24/07, a gente falou referente às tags, né, que são aquelas etiquetas que vocês conseguem incluir nos contatos.
+
+[02:00] Então, todos esses treinamentos, né, o webinar, ele tá gravado no YouTube, então, vocês conseguem localizar, ó, vou adicionar aqui na tela para vocês. No nosso canal da Digisac, que se você incluir Digisac no YouTube, você encontra o nosso canal. E por aqui, se vocês clicarem nesse campinho ao vivo, você tem o todo o retorno referente a esses vídeos que a gente realizou nesse mês de julho.
+
+[02:29] Tá bom? Então, no total, foi cinco temas, né, somando com o tema de hoje. Então, tá tudo certinho aí para vocês realizarem, assistirem esses, esses vídeos no momento que precisar, enviar também o vídeo para aquele amigo que você sabe que tem a plataforma, que pode, utilizar esse recurso que vai somar ali no atendimento dele. Então, fica tudo disponível no YouTube, a qualquer momento vocês podem acessar e localizar todos esses vídeos, tá bom?
+
+[03:00] Então, pesquisando Digisac, você localiza todos os vídeos, né? Mas referente ao webinar que eu tô apresentando, né, referente a toda quarta-feira às 15 horas, vocês localizam nesse campinho ao vivo, tá bom? Então, vocês conseguem realizar, ó, referente a chamados, assuntos de chamados, referente ao agendamento. Então, tá bem completinho, super interessante para vocês assistirem novamente, caso você já assistiu, tá bom?
+
+[03:25] Então, vamos lá. Então, hoje, a gente vai falar um pouquinho referente ao protocolo de atendimento, tá bom? Então, a importância dele no atendimento de vocês, para enviar para o cliente. A gente consegue enviar o protocolo também de forma automática, super legal. Então, vamos lá. Então, referente ao protocolo de atendimento, vocês conseguem incluir, né, o envio desse protocolo no atendimento ao cliente.
+
+[04:00] E ele é fundamental para garantir o funcionamento, né, o histórico de todo esse chamado. Então, vocês conseguem realizar, assim, na abertura do chamado, gera um protocolo. Então, você consegue fazer o envio desse protocolo para os seus clientes, ou também guardar para ter um controle referente a todas essas conversas, tá bom? Então, o número de protocolo na Digisac fica disponível no chat de atendimento, no menuzinho lateral, que eu vou mostrar para vocês, referente a todas as conversas, tá bom?
+
+[04:32] Então, vamos lá. E também é o formato do nosso número de protocolo. Então, como padrão é configurado para aparecer primeiro a data do protocolo gerado no formato ano, mês e dia do atendimento e após um contador automático gera um número do chamado. Então, sempre vai ser, né, eu vou mostrar na tela para vocês, vamos lá.
+
+[04:59] Então, na Digisac, dentro do chat de atendimento, no chat de atendimento, nesses dois balõezinhos no menu superior, referente aos atendimentos, né, que vocês que está no seu chat, que está sendo tratado naquele momento. Então, por exemplo, no meu chat, eu estou realizando o atendimento com a Fabiana. Então, nesses três pontinhos aqui, ó, nesses três pontinhos, vocês conseguem visualizar o menu lateral desse contato, tá bom?
+
+[05:35] Visualizando o número do contato, silenciando e marcando como não lida, incluindo as tags. Observação, então, vocês podem incluir uma observação referente a esse cliente, lembrando que todas essas informações são internas, tá bom, gente? E, claro, o protocolo de atendimento, que é o nosso foco hoje. Então, você localiza esse protocolo, no momento que você faz a abertura desse chamado, gera o protocolo.
+
+[06:05] Então, ele fica disponível nesse menuzinho lateral, nos três pontinhos. E, a qualquer momento, você pode copiar esse número de protocolo e fazer o envio para o cliente de forma manual, tá bom? Então, essa é a opção que vocês conseguem também enviar o número de protocolo, caso ele solicite, né? Então, no começo do, do chamado, você já consegue fazer o envio do número de protocolo.
+
+[06:58] Certinho? Então, vamos lá. Referente ao histórico de chamados, gente, então, vocês conseguem visualizar nesse reloginho, todo o histórico de chamados do contato, tá bom? Desse contato específico que você está conversando. Então, você tem a visualização por aqui também, tá? E visualizando nos três pontinhos, o protocolo de atendimento em questão.
+
+[15:13] Certinho? Então, vamos lá. Falei um pouquinho referente ao protocolo no histórico. E também, o envio automático de protocolo de atendimento. Então, vamos lá, que essa parte é super interessante.
+
+[15:30] Então, no momento que o robô é ativado, seja na abertura ou no fechamento do chamado, ele enviará automaticamente o número de protocolo para o contato, né, de referência. Então, basta, gente, vocês configurarem no seu robô de atendimento, um comando, que é esse que está na telinha para vocês, que é o protocol_number, precisa estar entre colchetes.
+
+[15:58] Caso você não tenha um robô configurado ainda na sua plataforma, a gente consegue realizar essa configuração para você, tá bom? Ou também, caso você tenha um robô configurado, você consegue realizar algumas alterações. Então, vamos lá. Na plataforma, vocês localizam em mais opções, nesse campinho mais opções, robôs.
+
+[17:21] Então, ah, Fabi, qual que é o robô que está ativo na minha conexão? Eu não sei qual que é esse robô. Então, vamos lá. Você vem nesse celularzinho vibrando em conexões, nos três pontinhos da sua conexão, você consegue visualizar o robô que está ativo, tá bom? Então, o meu robô ativo é esse que eu mostrei para vocês.
+
+[18:07] Então, eu preciso editar esse robô, tá? Então, eu preciso ir, ó, em mais opções, robôs, e procurar o meu robô ativo na conexão. Lembrando, gente, que o ideal é vocês duplicarem e realizarem algumas alterações, tá bom? Para você deixar esse robô com a certeza de que a configuração está correta, tá? Aí você duplica e tenta realizar algumas configurações.
+
+[18:37] Ah, não consegui. É só solicitar o atendimento do suporte, ou também da gente do treinamento. A gente sempre fica à disposição para realizar um treinamento com vocês e pontuar essas dúvidas, tá bom? Mas vamos lá. Então, eu consigo editar o meu robô já existente. E eu vou incluir no meu robô, após o fechamento de chamado, tá?
+
+[19:04] Então, fica no contexto persistente. Mas se eu incluir na mensagem de saudação, fica no contexto de menu. Então, vamos lá. De início, no contexto inicial, é o contexto inicial, tá bom, gente? Esse primeiro aqui. Você consegue visualizar a mensagem que está sendo direcionada para os seus clientes. Então, vocês podem incluir, por exemplo, o número de protocolo nesse momento, ou também no momento que é ele realiza uma transferência para o comercial, você já envia também esse número de protocolo.
+
+[19:40] Mas hoje, eu incluí, vamos lá, no contexto, no contexto persistente, que é após o fechamento de chamado. Então, tem esse gatilho aqui, após o fechamento de chamado, é direcionado uma mensagem para o meu cliente, né? Então, no momento que eu vou lá no chat de atendimento, clico no telefone vermelho e faço o fechamento desse chamado, será enviado essa mensagem para o meu cliente.
+
+[20:15] Tá? Então, essa variável, né, esse comando, puxa o número de protocolo, né, aquele número de atendimento daquele chamado e dispara para o cliente, tá, de forma automática. Então, qualquer dúvida referente a essa configuração dentro do seu robô, conta com a gente, tá bom? Envia mensagem para o nosso time de suporte, tá passando o número aqui para vocês, ou também agendando um treinamento que a gente orienta vocês, tá bom?
+
+[20:45] Mas é super simples incluir uma mensagem no robô já configurado, tá? Então, é uma ação de enviar mensagem e você inclui o textinho que quer ser direcionado com essa variável. Qualquer coisa, Carol, envia a variável no chat para vocês, tá bom? Então, vamos lá. Já configurei o meu robô. No chat de atendimento, eu vou mostrar para vocês.
+
+[21:13] Então, estou conversando aqui com a Fabiana, eu já fiz o envio do protocolo manual, mas foi para exemplificar para vocês. Mas, por exemplo, se eu venho no meu telefone vermelho e fecho esse chamado, ó, então depois do fechamento do chamado, envia o número de protocolo. Então, é o bote que faz o envio e logo em seguida, enviou a avaliação também.
+
+[21:44] Se vocês procurarem no histórico aí do YouTube, você localiza o treinamento que eu dei referente à avaliação no final do atendimento, tá? Então, vocês conseguem incluir também uma avaliação toda vez que você finalizar o chamado, tá? Então, o cliente, ele já tem esse número de protocolo, né?
+
+[22:10] Ele já tem essa informação. E caso ele volta ali, um atendimento, né? No dia seguinte, ele solicita um novo atendimento e fala, ah, eu queria abordar referente ao assunto do protocolo desse atendimento. Então, você, que é o atendente da Digisac, que está realizando essa tratativa com o cliente, consegue copiar esse número de protocolo, no histórico de chamados, com esse cliente em específico, você aperta nesse reloginho, que eu mostrei para vocês, ó, esse reloginho aqui, e consegue buscar dentro de filtros com esse número de protocolo. Então, eu copio o número de protocolo, filtro, e eu já tenho direto esse chamado aqui na minha tela, tá?
+
+[22:56] Então, eu pesquisei somente pelo número de protocolo, podendo observar o que foi conversado nesse chamado, né? Para dar um atendimento mais personalizado para o meu cliente, porque eu tenho esse histórico a favor, tá? Então, vocês conseguem visualizar, podendo exportar a qualquer momento. Certinho? Então, novamente, gente, como entrou bastante gente após o início do nosso webinar, a gente falou um pouquinho referente ao mês, né?
+
+[24:53] Então, referente ao mês de julho, a gente realizou ali vários treinamentos, né, educacionais, com esse intuito de trazer essas informações para vocês, para vocês terem o acesso a essas funcionalidades da Digisac. Então, no YouTube, deixa eu mostrar novamente para vocês para localizar todos esses vídeos da Digisac.
+
+[25:46] Então, essa é a visualização, tá? É só buscar Digisac no YouTube, que você localiza todo o treinamento que a gente realizou até então, nesse mês, tá bom? Que no total, foram cinco. Gente, eu falei um pouquinho referente a assuntos de chamados, tags. Tá bom? Então, a qualquer momento vocês podem vir, assistir esse vídeo, enviar para um amigo, para ele entender um pouquinho referente às funcionalidades da Digisac.
+
+[26:17] Hoje, a gente falou um pouquinho referente à importância do protocolo, que tem como incluir esse comando no seu robô, que você consegue enviar manual também. Você consegue realizar uma pesquisa no histórico de chamados, e fiquem tranquilos, que esses treinamentos, eles ficam gravados. Então, é só você pesquisar no ao vivo do YouTube, que você localiza todos eles, tá bom? Então, tem vários vídeos legais aí para vocês assistirem. E um recadinho final, gente, para vocês.
+
+[26:54] Carolzinha está respondendo todos no chat, podem enviando as dúvidas que a gente está chegando ao fim. Então, um recadinho importante: para manter a sua conta segura, atualize a sua senha da Digisac a cada 60 a 90 dias, mais ou menos, tá bom? Isso ajuda a proteger o acesso de vocês e manter a sua plataforma segura, tá?
+
+[27:26] Então, é sempre legal você alterar a senha. Temos um manualzinho também referente, referente a essa alteração que eu vou mostrar para vocês, que eu vou enviar também aqui no, Carolzinha vai enviar. Espera aí só um minutinho. Esse link, vocês conseguem visualizar como que realiza essa alteração, tá?
+
+[28:02] Então, é super simples. É legal, 60, 90 dias trocar a senha para deixar sua conta bem protegida, porque é onde fica todas as suas informações, né? Então, vocês conseguem incluir, como eu esqueci a minha senha, é direcionado um e-mail para vocês, na sua caixa de entrada, e você consegue realizar aí a alteração da sua senha, tá? Então, é super importante, qualquer dificuldade, é só entrar em contato com a gente também, tá bom? Deixar aqui na telinha referente aos treinamentos, ao vivo que a gente está realizando. Então, todas as quartas-feiras, às 15 horas, a gente vem com um tema diferente.
+
+[28:50] Esse mês que está chegando, então, agosto, a gente vai vir com um tema super interessante que eu não vou falar para vocês ainda. Então, eu volto a falar com vocês na semana que vem, né? Então, no dia 7, e vai ser um tema super interessante. Então, fica de olho no e-mail de vocês, na plataforma, sempre vai ficar um campinho referente ao webinar do mês, da, da semana, tá bom? Então, é só clicar, sendo direcionado para ele, tá certo? Então, chegamos ao fim de mais um webinar, né? Então, fechamos aí o mês de julho com cinco no total, tá?
+
+[29:25] Então, lembrando, gente, que os treinamentos, eles são gratuitos, vocês podem agendar qualquer momento um treinamento para você, para sua equipe, tá? Então, a gente explica certinho todas essas funcionalidades. Espero que vocês tenham gostado e absorvido o conhecimento de hoje referente ao protocolo. Fiquem tranquilos que está gravado esse vídeo, tá?
+
+[29:47] Espero vocês numa próxima e fiquem de olhos, de olho na nossa rede social, tá bom? Um beijo a todos, agradeço a atenção e a contribuição no treinamento de hoje. Um ótimo dia, uma ótima semana para vocês.

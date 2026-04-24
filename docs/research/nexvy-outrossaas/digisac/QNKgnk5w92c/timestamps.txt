@@ -1,0 +1,13 @@
+[00:00] A tela inicial mostra que nenhum contato foi selecionado.
+[00:09] A usuária seleciona o menu "Contatos".
+[00:13] A tela mostra uma lista de contatos ativos.
+[00:19] A usuária clica na aba "Fila de espera".
+[00:22] A tela mostra uma lista de contatos em espera.
+[00:29] A usuária seleciona um contato na fila de espera.
+[00:30] A conversa selecionada é aberta na tela.
+[00:32] A usuária digita uma mensagem.
+[00:35] A usuária envia a mensagem.
+[00:37] A conversa sai da fila de espera e é transferida para o atendimento individual.
+[00:46] A usuária volta para a aba "Contatos".
+[00:49] A usuária volta para a aba "Fila de espera".
+[00:52] A usuária volta para a aba "Contatos".

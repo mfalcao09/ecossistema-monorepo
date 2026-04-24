@@ -1,0 +1,73 @@
+Aqui está um mapeamento dos momentos importantes do vídeo:
+
+[00:00] Início da transmissão ao vivo com Fabiana (Digisac) e Bárbara
+[00:02] Fabiana cumprimenta os espectadores
+[00:10] Fabiana comenta sobre o número de espectadores e incentiva o compartilhamento do link
+[00:25] Fabiana menciona o número de 42 espectadores
+[00:30] Fabiana reforça a importância da participação dos espectadores
+[00:46] Fabiana indica o início da apresentação
+[01:00] Fabiana dá as boas-vindas ao webinário educacional
+[01:05] Fabiana explica o objetivo dos webinários semanais da Digisac
+[01:16] Fabiana incentiva a interação e envio de perguntas no chat
+[01:37] Fabiana introduz o tema do webinário: Integração
+[02:04] Fabiana descreve os benefícios da integração, como atendimento 24 horas e agilidade no cadastro
+[02:30] Fabiana explica que as integrações são possíveis devido à API aberta da Digisac
+[02:46] Fabiana menciona que as ferramentas de integração são segmentadas e otimizam processos
+[03:15] Fabiana convida Bárbara para apresentar o tema
+[04:02] Bárbara se apresenta como parte do time de sucesso do cliente e como nova integrante do educacional
+[04:26] Tela de abertura da apresentação: "Conecte Tudo: O poder das Integrações com a Digisac"
+[04:41] Slide: "Apresentação das Integrações da Digisac" com tópicos sobre oportunidades, Digisac como Hub, tipos de integração e exemplos (G-Clik, RD Sation)
+[04:43] Bárbara explica o conteúdo do slide sobre as integrações
+[05:13] Slide: "Oportunidade com Integrações" com "Quando tudo se conecta, tudo flui!" e lista de benefícios
+[05:15] Bárbara detalha a oportunidade de integrações para uma operação mais fluida e inteligente
+[06:10] Slide: "Digisac como Hub de Integrações" mostrando canais e ferramentas que podem ser integradas
+[06:12] Bárbara explica que a Digisac funciona como um hub de integrações, com integrações nativas e API aberta
+[07:04] Slide: "Tipos de Integrações" divididos em "Integração de Prateleira" e "Integração Personalizada"
+[07:06] Bárbara explica a diferença entre integração de prateleira (pré-configurada) e personalizada (sob medida)
+[08:01] Slide: "Integração Prateleira" com "Principais objetivos que os clientes buscam quando procuram uma integração"
+[08:04] Bárbara detalha os objetivos da integração de prateleira: automação/centralização de informações (Pipefy, Trello), atualização de dados entre sistemas (RD CRM, Funil de Vendas), automação de envio de boletos ou 2a via.
+[08:58] Slide: "Integração Personalizada" com destaque para a customização, webhooks e desenvolvimento via API aberta
+[09:00] Bárbara explica a integração personalizada, como funciona e a necessidade de API aberta e análise de viabilidade
+[10:20] Bárbara e Fabiana respondem perguntas do chat sobre custos de ativação de integrações de prateleira.
+[10:46] Fabiana compartilha a tela mostrando a página de integração da RD Station com a Digisac
+[10:50] Fabiana destaca que a Digisac está entre os top 5 em soluções de SMS e marketing
+[11:08] Slide: "RD STATION + digisac" detalhando objetivo e funcionalidades da integração
+[11:10] Bárbara detalha a integração RD Station + Digisac, explicando como facilita o gerenciamento do pipeline de vendas
+[12:21] Slide: "omie G-Click + digisac" com objetivo e funcionalidades
+[12:23] Bárbara explica a integração Omie G-Click + Digisac, focada em otimizar o fluxo de trabalho e gestão de tarefas
+[13:28] Slide: "Automatize processos e otimize sua operação" com 3 passos: 1. Escolha as integrações, 2. Nossa equipe configura, 3. Aproveite os benefícios. Nota sobre mensalidade.
+[13:30] Fabiana e Bárbara reforçam a informação sobre os custos das integrações
+[13:56] Bárbara resume o processo de automação e otimização da operação através das integrações da Digisac
+[14:45] Slide: "Ficou interessado? Entre em contato e descubra como tornar sua operação mais ágil e conectada."
+[14:48] Bárbara convida os espectadores a entrar em contato com o time de sucesso do cliente para mais informações
+[15:00] Fabiana mostra o site da RD Station novamente, com detalhes da integração
+[15:10] Bárbara incentiva o contato para dúvidas e informações sobre integrações
+[15:17] Fabiana reforça que o tema de integração foi muito solicitado pelos clientes
+[15:37] Fabiana continua mostrando o site da RD Station, com detalhes da integração, incluindo registro automático e gerenciamento de oportunidades
+[16:21] Fabiana destaca a eficiência e organização que a integração oferece
+[16:51] Fabiana comenta sobre como a integração permite focar mais no atendimento humano
+[18:01] Pergunta do chat: "Há uma lista das integrações já disponíveis?"
+[18:08] Fabiana confirma a existência da lista e sugere entrar em contato para solicitá-la
+[18:22] Fabiana enfatiza o conhecimento e o uso eficiente dos sistemas integrados
+[18:51] Comentário do chat: "Achei bem bacana a Integração do Trello e possuo interesse em ativá-la."
+[18:56] Bárbara informa que há um vídeo no YouTube sobre a integração com o Trello e que o time pode ajudar na ativação
+[19:35] Fabiana mostra o site da Digisac com a aba de integrações, exibindo as categorias de CRM, Fiscal e Contábil, Gestão de Condomínios e Imóveis
+[20:17] Fabiana continua mostrando as categorias de Saúde, E-commerce e Provedores de Internet e Telecom
+[20:53] Fabiana mostra o restante da página de integrações com um vídeo explicativo
+[21:14] Pergunta do chat: "tem algo já pronto para correspondente bancário?"
+[21:20] Fabiana sugere entrar em contato para verificar a possibilidade de integração personalizada
+[21:56] Pergunta do chat: "Também gostaria de ver a integração com o Trello"
+[22:07] Fabiana comenta sobre a disponibilidade de um vídeo no YouTube sobre a integração com o Trello
+[22:29] Bárbara reforça a informação sobre o vídeo do Trello e convida o contato
+[23:25] Comentário do chat: "Eu uso o digisac a 3 anos na minha farmácia excelente aplicativo. E sempre indico."
+[23:30] Fabiana agradece o feedback positivo do cliente
+[23:44] Comentário do chat: "Pode deixar, já chamei aqui" (referente ao contato para integração)
+[23:50] Fabiana pergunta sobre sugestões para o próximo tema de live
+[24:09] Comentário do chat: "Seria ideal essas live, para areas especificas."
+[24:16] Fabiana agradece a sugestão de lives por áreas específicas
+[25:00] Bárbara agradece a presença dos espectadores e as sugestões
+[25:08] Bárbara agradece a participação e o feedback
+[25:36] Pergunta do chat: "esse material fica gravado?"
+[25:40] Fabiana confirma que o vídeo ficará gravado no YouTube da Digisac, na aba de "Ao vivos"
+[25:54] Fabiana agradece a atenção e se despede
+[26:05] Bárbara agradece e se despede

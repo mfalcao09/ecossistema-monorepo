@@ -1,0 +1,20 @@
+[00:00] Início da apresentação sobre a função Kanban.
+[00:09] Visualização do ícone do Kanban na interface do chat.
+[00:14] Tela "Escolha um Kanban" para adicionar um card.
+[00:17] Opções de seleção de Kanban.
+[00:19] Opções de seleção de coluna.
+[00:21] Opções de seleção de etiqueta.
+[00:33] Visualização do ícone de lista de Kanbans.
+[00:39] Tela "Kanbans" com a lista de quadros existentes.
+[00:46] Acesso ao quadro Kanban "teste 1".
+[00:51] Opção para criar uma nova coluna.
+[00:56] Criando uma nova coluna.
+[01:04] Editando a coluna e adicionando uma cor.
+[01:12] Adicionando um novo item (card) à coluna.
+[01:45] Editando o item (card) e suas opções.
+[02:16] Visualizando um comentário adicionado ao card.
+[02:26] Visualizando o histórico de alterações do card.
+[02:58] Removendo um card.
+[03:00] Movendo um card entre colunas.
+[03:24] Movendo uma coluna de posição.
+[03:52] Adicionando um novo item à coluna.

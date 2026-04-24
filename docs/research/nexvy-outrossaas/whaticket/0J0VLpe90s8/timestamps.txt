@@ -1,0 +1,27 @@
+Aqui está um mapeamento exaustivo do vídeo:
+
+[00:00] Tela inicial da plataforma WABOOT, mostrando a interface principal com o menu lateral e a área de trabalho.
+[00:00] Área de KanBan, exibindo um ticket "Em aberto" com informações do WABOOT e seu número de telefone.
+[00:04] Menu lateral da plataforma, com as opções de ATENDIMENTO, RESPOSTAS RÁPIDAS, KANBAN, TAREFAS, CONTATOS, AGENDAMENTOS, TAGS, CHAT INTERNO, AJUDA.
+[00:04] Clique na opção "Atendimentos" no menu lateral.
+[00:05] Tela de "Atendimentos", mostrando os status "ATENDENDO" e "AGUARDANDO". Um ticket do WABOOT está em "AGUARDANDO".
+[00:10] Clique na opção "Kanban" no menu lateral.
+[00:11] Tela de "Kanban" com uma coluna "Em aberto" e um ticket do WABOOT nela.
+[00:17] Clique na opção "Tags" no menu lateral.
+[00:18] Tela de "Tags", mostrando uma tabela vazia com colunas "Nome", "Registros Tagados" e "Ações".
+[00:19] Clique no botão "NOVA TAG" no canto superior direito.
+[00:20] Janela pop-up "Nova Tag" com campos para "Nome", "Cor" e um checkbox "Kanban".
+[00:22] Digitação de "Primeiro atendimento" no campo "Nome".
+[00:25] Clique no ícone de lápis para selecionar uma cor.
+[00:26] Seletor de cores é exibido.
+[00:28] Seleção da cor azul para a tag.
+[00:29] Marcação do checkbox "Kanban".
+[00:30] Clique no botão "ADICIONAR".
+[00:32] Mensagem de sucesso "Tag salva com sucesso" aparece no canto superior direito.
+[00:33] A tag "Primeiro atendimento" com a cor azul é exibida na tabela "Tags".
+[00:35] Clique na opção "Kanban" no menu lateral.
+[00:36] Tela de "Kanban" agora exibe duas colunas: "Em aberto" e "Primeiro atendimento" (com a cor azul). O ticket do WABOOT ainda está em "Em aberto".
+[00:41] Arrastando o ticket do WABOOT da coluna "Em aberto" para a coluna "Primeiro atendimento".
+[00:45] O ticket do WABOOT agora está na coluna "Primeiro atendimento".
+[00:46] Mensagem de sucesso "Ticket movido com sucesso" aparece no canto superior direito.
+[00:54] Logotipo WABOOT e o endereço www.waboot.com.br, com a descrição "Plataforma Multi Atendimento para WhatsApp".

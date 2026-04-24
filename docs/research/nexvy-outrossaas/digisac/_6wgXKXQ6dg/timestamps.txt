@@ -1,0 +1,100 @@
+[00:00] Início da contagem regressiva de 27 segundos
+[00:01] Contagem regressiva de 26 segundos
+[00:02] Contagem regressiva de 25 segundos
+[00:03] Contagem regressiva de 24 segundos
+[00:04] Contagem regressiva de 23 segundos
+[00:05] Contagem regressiva de 22 segundos
+[00:06] Contagem regressiva de 21 segundos
+[00:07] Contagem regressiva de 20 segundos
+[00:08] Contagem regressiva de 19 segundos
+[00:09] Contagem regressiva de 18 segundos
+[00:10] Contagem regressiva de 17 segundos
+[00:11] Contagem regressiva de 16 segundos
+[00:12] Contagem regressiva de 15 segundos
+[00:13] Contagem regressiva de 14 segundos
+[00:14] Contagem regressiva de 13 segundos
+[00:15] Contagem regressiva de 12 segundos
+[00:16] Contagem regressiva de 11 segundos
+[00:17] Contagem regressiva de 10 segundos
+[00:18] Contagem regressiva de 09 segundos
+[00:19] Contagem regressiva de 08 segundos
+[00:20] Contagem regressiva de 07 segundos
+[00:21] Contagem regressiva de 06 segundos
+[00:22] Contagem regressiva de 05 segundos
+[00:23] Contagem regressiva de 04 segundos
+[00:24] Contagem regressiva de 03 segundos
+[00:25] Contagem regressiva de 02 segundos
+[00:26] Contagem regressiva de 01 segundo
+[00:27] Contagem regressiva de 00 segundos
+[00:28] Apresentação da tela de vídeo do apresentador
+[00:34] Exibição de um círculo de carregamento na tela de vídeo do apresentador
+[00:48] Transição para uma tela azul
+[00:51] Início da contagem regressiva de 30 segundos
+[00:52] Contagem regressiva de 29 segundos
+[00:53] Contagem regressiva de 28 segundos
+[00:54] Contagem regressiva de 27 segundos
+[00:55] Contagem regressiva de 26 segundos
+[00:56] Contagem regressiva de 25 segundos
+[00:57] Contagem regressiva de 24 segundos
+[00:58] Contagem regressiva de 23 segundos
+[00:59] Contagem regressiva de 22 segundos
+[01:00] Contagem regressiva de 21 segundos
+[01:01] Contagem regressiva de 20 segundos
+[01:02] Contagem regressiva de 19 segundos
+[01:03] Contagem regressiva de 18 segundos
+[01:04] Contagem regressiva de 17 segundos
+[01:05] Contagem regressiva de 16 segundos
+[01:06] Contagem regressiva de 15 segundos
+[01:07] Contagem regressiva de 14 segundos
+[01:08] Contagem regressiva de 13 segundos
+[01:09] Contagem regressiva de 12 segundos
+[01:10] Apresentação da tela de vídeo do apresentador
+[01:15] Exibição de um círculo de carregamento na tela de vídeo do apresentador
+[01:26] Transição para uma tela azul
+[01:27] Exibição de duas pessoas em uma videochamada
+[01:30] As apresentadoras cumprimentam o público e discutem o evento
+[01:50] Compartilhamento de que o vídeo do CEO está na plataforma
+[02:00] Apresentação das funcionalidades de transcrição de áudio, texto mágico e resumo inteligente
+[02:30] Convidando o público a enviar dúvidas e comentários
+[02:40] Apresentando detalhes de como usar a transcrição de áudio, o texto mágico e o resumo inteligente
+[02:50] Destacando a importância de otimizar a agilidade e eficiência operacional
+[03:00] Compartilhando que o feedback dos clientes é essencial para a evolução
+[03:10] Enfatizando a busca por tecnologia de ponta e acesso facilitado
+[03:20] Convite para interagir e compartilhar dúvidas
+[03:30] Agradecimento aos clientes e expectativa por mais novidades
+[03:40] Destacando a importância do feedback dos clientes
+[03:50] Reafirmando o compromisso com a evolução e a adaptação às necessidades dos clientes
+[04:00] Apresentando os planos de contratação e valores
+[04:10] Explicação dos benefícios da plataforma Digisac
+[04:20] Enfatizando a otimização de tempo e recursos
+[04:30] Convite para experimentar a demonstração interativa
+[04:40] Agradecimentos e encerramento
+[04:50] Final da live
+[05:07] Transição para o slide "Explore as Novas Funcionalidades de IA da Digisac"
+[05:10] Apresentação das três funcionalidades revolucionárias de IA
+[05:37] Detalhamento das funcionalidades: Resumo Inteligente, Texto Mágico e Transcrição de Áudios
+[06:11] Foco no "Texto Mágico": Correção Ortográfica e Sugestão de Texto para Mensagens
+[07:27] Demonstração da função "Gerar Mensagem" e "Corrigir meu texto" com opções de tom
+[08:46] Detalhamento da funcionalidade "Transcrição de Áudios"
+[12:41] Explicação sobre o aumento da produtividade e análise precisa com a transcrição
+[15:10] Detalhamento da funcionalidade "Resumo Inteligente"
+[17:00] Demonstração prática das funcionalidades em um atendimento simulado
+[17:15] Login na plataforma Digisac e visualização da demonstração
+[17:40] Demonstração da transcrição de áudio em tempo real
+[17:58] Explicação do processo de transcrição automática e detalhes como pontuação
+[18:31] Demonstração da função "Texto Mágico" durante a digitação de mensagens
+[19:47] Demonstração do uso do resumo inteligente na transferência e encerramento de chamados
+[22:00] Exibição dos planos de contratação individuais para o Texto Mágico
+[26:25] Exibição do "Combo de Lançamento" com desconto para as 3 funcionalidades
+[26:38] Detalhamento dos valores individuais e do combo de lançamento
+[31:52] Apresentação detalhada dos planos de contratação para cada funcionalidade de IA
+[33:12] Continuação da apresentação dos planos e seus limites
+[39:57] Reafirmação da disponibilidade das funcionalidades desde ontem
+[41:10] Explicação sobre a visualização das transcrições (somente para o atendente)
+[42:04] Explicação sobre a ativação automática do resumo em transferências e encerramentos
+[44:30] Resposta à pergunta sobre a fila de atendimento e a IA
+[45:54] Esclarecimento sobre o pacote de uso (não cumulativo, reinicia mensalmente)
+[46:53] Confirmação de que uma correção ou melhoria de texto conta como um uso
+[49:15] Confirmação de que o texto mágico, resumo e transcrição ficam para a equipe, não para o cliente
+[50:11] Convite para entrar em contato com o time de atendimento para mais informações
+[53:20] Agradecimento final e encerramento da live

@@ -1,0 +1,40 @@
+[00:05] Tela "Gestão de Usuários" na plataforma Zaapy 4.0.
+[00:06] Informações de nome, e-mail, status de administrador, situação e ações dos usuários.
+[00:26] Opção de exportar dados em diferentes formatos (Print, CSV, Excel, PDF, Copy).
+[00:35] Campo de busca para usuários.
+[00:38] Opção para exibir 10, 25, 50 ou 100 entradas de usuários.
+[00:44] Fotos de perfil dos atendentes exibidas na lista.
+[00:50] Botão "NOVO USUÁRIO" para adicionar um novo usuário.
+[00:53] Modal "Adicionar usuário" com campos para Nome Completo, Email, Senha.
+[00:59] Campo "Administrador" com opções "Sim" e "Não".
+[01:01] Campo "Grupo de Permissões".
+[01:03] Campos "Organização" e "Cargo".
+[01:07] Campos "Endereço", "Cidade", "UF" (estado pela sigla), "CEP", "País" e "Número Whatsapp".
+[01:18] Botão "CADASTRAR" e "CANCELAR" no modal.
+[01:24] Botões de ação para cada usuário na lista (Editar, Trocar senha).
+[01:26] Modal "Redefinir senha" com campos "Nova Senha" e "Confirme sua senha".
+[01:30] Ícone para visualizar/ocultar a senha.
+[01:33] Botão "DEFINIR NOVA SENHA".
+[01:39] Botão "Editar" para abrir a tela de edição de perfil do usuário.
+[01:41] Tela "Editar perfil / Conta" com "Detalhes do perfil".
+[01:43] Campo para adicionar foto de perfil.
+[01:46] Campos editáveis de informações do usuário.
+[01:48] Seção "Deletar Atendente" com checkbox para confirmar exclusão.
+[01:57] Botão "DELETAR ATENDENTE".
+[02:00] Aba "JORNADA DE TRABALHO" na tela de edição de perfil.
+[02:02] Opção "Férias de Usuário" para habilitar dias de férias.
+[02:06] Seção "Horários de Trabalho" com opções para cada dia da semana (Ativo, Intervalo, 24 Horas, Início/Fim Atendimento).
+[02:14] Campo de texto para "Msg caso tente logar fora do horário".
+[02:27] Aba "DEPARTAMENTOS" na tela de edição de perfil.
+[02:28] Seção "Associação de Departamentos" com "Departamentos Não Vinculados" e "Departamentos Associados".
+[02:30] Botões para vincular ou desvincular departamentos individualmente ou todos de uma vez.
+[03:03] Aba "CARTEIRA DE CONTATOS" na tela de edição de perfil.
+[03:04] Lista de "Contatos vinculados" com opções de busca e exportação.
+[03:07] Botão "DESVINCULAR SELECIONADOS".
+[03:20] Aba "PERMISSIONAMENTO" na tela de edição de perfil.
+[03:22] Seção "Regras específicas" com checkbox "Ver todos atendimentos".
+[03:26] Checkbox "Notificar avisos no WhatsApp".
+[03:50] Aba "GRUPOS WHATSAPP" na tela de edição de perfil.
+[03:52] Seção "Associação de Grupos" com "Grupos Não Vinculados" e "Grupos Associados".
+[04:09] Retorno à tela "Gestão de Usuários".
+[04:11] Menção da próxima aula sobre "Regras de Acesso" (antigo "Permissão").

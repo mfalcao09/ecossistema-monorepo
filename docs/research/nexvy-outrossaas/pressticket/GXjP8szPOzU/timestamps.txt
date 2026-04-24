@@ -1,0 +1,46 @@
+[00:00] Início do vídeo apresentando a tela inicial da plataforma de multiatendimento.
+[00:19] Acessando a área de "Flowbuilder" no menu lateral.
+[00:22] A tela de "Fluxos de conversa" é exibida, e o usuário clica em "Adicionar Flow".
+[00:24] Uma janela "Adicionar Fluxo" é aberta, onde o usuário digita "Transferência de Fluxo" no campo "Nome".
+[00:30] O usuário clica em "Adicionar" na janela "Adicionar Fluxo".
+[00:32] A tela do "Flowbuilder" é exibida com um bloco "Inicio do fluxo".
+[00:59] O usuário clica no ícone de adição de condição.
+[01:01] Uma janela "Adicionar condição ao fluxo" é aberta, e o usuário seleciona a opção "Tag".
+[01:04] O usuário clica no campo "Regra" e seleciona "Possui a tag".
+[01:06] O usuário clica no campo "Selecione as Tags" e escolhe a tag "Venda Concluída".
+[01:08] O usuário clica em "Adicionar" na janela "Adicionar condição ao fluxo".
+[01:09] O bloco "Condição" é adicionado ao fluxo, conectado ao "Início do fluxo".
+[01:11] O usuário clica no ícone de adição de transferência de fluxo.
+[01:17] Uma janela "Transferir para outro fluxo" é aberta, e o usuário seleciona "Treinamento Menu".
+[01:20] O usuário clica em "Adicionar" na janela "Transferir para outro fluxo".
+[01:21] O bloco "Transf. Fluxo" é adicionado ao fluxo e conectado à saída "Verdadeiro" do bloco "Condição".
+[01:40] O usuário clica no ícone de adição de inteligência artificial.
+[01:42] Uma janela "Adicionar uma IA ao fluxo" é aberta, e o usuário seleciona "Sophia 3".
+[01:44] O usuário clica em "Adicionar" na janela "Adicionar uma IA ao fluxo".
+[01:45] O bloco "Prompt IA" é adicionado ao fluxo e conectado à saída "Falso" do bloco "Condição".
+[02:16] O usuário clica em "Salvar" no canto superior direito.
+[02:18] O usuário clica em "Conexões" no menu lateral.
+[02:19] A tela de "Conexões" é exibida, e o usuário clica no ícone de edição da conexão "teste treinamento".
+[02:21] A janela "Editar Whatsapp" é aberta, e o usuário clica na aba "Integrações".
+[02:23] No campo "Fluxos do Flowbuilder", o usuário seleciona "Transferência de Fluxo".
+[02:26] O usuário clica em "Salvar" na janela "Editar Whatsapp".
+[02:27] O usuário clica em "Atendimentos" no menu lateral.
+[02:30] A tela de "Atendimentos" é exibida.
+[02:31] A tela muda para a interface do WhatsApp Web, onde o usuário envia a mensagem "Boa tarde".
+[02:39] A inteligência artificial "Sophia" responde à mensagem.
+[02:41] A tela retorna à plataforma de multiatendimento, mostrando o ticket na área de "Em atendimento".
+[02:45] O usuário clica no ticket em atendimento.
+[02:46] A tela da conversa com o cliente é exibida, e o usuário clica na aba "Tags".
+[02:49] O usuário adiciona a tag "Venda Concluída".
+[02:51] O usuário clica no ícone de finalizar ticket.
+[02:53] A tela de "Atendimentos" é exibida novamente, agora sem tickets em aberto.
+[02:54] A tela muda para a interface do WhatsApp Web, onde o usuário envia "Boa tarde" novamente.
+[03:00] O bot responde com um menu de atendimento, mostrando a transferência de fluxo.
+[03:38] A tela retorna à plataforma de multiatendimento.
+[03:41] O usuário clica em "Flowbuilder" no menu lateral.
+[03:42] A tela de "Fluxos de conversa" é exibida, e o usuário clica no fluxo "Transferência de Fluxo".
+[03:45] O fluxo é exibido novamente, e o usuário clica no bloco "Condição".
+[03:46] A janela "Editar condição" é aberta, mostrando a configuração da tag.
+[03:52] O usuário clica em "Salvar" na janela "Editar condição".
+[03:53] A tela do fluxo é exibida, destacando a lógica de transferência e IA.
+[04:01] Fim do vídeo.

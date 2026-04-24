@@ -1,0 +1,26 @@
+[00:05] A tela inicial de gerenciamento de contatos mostra o número total de contatos e os contatos vinculados a diferentes plataformas, como WhatsApp.
+[00:15] No topo da tela, você verá o número total de contatos.
+[00:20] Abaixo, há um contador para o número de contatos vinculados ao WhatsApp.
+[00:26] A coluna "Tipo de conta" indica o tipo de conta (ex: WhatsApp) para cada contato.
+[00:28] A tela mostra a foto do contato na primeira coluna.
+[00:30] O nome do contato é exibido abaixo da foto.
+[00:40] O tipo de conta (ex: WhatsApp) é mostrado ao lado do nome.
+[00:44] O número de telefone do contato é visível na coluna "Número".
+[00:46] Há uma opção para exibir 10, 25, 50 ou 100 entradas na tabela de contatos.
+[00:49] Um checkbox na primeira coluna permite selecionar um contato individualmente.
+[00:51] Um checkbox no cabeçalho da tabela permite selecionar todos os contatos.
+[00:53] A coluna "Carteira" mostra se o contato está vinculado a uma carteira.
+[00:56] O botão "IMPORTAR CEL" permite importar contatos do celular.
+[00:59] O botão "EXPORTAR" oferece opções para imprimir, exportar para CSV, Excel ou PDF, e copiar os dados.
+[01:05] O botão "NOVO CONTATO" abre um formulário para adicionar um novo contato manualmente.
+[01:06] O formulário de "Adicionar contato" solicita "Nome Completo", "Tipo de pessoa" (Física/Empresarial), "E-mail" e "Número".
+[01:21] O botão "AÇÕES EM MASSA" oferece opções para excluir contatos, remover etiquetas, remover carteiras, associar etiqueta, associar carteira e importar Excel.
+[01:39] O menu "Ações" (ícone de três pontos) para cada contato individual oferece as opções "Ver histórico", "Editar" e "Deletar".
+[01:42] Ao clicar em "Ver histórico", abre-se uma tela com o histórico de conversas do contato, incluindo mensagens e mapas de imagem.
+[01:54] O menu "Ações" novamente mostra as opções "Ver histórico", "Editar" e "Deletar".
+[02:00] Ao clicar em "Editar", a tela exibe "Dados Gerais" do contato, incluindo nome, e-mail, número, tipo de pessoa, país, data de nascimento e vínculo com carteira.
+[02:14] A aba "PROTOCOLOS" na tela de edição do contato mostra o histórico de protocolos, com informações como número do protocolo, conversas, data/hora e departamento.
+[02:27] A aba "OBSERVAÇÕES" permite adicionar e salvar observações sobre o contato.
+[02:30] A aba "MENSAGENS AGENDADAS" mostra o agendamento de mensagens para o contato, incluindo data de envio, conexão, número, protocolo, departamento, recorrência, informações e status.
+[03:13] A tela retorna ao gerenciamento de contatos, destacando a próxima aula sobre "Etiquetas".
+[03:17] O menu lateral "Etiquetas" é destacado para a próxima aula.

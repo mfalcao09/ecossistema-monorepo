@@ -1,0 +1,28 @@
+[00:00] Início do vídeo
+[00:00] Visão geral da tela de atendimento de uma plataforma de automação
+[00:34] Navegação para a seção "Filas e Conexões"
+[00:36] Abertura da tela de "Conexões"
+[00:38] Edição da conexão "teste treinamento"
+[00:39] Habilitação da funcionalidade de Remarketing
+[00:48] Acesso à aba "Remarketing" dentro da tela de edição de conexão
+[00:52] Ativação da "Primeira Etapa de Remarketing"
+[01:03] Definição da mensagem de Remarketing
+[01:10] Configuração do intervalo de envio para 1 minuto e número de envios como 1
+[01:54] Configuração da "Segunda Etapa de Remarketing" com 300 minutos
+[02:06] Configuração da "Terceira Etapa de Remarketing" com 600 minutos
+[02:24] Recapitulando a ativação e configuração do Remarketing
+[02:40] Clique no botão "Salvar"
+[02:43] Retorno à tela de "Atendimento"
+[02:45] Simulação de um lead entrando em contato e recebendo a mensagem da IA
+[02:51] Visualização da conversa no WhatsApp do cliente
+[02:53] Mensagem de reengajamento sendo enviada para o lead após 1 minuto sem resposta
+[03:29] Retorno à tela de "Atendimento" mostrando o ticket com a mensagem de remarketing enviada
+[03:32] Explicação da importância do ticket estar na aba "aguardando" para receber o remarketing
+[04:38] Verificação das configurações de remarketing (ativar/desativar)
+[04:47] Reativação da "Primeira Etapa de Remarketing"
+[04:52] Salvar as configurações e retorno à tela de "Conexões"
+[04:57] Visualização da mensagem de remarketing enviada no WhatsApp do cliente
+[05:00] Reconfirmação das configurações de remarketing na plataforma
+[05:15] Explicação que o remarketing se aplica a todos os tickets na aba "aguardando" da conexão configurada
+[05:32] Recomendação de usar uma conexão específica para o remarketing de leads
+[05:45] Encerramento do vídeo

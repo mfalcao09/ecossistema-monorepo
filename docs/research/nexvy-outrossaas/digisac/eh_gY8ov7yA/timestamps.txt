@@ -1,0 +1,18 @@
+[00:00] Mulher sorrindo e falando.
+[01:47] Um slide mostrando o tema da apresentação.
+[01:54] Um slide com dois painéis. À esquerda, os recursos incluídos no plano básico. À direita, os recursos disponíveis para contratação extra.
+[09:28] Um slide com um painel de menu e texto sobre o "Meu Plano".
+[10:14] Uma nova tela com informações sobre a fatura, incluindo data, valor e status de pagamento.
+[11:24] Uma tela para gerenciar usuários, mostrando a quantidade de usuários contratados, utilizados e disponíveis.
+[12:23] Uma tela para gerenciar conexões, mostrando a quantidade de conexões contratadas, utilizadas e disponíveis, além de opções para contratar novas conexões.
+[13:35] Uma tela com o histórico de faturas, exibindo a data, valor, status e ações para cada fatura.
+[14:45] Uma tela com informações gerais sobre a empresa, como razão social, nome fantasia, CNPJ, data de fundação, contatos e endereços.
+[16:00] A tela inicial da plataforma Digisac, mostrando o painel de navegação.
+[16:05] O menu suspenso "Ajuda" na plataforma Digisac, com opções "Tutoriais" e "Manual de acesso".
+[16:09] A página "Manual Digisac" no navegador, mostrando a "Apresentação Inicial" da plataforma.
+[16:20] A função de pesquisa no manual Digisac, onde a palavra "meu" é digitada.
+[16:23] A página "MEU PLANO" no manual Digisac, com informações detalhadas sobre o recurso.
+[16:42] A tela inicial da plataforma Digisac, com o menu "Ajuda" aberto.
+[16:45] A tela "Tutoriais" na plataforma Digisac, com vídeos curtos sobre diversas funcionalidades.
+[16:50] A página "MEU PLANO" no manual Digisac, com informações detalhadas sobre o recurso.
+[17:03] A página "MEU PLANO" no manual Digisac, com informações detalhadas sobre o recurso.

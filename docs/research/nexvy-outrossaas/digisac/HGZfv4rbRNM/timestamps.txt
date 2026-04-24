@@ -1,0 +1,74 @@
+[00:00] Mulher sorrindo na tela
+[00:46] Mulher de cabelo castanho com fone de ouvido
+[01:50] Usuário enviou um comentário com o texto "Boa tarde Fabiana, somos clientes de vocês. Qual o intuito da live?"
+[02:30] Tela inicial da apresentação da Digisac.
+[02:35] Novidades para todos os clientes: edição de mensagens no WhatsApp Standard, marcação de participantes em grupos, envio e recebimento de contatos pelo WhatsApp. Para clientes com Funil de Vendas: aviso de oportunidade vinculada no fechamento de chamado.
+[04:09] Tela da Digisac com informações sobre a edição de mensagens no WhatsApp.
+[06:03] Usuário enviou um comentário com o texto "Sou da Rede Quero Bahia. Gostaria de saber se as melhorias são inclusas no pacote, ou são pagas a parte?"
+[06:30] Tela da Digisac com informações sobre a marcação de participantes em grupos.
+[07:34] Tela da Digisac com informações sobre o envio e recebimento de contatos.
+[08:49] Usuário enviou um comentário com o texto "e a edição dos comentários em amarelo"
+[09:25] Visão geral do chat da Digisac, mostrando o contato "Fabiana" e o "Webinar Educacional".
+[09:28] Conversa aberta com "Fabiana", exibindo uma mensagem de atendimento encerrado e outra "Olá, tudo bem?".
+[09:37] Fabiana clica no balão da sua mensagem "Olá, tudo bem?" e abre um menu de opções.
+[09:44] Fabiana edita a mensagem "Olá, tudo bem?" para "Olá, tudo bem?".
+[09:59] Fabiana clica em "Adicionar comentário" e abre uma janela para digitar e adicionar arquivos.
+[10:04] Fabiana digita "Teste webinar" no campo de comentário e clica em "Salvar".
+[10:14] Fabiana clica na mensagem editada e um balão amarelo com o texto "teste webinar" aparece ao lado.
+[10:35] Fabiana clica no botão de anexos (clip de papel) na barra de digitação.
+[10:44] Fabiana clica em "Contato" para compartilhar um contato.
+[10:49] Lista de contatos "Compartilhar contato" é exibida, com opções para buscar por nome ou telefone e selecionar contatos.
+[10:54] Fabiana seleciona o contato "Bárbara Mangolin" e clica em "Enviar".
+[10:57] A conversa mostra o contato "Bárbara Mangolin" com a opção "Enviar mensagem".
+[11:00] Fabiana clica na opção "Enviar mensagem" para "Bárbara Mangolin".
+[11:02] A conversa com "Bárbara Mangolin" é exibida.
+[11:07] A conversa com "Bárbara Mangolin" é exibida.
+[11:15] Fabiana recebe uma mensagem de "Bia Rodrigues" no WhatsApp com o texto "Envio uma mensagem". Abaixo dela, há opções de "Enviar mensagem" e "Adicionar Contato".
+[11:27] A tela exibe a conversa, e Fabiana adiciona Bia Rodrigues como contato.
+[11:32] O contato "Bia Rodrigues" agora aparece na lista de contatos.
+[11:36] Fabiana recebe um contato "Bia Rodrigues".
+[11:42] As opções "Enviar mensagem" e "Adicionar Contato" são mostradas para o contato "Bia Rodrigues".
+[11:48] Fabiana adicionou "Bia Rodrigues" como contato.
+[11:58] Fabiana clica em "Enviar mensagem" para Bia Rodrigues.
+[12:03] A janela "Abrir chamado" aparece, com a opção de transferir para departamento, selecionar um atendente e adicionar um comentário.
+[12:08] Fabiana clica no ícone de opções (três pontos verticais) ao lado de "Operador" na lista de cargos.
+[12:12] Fabiana clica em "Editar" para editar o cargo de operador.
+[12:17] Fabiana edita o nome do contato de "Bia Rodrigues" para "Beatriz Rodrigues" e clica em "Salvar".
+[12:25] A conversa mostra o nome do contato atualizado para "Beatriz Rodrigues".
+[12:35] Fabiana clica no balão amarelo, que aparece um balão com o texto "Digite um comentário"
+[12:42] Fabiana clica na aba "Contatos".
+[12:48] Fabiana clica em "Novo grupo".
+[12:51] A janela "Criar grupo" aparece, com campos para "Nome do grupo" e "Conexão", e um espaço para selecionar conteúdo ou carregar lista de contatos.
+[12:55] A conversa com "Webinar Educacional" é exibida.
+[12:58] Fabiana digita "@" na barra de mensagens, e uma lista de participantes do grupo é exibida.
+[13:03] Fabiana digita o nome de um participante do grupo e "Boa tarde, está em reunião".
+[13:07] A mensagem "@Pamela Sousa Boa tarde, está em reunião" é enviada no chat.
+[13:17] Fabiana clica no balão da mensagem "@Pamela Sousa Boa tarde, está em reunião" e um menu de opções é exibido.
+[13:25] Fabiana clica em "Responder em particular".
+[13:30] A tela volta para o chat, mas não há uma conversa ativa selecionada.
+[14:12] Usuário enviou um comentário com o texto "Olá, boa tarde! Onde consigo ver qual o tipo do meu plano para saber se tenho disponível a opção de editar as mensagens?"
+[15:58] Usuário enviou um comentário com o texto "Boa tarde, sou da Mendes Tur o meu não aparece a opção de apagar apenas a de editar"
+[16:06] Fabiana clica no menu superior e seleciona "Cargos".
+[16:15] A tela "Cargos" é exibida, mostrando a lista de cargos: "Administrador", "Operador" e "Subtelas".
+[16:20] Fabiana clica em "Editar" para o cargo "Operador".
+[16:29] A janela "Editando Cargo" é exibida, mostrando permissões para várias funcionalidades. Fabiana rola para baixo para ver mais opções.
+[17:55] Usuário enviou um comentário com o texto "perfeito essa opção de grupo muito util para conversão comercial"
+[18:25] Usuário enviou um comentário com o texto "Tem algum para filtrar os comentários? Ou preciso ir rolando a conversa até achar eles?"
+[18:52] Fabiana clica na lupa na barra superior do chat.
+[18:57] Fabiana digita "teste" na barra de busca por mensagens.
+[19:01] A conversa exibe as mensagens que contêm a palavra "teste", destacando-as em amarelo.
+[19:22] A conversa é exibida, mostrando o status "Dispositivo externo" e as opções de avaliação de atendimento.
+[20:13] Usuário enviou um comentário com o texto "é possível agendar um contato direto pelo Digisac e automaticamente salvar no celular também?"
+[20:14] O comentário de Thauana Althaus é exibido na tela.
+[20:47] Fabiana responde sobre salvar contatos automaticamente no celular.
+[21:32] Fabiana responde sobre a visibilidade da mensagem editada.
+[22:08] Fabiana responde ao comentário sobre o filtro de comentários.
+[22:46] Fabiana explica o funcionamento dos comentários internos, com um balão de comentário que permite adicionar arquivos.
+[23:09] Um balão amarelo com a imagem do logo "AUXILIUM by 1sac" aparece no chat.
+[23:36] Fabiana responde sobre a integração com o GClick.
+[23:54] Fabiana sugere um tema para o próximo webinar: "integrações com RD".
+[24:08] Fabiana responde à pergunta sobre robôs.
+[24:22] Fabiana explica sobre a conexão oficial do WhatsApp.
+[25:34] Fabiana conclui a apresentação das novidades.
+[25:39] Fabiana convida os participantes a agendar um treinamento caso tenham dúvidas.
+[26:19] Fabiana encerra a live, agradecendo a participação de todos.

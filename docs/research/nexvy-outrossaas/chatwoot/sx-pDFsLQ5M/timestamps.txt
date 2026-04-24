@@ -1,0 +1,55 @@
+[00:00] Visão geral do Chatwoot, mostrando a interface de conversas e a área de informações da conversa.
+[00:21] Transição de tela. Texto digitado: "Qual sistema ideal para minha empresa?"
+[00:24] Animação do logo "FhOnline Sistemas".
+[00:41] A tela de conversas retorna, agora com uma conversa ativa.
+[00:48] Uma janela do WhatsApp aparece no lado esquerdo da tela, mostrando a conversa.
+[00:51] O usuário digita "ola tudo bem" no WhatsApp e a mensagem aparece no Chatwoot.
+[00:52] O usuário digita "bom dia" no WhatsApp e a mensagem aparece no Chatwoot.
+[00:53] O usuário digita "como vai" no WhatsApp e a mensagem aparece no Chatwoot.
+[00:58] O usuário clica em "Atribuir a mim" na seção "Agente atribuído".
+[01:00] O usuário seleciona "Suporte" como agente atribuído.
+[01:03] O usuário clica na opção "Equipe Atribuída" e seleciona "Suporte".
+[01:06] O usuário clica em "Adicionar marcador" e digita "visitante" para selecionar o marcador.
+[01:09] O usuário clica em "Resolver" na parte superior da tela.
+[01:10] O usuário clica novamente em "Resolver" e seleciona "Marcar como pendente".
+[01:10] O usuário clica em "Suspender as" e seleciona "Próxima resposta".
+[01:11] O usuário clica em "Suspender as" e seleciona "Amanhã".
+[01:11] O usuário clica em "Suspender as" e seleciona "Próxima semana".
+[01:13] O usuário clica em "Mensagem Privada" na área de texto.
+[01:16] O usuário digita uma mensagem privada: "temos que resolver esta questão".
+[01:21] O usuário menciona "@Suporte" e digita "vamos ver".
+[01:26] O usuário clica na aba "Base de conhecimento".
+[01:29] O usuário digita "ncm" na barra de pesquisa da base de conhecimento.
+[01:31] O usuário clica no artigo "Rejeição 778: Informado NCM inexistente".
+[01:34] O usuário clica em "Caixas de Entrada" no menu lateral.
+[01:36] A tela "Caixas de Entrada" é exibida, mostrando as opções de canais para integração.
+[01:53] O usuário clica em "Marcadores" no menu lateral.
+[01:54] A tela "Marcadores" é exibida, mostrando marcadores como "visitante", "proposta", "oportunidade", "qualificação" e "negociação".
+[02:00] O usuário clica em "Contatos" no menu lateral.
+[02:00] A tela "Contato" é exibida, listando os contatos "Flávio Oliveira" e "WhatsApp".
+[02:02] O usuário clica em "Configurações da Conta" no menu lateral.
+[02:03] A tela "Configurações da Conta" é exibida.
+[02:04] O usuário clica em "Agentes" no menu lateral.
+[02:05] A tela "Agentes" é exibida.
+[02:06] O usuário clica em "Caixas de Entrada" no menu lateral.
+[02:06] A tela "Caixas de Entrada" é exibida.
+[02:07] O usuário clica em "Marcadores" no menu lateral.
+[02:07] A tela "Marcadores" é exibida.
+[02:08] O usuário clica em "Atributos Personalizados" no menu lateral.
+[02:09] A tela "Atributos Personalizados" é exibida.
+[02:11] O usuário clica em "Visão geral" no menu lateral.
+[02:12] A tela "Visão geral" é exibida, mostrando as estatísticas de conversas.
+[02:13] O usuário clica em "Conversas" no menu lateral, dentro da seção "Visão geral".
+[02:14] A tela "Conversas" é exibida, mostrando o resumo das conversas.
+[02:15] O usuário clica em "CSAT" no menu lateral, dentro da seção "Visão geral".
+[02:16] A tela "Relatórios CSAT" é exibida.
+[02:16] O usuário clica em "Agentes" no menu lateral, dentro da seção "Visão geral".
+[02:17] A tela "Visão Geral de Agentes" é exibida.
+[02:18] O usuário clica em "Marcadores" no menu lateral, dentro da seção "Visão geral".
+[02:18] A tela "Visão Geral dos Marcadores" é exibida.
+[02:19] O usuário clica em "Caixa de Entrada" no menu lateral, dentro da seção "Visão geral".
+[02:20] A tela "Visualizar Caixa de Entrada" é exibida.
+[02:20] O usuário clica em "Times" no menu lateral, dentro da seção "Visão geral".
+[02:21] A tela "Resumo da Equipe" é exibida.
+[02:28] Transição para a página inicial do site Finanços Web, mostrando informações sobre o WhatsApp multicanal.
+[02:32] Um chatbox de boas-vindas aparece no canto inferior direito da tela.

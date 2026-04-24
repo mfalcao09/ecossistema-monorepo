@@ -1,0 +1,45 @@
+[00:05] Gerenciamento de assistentes I.A.
+[00:10] O Zaapy 4.0 está na versão 1.0.79.
+[00:15] Demonstrando os assistentes de I.A. e a função de departamentos.
+[00:19] Contadores para controle das informações.
+[00:23] Contador de total de assistentes.
+[00:27] Contador de total de assistentes contatos.
+[00:30] Contador de total de assistentes grupo.
+[00:39] Contador de total de assistentes em uso.
+[00:43] Nome do assistente, código, situação.
+[00:47] Tipo de assistente.
+[00:50] Opções "envia áudio" e "interpreta imagem".
+[00:55] Ações: Editar e Deletar Assistente.
+[00:58] Opções para mostrar entradas: 10, 25, 50, 100.
+[01:03] Campo de busca.
+[01:05] Botão "NOVO ASSISTENTE" para adicionar um novo assistente.
+[01:15] Ações: Editar e Deletar Assistente.
+[01:21] Configurações de Parametrização do Assistente.
+[01:22] Campo para mudar o nome do assistente.
+[01:25] Selecionar a versão do GPT (GPT-4 Turbo, GPT-4 8k, GPT-4 mini).
+[01:30] Selecionar o tipo de assistente (Contato ou Grupo).
+[01:34] Habilitar ou desabilitar a opção "interpreta imagens".
+[01:46] Habilitar ou desabilitar a opção "envia voz".
+[02:10] Selecionar a situação do assistente (ativo ou inativo).
+[02:13] Vincular um departamento específico ou deixar a I.A. decidir o departamento.
+[02:26] Gerenciamento de Departamentos.
+[02:29] Contador de total de departamentos.
+[02:31] Contador de total de atendimentos.
+[02:33] Contador de total de usuários vinculados.
+[02:35] Nome do departamento, código, descrição e cor de etiqueta.
+[02:40] A descrição do departamento é a chave para a I.A. decidir para qual departamento transferir o atendimento.
+[02:50] Ações: Editar e Deletar Departamento.
+[02:53] Detalhes do departamento: Nome, cor de etiqueta e descrição.
+[03:32] Adicionar Departamento: Nome, cor de etiqueta, descrição.
+[03:43] Usar Carteira: Habilitar ou desabilitar o uso de carteira.
+[03:47] Usar Distribuição: Habilitar ou desabilitar a distribuição e escolher o tipo (distribuir igualmente ou para quem tem menos).
+[03:54] Limite de atendimentos por atendente.
+[04:24] Instrução do Assistente: Tipos de Prompt (Texto, Site, Arquivo).
+[04:29] Prompt de texto: Campo para inserir o texto da instrução.
+[04:55] Prompt de site: Campo para inserir o link do site para a I.A. usar como prompt.
+[05:05] Prompt de arquivo: Opção para escolher um arquivo (PDF, Word, Excel) para a I.A. usar como prompt.
+[05:32] Mídias para envio: Adicionar mídias com descrição. A I.A. pode usar essas mídias para responder aos contatos.
+[06:36] Voz do Assistente: Configurar a voz para envio.
+[06:38] Selecionar o gênero da voz (Feminino ou Masculino).
+[06:40] Selecionar o modelo da voz (Nova, Onyx, Fable, etc.).
+[06:51] Ajustar o tom da voz (velocidade/grave).

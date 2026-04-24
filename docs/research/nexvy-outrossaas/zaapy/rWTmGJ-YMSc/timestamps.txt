@@ -1,0 +1,6 @@
+[00:05] A tela de conexões é exibida, mostrando contadores para total de conexões, total de atendimentos e total de conexões desconectadas.
+[00:32] Detalhes da conexão, incluindo cor, nome, tipo de conexão, identificador, se recebe mensagens e status, são apresentados.
+[00:54] O menu de ações é aberto, revelando opções como "Deletar QR Code", "Deletar Conexão" e "Editar Conexão".
+[01:09] O modal "Editar Conexão" é aberto, permitindo alterar o nome e a cor da conexão.
+[01:19] A cor da conexão é alterada com sucesso.
+[01:28] O modal "Comprar Conexão" é exibido, com campos para nome da conexão, tipo de conexão (WhatsApp QR Code é a única opção) e uma checkbox para "Receber MSG".

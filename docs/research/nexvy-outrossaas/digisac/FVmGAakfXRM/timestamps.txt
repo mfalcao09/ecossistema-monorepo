@@ -1,0 +1,56 @@
+[00:00] Mulher sorrindo na tela inicial da live de apresentação
+[02:40] Slide de apresentação com o título: "Avaliação de Atendimento: Tudo o que Você Precisa Saber"
+[02:43] Slide com o título "Pesquisa de Satisfação: importância e benefícios para a sua empresa"
+[03:53] Slide com o título: "Net Promoter Score (NPS)", mostrando uma escala de pontuação de 1 a 10
+[05:40] Slide com o título: "Customer Satisfaction Score (CSAT)", mostrando uma escala de satisfação com emojis
+[07:07] Slide com o título: "Estatísticas de Avaliações NPS e CSAT", mostrando um gráfico de avaliação com uma escala de emojis
+[07:56] Tela inicial da Digisac (plataforma de atendimento)
+[08:23] Menu superior com várias opções, incluindo "Avaliações"
+[08:39] Tela de "Avaliações" com as opções "Avaliação CSAT" e "Avaliação NPS"
+[09:07] Janela "Criando Avaliação" com campos para nome, duração e tipo
+[11:02] Página de script com um roteiro de atendimento
+[11:35] Mensagem de pergunta sobre como você avalia o atendimento recebido, incluindo opções de 1 a 5 com emojis
+[13:10] Campo "Quantidade de tentativas de resposta inválida", configurado para 3 tentativas
+[14:00] Campo "Mensagem enviada após resposta válida"
+[14:21] Campo "Mensagem de resposta inválida"
+[15:15] Campo "Mensagem enviada para solicitar o motivo da avaliação"
+[15:39] Confirmação da avaliação Digisac CSAT criada na plataforma
+[16:13] Chat da Digisac com um atendimento em andamento
+[16:34] Janela "Fechar chamado" no chat da Digisac
+[17:05] Chat da Digisac com um atendimento finalizado e a avaliação sendo enviada
+[19:02] Menu superior da Digisac, acessando a opção "Robôs"
+[19:06] Lista de robôs de atendimento
+[19:50] Menu superior da Digisac, acessando a opção "Conexões"
+[19:57] Lista de conexões do WhatsApp
+[20:07] Edição de conexão do WhatsApp, mostrando a opção para selecionar o bot
+[20:46] Tela de edição do robô, mostrando o fluxo de atendimento
+[20:49] Lista de robôs no modo "Construtor legado"
+[21:05] Edição de um robô no modo "Construtor legado"
+[21:20] Contexto persistente do robô
+[21:26] Gatilho "Após fechamento de chamado"
+[21:52] Campo para adicionar o gatilho "Após fechamento de chamado"
+[22:04] Gatilho "Após fechamento de chamado", mostrando as ações de regra
+[22:20] Ação de enviar mensagem no robô
+[22:36] Ação de "Envio de avaliação"
+[22:42] Seleção da avaliação "Avaliação Digisac"
+[22:50] Ação de redefinir contexto
+[23:00] Ação de redefinir contexto salva
+[23:05] Ação de redefinir contexto salva (revisão)
+[23:39] Criação de novo robô para incluir a avaliação
+[23:48] Edição do robô "Webinar"
+[24:02] Contexto persistente do robô
+[24:14] Regra de avaliação
+[24:20] Condição vazia
+[24:29] Seleção da avaliação Digisac para o robô
+[24:37] Salvando as informações do robô
+[24:50] Avaliações criadas
+[25:02] Chat da Digisac com um teste de avaliação
+[25:35] Avaliação enviada ao cliente no chat
+[25:58] Robô respondendo a um "oi" do cliente
+[26:15] Avaliação enviada ao cliente após o fechamento do chamado
+[28:23] Recursos incluídos no plano base da Digisac e recursos adicionais
+[31:14] Slide "Estatísticas de Avaliações NPS e CSAT"
+[31:45] Estatísticas de avaliação NPS
+[31:52] Estatísticas de avaliação CSAT
+[32:02] Estatísticas de avaliação NPS (revisão)
+[32:42] Mulher agradecendo na tela final

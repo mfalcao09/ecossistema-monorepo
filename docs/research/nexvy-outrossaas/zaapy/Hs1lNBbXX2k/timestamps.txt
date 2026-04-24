@@ -1,0 +1,44 @@
+[00:00] Visão geral do painel do assistente de IA, mostrando contadores de assistentes, contatos e grupos, e um campo de busca para filtrar assistentes.
+[00:26] Criação de um novo assistente, mostrando o campo para inserir o nome.
+[00:38] Assistente "Assistente 1" criado com sucesso, exibindo seu status (ativo), tipo (contato) e opções de envio de áudio e interpretação de imagem.
+[00:59] Navegação para as configurações de integração para configurar o token do ChatGPT.
+[01:06] Tela de configurações de integração, mostrando o campo para o Token ChatGPT, DeepSeek e ElevenLabs.
+[01:34] Retorno à tela de gerenciamento de assistentes, mostrando o assistente criado.
+[01:42] Edição do assistente "Assistente 1", mostrando as opções de personalização.
+[01:46] Opções de modelo de IA (GPT-4 Turbo, GPT-4o, GPT-4o Mini) para o assistente.
+[01:57] Configurações de situação (ativo/inativo) e envio de voz.
+[02:13] Configuração para o assistente interpretar imagens.
+[02:25] Opção "IA decide o departamento", permitindo que a IA direcione o atendimento.
+[03:03] Desativação da opção "IA decide o departamento", revelando o campo "Departamento vinculado".
+[03:30] Ativação da opção "IA decide o departamento".
+[03:34] Navegação para a seção de Departamentos.
+[03:48] Criação de um novo departamento ("Financeiro"), incluindo a cor da etiqueta e a descrição para a IA.
+[04:57] Departamento "Financeiro" criado com sua descrição visível.
+[05:05] Edição do departamento "Financeiro", mostrando opções de carteira e distribuição.
+[05:59] Tela de Horários do Departamento, para configurar os horários de atendimento e mensagens automáticas.
+[06:12] Opções de direcionamento do atendimento (enviar mensagem e finalizar, ou transferir para outro departamento).
+[07:23] Retorno à seção de Departamentos.
+[07:29] Retorno à edição do assistente, na seção "Instrução".
+[07:42] Tela de instrução do assistente, onde se define o prompt principal e variáveis disponíveis.
+[09:03] Retorno às configurações do assistente, seção "Parametrização".
+[09:41] Retorno à tela de gerenciamento de assistentes.
+[09:43] Retorno às configurações do assistente, seção "Instrução".
+[09:55] Seção "Fontes de Conhecimento", para upload de arquivos, URLs e planilhas do Google Sheets para o assistente.
+[10:14] Seção "Mídias para Envio", para o assistente enviar arquivos multimídia com descrições.
+[10:55] Seção "Voz do Assistente", para configurar o tipo de voz (GPT ou ElevenLabs) e o tom.
+[11:00] Opções de vozes para o assistente (feminino/masculino e modelos de voz).
+[11:01] Seleção de voz ElevenLabs.
+[11:15] Opções de voz do GPT (feminino/masculino e modelos de voz).
+[11:24] Opções de voz ElevenLabs (feminino/masculino e modelos de voz).
+[11:34] Opção "Usar a minha voz".
+[12:28] Retorno à tela de gerenciamento de assistentes.
+[12:38] Retorno à tela de gerenciamento de assistentes, mostrando que o assistente está pronto para uso.
+[12:48] Navegação para a seção "Fluxo do Bot".
+[12:52] Edição do fluxo do bot, exibindo um fluxograma de exemplo.
+[13:06] Adicionando o card "Assistente GPT" ao fluxograma.
+[13:17] Conectando o card "Mensagem Inicial" ao card "Assistente GPT".
+[13:24] Vinculação do assistente "Assistente 1" ao card "Assistente GPT".
+[13:38] Retorno à tela de configuração do fluxo do bot.
+[13:53] Retorno à tela de gerenciamento de assistentes.
+[13:57] Retorno à seção de instrução do assistente.
+[14:00] Conclusão da demonstração e menção da próxima aula sobre configuração de chatbots convencionais.

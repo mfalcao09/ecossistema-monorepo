@@ -1,0 +1,17 @@
+[00:00] Tela de Usuários com tabela de usuários e opções para adicionar, editar e excluir usuários.
+[00:05] Clicando no botão "Adicionar Usuário" para abrir o formulário de adição.
+[00:06] Formulário "Adicionar Usuário" é exibido com campos para Nome, Senha, Email, Perfil, Filas, Conexão Padrão, Dias da Semana, Início de trabalho e Fim de trabalho.
+[00:07] Inserindo o nome "Bruno" no campo "Nome".
+[00:10] Inserindo uma senha no campo "Senha".
+[00:12] Inserindo o e-mail "bruno@waboot.com.br" no campo "Email".
+[00:18] Selecionando o perfil "User" no campo "Perfil".
+[00:22] Clicando no menu suspenso "Filas" para selecionar as filas de atendimento.
+[00:27] Selecionando "RH" e "Comercial" nas opções de "Filas".
+[00:30] Clicando no menu suspenso "Conexão Padrão".
+[00:32] Selecionando "CHP TIM" no campo "Conexão Padrão".
+[00:34] Clicando no menu suspenso "Dias da Semana".
+[00:37] Selecionando os dias da semana "Seg, Ter, Qua, Qui, Sex" para o horário de trabalho.
+[00:41] Inserindo "09:00" no campo "Início de trabalho".
+[00:46] Inserindo "18:00" no campo "Fim de trabalho".
+[00:49] Clicando no botão "Adicionar" para finalizar a adição do usuário.
+[00:51] Tela final com o logo da WABOOT e o texto "Plataforma Multi Atendimento para WhatsApp".

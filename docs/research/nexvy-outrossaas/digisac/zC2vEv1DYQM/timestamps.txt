@@ -1,0 +1,170 @@
+[00:00] Logotipo DigiSac Plataforma Multicanal
+[00:05] Recursos da plataforma, Todos canais juntos, Faça transferências, Marcadores Tags, Troca de canais, Envio em massa e Recebimento em massa
+[00:12] Tela de login da plataforma
+[01:50] Tela inicial da plataforma, mostrando a interface do chat
+[02:08] Acessa o menu "Mais opções"
+[02:16] Clica em "Departamentos"
+[02:20] Página "Departamentos", mostra a lista de departamentos como Atendimento, Comercial, Financeiro, Suporte
+[02:37] Clica nos três pontos ao lado do departamento "Atendimento"
+[02:39] Menu de ações para o departamento, mostrando opções como Visualizar, Editar, Arquivar
+[02:40] Clica em "Editar", abre um pop-up para editar o nome do departamento
+[02:51] Clica em "Novo Departamento"
+[02:52] Abre um pop-up para criar um novo departamento, solicitando o nome
+[03:39] Retorna ao menu "Mais opções"
+[03:42] Clica em "Cargos"
+[03:45] Página "Cargos", mostra "Administrador" e "Operador"
+[04:10] Clica nos três pontos ao lado de "Operador"
+[04:12] Menu de ações para o cargo, mostrando opções como Visualizar, Editar, Excluir
+[04:13] Clica em "Editar", abre um pop-up com nome e permissões do cargo
+[05:33] Clica em "Novo Cargo"
+[05:34] Abre um pop-up para criar um novo cargo, solicitando nome e permissões
+[05:43] Retorna ao menu "Mais opções"
+[05:51] Clica em "Usuários"
+[05:53] Página "Usuários", mostrando uma lista de usuários existentes
+[06:05] Clica em "Novo usuário"
+[06:07] Abre um pop-up para criar um novo usuário, solicitando nome, e-mail, senha, cargos e departamentos
+[06:35] Seleciona o cargo "Operador" no menu dropdown
+[06:40] Seleciona o departamento "Atendimento" no menu dropdown
+[06:56] Clica em "Salvar"
+[07:01] A lista de usuários é atualizada com o novo usuário
+[07:38] Clica em "Conexões" (ícone de celular)
+[07:40] Página "Conexões", mostrando uma conexão de WhatsApp ativa
+[08:06] Clica em "Nova conexão"
+[08:08] Abre um pop-up para criar uma nova conexão, solicitando tipo, nome e departamento padrão
+[08:14] Um aviso de atenção é exibido informando que o limite do plano foi atingido
+[08:21] Retorna à página "Conexões"
+[08:33] Clica no ícone de três pontos para o WhatsApp conectado
+[08:36] Menu de ações para a conexão, mostrando opções como Visualizar, Histórico de eventos, Editar, Excluir, Reiniciar, Desligar, Logout
+[08:40] Clica em "Editar", abre um pop-up para editar a conexão, mostrando nome, departamento padrão e bot
+[08:55] A tela rola para baixo no pop-up "Editando Conexão", mostrando opções de confirmação de leitura, exibir digitando, e abrir chamado para mensagens de grupo
+[09:00] A tela volta a rolar para cima, mostrando opções de Nome e Departamento padrão para chamados
+[10:09] Visualiza a aba "Fila" no chat, mostrando chamados aguardando
+[10:13] Visualiza a aba "Contatos" no chat, mostrando a agenda de contatos
+[10:29] Clica em "Cadastrar Contato"
+[10:32] Abre um pop-up para criar um novo contato, solicitando nome, pessoa, conexão, número e tags
+[10:43] Clica em "Salvar", o pop-up fecha
+[10:51] Retorna à aba "Fila", mostrando dois chamados
+[11:00] Uma nova mensagem chega na fila
+[11:18] A mensagem de "teste" de Caio Vinícius é clicada na fila
+[11:19] A conversa com Caio Vinícius é exibida, mostrando as mensagens trocadas
+[11:54] Volta para a aba "Fila"
+[11:58] Clica na conversa de Sabrina Oliveira
+[12:00] A conversa com Sabrina Oliveira é exibida. Clica no ícone de transferência de chamada
+[12:01] Abre o pop-up "Transferir Chamado"
+[12:03] Clica no ícone de "finalizar chamado" (telefone vermelho riscado)
+[12:05] Abre o pop-up "Fechar chamado"
+[12:15] Uma nova mensagem aparece na fila de Sabrina Oliveira
+[12:24] Clica na conversa de Sabrina Oliveira
+[12:25] A conversa com Sabrina Oliveira é exibida, mostrando mensagens
+[12:27] Sabrina envia uma mensagem e a conversa move da fila para o chat ativo
+[12:59] A conversa com Sabrina Oliveira é exibida. Clica no ícone de emojis
+[13:06] Clica no ícone de respostas rápidas (raio)
+[13:17] Acessa o menu "Mais opções"
+[13:20] Clica em "Respostas Rápidas"
+[13:21] Página "Respostas Rápidas", mostrando uma lista de respostas
+[13:23] Clica em "Nova Resposta"
+[13:24] Abre um pop-up para criar uma nova resposta rápida, solicitando texto e departamentos
+[13:38] Clica em "Salvar", a resposta é salva
+[13:40] Retorna à conversa, e a resposta rápida está disponível para uso
+[13:52] Clica no ícone de comentários (balãozinho)
+[13:57] A área de texto muda para "Digite um comentário"
+[14:12] Clica no ícone de comentários novamente para desativar
+[14:23] Clica no ícone de microfone para gravar áudio
+[14:26] Grava e envia uma mensagem de áudio
+[14:32] Clica nos três pontos no canto superior direito da conversa para abrir o menu de informações do contato
+[14:34] As informações do contato são exibidas, incluindo nome, telefone, pessoa, silenciar e marcar como não lida
+[14:40] Rola para baixo no menu de informações do contato, mostrando tags, observações, protocolo de atendimento e departamento padrão para chamados
+[14:46] Ativa a opção "Silenciar" e "Marcar como não lida"
+[14:55] Retorna ao menu "Mais opções"
+[15:06] Clica em "Tags"
+[15:08] Página "Tags", mostrando uma lista de tags
+[15:10] Clica em "Nova Tag"
+[15:11] Abre um pop-up para criar uma nova tag, solicitando o nome
+[15:17] Retorna à conversa com Sabrina Oliveira. Clica nos três pontos no canto superior direito do menu lateral
+[15:19] Tags de "Venda realizada" e "Lead" são selecionadas
+[15:26] Retorna à aba "Contatos"
+[15:31] Clica no ícone de filtros (três linhas horizontais)
+[15:33] O painel de filtros é exibido, mostrando opções para filtrar por tags
+[15:36] Clica em "Venda realizada" no filtro de tags
+[15:37] O filtro é aplicado e a lista de contatos é atualizada
+[15:40] Clica em "Limpar" no painel de filtros
+[15:41] O filtro é removido
+[16:15] Clica no ícone de clipe para anexar arquivo
+[16:21] Clica no ícone de telefone vermelho para finalizar o chamado
+[16:26] A conversa com Caio Vinícius é clicada para uso como teste
+[16:30] Clica no ícone de telefone vermelho para finalizar o chamado
+[16:33] Abre o pop-up "Fechar chamado", solicitando o assunto do chamado e o resumo do atendimento
+[16:47] Clica em "Fechar", o pop-up se fecha e o chamado é finalizado
+[16:53] Clica em "Contatos" e a conversa com Caio Vinícius é exibida
+[16:58] Retorna à aba "Fila"
+[17:09] Acessa o menu "Mais opções"
+[17:11] Clica em "Assunto de chamado"
+[17:15] Página "Assunto de chamado", mostrando uma lista de assuntos como "Dúvidas" e "Treinamento agendado"
+[17:31] Clica no ícone de setas (transferir chamado)
+[17:35] Abre o pop-up "Transferir chamado", solicitando para qual departamento e atendente
+[17:40] Seleciona "Atendimento" e "Sabrina" nos campos de departamento e atendente
+[18:07] Clica no ícone de relógio (agendar mensagem)
+[18:10] Abre o pop-up "Criando Agendamento", solicitando pessoa, contato, departamento, atendente, ações, data e hora
+[19:35] Clica no ícone de relógio para ver o histórico de chamadas
+[19:39] Página "Histórico de chamados", mostrando um registro de chamados anteriores
+[19:44] Clica em "Exibir Filtros"
+[19:45] O painel de filtros para o histórico de chamados é exibido
+[20:00] Clica no número de protocolo de um chamado
+[20:03] Um pop-up é exibido com as mensagens do chamado, com opções para exportar em PDF ou TXT
+[20:13] Retorna à conversa com Sabrina Oliveira
+[20:18] Clica na seta para baixo ao lado de uma mensagem enviada por Sabrina
+[20:20] Menu de opções para a mensagem: Responder, Encaminhar mensagem, Apagar, Informações
+[20:23] Clica em "Apagar", abre um pop-up de confirmação "Você tem certeza que deseja apagar esta mensagem?"
+[20:34] A mensagem é apagada
+[20:53] Clica no ícone de visão geral (gráfico de linhas)
+[20:56] Menu de opções da visão geral: Agora, Histórico de chamados, Estatísticas de atendimentos, Estatísticas de avaliações, Auditoria, Controle de ausência
+[21:00] Clica em "Agora"
+[21:04] Página "Agora", mostrando um resumo do status dos atendimentos em tempo real, com a aba "Em atendimento" selecionada
+[21:18] Clica em "Filas de atendimento"
+[21:20] Aba "Filas de atendimento" selecionada, mostrando quem aguarda em cada departamento
+[21:26] Clica em "Em atendimento"
+[21:30] Clica em "Resumo"
+[21:32] Aba "Resumo" selecionada, mostrando o resumo das duas filas de atendimento
+[22:20] Clica no ícone de visão geral novamente
+[22:22] Clica em "Histórico de chamados"
+[22:24] Página "Histórico de chamados", mostrando um registro de chamados, similar ao histórico do chat, mas com todos os chamados
+[22:33] Clica em "Exibir Filtros"
+[22:34] O painel de filtros para o histórico de chamados é exibido
+[22:42] Clica no número de protocolo de um chamado
+[22:45] Um pop-up é exibido com as mensagens do chamado, com opções para exportar em PDF ou TXT
+[22:49] Clica em "Exportar" para exportar o histórico para Excel
+[23:25] As ações em massa são selecionadas, mostrando opções como "Fechar chamados" e "Transferir chamado"
+[23:32] Clica em "Fechar chamados"
+[23:33] Um aviso de atenção é exibido informando sobre o risco de banimento no WhatsApp ao realizar fechamento em massa
+[23:36] Clica em "Transferir chamado"
+[23:38] Abre o pop-up "Transferir chamado"
+[23:45] Retorna ao menu "Mais opções"
+[24:21] Clica em "Estatísticas de atendimentos"
+[24:26] Página "Estatísticas de atendimento", mostrando gráficos e dados sobre o desempenho dos atendimentos, com a aba "Geral" selecionada
+[24:46] Clica em "Exibir Filtros"
+[24:48] O painel de filtros para estatísticas de atendimento é exibido
+[24:59] Clica em "Exportar" para exportar as estatísticas para Excel
+[25:07] Clica em "Por período"
+[25:09] Aba "Por período" selecionada, mostrando um gráfico de tempo médio de atendimento ao longo do tempo
+[25:19] Clica em "Por assunto"
+[25:21] Aba "Por assunto" selecionada, mostrando o tempo médio de atendimento por tipo de assunto
+[25:27] Clica em "Por conexão"
+[25:28] Aba "Por conexão" selecionada, mostrando as estatísticas por conexão (WhatsApp)
+[25:31] Clica em "Estatísticas de avaliações"
+[25:34] Página "Estatísticas de avaliações", mostrando a distribuição de notas de avaliação dos clientes
+[25:54] Clica em "Exibir Filtros"
+[25:56] O painel de filtros para estatísticas de avaliações é exibido
+[26:01] Clica em "Exportar TXT" e "Exportar CSV" para exportar as avaliações
+[26:09] Clica em "Auditoria"
+[26:12] Página "Auditoria", mostrando um registro de atividades da plataforma (usuário, módulo, evento, data)
+[26:27] Clica em "Controle de ausência"
+[26:30] Página "Controle de ausência", mostrando um registro de ausências de usuários
+[27:06] Clica no ícone de ajuda (ponto de interrogação)
+[27:09] Menu de opções da ajuda: Tutoriais, Manual de acesso
+[27:20] A tela mostra a mulher do atendimento em uma janela menor
+[27:34] O menu de ajuda é acessado novamente, mostrando o contato de suporte
+[27:50] Clica no ícone de idioma (bandeira do Brasil), e "Inglês" e "Espanhol" são exibidos
+[27:53] Clica no ícone de rotacionar menu
+[27:56] O menu lateral é exibido verticalmente
+[27:58] O menu é rotacionado de volta para a posição horizontal
+[28:05] Logotipo DigiSac Plataforma Multicanal

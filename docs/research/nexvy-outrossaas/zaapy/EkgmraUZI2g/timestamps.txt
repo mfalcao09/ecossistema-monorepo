@@ -1,0 +1,24 @@
+[00:00] Logotipo Zaapy em tela preta com fundo tecnológico.
+[00:05] Visão Geral do Sistema (Dashboard) com métricas e atividades importantes.
+[00:30] Cartão de "Total de Contatos" com o número 1.
+[00:36] Cartão de "Mensagens Recebidas" com o número 13.
+[00:38] Cartão de "Mensagens Enviadas" com o número 20.
+[00:40] Cartão de "Tempo médio de atendimento" mostrando "0d 00:00:00".
+[00:45] Cartão de "Na fila" com o número 0.
+[00:50] Cartão de "Em atendimento" com o número 0.
+[00:57] Cartão de "No fluxo" com o número 0.
+[01:01] Cartão de "Com IA" com o número 0 (inteligência artificial).
+[01:12] Cartão de "Finalizados na semana" com o número 0.
+[01:15] Cartão de "Finalizados no mês" com o número 0.
+[01:19] Gráfico de "Atendimentos por Dia".
+[01:23] Menu suspenso para filtrar o mês dos atendimentos por dia.
+[01:31] Cartão de "Conexões de Atendimento" com o número 5 e percentual de 100%.
+[01:37] Gráfico de "Atendimentos por Atendente", mostrando "Suporte" com 1 atendimento.
+[01:53] Gráfico de "Atendimentos por Departamento", mostrando "Departamentos de todos" em azul.
+[01:59] Gráfico de "Atendimentos por Sentimento", mostrando "Neutro" (temperatura) em rosa.
+[02:41] Animação de transição para a tela de encerramento do vídeo.
+[02:42] Mensagem "Se você busca um SaaS MultiAtendimento White Label, Achou!!"
+[02:46] Mensagem "Nos preocupamos com todos os detalhes nesta nova versão!"
+[02:50] Mensagem "Mais recursos, Inteligência Artificial e mais desempenho."
+[02:53] Mensagem "Se você é ou foi parceiro, solicite ativação de seu painel!"
+[02:57] Mensagem "Faça isso antes do lançamento oficial e saia na frente!" com o site www.zaapy.com.br.

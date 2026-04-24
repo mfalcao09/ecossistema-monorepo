@@ -1,0 +1,18 @@
+[00:00] A mulher abre o laptop para mostrar as funcionalidades.
+[00:01] A mulher está mostrando como criar um novo usuário no sistema.
+[00:02] A mulher está explicando sobre a criação de novos usuários e a importância de criar os setores primeiro.
+[00:08] A mulher está explicando sobre a criação de novos usuários e a importância de criar os setores primeiro.
+[00:13] A mulher está explicando sobre a criação de novos usuários e a importância de criar os setores primeiro.
+[00:15] A mulher está explicando sobre a criação de novos usuários e a importância de criar os setores primeiro.
+[00:17] A mulher está explicando sobre a criação de novos usuários e a importância de criar os setores primeiro.
+[00:19] A mulher está explicando sobre a criação de novos usuários e a importância de criar os setores primeiro.
+[00:20] Uma janela de criação de usuário aparece no centro da tela.
+[00:22] A mulher está inserindo o nome do novo usuário.
+[00:27] A mulher está inserindo o nome do novo usuário.
+[00:30] A mulher está inserindo o e-mail do novo usuário.
+[00:35] A mulher está inserindo o cargo do novo usuário.
+[00:40] A mulher está inserindo o departamento do novo usuário.
+[00:45] A mulher está inserindo a senha do novo usuário.
+[00:51] A mulher está inserindo a senha do novo usuário.
+[00:52] A mulher está clicando em "Salvar".
+[00:55] A mulher está explicando que os dados de acesso devem ser passados para o novo usuário.

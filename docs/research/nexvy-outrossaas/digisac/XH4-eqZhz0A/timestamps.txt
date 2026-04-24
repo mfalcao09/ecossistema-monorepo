@@ -1,0 +1,363 @@
+[00:00] Digisac Multichannel Platform logo.
+[00:08] Digisac logo appears.
+[00:12] Presentation of Digisac features.
+[00:19] Woman in headphones introduces herself as Lais Campos from the onboarding team at Digisac.
+[00:20] She explains that the live session is about auxiliary tools in the Digisac platform.
+[00:21] She mentions an initial video about setup and configuration for the platform and encourages viewers to watch it.
+[00:22] Lais reiterates that today's training will focus on auxiliary tools that aid in the customer service process.
+[00:23] She mentions that some tools might be useful for some businesses and not for others.
+[00:24] Lais starts sharing her screen for the demonstration.
+[00:25] The platform shows "Digisac" at the top left and a navigation bar with "Chats," "Fila" (Queue), and "Contatos" (Contacts).
+[00:26] The main content area says, "Selecione um contato para iniciar uma conversa" (Select a contact to start a conversation).
+[00:27] Lais explains how to access the Digisac platform using a provided access link, email, and password.
+[00:28] She notes that Digisac is a web-based platform, so no application installation is needed.
+[00:29] Lais points to the "Ajuda" (Help) icon (a question mark) in the top navigation bar.
+[00:30] She clicks on the "Ajuda" icon, which reveals "Tutoriais" (Tutorials) and "Manual de acesso" (Access Manual) options.
+[00:31] Lais clicks on "Tutoriais," which opens a new section on the right side of the screen with categories like "Apresentação," "Configuração," "Empresa," "Chat," "Robô," "Funcionalidades," "Conexão," and "Relatórios."
+[00:32] She mentions that these videos are short and explain the configurations.
+[00:33] Lais then clicks on "Manual de acesso," and explains that it directs to a new tab with a searchable summary for finding specific information.
+[00:34] She highlights the language selection option (Brazilian flag icon), allowing users to switch between Portuguese, English, and Spanish.
+[00:35] Lais clarifies that the language setting is individual per user.
+[00:36] She points to the "Rotacionar Menu" (Rotate Menu) icon (a circular arrow), which allows changing the navigation panel's position.
+[00:37] Lais clicks "Rotacionar Menu," and the navigation panel moves from the top to the left side of the screen.
+[00:38] She shows that clicking "Navegação vertical" (Vertical Navigation) locks the menu on the left side, and clicking "Rotacionar Menu" again moves it back to the top.
+[00:39] Lais summarizes these as curiosities and new features of the platform.
+[00:40] She then begins explaining specific auxiliary tools, starting with the "Mais opções" (More options) icon (a grid of nine dots).
+[00:41] Lais clicks "Mais opções," revealing a dropdown menu with options like "Usuários," "Cargos," "Robôs," "Departamentos," "Assunto de chamado," "Empresa," "Feriados," "Respostas rápidas," "Avaliações," "Integrações," "Templates," "Distribuição de Chamados," "Agendamentos," "Campos personalizados," and "Créditos."
+[00:42] She chooses "Empresa" (Company) from the dropdown.
+[00:43] The screen displays "Empresa" settings, including "Nome da empresa" (Company name), "Fuso horário" (Time zone), and "HSM disponível" (Available HSM).
+[0:44] She also mentions "Serviço de Atendimento ao Cliente (SAC)" (Customer Service).
+[0:45] Lais explains that in the "Empresa" section, users can see the company's registered name, time zone, and the quantity of available HSMs (for official WhatsApp connections).
+[0:46] She then focuses on the "SAC" section, which has various toggle options.
+[0:47] Lais highlights "Restrição de IPs" (IP Restriction) and explains that enabling it restricts platform access to specific IP addresses.
+[0:48] She enables "Restrição de IPs" and a new field "IPs aceitos" (Accepted IPs) appears, where users can enter IP addresses.
+[0:49] Lais then disables "Restrição de IPs."
+[0:50] Next, she points to "SAC" (toggle switch) and explains that disabling it turns the platform into a direct WhatsApp-like chat interface, removing queue, contact, and reporting functionalities.
+[0:51] Lais demonstrates by disabling the "SAC" toggle, scrolling down, and clicking "Salvar" (Save).
+[0:52] A green notification "Alterações salvas" (Changes saved) appears.
+[0:53] She navigates back to the "Chats" screen, refreshes the page, and the "Fila" tab (Queue) disappears, consolidating all conversations under "Chats."
+[0:54] Lais explains that this mode is suitable for businesses with fewer agents that don't require extensive reporting or queue management.
+[0:55] She re-enables the "SAC" toggle in "Empresa" settings and saves the changes.
+[0:56] The "Fila" tab reappears on the "Chats" screen after refreshing.
+[0:57] Lais moves to "Nome do atendente no começo das mensagens" (Agent's name at the beginning of messages).
+[0:58] She explains that enabling this option makes the agent's name visible at the start of each message sent from the platform to the client.
+[0:59] Lais then discusses "Desabilitar transferência automática para departamento/atendente padrão do contato" (Disable automatic transfer to default department/agent of the contact).
+[1:00] She explains that if this option is enabled, any pre-configured automatic transfer rules for specific contacts will be ignored.
+[1:01] Lais illustrates this by going to a contact's chat, clicking the three dots for options, and scrolling down to "Departamento padrão para chamados" (Default department for calls) and "Atendente padrão para chamados" (Default agent for calls).
+[1:02] She demonstrates that if these fields are filled, messages from that contact would normally be routed automatically.
+[1:03] However, if the "Desabilitar transferência automática" option is enabled, these settings are overridden.
+[1:04] Lais then describes "Exibir notificação por departamentos no aplicativo" (Display notification by departments in the application).
+[1:05] She notes that Digisac has a mobile application (available for iOS and Android) called "Digisac" which allows agents to handle chats, but it only shows the "Chats" tab, not configuration options.
+[1:06] If "Exibir notificação por departamentos no aplicativo" is enabled, agents using the mobile app will receive notifications categorized by department.
+[1:07] Next, Lais explains "Mostrar informações do suporte" (Show support information).
+[1:08] She demonstrates that when this option is enabled, hovering over the "Suporte" (Support) button on the right side of the screen reveals Digisac's contact information (WhatsApp, phone, email).
+[1:09] Lais explains that disabling this option hides the support contact information from the main platform interface.
+[1:10] She then moves to "Permitir nomes duplicados" (Allow duplicate names).
+[1:11] Lais explains that enabling this allows users to create departments, user roles, or other entities with the same name, which might be useful in some business structures.
+[1:12] Then, Lais explains "Notificar nova mensagem" (Notify new message), "Notificar abertura de chamados" (Notify call opening), and "Notificar transferência de chamados" (Notify call transfer).
+[1:13] These are related to platform notifications, allowing users to choose whether to receive alerts for new messages, new calls, or call transfers.
+[1:14] Lastly, Lais explains "Tornar assunto obrigatório" (Make subject mandatory).
+[1:15] She strongly recommends enabling this option for businesses that need to track and monitor their calls closely.
+[1:16] Lais explains that "assunto de chamado" (call subject) is like a title for the conversation.
+[1:17] She demonstrates how to create a call subject by going to "Mais opções" (More options), then "Assunto de chamado" (Call subject), clicking "Novo Assunto de chamado" (New Call Subject), entering a name (e.g., "Dúvidas," "Treinamento agendado"), and saving it.
+[1:18] She then shows what happens when "Tornar assunto obrigatório" is enabled.
+[1:19] Lais opens a chat, clicks "Fechar chamado" (Close call), and a pop-up appears indicating "Campo obrigatório" (Mandatory field) for the call subject.
+[1:20] She selects "Treinamento agendado" as the subject, adds a summary, and clicks "Fechar" (Close), successfully closing the call.
+[1:21] Lais explains that this ensures all calls are categorized, which is vital for reporting.
+[1:22] She then moves to "Tempo de inatividade de chamado (minutos)" (Call inactivity time (minutes)).
+[1:23] This setting, Lais explains, is related to the "Robô" (Robot) feature.
+[1:24] The "Robô" allows for automated triaging and other configurations.
+[1:25] She notes that the support team can help configure the robot at no additional cost if a script is provided.
+[1:26] The "Tempo de inatividade" setting defines how long the platform waits for interaction (from client or agent) before triggering an automated action via the robot, such as closing or transferring a call.
+[1:27] Lais next describes "Formato de número de protocolo" (Protocol number format).
+[1:28] She explains that each time a call is initiated, a new protocol number is generated, which is used to save and track conversations.
+[1:29] Lais shows the default format, which includes the year, month, day, and an incremental counter for calls (e.g., YYYYMMDD + counter).
+[1:30] Then, Lais explains "Departamento padrão para chamados" (Default department for calls) within the company settings.
+[1:31] She clarifies that this is the department automatically assigned to calls if no specific routing is defined elsewhere.
+[1:32] Lais reiterates that the actually effective default department is set within the connection's configuration.
+[1:33] She moves on to "Tabela de horário" (Schedule table).
+[1:34] Lais explains that here, users can define the operating hours for their company.
+[1:35] She demonstrates by clicking "Adicionar regra" (Add rule), selecting working days (e.g., Monday to Friday), and setting the start and end times (e.g., 8:00 to 18:00).
+[1:36] She adds another rule for Saturdays (e.g., 8:00 to 12:00).
+[1:37] Lais emphasizes that this schedule is used by the robot to determine whether to send automated messages when clients contact outside of working hours.
+[1:38] Finally, Lais mentions "Controle de ausência" (Absence control), but decides to explain it later.
+[1:39] She saves the current configurations.
+[1:40] Lais returns to the "Mais opções" (More options) menu and selects "Feriados" (Holidays).
+[1:41] She explains that the "Feriados" function, also linked to the robot, allows users to define periods of absence, holidays, or vacations.
+[1:42] Lais clicks "Novo Feriado" (New Holiday) to demonstrate.
+[1:43] A "Criando Feriado" (Creating Holiday) pop-up appears.
+[1:44] She enters "Natal" (Christmas) as the holiday name.
+[1:45] Lais selects the start date (December 25, 2023) and time (00:00).
+[1:46] The system automatically populates the end date, but Lais shows how to change it (e.g., to December 31).
+[1:47] She notes that the title of the holiday doesn't impact its functionality.
+[1:48] Lais then fills in the "Mensagem do Feriado" (Holiday Message), writing: "A empresa X está ausente neste feriado de Natal. Desejamos boas festas!" (Company X is absent during this Christmas holiday. We wish you happy holidays!).
+[1:49] She explains that clients contacting during this holiday period will receive this predefined message instead of the regular robot message.
+[1:50] Lais saves the holiday, and it appears in the list.
+[1:51] She mentions that configuring the robot to send these holiday messages requires the support team, who will do it once for all future holidays.
+[1:52] Lais demonstrates how to view, edit, or exclude a holiday using the "Ações" (Actions) menu (three dots next to the holiday entry).
+[1:53] She then navigates back to "Mais opções" and selects "Avaliações" (Ratings).
+[1:54] Lais explains that "Avaliações" allows clients to rate their service, and it's also linked to the robot.
+[1:55] She mentions that setting up an evaluation requires assistance from the support team.
+[1:56] Lais clicks "Nova Avaliação" (New Rating) to show the setup process.
+[1:57] A "Criando Avaliação" (Creating Rating) pop-up appears.
+[1:58] She fills in "Avaliação" as the name.
+[1:59] Lais sets the "Duração (Minutos)" (Duration (Minutes)) to 60, advising not to set it too short (e.g., 1 or 5 minutes) to give clients enough time to respond.
+[2:00] She explains that if a client responds within the set duration, the evaluation is counted, and a report is generated.
+[2:01] If the client responds after the duration, a new call is opened in the platform.
+[2:02] Lais specifies that the "Tipo" (Type) is "NPS."
+[2:03] She then adds a standard question in the "Pergunta" (Question) field: "Prezado cliente, essa é uma pesquisa de satisfação acionada automaticamente. Por gentileza, gostaríamos da sua opinião, de 0 a 10, como você classifica nosso atendimento? (Sendo, 0 = péssimo e 10 = excelente)." (Dear client, this is an automatically triggered satisfaction survey. Please, we would like your opinion, from 0 to 10, how do you rate our service? (Being, 0 = terrible and 10 = excellent)).
+[2:04] She notes that support can provide this script.
+[2:05] Lais sets "Quantidade de tentativas de resposta inválida" (Number of invalid response attempts) to 3.
+[2:06] For "Mensagem enviada após resposta válida" (Message sent after valid response), she enters: "Agradecemos pela sua avaliação, tenha um ótimo dia!" (Thank you for your rating, have a great day!).
+[2:07] For "Mensagem de resposta inválida" (Invalid response message), she enters: "Desculpe, não entendi sua resposta, digite um número entre 0 e 10." (Sorry, I didn't understand your response, type a number between 0 and 10.).
+[2:08] Lais emphasizes including a note: "Essa mensagem foi acionada automaticamente e não é necessário respondê-la." (This message was activated automatically and it is not necessary to reply to it.) to prevent clients from opening new calls after receiving the thank you message.
+[2:09] She saves the evaluation, and it appears in the list.
+[2:10] Lais mentions that there's a separate training session about "Relatórios e Estatísticas" (Reports and Statistics) where users can learn how to analyze these evaluations.
+[2:11] She then moves to "Integrações" (Integrations) in the "Mais opções" menu.
+[2:12] Lais explains that Digisac's open API allows it to integrate with other platforms or systems.
+[2:13] She demonstrates by creating a new integration.
+[2:14] A "Criando Integração" (Creating Integration) pop-up appears.
+[2:15] For "Tipo" (Type), she selects "Menu superior" (Top menu), so the integration icon will appear in the top navigation bar.
+[2:16] For "Url do Iframe," she inputs "https://digisac.com.br" (Digisac's website).
+[2:17] For "Texto do Menu" (Menu Text), she enters "Site."
+[2:18] Lais chooses "ArrowDown" as an optional icon.
+[2:19] She saves the integration.
+[2:20] A notification "Alterações salvas" appears, and a new icon representing the integration appears in the top navigation bar.
+[2:21] Lais clicks on the new "Site" icon, and the Digisac website appears within the platform interface.
+[2:22] She shows that she can navigate the website directly within Digisac, highlighting the seamless integration.
+[2:23] Lais explains that clicking the "Site" icon again closes the integrated website and returns to the chat screen.
+[2:24] She reiterates that this feature allows users to integrate various external systems directly into Digisac.
+[2:25] Lais mentions that if users have any questions about API or webhooks for integrations, they can contact Digisac's commercial or support integration teams.
+[2:26] Next, Lais moves to "Distribuição de Chamados" (Call Distribution) in "Mais opções."
+[2:27] She explains that this is a new feature that evenly distributes incoming calls among agents.
+[2:28] Lais clarifies that "Distribuição de Chamados" is a paid add-on, so if users don't see it on their platform, it means it hasn't been purchased.
+[2:29] She advises contacting the commercial team for pricing.
+[2:30] Lais demonstrates how to create a new distribution.
+[2:31] A "Criando Distribuição de Chamados" (Creating Call Distribution) pop-up appears.
+[2:32] She activates the distribution using the toggle switch.
+[2:33] Lais gives the distribution a name, "Comercial."
+[2:34] For "Departamentos inclusos na distribuição" (Departments included in the distribution), she selects "Comercial."
+[2:35] She notes that multiple departments can be selected.
+[2:36] For "Cargos inclusos na distribuição" (Roles included in the distribution), she selects "Operador" (Operator), explaining that administrators in her example don't handle calls.
+[2:37] Lais then explains "Máximo de chamados por Atendente e Departamento" (Maximum calls per Agent and Department).
+[2:38] This setting defines how many calls each agent or department can receive simultaneously from the distribution.
+[2:39] Lais explains that this ensures equitable distribution and prevents agents from being overloaded.
+[34:09] A tela inicial do Digisac é exibida, mostrando a página de "Distribuição de Chamados" e um pop-up "Criando Distribuição de Chamados".
+[34:12] A usuária preenche o campo "Máximo de chamados por Atendente e Departamento" com "15".
+[34:17] A usuária explica como a distribuição de chamados funciona individualmente.
+[34:33] A usuária continua a explicar a lógica de distribuição individual.
+[34:44] A usuária descreve o ciclo de distribuição de chamados.
+[34:55] A usuária detalha a progressão da distribuição em lotes.
+[35:02] A usuária explica que a distribuição para um usuário para quando ele atinge o limite de chamados.
+[35:12] A usuária explica que a distribuição recomeça quando um chamado é finalizado.
+[35:22] A usuária enfatiza a condição para a retomada da distribuição.
+[35:30] A usuária recapitula o funcionamento da distribuição de chamados.
+[35:37] A usuária explica que a distribuição funciona com usuários "online".
+[35:51] A usuária detalha que o recebimento de chamados depende da disponibilidade.
+[36:03] A usuária introduz a opção de o que acontece quando um usuário fica "offline".
+[36:13] A usuária seleciona a opção "Redistribuir todos os chamados".
+[36:20] O balão de informação para "Redistribuir todos os chamados" aparece, explicando que todos os chamados irão para a fila do departamento e serão redistribuídos quando o operador realizar o logout.
+[36:35] A usuária exemplifica o funcionamento da redistribuição ao fazer logout.
+[37:02] A usuária seleciona a opção "Redistribuir somente chamados não respondidos".
+[37:08] O balão de informação para "Redistribuir somente chamados não respondidos" aparece, explicando que apenas chamados não respondidos irão para a fila.
+[37:19] A usuária explica a diferença entre as duas opções de redistribuição.
+[37:45] A usuária clica em "Salvar", fechando o pop-up e retornando à página "Distribuição de Chamados", que está vazia.
+[37:50] A usuária finaliza a explicação sobre a distribuição de chamados e oferece contato com o time comercial.
+[38:00] A usuária clica no ícone "Mais opções" no menu superior e seleciona "Campos personalizados".
+[38:06] A tela de "Campo Personalizado" é exibida, mostrando que nenhum resultado foi encontrado.
+[38:09] A usuária explica o que são campos personalizados.
+[38:19] A usuária explica a funcionalidade de adicionar campos personalizados para cadastrar contatos.
+[38:35] A usuária clica em "Novo Campo", abrindo o pop-up "Criando Campo Personalizado".
+[38:37] A usuária preenche o campo "Nome" com "CPF".
+[38:39] A usuária seleciona "Contatos" no campo "Entidades".
+[38:41] A usuária seleciona "Campo de texto" no campo "Tipo".
+[38:43] A usuária clica em "Salvar", fechando o pop-up e exibindo o "CPF" na lista de campos personalizados.
+[38:47] A usuária clica no ícone "Contatos" no menu superior.
+[38:48] A tela de "Contatos" é exibida.
+[38:51] A usuária clica em "Novo contato", abrindo o pop-up "Criando contato".
+[38:54] A usuária rola para baixo no pop-up e mostra o campo "CPF" recém-criado.
+[38:56] A usuária digita um número de CPF no campo.
+[39:00] A usuária clica nos três pontinhos ao lado de um contato e seleciona "Visualizar".
+[39:03] O pop-up com os detalhes do contato é exibido, mostrando o campo "CPF" e o número preenchido.
+[39:05] A usuária clica em "X" para fechar o pop-up de detalhes do contato.
+[39:06] A usuária clica no ícone "Chat" no menu superior.
+[39:12] A usuária clica no ícone "Mais opções" e seleciona "Campos personalizados" novamente.
+[39:18] A usuária explica a função dos campos personalizados e como eles podem ser preenchidos.
+[39:34] A usuária detalha o preenchimento automático através do robô.
+[39:53] A usuária dá um exemplo de como o robô pode solicitar o CPF do cliente.
+[40:19] A usuária explica que os campos personalizados não geram filtros, mas aparecem na exportação.
+[40:38] A usuária clica no ícone "Mais opções" e seleciona "Tabela de horários".
+[40:48] A tela de "Tabela de Horários" é exibida, sem resultados.
+[40:54] A usuária explica a funcionalidade da tabela de horários.
+[41:16] A usuária compara a tabela de horários com a restrição de IPs.
+[41:47] A usuária clica em "Nova Tabela de Horário", abrindo o pop-up "Criando Tabela de Horário".
+[41:53] A usuária preenche o campo "Descrição" com "Horário Comercial".
+[41:58] A usuária explica o campo "Tempo prévio de disparo da notificação de logout".
+[42:23] A usuária preenche o campo "Tempo prévio de disparo da notificação de logout" com "15" minutos.
+[42:44] A usuária recomenda um tempo mínimo de 15 minutos.
+[42:57] A usuária clica em "Adicionar regra" no campo "Horário de funcionamento".
+[42:59] A usuária seleciona os dias da semana (Segunda a Sexta) e os horários de início e término (08:00 e 12:00).
+[43:09] A usuária adiciona outra regra e seleciona os dias da semana (Segunda a Sexta) e os horários de início e término (14:00 e 18:00).
+[43:25] A usuária adiciona o sábado na primeira regra (08:00 às 12:00).
+[43:40] A usuária clica em "Salvar", fechando o pop-up e exibindo "Horário Comercial" na lista de tabelas de horários.
+[43:47] A usuária explica como vincular a tabela de horários a um usuário.
+[43:51] A usuária clica no ícone "Mais opções" e seleciona "Usuários".
+[43:52] A tela de "Usuários" é exibida.
+[43:56] A usuária clica nos três pontinhos ao lado de "Sabrina" e seleciona "Editar".
+[43:59] A usuária seleciona "Operador" no campo "Cargo(s)".
+[44:02] A usuária clica em "Mostrar mais 4 campos".
+[44:08] O campo "Tabela de Horário" aparece, e a usuária seleciona "Horário Comercial".
+[44:11] A usuária clica em "Salvar", fechando o pop-up e atualizando o usuário "Sabrina" com a "Tabela de horários" vinculada.
+[44:22] A usuária finaliza a explicação sobre a tabela de horários e aponta para a ferramenta de "pessoas".
+[44:32] A usuária mostra a opção "Conta de cliente" ao editar o usuário.
+[44:44] A usuária explica que "Celular" e "Ramal" são apenas campos adicionais.
+[45:02] A usuária menciona que "Conta de cliente" está vinculada à organização, que será explicada em breve.
+[45:08] A usuária salva as alterações e retorna à lista de usuários.
+[45:14] A usuária clica no ícone "Mais opções" e seleciona "Termos de aceite".
+[45:19] A tela de "Termos de aceite" é exibida, vazia.
+[45:23] A usuária clica em "Novo Termo", abrindo o pop-up "Criando termos de aceite".
+[45:26] A usuária explica a funcionalidade dos termos de aceite, como a LGPD.
+[46:21] A usuária explica que, se o cliente aceitar o termo, o robô inicia o atendimento, caso contrário, encerra o chamado.
+[46:39] A usuária clica em "Cancelar", fechando o pop-up.
+[46:43] A usuária explica que o termo de aceite é configurado pelo suporte e vinculado ao robô.
+[46:56] A usuária clica no ícone "Chat" no menu superior.
+[47:00] A usuária clica no ícone "Mais opções" e revisa as ferramentas já apresentadas.
+[47:09] A usuária apresenta os "Contatos".
+[47:19] A usuária clica no ícone "Contatos" no menu superior.
+[47:20] A tela de "Contatos" é exibida.
+[47:25] A usuária clica em "Exibir Filtros".
+[47:37] O painel de filtros é exibido.
+[47:44] A usuária explica os diferentes filtros disponíveis (nome, número, conexão, origem, etc.).
+[48:19] A usuária explica as opções de ordenação (crescente, decrescente, última mensagem, data de cadastro).
+[48:29] A usuária explica o filtro por "Departamento padrão para chamados" e "Atendente padrão para chamados".
+[48:43] A usuária explica que é possível fazer outras funcionalidades além de filtrar, como importar contatos.
+[48:49] A usuária clica em "Importar contatos".
+[48:55] Um menu suspenso aparece com as opções "Arquivo Excel (CSV)" e "Grupo".
+[48:57] A usuária seleciona "Arquivo Excel (CSV)", abrindo a tela "Importar contatos de CSV".
+[49:09] A usuária explica que o arquivo deve estar no formato CSV.
+[49:29] A usuária explica os campos que devem ser preenchidos para a importação (Conexão, Tags, Departamento, Atendente Padrão).
+[49:54] A usuária mostra o modelo de arquivo CSV fornecido pela Digisac, com campos como "Nome", "DDD", "Número", "Departamento Padrão", "Atendente Padrão" e "Tags".
+[50:30] A usuária clica em "Baixar o modelo".
+[50:36] A usuária explica que, após preencher e salvar a planilha, o arquivo pode ser carregado.
+[50:47] A usuária clica em "Carregar seu arquivo".
+[50:50] A usuária clica em "Importar".
+[50:54] A usuária explica que aparecerá um pop-up para salvar os números importados.
+[51:07] A usuária clica em "X" para fechar a tela de importação.
+[51:10] A usuária explica a funcionalidade de exportar contatos.
+[51:21] A usuária seleciona a caixa de seleção "Nome" para selecionar todos os contatos.
+[51:28] A mensagem "65 contatos selecionados" aparece.
+[51:37] A usuária explica que se selecionar apenas a caixa de seleção da primeira página, ele seleciona apenas os 15 exibidos.
+[51:44] A usuária seleciona novamente todos os contatos.
+[52:01] A usuária clica em "Ações em massa".
+[52:03] Um menu suspenso aparece com as opções "Adicionar tag", "Remover tag", "Excluir", "Exportar", "Departamento padrão".
+[52:08] A usuária seleciona "Exportar".
+[52:11] O pop-up "Escolha um formato" é exibido.
+[52:16] Um aviso amarelo aparece na parte superior direita, informando que é necessário filtrar por conexão antes de exportar.
+[52:22] A usuária seleciona "WhatsApp" no filtro de "Conexão".
+[52:26] A usuária seleciona novamente todos os contatos.
+[52:29] A usuária seleciona "Exportar" em "Ações em massa" novamente.
+[52:32] O pop-up "Escolha um formato" é exibido novamente.
+[52:36] A usuária explica as opções de formato de exportação (CSV separado por vírgula, CSV separado por ponto e vírgula ou formato Google Contacts).
+[52:50] A usuária clica em "Cancelar".
+[52:57] A usuária explica as outras opções em "Ações em massa" (adicionar/remover tag, excluir, vincular departamento padrão).
+[53:19] A usuária finaliza a explicação sobre as configurações de contatos.
+[53:31] A usuária clica no ícone "Chat" no menu superior.
+[53:34] A usuária mostra que não há chamados abertos.
+[53:44] A usuária clica no ícone "Pessoas" no menu superior.
+[53:57] A tela de "Pessoas" é exibida, sem resultados.
+[54:03] A usuária explica o que são as "Pessoas" no sistema (agrupamento de contatos).
+[54:34] A usuária clica em "Nova pessoa".
+[54:39] O pop-up "Criando pessoa" é exibido.
+[54:48] A usuária digita "Digisac" no campo "Nome".
+[54:58] A usuária clica em "Salvar", e "Digisac" é adicionado à lista de pessoas.
+[55:03] A usuária clica no ícone "Chat" no menu superior.
+[55:07] A usuária clica nos três pontinhos ao lado do contato "Jeniffer" e vincula à pessoa "Digisac".
+[55:20] A usuária clica nos três pontinhos ao lado do contato "Amanda Moraes" e vincula à pessoa "Digisac".
+[55:32] A usuária atualiza a página.
+[55:37] A usuária clica no chat de "Amanda Moraes".
+[55:40] O atalho "Conversar em..." aparece no chat.
+[55:46] A usuária clica no atalho e seleciona "Jeniffer".
+[55:49] A usuária demonstra a troca de chat de forma mais rápida.
+[56:04] A usuária clica no ícone "Pessoas" novamente.
+[56:07] A usuária explica que essa é a função da ferramenta "Pessoas".
+[56:13] A usuária clica no ícone "Organizações" no menu superior.
+[56:18] A tela de "Organizações" é exibida, vazia.
+[56:24] A usuária explica que "Organizações" serve para liberar acesso de terceiros ao histórico de atendimento de contatos vinculados às pessoas.
+[56:42] A usuária clica em "Nova organização".
+[56:47] O pop-up "Criando organização" é exibido.
+[56:51] A usuária digita "Digisac" no campo "Nome".
+[57:03] A usuária clica em "Salvar".
+[57:05] A tela de "Organizações" é exibida com "Digisac" listado.
+[57:06] A usuária clica no ícone "Pessoas".
+[57:09] A usuária clica nos três pontinhos ao lado de "Digisac" e seleciona "Editar".
+[57:14] A usuária clica em "Organizações" e seleciona "Digisac".
+[57:18] A usuária clica em "Salvar".
+[57:19] A tela de "Pessoas" é exibida com "Digisac" listado e a organização "Digisac" vinculada.
+[57:29] A usuária explica que para que o usuário da organização tenha acesso às conversas, é preciso fazer um upgrade com o time comercial para criar um usuário para essa organização.
+[58:17] A usuária mostra a tela de "Usuários".
+[58:20] A usuária clica em "Novo usuário".
+[58:25] A usuária digita "Organização" no campo "Nome".
+[58:29] A usuária digita "organizacao@digisac.com.br" no campo "Email".
+[58:41] A usuária digita e repete a senha.
+[58:47] A usuária clica em "Mostrar mais 4 campos".
+[58:54] A usuária habilita "Conta de cliente".
+[59:01] A usuária seleciona "Digisac" em "Organizações".
+[59:10] A usuária clica em "Salvar".
+[59:14] A tela de "Usuários" é exibida, com o novo usuário "Organização" listado.
+[59:21] A usuária sai do seu usuário e faz login com o usuário "Organização".
+[59:34] A tela de "Histórico de Chamados" é exibida, mostrando os chamados vinculados à organização.
+[59:43] A usuária clica em um dos chamados para visualizar os detalhes da conversa.
+[59:49] A usuária mostra a data e o protocolo de atendimento no chat.
+[59:57] A usuária sai do usuário "Organização" e faz login novamente com o seu usuário original.
+[01:00:10] A usuária mostra que não há chamados abertos.
+[01:00:15] A usuária apresenta o "Chat interno".
+[01:00:24] A usuária clica no ícone do chat no canto inferior direito.
+[01:00:31] A tela do "Chat Interno" é exibida.
+[01:00:39] A usuária explica que o chat interno é uma ferramenta contratada à parte.
+[01:00:50] A usuária clica no funil de filtros.
+[01:00:58] As opções de filtro (Todos, Grupos, Conversas) são exibidas.
+[01:01:03] A usuária clica nos três pontinhos no canto superior direito.
+[01:01:09] As opções "Ativar Usuário", "Canais", "Grupos" são exibidas.
+[01:01:15] A usuária seleciona "Canais".
+[01:01:20] A tela de "Canais" é exibida, mostrando que não existem canais criados.
+[01:01:25] A usuária clica em "Criar canal".
+[01:01:30] A usuária digita "Financeiro" no campo "Nome".
+[01:01:35] A usuária clica em "Cadastrar".
+[01:01:37] A mensagem "Canal criado com sucesso!" é exibida.
+[01:01:41] A usuária clica na seta para voltar.
+[01:01:44] O canal "Financeiro" é exibido.
+[01:01:49] A usuária clica nos três pontinhos ao lado do canal "Financeiro" e seleciona "Editar".
+[01:01:54] O pop-up "Editando canal" é exibido.
+[01:01:57] A usuária clica em "Salvar".
+[01:02:01] A usuária clica nos três pontinhos e seleciona "Grupos".
+[01:02:06] A tela de "Grupos" é exibida, mostrando que não existem grupos criados.
+[01:02:12] A usuária clica em "Criar grupo".
+[01:02:16] O pop-up "Criar grupo" é exibido.
+[01:02:22] A usuária digita "Segunda via de fatura" no campo "Nome do grupo".
+[01:02:27] A usuária seleciona "Financeiro" no campo "Canais".
+[01:02:34] A usuária seleciona "Laís" no campo "Administradores do grupo".
+[01:02:43] A usuária digita "Sabrina" no campo "Membros" e a adiciona.
+[01:02:52] A usuária clica em "Criar grupo".
+[01:02:58] A mensagem "Grupo criado com sucesso!" é exibida.
+[01:03:04] A usuária clica na seta para voltar.
+[01:03:08] O grupo "Segunda via de fatura" é exibido.
+[01:03:11] A usuária volta para a tela principal do chat interno.
+[01:03:14] O grupo "Segunda via de fatura" aparece no chat interno, vinculado ao canal "Financeiro".
+[01:03:17] A usuária clica no grupo "Segunda via de fatura".
+[01:03:22] A usuária digita uma mensagem de teste no chat.
+[01:03:27] A usuária clica no ícone "Informações do grupo".
+[01:03:30] As informações do grupo são exibidas, mostrando os usuários vinculados.
+[01:03:33] A usuária clica no "X" para fechar.
+[01:03:39] A usuária clica no ícone de emoji no chat.
+[01:03:43] O painel de emojis é exibido.
+[01:03:48] A usuária anexa um arquivo no chat.
+[01:03:52] O arquivo é carregado.
+[01:03:55] A usuária clica no ícone de enviar.
+[01:03:59] A usuária finaliza a explicação sobre o chat interno.
+[01:04:09] A usuária para de compartilhar a tela e aparece em vídeo.
+[01:04:14] A usuária faz um resumo das ferramentas apresentadas.
+[01:04:29] A usuária agradece a participação e oferece ajuda.
+[01:04:35] A usuária menciona a equipe de onboarding e os treinamentos personalizados.
+[01:04:49] A usuária se despede.
+[01:05:03] O logo da Digisac aparece com o slogan "Plataforma Multicanal".
+[01:05:09] Informações de contato da Digisac são exibidas (site, telefone, e-mail, redes sociais).

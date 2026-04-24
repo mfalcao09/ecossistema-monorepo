@@ -1,0 +1,43 @@
+[00:00] Slide de apresentação "Não perca! Conheça todos os Canais de atendimento da Digisac. Dia: 05 de Junho, Horário: 15h00."
+[00:01] Fabiana cumprimenta os espectadores.
+[00:15] Carol se apresenta.
+[00:27] Fabiana interage com os espectadores.
+[03:10] Fabiana apresenta a interface da plataforma Digisac, exibindo a tela "Conexões".
+[03:57] O slide inicial reaparece.
+[04:04] Fabiana fala sobre os webinars da Digisac.
+[04:59] Slide com a descrição da plataforma Digisac e as opções de conexões.
+[05:29] Slide detalhando o WhatsApp como canal de comunicação direta.
+[06:21] Fabiana demonstra como acessar as conexões na plataforma.
+[07:14] Slide explicando o WhatsApp Business API.
+[08:06] Slide detalhando as formas de cobrança do WhatsApp Business API.
+[10:04] Demonstração de como criar uma conexão WhatsApp Business na plataforma.
+[11:05] Demonstração de como enviar um template de mensagem via WhatsApp Business.
+[13:09] Demonstração de como criar uma campanha de envio em massa (campanhas).
+[13:52] Retorno para a tela de conexões.
+[14:04] Slide detalhando o Telegram como canal de comunicação.
+[15:01] Demonstração de como criar uma conexão Telegram.
+[16:13] Slide detalhando o SMS como canal de comunicação.
+[16:55] Demonstração de como criar uma conexão SMS.
+[17:09] Demonstração de como criar uma campanha por SMS.
+[18:02] Slide detalhando o Instagram como canal de comunicação.
+[19:51] Slide detalhando o Facebook Messenger como canal de comunicação.
+[21:09] Slide detalhando o WebChat como canal de comunicação.
+[21:55] Fabiana demonstra um exemplo de webchat no site Facilita Ponto.
+[22:46] Demonstração de uma conversa via WebChat na plataforma.
+[24:34] Slide detalhando o E-mail como canal de comunicação.
+[25:08] Demonstração de como criar uma conexão de e-mail na plataforma.
+[25:35] Demonstração de uma conversa via e-mail na plataforma.
+[25:47] Demonstração de como adicionar um contato e atribuir uma conexão.
+[26:17] Demonstração das opções de envio de e-mail.
+[28:13] Slide detalhando o Reclame Aqui como canal de comunicação.
+[29:06] Demonstração da conexão Reclame Aqui na plataforma.
+[29:56] Demonstração das estatísticas de atendimento por conexão.
+[30:05] Demonstração de login em outra plataforma Digisac.
+[30:11] Demonstração de estatísticas de atendimento por conexão em outra plataforma.
+[30:55] Demonstração de outras conexões na plataforma.
+[31:00] Demonstração de como criar uma conexão Instagram e associar a um departamento.
+[31:31] Demonstração de uma fila de atendimento na plataforma.
+[32:09] Retorno para o slide de apresentação.
+[32:14] Fabiana agradece aos participantes e anuncia o próximo webinar.
+[33:57] Slide final com a descrição da Digisac e as opções de conexões.
+[34:04] Fabiana faz as considerações finais e se despede.

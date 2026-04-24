@@ -1,0 +1,130 @@
+[00:00] Configuração do fluxo do bot
+[00:03] Como criar um fluxo de bot por opções, botões e assistentes de IA
+[00:07] Diversos fluxogramas
+[00:11] Fluxograma principal
+[00:15] Outros fluxogramas
+[00:18] Conexões no fluxograma
+[00:23] Conexões compradas no WhatsApp
+[00:27] Diversas conexões nos fluxogramas
+[00:32] Diversos fluxogramas nas conexões
+[00:36] Fluxo principal
+[00:40] Fluxos secundários ativados por palavras-chave
+[00:43] Fluxo principal
+[00:47] Questão da palavra-chave
+[00:52] Aula em duas partes
+[01:05] Adicionar novo fluxo
+[01:07] Nome do fluxo
+[01:08] Situação do fluxo (Ativo/Inativo)
+[01:15] Editar fluxo
+[01:17] Visualizar conexões
+[01:21] Associar conexões (Demo)
+[01:36] Alterar nome do fluxo
+[01:44] Deletar fluxo
+[01:51] Editar fluxo
+[01:54] Fluxograma (Mensagem Iniciar e Assistente GPT)
+[02:08] Apagar cards
+[02:14] Remover card
+[02:16] Refresh do fluxo
+[02:19] Tela cheia
+[02:22] Fluxograma com tela cheia
+[02:30] Atualizar
+[02:44] Mover no fluxograma
+[02:51] Fluxo ativo
+[02:54] Fluxo principal
+[02:58] Comandos ativos do fluxo
+[03:00] Desmarcar opção "Fluxo Principal"
+[03:07] Digitar comando ativo
+[03:13] Comando "Quero ser cliente"
+[03:22] Criar fluxo secundário
+[03:28] Criar fluxo principal
+[03:31] Adicionar card
+[03:34] Seleção de cards
+[03:37] Mensagem Inicial, Seleção de Opções, Enviar Texto, Enviar Imagem, Enviar Vídeo, Enviar Áudio, Enviar Arquivo, Adicionar Atraso (2s, 5s, 15s), Assistente GPT, Transferir Para o Chat, Request HTTP, Finalizar Fluxo, Horários de Atendimento, Lista de Usuários, Transferência de Fluxos, Condição de Carteira
+[05:22] Mensagem Inicial
+[05:32] Deixar a Mensagem Inicial vazia
+[05:41] Mensagem Inicial
+[05:43] Carregar imagem
+[05:48] Tamanho máximo da imagem
+[05:51] Salvar alterações
+[05:59] Adicionar card "Enviar Opções"
+[06:06] Enviar Opções
+[06:17] Mensagem inicial
+[06:22] Criar ligação
+[06:26] Adicionar ponto de saída
+[06:30] Cadastrar ponto
+[06:44] Adicionar ponto de entrada
+[06:50] Cadastrar ponto
+[06:53] Ligar pontos
+[07:05] Refresh do fluxo
+[07:07] Excluir linha
+[07:15] Três opções
+[07:20] Editar mensagem da Mensagem Inicial
+[07:26] Mensagem "Seja bem vindo ao nosso Atendimento"
+[07:33] Salvar alterações
+[07:44] Contato selecionar 1, 2 ou 3
+[08:06] Editar mensagem de "Enviar Opções"
+[08:14] Escrever mensagem
+[08:24] Negrito
+[08:31] Ordem das opções
+[08:40] Nome da opção
+[08:45] Suporte Técnico, Financeiro, Comercial
+[08:58] Adicionar mais opções
+[09:12] Deletar opção
+[09:18] Enviar menu lista
+[09:23] Salvar alterações
+[09:29] Três opções com negrito
+[10:00] Opção "Suporte Técnico"
+[10:07] Adicionar card "Enviar Texto"
+[10:14] Adicionar ponto de entrada
+[10:25] Bolinhas de saídas em cada opção
+[10:44] Adicionar ponto de entrada
+[10:52] Ligar "Suporte Técnico" à "Enviar Texto"
+[11:00] Editar mensagem de "Enviar Texto"
+[11:05] Mensagem "Aguarde, você está sendo Transferido para o Chat de Atendimento."
+[11:22] Salvar alterações
+[11:28] Texto "Aguarde, você está sendo Transferido para o Chat de Atendimento."
+[11:43] Adicionar card "Transferir para o Chat"
+[11:51] Departamento vinculado
+[12:00] Adicionar ponto de saída
+[12:10] Cadastrar ponto
+[12:17] Ligar "Enviar Texto" a "Transferir para o Chat"
+[12:29] Selecionar departamento
+[12:50] Atrelar a um departamento
+[12:58] Vincular departamento
+[13:02] Financeiro ou apresentação
+[13:06] Selecionar "Financeiro"
+[13:12] Criar departamento "Suporte Técnico"
+[13:18] Cor da etiqueta do departamento
+[13:23] Cadastrar departamento
+[13:28] Vincular departamento "Suporte Técnico"
+[13:36] Cadastrar departamento
+[13:42] Fluxo da opção "Suporte Técnico" completo
+[13:51] Mandar mensagem e depois de alguns segundos transferir pro chat
+[14:05] Excluir linha
+[14:15] Mandar mensagem e depois de alguns segundos transferir pro chat
+[14:23] Adicionar mais um card "Enviar Texto"
+[14:31] Adicionar ponto de entrada
+[14:36] Cards de texto sempre com entradas e saídas
+[14:48] Fluxo da opção "Suporte Técnico"
+[14:52] Pausa de 15 segundos
+[15:00] Editar mensagem de "Enviar Texto"
+[15:07] Mensagem "Por favor envie as seguintes informações CPF: Nome: Email: Telefone:"
+[15:38] Salvar alterações
+[15:47] Adicionar atraso de 15 segundos
+[15:52] Adicionar card "Adicionar Atraso 15s"
+[16:00] Usar atrasos de 20, 15 segundos
+[16:15] Adicionar ponto de entrada
+[16:20] Adicionar ponto de saída
+[16:29] Ligar "Enviar Texto" a "Adicionar Atraso 15s"
+[16:36] Ligar "Adicionar Atraso 15s" a "Enviar Texto"
+[16:59] Mais atraso
+[17:03] Adicionar card "Adicionar Atraso 5s"
+[17:09] Ligar "Adicionar Atraso 15s" a "Adicionar Atraso 5s"
+[17:21] Excluir linhas
+[17:30] Adicionar ponto de entrada
+[17:35] Adicionar ponto de saída
+[17:42] Ligar "Enviar Texto" a "Adicionar Atraso 5s"
+[17:49] Ligar "Adicionar Atraso 5s" a "Enviar Texto"
+[17:55] Ligar "Enviar Texto" a "Transferir para o Chat"
+[18:00] Expandir card
+[18:23] Próxima aula sobre outros cards e funções

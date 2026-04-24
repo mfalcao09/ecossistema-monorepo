@@ -1,0 +1,40 @@
+[00:00] Tela principal do sistema, menu "Atendimento" à esquerda.
+[00:09] Seleção da opção "Respostas Rápidas" no menu.
+[00:13] Visualização da tela de Respostas Rápidas, mostrando uma tabela vazia.
+[00:17] Retorno à tela de Atendimentos, mostrando a interface de chat.
+[00:19] Exemplo de chat com mensagens de "boa tarde".
+[00:29] Retorno à tela de Respostas Rápidas.
+[00:32] Clique no botão "ADICIONAR" no canto superior direito.
+[00:36] Exibição do formulário "Adicionar" com campos "Atalho" e "Resposta".
+[00:39] Digitação de "Pix" no campo "Atalho".
+[00:43] Digitação de "4564364654" no campo "Resposta".
+[00:46] Clique no botão "ANEXAR ARQUIVO".
+[00:48] Exibição de uma janela para selecionar arquivos.
+[00:50] Seleção de um arquivo PDF.
+[00:52] Explicação sobre o anexo de arquivos de áudio.
+[01:03] Explicação sobre o anexo de arquivos de imagem e vídeo.
+[01:13] Introdução às variáveis disponíveis para a resposta rápida.
+[01:15] Inserção da variável "{firstName}" no campo "Resposta".
+[01:19] Complementação da mensagem com "Como vai?".
+[01:28] Inserção da variável "{name}" no campo "Resposta".
+[01:33] Inserção da variável "{ms}" (saudação) no campo "Resposta".
+[01:36] Inserção da variável "{protocol}" no campo "Resposta".
+[01:43] Inserção da variável "{date}" no campo "Resposta".
+[01:46] Inserção da variável "{hour}" no campo "Resposta".
+[01:48] Limpeza do campo "Resposta".
+[01:50] Digitação da mensagem de exemplo "4564364654" para Pix.
+[01:51] Clique no botão "ADICIONAR" para salvar a resposta rápida "Pix".
+[01:53] Mensagem de "Atalho adicionado com sucesso!" e a resposta rápida "Pix" aparece na tabela.
+[01:56] Clique novamente no botão "ADICIONAR".
+[01:58] Digitação de "Fechamento" no campo "Atalho".
+[02:04] Digitação da mensagem "Obrigado por entrar em contato, até mais!" no campo "Resposta".
+[02:10] Clique no botão "ADICIONAR" para salvar a resposta rápida "Fechamento".
+[02:12] Mensagem de "Atalho adicionado com sucesso!" e a resposta rápida "Fechamento" aparece na tabela.
+[02:13] Retorno à tela de Atendimentos.
+[02:17] Demonstração do uso da resposta rápida no chat.
+[02:22] Digitação de "/" na caixa de mensagem do chat, exibindo a lista de respostas rápidas.
+[02:24] Seleção da resposta rápida "Fechamento" pela lista.
+[02:37] A mensagem "Fechamento - Obrigado por entrar em contato, até mais!" é pré-preenchida no chat.
+[02:40] Digitação de "/" novamente e seleção da resposta rápida "Pix".
+[02:43] A mensagem "Pix - 4564364654" é pré-preenchida no chat.
+[02:46] Finalização do vídeo, explicando a simplicidade e utilidade da funcionalidade.

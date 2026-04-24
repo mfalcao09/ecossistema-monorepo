@@ -1,0 +1,44 @@
+[00:00] Visão geral do painel da ferramenta de múltiplos atendimentos.
+[00:08] Apresentação do módulo de campanha.
+[00:23] Criação de uma nova campanha, apresentando os campos para configuração.
+[00:34] Preenchimento do nome da campanha como "Teste TAG".
+[00:41] Seleção da lista de tags "Venda Concluída".
+[00:46] Seleção da conexão "Teste Treinamento".
+[00:49] Definição da data e horário para agendamento da campanha.
+[00:58] Digitação da mensagem da campanha: "campanha de TAG".
+[01:12] Adição da campanha, mostrando a confirmação de criação.
+[01:15] Visualização da campanha "Teste TAG" com status "Programada".
+[01:19] Relatório da campanha "Teste TAG" mostrando 1 contato válido.
+[01:25] Retorno à tela de "Campanhas".
+[01:27] Criação de uma nova campanha, apresentando os campos.
+[01:35] Navegação para a "Lista de Contatos".
+[01:38] Criação de uma nova lista de contatos chamada "Teste campanha".
+[01:43] Seleção da opção para baixar o arquivo de modelo de lista.
+[01:54] Abertura do arquivo Excel baixado para edição.
+[02:08] Edição do arquivo Excel, removendo os números de teste.
+[02:11] Inserção de um número de telefone válido para teste.
+[02:15] Inserção de um número de telefone inválido para teste.
+[02:18] Alteração do formato da célula para exibir o número completo.
+[02:35] Salvamento das alterações no arquivo Excel.
+[02:41] Abertura da lista de contatos "Teste campanha".
+[02:44] Importação do arquivo Excel editado para a lista de contatos.
+[02:49] Visualização dos contatos importados, mostrando o status de validação.
+[03:15] Retorno à seção de "Campanhas".
+[03:18] Visualização do status "Finalizada" da campanha "Teste TAG".
+[03:22] Relatório da campanha "Teste TAG" com status "Finalizada 1 de 1".
+[03:27] Visualização da mensagem "campanha de TAG" no WhatsApp.
+[03:34] Criação de uma nova campanha, com campos vazios.
+[03:38] Preenchimento do nome da campanha como "Campanha Lista de Contato".
+[03:44] Seleção da lista de contatos "Teste campanha".
+[03:49] Definição da conexão "teste treinamento".
+[03:51] Agendamento da campanha para 2 minutos à frente do horário atual.
+[03:57] Inserção da mensagem da campanha: "teste campanha lista".
+[04:02] Adição da campanha "Campanha Lista de Contato".
+[04:05] Relatório da campanha "Campanha Lista de Contato" mostrando 1 contato válido.
+[04:11] Visualização da "Lista de Contatos" com os números validados.
+[04:18] Apresentação da opção "NOVO" para adicionar contatos manualmente.
+[04:29] Revisão da campanha "Teste TAG" (finalizada).
+[04:46] Revisão da campanha "Campanha Lista de Contato" (programada).
+[05:54] Visualização do status "Finalizada" da "Campanha Lista de Contato".
+[05:57] Relatório da campanha "Campanha Lista de Contato" com 1 entregue.
+[06:00] Visualização da mensagem "teste campanha lista" no WhatsApp.

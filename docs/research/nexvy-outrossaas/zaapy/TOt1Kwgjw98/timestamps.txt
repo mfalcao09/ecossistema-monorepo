@@ -1,0 +1,54 @@
+[00:05] Tela inicial da plataforma, exibindo a seção "Gerenciamento de Etiquetas".
+[00:13] Visualização dos totalizadores de grupos e etiquetas.
+[00:26] Clique no botão "NOVO GRUPO".
+[00:27] Preenchimento do nome do grupo como "Atendimentos".
+[00:30] Clique no botão "CADASTRAR".
+[00:31] O grupo "Atendimentos" é adicionado à lista.
+[00:38] Clique no ícone de três pontos para acessar as ações do grupo.
+[00:39] Visualização das opções "Editar nome", "Lista de etiquetas" e "Deletar grupo".
+[00:46] Clique em "Lista de etiquetas".
+[00:52] A tela "Lista de Etiquetas do Grupo: Atendimentos" é exibida.
+[00:59] Clique no botão "NOVA ETIQUETA".
+[01:00] Preenchimento do nome da etiqueta como "Cliente Vip".
+[01:06] Seleção da cor da etiqueta (verde/amarelo).
+[01:14] Seleção do tipo de etiqueta como "Contato".
+[01:35] Clique no botão "CADASTRAR".
+[01:38] A etiqueta "Cliente Vip" é adicionada à lista.
+[01:44] Clique no botão "NOVA ETIQUETA" novamente.
+[01:46] Preenchimento do nome da etiqueta como "Não me respondeu".
+[01:51] Seleção da cor da etiqueta (azul).
+[01:54] Seleção do tipo de etiqueta como "Atendimento".
+[01:57] Clique no botão "CADASTRAR".
+[02:00] A etiqueta "Não me respondeu" é adicionada à lista.
+[02:04] Clique no ícone de três pontos para acessar as ações da etiqueta.
+[02:05] Visualização das opções "Editar etiqueta" e "Deletar etiqueta".
+[02:11] Clique no botão "Voltar".
+[02:13] Visualização da tela "Gerenciamento de Etiquetas", mostrando os dois grupos de etiquetas.
+[02:22] Retorno para a lista de etiquetas.
+[02:23] Demonstração de como excluir as etiquetas individualmente.
+[02:27] Retorno para a tela de grupos e demonstração de como excluir o grupo.
+[02:37] Navegação para a seção "Contatos".
+[02:39] Visualização da lista de contatos.
+[02:40] Clique no ícone de três pontos ao lado do contato "renato".
+[02:41] Clique em "Editar".
+[02:43] Visualização do perfil de contato.
+[02:44] Clique no campo "Atribuir etiquetas".
+[02:45] Seleção da etiqueta "Cliente Vip".
+[02:48] Clique em "SALVAR MODIFICAÇÕES".
+[02:51] Navegação para a seção "Atendimento".
+[02:52] Visualização da tela de atendimentos.
+[02:54] Clique no contato "renato".
+[02:55] Clique no ícone de três pontos no canto superior direito do chat.
+[02:56] Clique em "Ver contato".
+[02:58] Visualização dos detalhes do contato, incluindo a opção de atribuir etiquetas.
+[03:00] Fechamento da janela de detalhes do contato.
+[03:02] Retorno para a tela de atendimento.
+[03:08] Demonstração da finalização de um atendimento.
+[03:12] Clique no ícone de finalização de atendimento (símbolo de check no canto superior direito).
+[03:15] Seleção da etiqueta "Não me respondeu" na janela "Finalizar Atendimento".
+[03:22] Clique em "SIM, FINALIZAR".
+[03:26] O atendimento é finalizado.
+[03:30] Navegação para a seção "Relatórios".
+[03:31] Clique em "Históricos".
+[03:32] Visualização da lista de atendimentos, exibindo a etiqueta de finalização.
+[03:41] Encerramento da demonstração e menção da próxima aula sobre "Fluxo do Bot".

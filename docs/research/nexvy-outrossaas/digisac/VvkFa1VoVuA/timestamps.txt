@@ -1,0 +1,63 @@
+[00:00] A apresentadora se dirige à câmera com fones de ouvido e microfone
+[01:06] A tela mostra a apresentadora em um quadro menor e uma tela maior com o título "WhatsApp Além do Básico: Explore Mensagens Interativas e Saúde WABA"
+[04:47] A tela mostra uma tabela com as características do WhatsApp Pessoal, WhatsApp Business e WhatsApp Business API
+[08:34] A tela mostra informações sobre "Mensagens Interativas", incluindo os tipos de mensagens
+[11:18] A apresentadora demonstra a criação de mensagens interativas na plataforma "Digisac"
+[11:27] A apresentadora clica em "Mais opções" no menu superior
+[11:30] A apresentadora clica em "Mensagens interativas" na lista suspensa
+[11:34] A tela mostra a página "Mensagens interativas" com uma lista de mensagens existentes
+[11:36] A apresentadora clica em "Nova mensagem interativa"
+[11:41] A apresentadora informa que as mensagens interativas só podem ser enviadas em conexões WhatsApp Business API
+[11:47] A apresentadora clica em "Conexões" no menu superior
+[11:51] A apresentadora mostra as diferentes conexões, incluindo "WhatsApp Oficial" (WABA)
+[12:05] A apresentadora clica novamente em "Mais opções" e em "Mensagens interativas"
+[12:12] A tela mostra a página "Mensagens interativas"
+[12:28] A apresentadora clica em "Nova mensagem interativa"
+[12:33] A tela mostra o formulário "Criando Mensagem Interativa"
+[12:48] A apresentadora digita "Tutorial" no campo "Nome"
+[12:53] A apresentadora clica em "Vídeos" na seção "Cabeçalho"
+[13:00] A apresentadora digita o nome do departamento e cargo
+[13:05] A apresentadora seleciona "Sucesso do Cliente", "Treinamento" e "Comercial/Vendas" como departamentos
+[13:16] A apresentadora seleciona "Atendimento" e "Comercial/Vendas" como departamentos
+[13:20] A apresentadora seleciona "Sucesso do Cliente", "Suporte", "Treinamento" e "Comercial/Vendas"
+[13:28] A apresentadora seleciona "Sucesso do Cliente", "Suporte", "Treinamento" e "Comercial/Vendas"
+[13:47] A apresentadora seleciona "Botões" no campo "Tipo de ação"
+[14:10] A apresentadora clica em "Vídeos"
+[14:38] A apresentadora seleciona um arquivo de vídeo
+[14:49] A apresentadora digita o texto do corpo da mensagem
+[14:59] A apresentadora digita "Guia passo a passo para configurar o WhatsApp" no corpo da mensagem
+[15:10] A apresentadora digita o texto do rodapé da mensagem
+[15:19] A apresentadora digita "Fico a disposição" no rodapé da mensagem
+[15:26] A apresentadora adiciona um botão "Conseguiu?"
+[15:35] A apresentadora adiciona outro botão "Não Conseguiu?"
+[16:13] A apresentadora clica em "Salvar"
+[16:21] A apresentadora recebe uma mensagem de erro "Já existe uma mensagem interativa com esse nome."
+[16:27] A apresentadora muda o nome da mensagem para "Tutorial conexão"
+[16:30] A apresentadora clica em "Salvar"
+[16:34] A mensagem interativa "Tutorial conexão" é salva
+[17:09] A apresentadora clica em "Chat" no menu lateral
+[17:15] A apresentadora seleciona um contato na lista
+[17:29] A apresentadora clica em "Abrir chamado"
+[17:34] A apresentadora seleciona o departamento e o atendente
+[17:41] O chamado é aberto com sucesso
+[17:48] A apresentadora clica em "Enviar template"
+[17:53] A apresentadora seleciona o template "abertura_conversa"
+[18:03] A apresentadora preenche os campos de personalização do template
+[18:15] O template é enviado para o cliente
+[18:22] A apresentadora clica em "Enviar mensagem interativa" (ícone de balão de fala)
+[18:31] A apresentadora seleciona a mensagem interativa "produtos"
+[18:43] A apresentadora clica em "Enviar"
+[18:49] A mensagem interativa de lista é enviada para o cliente
+[27:54] A apresentadora mostra como a mensagem interativa aparece no celular do cliente
+[28:07] A apresentadora clica novamente em "Enviar mensagem interativa" e seleciona "tutorial"
+[28:18] A apresentadora clica em "Enviar"
+[28:20] A apresentadora mostra como a mensagem interativa com vídeo e botões aparece no celular do cliente
+[28:46] A apresentadora mostra a página "Mensagens interativas" novamente
+[29:00] A apresentadora retorna para a tela da apresentadora
+[36:47] A apresentadora fala sobre "Saúde WABA"
+[37:10] A apresentadora mostra a tela "Agora" e clica em "Saúde WABA"
+[37:43] A tela mostra o status da conexão WhatsApp Business API como "ativa"
+[41:00] A apresentadora fala sobre a importância de monitorar a Saúde WABA
+[41:43] A apresentadora mostra o menu superior e clica em "Distribuição de Chamados"
+[42:36] A apresentadora clica em "Nova Distribuição"
+[43:08] A apresentadora mostra o formulário de criação de distribuição de chamados

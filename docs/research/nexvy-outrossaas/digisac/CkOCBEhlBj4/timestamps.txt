@@ -1,0 +1,141 @@
+00:00 A presentadora inicia o webinar dando as boas-vindas aos participantes e introduzindo o tema principal da sessão
+04:29 Tela com o título "Principais Novidades de Fevereiro" e informações sobre o evento
+04:47 Apresentação da funcionalidade "Gestão de grupos" no WhatsApp
+06:45 Menu "Mais opções" com a funcionalidade "Cargos"
+06:58 Tela "Cargos" com a opção de editar o cargo de "Operador"
+07:06 Menu de permissões para o cargo de "Operador"
+07:11 Permissões específicas para "Grupos de WhatsApp"
+08:08 Retorno à tela de "Conversas" com a aba "Contatos" selecionada
+08:25 Tela "Criar grupo" para criar um novo grupo no WhatsApp
+09:07 Resumo dos novos membros adicionados ao grupo
+09:16 Visualização do grupo "Webinar Educacional" com seus membros e informações
+09:34 Opção de adicionar novos membros ao grupo
+09:42 Edição das informações do grupo, incluindo permissões
+10:12 Abas "Mídias", "Docs" e "Links" dentro das informações do grupo
+10:37 Demonstração de como um grupo aparece na aba "Chats" quando há uma nova mensagem
+10:52 Interação com o bot do grupo "Avisos Digisac"
+11:18 Aba "Contatos" mostrando todos os contatos e grupos
+11:24 Aplicação de filtros para visualizar apenas os "Grupos"
+11:36 Seleção de todos os grupos e opção de "Ações em massa" para adicionar tags
+11:45 Inserção da tag "Grupos" para os contatos selecionados
+11:58 Demonstração de como filtrar os chats por tags
+12:15 Filtro de mensagens não lidas e por tags
+12:21 Ativando a opção de filtrar por "Última mensagem recebida"
+12:33 Centralização da conversa ao filtrar por tags
+15:39 Exibição das tags na listagem do chat
+16:04 Exemplo de como as tags aparecem no chat com diferentes cores
+16:15 Demonstração de como as tags oferecem mais controle e organização no atendimento
+16:47 Opção de editar informações do grupo novamente
+18:11 Pergunta de um participante sobre a replicação da criação de grupos no WhatsApp
+18:20 A presentadora mostra a tela do seu celular, confirmando que o grupo foi replicado no WhatsApp
+19:05 A presentadora responde a uma pergunta sobre a visualização das mensagens em grupo
+20:13 A presentadora mostra como responder uma mensagem específica no grupo
+20:44 A presentadora demonstra como agendar um chamado no sistema
+21:51 Demonstração de como criar e gerenciar tags no sistema
+22:00 Criação de uma nova tag e edição de uma tag existente
+22:31 Filtro de tags por nome e por cor
+22:46 Vinculação de tags a departamentos específicos
+22:56 Criação de uma nova tag com nome, cor e departamentos vinculados
+23:07 A presentadora demonstra como filtrar os chats por tags, selecionando "Aguardando Documentação"
+23:25 A presentadora mostra como o filtro retorna apenas as conversas com a tag selecionada
+23:37 A presentadora demonstra como desativar a exibição de tags no chat
+23:51 Criação de uma nova tag com o nome "Pessoas" e vinculação a departamentos
+24:46 Salvar a nova tag "Campanhas Instagram"
+25:07 Visualização da nova tag "Campanhas Instagram" na lista de tags
+25:17 A presentadora demonstra como ativar a exibição de tags no chat
+25:34 A presentadora demonstra como copiar o protocolo de atendimento
+25:47 Inserção da tag "Urgente", "Cliente VIP" e "Aguardando Documentação"
+26:15 A presentadora mostra o caminho para habilitar as tags no chat: "Mais opções" > "Empresas" > rolar até "Exibição das tags no chat"
+27:10 Opção de habilitar a exibição das tags no chat
+27:26 Retorno ao chat para verificar a exibição das tags
+27:31 Opção de mostrar e esconder tags no chat
+27:42 Habilitação da visualização das tags nas configurações da empresa
+27:56 A presentadora demonstra como filtrar os chats por mensagens não lidas e por tags
+28:22 Demonstração de como a criação de grupos é replicada no WhatsApp do celular
+29:00 Resposta a uma pergunta sobre as tags, mostrando a opção de editar tags existentes para adicionar cores
+29:44 Resposta a uma pergunta sobre a criação de tickets para demandas não atendidas imediatamente
+30:26 Demonstração de como agendar uma notificação para um contato, sem enviar mensagem automática
+30:45 A presentadora explica como criar uma notificação para lembrá-la de entrar em contato com um cliente, sem enviar uma mensagem automática
+31:37 Demonstração de como criar uma nova tag com nome, cor e vincular a departamentos
+32:20 A presentadora mostra como habilitar a exibição de tags no chat
+[33:57] Início da apresentação do sistema Digisac.
+[34:05] Abertura do menu de Configurações de Senhas de Usuários.
+[34:07] Visualização do menu de Configurações de Empresa.
+[34:09] Navegação para a aba "Conversas" e visualização da lista de chats.
+[34:14] Mudança para a aba "Fila" na lista de chats.
+[34:17] Retorno para a aba "Chats".
+[34:19] Abertura do menu de opções de agendamento dentro de um chat.
+[34:25] Clique no ícone de calendário para criar um agendamento.
+[34:31] Navegação para a aba "Contatos".
+[34:33] Seleção de um contato específico na lista.
+[34:41] Clique no ícone de calendário para criar um agendamento para o contato selecionado.
+[34:47] Seleção do departamento "Comercial/Vendas" no formulário de agendamento.
+[34:51] Seleção do atendente "Fabiana" no formulário.
+[34:57] Confirmação de que o contato é "Rebeca Cossoniche".
+[35:08] Abertura do calendário para seleção da data e hora do agendamento.
+[35:12] Seleção do dia 28 de fevereiro de 2025 às 15:35.
+[35:18] Alteração da hora para 15:37 para visualização imediata da ação.
+[35:27] Abertura das opções de ação no agendamento.
+[35:35] Seleção da opção "Abrir chamado".
+[35:39] Digitação de uma mensagem padrão ("Olá, como posso ajudar?") para ser enviada automaticamente.
+[36:04] Remoção da mensagem para demonstrar o envio sem conteúdo.
+[36:27] Demonstração de que a mensagem pode ser enviada vazia.
+[36:39] Seleção da opção "Notificar atendente".
+[36:57] Sinalização do ícone de notificação na tela.
+[37:05] Seleção da opção "Abrir chamado e notificar atendente".
+[37:14] Digitação da mensagem "Olá, vamos retomar o atendimento?" e adição de arquivo.
+[37:23] Ajuste da hora para 15:39.
+[37:34] Digitação de um comentário interno ("contrato enviado").
+[37:54] Agendamento concluído e visualização do chat.
+[37:59] Notificação de agendamento e abertura de chamado automático no chat.
+[38:02] Retorno à lista de conversas.
+[38:26] Notificação de agendamento e abertura de chamado automático para a atendente Fabiana.
+[38:44] Visualização do painel de notificações com o agendamento.
+[38:49] Retorno ao chat e visualização do agendamento na conversa.
+[38:57] Reabertura do formulário de agendamento.
+[39:34] Navegação para o menu superior "Mais opções".
+[39:40] Seleção da opção "Agendamentos" no menu.
+[39:44] Visualização da lista de agendamentos.
+[39:48] Clique em "Novo Agendamento".
+[39:57] Visualização do agendamento criado na lista.
+[40:36] Ponto de atenção: O chamado precisa estar fechado para o envio da mensagem automática no agendamento.
+[41:06] Slides sobre Melhorias na Gestão de Tags e Exibição das Tags na listagem do chat.
+[41:10] Slides sobre Gestão de Grupos.
+[41:14] Retorno aos slides sobre tags.
+[41:19] Slides sobre Campos Personalizados.
+[41:26] Explicação sobre a funcionalidade e tipos de campos personalizados.
+[43:18] Retorno ao chat para criação de campos personalizados.
+[43:28] Navegação para "Mais opções" e seleção de "Campos personalizados".
+[43:43] Clique em "Novo Campo".
+[43:49] Criação de um campo "CPF", vinculado a "Contatos" e do tipo "Texto curto".
+[43:58] Detalhamento dos tipos de campos (curto, longo, numérico, monetário, lista, checkbox, telefone, e-mail, código postal, hora, intervalo de hora, data, intervalo de data, CPF, CNPJ).
+[45:06] Seleção do tipo "CPF".
+[45:12] Ativação da opção "Mostrar no cadastro" para o campo CPF.
+[45:26] Explicação da opção "Mostrar no cadastro" para o campo CPF.
+[45:48] Ativação da opção "Campo obrigatório" para o campo CPF.
+[46:04] Salvamento do campo CPF.
+[46:13] Criação de um novo campo "Status de cobrança".
+[46:25] Vinculação a "Contatos" e tipo "Checkbox".
+[46:34] Adição de opções para o checkbox: "aberto", "sem pendências".
+[46:48] Adição de opção "pago", "atrasado".
+[46:57] Demonstração de edição e exclusão de opções.
+[47:06] Adição de opções "aberto", "pago", "atrasado".
+[47:43] Salvamento do campo "Status de cobrança".
+[48:05] Visualização da lista de campos personalizados (CPF, Status de cobrança).
+[48:21] Retorno ao chat e visualização do menu lateral do contato.
+[48:35] Visualização dos campos personalizados criados (CPF, Status de cobrança) no menu lateral do contato.
+[48:46] Preenchimento do campo CPF com um número e demonstração de validação.
+[49:07] Seleção das opções "aberto" e "atrasado" para "Status de cobrança".
+[49:17] Seleção do campo "Vigência" do tipo "Intervalo de data".
+[49:55] Salvamento do campo "Vigência".
+[50:00] Preenchimento do campo "Vigência" com um intervalo de datas e demonstração de validação.
+[50:38] Destaque para os campos personalizados.
+[50:58] Navegação para a aba "Contatos".
+[51:05] Seleção de vários contatos.
+[51:08] Clique em "Ações em massa" e seleção de "Exportar".
+[51:25] Visualização do arquivo CSV exportado com os dados dos contatos, incluindo os campos personalizados.
+[51:59] Seleção de um contato específico para exportar informações personalizadas.
+[52:03] Confirmação da exportação do contato.
+[53:08] Retorno à tela de apresentação.
+[53:18] Visualização do arquivo CSV exportado com os campos personalizados, incluindo CPF.
+[53:57] Encerramento da apresentação e agradecimento.

@@ -1,0 +1,22 @@
+[00:00] Transição do círculo Digisac para a tela principal
+[00:01] Logotipo Digisac com a frase "Plataforma Multicanal"
+[00:04] Transição para a página do site com o título "Solução Completa Multicanal de Atendimento"
+[00:05] Seção do site destacando "Reúna os canais de atendimento digital com WhatsApp API oficial em um único lugar"
+[00:09] Seção do site com "Performance Multicanal" e caixas de recursos como "Todos os canais juntos"
+[00:11] Transição para animação de ícones de mensagens (WhatsApp, Telegram, SMS, Chat, Email)
+[00:15] Os ícones de mensagens são sugados para um "portal" que os organiza e centraliza
+[00:18] O portal envia os canais organizados para operadores de atendimento
+[00:21] Destaque para "Integre e gerencie os chamados de seus clientes de forma fácil e organizada"
+[00:23] Destaque para os ícones de mensagem em linha com a frase "Com suporte técnico especializado e com horário estendido"
+[00:28] Apresentação da interface da plataforma Digisac com a tela "Agora" (em atendimento)
+[00:30] Demonstração de um filtro de chamados na interface
+[00:32] Visualização da tela de chat da plataforma Digisac
+[00:35] Demonstração de transferência de chamado para diferentes departamentos (Suporte, Atendimento, Financeiro)
+[00:38] Tela de "Métricas em tempo real" da plataforma Digisac
+[00:40] Scroll na tela de estatísticas mostrando dados de atendimento como "tempo médio" e "chamados abertos"
+[00:43] Gráfico de "TMA - Tempo médio de atendimento" e "PTE - Média do 1º tempo de espera"
+[00:45] Gráfico de barras de "TMA - Tempo médio de atendimento" por atendente
+[00:47] Logotipo Digisac com a frase "Plataforma Multicanal" e os ícones de mensagens ao redor
+[00:52] Frase em destaque "GERENCIE OS CANAIS DA SUA EMPRESA"
+[00:56] Informações de contato: Telefone, WhatsApp e Telegram (@digisacbot)
+[01:09] Endereço do site: WWW.DIGISAC.COM.BR

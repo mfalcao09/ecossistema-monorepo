@@ -1,0 +1,23 @@
+[00:00] Visão geral da plataforma
+[00:20] Acesso à tela de prompts
+[00:23] Edição do prompt "Sophia 3"
+[00:24] Configuração da voz no prompt
+[00:34] Colagem da chave API do Eleven Labs
+[00:44] Escolha do tipo de resposta (automático, texto, voz)
+[01:12] Configuração do tipo de resposta para "Automático"
+[01:19] Informações sobre a funcionalidade de voz da Eleven Labs e custos
+[01:33] Visão geral da página de configurações do Eleven Labs
+[02:00] Criação de uma nova chave API
+[02:14] Preenchimento do nome da chave API
+[02:18] Copiando a chave API
+[02:29] Colando a chave API no campo de configuração
+[02:35] Seleção da voz para a IA
+[02:40] Sugestão de voz da Karen
+[02:56] Adicionar voz da biblioteca
+[03:01] Selecionando a opção "Voice Library" para adicionar uma nova voz
+[03:06] Pesquisando pela voz "Karen" na biblioteca
+[03:15] Pesquisando pela voz "João" na biblioteca e adicionando-a
+[03:22] Confirmação para adicionar a voz "João Pedro"
+[03:36] Verificando a configuração da voz "Karen" no prompt
+[03:41] Salvando as configurações do prompt
+[03:52] Explicação sobre a simplicidade da configuração e a importância de verificar a precificação da Eleven Labs

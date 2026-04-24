@@ -1,0 +1,58 @@
+[00:00] A tela mostra uma mulher com fones de ouvido e óculos, falando para a câmera. Abaixo, há uma faixa com a inscrição "Fabiana - Digisac" e "Suporte Digisac: Telefone: (14) 3103-7800 | WhatsApp: (11) 99473-9889 | suporte@ikatec.com.br".
+[02:30] A tela mostra o canal "Digisac Plataforma Multicanal" no YouTube, com várias lives e vídeos programados.
+[03:22] A tela mostra a interface do chat Digisac, com o menu lateral aberto exibindo diversas opções.
+[03:27] A tela exibe um slide da "Imersão Digisac" com o título "Funcionalidades Auxiliares: Empresas", a data "11 de Setembro" e o horário "15h00".
+[03:47] A tela mostra um slide da "Imersão Digisac" com o título "Ferramenta Empresas na plataforma Digisac" e a descrição "Ferramenta que permite configurar diversos itens da sua plataforma, como o nome da empresa cadastrada, fuso horário, nome do atendente no início da mensagem, entre outros.". Abaixo, há uma seção intitulada "Serviço de Atendimento ao Cliente (SAC)" com várias opções de configuração.
+[04:22] A tela exibe um slide da "Imersão Digisac" com o título "Diversos itens, como:" e uma lista de funcionalidades: "Tempo de inatividade de chamado (minutos): Definir tempo de inatividade em conjunto ao robô.", "Tabela de horário: Define o horário de atendimento geral de sua empresa", "Controle de ausência: Controle das ausências dos operadores durante o expediente." e "Autenticação de dois fatores (2FA): Uma ferramenta de segurança que solicita uma segunda forma de autenticação além das credenciais de usuário e senha.".
+[05:50] A tela mostra a interface do chat Digisac, com o menu "Mais opções" aberto.
+[06:04] A tela exibe a seção "Empresa" da plataforma Digisac, com campos para configurar o "Nome da empresa", "Fuso horário" e "Template disponível". Abaixo, há a seção "Serviço de Atendimento ao Cliente (SAC)" com várias opções.
+[07:44] A tela exibe a seção "Empresa" da plataforma Digisac, com as configurações do "Serviço de Atendimento ao Cliente (SAC)" e as "Configurações de senhas de usuários". A opção "SAC" está desativada.
+[07:54] A tela mostra a interface do chat Digisac, com a coluna de chats visível.
+[08:19] A tela exibe a seção "Contatos" da plataforma Digisac, mostrando uma lista de contatos com "Nome", "Pessoa", "Número", "Conexão" e "Tags".
+[08:44] A tela mostra a seção "Empresa" da plataforma Digisac, com o menu "Mais opções" aberto e a opção "Empresa" selecionada.
+[11:06] A tela exibe a seção "Empresa" da plataforma Digisac, com configurações do "Serviço de Atendimento ao Cliente (SAC)" e a "Tabela de horário". A opção "Desabilitar transferência automática para departamento/atendente padrão do contato" está habilitada.
+[11:20] A tela exibe a seção "Serviço de Atendimento ao Cliente (SAC)" da plataforma Digisac, com opções como "Notificar nova mensagem", "Notificar transferência de chamados" e "Mostrar informações do suporte".
+[12:03] A tela mostra a interface do chat Digisac, com o menu "Suporte" aberto na lateral direita, exibindo informações de contato da Digisac.
+[12:40] A tela exibe a seção "Serviço de Atendimento ao Cliente (SAC)" da plataforma Digisac, com as opções "Mostrar informações do suporte" ativada e "Nome do atendente no começo da mensagem" ativada.
+[14:31] A tela mostra a interface do chat Digisac, com o menu "Mais opções" aberto e a opção "Assunto de chamado" selecionada.
+[14:50] A tela exibe uma janela pop-up "Fechar chamado" na plataforma Digisac, com campos para "Assunto do chamado" e "Resumo do atendimento".
+[15:05] A tela mostra a seção "Serviço de Atendimento ao Cliente (SAC)" da plataforma Digisac.
+[15:12] A tela exibe uma janela pop-up "Fechar chamado" na plataforma Digisac.
+[15:19] A tela mostra a seção "Serviço de Atendimento ao Cliente (SAC)" da plataforma Digisac, com as opções "Permitir nomes duplicados" e "Tornar assunto obrigatório" desativadas.
+[15:55] A tela mostra a seção "Serviço de Atendimento ao Cliente (SAC)" da plataforma Digisac, com a opção "Departamento padrão para chamados" configurada como "Treinamento".
+[16:01] A tela exibe a seção "Serviço de Atendimento ao Cliente (SAC)" da plataforma Digisac, com o campo "Tempo de inatividade de chamado (minutos)" preenchido com "360".
+[16:30] A tela mostra o campo "Tempo de inatividade de chamado (minutos)" na plataforma Digisac, sendo alterado de "360" para "60".
+[16:40] O campo "Tempo de inatividade de chamado (minutos)" na plataforma Digisac é alterado para "120".
+[16:47] O campo "Tempo de inatividade de chamado (minutos)" na plataforma Digisac é alterado para "360".
+[17:25] A tela exibe o campo "Formato de número de protocolo" na plataforma Digisac, mostrando o formato padrão "{date}@count".
+[17:31] A tela mostra a interface do chat Digisac, com o menu lateral e o chat principal visíveis.
+[18:02] A tela exibe o campo "Formato de número de protocolo" na plataforma Digisac, com um menu suspenso mostrando opções como "Data no formato: YYYYMMDD" e "Contador incremental de chamadas".
+[18:21] A tela mostra o campo "Departamento padrão para chamados" na plataforma Digisac, com a opção "Treinamento" selecionada.
+[18:55] A tela exibe a "Tabela de horário" na plataforma Digisac, com dias da semana e horários de início e término.
+[19:28] A tela mostra a "Tabela de horário" na plataforma Digisac, com a opção "Dom" sendo adicionada com horários de 08:00 a 12:00.
+[19:44] A tela exibe a seção "Controle de ausência" na plataforma Digisac, com a opção "Ativar controle de ausência" desativada e motivos cadastrados como "Consulta", "Almoço", "Café" e "Reunião".
+[20:41] A tela mostra a seção "Empresa" da plataforma Digisac, com o menu "Mais opções" aberto e a opção "Tabela de horários" destacada.
+[20:47] A tela exibe a seção "Mais opções" da plataforma Digisac, com a opção "Tabela de horários" destacada.
+[20:54] A tela mostra a seção "Tabela de horários" na plataforma Digisac.
+[21:11] A tela exibe a seção "Mais opções" da plataforma Digisac, com a opção "Usuários" selecionada.
+[21:21] A tela mostra a seção "Usuários" na plataforma Digisac, com uma lista de usuários e a coluna "Tabela de horários".
+[21:29] A tela exibe a seção "Empresa" da plataforma Digisac, com a "Tabela de horário" e o "Controle de ausência" visíveis.
+[21:36] A tela mostra a seção "Tabela de horário" na plataforma Digisac, com as opções "Adicionar regra" e dias da semana.
+[21:42] A tela exibe a seção "Controle de ausência" na plataforma Digisac, com a opção "Ativar controle de ausência" ativada e motivos como "Consulta", "Almoço", "Café" e "Reunião".
+[22:00] A tela mostra a seção "Controle de ausência" na plataforma Digisac, com a opção "Ativar controle de ausência" ativada e motivos cadastrados.
+[22:09] A tela exibe a interface do chat Digisac, com o ícone de pausa na barra superior direita.
+[22:19] A tela mostra a seção "Controle de ausência" na plataforma Digisac, com a opção "Motivo" selecionada e a opção "Inserir senha" desativada.
+[23:16] A tela exibe a seção "Controle de ausência" na plataforma Digisac, com a opção "Motivo" ativada e "Inserir senha" desativada.
+[24:20] A tela mostra a seção "Controle de ausência" na plataforma Digisac, com a opção "Motivo" ativada e "Inserir senha" desativada.
+[24:28] A tela exibe a seção "Configurações de senhas de usuários" na plataforma Digisac, com a opção "Expiração de senha" desativada.
+[24:43] A tela mostra a opção "Expiração de senha" ativada na plataforma Digisac.
+[25:12] A tela exibe a opção "Gerar senha aleatória automaticamente" selecionada na plataforma Digisac.
+[25:19] A tela mostra o campo "Prazo de expiração (dias)" na plataforma Digisac, preenchido com "90".
+[25:40] O campo "Prazo de expiração (dias)" na plataforma Digisac é alterado para "30".
+[25:46] O campo "Prazo de expiração (dias)" na plataforma Digisac é alterado para "90".
+[26:01] A tela exibe a opção "Exigir alteração de senha do usuário no primeiro acesso" na plataforma Digisac.
+[26:06] A tela mostra a opção "Exigir alteração de senha do usuário no primeiro acesso" ativada na plataforma Digisac.
+[26:47] A tela exibe a seção "Autenticação de dois fatores (2FA)" na plataforma Digisac.
+[27:27] A tela mostra a opção "Ativar autenticação de dois fatores" na plataforma Digisac, que está ativada. Uma mensagem "Cuidado! Ao ativar este opção e salvar, este ação não poderá ser desfeita. No prazo de 2 minutos todos o usuários que não ativarem a autenticação de dois fatores, serão desconectados." é exibida.
+[28:02] A tela exibe um slide da "Imersão Digisac" com o título "Configurações de senhas de usuários" e a descrição "É importante que você mantenha sua senha sempre atualizada para garantir a total segurança do seu acesso. Recomendamos que altere a cada 60 ou 90 dias, o que ajuda a manter sua conta protegida e a plataforma atualizada.". Abaixo, há as opções de configuração de senha.
+[29:08] A tela mostra um slide final da "Imersão Digisac" com o título "Configurações de senhas de usuários" e a mesma descrição sobre a importância de manter a senha atualizada.

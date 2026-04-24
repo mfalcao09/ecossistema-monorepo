@@ -57,3 +57,16 @@ supabase/.temp/
 
 # Claude Code
 .claude/local/
+.claude/
+
+# MiniMax AI tooling
+.minimax/
+
+# Research scraping artifacts (heavy binaries, regen'áveis)
+docs/research/**/_videos/
+docs/research/**/*.mp4
+docs/research/**/*.info.json
+docs/research/**/frame_*.jpg
+docs/research/**/run-*.log*
+docs/research/**/run.log*
+docs/research/**/__pycache__/

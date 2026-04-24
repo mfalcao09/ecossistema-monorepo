@@ -1,0 +1,22 @@
+[00:00] Início da apresentação do tutorial
+[00:06] Destaque para a aba Atendimento
+[00:23] Destaque para o ícone de criação de ticket
+[00:26] Apresentação do filtro por tags e status
+[00:32] Demonstração de envio de mensagem de cliente para a plataforma
+[00:40] Ticket aparece na aba aguardando
+[00:48] O usuário aceita o ticket e a tela de conversação é exibida
+[01:05] Recursos da tela de conversação: anexar arquivo, enviar emoji, gravar áudio, inserir tags, agendar, transferir, deletar
+[01:30] Demonstração de envio de mensagem na tela de conversação
+[01:39] Demonstração de como desativar a assinatura nas mensagens
+[01:52] Finalização do ticket
+[01:57] Ticket aparece na aba Resolvidos
+[02:15] Reabertura do ticket manualmente
+[02:34] Fechar todos os tickets na aba Atendendo
+[02:41] Confirmação da ação de fechar todos os tickets
+[02:50] Fechar todos os tickets na aba Aguardando
+[02:59] Filtros de busca por tag
+[03:04] Filtros de busca por status
+[03:08] Filtros de busca por usuário
+[03:10] Filtros de busca por fila
+[03:19] Reabertura do ticket
+[03:43] Fim do tutorial

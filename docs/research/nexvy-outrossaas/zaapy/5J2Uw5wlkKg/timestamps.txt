@@ -1,0 +1,21 @@
+[00:00] Tela de gerenciamento de contatos.
+[00:06] Notificações do navegador
+[00:16] Perfil da plataforma com permissão de notificação
+[00:20] Notificações ativadas com sucesso
+[00:27] Tela de gerenciamento de contatos, com cards de contato, WhatsApp, Facebook/Instagram e Telegram.
+[00:42] Tabela de contatos, com nome, carteira, tipo de conta, número e ações.
+[01:02] Botão "Mostrar" para selecionar o número de entradas na tabela.
+[01:17] Opção de selecionar um ou todos os contatos.
+[01:25] Menu de "Ações em massa" com várias opções.
+[02:07] Menu de "Exportar" com opções de impressão, CSV, Excel, PDF e copiar.
+[02:16] Tela de "Adicionar contato" com campos para nome completo, tipo de pessoa, e-mail e número.
+[02:37] Menu de "Ações" para um contato individual, com opções de ver histórico, editar e deletar.
+[02:40] Mensagem de "Contato não tem histórico".
+[03:04] Tela de "Editar perfil do contato" com dados gerais.
+[03:13] Campo de "Atribuir etiquetas".
+[03:25] Opção de "Deletar contato".
+[03:45] Aba "Protocolos" na tela de edição do perfil do contato.
+[03:57] Menu de "Exportar" na aba "Protocolos".
+[04:05] Aba "Observações" na tela de edição do perfil do contato.
+[04:12] Aba "Mensagens Agendadas" na tela de edição do perfil do contato.
+[04:24] Retorno à tela de gerenciamento de contatos.

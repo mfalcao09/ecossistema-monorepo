@@ -1,0 +1,80 @@
+[00:00] Início do vídeo com a apresentadora Fabiana da Digisac e um slide azul.
+[01:10] Fabiana apresenta um slide intitulado "Como melhorar o seu atendimento com o agendamento de mensagens?".
+[02:05] Fabiana apresenta um slide com "Exemplos de Agendamentos", mostrando três tipos: "Confirmação de reunião", "Retorno" e "Mensagem interna agendada entre colaboradores".
+[03:14] O slide "Exemplos de Agendamentos" é atualizado com mais duas opções: "Cliente solicitou um orçamento" e "Aniversariantes da semana".
+[03:59] Fabiana navega na plataforma Digisac para a tela de "Agendamentos".
+[04:05] Fabiana clica em "Mais opções" no menu superior.
+[04:12] Fabiana clica em "Agendamentos" no menu suspenso.
+[04:26] Fabiana clica em "Novo Agendamento".
+[04:42] Fabiana inicia a explicação dos campos para criar um agendamento.
+[04:49] Fabiana seleciona "Equipe Digisac" no campo "Pessoa".
+[05:09] Fabiana cancela a seleção de "Equipe Digisac".
+[05:14] Fabiana explica o campo "Pessoas" no menu superior da plataforma Digisac.
+[05:22] Fabiana retorna à tela de "Criando Agendamento".
+[05:25] Fabiana seleciona "Equipe Digisac" no campo "Pessoa".
+[05:58] Fabiana seleciona "Comercial/Vendas" no campo "Departamento".
+[06:05] Fabiana seleciona seu próprio nome, "Fabiana", no campo "Atendente".
+[06:19] Fabiana explica as opções do campo "Ações", mostrando "Abrir chamado" sem notificação.
+[06:34] Fabiana explica que ao selecionar um atendente específico, a opção de notificação se torna disponível.
+[06:51] Fabiana seleciona "Central WhatsApp - Treinamento" no campo "Conexão".
+[06:59] Fabiana seleciona "Alex" no campo "Contato".
+[07:23] Fabiana demonstra como a seleção de "Pessoa" filtra os contatos disponíveis.
+[07:46] Fabiana desmarca a seleção de "Equipe Digisac" e mostra todos os contatos.
+[07:58] Fabiana explica as três opções de "Ações": "Abrir chamado", "Notificar atendente" e "Abrir chamado e notificar atendente".
+[08:11] Fabiana escolhe a opção "Abrir chamado" e mostra o campo "Mensagem".
+[08:22] Fabiana demonstra a opção "Notificar atendente".
+[08:30] Fabiana demonstra a opção "Abrir chamado e notificar atendente".
+[09:31] Fabiana explica como estipular uma "Data e hora" para o agendamento.
+[09:57] Fabiana define a data para 11 de julho e a hora para 16:00.
+[10:09] Fabiana referencia o slide de "Exemplos de Agendamentos" novamente para a "Confirmação de reunião".
+[10:16] Fabiana cola o texto da "Confirmação de reunião" no campo "Mensagem".
+[10:50] Fabiana copia e cola o texto da mensagem de confirmação de reunião, mostrando a saudação "Boa tarde, Alex" e o horário agendado.
+[11:22] Fabiana ajusta o horário do agendamento para 15:00, uma hora antes da reunião.
+[11:44] Fabiana demonstra a opção de incluir um arquivo.
+[11:51] Fabiana explica o campo "Comentário" como sendo para a notificação interna do atendente, não visível ao cliente.
+[12:35] Fabiana digita "Confirmação reunião de 11 às 16:00 - Cliente Alex" no campo "Comentário".
+[12:59] Fabiana clica em "Salvar".
+[13:05] Fabiana exibe a tela de "Agendamentos" com o novo agendamento criado.
+[13:13] Fabiana mostra as opções "Visualizar", "Editar" e "Excluir" para o agendamento.
+[13:21] Fabiana retorna para a tela de chat para mostrar como o agendamento é feito de lá.
+[13:27] Fabiana abre o chamado com o contato "Fabiana" para demonstrar como o agendamento funciona.
+[13:41] Fabiana clica no ícone de calendário no canto superior direito para criar um agendamento diretamente do chat.
+[13:54] Fabiana exibe a tela de Agendamentos novamente.
+[14:00] Fabiana navega novamente até a tela de "Agendamentos" através do menu "Mais opções".
+[14:39] Fabiana responde a uma pergunta sobre agendamentos para conexão WABA (WhatsApp Business API).
+[15:13] Fabiana retorna para a tela de "Agendamentos" e cria um novo.
+[15:26] Fabiana explica o agendamento interno entre colaboradores.
+[16:00] Fabiana seleciona "Comercial/Vendas" como departamento.
+[16:07] Fabiana seleciona "Leonardo Lino" como atendente.
+[16:24] Fabiana seleciona "Central WhatsApp - Treinamento" como conexão.
+[16:30] Fabiana seleciona "Alex" como contato.
+[16:50] Fabiana define a data para o dia atual e a hora para 15:19.
+[17:07] Fabiana seleciona a ação "Abrir chamado e notificar atendente".
+[17:19] Fabiana deixa o campo de mensagem vazio.
+[17:55] Fabiana digita o comentário "O cliente Alex ligou durante o seu horário de almoço e solicitou retorno assim que estiver disponível".
+[18:18] Fabiana salva o agendamento.
+[18:31] Fabiana retorna ao chat com "Alex" e exibe a notificação de agendamento no canto superior direito.
+[18:50] Fabiana clica no ícone de notificações e exibe os agendamentos.
+[18:58] Fabiana clica no agendamento e mostra os detalhes.
+[19:07] Fabiana clica em "Ir para chamado".
+[19:26] Fabiana mostra o agendamento de orçamento no chat com "Alex".
+[19:50] Fabiana responde a uma pergunta do Diego sobre encerrar a conversa após agendar.
+[20:13] Fabiana navega até a tela de "Agendamentos".
+[20:32] Fabiana retorna ao tópico de "Solicitação de um orçamento".
+[20:55] Fabiana cria um novo agendamento.
+[21:16] Fabiana seleciona "Alex" como contato e define a ação "Abrir chamado e notificar atendente".
+[21:19] Fabiana cola o texto do orçamento no campo de mensagem.
+[22:56] Fabiana anexa um arquivo PDF ao agendamento.
+[23:09] Fabiana digita "Orçamento para o Cliente Alex, para o dia 10/07 as 15h30" no campo "Comentário".
+[23:32] Fabiana mostra o agendamento salvo.
+[23:58] Fabiana edita a data e hora do agendamento para 15:26.
+[24:08] Fabiana salva o agendamento.
+[24:12] Fabiana retorna ao chat com Alex.
+[24:59] Fabiana retorna à tela de agendamentos.
+[25:09] Fabiana responde a uma pergunta de um usuário sobre agendamentos para equipe.
+[27:32] Fabiana apresenta um slide com as regras para o agendamento.
+[28:05] Fabiana demonstra o erro ao tentar criar um agendamento dentro do intervalo de 6 minutos.
+[29:13] Fabiana demonstra o envio do agendamento de orçamento no chat.
+[30:50] Fabiana comenta sobre as regras do agendamento.
+[32:04] Fabiana apresenta um slide intitulado "Benefícios dos Agendamentos".
+[35:40] Fabiana encerra o webinar agradecendo a participação e convidando a todos para os próximos treinamentos.

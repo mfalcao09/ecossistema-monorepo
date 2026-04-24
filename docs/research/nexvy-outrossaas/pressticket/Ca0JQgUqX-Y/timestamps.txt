@@ -1,0 +1,27 @@
+[00:00] Início do vídeo: tela principal do sistema.
+[00:06] A tela mostra uma lista de atendimentos e a barra lateral de navegação.
+[00:36] Configurações de gerenciamento de expediente
+[00:46] Selecionando o modelo "Empresa" para gerenciamento de expediente
+[01:06] Definição de horários de atendimento da empresa
+[01:14] Preenchimento do horário de atendimento para sexta-feira (9h às 17h).
+[01:31] Acesso à aba "Filas e Conexões" para configurar mensagens.
+[01:36] Edição da conexão do WhatsApp e inserção da mensagem de expediente.
+[02:08] Revisão da configuração do horário de expediente.
+[02:22] Demonstração da mensagem de expediente fora do horário no WhatsApp.
+[02:44] Configuração de horário de atendimento por fila/departamento.
+[02:51] Seleção do modelo "Fila" para gerenciamento de expediente.
+[03:00] Acesso à aba "Filas/Departamentos" e edição da fila "Comercial".
+[03:10] Definição do horário de atendimento da fila "Comercial" para sexta-feira.
+[03:22] Exemplo de configuração de horário 24h para domingo.
+[03:34] Inserção da mensagem de expediente fora do horário para a fila.
+[03:55] Revisão das configurações por fila.
+[04:09] Vinculação do fluxo de atendimento "Treinamento Menu" na conexão.
+[04:22] Demonstração da funcionalidade por fila no WhatsApp (primeira tentativa).
+[04:47] Verificação da configuração do fluxo de atendimento.
+[04:55] Correção do fluxo, transferindo para a fila "Comercial".
+[05:17] Salvando o fluxo de atendimento.
+[05:22] Finalização do teste e nova tentativa de comunicação via WhatsApp.
+[05:32] Mensagem de saudação do menu de atendimento é exibida.
+[05:43] Mensagem de expediente fora do horário para a fila é exibida.
+[06:00] Explicação sobre a diferença entre as configurações de horário "Empresa" e "Fila".
+[06:12] Encerramento do vídeo e contato para dúvidas.

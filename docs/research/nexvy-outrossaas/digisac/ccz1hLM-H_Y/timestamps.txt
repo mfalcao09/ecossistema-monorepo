@@ -1,0 +1,67 @@
+[00:00] Mulher em uma videochamada.
+[00:02] Mulher em uma videochamada falando.
+[03:39] Slide de apresentação com o título "Campanhas no WhatsApp Business API da Digisac".
+[03:40] Slide de apresentação com o título "O que você precisa saber para realizar campanhas pelo WhatsApp API".
+[04:34] Slide de apresentação com o título "Tenha permissão dos contatos" e "Faça a segmentação dos contatos".
+[06:14] Slide de apresentação com o título "Não envie conteúdo de produtos proibidos" e "Conheça as diretrizes do WhatsApp Business".
+[08:42] Slide de apresentação com o título "Saúde WABA na Digisac" e "Monitore a saúde das suas contas WABA".
+[09:52] Interface da plataforma Digisac, na aba "Saúde WABA".
+[10:02] Mulher na videochamada.
+[10:07] Mulher na videochamada apontando para a aba "Saúde WABA" na plataforma.
+[10:11] Mulher na videochamada clicando em "Visão geral" e abrindo um menu suspenso.
+[10:16] Mulher na videochamada clicando em "Saúde WABA" na plataforma.
+[10:25] Mulher na videochamada explicando a plataforma Digisac.
+[10:57] Mulher na videochamada olhando para a tela da plataforma.
+[11:34] Slide de apresentação com o título "Evite Disparos em Alta Frequência" e informações sobre limites de conversas por dia.
+[14:02] Interface da plataforma Meta com a página "Limites de mensagens".
+[15:11] Slide de apresentação com o título "Evite Disparos em Alta Frequência" e informações sobre limites de conversas por dia.
+[15:23] Slide de apresentação com o título "Para enviar mensagens em massa, escolha uma das duas opções:".
+[16:21] Interface da plataforma Digisac, na aba "Saúde WABA".
+[16:27] Mulher na videochamada clicando no ícone de megafone, que representa "Campanhas".
+[16:36] Interface da plataforma Digisac, na aba "Campanhas", mostrando a opção "Criar nova campanha".
+[17:00] Mulher na videochamada selecionando "WABA - Oficial" no campo "Conexão".
+[17:10] Mulher na videochamada clicando no campo "Template".
+[17:20] Mulher na videochamada explicando a plataforma Digisac.
+[18:27] Mulher na videochamada clicando em "Mais opções" e abrindo um menu suspenso.
+[18:37] Mulher na videochamada clicando em "Templates" no menu suspenso.
+[18:41] Mulher na videochamada clicando em "+ Novo Template".
+[18:51] Mulher na videochamada explicando o status dos templates.
+[18:58] Mulher na videochamada clicando no ícone de megafone, que representa "Campanhas".
+[19:09] Mulher na videochamada digitando "Renovação" no campo "Título" e selecionando "WABA - Oficial" no campo "Conexão".
+[19:19] Mulher na videochamada selecionando o template "assinatura_renovada".
+[19:57] Mulher na videochamada ativando a opção "Utilizar tags".
+[20:05] Mulher na videochamada digitando "renovação" no campo de tags e selecionando-a.
+[20:11] Mulher na videochamada digitando "Fabiana" no campo "Corpo da mensagem" para personalizar a mensagem.
+[20:44] Mulher na videochamada rolando a tela para baixo.
+[20:53] Mulher na videochamada digitando "Fabiana" no campo "Corpo da mensagem".
+[21:11] Mulher na videochamada explicando as tags da plataforma.
+[22:11] Mulher na videochamada desativando a opção "Utilizar tags".
+[22:19] Mulher na videochamada clicando em "Baixar o modelo" no campo "Modelo para arquivo CSV".
+[22:24] Tela do navegador mostrando a página inicial do Google.
+[22:27] Mulher na videochamada clicando no ícone de um quadrado com um "M" em cima.
+[22:31] Mulher na videochamada clicando em "Carregar" na janela pop-up.
+[22:36] Mulher na videochamada mostrando o modelo do arquivo CSV aberto no Excel.
+[23:13] Mulher na videochamada voltando para a plataforma Digisac.
+[23:26] Mulher na videochamada clicando em "Selecionar o arquivo".
+[23:55] Mulher na videochamada rolando a tela para baixo.
+[24:14] Mulher na videochamada clicando na opção "Abrir chamado ao enviar a campanha".
+[24:29] Mulher na videochamada selecionando "Comercial" no campo "Departamento".
+[25:08] Mulher na videochamada desativando a opção "Abrir chamado ao enviar a campanha".
+[25:34] Mulher na videochamada ativando a opção "Agendamento de campanha".
+[25:52] Mulher na videochamada selecionando a data 22 de novembro de 2024 e o horário 08:00.
+[26:06] Mulher na videochamada rolando a tela para baixo.
+[26:32] Mulher na videochamada clicando em "Salvar".
+[26:41] Mulher na videochamada mostrando a campanha "Renovação" agendada na lista.
+[27:31] Mulher na videochamada clicando nos três pontos verticais à direita da campanha "Renovação".
+[27:37] Mulher na videochamada clicando em "Visualizar" no menu suspenso.
+[27:46] Mulher na videochamada mostrando o "Progresso do disparo" da campanha.
+[28:05] Mulher na videochamada mostrando o "Progresso do envio" da campanha.
+[28:56] Mulher na videochamada clicando em "Exportar resultado".
+[29:02] Mulher na videochamada fechando a janela de visualização da campanha.
+[29:05] Mulher na videochamada clicando em "Exibir filtros" e zerando o período.
+[29:14] Mulher na videochamada mostrando o retorno de campanhas concluídas.
+[31:43] Mulher na videochamada mostrando um vídeo do YouTube com o título "Entenda sobre o WhatsApp Business API da Digisac".
+[31:57] Mulher na videochamada fechando o vídeo do YouTube.
+[32:10] Mulher na videochamada mostrando o site do Manual Digisac, na página "Waba (WhatsApp Business API)".
+[32:39] Mulher na videochamada clicando em "Manual de acesso" no ponto de interrogação.
+[33:40] Mulher na videochamada mostrando a tela de agradecimento final do webinar.

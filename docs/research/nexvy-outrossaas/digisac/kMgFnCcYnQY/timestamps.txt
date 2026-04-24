@@ -1,0 +1,61 @@
+[00:00] A mulher aparece na tela, falando e mostrando os pontos mais importantes do vídeo.
+[02:24] A tela mostra a imagem de “Imersão Digisac” e “Funil de Vendas: Retrospectiva e Inovação”.
+[03:03] A tela mostra o título “Funil de Vendas da Digisac” e a descrição da funcionalidade.
+[04:37] A tela mostra o título “Novidades do Funil de Vendas”.
+[06:30] A tela mostra a imagem “Rumo à plataforma Digisac!”.
+[06:54] A tela mostra a área de chats e contatos.
+[07:09] A tela mostra a área “Funil de vendas”.
+[09:57] A tela mostra as etapas do funil de vendas.
+[10:49] A tela mostra a área “Editar Etapa”.
+[11:49] A tela mostra o processo de exclusão da etapa.
+[12:44] A tela mostra a etapa “Visitantes” sendo criada.
+[13:30] A tela mostra o processo de exclusão da etapa.
+[14:02] A tela mostra o processo de exclusão da etapa.
+[14:28] A tela mostra o processo de criação de uma nova oportunidade.
+[14:43] A tela mostra o processo de salvar uma nova oportunidade.
+[14:55] A tela mostra o cliente Fabiana WAABA.
+[15:05] A tela mostra o processo de criar uma nova oportunidade.
+[15:30] A tela mostra o processo de criar uma nova oportunidade.
+[15:43] A tela mostra o processo de criação de uma nova oportunidade.
+[15:55] A tela mostra o processo de criação de uma nova oportunidade.
+[16:08] A tela mostra o processo de criação de uma nova oportunidade.
+[16:26] A tela mostra o processo de criação de uma nova oportunidade.
+[16:47] A tela mostra o processo de criação de uma nova oportunidade.
+[17:09] A tela mostra o processo de criação de uma nova oportunidade.
+[17:23] A tela mostra o processo de criação de uma nova oportunidade.
+[17:37] A tela mostra o processo de criação de uma nova oportunidade.
+[18:10] A tela mostra o processo de criação de uma nova oportunidade.
+[18:29] A tela mostra as informações da oportunidade de funil.
+[19:04] A tela mostra a área “Agendamentos”.
+[19:44] A tela mostra a área “Criando Agendamento”.
+[20:00] A tela mostra a área “Criando Agendamento” com o campo de data e hora.
+[20:15] A tela mostra a área “Criando Agendamento” com o campo de ações.
+[20:29] A tela mostra a área “Criando Agendamento” com o campo de mensagem.
+[20:44] A tela mostra a área “Criando Agendamento” com o campo de comentários.
+[21:02] A tela mostra a área de agendamentos.
+[21:19] A tela mostra a área de comentários.
+[21:34] A tela mostra a área de comentários.
+[21:46] A tela mostra a área de comentários.
+[22:01] A tela mostra a área de edição da oportunidade.
+[22:14] A tela mostra o processo de mover a oportunidade para outro funil.
+[22:45] A tela mostra o processo de download do relatório em Excel.
+[24:45] A tela mostra o relatório do funil em Excel.
+[25:00] A tela mostra o relatório do funil em Excel.
+[25:06] A tela mostra o relatório do funil em Excel.
+[25:14] A tela mostra o relatório do funil em Excel.
+[25:27] A tela mostra o relatório do funil em Excel.
+[25:35] A tela mostra o relatório do funil em Excel.
+[25:42] A tela mostra o relatório do funil em Excel.
+[25:49] A tela mostra o relatório do funil em Excel.
+[26:02] A tela mostra a área de funis de vendas.
+[26:15] A tela mostra a área de edição da etapa “Finalizados”.
+[26:22] A tela mostra o processo de edição do funil de vendas.
+[26:34] A tela mostra o processo de marcar como ganho.
+[26:49] A tela mostra o processo de marcar como ganho.
+[27:32] A tela mostra o processo de editar a etapa.
+[27:48] A tela mostra a área de funis de vendas.
+[27:56] A tela mostra o processo de edição do funil de vendas.
+[28:51] A tela mostra o processo de edição do funil de vendas.
+[29:50] A tela mostra a área de funis de vendas.
+[31:04] A tela mostra a imagem “Comece agora mesmo!”.
+[32:56] A tela mostra a imagem “Comece agora mesmo!”.

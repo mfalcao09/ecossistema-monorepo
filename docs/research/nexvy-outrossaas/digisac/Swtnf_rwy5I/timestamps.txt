@@ -1,0 +1,187 @@
+[00:00] Apresentação do logotipo do Digisac.
+[00:04] Ícones que representam os serviços oferecidos.
+[00:11] Interface principal do Digisac.
+[00:32] Sabina inicia a explicação da plataforma.
+[00:36] Tela inicial da plataforma.
+[01:13] Sabina fala sobre os treinamentos.
+[01:23] Sabina desliga a câmera.
+[01:33] Tela de login do Digisac.
+[01:41] Digitando as credenciais de acesso.
+[01:54] Explicação das credenciais de acesso.
+[02:09] Explicação da URL de acesso.
+[02:32] Sabina insere as credenciais.
+[02:58] Login realizado com sucesso.
+[03:04] Opções de idioma.
+[03:17] Informações de contato do suporte Digisac.
+[03:29] Menu de ajuda (Tutoriais e Manual de Acesso).
+[03:36] Vídeo de tutorial básico do Digisac.
+[03:42] Configurações (usuários, cargos, departamentos).
+[04:02] Opção de manual de acesso.
+[04:20] Clicando em "Chat".
+[04:49] Acessando "Mais opções".
+[04:55] Menu de "Departamentos".
+[04:59] Tela de "Departamentos".
+[05:27] Opções de edição do departamento "Suporte".
+[05:30] Edição do nome do departamento para "Atendimento".
+[05:43] Sabina explica como criar outros departamentos.
+[05:54] Criando um novo departamento "Suporte".
+[06:36] Clicando em "Cargos".
+[06:44] Tela de "Cargos".
+[07:08] Visualizando permissões do cargo "Administrador".
+[07:50] Explicação do cargo "Operador".
+[08:38] Editando permissões do cargo "Operador".
+[09:10] Editando as permissões de "Agendamentos".
+[09:50] Editando as permissões de "Mensagens".
+[10:06] Explicação da exclusão de mensagens.
+[10:35] Salvando as permissões editadas.
+[10:52] Criando um novo cargo.
+[11:10] Explicação sobre a criação de novos cargos.
+[11:42] Clicando em "Usuários".
+[11:46] Tela de "Usuários".
+[12:19] Editando o usuário "Sabrina".
+[12:28] Opção de alterar senha.
+[12:35] Escolhendo os departamentos que o usuário pertence.
+[13:00] Salvando o usuário "Sabrina".
+[13:05] Criando um novo usuário "Laís".
+[13:28] Escolhendo o cargo "Administrador" para "Laís".
+[13:46] Escolhendo os departamentos para "Laís".
+[13:54] Observação: não colocar dois cargos.
+[14:04] Salvando o usuário "Laís".
+[14:31] Usuário "Laís" salvo com sucesso.
+[15:13] Clicando em "Conexões".
+[15:23] Tela de "Conexões".
+[16:30] Criando uma nova conexão de WhatsApp.
+[17:25] Selecionando o departamento padrão para a conexão.
+[18:38] Ativando a confirmação de leitura.
+[18:49] Ativando a opção de abrir chamadas para mensagens de grupo.
+[18:54] Conexão criada e aguardando QR Code.
+[19:38] Exibindo o QR Code para conectar.
+[19:53] Conexão estabelecida com sucesso.
+[20:10] Mensagem indicando sincronização de contatos e mensagens.
+[20:46] Clicando na aba "Chats".
+[20:53] Tela de chat principal.
+[21:10] Explicação sobre as conexões Facebook e Instagram.
+[21:31] Opções de conexão: WhatsApp Business, Google Business, Telegram, SMS, Webchat, E-mail, Reclame Aqui.
+[22:38] Entrando em contato com o suporte para conexão de Facebook e Instagram.
+[23:12] Sabina explica sobre WhatsApp Business.
+[23:32] Sabina explica sobre Google Business.
+[23:42] Sabina explica sobre Telegram e SMS.
+[23:49] Sabina explica sobre Webchat.
+[23:53] Sabina explica sobre E-mail e Reclame Aqui.
+[24:23] Clicando na aba "Contatos".
+[24:26] Lista de contatos.
+[24:43] Cadastrando um novo contato.
+[24:52] Tela de criação de contato.
+[25:12] Preenchendo nome, conexão e número de telefone.
+[25:39] Clicando para salvar o contato.
+[25:44] Mensagem de "Número inválido".
+[26:16] Clicando na aba "Fila".
+[26:24] Explicação sobre a fila de atendimento.
+[26:49] Um novo cliente ("Sabrina Oliveira") entra na fila.
+[27:32] Clicando no cliente na fila.
+[27:46] Respondendo ao cliente.
+[27:54] A conversa é movida para o chat individual.
+[28:57] Recursos do chat: emoji, respostas rápidas.
+[29:21] Acessando "Respostas Rápidas" no menu "Mais opções".
+[29:26] Criando uma nova resposta rápida.
+[29:56] Criando uma segunda resposta rápida.
+[30:20] Usando as respostas rápidas no chat.
+[31:06] Balão de comentário no chat.
+[31:18] Digitando um comentário.
+[32:23] Ícone de microfone para enviar áudios.
+[32:32] Ícone de três pontos para ver os dados do contato.
+[33:01] Como criar e gerenciar tags no sistema Digisac.
+[33:06] A criação de tags no sistema.
+[33:10] A tela de criação de uma nova tag.
+[33:16] Inserindo o nome da tag "Venda realizada".
+[33:23] A tag "Venda realizada" aparece na lista de tags.
+[33:34] A tela de criação de uma nova tag para "Lead".
+[33:39] A tag "Lead" aparece na lista de tags.
+[33:41] A tela de criação de uma nova tag para "Cliente novo".
+[33:46] A tag "Cliente novo" aparece na lista de tags.
+[33:54] Como usar as tags no chat.
+[33:59] Inserindo a tag "Venda realizada" no chat.
+[34:02] Inserindo a tag "Cliente novo" no chat.
+[34:13] Como filtrar as conversas por tags.
+[34:18] A tela de filtros para contatos.
+[34:22] Filtrando por "Venda realizada".
+[34:24] O filtro aplicado no chat.
+[34:37] A funcionalidade de observações no chat.
+[34:43] Escrevendo uma observação.
+[34:55] O protocolo de atendimento.
+[35:01] Copiando o número do protocolo de atendimento.
+[35:14] A funcionalidade de definir um departamento padrão para chamadas.
+[35:23] Selecionando o departamento de atendimento.
+[35:27] Selecionando o atendente padrão.
+[35:31] A atendente Sabrina definida como padrão para este cliente.
+[36:13] As funções dos três pontinhos.
+[36:29] Anexo de imagens e arquivos.
+[36:37] Como finalizar um chamado.
+[36:41] Selecionando o assunto do chamado.
+[36:47] Como criar assuntos de chamado.
+[36:57] A tela de criação de um novo assunto de chamado.
+[37:10] Inserindo o assunto "Dúvidas".
+[37:13] O assunto "Dúvidas" aparece na lista de assuntos de chamado.
+[37:27] Inserindo o assunto "Treinamento agendado".
+[37:32] O assunto "Treinamento agendado" aparece na lista de assuntos de chamado.
+[37:48] Inserindo o assunto "Venda realizada".
+[37:53] O chat após a criação dos assuntos.
+[37:58] Finalizando o chamado e selecionando o assunto.
+[38:08] Fechando o chamado.
+[38:11] O chat mostra que não há chamados abertos.
+[38:36] Reabrindo o chamado do contato.
+[38:41] O chamado da Sabrina está fechado.
+[38:47] Reabrindo o chamado e transferindo para um departamento e atendente.
+[38:55] O chat com o chamado reaberto.
+[39:37] A funcionalidade de transferência de chamados.
+[39:41] Selecionando o departamento de suporte.
+[39:48] Escolhendo o atendente.
+[40:07] Adicionando um comentário na transferência.
+[40:30] A funcionalidade de agendamento.
+[40:38] A tela de criação de agendamento.
+[40:45] Selecionando o departamento e o atendente.
+[40:51] Escolhendo a ação de abrir e notificar o atendente.
+[41:15] Selecionando a data e hora do agendamento.
+[41:27] Escrevendo a mensagem a ser enviada.
+[41:43] Adicionando um comentário para o lembrete.
+[42:04] A tela de agendamentos com o agendamento criado.
+[42:28] Importante sobre o agendamento.
+[42:59] O agendamento sem abrir o chamado.
+[43:12] A notificação de agendamento.
+[43:46] Agendar um chamado e finalizá-lo.
+[44:03] O histórico de chamadas.
+[44:09] A tela de histórico de chamadas.
+[44:16] Visualizando mensagens anteriores.
+[44:28] Filtrando o histórico de chamadas.
+[44:33] Aplicando filtros de data e atendente.
+[44:56] O histórico de chamadas filtrado.
+[45:16] Filtrando por data.
+[45:20] Protocolo de atendimento no histórico de chamadas.
+[45:26] Visualizando o detalhe do chamado e a opção de exportar.
+[45:50] A visão geral no menu superior.
+[46:01] Recapitulação sobre o treinamento.
+[47:03] A tela de "Agora" na visão geral.
+[47:19] Atendentes offline e online.
+[47:38] Fila de atendimento por departamento.
+[47:51] Resumo de usuários e chamados.
+[49:43] Histórico de chamadas na visão geral.
+[50:11] Filtrando o histórico de chamadas por diferentes critérios.
+[51:08] Opções de exportar para Excel.
+[52:55] Ações em massa no histórico de chamadas.
+[53:13] O botão de "Ações em massa" com as opções "Fechar chamados" e "Transferir chamado".
+[54:06] A tela para fechar chamados em massa.
+[54:17] A tela para transferir chamados em massa.
+[54:33] Estatísticas de atendimento.
+[55:05] A estatística de atendimento.
+[55:10] Filtrando estatísticas de atendimento.
+[55:39] Tempo médio de chamados.
+[56:24] Média do 1º tempo de espera.
+[57:11] Média do tempo médio de espera.
+[58:16] Gráfico de tempo médio de atendimento (TMA) por período.
+[58:37] Gráfico de TMA por assunto.
+[58:58] Gráfico de TMA por conexão.
+[59:15] Estatísticas de avaliações.
+[01:00:43] Filtrando estatísticas de avaliações.
+[01:01:21] Auditoria.
+[01:01:56] Controle de ausência.
+[01:03:53] O chat interno do Digisac.

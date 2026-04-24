@@ -1,0 +1,33 @@
+[00:00] Início da transmissão do webinar
+[00:03] Apresentação da palestrante Fabiana e introdução do tema
+[00:43] Explicação sobre o recurso "reagir nas mensagens"
+[01:09] Demonstração do recurso de reações na plataforma Digisac
+[01:27] Catálogo de emojis para reagir
+[02:04] Apresentação do tema principal: "Aprenda como funciona o recurso Distribuição de Chamados"
+[02:10] Definição de Distribuição de Chamados na Digisac
+[02:54] Explicação do modelo de Distribuição Padrão
+[03:53] Explicação do modelo de Distribuição em Fila
+[05:08] Explicação sobre a Redistribuição de chamados ao final do expediente
+[06:22] Acesso à funcionalidade "Distribuição de Chamados" na plataforma
+[06:41] Interface de "Distribuição de Chamados" com opção "Nova Distribuição"
+[06:47] Formulário de "Criando Distribuição de Chamados" com opções de ativação, tipo de distribuição (padrão ou em fila), nome e departamentos inclusos
+[08:00] Seleção de departamentos na configuração da distribuição
+[08:26] Seleção de cargos na configuração da distribuição
+[08:56] Definição do número máximo de chamados por atendente e departamento
+[10:10] Configuração do tempo máximo para chamados permanecerem na fila do usuário offline e opções de redistribuição
+[10:56] Visualização de uma distribuição arquivada e opção de ativar
+[11:22] Edição de uma distribuição existente
+[11:59] Demonstração prática da distribuição de chamados
+[12:34] Demonstração de fechamento de chamado e redistribuição automática
+[13:06] Recebimento de novo chamado após redistribuição
+[13:24] Novo fechamento de chamado e aguardo de redistribuição
+[14:12] Recebimento de mais um chamado redistribuído
+[14:19] Central de notificações mostrando as redistribuições
+[14:48] Contato para informações adicionais sobre a ferramenta de distribuição de chamados
+[15:09] Demonstração da função "Controle de Ausência"
+[15:26] Acesso ao "Controle de Ausência" e visualização de registros
+[15:37] Ativação do modo "pausado" e seleção do motivo da ausência
+[16:34] Desbloqueio do "Controle de Ausência"
+[16:45] Breve revisão da criação de distribuição em fila
+[17:48] Informações de contato para adquirir a ferramenta
+[18:37] Encerramento do webinar

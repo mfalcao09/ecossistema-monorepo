@@ -1,0 +1,81 @@
+[00:00] Início da apresentação do sistema Digisac.
+[00:08] Abertura do menu de Configurações de Senhas de Usuários.
+[00:10] Visualização do menu de Configurações de Empresa.
+[00:12] Navegação para a aba "Conversas" e visualização da lista de chats.
+[00:17] Mudança para a aba "Fila" na lista de chats.
+[00:20] Retorno para a aba "Chats".
+[00:22] Abertura do menu de opções de agendamento dentro de um chat.
+[00:28] Clique no ícone de calendário para criar um agendamento.
+[00:34] Navegação para a aba "Contatos".
+[00:36] Seleção de um contato específico na lista.
+[00:44] Clique no ícone de calendário para criar um agendamento para o contato selecionado.
+[00:50] Seleção do departamento "Comercial/Vendas" no formulário de agendamento.
+[00:54] Seleção do atendente "Fabiana" no formulário.
+[01:00] Confirmação de que o contato é "Rebeca Cossoniche".
+[01:11] Abertura do calendário para seleção da data e hora do agendamento.
+[01:15] Seleção do dia 28 de fevereiro de 2025 às 15:35.
+[01:21] Alteração da hora para 15:37 para visualização imediata da ação.
+[01:30] Abertura das opções de ação no agendamento.
+[01:38] Seleção da opção "Abrir chamado".
+[01:42] Digitação de uma mensagem padrão ("Olá, como posso ajudar?") para ser enviada automaticamente.
+[02:07] Remoção da mensagem para demonstrar o envio sem conteúdo.
+[02:30] Demonstração de que a mensagem pode ser enviada vazia.
+[02:42] Seleção da opção "Notificar atendente".
+[03:00] Sinalização do ícone de notificação na tela.
+[03:08] Seleção da opção "Abrir chamado e notificar atendente".
+[03:17] Digitação da mensagem "Olá, vamos retomar o atendimento?" e adição de arquivo.
+[03:26] Ajuste da hora para 15:39.
+[03:37] Digitação de um comentário interno ("contrato enviado").
+[03:57] Agendamento concluído e visualização do chat.
+[04:02] Notificação de agendamento e abertura de chamado automático no chat.
+[04:05] Retorno à lista de conversas.
+[04:29] Notificação de agendamento e abertura de chamado automático para a atendente Fabiana.
+[04:47] Visualização do painel de notificações com o agendamento.
+[04:52] Retorno ao chat e visualização do agendamento na conversa.
+[05:00] Reabertura do formulário de agendamento.
+[05:37] Navegação para o menu superior "Mais opções".
+[05:43] Seleção da opção "Agendamentos" no menu.
+[05:47] Visualização da lista de agendamentos.
+[05:51] Clique em "Novo Agendamento".
+[06:00] Visualização do agendamento criado na lista.
+[06:39] Ponto de atenção: O chamado precisa estar fechado para o envio da mensagem automática no agendamento.
+[07:09] Slides sobre Melhorias na Gestão de Tags e Exibição das Tags na listagem do chat.
+[07:13] Slides sobre Gestão de Grupos.
+[07:17] Retorno aos slides sobre tags.
+[07:22] Slides sobre Campos Personalizados.
+[07:29] Explicação sobre a funcionalidade e tipos de campos personalizados.
+[09:21] Retorno ao chat para criação de campos personalizados.
+[09:31] Navegação para "Mais opções" e seleção de "Campos personalizados".
+[09:46] Clique em "Novo Campo".
+[09:52] Criação de um campo "CPF", vinculado a "Contatos" e do tipo "Texto curto".
+[10:01] Detalhamento dos tipos de campos (curto, longo, numérico, monetário, lista, checkbox, telefone, e-mail, código postal, hora, intervalo de hora, data, intervalo de data, CPF, CNPJ).
+[11:09] Seleção do tipo "CPF".
+[11:15] Ativação da opção "Mostrar no cadastro" para o campo CPF.
+[11:29] Explicação da opção "Mostrar no cadastro" para o campo CPF.
+[11:51] Ativação da opção "Campo obrigatório" para o campo CPF.
+[12:07] Salvamento do campo CPF.
+[12:16] Criação de um novo campo "Status de cobrança".
+[12:28] Vinculação a "Contatos" e tipo "Checkbox".
+[12:37] Adição de opções para o checkbox: "aberto", "sem pendências".
+[12:51] Adição de opção "pago", "atrasado".
+[13:00] Demonstração de edição e exclusão de opções.
+[13:09] Adição de opções "aberto", "pago", "atrasado".
+[13:46] Salvamento do campo "Status de cobrança".
+[14:08] Visualização da lista de campos personalizados (CPF, Status de cobrança).
+[14:24] Retorno ao chat e visualização do menu lateral do contato.
+[14:38] Visualização dos campos personalizados criados (CPF, Status de cobrança) no menu lateral do contato.
+[14:49] Preenchimento do campo CPF com um número e demonstração de validação.
+[15:10] Seleção das opções "aberto" e "atrasado" para "Status de cobrança".
+[15:20] Seleção do campo "Vigência" do tipo "Intervalo de data".
+[15:58] Salvamento do campo "Vigência".
+[16:03] Preenchimento do campo "Vigência" com um intervalo de datas e demonstração de validação.
+[16:41] Destaque para os campos personalizados.
+[17:01] Navegação para a aba "Contatos".
+[17:08] Seleção de vários contatos.
+[17:11] Clique em "Ações em massa" e seleção de "Exportar".
+[17:28] Visualização do arquivo CSV exportado com os dados dos contatos, incluindo os campos personalizados.
+[18:02] Seleção de um contato específico para exportar informações personalizadas.
+[18:06] Confirmação da exportação do contato.
+[19:11] Retorno à tela de apresentação.
+[19:21] Visualização do arquivo CSV exportado com os campos personalizados, incluindo CPF.
+[20:00] Encerramento da apresentação e agradecimento.

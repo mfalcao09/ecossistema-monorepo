@@ -1,0 +1,64 @@
+[00:00] Fabiana Digisac.
+[01:43] Novidade no Digisac: Gestão de Grupos.
+[03:04] Plataforma Digisac.
+[03:14] Criar grupo: nome do grupo na Digisac.
+[04:15] Resumo dos novos membros.
+[05:17] Saiba como configurar o recurso de "Feriados" na Digisac.
+[05:54] O que são os feriados na plataforma?
+[06:48] Personalização de Feriados.
+[08:34] Ativando o robô de atendimento.
+[09:13] Plataforma Digisac.
+[09:20] Nenhuma conversa.
+[09:30] Robôs.
+[10:18] Conexões.
+[10:24] Editando conexão.
+[10:44] Robô.
+[11:03] Gatilho - Recebimento de mensagem.
+[12:15] Título da regra (opcional).
+[12:22] Variável.
+[12:35] Ação.
+[12:43] Mensagem automática.
+[13:08] Mensagem automática habilitada.
+[14:12] Regra - Feriado.
+[14:24] Condição feriado igual a verdadeiro.
+[14:31] Ação: Enviar mensagem.
+[14:40] Dúvida sobre criação.
+[15:13] Mensagem automática no robô.
+[15:28] Feriados.
+[15:42] Criando Feriado.
+[16:35] Editando Feriado.
+[17:34] Editando Feriado.
+[18:18] Calendário de datas.
+[18:36] Edição do robô Ferieds.
+[19:00] Mensagem recebida.
+[19:05] Chat de conversas.
+[19:10] Editando conexão.
+[19:19] Lista de robôs.
+[19:24] Contexto inicial do robô.
+[19:35] Editando Ferias.
+[19:40] Edição do feriado.
+[19:50] Verificação de mensagem no chat.
+[19:57] Mensagem de bot.
+[20:25] Fechar chamado.
+[20:30] Mensagem do bot.
+[20:55] Chat de conversas.
+[21:18] Chat de conversas.
+[21:32] Mensagem do bot.
+[21:40] Chat de conversas.
+[21:49] Mensagem do bot.
+[21:55] Chat de conversas.
+[22:02] Mensagem "ok, estamos de volta".
+[22:09] Chat de conversas.
+[22:15] Resposta do bot.
+[22:21] Mensagem do bot.
+[22:29] Chat de conversas.
+[22:35] Mensagem do bot.
+[22:42] Chat de conversas.
+[22:50] Importar Feriados.
+[23:26] Modelo para o arquivo CSV.
+[23:33] Modelo para o arquivo CSV.
+[24:12] Tipos de importação de feriados.
+[24:19] Escolher arquivo para importação de feriados.
+[24:50] Configurações de feriados.
+[24:56] Funcionalidades de feriados.
+[25:02] Tema da live de hoje.

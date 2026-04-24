@@ -1,0 +1,22 @@
+[00:00] Gerenciamento de Etiquetas
+[00:19] Adicionar Grupo
+[00:20] Criação de grupo "Etiquetas Contatos"
+[00:30] Grupo de Etiquetas "Etiquetas Contatos" criado
+[00:35] Criação de grupo "Etiquetas de Finalização"
+[00:44] Grupo de Etiquetas "Etiquetas de Finalização" criado
+[01:04] Lista de etiquetas
+[01:24] Adicionar Etiqueta
+[01:30] Criando etiqueta "Cliente Vip"
+[01:58] Etiqueta "Cliente Vip" criada
+[02:15] Grupo "Etiquetas Contatos" com uma etiqueta
+[02:26] Adicionar Etiqueta
+[02:30] Criando etiqueta "Contato não me respondeu"
+[02:50] Etiqueta "Contato não me respondeu" criada
+[03:10] Chat de Atendimento
+[03:19] Finalizar Atendimento
+[03:25] Selecionar um motivo para finalizar atendimento
+[03:47] Detalhes do contato
+[03:51] Atribuir etiquetas
+[04:08] Contato atualizado com sucesso
+[04:15] Etiqueta "Cliente Vip" atrelada ao contato
+[04:30] Gerenciamento de Conexões

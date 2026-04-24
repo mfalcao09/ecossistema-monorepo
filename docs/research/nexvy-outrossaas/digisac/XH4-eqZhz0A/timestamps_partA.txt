@@ -1,0 +1,144 @@
+[00:00] Digisac Multichannel Platform logo.
+[00:08] Digisac logo appears.
+[00:12] Presentation of Digisac features.
+[00:19] Woman in headphones introduces herself as Lais Campos from the onboarding team at Digisac.
+[00:20] She explains that the live session is about auxiliary tools in the Digisac platform.
+[00:21] She mentions an initial video about setup and configuration for the platform and encourages viewers to watch it.
+[00:22] Lais reiterates that today's training will focus on auxiliary tools that aid in the customer service process.
+[00:23] She mentions that some tools might be useful for some businesses and not for others.
+[00:24] Lais starts sharing her screen for the demonstration.
+[00:25] The platform shows "Digisac" at the top left and a navigation bar with "Chats," "Fila" (Queue), and "Contatos" (Contacts).
+[00:26] The main content area says, "Selecione um contato para iniciar uma conversa" (Select a contact to start a conversation).
+[00:27] Lais explains how to access the Digisac platform using a provided access link, email, and password.
+[00:28] She notes that Digisac is a web-based platform, so no application installation is needed.
+[00:29] Lais points to the "Ajuda" (Help) icon (a question mark) in the top navigation bar.
+[00:30] She clicks on the "Ajuda" icon, which reveals "Tutoriais" (Tutorials) and "Manual de acesso" (Access Manual) options.
+[00:31] Lais clicks on "Tutoriais," which opens a new section on the right side of the screen with categories like "Apresentação," "Configuração," "Empresa," "Chat," "Robô," "Funcionalidades," "Conexão," and "Relatórios."
+[00:32] She mentions that these videos are short and explain the configurations.
+[00:33] Lais then clicks on "Manual de acesso," and explains that it directs to a new tab with a searchable summary for finding specific information.
+[00:34] She highlights the language selection option (Brazilian flag icon), allowing users to switch between Portuguese, English, and Spanish.
+[00:35] Lais clarifies that the language setting is individual per user.
+[00:36] She points to the "Rotacionar Menu" (Rotate Menu) icon (a circular arrow), which allows changing the navigation panel's position.
+[00:37] Lais clicks "Rotacionar Menu," and the navigation panel moves from the top to the left side of the screen.
+[00:38] She shows that clicking "Navegação vertical" (Vertical Navigation) locks the menu on the left side, and clicking "Rotacionar Menu" again moves it back to the top.
+[00:39] Lais summarizes these as curiosities and new features of the platform.
+[00:40] She then begins explaining specific auxiliary tools, starting with the "Mais opções" (More options) icon (a grid of nine dots).
+[00:41] Lais clicks "Mais opções," revealing a dropdown menu with options like "Usuários," "Cargos," "Robôs," "Departamentos," "Assunto de chamado," "Empresa," "Feriados," "Respostas rápidas," "Avaliações," "Integrações," "Templates," "Distribuição de Chamados," "Agendamentos," "Campos personalizados," and "Créditos."
+[00:42] She chooses "Empresa" (Company) from the dropdown.
+[00:43] The screen displays "Empresa" settings, including "Nome da empresa" (Company name), "Fuso horário" (Time zone), and "HSM disponível" (Available HSM).
+[0:44] She also mentions "Serviço de Atendimento ao Cliente (SAC)" (Customer Service).
+[0:45] Lais explains that in the "Empresa" section, users can see the company's registered name, time zone, and the quantity of available HSMs (for official WhatsApp connections).
+[0:46] She then focuses on the "SAC" section, which has various toggle options.
+[0:47] Lais highlights "Restrição de IPs" (IP Restriction) and explains that enabling it restricts platform access to specific IP addresses.
+[0:48] She enables "Restrição de IPs" and a new field "IPs aceitos" (Accepted IPs) appears, where users can enter IP addresses.
+[0:49] Lais then disables "Restrição de IPs."
+[0:50] Next, she points to "SAC" (toggle switch) and explains that disabling it turns the platform into a direct WhatsApp-like chat interface, removing queue, contact, and reporting functionalities.
+[0:51] Lais demonstrates by disabling the "SAC" toggle, scrolling down, and clicking "Salvar" (Save).
+[0:52] A green notification "Alterações salvas" (Changes saved) appears.
+[0:53] She navigates back to the "Chats" screen, refreshes the page, and the "Fila" tab (Queue) disappears, consolidating all conversations under "Chats."
+[0:54] Lais explains that this mode is suitable for businesses with fewer agents that don't require extensive reporting or queue management.
+[0:55] She re-enables the "SAC" toggle in "Empresa" settings and saves the changes.
+[0:56] The "Fila" tab reappears on the "Chats" screen after refreshing.
+[0:57] Lais moves to "Nome do atendente no começo das mensagens" (Agent's name at the beginning of messages).
+[0:58] She explains that enabling this option makes the agent's name visible at the start of each message sent from the platform to the client.
+[0:59] Lais then discusses "Desabilitar transferência automática para departamento/atendente padrão do contato" (Disable automatic transfer to default department/agent of the contact).
+[1:00] She explains that if this option is enabled, any pre-configured automatic transfer rules for specific contacts will be ignored.
+[1:01] Lais illustrates this by going to a contact's chat, clicking the three dots for options, and scrolling down to "Departamento padrão para chamados" (Default department for calls) and "Atendente padrão para chamados" (Default agent for calls).
+[1:02] She demonstrates that if these fields are filled, messages from that contact would normally be routed automatically.
+[1:03] However, if the "Desabilitar transferência automática" option is enabled, these settings are overridden.
+[1:04] Lais then describes "Exibir notificação por departamentos no aplicativo" (Display notification by departments in the application).
+[1:05] She notes that Digisac has a mobile application (available for iOS and Android) called "Digisac" which allows agents to handle chats, but it only shows the "Chats" tab, not configuration options.
+[1:06] If "Exibir notificação por departamentos no aplicativo" is enabled, agents using the mobile app will receive notifications categorized by department.
+[1:07] Next, Lais explains "Mostrar informações do suporte" (Show support information).
+[1:08] She demonstrates that when this option is enabled, hovering over the "Suporte" (Support) button on the right side of the screen reveals Digisac's contact information (WhatsApp, phone, email).
+[1:09] Lais explains that disabling this option hides the support contact information from the main platform interface.
+[1:10] She then moves to "Permitir nomes duplicados" (Allow duplicate names).
+[1:11] Lais explains that enabling this allows users to create departments, user roles, or other entities with the same name, which might be useful in some business structures.
+[1:12] Then, Lais explains "Notificar nova mensagem" (Notify new message), "Notificar abertura de chamados" (Notify call opening), and "Notificar transferência de chamados" (Notify call transfer).
+[1:13] These are related to platform notifications, allowing users to choose whether to receive alerts for new messages, new calls, or call transfers.
+[1:14] Lastly, Lais explains "Tornar assunto obrigatório" (Make subject mandatory).
+[1:15] She strongly recommends enabling this option for businesses that need to track and monitor their calls closely.
+[1:16] Lais explains that "assunto de chamado" (call subject) is like a title for the conversation.
+[1:17] She demonstrates how to create a call subject by going to "Mais opções" (More options), then "Assunto de chamado" (Call subject), clicking "Novo Assunto de chamado" (New Call Subject), entering a name (e.g., "Dúvidas," "Treinamento agendado"), and saving it.
+[1:18] She then shows what happens when "Tornar assunto obrigatório" is enabled.
+[1:19] Lais opens a chat, clicks "Fechar chamado" (Close call), and a pop-up appears indicating "Campo obrigatório" (Mandatory field) for the call subject.
+[1:20] She selects "Treinamento agendado" as the subject, adds a summary, and clicks "Fechar" (Close), successfully closing the call.
+[1:21] Lais explains that this ensures all calls are categorized, which is vital for reporting.
+[1:22] She then moves to "Tempo de inatividade de chamado (minutos)" (Call inactivity time (minutes)).
+[1:23] This setting, Lais explains, is related to the "Robô" (Robot) feature.
+[1:24] The "Robô" allows for automated triaging and other configurations.
+[1:25] She notes that the support team can help configure the robot at no additional cost if a script is provided.
+[1:26] The "Tempo de inatividade" setting defines how long the platform waits for interaction (from client or agent) before triggering an automated action via the robot, such as closing or transferring a call.
+[1:27] Lais next describes "Formato de número de protocolo" (Protocol number format).
+[1:28] She explains that each time a call is initiated, a new protocol number is generated, which is used to save and track conversations.
+[1:29] Lais shows the default format, which includes the year, month, day, and an incremental counter for calls (e.g., YYYYMMDD + counter).
+[1:30] Then, Lais explains "Departamento padrão para chamados" (Default department for calls) within the company settings.
+[1:31] She clarifies that this is the department automatically assigned to calls if no specific routing is defined elsewhere.
+[1:32] Lais reiterates that the actually effective default department is set within the connection's configuration.
+[1:33] She moves on to "Tabela de horário" (Schedule table).
+[1:34] Lais explains that here, users can define the operating hours for their company.
+[1:35] She demonstrates by clicking "Adicionar regra" (Add rule), selecting working days (e.g., Monday to Friday), and setting the start and end times (e.g., 8:00 to 18:00).
+[1:36] She adds another rule for Saturdays (e.g., 8:00 to 12:00).
+[1:37] Lais emphasizes that this schedule is used by the robot to determine whether to send automated messages when clients contact outside of working hours.
+[1:38] Finally, Lais mentions "Controle de ausência" (Absence control), but decides to explain it later.
+[1:39] She saves the current configurations.
+[1:40] Lais returns to the "Mais opções" (More options) menu and selects "Feriados" (Holidays).
+[1:41] She explains that the "Feriados" function, also linked to the robot, allows users to define periods of absence, holidays, or vacations.
+[1:42] Lais clicks "Novo Feriado" (New Holiday) to demonstrate.
+[1:43] A "Criando Feriado" (Creating Holiday) pop-up appears.
+[1:44] She enters "Natal" (Christmas) as the holiday name.
+[1:45] Lais selects the start date (December 25, 2023) and time (00:00).
+[1:46] The system automatically populates the end date, but Lais shows how to change it (e.g., to December 31).
+[1:47] She notes that the title of the holiday doesn't impact its functionality.
+[1:48] Lais then fills in the "Mensagem do Feriado" (Holiday Message), writing: "A empresa X está ausente neste feriado de Natal. Desejamos boas festas!" (Company X is absent during this Christmas holiday. We wish you happy holidays!).
+[1:49] She explains that clients contacting during this holiday period will receive this predefined message instead of the regular robot message.
+[1:50] Lais saves the holiday, and it appears in the list.
+[1:51] She mentions that configuring the robot to send these holiday messages requires the support team, who will do it once for all future holidays.
+[1:52] Lais demonstrates how to view, edit, or exclude a holiday using the "Ações" (Actions) menu (three dots next to the holiday entry).
+[1:53] She then navigates back to "Mais opções" and selects "Avaliações" (Ratings).
+[1:54] Lais explains that "Avaliações" allows clients to rate their service, and it's also linked to the robot.
+[1:55] She mentions that setting up an evaluation requires assistance from the support team.
+[1:56] Lais clicks "Nova Avaliação" (New Rating) to show the setup process.
+[1:57] A "Criando Avaliação" (Creating Rating) pop-up appears.
+[1:58] She fills in "Avaliação" as the name.
+[1:59] Lais sets the "Duração (Minutos)" (Duration (Minutes)) to 60, advising not to set it too short (e.g., 1 or 5 minutes) to give clients enough time to respond.
+[2:00] She explains that if a client responds within the set duration, the evaluation is counted, and a report is generated.
+[2:01] If the client responds after the duration, a new call is opened in the platform.
+[2:02] Lais specifies that the "Tipo" (Type) is "NPS."
+[2:03] She then adds a standard question in the "Pergunta" (Question) field: "Prezado cliente, essa é uma pesquisa de satisfação acionada automaticamente. Por gentileza, gostaríamos da sua opinião, de 0 a 10, como você classifica nosso atendimento? (Sendo, 0 = péssimo e 10 = excelente)." (Dear client, this is an automatically triggered satisfaction survey. Please, we would like your opinion, from 0 to 10, how do you rate our service? (Being, 0 = terrible and 10 = excellent)).
+[2:04] She notes that support can provide this script.
+[2:05] Lais sets "Quantidade de tentativas de resposta inválida" (Number of invalid response attempts) to 3.
+[2:06] For "Mensagem enviada após resposta válida" (Message sent after valid response), she enters: "Agradecemos pela sua avaliação, tenha um ótimo dia!" (Thank you for your rating, have a great day!).
+[2:07] For "Mensagem de resposta inválida" (Invalid response message), she enters: "Desculpe, não entendi sua resposta, digite um número entre 0 e 10." (Sorry, I didn't understand your response, type a number between 0 and 10.).
+[2:08] Lais emphasizes including a note: "Essa mensagem foi acionada automaticamente e não é necessário respondê-la." (This message was activated automatically and it is not necessary to reply to it.) to prevent clients from opening new calls after receiving the thank you message.
+[2:09] She saves the evaluation, and it appears in the list.
+[2:10] Lais mentions that there's a separate training session about "Relatórios e Estatísticas" (Reports and Statistics) where users can learn how to analyze these evaluations.
+[2:11] She then moves to "Integrações" (Integrations) in the "Mais opções" menu.
+[2:12] Lais explains that Digisac's open API allows it to integrate with other platforms or systems.
+[2:13] She demonstrates by creating a new integration.
+[2:14] A "Criando Integração" (Creating Integration) pop-up appears.
+[2:15] For "Tipo" (Type), she selects "Menu superior" (Top menu), so the integration icon will appear in the top navigation bar.
+[2:16] For "Url do Iframe," she inputs "https://digisac.com.br" (Digisac's website).
+[2:17] For "Texto do Menu" (Menu Text), she enters "Site."
+[2:18] Lais chooses "ArrowDown" as an optional icon.
+[2:19] She saves the integration.
+[2:20] A notification "Alterações salvas" appears, and a new icon representing the integration appears in the top navigation bar.
+[2:21] Lais clicks on the new "Site" icon, and the Digisac website appears within the platform interface.
+[2:22] She shows that she can navigate the website directly within Digisac, highlighting the seamless integration.
+[2:23] Lais explains that clicking the "Site" icon again closes the integrated website and returns to the chat screen.
+[2:24] She reiterates that this feature allows users to integrate various external systems directly into Digisac.
+[2:25] Lais mentions that if users have any questions about API or webhooks for integrations, they can contact Digisac's commercial or support integration teams.
+[2:26] Next, Lais moves to "Distribuição de Chamados" (Call Distribution) in "Mais opções."
+[2:27] She explains that this is a new feature that evenly distributes incoming calls among agents.
+[2:28] Lais clarifies that "Distribuição de Chamados" is a paid add-on, so if users don't see it on their platform, it means it hasn't been purchased.
+[2:29] She advises contacting the commercial team for pricing.
+[2:30] Lais demonstrates how to create a new distribution.
+[2:31] A "Criando Distribuição de Chamados" (Creating Call Distribution) pop-up appears.
+[2:32] She activates the distribution using the toggle switch.
+[2:33] Lais gives the distribution a name, "Comercial."
+[2:34] For "Departamentos inclusos na distribuição" (Departments included in the distribution), she selects "Comercial."
+[2:35] She notes that multiple departments can be selected.
+[2:36] For "Cargos inclusos na distribuição" (Roles included in the distribution), she selects "Operador" (Operator), explaining that administrators in her example don't handle calls.
+[2:37] Lais then explains "Máximo de chamados por Atendente e Departamento" (Maximum calls per Agent and Department).
+[2:38] This setting defines how many calls each agent or department can receive simultaneously from the distribution.
+[2:39] Lais explains that this ensures equitable distribution and prevents agents from being overloaded.

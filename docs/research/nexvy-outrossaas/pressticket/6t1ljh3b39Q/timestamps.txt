@@ -1,0 +1,46 @@
+[00:00] Dashboard de desempenho do atendimento.
+[00:06] Visão geral do desempenho por canal (WhatsApp, Facebook, Instagram, API).
+[00:10] Análises da distribuição de status de tickets e tickets por status.
+[00:13] Alteração do período de análise do dashboard.
+[00:34] Navegação para a seção "Filas & Chatbot".
+[00:36] Tela de "Filas & Chatbot" exibindo filas configuradas.
+[00:40] Opção para criar e gerenciar filas e departamentos.
+[01:00] Edição de uma fila (Comercial), mostrando opções de nome, cor, ordem do bot e mensagem de saudação.
+[01:19] Adição de uma nova fila.
+[01:26] Navegação para a seção "Usuários".
+[01:28] Tela de "Usuários" exibindo a lista de usuários, e-mails e perfis (Administrador/Usuário).
+[01:38] Edição de um usuário, mostrando informações básicas de nome, contato, e-mail, integração com CRM e configuração de filas.
+[02:08] Permissões específicas para o usuário, incluindo acesso ao CRM e Meet.
+[02:22] Opção para o usuário ver tickets sem fila.
+[02:42] Navegação para a seção "Flowbuilder".
+[02:44] Visão geral dos "Fluxos de Conversa" disponíveis.
+[02:47] Edição de um fluxo de conversa, exibindo um diagrama visual das interações.
+[03:02] Edição de uma condição no fluxo, mostrando opções de variável, Vanted HTTP, hora do dia, tag ou pipeline.
+[03:27] Detalhes da condição baseada em "tag".
+[04:20] Edição do menu de opções no fluxo, mostrando a mensagem de saudação e as opções de digitação.
+[05:10] Navegação para a seção "Conexões".
+[05:12] Tela de "Conexões" mostrando duas conexões ativas do WhatsApp.
+[05:18] Edição de uma conexão do WhatsApp, mostrando informações básicas, token de autenticação e recursos avançados.
+[05:40] Configurações de mensagens automáticas para a conexão (boas-vindas, finalização, fora de horário, avaliação).
+[06:01] Configurações de integrações e automação (Flowbuilder, ChatGPT, filas de atendimento).
+[06:35] Configurações de redirecionamento de filas e controle de bot/IA.
+[06:48] Configurações de finalização automática de tickets por inatividade do cliente.
+[07:27] Navegação para a seção "Atendimentos".
+[07:30] Tela de "Atendimentos" exibindo tickets pendentes e aguardando.
+[07:33] Visualização detalhada de um ticket, mostrando a origem, o atendente e as tags.
+[08:18] Adição de tags a um ticket (Atendimento Suspenso, Pendente de Retorno).
+[08:47] Interação normal no chat do WhatsApp, com opções para enviar mensagens, áudios e anexos.
+[09:00] Opções de reação a mensagens (encaminhar, responder, reagir).
+[09:10] Opções adicionais do chat: agendamento, transferência, deletar.
+[09:20] Agendamento de uma nova mensagem, com opções de contato, canal, mensagem, data e hora.
+[10:30] Demonstração de respostas rápidas pré-configuradas.
+[10:59] Navegação para a seção "Tags".
+[11:00] Tela de "Tags" exibindo tags criadas e o número de registros marcados com cada tag.
+[11:08] Navegação para a seção "Campanhas".
+[11:11] Criação de uma nova campanha de envio de mensagens, com opções de nome, lista de contato, lista de tags, conexão, agendamento e mensagens.
+[11:45] Navegação para "Listas de Contato" dentro das campanhas.
+[11:47] Tela de "Listas de Contato" exibindo listas existentes e opções para importar ou criar novas listas.
+[12:10] Navegação para a seção "Treinamento".
+[12:12] Central de Ajuda com vídeos educativos sobre as funcionalidades da plataforma.
+[12:35] Retorno à seção "Conexões" para mostrar as opções de tipo de conexão.
+[12:41] Escolha do tipo de conexão: WhatsApp pessoal, WhatsApp Business (API), Facebook, Instagram, Telegram.

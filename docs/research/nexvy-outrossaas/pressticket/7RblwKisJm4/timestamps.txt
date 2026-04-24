@@ -1,0 +1,81 @@
+[00:00] Rodrigo inicia o tutorial sobre a integração da plataforma de multiatendimento com gateways de pagamento
+[00:07] Rodrigo fala sobre a emissão da segunda via de boleto e o envio de lembretes de vencimento
+[00:15] Integração com Asaas será utilizada como exemplo no tutorial
+[00:20] Com a integração, é possível emitir a segunda via de boleto e enviar lembretes de vencimento
+[00:30] Cliente pode acessar o fluxo, escolher a opção “segunda via de boleto” e a plataforma emitirá o boleto automaticamente após o CPF/CNPJ
+[00:46] Em relação aos lembretes, o tutorial mostrará como configurá-los e como inserir a chave API do Asaas
+[01:01] Primeiro passo: acessar a conta Asaas pelo computador
+[01:05] A tela do Asaas é exibida
+[01:12] No Asaas, o usuário deve clicar em “Integrações”
+[01:17] Em integrações, o usuário deve ir em “Chaves de API”
+[01:21] O usuário deve clicar em “Gerar nova chave” e preencher o nome da chave, data e hora de expiração (opcional)
+[01:29] Clicar em “Avançar”
+[01:32] A tela de Validação Token App é exibida
+[01:38] O usuário deve usar o aplicativo Asaas no smartphone para obter o token e inseri-lo no campo “Informe o código”
+[01:50] A chave API foi salva com sucesso
+[01:52] Copiar a chave API
+[02:05] Retorno à plataforma de multiatendimento
+[02:08] Primeiro passo na plataforma: configurar a segunda via de boleto
+[02:14] O usuário deve ir em “Configurações”
+[02:17] Em configurações, o usuário deve ir em “Integração – 2ª Via de Boletos”
+[02:20] Selecionar o Asaas e ativar a integração
+[02:22] Colar o token Asaas e clicar em “Salvar”
+[02:27] A integração foi atualizada com sucesso
+[02:29] Agora, o usuário deve criar um departamento (fila) específico
+[02:35] O usuário deve ir em “Filas e Chatbot” e em “Filas e Seções”
+[02:38] O nome da fila deve ser “2ª Via de Boletos”
+[02:44] A tela de “Editar fila” é exibida
+[02:47] O usuário deve definir o “Nome” da fila como “2ª Via de Boletos”
+[02:50] O usuário deve inserir uma mensagem de saudação para o cliente
+[03:00] A mensagem de saudação solicita o CPF ou CNPJ para enviar a fatura
+[03:09] Quando o cliente digitar o CPF/CNPJ, a integração buscará os dados da fatura e os enviará
+[03:12] A mensagem foi salva com sucesso
+[03:26] Para quem já fez a videoaula de fluxo:
+[03:31] O usuário deve criar a opção “2ª Via de Boletos” no menu de fluxo e transferir para a fila “2ª Via de Boletos”
+[03:49] O usuário deve ir em “Flowbuilder”
+[03:52] A tela de “Adicionar Fluxo” é exibida
+[03:55] O usuário deve inserir um nome para o fluxo e clicar em “Adicionar”
+[04:00] O fluxo de conversa é exibido
+[04:02] O usuário deve clicar no sinal de mais para adicionar um menu
+[04:06] A tela de “Adicionar menu ao fluxo” é exibida
+[04:09] O usuário deve inserir uma mensagem de boas-vindas
+[04:19] Adicionar a opção “Comercial”
+[04:26] Adicionar a opção “2ª Via de Boleto/PIX”
+[04:31] O menu foi criado
+[04:38] O usuário deve adicionar uma fila ao fluxo
+[04:41] Selecionar a fila “2ª Via de Boleto”
+[04:53] A fila “2ª Via de Boleto” foi vinculada
+[04:58] O usuário deve vincular a opção “Comercial” à fila “Comercial”
+[05:01] O fluxo é exibido com o menu de opções
+[05:05] Quando o cliente escolher a opção “2ª Via de Boleto/PIX”, a integração Asaas será acionada e pedirá o CPF/CNPJ
+[05:10] Após o CPF/CNPJ, o sistema verificará se há faturas vencidas e enviará a mais próxima ao vencimento ou o boleto
+[05:25] O fluxo foi salvo com sucesso
+[05:37] Agora, o tutorial mostrará como utilizar o Asaas para lembretes de faturas
+[05:43] Já foi configurada a emissão, agora será configurado o envio
+[05:49] O Asaas cobra R$1,00 pela liquidação da fatura para notificar o cliente via e-mail/SMS e R$0,50 para notificar via WhatsApp
+[06:06] Utilizando a plataforma, o usuário economiza esses custos e tem o serviço gratuito
+[06:17] A tela de “Adicionar integração” é exibida
+[06:21] O usuário deve selecionar a conexão
+[06:26] Definir o horário de atendimento para o envio das mensagens
+[06:33] É importante definir o WhatsApp que já interage com a base de clientes
+[06:47] Utilizar o próprio número para evitar bloqueios
+[06:59] Inserir o token de integração do Asaas
+[07:05] Em “Enviar no dia do vencimento?”, o usuário deve selecionar “Sim”
+[07:15] Em “Quantos dias antes do vencimento enviar a mensagem?”, o usuário pode definir a quantidade de dias para lembrar o cliente
+[07:20] Definir 3 dias antes do vencimento
+[07:29] Em “Após o vencimento enviar a mensagem a cada quantos dias?”, o usuário pode definir a recorrência de cobrança
+[07:46] Definir 1 dia para cobrar todos os dias
+[07:54] Definir 2 dias para cobrar a cada 2 dias
+[08:00] Em “Após o vencimento Máximo de dias para enviar?”, o usuário pode definir o período máximo de inadimplência
+[08:05] Definir 60 dias como padrão
+[08:18] Em “Mensagem antes do vencimento”, o usuário deve colocar um template com as variáveis
+[08:29] Exemplo de template com variáveis: %Name% (nome), %InvoiceNumber% (número da fatura), %DueDate% (data de vencimento), %Value% (valor total)
+[08:59] A notificação incluirá o link, a data de vencimento, as variáveis e o boleto PDF/PIX automaticamente
+[09:12] Inserir a mensagem para o dia do vencimento
+[09:17] Inserir a mensagem após o vencimento
+[09:24] Os templates estarão disponíveis na descrição da videoaula
+[09:27] Clicar em “Salvar”
+[09:30] A integração foi salva com sucesso
+[09:34] Com a automatização, o processo financeiro é agilizado, eliminando a necessidade de um profissional enviar mensagens manualmente
+[09:54] Essa funcionalidade se estende aos demais gateways de pagamento, como SGA, Harmonit, IXC, SGP, SiproV e MK.AUTH
+[10:11] Encerramento do tutorial. Rodrigo agradece e convida a entrar em contato com o suporte em caso de dúvidas.

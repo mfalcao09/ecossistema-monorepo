@@ -1,0 +1,33 @@
+[00:00] Início do vídeo, tela inicial do sistema.
+[00:16] Acessando a seção de "Flowbuilder" para criar um novo fluxo.
+[00:20] Criação de um novo fluxo chamado "Fluxo palavra-chave" com a palavra de ativação "Tenho interesse".
+[00:30] Definindo a palavra de ativação como "Tenho interesse".
+[00:41] Explicação sobre a importância da palavra-chave para campanhas de marketing.
+[01:13] Fluxo "Fluxo palavra-chave" criado e ativado.
+[01:25] Iniciando a edição do fluxo, adicionando o bloco "Add Tags".
+[01:31] Adicionando uma tag "Prospecção" ao fluxo.
+[01:41] Conectando o início do fluxo ao bloco "Add Tags" com a tag "Prospecção".
+[01:58] Adicionando o bloco "Prompt IA" e selecionando "Sophia 3".
+[02:02] Conectando o bloco "Add Tags" ao "Prompt IA".
+[02:18] Adicionando um novo bloco "Add Tags" com a tag "Negociação".
+[02:22] Conectando o "Prompt IA" ao novo bloco "Add Tags" e depois ao "Prompt IA" original.
+[02:49] Explicação sobre os benefícios de usar tags para remarketing e segmentação de leads.
+[03:06] Salvando o fluxo.
+[03:13] Retornando à lista de fluxos e visualizando o fluxo criado.
+[03:20] Editando o fluxo para ver a palavra-chave configurada.
+[03:26] Acessando a seção de "Conexões" para configurar a palavra-chave.
+[03:30] Visualizando as conexões.
+[03:32] Editando a conexão "teste treinamento".
+[03:35] Ativando a opção "Iniciar Flow por Palavra".
+[03:43] Na aba "Integrações", selecionando o "Fluxo de Transferência de Fluxos" como fluxo padrão.
+[04:00] Salvando as configurações da conexão.
+[04:02] Abrindo o WhatsApp Web para testar a funcionalidade.
+[04:05] Enviando a mensagem "Boa tarde" e recebendo o fluxo padrão.
+[04:19] Verificando o motivo pelo qual o fluxo padrão foi ativado.
+[04:23] Reabrindo o WhatsApp Web.
+[04:42] Enviando a palavra-chave "Tenho interesse".
+[04:48] Recebendo a resposta da IA configurada no fluxo da palavra-chave.
+[04:54] Enviando uma mensagem fora da palavra-chave para demonstrar o retorno ao fluxo padrão.
+[05:00] Regras de formatação da palavra-chave (maiúsculas, minúsculas, acentos).
+[05:13] Finalizando o vídeo, resumindo a configuração do fluxo por palavra-chave.
+[05:30] Encerramento do treinamento.

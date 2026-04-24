@@ -1,0 +1,6 @@
+[00:00] Início da apresentação sobre a plataforma DigiSac, um vídeo de introdução.
+[00:07] A tela mostra dois apresentadores sentados em frente a laptops e usando headsets.
+[00:20] A tela agora exibe uma interface do sistema com "Agora", "Filas de atendimento" e "Resumo" como títulos principais, e três cartões de atendimento.
+[00:24] O mouse clica no ícone de "Estatísticas de Atendimentos", mostrando um menu expandido com opções como "Agora", "Histórico de chamados", "Estatísticas de atendimentos", "Estatísticas de avaliações", e "Estatísticas de conversas".
+[00:30] A câmera retorna para os apresentadores, que estão explicando as funcionalidades da plataforma.
+[01:08] Final da apresentação com o logo da DigiSac, a plataforma multicanal.

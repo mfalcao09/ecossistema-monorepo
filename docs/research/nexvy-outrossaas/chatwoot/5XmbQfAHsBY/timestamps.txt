@@ -1,0 +1,39 @@
+[00:00] Tela inicial do dashboard Chatwoot, mostrando "Conversas" e a mensagem "Oh oh! Parece que não há mensagens de clientes na sua caixa de entrada."
+[00:18] Navegação para "Configurações" no menu lateral.
+[00:19] Tela de "Configurações da Conta", com informações gerais e a opção "Caixas de Entrada" selecionada no menu lateral.
+[00:21] Tela "Caixas de Entrada", com "WhatsApp API" já configurado e a opção "Adicionar Caixa de Entrada" destacada.
+[00:23] Tela "Escolha um canal", com várias opções de canais, incluindo "Website", "Messenger", "Twitter", "WhatsApp", "SMS", "API" e "Telegram". "Website" é selecionado.
+[00:27] Formulário "Canal do website", para configurar o widget de chat no site. Campos como "Nome do site", "Domínio do website", "Cor do Widget", "Seja bem-vindo", "Bem-vindo, saudação" são exibidos.
+[00:28] Inserção do "Nome do site" como "FhOnline Sistemas".
+[00:33] Inserção do "Domínio do website" como "fhonlne.com.br".
+[00:41] Preenchimento da mensagem de saudação "Olá tudo bem?".
+[00:46] Preenchimento da mensagem de boas-vindas "Seja bem vindo - como podemos lhe ajudar hoje?".
+[00:58] Clique em "Criar caixa de entrada".
+[00:59] Tela "Agentes", onde se pode escolher agentes para a caixa de entrada.
+[01:01] Seleção do agente "Suporte" para a caixa de entrada.
+[01:05] Clique em "Adicionar agentes".
+[01:06] Tela "Sua caixa de entrada está pronta!", exibindo o código JavaScript a ser copiado e colado no site para integrar o Chatwoot.
+[01:09] Seleção e cópia do código JavaScript de integração.
+[01:28] Código HTML sendo editado em um editor online (W3Schools Tryit Editor) para colar o script do Chatwoot no corpo (body) da página.
+[01:31] Clique em "Run" para executar o código HTML.
+[01:33] O widget de chat do Chatwoot aparece no canto inferior direito da página.
+[01:39] Clique no ícone do chat para abrir a janela de conversa. A mensagem de boas-vindas configurada é exibida.
+[01:44] Clique em "Iniciar Conversa".
+[01:46] Digitação da mensagem "Olá preciso de ajuda" no chat.
+[01:49] O chat solicita ao usuário que "Informe uma forma para entrarmos em contato com você." e "Seja notificado por e-mail", com um campo para inserir o e-mail.
+[02:02] Retorno à tela do dashboard Chatwoot, mostrando a nova conversa iniciada no chat do site.
+[02:04] Clique na conversa "Dark-Dew-837" para visualizar e responder às mensagens.
+[02:08] Digitação da mensagem "Olá como vai" na conversa do Chatwoot.
+[02:13] Digitação da mensagem "qual teu nome" na conversa do Chatwoot.
+[02:16] Visualização das mensagens digitadas no Chatwoot refletidas no chat do site.
+[02:21] Navegação para "Configurações" no menu lateral.
+[02:24] Tela de "Configurações da Conta", com a opção "Caixas de Entrada" selecionada.
+[02:26] Clique na engrenagem de configurações da caixa de entrada "FhOnline Sistemas Website".
+[02:29] Tela "Configurações da Caixa de Entrada - FhOnline Sistemas", mostrando as abas: "Configurações", "Colaboradores", "Horário de funcionamento", "Formulário Chat Pré", "Configuração" e "Construtor de Widget".
+[02:35] Aba "Colaboradores", mostrando os agentes atribuídos.
+[02:37] Aba "Horário de funcionamento", permitindo definir a disponibilidade do chat.
+[02:39] Aba "Formulário Chat Pré", para ativar ou desativar formulários antes do bate-papo.
+[02:48] Aba "Configuração", exibindo novamente o código JavaScript de integração e opções de validação de identidade do usuário.
+[02:53] Aba "Construtor de Widget", onde se pode pré-visualizar e personalizar o widget do chat, incluindo avatar, nome do site, mensagens de boas-vindas, tempo de resposta, cor do widget, posição do balão e tipo de balão.
+[03:00] Rolagem para baixo na aba "Construtor de Widget", mostrando mais opções de personalização como "Título do disparador da Bolha do Widget".
+[03:10] Final do vídeo, destacando a capacidade de configurar a exibição do widget no site.

@@ -1,0 +1,219 @@
+[00:00] A tela inicial do Digisac é exibida, mostrando a página de "Distribuição de Chamados" e um pop-up "Criando Distribuição de Chamados".
+[00:03] A usuária preenche o campo "Máximo de chamados por Atendente e Departamento" com "15".
+[00:08] A usuária explica como a distribuição de chamados funciona individualmente.
+[00:24] A usuária continua a explicar a lógica de distribuição individual.
+[00:35] A usuária descreve o ciclo de distribuição de chamados.
+[00:46] A usuária detalha a progressão da distribuição em lotes.
+[00:53] A usuária explica que a distribuição para um usuário para quando ele atinge o limite de chamados.
+[01:03] A usuária explica que a distribuição recomeça quando um chamado é finalizado.
+[01:13] A usuária enfatiza a condição para a retomada da distribuição.
+[01:21] A usuária recapitula o funcionamento da distribuição de chamados.
+[01:28] A usuária explica que a distribuição funciona com usuários "online".
+[01:42] A usuária detalha que o recebimento de chamados depende da disponibilidade.
+[01:54] A usuária introduz a opção de o que acontece quando um usuário fica "offline".
+[02:04] A usuária seleciona a opção "Redistribuir todos os chamados".
+[02:11] O balão de informação para "Redistribuir todos os chamados" aparece, explicando que todos os chamados irão para a fila do departamento e serão redistribuídos quando o operador realizar o logout.
+[02:26] A usuária exemplifica o funcionamento da redistribuição ao fazer logout.
+[02:53] A usuária seleciona a opção "Redistribuir somente chamados não respondidos".
+[02:59] O balão de informação para "Redistribuir somente chamados não respondidos" aparece, explicando que apenas chamados não respondidos irão para a fila.
+[03:10] A usuária explica a diferença entre as duas opções de redistribuição.
+[03:36] A usuária clica em "Salvar", fechando o pop-up e retornando à página "Distribuição de Chamados", que está vazia.
+[03:41] A usuária finaliza a explicação sobre a distribuição de chamados e oferece contato com o time comercial.
+[03:51] A usuária clica no ícone "Mais opções" no menu superior e seleciona "Campos personalizados".
+[03:57] A tela de "Campo Personalizado" é exibida, mostrando que nenhum resultado foi encontrado.
+[04:00] A usuária explica o que são campos personalizados.
+[04:10] A usuária explica a funcionalidade de adicionar campos personalizados para cadastrar contatos.
+[04:26] A usuária clica em "Novo Campo", abrindo o pop-up "Criando Campo Personalizado".
+[04:28] A usuária preenche o campo "Nome" com "CPF".
+[04:30] A usuária seleciona "Contatos" no campo "Entidades".
+[04:32] A usuária seleciona "Campo de texto" no campo "Tipo".
+[04:34] A usuária clica em "Salvar", fechando o pop-up e exibindo o "CPF" na lista de campos personalizados.
+[04:38] A usuária clica no ícone "Contatos" no menu superior.
+[04:39] A tela de "Contatos" é exibida.
+[04:42] A usuária clica em "Novo contato", abrindo o pop-up "Criando contato".
+[04:45] A usuária rola para baixo no pop-up e mostra o campo "CPF" recém-criado.
+[04:47] A usuária digita um número de CPF no campo.
+[04:51] A usuária clica nos três pontinhos ao lado de um contato e seleciona "Visualizar".
+[04:54] O pop-up com os detalhes do contato é exibido, mostrando o campo "CPF" e o número preenchido.
+[04:56] A usuária clica em "X" para fechar o pop-up de detalhes do contato.
+[04:57] A usuária clica no ícone "Chat" no menu superior.
+[05:03] A usuária clica no ícone "Mais opções" e seleciona "Campos personalizados" novamente.
+[05:09] A usuária explica a função dos campos personalizados e como eles podem ser preenchidos.
+[05:25] A usuária detalha o preenchimento automático através do robô.
+[05:44] A usuária dá um exemplo de como o robô pode solicitar o CPF do cliente.
+[06:10] A usuária explica que os campos personalizados não geram filtros, mas aparecem na exportação.
+[06:29] A usuária clica no ícone "Mais opções" e seleciona "Tabela de horários".
+[06:39] A tela de "Tabela de Horários" é exibida, sem resultados.
+[06:45] A usuária explica a funcionalidade da tabela de horários.
+[07:07] A usuária compara a tabela de horários com a restrição de IPs.
+[07:38] A usuária clica em "Nova Tabela de Horário", abrindo o pop-up "Criando Tabela de Horário".
+[07:44] A usuária preenche o campo "Descrição" com "Horário Comercial".
+[07:49] A usuária explica o campo "Tempo prévio de disparo da notificação de logout".
+[08:14] A usuária preenche o campo "Tempo prévio de disparo da notificação de logout" com "15" minutos.
+[08:35] A usuária recomenda um tempo mínimo de 15 minutos.
+[08:48] A usuária clica em "Adicionar regra" no campo "Horário de funcionamento".
+[08:50] A usuária seleciona os dias da semana (Segunda a Sexta) e os horários de início e término (08:00 e 12:00).
+[09:00] A usuária adiciona outra regra e seleciona os dias da semana (Segunda a Sexta) e os horários de início e término (14:00 e 18:00).
+[09:16] A usuária adiciona o sábado na primeira regra (08:00 às 12:00).
+[09:31] A usuária clica em "Salvar", fechando o pop-up e exibindo "Horário Comercial" na lista de tabelas de horários.
+[09:38] A usuária explica como vincular a tabela de horários a um usuário.
+[09:42] A usuária clica no ícone "Mais opções" e seleciona "Usuários".
+[09:43] A tela de "Usuários" é exibida.
+[09:47] A usuária clica nos três pontinhos ao lado de "Sabrina" e seleciona "Editar".
+[09:50] A usuária seleciona "Operador" no campo "Cargo(s)".
+[09:53] A usuária clica em "Mostrar mais 4 campos".
+[09:59] O campo "Tabela de Horário" aparece, e a usuária seleciona "Horário Comercial".
+[10:02] A usuária clica em "Salvar", fechando o pop-up e atualizando o usuário "Sabrina" com a "Tabela de horários" vinculada.
+[10:13] A usuária finaliza a explicação sobre a tabela de horários e aponta para a ferramenta de "pessoas".
+[10:23] A usuária mostra a opção "Conta de cliente" ao editar o usuário.
+[10:35] A usuária explica que "Celular" e "Ramal" são apenas campos adicionais.
+[10:53] A usuária menciona que "Conta de cliente" está vinculada à organização, que será explicada em breve.
+[10:59] A usuária salva as alterações e retorna à lista de usuários.
+[11:05] A usuária clica no ícone "Mais opções" e seleciona "Termos de aceite".
+[11:10] A tela de "Termos de aceite" é exibida, vazia.
+[11:14] A usuária clica em "Novo Termo", abrindo o pop-up "Criando termos de aceite".
+[11:17] A usuária explica a funcionalidade dos termos de aceite, como a LGPD.
+[12:12] A usuária explica que, se o cliente aceitar o termo, o robô inicia o atendimento, caso contrário, encerra o chamado.
+[12:30] A usuária clica em "Cancelar", fechando o pop-up.
+[12:34] A usuária explica que o termo de aceite é configurado pelo suporte e vinculado ao robô.
+[12:47] A usuária clica no ícone "Chat" no menu superior.
+[12:51] A usuária clica no ícone "Mais opções" e revisa as ferramentas já apresentadas.
+[13:00] A usuária apresenta os "Contatos".
+[13:10] A usuária clica no ícone "Contatos" no menu superior.
+[13:11] A tela de "Contatos" é exibida.
+[13:16] A usuária clica em "Exibir Filtros".
+[13:28] O painel de filtros é exibido.
+[13:35] A usuária explica os diferentes filtros disponíveis (nome, número, conexão, origem, etc.).
+[14:10] A usuária explica as opções de ordenação (crescente, decrescente, última mensagem, data de cadastro).
+[14:20] A usuária explica o filtro por "Departamento padrão para chamados" e "Atendente padrão para chamados".
+[14:34] A usuária explica que é possível fazer outras funcionalidades além de filtrar, como importar contatos.
+[14:40] A usuária clica em "Importar contatos".
+[14:46] Um menu suspenso aparece com as opções "Arquivo Excel (CSV)" e "Grupo".
+[14:48] A usuária seleciona "Arquivo Excel (CSV)", abrindo a tela "Importar contatos de CSV".
+[15:00] A usuária explica que o arquivo deve estar no formato CSV.
+[15:20] A usuária explica os campos que devem ser preenchidos para a importação (Conexão, Tags, Departamento, Atendente Padrão).
+[15:45] A usuária mostra o modelo de arquivo CSV fornecido pela Digisac, com campos como "Nome", "DDD", "Número", "Departamento Padrão", "Atendente Padrão" e "Tags".
+[16:21] A usuária clica em "Baixar o modelo".
+[16:27] A usuária explica que, após preencher e salvar a planilha, o arquivo pode ser carregado.
+[16:38] A usuária clica em "Carregar seu arquivo".
+[16:41] A usuária clica em "Importar".
+[16:45] A usuária explica que aparecerá um pop-up para salvar os números importados.
+[16:58] A usuária clica em "X" para fechar a tela de importação.
+[17:01] A usuária explica a funcionalidade de exportar contatos.
+[17:12] A usuária seleciona a caixa de seleção "Nome" para selecionar todos os contatos.
+[17:19] A mensagem "65 contatos selecionados" aparece.
+[17:28] A usuária explica que se selecionar apenas a caixa de seleção da primeira página, ele seleciona apenas os 15 exibidos.
+[17:35] A usuária seleciona novamente todos os contatos.
+[17:52] A usuária clica em "Ações em massa".
+[17:54] Um menu suspenso aparece com as opções "Adicionar tag", "Remover tag", "Excluir", "Exportar", "Departamento padrão".
+[17:59] A usuária seleciona "Exportar".
+[18:02] O pop-up "Escolha um formato" é exibido.
+[18:07] Um aviso amarelo aparece na parte superior direita, informando que é necessário filtrar por conexão antes de exportar.
+[18:13] A usuária seleciona "WhatsApp" no filtro de "Conexão".
+[18:17] A usuária seleciona novamente todos os contatos.
+[18:20] A usuária seleciona "Exportar" em "Ações em massa" novamente.
+[18:23] O pop-up "Escolha um formato" é exibido novamente.
+[18:27] A usuária explica as opções de formato de exportação (CSV separado por vírgula, CSV separado por ponto e vírgula ou formato Google Contacts).
+[18:41] A usuária clica em "Cancelar".
+[18:48] A usuária explica as outras opções em "Ações em massa" (adicionar/remover tag, excluir, vincular departamento padrão).
+[19:10] A usuária finaliza a explicação sobre as configurações de contatos.
+[19:22] A usuária clica no ícone "Chat" no menu superior.
+[19:25] A usuária mostra que não há chamados abertos.
+[19:35] A usuária clica no ícone "Pessoas" no menu superior.
+[19:48] A tela de "Pessoas" é exibida, sem resultados.
+[19:54] A usuária explica o que são as "Pessoas" no sistema (agrupamento de contatos).
+[20:25] A usuária clica em "Nova pessoa".
+[20:30] O pop-up "Criando pessoa" é exibido.
+[20:39] A usuária digita "Digisac" no campo "Nome".
+[20:49] A usuária clica em "Salvar", e "Digisac" é adicionado à lista de pessoas.
+[20:54] A usuária clica no ícone "Chat" no menu superior.
+[20:58] A usuária clica nos três pontinhos ao lado do contato "Jeniffer" e vincula à pessoa "Digisac".
+[21:11] A usuária clica nos três pontinhos ao lado do contato "Amanda Moraes" e vincula à pessoa "Digisac".
+[21:23] A usuária atualiza a página.
+[21:28] A usuária clica no chat de "Amanda Moraes".
+[21:31] O atalho "Conversar em..." aparece no chat.
+[21:37] A usuária clica no atalho e seleciona "Jeniffer".
+[21:40] A usuária demonstra a troca de chat de forma mais rápida.
+[21:55] A usuária clica no ícone "Pessoas" novamente.
+[21:58] A usuária explica que essa é a função da ferramenta "Pessoas".
+[22:04] A usuária clica no ícone "Organizações" no menu superior.
+[22:09] A tela de "Organizações" é exibida, vazia.
+[22:15] A usuária explica que "Organizações" serve para liberar acesso de terceiros ao histórico de atendimento de contatos vinculados às pessoas.
+[22:33] A usuária clica em "Nova organização".
+[22:38] O pop-up "Criando organização" é exibido.
+[22:42] A usuária digita "Digisac" no campo "Nome".
+[22:54] A usuária clica em "Salvar".
+[22:56] A tela de "Organizações" é exibida com "Digisac" listado.
+[22:57] A usuária clica no ícone "Pessoas".
+[23:00] A usuária clica nos três pontinhos ao lado de "Digisac" e seleciona "Editar".
+[23:05] A usuária clica em "Organizações" e seleciona "Digisac".
+[23:09] A usuária clica em "Salvar".
+[23:10] A tela de "Pessoas" é exibida com "Digisac" listado e a organização "Digisac" vinculada.
+[23:20] A usuária explica que para que o usuário da organização tenha acesso às conversas, é preciso fazer um upgrade com o time comercial para criar um usuário para essa organização.
+[24:08] A usuária mostra a tela de "Usuários".
+[24:11] A usuária clica em "Novo usuário".
+[24:16] A usuária digita "Organização" no campo "Nome".
+[24:20] A usuária digita "organizacao@digisac.com.br" no campo "Email".
+[24:32] A usuária digita e repete a senha.
+[24:38] A usuária clica em "Mostrar mais 4 campos".
+[24:45] A usuária habilita "Conta de cliente".
+[24:52] A usuária seleciona "Digisac" em "Organizações".
+[25:01] A usuária clica em "Salvar".
+[25:05] A tela de "Usuários" é exibida, com o novo usuário "Organização" listado.
+[25:12] A usuária sai do seu usuário e faz login com o usuário "Organização".
+[25:25] A tela de "Histórico de Chamados" é exibida, mostrando os chamados vinculados à organização.
+[25:34] A usuária clica em um dos chamados para visualizar os detalhes da conversa.
+[25:40] A usuária mostra a data e o protocolo de atendimento no chat.
+[25:48] A usuária sai do usuário "Organização" e faz login novamente com o seu usuário original.
+[26:01] A usuária mostra que não há chamados abertos.
+[26:06] A usuária apresenta o "Chat interno".
+[26:15] A usuária clica no ícone do chat no canto inferior direito.
+[26:22] A tela do "Chat Interno" é exibida.
+[26:30] A usuária explica que o chat interno é uma ferramenta contratada à parte.
+[26:41] A usuária clica no funil de filtros.
+[26:49] As opções de filtro (Todos, Grupos, Conversas) são exibidas.
+[26:54] A usuária clica nos três pontinhos no canto superior direito.
+[27:00] As opções "Ativar Usuário", "Canais", "Grupos" são exibidas.
+[27:06] A usuária seleciona "Canais".
+[27:11] A tela de "Canais" é exibida, mostrando que não existem canais criados.
+[27:16] A usuária clica em "Criar canal".
+[27:21] A usuária digita "Financeiro" no campo "Nome".
+[27:26] A usuária clica em "Cadastrar".
+[27:28] A mensagem "Canal criado com sucesso!" é exibida.
+[27:32] A usuária clica na seta para voltar.
+[27:35] O canal "Financeiro" é exibido.
+[27:40] A usuária clica nos três pontinhos ao lado do canal "Financeiro" e seleciona "Editar".
+[27:45] O pop-up "Editando canal" é exibido.
+[27:48] A usuária clica em "Salvar".
+[27:52] A usuária clica nos três pontinhos e seleciona "Grupos".
+[27:57] A tela de "Grupos" é exibida, mostrando que não existem grupos criados.
+[28:03] A usuária clica em "Criar grupo".
+[28:07] O pop-up "Criar grupo" é exibido.
+[28:13] A usuária digita "Segunda via de fatura" no campo "Nome do grupo".
+[28:18] A usuária seleciona "Financeiro" no campo "Canais".
+[28:25] A usuária seleciona "Laís" no campo "Administradores do grupo".
+[28:34] A usuária digita "Sabrina" no campo "Membros" e a adiciona.
+[28:43] A usuária clica em "Criar grupo".
+[28:49] A mensagem "Grupo criado com sucesso!" é exibida.
+[28:55] A usuária clica na seta para voltar.
+[28:59] O grupo "Segunda via de fatura" é exibido.
+[29:02] A usuária volta para a tela principal do chat interno.
+[29:05] O grupo "Segunda via de fatura" aparece no chat interno, vinculado ao canal "Financeiro".
+[29:08] A usuária clica no grupo "Segunda via de fatura".
+[29:13] A usuária digita uma mensagem de teste no chat.
+[29:18] A usuária clica no ícone "Informações do grupo".
+[29:21] As informações do grupo são exibidas, mostrando os usuários vinculados.
+[29:24] A usuária clica no "X" para fechar.
+[29:30] A usuária clica no ícone de emoji no chat.
+[29:34] O painel de emojis é exibido.
+[29:39] A usuária anexa um arquivo no chat.
+[29:43] O arquivo é carregado.
+[29:46] A usuária clica no ícone de enviar.
+[29:50] A usuária finaliza a explicação sobre o chat interno.
+[30:00] A usuária para de compartilhar a tela e aparece em vídeo.
+[30:05] A usuária faz um resumo das ferramentas apresentadas.
+[30:20] A usuária agradece a participação e oferece ajuda.
+[30:26] A usuária menciona a equipe de onboarding e os treinamentos personalizados.
+[30:40] A usuária se despede.
+[30:54] O logo da Digisac aparece com o slogan "Plataforma Multicanal".
+[31:00] Informações de contato da Digisac são exibidas (site, telefone, e-mail, redes sociais).

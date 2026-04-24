@@ -1,0 +1,130 @@
+[00:00] Olá. Boa tarde. Olá a todos.
+[00:11] Pessoal que já está aqui comigo, como que está o som para vocês? Podem ir
+[00:18] dando o retorno aqui no chat, por favor. Se vocês estão me escutando bem,
+[00:26] visualizando bem a tela também. Boa tarde a todos.
+[00:29] Podem ir compartilhando também esse link, tá, com a equipe,
+[00:36] com os amigos que utilizam a Digisac.
+[00:43] A gente já vai iniciar. Às 15 horas em ponto a gente inicia.
+[00:44] Pessoal, vamos se apresentando também, por favor, né? Enviando o nome de vocês,
+[00:53] o nome da empresa, se vocês são clientes da Digisac. Muito obrigada, Larissa.
+[00:59] Larissa falou que o o som está ok.
+[01:03] Então, bora lá, né, pessoal? Hoje o tema é super interessante aí. É um tema esperado por por bastante clientes.
+[01:14] Então, hoje a gente vai sanar algumas dúvidas referente a algumas configurações do robô V3, da nova versão do robô.
+[01:21] Combinado? Então, vamos lá para dar tempo da gente falar sobre todos os pontos
+[01:31] dentro aí dos 40 minutos que a gente tem de interação aqui, tá bom? Então,
+[01:37] mão na massa, né, pessoal? Inicialmente eu vou me apresentar. Então, meu nome é Fabiana, eu sou analista de treinamento da Digisac.
+[01:46] Todas as quartas-feiras eu venho com um tema aqui para vocês, para explicar referente a algumas funcionalidades da Digisac, algumas ações, algumas configurações.
+[01:57] Então, se vocês acessarem o nosso canal do YouTube e na aba ao vivo, você vai localizar vários vídeos referente a diversos temas.
+[02:08] Então, é interessante vocês procurarem ali algum tema que que vocês têm interesse de assistir, que é interessante, tá bom? Para vocês para vocês utilizarem cada vez mais
+[02:18] a Digisac num formato completo, né, com todas as configurações.
+[02:24] Então, hoje a gente vai falar um pouquinho sobre algumas configurações do V3, como eu havia comentado.
+[02:32] E hoje eu já vou iniciar a explicação.
+[02:39] Boa tarde a todos que estão entrando agora.
+[02:44] Lembrando que esse vídeo vai ficar ao vivo, ao vivo. Vai ficar gravado, tá, pessoal? É ao vivo, mas ele vai ficar gravado.
+[02:50] Tudo bem? Então, vamos lá. Hoje a gente vai falar um pouquinho referente a configuração,
+[02:59] eh, do robô dentro aí dos grupos, avaliações, tags. Então, o porquê, né, dessas configurações, pessoal? Então, vamos lá.
+[03:07] Na semana passada, lançamos o novo robô fluxograma da Digisac e realizamos um treinamento completo sobre como criar um bot do zero. Abordamos recursos como inatividade, condição do zero e envio de avaliação. Link na Bio.
+[03:19] Então, seria interessante vocês acessarem, tá? Você que não participou do vídeo da semana passada,
+[03:26] acessarem esse link aqui no chat
+[03:32] para vocês assistirem esse vídeo.
+[03:40] Mandei, vou mandar só o link para ver se
+[03:44] Ó, vou mandar só o link também aqui para vocês.
+[03:52] Pronto, ó.
+[04:00] Assistam esse vídeo que está aqui, está na Bio também, para você que está assistindo essa gravação, está na Bio esse vídeo, para você entender como criar um robô do zero, tudo bem? Porque hoje o robô que eu que eu vou criar, vai ser bem,
+[04:22] bem simples, porque eu vou,
+[04:29] Pode, com certeza, não tem problema assistir depois a imersão anterior, não tem problema nenhum, tá?
+[04:37] Então, podem assistir essa daqui hoje, podem ir trazendo as dúvidas também. Fiquem bem à vontade, por favor. Esse espaço é de vocês, mas lembrando que o ideal é vocês assistirem o vídeo e depois iniciar essas configurações de hoje. Tudo bem? Então, eu vou te mostrar depois na tela para vocês, que vai ficar na Bio também,
+[04:58] anexado esse vídeo para vocês assistirem. Então, bora lá.
+[05:01] Então, na semana passada, a gente criou um robô do zero, trazendo aí na inatividade, a condição do zero para voltar no menu anterior, inicial.
+[05:13] E também, o envio de avaliação. Tudo bem? Então, esse foi o vídeo de semana passada. Hoje, o que que a gente vai fazer?
+[05:22] A gente vai realizar uma configuração para o robô não acionar dentro dos grupos.
+[05:29] E também, a gente vai trazer uma configuração, para caso você queira encerrar um atendimento, encerrar um chamado, sem enviar a avaliação para o cliente. Porque às vezes,
+[05:40] você quer enviar a avaliação, apenas no final daquela contratação, e não a toda vez que você fecha um chamado. Faz super sentido, né? Então, hoje eu vou mostrar para vocês como configurar
+[05:54] para a avaliação não ser enviada a todo fechamento de chamado para o cliente. Tudo bem? E também, a gente vai falar um pouquinho sobre a configuração das tags.
+[06:05] Legal? Então, vamos lá. Todos preparados?
+[06:10] Só para lembrar vocês que a Digisac é uma plataforma multicanal, que vocês conseguem centralizar atendimentos. Então, esse robô que a gente vai configurar hoje, que a gente configurou na semana passada, pessoal, vocês podem inserir no, na conexão de WhatsApp, na conexão de Webchat, na conexão do Instagram, na conexão do Telegram, tá bom? Então,
+[06:36] saibam que a Digisac consegue centralizar todos esses atendimentos e também personalizar os atendimentos conforme aí o canal que o cliente direcionou uma mensagem. Tudo bem?
+[06:50] Então, a gente não realiza, a gente não é centralizado só no WhatsApp. A gente tem outras,
+[06:58] outros canais de de canais de atendimento, outras conexões disponíveis aí para vocês, tá bom? Só para relembrar todos aí.
+[07:05] E também referente ao script. Então, quem participou na semana passada, hoje vai saber também
+[07:14] O Instagram, sim, é um investimento à parte, isso mesmo, Bernardo. Já estou respondendo algumas perguntinhas aqui no chat.
+[07:24] E a importância do script, pessoal, que é um formato aí, é um roteiro que você consegue se organizar, organizar o seu conteúdo, o que você quer que seja enviado para o cliente, no formato legal para você realizar a configuração já com o script pronto, para você não precisar
+[07:55] eh, se preocupar com a configuração do robô e também com a descrição daquela, daquele conteúdo, daquela mensagem, tá? Então, você deixando tudo isso pronto, você já consegue focar aí somente na criação e na configuração do robô e copiando e colando as mensagens. Tudo bem?
+[08:06] Então, o chat GPT, pessoal, ele ajuda bastante aí na criação desses scripts. Então, a gente tem alguns modelos que a gente pode direcionar para vocês também. Tá bom? Então, vamos lá. Vamos para a plataforma, porque hoje é mais focado mesmo na plataforma. Tudo bem?
+[08:16] Então, ó, essa é a plataforma Digisac para vocês que nunca visualizaram. E hoje, pessoal, como a gente vai realizar a configuração do departamento sem robô, né, que eu já vou explicar um pouquinho mais.
+[08:44] Para o robô não acionar dentro dos grupos, a gente precisa realizar algumas configurações antes, tá bom? A gente precisa criar alguns departamentos antes.
+[08:52] Tudo bem? Então, vocês já vão entender o porquê eu preciso criar esses departamentos. Mas é necessário.
+[09:01] Tudo bem? Então, vamos lá. O primeiro passo é vocês acessarem o menu superior mais opções da plataforma.
+[09:10] Clicar em Departamentos.
+[09:16] Certo? E você vai criar um novo departamento. Esse departamento, ele pode chamar grupos, ele pode chamar sem robô. Você que vai escolher esse nome, mas que seja um nome aí que você saiba que é para fidelizar esses grupos, né, esses atendimentos dentro dos grupos do WhatsApp, ao departamento sem robô, tá? Então, você pode trazer eh,
+[09:44] Departamento sem robô. Você pode trazer somente sem robô direto.
+[09:51] Tá bom? Ou também, ó, grupos.
+[09:56] Certinho? Então, precisa criar um departamento.
+[10:01] Então, eu vou incluir, então, Departamento Grupos.
+[10:06] Certinho? E salvar.
+[10:10] Tudo bem? Então, criando esse Departamento Grupos, eu preciso criar um Departamento sem avaliação também.
+[10:17] Tá? Então, eu posso trazer um Departamento sem avaliação.
+[10:28] Então, o primeiro passo, pessoal, é criar esses departamentos que a gente vai vincular na configuração do robô. Combinado?
+[10:39] Entendendo essa parte, agora a gente precisa ir para o menu superior Contatos. Tá certo? Então, essa agenda aqui que fica disponível no menu superior da plataforma. A gente vai abrir os filtros,
+[10:55] mostrar filtros. Abrindo, a gente vai ter esse campo tipo. E aqui no tipo, a gente vai selecionar somente os grupos, né? Então, tipo, grupo.
+[11:06] Visualizando todos os grupos disponíveis. Ó, do lado do nome, pessoal, eu vou selecionar todos os grupos. Aí é que vai ter uma opção, ó.
+[11:15] Selecione todos os grupos. Aí você vai selecionar todos eles. Exatamente assim que eu estou fazendo, hein, pessoal? Seleciona, filtra por tipo grupo.
+[11:32] Seleciona todos os grupos, selecionar todos aqui, ó. Precisa clicar nesse campo. Selecionando todos eles, você vai subir um pouquinho e vai ter uma ação em massa, ó. Ações em massa.
+[11:46] Se você não selecionar, não vai aparecer esse campo. É só selecionando todos que vai aparecer. Então, eu selecionei todos os grupos da minha conexão, e aqui eu consigo trazer um departamento padrão para todos esses grupos, que ele vai ser o departamento sem robô. Aquele departamento que eu criei, que eu acabei de criar, tudo bem? Então, Departamento sem robô. E eu salvo. Tudo bem?
+[12:15] Entenderam essa parte? Precisa fidelizar, então, todos os grupos ao Departamento sem robô. Certo? Então, o primeiro passo foi criar o Departamento sem robô e criar o Departamento sem avaliação. E o segundo passo foi fidelizar todos esses grupos ao Departamento. Agora a gente vai para a criação do robô. Porque a gente já realizou essa configuração inicial. Tudo bem?
+[13:00] Então, bora lá. Menu superior mais opções, robôs. E aqui a gente vai criar um novo robô.
+[13:12] Se não está disponível na sua plataforma esse robô de fluxograma, é só acionar a gente, tá, pessoal, que a gente libera.
+[13:19] Mas é para estar liberado para todos. Tudo bem? Então, bora lá. Vai ficar salvo sim esse vídeo lá no YouTube, tá bom, Mateus?
+[13:28] Então, vamos lá. Eu vou criar um robô simples hoje, porque eu quero focar nessas configurações especiais aí que é dentro do,
+[13:38] do dos grupos e também sem avaliação. Certinho? Então, vamos lá.
+[13:43] Então, inicialmente, pessoal, vocês vão visualizar nesse formato aqui, ó, o início do fluxo e o gatilho. Então, já vai vir pré-definido esses dois campos para vocês. Vocês vão deixar nesse formato para ir realizando a estrutura do robô. Tudo bem?
+[13:58] Então, eu vou clicar no gatilho.
+[14:03] E vai abrir esse menuzinho lateral aqui para mim, para eu configurar esse gatilho.
+[14:09] Trazendo a ação que eu desejo nesse início, o recebimento de mensagem, que é essa primeira opção. Porque o nosso bot, ele é receptivo. O bot da Digisac só vai ser acionado no momento que ele receber uma mensagem, receber algum conteúdo ali. Tudo bem?
+[14:35] Então, primeiro gatilho, recebimento de mensagem. Aplicando, pessoal, a gente vai trazer a condição, tudo bem? Então, ó, dentro da condição está o segredo, hein?
+[14:52] Então, é esse momento que a gente vai trazer as opções que eu quero que o robô entenda, o que é verdadeiro e o que é falso. Tudo bem? E se você achasse conteúdo um pouquinho difícil, fica tranquilo que a gente tem ali um time que consegue te ajudar, consegue te explicar e tirar todas as suas dúvidas que é o suporte técnico e o time de treinamento. Tudo bem?
+[15:29] Então, se você acha um pouquinho complexo esse tema, não desespera, porque a gente tem aqui todo um time especializado para ajudar vocês, tá bom? Então, vamos lá.
+[15:34] Configuração da condição. Então, aqui a gente vai trazer, pessoal, ó, a condição que eu quero que o robô acione, a condição que eu quero que o meu robô envie a mensagem. E eu quero que o meu bot envie uma mensagem dentro do horário de atendimento e uma mensagem fora do horário de atendimento. Mensagens diferentes. A dentro do horário, realizando transferências automáticas, e a fora do horário, enviando ali para o meu cliente que a gente não vai estar disponível naquele momento, mas a gente volta o atendimento no dia seguinte às 8 horas da manhã. Tá bom? Então, para sempre deixar o cliente ali com o conhecimento referente ao horário de atendimento e também prestando ali o atendimento inicial dentro do horário. Tudo bem? Então, aqui nessa condição, a primeira condição que eu vou incluir é dentro do horário de atendimento. Tudo bem?
+[16:29] Então, vou selecionar essa variável dentro da condição. Só que aqui embaixo eu consigo adicionar mais condições. Então, dentro do horário de atendimento, e eu também quero que o robô saiba que é a primeira mensagem do meu cliente, né? Então, eu vou trazer uma variável, é a primeira mensagem do chamado. No vídeo anterior, da semana passada, eu expliquei a diferença referente a algumas condições. Pode assistir que lá está bem mais completo, tá bom?
+[17:01] Então, é a primeira mensagem do chamado. E eu vou trazer mais uma condição aqui dentro. Então, muita atenção nessa hora, hein? Porque é aqui que a gente vai incluir em quais departamentos eu quero que o robô acione. Porque lembra que a gente incluiu, a gente criou um departamento sem robô? Esse departamento, ele vai ficar de fora. Ele não vai ficar selecionado aqui porque eu não quero que o robô acione dentro desse departamento sem robô. Então,
+[17:31] essa condição que eu vou incluir agora, vai ser variável, eu vou descer um pouquinho a minha tela e selecionar essa opção aqui, ó, "Chamado está em um dos departamentos". Tudo bem?
+[17:49] Então, vocês precisam trazer essa condição.
+[17:51] Tá certo? Então, ó, dentro do horário de atendimento, é a primeira mensagem do chamado. E a terceira condição que é, o chamado está incluso em um dos, nos departamentos. Tudo bem?
+[18:07] O operador eu vou incluir, está incluso na lista. Tem as duas, né? Tem o "igual" e "está incluso na lista". O "igual" não deixa eu selecionar, selecionar mais que um, ó. Eu só posso selecionar apenas um. E o "está incluso na lista", eu consigo selecionar vários. Tudo bem?
+[18:29] Então, aqui eu vou selecionar todos os departamentos, menos o Departamento sem robô. Ó, sem robô, sem avaliação, Departamento Grupos, e Departamento sem avaliação. Esses daqui foram os departamentos que eu criei para realizar a configuração. Tudo bem?
+[18:59] Então, seleciona todos os departamentos ativos aí na plataforma de vocês, menos o Departamento sem robô, que foi o que a gente criou no início. Certo? E incluindo essas condições,
+[19:10] eu já consigo salvar.
+[19:16] E incluir a mensagem dentro do horário de atendimento. Então, é como se fosse perguntas, as condições, tá? Então, dentro do horário de atendimento, se for verdadeiro,
+[19:28] eu quero que envie a mensagem de saudação para o meu cliente. Então, eu vou vim aqui no meu script, copiar esse conteúdo.
+[19:40] E colar. Tudo bem? Então,
+[19:46] Olá, contact_name vai puxar o nome do meu cliente. É uma variável. Seja muito bem-vindo à empresa X. Vai incluir o nome da empresa de vocês. Digite um para comercial, dois suporte, três financeiro. Então, essa mensagem que eu copiei agora e inseri aqui no meu bot. Tudo bem? E aqui a gente tem algumas,
+[20:11] algumas opções, né? Então, um financeiro, dois suporte. Então, a gente precisa definir uma resposta, incluindo um, dois e três, tá bom?
+[20:23] Olha que legal, super tranquilo de criar, viu, pessoal? Então, eu quero que, a partir do momento que o cliente digitar um, ele seja transferido para o comercial. Então, eu vou pegar a minha opção de transferir e só ir conectando, tá bom, pessoal? Ó. Então, comercial,
+[20:46] e salvar. Então, a segunda opção, se ele digitar dois, vai ser transferir para o suporte. Eu posso incluir um atendente em específico? Posso, mas é opcional, não é obrigatório. Tudo bem?
+[21:05] Ó, transferir aqui também. Então, três é a opção, financeiro.
+[21:14] E eu salvo. Tudo bem? Olha que simples, hein, pessoal? Simples demais, né? Então, digite um para comercial, dois suporte e três financeiro. As outras opções, eu quero que envie novamente a opção. Então, eu vou,
+[21:30] eu vou ligar outras opções aqui no começo dessa condição. Ó, só liguei, ela está aqui, ó. Vou até ligar novamente para vocês.
+[21:40] Então, outras opções, aqui nessa condição. Tudo bem? Então, bora lá. A partir do momento que o cliente for transferido para o departamento correto, eu quero que seja direcionada uma mensagem para ele. Independentemente para qual departamento ele foi transferido, eu quero que seja direcionada uma mensagem. Ótimo, aguarde um instante, em breve um atendente entrará em contato. Então, vou copiar esse conteúdo e colar aqui. Tá bom? Enviar uma mensagem. Eu não preciso definir, eu não preciso definir uma resposta. Porque não tem resposta. O cliente ele só vai precisar aguardar. Tá?
+[22:49] Então, no momento da transferência, do envio dessa mensagem, eu quero que pare o fluxo. Eu quero que o robô entenda que agora vai ser o atendimento humano. Quem vai assumir vai ser os atendentes e o robô não precisa acionar mais. Justamente por isso que eu preciso trazer parar o fluxo principal. Tudo bem referente a essa parte, pessoal?
+[23:19] Deixa eu visualizar um pouquinho as perguntas.
+[23:28] Então, eh, Nathan, sobre essas mensagens no "Não entendi", você pode incluir ali dentro de "Outras opções". Então, tem um, dois ou três, né? Deixa eu te mostrar, ó.
+[23:41] Tem um, dois e três. Se ele enviar outra resposta, você pode incluir aqui, ó, para enviar uma mensagem. Não entendi sua resposta. Mas eu acho mais fácil você incluir direto para receber a mesma mensagem, né? Porque se ele não digitou uma resposta válida, ele vai receber o mesmo conteúdo para assim entender o que ele precisa direcionar. Tudo bem?
+[24:06] Aí fica a critério de vocês incluir uma mensagem de "Não entendi" ou já direcionar a mensagem com as opções válidas. Tudo bem?
+[24:14] Não é possível, por tag não é possível, tá bom? Realmente precisa ser um, dois e três.
+[24:28] Você disse que se ele tiver fidelizado a uma tag, ele vai ser transferido de forma automática. É mais ou menos? A Dinacet fez uma pergunta aqui e a gente já responde, tá bom? O contact name, você consegue colocar nas mensagens. Realmente, você precisa incluir a opção um, dois e três, não dá certo referente às tags nesse início, tá? Você só consegue adicionar as tags aqui de forma automática, que eu já vou falar um pouquinho sobre. Realmente precisa das condições um, dois e três, ou quatro, cinco, seis, depende aí das opções que vocês vão incluir para o cliente. Beijinho. Entendendo essa parte, pessoal.
+[25:13] Agora, sim, a gente vai realizar algumas configurações.
+[25:19] Então, vocês observaram que a gente só incluiu a condição inicial "verdadeiro"? A falsa a gente não incluiu ainda, por quê?
+[25:29] Porque eu vou precisar realizar a configuração de uma condição nova aqui embaixo. Então, olha lá, retomando. Como eu quero que o meu robô não funcione dentro dos grupos, eu incluí todos os departamentos da condição que eu quero que o robô acione. Então, eu quero que o robô acione no sucesso do cliente, dentro do departamento Recepção, Suporte, Treinamento, Atendimento, Financeiro, Comercial/Vendas. Todos esses departamentos eu quero que o robô funcione, tá? E nessa condição que eu acabei de incluir, eu vou incluir a variável, "Chamado está dentro do departamento". Então, essa opção. O "está incluso na lista" e aqui sim, eu vou trazer o Departamento sem robô, tá?
+[26:25] Então, nessa condição, ela sozinha, pessoal, ó, ela sozinha. Eu incluí o "Chamado está em um dos departamentos" e "Departamento sem robô". Porque aqui eu vou trazer, então, se for verdadeiro, eu quero que pare o fluxo, porque eu não quero que o robô funcione dentro desse departamento. Entendeu? Então, se for verdadeiro, eu não quero que acione, eu quero que pare o robô, pare o fluxo. E se for falso, eu quero que envie uma mensagem ali, avisando os clientes que a gente não está no horário de atendimento. Tudo bem?
+[27:32] Para você que não assistiu o vídeo anterior, o vídeo da semana passada, está achando esse daqui um pouquinho confuso, assista o da semana passada que vai ficar tudo certo. Hoje a gente está realizando algumas configurações um pouquinho mais complexas, tá bom? Então,
+[27:50] se for falso, pessoal, eu quero que o robô envie ali a mensagem para o meu cliente que a gente não está no horário de atendimento, e após enviar essa mensagem, eu quero que pare o fluxo. Tudo bem?
+[28:07] Então, a gente já realizou a configuração do departamento sem robô para os grupos. Agora a gente vai criar a configuração da avaliação, tá, pessoal? Então, preciso trazer essa opção, esse fluxo a qualquer momento. Ele sozinho, né? Como o "a qualquer momento", pessoal, ele é como se fosse o início do fluxo. Ele é o nosso contexto persistente, para vocês que são clientes antigos, é o contexto persistente, tá? Então, ele fica sozinho como o início do fluxo. Ó, ele é como se fosse o início de tudo. Tudo vai ficar ligado a ele, tá bom? E a avaliação fica ligado a qualquer momento.
+[29:05] Então, aqui eu vou trazer o gatilho, sempre acompanhado, sempre inicia com o gatilho, tá?
+[29:16] E aqui vai ser o recebimento de mensagem novamente. E após o robô, né, após enviar, receber uma mensagem, eu vou incluir o envio de uma avaliação.
+[29:26] Tá? Mas antes de incluir, ó, enviar pesquisa de avaliação, a gente precisa trazer a condição. Tudo bem? Então, aqui nessa condição, se for verdadeiro, tá? A gente vai seguir. Se for falso, a gente vai incluir outra ação. Tudo bem? Então, aqui a gente vai incluir as mesmas opções, ó. O "Chamado está em um dos departamentos", "está incluso na lista", e todos os departamentos, novamente.
+[30:03] Tá? menos o departamento "sem avaliação" dessa vez. Porque a gente não quer que a avaliação seja enviada para o cliente no final do atendimento, né? Então, aqui a gente não está falando mais referente ao departamento "sem robô", e sim ao departamento "sem avaliação". Então, aqui eu trouxe todos os departamentos, menos o departamento "sem avaliação" e o departamento "sem robô" também. Tudo bem?
+[30:37] Se você achar confuso essa configuração, fique tranquilo que a gente configura para vocês. Mas tem algumas pessoas que conseguem realizar sozinhos, tá? Então, eu vou aplicar. Para a dúvida do Nathan, gente,
+[30:49] vamos lá. Então, aqui o cliente precisa digitar um, dois ou três. Se ele digitar uma dessas opções, segue o atendimento. Se ele não digitar uma dessas opções, por exemplo, se ele digitar quatro, cinco, seis, ou até mesmo digitar uma, uma palavra, "batata frita". O robô não vai entender. Então, o que você pode incluir,
+[31:00] se ele incluir "Outras respostas", ó, já tem até uma opção aqui, "Outras respostas". Você vai incluir essa mensagem de "Outras respostas", ó, para o contexto inicial. Ó, então, você vai aqui nessa primeira, nessa primeira condição, você vai ligar, opa, o zoom está forte aqui. Você vai ligar ela aqui. A essa condição aqui, ó. Tudo bem? Aí, no momento que o cliente não digitar um, dois e três, ele vai receber essa mensagem novamente, entender que ele precisa digitar uma das, uma das opções válidas. Tudo bem? Então, tem essas duas opções que eu acabei de mostrar para você, tá bom? Se você tiver dificuldade, você pode assistir esse vídeo depois, ou até mesmo chamar o nosso suporte técnico, que a gente consegue te auxiliar. Tudo bem?
+[31:52] Pessoal, então hoje a gente já finalizou, já completou aí os 40 minutos. Lembrando que na semana que vem a gente volta com mais temas, e se você precisar,
+[32:00] é só entrar em contato com a gente. O nosso número está passando aqui embaixo. Agende um treinamento, fala com o nosso suporte técnico, ou até mesmo assiste esse vídeo novamente no YouTube. Um beijão a todos. Obrigada pela participação, pela contribuição também, e até semana que vem. Tchau, tchau.

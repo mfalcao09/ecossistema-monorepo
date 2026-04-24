@@ -1,0 +1,38 @@
+[00:00] Tela principal da gestão de usuários, mostrando usuários existentes, e-mails, status de administrador, situação e opções de ação (editar/trocar senha).
+[00:26] Demonstração do menu de ações para um usuário, exibindo opções para "Editar" e "Trocar senha".
+[00:30] Demonstração da funcionalidade "Redefinir senha", mostrando campos para "Nova Senha" e "Confirme sua senha".
+[00:46] Demonstração da funcionalidade "Exportar", mostrando as opções de formato de exportação (Print, CSV, Excel, PDF, Copy).
+[00:50] Demonstração da funcionalidade "Adicionar usuário", abrindo um formulário com campos como "Nome Completo", "Email", "Senha", "Administrador (Sim/Não)", "Grupo de Permissões" e informações opcionais.
+[00:57] Preenchimento dos campos "Nome Completo" e "Email" no formulário de adição de usuário.
+[01:00] Seleção da opção "Não" para o campo "Administrador".
+[01:19] Rolagem do formulário para mostrar mais campos opcionais como "Organização", "Cargo", "Endereço", "Cidade", "UF", "CEP", "País" e "Número WhatsApp".
+[01:27] Detalhes sobre o preenchimento do campo "Número WhatsApp", explicando o formato e sua utilidade para notificações.
+[01:59] Tela de edição do perfil de um usuário existente, mostrando "Detalhes do perfil", com opções para editar informações e a opção de "Deletar Atendente".
+[02:14] Navegação para a aba "Jornada de Trabalho" no perfil do usuário.
+[02:18] Tela "Horários de Acesso", mostrando opções para "Férias do Usuário" e "Horários de Trabalho".
+[02:27] Ativação da opção "Tem Férias?", revelando campos para "Início das Férias" e "Fim das Férias".
+[02:35] Ativação da opção "Horários de Trabalho", revelando dias da semana com opções "Ativo", "Intervalo" e "24 Horas", além de campos para "Início Atendimento" e "Fim Atendimento".
+[02:50] Demonstração de como definir horários específicos de atendimento para um dia.
+[02:58] Ativação da opção "Intervalo", revelando campos para "Início Intervalo" e "Fim Intervalo".
+[03:08] Navegação para a aba "Departamentos" no perfil do usuário.
+[03:10] Tela "Associação de Departamentos", mostrando "Departamentos Não Vinculados" e "Departamentos Associados", com botões para mover departamentos.
+[03:29] Navegação para a aba "Carteira de contatos" no perfil do usuário.
+[03:31] Tela "Contatos Vinculados", exibindo uma lista de contatos associados ao atendente, com opções para buscar, exportar e desvincular.
+[03:42] Navegação para a aba "Permissionamento" no perfil do usuário.
+[03:44] Tela "Regras específicas", mostrando diversas opções de permissões como "Permitir trocar status Online", "Permitir desabilitar assinatura", "Permitir convidar outros atendentes", "Ativar supervisão", "Permitir ver contatos no fluxo", "Ver todos atendimentos ?", "Ver histórico dentro do chat", "Notificar avisos no WhatsApp" e "Poder espiar a conversa em aberto atendimento".
+[03:57] Explicação da funcionalidade "Permitir desabilitar assinatura" e sua relação com o botão de assinatura no chat.
+[04:02] Demonstração do botão de desabilitar assinatura no chat de atendimento.
+[04:29] Explicação da funcionalidade "Permitir convidar outros atendentes".
+[04:39] Explicação da funcionalidade "Ativar supervisão".
+[04:48] Demonstração de como configurar a supervisão para ver atendimentos específicos (por departamento ou apenas do usuário).
+[05:07] Detalhes da opção "Ver todos atendimentos?", mostrando o campo de seleção para "Pode ver tudo", "Apenas do usuário" ou "Por departamento".
+[05:28] Retorno à tela de departamentos para mostrar o vínculo com as opções de supervisão.
+[05:32] Demonstração do ícone de supervisão no chat, que permite visualizar atendimentos não atribuídos a outros atendentes.
+[05:59] Continuação da explicação das "Regras específicas" no permissionamento.
+[06:01] Explicação da funcionalidade "Permissão de ver histórico dentro do chat", com opções para "Pode ver tudo", "Apenas do usuário" ou "Por departamento".
+[06:47] Explicação dos campos "Conexão default" e "Departamento default" e sua funcionalidade na abertura de atendimentos manuais.
+[06:55] Demonstração da abertura de atendimento manual através do ícone de lista de contatos.
+[07:18] Tela "Abertura de Atendimento", mostrando campos para "Contato", "Departamento" e "Atendente", com a funcionalidade de autoseleção.
+[07:35] Explicação da funcionalidade "Regras de ordem dos atendimentos", com opções "Mais recente para cima" e "Fila indiana".
+[07:49] Explicação da funcionalidade "Mostrar seta de inverter", com opções "Sim" e "Não".
+[07:59] Demonstração dos botões de inverter a ordem dos atendimentos no chat.

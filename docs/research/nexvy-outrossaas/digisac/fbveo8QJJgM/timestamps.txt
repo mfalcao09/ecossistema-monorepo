@@ -1,0 +1,7 @@
+[00:00] Cliente conversando com um dos atendentes
+[00:06] Cliente com uma solicitação que não pertence ao departamento do atendente
+[00:20] Atendente escrevendo mensagem para o cliente
+[00:26] Atendente clica no ícone de duas setas, "transferir chamada"
+[00:29] Atendente preenchendo as informações para a transferência
+[00:44] Atendente clicando em salvar
+[00:46] Conversa foi transferida para o departamento financeiro

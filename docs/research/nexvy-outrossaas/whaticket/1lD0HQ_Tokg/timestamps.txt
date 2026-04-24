@@ -1,0 +1,9 @@
+[00:00] Menu Respostas rápidas e lista de atalhos.
+[00:08] Edição de atalho - Horário.
+[00:15] Menu Atendimentos.
+[00:18] Atendimento em andamento.
+[00:24] Perguntas do cliente.
+[00:37] Mensagem de áudio.
+[00:43] Mensagem de texto: "Qual o horário?".
+[00:47] Mensagem de resposta automática do WABOOT.
+[00:58] Logo WABOOT.

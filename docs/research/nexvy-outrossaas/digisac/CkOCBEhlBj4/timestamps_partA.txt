@@ -1,0 +1,60 @@
+00:00 A presentadora inicia o webinar dando as boas-vindas aos participantes e introduzindo o tema principal da sessão
+04:29 Tela com o título "Principais Novidades de Fevereiro" e informações sobre o evento
+04:47 Apresentação da funcionalidade "Gestão de grupos" no WhatsApp
+06:45 Menu "Mais opções" com a funcionalidade "Cargos"
+06:58 Tela "Cargos" com a opção de editar o cargo de "Operador"
+07:06 Menu de permissões para o cargo de "Operador"
+07:11 Permissões específicas para "Grupos de WhatsApp"
+08:08 Retorno à tela de "Conversas" com a aba "Contatos" selecionada
+08:25 Tela "Criar grupo" para criar um novo grupo no WhatsApp
+09:07 Resumo dos novos membros adicionados ao grupo
+09:16 Visualização do grupo "Webinar Educacional" com seus membros e informações
+09:34 Opção de adicionar novos membros ao grupo
+09:42 Edição das informações do grupo, incluindo permissões
+10:12 Abas "Mídias", "Docs" e "Links" dentro das informações do grupo
+10:37 Demonstração de como um grupo aparece na aba "Chats" quando há uma nova mensagem
+10:52 Interação com o bot do grupo "Avisos Digisac"
+11:18 Aba "Contatos" mostrando todos os contatos e grupos
+11:24 Aplicação de filtros para visualizar apenas os "Grupos"
+11:36 Seleção de todos os grupos e opção de "Ações em massa" para adicionar tags
+11:45 Inserção da tag "Grupos" para os contatos selecionados
+11:58 Demonstração de como filtrar os chats por tags
+12:15 Filtro de mensagens não lidas e por tags
+12:21 Ativando a opção de filtrar por "Última mensagem recebida"
+12:33 Centralização da conversa ao filtrar por tags
+15:39 Exibição das tags na listagem do chat
+16:04 Exemplo de como as tags aparecem no chat com diferentes cores
+16:15 Demonstração de como as tags oferecem mais controle e organização no atendimento
+16:47 Opção de editar informações do grupo novamente
+18:11 Pergunta de um participante sobre a replicação da criação de grupos no WhatsApp
+18:20 A presentadora mostra a tela do seu celular, confirmando que o grupo foi replicado no WhatsApp
+19:05 A presentadora responde a uma pergunta sobre a visualização das mensagens em grupo
+20:13 A presentadora mostra como responder uma mensagem específica no grupo
+20:44 A presentadora demonstra como agendar um chamado no sistema
+21:51 Demonstração de como criar e gerenciar tags no sistema
+22:00 Criação de uma nova tag e edição de uma tag existente
+22:31 Filtro de tags por nome e por cor
+22:46 Vinculação de tags a departamentos específicos
+22:56 Criação de uma nova tag com nome, cor e departamentos vinculados
+23:07 A presentadora demonstra como filtrar os chats por tags, selecionando "Aguardando Documentação"
+23:25 A presentadora mostra como o filtro retorna apenas as conversas com a tag selecionada
+23:37 A presentadora demonstra como desativar a exibição de tags no chat
+23:51 Criação de uma nova tag com o nome "Pessoas" e vinculação a departamentos
+24:46 Salvar a nova tag "Campanhas Instagram"
+25:07 Visualização da nova tag "Campanhas Instagram" na lista de tags
+25:17 A presentadora demonstra como ativar a exibição de tags no chat
+25:34 A presentadora demonstra como copiar o protocolo de atendimento
+25:47 Inserção da tag "Urgente", "Cliente VIP" e "Aguardando Documentação"
+26:15 A presentadora mostra o caminho para habilitar as tags no chat: "Mais opções" > "Empresas" > rolar até "Exibição das tags no chat"
+27:10 Opção de habilitar a exibição das tags no chat
+27:26 Retorno ao chat para verificar a exibição das tags
+27:31 Opção de mostrar e esconder tags no chat
+27:42 Habilitação da visualização das tags nas configurações da empresa
+27:56 A presentadora demonstra como filtrar os chats por mensagens não lidas e por tags
+28:22 Demonstração de como a criação de grupos é replicada no WhatsApp do celular
+29:00 Resposta a uma pergunta sobre as tags, mostrando a opção de editar tags existentes para adicionar cores
+29:44 Resposta a uma pergunta sobre a criação de tickets para demandas não atendidas imediatamente
+30:26 Demonstração de como agendar uma notificação para um contato, sem enviar mensagem automática
+30:45 A presentadora explica como criar uma notificação para lembrá-la de entrar em contato com um cliente, sem enviar uma mensagem automática
+31:37 Demonstração de como criar uma nova tag com nome, cor e vincular a departamentos
+32:20 A presentadora mostra como habilitar a exibição de tags no chat

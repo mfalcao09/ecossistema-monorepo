@@ -1,0 +1,30 @@
+[00:05] O vídeo começa com a tela de Grupos do WhatsApp na plataforma Zaapy 4.0, onde é possível visualizar a lista de grupos.
+[00:13] A pessoa clica no menu "Módulos" para expandi-lo.
+[00:15] A pessoa clica em "Grupos Zaap", que é a seção onde os grupos do WhatsApp são gerenciados.
+[00:18] A tela principal exibe o nome do grupo, número do grupo, número da conexão e opções de ações.
+[00:30] Demonstração das opções de seleção de grupos (individual e em massa).
+[00:34] Mostra as opções de exportação: "Print", "CSV", "Excel", "PDF" e "Copy".
+[00:40] Demonstração do campo de busca para encontrar grupos específicos.
+[00:41] Mostra as opções para exibir a quantidade de entradas: 10, 25, 50 ou 100.
+[00:45] Exibe o botão "Ações em Massa" com as opções "Salvar Selecionados" e "Remover Grupos".
+[01:05] Clica no botão "Sincronizar Grupos" para exibir a caixa de seleção de canais.
+[01:37] A pessoa clica no menu "Usuários" para ir à tela de gerenciamento de usuários.
+[01:40] A pessoa clica no botão "Editar" de um usuário para acessar o perfil.
+[01:45] A pessoa clica na aba "Grupos Whatsapp" no perfil do usuário.
+[01:47] A tela de "Associação de Grupos" é exibida, mostrando grupos não vinculados e grupos associados ao usuário.
+[02:04] A pessoa move um grupo dos "Grupos Associados" para "Grupos Não Vinculados" e vice-versa.
+[02:12] A pessoa clica em "Salvar Alterações".
+[02:24] A pessoa clica no menu "Atendimento", que é o chat.
+[02:27] A pessoa clica na aba "Grupos" no chat.
+[02:29] A lista de grupos vinculados ao usuário é exibida, e a pessoa clica em um grupo específico.
+[02:32] É exibida a tela de chat do grupo, mostrando a área para digitar mensagens.
+[02:37] A pessoa clica no ícone de emojis para exibir o teclado de emojis.
+[02:38] A pessoa clica no ícone de respostas rápidas para exibir a lista de respostas.
+[02:40] A pessoa clica no ícone de "assinatura" para ativar/desativar o nome do usuário no grupo.
+[02:45] A pessoa clica no ícone de microfone para gravar áudios.
+[02:48] A pessoa clica no ícone de anexos para enviar arquivos.
+[02:52] A pessoa clica no ícone de "Abrir Sala de Vídeo" para iniciar uma chamada de vídeo.
+[02:58] A pessoa clica no ícone de informações do grupo para ver a descrição e detalhes.
+[03:22] Mostra a última mensagem enviada no grupo e a conexão utilizada.
+[03:35] Início da transição para a tela final do vídeo.
+[03:51] Exibição da logo da Zaapy e do endereço do site: www.zaapy.com.br.

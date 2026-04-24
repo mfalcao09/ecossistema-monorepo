@@ -1,0 +1,102 @@
+[00:00] Início do vídeo com a tela principal do sistema, mostrando o fluxograma do bot
+[00:27] Abrindo a janela de seleção de cards
+[00:39] Visão geral do fluxograma existente.
+[01:05] Clicando para adicionar um card de "Transferência de fluxo".
+[01:12] Adicionando um ponto de entrada ao card.
+[01:15] Conectando a opção "Comercial" ao card de "Transferência de fluxo".
+[01:27] Acessando as configurações do card "Transferência de fluxo".
+[01:28] Abrindo a janela para vincular o fluxo e a conexão.
+[02:02] Adicionando um card de "Condição de carteira".
+[02:08] Conectando a opção "Financeiro" ao card de "Condição de carteira".
+[02:54] Navegando para a seção "Departamentos" no menu lateral.
+[02:58] Editando o departamento "Comercial" para habilitar a opção "Usar Carteira".
+[03:04] Voltando para a tela de "Organização de Departamentos".
+[03:10] Navegando para "Fluxo do Bot".
+[03:14] Editando o fluxo atual e atualizando o fluxograma.
+[03:20] Acessando as configurações do card "Condição de carteira" para vincular departamentos.
+[03:31] O fluxograma é atualizado após salvar as alterações.
+[04:42] Adicionando um card de "Request HTTP".
+[05:04] Clicando no menu de opções do card "Request HTTP".
+[05:09] Adicionando um ponto de saída ao card "Request HTTP".
+[05:32] Acessando as configurações do card "Request HTTP".
+[06:14] Navegando para o "Dashboard".
+[06:17] Clicando no ícone do perfil no canto superior direito para acessar as configurações.
+[06:21] Acessando a aba "API do sistema" nas configurações.
+[06:47] Retornando à seção "Fluxo do Bot".
+[07:04] Adicionando um novo fluxo com o nome "Clientes Novos".
+[07:19] Adicionando um novo fluxo com o nome "Facebook".
+[07:29] Adicionando um novo fluxo com o nome "Instagram".
+[07:41] Editando o fluxo "Clientes Novos".
+[07:44] Adicionando um card de "Mensagem Inicial" ao fluxo "Clientes Novos".
+[07:48] Adicionando um ponto de saída ao card de "Mensagem Inicial".
+[07:51] Editando a mensagem inicial (que está vazia).
+[07:54] O fluxo é atualizado.
+[07:57] Navegando para "Departamentos".
+[08:00] Criando um novo departamento com o nome "Cliente Novo".
+[08:13] Criando um novo departamento com o nome "Facebook".
+[08:22] Criando um novo departamento com o nome "Instagram".
+[08:31] Retornando para "Fluxos do Bot".
+[08:43] Associando conexões ao fluxo "Clientes Novos".
+[08:46] Associando a conexão "Demo" ao fluxo "Clientes Novos".
+[08:49] Associando conexões ao fluxo "Facebook".
+[09:05] Associando conexões ao fluxo "Instagram".
+[09:15] Editando o fluxo "Clientes Novos" para definir o comando de ativação.
+[09:32] Voltando à tela de "Configuração do Fluxo do Bot".
+[09:34] Editando o fluxo "Facebook" para definir o comando de ativação.
+[09:47] Editando o fluxo "Instagram" para definir o comando de ativação.
+[10:58] Editando o fluxo "Clientes Novos".
+[11:02] Adicionando um card de "Transferir para o chat" ao fluxo "Clientes Novos".
+[11:09] Vinculando o departamento "Cliente Novo" ao card "Transferir para o chat".
+[11:29] Navegando para a seção "Atendimento".
+[11:51] Retornando para "Fluxos do Bot".
+[11:57] Editando o fluxo "Facebook".
+[12:01] Adicionando um card de "Mensagem Inicial" ao fluxo "Facebook".
+[12:05] Editando a mensagem inicial (que está vazia).
+[12:08] Adicionando um card de "Transferir para o chat" ao fluxo "Facebook".
+[12:13] Adicionando um ponto de entrada ao card "Mensagem Inicial".
+[12:17] Vinculando o departamento "Facebook" ao card "Transferir para o chat".
+[12:37] Retornando para a seção "Atendimento".
+[12:46] Retornando para "Fluxos do Bot".
+[13:14] Editando o fluxo "Teste".
+[13:35] Adicionando um card de "Horários de atendimento".
+[13:50] Clicando no menu de opções do card "Horários de atendimento".
+[13:56] Adicionando um segundo card de "Horários de atendimento".
+[14:02] Adicionando um ponto de entrada ao primeiro card "Horários de atendimento".
+[14:05] Adicionando um ponto de saída ao primeiro card "Horários de atendimento".
+[14:08] Adicionando um ponto de entrada ao segundo card "Horários de atendimento".
+[14:12] Adicionando um ponto de saída ao segundo card "Horários de atendimento".
+[14:16] Conectando a opção "Suporte Técnico" ao primeiro card "Horários de atendimento".
+[14:20] Conectando a opção "Financeiro" ao segundo card "Horários de atendimento".
+[14:26] Vinculando o departamento "Suporte Técnico" ao primeiro card "Horários de atendimento".
+[14:53] Vinculando o departamento "Financeiro" ao segundo card "Horários de atendimento".
+[15:25] Navegando para a seção "Departamentos".
+[15:29] Acessando a aba "Horário do Departamento" do departamento "Financeiro".
+[15:44] Retornando para "Fluxos do Bot".
+[15:46] Editando o fluxo "Teste" e visualizando os cards de "Horários de atendimento".
+[15:52] Navegando para a aba "Horário do Fluxo".
+[16:03] Voltando para o fluxograma.
+[16:23] Navegando para a aba "Inatividades".
+[16:44] Ações relacionadas a inatividades no sistema.
+[17:05] Selecionando o departamento de transferência.
+[17:09] Opções de envio de mensagem.
+[17:20] Salvar alterações das inatividades.
+[17:29] Funções de inatividade para contatos na fila de espera.
+[17:42] Funções de inatividade para contatos sem responder em atendimento.
+[17:55] Funções de inatividade para atendentes sem responder em atendimento.
+[18:10] Salvar alterações.
+[18:36] Navegando para a aba "Parâmetros".
+[19:16] Parâmetros de chat.
+[21:43] Navegando para a aba "Msgs automáticas".
+[22:21] Campo de "Mensagens Protocolo No Bot".
+[22:30] Campo de "Mensagens Protocolo ao finalizar Atendimento".
+[22:40] Campo de "Mensagens abertura de atendimento".
+[22:48] Campo de "Mensagens iniciar atendimento".
+[22:56] Campo de "Mensagens espera em fila de atendimento".
+[23:09] Campo de "Mensagens transferência atendimento".
+[23:41] Campo de "Mensagens encerrar atendimento".
+[24:37] Campo de "Mensagens finalizar atendimento".
+[25:03] Campo de "Mensagem caso errar a opção".
+[25:21] Voltando para a tela de "Configuração do Fluxo do Bot".
+[25:27] Navegando para a aba "Avaliação".
+[26:01] Adicionando opções de avaliação.
+[27:08] Finalizando a demonstração.
