@@ -1,0 +1,73 @@
+[ 00:00] Olá, nesse vídeo eu vou estar mostrando inteligência artificial e assistentes que você pode criar aqui na nossa nova plataforma de chatbot de atendimento.
+[ 00:09] Então aqui nessa tela de assistentes IA, vai mostrar aqui todo o gerenciamento de todos os assistentes que você tem. Contador de assistentes, total de assistentes de contatos, total de assistentes no grupos também, que em breve vai ter o assistente interagindo em grupos também de WhatsApp. Total de assistentes em uso, tá bom?
+[ 00:26] E aqui você cria basicamente o assistente, é bem simples.
+[ 00:30] Clicando aqui em novo assistente, você vai colocar o assistente dele. Vamos botar aqui, por exemplo, o assistente um.
+[ 00:38] Feito aqui, ele vai mostrar a situação do atenden do assistente, o tipo de assistente, é um tipo de contato, e se ele pode enviar áudio, né, interpretar áudio, ou interpretar imagem também.
+[ 00:52] Lembrando que isso aqui seria uma função do ChatGPT. Então você precisa colocar o token do ChatGPT para funcionar esse assistente.
+[ 01:00] Para colocar o seu token, basta você clicar aqui do lado direito superior, configurações.
+[ 01:06] Integrações. E aqui você vai colocar o token que você tiver aqui do seu assistente. Você tem que criar lá sua conta na OpenAI e tudo todos os passos que a nossa equipe passa ali, como fazer, e você vai pegar o token que vai gerar lá e colocar colocar aqui para o seu assistente funcionar, tá bom?
+[ 01:24] Caso você tenha outros tipos de assistente como o DeepSeek e ElevenLabs, você pode colocar aqui também os tokens, tá bom? Então esse aqui são outros formatos aqui de GPT. Perfeito.
+[ 01:34] Ah, em assistentes aqui, vamos voltar agora. Clicando aqui em deletar assistente, você pode deletar ele também. E editar ele. Aqui a gente vai configurar o nosso assistente.
+[ 01:46] Eu sempre recomendo colocar sempre o Mini, tá? Tem essas três opções aqui, o Mini sempre é o que consome menos ali da sua conta da OpenAI, tá bom?
+[ 01:55] Então sempre coloca o Mini aqui. A situação do atendente, se ele está ativo ou não. Enviar voz, basicamente, aqui ele envia um áudio, se o contato enviar um áudio, se você tiver habilitado essa opção, o atendente, o assistente vai responder com um áudio também.
+[ 02:14] Se o contato enviar um áudio para ele, e interpretar imagem, o o se o contato enviar uma uma imagem para o assistente, o assistente vai basicamente vai fazer uma análise da imagem e vai mandar uma descrição ali do que que ele viu na imagem, tá bom?
+[ 02:25] E a decidir o departamento, isso aqui é para a IA decidir o departamento na hora da transferência. Caso o contato mande uma mensagem, alguma coisa ali, e você tenha habilitado isso aqui, você tem que, basicamente, colocar uma descrição no departamento, que eu vou logo já mostrar isso aí também.
+[ 02:45] Você tem que colocar uma descrição no departamento, e no seu prompt, você tem que botar o comando arroba transferir ali, né, e botar, deixar detalhado ali, caso o contato queira falar com o tal atendente, né, botar ali arroba transferir, que ele vai fazer a transferência ali pro atendente, e a a IA vai decidir o departamento.
+[ 03:03] Quando você habilita isso aqui, e a decide o departamento, tu vê que some essa opção aqui também. Se você não utilizar essa opção, você pode colocar aqui, né, sempre colocar, caso você não utilize isso aqui, você tem que colocar um departamento que ele vai fazer a transferência.
+[ 03:22] Caso o contato fale alguma coisa ali, e a IA vai transferir em algum momento ali da conversa para o chat, ela sempre tem que ter um departamento atrelado aqui, ou utilizar a função de IA decide o departamento, tá?
+[ 03:34] Perfeito. Agora, caso eu coloque essa daqui, IA decide o departamento. Indo aqui na tela de departamentos, onde eu crio os departamentos que eu tenho ali do meu sistema, né, de atendimento, que são os departamentos que vai cair no chat para os atendentes atender, tá?
+[ 03:47] Eu tenho o departamento aqui, apresentação. Vamos supor aqui, eu vou criar o departamento, financeiro.
+[ 03:59] Financeiro. Botar uma corzinha nele aqui também.
+[ 04:02] E aqui eu posso logo colocar a descrição aqui e quando eu tiver criado o departamento, eu posso editar essa descrição também, tá?
+[ 04:09] É igual tá informando ali, ó, descrição do departamento para a IA. Isso aqui, basicamente, serve somente para a IA, tá?
+[ 04:14] Uma identificação interna que a IA vai usar, como se fosse um banco de informações que ela vai em algum momento pegar essa informação ali, vai olhar a informação e vai fazer a transferência para esse tal departamento.
+[ 04:26] Vamos botar aqui, então, o financeiro. Este departamento trata de boletos, mensalidades, custos, valores e etc. Aqui você sempre vai colocar o máximo descritivo sobre esse departamento, uma descrição dele, do que que ele é sobre o que ele, né?
+[ 04:52] No caso, o financeiro aqui, é o nosso financeiro que mexe com boletos, mensalidades, custos e valores. Criando aqui agora em cadastrar, ele vai aparecer também aqui, ó.
+[ 05:00] Na descrição, este departamento trata de boletos, mensalidades, custos, valores e etc. Caso eu venha aqui em editar, eu posso editar também, tá?
+[ 05:08] Posso também, aqui já que estamos nessa tela também, vou estar mostrando essa tela aqui para vocês, que é a do departamento, aqui você pode usar a carteira, né, ativar a carteira para funcionar a cartelização nesse departamento, então, a carteira dos atendentes vai funcionar se o atendimento estiver nesse departamento, então ele pode, basicamente, o atendente pode vincular contatos a ele ali, ou você pode também usar a distribuição, tá?
+[ 05:42] Sempre o correto é usar um dos dois aqui no departamento, nunca utilizar os dois no mesmo departamento que pode dar algum conflito, tá bom?
+[ 05:48] Pois a distribuição ali, ela não reconhece a carteira, e a carteira não reconhece a distribuição. Então se você utilizar um dos dois ali, seria só um. Caso você queira utilizar o outro, por exemplo, aqui eu ativo a distribuição, e no outro departamento quero usar a carteira, aí você pode tranquilamente, tá bom?
+[ 06:00] Aqui também você coloca os horários de atendimento do departamento, tá? Clicando aqui em horários de atendimento, você coloca as datas aqui, né?
+[ 06:08] Os dias, basicamente. E aqui embaixo tem um campo aqui, ó, enviar mensagem e finalizar, transferir para o departamento.
+[ 06:15] E aqui embaixo vai aparecer dois campos de mensagem. Então, caso, por exemplo, o contato entra em contato ali, fora do horário de atendimento.
+[ 06:23] Vamos supor que eu bote aqui, 24 horas. Vamos botar aqui, 6 horas. Né?
+[ 06:33] E aqui, 5 horas. Vamos supor aqui que o contato entre antes das 5 ou depois das 6, né? No meu fim de expediente, ou no intervalo de almoço, os horários que não tiver aqui.
+[ 06:47] Vai enviar a mensagem que estiver no campo aqui, né? Mensagem de resposta de fora do horário. E a ação que vai realizar quando ele entrar fora do horário vai ser a que você vai colocar aqui.
+[ 06:58] Se ele vai transferir para um departamento, tu vai selecionar o departamento aqui, né? Ou se ele vai enviar mensagem e finalizar, tá bom?
+[ 07:05] A mensagem que vai enviar aqui ao finalizar é a mesma que estiver aqui. Então se você colocar a mensagem aqui e salvar, e depois você colocar esta opção aqui e salvar, então ele vai mandar a mensagem e vai finalizar o atendimento, tá bom?
+[ 07:20] Perfeito. Agora, voltando lá sobre os assistentes IA, criamos nossa descrição de departamento aqui.
+[ 07:30] E agora, como eu criei a minha descrição de departamento e eu habilitei essa opção aqui, a IA ali, por conta só, se você colocar agora a instrução ali no prompt, que é na instrução aqui, né, que você vai criar o prompt da IA tudo aqui, né?
+[ 07:44] Aqui tem uma tag aqui que não tá aparecendo, que é o arroba transferir, que é este aqui, tá bom?
+[ 07:53] Tem este comando aqui também, só que não está aqui visível, mas tem este comando, que é para fazer a transferência para o chat, tá bom? Quando a pessoa falar alguma coisa, então, geralmente eu boto dessa forma, caso o contato queira falar com um atendente, você, ops, você deve transferir.
+[ 08:21] Aí no final eu boto arroba transferir. Então ele vai, eh, transferir, né, caso fala com o atendente, e a IA vai decidir o departamento ali que deve transferir, tá bom?
+[ 08:30] Perfeito. E aqui você coloca a sua base de comando ali, o prompt, que é todo o conhecimento que a IA vai ter primordialmente. Então, a capacidade de interpretação e envio de respostas, eh, depende tudo do que você colocar aqui.
+[ 08:45] Então, aqui não tem limite de caracteres, você pode botar prompts bem complexos, bem, ah, grandes aqui por texto, tá?
+[ 08:53] Pra dar mais inteligência para a IA, porque ela vai usar essa base de conhecimento aqui para atender os seus contatos ali, os seus clientes no dia a dia, tá bom?
+[ 09:02] Perfeito. E voltando aqui, sobre a IA decide o departamento, ah, ela vai identificar, né, o que que a pessoa tá falando ali, ela vê que é uma coisa referente a essa descrição aqui do departamento, ela vai realizar a transferência aqui, se ela for de acordo com a descrição de cada departamento aqui.
+[ 09:31] Então, tu vai criar o, por exemplo, o departamento suporte técnico, vai botar uma descrição nele. O departamento mensalidades, vai botar uma descrição nele.
+[ 09:39] Se ela identificar que aquele assunto se trata referente a essa descrição, ela vai fazer ali a transferência do chat para aquele departamento ali no chat, tá bom?
+[ 09:42] Perfeito. Voltando aqui nos assistentes. Já mostramos aqui a instrução também. Tem também aqui a instrução de prompt de imagem, que é, extrai os dados em texto da imagem, tá?
+[ 09:55] Você pode colocar aqui também. Fontes de conhecimento. Aqui tu pode fazer o upload de arquivo, né, que é o dados de apoio para o assistente.
+[ 10:02] Você pode botar o upload de arquivo aqui, o URL's para extrair conteúdo, tá? Aqui você adiciona a URL. E o URL's da Google Sheets, né, que você adiciona a uma planilha aqui também.
+[ 10:14] Mídias para envio. Aqui você coloca uma mídia, basicamente, e do lado ali, vai ter uma descrição que tu vai colocar, né, nessa mídia.
+[ 10:25] E, basicamente, a descrição que você colocar aqui, se o contato, por exemplo, vamos supor que eu boto uma foto aqui de um hambúrguer e boto a descrição dele que é um hambúrguer, escrevo hambúrguer. Caso a pessoa, no contato, que fale assim, ah, eh, pra IA, me envie, por favor, uma foto do hambúrguer, né?
+[ 10:43] Alguma coisa do tipo. Dependendo da descrição que estiver aqui, se tiver uma foto com a descrição do que a pessoa falou lá no chat, a IA vai vir aqui por conta só, pegar a imagem e vai enviar lá no chat para o contato, tá bom?
+[ 10:54] É bem interessante isso aqui também. Voz do assistente. Aqui tu consegue colocar as vozes do GPT, né, ou do ElevenLabs.
+[ 11:00] Se for do ElevenLabs, você pode colocar até a sua voz lá também, tá? E pode utilizar aqui a opção, Minha voz, tá?
+[ 11:08] Isso aí você consegue, se for lá no ElevenLabs. E aqui as vozes do GPT, se é feminino, masculino, né?
+[ 11:15] E aqui quando você seleciona feminino e masculino, ele dá as opções que tem disponível de feminino e, e a masculino, tá bom?
+[ 11:24] Caso seja ElevenLabs, você vai selecionar aqui e ele vai ter outras opções aqui também, como você pode ver.
+[ 11:30] Tem todas essas opções aqui, tem até Papai Noel. E usar a minha voz. Você pode usar a sua voz aqui, né?
+[ 11:38] Caso você selecione essa opção aqui, para usar a sua voz. Aí você tem que configurar diretamente ali no ElevenLabs lá, criar sua conta e tudo mais, botar o seu token, ali como eu informei também aqui em configurações, colocar o seu token no ElevenLabs ali, e gravar a sua voz, basicamente, lá na sua conta e deixar salvo.
+[ 11:55] E aqui selecionando as opções, você vai conseguir botar a sua voz ali no seu assistente, para o assistente falar com os contatos ali no seu site, no seu chat, tá bom?
+[ 12:05] Caso você use também as conversas, no caso aqui, as vozes que tem, né, do disponíveis aqui.
+[ 12:13] Você pode mudar, né, o tom da voz aqui, clicando aqui e você pode selecionar com as frequências que tem aqui disponível, né? O tom da voz que você pode colocar do assistente, tá bom?
+[ 12:27] Perfeito. Feito todas as configurações do assistente, você pode ter diversos assistentes, tá?
+[ 12:32] Então, aqui eu criei um assistente, você pode ter outros aqui também. Depois, para funcionar aqui a reta final, é você colocar o assistente, basicamente, no seu fluxo de bote, que eu vou estar mostrando também, na aula de fluxo de bote, mas dando uma palhinha aqui nessa nessa aula.
+[ 12:48] Aqui em fluxo do bote, onde você tem o seu fluxograma. Em editar fluxo.
+[ 12:54] Para colocar o seu assistente aqui, vamos supor aqui, por exemplo, que eu quero que a pessoa mande uma mensagem e logo fale com o meu assistente, o assistente que a gente criou ali agora.
+[ 13:04] Basta eu fazer este, tipo de fluxograma aqui. Eu vou vir aqui em adicionar card. Vou vou botar aqui assistente GPT.
+[ 13:13] Né? Vou clicar nos três pontinhos, adicionar ponto de entrada. Vou fazer a ligação aqui. Perfeito.
+[ 13:23] E aqui nos três pontinhos, assistente GPT, eu vou selecionar o assistente que eu quero que aja, né, quando a pessoa mandar mensagem para o meu nome, tá bom?
+[ 13:33] Então eu vinculei aqui agora. Quando a pessoa mandar mensagem pro o número da conexão que eu atrelei a este fluxograma aqui, no caso é essa conexão aqui, né, que eu só tenho uma, o assistente vai já agir logo de vez ali e vai começar a interagir ali com o contato de acordo com o prompt que você criou dele aqui, né, nas configurações do assistente aqui em na instrução, tá bom?
+[ 14:00] Perfeito. Na próxima aula, aqui nessa aula a gente já mostrou sobre os assistentes de IA, de inteligência artificial e os departamentos. Na próxima aula eu vou estar mostrando ali, ah, fluxo do bote, onde a gente já entrou ali de cabeça também, mostrando como colocar um assistente. Vou mostrar como configurar os seus fluxogramas de chatbot convencional por opções, botões e inteligência artificial também, tá bom?

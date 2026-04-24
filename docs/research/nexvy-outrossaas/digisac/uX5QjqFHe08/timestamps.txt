@@ -1,0 +1,53 @@
+[00:00] Início da apresentação do webinar sobre gestão de grupos no Digisac.
+[00:43] Pergunta sobre a possibilidade de organizar mais de um grupo na conta e qual a melhor forma de fazer isso.
+[01:16] Comentário sobre convidar a equipe e amigos para o webinar.
+[01:31] Apresentação da Fabiana, analista de treinamento da Digisac.
+[02:08] Explicação sobre o objetivo do webinar e a importância da interação.
+[03:00] Exibição da tela inicial do webinar, "Domine a Gestão de Grupos na Digisac!".
+[03:19] Definição de Gestão de Grupos no Digisac.
+[04:38] Tabela de funcionalidades da Gestão de Grupos no Digisac.
+[06:03] Objetivo principal e dica estratégica para a Gestão de Grupos no Digisac.
+[07:25] Novidade no Digisac: Menção com "@".
+[08:49] Próximo passo: criar um grupo do zero no Digisac.
+[09:16] Visualização da tela de conversas no Digisac.
+[09:29] Acessando a tela de Cargos no Digisac.
+[09:58] Tela de criação de um novo Cargo.
+[11:37] Acessando a tela de Contatos no Digisac.
+[11:51] Filtrando contatos por grupos.
+[12:15] Realizando ações em massa, como adicionar tags.
+[12:37] Retornando à tela de conversas e visualizando os filtros.
+[12:41] Aplicando filtro por tags.
+[12:55] Criando um novo grupo.
+[13:38] Selecionando a conexão para o grupo.
+[13:47] Adicionando membros ao grupo.
+[14:32] Resumo dos novos membros adicionados ao grupo.
+[14:51] Grupo "Webinar Educacional" criado com sucesso.
+[14:58] Abrindo um novo chamado para o grupo.
+[15:21] Opções de respostas rápidas.
+[15:28] Envio de uma resposta rápida.
+[15:39] Visualizando o menu lateral do grupo.
+[15:46] Visualizando mídias, links e documentos.
+[15:56] Opções de silenciar e marcar como não lida.
+[16:01] Adicionando tags e observações.
+[16:13] Associando o grupo a um departamento padrão e atendente padrão.
+[17:03] Visualizando os membros do grupo.
+[17:10] Opções para membros: tornar admin ou remover.
+[17:19] Adicionando novos membros ao grupo.
+[17:28] Copiando o link do grupo.
+[18:03] Demonstração de como o grupo aparece no WhatsApp no celular.
+[18:16] Exibição do grupo no WhatsApp.
+[18:30] Mensagem sobre a funcionalidade de menção com "@".
+[18:56] Demonstração da função de mencionar membros com "@" no Digisac.
+[22:37] Criando uma nova tag "Grupos".
+[22:50] Filtrando contatos pela tag "Grupos".
+[23:01] Adicionando a tag "Grupos" em massa para todos os contatos filtrados.
+[23:13] Retornando à tela de conversas e filtrando por tag.
+[23:17] Filtrando por tags.
+[23:20] Visualizando grupos filtrados.
+[23:32] Fidelizando grupos a um atendimento específico.
+[23:46] Atribuindo departamento padrão em massa.
+[24:22] Deletando um grupo através da tela de Contatos.
+[24:43] Saindo do grupo através do menu lateral da conversa.
+[25:17] Removendo notificações para evitar alertas sonoros.
+[25:56] Considerações finais e agradecimento pela participação.
+[28:30] Tela final de agradecimento e convite para próximos webinars.

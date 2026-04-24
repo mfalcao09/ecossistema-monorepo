@@ -1,0 +1,15 @@
+# Arquivos pesados que NÃO vão pro git
+_videos/
+*.mp4
+*.info.json
+frame_*.jpg
+
+# Logs de scraping
+*.log
+*.log.*
+run-*.log*
+
+# Python cache
+__pycache__/
+
+# O resto (README.md, transcricao.txt, timestamps.txt, INDEX.md, *.py) vai normal

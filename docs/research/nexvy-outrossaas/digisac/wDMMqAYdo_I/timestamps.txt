@@ -1,0 +1,144 @@
+[00:00] Início da contagem regressiva para a apresentação.
+[00:25] Apresentação da palestrante Fabiana - Digisac, analista de treinamento.
+[00:27] Fabiana dá as boas-vindas ao webinar "Imersão Digisac".
+[02:00] Fabiana compartilha sua tela, mostrando a interface da plataforma Digisac.
+[02:08] Tela de login da Digisac.
+[02:16] Visão geral da plataforma Digisac, com o menu de chats e contatos.
+[02:35] Fabiana clica no ícone de "Conexões" no menu superior.
+[02:40] A tela "Conexões" exibe os canais de atendimento integrados (WhatsApp, G/Business, Messenger, Instagram, Telegram, SMS, Webchat, E-mail, Rec/Aqui).
+[03:00] Demonstração de como o chat do Google Business é exibido quando se pesquisa uma empresa no Google.
+[03:11] Volta para a tela "Conexões".
+[04:06] Fabiana clica nos três pontos ao lado da conexão "Central de atendimento - Treinamento" (WhatsApp) para editar.
+[04:08] A janela "Editando Conexão" é aberta, mostrando opções como tipo de conexão, nome, departamento padrão para chamadas e bot.
+[04:29] Fabiana clica em "Cancelar".
+[04:30] Fabiana clica nos três pontos ao lado da conexão "Instagram Treinamento" para editar.
+[04:32] A janela "Editando Conexão" é aberta, mostrando o tipo de conexão Instagram e o departamento padrão "Sucesso do Cliente".
+[04:55] Fabiana clica em "Cancelar".
+[05:14] Fabiana clica em "Mais opções" no menu superior.
+[05:18] O menu de "Mais opções" é expandido, exibindo "Usuários", "Cargos", "Robôs", "Departamentos", "Assunto de chamado", "Empresa", "Feriados", "Respostas rápidas", "Avaliações", "Integrações", "Auditoria de autenticação", "Mensagens interativas", "Distribuição de Chamados" e "Agendamentos".
+[05:20] Fabiana clica em "Departamentos". A tela "Departamentos" é exibida, mostrando os nomes dos departamentos e seus status.
+[05:40] Fabiana clica em "Mais opções" novamente.
+[05:43] Fabiana clica em "Cargos". A tela "Cargos" é exibida, mostrando os cargos "Administrador" e "Operador".
+[06:39] Fabiana clica em "Mais opções" novamente.
+[06:41] Fabiana clica em "Usuários". A tela "Usuários" é exibida, mostrando o nome, e-mail, cargos, departamentos e tabela de horários dos usuários.
+[07:14] Fabiana clica em "Novo usuário". Uma janela "Criando usuário" é exibida, com campos para nome, e-mail, senha, cargos e departamentos.
+[07:22] Fabiana seleciona "Recepção", "Atendimento" e "Pós-Venda" como departamentos.
+[07:39] Fabiana clica em "Cancelar".
+[08:26] Fabiana clica em "Mais opções", rola o menu para baixo e clica em "Tabela de horários".
+[08:33] Fabiana clica em "Ações" e seleciona "Editar".
+[08:34] A janela "Editando usuário" é aberta, permitindo incluir a tabela de horário no campo correspondente.
+[08:40] Fabiana clica em "Cancelar".
+[08:41] Fabiana clica em "Mais opções" novamente.
+[08:48] Fabiana clica em "Empresa". A tela "Empresa" é exibida, com opções de configurações gerais para o Serviço de Atendimento ao Cliente (SAC).
+[09:15] Fabiana rola a tela para baixo para mostrar a "Tabela de horário", onde ela demonstra como configurar os dias e horários de atendimento da empresa, incluindo horários diferenciados para o sábado.
+[10:29] Fabiana volta para a parte superior da tela "Empresa".
+[10:30] Fabiana clica no ícone de "Chat" no menu superior.
+[10:37] A tela de chats é exibida novamente.
+[10:48] Fabiana clica em "Contatos". A tela "Contatos" é exibida, mostrando os contatos cadastrados.
+[11:09] Fabiana clica em "Cadastrar Contato". A janela "Criando contato" é exibida, com campos para nome, pessoa, conexão, número e tags.
+[11:27] Fabiana clica em "Cancelar".
+[11:32] Fabiana clica no ícone de "Contatos" no menu superior.
+[11:34] A tela "Contatos" é exibida com filtros para busca.
+[11:41] Fabiana clica em "Ações" ao lado de um contato e seleciona "Editar".
+[11:43] A janela "Editando contato" é exibida.
+[11:53] Fabiana clica em "Cancelar".
+[11:54] Fabiana clica em "Exibir Filtros" na tela "Contatos". Os filtros são expandidos.
+[12:10] Fabiana demonstra como filtrar contatos por conexão.
+[12:15] Fabiana clica em "Esconder Filtros".
+[12:17] Fabiana clica no ícone de "Chat" no menu superior.
+[12:24] Fabiana clica em "Fila" na tela de chats. A fila de atendimento é exibida.
+[12:41] Fabiana clica em "Chats" novamente. Os chats são exibidos.
+[13:35] Fabiana clica em um chat existente. O chat é exibido com o histórico de conversas.
+[13:45] Fabiana clica no ícone de "Calendário" no menu superior do chat.
+[13:48] Fabiana clica nos três pontos no menu lateral do chat.
+[13:54] Fabiana demonstra como usar as respostas rápidas. Ela clica no ícone de resposta rápida e seleciona uma mensagem pré-definida.
+[14:05] Fabiana clica novamente no ícone de resposta rápida, mas desta vez mostra que é possível personalizar a mensagem antes do envio.
+[14:13] Fabiana clica no ícone de resposta rápida novamente.
+[14:51] Fabiana clica em "Mais opções" e seleciona "Respostas rápidas".
+[14:56] A tela "Respostas Rápidas" é exibida, mostrando as mensagens pré-definidas.
+[15:00] Fabiana clica em "Ações" ao lado de uma resposta rápida e seleciona "Editar".
+[15:02] A janela "Editando Respostas Rápidas" é exibida.
+[15:05] Fabiana clica em "Nova Resposta". A janela "Criando Respostas Rápidas" é exibida, permitindo criar uma nova mensagem.
+[15:17] Fabiana demonstra como selecionar os departamentos que terão acesso a essa resposta rápida.
+[15:22] Fabiana clica em "Fechar".
+[15:23] Fabiana volta para a tela do chat. Ela clica no ícone de resposta rápida e seleciona uma mensagem.
+[15:28] Fabiana clica nos três pontos do menu lateral do chat.
+[15:35] Fabiana rola o menu lateral para baixo para mostrar as "Tags".
+[15:46] Fabiana demonstra como incluir uma tag no contato. Ela digita "pós-venda" e clica para adicionar.
+[15:53] Fabiana demonstra como incluir outra tag, "negociação".
+[16:01] Fabiana demonstra como incluir outra tag, "clientes novos".
+[17:11] Fabiana clica no ícone de "Tags" no menu superior.
+[17:16] A tela "Tags" é exibida, mostrando todas as tags cadastradas.
+[17:19] Fabiana clica em "Nova tag". A janela "Criando tag" é exibida.
+[17:21] Fabiana clica em "Cancelar".
+[17:22] Fabiana clica no ícone de "Chat" no menu superior.
+[17:29] Fabiana clica no ícone de "Filtro" (três barrinhas) acima da lista de chats. Os filtros são expandidos.
+[17:33] Fabiana demonstra como filtrar os chats por tags.
+[17:39] Fabiana clica em "Limpar".
+[17:41] Os filtros são limpos, e a lista de chats volta ao normal.
+[17:52] Fabiana clica nos três pontos do menu lateral do chat, rola para baixo para mostrar as opções de "Observações" e "Protocolo de atendimento".
+[18:24] Fabiana clica em "Copiar" ao lado do número de protocolo.
+[18:47] Fabiana clica no ícone de "Histórico de Chamados" (reloginho) no menu superior do chat.
+[18:54] A tela "Histórico de Chamados" é exibida com filtros.
+[19:04] Fabiana demonstra como filtrar o histórico de chamados por número de protocolo.
+[19:10] Fabiana clica no número do protocolo para visualizar a conversa. A janela "Mensagens do chamado" é exibida, mostrando o histórico da conversa.
+[19:16] Fabiana clica em "Fechar".
+[19:22] Fabiana rola a tela para baixo no menu lateral do chat para mostrar as opções de "Departamento padrão para chamados" e "Atendente padrão para chamados".
+[19:54] Fabiana demonstra como selecionar um departamento e um atendente padrão para fidelizar um contato.
+[20:10] Fabiana rola a tela para baixo para mostrar os "Campos personalizados" (CPF, e-mail, nome completo).
+[21:11] Fabiana clica em "Mais opções" e seleciona "Campos personalizados".
+[21:16] A tela "Campo Personalizado" é exibida, mostrando os campos já criados.
+[21:22] Fabiana clica em "Novo Campo". A janela "Criando Campo Personalizado" é exibida.
+[21:34] Fabiana clica em "Cancelar".
+[21:35] Fabiana clica no ícone de "Chat" no menu superior.
+[21:40] Fabiana clica nos três pontos no menu lateral do chat.
+[21:46] Fabiana clica no ícone de "Calendário" no menu superior do chat.
+[21:58] A janela "Criando Agendamento" é exibida.
+[22:04] Fabiana demonstra como selecionar o departamento, atendente, contato e data/hora para o agendamento.
+[22:09] Fabiana seleciona "Emanuela Mello" como atendente.
+[22:15] Fabiana seleciona a data de 29/05/2024.
+[22:20] Fabiana define a hora como 08:00.
+[22:31] Fabiana demonstra as "Ações" do agendamento: "Abrir chamado", "Notificar atendente" e "Abrir chamado e notificar atendente".
+[22:46] Fabiana seleciona "Abrir chamado e notificar atendente". Um campo de "Mensagem" é exibido.
+[23:01] Fabiana digita uma mensagem: "Boa tarde, tudo bem? Vamos retomar o atendimento."
+[23:20] Fabiana rola a tela para baixo para mostrar o campo "Comentário". Ela digita "teste" e "retorno cliente 29/05".
+[23:29] Fabiana clica no ícone de "Sininho" no menu superior. As notificações são exibidas.
+[23:30] Fabiana clica novamente no ícone de "Sininho" para fechar as notificações.
+[24:06] Fabiana clica em "Salvar".
+[24:08] A tela "Agendamentos" é exibida, mostrando o agendamento criado.
+[24:16] Fabiana clica em "Ações" ao lado do agendamento criado e seleciona "Editar".
+[24:19] A janela "Editando Agendamento" é exibida, permitindo alterar os detalhes.
+[25:37] Fabiana clica em "Salvar".
+[25:38] Fabiana clica no ícone de "Chat" no menu superior.
+[26:17] Fabiana clica no ícone de "Visão geral" (gráfico) no menu superior.
+[26:19] A tela "Agora" é exibida, mostrando o status dos atendentes e chamados em tempo real.
+[27:09] Fabiana clica no botão de "Atualizar" para atualizar as informações em segundos.
+[27:18] Fabiana clica em "Filas de atendimento". A tela exibe os atendimentos aguardando nas filas.
+[27:45] Fabiana clica em "Resumo". A tela exibe o resumo dos atendimentos e usuários.
+[28:08] Fabiana rola a tela para baixo para mostrar a lista de atendentes por nome.
+[28:10] Fabiana clica no ícone de "Visão geral" e seleciona "Histórico de chamados".
+[28:13] A tela "Histórico de chamados" é exibida.
+[28:35] Fabiana clica em "Exibir Filtros" para mostrar as opções de filtro.
+[29:05] Fabiana demonstra como aplicar filtros para obter informações específicas.
+[29:49] Fabiana clica no ícone de "Visão geral" e seleciona "Estatísticas de atendimento".
+[30:02] A tela "Estatísticas de atendimento" é exibida, mostrando informações como tempo médio de chamados.
+[30:29] Fabiana clica em "Por período". Um gráfico de tempo médio de atendimento é exibido.
+[31:18] Fabiana clica em "Por assunto". Um gráfico de tempo médio de atendimento por assunto é exibido.
+[31:43] Fabiana clica no ícone de "Visão geral" e seleciona "Estatísticas de avaliações".
+[32:21] A tela "Estatísticas de avaliações" é exibida, mostrando o NPS.
+[32:56] Fabiana rola a tela para baixo para mostrar o CSAT.
+[33:31] Fabiana clica no ícone de "Visão geral" e seleciona "Mais opções".
+[33:43] Fabiana clica nos três pontos ao lado da conexão "WhatsApp Business API" e seleciona "Editar".
+[33:47] A janela "Editando Conexão" é exibida, Fabiana desabilita o robô.
+[33:49] Fabiana clica em "Salvar".
+[33:51] Fabiana clica no ícone de "Campanhas" no menu superior. A tela "Campanhas" é exibida.
+[33:57] Fabiana clica em "Nova Campanha". A janela "Criando Campanha" é exibida, permitindo configurar uma nova campanha.
+[34:10] Fabiana clica em "Salvar".
+[34:12] A tela "Campanhas" exibe a campanha criada.
+[34:16] Fabiana clica no ícone de "Visão geral" e seleciona "Relatórios".
+[34:25] A tela "Relatórios" é exibida, mostrando diversas opções de relatórios.
+[34:36] Fabiana clica no ícone de "Chat" para voltar à tela de chats.
+[34:37] Fabiana clica no nome do contato "Fabiana Farid" no chat.
+[37:34] Fabiana responde a uma pergunta do chat sobre lista de transmissão.
+[39:53] Fabiana responde a uma pergunta do chat sobre ver mensagens de ausência.
+[41:02] Fabiana se despede do público.

@@ -1,0 +1,122 @@
+[ 00:00 ] Olá pessoal, Rodrigo, mais uma vez pra dar continuidade ao treinamento da nossa plataforma de multiatendimento.
+[ 00:08 ] Falando de um, de uma funcionalidade mais específica, né? Vamos pro nosso segundo vídeo, que é a nossa, nosso construtor de fluxo.
+[ 00:17 ] Hoje a gente vai falar da possibilidade da gente poder criar um fluxo voltado mais pra automação comercial com captação de variável, com condição, com menu.
+[ 00:29 ] Saber como utilizar essas informações dentro da plataforma. Bom, vamos lá.
+[ 00:33 ] Eh, primeiro passo. Vamos aqui em fluxo e vamos criar um fluxo agora.
+[ 00:38 ] Treinamento automação. Tá? Automação.
+[ 00:43 ] Eh, dentro desse treinamento, a ideia é automatizar um pouquinho mais, né?
+[ 00:50 ] Eh, explorar algumas funcionalidades. Então, o primeiro passo que eu vou criar é um texto, e eu vou, e eu vou falar o seguinte: "Olá, seja muito bem-vindo".
+[ 01:04 ] Seja muito bem-vindo. "Será, eh, para continuarmos como gostaria de ser chamado?"
+[ 01:12 ] Tá? OK. Vou inserir esse card, tá?
+[ 01:17 ] E depois desse card, eu vou solicitar uma variável.
+[ 01:21 ] Né? Então, ou seja, que é a variável o nome. Eu perguntei o nome do cliente.
+[ 01:25 ] Então agora eu vou captar essa resposta. Então, quando o cliente me enviar uma mensagem, eu vou devolver esse texto pra ele, vou ficar aguardando ele me devolver esse nome, tá?
+[ 01:34 ] Depois que ele me devolver esse nome, aí eu vou exibir o nome dele dentro da próxima informação.
+[ 01:40 ] Tá bom? Depois que eu perguntei o nome do cliente, agora eu vou inserir uma condicional.
+[ 01:46 ] Eu vou dizer o seguinte: "Olha, se for, eh, depois, tá?
+[ 01:54 ] Eh, da, melhor, se for antes das doze horas, meio dia".
+[ 01:58 ] Tá, o caminho, se essa regra for verdadeira. Então vamos lá.
+[ 02:02 ] A condição hora do dia, antes de meio dia, se for verdadeiro, eu vou fazer o seguinte.
+[ 02:09 ] Eu vou mandar esse cliente para o menu, é, confirmando o nome dele, tá bom? Olá, opa!
+[ 02:18 ] Deixa eu pegar a síntese do nome dele. Pra gente poder exibir a variável, a gente utiliza essa síntese, tá vendo?
+[ 02:29 ] Pra usar as variáveis que você escolheu, use, tá, essa síntese. Então, vamos lá.
+[ 02:31 ] Dentro desse menu, eu vou fazer uma confirmação, tá? Olá, obrigado. Ah, vamos lá.
+[ 02:42 ] Eh, vamos confirmar, vamos confirmar seu nome? Tá?
+[ 02:46 ] Vamos lá. E aqui dentro da variável, eu vou citar só o nome que eu inseri lá na hora que eu criei a variável.
+[ 02:54 ] Tá? "Está correto? Sim." Né? E não. Por que "sim" "não"?
+[ 03:00 ] Lembra que a gente só tá exemplificando aqui. Então, vamos lá.
+[ 03:04 ] Se o cliente entrar em contato, eu vou fazer essa pergunta pra ele.
+[ 03:08 ] Vou captar a variável que eu criei nome, que é a forma como eu vou chamar ele aqui pra confirmar.
+[ 03:15 ] Tá? Se estiver correto e for antes da meio dia, ele vai bater aqui.
+[ 03:18 ] Se for "sim", eu vou dar continuidade. Se for "não", eu vou retornar a pergunta inicial.
+[ 03:24 ] Tá vendo? Ó, eu retornei pra pergunta inicial. Por quê?
+[ 03:29 ] Ele falou que o nome dele tá correto. "Está correto?" "Não."
+[ 03:32 ] Então, retorno ele pra primeira opção. OK?
+[ 03:36 ] Se estiver correto, eu vou eu vou enviar uma notificação.
+[ 03:41 ] Então, vou enviar notificação para o nosso número, tá?
+[ 03:46 ] Vou falar o seguinte: "Ó, lead, "Lead para você, Rodrigo", tá bom?
+[ 03:52 ] Então, eu vou comunicar o meu usuário que esse lead chegou, tá bom? Então, vamos lá.
+[ 03:59 ] "Sim", então vou randomizar o atendimento. Antes de enviar direto pra um usuário, eu vou criar um randomizador, que a gente, eh, aprendeu na na outra vídeo aula, tá?
+[ 04:09 ] Então, se tiver correto, eu mando pro randomizador.
+[ 04:12 ] E aí eu mando pro meu, eu tenho dois comerciais, né?
+[ 04:16 ] Eh, se for pro comercial Rodrigo, que eu vou incluir o usuário dele aqui como Admin, né?
+[ 04:22 ] Então, ou seja, opa! Esqueci de escolher uma fila comercial, né?
+[ 04:26 ] Hã? Então, vou transferir pro Rodrigo. Então, se o randomizador mandar pro Rodrigo, ele vai enviar uma notificação de WhatsApp, tá?
+[ 04:34 ] E se o randomizador mandar pra Mayara, né?
+[ 04:47 ] De novo, opa! Vamos incluir uma fila.
+[ 04:52 ] Hã? Ó, incluí uma fila comercial. Se o randomizador mandar pra Mayara, eu não vou enviar notificação, tá bom? É só pra exemplificar.
+[ 04:52 ] Não. Melhor, vou criar aqui também para a gente poder testar essa funcionalidade junto com vocês.
+[ 04:59 ] Vamos lá. Notificação, vou mandar pro mesmo número, né?
+[ 05:03 ] E vou falar o seguinte: "Ide para você, Maiara". Vai ficar um pouco confuso, porque essa mensagem vai ser enviada dentro da mesma mensagem que eu vou enviar.
+[ 05:12 ] Vocês vão entender lá na prática, tá bom? Então, vamos testar essa condição, tá?
+[ 05:16 ] Eu vou alterar aqui e vou colocar depois, né? Porque agora já são 18 horas. Então, depois das 12 horas, se for verdadeiro, né?
+[ 05:27 ] Opa, depois das 18 horas. Se for verdadeiro, essa é a ação que ele vai tomar, tá bom?
+[ 05:32 ] Então, vamos testar essa parte do fluxo. É sempre legal, na medida que você vai criando o fluxo, se você for validando ele na tua opção.
+[ 05:39 ] Como a gente já aprendeu na vídeo aula, o primeiro passo é vincular o fluxo que a gente tá criando na conexão, tá bom?
+[ 05:47 ] Verificar se não tem nenhum ticket aberto, né?
+[ 05:50 ] E agora a gente vai mandar um "Oi!", tá? Então, a primeira parte, o fluxo tem que me mandar mensagem, né?
+[ 05:56 ] Tá? Digitou aqui e vamos ver o que ele vai me entregar.
+[ 06:00 ] "Olá, seja muito bem-vindo! Pra continuarmos como gostaria de ser chamado?" "Rodrigo".
+[ 06:06 ] Né? E agora ele precisa verificar se a condição é depois das dezoito horas.
+[ 06:12 ] Pra poder me mandar pro randomizador, pra poder me enviar uma notificação e pra poder transferir pra um usuário.
+[ 06:18 ] Vamos ver como é que ficou.
+[ 06:21 ] Vamos lá. Vamos lá no fluxo.
+[ 06:24 ] Treinamento automação. É o seguinte.
+[ 06:28 ] Coletei uma variável. A regra 18 horas. Então, ele tem que me mandar um menu nesse momento, né?
+[ 06:33 ] E apareceu a informação. Vamos, "Vamos confirmar seu nome?"
+[ 06:37 ] Rodrigo. "Está correto?" "Sim."
+[ 06:40 ] Por que que a gente chegou até aqui, pessoal? Vamos voltar lá no fluxo pra gente poder compreender, tá?
+[ 06:44 ] Eu mandei uma mensagem, né?
+[ 06:47 ] E aí o card perguntou, "Olá, seja muito bem-vindo! Pra continuarmos como gostaria de ser chamado?" Né?
+[ 06:53 ] Aí ele coletou a variável que eu mandei como Rodrigo.
+[ 06:57 ] E quando chegou aqui, ele perguntou: "Vamos, vamos confirmar seu nome?"
+[ 07:02 ] Aqui, "Rodrigo, está correto?" Sim ou não?
+[ 07:05 ] Perfeito! Rodrigo está correto. "Sim" ou "não"?
+[ 07:08 ] Eu vou digitar "Sim", né? E agora ele precisa dar continuidade ao fluxo.
+[ 07:12 ] Ou ele vai me transferir pro usuário Admin ou pro usuário Maiara.
+[ 07:16 ] Só que antes de transferir, ele tem que enviar uma notificação, né?
+[ 07:20 ] Ó, ele me enviou a notificação: "Lead para Rodrigo". Porque ele me transferiu pro usuário Admin, né?
+[ 07:27 ] Então, essa parte do fluxo tá correto, né?
+[ 07:30 ] Então, tudo isso que a gente criou no fluxo, a gente viu agora. A gente mandou uma mensagem.
+[ 07:34 ] Eu perguntou meu nome. Eu perguntei "Vamos confirmar seu nome, Rodrigo, está correto?" "Sim".
+[ 07:40 ] Enviou a notificação: "Lead para você, Rodrigo". Né? Que era o número que eu selecionei lá.
+[ 07:45 ] Eu poderia ter selecionado qualquer outro número. E aqui, ó, "Estou transferindo seu atendimento agora pro usuário Admin".
+[ 07:51 ] Então, se a gente vier aqui, ó, em "Usuários", ele já tá aqui, ó.
+[ 07:56 ] Posso espiar todo o histórico da conversa. Ele tá aqui, tá vendo?
+[ 08:00 ] Ó, conexão, tá?
+[ 08:05 ] Hã, usuário, departamento e a tag.
+[ 08:07 ] Então, eu posso aceitar esse ticket, né? E realizar o atendimento.
+[ 08:11 ] Bom, conseguiram compreender, né, como que a gente é, utiliza, né, a variável e a condicional.
+[ 08:21 ] Essa condicional aqui, eh, depois das 18, por exemplo, depois da meio dia, ela poderia ser seguinte, pra validar a tag.
+[ 08:31 ] Se o cliente possuir a tag "negociação", né?
+[ 08:35 ] Ele iria pro menu. Ele não tem a tag "negociação", ele vai pro outro caminho.
+[ 08:42 ] Então, você pode utilizar ela de vários formatos, né?
+[ 08:45 ] Então, você precisa compreender aqui a condição pra poder utilizar.
+[ 08:50 ] Se fosse a variável, eu ia puxar a variável. Se fosse igual, ah, o nome, né?
+[ 08:56 ] Aí eu vou comparar o nome. Por exemplo, João, tá? Meu, o nome que eu digitei na variável é João. Não.
+[ 09:03 ] Então, é falso. Entendeu? Agora, se eu colocasse Rodrigo, aí é verdadeiro.
+[ 09:08 ] Aí ele ia pro card de cima. João é falso e ele ia pro card de baixo, tá?
+[ 09:12 ] Então, são essas três opções que você poderia utilizar aí dentro da condição.
+[ 09:17 ] E a variável é super simples. Você pode coletar variáveis em vários locais da plataforma.
+[ 09:23 ] Lembre-se de sempre utilizar a síntese e dentro aqui das chaves o nome da variável que você colheu.
+[ 09:30 ] Exatamente igual, letra maiúscula, letra minúscula e etc.
+[ 09:33 ] Então, essa parte do fluxo a gente tá desenhado.
+[ 09:36 ] E se o cliente escolher "Não", ele voltaria pro conteúdo.
+[ 09:39 ] E quando a regra for falsa, né? Quando a condição for antes das doze horas, tá?
+[ 09:46 ] Quando for antes das doze horas, aí eu vou transferir esse, esse fluxo, hã, direto para, eu vou adicionar uma tag.
+[ 09:56 ] Tá? Eu vou adicionar uma tag de prospecção e vou transferir esse fluxo direto pra um departamento.
+[ 10:03 ] Então, eu quero rodar a automação somente após às às dezoito horas.
+[ 10:09 ] Antes das dezoito horas, eu vou adicionar uma tag e mandar pro comercial, tá?
+[ 10:13 ] Então, isso aqui é um fluxo de automação, né?
+[ 10:17 ] O cliente envia uma mensagem, tá? Eu recepciono o cliente com uma mensagem e faço uma pergunta.
+[ 10:22 ] Não necessariamente nessa ordem, tá? Que poderia ser um menu, por exemplo, etc.
+[ 10:26 ] Aqui eu coleto a variável da pergunta que eu realizei.
+[ 10:31 ] Aqui eu estabeleci uma condição. Depois das 12 horas, eu mando meu fluxo para essa automação.
+[ 10:38 ] E transfiro pros usuários que entram na minha empresa somente a meio dia, tá?
+[ 10:43 ] E se for antes, né, da meio dia, né? Se for falsa essa informação, ó, falso.
+[ 10:49 ] Eu vou adicionar uma tag "Prospecção", e ele vai ficar aguardando atendimento.
+[ 10:53 ] OK? Então, extremamente simples, né? Simples, não, né?
+[ 10:59 ] Pra gente que tá no dia a dia aqui, parece simples, mas, eh, eu acho que deu pra compreender, eh, de qual maneira você pode utilizar tanto a variável quanto a condicional, que foi a ideia do fluxo, né?
+[ 11:12 ] Pra que vocês possam replicar essas informações, eh, nos fluxos que vocês vão fazer de agora em diante, tá bom?
+[ 11:19 ] Bom, eu vou ficando por aqui. Qualquer dúvida que vocês tiverem, eh, fale com o nosso time, que vai ser sempre um prazer auxiliar vocês.
+[ 11:28 ] Tá? OK? Muito obrigado. Até logo e até a próxima vídeo aula.

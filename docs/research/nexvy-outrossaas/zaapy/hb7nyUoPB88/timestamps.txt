@@ -1,0 +1,13 @@
+[00:00] Início da apresentação sobre gerenciamento de grupos do WhatsApp na plataforma.
+[00:08] Destaque para a necessidade de ter uma conexão ativa para a maioria das funcionalidades.
+[00:20] Tela de gerenciamento de grupos do WhatsApp, mostrando a opção "Sincronizar Grupos".
+[00:29] Explicação sobre como sincronizar grupos, escolhendo a conexão desejada.
+[00:41] Após a sincronização, os grupos do WhatsApp aparecerão na lista para seleção.
+[00:54] Opções de "Ações" para "Salvar Selecionados" ou "Remover Grupos".
+[01:08] Navegação para a tela de "Usuários" na plataforma.
+[01:13] Edição de um usuário específico, mostrando as abas de configurações.
+[01:16] Navegação para a aba "Grupos WhatsApp" dentro das configurações do usuário.
+[01:20] Tela de "Associação de Grupos", onde é possível vincular grupos a um atendente.
+[01:34] Explicação de que grupos associados aparecerão no chat de atendimento do atendente.
+[01:39] Visualização da tela de "Atendimento", mostrando a aba "Grupos".
+[01:46] Final da explicação do módulo, mencionando que a próxima aula será sobre "Disparos de Mensagem".

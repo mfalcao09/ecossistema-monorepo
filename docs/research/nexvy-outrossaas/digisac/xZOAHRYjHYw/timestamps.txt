@@ -1,0 +1,17 @@
+[00:00] A tela de "Usuários" é exibida, mostrando uma lista de usuários existentes, seus status, e-mails e cargos.
+[00:01] Uma janela pop-up "Criando usuário" aparece sobre a tela principal.
+[00:04] O campo "Cargo" na janela pop-up é clicado, revelando um menu suspenso com as opções "Administrador" e "Operador".
+[00:13] A opção "Administrador" é destacada no menu suspenso.
+[00:16] A opção "Operador" é destacada no menu suspenso.
+[00:23] O menu suspenso "Cargo" é fechado.
+[00:27] A navegação muda para a tela de "Cargos".
+[00:29] A tela "Cargos" é exibida, mostrando os cargos "Administrador", "Operador" e "Live".
+[00:30] Um botão "+ Novo cargo" no canto superior direito é clicado.
+[00:31] Uma janela pop-up "Criando cargo" aparece, mostrando campos para "Nome", "Permissões" (incluindo "Marcar todos") e várias opções de permissão agrupadas por categorias como "API" e "Agendamentos".
+[00:33] O botão de "3 pontos" ao lado do cargo "Operador" é clicado.
+[00:34] Um menu suspenso com as opções "Editar" e "Remover" é exibido.
+[00:36] A opção "Editar" é selecionada no menu.
+[00:37] Uma janela pop-up "Editando cargo" é exibida, com campos para "Nome", "Permissões" e uma lista de checkboxes para diferentes funções da plataforma.
+[00:41] A opção "Marcar todos" é desmarcada, desativando todas as permissões listadas abaixo.
+[00:43] Uma permissão específica ("API") é marcada.
+[00:45] O vídeo termina com a janela "Editando cargo" aberta e as permissões sendo configuradas.

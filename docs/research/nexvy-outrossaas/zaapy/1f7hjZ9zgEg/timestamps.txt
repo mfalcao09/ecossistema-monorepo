@@ -1,0 +1,10 @@
+[00:00] Regras de Acesso
+[00:06] Adicionando uma regra
+[00:09] Permissões para cada campo
+[00:35] Criando uma nova regra
+[00:41] Regra criada com sucesso
+[00:46] Regra adicionada
+[00:49] Editando a regra
+[00:58] Gerenciamento de Usuários
+[01:00] Editando um usuário
+[01:07] Atribuindo um grupo de permissão

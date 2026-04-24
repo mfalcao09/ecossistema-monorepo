@@ -1,0 +1,32 @@
+[00:06] A apresentadora começa a cumprimentar os espectadores.
+[00:15] A apresentadora sugere aos espectadores que compartilhem o link.
+[00:26] A apresentadora menciona que o vídeo será gravado e poderá ser compartilhado posteriormente.
+[00:33] A apresentadora apresenta-se como Fabiana e afirma ser analista de treinamento.
+[00:36] A apresentadora fala sobre a Digisac, que é uma plataforma multicanal.
+[00:46] A apresentadora fala sobre as conexões disponíveis na plataforma.
+[00:54] A apresentadora clica no menu de opções ao lado de uma conexão de WhatsApp.
+[00:57] A apresentadora mostra como cada conexão pode ser configurada individualmente.
+[01:03] A apresentadora retorna à tela de conexões.
+[01:08] A apresentadora enfatiza a capacidade da Digisac de centralizar canais de comunicação.
+[01:10] A apresentadora introduz o recurso "Webchat" e suas vantagens.
+[01:18] A apresentadora mostra uma pré-visualização do webchat e como o cliente pode retomar o atendimento por e-mail.
+[01:21] A apresentadora volta à tela do chat para demonstrar o funcionamento do webchat.
+[01:31] A apresentadora mostra a tela de conexões novamente.
+[01:36] A apresentadora clica na opção "Webchat" para configurar.
+[01:39] A apresentadora demonstra a configuração do webchat.
+[01:49] A apresentadora explica as opções de personalização do webchat.
+[01:54] A apresentadora demonstra o funcionamento do webchat no site de teste.
+[02:07] A apresentadora mostra como o atendimento do webchat aparece na plataforma Digisac.
+[02:16] A apresentadora menciona as funcionalidades de inteligência artificial.
+[02:22] A apresentadora fala sobre o funil de vendas.
+[02:26] A apresentadora demonstra como criar um funil de vendas.
+[02:29] A apresentadora explica a configuração de um robô no funil de vendas.
+[02:35] A apresentadora volta à tela de atendimento para mostrar o robô em ação.
+[02:40] A apresentadora demonstra a criação de uma nova conexão de webchat.
+[02:45] A apresentadora volta à tela de atendimento e mostra o robô em ação novamente.
+[02:50] A apresentadora demonstra a criação de um novo robô.
+[02:56] A apresentadora explica como personalizar o contexto inicial do robô.
+[03:00] A apresentadora volta à tela de atendimento e mostra o robô em ação.
+[03:05] A apresentadora responde a uma pergunta sobre a simplicidade da configuração do webchat.
+[03:10] A apresentadora demonstra a configuração de um robô para o webchat.
+[03:18] A apresentadora mostra o script para incluir o webchat no site.

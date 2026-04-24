@@ -1,0 +1,129 @@
+[00:00] A apresentadora inicia a transmissão ao vivo, olhando para a câmera e falando.
+[00:02] Ela cumprimenta o público, desejando boa tarde.
+[00:07] A apresentadora pergunta como o público está, gesticulando com as mãos.
+[00:11] Ela indica que vai aguardar um pouco para mais pessoas entrarem na transmissão.
+[00:19] Menciona que há cerca de 50 pessoas na sala e que espera mais participantes.
+[00:25] Incentiva o público a compartilhar o link com a equipe da empresa e amigos.
+[00:35] Reforça que a transmissão é aberta a todos, por ser no YouTube.
+[00:43] Reitera que aguardará mais alguns minutos para a entrada dos participantes.
+[00:54] Encoraja a compartilharem o link e se apresentarem no chat.
+[01:00] Pede para o público interagir no chat.
+[01:11] A apresentadora começa a explicar os temas do webinar.
+[01:13] Dá as boas-vindas novamente aos participantes.
+[01:17] Informa que o webinar é educacional e acontece toda quarta-feira às 15h.
+[01:25] Explica que o objetivo é compartilhar conhecimento e trazer insights.
+[01:34] Incentiva o público a enviar perguntas e compartilhar experiências no chat.
+[01:50] Pede para enviarem seus nomes, cidades e locais de trabalho.
+[02:00] Saúda alguns participantes pelo nome e pergunta se já são clientes.
+[02:18] Menciona que deixará mais tempo para dúvidas e interação.
+[02:30] Sugere que preparem as dúvidas.
+[02:37] A apresentadora dá início ao conteúdo.
+[03:22] Tela de apresentação: "Atendimento Inteligente: Turbine sua comunicação com a IA da Digisac."
+[03:24] A apresentadora retorna à tela, sentada na parte inferior esquerda. O slide "Transforme seu atendimento com a inteligência artificial da Digisac" é exibido.
+[03:29] Explica que as funcionalidades de IA foram lançadas no final de 2024.
+[03:41] Menciona que clientes novos em 2025 também podem usar a ferramenta.
+[03:52] Explica que a funcionalidade de IA é um serviço contratado à parte.
+[04:05] Detalha que as funcionalidades automatizam interações e agilizam o atendimento.
+[04:15] Menciona o recurso de resumo inteligente e como ele melhora o profissionalismo.
+[04:36] Garante que o bate-papo não será demorado e pede para ficarem até o final.
+[04:37] Slide: "Transcrição de Áudios", mostrando um player de áudio com a opção "Transcrever áudio". A apresentadora aparece novamente no canto inferior esquerdo.
+[04:41] Explica que a transcrição de áudios é uma funcionalidade poderosa.
+[05:04] Detalha como a transcrição converte mensagens de áudio em texto.
+[05:20] Destaca os benefícios: aumento de produtividade, análise precisa e agilidade.
+[05:43] Dá exemplos de situações onde a transcrição é útil, como ruídos externos.
+[06:05] Menciona que a transcrição elimina a necessidade de ouvir gravações longas.
+[06:14] Garante que mostrará na prática como utilizar a transcrição.
+[06:15] Slide: "Resumo Inteligente", mostrando uma interface de chat com resumos de chamados.
+[06:19] Explica que o resumo inteligente gera automaticamente resumos de transferências.
+[06:30] Detalha que a funcionalidade otimiza o tempo dos atendentes.
+[06:40] Menciona que o resumo oferece um panorama claro e rápido de cada conversa.
+[06:58] Explica como a equipe ganha produtividade e melhora a qualidade do atendimento.
+[07:14] Enfatiza que não é preciso ler históricos longos ou procurar informações.
+[07:44] Slide: "Texto Mágico", mostrando uma interface de chat com opções de estilo de texto.
+[07:49] Explica que o texto mágico auxilia na correção e melhoria das mensagens.
+[08:12] Detalha as duas principais funções: correção ortográfica e sugestão de texto.
+[08:24] Menciona a correção ortográfica, útil para erros de digitação.
+[08:58] Explica a sugestão de texto para mensagens, que oferece alternativas de tom.
+[09:20] Apresenta os cinco estilos de texto: animado, confiante, empático, objetivo e neutro.
+[10:20] Explica a utilidade de cada estilo e como eles agilizam a comunicação.
+[10:55] Anuncia que mostrará na prática como utilizar as funcionalidades.
+[11:08] A tela mostra uma breve tela de carregamento.
+[11:10] A tela da plataforma Digisac é exibida.
+[11:19] A apresentadora mostra a transcrição de áudio na prática.
+[11:29] Clica na opção "Transcrever áudio".
+[11:36] O áudio é transcrito para texto.
+[11:46] Exibe um exemplo de áudio transcrito, com o texto: "Olá, tudo bem? Gostaria de agendar um treinamento para a semana que vem, por volta das 19 horas."
+[11:54] Explica que a transcrição elimina ruídos e otimiza o entendimento.
+[12:12] Menciona que também é possível ouvir os áudios enviados.
+[12:24] A apresentadora mostra a funcionalidade de resumo inteligente.
+[12:30] Exibe um atendimento simulado e a transferência do chamado.
+[12:43] Mostra o resumo do atendimento gerado automaticamente pela IA.
+[12:50] Explica como o resumo agiliza o entendimento do histórico do chamado.
+[13:06] Detalha que o resumo é gerado automaticamente em transferências entre departamentos.
+[13:25] A apresentadora simula uma transferência de chamado.
+[13:30] Explica como o resumo é útil ao transferir chamados entre setores.
+[13:41] Mostra que o resumo é gerado automaticamente na transferência.
+[14:04] A apresentadora exibe o fechamento de chamado.
+[14:17] Explica que o resumo do atendimento também é gerado no fechamento de chamados.
+[14:35] Retorna à transcrição de áudios na plataforma.
+[14:52] A apresentadora mostra o texto mágico na prática.
+[15:02] Digita "ola tdo bem" com erros gramaticais e de pontuação.
+[15:08] Clica na opção "Corrigir meu texto".
+[15:15] A IA sugere a correção: "Olá, tudo bem?".
+[15:20] Aplica a sugestão.
+[15:28] Clica na opção "Melhorar mensagem".
+[15:35] Escolhe o estilo "Animado".
+[15:43] O texto é gerado com o estilo animado: "Oi, tudo ótimo? Espero que você esteja se divertindo muito!"
+[15:58] Clica novamente para "Melhorar mensagem" e escolhe o estilo "Objetivo".
+[16:05] O texto é gerado com o estilo objetivo.
+[16:11] Escolhe o estilo "Neutro".
+[16:21] Digita "vamos retomar atendimento" com erro.
+[16:27] Clica em "Corrigir meu texto".
+[16:38] A IA sugere a correção: "Vamos retomar o atendimento?".
+[16:44] Clica em "Melhorar mensagem" e escolhe o estilo "Empático".
+[16:52] O texto é gerado com o estilo empático.
+[17:02] A apresentadora retorna à tela de valores.
+[17:20] Slide de preços: "Contrate as 3 funcionalidades de IA com um valor especial!", mostrando os preços de transcrição de áudios, resumo inteligente e texto mágico, individualmente e em pacote.
+[17:28] Explica os valores dos pacotes individuais de transcrição de áudios, resumo inteligente e texto mágico.
+[17:53] Menciona que o pacote total das três funcionalidades custa R$ 113,00/mês.
+[18:04] Slide de preços: "Confira os planos e escolha a melhor opção para sua necessidade!", mostrando os planos individuais de IA Texto Mágico, IA Resumo Inteligente e IA Transcrição de Áudio.
+[18:08] Explica que há opções de contratação individual para cada funcionalidade.
+[18:32] Detalha as quantidades de uso e os valores para cada plano.
+[18:57] Reforça que os planos são baseados em usos/minutos.
+[19:11] Menciona que o saldo não utilizado não acumula para o próximo mês.
+[19:25] Recomenda que entrem em contato com o comercial para um plano personalizado.
+[19:40] Pergunta ao público o que acharam das novidades.
+[19:44] A apresentadora volta a aparecer na tela, com o slide de preços ao fundo.
+[19:50] Informa que deixará o número do comercial disponível.
+[20:06] Anuncia que responderá às perguntas ao vivo no chat.
+[20:25] Um usuário pergunta se é possível fechar mais de um chamado por vez.
+[20:34] A apresentadora confirma que sim, é possível realizar fechamento em massa.
+[20:46] Recomenda entrar em contato com o suporte técnico para mais informações.
+[20:58] Retorna à tela da plataforma para mostrar o passo a passo no manual.
+[21:13] Mostra o histórico de chamados no manual.
+[21:26] Exibe as opções de "Fechar chamados em lote" e "Transferir chamados em lote".
+[21:38] Retorna ao slide de preços.
+[21:46] Um usuário pergunta se as funções já estão disponíveis.
+[21:54] A apresentadora confirma que sim, as funcionalidades já estão disponíveis após a contratação.
+[22:12] Reitera que os valores são por uso e não por usuário.
+[22:21] Menciona que o valor está muito bom e que é uma ótima oportunidade.
+[22:38] Um usuário pergunta se o desconto é só no primeiro mês.
+[22:45] A apresentadora explica que o valor do pacote se mantém nos próximos meses.
+[23:08] Menciona que o saldo de usos não acumula para o próximo mês.
+[23:25] Um usuário pergunta sobre disparo de mensagens para vários clientes.
+[23:42] A apresentadora explica que a Digisac utiliza a API oficial do WhatsApp.
+[24:00] Menciona que as mensagens enviadas são cobradas.
+[24:15] Recomenda entrar em contato para mais detalhes sobre os provedores.
+[24:32] Um usuário pergunta sobre funil de vendas.
+[24:49] A apresentadora confirma que a Digisac possui a funcionalidade de funil de vendas.
+[25:19] A apresentadora mostra a seção de funis de vendas no dashboard.
+[25:29] Explica como visualizar as etapas e o status dos clientes no funil.
+[25:40] Mostra o potencial de receita, receita ganha e conversão geral.
+[26:00] Detalha que não há limite de funis, podendo criar um para cada necessidade.
+[26:19] Retorna à tela do chat.
+[26:27] A apresentadora se prepara para finalizar a transmissão.
+[26:34] Agradece a atenção de todos e a interação no chat.
+[26:47] Convida o público para o próximo webinar na quarta-feira.
+[27:00] Menciona que o vídeo ficará salvo no canal do YouTube.
+[27:14] Deseja uma boa tarde e uma boa semana a todos.
+[27:26] Finaliza a transmissão.

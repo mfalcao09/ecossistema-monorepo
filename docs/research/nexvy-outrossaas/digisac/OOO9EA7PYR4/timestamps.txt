@@ -1,0 +1,38 @@
+Claro, aqui está o mapeamento exaustivo dos momentos importantes do vídeo:
+
+[00:00] Fabiana e Ana Carolina se apresentam para o webinar.
+[00:23] Ana Carolina se apresenta e informa que responderá às dúvidas no chat.
+[00:38] Fabiana agradece a Ana Carolina e convida o público a fazer perguntas.
+[00:50] Fabiana dá as boas-vindas ao Imersão Digisac.
+[01:23] Fabiana apresenta o slide sobre "Categorização e organização usando tags em atendimento ao cliente".
+[02:09] Fabiana mostra dicas de como usar tags na jornada do cliente, cobrança e acompanhamento.
+[04:00] Fabiana mostra exemplos de como classificar por assunto ou produto (advocacia, contabilidade, promotora de crédito).
+[05:15] Fabiana demonstra como criar tags na plataforma Digisac.
+[05:40] Fabiana cria uma nova tag chamada "Urgente".
+[06:05] Fabiana demonstra como editar e excluir uma tag existente.
+[06:45] Fabiana demonstra como filtrar contatos por tags no chat de atendimento.
+[07:10] Fabiana demonstra como limpar os filtros de tags no chat de atendimento.
+[07:30] Fabiana demonstra como inserir uma tag em um contato durante o atendimento.
+[08:29] Fabiana demonstra como criar uma nova tag diretamente no chat de atendimento.
+[09:05] Fabiana demonstra como filtrar contatos por tags no chat, exibindo apenas clientes com a tag "Descoberta e aprendizado".
+[09:21] Fabiana demonstra como acessar a seção de "Contatos" e visualizar as tags inseridas.
+[09:39] Fabiana demonstra como filtrar os contatos por tags na seção "Contatos", usando a tag "Indicação".
+[10:14] Fabiana demonstra como adicionar ou remover tags em massa para múltiplos contatos selecionados.
+[11:25] Fabiana demonstra como importar contatos via arquivo CSV, com a opção de adicionar tags durante a importação.
+[12:29] Fabiana retorna ao slide "Vantagens de utilizar Tags na Digisac".
+[14:10] Fabiana demonstra como criar e agendar campanhas de envio em massa de mensagens no WhatsApp Business API, utilizando tags.
+[15:20] Fabiana demonstra como selecionar tags para a configuração de envio da campanha.
+[16:21] Fabiana demonstra como importar contatos para a campanha via arquivo CSV.
+[17:30] Fabiana demonstra como criar campanhas de envio em massa via SMS, utilizando tags.
+[18:11] Fabiana demonstra como selecionar tags para o envio da campanha por SMS.
+[19:30] Fabiana retorna ao slide "Vantagens de utilizar Tags na Digisac" e fala sobre a automação de tags com o robô.
+[21:50] Fabiana demonstra como configurar o robô para adicionar tags automaticamente com base em frases recebidas.
+[23:09] Fabiana demonstra a condição e ação para o robô adicionar a tag "Campanha marketing" quando o cliente envia a frase "Olá, vim através do Instagram e gostaria de mais informações".
+[25:35] Fabiana apresenta o slide "Acompanhe o desempenho das Tags".
+[26:48] Fabiana demonstra como acessar o "Histórico de chamados" na plataforma.
+[27:14] Fabiana demonstra como filtrar os chamados por tags no "Histórico de chamados".
+[28:07] Fabiana demonstra como exportar o "Histórico de chamados" para uma planilha Excel.
+[28:38] Fabiana demonstra como formatar o número de protocolo no Excel para remover casas decimais.
+[29:33] Fabiana demonstra como filtrar os dados por tags dentro da planilha Excel.
+[30:58] Fabiana apresenta o slide "Benefícios de classificar contatos por Tags".
+[33:37] Fabiana mostra o número de contato do suporte da Digisac.

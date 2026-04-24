@@ -1,0 +1,16 @@
+[00:00] Início do vídeo: tela inicial da plataforma com a barra lateral à esquerda e uma área de trabalho vazia à direita.
+[00:11] Navegação até a opção "Filas & Conexões" na barra lateral.
+[00:16] Clique em "Filas & Deptos" e a tela de Filas & Chatbot é exibida.
+[00:19] Clique no botão "Adicionar Fila" no canto superior direito.
+[00:20] Um formulário de adição de fila é exibido.
+[00:51] Seleção de cor para a fila "Comercial".
+[01:16] Digitação de uma mensagem de saudação para a fila.
+[01:27] Clique em "Adicionar", e a fila "Comercial" é adicionada à lista.
+[01:48] Navegação até a opção "Usuários" na barra lateral.
+[01:50] A tela de Usuários é exibida, mostrando os usuários existentes.
+[01:52] Clique no ícone de editar ao lado do usuário "Maiara".
+[01:53] Um formulário de edição de usuário é exibido.
+[01:55] Vinculação da fila "Comercial" ao usuário "Maiara" no campo "Filas".
+[02:16] Explicação dos perfis de usuário "Admin" e "User".
+[02:53] Explicação da opção "Ver tickets sem fila?".
+[03:41] Final do vídeo: as configurações de usuário são salvas e a tela retorna à lista de usuários.

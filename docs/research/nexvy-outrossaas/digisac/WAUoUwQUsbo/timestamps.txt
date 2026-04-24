@@ -1,0 +1,80 @@
+[00:00] Webnário imersão Digisac
+[00:20] Tela de apresentação com o tema "Descubra como turbinar suas respostas rápidas com a Digisac"
+[03:34] Fabiana fala sobre Respostas Rápidas com Mídias e Categorias
+[04:57] Novos recursos das respostas rápidas
+[06:07] Novidades sobre o recebimento de Stickers/Figurinhas no WhatsApp
+[07:18] Tela da plataforma Digisac com a aba "Respostas rápidas"
+[07:31] Tela da plataforma Digisac com a aba "Atendimento"
+[07:43] Tela da plataforma Digisac no menu superior com opções como "Cargos", "Bots", "Departamentos", "Atendimento de chamados", "Respostas rápidas", "Avaliações", "Integrações" e "Templates"
+[07:50] Fabiana retorna à tela "Respostas rápidas"
+[08:29] Fabiana clica no botão "Nova resposta" e abre uma janela pop-up "Criando Respostas Rápidas"
+[08:37] Fabiana demonstra como adicionar um "Título de resposta rápida"
+[08:52] Fabiana demonstra como adicionar um "Texto de resposta rápida"
+[09:12] Fabiana demonstra como selecionar categorias
+[09:50] Fabiana digita e cria uma nova categoria "Tutorial"
+[10:04] Fabiana digita e cria uma nova categoria "Campanha ou Promoção"
+[10:20] Fabiana digita e cria uma nova categoria "Segurança para Whatsapp"
+[10:38] Fabiana digita e cria uma nova categoria "Primeiros passos"
+[10:59] Fabiana digita e cria uma nova categoria "Cliente novo"
+[11:34] Fabiana demonstra como selecionar departamentos que podem utilizar
+[12:20] Fabiana demonstra como adicionar arquivos
+[12:54] Fabiana clica em "Descartar"
+[12:57] Fabiana clica no ícone "Editar" da resposta "Conexão de WhatsApp com tutorial em vídeo"
+[13:00] Fabiana demonstra a edição do título e texto da resposta rápida
+[13:23] Fabiana demonstra o título da resposta como "Conexão de WhatsApp com tutorial em vídeo" e o texto que descreve como fazer a conexão
+[13:58] Fabiana demonstra a categoria "Tutorial"
+[14:02] Fabiana demonstra os departamentos que podem utilizar
+[14:14] Fabiana demonstra o arquivo já adicionado, que é um vídeo
+[14:31] Fabiana clica no ícone "Visualizar" da resposta "Bem-vindo ao Suporte Técnico"
+[14:34] Fabiana demonstra a pré-visualização da imagem para o cliente
+[14:44] Fabiana demonstra a mensagem que vai junto com a imagem
+[14:52] Fabiana demonstra os departamentos que podem utilizar
+[15:03] Fabiana clica no ícone "Editar" da resposta "Dicas de segurança para WhatsApp"
+[15:05] Fabiana demonstra o arquivo PDF já adicionado
+[15:13] Fabiana clica no ícone "Visualizar" da resposta "Campanha ou Promoção - Funil de vendas"
+[15:15] Fabiana demonstra a pré-visualização da imagem de funil de vendas
+[15:54] Fabiana clica na aba "Categorias"
+[16:03] Fabiana demonstra que pode editar ou excluir a qualquer momento as categorias
+[16:11] Fabiana clica na aba "Respostas rápidas"
+[16:15] Fabiana clica no botão "Nova resposta" novamente
+[16:24] Fabiana entra na tela "Chat"
+[16:43] Fabiana clica no ícone de raio para visualizar as "Respostas rápidas"
+[16:48] Fabiana exibe uma lista de respostas rápidas com seus títulos, textos e categorias
+[17:09] Fabiana digita "Campanha" na barra de busca de respostas rápidas
+[17:21] Fabiana demonstra o filtro por categoria na resposta "Campanha ou Promoção - Funil de vendas"
+[17:25] Fabiana clica no ícone de filtro
+[17:41] Fabiana demonstra as opções de filtro
+[17:59] Fabiana clica no ícone "Editar" da resposta "Campanha ou promoção"
+[18:35] Fabiana clica na resposta "Campanha ou promoção - Funil de vendas"
+[18:41] Fabiana clica no botão "Enviar"
+[18:43] Fabiana envia a mensagem e imagem para o cliente
+[18:59] Fabiana clica no ícone do raio e demonstra as respostas rápidas disponíveis
+[19:15] Fabiana clica na resposta "Conexão de WhatsApp com tutorial em vídeo"
+[19:22] Fabiana envia o vídeo para o cliente
+[19:48] Fabiana demonstra as permissões de "Cargos"
+[19:54] Fabiana demonstra o cargo "Administrador" e "Operadores"
+[20:13] Fabiana clica no ícone "Editar" do cargo "Operadores"
+[20:25] Fabiana demonstra as permissões específicas do cargo "Operadores" para "Respostas rápidas"
+[20:53] Fabiana demonstra as respostas rápidas no chat
+[21:05] Fabiana demonstra que a busca por palavra-chave filtra as respostas
+[21:14] Fabiana demonstra a personalização e organização das respostas rápidas
+[21:47] Fabiana reforça que o vídeo ficará salvo no YouTube
+[22:05] Fabiana apresenta as "Novidades: Recebimento de Stickers/Figurinhas no WhatsApp"
+[22:08] Fabiana demonstra a visualização de stickers
+[22:25] Fabiana demonstra o formato da visualização de stickers
+[22:47] Fabiana explica sobre o envio de stickers e a conexão WABA
+[23:16] Fabiana apresenta as "Novidades: Fluxo de "Marcar como Não Lida" no Chat"
+[23:25] Fabiana demonstra a visualização das mensagens não lidas no filtro
+[23:37] Fabiana explica a importância da organização das mensagens
+[23:54] Fabiana demonstra na plataforma o acesso ao filtro
+[24:08] Fabiana demonstra a localização do funil de filtros
+[24:16] Fabiana demonstra como filtrar "Mensagens não lidas"
+[24:22] Fabiana demonstra o filtro aplicado, exibindo as mensagens não lidas nos contatos
+[24:29] Fabiana demonstra como "Limpar" o filtro
+[24:40] Fabiana demonstra novamente como aplicar o filtro
+[24:57] Fabiana demonstra as mensagens não lidas
+[25:03] Fabiana explica a funcionalidade do filtro
+[25:31] Fabiana oferece treinamento gratuito da Digisac
+[25:56] Fabiana demonstra as figurinhas enviadas pelos clientes
+[26:01] Fabiana demonstra a visualização de stickers
+[26:08] Fabiana agradece a atenção e a participação no webinar

@@ -1,0 +1,32 @@
+[00:00] Apresentação geral da tela de atendimento.
+[00:12] Detalhes do card de conversa.
+[01:08] Abertura da lista de contatos.
+[01:21] Edição de um contato na lista de contatos.
+[01:29] Abrindo atendimento a partir da lista de contatos.
+[01:51] Visualização de atendimentos finalizados.
+[02:08] Configurações de permissões para visualização de históricos.
+[02:24] Visualização de anotações.
+[02:31] Visualização de agendamentos de mensagens.
+[02:37] Silenciando notificações de gestão de atendimento.
+[02:47] Configurações de supervisão de atendimento.
+[03:10] Colunas de atendimento: em atendimento, aguardando e lista de contatos no fluxo.
+[04:00] Painel de atendimentos, grupos e chat interno.
+[04:35] Menu de status do usuário (online, ocupado, ausente, offline).
+[05:04] Configurações de verificação em duas etapas e notificações.
+[05:58] Configuração de chat em aba separada.
+[06:24] Edição de perfil do usuário.
+[06:53] Campo de busca e filtro de mensagens não lidas.
+[07:07] Detalhes da conversa de atendimento (hora, data, opções de mensagem).
+[07:37] Botão de assinatura e envio de emojis.
+[08:03] Lista de respostas rápidas.
+[08:14] Agendamento de mensagens.
+[08:32] Envio de anexos.
+[08:37] Gravador de áudio.
+[09:05] Adicionar usuário (atendente) ao atendimento.
+[09:24] Botão de carteira (vincular/desvincular contato).
+[09:41] Oráculo de sugestão de respostas (IA).
+[10:16] Nova anotação na conversa.
+[10:26] Botão de transferência de atendimento.
+[10:37] Botão de finalizar atendimento.
+[10:54] Ver contato e abrir sala de vídeos.
+[11:17] Introdução aos módulos adicionais.

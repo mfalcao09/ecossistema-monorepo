@@ -1,0 +1,22 @@
+[00:00] Painel principal (dashboard) da plataforma de chatbot.
+[00:01] Visão geral do sistema com cards informativos e gráficos.
+[00:05] Versão da plataforma.
+[00:09] Customização de painéis e identidade visual.
+[00:23] Link próprio para revendas.
+[00:30] Detalhes dos cards: Total de contatos.
+[00:41] Detalhes dos cards: Mensagens recebidas.
+[00:44] Detalhes dos cards: Mensagens enviadas.
+[00:46] Detalhes dos cards: Tempo médio de atendimento.
+[00:51] Detalhes dos cards: Contatos na fila.
+[00:59] Detalhes dos cards: Contatos em atendimento.
+[01:05] Detalhes dos cards: Contatos no fluxo.
+[01:13] Detalhes dos cards: Contatos com IA.
+[01:18] Detalhes dos cards: Finalizados na semana.
+[01:23] Detalhes dos cards: Finalizados no mês.
+[01:28] Gráfico: Atendimentos por dia.
+[01:34] Filtro de mês para o gráfico de atendimentos.
+[01:39] Conexões de atendimento e número de atendimentos.
+[01:52] Atendimentos por atendente.
+[02:05] Atendimentos por departamento.
+[02:11] Atendimentos por sentimento (neutro, negativo, positivo, lead quente, não definido).
+[02:37] Próximos vídeos abordarão outras telas da plataforma.

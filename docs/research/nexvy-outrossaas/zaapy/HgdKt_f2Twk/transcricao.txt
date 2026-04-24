@@ -1,0 +1,135 @@
+[ 00:00 ] Olá, nesse vídeo a gente vai estar dando o término na função de fluxos bots, que na aula anterior a gente mostrou como colocar uma imagem, né? Anexos basicamente do computador, um vídeo, um áudio, um arquivo.
+[ 00:16 ] Uma mensagem de texto e um término ali de finalização, né, com um relatório de financeiro, perfeito.
+[ 00:24 ] Nessa aula a gente vai estar mostrando sobre os cards ali, basicamente, os cards de transferência de fluxo, condição de carteira e request HTTP de integrações externas, tá bom? E também, as funções que temos disponíveis aqui em cima.
+[ 00:39 ] Então vamos lá. Vamos supor aqui agora que a gente tem nossas três opções de suporte técnico, financeiro e comercial, que a pessoa que seleciona comercial seja transferida para um outro canal de telefone que ela está falando pelo canal 1.
+[ 00:54 ] Quero que ela seja transferida lá para o canal 2, um meu outro número de telefone, que abre uma conversa lá no whatsapp da pessoa com essa, esse outro whatsapp também e tudo mais. Então vamos lá. Então eu vou utilizar o card de, transferência de fluxo, tá? Ele é um card terminal também.
+[ 01:12 ] Então ele só, é possível colocar um card de entrada. Então, eu vou colocar aqui Comercial, vou fazer a ligação.
+[ 01:20 ] E aqui quando a pessoa selecionar comercial, quero que seja transferida para um outro fluxo e uma outra conexão. Então, eu vou vim aqui, no fluxo.
+[ 01:29 ] Posso botar uma mensagem também na hora dessa transferência, vou selecionar o fluxo e a conexão aqui. E aí vai transferir lá para outra conexão, caso tenha um fluxo também, que aí sempre tem que ter, né? Um fluxo, Ah, vai ser transferido para esse fluxo e vai cair lá no chat de atendimento, ou você pode dar uma continuidade num outro fluxograma por lá também, tá bom?
+[ 01:54 ] Perfeito. Feito isso também, vai abrir uma conversa com esse outro, com esse outro whatsapp que você colocou aqui lá no, no whatsapp do contato, tá bom? Perfeito.
+[ 02:01 ] Agora vamos supor uma outra situação, situação da condição da carteira.
+[ 02:08 ] Eu quero que, por exemplo, que esse aqui é um card de carteira.
+[ 02:12 ] Que ele faz duas ações, como vocês podem ver, ele faz a condição da carteira e ele transfere para o chat. Então, essa função aqui é a mesma que colocar isso aqui.
+[ 02:22 ] Basicamente ele já tem essa função atrelada. Então ele faz a verificação de carteirização e a transfere para o chat, dependendo da situação. Como você pode ver, ele é um card que já tem duas opções aqui, ó, sem carteira e com carteira.
+[ 02:35 ] E aqui é a opção de você selecionar os departamentos, certo? Então vamos lá.
+[ 02:40 ] Como que funciona na lógica isso, né? Ele é um card terminal, então eu só consigo dar uma entrada nele. Então eu vou selecionar aqui o comercial.
+[ 02:49 ] Perfeito. E agora, eu vou vim em algum dos meus departamentos e vou selecionar a carteira. Aqui a gente tinha selecionado que é o comercial. Então, eu vim aqui em editar o fluxo.
+[ 03:00 ] Habilitei a carteira nele, né, no meu, no meu departamento comercial. E o meu departamento financeiro aqui, que eu vou usar ele, eu vou deixar sem carteira, tá, pra gente fazer esse teste.
+[ 03:10 ] Então, aqui no fluxo do bot, em editar o fluxo.
+[ 03:16 ] O que que vai acontecer se, se o card ele selecionar ele aqui o Comercial? Vamos atrelar aqui primeiro, departamentos. Então, o sem carteira eu vou deixar o financeiro, que eu não habilitei carteira lá nos departamentos.
+[ 03:28 ] E o com carteira, eu vou habilitar o comercial.
+[ 03:32 ] Habilitei aqui. Perfeito. O que que vai acontecer agora se a pessoa selecionar a opção três Comercial? O sistema vai identificar se aquele contato que está entrando ali, ele está atrelado a uma atendente, a uma carteira de atendente ou não.
+[ 03:47 ] Se ele não estiver atrelado a uma atendente, ele vai transferir para o chat do departamento sem carteira, aqui no caso é o financeiro.
+[ 03:57 ] Agora, a outra situação: Se o contato já estiver atrelado, por exemplo, chegou o Matheus. O Matheus selecionou a opção três Comercial, e ele está atrelado à carteira do atendente Gustavo.
+[ 04:09 ] Então, quer dizer que o sistema vai fazer uma verificação e vai mandar ele pro departamento Comercial, que é o departamento com carteira, tá? Então, este card aqui o sistema faz uma análise se o contato ele é encarteirado ou não.
+[ 04:22 ] Dependendo se ele é ou não, ele vai mandar aqui, ele vai fazer a escolha aqui, né, no caso não o contato, o sistema vai decidir e vai enviar para o chat do departamento correto, tá? Dependendo se ele é vinculado a uma carteira ou não, tá? Perfeito.
+[ 04:41 ] Agora, o outro card que temos é o card de integração, que é o request HTTP, né? Ele é de integração externa para você integrar o seu fluxo do bot aqui, né, todo com um, um outro sistema, um CRM, um RP, ou um site.
+[ 04:55 ] Esse aqui você tem que ter conhecimento de programação ou ter um programador para fazer essa integração para você, tá bom?
+[ 05:03 ] Como você pode ver aqui, ó, quando você clica nos três pontinhos, ele também é um card, ele também é um card, ah, na verdade, ele é um card de dá para dar saída.
+[ 05:10 ] Então, ele não é um card, dá para dar saída, então ele só, dá para dar entrada.
+[ 05:15 ] Na verdade, ele é um card, dá para dar saída, então tu podes dar uma saída também nele. Ele não é um card terminal, tá? Agora os outros dois que eu mostrei era cards terminais. Então tu pode dar uma entrada e dar uma saída aqui nele e dar continuar, continuidade num outro fluxo que você pode criar aqui depois dele, tá bom?
+[ 05:27 ] Perfeito. Então, ele tá aqui não configurado. Quando eu vou aqui em Request HTTP, você vai ver que vai mostrar muitas informações aqui, né? Isso aqui tem que ter conhecimento com programação para ter o entendimento, tá bom?
+[ 05:41 ] Que ele mostra aqui a URL da API, o método, se é um GET, POST, um PUT, ou uma ação de delete, tá? Os headers, os, o body, né, que é o JSON também. Então, todas essas informações aqui tem que ter um certo conhecimento, tá bom?
+[ 05:57 ] Temos a documentação, tá, que a documentação mostra tudo, instruindo ali como fazer uma integração externa, tá? A documentação está disponível bem aqui do lado direito.
+[ 06:07 ] Claro, se você estiver aqui no fluxograma e você tentar acessar por aqui, você não vai conseguir. Ó, igual eu estou clicando aqui, ele não abre. Então, se você vim no dashboard, por exemplo, qualquer outra tela, você vai conseguir acessar ali esse painel.
+[ 06:19 ] E vai ficar bem aqui em API do sistema, tá? Que aqui você também cria o token, você cria o token aqui, nomeia ele, e você utiliza ele para fazer as integrações.
+[ 06:30 ] E a documentação mostrando como fazer as integrações aqui de webhook também fica bem aqui no canto direito inferior, em documentação. Ele vai abrir a documentação para você em postman, numa outra aba ali do seu navegador, tá bom?
+[ 06:47 ] Perfeito. Então, vamos lá agora, dando continuidade à nossa aula de fluxo do bot.
+[ 06:55 ] O que que eu vou mostrar agora aqui para vocês? A questão do fluxo secundário, que é o quê? A ativação de chave de fluxo secundário.
+[ 07:04 ] Que eu vou criar um outro fluxo aqui agora.
+[ 07:07 ] Fluxo, por exemplo, vendas.
+[ 07:12 ] Não, vou, na verdade, eu já tenho o comercial e o financeiro. Então, vou botar clientes novos.
+[ 07:18 ] Vou botar aqui.
+[ 07:22 ] Vou botar clientes novos e vou criar um outro aqui também: Facebook.
+[ 07:29 ] Perfeito. E um último aqui, né, de Instagram.
+[ 07:38 ] Já vou explicar o que que é isso tudo que eu estou criando. Criei todos esses fluxos aqui, né? Eu vou, claro, vou criar o fluxo aqui dentro, né? Vou fazer alguma ação.
+[ 07:44 ] Vamos supor aqui que eu vou botar uma coisa bem simples, né? Só para a gente ver.
+[ 07:50 ] Que é o quê? Eu vou mandar diretamente para o chat, tá?
+[ 07:55 ] Eu vou criar, para ficar bem bacana, eu vou criar aqui os departamentos com os nomes que eu criei aqui. Então, cliente novo.
+[ 08:08 ] Vou botar uma corzinha aqui porque essa corzinha aparece lá no chat, né?
+[ 08:14 ] Vou botar aqui Facebook.
+[ 08:21 ] Instagram.
+[ 08:31 ] Posso até botar as cores do Facebook, né? Aqui eu já botei o azul, Instagram é um rosinha lá, né? Então, já ficou isso aqui já.
+[ 08:38 ] Perfeito. Agora aqui, vocês vão ver que eu posso botar a minha conexão em todos esses fluxogramas aqui.
+[ 08:46 ] Posso botar ela em todos esses fluxos.
+[ 09:03 ] Então, todos eles vão funcionar, né? Os secundários por palavras-chaves.
+[ 09:10 ] Esse, esse primeiro aqui, eu botei minha conexão aqui agora. Esse primeiro aqui, eu vou editar ele.
+[ 09:18 ] Eu vou deixar desmarcada essa opção aqui, o fluxo principal e vou botar aqui.
+[ 09:22 ] Cliente novo.
+[ 09:26 ] E vou dar um clique aqui para ele atualizar. Ele vai atualizar o comando.
+[ 09:32 ] Vou fazer a mesma coisa nos outros, só que aqui eu vou botar as palavras dos fluxos aqui que eu quero que faça.
+[ 09:39 ] Então, OK, esse aqui vai ser Facebook.
+[ 09:47 ] O outro aqui vai ser Instagram.
+[ 09:56 ] Vou dar um clique aqui sempre aqui do lado aqui que ele atualiza para mim.
+[ 09:59 ] Perfeito. Como é que vai funcionar isso agora? Você pode tanto orientar o cliente a falar essa tal palavra lá na, numa publicidade, no marketing que estiver fazendo lá no Facebook, no Instagram, ou no seu site, quanto você pode botar na URL do link.
+[ 10:16 ] Então, se você botar na URL do link que a pessoa vai clicar e vai ser direcionado para o seu whatsapp, por exemplo, vai, você vai escrever na URL lá, adicionar essa informação, por exemplo, cliente novo.
+[ 10:28 ] Vamos supor que o cliente novo vai do site. Então, botar lá cliente novo. Quando a pessoa clicar no botão, vai auto-escrever no barra, na barra de whatsapp dela, para mandar para aquele whatsapp. E ela vai dar um enter, quando ela dá um enter, escrever a primeira mensagem cliente novo, ela vai entrar neste fluxograma aqui, que eu criei, tá?
+[ 10:46 ] Ela vai criar neste fluxograma aqui e vai, e consequentemente, dependendo do fluxo que você criou aqui, se vai dar um, vai ter um fluxo dela seguir e tudo mais, ou se vai mandar para o chat, aí você, você vai decidir, né?
+[ 11:00 ] Aqui dentro do fluxo, o que que ele quer fazer. Nesse caso, a gente vai só transferir para o chat, tá?
+[ 11:05 ] A gente vai só fazer a transferência aqui. A gente vai botar aqui Cliente novo.
+[ 11:12 ] Então, quando a pessoa selecionar, escrever, né, Cliente novo, a primeira mensagem dela tem que ser o comando para ativar esse fluxo secundário. Quando ela escrever Cliente novo ali no chat, ela já vai cair no chat aqui, nesse formato que eu botei para transferir para o chat, vai cair lá no chat.
+[ 11:29 ] No departamento, que vai aparecer bem aqui, ó, Cliente novo. Então, eu vou saber por onde que o, o Renato, por exemplo, chegou. Ele chegou pelo meu site, porque lá eu, no site, eu botei uma URL, URL, né?
+[ 11:45 ] Ah, de cliente novo. E ele clicou e mandou essa mensagem e ativou o meu fluxo secundário e caiu aqui no meu chat de atendimento, tá? Então, basicamente, isso seria fluxos secundários que são ativados por palavras-chaves.
+[ 11:58 ] O meu Facebook é a mesma coisa. Posso vim aqui, né? Vou criar a mensagem inicial.
+[ 12:04 ] Posso até deixar vazio se eu quiser aqui, né? E vou botar para transferir para o chat.
+[ 12:10 ] Vou fazer as entradas, as saídas sempre, né, para funcionar. Sempre tem que fazer isso.
+[ 12:18 ] Vou aqui atrelar ao meu Facebook.
+[ 12:22 ] Perfeito. Então, aqui a pessoa vai chegar, vai escrever Facebook, né, porque eu orientei lá no Facebook ou eu botei na URL que a pessoa clicou também a palavra Facebook. Então, ela mandou a primeira mensagem para o meu bot foi Facebook.
+[ 12:37 ] Então, ela mandou, vai cair direto no meu atendimento aqui com a palavra Facebook. Aí, eu já sei que ela chegou pelo Facebook, tá? Então, é assim que funciona basicamente, né, os o Instagram também é a mesma forma.
+[ 12:51 ] URL, o link Instagram e orientando a pessoa lá a escrever a palavra Instagram. A palavra que você decidir aqui, né, conforme você quiser, que a pessoa vai clicar ou vai seguir a sua orientação lá para mandar essa mensagem para o seu bot.
+[ 13:06 ] E ela vai cair nesses outros fluxogramas, tá bom? Então, é assim que funciona basicamente, né, os fluxos externos, tá? Agora, nos aprofundando aqui também dando o término, na nossa aula de fluxo do bot, as nossas outras funções que temos aqui.
+[ 13:20 ] Que é o horário do fluxo aqui. O horário do fluxo, se você não tiver um card, que é um card que eu esqueci de mostrar também, que é esse aqui, ó. Deixa eu voltar.
+[ 13:30 ] Até apertei ali no botão errado, mas se você tiver este card aqui, ó, que é horário de atendimento, que sempre que você for usar ele, você tem que usar ele antes de todos esses aqui.
+[ 13:44 ] Então, vamos supor aqui, ó, antes de enviar essa imagem e antes de mandar esse texto, você vai colocar este card aqui.
+[ 13:50 ] Porque ele é um card de horários de departamento, tá? Ele é um card de horário de departamento. Então, eu vou só colocar horários no departamento aqui em si. Ele é um card de entrada e saída. Então, você já vai logo colocar a entrada.
+[ 14:06 ] A saída, tá?
+[ 14:12 ] E aqui tu vai fazer a ligação. Suporte técnico.
+[ 14:20 ] E vai ligar ali, né, para dar continuidade. Ele é sempre um card que você bota no início, tá?
+[ 14:25 ] Então, você botou essas opções e aí depois, sempre o card de departamentos, tá bom?
+[ 14:34 ] Financeiro. Comercial, quando a gente, como a gente não tem nada aqui no comercial, a gente não vai colocar nenhum card aqui embaixo, tá?
+[ 14:42 ] Então, aqui eu vou, botar os departamentos. Então, aqui é o suporte técnico. Eu vou botar aqui suporte técnico.
+[ 14:53 ] Financeiro, vou botar aqui o departamento financeiro.
+[ 14:58 ] Perfeito. Agora, não mudou, não vai mudar em nada o envio para o cliente. Isso aqui é uma informação interna, tá?
+[ 15:06 ] Porque agora, como está atrelado aqui suporte técnico e aqui no final também está, ó, suporte técnico.
+[ 15:13 ] E no financeiro aqui também está financeiro. E no final está financeiro. O que que vai acontecer? Você precisa colocar os horários de atendimento desse departamento financeiro e do departamento suporte técnico aqui em departamentos.
+[ 15:26 ] Então, você vai vir aqui no financeiro, horários de departamento e vai colocar os horários de atendimento dele, o direcionamento, se vai enviar mensagem ou finalizar, tá? Ou transferir para o departamento, tá? Tu vai selecionar aqui também, perfeito.
+[ 15:42 ] Colocando aqui, o que que vai acontecer? Quando você usa esse card, a partir do da hora que você criou o card e tem esse card aqui, eh, o sistema invalida, né, os horários de fluxo que estiver aqui.
+[ 15:55 ] Então, os horários de fluxo que vai contar são os horários que você botou ali no departamento. Então, isso aqui fica desativado quando você coloca os cards de horário de atendimento aqui e coloca os horários ali nos departamentos, tá bom?
+[ 16:09 ] Então, o que vai contar é esse aqui. Se eu excluir esses dois cards, o horário que vai utilizar de atendimento vai ser o horário que tiver aqui, tá bom? É assim que funciona aqui os horários de atendimento.
+[ 16:21 ] Agora, inatividades, como é que funciona? Isso aqui são inatividades para fazer uma ação, dependendo da inatividade. Por exemplo, esse aqui, contato parado no bot, é um contato que está parado ali e vai fazer uma ação em minutos do que eu quiser ou não fazer nenhuma ação, né?
+[ 16:41 ] Eu posso enviar uma mensagem e finalizar, ou transferir para um departamento. Então, esse aqui, tanto esse aqui quanto esse aqui, vai usar as mensagens que estão aqui embaixo, tá? Que você pode configurar.
+[ 16:48 ] Esses três aqui embaixo são outras funções, que são contato na fila de espera. É quando a pessoa passa pelo bot e chega na fila de espera de atendimento, tá? Então, a pessoa que está na fila de espera de atendimento, se demorar 5 minutos, pode finalizar ou transferir.
+[ 17:43 ] Contato sem responder. Que é quando o contato está em atendimento, ali, né, com o atendente. Se ele está demorando para responder, vai fazer uma ação de enviar mensagem e finalizar, ou transferir para um outro departamento. Aí, você coloca as mensagens sempre aqui nos campos, tá?
+[ 18:16 ] Para liberar o segundo campo, tem que apertar aqui para transferir. Aí, ele libera aqui os dois campos. Esse aqui é caso finalize, e esse aqui é caso transfira, tá? Então, se você botar essa função aqui, transfira, o campo que vai enviar mensagem é o que está aqui e o que está, para transferir, o campo que vai enviar mensagem é o, é o desse aqui, tá bom?
+[ 18:34 ] Perfeito. Os outros aqui são parâmetros, né? São, basicamente, permissões, tá? Que você coloca aqui aceitar tipos de mídia em fluxo, que é permitir áudio no bot, permitir vídeo no bot, imagem no bot e arquivo no bot.
+[ 18:51 ] Se você desabilitar algum deles, e o contato enviar, por exemplo, uma imagem e eu desabilitei imagem, o bot vai falar que ele não pode receber imagem, né? Basicamente. Ele vai ser enviada, ah, na verdade, a mensagem que estiver neste campo aqui, tá? Você colocou a mensagem aqui e desabilitou a imagem, e o contato enviou uma imagem, ele vai mandar a mensagem aqui: tipo de mídia não suportada, ou a mensagem que você configurar aqui, tá bom?
+[ 19:15 ] Parâmetros do chat. Você pode botar o nome do atendente nas conversas. Isso aqui são parâmetros desse fluxograma aqui, que a gente está mexendo. O que que pode fazer, né? Nome do atendente nas conversas, se pode aparecer o nome deles, se o, se o atendente pode deletar mensagens no chat de atendimento, que é quando você está aqui no chat de atendimento e você está numa conversa, e você quer, por exemplo, finalizar ela, quer dizer, excluir ela, que é esse botão aqui, se você quer que apareça esse botão ou não, tá?
+[ 19:45 ] Nesse fluxo do bot aqui. Então, você vai estar fazendo essa decisão ali nos parâmetros, aqui, tá?
+[ 19:54 ] Eh, perguntar envio mensagem finalização. Quando você vai finalizar o atendimento, ele faz uma pergunta se você quer enviar uma, uma mensagem de finalização ou não, tá? Se você quer que apareça isso ou não, quando você for finalizar um atendimento, tu vai marcar e desmarcar aqui.
+[ 20:10 ] Ao transferir, abrir novo protocolo. Basicamente, isso aqui é o quê? Isso aqui é para quando você transferir o atendimento. Se você habilitar isso aqui, ao transferir, abrir novo protocolo, quando você transferir o atendimento para um outro atendente, num outro canal, um outro departamento, por exemplo, ele vai mandar a conversa vazia.
+[ 20:41 ] O atendente que está recebendo a transferência não vai ver o que você conversou, basicamente, tá? Se você deixar habilitado isso aqui no fluxo.
+[ 20:46 ] Transcrever áudio. Isso aqui tem que ter IA para funcionar, tá? Isso aqui ele transcreve, você consegue transcrever os áudios ali do chat que o contato envia.
+[ 20:54 ] Para utilizar isso, você tem que ter uma IA no fluxo do bot ali funcionando, tá bom?
+[ 21:00 ] Configurações dentro do fluxo do bot. Isso aqui são comandos que o contato pode ele mesmo encerrar por decisão dele. Se ele escrever, por exemplo, o fim, e aqui tiver a, esse comando fim, ele consegue ele mesmo finalizar o atendimento, tá bom?
+[ 21:15 ] Usar like no bot. Se você habilitar isso aqui, toda mensagem que o contato envia para o seu bot, basicamente o, o bot fica dando um likezinho, uma reação, né, de like em cima de cada mensagem que ele manda.
+[ 21:26 ] Se ele tiver acertando as opções do bot, se ele estiver errando, né, o bot vai mandar um xizinho embaixo, como reação na mensagem dele, tá bom?
+[ 21:35 ] E isso aqui são configurações de webhook, né, o URAs, que é evento de webhook para o UR, tá bom?
+[ 21:42 ] Aqui em cima temos mensagens automáticas, que, basicamente, são mensagens que vão ser enviadas, eh, em devidas situações, né?
+[ 21:52 ] Por exemplo, aqui, mensagem de protocolo. Isso aqui são mensagem de protocolo do bot. Quando iniciar o atendimento, vai enviar o protocolo, que é uma identificação de cada atendimento que tem no sistema.
+[ 22:04 ] Então, é um, @protocolo é um código gigantesco que o sistema cria ele mesmo, que você pode usar esse código para filtrar nos relatórios também esse código de protocolo, tá bom? Cada produto, cada atendimento que você inicia e finaliza é um protocolo que é finalizado e criado, tá bom?
+[ 22:21 ] Então, isso aqui é para enviar o protocolo que a pessoa está no momento, né? Geralmente, o pessoal apaga isso aqui, mas você pode botar também se você quiser.
+[ 22:30 ] Mensagem protocolo ao finalizar o atendimento. Quando finalizar o atendimento, enviar o protocolo novamente, né? Se você quiser, você pode apagar aqui também, tá?
+[ 22:40 ] Mensagens em atendimento. Isso aqui é mensagem de abertura de atendimento. Quando você faz a abertura de atendimento, ele vai enviar essa mensagem aqui.
+[ 22:48 ] Quando você inicia o atendimento, quando você clica em cima para iniciar o atendimento, está aguardando, ele envia a mensagem que estiver neste campo aqui. Todos eles têm variáveis embaixo que disponíveis para você utilizar, tá? Que vai enviar informações: @protocolo, que envia o protocolo da conversa. @contato, vai puxar o nome do contato ali, que está no atendimento. @do primeiro nome, que é o nome do primeiro nome ali do contato. @usuário, que é o nome do atendente que está atendendo ali no momento, né? Então, vamos supor aqui, por exemplo: Olá.
+[ 23:22 ] @contato.
+[ 23:25 ] Então, aqui eu estou falando: Olá, por exemplo, Gustavo, que o nome do contato é Gustavo.
+[ 23:30 ] Meu nome é @usuário.
+[ 23:36 ] Vírgula, e vou estar realizando o seu atendimento agora. Então, Olá, Gustavo, meu nome é Renato, e vou estar realizando o seu atendimento agora. Basicamente, vai estar falando isso para o contato lá.
+[ 23:52 ] Mensagem iniciar atendimento, né? Que é quando inicia o atendimento.
+[ 23:57 ] Mensagem espera na fila de atendimento, que é quando o contato está na fila de espera, aguardando, ele não foi iniciado o atendimento por nenhum atendente e ele está mandando mensagem ali, vai estar enviando essa mensagem. Cada vez que ele mandar mensagem, vai enviar essa mensagem aqui, tá bom? Todas as mensagens são editáveis, você pode digitar e colocar a sua mensagem ali ou deixar o campo vazio, tá bom?
+[ 24:17 ] Mensagens de transferência de atendimento, que é quando transfere o atendimento, que eu vou mostrar todas essas funções também no chat de atendimento, na aula de chat de atendimento, que é quando você transfere o seu, o seu atendimento para um outro atendente, um outro fluxo ali, ou o departamento, tá? Ele manda essa mensagem aqui.
+[ 24:36 ] Isso aqui é mensagem encerrar atendimento, que é quando o contato escreve fim e ele mesmo finaliza o atendimento por conta própria, tá bom?
+[ 24:43 ] E mensagem finalizar atendimento, que é quando o atendente finaliza o atendimento ali pelo botãozinho verde do lado direito superior, né? Quando finaliza o atendimento e manda essa, essa mensagem aqui: Atendimento finalizado. Você pode customizar e colocar aqui como você bem querer a mensagem, tá bem?
+[ 25:01 ] Vou apagar e deixar vazio. Era só preferência, tá bom? Mensagem do bot, que é mensagem caso errar a opção. Por favor, envie o número válido para continuar, que é quando o contato, ah, o bot manda a opção 1 2 3 e o contato ignora a opção e manda mensagem de texto e, e vai ignorando o que o bot vai mandando.
+[ 25:17 ] Então, ele fica dando essa mensagem aqui, enviando essa mensagem para o contato, tá bom?
+[ 25:21 ] E dando o término aqui na nossa aula de fluxo do bot, na nossa próxima aula, eu vou estar mostrando aqui a nossa tela de atendimento da nossa nova plataforma de chatbot de atendimento.

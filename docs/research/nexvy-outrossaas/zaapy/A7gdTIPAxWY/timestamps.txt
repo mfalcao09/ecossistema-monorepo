@@ -1,0 +1,131 @@
+[00:00] Transição do logo da Zaapy
+[00:05] Tela de Fluxos do Bot
+[00:09] Onde encontrar a tela de fluxos
+[00:12] Nome do Fluxo
+[00:15] Situação do Fluxo
+[00:18] Data de Cadastro
+[00:20] Fluxo Principal
+[00:22] Comando de Fluxo
+[00:26] Conexões do Fluxo
+[00:28] Ações do Fluxo
+[00:30] Botão Exportar
+[00:36] Campo de Busca
+[00:37] Entradas do Fluxo
+[00:40] Botão Novo Fluxo
+[00:41] Modal de Adicionar Fluxo
+[00:43] Campo Nome do Fluxo
+[00:44] Campo Situação do Fluxo
+[00:50] Opções de Ação do Fluxo
+[00:51] Editar Fluxo
+[00:55] Trocar Nome do Fluxo
+[00:56] Modal de Alterar Nome do Fluxo
+[01:00] Visualizar Conexões
+[01:01] Modal de Associar Conexões
+[01:06] Deletar Fluxo
+[01:12] Tela de Fluxograma (Edição de Fluxo)
+[01:21] Opção Fluxo Principal
+[01:33] Criação de um Novo Fluxo para Exemplificar
+[01:35] Modal de Adicionar Fluxo (preenchimento)
+[01:43] Retorno para a Tela de Fluxos do Bot
+[01:45] Renomeando o Fluxo
+[01:47] Modal de Alterar Nome do Fluxo (preenchimento)
+[01:56] Visualização do Fluxo Renomeado
+[02:04] Vinculando um Canal ao Fluxo
+[02:08] Modal de Associar Conexões (preenchimento)
+[02:18] Funcionalidade de Vínculo de Canais em Múltiplos Fluxos
+[02:37] Como Adicionar um Comando ao Fluxo Secundário
+[02:40] Acessando a Edição do Fluxo Secundário
+[02:41] Campo Comando do Fluxo (preenchimento)
+[02:50] Confirmação da Atualização do Comando
+[02:55] Retorno à Tela de Fluxos do Bot e Visualização do Comando
+[03:47] Retorno à Edição do Fluxo Secundário
+[03:50] Botão de Refresh do Fluxo
+[03:59] Botão Adicionar Card
+[04:00] Modal de Seleção de Cards
+[04:03] Adicionando o Card Mensagem Inicial
+[04:09] O Card Mensagem Inicial é o Primeiro a Ser Criado
+[04:14] Movendo e Dando Zoom nos Cards
+[04:19] Opção Tela Cheia
+[04:24] Opções do Card Mensagem Inicial
+[04:25] Editar Mensagem
+[04:33] Modal de Edição da Mensagem Inicial (preenchimento)
+[04:46] Confirmando a Atualização da Mensagem
+[04:53] Adicionar Ponto
+[04:56] Modal de Ponto de Ligação (opção Saída)
+[05:06] Visualização do Ponto de Saída
+[05:09] Criando uma Conexão entre Pontos
+[05:23] Adicionando o Card Enviar Opções
+[05:25] Posição do Card no Fluxograma
+[05:39] Adicionar Ponto (opção Entrada)
+[05:46] Visualização do Ponto de Entrada
+[05:53] Conectando os Cards Mensagem Inicial e Enviar Opções
+[06:13] Editando a Mensagem do Card Enviar Opções
+[06:15] Modal de Edição (preenchimento da mensagem principal)
+[06:22] Edição das Opções
+[06:28] Opções Enviar Menu Lista e Enviar Emoji nas Opções
+[06:36] Confirmação da Atualização das Opções
+[06:43] Adicionando o Card Enviar Imagem
+[06:47] Posição do Card Enviar Imagem
+[06:54] Adicionar Ponto no Card Enviar Imagem (opção Entrada)
+[07:09] Conectando o Card Enviar Opções à Entrada do Card Enviar Imagem
+[07:14] Adicionar Ponto no Card Enviar Imagem (opção Saída)
+[07:21] Adicionando o Card Enviar Texto
+[07:25] Posição do Card Enviar Texto
+[07:33] Adicionar Ponto no Card Enviar Texto (opção Entrada)
+[07:42] Conectando o Card Enviar Imagem à Entrada do Card Enviar Texto
+[07:48] Adicionando o Card Transferir para o Chat
+[07:53] Posição do Card Transferir para o Chat
+[08:00] Adicionar Ponto no Card Transferir para o Chat (opção Entrada)
+[08:08] O Card Transferir para o Chat Possui Apenas uma Entrada
+[08:15] Conectando o Card Enviar Texto à Entrada do Card Transferir para o Chat
+[08:20] Vinculando um Departamento ao Card Transferir para o Chat
+[08:29] Modal de Vincular Departamento (seleção de departamento)
+[08:36] Confirmação do Departamento Vinculado
+[08:48] Onde Encontrar os Departamentos na Plataforma
+[08:52] Retorno ao Fluxograma
+[09:00] Outros Cards Disponíveis
+[09:01] Adicionar Atraso Ts
+[09:09] Enviar Arquivo
+[09:13] Enviar Vídeo e Enviar Áudio
+[09:16] Assistente GPT
+[09:20] Posição do Card Assistente GPT
+[09:22] Vinculando um Assistente ao Card Assistente GPT
+[09:25] Modal de Vincular Assistente (seleção de assistente)
+[09:31] Adicionar Ponto no Card Assistente GPT (opção Entrada)
+[09:39] Conectando a Opção 2 do Card Enviar Opções à Entrada do Card Assistente GPT
+[09:59] Fluxograma Completo
+[10:04] Testando o Fluxograma no Chat
+[10:15] Mensagem Inicial do Fluxo
+[10:35] Mensagens das Opções do Fluxo
+[10:38] Card Enviar Imagem sem Imagem
+[10:41] Upload de Imagem
+[10:52] Flexibilidade do Fluxograma
+[11:06] Horário do Fluxo
+[11:08] Configurações de Horário de Atendimento
+[11:15] Direcionamento de Atendimento (opções)
+[11:20] Inatividades
+[11:22] Inatividades do Sistema
+[11:24] Contato Parado no Bot (configuração de tempo)
+[11:31] Direcionamento de Atendimento (opções)
+[11:36] Mensagem a Ser Enviada Caso Finalize (configurações)
+[11:38] Contato na Fila de Espera (configurações)
+[11:45] Atendente Sem Responder em Atendimento (configurações)
+[11:49] Contato Sem Responder em Atendimento (configurações)
+[11:59] Contato no Bot (configurações)
+[12:19] Parâmetros
+[12:21] Aceitar Tipos de Mídia no Fluxo (permissões)
+[12:28] Mensagem a Ser Enviada Caso Envie Mídia Não Autorizada (personalização)
+[12:33] Parâmetros do Chat (configurações)
+[12:57] Configurações Dentro do Fluxo do Bot (comando encerrar atendimento e Use Like no Bot)
+[13:14] Mensagens Automáticas
+[13:16] Mensagens de Protocolo no Bot (configurações e variáveis)
+[13:20] Mensagens Iniciar Atendimento (configurações e variáveis)
+[13:23] Mensagens Espera em Fila de Atendimento (configurações e variáveis)
+[13:26] Mensagens Transferência Atendimento (configurações e variáveis)
+[13:29] Mensagens Encerrar Atendimento (configurações e variáveis)
+[13:31] Mensagens Finalizar Atendimento (configurações e variáveis)
+[13:39] Avaliação
+[13:41] Configuração da Avaliação (título e descrição)
+[13:48] Adicionar Opções (personalização de opções e exclusão)
+[14:10] Fluxograma Completo
+[14:16] Próxima Aula: Chat de Atendimento

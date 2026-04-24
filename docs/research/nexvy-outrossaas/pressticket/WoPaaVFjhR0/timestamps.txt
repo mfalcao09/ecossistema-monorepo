@@ -1,0 +1,107 @@
+[00:00] Início do vídeo: tela inicial da plataforma
+[00:46] Primeiro passo: ir em "Flow Builder"
+[00:48] Clicar em "Flow Builder" no menu lateral
+[00:49] Fluxos de conversa: clicar em "Adicionar Fluxo"
+[00:51] Adicionar Fluxo: preencher "Nome" e "Palavra de ativação" e clicar em "Adicionar"
+[01:00] Fluxos de conversa: clicar no fluxo criado
+[01:02] Desenhe seu fluxo: fluxo criado
+[01:13] Criar cards: clicar no botão "+" no canto superior esquerdo
+[01:19] Criar cards: clicar em "Conteúdo"
+[01:20] Adicionar conteúdo ao fluxo: demonstração das opções de conteúdo
+[01:31] Criar cards: clicar em "Menu"
+[01:33] Adicionar menu ao fluxo: preencher a mensagem de explicação do menu
+[02:07] Adicionar menu ao fluxo: adicionar a variável de protocolo
+[02:37] Adicionar menu ao fluxo: adicionar as opções do menu
+[03:15] Menu de atendimento criado
+[03:25] Criar cards: clicar em "Randomizador"
+[03:29] Adicionar um randomizador ao fluxo: configurar as porcentagens
+[03:30] Randomizador adicionado ao fluxo
+[03:40] Adicionar usuário a transferir: selecionar usuário e fila
+[03:51] Transferir usuário adicionado ao fluxo
+[04:20] Corrigir o menu: alterar o item "Comercial" para "Suporte"
+[04:22] Menu corrigido
+[04:24] Configurar o randomizador: ajustar as porcentagens
+[04:26] Adicionar uma fila ao fluxo: selecionar "Comercial"
+[04:31] Fila "Comercial" adicionada ao fluxo
+[04:38] Apagar seta: selecionar a seta e pressionar "Delete"
+[04:47] Seta apagada
+[04:53] Configurar a segunda via de boleto: selecionar "2ª Via de Boleto"
+[04:59] Fila "2ª Via de Boleto" adicionada ao fluxo
+[05:07] Transferir suporte e financeiro: adicionar a fila "Suporte"
+[05:11] Adicionar fila: selecionar "Financeiro"
+[05:16] Filas "Suporte" e "Financeiro" adicionadas
+[05:22] Salvar o fluxo
+[05:27] Ir em "Filas e Chatbot" no menu lateral
+[05:28] Filas & Chatbot: adicionar fila "Suporte"
+[05:31] Adicionar Fila: preencher nome, cor e mensagem de saudação
+[05:45] Fila "Suporte" criada
+[05:48] Adicionar Fila: adicionar fila "Financeiro"
+[06:01] Fila "Financeiro" criada
+[06:03] Ir em "Usuários" no menu lateral
+[06:04] Usuários: editar o usuário "Maiara" e vincular as filas
+[06:11] Usuários: editar o usuário "Admin" e vincular as filas
+[06:17] Usuários vinculados
+[06:20] Voltar ao fluxo
+[06:23] Vincular filas no fluxo: vincular a fila "Suporte"
+[06:28] Fila "Suporte" vinculada
+[06:31] Vincular filas no fluxo: vincular a fila "Financeiro"
+[06:35] Fila "Financeiro" vinculada
+[06:40] Menu de atendimento finalizado
+[06:55] Opções de cards: clicar em "Intervalo"
+[07:01] Adicionar um intervalo ao fluxo: configurar o tempo
+[07:05] Intervalo de 5 segundos adicionado
+[07:10] Conectar o intervalo ao menu
+[07:19] Opções de cards: clicar em "IA"
+[07:22] Adicionar uma IA ao fluxo: campo para configurar IA
+[07:34] Opções de cards: clicar em "Add Tag"
+[07:37] Adicionar Tag: selecionar "Prospecção"
+[07:42] Tag "Prospecção" adicionada
+[07:47] Conectar a tag ao randomizador
+[08:08] Opções de cards: clicar em "Remover Tag"
+[08:11] Remover uma Tag: selecionar "Prospecção"
+[08:14] Tag "Prospecção" removida
+[08:19] Conectar remover tag ao randomizador
+[08:29] Adicionar Tag: adicionar tag "Negociação"
+[08:31] Tag "Negociação" adicionada
+[08:37] Conectar negociação ao randomizador
+[09:02] Opções de cards: clicar em "Coletar Variável"
+[09:05] Coletar Variável: nomear a variável como "Nome"
+[09:09] Variável "Nome" adicionada
+[09:12] Conectar coletar variável ao randomizador
+[09:29] Opções de cards: clicar em "Enviar Notificação"
+[09:34] Enviar Notificação: preencher número e mensagem
+[09:49] Notificação adicionada
+[09:52] Conectar notificação ao usuário Maiara
+[10:33] Opções de cards: clicar em "HTTP Request"
+[10:37] HTTP Request: campos para configurar a requisição
+[11:32] Opções de cards: clicar em "Condição"
+[11:36] Adicionar condição ao fluxo: tipo de condição "Tag"
+[11:47] Adicionar condição ao fluxo: selecionar a tag "Negociação"
+[11:54] Condição adicionada
+[11:57] Conectar condição ao início do fluxo
+[12:13] Conectar condição ao menu
+[12:28] Conectar condição ao randomizador
+[12:35] Conectar condição ao menu novamente
+[13:00] Opções de cards: clicar em "Finalizar Ticket"
+[13:04] Finalizar Ticket: card para finalizar atendimento
+[13:09] Opções de cards: clicar em "Conteúdo" (texto)
+[13:12] Adicionar conteúdo ao fluxo: preencher a mensagem
+[13:19] Conteúdo de texto adicionado
+[13:25] Conectar conteúdo de texto ao suporte e finalizar ticket
+[13:40] Fluxo finalizado
+[14:10] Salvar o fluxo
+[14:14] Vincular fluxo à conexão: ir em "Conexões" no menu lateral
+[14:24] Conexões: clicar em "Editar" na conexão desejada
+[14:26] Editar WhatsApp: ir em "Integrações"
+[14:29] Editar WhatsApp: selecionar o fluxo "Treinamento Menu"
+[14:34] Fluxo vinculado à conexão
+[14:37] Testar o fluxo na prática: finalizar o ticket atual
+[14:44] Enviar uma mensagem no WhatsApp para iniciar o fluxo
+[15:06] O fluxo é iniciado com a mensagem de boas-vindas e o menu
+[15:28] Digitar "3" para suporte
+[15:35] Mensagem de aguarde atendimento é exibida
+[15:40] No painel, o ticket aparece na fila "Suporte"
+[15:55] Aceitar o ticket e iniciar o atendimento
+[16:00] Finalizar o atendimento
+[16:05] Enviar "Boa noite" novamente para iniciar um novo fluxo
+[16:16] Encerramento do vídeo

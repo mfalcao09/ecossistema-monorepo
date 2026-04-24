@@ -1,0 +1,34 @@
+[00:00] Logotipo da empresa "DigiSac - Plataforma Multicanal"
+[00:04] Ícones e textos: "TODOS OS CANAIS JUNTOS", "FAÇA TRANSFERÊNCIAS", "MARCADORES TAGS", "TROCA DE CANAIS", "ENVIO EM MASSA", "RECEBIMENTO EM MASSA"
+[00:11] Tela de login da plataforma "DigiSac"
+[01:54] Menu superior com ícones de chat, pessoas, contatos, organizações, tags, campanhas, conexões, visão geral, mais opções, notificações, ajuda, travar navegação e nome de usuário
+[02:00] Opções de idioma: "Inglês" e "Espanhol"
+[02:09] Menu de ajuda com "Tutoriais" e "Manual de acesso"
+[02:22] Opção "Rotacionar Menu"
+[02:25] Menu lateral expandido
+[02:35] Caixa de suporte "Suporte Digisac" com números de WhatsApp e telefone, e e-mail
+[02:44] Menu de "Visão geral" com opções: "Agora", "Histórico de chamados", "Estatísticas de atendimento", "Estatísticas de avaliações", "Auditoria", "Controle de ausência"
+[02:57] Seção "Agora" com "Em atendimento", "Filas de atendimento" e "Resumo"
+[03:10] Aba "Filas de atendimento"
+[03:43] Aba "Resumo" com informações sobre usuários, chamados e tempo de atendimento
+[04:43] Seção "Departamento" mostrando status e chamados por departamento
+[04:55] Seção "Atendente" mostrando status e chamados por atendente
+[05:22] Seção "Histórico de chamados" com nome, conexão, departamento, atendente, último atendimento e número de protocolo
+[05:31] Filtros para o "Histórico de chamados"
+[06:07] Assuntos de chamado: "Dúvidas" e "Treinamento agendado"
+[06:22] Tags: "Venda realizada", "Lead" e "Cliente novo"
+[06:42] Status do chamado: "Todos", "Aberto" e "Fechado"
+[07:01] Botão "Exportar"
+[08:06] Mensagens do chamado com "Inicio do chamado", "Fim do chamado" e opções para "Exportar PDF" e "Exportar TXT"
+[08:29] Seção "Estatísticas de atendimento" com abas "Geral", "Por período", "Por assunto" e "Por conexão"
+[08:39] Filtros para "Estatísticas de atendimento"
+[10:33] Gráficos de "TMA - Tempo médio de atendimento" e "PTE - Média do 1º tempo de espera"
+[10:41] Gráfico de "TMA - Tempo médio de atendimento" por assunto
+[11:13] Gráficos de "PTE - Média do 1º tempo de espera" e "TME - Média do tempo médio de espera" por assunto, e "QME/QMR - Quantidade de mensagens enviadas e recebidas"
+[11:18] Gráfico de "TMA - Tempo médio de atendimento" por conexão
+[12:12] Seção "Estatísticas de avaliações" com tipos de notas: "Promotores", "Neutros" e "Detratores", e opção "Não avaliados"
+[12:49] Filtros para "Estatísticas de avaliações"
+[14:03] Seção "Auditoria" com usuário, módulo, evento e data
+[14:42] Seção "Controle de Ausência" com usuário, de, até e motivo
+[16:14] Logotipo da empresa "DigiSac - Plataforma Multicanal"
+[16:18] Contato da empresa "DigiSac" com site, telefones de suporte (WhatsApp e telefone), e-mail de suporte e ícones de redes sociais (Facebook, Instagram, Twitter, LinkedIn e Telegram)

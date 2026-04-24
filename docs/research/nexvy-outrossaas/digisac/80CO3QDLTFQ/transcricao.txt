@@ -1,0 +1,4 @@
+[00:00] Depois que você criou todos os setores que vão usar a plataforma, aqui na parte de departamentos, você vai precisar criar o acesso das pessoas desses setores para poder entrar na plataforma.
+[00:15] Para isso, vá em configurações > usuários, vem em mais novo usuário, e aqui você vai preencher o cadastro
+[00:22] dos seus colaboradores. Então, por exemplo, supondo que na minha empresa a Maria Santos vai usar, então eu cadastro ela aqui, coloco o e-mail dela, do departamento dela, aí tanto faz. Você pode colocar o cargo, que é o que ela vai ter acesso na plataforma, eu vou explicar para vocês, o departamento dela, então, por isso que é legal criar o departamento antes
+[00:46] e você pode criar também uma senha para ela, e depois ela consegue mudar, é só para ela ter o primeiro acesso mesmo. Criou aqui, clique em salvar, e aí você vai passar para ela esses dados de acesso para ela conseguir entrar na plataforma.

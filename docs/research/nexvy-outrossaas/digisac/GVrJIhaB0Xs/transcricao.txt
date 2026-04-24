@@ -1,0 +1,421 @@
+A seguir, a transcrição completa do vídeo:
+
+[ 00:00 ] Olá.
+[ 00:02 ] Boa tarde a todos.
+[ 00:04 ] Como vocês estão?
+[ 00:07 ] Vamos lá então, pessoal?
+[ 00:10 ] Então, bem-vindos novamente a imersão de saque.
+[ 00:15 ] Então, todas as quartas-feiras, às 15 horas, eu venho com um educacional, trazendo algumas novidades, falando um pouquinho referente às funcionalidades da Dgisac para vocês.
+[ 00:27 ] Então, com imenso prazer venho me apresentar, o meu nome é Fabiana, sou analista de treinamento da Dgisac.
+[ 00:34 ] E aproveitando, né, envie o nome de vocês aqui no chat também.
+[ 00:40 ] Fiquem à vontade para trazer as dúvidas, conforme essa explicação que eu trago para vocês hoje, tá bom?
+[ 00:46 ] Envie o nome, a cidade que vocês estão falando, o nome da empresa de vocês, pra gente reconhecer nossos clientes, para você que não é cliente também, pode enviar o seu nome, tá bom?
+[ 00:58 ] Vamos interagindo aqui.
+[ 01:00 ] Então, no webinar educacional, a gente oferece uma sessão exclusiva para você tirar as suas dúvidas e também ter esse conhecimento referente a algumas funcionalidades da plataforma, tá bom?
+[ 01:13 ] Então, seja bem-vindos novamente, fiquem à vontade para enviar o nome de vocês, se apresentarem e também as dúvidas, tá bom?
+[ 01:22 ] Hoje a gente vai falar um pouquinho referente à ferramenta Cargos.
+[ 01:28 ] Então, é uma ferramenta bem utilizada.
+[ 01:31 ] Eh, um dos primeiros passos aí, quando você contrata a plataforma, você precisa ter o entendimento referente a essa ferramenta, essa funcionalidade, tá bom?
+[ 01:41 ] Então, hoje vai ser bem legal porque eu trago um assunto bem interessante para todos, você que é cliente novo e você que é um cliente um pouco mais antigo, tá bom?
+[ 01:51 ] E também hoje, de início, né, eu venho com uma novidade.
+[ 01:57 ] Então, em primeira mão, gente, eu vou contar para vocês antes do lançamento, não foi lançado ainda, mas eu já venho com essa novidade para vocês, que agora é possível visualizar e reagir mensagens com emojis, tornando a sua interação com os seus clientes mais dinâmica, tá bom?
+[ 02:18 ] Então, eu vou mostrar para vocês, ó, referente ao tema da, das reações, né?
+[ 02:24 ] Então, agora, ó, a gente vem com essa novidade, não foi lançado ainda.
+[ 02:30 ] É um spoiler aí para vocês.
+[ 02:33 ] Então, vocês vão conseguir reagir mensagens, né, bem parecido com o WhatsApp Web.
+[ 02:39 ] Então, essas reações, vocês vão conseguir visualizar e também enviar a sua reação, né, como o ícone do coração, e também vocês vão conseguir remover essa reação a qualquer momento, incluindo uma nova reação, por exemplo.
+[ 02:54 ] Tá, e o ponto importante referente a essa novidade, referente às reações nas mensagens, é que vai ficar disponível aí para suas conexões de WhatsApp, Instagram e Facebook, tá bom?
+[ 03:09 ] Então, eu vou enviar esse link para vocês para vocês terem aí essa novidade.
+[ 03:19 ] Mas lembrando que não tá disponível na plataforma de vocês ainda, tá bom?
+[ 03:22 ] Já já vem esse lançamento para todos vocês.
+[ 03:25 ] Então, eu vou enviar aqui no o link para vocês no chat.
+[ 03:30 ] Pra vocês terem, realizarem essa leitura, tá, com mais calma.
+[ 03:36 ] Então, vamos lá.
+[ 03:39 ] Eu vou enviar aqui no chat e podem ir se apresentando também.
+[ 03:47 ] Então, vamos lá.
+[ 03:52 ] Mas hoje o nosso foco, o nosso tema principal é referente aos Cargos, né?
+[ 04:02 ] Então, a gente vai falar um pouquinho sobre essas permissões, como você deve personalizar esses cargos, tá bom?
+[ 04:10 ] Então, vamos lá.
+[ 04:13 ] Então, hoje eu vou trazer o tema para vocês, eh, de como organizar e controlar essas permissões, tá, dos usuários, garantindo que cada pessoa, cada atendente tenha um acesso apenas das funcionalidades e informações necessárias para ele cumprir a função dele, tá bom?
+[ 04:32 ] Então, por exemplo, se o seu funcionário, ele é mais direcionado para o atendimento, é necessário que ele tenha todas as permissões para ele ter ali um bom atendimento, dar, prestar um bom atendimento para os clientes, ter todas as ferramentas para ele incluir uma tag, para ele incluir também uma resposta rápida.
+[ 04:52 ] Então, tudo isso são permissões na plataforma.
+[ 04:57 ] Tá?
+[ 04:57 ] Então, como vocês já são acostumados, o cargo de Administrador, ele tem um acesso mais completo.
+[ 05:03 ] Enquanto o cargo de Operador, ele tem um acesso um pouquinho mais restrito.
+[ 05:07 ] E você vai entender um pouquinho mais que eu vou explicando para vocês como incluir e retirar essas permissões.
+[ 05:13 ] Então, hoje, gente, a gente vai focar nas permissões relacionadas aos cargos.
+[ 05:20 ] Então, caso você não esteja familiarizado ainda com alguma ferramenta, com alguma funcionalidade mencionada hoje, né, a gente tem tutoriais e um manual que explica cada opção para vocês.
+[ 05:36 ] Então, por exemplo, o que é uma API, o que é agendamento, assuntos de chamados, a gente já tem descrito no nosso manual que eu vou enviar o link para vocês também.
+[ 05:47 ] Mas hoje a gente vai falar um pouquinho referente a essas permissões.
+[ 05:51 ] Então, o seu operador, ele tem a permissão de criar um agendamento?
+[ 05:55 ] Para criar, ele precisa visualizar o ícone para ele acessar e criar, editar, tá bom?
+[ 06:01 ] Então, hoje eu vou explicar toda essa parte para vocês.
+[ 06:04 ] E nos cargos, gente, é possível permitir a criação, a edição, a exclusão e a visualização dessas funcionalidades, tá bom?
+[ 06:17 ] Então, como eu mostro aqui nessa imagem, né, você consegue ter, por exemplo, o seu operador, ele consegue criar uma avaliação?
+[ 06:24 ] Para criar, ele precisa visualizar o ícone para ele acessar e criar, editar, tá bom?
+[ 06:30 ] Então, hoje eu vou explicar toda essa parte para vocês.
+[ 06:33 ] Então, de início, eu vou enviar o link do nosso manual.
+[ 06:37 ] Ah, Fabia, eu não sei o que significa.
+[ 06:40 ] Eu não sei como criar uma avaliação na plataforma, por exemplo.
+[ 06:44 ] Né?
+[ 06:44 ] Eu não sei o que significa API.
+[ 06:46 ] Então, você pode acessar esse link que eu acabei de enviar para vocês e fazer uma leitura referente a cada funcionalidade, tá bom?
+[ 06:54 ] Tá aqui no chat, na lateralzinha para vocês.
+[ 06:59 ] Então, vamos lá.
+[ 07:03 ] Na plataforma, eu vou apresentar a plataforma aqui para vocês.
+[ 07:07 ] Então, por aqui vocês conseguem acessar o ícone de cargos, né?
+[ 07:12 ] Então, em mais opções.
+[ 07:13 ] Mais opções, gente, são as ferramentas auxiliares.
+[ 07:16 ] Então, por aqui você localiza várias funcionalidades, várias ferramentas e hoje a gente vai abortar, abortar referente a cargos, tá bom?
+[ 07:27 ] Então, por aqui já vem pré-configurado para você administrador e operador, tá bom?
+[ 07:34 ] Administrador é aquele cargo completo, aquele cargo mastro, que já está tudo permitido.
+[ 07:40 ] Você não consegue nem editar, ó.
+[ 07:42 ] Em ações, você não consegue editar, apenas visualizar esse cargo, porque já tá tudo permitido, ó, já está tudo liberado para vocês, tá?
+[ 07:52 ] Já um cargo de operador, ele é um cargo mais restrito, que também vem pré-configurado para vocês, que é para o atendimento na plataforma.
+[ 08:00 ] No chat de atendimento aqui, ele tem toda aquela funcionalidade de abrir um chamado, transferir, fechar.
+[ 08:10 ] Então, adicionar também comentários, né, enviar ali, eh, as respostas rápidas.
+[ 08:16 ] Então, ele tem todas essas permissões, tanto de visualizar e algumas de criar, tá bom?
+[ 08:22 ] Então, é claro que vocês conseguem criar um novo cargo, diferente dos existentes.
+[ 08:28 ] Então, por exemplo, você pode criar um cargo como gerente ou supervisor, que esse cargo tenha mais permissões que um operador e menos permissões que um administrador, sempre criando esse cargo diferente, tá bom?
+[ 08:49 ] E é claro que você consegue trazer esse cargo de administrador para você e para o gerente também da plataforma, não tem problema nenhum, você consegue deixar o mesmo cargo para mais de uma pessoa, tá bom?
+[ 08:56 ] Então, vamos lá.
+[ 08:59 ] Quando a gente vem nessa opção de criar um novo cargo, a gente consegue trazer um nome para ele, né?
+[ 09:05 ] Então, supervisor, certo?
+[ 09:09 ] Nesse momento você pode selecionar todos, mas quando, caso você queira selecionar todos, é só você trazer o cargo de administrador para esse funcionário, para esse responsável, tá bom?
+[ 09:23 ] Então, eu vou explicar um a um para vocês, tá?
+[ 09:27 ] E qualquer dúvida, vocês podem enviando mensagem aqui no chat que eu vou esclarecendo no final aí do nosso webinar de hoje, tá bom?
+[ 09:37 ] Então, vamos lá.
+[ 09:40 ] API.
+[ 09:42 ] Então, nesse momento, você pode permitir pro seu operador, pro seu supervisor, atualizar a API.
+[ 09:49 ] Essa parte é referente à integração, gente.
+[ 09:52 ] API é quando você vai ali em contas e gera um token, tá?
+[ 09:57 ] Então, é a parte mais administrativa da plataforma.
+[ 10:01 ] Então, só para vocês entenderem, é essa parte aqui, ó.
+[ 10:04 ] No seu perfil sobre a conta, né?
+[ 10:07 ] Aqui, ó, conta, você consegue gerar um token, mas é a parte de API, tá bom?
+[ 10:13 ] Então, integração, parte mais do administrador mesmo.
+[ 10:18 ] Um pouquinho mais para baixo, a gente consegue visualizar referente ao agendamento.
+[ 10:23 ] Então, agendamento, você consegue trazer uma mensagem, né?
+[ 10:29 ] Então, criar uma mensagem, que seja enviada pro seu cliente numa data e num horário específico, trazendo também às vezes apenas uma notificação pro seu atendente, ou até mesmo abertura automática de um chamado e o envio dessa mensagem que você deixou programada.
+[ 10:45 ] Então, nesse momento é sempre legal você deixar permitido o agendamento para os seus operadores, para o supervisor também, para ele ter essa funcionalidade, que é muito legal e muito importante para o dia a dia, tá bom?
+[ 10:59 ] Então, você consegue trazer, então, pessoa, o operador, ele vai conseguir criar um agendamento?
+[ 11:04 ] Ele consegue criar um agendamento para outra pessoa?
+[ 11:07 ] Deletar, editar ou visualizar um agendamento?
+[ 11:10 ] Então, lembra que eu falei?
+[ 11:12 ] No momento que você permite que o seu operador, que o seu supervisor crie uma, um agendamento, é sempre legal trazer a visualização também para ele visualizar o ícone para realizar esse agendamento, tá?
+[ 11:27 ] Ele pode criar para um terceiro?
+[ 11:30 ] Então, por exemplo, o recepcionista, ele atende o telefone ali, por exemplo, e o cliente é do, do patrão dele, por exemplo.
+[ 11:39 ] Então, ele já consegue realizar ali um agendamento para outra pessoa, então, é sempre legal trazer também criar o agendamento.
+[ 11:51 ] E é claro, gente, que depende muito do seguimento de vocês.
+[ 11:55 ] Ah, Fabiana, eu não posso permitir isso, eu posso permitir aquilo, tá bom?
+[ 12:00 ] Justamente por isso que tem todas essas opções para você permitir somente o que pode, tá bom?
+[ 12:06 ] Então, vamos lá.
+[ 12:08 ] Você tem também a opção de deletar ou editar um agendamento, então, legal.
+[ 12:15 ] Se você, ah, Fabiana, eu não quero que ele crie ali um usuário para um terceiro, não tem problema nenhum, só deixa a criação para ele próprio.
+[ 12:21 ] Um pouquinho mais para baixo.
+[ 12:23 ] Vamos lá, referente a assuntos de chamados.
+[ 12:26 ] Então, essa ferramenta fica ali no fechamento.
+[ 12:30 ] Sabe aquele telefone vermelho que você encerra o chamado?
+[ 12:34 ] Então, por aqui você consegue trazer alguns assuntos.
+[ 12:38 ] Então, o operador, o supervisor da plataforma, ele pode arquivar um assunto?
+[ 12:42 ] Ele pode criar um assunto, por exemplo?
+[ 12:44 ] Ah, não, Fabiana, eu não quero que ele arquive, que é excluir, por exemplo, um assunto, eu só quero que ele tenha a permissão de criar e visualizar, ou somente de visualizar os existentes.
+[ 12:57 ] Eu não quero, não quero que ele crie.
+[ 13:00 ] Então, você pode deixar somente criar visualizar.
+[ 13:03 ] Tá bom?
+[ 13:04 ] Então, permitindo a criação, deletar, editar e visualizar, ele já consegue trazer aquele assunto abordado no chamado dele.
+[ 13:11 ] Então, referente a essa parte, gente, do assunto de chamados, fiquem mais opções nas ferramentas auxiliares, assuntos de chamados, tá bom?
+[ 13:21 ] Então, vocês conseguem criar e no fechamento, né, naquele telefoninho vermelho, tá bom?
+[ 13:27 ] Para você fechar o chamado, então, ele vai ter a opção de visualizar ou até mesmo de criar um novo assunto, tá?
+[ 13:35 ] Então, vocês podem deixar apenas a visualização, caso necessário, se você quiser padronizar ali os assuntos.
+[ 13:44 ] Referente a avaliações.
+[ 13:47 ] Então, por aqui a avaliação, ela está atrelada ao robô.
+[ 13:51 ] Então, você pode criar essa avaliação, selecionando uma das opções que é NPS e acessar, tá?
+[ 13:58 ] Então, essa parte é mais do administrador da plataforma.
+[ 14:02 ] Então, você consegue trazer apenas uma visualização, por exemplo.
+[ 14:08 ] E se for para o seu supervisor, você consegue trazer outras permissões também, tá bom?
+[ 14:12 ] Então, essa avaliação, ela fica também nas ferramentas auxiliares, ó, avaliação.
+[ 14:19 ] Então, por aqui você consegue criar uma avaliação ou somente visualizar.
+[ 14:24 ] Você cria a avaliação para inserir o seu bote.
+[ 14:28 ] Então, esse é o primeiro passo, tá bom?
+[ 14:30 ] Então, você consegue trazer essas informações também.
+[ 14:36 ] Ações de segurança.
+[ 14:38 ] Então, por aqui é a parte de auditoria, tá?
+[ 14:41 ] Então, você visualiza também em mais opções, descendo um pouquinho, auditoria de autenticação.
+[ 14:50 ] Tá?
+[ 14:50 ] Então, essa parte é mais do administrador.
+[ 14:53 ] Então, caso você queira liberar, tudo bem, não tem problema, mas é a parte mais do administrador da plataforma, tá?
+[ 14:58 ] Para visualizar todos esses acessos.
+[ 15:04 ] O robô que é o nosso bote.
+[ 15:06 ] 100% administrador, gente.
+[ 15:08 ] Então, você pode deixar para o seu operador visualizar.
+[ 15:12 ] Caso você esteja criando um cargo para o supervisor da plataforma, por exemplo, você consegue também deixar a opção para criar um bote, tá?
+[ 15:21 ] Lembrando que você trazendo essas informações, tá?
+[ 15:27 ] Ele vai ter todo o acesso para, eh, para alterar essa configuração do robô de vocês, tá bom?
+[ 15:33 ] Então, você pode trazer somente a visualização, caso necessário.
+[ 15:39 ] Campanhas.
+[ 15:41 ] Então, vamos lá.
+[ 15:42 ] As campanhas, gente, elas estão disponíveis para duas conexões, tá?
+[ 15:47 ] Para somente duas conexões, de SMS e também a conexão oficial, que é aquela conexão WhatsApp Business API, tá?
+[ 15:59 ] Que é que a gente fala que é a conexão WABA.
+[ 16:03 ] Então, você consegue trazer essas campanhas, realizar campanhas por SMS, mas para isso você precisa contratar ali os créditos para você fazer esse disparo em massa, via SMS, ou também, se você tem uma conexão oficial, você pode trazer esse ícone aí, né?
+[ 16:21 ] Essa permissão para o seu operador visualizar as campanhas ou até mesmo criar, deletar ou editar, tá bom?
+[ 16:29 ] Mas essa parte aqui é somente para conexão oficial, tá?
+[ 16:34 ] E também para conexão de SMS.
+[ 16:37 ] Ponto importante aí para vocês, tá bom?
+[ 16:40 ] Descendo mais um pouquinho, a gente tem os campos personalizados.
+[ 16:44 ] O campo personalizado é quando você quer trazer ali mais informações no cadastro do seu contato.
+[ 16:53 ] Normalmente, você sempre tem a opção de você inserir o nome, a conexão, uma tag, o número de telefone, um DDD.
+[ 17:01 ] E os campos personalizados, você consegue trazer um campo, por exemplo, referente ao CPF.
+[ 17:07 ] Então, fica disponível esse campo personalizado para ele trazer uma informação, como CPF, CNPJ, e-mail, tá bom?
+[ 17:15 ] Então, fica também nas ferramentas auxiliares, campos personalizados.
+[ 17:21 ] Então, você quer que o seu operador crie um campo personalizado?
+[ 17:25 ] Então, é possível, tá bom?
+[ 17:28 ] Então, você consegue trazer essas informações também, tá?
+[ 17:31 ] Então, novo campo, como CPF.
+[ 17:34 ] Então, ele sempre vai ficar disponível quando você precisar cadastrar um novo contato, ó.
+[ 17:38 ] Então, fica disponível nesse formato aqui para vocês.
+[ 17:44 ] Criando um contato, você consegue incluir e também no menu lateral, você consegue trazer também essas informações, tá?
+[ 17:53 ] Então, o seu operador, ele vai conseguir criar, deletar e editar um, um campo personalizado e visualizar também, tá bom?
+[ 18:02 ] Essa parte é legal, eles terem a permissão.
+[ 18:05 ] Caso você queira padronizar, você consegue também só deixar a visualização para eles, tá?
+[ 18:11 ] Não tem problema.
+[ 18:13 ] Referente aos cargos, que é essa funcionalidade que eu tô apresentando para vocês, é um pouquinho mais da parte do administrador, né?
+[ 18:20 ] Então, sempre deixando a visualização para ele, que ele não consegue editar, por exemplo, esse cargo ou criar um novo cargo, tá?
+[ 18:29 ] Então, caso você esteja aí criando, eh, um acesso, um cargo para o seu operador, é legal ele somente visualizar e caso ele precise redefinir uma senha, por exemplo, ele solicita para o administrador dele, tá bom?
+[ 18:43 ] Então, é esse ícone aqui, de cargos, tá certo?
+[ 18:46 ] Descendo mais um pouquinho, a gente vai falar um pouco sobre chamados.
+[ 18:49 ] Essa parte é interessante.
+[ 18:50 ] Então, o cargo de operador, ele já vem pré-configurado para vocês, né?
+[ 18:55 ] Então, nos três pontinhos, você consegue editar.
+[ 18:58 ] E já vem a parte mais simples, do fechamento de chamado, do, fechar chamados próprios.
+[ 19:02 ] E por aqui você consegue personalizar, tá?
+[ 19:07 ] Então, vamos lá.
+[ 19:08 ] Você quer que o seu operador feche qualquer chamado?
+[ 19:10 ] Então, você já deixa essa opção para ele.
+[ 19:14 ] Fechar chamados próprios?
+[ 19:16 ] Então, ele não consegue fechar o chamado que está aberto ali no chat de outra pessoa, tá?
+[ 19:20 ] Ele só vai conseguir fechar os próprios chamados.
+[ 19:24 ] Então, você consegue trazer essa opção também.
+[ 19:27 ] Adicionar um comentário, eh, em um chamado que pertence a outro usuário, é aquele comentário interno que fica laranjinha, amarelinho na sua plataforma.
+[ 19:37 ] Então, você consegue trazer também essa opção, tá bom?
+[ 19:42 ] Referente aos chamados.
+[ 19:43 ] Abrir chamados é essencial que você, se o seu atendente, ele realiza ali, eh, o atendimento de forma ativa, quando ele abre o chamado para iniciar essa interação com os seus clientes, é essencial ele ter a abertura de chamado, tá bom?
+[ 19:59 ] Trazendo também a transferência de qualquer chamado, ou transferir chamados em massa, tá?
+[ 20:05 ] Então, essas duas opções aqui, ou somente transfere os chamados próprios, tá?
+[ 20:10 ] Então, essas duas opções aqui.
+[ 20:13 ] Transferir chamados em massa, então, por aqui é só no histórico de chamados, é a parte mais do operador da plataforma, que tem alguns pontos importantes referente a essas transferências e fechamentos em massa, tá bom?
+[ 20:25 ] Transferir chamados do departamento que você participa, tá?
+[ 20:29 ] Para incluir essa opção, editar chamado.
+[ 20:32 ] Então, essa parte, gente, de editar um chamado é quando você tem ali a parte da lateral, que fica nos três pontinhos no chat de atendimento, que você consegue inserir uma tag, o departamento e atendente padrão.
+[ 20:49 ] Então, é sempre legal trazer essa permissão também, que ele consiga editar e inserindo algumas informações nesse menuzinho lateral do contato, tá?
+[ 20:57 ] Então, é interessante você deixar essa função permitida referente aos chamados, tá bom?
+[ 21:04 ] E essas duas últimas opções, gente, essas duas últimas opções, é sempre legal você não selecionar, porque bagunça um pouco a sua visualização.
+[ 21:13 ] Então, quando você seleciona essas duas opções, fica os chamados dos atendentes, ali no chat de atendimento, fica um pouco misturado, tá bom?
+[ 21:24 ] É uma visualização completa, não tem muito a divisão entre fila e chat.
+[ 21:29 ] Então, é sempre legal vocês não selecionarem essas duas opções, tá bom?
+[ 21:35 ] Porque bagunça um pouco a visualização de vocês, certinho?
+[ 21:40 ] Então, referente a chamados, tem bastante opção, então você consegue trazer bem personalizado ali referente ao seu seguimento, à ação que vocês realizam aí dentro da empresa de vocês, tá?
+[ 21:52 ] Então, essa parte é bem interessante.
+[ 21:56 ] Chat.
+[ 21:57 ] Então, nesse momento, é claro que você precisa deixar permitida a visualização do chat, que é aquele ícone, é esse ícone aqui, tá?
+[ 22:04 ] De chat, então, pode habilitar, e também a visualização da terceira coluna do contato.
+[ 22:11 ] Então, caso você retire essa permissão, os seus operadores, por exemplo, né, o responsável por esse cargo, ele não vai visualizar essa coluna aqui, ó, de contatos, vai ficar apenas fila e chat.
+[ 22:25 ] Então, caso você queira retirar essa terceira coluna, tem a possibilidade sim, tá bom?
+[ 22:30 ] Mas se você selecionar, vai ficar nesse formato, a dinâmica das três colunas, tá bom?
+[ 22:37 ] Então, a gente falou um pouquinho referente ao chat, conexões.
+[ 22:41 ] Essa parte é um pouquinho mais para o administrador.
+[ 22:44 ] Então, você pode deixar apenas uma visualização dessa conexão, dessas conexões, né, porque a plataforma, ela traz várias conexões de atendimento, então, Instagram, Facebook.
+[ 22:56 ] Então, ele vai poder visualizar essas conexões?
+[ 22:59 ] Ele vai poder editar, manipular?
+[ 23:01 ] Então, sempre deixando aí o que você acha melhor para função desse funcionário, tá?
+[ 23:07 ] Então, vou deixar somente a visualização, por exemplo, para ele ter acesso também, né?
+[ 23:14 ] A todas as conexões ativas na sua plataforma.
+[ 23:19 ] Em contatos.
+[ 23:21 ] Então, aqui referente a todos os seus contatos da plataforma.
+[ 23:28 ] O seu operador, né, o seu funcionário, ele vai conseguir bloquear, criar novos contatos.
+[ 23:35 ] Essa parte é interessante também, ele ter a criação de um novo contato, deletar, exportar, tá bom?
+[ 23:42 ] Fixar, gente, essa parte aqui é somente no nosso aplicativo, tá?
+[ 23:47 ] Para você que não tem conhecimento, nós temos o aplicativo da Digisac, é só baixar no seu celular, tá bom?
+[ 23:51 ] Então, essa permissão aqui é somente no aplicativo, para fixar contatos, tá?
+[ 23:58 ] Editar um contato, visualizar contatos e também essa última opção aqui, ó, visualizar número de contato.
+[ 24:08 ] Então, se o seu funcionário, o seu operador, por exemplo, não tem a permissão de visualizar o número dos contatos, vai ficar somente os quatro últimos, tá bom?
+[ 24:16 ] Então, caso você queira que ele visualize o número do contato completo, você precisa vir nos cargos e liberar essa permissão para ele, tá?
+[ 24:26 ] Nesse formato aqui.
+[ 24:29 ] Então, aqui é referente a todos os contatos, trazendo essas informações.
+[ 24:34 ] É legal sempre deixar a criação, tá bom?
+[ 24:38 ] Departamentos.
+[ 24:40 ] Então, o seu operador, é sempre legal visualizar os departamentos existentes.
+[ 24:43 ] Então, ele vai poder editar, criar ou arquivar um departamento?
+[ 24:48 ] Arquivar é como se fosse deletar, tá bom?
+[ 24:52 ] Sempre trazendo essas informações, então, caso você queira que ele somente visualize, somente essa última opção, tá?
+[ 25:00 ] Referente à distribuição de chamados.
+[ 25:04 ] Esse tema é super interessante, eu vou trazer esse mês para vocês entenderem um pouquinho mais, mas a distribuição de chamados na Digisac é uma funcionalidade contratada à parte, que realiza essa transferência automática pro chat de cada atendente, tá?
+[ 25:22 ] Então, é bem legal que no momento que os clientes vão caindo na fila, a distribuição automática de chamados vem e realiza essa distribuição, tá?
+[ 25:30 ] Então, é super interessante, caso você tenha essa ferramenta, você tem a distribuição de chamados na sua plataforma, você consegue também habilitar para os seus operadores visualizar e caso você esteja fazendo esse cargo para o supervisor da plataforma, por exemplo, ele pode editar, por exemplo, ou até mesmo criar uma distribuição, mas lembrando que essa funcionalidade é contratado à parte, tá bom?
+[ 25:58 ] Referente a diversos.
+[ 26:01 ] Eh, ignorar a restrição de IP, que fica ali empresas, tá?
+[ 26:07 ] Então, você consegue, essa parte é mais administrativa também.
+[ 26:10 ] Então, você consegue trazer essa permissão ou não?
+[ 26:14 ] Empresas.
+[ 26:16 ] Então, nesse momento, você consegue trazer também a visualização para os seus operadores, mas essa parte, gente, é sempre legal apenas essa visualização, tá bom?
+[ 26:27 ] A parte de empresas na plataforma, eu vou mostrar para vocês, ó, vou mostrar para vocês, fica no ícone mais opções, que são as ferramentas auxiliares, e você consegue visualizar esse campo de empresas.
+[ 26:40 ] Então, nome do atendente no começo da mensagem, restrição de IP.
+[ 26:45 ] Essa opção SAC, para você ter a visualização somente de uma coluna ali no chat de atendimento.
+[ 26:50 ] Então, são essas informações.
+[ 26:52 ] A tabela de horário de vocês.
+[ 26:54 ] Então, essa tabela de horário, corresponde ao funcionamento do robô, tá?
+[ 27:00 ] Então, qual que é o horário de expediente de vocês?
+[ 27:02 ] Então, sempre inclui essas informações por aqui.
+[ 27:05 ] Então, você quer que o seu operador visualize e altere essas opções, tá?
+[ 27:12 ] Empresas.
+[ 27:13 ] Então, você consegue trazer que ele tem essa visualização bem completa, utilizando o controle de ausência.
+[ 27:19 ] O controle de ausência fica um pouquinho mais para baixo aqui, ó, tá?
+[ 27:23 ] Então, depende muito do seguimento de vocês, mas é a parte mais administrativa mesmo.
+[ 27:30 ] Você pode apenas visualizar os dados da empresa, tá?
+[ 27:34 ] Pro seu operador, referente a estatísticas.
+[ 27:38 ] Vamos lá.
+[ 27:39 ] Estatísticas é a parte ali que você consegue visualizar o histórico de chamado, estatísticas de avaliação, o controle de ausência, que é a parte ali da visão geral.
+[ 27:50 ] Ó, então, na plataforma, tem essa setinha para cima, visão geral.
+[ 27:55 ] Então, tem o agora, histórico de chamados, estatísticas de atendimentos, estatísticas de avaliações.
+[ 28:01 ] Essa parte aqui, ó, você quer que o seu operador tenha a visualização?
+[ 28:04 ] Então, você precisa trazer essa permissão para ele.
+[ 28:09 ] Então, ele vai visualizar o controle de ausência, a estatística de avaliação, ou você quer somente que ele visualize o histórico de chamados, tá?
+[ 28:18 ] Então, você consegue trazer todas essas informações.
+[ 28:22 ] Ó, visualizar em tempo real, que é a opção do agora, tá bom?
+[ 28:26 ] Mas essa parte, ela é mais pro administrador, pro supervisor da plataforma, tá bom?
+[ 28:32 ] Porque ele fica responsável por essa análise, né?
+[ 28:36 ] Dos atendimentos, referente ao atendimento, que é o tempo médio de chamados, primeiro tempo de espera, tá bom?
+[ 28:43 ] Essa parte é mais administrativa também.
+[ 28:46 ] Você pode trazer somente a visualização do histórico de chamados, porque aí o seu operador vai prestar um atendimento mais personalizado, tá bom?
+[ 28:54 ] Feriado.
+[ 28:56 ] Então, está atrelado ao robô também.
+[ 28:59 ] Então, tem essa opção, você precisa configurar no seu robô antes de trazer essas informações na funcionalidade de feriados, tá bom?
+[ 29:09 ] Então, por aqui ele vai conseguir visualizar, criar e deletar, tá?
+[ 29:13 ] Essa parte você pode liberar pro seu operador, tá?
+[ 29:16 ] Que é sempre legal porque, por exemplo, ah, a gente vai ter um feriado municipal aqui na cidade, então eu vou trazer esse período para enviar uma mensagem mais personalizada para os meus clientes.
+[ 29:28 ] Então, você realiza, ó, em mais opções novamente, feriados, então, por aqui você consegue criar, tá?
+[ 29:38 ] Então, seu operador, ele vai ter a opção de criar um referente a um feriado, então, você consegue trazer essas permissões para ele, tá bom?
+[ 29:47 ] Mas lembrando que está atrelado ao robô, você precisa configurar no seu robô antes para ficar ativo e você conseguir personalizar essa mensagem referente aos feriados, tá bom?
+[ 29:59 ] Templates, gente, é referente à conexão oficial, o WhatsApp Business API, que é o envio de templates.
+[ 30:08 ] Você inicia ali a conversa com os seus clientes, realiza campanhas via template.
+[ 30:13 ] Então, essa parte você pode liberar, tá, caso necessário.
+[ 30:18 ] Caso você tenha uma conexão oficial também, não é para todos essa opção, tá?
+[ 30:23 ] Então, somente visualizar um template, tá?
+[ 30:25 ] Editar, criar, enviar um template.
+[ 30:29 ] Então, se você tem uma conexão oficial, o seu operador, ele precisa iniciar as conversas enviando um template, tá?
+[ 30:36 ] Então, você consegue personalizar ali para ele, tá bom?
+[ 30:40 ] Então, é sempre legal trazer essa, a opção de enviar e visualizar, tá?
+[ 30:46 ] Se você não quer que ele crie, tudo bem, não tem problema, você tira essa opção de criar um template.
+[ 30:52 ] Lembrando que é somente para conexão oficial.
+[ 30:55 ] Integração, então, caso você tenha uma integração com a Digisac, é possível também, tá bom, gente?
+[ 31:01 ] A nossa API ela é aberta, então você consegue integrar sistemas.
+[ 31:05 ] Então, caso você tenha uma integração disponível, o seu operador, ele vai conseguir visualizar uma integração?
+[ 31:11 ] Então, é sempre legal trazer esse, essa opção, essa permissão para eles, tá bom?
+[ 31:17 ] Então, vai ficar disponível na sua plataforma, essa tomadinha aqui para ele acessar a integração, tá bom?
+[ 31:25 ] Vamos lá, referente a mensagens.
+[ 31:28 ] Então, por aqui, gente, vocês conseguem incluir permissões de visualização de mensagens, tá?
+[ 31:34 ] Então, essa primeira opção para você excluir uma mensagem, tá?
+[ 31:40 ] Então, é sempre legal você trazer essa permissão de excluir mensagem, porque quando você apaga uma mensagem na Digisac, apaga para o seu cliente, mas no histórico fica com um risquinho na frente, então você tem a visualização ainda dessa mensagem que foi apagada, tá bom?
+[ 31:56 ] Então, pode incluir essa permissão, que é legal para ele, porque na Digisac também não tem a opção de editar uma mensagem, apenas apagar, tá?
+[ 32:05 ] Então, é sempre legal trazer essa opção aí para os seus operadores, para todos que vão utilizar o chat de atendimento.
+[ 32:13 ] Essa segunda opção é para você ocultar mensagens de fila de atendimento e de todos os contatos.
+[ 32:20 ] Então, isso faz com que os operadores, esse responsável por esse cargo, ele não visualize as mensagens ali em contatos.
+[ 32:30 ] Somente numa transferência ele vai ter essa visualização, tá bom?
+[ 32:35 ] Então, essa opção é sempre legal não habilitar também, é sempre legal não habilitar porque você consegue trazer essa visualização por aqui também porque tem a opção, ó, de você visualizar mensagens do chamado que o usuário participa, tá bom?
+[ 32:51 ] Então, nesse momento que você realiza uma transferência, o usuário vai ter a visualização, tá bom?
+[ 32:57 ] Então, referente a mensagens, essas permissões, elas, elas são bem personalizadas, tá bom, gente?
+[ 33:04 ] Então, tem um izinho de informação para você entender o que significa, ó.
+[ 33:10 ] Cada campinho, quando você contrata a plataforma, nós liberamos essa primeira opção, visualizar todas as mensagens.
+[ 33:19 ] Normalmente, a mais utilizada é visualizar mensagens somente do departamento que você participa.
+[ 33:28 ] Então, se eu sou do comercial, eu visualizo somente as mensagens do comercial.
+[ 33:38 ] Eu não visualizo as mensagens do financeiro, por exemplo, tá bom?
+[ 33:49 ] Então, quanto mais para baixo você vai selecionando, menos permissão ele tem, tá?
+[ 33:56 ] Então, é bem personalizada essa parte, ó, informa o que significa cada campinho.
+[ 34:07 ] Quando você contrata a plataforma, nós liberamos essa primeira opção, visualizar todas as mensagens, tá?
+[ 34:11 ] Normalmente, a mais utilizada é visualizar mensagens somente do departamento que você participa.
+[ 34:16 ] Então, esse formato você consegue trazer mais segurança também, então, o que é conversado em um departamento, outro departamento não visualiza, tá?
+[ 34:28 ] Então, essa parte é super interessante.
+[ 34:31 ] Nós temos também no manual, tá, explicativo referente a eles.
+[ 34:36 ] Mensagens interativas também é somente para conexão oficial, tá?
+[ 34:41 ] Então, por aqui você consegue, gente, trazer, eh, essas mensagens interativas, é bem parecido com as respostas rápidas, mas são as respostas rápidas de uma conexão oficial, que o WhatsApp Business API, aquela, aquela conta um pouquinho mais diferente do WhatsApp, tá bom?
+[ 35:00 ] Então, se você tem essa conexão, você consegue criar uma mensagem interativa.
+[ 35:05 ] Então, o seu operador, ele vai poder visualizar uma mensagem interativa, ou somente criar uma mensagem interativa, né, visualizar e criar na verdade.
+[ 35:14 ] Ele tem a opção de deletar, de gerenciar.
+[ 35:18 ] Então, você consegue trazer essas permissões para eles, tá?
+[ 35:22 ] Notificações, então, visualizar notificações da plataforma, sempre legal permitir.
+[ 35:30 ] Organização e pessoas, tá?
+[ 35:34 ] Então, você consegue deixar apenas a visualização ou também a criação, tá?
+[ 35:39 ] Deletar, editar.
+[ 35:41 ] Então, pessoas e organização andam juntos, tá bom?
+[ 35:45 ] Organização, gente, é referente a empresas terceirizadas, e pessoas é quando você tem um agrupamento de pessoas ali, então você tem um atalho no chat de atendimento que você consegue trocar de contatos, tá?
+[ 35:59 ] É um atalho ali super legal que você consegue trazer também para sua plataforma, tá?
+[ 36:02 ] Então, tem também no nosso manual o que significa essas duas funcionalidades.
+[ 36:13 ] Respostas rápidas.
+[ 36:15 ] Essa parte é interessante.
+[ 36:17 ] Ele ter a visualização, é claro, tá?
+[ 36:20 ] Caso você queira que ele crie uma mensagem, uma resposta rápida, é legal também deixar ali habilitado para eles, editar, tá bom?
+[ 36:30 ] Deletar, ou apenas a criação, ele não consegue nem editar, nem deletar, tá?
+[ 36:36 ] Então, o interessante dos cargos, gente, é que vocês conseguem trazer essas opções.
+[ 36:40 ] Ah, Fabiana, eu quero que ele somente, que ele visualize e crie, eu não quero que ele delete nenhuma resposta rápida.
+[ 36:46 ] Você consegue selecionar essas opções, tá bom?
+[ 36:50 ] Então, as respostas rápidas ficam naquele raio ali perto do rostinho feliz, que são os emojis na plataforma.
+[ 36:57 ] Então, você já consegue direcionar uma resposta rápida.
+[ 37:00 ] Tabela de horário é referente à parte do usuário.
+[ 37:03 ] Então, você pode criar uma tabela de horário para cada usuário de vocês, limitando o acesso.
+[ 37:09 ] Então, os seus funcionários vão utilizar a plataforma somente um período específico, tá?
+[ 37:16 ] Então, você consegue inserir essa tabela de horário, é mais a parte ali do administrador da plataforma, tá bom?
+[ 37:23 ] Tags.
+[ 37:25 ] Então, as tags é legal também você ter a visualização, que você consegue criar uma tag, porque é bem personalizado do seu contato.
+[ 37:33 ] É claro que se você gosta de realizar um padrão, né, você cria as tags e os seus operadores somente inserem as tags ali no dia a dia, excelente, tá bom?
+[ 37:44 ] Mas você consegue também trazer essa permissão de criar uma nova tag, tá?
+[ 37:50 ] Então, é sempre legal trazer essas informações também, tá?
+[ 37:56 ] Porque quanto mais permissão o seu operador tem ali na parte do, do atendimento, que são as tags, as respostas rápidas, assuntos de chamados, melhor para vocês, porque eles vão trazendo mais informação referente ao atendimento, e os administradores conseguem ter ali depois um retorno referente a essas informações que ele está inserindo, né?
+[ 38:15 ] No atendimento, então, é sempre legal trazer essa, essa visualização, essa criação de tags e respostas rápidas, tá bom?
+[ 38:24 ] O termo de aceite é referente a uma mensagem que a gente consegue incluir de início no seu robô, tá bom?
+[ 38:31 ] Então, é ali para você aprovar a análise de dados, né?
+[ 38:36 ] Então, você consegue trazer também esse termo de aceite é bem, eh, aceite é bem administrativa essa parte, tá?
+[ 38:43 ] Então, você consegue também apenas uma visualização, caso você tenha, ah, Fabiana, eu não sei o que que é o termo de aceite na plataforma.
+[ 38:51 ] Tem no nosso manual também o que significa, qual que é essa funcionalidade, mas nós que realizamos a configuração para vocês, tá bom?
+[ 39:00 ] Fiquem tranquilos.
+[ 39:03 ] E referente ao usuário, então, é aquele cadastro do acesso do seu usuário.
+[ 39:08 ] Então, você consegue arquivar, criar e editar um usuário.
+[ 39:12 ] Então, esse cargo, ele vai ficar responsável por apenas visualizar o cargo, o usuário?
+[ 39:19 ] Então, você consegue incluir somente uma visualização.
+[ 39:24 ] Ou ele tem a opção de editar um cargo, tá?
+[ 39:28 ] Então, caso seja um operador, você tá ali fazendo, né, incluindo algumas permissões para o seu operador, é legal ele somente visualizar e caso ele precise redefinir uma senha, por exemplo, ele solicita para o administrador dele, tá bom?
+[ 39:44 ] Então, gente, essa parte de cargos, ela é bem completa, vocês conseguem criar um novo cargo, como eu fiz aqui para vocês.
+[ 39:53 ] E vocês vão incluir o cargo que o usuário vai participar nesse formato aqui, então, ó, pronto, Fabiana, já incluí as informações, já incluí as permissões ali do cargo que eu acabei de criar.
+[ 40:06 ] Como que eu insiro no meu usuário, né?
+[ 40:09 ] Então, em mais opções, usuários, você consegue trazer o cargo, tá?
+[ 40:15 ] Então, novo usuário, você sempre vai selecionar apenas um usuário.
+[ 40:21 ] Então, ele vai ser operador da plataforma, supervisor ou administrador.
+[ 40:26 ] Nunca inclua os três, tá bom, gente?
+[ 40:30 ] Apenas um cargo para cada usuário, tudo bem?
+[ 40:34 ] Então, sempre quando vocês realizarem ali a criação de um novo cargo, você consegue trazer para algumas pessoas aqui dentro de usuários, tá bom?
+[ 40:48 ] Então, sempre incluindo apenas um cargo, tá certo?
+[ 40:53 ] Então, eu falei para vocês referente a essa parte de visualizar, criar e deletar algumas permissões na plataforma, né, de algumas funcionalidades, e qualquer dúvida que vocês tiverem, gente, pode enviar aqui no chat, mas também a gente sempre vai estar à disposição.
+[ 41:12 ] Vocês podem enviar uma mensagem tanto pro suporte, quanto pro treinamento, que a gente vai ali exemplificar para vocês, para vocês terem um conhecimento referente a essas funcionalidades, tá bom?
+[ 41:26 ] Então, os benefícios de utilizar ali essas permissões, ter um entendimento referente a elas, é uma segurança aprimorada.
+[ 41:34 ] Então, você garante que as pessoas, as pessoas específicas, né, apenas aquelas pessoas autorizadas possam acessar determinadas áreas e funcionalidades da plataforma.
+[ 41:45 ] E uma organização, né?
+[ 41:47 ] Então, por exemplo, se você gosta de padronizar as respostas rápidas, as tags, assuntos de chamados, você habilita ali apenas a visualização para os seus operadores inserirem, tá bom?
+[ 42:01 ] Então, você administrador ou supervisor realiza essa criação e eles vão inserindo ali conforme o atendimento, o dia a dia do atendimento, tá bom?
+[ 42:09 ] Então, gente, não tem nenhuma dúvida.
+[ 42:11 ] Eu já realizei essa explicação de hoje.
+[ 42:15 ] Lembrando que fica salvo, tá bom?
+[ 42:17 ] Toda quarta-feira eu venho com um tema diferente aqui para vocês.
+[ 42:22 ] Fica salvo na Digisac, eh, no YouTube da Digisac.
+[ 42:26 ] Então, você só joga ali na barrinha de pesquisa do YouTube, Digisac, seleciona a opção ao vivo, que tem todos os treinamentos, né, webinar educacional gravado.
+[ 42:37 ] E lembrando que a qualquer momento vocês conseguem agendar um treinamento.
+[ 42:41 ] Então, sabe esse número que está passando aqui embaixo para vocês?
+[ 42:45 ] Então, vocês conseguem enviar uma mensagem, agendar um treinamento para vocês terem o conhecimento dessa funcionalidade ou até mesmo alguma, da sua equipe, né?
+[ 42:55 ] Alguém da sua equipe que é novo, que não tem muito conhecimento da plataforma, então, a gente consegue trazer esse conhecimento para eles, tá?
+[ 43:03 ] Então, alguma dúvida, tudo certinho?
+[ 43:13 ] Então, gente, eu agradeço a atenção de todos, tá?
+[ 43:18 ] A contribuição no treinamento de hoje também.
+[ 43:21 ] Desejo um ótimo fim de tarde para vocês, um bom restinho de semana e até semana que vem.
+[ 43:27 ] Na semana que vem a gente vai falar um pouquinho sobre as ferramentas auxiliares, como que você realiza ali algumas configurações, então, vai ser bem legal.
+[ 43:36 ] Então, até semana que vem, até quarta-feira, 15 horas novamente.
+[ 43:40 ] Tchau, tchau.
+[ 43:41 ] Até mais.

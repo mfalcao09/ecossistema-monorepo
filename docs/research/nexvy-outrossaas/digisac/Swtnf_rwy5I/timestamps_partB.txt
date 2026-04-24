@@ -1,0 +1,95 @@
+[00:00] Como criar e gerenciar tags no sistema Digisac.
+[00:05] A criação de tags no sistema.
+[00:09] A tela de criação de uma nova tag.
+[00:15] Inserindo o nome da tag "Venda realizada".
+[00:22] A tag "Venda realizada" aparece na lista de tags.
+[00:33] A tela de criação de uma nova tag para "Lead".
+[00:38] A tag "Lead" aparece na lista de tags.
+[00:40] A tela de criação de uma nova tag para "Cliente novo".
+[00:45] A tag "Cliente novo" aparece na lista de tags.
+[00:53] Como usar as tags no chat.
+[00:58] Inserindo a tag "Venda realizada" no chat.
+[01:01] Inserindo a tag "Cliente novo" no chat.
+[01:12] Como filtrar as conversas por tags.
+[01:17] A tela de filtros para contatos.
+[01:21] Filtrando por "Venda realizada".
+[01:23] O filtro aplicado no chat.
+[01:36] A funcionalidade de observações no chat.
+[01:42] Escrevendo uma observação.
+[01:54] O protocolo de atendimento.
+[02:00] Copiando o número do protocolo de atendimento.
+[02:13] A funcionalidade de definir um departamento padrão para chamadas.
+[02:22] Selecionando o departamento de atendimento.
+[02:26] Selecionando o atendente padrão.
+[02:30] A atendente Sabrina definida como padrão para este cliente.
+[03:12] As funções dos três pontinhos.
+[03:28] Anexo de imagens e arquivos.
+[03:36] Como finalizar um chamado.
+[03:40] Selecionando o assunto do chamado.
+[03:46] Como criar assuntos de chamado.
+[03:56] A tela de criação de um novo assunto de chamado.
+[04:09] Inserindo o assunto "Dúvidas".
+[04:12] O assunto "Dúvidas" aparece na lista de assuntos de chamado.
+[04:26] Inserindo o assunto "Treinamento agendado".
+[04:31] O assunto "Treinamento agendado" aparece na lista de assuntos de chamado.
+[04:47] Inserindo o assunto "Venda realizada".
+[04:52] O chat após a criação dos assuntos.
+[04:57] Finalizando o chamado e selecionando o assunto.
+[05:07] Fechando o chamado.
+[05:10] O chat mostra que não há chamados abertos.
+[05:35] Reabrindo o chamado do contato.
+[05:40] O chamado da Sabrina está fechado.
+[05:46] Reabrindo o chamado e transferindo para um departamento e atendente.
+[05:54] O chat com o chamado reaberto.
+[06:36] A funcionalidade de transferência de chamados.
+[06:40] Selecionando o departamento de suporte.
+[06:47] Escolhendo o atendente.
+[07:06] Adicionando um comentário na transferência.
+[07:29] A funcionalidade de agendamento.
+[07:37] A tela de criação de agendamento.
+[07:44] Selecionando o departamento e o atendente.
+[07:50] Escolhendo a ação de abrir e notificar o atendente.
+[08:14] Selecionando a data e hora do agendamento.
+[08:26] Escrevendo a mensagem a ser enviada.
+[08:42] Adicionando um comentário para o lembrete.
+[09:03] A tela de agendamentos com o agendamento criado.
+[09:27] Importante sobre o agendamento.
+[09:58] O agendamento sem abrir o chamado.
+[10:11] A notificação de agendamento.
+[10:45] Agendar um chamado e finalizá-lo.
+[11:02] O histórico de chamadas.
+[11:08] A tela de histórico de chamadas.
+[11:15] Visualizando mensagens anteriores.
+[11:27] Filtrando o histórico de chamadas.
+[11:32] Aplicando filtros de data e atendente.
+[11:55] O histórico de chamadas filtrado.
+[12:15] Filtrando por data.
+[12:19] Protocolo de atendimento no histórico de chamadas.
+[12:25] Visualizando o detalhe do chamado e a opção de exportar.
+[12:49] A visão geral no menu superior.
+[13:00] Recapitulação sobre o treinamento.
+[14:02] A tela de "Agora" na visão geral.
+[14:18] Atendentes offline e online.
+[14:37] Fila de atendimento por departamento.
+[14:50] Resumo de usuários e chamados.
+[16:42] Histórico de chamadas na visão geral.
+[17:10] Filtrando o histórico de chamadas por diferentes critérios.
+[18:07] Opções de exportar para Excel.
+[19:54] Ações em massa no histórico de chamadas.
+[20:12] O botão de "Ações em massa" com as opções "Fechar chamados" e "Transferir chamado".
+[21:05] A tela para fechar chamados em massa.
+[21:16] A tela para transferir chamados em massa.
+[21:32] Estatísticas de atendimento.
+[22:04] A estatística de atendimento.
+[22:09] Filtrando estatísticas de atendimento.
+[22:38] Tempo médio de chamados.
+[23:23] Média do 1º tempo de espera.
+[24:10] Média do tempo médio de espera.
+[25:15] Gráfico de tempo médio de atendimento (TMA) por período.
+[25:36] Gráfico de TMA por assunto.
+[25:57] Gráfico de TMA por conexão.
+[26:14] Estatísticas de avaliações.
+[27:42] Filtrando estatísticas de avaliações.
+[28:20] Auditoria.
+[28:55] Controle de ausência.
+[30:52] O chat interno do Digisac.

@@ -1,0 +1,18 @@
+[00:00] Tela de login da plataforma WABOOT.
+[00:06] Página principal da plataforma, com visão de atendimentos.
+[00:13] Página de respostas rápidas, com opções de edição.
+[00:18] Tela de Kanban, para organização de atendimentos.
+[00:22] Tela de Tarefas, para adicionar novas tarefas.
+[00:27] Página de Contatos, com lista de contatos e opções de edição/exclusão.
+[00:32] Calendário de Agendamentos, mostrando um agendamento existente.
+[00:39] Página de Tags, com uma tag existente para controle de atendimentos.
+[00:43] Chat Interno, para comunicação entre a equipe.
+[00:47] Dashboard com gráficos e informações sobre atendimentos.
+[00:58] Relatórios de Atendimentos, com opções de filtro.
+[01:07] Página de Campanhas, com opção para criar uma nova campanha.
+[01:14] Página de Usuários, com lista de usuários e suas configurações.
+[01:16] Janela para editar usuário, mostrando detalhes como dias e horários de trabalho.
+[01:24] Janela para adicionar um novo usuário.
+[01:25] Página de Conexões, mostrando um WhatsApp conectado.
+[01:33] Janela para editar WhatsApp, permitindo personalizar mensagens e filas de atendimento.
+[01:46] Tela final com o logo da WABOOT e o site www.waboot.com.br, indicando "Plataforma Multi Atendimento para WhatsApp".

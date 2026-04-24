@@ -1,0 +1,83 @@
+[00:00] Transmissão ao vivo do "Imersão Digisac" sobre como "Entenda o modelo padrão de um robô de atendimento".
+[00:01] Apresentação da analista de treinamento Fabiana e o aviso sobre as dúvidas no chat.
+[02:54] Slide "Aprenda a desenvolver seu robô de atendimento" com os tópicos: compreender a estrutura básica de um robô (triagem), aprender a adicionar a avaliação de atendimento e explorar exemplos práticos de robôs.
+[03:46] Slide "Nossa solução de robô no Webchat" mostra como configurar um robô personalizado para o Webchat, que fará a triagem de clientes utilizando botões.
+[04:43] Abertura da plataforma Digisac para demonstrar a criação do robô.
+[04:57] Demonstração de como acessar a seção de robôs no menu "Mais opções".
+[05:04] Lista de robôs já existentes na plataforma.
+[05:17] Opções de "Ações" para cada robô: visualizar fluxo, visualizar, duplicar, editar e excluir.
+[05:32] Demonstração de como duplicar um robô existente para realizar alterações na cópia.
+[06:36] Demonstração de como criar um novo robô.
+[06:40] Nomeando o robô como "teste" e salvando.
+[06:46] Mensagem "Contexto criado com sucesso".
+[06:48] Voltar para a lista de robôs, onde o robô "teste" aparece.
+[06:54] Excluindo o robô "teste".
+[07:01] Editando o robô e mostrando as opções de contexto inicial, persistente e de contingência.
+[07:19] Demonstração de como usar os "Templates" para selecionar a "Triagem".
+[07:26] Caixa de diálogo "Template" que permite selecionar os departamentos para triagem.
+[07:50] Salvando as configurações do template.
+[08:10] Slide "Contexto Inicial" explica que é a mensagem enviada pelo robô no início da conversa, com exemplos como mensagens de boas-vindas, horários de atendimento e feriados.
+[09:17] Demonstração na plataforma de como configurar o gatilho de "Recebimento de mensagem" para o contexto inicial.
+[10:00] Configuração da regra "Dentro do horário de atendimento".
+[11:18] Configuração de variáveis para a condição "Dentro do horário de atendimento" igual a verdadeiro e "É a primeira mensagem do chamado" igual a verdadeiro.
+[12:06] A mensagem "Bem vindo(a), selecione uma das opções abaixo para ser redirecionado(a) para um departamento" é exibida.
+[12:44] Ação de definir o contexto para "Contexto de menu".
+[14:05] Adicionando uma nova regra "Fora do horário de atendimento".
+[14:39] Configuração da condição "Dentro do horário de atendimento" igual a falso e "É a primeira mensagem do chamado" igual a verdadeiro.
+[15:15] Exemplo de mensagem personalizada para quando não é a primeira mensagem do chamado.
+[16:29] Configurando a ação de "Enviar mensagem" com a opção "Mensagem automática".
+[17:24] Exemplo de mensagem personalizada para quando o atendimento está fora do horário.
+[17:53] Ação de "Definir contexto" para "Contexto Morto".
+[18:18] Regras "Dentro do horário de atendimento", "Fora do horário de atendimento" e "Não é a primeira mensagem do chamado" configuradas no contexto inicial.
+[18:41] Adicionando a regra "Feriado" no contexto inicial.
+[19:56] Configuração da condição "É feriado" igual a verdadeiro.
+[20:12] Configuração da ação de "Enviar mensagem" com a opção "Mensagem automática" e a opção de avaliação NPS.
+[20:25] Acessando a opção "Feriados" no menu "Mais opções" para configurar feriados.
+[20:41] A tela "Feriados" mostra um feriado municipal configurado.
+[20:56] A regra "Feriado" é adicionada no contexto inicial do robô.
+[21:05] Ação de "Enviar mensagem" com a opção "Mensagem automática" para o feriado.
+[21:13] Ação de "Definir contexto" para "Contexto Morto" no feriado.
+[21:19] Demonstração de como ficam os contextos iniciais com as regras de horário e feriado.
+[21:44] Ações para o contexto "Dentro do horário de atendimento": envio de mensagem com opções de suporte, treinamento e financeiro.
+[22:01] Ação de "Definir contexto" para "Contexto de menu".
+[22:07] Minimizar o contexto inicial.
+[22:13] Configuração do contexto de menu com gatilho de "Recebimento de mensagem".
+[22:27] Regras para o menu: "Suporte", "Treinamento" e "Financeiro".
+[22:36] Configuração da regra "Suporte" para que a mensagem "Ótimo! Queremos entender um pouco mais sobre o que precisa, por isso escolha uma opção abaixo: Digite 0 para retornar ao menu." seja enviada.
+[22:52] Opções de botões para o cliente: "Já sou cliente" e "Sou novo por aqui".
+[23:05] Ação de "Definir contexto" para "Submenu - Suporte".
+[23:16] Configuração da regra "Treinamento".
+[23:42] Ação de "Transferir chamado" para o departamento "Treinamento".
+[23:55] Configuração da regra "Financeiro".
+[24:00] Ação de "Transferir chamado" para o departamento "Financeiro".
+[24:08] Configuração do contexto "Submenu - Suporte" com gatilho de "Recebimento de mensagem".
+[24:16] Regras para o submenu "Suporte": "Cliente" e "Não é cliente".
+[24:22] Configuração da regra "Cliente": mensagem solicitando o CPF e ação de "Definir contexto" para "Recebimento do CPF".
+[24:38] Configuração da regra "Não é cliente": mensagem de agradecimento com oferta exclusiva.
+[24:50] Configuração do contexto "Recebimento do CPF" com gatilho de "Recebimento de mensagem".
+[25:00] Ação de "Transferir chamado" para o departamento "Suporte".
+[25:07] Salvando o robô configurado.
+[25:11] Slide "Contexto de Menu" e "Contexto de Contingência" com explicações e exemplos.
+[25:49] Slide "Contexto Persistente" e "Contexto Morto" com explicações e exemplos.
+[26:56] Demonstração na plataforma de como fica o Webchat no site.
+[27:09] Menu do Webchat com as opções de suporte, treinamento e financeiro.
+[27:26] Interação do cliente no Webchat, selecionando "Suporte".
+[27:35] O Webchat pede para o cliente escolher entre "Já sou cliente" ou "Sou novo por aqui".
+[27:44] Cliente seleciona "Já sou cliente".
+[27:52] O Webchat pede o CPF do cliente.
+[28:01] Cliente digita o CPF.
+[28:09] O Webchat agradece, fornece o número do protocolo e pede uma avaliação.
+[28:18] Cliente dá nota 10 para a avaliação.
+[28:27] O Webchat agradece o feedback.
+[28:34] Voltando à plataforma Digisac para mostrar a aba "Conexões".
+[28:41] Editando a conexão do Webchat.
+[28:50] A aba "Edição de Conexão" mostra as configurações do Webchat.
+[29:02] Demonstração do Webchat no site da Fabiana.
+[29:16] Voltando à aba "Edição de Conexão".
+[29:27] Detalhes das configurações do robô para o Webchat.
+[29:53] Contextos do robô configurados para o Webchat.
+[30:29] Demonstração do Webchat no site da Fabiana.
+[30:57] Detalhes do Webchat com as opções de suporte, treinamento e financeiro.
+[31:06] Mais detalhes do Webchat, mostrando as opções de "Já sou cliente" e "Sou novo por aqui".
+[31:15] Configurações de tags, tempo de inatividade e opções para retornar ao menu inicial.
+[31:22] Agradecimentos e despedida da Fabiana.

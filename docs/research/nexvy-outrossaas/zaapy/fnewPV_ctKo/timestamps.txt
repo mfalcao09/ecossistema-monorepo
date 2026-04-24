@@ -1,0 +1,29 @@
+[00:05] O tutorial começa na tela "Automação de Respostas" da plataforma Zaapy 4.0, mostrando os contadores de "Total de Grupos de Respostas" e "Total de Respostas".
+[00:29] O instrutor clica no botão "+ NOVO GRUPO" para adicionar um novo grupo de respostas rápidas.
+[00:32] É exibida uma janela "Adicionar Grupo", onde o nome "Grupo Vip" é inserido no campo "Nome".
+[00:37] O grupo "Grupo Vip" é criado e aparece na lista, com um contador de "0" respostas.
+[00:48] O instrutor clica nos três pontos na coluna "AÇÕES" ao lado do grupo "Grupo Vip", abrindo um menu com as opções "Editar nome", "Lista de respostas" e "Deletar todo grupo de respostas".
+[01:05] O instrutor clica em "Lista de respostas" no menu de ações do grupo "Grupo Vip", navegando para a tela de lista de respostas do grupo.
+[01:09] O instrutor clica no botão "+ NOVA RESPOSTA" para criar uma nova resposta rápida.
+[01:11] É exibida uma janela "Resposta Rápida" com campos para "Nome da Resposta", "Anexo 1", "Texto para Anexo 1", "Anexo 2" e "Texto para Anexo 2".
+[01:16] O nome da resposta "teste de envio no chat" é inserido no campo "Nome da Resposta".
+[01:31] O texto "teste de imagem mapa do mundo 1" é inserido no campo "Texto para Anexo 1".
+[01:44] O texto "teste de imagem mapa do mundo 2" é inserido no campo "Texto para Anexo 2".
+[01:47] O instrutor clica em "Escolher arquivo" para o "Anexo 1", abrindo o explorador de arquivos.
+[01:54] A imagem "download 123.jpeg" é selecionada no explorador de arquivos para o "Anexo 1".
+[01:58] A imagem "download 123.jpeg" é selecionada novamente para o "Anexo 2".
+[02:04] O instrutor clica em "SALVAR MODIFICAÇÕES" na janela "Resposta Rápida".
+[02:06] A resposta "teste de envio no chat" é criada e aparece na lista de respostas do grupo "Grupo Vip", com o código "cod: 21".
+[02:09] O instrutor clica nos três pontos na coluna "AÇÕES" ao lado da resposta "teste de envio no chat", abrindo um menu com as opções "Editar resposta" e "Deletar Resposta".
+[02:11] O instrutor clica em "Editar resposta" no menu de ações, reabrindo a janela "Resposta Rápida" com os detalhes preenchidos.
+[02:14] O instrutor fecha a janela "Resposta Rápida" e volta para a tela de lista de respostas do grupo.
+[02:15] O instrutor clica no ícone "voltar" (seta para a esquerda) no canto superior esquerdo da tela para retornar à tela de grupos de respostas rápidas.
+[02:16] A tela "Automação de Respostas" agora mostra o "Grupo Vip" com "1" resposta em "Quantidade", e os contadores gerais atualizados para "1" em "Total de Grupos de Respostas" e "1" em "Total de Respostas".
+[02:24] O instrutor clica em "Atendimento" no menu lateral esquerdo, navegando para a tela de atendimentos.
+[02:28] O instrutor clica em um atendimento na lista, abrindo a conversa no chat.
+[02:32] No campo de digitação da mensagem, o instrutor digita "/" para abrir a lista de respostas rápidas.
+[02:36] A resposta rápida "teste de envio no chat" é exibida como uma opção, mostrando seu nome e o texto dos anexos.
+[02:44] O instrutor clica na opção da resposta rápida para enviá-la.
+[02:46] As duas imagens com seus respectivos textos (subtítulos) são enviadas no chat, confirmando o funcionamento da resposta rápida com múltiplos anexos e textos.
+[02:54] O instrutor clica no ícone de resposta rápida (símbolo de raio) na barra de ferramentas do chat, mostrando a lista de respostas rápidas.
+[03:13] O instrutor aponta para a opção "Etiquetas" no menu lateral esquerdo, indicando o próximo tópico do tutorial.

@@ -1,0 +1,67 @@
+[00:00] Início da apresentação do Digisac, plataforma multicanal.
+[00:01] Animação do logotipo do Digisac.
+[00:05] Seis ícones representando funcionalidades: todos os canais juntos, fazer transferências, marcadores de tags, troca de canais, envio em massa, recebimento em massa.
+[00:11] Tela de login da plataforma Digisac.
+[00:27] Explicação sobre o processo de login e as funcionalidades.
+[00:54] Login e senha da plataforma.
+[01:06] Informação sobre como obter login e senha do administrador.
+[01:13] Explicação sobre a URL de acesso à plataforma.
+[01:39] Seleção do idioma da interface.
+[01:46] Página inicial da plataforma Digisac.
+[02:04] Explicação sobre a aba "Contatos".
+[02:08] Visualização e pesquisa de contatos.
+[02:26] Tela de criação de contato.
+[02:30] Demonstração de como preencher o nome do contato.
+[02:34] Demonstração de como selecionar a conexão para salvar o contato.
+[02:49] Consulta de conexões disponíveis.
+[02:55] Visualização das conexões ativas.
+[03:00] Detalhes da conexão (nome e número).
+[03:17] Retorno à tela de criação de contato para seleção da conexão.
+[03:22] Preenchimento do nome do contato.
+[03:26] Preenchimento do número do cliente.
+[03:31] Salvar o contato.
+[03:40] Explicação sobre a aba "Fila" (fila de espera).
+[03:57] Notificação de nova mensagem na fila.
+[04:05] Atendimento a um cliente na fila.
+[04:14] Cliente sai da fila e vai para o chat individual.
+[04:39] Uso de emojis na conversa.
+[04:45] Uso da função de "resposta rápida".
+[05:15] Acesso e criação de respostas rápidas.
+[05:25] Tela de criação de respostas rápidas.
+[05:43] Uso do campo de "comentário" (observações internas).
+[06:24] Uso do microfone para gravar áudios.
+[06:38] Visualização dos dados do cliente (foto, nome, número).
+[07:05] Funções de silenciar conversa e marcar como não lida.
+[07:13] Uso de tags para categorizar conversas.
+[07:44] Filtragem de contatos por tags.
+[08:08] Campo de "observações" (informações adicionais sobre a conversa).
+[08:24] Protocolo de atendimento e departamento padrão.
+[08:58] Explicação sobre a fidelização do atendimento.
+[09:19] Anexo de imagens e arquivos.
+[09:30] Finalizar o chamado.
+[09:57] Tela de fechamento do chamado (assunto e resumo).
+[10:20] Conversa removida da fila após o fechamento.
+[10:30] Visualização do histórico da conversa na aba "Contatos".
+[10:45] Abrir um chamado novamente (para iniciar uma nova conversa).
+[10:50] Seleção do departamento e login para reabrir o chamado.
+[11:12] Conversa reaberta.
+[11:22] Transferência de chamado.
+[11:41] Seleção do departamento e atendente para transferência.
+[12:20] Adicionar um comentário antes da transferência.
+[12:34] Agendamento de mensagem.
+[13:00] Tela de criação de agendamento (contato, departamento, atendente).
+[13:14] Seleção da ação (abrir chamado, notificar, etc.).
+[13:40] Seleção da data e hora para o agendamento.
+[13:47] Campo para digitar a mensagem e adicionar arquivos.
+[13:52] Campo de comentário para o agendamento (lembrete).
+[14:00] Agendamento pronto.
+[14:15] Informação importante sobre agendamento e chamados abertos.
+[14:57] Histórico de chamados.
+[15:10] Filtragem de histórico de chamados (status, período, departamento, atendente, tags, etc.).
+[15:35] Visualização das conversas filtradas.
+[15:52] Opções de mensagem (responder, encaminhar, apagar).
+[16:00] Apagar mensagem (apaga para o cliente, mas não da plataforma).
+[16:20] Encerramento do treinamento.
+[16:53] Informações de contato para suporte.
+[17:07] Logotipo Digisac.
+[17:10] Contatos e redes sociais.

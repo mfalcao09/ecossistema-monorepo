@@ -1,0 +1,94 @@
+[00:00] Palestrante dando as boas-vindas aos participantes do webinar.
+[00:16] Palestrante convidando o público a compartilhar o link do webinar com colegas e funcionários.
+[00:33] Palestrante se apresentando e falando sobre o conteúdo do webinar.
+[00:52] Palestrante explicando o tema principal do webinar, que é a conexão oficial do WhatsApp.
+[01:06] Palestrante incentivando os participantes a fazerem perguntas no chat.
+[01:35] Palestrante explicando o foco do webinar no WhatsApp Business API.
+[02:00] Palestrante detalhando o objetivo de esclarecer as diferenças entre as versões do WhatsApp.
+[02:16] Palestrante mencionando a configuração e implantação da conexão oficial.
+[02:39] Palestrante exibe slide com título: "Entenda sobre o WhatsApp Business API da Digisac."
+[03:03] Palestrante explica as características do WhatsApp Pessoal, WhatsApp Business e WhatsApp Business API.
+[03:13] Palestrante passa para o slide sobre "Calcule os custos dos CBPs" e os modelos de conversa.
+[03:51] Palestrante explica as diferenças de custo entre as versões do WhatsApp.
+[04:26] Palestrante ressalta que o WhatsApp Business API requer aprovação da Meta e não tem aplicativo móvel.
+[04:51] Palestrante destaca os benefícios da versão oficial do WhatsApp.
+[05:27] Palestrante informa que a versão API é usada na interface da Digisac ou em plataformas de atendimento.
+[06:19] Palestrante explicando como funcionam as cobranças do WhatsApp Business API.
+[06:40] Palestrante menciona a calculadora de preços da Digisac para estimar custos.
+[07:07] Palestrante destaca a gratuidade das conversas de "Serviço" a partir de novembro de 2024.
+[08:59] Palestrante acessa a calculadora de preços no site da Digisac.
+[09:19] Palestrante demonstra como usar a calculadora para estimar os custos das conversas.
+[10:00] Palestrante explica que os preços são fixados pela Meta e sujeitos a alterações.
+[11:05] Palestrante envia o link da calculadora no chat para os participantes.
+[11:35] Palestrante seleciona "Brasil" como país de destino na calculadora.
+[12:20] Palestrante explica que a Digisac tem parcerias com provedores para auxiliar na conexão oficial.
+[12:53] Palestrante volta para o slide sobre "Calcule os custos dos CBPs" e as categorias de conversas.
+[13:06] Palestrante passa para o slide sobre "Sobre as sessões de conversa".
+[13:12] Palestrante detalha as sessões de conversas de 24 e 72 horas.
+[14:10] Palestrante explica o "ponto de entrada gratuito" para iniciar conversas.
+[15:08] Palestrante exibe slide com "Modelos de mensagem" e exemplos de templates.
+[15:18] Palestrante explica a necessidade de criar templates para iniciar conversas ativas.
+[15:30] Palestrante demonstra a interface da Digisac, mostrando o envio de um template.
+[15:40] Palestrante mostra o envio de um template "Atendimento inicial" na plataforma.
+[16:07] Palestrante clica em "Enviar template" para abrir a janela de envio.
+[16:11] Palestrante seleciona o template "Atendimento inicial" na lista.
+[16:23] Palestrante preenche o nome do cliente no campo "Corpo da mensagem".
+[16:33] Palestrante insere o nome da cliente "Fabiana" no template.
+[16:41] Palestrante insere o nome do atendente "Carol" no template.
+[16:58] Palestrante clica em "Confirmar" para enviar o template.
+[17:03] Palestrante mostra o template enviado no chat e o relógio de 24 horas iniciando a contagem.
+[17:23] Palestrante clica na barra de digitação que aparece após o cliente responder.
+[17:46] Palestrante digita "Olá, tudo bem?" como se fosse o cliente respondendo.
+[17:57] Palestrante mostra a resposta do cliente e a barra de digitação ativa.
+[18:56] Palestrante retorna ao slide "Sobre as sessões de conversa".
+[20:47] Palestrante retorna ao slide "Modelos de mensagem".
+[21:12] Palestrante explica que é necessário criar templates para iniciar conversas.
+[21:56] Palestrante sugere criar templates com botões para interação do cliente.
+[22:12] Palestrante volta para a plataforma da Digisac.
+[22:18] Palestrante acessa a seção "Mais opções" no menu superior.
+[22:28] Palestrante clica em "Templates" na lista de opções.
+[22:38] Palestrante mostra a tela de templates e clica em "Novo Template".
+[22:50] Palestrante insere o nome do modelo "Abertura de atendimento" e o nome do modelo "primeiro_contato" com um underline.
+[23:06] Palestrante corrige o nome do modelo para "primeiro_contato".
+[23:14] Palestrante corrige o nome do modelo, adicionando "_teste" ao final.
+[23:29] Palestrante seleciona a conexão "WABA-Oficial" e a categoria "Marketing".
+[23:41] Palestrante escolhe o idioma "Português" para o template.
+[23:58] Palestrante seleciona a categoria "Marketing".
+[24:00] Palestrante explica as categorias de templates: utilidade, marketing, autenticação.
+[24:55] Palestrante explica a categoria "Marketing" para mensagens promocionais.
+[25:34] Palestrante explica a categoria "Autenticação" para confirmação de identidade.
+[25:52] Palestrante demonstra a diferença entre as categorias.
+[26:05] Palestrante seleciona a categoria "Marketing" e o idioma "Português".
+[26:12] Palestrante escolhe o tipo de mensagem "Mídia & Interativo".
+[26:21] Palestrante mostra as opções de cabeçalho: texto, imagem, documento, vídeo.
+[26:41] Palestrante opta por criar um cabeçalho de texto.
+[26:50] Palestrante demonstra como adicionar parâmetros personalizáveis no corpo da mensagem.
+[27:10] Palestrante insere "Olá, {{1}} tudo bem com você? Meu nome é {{2}} e faço parte do time da Digisac. Como você gostaria de continuar seu atendimento?" no corpo da mensagem.
+[27:46] Palestrante insere os nomes dos parâmetros: "nomecliente" e "nomeatendente".
+[28:44] Palestrante rola para baixo e ativa a opção "Botões".
+[29:21] Palestrante adiciona dois botões: "WhatsApp" e "Ligação".
+[30:21] Palestrante clica em "Salvar" para criar o template.
+[31:01] Palestrante clica em "Enviar para análise" para submeter o template.
+[31:10] Palestrante mostra a visualização do template antes da aprovação.
+[31:37] Palestrante clica em "Limpar" para resetar os campos do template.
+[32:19] Palestrante reitera a importância da aprovação do template pela Meta.
+[33:16] Palestrante retorna ao slide "Modelos de mensagem".
+[33:35] Palestrante volta para o slide "Mensagens interativas".
+[33:45] Palestrante explica que mensagens interativas não são cobradas e permitem listas ou botões.
+[34:10] Palestrante demonstra como criar uma nova mensagem interativa.
+[34:25] Palestrante insere o nome "Lojas e Locais" e seleciona os departamentos "Atendimento" e "Financeiro".
+[34:36] Palestrante escolhe o tipo de ação "Lista simples".
+[34:50] Palestrante insere o título da lista "Lojas e Locais".
+[35:01] Palestrante adiciona itens à lista: "Bauru", "São Paulo", "Marília", "Jaú".
+[35:10] Palestrante clica em "Salvar" para criar a mensagem interativa.
+[35:17] Palestrante retorna à tela de "Mensagens interativas".
+[35:25] Palestrante tenta enviar uma mensagem interativa pré-existente (sem sucesso devido à plataforma de teste).
+[35:44] Palestrante demonstra o envio de uma mensagem interativa de teste.
+[36:19] Palestrante retorna ao slide "Mensagens interativas".
+[36:58] Palestrante passa para o slide "Saúde WABA na Digisac".
+[37:12] Palestrante explica o relatório "Saúde da WABA" para monitorar a conta.
+[37:46] Palestrante demonstra como acessar o relatório "Saúde WABA" na plataforma.
+[38:45] Palestrante mostra o status "Ativa" da conexão WABA.
+[39:09] Palestrante retorna ao slide "Saúde WABA na Digisac".
+[40:19] Palestrante finaliza o webinar e agradece a participação.
+[40:35] Palestrante lembra que o vídeo ficará gravado e convida para o próximo webinar sobre campanhas.

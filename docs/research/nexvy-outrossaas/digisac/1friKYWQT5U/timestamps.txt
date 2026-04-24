@@ -1,0 +1,73 @@
+[00:00] Início da apresentação de Fabiana, a analista de treinamento da Digisac.
+[02:56] Início da tela de apresentação do webinário, com o título "O Poder do Histórico de Chamados na Digisac."
+[03:00] Slide com o título "Conheça o recurso Histórico de Chamados presente na Digisac", com os principais pontos.
+[04:04] Slide com o título "No histórico de chamados, é possível visualizar o assunto do chamado e o resumo do atendimento inserido no fechamento do chamado." com um exemplo de chat.
+[05:20] Tela da plataforma Digisac, mostrando o menu superior e a área de chats.
+[05:27] Fabiana clica no ícone de "Visão Geral" no menu superior e abre um menu suspenso.
+[05:30] Fabiana clica em "Histórico de chamados" no menu suspenso.
+[05:50] A tela mostra o "Histórico de chamados", com uma lista de atendimentos e os detalhes de cada um.
+[06:21] Fabiana clica em "Exibir Filtros" na parte superior direita da tela.
+[06:33] A tela mostra os filtros disponíveis para a busca no histórico de chamados.
+[07:25] Fabiana clica no menu suspenso "Status" e mostra as opções: "Todos", "Aberto" e "Fechado".
+[07:44] Fabiana clica no menu suspenso "Tipo do período" e mostra as opções: "Todos", "Data de abertura" e "Data de fechamento".
+[07:50] Fabiana clica no campo de data "De" e abre um calendário.
+[08:18] Fabiana limpa os campos de data "De" e "Até".
+[09:07] Fabiana clica no menu suspenso "Andamento do chamado" e mostra as opções: "Último departamento" e "Atendido pelo departamento".
+[09:49] Fabiana clica no menu suspenso "Atendente" e mostra uma lista de atendentes.
+[10:17] Fabiana clica no menu suspenso "Departamento" e mostra uma lista de departamentos.
+[10:56] Fabiana clica no menu suspenso "Conexão" e mostra uma lista de conexões.
+[11:18] Fabiana clica no menu suspenso "Assunto do chamado" e mostra uma lista de assuntos.
+[11:35] Fabiana clica no menu suspenso "Tags" e mostra uma lista de tags.
+[11:57] Fabiana clica no menu suspenso "Pessoas" e mostra uma lista de pessoas.
+[12:01] Fabiana clica no menu suspenso "Contatos" e mostra uma lista de contatos.
+[12:13] Fabiana mostra o campo "Número de protocolo".
+[12:44] Fabiana clica no botão "Aplicar Filtros".
+[13:00] Fabiana clica no botão "Esconder Filtros".
+[13:04] Fabiana clica no ícone de "Atualizar dados".
+[13:08] Fabiana clica no ícone de "Limpar Filtros".
+[13:13] Fabiana clica no botão "Exibir Filtros".
+[13:16] Fabiana clica no botão "Aplicar Filtros".
+[14:45] Fabiana clica no número de protocolo de um chamado e abre uma tela de "Mensagens do chamado".
+[15:09] Fabiana clica em "Exportar PDF" e exporta o conteúdo do chat para um arquivo PDF.
+[15:33] A tela mostra o arquivo PDF exportado, com o registro das mensagens, áudios e imagens.
+[16:48] Fabiana fecha o arquivo PDF e retorna à tela de "Mensagens do chamado".
+[16:56] Fabiana clica no número de protocolo de outro chamado e abre uma tela de "Mensagens do chamado".
+[17:11] Fabiana fecha a tela de "Mensagens do chamado".
+[17:23] Fabiana clica em "Exportar" e exporta o histórico de chamados para um arquivo Excel.
+[17:28] A tela mostra o arquivo Excel exportado, com todas as informações dos chamados.
+[17:47] Fabiana formata a coluna "Protocolo" para número no Excel.
+[18:11] Fabiana formata a coluna "Número" para número no Excel.
+[18:50] Fabiana personaliza o formato das colunas do Excel.
+[23:05] Fabiana clica no checkbox ao lado de "Nome" para selecionar todos os chamados.
+[23:09] A tela mostra o botão "Ações em massa" e Fabiana clica nele, revelando as opções "Fechar chamados" e "Transferir chamado".
+[23:19] Fabiana clica no link "Selecionar todos em aberto" e seleciona todos os chamados abertos.
+[23:25] Fabiana desmarca o checkbox ao lado de "Nome".
+[23:34] Fabiana clica no botão "Ações em massa" novamente.
+[23:42] Fabiana explica a importância de desativar o bot antes de realizar ações em massa.
+[24:22] Fabiana clica no ícone de "Conexões" no menu superior.
+[24:28] Fabiana clica nos três pontos ao lado da conexão "Central WhatsApp - Treinamento" e abre um menu suspenso.
+[24:32] Fabiana clica em "Editar" e abre a tela de edição da conexão.
+[24:38] Fabiana desativa o bot na conexão e clica em "Salvar".
+[24:57] Fabiana clica no ícone de "Visão Geral" e depois em "Histórico de chamados" para retornar à tela anterior.
+[25:01] Fabiana clica no checkbox ao lado de "Nome" para selecionar todos os chamados.
+[25:06] Fabiana clica no botão "Ações em massa" e mostra as opções.
+[25:12] Fabiana clica no ícone de "Chat" no menu superior.
+[25:47] Fabiana mostra o ícone de histórico de chamados dentro de um chat individual.
+[25:56] Fabiana clica em "Mais opções" no menu superior.
+[26:16] Fabiana clica em "Cargos" no menu.
+[26:22] Fabiana clica nos três pontos ao lado do cargo "Operador" e depois em "Editar".
+[26:29] Fabiana desce até o campo "Estatísticas" e ativa a opção "Visualizar histórico de chamados".
+[27:03] Fabiana clica em "Ajuda" no menu superior.
+[27:08] Fabiana clica em "Manual de acesso" no menu suspenso.
+[27:10] A tela mostra o manual de acesso da Digisac.
+[27:42] Fabiana retorna ao slide final da apresentação.
+[27:52] Slide com o título "Benefícios do Histórico de Chamados", com dois pontos principais: "Manter o registro das conversas" e "Interação contínua".
+[29:26] Fabiana retorna à plataforma Digisac.
+[29:35] Fabiana clica no manual de acesso.
+[29:43] Fabiana mostra a lupa de busca no manual.
+[29:48] Fabiana navega até a seção "Visão Geral" e depois "Histórico de chamados" no manual.
+[30:27] Fabiana mostra o detalhamento de cada filtro no manual.
+[30:57] Fabiana busca por "agendamento" na lupa do manual.
+[31:02] A tela mostra o resultado da busca sobre "Agendamentos" no manual.
+[31:16] Fabiana volta à tela do histórico de chamados e mostra o manual de acesso novamente.
+[31:26] Fabiana finaliza a apresentação.

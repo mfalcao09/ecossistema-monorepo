@@ -1,0 +1,19 @@
+[00:00] Início do vídeo: Apresentação da interface da plataforma de atendimento "Chatwoot".
+[00:00] Demonstração de um chat de conversas na plataforma.
+[00:06] Destaque para o recurso de anexar um dashboard ao formulário de conversas.
+[00:29] Abertura de uma nova guia no navegador para acessar a base de conhecimento.
+[00:33] Digitação da URL da base de conhecimento (fhonlne.freshdesk.com) na barra de pesquisa.
+[00:43] Exibição da página de suporte "FhOnline Help Desk" (base de conhecimento).
+[00:52] Navegação para a seção de configurações da conta no Chatwoot.
+[00:56] Acesso à opção "Integrações" no menu de configurações.
+[00:58] Configuração de um novo "App da Dashboard".
+[01:00] Clique no botão "Adicionar um novo app da dashboard".
+[01:01] Preenchimento dos campos "Nome" (Base de conhecimento) e "Endpoint" (URL da base de conhecimento).
+[01:13] Confirmação de que o aplicativo do dashboard foi configurado com sucesso.
+[01:14] Retorno para a seção de conversas no Chatwoot.
+[01:18] Exibição de uma nova aba "Base de conhecimento" na tela de conversa.
+[01:21] Interação com a base de conhecimento dentro do Chatwoot.
+[01:30] Digitação de um termo de pesquisa ("como emitir") na base de conhecimento.
+[01:34] Seleção de um artigo ("Como emitir NFe de Exportação") nos resultados da pesquisa.
+[01:37] Exibição do conteúdo do artigo dentro da aba "Base de conhecimento".
+[01:44] Retorno para a aba "Mensagens" da conversa, indicando a possibilidade de copiar e colar informações da base de conhecimento no chat.

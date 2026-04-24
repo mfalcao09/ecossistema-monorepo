@@ -1,0 +1,178 @@
+[ 00:01 ] Olá, pessoal, boa tarde. Boa tarde a todos. Vamos iniciar mais um webinar.
+[ 00:15 ] Eu vou aguardar uns, uns instantes aí, uns minutinhos, para todos entrarem com calma, compartilhar o link com a equipe, com os amigos.
+[ 00:28 ] Fiquem à vontade. Boa tarde, Carlos. Hoje a gente vai falar um pouquinho sobre
+[ 00:36 ] mensagens interativas. A gente vai falar sobre saúde o ABA também.
+[ 00:46 ] Pode compartilhando o link, chamando a turma pra participar com a gente. Lembrando que vai ficar gravado, tá pessoal? Então vocês conseguem acessar depois esse conteúdo.
+[ 00:58 ] Então fiquem tranquilos. Bom, vamos,
+[ 01:06 ] vamos iniciando. Vocês que estão aqui comigo, vocês têm a conexão oficial da Digisac,
+[ 01:21 ] ou ainda não? Vocês têm o interesse de adquirir a conexão oficial do WhatsApp? Me conta um pouco aqui no chat.
+[ 01:33 ] Pra gente interagindo, vocês vão poder tirar as dúvidas também, tá?
+[ 01:45 ] Então, vamos lá. Então, bem-vindos.
+[ 01:52 ] Hoje a gente vai falar um pouquinho sobre umas funcionalidades ativas da Digisac, que é a saúde WABA e também as mensagens
+[ 02:00 ] interativas, tá? Então fica até o final com a gente. É um tema pouco abordado aí.
+[ 02:12 ] Normalmente os clientes sempre têm dúvidas, né, do que são mensagens interativas, se elas são cobradas ou não. Então hoje eu vou esclarecer todas essas dúvidas, tá bom?
+[ 02:22 ] Tá entrando mais algumas pessoas. Sejam bem-vindos, podem se apresentar aqui no chat.
+[ 02:35 ] Então, vamos lá. Então, pessoal, com um enorme prazer, eu me apresento. Meu nome é Fabiana. Eu sou do time de treinamento da Digisac, né? Então,
+[ 02:49 ] a gente fica responsável por essa parte educacional, trazendo todo esse conhecimento para o cliente. Então,
+[ 02:59 ] a gente tem um time que a gente realiza treinamentos ali. Então é só você agendar com a gente um horário,
+[ 03:07 ] que a gente abre ali uma cal para conversar, discutir um pouquinho sobre as funcionalidades da Digisac.
+[ 03:18 ] Então, pessoal, o webinário educacional, que é esse projeto que a gente realiza há um tempo, é um momento que a gente explora as principais funcionalidades da plataforma Digisac,
+[ 03:30 ] pra facilitar o dia a dia de vocês, a rotina de vocês, trazendo mais praticidade, eficiência nessa rotina do dia a dia, tá bom? Então, o nosso maior objetivo é proporcionar uma visão mais clara e prática, né?
+[ 03:45 ] Pra vocês se interarem referente a essas funcionalidades, aproveitar o máximo a Digisac, com essas dicas que a gente vem trazendo toda quarta-feira às 15 horas, também com as nossas postagens, tanto no Instagram,
+[ 03:59 ] no nosso blog também, no nosso site da Digisac, que tá sensacional.
+[ 04:08 ] Então, esse é um momento aí pra gente interagir. Então, fiquem à vontade para enviar as perguntas a qualquer momento,
+[ 04:15 ] para se apresentar aqui no chat também, tá? Esse espaço é de vocês. E mão na massa, né? Vamos entender um pouquinho aí referente
+[ 04:26 ] a essas funcionalidades que hoje a gente vai focar um pouco
+[ 04:33 ] referente a conexão oficial do WhatsApp. Vocês sabem o que é uma conexão oficial?
+[ 04:47 ] O Carlos, ele já tem a conexão oficial do WhatsApp. Legal. E vocês sabem a diferença?
+[ 04:59 ] Então, já apresento aqui pra vocês a diferença entre o WhatsApp pessoal, o WhatsApp Business e o WhatsApp Business API.
+[ 05:08 ] Então, pessoal, a diferença do tipo de usuário referente a esses canais de comunicação do WhatsApp, é que no pessoal é o individual, né? O que a gente está mais acostumado.
+[ 05:15 ] O WhatsApp Business é para pequenas empresas, e o WhatsApp Business API
+[ 05:20 ] é pra médias e grandes empresas. Então é pra aquelas empresas que tem um fluxo de recebimento e envio de mensagem, alto,
+[ 05:27 ] tá? Então, o WhatsApp, ele traz essa versão API para vocês conseguirem realizar disparos em massa, pra você conseguir realizar também
+[ 05:37 ] o acompanhamento referente às campanhas que vocês realizam no Instagram, tá? Então, pessoal, a conexão oficial do WhatsApp
+[ 05:49 ] é um perfil direcionado pra negócios, pra empresas, diferente do WhatsApp pessoal,
+[ 05:57 ] tá? E referente a custos, né? É uma das maiores dúvidas aí dos clientes. Então, o WhatsApp Business API,
+[ 06:08 ] o WhatsApp oficial, ele tem o custo por mensagem, diferente do do WhatsApp Business e o pessoal, que você consegue enviar e receber mensagens de forma gratuita.
+[ 06:23 ] Tá? Então, assim, na conexão oficial, do WhatsApp, vocês conseguem receber mensagens gratuitas. Então, de forma receptiva, quando o cliente entra em contato com vocês,
+[ 06:36 ] você não é cobrado. Mas quando você envia uma mensagem para o cliente, que é um template, aí sim,
+[ 06:45 ] tem um custo, tá bom? A gente falou referente a conexão oficial
+[ 06:54 ] no webinário, acredito que foi em novembro do ano passado, eu consigo até disponibilizar o link aqui pra vocês assistirem, porque eu detalho bastante referente a conexão oficial. Hoje a gente só vai falar um pouquinho referente a algumas funcionalidades gratuitas aí que vocês têm disponível na Digisac.
+[ 07:11 ] Mas se vocês quiserem se aprofundar no tema, eu vou disponibilizar um link aqui pra vocês assistirem, que esse webinário ele tá bem completo, é um webinário que a gente fica quase 50 minutos ali realizando uma explicação somente da conexão oficial. Então, é bem interessante.
+[ 07:31 ] Tá? Então, vamos lá. Nesse quadro de diferenciação que eu tô apresentando pra vocês na tela, tem a última opção, que é "Requer aprovação do Meta".
+[ 07:44 ] E a conexão oficial precisa dessa aprovação. Como assim?
+[ 07:51 ] Toda mensagem que você cria para realizar um disparo, para realizar um envio para o cliente, ele precisa ser aprovado pelo Meta.
+[ 08:00 ] Então você realiza a configuração desse conteúdo, dessa mensagem, envia pra análise, a Meta vai realizar uma verificação e aprovar o envio dessa mensagem, tudo bem?
+[ 08:15 ] Então, requer aí essa aprovação, tá? Mas fiquem tranquilos que vocês que estão interessados ou até mesmo que iniciaram essa conexão oficial,
+[ 08:29 ] a aprovação é rápida, tá? Então, vamos lá.
+[ 08:38 ] Hoje a gente vai falar um pouquinho referente às mensagens interativas. Então, pessoal, esse recurso, essa funcionalidade da Digisac, ela fica presente nas ferramentas auxiliares,
+[ 08:52 ] e só é disponível apenas para clientes que possuem a conexão do WhatsApp Business API, pra quem utiliza já tem ativa essa conexão,
+[ 09:05 ] e aí sim, você consegue realizar a criação dessas mensagens interativas e enviar para seus clientes.
+[ 09:12 ] Tá? Então, são mensagens pré-configuradas que permitem você enviar pro cliente, engajando, é uma mensagem mais interativa, porque vocês conseguem trazer botões, vocês conseguem trazer listas,
+[ 09:29 ] né, no envio da ação, então, chamar mais a atenção do cliente, né? Então, é um dos grandes benefícios da conexão oficial é que você consegue criar mensagens diferenciadas, que você envia e o cliente fica mais curioso. Se eu apertar nesse botão, tem uma lista, então ele consegue fazer uma análise antes da resposta, tá bom?
+[ 09:52 ] E a grande vantagem da mensagem interativa é que elas são personalizadas, vocês conseguem criar conteúdos com imagens, com vídeos,
+[ 10:05 ] vocês conseguem trazer esses botões, essas listas,
+[ 10:11 ] e não tem custo no envio, somente os templates
+[ 10:16 ] que vocês precisam abrir a conversa, que eu já vou realizar uma breve demonstração pra vocês de como abrir uma conversa no WhatsApp
+[ 10:27 ] oficial. Mas as mensagens interativas você consegue enviar com o túnel aberto, com a conversa
+[ 10:35 ] já ativa com o cliente, você faz o envio dessas mensagens interativas que pra vocês que não têm a conexão oficial são as respostas rápidas.
+[ 10:48 ] Né? Então, as respostas rápidas que fica ali no rodapé da plataforma, um raio que você abre as mensagens pré-definidas, pré-configuradas.
+[ 10:59 ] É como se fosse essas mensagens mais interativas que vocês conseguem trazer botões e listas, tá bom? Então, vamos lá.
+[ 11:08 ] Eu vou realizar a apresentação da plataforma pra vocês de como criar uma mensagem interativa,
+[ 11:15 ] que é super interessante, ó. Então, vamos lá.
+[ 11:22 ] Então, visualizando a Digisac, pessoal, vocês vão localizar em "Mais opções",
+[ 11:32 ] "Mensagens interativas". Pra você que tem uma conexão
+[ 11:40 ] de WhatsApp API, tá bom pessoal? É diferente da conexão WhatsApp Business, é o WhatsApp Business API. Deixa eu até mostrar pra vocês, ó. Que em conexões, essa é uma conexão standard, convencional. Já a conexão oficial, ela é um verdinho mais escuro, ó.
+[ 12:00 ] Tá bom? Então, se você tem essa conexão ativa na Digisac, você consegue criar em "Mais opções" as mensagens interativas pra serem enviadas ali no bate-papo com o cliente, tá bom?
+[ 12:16 ] Então, aqui eu já tenho alguns conteúdos, mas eu vou criar uma do zero com vocês.
+[ 12:26 ] Tá bom? Então, vamos lá. Então, em "Nova mensagem interativa", pessoal,
+[ 12:33 ] vai abrir esse quadro pra gente. E a gente precisa nomear. Então, é obrigatório pra criação, mas não fica visível para o cliente, tudo bem? É só para vocês localizarem. Então, eu vou criar uma de tutorial.
+[ 12:50 ] Tá? Eu vou incluir um vídeo que vai realizar uma explicação de como realizar a conexão do WhatsApp, por exemplo, tá? Então, esse é o título e ele é interno.
+[ 13:08 ] Descendo um pouco, a gente consegue trazer os departamentos que vão visualizar essa mensagem, né?
+[ 13:16 ] Que vão ter disponível a mensagem pra envio. Pode ser todos? Com certeza, pode trazer todos. Pode trazer somente o financeiro e o comercial? Também, tá? Então, ó,
+[ 13:28 ] sucesso do cliente, suporte, treinamento e comercial. Então, vão ser os quatro departamentos que vão visualizar essas mensagens interativas, tudo bem?
+[ 13:42 ] Descendo um pouco, tipo de ação. Então, aqui, pessoal, vocês conseguem trazer lista simples. Vocês conseguem trazer até 10 opções dentro de uma lista.
+[ 13:57 ] Ou até mesmo botões, que vocês conseguem trazer até três botões, tá?
+[ 14:04 ] Então, lista no total são 10, e botões no total são três, tá?
+[ 14:14 ] Selecionando uma das opções, a gente já consegue trazer se vai ser um conteúdo de texto,
+[ 14:24 ] imagem, documento e vídeos, tá? Então, eu vou fazer um agora com vocês, de vídeo, pode ser? Então, eu vou selecionar um vídeo.
+[ 14:45 ] E já consigo trazer também, pessoal,
+[ 14:53 ] o conteúdo, o texto que vai ser direcionado junto com o vídeo, a descrição, né? Um passo a passo, uma orientação. Então, vocês vão ter, ó, é como se fosse a estrutura de um e-mail.
+[ 15:06 ] O corpo da mensagem, tá? E o rodapé.
+[ 15:13 ] Tá? Então, vamos lá, vou trazer, vou pegar uma frase aqui pra vocês visualizarem.
+[ 15:23 ] Realmente, Ana, você não consegue selecionar, né?
+[ 15:32 ] A a resposta do cliente para trazer a resposta, a respostinha rápida.
+[ 15:41 ] Deixa eu pegar aqui, pessoal, a frase pra gente trazer.
+[ 15:49 ] Ó, então a gente pode trazer um guia,
+[ 15:56 ] "Guia passo a passo para configuração do WhatsApp". Posso trazer o rodapé? Posso também.
+[ 16:05 ] Ó, "Fico à disposição." Tá? E aqui dentro das ações, a gente pode trazer botões. Então, a gente pode trazer opções assim, ó. Esse conteúdo
+[ 16:21 ] foi interessante pra você? Você conseguiu realizar a conexão do seu WhatsApp? Ó, então, a gente pode trazer,
+[ 16:32 ] "Não consegui" e "Consegui". Certinho? Então, vamos retomar?
+[ 16:41 ] Ó, o nome, ele é interno, é só para você localizar a mensagem. Os departamentos que vão visualizar essas mensagens interativas.
+[ 16:53 ] O tipo da ação, então, ou lista ou botões. Vocês conseguem trazer, então, textos, imagens, documentos PDF, vídeos, tá?
+[ 17:03 ] Selecionando essas informações e preenchendo o campo da descrição, a gente já salva, tá? Já tenho uma mensagem com esse nome. Eu vou incluir "Tutorial
+[ 17:19 ] conexão". Agora sim, eu consegui salvar.
+[ 17:28 ] Tudo bem? Ó, a gente tem uma opção aqui também de listas, né? Então, vamos lá.
+[ 17:42 ] Trouxe o nome, que é o nome interno. Então, o nome é "Produtos", os departamentos que vão visualizar.
+[ 17:50 ] E esse conteúdo, pessoal, ele não tem o corpo da mensagem. Eu não preenchi o cabeçalho, eu só incluí a lista mesmo, a listagem. Então, lista simples.
+[ 18:05 ] Eletrônicos, moda. Então, você pode trazer somente a lista pro cliente, tá?
+[ 18:15 ] Então, no que você está interessado, né? Escolha uma categoria para explorar os nossos produtos. Então, eu consigo trazer dentro da listagem, ó, até 10 itens.
+[ 18:30 ] Bastante informação. E fica super interessante o formato que chega pro cliente. Vamos realizar essa ação de envio pra vocês acompanharem comigo?
+[ 18:48 ] Deixa eu ver as perguntinhas aqui.
+[ 18:57 ] Pode deixar, Ana. A Ana deu a sugestão aqui, pessoal, para ter a opção de resposta, né? De selecionar e responder. Pela conexão oficial,
+[ 19:08 ] realmente, tá? Ó, agora pra vocês entenderem, pra vocês que estão
+[ 19:18 ] Deixa eu ver. Boa tarde, Cleiton. Pra vocês que entraram agora, entender um pouquinho referente do que a gente tá falando.
+[ 19:27 ] Nós estamos falando referente às mensagens interativas, que é uma ferramenta da Digisac, que você consegue trazer mensagens pré-definidas com listas, botões, mensagens bem interativas para ser enviado para os clientes. Só que
+[ 19:43 ] é direcionado pra conexão oficial do WhatsApp, tá? Então, é a conexão API do WhatsApp, tá? Que você consegue realizar disparos em massa.
+[ 19:55 ] O envio das mensagens tem um custo.
+[ 20:02 ] Tá? E agora eu vou apresentar pra vocês como abrir um chamado na conexão oficial, tá? Então, como funciona?
+[ 20:12 ] No menu de contatos, no chat de atendimento, a gente consegue filtrar no funil aqui, pessoal, somente os contatos da conexão oficial.
+[ 20:25 ] Então, já vai resumir aqui pra mim todos os clientes que eu tenho salvo na conexão oficial do WhatsApp. Então, os filtros, ele auxilia bastante nessa busca, tá?
+[ 20:41 ] Você consegue filtrar por tag, por mensagens não lidas, por mensagens recebidas, então, a última mensagem enviada pelo cliente, tá?
+[ 20:51 ] Então, eu filtrando por tipo de conexão, eu já visualizo todo o histórico e todas as mensagens que foram enviadas referente à conexão oficial, tá?
+[ 21:05 ] Por exemplo, quando eu clico na Fabiana, eu visualizo que o túnel de 24 horas já foi aberto. E pra você que não sabe,
+[ 21:18 ] a conexão oficial, ela tem um túnel de 24 horas de interação com o cliente.
+[ 21:26 ] Então, você abre essas 24 horas com o envio de um template, que é o que a gente vai fazer agora. Quer ver?
+[ 21:31 ] Ó, então, vamos lá. A cliente Rebeca. O chamado dela tá fechado, tem a opção de abrir o chamado. E o relógio está zerado, certo? Quando eu abro o chamado com o meu cliente Rebeca, dentro da conexão oficial, eu já consigo trazer o meu departamento e o meu nome.
+[ 21:59 ] Salvando essas informações, ó, pessoal, eu ainda não tenho aquela barrinha de digitação, por quê? Porque é obrigatório você abrir esse, essa interação de 24 horas com o cliente com o envio de uma mensagem, com o envio de um template.
+[ 22:19 ] Mas vocês precisam criar esses templates, enviar pra aprovação e aí sim, vocês conseguem direcioná-los pros clientes, tudo bem?
+[ 22:30 ] Como criar um template? A gente tem o passo a passo também no webinário que eu fiz referente à conexão oficial, que eu vou enviar o link aqui pra vocês assistirem, tá bom? Então, vamos lá.
+[ 22:40 ] Então, eu vou enviar um template, vou selecionar um template que eu tenho aprovado.
+[ 22:48 ] Ó, eu tenho abertura de conversa, que tem esses campos de personalização no momento do envio, que são os parâmetros, tá?
+[ 23:00 ] Então, eu tenho alguns templates aqui que eu consigo enviar pro meu cliente, certinho? Ó, com botões.
+[ 23:14 ] Isso que eu estou apresentando pra vocês, não são as mensagens interativas, são os templates que vocês abrem a conversa com o cliente, tudo bem?
+[ 23:26 ] Então, vamos lá. "Olá, Rebeca, tudo bem com você? Meu nome é Fabiana, faço parte do time Digisac. Como você gostaria de continuar seu atendimento?" Por WhatsApp ou ligação. Quando eu confirmo essas informações, ó,
+[ 23:55 ] já foi direcionada a mensagem pro meu cliente. Deixa eu atualizar para vocês visualizarem.
+[ 24:03 ] E o túnel de interação já iniciou. Visualizaram?
+[ 24:14 ] Ó, estava zerado. E agora eu tenho 24 horas para aguardar a resposta do meu cliente e iniciar esse bate-papo com ele, tá?
+[ 24:25 ] Mas só vai abrir a barrinha de digitação quando o cliente responder, tá? Então, mesmo assim, eu preciso aguardar o retorno do cliente, justamente por isso que vocês realizam campanhas,
+[ 24:45 ] para para os clientes que estão interessados no seu produto, no seu serviço, pra eles responderem essas mensagens.
+[ 24:55 ] Deixa eu pedir pra Rebeca responder o template. Vamos ver se ela consegue responder para vocês visualizarem.
+[ 25:08 ] Mas eu tenho já aqui, ó, interações que estão correndo, ó.
+[ 25:15 ] Então, eu enviei, ó, eu iniciei um chamado dentro da conexão oficial hoje às 13:43, com um template. E o cliente respondeu, eu consigo abrir esse chamado.
+[ 25:32 ] Que a barrinha de digitação já vai tá presente, por quê? Porque eu já estou conversando com esse cliente. Eu já estou ali, ó, com o túnel aberto, ele me respondeu.
+[ 25:44 ] E aí sim, eu consigo conversar com ele,
+[ 25:50 ] tranquilamente dentro das 24 horas, tudo bem?
+[ 25:56 ] Então, isso que eu expliquei até o momento, pessoal, é referente ao envio dos templates, tá?
+[ 26:08 ] Agora a gente vai falar um pouquinho referente ao envio das mensagens interativas. Você que tem a conexão oficial do WhatsApp, vai ter esse balão aqui embaixo que você consegue selecionar
+[ 26:24 ] uma mensagem interativa, tá? Então, eu vou enviar a do tutorial.
+[ 26:38 ] Enviando, chega nesse formato pro cliente. Deixa eu mostrar pra vocês como chega no celular, ó, que legal.
+[ 27:03 ] Então, chega botões, ó, chega nesse formato pro cliente, tá bom? Então, ele clica e responde, fica bem mais interativo, tá certo?
+[ 27:12 ] Então, voltando pra tela, ó, eu respondendo que eu consegui realizar a ação,
+[ 27:20 ] eu já tenho esse retorno, tá? Vamos lá. Vamos enviar uma de lista pra eu mostrar pra vocês.
+[ 27:30 ] Então, eu só clico e envio. Olha que interessante, vai nesse formato pro cliente.
+[ 27:38 ] Deixa eu mostrar pra vocês como chega.
+[ 27:45 ] Ó. Bom, agora eu vou tirar um pouquinho das dúvidas dos clientes, que estão aqui na lateral.
+[ 29:21 ] Sugestão da Ana, pode deixar Ana, que eu vou levar para o time. Muito obrigada.
+[ 29:40 ] A Maria Cecília, ela perguntou: "Se alguém mandar uma mensagem para o número, pode usar a mensagem interativa?" Pode, com certeza. Porque, no envio da mensagem do seu cliente, iniciou o túnel de 24 horas. Então, você vai ter uma interação aberta ali pra enviar e receber mensagens livres dentro das 24 horas e consegue direcionar as mensagens interativas. Você só não consegue abrir o túnel de 24 horas com uma mensagem interativa, porque você só abre esse túnel com um template, tá bom?
+[ 30:20 ] E com o retorno do cliente. Então, o cliente, ele precisa se interessar no seu conteúdo para responder, justamente por isso que os templates, eles são, né? Eles são legais ali pra você trazer botões, pra você trazer um conteúdo com imagem, vídeos também, tá bom? Pra chamar a atenção do cliente, tá?
+[ 30:45 ] Certinho, Maria? Não usam ainda, Cleiton. Precisa começar a usar.
+[ 30:57 ] Fica interessante ali pro cliente, você consegue padronizar o atendimento com essas mensagens, essas listagens, tá?
+[ 31:07 ] E não tem o custo do envio, né? Só os templates. Então, vamos lá. Agora, pessoal, a gente vai falar um pouquinho
+[ 31:18 ] referente à saúde WABA. Então, como funciona? A saúde WABA da Digisac, vocês conseguem visualizar retornos. Então, é super interessante, ó, deixa eu mostrar pra vocês.
+[ 31:36 ] Na Digisac, pra vocês localizarem a saúde WABA, você precisa vir no "Visão Geral",
+[ 31:47 ] menu superior da plataforma, a opção do "Agora". Então, essa visualização do agora é o tempo real.
+[ 31:58 ] Então, aqui você visualiza o chat individual de cada usuário cadastrado na Digisac. Então, quantas pessoas eles estão conversando, a interação, tá?
+[ 32:09 ] A fila de espera de cada departamento. E o nosso foco, que é a saúde WABA.
+[ 32:19 ] Então, você que tem a conexão oficial, você consegue acompanhar a saúde da conexão de vocês. Então, consequentemente, vocês vão ter mais controle, porque vocês vão ter uma visão mais clara das informações, permitindo essa previsão, né, pessoal? Que é muito importante na conexão oficial, você tiver você ter essas previsões mais precisas sobre o estágio de aprovação do número de vocês, né? Como que tá a saúde da conexão de vocês, né? Do número atual.
+[ 32:43 ] Então, vocês conseguem antecipar, né, algumas ações
+[ 32:51 ] pra vocês não serem aí banidos, pra vocês não ficarem pendentes, tá?
+[ 33:00 ] Então, a plataforma, ela vai apresentar uma notificação pra vocês na lateral da tela. Pra tomar ali ações imediatas, né? Mediantes ali, imediatas pra vocês realizarem e restabelecer, né? O número de vocês, tá bom?
+[ 33:14 ] Eu não tenho nenhum caso aqui de bloqueado pra mostrar pra vocês. Mas vai ficar com uma tagzinha vermelha, tá certo? Então, pra vocês localizarem, Visão Geral, Agora, Saúde WABA.
+[ 33:28 ] Então, a gente deixou disponível para vocês conseguirem ter essa, esse retorno direto na Digisac, tudo bem?
+[ 33:38 ] Bom, agora eu vou abrir para as dúvidas. Hoje o conteúdo é um pouquinho mais curto mesmo, que a gente só falou referente às mensagens interativas e a saúde WABA.
+[ 33:51 ] E vocês podem trazer dúvidas, pontos, experiências, que eu vou ficar mais um minutinho aqui com vocês. O que vocês querem assistir no na próxima semana?
+[ 34:04 ] O que vocês acham interessante eu trazer de conteúdo?
+[ 34:11 ] Nós temos a a distribuição de chamados. Vocês conhecem nossa distribuição de chamados? A gente pode falar um pouco sobre.
+[ 34:26 ] Então, de forma automática, é distribuído os chamados
+[ 34:31 ] que estão na fila. Interessante, tá?
+[ 34:44 ] Só que a distribuição de chamados é uma funcionalidade contratada à parte. Então, é um investimento super legal que você consegue ter na sua Digisac,
+[ 34:55 ] diminuindo o primeiro tempo de espera, né? Que o cliente, ele vai enviar uma mensagem e já vai ser recepcionado pelo robô. E depois, no atendimento humano, ele já é direcionado ali para o atendente em poucos minutos, tá?
+[ 35:08 ] Então, Ana, referente à distribuição de chamados, ó, deixa eu te mostrar na tela.
+[ 35:22 ] A gente vai mudar um pouquinho de assunto só pra tirar a dúvida da Ana. Então, como funciona?
+[ 35:36 ] Quando você cria a configuração da distribuição de chamados, você vai trazer os departamentos inclusos na distribuição, então você precisa ter esses departamentos já estruturados na sua plataforma para inserir na distribuição de chamados, o cargo específico, então, operador ou administrador, por exemplo, e os departamentos, tá?
+[ 35:50 ] Então, se são assuntos específicos, você consegue realizar por departamentos, certo?
+[ 36:00 ] Aí você pode trazer a distribuição referente ao departamento "Suporte", departamento comercial, por exemplo, atendimento, trazer mais um departamento, certo?
+[ 36:13 ] Então, eu vou trazer esse conteúdo pra vocês, tá? Sobre a distribuição de chamados, que é um tema interessante pra vocês entenderem,
+[ 36:26 ] Não, Aninha, é só por departamento mesmo, tá?
+[ 36:47 ] Aí são os atendentes desse departamento, né? E aí você pode criar um departamento específico para esses atendentes, qualquer coisa, tá?

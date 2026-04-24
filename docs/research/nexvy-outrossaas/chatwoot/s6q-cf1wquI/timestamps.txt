@@ -1,0 +1,44 @@
+[00:00] Cliente no WhatsApp simulando uma conversa com o chatwoot
+[00:03] Mensagem de "bom dia"
+[00:07] Resposta automática do bot
+[00:15] Cliente digitando "1" para iniciar o atendimento
+[00:16] Resposta automática do bot com opções para o cliente
+[00:22] Cliente digitando "1" para selecionar a opção "preciso de um sistema para automatizar o meu negócio"
+[00:26] Resposta automática do bot com opções para o cliente
+[00:38] Cliente digitando "5" para selecionar a opção "já conheço o produto e quero testar grátis"
+[00:41] Resposta automática do bot sobre o ERP Finanças Web
+[00:49] Cliente digitando "querotestar" para testar o sistema
+[00:54] Resposta automática do bot com pedido de nome
+[00:57] Cliente digitando o nome
+[01:00] Resposta automática do bot com pedido do nome da empresa
+[01:04] Cliente digitando o nome da empresa
+[01:08] Resposta automática do bot com pedido de e-mail principal
+[01:11] Cliente digitando o e-mail
+[01:16] Resposta automática do bot com pedido de telefone
+[01:20] Cliente digitando o número de telefone
+[01:23] Resposta automática do bot com os dados fornecidos e a informação de que a conversa será transferida para um agente
+[01:31] Agente recebendo a conversa no Chatwoot
+[01:34] Agente clicando na conversa do Flávio
+[01:43] Agente clicando em "Atribuir a mim" para atribuir a conversa a si mesmo
+[01:47] Agente digitando "olá bom dia Flávio"
+[01:53] Agente digitando "como vai tudo bem"
+[02:00] Cliente no WhatsApp digitando "olá tudo bem"
+[02:04] Agente digitando "dia tudo bem"
+[02:08] Agente narrando o vídeo e explicando sobre o chatbot
+[02:40] "Qual sistema ideal para minha empresa?"
+[02:54] Logotipo "FhOnline Sistemas"
+[02:59] Visão geral da tela do Dialogflow Essentials, mostrando as "Intents" (intenções) do bot
+[03:17] Visão geral da tela do Google Cloud Console, mostrando a criação de um projeto
+[03:34] Retorno para a tela do Dialogflow Essentials
+[04:16] Detalhes da intent "Default Welcome Intent" (intenção de boas-vindas padrão), mostrando frases de treinamento e respostas
+[04:45] Detalhes da intent "Default Fallback Intent" (intenção de fallback padrão), para quando o bot não entende a mensagem
+[05:06] Detalhes da intent "Menu", mostrando as opções do menu principal
+[05:32] Detalhes da intent "Automatizar", mostrando as opções para automatização
+[06:33] Detalhes da intent "Testar", mostrando a solicitação de dados do usuário
+[07:08] Mostra o código JSON para "handoff" (transferência para um agente) no Custom Payload
+[07:30] Teste do bot na própria interface do Dialogflow
+[08:09] Visão geral da tela do Chatwoot, com a caixa de entrada vazia
+[08:18] Navegação para as configurações do Chatwoot para ativar o Dialogflow
+[08:44] Tela para adicionar um novo "hook" do Dialogflow, solicitando o Project ID e o Key File
+[08:48] Mostra onde encontrar o Project ID no Dialogflow
+[09:30] Finalização do vídeo com o logo da FhOnline Sistemas

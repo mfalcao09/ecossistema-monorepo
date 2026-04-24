@@ -1,0 +1,30 @@
+[00:00] Início da apresentação com a palestrante.
+[05:03] Slide "Distribuição Automática na Digisac".
+[06:16] Slide "Distribuição Padrão" e explicação.
+[08:03] Slide "Distribuição em Fila" e explicação.
+[10:30] Slide "Redistribuição de chamados ao final do expediente" e explicação.
+[14:36] Demonstração na plataforma Digisac: "Criando Distribuição de Chamados".
+[17:09] Demonstração na plataforma Digisac: Opção "Distribuição padrão" e "Distribuir em fila" marcadas.
+[17:52] Demonstração na plataforma Digisac: Campo "Nome" preenchido com "Central de atendimento - Digisac".
+[18:09] Demonstração na plataforma Digisac: Departamentos incluídos na distribuição "Comercial/Vendas" selecionado.
+[19:44] Demonstração na plataforma Digisac: Cargos incluídos na distribuição "Operador" selecionado.
+[20:04] Demonstração na plataforma Digisac: Máximo de chamados por atendente e departamento definido como "15".
+[20:21] Demonstração na plataforma Digisac: Configuração de tempo máximo que os chamados permanecerão na fila do usuário offline como "15".
+[20:41] Demonstração na plataforma Digisac: Opção "Redistribuir todos os chamados" selecionada.
+[25:10] Distribuição criada e exibida na lista.
+[25:18] Demonstração na plataforma Digisac: Editando a distribuição e desativando a opção "Ativar".
+[25:46] Acesso ao menu superior e seleção de "Empresas".
+[28:27] Navegação para "Controle de Ausência" dentro de "Empresas".
+[31:31] Demonstração na plataforma Digisac: Edição da Conexão.
+[32:27] Demonstração na plataforma Digisac: Edição da Conexão novamente.
+[33:01] Visualização das conversas no chat.
+[34:20] Notificações recebidas na plataforma.
+[34:50] Demonstração na plataforma Digisac: Visualização da tela "Agora" com os chats individuais.
+[36:01] Demonstração na plataforma Digisac: Visualização da tela de Conversas.
+[36:11] Demonstração na plataforma Digisac: Controle de ausência.
+[37:25] Retorno à tela de conexões.
+[40:02] Acesso ao "Manual de Acesso" na plataforma.
+[45:10] Exibição da página inicial do manual.
+[46:24] Exibição da seção "Inteligência Artificial" no manual.
+[46:40] Exibição da seção "Novo Robô - Fluxograma" no manual.
+[48:34] Encerramento da apresentação com a palestrante.

@@ -1,0 +1,116 @@
+[00:00] A apresentadora Fabiana - Digisac é mostrada na tela
+[00:23] A apresentadora Fabiana - Digisac cumprimenta os espectadores
+[00:24] A apresentadora Fabiana - Digisac estende boas-vindas aos participantes do webinar
+[00:25] A apresentadora Fabiana - Digisac cumprimenta os participantes do webinar
+[00:30] A apresentadora Fabiana - Digisac cumprimenta os participantes do primeiro webinar educacional de 2025
+[00:32] A apresentadora Fabiana - Digisac cumprimenta os participantes do primeiro webinar educacional de 2025
+[00:36] A apresentadora Fabiana - Digisac deseja um bom dia aos participantes do webinar
+[00:46] A apresentadora Fabiana - Digisac observa que há 11 pessoas participando
+[00:50] A apresentadora Fabiana - Digisac expressa satisfação com a participação
+[00:54] A apresentadora Fabiana - Digisac convida os espectadores a compartilhar o link do webinar
+[01:06] A apresentadora Fabiana - Digisac confirma o início do webinar às 15h
+[01:10] A apresentadora Fabiana - Digisac começa o webinar
+[01:12] A apresentadora Fabiana - Digisac expressa prazer em estar de volta
+[01:17] A apresentadora Fabiana - Digisac explica que os webinars são realizados todas as quartas-feiras às 15h para compartilhar conhecimentos sobre a Digisac
+[01:28] A apresentadora Fabiana - Digisac se apresenta como analista de treinamento da Digisac
+[01:34] A apresentadora Fabiana - Digisac destaca que o webinar é um momento para interação e compartilhamento de novidades da plataforma
+[01:47] A apresentadora Fabiana - Digisac convida os espectadores a compartilhar comentários e perguntas no chat
+[01:50] A apresentadora Fabiana - Digisac convida os espectadores a se apresentarem no chat
+[02:08] A apresentadora Fabiana - Digisac convida os espectadores a se apresentarem no chat
+[02:18] A apresentadora Fabiana - Digisac inicia a apresentação
+[02:20] Tela de apresentação: "Novidades: Prepare-se para um Ano Ainda Mais Produtivo!" com a data "DIA 29 de Janeiro" e "HORÁRIO 15h00"
+[02:23] A apresentadora Fabiana - Digisac apresenta o tema do webinar
+[03:13] Tela de apresentação: "Novidades Digisac: Mais Produtividade para Você!" com categorias de novidades como "Organização e Agilidade", "Mais Personalização e Controle" e "Melhor Experiência no Atendimento"
+[03:14] A apresentadora Fabiana - Digisac apresenta as novidades da Digisac
+[03:36] A apresentadora Fabiana - Digisac menciona os lançamentos de 2024 relacionados à IA, como texto mágico e resumo inteligente
+[03:42] A apresentadora Fabiana - Digisac destaca a transcrição de áudios e o funil de vendas como recursos interessantes
+[03:59] A apresentadora Fabiana - Digisac encoraja os espectadores a assistir aos vídeos sobre os recursos mencionados no canal do YouTube da Digisac
+[04:20] A apresentadora Fabiana - Digisac introduz os filtros de mensagens não lidas para organização e agilidade
+[04:47] A apresentadora Fabiana - Digisac menciona a disponibilidade dos filtros na plataforma e no aplicativo da Digisac
+[05:12] A apresentadora Fabiana - Digisac explica como os filtros podem ser usados para destacar mensagens não lidas e priorizar clientes
+[05:28] A apresentadora Fabiana - Digisac introduz a personalização dos campos com máscaras para dados como CPF, CNPJ, e-mail, data e hora
+[06:14] A apresentadora Fabiana - Digisac fala sobre a aceleração de áudios e a transcrição, que otimizam o tempo de atendimento
+[07:13] Tela de apresentação: "Tags no chat" com informações sobre cores, vínculo a departamentos e exclusão de tags
+[07:14] A apresentadora Fabiana - Digisac introduz a funcionalidade de tags no chat
+[08:12] Tela de apresentação: "Tags no chat" com a seção "Realizar a configuração no menu Empresas" e um botão "Exibição das tags no chat"
+[08:13] A apresentadora Fabiana - Digisac explica como habilitar a exibição das tags no chat
+[09:03] A apresentadora Fabiana - Digisac mostra a interface da plataforma Digisac
+[09:16] A apresentadora Fabiana - Digisac demonstra como criar e gerenciar tags no menu superior
+[09:31] A apresentadora Fabiana - Digisac demonstra a criação de uma nova tag, adicionando nome e cor
+[10:16] A apresentadora Fabiana - Digisac demonstra como vincular a tag a departamentos específicos
+[10:40] A apresentadora Fabiana - Digisac mostra que a tag criada agora aparece no chat de atendimento
+[10:55] A apresentadora Fabiana - Digisac demonstra a inserção de tags em um contato no chat de atendimento
+[11:23] A apresentadora Fabiana - Digisac explica que as tags são etiquetas de identificação para classificar clientes
+[11:34] A apresentadora Fabiana - Digisac mostra como as tags aparecem no chat de atendimento
+[11:51] A apresentadora Fabiana - Digisac demonstra como habilitar a exibição das tags no menu "Mais opções" > "Empresa"
+[12:12] A apresentadora Fabiana - Digisac destaca a opção de permitir que os operadores ativem ou desativem a exibição das tags no chat
+[12:29] A apresentadora Fabiana - Digisac repete o caminho para acessar as configurações de tags
+[12:47] A apresentadora Fabiana - Digisac mostra como as tags aparecem nos contatos após a habilitação
+[12:58] A apresentadora Fabiana - Digisac demonstra como esconder e mostrar as tags no menu superior do chat
+[13:22] A apresentadora Fabiana - Digisac explica que é possível visualizar mais tags clicando no sinal de mais
+[13:30] A apresentadora Fabiana - Digisac demonstra como remover tags dos contatos
+[13:40] A apresentadora Fabiana - Digisac demonstra a criação de uma nova tag diretamente no chat de atendimento
+[14:22] A apresentadora Fabiana - Digisac responde às perguntas dos espectadores no chat
+[14:36] A apresentadora Fabiana - Digisac orienta sobre o envio de sugestões de melhorias para o suporte técnico
+[14:50] A apresentadora Fabiana - Digisac anuncia que as figurinhas (stickers) serão abordadas em breve
+[15:12] A apresentadora Fabiana - Digisac reforça a importância de liberar as tags para uso na plataforma
+[15:25] A apresentadora Fabiana - Digisac menciona que é possível filtrar por tags no histórico de chamadas e estatísticas
+[15:35] A apresentadora Fabiana - Digisac informa que há quatro cores disponíveis para as tags
+[15:50] A apresentadora Fabiana - Digisac esclarece que os comentários internos permanecerão no novo layout e não serão visíveis para o cliente
+[16:21] A apresentadora Fabiana - Digisac confirma que é possível fechar chamados em massa e oferece treinamento para isso
+[16:51] Tela de apresentação: "Exemplos:" com informações sobre "Cores Personalizadas" e "Tags"
+[16:52] A apresentadora Fabiana - Digisac mostra exemplos de uso das tags, como cores para urgência e negociação
+[17:08] A apresentadora Fabiana - Digisac explica que as tags podem ser vinculadas a departamentos para evitar confusão
+[17:20] A apresentadora Fabiana - Digisac demonstra novamente a criação de tags e a visualização da quantidade de contatos vinculados
+[17:41] A apresentadora Fabiana - Digisac demonstra como realizar ações em massa com as tags, como vincular a um departamento ou excluí-las
+[18:00] A apresentadora Fabiana - Digisac exemplifica a utilização das tags para organizar contatos por indicação ou campanha
+[18:10] A apresentadora Fabiana - Digisac mostra como filtrar mensagens por tags no chat de atendimento
+[18:24] A apresentadora Fabiana - Digisac demonstra como filtrar contatos por tags, como "aguardando documentação"
+[18:35] A apresentadora Fabiana - Digisac reforça o uso dos filtros para facilitar a visualização e organização das conversas
+[18:51] Tela de apresentação: "Envio e Criação de Stickers" com informações sobre compatibilidade, tamanho e permissões de uso
+[18:53] A apresentadora Fabiana - Digisac introduz o envio e criação de stickers na plataforma
+[19:04] A apresentadora Fabiana - Digisac explica que o recurso de stickers é compatível com WhatsApp Standard e WhatsApp Business API (WABA)
+[19:20] A apresentadora Fabiana - Digisac informa que os stickers devem ter até 100 KB para melhor desempenho
+[19:30] A apresentadora Fabiana - Digisac explica que os administradores podem configurar quem pode criar, editar ou excluir stickers
+[19:57] A apresentadora Fabiana - Digisac demonstra como criar figurinhas na Digisac
+[20:08] A apresentadora Fabiana - Digisac mostra o menu de figurinhas no chat de atendimento
+[20:20] A apresentadora Fabiana - Digisac demonstra o botão para criar figurinhas
+[20:28] A apresentadora Fabiana - Digisac mostra as figurinhas usadas recentemente e todas as figurinhas
+[20:30] A apresentadora Fabiana - Digisac demonstra a opção de criar uma figurinha personalizada
+[20:47] A apresentadora Fabiana - Digisac demonstra a inclusão de uma imagem no criador de figurinhas
+[21:05] A apresentadora Fabiana - Digisac mostra a figurinha criada e a opção de enviá-la para o cliente
+[21:19] A apresentadora Fabiana - Digisac demonstra como copiar e remover figurinhas
+[21:30] A apresentadora Fabiana - Digisac mostra que as figurinhas ficam salvas na plataforma
+[21:40] A apresentadora Fabiana - Digisac responde a uma pergunta sobre o uso de figurinhas no Telegram
+[22:00] A apresentadora Fabiana - Digisac esclarece que o Telegram já é compatível com a Digisac
+[22:49] Tela de apresentação: "Evolução nos Campos Personalizados" com informações sobre maior controle, flexibilidade e novidades
+[22:50] A apresentadora Fabiana - Digisac introduz a evolução dos campos personalizados
+[23:05] A apresentadora Fabiana - Digisac explica que os campos personalizados permitem identificar informações como CPF, CNPJ, e-mail, data e hora
+[23:25] A apresentadora Fabiana - Digisac explica que as máscaras dos campos personalizados facilitam o preenchimento de informações específicas
+[23:40] A apresentadora Fabiana - Digisac destaca que os campos personalizados evitam a repetição de informações e ficam visíveis no menu lateral do contato
+[23:59] A apresentadora Fabiana - Digisac demonstra como configurar os campos personalizados no menu "Mais opções" > "Campos personalizados"
+[24:46] A apresentadora Fabiana - Digisac demonstra a criação de um novo campo personalizado, definindo nome, tipo e vinculação
+[25:27] A apresentadora Fabiana - Digisac demonstra a inclusão de um campo de hora com intervalo e data específica
+[25:56] A apresentadora Fabiana - Digisac demonstra a inclusão de campos para CPF e CNPJ
+[26:12] A apresentadora Fabiana - Digisac demonstra a opção de mostrar o campo personalizado no cadastro e torná-lo obrigatório
+[26:52] A apresentadora Fabiana - Digisac mostra a visualização dos campos personalizados no menu lateral do contato no chat de atendimento
+[27:15] A apresentadora Fabiana - Digisac explica que os campos personalizados ficam visíveis ao cadastrar um novo contato e ao interagir com o cliente
+[27:46] A apresentadora Fabiana - Digisac explica que a configuração "mostrar no cadastro" determina a visibilidade dos campos personalizados
+[28:03] A apresentadora Fabiana - Digisac demonstra a inclusão de informações de consulta com intervalo de horário no campo personalizado
+[28:16] A apresentadora Fabiana - Digisac explica que é possível incluir a vigência de uma apólice de seguro usando intervalos de data
+[28:38] A apresentadora Fabiana - Digisac relembra como acessar e criar campos personalizados
+[29:51] Tela de apresentação: "Respostas Rápidas com Mídias e Categorias" com informações sobre a ferramenta de respostas rápidas
+[29:52] A apresentadora Fabiana - Digisac introduz as respostas rápidas com mídias e categorias
+[30:08] A apresentadora Fabiana - Digisac explica que as respostas rápidas podem incluir imagens, arquivos e vídeos para otimizar o tempo de resposta
+[30:30] A apresentadora Fabiana - Digisac destaca que as respostas rápidas permitem padronizar as mensagens e atendimentos
+[30:50] A apresentadora Fabiana - Digisac demonstra como gerenciar e cadastrar novas respostas rápidas no menu superior
+[31:24] A apresentadora Fabiana - Digisac demonstra a visualização e edição de uma resposta rápida existente
+[31:49] A apresentadora Fabiana - Digisac mostra como categorizar as respostas rápidas e selecionar os departamentos que podem utilizá-las
+[32:15] A apresentadora Fabiana - Digisac demonstra como adicionar arquivos como imagens, vídeos e PDFs às respostas rápidas
+[32:49] A apresentadora Fabiana - Digisac demonstra como direcionar uma resposta rápida com texto e vídeo para o cliente
+[33:12] A apresentadora Fabiana - Digisac demonstra o envio de uma resposta rápida com um vídeo
+[33:24] A apresentadora Fabiana - Digisac demonstra a inclusão de uma ficha de cadastro nas respostas rápidas
+[33:30] A apresentadora Fabiana - Digisac demonstra a alteração do endereço em uma resposta rápida antes do envio
+[33:43] A apresentadora Fabiana - Digisac demonstra como enviar uma resposta rápida com um funil de vendas e imagem para o cliente
+[34:19] Tela de agradecimento: "Obrigada!" com o logo da Digisac
+[34:20] A apresentadora Fabiana - Digisac agradece a participação dos espectadores no webinar e se despede

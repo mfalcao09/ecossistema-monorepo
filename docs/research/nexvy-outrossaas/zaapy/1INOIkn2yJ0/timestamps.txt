@@ -1,0 +1,83 @@
+[00:00] Fluxograma do fluxo de bots.
+[00:05] O menu de opções é visto.
+[00:06] O fluxo para Suporte Técnico é mostrado.
+[00:20] O fluxo de Suporte Técnico é recolhido.
+[00:21] O menu de opções é exibido.
+[00:24] O botão Adicionar Cartão é clicado.
+[00:25] A tela de seleção de cartão é exibida.
+[00:39] O cartão "Enviar Imagem" é adicionado.
+[00:43] O botão Adicionar Cartão é clicado.
+[00:44] A tela de seleção de cartão é exibida.
+[00:45] O cartão "Enviar Vídeo" é adicionado.
+[00:47] O botão Adicionar Cartão é clicado.
+[00:48] A tela de seleção de cartão é exibida.
+[00:49] O cartão "Enviar Áudio" é adicionado.
+[00:52] O botão Adicionar Cartão é clicado.
+[00:53] A tela de seleção de cartão é exibida.
+[00:56] O cartão "Enviar Arquivo" é adicionado.
+[01:03] Uma seta é ligada do cartão "Enviar Opções" para o cartão "Enviar Imagem".
+[01:10] O botão "Adicionar Ponto" é clicado no cartão "Enviar Imagem".
+[01:13] A tela "Ponto de Ligação" é exibida.
+[01:14] O ponto de ligação "Entrada" é adicionado.
+[01:16] O botão "Adicionar Ponto" é clicado no cartão "Enviar Imagem".
+[01:17] A tela "Ponto de Ligação" é exibida.
+[01:18] O ponto de ligação "Saída" é adicionado.
+[01:20] O botão "Adicionar Ponto" é clicado no cartão "Enviar Vídeo".
+[01:21] A tela "Ponto de Ligação" é exibida.
+[01:22] O ponto de ligação "Entrada" é adicionado.
+[01:24] O botão "Adicionar Ponto" é clicado no cartão "Enviar Vídeo".
+[01:25] A tela "Ponto de Ligação" é exibida.
+[01:26] O ponto de ligação "Saída" é adicionado.
+[01:28] O botão "Adicionar Ponto" é clicado no cartão "Enviar Áudio".
+[01:29] A tela "Ponto de Ligação" é exibida.
+[01:30] O ponto de ligação "Entrada" é adicionado.
+[01:32] O botão "Adicionar Ponto" é clicado no cartão "Enviar Áudio".
+[01:33] A tela "Ponto de Ligação" é exibida.
+[01:34] O ponto de ligação "Saída" é adicionado.
+[01:36] O botão Adicionar Cartão é clicado.
+[01:40] O cartão "Enviar Arquivo" é exibido.
+[01:43] O botão Adicionar Cartão é clicado.
+[01:44] A tela de seleção de cartão é exibida.
+[01:46] O cartão "Enviar Texto" é adicionado.
+[01:48] O botão "Adicionar Ponto" é clicado no cartão "Enviar Texto".
+[01:49] A tela "Ponto de Ligação" é exibida.
+[01:50] O ponto de ligação "Entrada" é adicionado.
+[01:52] O botão "Adicionar Ponto" é clicado no cartão "Enviar Texto".
+[01:53] A tela "Ponto de Ligação" é exibida.
+[01:54] O ponto de ligação "Saída" é adicionado.
+[01:55] O botão Adicionar Cartão é clicado.
+[01:56] A tela de seleção de cartão é exibida.
+[02:00] O cartão "Finalizar Fluxo" é adicionado.
+[02:15] O botão "Adicionar Ponto" é clicado no cartão "Finalizar Fluxo".
+[02:18] A tela "Ponto de Ligação" é exibida.
+[02:19] O ponto de ligação "Entrada" é adicionado.
+[02:37] O fluxo é movido para o lado direito.
+[02:46] O cartão "Enviar Opções" está conectado ao cartão "Enviar Imagem".
+[02:51] O cartão "Enviar Imagem" está conectado ao cartão "Enviar Vídeo".
+[02:55] O cartão "Enviar Vídeo" está conectado ao cartão "Enviar Áudio".
+[03:00] O cartão "Enviar Áudio" está conectado ao cartão "Enviar Arquivo".
+[03:05] O cartão "Enviar Arquivo" está conectado ao cartão "Enviar Texto".
+[03:10] O cartão "Enviar Texto" está conectado ao cartão "Finalizar Fluxo".
+[03:19] O botão "Editar Imagem" é clicado no cartão "Enviar Imagem".
+[03:24] A tela "Enviar Imagem" é exibida.
+[03:38] A tela "Enviar Imagem" é fechada.
+[03:40] O botão "Editar Vídeo" é clicado no cartão "Enviar Vídeo".
+[03:41] A tela "Enviar Vídeo" é exibida.
+[03:51] A tela "Enviar Vídeo" é fechada.
+[03:53] O botão "Editar Áudio" é clicado no cartão "Enviar Áudio".
+[03:54] A tela "Enviar Áudio" é exibida.
+[04:08] A tela "Enviar Áudio" é fechada.
+[04:11] O botão "Editar Arquivo" é clicado no cartão "Enviar Arquivo".
+[04:12] A tela "Enviar Arquivo" é exibida.
+[04:19] A tela "Enviar Arquivo" é fechada.
+[04:21] O botão "Editar Mensagem" é clicado no cartão "Enviar Texto".
+[04:22] A tela "Mensagem de Texto" é exibida.
+[04:24] "Obrigado por tudo!" é digitado.
+[04:35] A tela "Mensagem de Texto" é fechada.
+[04:38] O botão "Departamento" é clicado no cartão "Finalizar Fluxo".
+[04:39] A tela "Vincular Departamento" é exibida.
+[04:41] O departamento "Financeiro" é selecionado.
+[04:42] O botão "Cadastrar Departamento" é clicado.
+[04:52] A tela "Vincular Departamento" é fechada.
+[05:47] O botão Adicionar Cartão é clicado.
+[05:48] A tela de seleção de cartão é exibida.

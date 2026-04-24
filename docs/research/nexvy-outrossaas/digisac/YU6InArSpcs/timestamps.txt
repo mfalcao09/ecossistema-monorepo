@@ -1,0 +1,54 @@
+[00:00] Início da apresentação do vídeo
+[00:02] Transição para o logotipo da Digisac
+[00:07] Visão geral das funcionalidades da plataforma
+[00:13] Início do treinamento sobre cargos
+[00:23] Explicação sobre os cargos de administrador e operador
+[01:04] Acesso à aba "Cargos"
+[01:16] Detalhes sobre o cargo de "Administrador"
+[01:39] Detalhes sobre o cargo de "Operador"
+[01:50] Edição de um cargo existente
+[02:00] Permissões de "API"
+[02:07] Criação de um novo cargo
+[02:18] Campo "Nome" para o novo cargo
+[02:26] Explicação sobre quando criar um novo cargo
+[03:26] Detalhes das permissões de "API"
+[03:43] Permissões de "Agendamentos"
+[04:20] Opções de permissão para agendamentos
+[05:16] Permissões de "Assuntos de Chamados"
+[06:07] Permissões de "Avaliações"
+[06:45] Permissões de "Bots"
+[07:16] Permissões de "Campanhas"
+[07:47] Permissões de "Campos Personalizados"
+[08:42] Permissões de "Cargos"
+[09:25] Permissões de "Chamados"
+[11:49] Permissões de "Chat"
+[12:14] Permissões de "Conexões"
+[12:36] Permissões de "Contatos"
+[13:24] Permissões de "Departamentos"
+[13:47] Permissões de "Distribuição de Chamados"
+[14:23] Permissões de "Diversos"
+[14:36] Permissões de "Empresa"
+[15:00] Informações da empresa no menu "Mais Opções"
+[15:13] Retorno às permissões dos cargos
+[15:30] Permissões de "Estatísticas"
+[15:52] Permissões de "Feriados"
+[16:08] Permissões de "HSM"
+[16:38] Permissões de "Integração"
+[16:48] Permissões de "Mensagens"
+[17:42] Permissões de visualização das mensagens
+[18:58] Permissões de "Notificações"
+[19:13] Permissões de "Organizações"
+[19:15] Permissões de "Pessoas"
+[19:51] Permissões de "Respostas Rápidas"
+[20:10] Permissões de "Tabela de Horários"
+[20:53] Permissões de "Tags"
+[21:17] Permissões de "Termo de Aceite"
+[21:40] Permissões de "Usuários"
+[21:52] Salvando as alterações do cargo
+[22:00] Informações de contato do suporte Digisac
+[22:04] Acesso rápido ao chat de suporte
+[22:37] Acesso aos tutoriais e manual de acesso
+[22:52] Como rotacionar o menu na plataforma
+[23:02] Opção de alterar o idioma
+[23:18] Encerramento do vídeo e logotipo da Digisac
+[23:23] Detalhes de contato da Digisac

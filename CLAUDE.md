@@ -47,8 +47,43 @@ Se o usuário disser **"salva contexto"** ou **"vou encerrar"**: parar trabalho,
 4. **Dual-write** — decisões importantes vão para Supabase ECOSYSTEM antes de .md
 5. **Testes antes de deploy** — smoke test mínimo antes de ativar qualquer agente em produção
 6. **Conventional commits** — `feat:`, `fix:`, `docs:`, `refactor:`, `chore:`
-7. **Co-authored commits** — `Co-Authored-By: Claude Opus 4.6 <noreply@anthropic.com>`
+7. **Co-authored commits** — `Co-Authored-By: Claude Opus 4.7 (1M context) <noreply@anthropic.com>`
 8. **Registro de pendências** — antes de encerrar qualquer sessão, registrar em `docs/sessions/PENDENCIAS.md` toda pendência identificada (config manual, ACL a popular, seed faltando, deploy pendente, débito técnico, teste não executado). Nunca encerrar uma sessão deixando pendência só na conversa — ela some. Se uma sessão anterior deixou pendência que você pode fechar, feche e mova a linha para "Resolvidas" no mesmo PR
+
+## Fluxo canônico de sessão (SINGLE-CHECKOUT — sem worktree)
+
+Desde 2026-04-23 o fluxo padrão é **sem worktrees**. Uma sessão Claude = trabalha direto no checkout principal.
+
+**Ao abrir nova sessão:**
+1. Configurar Claude Desktop: modo **Local**, pasta `erp-educacional`, branch `main`
+2. NÃO criar worktree (toggle "worktree" desligado)
+3. `git checkout -b feat/<escopo-curto>` — branch curta, nome descritivo
+
+**Durante a sessão:**
+- Commits direto na feature branch
+- Push regular (`git push -u origin feat/xxx`)
+
+**Ao encerrar a sessão (CRÍTICO — antes de desconectar):**
+1. `git push` final
+2. `gh pr create` — criar PR com descrição do que foi feito
+3. Aguardar CI verde
+4. `gh pr merge --squash --delete-branch --admin` — mergear e limpar remote
+5. `git checkout main && git pull && git branch -D feat/xxx` — voltar a main e limpar local
+6. Se ficou algo incompleto: registrar em `docs/sessions/PENDENCIAS.md`
+
+**Regra de ouro:** nenhuma sessão pode terminar com branch órfã. Ou mergeia, ou fecha o PR com motivo, ou registra em PENDENCIAS.
+
+**Worktrees são exceção**, não regra. Use apenas se:
+- Precisa rodar dev server/testes longos em paralelo com outra sessão editando
+- Está comparando duas versões lado-a-lado
+- Em caso de uso: `git worktree add ../tmp-worktree feat/xxx` com **nome significativo** (não aleatório) e delete imediatamente após uso.
+
+**Merge de PR de worktree filho** (workaround P-171 quando CLI falha com 'main already used'):
+```
+gh pr update-branch N     # GitHub sincroniza branch com main
+gh pr checks N --watch    # aguarda CI verde
+gh pr merge N --squash --delete-branch --admin
+```
 
 ## Ações bloqueadas (qualquer contexto)
 

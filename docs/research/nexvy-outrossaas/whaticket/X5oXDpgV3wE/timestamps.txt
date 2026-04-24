@@ -1,0 +1,45 @@
+[00:00] Início do vídeo: tela inicial da plataforma WABOOT exibindo a aba "Atendimentos" vazia.
+[00:14] Um novo atendimento aparece na aba "Aguardando" após uma mensagem ser enviada pelo WhatsApp.
+[00:20] A mensagem "SEM FILA" é destacada, indicando que o cliente ainda não escolheu um departamento.
+[00:32] O cliente no WhatsApp seleciona a opção "1" (RH).
+[00:37] O atendimento do cliente é movido para a aba "Atendendo".
+[00:44] O usuário clica na opção "Usuários" no menu de administração.
+[00:46] Uma janela de edição de usuário é aberta.
+[00:47] É mostrado que as filas não foram configuradas para o usuário atual, explicando por que o atendimento não foi exibido.
+[00:51] O usuário seleciona as filas "RH", "Comercial" e "Suporte".
+[00:54] O usuário seleciona a conexão "CHP TIM".
+[00:57] O usuário clica em "Salvar" para aplicar as alterações.
+[01:00] A página é recarregada.
+[01:03] O atendimento do cliente agora é visível na aba "Aguardando".
+[01:09] O usuário clica em "Aceitar" para iniciar o atendimento.
+[01:10] O atendimento do cliente é movido para a aba "Atendendo", e a interface de conversa é exibida.
+[01:16] O usuário envia uma mensagem "Oi" para o cliente.
+[01:28] O usuário envia uma mensagem "Tudo bem?" para o cliente.
+[01:34] O cliente responde "Tudo bem sim".
+[01:40] O usuário clica no botão "Resolver" para finalizar o atendimento.
+[02:06] O usuário clica no botão de áudio.
+[02:08] Uma janela pop-up solicita permissão para usar o microfone.
+[02:09] O usuário permite o acesso ao microfone.
+[02:11] O usuário grava e envia um áudio.
+[02:24] O usuário clica na opção "Assinar" para desabilitar a assinatura nas mensagens.
+[02:27] O usuário clica no botão de emoji.
+[02:31] O usuário clica no botão de anexar mídia.
+[02:39] O usuário clica no botão "Transferir atendimento".
+[02:51] Uma janela para transferir o ticket é aberta.
+[02:54] O usuário digita "Bruno" para buscar um usuário.
+[02:58] O usuário seleciona a fila "Comercial".
+[03:01] O usuário clica em "Transferir".
+[03:06] O usuário clica no botão "Agendar cliente".
+[03:16] Uma janela de "Mensagem" é aberta para agendar o cliente.
+[03:19] O usuário seleciona "Não" para "Abrir Ticket?".
+[03:26] O usuário digita a mensagem "Fulano, nossa reunião será daqui a 40 minutos."
+[03:38] O usuário seleciona a conexão "CHP TIM".
+[03:42] O usuário seleciona "1 dia" para enviar a mensagem.
+[03:48] O usuário ajusta a data e hora do agendamento para 24/07/2025 às 17:19.
+[04:22] O agendamento é salvo com sucesso.
+[04:25] O usuário clica no botão "Deletar cliente".
+[04:47] O usuário clica no botão "Voltar para fila".
+[04:52] O usuário clica no botão "Resolver".
+[04:56] O atendimento resolvido é exibido na aba "Filas".
+[05:01] O usuário filtra as filas (RH, Comercial, Suporte).
+[05:13] Fim do vídeo: tela final da plataforma WABOOT com o logo e o endereço do site.

@@ -1,0 +1,50 @@
+Claro, aqui está uma análise detalhada dos momentos importantes do vídeo:
+
+[00:00] Início do vídeo, introdução ao treinamento sobre integração de inteligência artificial na plataforma.
+[00:15] Primeiro passo: Acessar a seção "Filas e Conexões" na barra lateral.
+[00:19] Clicar em "Prompts" para gerenciar as configurações da IA.
+[00:21] Abrir o link da OpenAI (plataforma.openai.com/account/api-keys) em uma nova aba.
+[00:24] Tela de "API keys" da OpenAI, onde o usuário será redirecionado.
+[00:30] Explicação sobre como criar uma conta na OpenAI, caso o usuário não tenha uma.
+[00:41] Acessar a tela de "API keys" após criar a organização.
+[00:53] Instrução para retornar à plataforma e abrir o link de faturamento da OpenAI.
+[01:09] Tela de "Billing" (Faturamento) da OpenAI, onde o usuário deve adicionar um método de pagamento e carregar crédito.
+[01:27] Retornar à seção "API keys" na OpenAI após adicionar o crédito.
+[01:31] Clicar em "Create new secret key" para gerar uma nova chave API.
+[01:32] Preencher o nome da chave API (ex: "rodrigo") e selecionar o projeto padrão.
+[01:41] Código da chave API gerada (deve ser copiado e armazenado, pois não será visível novamente).
+[01:49] Retornar à plataforma de multiatendimento na seção "Prompts".
+[01:53] Agentes de IA criados na plataforma (ex: "Sofia 3").
+[02:04] Abrir as configurações do agente de IA "Sofia 3".
+[02:07] Colar a chave API da OpenAI no campo "API Key".
+[02:11] Definir o nome do agente de IA.
+[02:13] Inserir o "Prompt" (base de conhecimento e comportamento da IA).
+[02:17] Definir a "Mensagem de Transferência" (mensagem exibida quando a IA transfere o atendimento para um humano).
+[02:44] Selecionar a fila (departamento) para onde a IA deve transferir o atendimento.
+[02:54] Escolher o "Modelo GPT" (versão do ChatGPT), recomendando o GPT-4 Mini.
+[03:13] Ajustar a "Temperatura" (grau de aleatoriedade da resposta da IA) para 1.
+[03:16] Definir o "Máximo de Tokens da Resposta" entre 300 e 400.
+[03:31] Ajustar o "Máximo de Mensagens de Tokens de Histórico" entre 30 e 40.
+[03:40] Selecionar o "Tipo de Resposta" (Automática, Texto ou Voz).
+[03:44] Explicação sobre a integração da IA com ElevenLabs para humanizar a voz.
+[04:02] Demonstração das opções "Automático", "Texto" e "Voz" para o tipo de resposta.
+[04:46] Confirmar que o "Prompt" é a base de conhecimento da IA e pode ser criado com o auxílio do ChatGPT.
+[06:04] Salvar as configurações do agente de IA.
+[06:07] Acessar "Conexões" para testar a inteligência artificial.
+[06:17] Abrir as configurações de uma conexão de WhatsApp.
+[06:19] Na aba "Integrações", selecionar o agente de IA para atendimento direto.
+[06:28] Demonstração de como iniciar o atendimento da IA através de um fluxo de automação.
+[06:41] Adicionar a inteligência artificial a um fluxo de automação.
+[06:58] Retornar à aba "Integrações" da conexão de WhatsApp para exibir a IA diretamente.
+[07:11] Explicar que não é possível iniciar um fluxo e uma IA simultaneamente na conexão.
+[07:27] Salvar as configurações da conexão de WhatsApp com a IA vinculada.
+[07:33] Abrir o WhatsApp para fazer o teste de conversação com a IA.
+[07:42] Enviar uma mensagem de "Boa tarde" para a IA no WhatsApp.
+[07:48] A IA responde, seguindo as orientações do prompt, identificando o número e apresentando-se.
+[07:59] A IA apresenta o objetivo da plataforma e as principais vantagens.
+[08:05] O usuário pergunta "como funciona".
+[08:11] A IA responde com as informações detalhadas sobre o funcionamento da plataforma.
+[08:24] A IA direciona para o objetivo principal, agendar uma reunião.
+[08:33] Reforço sobre a simplicidade da integração e a necessidade de recarga mínima na OpenAI.
+[08:44] Informações sobre o custo aproximado da IA para a empresa.
+[09:03] Finalização do vídeo, com a plataforma configurada e a IA em funcionamento.

@@ -1,0 +1,20 @@
+[00:00] Início do vídeo com a tela de Agendamentos, mostrando um calendário.
+[00:08] A tela muda para a aba de Atendimentos, mostrando um chat e a interface do WABOOT.
+[00:13] Clicado no botão "Agendar Cliente" na interface do chat.
+[00:20] A tela retorna para a aba de Agendamentos.
+[00:22] Clicado no botão "Novo Agendamento", abrindo um formulário para criar uma nova mensagem.
+[00:24] Campo "Contato" sendo preenchido com "WABOOT".
+[00:27] Campo "Abrir Ticket?" mostrando as opções "Sim" e "Não", e "Não" é selecionado.
+[00:31] Campo "Mensagem" sendo preenchido com "Olá".
+[00:34] Campo "Selecione um convênio" mostrando a opção "CHIP TIM".
+[00:39] Campo "Selecione uma fila" mostrando as opções "BH", "Comercial" e "Suporte".
+[00:44] A mensagem no campo "Mensagem" é alterada para "Olá tudo bem".
+[00:48] Campo "Enviar por:" mostrando as opções de dias para envio (1 dia, 2 dias, etc.). "1 dia" é selecionado.
+[00:54] O calendário é aberto para selecionar a data do agendamento, e o dia 29 de julho é selecionado.
+[00:58] Clicado no botão "Adicionar".
+[01:00] Clicado no botão "Anexar Mídia".
+[01:03] Clicado no botão "Cancelar".
+[01:04] A tela de Agendamentos retorna, e o agendamento existente no dia 24 de julho é selecionado.
+[01:06] Clicado no ícone de lápis para editar o agendamento, abrindo o formulário "Mensagem Pendente".
+[01:12] Clicado no botão "Cancelar".
+[01:17] Tela final com o logo da WABOOT e informações de contato.

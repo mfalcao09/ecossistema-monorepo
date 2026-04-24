@@ -1,0 +1,109 @@
+[00:00] Início da apresentação sobre a plataforma Digisac.
+[00:10] Fabiana interage com o público.
+[00:29] Fabiana responde a uma dúvida sobre avaliações e feedbacks no bot.
+[00:54] Fabiana responde a uma dúvida sobre o tempo de atendimento em pausa.
+[01:06] Fabiana informa que a análise de métricas por atendimento ainda não está disponível na plataforma.
+[01:19] Fabiana aceita a sugestão de melhoria da plataforma.
+[01:31] Fabiana convida o público a compartilhar a live.
+[02:00] Fabiana mostra a lista de funcionalidades que serão abordadas.
+[02:07] Fabiana pergunta sobre o segmento de atuação do público.
+[02:58] Fabiana responde a uma dúvida sobre a possibilidade de colocar várias condições no novo bot.
+[03:31] Fabiana incentiva o público a participar da próxima imersão sobre como criar um robô do zero para um segmento específico.
+[04:02] Fabiana responde a uma dúvida sobre como configurar o tempo de inatividade no chatbot.
+[04:22] Fabiana se apresenta.
+[05:11] Fabiana explica sobre o lançamento do novo fluxograma de robôs.
+[06:05] Fabiana compartilha a tela da plataforma Digisac.
+[06:15] Fabiana apresenta o script inicial do bot.
+[06:40] Fabiana explica sobre o uso da variável "contact_name" para personalizar a saudação.
+[06:50] Fabiana detalha as opções de atendimento (Comercial, Suporte, Financeiro).
+[07:00] Fabiana mostra a opção de digitar 0 para retornar ao menu inicial.
+[07:20] Fabiana apresenta a mensagem de encerramento de atendimento.
+[07:30] Fabiana mostra como incluir o protocolo do atendimento.
+[07:45] Fabiana exibe a mensagem de inatividade após XX horas ou minutos.
+[08:05] Fabiana explica a configuração de feriado e o horário de atendimento.
+[08:25] Fabiana mostra a mensagem de fora do horário de atendimento.
+[08:40] Fabiana apresenta as formas de avaliação NPS ou CSAT.
+[08:52] Fabiana mostra como acessar a aba "Robôs" na plataforma.
+[09:07] Fabiana explica a diferença entre "Fluxograma NOVO" e "Construtor legado".
+[09:40] Fabiana explica sobre a importância de configurar a avaliação antes de criar o robô.
+[10:18] Fabiana mostra a aba "Avaliações" na plataforma.
+[10:22] Fabiana mostra como criar uma nova avaliação, escolhendo o tipo (NPS ou CSAT).
+[10:30] Fabiana mostra o exemplo de configuração de uma avaliação CSAT com duração de 5 minutos.
+[10:47] Fabiana exibe as opções de resposta e mensagens para a avaliação CSAT.
+[10:55] Fabiana configura a duração da avaliação para 15 minutos.
+[11:06] Fabiana configura a avaliação para 5 minutos.
+[11:15] Fabiana altera a duração da avaliação para 15 minutos.
+[11:23] Fabiana altera a duração da avaliação para 30 minutos.
+[11:32] Fabiana configura a pergunta da avaliação "Como você avalia o meu atendimento?".
+[11:40] Fabiana define a escala de satisfação de 1 a 5.
+[11:49] Fabiana define a quantidade de tentativas de resposta inválida (3 vezes).
+[11:57] Fabiana mostra as mensagens para respostas válidas e inválidas.
+[12:05] Fabiana explica a importância de configurar a avaliação antes de criar o fluxograma.
+[12:22] Fabiana mostra as avaliações CSAT e NPS.
+[12:40] Fabiana mostra a configuração de uma avaliação NPS de 0 a 10.
+[13:00] Fabiana mostra como configurar o horário de atendimento da empresa.
+[13:10] Fabiana acessa o menu "Empresa" para configurar o horário de atendimento.
+[13:30] Fabiana mostra a tabela de horário de atendimento.
+[13:40] Fabiana adiciona um novo horário para o sábado.
+[13:50] Fabiana explica como o bot interpreta o horário de atendimento.
+[13:59] Fabiana configura o tempo de inatividade do chamado para 5 minutos.
+[14:15] Fabiana altera o tempo de inatividade do chamado para 360 minutos.
+[14:20] Fabiana mostra a seção de controle de ausência e configurações de senhas de usuários.
+[14:26] Fabiana salva as alterações na configuração da empresa.
+[14:40] Fabiana retorna à seção de robôs.
+[14:45] Fabiana mostra como iniciar a criação de um novo robô com o "Início do fluxo" e "Configurar gatilho".
+[15:15] Fabiana mostra os tipos de gatilho disponíveis (recebimento de mensagem, abertura de chamado, após fechamento de chamado, etc.).
+[15:45] Fabiana mostra a opção "Antes do fechamento de chamado".
+[16:00] Fabiana explica a regra de enviar avaliação antes do fechamento do chamado.
+[16:15] Fabiana mostra a opção "Chamado inativo".
+[16:30] Fabiana inclui a opção "Configurar condição".
+[16:40] Fabiana explica sobre as condições "Verdadeiro" e "Falso".
+[16:50] Fabiana explica a função das variáveis nas condições.
+[17:09] Fabiana mostra as opções de variáveis para configurar a condição (texto da mensagem, é a primeira mensagem do contato, dentro do horário de atendimento, é feriado, etc.).
+[17:20] Fabiana seleciona a variável "Dentro do horário de atendimento" e adiciona outra condição.
+[17:30] Fabiana adiciona a condição "É a primeira mensagem do chamado".
+[17:40] Fabiana explica sobre a possibilidade de adicionar múltiplas condições.
+[18:00] Fabiana adiciona mais uma condição "Texto da mensagem está incluso na lista" com o valor "0".
+[18:10] Fabiana explica que o robô pode acionar a qualquer momento se o cliente digitar "0".
+[18:20] Fabiana mostra as opções de operadores (é igual, não é igual, está incluso na lista, etc.).
+[18:30] Fabiana mostra como digitar o valor da condição (por exemplo, "0").
+[18:40] Fabiana responde a uma dúvida sobre a inclusão de palavras-chave nos anúncios.
+[18:50] Fabiana salva as condições configuradas.
+[19:00] Fabiana explica a opção "Condição do bloco" (E ou OU).
+[19:10] Fabiana seleciona a opção "E" para que todas as condições sejam atendidas.
+[19:30] Fabiana minimiza a condição e adiciona um "Enviar mensagem".
+[19:40] Fabiana copia a mensagem de boas-vindas do script.
+[20:00] Fabiana cola a mensagem no bloco "Enviar mensagem".
+[20:10] Fabiana define as respostas para as opções 1, 2 e 3.
+[20:20] Fabiana aplica as respostas.
+[20:30] Fabiana adiciona um novo bloco "Enviar mensagem" para o caso de o cliente não estar no horário de atendimento.
+[20:40] Fabiana copia a mensagem de fora do horário de atendimento do script.
+[20:50] Fabiana cola a mensagem no novo bloco.
+[21:00] Fabiana adiciona um "Enviar mensagem" para a opção de encerrar o chamado.
+[21:10] Fabiana adiciona um "Transferir chamado" para o departamento de suporte.
+[21:20] Fabiana seleciona o departamento de "Suporte" e o atendente "Fabiana".
+[21:30] Fabiana adiciona outro "Transferir chamado" para o departamento "Financeiro".
+[21:40] Fabiana seleciona o departamento de "Comercial/Vendas" e o atendente "Pamela Souza".
+[21:50] Fabiana adiciona o gatilho "Recebimento de mensagem" para a opção "0" (retornar ao menu inicial).
+[22:00] Fabiana adiciona o bloco "Enviar mensagem" com a opção de aguardar atendimento ou digitar 0 para retornar ao menu inicial.
+[22:10] Fabiana adiciona um bloco "Parar fluxo principal".
+[22:20] Fabiana explica que o bloco "Parar fluxo principal" não encerra o chamado, apenas pausa o fluxo do robô.
+[22:30] Fabiana exclui um bloco e adiciona um "Fechar chamado".
+[22:40] Fabiana define o assunto do chamado como "Fora do horário de atendimento" e o resumo do atendimento.
+[22:50] Fabiana adiciona o bloco "Enviar pesquisa de avaliação".
+[23:00] Fabiana seleciona a avaliação NPS que foi criada anteriormente.
+[23:10] Fabiana adiciona o bloco "Voltar ao início do fluxo" após a avaliação.
+[23:20] Fabiana adiciona um gatilho "A qualquer momento" para o recebimento de mensagem.
+[23:30] Fabiana adiciona um bloco "Configurar condição" com a variável "Mensagem foi enviada pelo atendente".
+[23:40] Fabiana adiciona um bloco "Enviar mensagem" com a mensagem de que o chamado foi finalizado por falta de interação.
+[23:50] Fabiana adiciona o bloco "Fechar chamado" com o assunto "Fechado por inatividade".
+[24:00] Fabiana mostra o fluxograma completo do robô criado.
+[24:10] Fabiana agradece a participação do público.
+[24:20] Fabiana disponibiliza o link para o passo a passo da criação do robô.
+[24:30] Fabiana mostra o fluxo do robô em funcionamento no WhatsApp.
+[24:40] Fabiana mostra o teste do robô no WhatsApp.
+[24:50] Fabiana mostra a avaliação NPS no WhatsApp.
+[25:00] Fabiana mostra o resultado da avaliação no WhatsApp.
+[25:10] Fabiana responde a mais dúvidas do chat.
+[25:20] Fabiana informa que o script do robô será disponibilizado na plataforma.
+[25:30] Fabiana encerra a live.

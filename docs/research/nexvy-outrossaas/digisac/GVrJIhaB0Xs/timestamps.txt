@@ -1,0 +1,195 @@
+[00:00] Mulher sorrindo na tela
+[00:02] A apresentadora Fabiana cumprimenta os espectadores, que se apresentam no chat
+[00:13] Fabiana dá as boas-vindas à "Imersão Digisac", um webinário semanal sobre o uso da plataforma
+[00:27] Fabiana se apresenta como analista de treinamento da Digisac e incentiva a interação no chat
+[00:30] Fabiana se apresenta como Fabiana e incentiva as pessoas a se apresentarem no chat
+[00:46] Fabiana convida os espectadores a enviar seus nomes, cidades e empresas
+[01:00] Fabiana informa que o webinar oferece uma sessão exclusiva para tirar dúvidas e conhecer funcionalidades
+[01:14] Fabiana encoraja a interação no chat para dúvidas e apresentações
+[01:22] Fabiana anuncia que o tema de hoje é a ferramenta "Cargos"
+[01:26] Fabiana explica que "Cargos" é uma ferramenta essencial para novos usuários da plataforma
+[01:51] Fabiana revela uma novidade sobre o lançamento de reações com emojis
+[02:07] Fabiana explica que será possível visualizar e reagir a mensagens com emojis
+[02:24] Fabiana explica a funcionalidade de reagir a mensagens com emojis, semelhante ao WhatsApp Web
+[02:30] Fabiana anuncia que a funcionalidade ainda não foi lançada, mas que está dando um spoiler
+[02:38] Fabiana detalha que a funcionalidade permite visualizar, enviar e remover reações com emojis
+[02:54] A tela muda para uma página de ajuda da Digisac sobre "Novidade na Plataforma: Reações em Mensagens!"
+[02:58] Fabiana explica os "Pontos Importantes" da nova funcionalidade para WhatsApp, Instagram e Facebook
+[03:07] Fabiana enfatiza que a funcionalidade estará disponível para WhatsApp, Instagram e Facebook
+[03:13] Fabiana informa que a funcionalidade ainda não está disponível na plataforma
+[03:20] Fabiana compartilha o link da página de ajuda no chat para que os espectadores possam ler com calma
+[04:00] A tela muda para um slide com o título "Ferramenta "Cargos": Personalize permissões na Digisac."
+[04:09] A tela muda para um slide com o título "Aprenda a criar e editar cargos na Digisac" e explica a função dos cargos
+[04:12] Fabiana explica o conceito de cargos e como eles controlam as permissões dos usuários
+[04:22] Fabiana compara os acessos de "Administrador" (completo) e "Operador" (restrito)
+[04:31] Fabiana explica que as permissões são personalizadas para cada função
+[04:51] Fabiana dá exemplos de permissões como "tag", "resposta rápida" e outras ferramentas
+[05:13] A tela muda para um slide mostrando as opções de permissão para Avaliações e Ações de Segurança
+[05:19] Fabiana explica que é possível permitir a criação, edição, exclusão e visualização de ferramentas na plataforma
+[05:32] Fabiana informa que há tutoriais e um manual explicando cada opção de permissão
+[06:02] A tela muda para um slide que destaca as opções de permissão para Avaliações: Criar, Deletar, Editar e Visualizar
+[06:07] Fabiana explica que nos cargos é possível permitir a criação, edição, exclusão e visualização das ferramentas
+[06:26] Fabiana explica a importância de conceder permissões para criar, editar ou visualizar avaliações
+[07:04] A tela muda para a plataforma Digisac, na seção "Cargos", mostrando "Administrador" e "Operador"
+[07:07] Fabiana demonstra como acessar a seção de "Cargos" na plataforma Digisac
+[07:11] Fabiana explica que "Mais opções" mostra ferramentas auxiliares como "Usuários" e "Cargos"
+[07:15] Fabiana demonstra a visualização do cargo de "Administrador", que já possui todas as permissões
+[07:32] Fabiana explica que o cargo de "Operador" é mais restrito, mas também pré-configurado
+[07:44] Fabiana mostra que o "Administrador" não pode ser editado, apenas visualizado
+[07:51] Fabiana mostra as permissões do "Administrador", que já estão todas liberadas
+[07:58] Fabiana explica que o "Operador" tem acesso restrito, mas pode usar o chat de atendimento
+[08:05] Fabiana descreve as funcionalidades do chat para o "Operador"
+[08:22] Fabiana demonstra como criar um novo cargo na plataforma
+[08:29] Fabiana explica que é possível criar um novo cargo, como "Supervisor"
+[08:44] Fabiana explica que é possível ter o mesmo cargo para várias pessoas
+[08:57] Fabiana demonstra o processo de criação de um novo cargo, incluindo nome e permissões
+[09:05] Fabiana insere "Supervisor" como nome do novo cargo
+[09:09] Fabiana mostra a opção "Selecionar Todos" para as permissões
+[09:12] Fabiana explica que é possível selecionar todas as permissões para um cargo de administrador
+[09:22] Fabiana explica cada permissão do cargo
+[09:37] Fabiana explica a permissão "API", relacionada à integração e geração de tokens
+[10:00] Fabiana mostra onde gerar o token da API, na seção "Conta" do perfil
+[10:17] Fabiana explica a permissão "Agendamentos" e suas funcionalidades
+[10:39] Fabiana enfatiza a importância de permitir agendamentos para operadores e supervisores
+[10:48] Fabiana explica que a permissão de agendamento permite criar, deletar, editar e visualizar agendamentos
+[11:00] Fabiana detalha a funcionalidade de agendamento, incluindo a criação para outros usuários
+[11:21] Fabiana explica que a permissão de criar agendamentos pode ser personalizada para cada usuário
+[11:39] Fabiana dá um exemplo de como a recepcionista pode agendar para outras pessoas
+[11:51] Fabiana explica que a permissão de agendamento depende do segmento da empresa
+[12:05] Fabiana reforça que as permissões podem ser personalizadas para cada necessidade
+[12:21] Fabiana explica a permissão "Assuntos de Chamados" e suas funcionalidades
+[12:30] Fabiana mostra que a ferramenta "Assunto de Chamado" está disponível no ícone do telefone vermelho
+[12:38] Fabiana demonstra como arquivar, criar, deletar, editar e visualizar assuntos de chamados
+[12:50] Fabiana explica que as permissões podem ser personalizadas, permitindo, por exemplo, apenas visualizar assuntos existentes
+[13:00] Fabiana demonstra que é possível personalizar as permissões de visualizar assuntos de chamados
+[13:12] Fabiana mostra que a ferramenta "Assunto de Chamado" fica em "Mais opções"
+[13:17] Fabiana mostra que o "Assunto de Chamado" está na seção de ferramentas auxiliares
+[13:21] Fabiana demonstra como criar um novo assunto de chamado
+[13:30] Fabiana explica que a ferramenta permite visualizar ou criar um novo assunto
+[13:44] Fabiana explica a permissão "Avaliações", que está atrelada ao robô
+[13:59] Fabiana explica que a permissão de "Avaliações" é mais administrativa e permite apenas a visualização
+[14:15] Fabiana mostra onde encontrar a ferramenta "Avaliações" nas opções auxiliares
+[14:24] Fabiana explica que o primeiro passo é criar a avaliação para inserir o bot
+[14:34] Fabiana mostra a permissão "Ações de Segurança", que é referente à auditoria
+[14:48] Fabiana mostra onde encontrar a "Auditoria de autenticação" nas opções auxiliares
+[14:52] Fabiana explica que a permissão de "Ações de Segurança" é mais administrativa
+[15:03] Fabiana explica a permissão "Bots", que é 100% administrativa
+[15:15] Fabiana explica que a permissão de "Bots" pode ser de visualizar para o operador
+[15:38] Fabiana explica a permissão "Campanhas" e suas funcionalidades
+[15:52] Fabiana explica que as campanhas estão disponíveis para duas conexões
+[16:03] Fabiana explica que é possível realizar campanhas por SMS e pela conexão oficial
+[16:22] Fabiana explica que é possível visualizar, criar, deletar ou editar campanhas
+16:32 Fabiana reforça que a permissão de "Campanhas" é para conexões oficiais e SMS
+[16:41] Fabiana explica a permissão "Campos Personalizados"
+[16:50] Fabiana explica que os "Campos Personalizados" permitem adicionar mais informações no cadastro do contato
+[17:09] Fabiana explica que é possível criar campos personalizados como CPF
+[17:23] Fabiana mostra como adicionar um novo campo personalizado na plataforma
+[17:35] Fabiana mostra que o campo personalizado fica disponível ao cadastrar um novo contato
+[17:47] Fabiana demonstra que é possível incluir campos personalizados ao criar um contato
+[17:53] Fabiana explica que é possível personalizar a permissão para cada campo personalizado
+[18:12] Fabiana explica a permissão "Cargos" novamente
+[18:23] Fabiana explica que a permissão de "Cargos" é mais administrativa
+[18:37] Fabiana reforça que é legal deixar apenas a visualização para o operador
+[18:45] Fabiana explica a permissão "Chamados" e suas funcionalidades
+18:55 Fabiana mostra que a opção de chamados vem pré-configurada para o operador
+[19:04] Fabiana explica que é possível personalizar as permissões de chamados
+[19:14] Fabiana explica a permissão de fechar chamados próprios, sem fechar os de outros usuários
+[19:27] Fabiana explica a permissão de adicionar comentários em chamados de outros usuários (comentário interno)
+[19:42] Fabiana explica a permissão de abrir chamados, essencial para o atendimento ativo
+[19:59] Fabiana explica as permissões de transferência de chamados
+[20:13] Fabiana explica a permissão de transferir chamados em massa (somente no histórico)
+[20:25] Fabiana explica as permissões de transferir chamados do departamento e próprios
+[20:30] Fabiana explica a permissão de editar chamados
+[20:40] Fabiana mostra que a opção de editar chamados fica nos três pontinhos no chat de atendimento
+[21:05] Fabiana explica as permissões de visualizar todos os chamados e visualizar todos os chamados do departamento
+[21:10] Fabiana alerta para não selecionar as últimas duas opções para não bagunçar a visualização
+[21:32] Fabiana reforça a importância de não selecionar as últimas duas opções
+[21:55] Fabiana explica a permissão "Chat" e suas funcionalidades
+[22:07] Fabiana mostra que é possível visualizar a terceira coluna do contato
+[22:15] Fabiana mostra que a visualização da terceira coluna do contato pode ser removida
+[22:30] Fabiana demonstra que ao selecionar, a visualização volta a ser dinâmica
+[22:39] Fabiana explica a permissão "Conexões"
+[22:50] Fabiana explica que a permissão de "Conexões" é mais administrativa
+[23:02] Fabiana explica que é legal deixar apenas a visualização para o operador
+[23:14] Fabiana reforça que a visualização de conexões permite o acesso a todas as conexões ativas
+[23:20] Fabiana explica a permissão "Contatos"
+[23:30] Fabiana explica a permissão de bloquear, criar, deletar e exportar contatos
+[23:42] Fabiana explica que a permissão de fixar contatos é exclusiva do aplicativo da Digisac
+[23:57] Fabiana explica a permissão de editar, visualizar e visualizar números de contatos
+[24:12] Fabiana explica que para visualizar o número completo do contato, é preciso liberar a permissão em "Cargos"
+[24:28] Fabiana explica a permissão "Departamentos"
+[24:40] Fabiana explica a permissão de arquivar, criar, editar e visualizar departamentos
+[24:51] Fabiana explica que arquivar um departamento é como deletar
+[25:01] Fabiana explica a permissão "Distribuição de Chamados"
+[25:11] Fabiana informa que a distribuição de chamados é uma funcionalidade contratada à parte
+[25:21] Fabiana explica que a distribuição de chamados realiza a transferência automática para cada atendente
+[25:32] Fabiana informa que a distribuição de chamados é uma ferramenta contratada à parte
+[25:59] Fabiana explica a permissão "Diversos"
+[26:10] Fabiana explica a permissão de ignorar restrição de IP, que é mais administrativa
+[26:17] Fabiana explica a permissão "Empresa"
+[26:27] Fabiana explica que a permissão de "Empresa" é mais administrativa e permite visualizar dados da empresa
+[26:38] Fabiana mostra que a permissão de "Empresa" está no ícone "Mais Opções"
+[26:50] Fabiana explica a permissão "Tabela de Horário"
+[27:03] Fabiana explica que a "Tabela de Horário" corresponde ao funcionamento do robô
+[27:18] Fabiana reforça que a "Tabela de Horário" é configurada pelo administrador
+[27:24] Fabiana explica a permissão "Estatísticas"
+[27:39] Fabiana explica que a permissão de "Estatísticas" é mais administrativa
+[27:49] Fabiana mostra que a permissão de "Estatísticas" está em "Visão Geral"
+[28:01] Fabiana explica que a permissão de "Estatísticas" é mais para o administrador
+[28:16] Fabiana explica que a permissão de "Estatísticas" permite visualizar histórico e dados em tempo real
+[28:28] Fabiana reforça que a permissão de "Estatísticas" é para o administrador
+[28:55] Fabiana explica a permissão "Feriados"
+[29:07] Fabiana explica que a permissão de "Feriados" está atrelada ao robô e precisa ser configurada antes
+[29:28] Fabiana demonstra como criar um novo feriado na plataforma
+[29:48] Fabiana reforça que a permissão de "Feriados" precisa ser configurada no robô
+[29:59] Fabiana explica a permissão "Template"
+[30:10] Fabiana explica que a permissão de "Template" é para a conexão oficial (WhatsApp Business API)
+[30:21] Fabiana explica que a permissão de "Template" permite visualizar, editar e enviar templates
+[30:31] Fabiana reforça que a permissão de "Template" é somente para conexão oficial
+[30:54] Fabiana explica a permissão "Integração"
+[31:09] Fabiana explica que a permissão de "Integração" permite visualizar, criar, deletar e editar integrações
+[31:25] Fabiana explica a permissão "Mensagens"
+[31:38] Fabiana explica que a permissão de "Mensagens" permite excluir mensagens
+[31:52] Fabiana explica que a permissão de "Mensagens" permite visualizar mensagens excluídas no histórico
+[32:05] Fabiana explica que a permissão de "Mensagens" permite ocultar mensagens da fila de atendimento
+[32:21] Fabiana reforça a importância de não habilitar a opção de ocultar mensagens
+[32:38] Fabiana mostra que há um ícone de informação para cada permissão
+[32:51] Fabiana explica que a permissão de "Mensagens" é bem personalizada
+[33:04] Fabiana detalha as permissões de visualização de mensagens
+[33:17] Fabiana explica as permissões de visualização de mensagens por departamento
+[33:30] Fabiana demonstra que é possível ter mais segurança ao restringir a visualização de mensagens por departamento
+[33:48] Fabiana reforça que a permissão de "Mensagens" é super interessante
+[34:35] Fabiana explica a permissão "Mensagens Interativas"
+[34:50] Fabiana explica que a permissão de "Mensagens Interativas" é para conexão oficial (WhatsApp Business API)
+[35:08] Fabiana demonstra que é possível criar, deletar, gerenciar, enviar, editar e visualizar mensagens interativas
+[35:22] Fabiana explica a permissão "Notificações"
+[35:29] Fabiana explica que a permissão de "Notificações" permite visualizar notificações da plataforma
+[35:32] Fabiana explica a permissão "Organizações e Pessoas"
+[35:45] Fabiana explica que "Organização" é para empresas terceirizadas e "Pessoas" é para agrupamento de pessoas
+[35:59] Fabiana explica que a permissão de "Organização e Pessoas" permite visualizar ou criar
+[36:13] Fabiana explica a permissão "Respostas Rápidas"
+[36:29] Fabiana explica que a permissão de "Respostas Rápidas" permite criar, deletar, editar e visualizar respostas rápidas
+[36:48] Fabiana demonstra que é possível personalizar as permissões de "Respostas Rápidas"
+[37:00] Fabiana explica a permissão "Tabela de Horários"
+[37:16] Fabiana explica que a permissão de "Tabela de Horários" é mais administrativa
+[37:24] Fabiana reforça que a "Tabela de Horários" é configurada pelo administrador
+[37:25] Fabiana explica a permissão "Tags"
+[37:40] Fabiana explica que a permissão de "Tags" é bem personalizada
+[37:53] Fabiana explica que quanto mais permissão o operador tem, melhor para o atendimento
+[38:15] Fabiana demonstra que é legal permitir a visualização e criação de tags
+[38:25] Fabiana explica a permissão "Termo de Aceite"
+[38:42] Fabiana explica que o "Termo de Aceite" é uma parte administrativa
+[38:53] Fabiana informa que o "Termo de Aceite" é configurado pela Digisac
+[39:03] Fabiana explica a permissão "Usuários"
+[39:19] Fabiana explica que a permissão de "Usuários" permite arquivar, criar, editar e visualizar usuários
+[39:35] Fabiana explica que é legal permitir apenas a visualização para o operador
+[39:46] Fabiana demonstra que é preciso incluir apenas um cargo por usuário
+[40:15] Fabiana finaliza a demonstração da criação de cargos
+[40:52] A tela retorna para o slide com o título "Nos Cargos, é possível PERMITIR A criação, edição, exclusão e visualização das ferramentas da plataforma."
+[41:26] A tela muda para um slide com o título "Os benefícios de utilizar cargos para definir permissões:" e explica "Segurança Aprimorada" e "Organização"
+[41:35] Fabiana explica os benefícios de "Segurança Aprimorada" e "Organização" ao utilizar cargos
+[42:10] Fabiana questiona se há alguma dúvida
+[42:20] Fabiana informa que as imersões da Digisac ficam salvas no YouTube
+[42:37] Fabiana incentiva a agendar um treinamento com a equipe da Digisac
+[43:08] Fabiana agradece a atenção de todos e deseja um bom fim de tarde
+[43:13] Fabiana se despede e convida para o próximo webinário

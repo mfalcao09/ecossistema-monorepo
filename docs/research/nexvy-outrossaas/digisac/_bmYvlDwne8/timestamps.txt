@@ -1,0 +1,44 @@
+[00:00] Início da apresentação com Fabiana, analista de treinamento da Digisac.
+[02:39] Slide "Configurações Essenciais do Bot: Grupos, Avaliação e Tags Automáticas".
+[03:03] Slide "Novo Robô Fluxograma da Digisac!", com link para o vídeo da semana passada e lista de tópicos.
+[06:08] Slide "Plataforma de atendimento multicanal".
+[07:02] Slide "Qual a importância do script?".
+[08:29] Tela da plataforma Digisac, mostrando a interface de conversas e menu superior.
+[09:07] Navegação para o menu "Mais opções" e seleção de "Departamentos".
+[09:15] Tela de "Departamentos", Fabiana cria um "Novo Departamento" chamado "Dpto Grupos".
+[10:07] Criação de um novo departamento chamado "Dpto sem avaliação".
+[10:39] Abertura do menu "Contatos".
+[10:50] Seleção de "Mostrar filtros" e filtro por "Tipo: Grupos".
+[11:10] Seleção de todos os grupos e aplicação da ação em massa para "Departamento padrão".
+[11:59] Transferência dos grupos para o departamento "Sem robô".
+[13:00] Navegação para o menu "Mais opções", "Robôs".
+[13:09] Criação de um "Novo Fluxograma".
+[13:42] Configuração do gatilho inicial para "Recebimento de mensagem".
+[14:48] Configuração da condição para "Dentro do horário de atendimento" e "É primeira mensagem do chamado".
+[16:29] Adição de uma terceira condição "Chamado está em um dos departamentos" e seleção de todos os departamentos, exceto "Sem robô", "Sem avaliação", "Dpto Grupos" e "Dpto sem avaliação".
+[19:10] Vinculação da condição para "Enviar mensagem" com o conteúdo do script inicial.
+[20:18] Definição das respostas esperadas para as opções 1, 2 e 3 do menu.
+[20:34] Adição de "Transferir chamado" para a opção 1 (Comercial/Vendas).
+[20:50] Adição de "Transferir chamado" para a opção 2 (Suporte).
+[21:07] Adição de "Transferir chamado" para a opção 3 (Financeiro).
+[21:24] Configuração da opção "Outras respostas" para "Enviar mensagem" com o conteúdo da mensagem inicial.
+[22:18] Adição de "Transferir chamado" para o departamento "Sem robô" e ligação da condição "Chamado está em um dos departamentos: Sem robô".
+[23:05] Ligação das opções de transferência de chamado (Comercial, Suporte, Financeiro) e "Outras respostas" ao bloco "Enviar mensagem" e, subsequentemente, a "Parar fluxo principal".
+[25:31] Adição de uma nova condição "Configurar condição" para gerenciar o envio de avaliação.
+[26:15] Configuração da condição "Chamado está em um dos departamentos: Sem robô" e conexão a "Parar fluxo principal".
+[27:09] Conexão da condição a "Enviar pesquisa de avaliação" e seleção da avaliação "Digisac".
+[27:26] Conexão da avaliação a "Voltar ao início do fluxo".
+[28:20] Publicação do robô "Live 0204".
+[28:57] Abertura do gatilho "A qualquer momento" para configurar a avaliação.
+[29:06] Configuração do gatilho "A qualquer momento" com "Recebimento de mensagem".
+[29:28] Configuração da condição para "Enviar pesquisa de avaliação" e "Voltar ao início do fluxo".
+[32:20] Teste do robô com o envio de "Oi" em um contato individual.
+[32:47] Teste do robô no grupo, mostrando que o robô não aciona.
+[33:17] Demonstração de como desativar as notificações sonoras e visuais na plataforma Digisac.
+[33:50] Reativação das notificações na tela de "Empresa" para a Larissa.
+[33:57] Demonstração das tags no robô, mostrando como o robô adiciona tags automaticamente com base nas respostas do cliente.
+[34:10] Explicação do funcionamento das tags e como são adicionadas no robô.
+[34:26] Tela de "Configurar condição" com o exemplo de tags.
+[34:40] Demonstração da configuração de "Outras respostas" no robô, ligando-a de volta ao menu inicial para o cliente digitar uma opção válida.
+[34:45] Finalização da apresentação e agradecimento pela participação.
+[34:55] Fabiana se despede e convida para a próxima live.

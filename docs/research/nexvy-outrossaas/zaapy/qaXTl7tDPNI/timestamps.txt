@@ -1,0 +1,19 @@
+[00:00] Visão geral do painel de automação de respostas
+[00:20] Adicionando um novo grupo de respostas
+[00:31] Criação de um grupo de respostas chamado "Chave Pix"
+[00:40] Grupo "Chave Pix" criado no painel
+[00:59] Opções de edição para o grupo "Chave Pix"
+[01:12] Tela de lista de respostas para o grupo "Chave Pix"
+[01:15] Formulário para criar uma nova resposta rápida
+[01:39] Inserindo texto para a resposta rápida "Chave Pix CNPJ"
+[01:50] Preenchendo o nome da resposta como "Chave Pix"
+[01:58] Salvando as modificações da resposta rápida
+[02:00] Resposta "Chave Pix" cadastrada, com opções de departamento e grupo
+[02:13] Retornando à visão geral dos grupos de respostas
+[02:22] Navegando para a seção de atendimento
+[02:26] Utilizando o comando de barra para acessar respostas rápidas no chat
+[02:32] Resposta rápida "Chave Pix" aparece no chat, pronta para ser enviada
+[02:40] Acessando a lista de respostas rápidas através do ícone de interrogação
+[02:44] Enviando a resposta rápida "Chave Pix" com um clique
+[02:54] Editando a resposta rápida "Chave Pix" antes de enviar no chat
+[03:03] Transição para o próximo tópico: telas de etiquetas

@@ -1,0 +1,77 @@
+[00:00] Início da contagem regressiva para apresentação do vídeo
+[00:30] Transição para o logo Digisac
+[00:34] Tela de recursos da plataforma Digisac, destacando as funcionalidades de integração, transferências, marcadores, troca de canais, envio em massa e recebimento em massa
+[00:41] Tela de login na plataforma Digisac, onde o usuário insere suas credenciais.
+[01:07] O vídeo mostra o login na plataforma Digisac.
+[01:15] Aba "Conexões" na plataforma, onde o usuário pode adicionar ou gerenciar conexões.
+[01:21] O usuário clica em "Nova conexão".
+[01:23] Tela de "Criando Conexão", mostrando opções para tipo de conexão (WhatsApp), nome, departamento padrão para chamados e configurações específicas de leitura e mensagens.
+[01:34] O usuário nomeia a nova conexão como "Nova Conexão" e seleciona "Suporte" como departamento.
+[01:40] A nova conexão é adicionada, mas está "Desconectado". O vídeo mostra a opção de escanear o código QR para conectar.
+[01:50] O usuário clica em "Escanear código QR".
+[01:51] Uma janela pop-up exibe o código QR para ser escaneado.
+[01:58] O código QR é escaneado com sucesso e a conexão WhatsApp aparece como "Conectado".
+[02:07] O usuário clica em "Mais opções" no menu superior.
+[02:09] O menu "Mais opções" é aberto, mostrando várias funcionalidades, incluindo "Departamentos" e "Cargos/Puestos". O usuário clica em "Departamentos".
+[02:11] Aba "Departamentos", que lista os departamentos existentes. O usuário clica em "Novo Departamento".
+[02:13] Tela de "Criando Departamento", onde o usuário nomeia o departamento como "Comercial" e clica em "Guardar".
+[02:24] O usuário clica em "Mais opções" e seleciona "Cargos/Puestos".
+[02:27] Aba "Cargo", mostrando "Administrador" e "Operador". O usuário clica em "Visualizar" para o cargo de "Administrador".
+[02:37] Detalhes do cargo de "Administrador", mostrando acesso irrestrito a várias funcionalidades da plataforma Digisac.
+[02:51] O usuário clica em "Visualizar" para o cargo de "Operador".
+[02:53] Detalhes do cargo de "Operador", mostrando permissões mais restritas, focadas no uso do chat e manejo de clientes.
+[03:25] O usuário clica em "Mais opções" e seleciona "Usuários".
+[03:30] Aba "Usuários", exibindo o nome, e-mail, cargo e departamento dos usuários. O usuário clica em "Novo usuário".
+[03:44] Tela de "Criando Usuário", onde o usuário pode definir nome, e-mail, senha, cargo e departamento do novo usuário.
+[04:20] O usuário clica na aba "Chats", que é a tela principal de conversas.
+[04:32] Aba "Contatos", mostrando os contatos do WhatsApp espelhados na plataforma.
+[04:45] Aba "Cola", que exibe clientes aguardando atendimento por departamento, priorizando quem espera há mais tempo.
+[05:18] O vídeo mostra a transferência de um cliente da "Cola" para a aba "Chats" após o envio de uma mensagem.
+[05:44] O usuário clica em "Contatos" e depois em "Registrar contato".
+[05:51] Tela de "Criando Contato", onde o usuário insere o nome, vincula a conexão WhatsApp e o número de telefone do contato.
+[06:08] O usuário preenche as informações do contato, seleciona a conexão e o número de telefone, e clica em "Guardar".
+[06:17] A tela de chat com o contato recém-criado é aberta.
+[06:27] O usuário clica em "Abrir llamado" para iniciar um novo atendimento.
+[06:29] Uma janela "Abrir Llamado" é exibida, onde o usuário seleciona um departamento ("Suporte") e um atendente ("Augusto").
+[06:37] O usuário seleciona o próprio nome como atendente.
+[06:43] O usuário adiciona um comentário "Teste" no campo de observações e clica em "Guardar".
+[06:49] O chamado é aberto, e a tela de chat mostra o início do chamado com as informações inseridas.
+[07:14] O usuário digita uma mensagem ("Hola") e a envia.
+[07:30] O usuário clica no ícone de emoji para adicionar um emoji à mensagem.
+[07:37] O usuário clica no ícone de microfone para enviar um áudio (requer dispositivo de gravação).
+[07:49] O usuário clica no ícone de clipe para anexar arquivos ou imagens.
+[08:08] O usuário clica no ícone de três pontos para acessar informações adicionais do contato e funcionalidades como silenciar a conversa, marcá-la como não lida, adicionar observações e copiar o protocolo de atendimento.
+[08:58] O usuário clica no ícone de "Histórico de Chamados" (um "Z" com um relógio).
+[09:00] A tela de "Histórico de Llamados" é exibida, mostrando todos os chamados realizados com aquele contato. O usuário clica em "Exibir Filtros".
+[09:06] Filtros de pesquisa são exibidos, permitindo buscar chamados por status, período, departamento, atendente, assunto, tags e número de protocolo. O usuário insere o número de protocolo e clica em "Aplicar Filtros".
+[09:17] O resultado da pesquisa mostra o chamado específico. O usuário clica no número de protocolo.
+[09:24] Uma janela pop-up "Mensajes de Ticket" é exibida, mostrando a conversa do chamado e as opções de exportar em PDF ou TXT.
+[09:35] O usuário clica no ícone de seta (Transferir Llamado) para transferir o chamado.
+[09:37] Janela "Transferir Llamado", mostrando as opções de transferir para outro departamento ou para outro atendente.
+[09:44] O usuário adiciona um comentário antes de realizar a transferência.
+[09:56] O usuário clica no ícone de "Respostas Rápidas" (um raio).
+[10:07] O usuário clica em "Mais opções" e seleciona "Respostas Rápidas".
+[10:12] Tela de "Respostas Rápidas", mostrando a opção de criar uma nova resposta. O usuário clica em "Nova resposta".
+[10:28] Janela "Criando Respostas Rápidas", onde o usuário insere um texto de resposta rápida ("Nuestra ubicación es Calle X. Aguardamos tu visita!") e seleciona os departamentos que terão acesso a ela.
+[10:55] A nova resposta rápida é adicionada. O usuário retorna para a tela de chat.
+[11:08] No chat, o usuário clica no ícone de raio para acessar as respostas rápidas, seleciona a resposta criada e a envia.
+[11:21] O usuário clica no ícone de "Comentários" (um balão de fala) para adicionar um comentário que não será enviado ao cliente.
+[11:40] O usuário escreve um comentário ("El cliente me contactó por llamada telefónica.") para registrar informações internas sobre o atendimento.
+[12:18] O usuário clica em "Visão Geral" no menu superior e seleciona "Assunto do Llamado".
+[12:22] Tela de "Assunto del Llamado". O usuário clica em "Nuevo Assunto del Llamado".
+[12:32] Janela "Creando Assunto del Llamado", onde o usuário nomeia um novo assunto ("Venta realizada") e clica em "Guardar".
+[12:40] Outro assunto é adicionado ("Agendamiento"). O usuário retorna para o chat.
+[12:51] O usuário clica no ícone de telefone vermelho para "Finalizar llamado".
+[12:53] Janela "Finalizar llamado", onde o usuário seleciona o assunto do chamado ("Venta realizada") e adiciona um resumo do atendimento ("Este cliente solicito la compra del producto Y.").
+[13:21] O chamado é finalizado e o chat é limpo, indicando que não há chamados abertos.
+[13:56] O usuário clica em "Visión General" e seleciona "Ahora" para ver a tela de acompanhamento em tempo real.
+[14:00] Tela "Ahora", mostrando "En Atendimiento", "Colas de Servicio" e "Resumen". O usuário clica em "En Atendimiento".
+[14:07] "En Atendimiento" exibe os operadores e seus respectivos contatos em atendimento.
+[14:15] O usuário clica em "Colas de Servicio", mostrando os clientes em espera em cada departamento.
+[14:26] O usuário clica em "Resumen", que exibe um resumo estatístico dos usuários online/offline, chamados abertos/fechados, tempo médio de atendimento e por departamento/assistente.
+[14:47] O usuário clica em "Visión General" e seleciona "Histórico de Llamados".
+[14:49] Tela de "Histórico de Llamados", que permite visualizar e filtrar todos os chamados da plataforma.
+[15:13] O usuário clica em "Visión General" e seleciona "Estadísticas de Servicio".
+[15:15] Tela de "Estadísticas de Servicio", mostrando dados como tempo médio de chamado, tempo de espera, mensagens enviadas/recebidas e chamados abertos/fechados.
+[15:42] O vídeo mostra gráficos de tempo médio de serviço, tempo de espera e número de mensagens, que se atualizam com base nos filtros aplicados.
+[16:07] O vídeo conclui, reforçando que o conteúdo abordou o básico da plataforma para iniciar o atendimento ao cliente.

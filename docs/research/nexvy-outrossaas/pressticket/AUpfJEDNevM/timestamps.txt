@@ -1,0 +1,26 @@
+[00:00] Tela inicial da plataforma de multiatendimento, com o menu lateral "Atendimento" expandido, exibindo as opções: "Atendimentos", "Respostas Rápidas", "Kamban", "Tarefas", "Contatos", "Agendamentos" (selecionada), "Tags", "Chat Interno" e "Treinamento". A área principal exibe a tela de Agendamentos, mostrando as colunas "Contato", "Mensagem", "Data de Agendamento", "Status" e "Ações".
+[00:17] Clique no botão "Novo Agendamento". Abre-se uma janela para criar uma nova mensagem de agendamento, com campos para "Contato", "Conexão", "Mensagem", "Variáveis disponíveis", "Data de agendamento" e "Número de repetições".
+[00:23] No campo "Número de repetições", a opção "Diário" está selecionada no dropdown.
+[00:28] O campo "Número de repetições" está visível, permitindo inserir a quantidade de vezes que a mensagem será repetida.
+[00:31] A "Data de agendamento" e o campo "Mensagem" estão sendo preenchidos.
+[00:35] O campo "Conexão" está sendo preenchido, exibindo "Teste treinamento" como opção.
+[00:44] Clique no botão "Cancelar" na janela de mensagem de agendamento.
+[00:46] Retorno à tela inicial da plataforma de multiatendimento, com a opção "Atendimentos" selecionada no menu lateral.
+[00:48] Seleção de um atendimento específico na lista de "Atendimentos". A tela principal agora exibe a conversa do atendimento.
+[01:04] Clique no ícone de opções (três pontos) no canto superior direito da tela de atendimento. Abre-se um menu suspenso com as opções "Agendamento", "Transferir" e "Deletar".
+[01:06] Seleção de "Agendamento" no menu suspenso. Abre-se a janela "Mensagem", idêntica à de "Novo Agendamento", mas com o campo "Contato" já preenchido com o número do cliente.
+[01:10] O campo "Conexão" está sendo preenchido, exibindo "Teste treinamento" como opção.
+[01:14] O campo "Mensagem" está sendo preenchido com a mensagem "Olá! Conseguiu avaliar nossa plataforma?".
+[01:21] O campo "Data de agendamento" é alterado para "29/05/2025 10:00".
+[01:29] No campo "Número de repetições", a opção "Diário" está selecionada no dropdown.
+[01:36] O campo "Número de repetições" mostra "1" como valor.
+[01:46] O valor do campo "Número de repetições" é alterado para "10".
+[01:54] O dropdown "Diário" é clicado, revelando as opções "Diário", "Semanal", "Mensal", "Trimestral", "Semestral" e "Anual". "Semanal" é selecionado.
+[02:02] O dropdown "Semanal" é clicado, exibindo as mesmas opções.
+[02:06] A opção "Diário" é selecionada novamente no dropdown "Número de repetições".
+[02:08] Clique no botão "Adicionar" na janela "Mensagem".
+[02:11] Um banner de notificação "Agendamentos salvo com sucesso!" aparece no canto superior direito da tela.
+[02:14] Retorno à tela "Agendamentos" no menu lateral. A lista agora exibe o agendamento criado, com as informações de contato, mensagem, data de agendamento e status "Pendente".
+[02:35] Retorno à tela de atendimento, com a conversa do cliente visível.
+[02:39] Clique no ícone de opções (três pontos) no canto superior direito da tela de atendimento. Abre-se um menu suspenso com as opções "Agendamento", "Transferir" e "Deletar".
+[03:09] Fim do vídeo.

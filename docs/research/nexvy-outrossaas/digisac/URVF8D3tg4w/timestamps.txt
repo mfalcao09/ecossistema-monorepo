@@ -1,0 +1,6 @@
+[00:00] Início da apresentação sobre a personalização da plataforma Digisac.
+[00:16] A usuária clica em "Configurações".
+[00:19] A usuária clica em "Departamentos".
+[00:27] A usuária clica em "Novo departamento".
+[00:28] A usuária digita "Suporte" no campo para criar um novo departamento.
+[00:37] O novo departamento "Suporte" é adicionado à lista.

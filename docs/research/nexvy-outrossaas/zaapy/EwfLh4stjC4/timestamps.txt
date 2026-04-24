@@ -1,0 +1,24 @@
+[00:00] Tela principal da plataforma de chatbot de atendimento, mostrando a tela de histórico com uma lista de atendimentos.
+[00:09] Visão geral do histórico de atendimentos com colunas como contato, protocolo, celular, data de chegada, departamento, atendente, status, sentimento e etiqueta.
+[01:04] Demonstração do pop-up com o histórico da conversa ao clicar no ícone de chat.
+[01:10] Demonstração do pop-up para exportar a conversa em PDF.
+[01:13] Ajuste do número de entradas exibidas por página (10, 25, 50, 100).
+[01:17] Cartões de resumo na parte superior com totais de atendimentos (no fluxo, em fila, em atendimento, finalizados).
+[01:30] Demonstração dos "Filtros Avançados" com opções para data inicial/final, atendente, contato, celular, protocolo e avaliação.
+[01:48] Exibição do calendário para seleção de datas nos filtros.
+[01:56] Demonstração dos "Filtros" básicos na lateral esquerda, incluindo status, departamento e data de chegada.
+[02:13] Demonstração do filtro por coluna ao clicar nos cabeçalhos da tabela.
+[02:20] Pop-up "Detalhes do Protocolo" ao clicar no ícone de "olho", mostrando informações detalhadas do atendimento.
+[02:32] Menu de exportação da lista de atendimentos (Print, CSV, Excel, PDF, Copy).
+[02:46] Navegação para a tela "Atendentes Online" com lista de atendentes online e suas últimas atividades.
+[03:03] Navegação para a tela "Atendimentos" com gráficos de atendimentos em andamento, finalizados, quantidade de atendimentos e avaliações.
+[03:18] Filtros de data, departamento, conexão e atendente na tela "Atendimentos".
+[03:33] Navegação para a tela "Produtividade" com gráficos de atendimentos por dia e atendente, avaliações por atendente, atendimentos por conexão e atendimentos por departamento.
+[04:03] Navegação para a tela "Últimos Atendimentos" com um gráfico de atendimentos por período e uma tabela detalhada dos últimos atendimentos.
+[04:30] Navegação para a tela "Atendente" com um relatório de desempenho por atendente, incluindo métricas como finalizados, em atendimento, tempo na fila, tempo em atendimento, tempo entre respostas e média de avaliações.
+[04:46] Gráficos de distribuição por status (Fila, Em Atendimento, Finalizados) na tela "Atendente".
+[05:08] Navegação para a tela "Departamentos" com um gráfico de evolução de atendimentos por departamento, tempo médio de atendimento por departamento e atendentes por departamento.
+[05:28] Navegação para a tela "Conexões" com um gráfico de evolução de atendimentos por conexão e tempo médio de atendimento por conexão.
+[05:39] Navegação para a tela "Perfis de Atendentes" com relatórios de performance por atendente, incluindo tempo médio de atendimento, atendimentos finalizados por dia e avaliações recebidas por dia.
+[05:53] Análise da IA sobre a equipe e comentários por atendente na tela "Perfis de Atendentes".
+[06:05] Navegação para a tela "Disparo de Mensagens Integração" com um gráfico de volume de mensagens por status e detalhamento das mensagens.

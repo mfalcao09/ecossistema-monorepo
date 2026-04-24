@@ -1,0 +1,108 @@
+[00:00] Uma mulher está apresentando um vídeo tutorial sobre o software "digisac".
+[00:03] A mulher inicia o tutorial apresentando a tela inicial da ferramenta "Funis de Vendas" que tem a opção de "Funil de Vendas - Izabela (teste)", "Comercial", "Funil Advogados", "Funil de Pós Venda" e "Funil Comercial".
+[00:08] A mulher faz um scroll para baixo na tela, mostrando os gráficos da ferramenta.
+[00:09] A mulher clica em "Ver Detalhes" para mostrar as funcionalidades da ferramenta "Funil Comercial".
+[00:11] A mulher mostra a tela "Funil Comercial", que tem opções como "Visitante", "Oportunidade", "Proposta Enviada", "Pagamentos" e "Finalizados".
+[00:15] A mulher mostra como movimentar as etapas do "Funil Comercial" arrastando-as.
+[00:42] A mulher clica em "Editar" para editar uma oportunidade.
+[00:44] A mulher mostra a tela "Editando Card" onde é possível editar as informações de uma oportunidade.
+[00:48] A mulher preenche as informações do produto, quantidade e valor unitário.
+[00:59] A mulher clica em "Salvar" para salvar as alterações feitas na oportunidade.
+[01:00] A mulher mostra a tela "Funil Comercial" com as alterações salvas.
+[01:08] A mulher clica em "Editar Etapa" para editar uma etapa do funil.
+[01:14] A mulher mostra a tela "Editar Etapa" onde é possível editar o nome da etapa e adicionar ou remover status.
+[01:50] A mulher mostra que é possível adicionar até 10 status por etapa.
+[02:08] A mulher clica em "Criar Nova Etapa" para adicionar uma nova etapa ao funil.
+[02:12] A mulher mostra a tela "Criando Etapa" onde é possível dar um nome à etapa e habilitar status para as oportunidades desta etapa.
+[02:18] A mulher escreve o nome da nova etapa "Aguardando documentação".
+[02:27] A mulher habilita a opção "Habilitar status para as oportunidades desta etapa" e adiciona alguns status.
+[02:44] A mulher clica em "Salvar" para salvar a nova etapa.
+[02:47] A mulher mostra a tela "Funil Comercial" com a nova etapa adicionada.
+[03:17] A mulher clica em "Nova Oportunidade" para adicionar uma nova oportunidade.
+[03:19] A mulher fecha a janela "Nova Oportunidade".
+[03:22] A mulher arrasta uma oportunidade da etapa "Pagamentos" para a etapa "Finalizados".
+[03:27] A mulher clica na oportunidade arrastada para ver os detalhes.
+[03:31] A mulher mostra o campo "Status" da oportunidade e as opções "Ganho" e "Perdido".
+[03:44] A mulher clica em "Editar Etapa" na etapa "Aguardando documentação".
+[03:52] A mulher clica em "Editar Etapa" na etapa "Finalizados".
+[04:00] A mulher mostra que é possível habilitar motivos de ganho e perda na etapa "Finalizados".
+[04:22] A mulher adiciona um novo motivo de perda "Não há orçamento disponível".
+[04:26] A mulher clica em "Salvar" para salvar as alterações nos motivos de perda.
+[04:28] A mulher explica que essa funcionalidade de registrar os motivos de perda ajuda a ter clareza no processo comercial e a fazer relatórios.
+[05:54] A mulher mostra um slide com o título "Funil de Vendas" e as vantagens da ferramenta.
+[06:04] A mulher mostra a tela de filtros da ferramenta "Funil Comercial" onde é possível filtrar por período, status, conexão associada e responsável.
+[06:07] A mulher seleciona um período para filtrar.
+[06:17] A mulher mostra as opções de status.
+[06:20] A mulher mostra as opções de responsáveis.
+[06:33] A mulher mostra a funcionalidade de agendamento na tela de detalhes de uma oportunidade.
+[07:08] A mulher clica em "Novo Agendamento" para criar um novo agendamento.
+[07:10] A mulher mostra a tela "Criando Agendamento" onde é possível selecionar o departamento, atendente, contato, ação, data e hora, mensagem e comentário.
+[07:27] A mulher seleciona uma data para o agendamento.
+[07:42] A mulher explica que essa funcionalidade permite agendar mensagens para os clientes.
+[07:54] A mulher mostra a opção de exportar relatório na tela "Funil Comercial".
+[07:57] A mulher mostra a tela "Exportar relatório" onde é possível selecionar o intervalo de datas para exportar o relatório.
+[08:16] A mulher seleciona um período para exportar o relatório.
+[08:21] A mulher clica em "Baixar" para baixar o relatório.
+[08:26] A mulher explica que o relatório é um arquivo Excel.
+[09:02] A mulher mostra a tela de conversas do chat.
+[09:10] A mulher clica no ícone de cifrão para abrir a funcionalidade de oportunidades no chat.
+[09:14] A mulher mostra a aba "Oportunidades" no chat.
+[09:25] A mulher seleciona um funil, uma etapa e preenche as informações da oportunidade.
+[10:02] A mulher fecha a janela "Nova Oportunidade".
+[10:04] A mulher mostra uma oportunidade no chat.
+[10:14] A mulher muda o status da oportunidade de "Perdido" para "Ganho".
+[10:25] A mulher clica em "Mover para" para mover a oportunidade para outro funil.
+[10:30] A mulher move a oportunidade para "Funil advogados".
+[10:57] A mulher mostra um slide com o título "Funil de Vendas" e as vantagens da ferramenta.
+[10:59] A mulher mostra um slide com o título "Conecte-se aos sistemas que você já usa" e as integrações da Digisac com outros sistemas.
+[11:05] A mulher explica que a API da Digisac é aberta e permite integrar sistemas.
+[13:17] A mulher clica no ícone de ponto de interrogação para acessar o manual da Digisac.
+[13:21] A mulher mostra o manual da Digisac em uma nova aba do navegador.
+[13:28] A mulher mostra as seções do manual, incluindo "Inteligência Artificial", "Funil de Vendas", "Tags" e "Conexões".
+[13:36] A mulher mostra a seção "Tags" do manual.
+[13:48] A mulher mostra a seção "Webchat" do manual.
+[14:12] A mulher mostra o formulário de atendimento do webchat.
+[15:40] A mulher mostra a funcionalidade de criar novos grupos.
+[15:52] A mulher mostra a visualização de um grupo no chat.
+[16:25] A mulher responde a pergunta sobre o campo "Pessoas" no cadastro de clientes.
+[16:53] A mulher mostra a tela "Pessoas" onde é possível agrupar contatos.
+[17:15] A mulher mostra a opção "Conversar em..." no chat.
+[17:30] A mulher mostra como alternar entre contatos da "Família Oliveira".
+[18:36] A mulher responde a pergunta sobre a menção em grupos.
+[19:15] A mulher explica que não é possível fazer menções em grupos pela Digisac.
+[19:53] A mulher responde a pergunta sobre o valor da ferramenta "Funil de Vendas".
+[20:17] A mulher envia o número de contato do comercial da Digisac.
+[21:15] A mulher responde a pergunta sobre a configuração de assinatura de e-mail por usuário.
+[21:58] A mulher mostra um exemplo de assinatura de e-mail no chat.
+[22:04] A mulher explica que a assinatura do e-mail aparece quando o atendente responde.
+[22:15] A mulher mostra a assinatura do e-mail no chat.
+[22:20] A mulher explica que a mensagem chega como um e-mail normal para o cliente.
+[22:27] A mulher mostra o e-mail no chat.
+[22:45] A mulher responde a pergunta sobre a edição de mensagens.
+[22:50] A mulher explica que não é possível editar uma mensagem enviada, mas é possível apagar.
+[23:03] A mulher responde a pergunta sobre a criação de grupos em conexão oficial.
+[23:16] A mulher explica que é possível utilizar a transcrição de áudios na conexão oficial.
+[23:30] A mulher explica que na conexão oficial não há aparelho como intermediário.
+[23:47] A mulher explica que não é possível criar grupos na conexão oficial.
+[24:12] A mulher responde a pergunta sobre a integração de IA.
+[24:19] A mulher explica que a Digisac já possui IA disponível para resumo inteligente, transcrição de áudios e texto mágico.
+[24:59] A mulher responde a pergunta sobre a edição de mensagens.
+[25:05] A mulher explica que não é possível editar mensagens enviadas pela Digisac.
+[25:34] A mulher responde a pergunta sobre a transcrição de áudios na API oficial.
+[25:42] A mulher explica que é preciso adquirir a transcrição para ter a funcionalidade disponível na conexão oficial.
+[25:56] A mulher mostra como abrir um chamado dentro de uma conexão oficial do WhatsApp.
+[26:08] A mulher explica que na conexão oficial, não é possível digitar mensagens convencionais, apenas enviar templates.
+[26:21] A mulher envia um template de mensagem.
+[26:30] A mulher mostra a mensagem enviada por template.
+[26:34] A mulher atualiza a tela do chat.
+[26:41] A mulher mostra o tempo restante para conversar com o cliente na conexão oficial.
+[26:50] A mulher explica que o campo de digitação de mensagem só é liberado após responder a primeira mensagem do cliente.
+[27:06] A mulher responde à mensagem do cliente.
+[27:14] A mulher mostra o campo de digitação de mensagem liberado.
+[27:26] A mulher envia um áudio para o cliente.
+[27:30] A mulher mostra a transcrição do áudio gerada por IA.
+[28:02] A mulher agradece a atenção dos participantes e convida-os para os próximos webinars.
+[28:34] A mulher mostra o número de contato da Digisac para dúvidas.
+[29:00] A mulher convida a equipe dos participantes para os próximos webinars.
+[29:05] A mulher explica que os webinars ficam gravados no YouTube.
+[29:39] A mulher encerra a apresentação.

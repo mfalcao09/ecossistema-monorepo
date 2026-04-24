@@ -1,0 +1,33 @@
+[00:00] Live sobre como configurar respostas rápidas e agilizar o atendimento na Digisac
+[01:31] Como melhorar o seu atendimento com as respostas rápidas
+[02:26] Como criar uma resposta rápida?
+[03:08] Exemplos de mensagens rápidas: Transferência de chamado, pesquisa de satisfação, link do Google
+[05:49] Exemplos de mensagens rápidas: Endereço, gerais (atendimento, encerrar chamado, boleto)
+[07:05] Área de respostas rápidas da plataforma
+[07:47] Criando uma nova resposta
+[08:08] Texto de resposta rápida para transferência de chamado
+[08:33] Selecionando os departamentos que verão a resposta rápida
+[09:28] Editando resposta rápida: "1º passo! Olá [cliente] [saudação] Tudo bem? Me chamo [atendente], do time de Treinamento da Digisac. Como posso te ajudar hoje?"
+[10:19] Criando resposta rápida: "Em nossos registros, consta um valor em aberto com vencimento em [*]. Podemos atualizar o boleto para [*]?"
+[11:08] Selecionando o departamento financeiro e comercial/vendas
+[11:35] Criando resposta rápida: "TEMAS DOS TREINAMENTOS: Treinamento Setup para Administradores (Treinamento completo APENAS para administradores - configurações, chat e gerenciamento) – 60min. Implantação (Treinamento completo APENAS para administradores a fim de realizar o processo de configuração inicial da plataforma) – 60min. Treinamento de Chat para Operadores (APENAS chat de atendimento e suas funcionalidades) – 40min. Gerenciamento para Administradores (APENAS relatórios e estatísticas) – 40min. Robô para Administradores (OBRIGATÓRIO a apresentação do SCRIPT de robô no momento do treinamento) – 60min. Dúvidas gerais de uso da plataforma (APENAS para tirar dúvidas pontuais) – 40min. Webn (WhatsApp Business API - Oficial) (serviço incluso após contratação da conexão Webn) – 40min. Reciclagem (para clientes ativos que precisam de atualização da plataforma) – 60min."
+[12:20] Usando as respostas rápidas no chat da Digisac
+[13:00] Inserindo o nome da atendente e a saudação
+[14:13] Inserindo a resposta rápida dos temas de treinamento
+[14:59] Inserindo a resposta rápida de endereço
+[15:46] Visualizando os campos personalizados do contato da cliente
+[16:11] Mostrando como criar os campos personalizados
+[16:20] Campo personalizado
+[16:32] Criando campo personalizado: Treinamento, com tipo de texto e entidade contatos
+[16:52] Criando campo personalizado: CPF ou CNPJ, com tipo de texto e entidade contatos
+[17:07] Criando campo personalizado: E-mail, com tipo de texto e entidade contatos
+[17:41] Preenchendo o campo personalizado "Treinamento"
+[17:51] Preenchendo o campo personalizado "CPF ou CNPJ"
+[17:58] Preenchendo o campo personalizado "E-mail"
+[19:22] Benefícios de cadastrar respostas rápidas
+[20:59] Visualizando as opções para liberar as respostas rápidas para o cargo do operador
+[21:23] Liberando as respostas rápidas para o cargo de operador
+[22:31] Benefícios de cadastrar respostas rápidas
+[23:34] Manual para alterar a senha
+[24:00] Manual de redefinição de senha
+[25:01] Pergunta sobre a tag no chat.

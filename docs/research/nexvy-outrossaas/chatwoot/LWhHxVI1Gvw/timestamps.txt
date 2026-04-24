@@ -1,0 +1,40 @@
+[00:00] Tela inicial do dashboard Chatwoot.
+[00:24] Acesso às configurações do Chatwoot para criar regras de automação.
+[00:28] Acesso às configurações da conta.
+[00:30] Acesso à seção de Automação.
+[00:35] Tela de adicionar regra de automação.
+[00:39] Preenchendo o nome e descrição da regra.
+[00:43] Selecionando o evento "Conversation Created" para iniciar a automação.
+[00:56] Escolhendo "Status" como condição.
+[01:00] Selecionando "abertas" para a condição de status.
+[01:03] Escolhendo a ação de enviar uma mensagem.
+[01:14] Visualizando a regra "bem-vindo".
+[01:18] Evento "Conversation Created" e condição "Status" igual a "Abertas".
+[01:31] Mensagem de boas-vindas para o cliente com opções de direcionamento.
+[01:45] Atualizando a regra.
+[01:50] Regra de encaminhamento para "suporte".
+[01:52] Condição de mensagem com o termo "#suporte".
+[01:56] Ação de atribuir à equipe "suporte" e enviar mensagem de transferência.
+[02:05] Regra de encaminhamento para "financeiro".
+[02:08] Condição de mensagem com o termo "#financeiro".
+[02:11] Regra de encaminhamento para "comercial".
+[02:13] Condição de mensagem com o termo "#comercial".
+[02:27] Criando uma nova regra de automação chamada "até mais".
+[02:35] Selecionando o evento "Conversation Updated".
+[02:40] Condição de status "Resolvida".
+[02:48] Ação de enviar uma mensagem de agradecimento.
+[02:51] Digitando a mensagem "Obrigado pelo seu contato. Volte sempre.".
+[03:00] Regra "até mais" adicionada com sucesso.
+[03:08] Envio de "bom dia" via WhatsApp.
+[03:16] Mensagem "bom dia" recebida no Chatwoot e resposta automática.
+[03:22] A mensagem de boas-vindas do Chatwoot aparece no WhatsApp.
+[03:30] Digitando "#suporte" no WhatsApp.
+[03:39] Conversa automaticamente atribuída à equipe de suporte.
+[03:47] Mensagem de atribuição da equipe de suporte no Chatwoot.
+[03:52] Mensagem de transferência para a equipe de suporte no WhatsApp.
+[03:58] Resposta do atendente no Chatwoot.
+[04:03] Mensagem do atendente aparece no WhatsApp.
+[04:17] Conversa com o cliente no Chatwoot e no WhatsApp.
+[04:22] Clicando em "Resolver" para finalizar a conversa no Chatwoot.
+[04:44] Mensagem de "Obrigado pelo seu contato. Volte sempre." disparada automaticamente no Chatwoot.
+[04:49] Mensagem de agradecimento aparece no WhatsApp.

@@ -1,0 +1,33 @@
+[00:00] Início da apresentação do Zaapy
+[00:05] Interface da tela "Regras de Acesso"
+[00:07] Explicação da nova tela de permissionamento
+[00:13] Localização da aba "Regras de Acesso"
+[00:15] Visualização das configurações de regras de permissionamento
+[00:22] Exibição de um atendente vinculado à regra "admin"
+[00:28] Criação da regra "admin" e possibilidade de criar mais regras
+[00:30] Status "ativo" para a regra "admin"
+[00:36] Contagem de usuários vinculados à regra "admin" e exibição do nome ao passar o mouse
+[00:44] O usuário "suporte" cadastrado como atendente
+[00:50] Opções para editar ou excluir a regra "admin"
+[00:52] Abertura da tela de edição de regras
+[01:00] Painel de permissões por tela
+[01:06] Definição de permissões (Ler, Salvar, Criar, Deletar) para cada tipo de uso do usuário
+[01:28] Opção "Selecionar tudo" para acesso de administrador
+[01:35] Botão "Salvar Alterações" para aplicar as mudanças nas permissões
+[01:37] Botão "Adicionar Regra" para criar novas regras
+[01:40] Formulário para adicionar uma nova regra
+[01:50] Salvando a nova regra
+[01:52] Mensagem de "Salvo com sucesso!"
+[01:54] Nova regra "regra nível" criada
+[02:09] Vinculando usuários à nova regra
+[02:16] Acessando a tela "Usuários"
+[02:18] Lista de usuários cadastrados
+[02:20] Opção para editar o usuário "suporte"
+[02:23] Detalhes do perfil do usuário "suporte"
+[02:24] Alterando o "Tipo de Permissionamento" para "regra nível"
+[02:28] Salvando as alterações do usuário
+[02:30] Mensagem de "Salvo com sucesso!"
+[02:38] Retornando à tela "Regras de Acesso" com o usuário vinculado à nova regra
+[02:46] Confirmando o vínculo do usuário à "regra nível"
+[02:49] Próximo vídeo sobre "Respostas Rápidas"
+[02:54] Fim da apresentação

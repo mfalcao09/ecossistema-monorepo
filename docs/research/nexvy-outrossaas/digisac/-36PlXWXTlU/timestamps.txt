@@ -1,0 +1,54 @@
+[00:00] Início da apresentação sobre Avaliações NPS e CSAT.
+[00:29] Explicação inicial sobre o propósito dos treinamentos da Digisac.
+[00:53] Introdução ao tema do dia: Avaliação NPS e CSAT.
+[01:26] Apresentação da pesquisa de satisfação, sua importância e benefícios para a empresa.
+[02:00] Detalhes sobre a formulação das perguntas da pesquisa de satisfação.
+[03:31] Explicação do Net Promoter Score (NPS) e seus grupos (Detratores, Neutros, Promotores).
+[04:49] Explicação do Customer Satisfaction Score (CSAT) e sua escala.
+[06:55] Navegação na plataforma Digisac para encontrar a área de avaliações.
+[07:07] Demonstração de como criar uma nova avaliação (NPS).
+[07:18] Preenchimento do nome da avaliação, duração e tipo (NPS).
+[08:12] Inserção da pergunta da avaliação NPS com guia de pontuação.
+[09:00] Definição da quantidade de tentativas para resposta inválida (3 vezes).
+[09:30] Configuração da mensagem para resposta inválida (Ex: Desculpe, não entendi sua resposta, digite um número entre 0 e 10).
+[10:20] Configuração da mensagem enviada após resposta válida (Ex: Agradecemos seu feedback. Sua resposta nos ajuda a evoluir!).
+[10:55] Configuração da mensagem para solicitar o motivo da avaliação (diferencial CSAT).
+[11:44] Salvando a avaliação NPS recém-criada.
+[11:51] Demonstração de edição da avaliação CSAT existente.
+[12:13] Ajuste da quantidade de tentativas para resposta inválida na avaliação CSAT para 3.
+[12:42] Inclusão da mensagem enviada para solicitar o motivo da avaliação (diferencial CSAT).
+[13:26] Salvando as alterações da avaliação CSAT.
+[13:38] Demonstração de como incluir uma avaliação no robô (bot) de atendimento.
+[14:14] Edição de um robô de atendimento existente.
+[14:31] Inclusão da avaliação no contexto persistente do robô.
+[14:52] Seleção do gatilho "Após fechamento de chamado" para acionar a avaliação.
+[15:05] Seleção da ação "Envio de avaliação" e escolha da avaliação CSAT.
+[15:39] Demonstração de um atendimento real com o envio da avaliação CSAT.
+[15:46] Fechamento do chamado para disparar a avaliação CSAT para o cliente.
+[15:59] Cliente respondendo à avaliação CSAT com a nota 5.
+[16:06] Cliente fornecendo um comentário na avaliação CSAT (Ex: Excelente atendente, atendimento muito boa!).
+[16:59] Visão das estatísticas de avaliações (NPS e CSAT) na plataforma.
+[17:54] Aplicação de filtros para visualizar as estatísticas da avaliação CSAT por período.
+[18:50] Visualização do gráfico de pizza e da tabela de dados das avaliações CSAT.
+[19:24] Explicação da funcionalidade de exportar os dados das avaliações.
+[19:48] Demonstração da exportação dos dados das avaliações para um arquivo CSV.
+[19:51] Abertura do arquivo CSV no Excel e demonstração de formatação para facilitar a visualização.
+[20:11] Seleção da coluna de protocolo para aplicar a formatação de "Texto em Colunas".
+[20:25] Seleção do delimitador "Vírgula" para separar as informações.
+[20:39] Aplicação da formatação e visualização dos dados organizados.
+[20:50] Ajuste da largura das colunas e destaque dos títulos com cor amarela e negrito.
+[21:01] Centralização das informações nas colunas.
+[21:07] Correção da formatação do número de protocolo para remover casas decimais.
+[21:18] Demonstração de como ajustar a coluna do número de protocolo para formato de número e remover casas decimais.
+[21:42] Explicação de como usar o número do protocolo para pesquisar o histórico de chamadas.
+[22:15] Análise do motivo de uma nota baixa na planilha (Ex: Não conseguiu esclarecer todas as minhas dúvidas).
+[22:25] Explicação dos tipos de avaliação (CSAT e NPS) e suas classificações.
+[22:42] Explicação das informações de data, horário, conexão, departamento e nome do atendente.
+[23:23] Demonstração de como aplicar filtros na planilha Excel para analisar dados específicos, como por departamento.
+[23:49] Correção da formatação do número de contato para remover casas decimais.
+[24:06] Confirmação do nome do atendente que realizou o atendimento.
+[24:43] Reafirmação da importância da análise dos dados de avaliação para identificar oportunidades de melhoria.
+[26:30] Recapitulação dos benefícios dos feedbacks negativos como oportunidades de melhoria.
+[27:00] Destaque para a importância do feedback dos clientes para a melhoria contínua.
+[27:46] Encerramento do webinar, agradecendo a participação e convidando para o próximo treinamento.
+[30:06] Final da apresentação.

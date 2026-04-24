@@ -1,0 +1,72 @@
+[00:00] Visão geral do painel "Envio de Mensagens em Massa".
+[00:08] Disparo de mensagens em massa como módulo adicional.
+[00:26] Colunas exibidas na tela de campanhas: Nome, Cadastrada, Data para Envio, Envio Concluído, Status, Progresso, Liberado Envio, Play/Pause.
+[00:58] Criação de uma nova campanha de disparo.
+[01:00] Digitando o nome do disparo como "Qr Code".
+[01:07] Confirmação de disparo criado com sucesso.
+[01:10] Página de configuração do disparo.
+[01:12] Retornando à tela de "Envio de Mensagens em Massa".
+[01:13] Criando uma nova campanha de disparo.
+[01:15] Digitando o nome do disparo como "Ligação".
+[01:21] Confirmação de disparo criado com sucesso.
+[01:24] Retornando à tela de "Envio de Mensagens em Massa".
+[01:27] Exclusão de um disparo duplicado.
+[01:31] Confirmação de exclusão do disparo.
+[01:35] Edição da campanha "Qr Code".
+[01:45] Página de configuração do disparo "Qr Code".
+[01:48] Detalhes das configurações de envio: Nome do disparo, Tipo de conexão, Tipo de alvo.
+[02:14] Detalhes das configurações de envio: Data de envio, Hora de envio.
+[02:20] Inserindo a hora de envio como 19:00.
+[02:49] Detalhes das configurações de envio: Permitir início de envio, Permitir fim de envio.
+[02:50] Alterando o horário de início de envio para 18:40.
+[03:29] Detalhes das configurações de envio: Intervalo entre as mensagens (min e max).
+[04:16] Opção "Liberado Para Envio".
+[04:21] Salvando as alterações.
+[04:23] Seção "Conexões" para o disparo "Qr Code".
+[04:25] Sincronização de conexões.
+[04:27] Confirmação de sincronização de conexões.
+[05:00] Seleção do canal "Denna" (conexão).
+[05:16] Salvando as conexões selecionadas.
+[05:20] Seção "Alvos do Disparo" para o disparo "Qr Code".
+[05:22] Seleção do contato "Reinaldo" como alvo.
+[05:32] Salvando os alvos selecionados.
+[05:37] Seção "Mensagens" para o disparo "Qr Code".
+[05:43] Seleção do tipo de mensagem como "Texto".
+[05:49] Digitando a mensagem: "Olá @contato tudo bem ?".
+[06:04] Adicionando a mensagem.
+[06:06] Pré-visualização da mensagem adicionada.
+[06:09] Opção para editar ou excluir a mensagem.
+[06:14] Tipos de mensagem disponíveis: Texto, Imagem, Vídeo, Áudio, Arquivo.
+[06:29] Salvando as mensagens.
+[06:31] Retornando à seção "Configuração" para liberar o envio.
+[06:33] Habilitando a opção "Liberado Para Envio".
+[06:36] Salvando as alterações para liberar o disparo.
+[06:40] Retornando à tela de "Envio de Mensagens em Massa", mostrando as campanhas agendadas.
+[06:58] Edição da campanha "Ligação".
+[07:08] Seção "Configuração" para o disparo "Ligação".
+[07:12] Mudança do "Tipo de conexão" para "Ligação Áudio Gravado".
+[07:19] Observação sobre o horário permitido para ligações (08:00 às 19:00).
+[07:29] Definindo a "Data de envio".
+[07:38] Definindo a "Hora de envio" para 18:00.
+[07:44] Definindo o "Permite início envio" para 18:15.
+[08:00] Habilitando "Liberado Para Envio".
+[08:02] Salvando as alterações.
+[08:05] Seção "Conexões" para o disparo "Ligação".
+[08:08] Sincronização de conexões.
+[08:11] Seleção da conexão "Ligação Áudio gravado".
+[08:19] Campo "Saldo Créditos" indicando a necessidade de créditos para o disparo de ligação.
+[08:29] Salvando as conexões selecionadas.
+[08:35] Seção "Alvos do Disparo" para o disparo "Ligação".
+[08:38] Seleção do contato "Reinaldo" como alvo.
+[09:03] Salvando os alvos selecionados.
+[09:08] Seção "Mensagens" para o disparo "Ligação".
+[09:10] Painel "Gravador de Voz" para áudios de ligação.
+[09:17] Opções para gravar áudio, fazer upload de áudio, ou converter texto em áudio.
+[09:30] Opções de redirecionamento para o contato digitar 1 ou 2.
+[09:40] Opções de fluxo do bot: Clientes Novos, Facebook, Instagram.
+[10:17] Mensagem de validação: "Fluxo selecionado não pode ser o principal e só pode ter apenas uma conexão associada!".
+[10:29] Salvando as alterações na seção "Mensagens".
+[10:32] Retornando à seção "Configuração" para liberar o envio.
+[10:34] Habilitando "Liberado Para Envio" e salvando.
+[10:38] Retornando à tela de "Envio de Mensagens em Massa", mostrando as campanhas agendadas.
+[10:46] Introdução à próxima aula sobre relatórios.

@@ -1,0 +1,35 @@
+[00:00] Visão geral do painel da plataforma.
+[00:26] Acessando a seção "Tags".
+[00:34] Criando uma nova tag.
+[00:54] Definindo o nome da tag como "Prospecção".
+[00:56] Escolhendo a cor para a tag "Prospecção" e ativando o Kanban.
+[01:06] Criando uma nova tag "Negociação".
+[01:12] Escolhendo a cor para a tag "Negociação" e ativando o Kanban.
+[01:19] Criando uma nova tag "Venda Concluída".
+[01:26] Escolhendo a cor para a tag "Venda Concluída" e ativando o Kanban.
+[01:44] Acessando a seção "Kanban" e visualizando as tags como colunas.
+[01:56] Filtrando as tags para exibição no Kanban.
+[02:12] Exibindo a aba "Atendimentos".
+[02:35] Criando um novo ticket de atendimento.
+[02:40] Preenchendo os detalhes para criar o ticket.
+[02:46] Visualizando o ticket recém-criado na aba "Atendimentos".
+[02:57] Adicionando a tag "Prospecção" ao ticket.
+[03:04] Visualizando o ticket com a tag "Prospecção" na coluna "Prospecção" do Kanban.
+[03:10] Movendo o ticket da coluna "Prospecção" para a coluna "Negociação" no Kanban.
+[03:18] Movendo o ticket da coluna "Negociação" para a coluna "Venda Concluída" no Kanban.
+[03:27] Voltando para a aba "Atendimentos" e vendo a tag "Negociação" aplicada ao ticket.
+[03:38] Alterando manualmente a tag do ticket para "Venda Concluída" na aba "Atendimentos".
+[03:41] O ticket agora está na coluna "Venda Concluída" do Kanban.
+[04:15] Finalizando o ticket na aba "Atendimentos".
+[04:20] O ticket finalizado não aparece mais no Kanban.
+[04:44] Reabrindo o ticket finalizado.
+[04:52] O ticket reaberto reaparece no Kanban.
+[05:08] Acessando a funcionalidade de filtro de tickets por tags na aba "Atendimentos".
+[05:14] Aplicando o filtro "Prospecção".
+[05:17] Aplicando o filtro "Venda Concluída".
+[05:19] Aplicando o filtro "Negociação".
+[05:22] Acessando a seção "Relatórios" no menu esquerdo.
+[05:26] Gerando um relatório de tags para "Prospecção" em um período específico.
+[05:37] Acessando a seção "Campanhas" para criar uma nova campanha.
+[05:48] Visão geral da movimentação de tickets no Kanban.
+[06:09] Demonstração de reorganização das colunas no Kanban.

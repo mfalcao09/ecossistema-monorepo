@@ -1,0 +1,92 @@
+[00:00] Apresentação do logotipo do Digisac.
+[00:04] Ícones que representam os serviços oferecidos.
+[00:11] Interface principal do Digisac.
+[00:32] Sabina inicia a explicação da plataforma.
+[00:36] Tela inicial da plataforma.
+[01:13] Sabina fala sobre os treinamentos.
+[01:23] Sabina desliga a câmera.
+[01:33] Tela de login do Digisac.
+[01:41] Digitando as credenciais de acesso.
+[01:54] Explicação das credenciais de acesso.
+[02:09] Explicação da URL de acesso.
+[02:32] Sabina insere as credenciais.
+[02:58] Login realizado com sucesso.
+[03:04] Opções de idioma.
+[03:17] Informações de contato do suporte Digisac.
+[03:29] Menu de ajuda (Tutoriais e Manual de Acesso).
+[03:36] Vídeo de tutorial básico do Digisac.
+[03:42] Configurações (usuários, cargos, departamentos).
+[04:02] Opção de manual de acesso.
+[04:20] Clicando em "Chat".
+[04:49] Acessando "Mais opções".
+[04:55] Menu de "Departamentos".
+[04:59] Tela de "Departamentos".
+[05:27] Opções de edição do departamento "Suporte".
+[05:30] Edição do nome do departamento para "Atendimento".
+[05:43] Sabina explica como criar outros departamentos.
+[05:54] Criando um novo departamento "Suporte".
+[06:36] Clicando em "Cargos".
+[06:44] Tela de "Cargos".
+[07:08] Visualizando permissões do cargo "Administrador".
+[07:50] Explicação do cargo "Operador".
+[08:38] Editando permissões do cargo "Operador".
+[09:10] Editando as permissões de "Agendamentos".
+[09:50] Editando as permissões de "Mensagens".
+[10:06] Explicação da exclusão de mensagens.
+[10:35] Salvando as permissões editadas.
+[10:52] Criando um novo cargo.
+[11:10] Explicação sobre a criação de novos cargos.
+[11:42] Clicando em "Usuários".
+[11:46] Tela de "Usuários".
+[12:19] Editando o usuário "Sabrina".
+[12:28] Opção de alterar senha.
+[12:35] Escolhendo os departamentos que o usuário pertence.
+[13:00] Salvando o usuário "Sabrina".
+[13:05] Criando um novo usuário "Laís".
+[13:28] Escolhendo o cargo "Administrador" para "Laís".
+[13:46] Escolhendo os departamentos para "Laís".
+[13:54] Observação: não colocar dois cargos.
+[14:04] Salvando o usuário "Laís".
+[14:31] Usuário "Laís" salvo com sucesso.
+[15:13] Clicando em "Conexões".
+[15:23] Tela de "Conexões".
+[16:30] Criando uma nova conexão de WhatsApp.
+[17:25] Selecionando o departamento padrão para a conexão.
+[18:38] Ativando a confirmação de leitura.
+[18:49] Ativando a opção de abrir chamadas para mensagens de grupo.
+[18:54] Conexão criada e aguardando QR Code.
+[19:38] Exibindo o QR Code para conectar.
+[19:53] Conexão estabelecida com sucesso.
+[20:10] Mensagem indicando sincronização de contatos e mensagens.
+[20:46] Clicando na aba "Chats".
+[20:53] Tela de chat principal.
+[21:10] Explicação sobre as conexões Facebook e Instagram.
+[21:31] Opções de conexão: WhatsApp Business, Google Business, Telegram, SMS, Webchat, E-mail, Reclame Aqui.
+[22:38] Entrando em contato com o suporte para conexão de Facebook e Instagram.
+[23:12] Sabina explica sobre WhatsApp Business.
+[23:32] Sabina explica sobre Google Business.
+[23:42] Sabina explica sobre Telegram e SMS.
+[23:49] Sabina explica sobre Webchat.
+[23:53] Sabina explica sobre E-mail e Reclame Aqui.
+[24:23] Clicando na aba "Contatos".
+[24:26] Lista de contatos.
+[24:43] Cadastrando um novo contato.
+[24:52] Tela de criação de contato.
+[25:12] Preenchendo nome, conexão e número de telefone.
+[25:39] Clicando para salvar o contato.
+[25:44] Mensagem de "Número inválido".
+[26:16] Clicando na aba "Fila".
+[26:24] Explicação sobre a fila de atendimento.
+[26:49] Um novo cliente ("Sabrina Oliveira") entra na fila.
+[27:32] Clicando no cliente na fila.
+[27:46] Respondendo ao cliente.
+[27:54] A conversa é movida para o chat individual.
+[28:57] Recursos do chat: emoji, respostas rápidas.
+[29:21] Acessando "Respostas Rápidas" no menu "Mais opções".
+[29:26] Criando uma nova resposta rápida.
+[29:56] Criando uma segunda resposta rápida.
+[30:20] Usando as respostas rápidas no chat.
+[31:06] Balão de comentário no chat.
+[31:18] Digitando um comentário.
+[32:23] Ícone de microfone para enviar áudios.
+[32:32] Ícone de três pontos para ver os dados do contato.

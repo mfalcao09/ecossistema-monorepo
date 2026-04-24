@@ -1,0 +1,18 @@
+Com certeza! Segue abaixo um mapeamento exaustivo dos momentos importantes do vídeo:
+
+[00:00] Início da apresentação sobre a plataforma de multiatendimento.
+[00:06] Menciona a facilidade de vincular o WhatsApp na plataforma.
+[00:13] Direciona para "Filas e Conexões" no menu lateral.
+[00:16] Clica em "Nova Conexão" no canto superior direito.
+[00:17] Exibe as opções de conexão: WhatsApp, WhatsApp Oficial, Facebook, Instagram e Telegram.
+[00:20] Seleciona a opção "WhatsApp".
+[00:22] Abre a tela "Adicionar WhatsApp" com campos para "Nome" e "Token".
+[00:27] Preenche o campo "Name" com "teste treinamento".
+[00:31] Clica em "Adicionar" para adicionar a conexão.
+[00:33] Conexão "teste treinamento" aparece na lista com status "conectando".
+[00:35] Clica no botão "QR Code" para gerar o código.
+[00:46] Exibe o QR Code para iniciar a sessão do WhatsApp.
+[00:54] O status da conexão "teste treinamento" muda para "desconectar", indicando que foi conectado com sucesso.
+[01:05] Menciona que o botão "desconectar" aparece quando o WhatsApp está conectado.
+[01:06] Informa que a partir desse ponto é possível praticar as outras configurações e realizar o atendimento.
+[01:13] Finaliza o vídeo.

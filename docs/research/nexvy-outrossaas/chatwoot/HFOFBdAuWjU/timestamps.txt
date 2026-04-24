@@ -1,0 +1,25 @@
+[00:00] Início do vídeo: tela de login do Chatwoot.
+[00:11] Após o login, a tela inicial do Chatwoot mostra um painel de conversas.
+[00:27] Navegação para o menu de configurações.
+[00:30] Tela "Agentes" nas configurações, mostrando como adicionar novos agentes.
+[00:40] Pop-up para "Adicionar agente ao seu time", com campos para nome, tipo e e-mail.
+[00:55] A tela "Agentes" após o cadastro.
+[01:04] A tela "Times", mostrando como criar e gerenciar equipes.
+[01:12] Pop-up "Criar nova equipe" para adicionar departamentos.
+[01:21] Tela "Editar detalhes da sua equipe" para adicionar agentes a um time.
+[01:31] Tela "Caixas de Entrada", mostrando a caixa padrão do WhatsApp API.
+[01:38] Configurações de uma caixa de entrada do WhatsApp.
+[01:54] Aba "Colaboradores" nas configurações do WhatsApp, para atribuir agentes.
+[02:12] Aba "Configuração" nas configurações do WhatsApp, mostrando o URL do webhook e o token de acesso.
+[02:24] Tela "Marcadores" para organizar conversas e contatos.
+[02:37] Tela "Configurações do Perfil" para personalizar dados e notificações.
+[03:06] Retorno ao painel de conversas.
+[03:17] Tela "Contato", mostrando a lista de contatos.
+[03:20] Pop-up para iniciar uma nova conversa com um contato do WhatsApp.
+[03:29] Interação na conversa, com envio da mensagem "iniciar".
+[03:36] Exibição do QR Code para conectar o WhatsApp.
+[03:59] Confirmação de "WhatsApp conectado" após a leitura do QR Code.
+[04:04] Exemplo de envio de mensagem para um contato já conectado.
+[04:14] Visualização da conversa enviada no painel.
+[04:18] Detalhes das conversas: "Minha", "Não atribuída" e "Todas".
+[04:32] Encerramento do vídeo.

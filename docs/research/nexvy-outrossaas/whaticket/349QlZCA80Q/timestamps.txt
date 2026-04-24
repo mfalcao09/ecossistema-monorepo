@@ -1,0 +1,29 @@
+[00:00] Início do vídeo: exibição da tela "Conexões" com uma conexão de WhatsApp já configurada.
+[00:05] Clique no botão "Adicionar WhatsApp".
+[00:06] Exibição da tela "Adicionar WhatsApp" para preenchimento de informações.
+[00:09] Retorno à tela "Conexões".
+[00:13] Clique no ícone de lápis para editar uma conexão existente.
+[00:14] Exibição da tela "Editar WhatsApp" com campos pré-preenchidos.
+[00:15] Campo "Nome" sendo preenchido/editado.
+[00:21] Campo "Mensagem de saudação" sendo preenchido/editado.
+[00:30] Campo "Mensagem de conclusão" sendo preenchido/editado.
+[00:36] Campo "Mensagem de fora de expediente" sendo preenchido/editado.
+[00:51] Menu suspenso "Filas" sendo aberto para seleção de filas (RH, Comercial, Suporte).
+[00:56] Seleção da fila "Suporte".
+[01:00] Seleção da fila "Comercial".
+[01:03] Campo "Redirecionamento de Fila" e "Transferir após X (minutos)" sendo configurados.
+[01:12] Menu suspenso "Fila de Transferência" sendo aberto, com opções de filas.
+[01:16] Seleção da fila "Suporte" para transferência.
+[01:21] Campo "Encerrar chats abertos após X minutos" sendo configurado (60 minutos).
+[01:28] Campo "Mensagem de encerramento por inatividade" sendo preenchido/editado.
+[01:36] Menu suspenso "Fila de Transferência" sendo aberto novamente.
+[01:42] Seleção da fila "Suporte" para transferência.
+[01:45] Alteração do tempo de transferência para 5 minutos.
+[01:48] Clique no botão "Salvar".
+[01:49] Mensagem de sucesso "WhatsApp salvo com sucesso!" e retorno à tela "Conexões".
+[01:51] Clique no botão "QR Code".
+[01:52] Exibição da tela "QrCode" com instruções para conectar o WhatsApp e um QR Code sendo gerado.
+[01:56] QR Code gerado e "Conectado" status exibido.
+[01:59] Status "Conectado" para a conexão do WhatsApp.
+[02:00] Fim da gravação.
+[02:01] Tela final com o logo da WABOOT e o site.

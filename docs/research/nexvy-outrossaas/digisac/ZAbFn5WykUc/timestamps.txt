@@ -1,0 +1,59 @@
+[00:00] Início da apresentação do vídeo
+[00:32] Logotipo do Digisac em branco
+[00:36] Iconografia de recursos
+[00:43] Apresentadora inicia a explicação sobre o WhatsApp Business API
+[01:16] Painel inicial do Digisac exibido com as opções de Chat, Fila e Contatos
+[04:19] Apresentadora navega até a tela de Conexões para mostrar a conexão do WhatsApp Business API
+[04:25] Tela de Conexões exibida com diversos tipos de conexões, incluindo WhatsApp, WBusiness, FBMessenger, Instagram, Telegram, SMS, Webchat, E-mail e Rec/Aqui
+[04:50] Retorno ao painel inicial, com foco na aba "Chat"
+[05:39] Abas "Chat", "Fila" e "Contatos" são mostradas novamente.
+[05:40] Apresentadora clica em "Mais Opções" e seleciona "Templates"
+[05:46] Tela de "Templates" exibida, mostrando modelos de mensagens pré-aprovados ou em análise pelo WhatsApp Oficial
+[06:08] Apresentadora clica em "Novo Template", abrindo a janela de criação de template
+[06:56] Apresentadora mostra o campo "Corpo da Mensagem" e a opção "Parâmetro"
+[07:13] As opções de categorias "Utilidade", "Marketing" e "Autenticação" são mostradas na tela
+[09:18] Campo "Tipo de Mensagem" é mostrado, oferecendo as opções "Somente Texto" e "Mídia & Interativo"
+[09:28] Opções de cabeçalho "Texto", "Imagem", "Documento" e "Vídeo" são apresentadas
+[11:04] Opção de adicionar "Botões" a um template é ativada, mostrando opções de "Resposta Rápida" e "Chamada para Ação"
+[11:58] Retorno à tela de "Templates", com a mensagem de que o modelo será enviado para aprovação
+[12:12] Modelos de templates com status "Aprovado" e "Rejeitado" são exibidos
+[12:35] Apresentadora clica em "Enviar para análise" para um template, mostrando que o status mudará
+[13:48] Apresentadora clica na aba "Chat" no painel principal
+[14:15] Painel do Chat dividido em "Chats", "Fila" e "Contatos" é mostrado
+[14:52] Apresentadora pesquisa por um contato, "Sabrina", na barra de busca
+[14:59] O chat com o contato "Sabrina" é aberto, mostrando o relógio zerado e a opção "Abrir Chamado"
+[15:18] Apresentadora clica em "Abrir Chamado" e preenche os campos "Departamento" e "Atendente"
+[15:33] O chat é aberto, o relógio começa a contar o tempo e a opção "Enviar Template" aparece
+[15:46] Apresentadora clica em "Enviar Template", abrindo a janela de envio
+[15:51] Apresentadora seleciona um template, "retomar_contato", da lista
+[16:05] O template "retomar_contato" é exibido com campos de preenchimento para personalização
+[16:20] Apresentadora personaliza o template com o nome "Sabrina" e a saudação "boa tarde"
+[16:31] O template é enviado no chat com "Sabrina", e o relógio de 24 horas começa a contagem regressiva
+[17:09] "Sabrina" responde com um "Olá!", e a interação é liberada para mensagens livres
+[17:19] Apresentadora envia "Teste!" e "123456" como mensagens livres
+[19:37] Apresentadora clica no ícone do cifrão para enviar um novo template
+[19:40] A lista de templates é exibida novamente, e a apresentadora escolhe "assinatura_renovada"
+[19:49] O template "assinatura_renovada" é personalizado e enviado, gerando uma nova cobrança
+[20:05] Apresentadora clica no ícone de "fechar" (telefone vermelho) para encerrar o chamado
+[20:07] A janela "Fechar Chamado" é exibida, e a apresentadora clica em "Fechar"
+[20:12] O chamado com "Sabrina" é encerrado e some da fila de chats
+[21:12] Apresentadora navega até a tela de "Campanhas" clicando no ícone do megafone
+[21:19] A tela "Criar nova campanha" é exibida, com campos para "Título", "Conexão" e "Template"
+[21:37] Apresentadora seleciona um template "assinatura_renovada"
+[22:04] As opções de configuração de envio são mostradas, incluindo "Utilizar tags" e "Importar contatos"
+[22:31] Apresentadora ativa "Utilizar tags" e mostra a opção de selecionar tags para o envio
+[22:44] Apresentadora mostra a opção "Importar contatos" e o modelo de arquivo CSV
+[23:45] Apresentadora clica em "Selecionar o arquivo" para importar uma lista de contatos
+[23:59] As opções "Abrir chamado ao enviar a campanha" e "Agendamento de campanha" são exibidas
+[25:27] A apresentadora mostra a opção de agendar a campanha, selecionando data e hora
+[25:52] Apresentadora clica em "Salvar", e a campanha é criada
+[26:01] A tela de "Campanhas" é exibida, mostrando o histórico, status e progresso das campanhas
+[27:04] Apresentadora navega até "Balanço de CBP" clicando no ícone do gráfico
+[27:11] A tela "Balanço de CBP" é exibida, mostrando o número total de CBPs, iniciados pela empresa e pelo cliente, e o total cobrado
+[27:27] A apresentadora mostra o filtro por data para consultar o balanço
+[27:39] As opções de filtro por "Conexão", "Departamento", "Atendente" e período de datas são exibidas
+[27:54] Informações detalhadas sobre "Bonificação mensal" e "Pontos de entrada gratuitos" são mostradas
+[29:01] Apresentadora expande a seção "Principais dúvidas" para mostrar detalhes sobre a cobrança de CBP
+[29:13] Detalhes sobre as taxas de cobrança por tipo de conversa (Utilidades, Marketing, Autenticações, Serviços) são apresentados
+[29:32] As "Exceções de cobrança no WhatsApp Business API" são explicadas, incluindo anúncios de clique no WhatsApp e botão de ação na página do Facebook, que oferecem 72 horas de interação gratuita.
+[31:17] Apresentadora encerra a apresentação, agradecendo a atenção.

@@ -1,0 +1,43 @@
+[00:00] Tela inicial com o título "Disparo em Massa" e o logo da Zaapy
+[00:05] Tela de configurações de conexões
+[00:08] Menu lateral esquerdo com opções como Dashboard, Contatos, Usuários, etc. A opção "Módulos" está expandida e "Disparo de msg" está selecionado
+[00:24] Tela "Envio de Mensagens em Massa" com uma lista de disparos
+[00:44] Popup para adicionar novo disparo, solicitando o nome
+[00:55] Tela de configuração do envio, com campos para nome do disparo, tipo de conexão, tipo de alvo, data e hora de envio, intervalo entre mensagens e um botão para liberar o envio
+[01:05] Retorno à tela "Envio de Mensagens em Massa"
+[01:10] Edição de um disparo, renomeando para "Teste de disparo QR CODE"
+[01:21] Criação de um novo disparo, nomeando para "Teste de disparo Ligação"
+[01:36] Edição do disparo "Teste de disparo QR CODE"
+[01:40] Configuração dos detalhes do disparo QR Code, incluindo data, hora e intervalos
+[01:48] Demonstração do menu suspenso "Tipo de Conexão" mostrando "Whatsapp QR Code" e "Ligação Áudio gravado"
+[01:53] Demonstração do menu suspenso "Tipo de Alvo" mostrando "Contato", "Carteira do usuário", "Planilha Excel" e "Etiquetas"
+[02:05] Explicação sobre os horários de início e fim permitidos para o envio
+[02:34] Explicação sobre o intervalo de segundos entre as mensagens
+[03:07] Explicação sobre o botão "Liberado Para Envio"
+[03:17] Tela "Conexões", mostrando a conexão ativa
+[03:20] Clique em "Sincronizar Conexões"
+[03:26] Seleção de uma conexão e clique em "Salvar Selecionados"
+[03:33] Tela "Alvos do disparo" com uma lista de contatos
+[03:37] Seleção de um contato e clique em "Salvar Selecionados"
+[03:45] Tela "Mensagens" para construção da mensagem
+[03:49] Demonstração do menu suspenso "Tipo de Mensagem" com opções como "Texto", "Imagem", "Vídeo", "Áudio" e "Arquivo"
+[03:53] Digitação de uma mensagem de texto e uso da variável "@contato"
+[04:17] Mensagem adicionada e pré-visualizada no canto direito
+[04:25] Demonstração da opção "Imagem" para upload de mídia
+[04:36] Retorno à tela de "Configuração" e ativação do botão "Liberado Para Envio"
+[04:51] Retorno à tela "Envio de Mensagens em Massa"
+[05:07] Edição do disparo "Teste de disparo Ligação"
+[05:15] Alteração do "Tipo de conexão" para "Ligação Áudio gravado"
+[05:37] Mensagem de erro indicando que o horário para ligações deve ser entre 08:00 e 19:00
+[05:56] Ajuste do horário para 19:00 e clique em "Salvar Alterações"
+[06:12] Tela "Conexões", mostrando a conexão de áudio gravado
+[06:16] Clique em "Sincronizar Conexões"
+[06:20] Seleção da conexão "Ligação Áudio gravado" e observação do saldo de créditos
+[06:33] Clique em "Salvar Selecionados"
+[06:39] Tela "Alvos do disparo", seleção de um contato e clique em "Salvar Selecionados"
+[06:46] Tela "Mensagens" para o disparo de ligação, mostrando opções para gravar voz, upload de áudio e converter texto em áudio
+[07:05] Explicação das opções de redirecionamento do contato após digitar 1 ou 2
+[07:27] Observação sobre o fluxo selecionado não poder ser o principal
+[07:37] Clique em "Salvar Alterações"
+[07:40] Retorno à tela de "Configuração" e habilitação do "Liberado Para Envio"
+[07:49] Retorno à tela "Envio de Mensagens em Massa" mostrando os disparos agendados

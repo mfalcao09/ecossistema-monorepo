@@ -1,0 +1,111 @@
+[00:00] Início da introdução
+[00:01] Animação do logo "Caixa de Entrada" com ícone de mensagem
+[00:02] Transição para o texto "CAIXA DE ENTRADA"
+[00:03] Adição de um ícone de sino de notificação ao lado do ícone de mensagem
+[00:08] Música de introdução começa
+[00:12] Imagem de tela de abertura com apresentadora e convidado
+[00:13] Apresentadora inicia a conversa
+[00:18] Ícone de sino de notificação aparece novamente
+[00:19] Legenda com o nome "Bruna Ferreira" aparece
+[00:23] Apresentadora falando sobre o Black Friday
+[00:29] Apresentadora falando sobre a equipe
+[00:46] Apresentadora apresentando Caio Domingues
+[00:56] Caio Domingues cumprimentando
+[00:58] Legenda com o nome "Caio Domingues" aparece
+[01:01] Apresentadora apresentando Rodrigo Lago
+[01:07] Rodrigo Lago cumprimentando
+[01:08] Legenda com o nome "Rodrigo Lago" aparece
+[01:12] Apresentadora apresentando Matheus Aleixo
+[01:21] Matheus Aleixo cumprimentando
+[01:22] Legenda com o nome "Matheus Aleixo" aparece
+[01:27] Apresentadora falando sobre a garantia de vendas
+[01:31] Convidado tomando água
+[01:38] Apresentadora fala sobre os dados da Black Friday
+[01:41] Apresentadora falando sobre o e-commerce brasileiro
+[01:50] Convidado tomando água
+[02:00] Apresentadora falando sobre o 13º salário
+[02:11] Apresentadora questiona se a campanha de Black Friday serve para todo negócio
+[02:27] Caio Domingues falando sobre a Black Friday
+[02:30] Matheus Aleixo falando sobre a Black Friday
+[02:46] Caio Domingues falando sobre o modelo de negócio
+[03:07] Apresentadora perguntando sobre promoções e erros a evitar na Black Friday
+[03:08] Convidado tomando água
+[03:38] Caio Domingues falando sobre o principal erro: não conhecer o cliente
+[03:44] Convidado tomando água
+[04:21] Rodrigo Lago falando sobre a Black Friday como tendência
+[04:23] Apresentadora ouvindo
+[04:44] Matheus Aleixo concordando
+[05:20] Rodrigo Lago falando sobre o Black Friday perder o hype
+[05:22] Apresentadora ouvindo
+[05:57] Rodrigo Lago falando sobre o Natal
+[06:12] Rodrigo Lago falando sobre o cliente consciente
+[06:44] Apresentadora falando sobre o cliente na Black Friday
+[06:56] Convidado tomando água
+[07:11] Convidado falando sobre diferenciais
+[07:29] Rodrigo Lago falando sobre a Black Friday se tornar apenas um período de vendas
+[07:31] Apresentadora ouvindo
+[07:44] Convidado falando sobre cashback e experiência
+[08:10] Apresentadora perguntando sobre o passo a passo para a campanha de Black Friday
+[08:14] Convidado tomando água
+[08:21] Apresentadora pedindo o passo a passo
+[08:33] Matheus Aleixo se preparando para responder
+[08:38] Matheus Aleixo falando sobre o planejamento ser importante
+[09:37] Matheus Aleixo falando sobre o time ser treinado
+[09:47] Matheus Aleixo dando exemplo de material de construção
+[10:23] Convidado tomando água
+[10:24] Rodrigo Lago falando sobre o volume de clientes
+[10:26] Apresentadora ouvindo
+[11:05] Convidado falando sobre o volume de pessoas
+[11:33] Convidado falando sobre a conversão
+[11:39] Caio Domingues falando sobre o pós-venda
+[12:02] Convidado falando sobre a experiência do cliente
+[12:21] Convidado tomando água
+[12:31] Rodrigo Lago falando sobre a preparação da equipe
+[12:45] Convidado tomando água
+[13:00] Apresentadora perguntando como escolher o produto ou serviço para a campanha
+[13:01] Convidado tomando água
+[13:17] Matheus Aleixo falando sobre produtos e serviços
+[13:18] Convidado tomando água
+[13:42] Convidado falando sobre serviços
+[14:24] Apresentadora perguntando sobre as dificuldades das empresas com a equipe comercial
+[14:27] Convidado tomando água
+[15:02] Matheus Aleixo falando sobre pessoas, processos e planejamento
+[15:20] Matheus Aleixo falando sobre processos
+[15:37] Convidado tomando água
+[16:25] Caio Domingues falando sobre atendimento ágil
+[16:32] Convidado tomando água
+17:09] Caio Domingues falando sobre o Webchat da DDI
+[17:19] Caio Domingues falando sobre a agilidade no atendimento
+[17:31] Apresentadora falando sobre o WhatsApp
+[17:36] Convidado tomando água
+[17:46] Rodrigo Lago falando sobre o conhecimento do cliente
+[17:50] Convidado tomando água
+[17:54] Convidado falando sobre propósito
+[18:05] Convidado falando sobre o funil
+[19:00] Rodrigo Lago falando sobre a Black Friday como tendência
+[19:22] Convidado tomando água
+[19:48] Convidado falando sobre achismo
+[19:52] Apresentadora perguntando sobre o funil de vendas
+[19:56] Convidado tomando água
+[20:00] Apresentadora perguntando sobre os canais digitais
+[20:01] Convidado tomando água
+[20:19] Rodrigo Lago falando sobre as expectativas para a Black Friday
+[20:20] Convidado tomando água
+[20:21] Rodrigo Lago falando sobre a equipe
+[20:29] Convidado falando sobre o perfil do cliente
+[20:41] Convidado tomando água
+[20:53] Convidado falando sobre o benefício da solução
+[21:16] Convidado falando sobre os canais
+[21:28] Convidado tomando água
+[21:29] Apresentadora perguntando sobre a análise do comportamento do consumidor
+[21:33] Convidado tomando água
+[21:34] Caio Domingues falando sobre a importância do cliente
+[21:40] Caio Domingues falando sobre a Black Friday
+[21:50] Caio Domingues falando sobre o funil de vendas
+[22:03] Caio Domingues falando sobre a expectativa para a Black
+[22:16] Convidado tomando água
+[22:27] Caio Domingues falando sobre o time de vendas
+[22:42] Apresentadora e convidados rindo
+[22:43] Caio Domingues falando sobre o carrinho de presentes
+[22:52] Apresentadora agradecendo
+[22:56] Encerramento do programa

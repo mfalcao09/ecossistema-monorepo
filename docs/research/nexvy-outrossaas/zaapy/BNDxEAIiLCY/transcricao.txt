@@ -1,0 +1,23 @@
+Claro! Aqui está a transcrição completa do vídeo:
+
+[00:00] Olá! Nesse vídeo, eu vou estar mostrando a nova tela de permissionamento que nesta plataforma do Zaapy, que está com o nome de regras de acesso, tá?
+[00:15] Vocês podem ver que ficou bem bonita também as configurações de regra agora de permissionamento. Vamos lá, então, vamos mostrar como é que funciona.
+[00:23] Vocês podem ver, já tem aqui já um, um, um atendente, já vinculado a uma regra, a regra admin que eu criei aqui em cima. Eu criei essa regra. Posso criar quantas regras eu quiser aqui.
+[00:35] Eu coloquei aqui já, está em status em ativo. Aqui mostra quantas, quantos usuários estão vinculados nesta regra.
+[00:43] E, ao passar o mouse aqui, mostra o usuário também, me mostra o nome dele. Então, esse aqui é o usuário suporte que eu tenho cadastrado aqui como um atendente na tela de atendentes.
+[00:52] Eu posso editar a regra aqui ou excluir também. Editando a regra aqui,
+[00:56] eu consigo ver um painel bem diferente também do, da plataforma anterior.
+[01:02] Eu consigo ter a tela, todas as telas aqui e permissionar o tipo de uso do usuário. Se ele vai poder ler,
+[01:10] apenas salvar coisas, criar coisas ou deletar coisas também. Então, eu vou selecionar o que eu quero e o que eu não quero aqui em cada página que esse grupo de permissionamento vai ter permissão e vou vincular os atendentes
+[01:27] que vão usar esse grupo de permissionamento, tá bom? Tem aqui a opção de selecionar tudo também. Então, aqui bem interativo, tá? Isso aqui já mostra bastante como que faz.
+[01:37] Depois aqui, você pode adicionar mais regras aqui também. Eu posso criar regra,
+[01:45] regra nível dois. Colocar o os níveis que eu quero.
+[01:50] E apertar e aqui em salvar. Ele vai adicionar uma nova regra aqui.
+[01:55] Vai aparecer um uma telinha de carregamento aqui, lado direito superior.
+[02:01] E criou, aqui, ó, regra nível dois. Perfeito. Acho que não salvou o o dois que eu coloquei. Ficou só regra nível. Perfeito.
+[02:09] Então, aqui agora eu posso vincular também. Eu posso desvincular, por exemplo, este usuário daqui e vincular aqui também.
+[02:18] Eu posso vir aqui, por exemplo, em usuários. Suporte aqui,
+[02:23] editar. Posso mudar aqui para regra nível, né?
+[02:29] Colocar aqui. Ele vai aparecer aqui sempre aguarde a tela de carregamento que vai aparecer no canto
+[02:37] direito superior. Voltando aqui em regra de acesso, vai aparecer aqui o usuário vinculado à regra, tá? Então, bem fácil e bem prático, tá bom, pessoal?
+[02:49] Na próxima tela, eu vou estar mostrando aqui a nova tela que temos de respostas rápidas. Vai ser o próximo conteúdo da próxima aula.

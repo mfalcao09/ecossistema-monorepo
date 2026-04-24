@@ -1,0 +1,32 @@
+[00:00] Visão geral do módulo Kanban e seus contadores.
+[00:09] Observação sobre a necessidade de habilitar o módulo para clientes.
+[00:19] Detalhes dos contadores: total de Kanbans, públicos, privados e compartilhados.
+[00:39] Criação de um novo Kanban: opção de nome e permissão (público, privado, compartilhado).
+[00:56] Inserção do nome "teste 1" para o Kanban público.
+[01:01] Kanban "teste 1" criado, exibindo permissão, data de cadastro e usuário.
+[01:10] Opções de edição, exclusão e acesso ao Kanban.
+[01:13] Tela de edição de informações do Kanban: alteração de nome, permissão e seleção de usuários compartilhados.
+[01:24] Seção de colunas do Kanban, ainda vazia.
+[01:38] Acesso ao Kanban criado.
+[01:40] Criação de uma nova coluna: "negociação nível 1".
+[01:49] Adição de cor à coluna "negociação nível 1".
+[01:57] Criação de uma segunda coluna: "Negociação Nível 2".
+[02:08] Adição de cor à coluna "Negociação Nível 2".
+[02:16] Criação de um novo item (card) na coluna "negociação nível 1".
+[02:24] Inserção do título "Cliente Gustavo quase fechando o negócio" para o card.
+[02:39] Card "Cliente Gustavo quase fechando o negócio" criado.
+[02:40] Demonstração de movimentação do card entre colunas.
+[03:00] Edição de um item (card): opções de título, vencimento, etiqueta, contato, anexos e comentários.
+[03:10] Inserção de um comentário no item.
+[03:17] Envío do comentário e exibição abaixo do campo de comentário.
+[03:48] Comentário exibido no item com o número 1.
+[03:57] Histórico de alterações do item: registro de comentários e criação do item/coluna.
+[04:22] Criação de um segundo item: "teste 2".
+[04:29] Demonstração de movimentação do item "teste 2" entre colunas.
+[04:33] Criação de uma terceira coluna: "teste".
+[04:44] Demonstração de movimentação da coluna "teste" entre as colunas existentes.
+[05:05] Acesso à tela de atendimento para adicionar um contato ao Kanban.
+[05:13] Seleção de um contato na lista de atendimentos.
+[05:17] Opção de adicionar o contato ao Kanban dentro do chat.
+[05:20] Tela para escolher um Kanban, coluna, etiqueta e nome do card para o contato.
+[05:30] Observação sobre a criação de etiquetas para o Kanban.

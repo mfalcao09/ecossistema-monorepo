@@ -1,0 +1,58 @@
+[00:00] Logotipo da DigiSac com a frase "Plataforma Multicanal"
+[00:01] Início da contagem regressiva de 30 segundos
+[00:31] O logotipo da DigiSac reaparece com a frase "Plataforma Multicanal"
+[00:34] Animação do logotipo da DigiSac.
+[00:38] Apresentação das funcionalidades da DigiSac em ícones.
+[00:44] Tela de login na plataforma DigiSac.
+[01:23] Tela principal da plataforma DigiSac, com chats, fila e contatos.
+[01:34] Tela de conexões com uma conexão WhatsApp já estabelecida e uma nova sendo criada (desconectada).
+[01:39] Pop-up para criar nova conexão, solicitando tipo, nome e departamento padrão.
+[01:52] A nova conexão aparece como "Desconectada" e "Aguardando QR Code".
+[02:05] Pop-up para escanear o QR Code para conectar o WhatsApp.
+[02:30] Acessando a página de Departamentos através do menu "Mais opções".
+[02:37] Pop-up para criar um novo departamento.
+[02:40] Nova seção de departamentos.
+[02:57] Acessando a página de Posições (funções) através do menu "Mais opções".
+[03:07] Detalhes da função "Administrador".
+[03:17] Detalhes da função "Operador".
+[03:55] Acessando a página de Usuários através do menu "Mais opções".
+[04:09] Pop-up para criar um novo usuário.
+[04:47] Acessando a página de Chat.
+[05:03] Aba de Contatos mostrando uma lista de clientes.
+[05:18] Aba de Fila mostrando clientes aguardando atendimento.
+[05:44] Aba de Chats mostrando tickets abertos.
+[06:07] Retornando à aba de Contatos, o usuário pesquisa e seleciona um contato.
+[06:19] Pop-up para criar um novo contato.
+[06:40] O chat com o novo contato é aberto, e aparece o botão "Abrir chamado".
+[06:51] Pop-up "Abrir chamado" solicitando departamento e atendente.
+[07:13] Chamado aberto com sucesso, o usuário envia uma mensagem.
+[07:25] Painel lateral mostrando informações do contato, incluindo foto de perfil e número.
+[07:49] Menu de emojis.
+[08:06] Menu para anexar arquivos.
+[08:19] Menu de três pontos com opções do chat, como silenciar e marcar como não lido.
+[08:35] Campo para inserir e copiar o número de protocolo do atendimento.
+[09:07] Histórico de tickets do contato.
+[09:16] Filtros para o histórico de tickets.
+[09:37] Pop-up "Mensagem do chamado" mostrando a conversa e opções de exportar.
+[09:48] Pop-up "Transferir chamado" para mover o atendimento para outro departamento ou atendente.
+[10:11] Menu de respostas rápidas.
+[10:18] Acessando a página de Respostas Rápidas através do menu "Mais opções".
+[10:30] Pop-up para criar uma nova resposta rápida.
+[10:57] Utilizando uma resposta rápida no chat.
+[11:20] Campo de comentários para notas internas no atendimento.
+[12:13] Comentário salvo no histórico do ticket.
+[12:28] Acessando a página de Assunto do Ticket através do menu "Mais opções".
+[12:37] Pop-up para criar um novo assunto de ticket.
+[12:47] Campo para o assunto de ticket.
+[12:56] Inserindo um novo assunto de ticket.
+[13:03] Pop-up "Encerrar chamada" para fechar o ticket, solicitando o assunto e um resumo do atendimento.
+[13:32] Ticket encerrado, a conversa não está mais aberta.
+[13:56] Acessando a página "Agora" através do menu "Visão Geral".
+[14:10] Aba de "Atendimento em Fila" mostrando os clientes aguardando.
+[14:18] Aba de "Resumo" mostrando dados gerais do atendimento, como usuários online e offline.
+[14:41] Acessando a página de "Histórico de Chamados" através do menu "Visão Geral".
+[14:53] Filtros do histórico de chamados.
+[15:01] Acessando a página de "Estatísticas de Atendimento" através do menu "Visão Geral".
+[15:07] Estatísticas gerais de atendimento, incluindo tempo médio de chamada e mensagens.
+[15:32] Filtros para as estatísticas de atendimento.
+[15:47] Gráficos de estatísticas, como tempo médio de atendimento e número de mensagens.

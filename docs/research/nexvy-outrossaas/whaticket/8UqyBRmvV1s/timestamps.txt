@@ -1,0 +1,36 @@
+[00:00] A tela mostra a interface do WABOOT, uma plataforma de multatendimento para WhatsApp.
+[00:01] O menu lateral, na parte esquerda da tela, exibe as opções "Atendimento", "Gerência" e "Campanhas".
+[00:02] Dentro de "Atendimento", as opções são "Atendimentos", "Respostas Rápidas", "Kanban", "Tarefas", "Contatos", "Agendamentos", "Tags", "Chat Interno" e "Ajuda".
+[00:03] A opção "Contatos" está destacada.
+[00:04] A área principal da tela exibe a lista de contatos, com colunas para "Foto de Perfil", "Nome", "WhatsApp", "Email", "Última Interação", "Status" e "Ações".
+[00:05] Há um contato de nome "WABOOT" com o número "551194986338" listado.
+[00:06] Acima da lista, há uma barra de pesquisa e botões para "Marcar Todos", "Excluir", "Importar / Exportar" e "Adicionar Contato".
+[00:07] O botão "Importar / Exportar" possui um menu suspenso.
+[00:08] O menu suspenso de "Importar / Exportar" mostra as opções "Importar Contatos" e "Importar Excel".
+[00:09] O cursor seleciona a opção "Importar Contatos".
+[00:10] Uma mensagem informativa é exibida.
+[00:11] A tela exibe novamente a lista de contatos.
+[00:12] Na linha do contato "WABOOT", sob a coluna "Ações", há ícones para editar, iniciar um atendimento e excluir.
+[00:13] O cursor clica no ícone de lápis para editar o contato.
+[00:14] Uma janela pop-up intitulada "Editar contato" é aberta.
+[00:15] A janela "Editar contato" mostra campos para "Nome", "Número do WhatsApp" e "Email".
+[00:16] Há uma caixa de seleção "Desabilitar chatbot" e um botão "+ ADICIONAR INFORMAÇÃO".
+[00:17] Os botões "CANCELAR" e "SALVAR" estão na parte inferior da janela.
+[00:18] A caixa de seleção "Desabilitar chatbot" é clicada, tornando-a ativa.
+[00:19] A tela exibe novamente a janela "Editar contato", com o checkbox "Desabilitar chatbot" marcado.
+[00:20] A tela retorna à lista de contatos.
+[00:21] O cursor clica no ícone do WhatsApp, sob a coluna "Ações".
+[00:22] Uma janela pop-up intitulada "Criar Ticket" é aberta.
+[00:23] A janela "Criar Ticket" possui um campo para "Selecione uma fila" e outro para selecionar o "CHIP TIM".
+[00:24] O menu suspenso de "Selecione uma fila" é aberto, mostrando as opções "RH", "Comercial" e "Suporte".
+[00:25] A opção "Comercial" é selecionada.
+[00:26] A janela "Criar Ticket" agora mostra "Comercial" selecionado na fila.
+[00:27] O menu suspenso "CHIP TIM" exibe as opções de chips disponíveis.
+[00:28] A opção "CHIP TIM (CONNECTED)" é selecionada.
+[00:29] A janela "Criar Ticket" agora exibe "Comercial" e "CHIP TIM" selecionados.
+[00:30] O botão "SALVAR" é clicado.
+[00:31] A tela retorna à interface principal, e o menu lateral "Atendimentos" é selecionado automaticamente.
+[00:32] Dentro de "Atendimentos", são exibidas as abas "Atendendo" e "Aguardando".
+[00:33] Na aba "Aguardando", um novo atendimento do contato "WABOOT" é exibido, com a mensagem "Olá, bem vindo ao at...".
+[00:34] Há um botão para "Avaliar" e ícones para confirmar ou cancelar.
+[00:35] O vídeo exibe o logotipo da WABOOT, o endereço do site www.waboot.com.br e a legenda "Plataforma Multi Atendimento para WhatsApp".
