@@ -1,0 +1,4 @@
+[ 00:00 ] If you're using Pipedrive and Microsoft Teams, you're going to save yourself some valuable time with Pipedrive's direct integration. Get Pipedrive updates inside Teams and keep your colleagues inside the picture.
+[ 00:12 ] Be it a won deal, a contact update, or a new activity, you name it. A bot will automatically send a note to your Teams channel.
+[ 00:21 ] You can also schedule and join Microsoft Teams video meetings from inside of Pipedrive, meaning you don't have to switch tools just to join your video call.
+[ 00:30 ] That's more time saved, right? So head on over to the Pipedrive marketplace, install the integration, and keep your team ready to close that next big deal.

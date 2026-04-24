@@ -1,0 +1,11 @@
+[ 00:00 ] In sales, knowledge is money. Teams that have the most relevant information at their fingertips are able to act quicker, speak more confidently and produce effective results.
+[ 00:10 ] That's why we have required and important fields to guarantee you and your team get all the data you need to quickly close deals. You can access both features by navigating to company settings.
+[ 00:22 ] From here, you'll go to data fields and select the field you'd like to set up. For admin users, required fields are available on the Professional and Enterprise plans.
+[ 00:33 ] While important fields are available for Advanced, Professional and Enterprise admin users. After selecting the field you want to change, you'll be able to mark it as required and important, or just important.
+[ 00:46 ] By default, both required and important fields will always be visible in a deals detail view, and will appear when you add a new lead, deal, person, organization or product.
+[ 00:57 ] From here, you'll be able to choose if you want to focus on making a build required or important for all pipelines and stages, or just for a specific pipeline or stage.
+[ 01:08 ] Once your selections have been made, you can see the changes reflected here. And if you'd like, you can add a number of custom fields and set them as required or important.
+[ 01:21 ] One cool thing about custom fields is that you'll be able to choose whether or not a custom field is visible when adding a new item, and when viewing this custom field inside of a deal.
+[ 01:31 ] This allows you to tailor with precision which members of your company collect which types of data. Now, you and your team can see your important and required fields over here in the deal detail view.
+[ 01:45 ] Similar to the view in our data fields page, you'll also be able to tell if a field is required or important, based on this colored dot here. And this window will stay visible even when scrolling, so users have a constant reminder that they need to collect missing data.
+[ 02:00 ] And if you need to edit a field, doing so is super easy. Just click here and you'll be able to make changes to your data fields by toggling your desired settings to on or off. Now, you're all ready to set up your company's required and important fields to make sure your entire team always gets the most complete data that it needs.

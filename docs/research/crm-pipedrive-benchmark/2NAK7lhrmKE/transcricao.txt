@@ -1,0 +1,45 @@
+[00:00] The DocuSign integration with Pipedrive offers a more sophisticated digital signing solution to simplify your sales process.
+[00:08] With this integration, your DocuSign envelopes are conveniently accessible inside of Pipedrive Smart Docs workflow.
+[00:15] And the good news is that you can still use this integration even if you don't have Smart Docs.
+[00:20] You'll want to install the DocuSign integration from the Pipedrive marketplace.
+[00:25] Once installed and authenticated with your DocuSign account, you're all set to get started.
+[00:31] A quick note here. After installing the app, you'll want to double-check to make sure that this system update is set to inactive in DocuSign.
+[00:41] Now, there are a few ways you can create a DocuSign envelope in Pipedrive. The cool thing is that all of these can be accessed in your selected deal under the documents tab.
+[00:50] If you're already using Smart Docs, then it's likely you've already started drafting a document or maybe even have one all prepped and ready to go.
+[01:03] If so, then you'll be able to access DocuSign in a couple of ways.
+In this first option, you can edit your document, generate a link for sharing, request signatures, download a PDF, and what we're looking for, create a DocuSign envelope.
+[01:13] You'll also see the option to delete a document if you want.
+[01:19] For the second option, your choices are similar except instead of being able to edit this specific version, you'll have the option to open it. But all the other menu items are the same.
+[01:31] And just like with the first option, you'll be able to create a DocuSign envelope from here. For now, we'll hold off creating our envelope and show you two more options before we get started.
+[01:40] The next way to access the Create DocuSign envelope button is from the document editor.
+[01:46] For this example, we're using a template from Google Drive.
+[01:51] But you can choose to use one from OneDrive or SharePoint as well.
+[01:56] And this last one is for DocuSign users who may not be using Smart Docs.
+[02:00] From here, you'll still be able to create a DocuSign envelope after uploading your PDF of choice. Just click on the menu over here and select the familiar create DocuSign envelope option.
+[02:12] Now, let's focus on sending our envelope. In this window, you can add the details for your recipients.
+[02:19] And because these fields are required, you'll want to make sure to fill in your recipient's first and last name, as well as their email. Next is the option to set the signer roles.
+[02:29] You can choose between the default needs to sign and sending a read-only copy.
+[02:35] For this, we'll set different roles for our different recipients, but you'll want to do what makes the most sense for you. And to add another layer of customization, you can set the signing order here if you have permission.
+[02:49] And you'll know right away if you can set the signing order with this button here.
+[02:51] Being able to click it means you're all clear, but if it's grayed out, then you'll want to check with your account admin.
+[02:57] This option is great if, say, you want signer B to sign, but only after signer A. This can help you better keep track of who's signing, and gives you more control over the negotiation process.
+[03:09] And with all our recipients listed, we're ready to move on to the next step.
+[03:14] Here, we can add one more layer of customization to our envelope by including a personalized message that will be sent to all recipients.
+[03:22] In this screen, you'll want to include an email subject along with a message.
+[03:27] We'll go ahead and add ours.
+[03:30] Now, all of our recipients will receive this message along with a personal signature request.
+[03:37] Now we're ready to edit our document.
+[03:41] All documents delivered with the DocuSign integration will need to include a standard field to mark the doc as completed.
+[03:49] But you can add special fields to your doc, such as signature blocks, and make them mandatory.
+[03:54] This way, you control the parameters of what gets a document signed.
+[04:00] And with all our customizations added, we're all ready to send.
+[04:06] Now that we've sent our envelope, we can get the status back in our deal and even see the number of signatures for a specific version of a document.
+[04:16] And here is another place where we can get a preview of our sent envelope with the option to share it via a generated link, or a downloaded PDF.
+[04:25] And just like back in our deal, we can see the number of recipients who have signed our document.
+[04:30] So, there are several ways to keep track of who signed and who hasn't.
+[04:36] An important thing to note is that while you can send a new signature request for a document, you won't be able to request signatures for that same document without deleting the original.
+[04:47] This is because each document can only have one DocuSign envelope attached at a time. But as you've seen, creating a new one only takes a few minutes.
+[04:57] What's even better is that now you'll be able to complete the negotiation and signing process without ever having to leave Pipedrive.
+[05:03] And you've eliminated the need to open and close multiple windows just to send one signing request.
+[05:10] With that, you're all ready to start creating and sending your DocuSign envelopes in Pipedrive.
+[05:19] And if you want to learn more about how Smart Docs works, you can click on the link here.

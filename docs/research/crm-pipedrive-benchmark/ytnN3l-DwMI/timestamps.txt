@@ -1,0 +1,69 @@
+[00:00] Pipeline View
+[00:03] Tela principal do Pipedrive, com os pipelines de vendas, deals e pessoas
+[00:06] Visão geral do pipeline de vendas, com as etapas e deals
+[00:09] Visão geral do pipeline de vendas, com as etapas e deals
+[00:11] Visão geral do pipeline de vendas, com as etapas e deals
+[00:15] Configurações dos pipelines de vendas, com as etapas, nomes e probabilidades
+[00:18] Configurações dos pipelines de vendas, com as etapas, nomes e probabilidades
+[00:23] Adicionar um novo deal ao pipeline
+[00:27] Tela de adição de deal, com campos para pessoa, organização, título, valor, pipeline e etapa
+[00:30] Tela de adição de deal, com campos para pessoa, organização, título, valor, pipeline e etapa
+[00:33] Tela de adição de deal diretamente da etapa
+[00:35] Tela de adição de deal, com campos para pessoa, organização, título, valor, pipeline e etapa
+[00:38] Menu lateral do Pipedrive, com opção de importar dados
+[00:41] Tela de importação de dados, com opções de importar de planilha ou outro software
+[00:45] Tela de importação de dados, com opções de importar de planilha ou outro software
+[00:48] Arrastar e soltar um deal entre as etapas do pipeline
+[00:54] Arrastar e soltar um deal para a etapa "Perdido" ou "Ganho"
+[00:58] Animação de um ciclista celebrando
+[01:01] Menu de seleção de pipeline, com opções de criar, editar, reordenar ou automatizar
+[01:04] Novo pipeline de vendas, com etapas e deals diferentes
+[01:07] Menu de seleção de pipeline, com opções de criar, editar, reordenar ou automatizar
+[01:09] Deals com atividades atrasadas ou sem atividades, sinalizados com ícones
+[01:12] Deals com atividades atrasadas ou sem atividades, sinalizados com ícones
+[01:15] Clicar em um deal para ver as atividades pendentes
+[01:19] Deals com atividades atrasadas ou sem atividades, sinalizados com ícones
+[01:22] Tela principal do Pipedrive, com os pipelines de vendas, deals e pessoas
+[01:25] Configurações dos pipelines de vendas, com as etapas, nomes e probabilidades
+[01:28] Adicionar uma nova etapa ao pipeline
+[01:30] Excluir uma etapa do pipeline
+[01:32] Renomear uma etapa do pipeline
+[01:35] Arrastar e soltar uma etapa para mudar sua posição
+[01:38] Menu de seleção de pipeline, com opção de criar um novo pipeline
+[01:41] Criar um novo pipeline, com campo para o nome
+[01:44] Renomear o novo pipeline para "Customer Success"
+[01:46] Configurações do novo pipeline, com etapas e probabilidades
+[01:49] Alterar o nome da etapa
+[01:52] Alterar o nome da etapa
+[01:55] Definir a probabilidade de ganho em cada etapa
+[01:58] Definir a probabilidade de ganho em cada etapa
+[02:01] Definir a probabilidade de ganho em cada etapa
+[02:04] Definir a probabilidade de ganho em cada etapa
+[02:07] Definir a probabilidade de ganho em cada etapa
+[02:10] Valores de probabilidade exibidos nas etapas do pipeline
+[02:13] Valores de probabilidade exibidos nas etapas do pipeline
+[02:16] Valores de probabilidade exibidos nas etapas do pipeline
+[02:20] Valor total e valor ponderado dos deals no pipeline
+[02:25] Valor total e valor ponderado dos deals no pipeline
+[02:29] Ativar a "Deal probability" nas configurações do pipeline
+[02:32] Ativar a "Deal probability" nas configurações do pipeline
+[02:34] Definir a probabilidade de um deal específico
+[02:37] Definir a probabilidade de um deal específico
+[02:40] Valores de probabilidade exibidos nas etapas do pipeline
+[02:43] Valores de probabilidade exibidos nas etapas do pipeline
+[02:47] Ativar a funcionalidade "Rotting in days" (decadência em dias) para uma etapa
+[02:50] Definir o número de dias para a decadência
+[02:53] Deals que atingiram o tempo de decadência são destacados em vermelho
+[02:56] Deals que atingiram o tempo de decadência são destacados em vermelho
+[02:59] Usar filtros para visualizar deals em decadência
+[03:02] Visão filtrada de deals em decadência
+[03:05] Agendar uma atividade para um deal em decadência
+[03:08] Agendar uma atividade para um deal em decadência
+[03:11] Deal em decadência com atividade agendada
+[03:14] Menu de filtros, com opções de filtrar por proprietário ou status
+[03:17] Menu de filtros, com opções de filtrar por proprietário ou status
+[03:20] Menu de filtros, com opções de filtrar por proprietário ou status
+[03:23] Opção de adicionar um novo filtro personalizado
+[03:26] Favoritar um filtro para acesso rápido
+[03:29] Filtros favoritos exibidos na seção "Favorites"
+[03:32] Tela final do vídeo, com o logo do Pipedrive e a opção de próximo vídeo

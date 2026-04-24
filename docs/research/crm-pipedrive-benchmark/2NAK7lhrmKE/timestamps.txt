@@ -1,0 +1,45 @@
+[00:00] Visão geral do aplicativo DocuSign no Marketplace da Pipedrive
+[00:03] A integração do DocuSign simplifica o processo de vendas
+[00:04] Menu de ações do documento aberto
+[00:07] Criação de um envelope DocuSign enviada com sucesso
+[00:15] Visualização do documento
+[00:20] Tela de configurações com a seção de ferramentas e aplicativos
+[00:23] Botão "Instalar agora" clicado no marketplace
+[00:26] Tela de permissões do aplicativo DocuSign
+[00:28] Tela de permissão do DocuSign para Pipedrive
+[00:32] Configurações de atualizações do DocuSign
+[00:41] Painel de negócios do Pipedrive
+[00:44] Visão geral de detalhes do negócio
+[01:02] Menu de três pontos ao lado do nome do documento
+[01:19] Menu de três pontos no canto superior direito do nome do documento
+[01:40] Botão "Criar novo" na seção de documentos
+[01:42] Seleção de arquivo do Google Drive
+[01:45] Editor de documento Pipedrive
+[01:52] Menu de compartilhamento no editor de documentos
+[01:57] Menu "Upload de um arquivo" na seção de documentos
+[02:00] Seleção de arquivo do computador
+[02:04] Visualização do documento
+[02:08] Menu de compartilhamento na visualização do documento
+[02:13] Visualização do documento com a opção de continuar
+[02:16] Adicionar destinatários do envelope DocuSign
+[02:26] Adição de detalhes de um novo destinatário
+[02:43] Ordem de assinatura definida para os destinatários
+[03:10] Opção de editar a mensagem do e-mail
+[03:20] Edição de assunto e corpo do e-mail
+[03:36] Edição do documento no DocuSign
+[03:45] Adição de um campo de assinatura ao documento
+[03:52] Adição de outro campo de assinatura
+[03:59] Documento pronto para envio
+[04:03] Status de envio do documento
+[04:06] Mensagem de envio do envelope DocuSign
+[04:10] Status do documento no Pipedrive
+[04:16] Visualização do documento enviado com opções de compartilhamento
+[04:30] Detalhes do envelope DocuSign enviado
+[04:35] Janela de adoção de assinatura do DocuSign
+[04:37] Lista de documentos com status de assinatura
+[04:41] Envelope DocuSign com motivo de recusa
+[04:46] Confirmação de exclusão do envelope DocuSign
+[04:56] Lista de documentos atualizada no Pipedrive
+[05:14] Visualização do documento completo
+[05:17] Botão "Finalizar" clicado
+[05:19] Tela final com informações sobre Smart Docs

@@ -1,0 +1,137 @@
+[00:00] Início da apresentação e introdução sobre o que será abordado no vídeo.
+[00:12] Transição para o logotipo da empresa "MinorCo".
+[00:18] Retorno à apresentação com Paul Minors.
+[00:26] Exibição de um selo "Pipedrive Platinum Partner".
+[00:32] Exibição de um vídeo anterior do YouTube intitulado "GETTING STARTED WITH PIPEDRIVE" com dados de visualizações e comentários.
+[00:48] Paul Minors explica a importância de seguir o tutorial prático.
+[01:09] Exibição de uma playlist do YouTube chamada "Pipedrive Training" com vários vídeos.
+[01:31] Paul Minors em seu escritório, explicando o que é o Pipedrive.
+[01:38] Exibição do termo "SALES CRM (CUSTOMER RELATIONSHIP MANAGER)" na tela.
+[01:51] Demonstração de uma tela de "Deals" (negócios) no Pipedrive, mostrando estágios de vendas.
+[02:02] Demonstração de uma tela de lista de "Deals" no Pipedrive.
+[02:05] Demonstração de uma tela detalhada de um "Deal" no Pipedrive, mostrando atividades e histórico.
+[02:36] Demonstração de uma tela de "Deals" no Pipedrive com um filtro aplicado.
+[03:00] Paul Minors ao telefone, demonstrando a acessibilidade do Pipedrive.
+[03:05] Close-up da tela de um smartphone com o aplicativo Pipedrive.
+[03:06] Paul Minors usando um tablet com o aplicativo Pipedrive.
+[03:41] Demonstração da tela de inscrição do Pipedrive.
+[03:46] Exibição de um selo "Pipedrive Platinum Partner" no canto inferior esquerdo da tela.
+[03:57] A tela mostra a página "Deals" com o pipeline padrão do Pipedrive.
+[04:09] Navegação para as configurações de faturamento ("Billing") no Pipedrive.
+[04:17] Paul Minors destaca o plano Premium e o período de teste.
+[04:20] A tela exibe as diferentes opções de plano do Pipedrive (Lite, Growth, Premium, Ultimate) e seus preços.
+[05:00] Retorno à página "Deals" no Pipedrive.
+[05:19] Paul Minors mostra a função "Leads" no Pipedrive.
+[05:27] A tela "Leads Inbox" (Caixa de Entrada de Leads) é exibida.
+[05:37] Paul Minors clica no botão "Lead" para adicionar um novo lead.
+[05:40] A janela "Add lead" (Adicionar lead) é exibida, e Paul preenche os dados de um contato (Tim Cook) e uma organização (Apple).
+[06:27] O lead é salvo e exibido na "Leads Inbox".
+[06:30] Paul clica no lead "Apple lead" para visualizar seus detalhes.
+[06:48] Paul clica no botão "Convert to deal" (Converter para negócio) na parte inferior da tela.
+[06:52] A janela "Convert to deal" é exibida, permitindo mover o lead para uma fase do pipeline de vendas.
+[07:01] O lead é convertido em deal e a página "Deals" é atualizada.
+[07:05] Paul clica no deal "Apple lead" para ver seus detalhes como deal.
+[07:11] Paul retorna à página "Deals" para iniciar a personalização do pipeline.
+[07:22] Paul clica em "Pipeline" e depois no ícone de lápis para editar o pipeline.
+[07:25] Paul Minors mostra as opções para visualizar ou criar pipelines de vendas.
+[07:38] Exemplo do pipeline de consultoria da Minco.
+[08:04] Exemplo do pipeline de assinaturas do Pipedrive.
+[08:27] Paul Minors explica um erro comum na criação de pipelines e como acessar a edição.
+[08:46] A tela de edição do pipeline é exibida, mostrando as fases e suas probabilidades.
+[08:58] Paul Minors renomeia a fase "Qualified" para "Qualified Opportunity".
+[09:06] Paul Minors remove a fase "Contact Made".
+[09:22] Paul Minors renomeia a fase "Demo Scheduled" para "Discovery Call Booked".
+[09:32] Paul Minors adiciona uma nova fase chamada "Gathering More Info" (Coletando Mais Informações).
+[09:41] Paul Minors adiciona outra fase chamada "Contract Sent" (Contrato Enviado).
+[09:53] Paul Minors renomeia a fase "Negotiations Started" para "Waiting for Payment".
+[10:04] As fases do pipeline são atualizadas com os novos nomes e Paul explica a funcionalidade de "probabilidade" de cada fase.
+[11:03] Paul Minors demonstra a funcionalidade de "rotting" (apodrecimento) para negócios.
+[11:58] Paul Minors ativa a opção "Deal probability" (Probabilidade do negócio).
+[12:15] As mudanças são salvas, e o pipeline atualizado é exibido com as novas fases e probabilidades.
+[12:24] Paul Minors demonstra como a probabilidade afeta o valor ponderado dos negócios.
+[12:44] Paul Minors demonstra as opções de visualização (Pipeline, List, Forecast).
+[12:58] Paul Minors mostra a aba "Info" no pipeline, que exibe o valor total e ponderado dos negócios.
+[13:00] Paul Minors enfatiza a importância de nomear as fases no passado.
+[13:17] O vídeo retorna à tela "Deals" com o pipeline atualizado.
+[13:50] Paul Minors demonstra como usar os filtros no pipeline.
+[14:04] Paul Minors mostra como filtrar negócios por proprietário ("Owners").
+[14:08] Paul Minors demonstra os filtros predefinidos e a criação de novos filtros.
+[14:16] A janela "Create new filter" (Criar novo filtro) é exibida.
+[14:24] Paul Minors retorna à página "Deals" com os filtros aplicados.
+[14:32] Paul Minors demonstra a opção de "List view" (visualização em lista).
+[14:54] Paul Minors mostra como personalizar as colunas na visualização em lista.
+[15:05] Paul Minors demonstra a opção de "Forecast view" (visualização de previsão).
+[15:09] Paul Minors demonstra a funcionalidade de definir a "Expected close date" (Data de fechamento esperada) para um negócio.
+[15:32] Paul Minors enfatiza a criação de um negócio real para seguir o tutorial.
+[15:43] Paul Minors demonstra como criar um novo negócio (deal).
+[15:46] Paul Minors demonstra a opção de importar negócios de uma planilha.
+[16:00] Paul Minors clica no botão "+" para criar um novo negócio.
+[16:03] A janela "Add deal" é exibida, e Paul vincula o negócio a um contato e organização existentes.
+[16:29] O negócio é salvo e exibido no pipeline.
+[16:32] Paul Minors demonstra como visualizar e gerenciar múltiplos negócios para um mesmo contato.
+[16:57] Paul Minors explica a importância de ter apenas um negócio por contato para a maioria dos usuários do Pipedrive.
+[17:15] Paul Minors explica a diferença entre "ganhar" um negócio e "reutilizar" um negócio existente.
+[17:55] Paul Minors mostra como gerenciar múltiplos negócios simultaneamente em seu próprio Pipedrive.
+[18:41] Paul Minors retorna ao negócio "Apple Website Redesign".
+[18:53] Paul Minors demonstra a seção "Summary" do negócio.
+[19:00] Paul Minors adiciona o valor do negócio.
+[19:12] Paul Minors demonstra como adicionar produtos ao negócio.
+[19:28] Paul Minors adiciona um novo produto "Website Design" com um preço.
+[19:35] Paul Minors adiciona um segundo produto "SEO" com um preço.
+[19:51] Os produtos são salvos e o valor total do negócio é atualizado.
+[19:56] Paul Minors explica o benefício de usar produtos para relatórios.
+[20:23] Paul Minors demonstra como definir a probabilidade do negócio individualmente.
+[20:39] Paul Minors demonstra a visualização da organização e o contato vinculado ao negócio.
+[20:44] Paul Minors demonstra como adicionar rótulos (labels) ao negócio.
+[21:13] Paul Minors demonstra como definir a data de fechamento esperada do negócio.
+[21:24] Paul Minors demonstra a opção de adicionar o negócio a uma sequência de acompanhamento (follow-up sequence).
+[21:43] Paul Minors demonstra a seção "Details" (Detalhes) para campos personalizados.
+[21:58] Paul Minors demonstra a criação de um novo campo personalizado "Deal Source" (Fonte do Negócio).
+[22:42] Paul Minors insere opções para o campo "Deal Source" (YouTube, Facebook, Referrals, Website).
+[22:54] Paul Minors demonstra como configurar onde o campo "Deal Source" será exibido e se é obrigatório.
+[23:31] O campo "Deal Source" é salvo e exibido na seção "Details".
+[23:38] Paul Minors demonstra que o campo "Deal Source" é obrigatório para mover o negócio para a próxima fase.
+[23:59] O campo "Deal Source" é preenchido com "YouTube".
+[24:01] Paul Minors mostra um exemplo de campos personalizados em seu próprio Pipedrive (detalhes de assinatura e rastreamento).
+[24:50] Paul Minors demonstra o campo "Referred by" (Referido por) em seu Pipedrive.
+[25:10] Paul Minors demonstra a criação de campos monetários para comissão e custo.
+[25:21] Paul Minors demonstra a seleção de "Deal Source" em seu Pipedrive.
+[25:28] Paul Minors resume a importância da seção "Details" para capturar informações.
+[25:42] Paul Minors demonstra como criar campos personalizados para o contato e a organização.
+[25:56] Paul Minors preenche os detalhes do contato e da organização.
+[26:10] Paul Minors cria um campo personalizado "Job Title" (Cargo) para o contato.
+[26:37] Paul Minors preenche o cargo do contato como "CEO".
+[27:02] Paul Minors resume a configuração básica e a importância do Pipedrive no dia a dia.
+[27:18] Paul Minors demonstra como marcar um negócio como perdido e adicionar um motivo.
+[27:26] Paul Minors demonstra como configurar "Lost reasons" (Motivos de perda) nas configurações da empresa.
+[28:12] Paul Minors mostra exemplos de motivos de perda em sua conta principal.
+[28:35] Paul Minors desativa a opção "Allow free-form reasons" (Permitir motivos de forma livre).
+[29:01] Paul Minors demonstra a tela de perda de negócio com motivos predefinidos.
+[29:18] Paul Minors demonstra a opção de reabrir um negócio perdido.
+[29:29] Paul Minors demonstra como personalizar os tipos de atividades nas configurações da empresa.
+[29:58] Paul Minors cria um novo tipo de atividade "Introductory Call" (Chamada Introdutória).
+[30:08] Paul Minors cria um novo tipo de atividade "Demo Call" (Chamada de Demonstração).
+[30:28] Paul Minors cria um novo tipo de atividade "Create Quote" (Criar Cotação).
+[30:46] Paul Minors cria um novo tipo de atividade "Send Contract" (Enviar Contrato).
+[31:10] Paul Minors enfatiza a importância de manter o Pipedrive atualizado para o sucesso.
+[31:50] Paul Minors demonstra a importância da linha do tempo do negócio para registrar atividades e notas.
+[32:33] Paul Minors demonstra como agendar atividades (chamadas, e-mails) no Pipedrive.
+[33:24] Paul Minors mostra a lista de atividades (Activities) no menu lateral.
+[33:55] Paul Minors demonstra como registrar notas e agendar a próxima atividade após uma chamada.
+[34:10] Paul Minors demonstra como agendar a próxima atividade (e-mail) após a conclusão de uma atividade.
+[34:44] Paul Minors resume a importância de sempre agendar a próxima atividade.
+[35:05] Paul Minors demonstra como os indicadores coloridos mostram o status das atividades no pipeline.
+[35:49] Paul Minors demonstra a seção de notas para registrar informações detalhadas.
+[36:01] Paul Minors demonstra a funcionalidade de agendamento de reuniões (Meeting scheduler).
+[36:13] Paul Minors demonstra a integração do Pipedrive com opções de chamada de terceiros.
+[36:27] Paul Minors demonstra como fazer upload de arquivos e documentos.
+[36:36] Paul Minors demonstra a funcionalidade "Smart Docs" para criar e enviar cotações e contratos.
+[37:02] Paul Minors demonstra a aba de e-mail para sincronizar e enviar e-mails.
+[37:12] Paul Minors mostra sua conta principal com e-mail conectado e modelos de e-mail.
+[37:56] Paul Minors enfatiza a importância de tornar o uso do Pipedrive um hábito diário.
+[38:13] Paul Minors aconselha a manter o Pipedrive aberto no navegador durante o dia de trabalho.
+[38:21] Paul Minors demonstra a criação e atualização de negócios com novas atividades.
+[38:48] Paul Minors incentiva a explorar mais recursos avançados do Pipedrive, como automações, relatórios e dashboards.
+[39:59] Paul Minors conclui o vídeo, agradecendo e oferecendo a playlist de treinamento do Pipedrive.
+[40:07] Paul Minors encerra o vídeo.
+[40:30] Tela final do vídeo.

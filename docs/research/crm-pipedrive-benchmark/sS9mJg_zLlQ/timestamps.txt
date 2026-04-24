@@ -1,0 +1,51 @@
+[00:00] Visão geral do Pipedrive com o painel de ofertas.
+[00:01] Recursos da funcionalidade "Insights" com painéis ao vivo, previsão de receita, relatórios de desempenho e metas.
+[00:09] Acesso à funcionalidade "Insights" no menu lateral esquerdo.
+[00:11] Painel de "Insights" com relatórios, metas e painéis.
+[00:14] Visualização da seção de relatórios com diversas opções pré-definidas.
+[00:19] Visualização de um relatório de "Conversão de ofertas" em formato de funil.
+[00:24] Visualização da seção de painéis com diferentes gráficos e dados.
+[00:28] Visualização da seção de metas com o acompanhamento do progresso.
+[00:33] Gerenciamento de usuários nas configurações.
+[00:37] Seção "Gerenciar usuários" e "Grupos de visibilidade" nas configurações.
+[00:46] Configurações de visibilidade para leads, ofertas, pessoas, organizações e produtos.
+[01:06] Confirmação das alterações de visibilidade para o grupo "EMEA".
+[01:12] Seção "Gerenciar usuários" e "Conjuntos de permissão".
+[01:16] Detalhes das permissões para o conjunto "Deals admin" (administrador de ofertas).
+[01:23] Detalhes das permissões para o conjunto "Global admin" (administrador global).
+[01:36] Opções para editar as permissões de "Usuário global regular".
+[01:47] Habilitação das permissões "Ver estatísticas de outras pessoas nos Insights" e "Ver estatísticas da empresa nos Insights".
+[02:10] Acesso à funcionalidade "Insights" no menu lateral esquerdo.
+[02:18] Criação de um novo relatório.
+[02:22] Opções para escolher o tipo de relatório a ser criado.
+[02:28] Criação de um relatório de "Desempenho de atividades".
+[02:37] Interface de criação de relatório com filtros de atividades e visualização de dados.
+[02:49] Alteração do filtro de tempo para "Último ano" no relatório.
+[02:54] Opções para adicionar condições adicionais ao filtro do relatório.
+[02:59] Opções de visualização do gráfico: coluna, funil, pizza, scorecard e tabela.
+[03:12] Opções de personalização do relatório, ajustando a medida e o segmento.
+[03:25] Opção para selecionar o número de colunas por página no gráfico.
+[03:38] Opção para personalizar as cores dos gráficos.
+[03:44] Interface de personalização de cores, com seleção de cores do sistema e personalizadas.
+[03:59] Atribuição de uma nova cor a um segmento do gráfico.
+[04:08] Visualização em formato de tabela do relatório.
+[04:12] Visualização em formato de resumo do relatório.
+[04:17] Opção para personalizar as colunas visíveis na tabela.
+[04:22] Opção para exportar o relatório em formato XLS ou CSV.
+[04:30] Salvando o relatório personalizado.
+[04:37] Criação de uma nova meta.
+[04:51] Escolha da entidade e tipo de meta (adicionada, progredida, ganha).
+[04:57] Configurações para a nova meta: atribuir a usuário/equipe/empresa, tipo de atividade, pipeline, frequência e duração.
+[05:15] Especificação das metas individuais por período.
+[05:25] Visualização da meta criada com o progresso mensal.
+[05:33] Edição da meta.
+[05:36] Adição da meta a um painel.
+[05:39] Exportação da meta em formato PDF ou PNG.
+[05:45] Visualização da seção de painéis com vários relatórios e metas.
+[05:54] Criação de um novo painel.
+[06:00] Novo painel vazio.
+[06:05] Adição de relatórios e metas ao painel, arrastando-os do menu lateral.
+[06:18] Redimensionamento e organização dos relatórios no painel.
+[06:27] Compartilhamento do painel com usuários da equipe ou através de um link público.
+[06:36] Geração e gerenciamento de links públicos para o painel.
+[06:40] Painel finalizado com relatórios, metas e opção de exportação.

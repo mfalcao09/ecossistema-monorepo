@@ -1,0 +1,57 @@
+[00:00] Apresentação do tema do vídeo
+[00:31] Introdução do problema da perda de histórico de interações com clientes.
+[00:37] Identificação do apresentador.
+[01:19] Perda de tempo ao interagir com 80% das pessoas.
+[01:49] Oferece um cupom de 50% de desconto no Pipedrive.
+[02:07] Oferece 30 dias gratuitos para teste do Pipedrive.
+[02:19] Chamada para ação: inscreva-se no canal.
+[02:43] Os 4 objetivos da prospecção: coletar informação.
+[02:44] Aumentar o conhecimento da marca.
+[02:46] Fechar uma venda.
+[02:48] Criar familiaridade.
+[03:12] Aumento de 25% a 30% na receita ao usar bem as informações.
+[03:22] Pipedrive é a solução com o melhor custo-benefício.
+[03:49] Interação com o cliente.
+[03:51] Atividades futuras.
+[03:53] Automação de tarefas.
+[03:57] Mais produtividade.
+[03:59] Mais receita.
+[06:06] Visão geral do painel do Pipedrive, com Leads Inbox.
+[06:13] Mostra a contagem regressiva para o fim do teste gratuito (29 dias).
+[06:29] Clique na imagem do perfil no canto superior direito.
+[06:33] Abre as configurações da empresa (Company Settings).
+[06:35] Navega para a aba "Personal Preferences" para alterar o idioma.
+[06:43] Seleciona "Português (Brasil)" na lista de idiomas.
+[06:48] Salva as alterações de idioma.
+[06:55] A interface é atualizada para português.
+[06:59] Navega para a seção de Negócios (Deals).
+[07:05] Visão do funil de vendas padrão (Qualified, Contact Made, Demo Scheduled, Proposal Made, Negotiations Started).
+[07:09] Clica no ícone de lápis para editar o funil.
+[07:14] Altera o nome da etapa "Qualified" para "Qualificação".
+[07:29] Altera o nome da etapa "Contact Made" para "Contato".
+[07:30] Altera o nome da etapa "Demo Scheduled" para "Demonstração".
+[07:31] Altera o nome da etapa "Proposal Made" para "Proposta".
+[07:33] Altera o nome da etapa "Negotiations Started" para "Negociação".
+[07:37] Salva as alterações do funil.
+[07:44] Visão atualizada do funil de vendas.
+[07:56] Clica em "+ Negócio" para adicionar uma nova oportunidade.
+[08:00] Preenche o nome da pessoa de contato (João) e da organização (Teste).
+[08:08] Clica em "Salvar" para criar o novo negócio.
+[08:11] Um card de negócio "Negócio Teste" é criado na etapa "Qualificação".
+[08:21] Abre os detalhes do negócio.
+[08:24] Seleciona a aba "Observações" para registrar conversas.
+[08:28] Seleciona a aba "Atividade" para programar futuras atividades (ex: ligar amanhã).
+[08:35] Demonstra a função de sugerir horários para reuniões, mostrando a agenda.
+[08:47] Fecha a janela de disponibilidade de horário.
+[08:50] Demonstra a função de "Ligar" para fazer chamadas direto da plataforma.
+[08:58] Demonstra a função de "E-mail" para enviar e-mails e anexar arquivos.
+[09:18] Demonstra a função de "Arquivos" para anexar documentos.
+[09:30] Arrasta e solta o card do negócio da etapa "Qualificação" para "Contato".
+[09:42] Altera o valor da negociação para R$ 5.000,00 e a moeda para Real Brasileiro.
+[09:48] Define a data de fechamento esperada para a próxima semana.
+[09:59] Criação de campos personalizados dentro do Pipedrive.
+[10:32] Demonstra arrastar e soltar o negócio para as etapas de "Demonstração" e "Proposta".
+[10:39] Arrasta o negócio para "Negociação" e depois para "Ganho".
+[11:10] Animação de celebração ao ganhar um negócio.
+[11:27] Mostra a visualização do funil por previsão de vendas/receita.
+[11:44] Considerações finais e chamada para ação: compartilhar o vídeo e marcar no Instagram.

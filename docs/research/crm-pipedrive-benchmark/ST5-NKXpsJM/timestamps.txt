@@ -1,0 +1,61 @@
+Aqui está o mapeamento EXAUSTIVO de todos os momentos importantes do vídeo:
+
+[00:00] Visão geral do pipeline de vendas, mostrando diferentes estágios de negócios.
+[00:10] Clique em um negócio para visualizar seus detalhes.
+[00:12] Detalhes do negócio exibidos, incluindo a seção "DETALHES" para adicionar campos personalizados.
+[00:14] O usuário abre a seção "DETALHES" para ver campos existentes e a opção "Personalizar campos".
+[00:15] O usuário clica em "Adicionar valor" sob "Prazo".
+[00:19] O usuário volta para a visão geral do pipeline.
+[00:20] O usuário clica na seção "Pessoas" do menu lateral.
+[00:23] Detalhes de um contato ("Matt Whittaker") exibidos.
+[00:26] O usuário clica na seção "Organizações" do menu lateral.
+[00:30] Detalhes de uma organização ("Oceanica Industries") exibidos.
+[00:36] O usuário clica na seção "Produtos" do menu lateral.
+[00:41] Lista de produtos exibida, com opções para editar.
+[00:46] O usuário volta para a tela de detalhes de um negócio ("Matt Whittaker Deal").
+[00:49] O usuário clica em "30 produtos" para adicionar ou gerenciar produtos.
+[00:51] Pop-up "Adicionar produtos ao negócio" exibido, permitindo adicionar itens e definir preço/quantidade.
+[00:52] O usuário volta para a visão geral do pipeline.
+[00:56] O usuário clica no ícone do perfil no canto superior direito.
+[00:57] Menu suspenso do perfil exibido. O usuário clica em "Configurações da empresa".
+[000:59] Tela "Configurações da empresa" exibida. O usuário clica em "Campos de dados" no menu lateral.
+[01:02] Tela "Personalizar campos de dados" exibida. Mostra campos personalizados e padrão para "Negócio/Lead".
+[01:06] Dicas de ferramentas mostrando opções "Obrigatório" e "Importante".
+[01:12] O usuário clica em "Adicionar campo personalizado" e seleciona "Campo de lead/negócio".
+[01:14] Pop-up "Adicionar campo de lead/negócio" exibido. O usuário preenche o nome do campo como "Fonte do lead".
+[01:15] O usuário seleciona o tipo de campo como "Opção única" e adiciona opções.
+[01:16] O usuário marca o campo como "Importante" e seleciona "Pipeline de vendas" e todos os estágios.
+[01:19] O usuário volta para a tela de detalhes de um negócio. A notificação "PREENCHA" aparece para o campo "Fonte do lead".
+[01:23] O usuário volta para a tela "Personalizar campos de dados" para editar o campo "Fonte do lead".
+[01:24] O usuário marca o campo como "Obrigatório" para estágios específicos do pipeline.
+[01:27] O usuário tenta criar um novo negócio sem preencher o campo "Fonte do lead".
+[01:29] Uma mensagem de erro aparece indicando que "Fonte do lead" é obrigatório.
+[01:32] O usuário volta para a tela "Personalizar campos de dados" e edita o campo "Fonte do lead" novamente.
+[01:34] O usuário marca o campo como obrigatório para "Marcando negócio como ganho" e "Marcando negócio como perdido".
+[01:38] O usuário tenta mover o negócio para o estágio "Proposta Feita" sem preencher o campo "Fonte do lead".
+[01:40] Um pop-up "Campos Obrigatórios" aparece, exigindo o preenchimento da "Fonte do lead".
+[01:43] O usuário clica em "Personalizar campos" na visão detalhada de uma pessoa.
+[01:45] O usuário clica em "Adicionar um novo campo".
+[01:48] O usuário preenche o nome do campo como "Cargo" e seleciona o tipo "Texto".
+[01:50] O usuário marca "Sempre visível na barra lateral" e "Aparece no diálogo 'Adicionar nova pessoa'".
+[01:56] O campo "Cargo" é adicionado aos detalhes da pessoa e exibido na barra lateral.
+[02:05] O usuário clica na seção "Pessoas" do menu lateral, exibindo a visão de lista.
+[02:10] O usuário clica no ícone de "Escolher colunas" (três pontos verticais).
+[02:12] Pop-up "Escolher colunas" exibido. O usuário adiciona o campo "Cargo".
+[02:15] O campo "Cargo" agora é exibido na lista de pessoas.
+[02:18] O usuário clica em uma célula na coluna "Cargo" para editá-la.
+[02:20] O usuário seleciona várias pessoas para edição em massa.
+[02:22] O painel de "Edição em massa" aparece no lado direito, permitindo editar "Cargo".
+[02:29] O usuário clica no ícone do perfil, seleciona "Configurações da empresa" e depois "Gerenciar usuários".
+[02:32] Tela "Gerenciar usuários" exibida, mostrando as permissões dos conjuntos de usuários.
+[02:35] O usuário volta para a visão de lista de pessoas.
+[02:38] O usuário clica no ícone de "Mais ações" (três pontos verticais) no canto superior direito.
+[02:39] Menu suspenso exibido. O usuário clica em "Exportar resultados do filtro".
+[02:41] Pop-up "Exportar resultados" exibido, permitindo escolher o formato de exportação.
+[02:44] O usuário clica na seção "Insights" do menu lateral.
+[02:45] Tela "Insights" exibida, mostrando um relatório de desempenho de negócios.
+[02:46] O usuário clica em "Segmentar por" e seleciona "Fonte do lead".
+[02:49] O relatório de desempenho é segmentado pela "Fonte do lead", mostrando a conversão por estágio.
+[03:00] O usuário volta para a tela "Personalizar campos de dados" e exibe o pop-up "Adicionar campo de lead/negócio".
+[03:01] Mostra os diferentes tipos de campo disponíveis (texto, numérico, monetário, usuário, organização, pessoa, telefone, tempo, intervalo de tempo, data).
+[03:05] Logotipo do Pipedrive.

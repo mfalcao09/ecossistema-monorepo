@@ -1,0 +1,27 @@
+[00:00] Visão geral do Pipedrive
+[00:04] Seção de Negócios
+[00:05] Barra lateral esquerda
+[00:08] Botão Leads
+[00:11] Caixa de entrada de Leads
+[00:20] Convertendo um lead em um negócio
+[00:24] Botão "Converter em Negócio"
+[00:27] Detalhes do Negócio
+[00:30] Atividades, Notas, E-mails, Documentos, Arquivos e Registro de Alterações
+[00:36] Arrastar e soltar um negócio
+[00:45] Seção de e-mail
+[00:49] Visualização de um e-mail
+[00:52] "Negócio Vinculado" na seção de e-mail
+[00:56] Seção de Atividades
+[01:03] Botão Configurações
+[01:05] Configurações da Empresa
+[01:07] Sincronização de Calendário
+[01:10] Calendário sincronizado
+[01:14] Seção de Contatos
+[01:17] "Organizações" e "Pessoas" na seção de contatos
+[01:28] Seção Insights
+[01:31] Dashboards personalizáveis
+[01:38] Seção de Produtos
+[01:42] Edição de um produto
+[01:46] Produtos personalizados
+[01:54] Marketplace
+[01:59] Visão geral do Marketplace

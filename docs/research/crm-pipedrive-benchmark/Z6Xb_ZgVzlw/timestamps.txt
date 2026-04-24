@@ -1,0 +1,88 @@
+Claro, aqui está o detalhamento completo do vídeo:
+
+[00:00] Visão geral do Pipeline de Vendas.
+[00:07] Abrindo as configurações da empresa.
+[00:10] Acessando a página de Configurações da empresa.
+[00:11] Selecionando Email Sync nas configurações.
+[00:13] Navegando pelas abas de Email Sync: Contas, Smart Bcc, Email AI.
+[00:15] Exibindo a aba Smart Bcc.
+[00:24] Copiando o endereço de e-mail Smart Bcc.
+[00:26] Compondo um e-mail no Gmail com o Smart Bcc.
+[00:30] E-mail enviado e vinculado na caixa de entrada de vendas.
+[00:36] Abrindo novamente as configurações da empresa.
+[00:39] Selecionando Email Sync para conectar a conta.
+[00:46] Clicando para conectar a conta de e-mail.
+[00:49] Inserindo o endereço de e-mail.
+[00:50] Selecionando a conta Google para conectar.
+[00:54] Assinando no Pipedrive CRM.
+[00:57] Confirmando a conexão da conta de e-mail.
+[00:58] Visão geral dos provedores de e-mail compatíveis.
+[01:02] Visão geral das configurações de detalhes da conta.
+[01:14] Opções de compartilhamento de e-mail.
+[01:18] Opções de sincronização de e-mails passados e rótulos.
+[01:29] Exibindo as configurações gerais de e-mail.
+[01:40] Opção para adicionar várias contas de e-mail.
+[01:45] Conectando uma segunda conta de e-mail.
+[01:47] Assinando na segunda conta de e-mail.
+[01:48] Ambas as contas de e-mail agora conectadas.
+[01:52] Opção de conta de e-mail padrão.
+[01:58] Aviso ao desabilitar a conta de e-mail padrão.
+[02:07] Confirmando a desativação da conta de e-mail padrão.
+[02:08] Janela de composição de e-mail com opção de seleção de remetente.
+[02:16] Acessando a caixa de entrada de vendas.
+[02:18] Visualização da caixa de entrada de vendas.
+[02:22] Alternando entre contas de e-mail sincronizadas.
+[02:27] Filtrando e-mails por rótulos e outras opções.
+[02:35] Opções de compartilhamento de e-mail individual.
+[02:40] Opções de compartilhamento de vários e-mails.
+[02:48] Visualização de um e-mail compartilhado na visão de detalhes de um negócio.
+[03:04] Gerenciando rótulos na caixa de entrada de vendas.
+[03:07] Criando um novo rótulo.
+[03:15] Aplicando rótulos a um e-mail.
+[03:20] Aplicando vários rótulos a um e-mail.
+[03:28] Editando um rótulo.
+[03:32] Excluindo um rótulo.
+[03:36] Filtrando a caixa de entrada de vendas por rótulos.
+[03:47] Iniciando um novo e-mail.
+[03:54] Selecionando um modelo de e-mail.
+[04:03] Criando um novo modelo de e-mail.
+[04:07] Salvando um rascunho como modelo.
+[04:12] Gerenciando e editando modelos de e-mail.
+[04:18] Opções de visibilidade do modelo (privado/compartilhado).
+[04:26] Inserindo campos mesclados de dados do Pipedrive.
+[04:30] Selecionando campos de pessoa para o modelo.
+[04:42] Agendando uma reunião com o agendador de reuniões do Pipedrive.
+[04:53] Selecionando horários disponíveis para a reunião.
+[04:56] Preenchendo os detalhes da reunião.
+[04:59] Opções para compartilhar e incorporar o link da reunião.
+[05:07] Usando a ferramenta de criação de e-mail com IA.
+[05:13] Descrevendo o conteúdo do e-mail.
+[05:17] Usando exemplos para o conteúdo do e-mail.
+[05:20] Adicionando mais detalhes ao e-mail.
+[05:24] Escolhendo o tom e o comprimento do e-mail.
+[05:29] Gerando o conteúdo do e-mail com IA.
+[05:32] Visualizando o e-mail sugerido.
+[05:36] Ajustando o comprimento do e-mail gerado.
+[05:40] Confirmando o e-mail gerado.
+[05:41] Copiando o conteúdo do e-mail para a mensagem.
+[05:47] Criando uma assinatura de e-mail.
+[05:50] Acessando as configurações de assinatura de e-mail.
+[05:52] Adicionando uma nova assinatura de e-mail.
+[05:57] Salvando a assinatura de e-mail.
+[06:02] Selecionando e aplicando a assinatura de e-mail.
+[06:14] Opções de rastreamento de e-mail (abertura e cliques).
+[06:23] Ativando o rastreamento antes de enviar o e-mail.
+[06:27] E-mail enviado e status de rastreamento na pasta "Enviados".
+[06:39] Vinculando o e-mail a um contato ou negócio existente.
+[06:45] Selecionando um contato existente para vincular.
+[06:51] Vinculando a um negócio existente.
+[06:56] Visualizando e-mails vinculados na página de detalhes do negócio.
+[07:05] Iniciando um novo e-mail a partir da página de detalhes do negócio.
+[07:08] Criando um novo contato para o e-mail recebido.
+[07:15] Preenchendo os detalhes do novo contato.
+[07:17] Sumarizando conversas de e-mail com IA.
+[07:22] Acessando a seção de e-mail na visão de detalhes.
+[07:31] Sumarizando a conversa de e-mail na janela de resposta.
+[07:38] Visualizando o resumo da conversa (resumo, sentimento, prontidão para compra, itens de ação).
+[07:49] Recomendações de tutoriais adicionais (e-mail em grupo, automações, campanhas).
+[08:18] Tela final: Ganhe uma certificação em noções básicas do Pipedrive.

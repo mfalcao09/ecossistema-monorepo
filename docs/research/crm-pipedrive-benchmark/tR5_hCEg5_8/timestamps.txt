@@ -1,0 +1,87 @@
+Claro! Aqui está o mapeamento EXAUSTIVO dos momentos importantes do vídeo:
+
+[00:00] Logotipo Pipedrive AI.
+[00:03] Visão geral do Pipedrive AI no aplicativo.
+[00:07] Acessando os recursos do Pipedrive AI através do menu.
+[00:10] Seleção de "Ferramentas e aplicativos" no menu.
+[00:13] Navegando para "Pipedrive AI" nas configurações.
+[00:15] Painel de recursos do Pipedrive AI.
+[00:19] Expansão do recurso "AI-powered Sales Assistant".
+[00:29] Expansão do recurso "AI email creation".
+[00:38] Expansão do recurso "AI smart-app recommendations".
+[00:49] Expansão do recurso "AI-powered marketplace search".
+[00:59] Expansão do recurso "AI email summarization".
+[01:08] Transição para "AI Sales Assistant".
+[01:14] O recurso "Sales Assistant" é acionado.
+[01:17] Balão de luz no canto superior direito do Pipedrive indicando o assistente de vendas.
+[01:20] O assistente de vendas aparece com "Bom dia, Sheila".
+[01:23] Rolagem para "PRÓXIMA MELHOR AÇÃO".
+[01:24] Uma sugestão é oferecida para agendar uma chamada com um prospect.
+[01:26] A barra de rolagem do Assistente de Vendas é arrastada para baixo.
+[01:28] Opções de notificação no Sales Assistant.
+[01:31] A barra de rolagem do Assistente de Vendas é arrastada para cima.
+[01:32] Menu de configurações do Sales Assistant.
+[01:34] As configurações são fechadas.
+[01:47] Notificação de "Próxima melhor ação".
+[01:51] Oportunidade sugerida no Assistente de Vendas.
+[01:54] Oportunidade Meter mostrando "Alta" probabilidade.
+[01:59] Mensagem sugerindo agendar uma ligação.
+[02:04] Botão "Agendar chamada" clicado.
+[02:08] "MELHOR OPORTUNIDADE" destacada no Assistente de Vendas.
+[02:11] Descrição de "MELHOR OPORTUNIDADE".
+[02:26] Transição para "AI Email Creation".
+[02:30] Acessando a caixa de entrada de vendas.
+[02:34] Clicando em "Novo e-mail".
+[02:37] A janela de composição de e-mail é aberta.
+[02:39] Clicando no ícone do AI para "Escrever meu e-mail".
+[02:44] Acessando a visualização detalhada de um negócio.
+[02:47] Clicando na aba "E-mail" na visualização detalhada.
+[02:50] Clicando no ícone do AI para "Escrever meu e-mail" novamente.
+[02:52] Caixa de diálogo "Escrever meu e-mail".
+[02:56] Expandindo "Ver exemplos" na caixa de diálogo de descrição do e-mail.
+[03:00] Selecionando o exemplo "Follow up".
+[03:03] Adicionando detalhes adicionais à descrição do e-mail.
+[03:08] Selecionando "Amigável" como tom do e-mail.
+[03:10] Selecionando "Curto" como comprimento do e-mail.
+[03:16] Clicando em "Gerar e-mail".
+[03:17] E-mail sugerido gerado com tom "Amigável" e comprimento "Curto".
+[03:22] Mudando o tom do e-mail para "Formal".
+[03:25] Regenerando o e-mail com tom "Formal" e comprimento "Curto".
+[03:27] Mudando o comprimento do e-mail para "Padrão".
+[03:30] Regenerando o e-mail com tom "Formal" e comprimento "Padrão".
+[03:36] Clicando em "Copiar para mensagem".
+[03:38] Conteúdo do e-mail copiado para o compositor.
+[03:41] Editando o nome do cliente no e-mail.
+[03:47] Transição para "AI Email Summarization".
+[03:50] Navegando para a visualização detalhada de um negócio.
+[03:58] Clicando na aba "E-mail" na visualização detalhada do negócio.
+[04:02] Abrindo uma conversa de e-mail.
+[04:05] Botão "Resumir esta conversa com AI (BETA)" clicado.
+[04:08] Resumo da conversa de e-mail é exibido.
+[04:14] Visão geral do resumo: "Resumo", "Sentimento", "Prontidão para Comprar" e "Itens de Ação".
+[04:20] Botão "Copiar resumo" é clicado.
+[04:22] Opção para dar feedback sobre o resumo.
+[04:25] Caixa de feedback para o resumo.
+[04:29] Fechando a janela de conversa de e-mail.
+[04:31] Reabrindo a conversa de e-mail com o resumo visível.
+[04:39] Acessando a caixa de entrada de vendas.
+[04:42] Abrindo um e-mail na caixa de entrada de vendas.
+[04:44] Botão "Resumir esta conversa com AI (BETA)" clicado na caixa de entrada.
+[04:48] Resumo do e-mail é exibido.
+[04:53] Transição para "AI-powered Marketplace Search".
+[04:55] Acessando o "Marketplace".
+[04:58] Campo de busca do Marketplace.
+[05:01] Exemplos de pesquisa.
+[05:07] Clicando no exemplo "Capturando leads que correspondam ao meu perfil de cliente".
+[05:10] Resultados da busca são exibidos.
+[05:15] Campo de busca do Marketplace novamente.
+[05:18] Digitou "Eu quero resolver problemas de clientes".
+[05:22] Resultados da busca para "Eu quero resolver problemas de clientes".
+[05:30] Transição para "AI SmartApp Recommendations".
+[05:35] Clicando em "Ver todos os aplicativos no Marketplace".
+[05:39] Página inicial do Marketplace.
+[05:43] Ferramentas recomendadas para você no Marketplace.
+[05:52] Tela final com o logotipo Pipedrive.
+[05:54] Chamada para ação: "Próximo vídeo".
+
+Espero que isso seja útil!

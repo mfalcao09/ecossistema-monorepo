@@ -1,0 +1,52 @@
+[00:00] Visão geral do pipeline de vendas, mostrando diferentes estágios de negócios.
+[00:01] A tela muda para a caixa de entrada de Leads.
+[00:06] A tela muda para a página de detalhes de um negócio.
+[00:07] Navegação para a página de detalhes de uma pessoa.
+[00:19] Navegação para a página de detalhes de um negócio.
+[00:23] Vista do pipeline de vendas do negócio, mostrando os estágios.
+[00:26] Arrasta o negócio para o próximo estágio do pipeline.
+[00:36] Abre o menu para adicionar um rótulo ao negócio.
+[00:40] O rótulo "VIP" é exibido na visão do pipeline.
+[00:43] Filtra os negócios por rótulo na visão do pipeline.
+[00:47] Abre o editor de valor do negócio.
+[00:48] Adiciona produtos ao negócio.
+[00:53] Botões para marcar o negócio como "ganho" ou "perdido".
+[00:59] Abre o menu para transferir a propriedade do negócio.
+[01:04] Abre o menu para alterar a visibilidade do negócio.
+[01:06] Altera a data esperada de fechamento do negócio.
+[01:08] Altera a probabilidade de ganho do negócio.
+[01:18] Ativa/desativa a probabilidade de negócio individual nas configurações do pipeline.
+[01:23] Abre o menu de ações do negócio (duplicar, mesclar, excluir, exportar, converter para lead).
+[01:34] Mostra as atividades planejadas e concluídas para o negócio.
+[01:39] Rola para baixo para ver o histórico de atividades do negócio.
+[01:50] Edita uma nota existente.
+[01:54] Adiciona uma nota e menciona um colega de equipe.
+[02:00] Visualiza notificações do assistente de vendas.
+[02:01] Agendamento de uma atividade de chamada.
+[02:05] Inicia uma chamada diretamente do Pipedrive.
+[02:15] Salva a chamada e adiciona um resultado.
+[02:17] Compõe um e-mail para o cliente.
+[02:22] Usa o recurso de agendamento para propor horários de reunião.
+[02:28] Exemplo de cliente selecionando um horário de reunião.
+[02:32] Anexa um arquivo ao negócio.
+[02:35] Abre a seção de documentos.
+[02:39] Cria um novo modelo de documento.
+[02:44] Edita um modelo de documento com campos de mesclagem.
+[02:51] Visualiza um documento criado e a notificação de visualização.
+[02:53] Rola para baixo na barra lateral para ver os detalhes do negócio.
+[02:58] Rola para baixo para ver os detalhes da organização.
+[03:09] Visualiza informações de "Smart Contact Data" para a organização.
+[03:20] Adiciona um participante ao negócio.
+[03:28] Navega para a página de detalhes do participante.
+[03:32] Visualiza o histórico de negócios do participante.
+[03:34] Visão geral do negócio na barra lateral, mostrando a idade do negócio e as principais atividades.
+[03:41] Abre a seção de receita para configurar a assinatura.
+[03:49] Configura os detalhes da assinatura.
+[04:22] Cancela a assinatura.
+[04:26] Acessa o relatório de receita recorrente no painel de insights.
+[04:30] Seleciona o relatório de crescimento de receita recorrente.
+[04:39] Gráfico de crescimento de receita recorrente, mostrando novas adições, rotatividade, contração e expansão.
+[04:47] Gerencia seções da barra lateral, ocultando ou reordenando.
+[05:01] Altera a ordem das seções na barra lateral.
+[05:02] A tela mostra uma visão geral da página de detalhes do negócio.
+[05:07] A tela muda para a página de detalhes de uma organização, mostrando o histórico de negócios.

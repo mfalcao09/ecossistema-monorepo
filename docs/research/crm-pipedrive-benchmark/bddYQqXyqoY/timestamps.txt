@@ -1,0 +1,27 @@
+[00:00] Visão geral dos componentes do Pipedrive: Contatos, Leads, Negócios, Atividades, Produtos, Empresas, Pessoas, Conversas.
+[00:15] Exibição das cinco categorias principais do Pipedrive: Contatos, Leads, Negócios, Atividades, Produtos.
+[00:23] Contatos: informações de longo prazo sobre pessoas e históricos.
+[00:27] Leads e Negócios: rastreamento de ações de vendas.
+[00:32] Atividades: ações individuais, como chamadas e reuniões.
+[00:39] Produtos: informações sobre os produtos vendidos.
+[00:44] Visão do "Leads Inbox" (Caixa de entrada de leads), mostrando uma lista de leads com seus rótulos (hot/cold), e-mails e proprietários.
+[00:46] Detalhes de um lead, "GoToSpace Lead", com notas e atividades planejadas.
+[01:00] Conversão de um lead em um negócio, mantendo os detalhes e notas.
+[01:09] Visão de "Deals" (Negócios) no modo Kanban, com estágios como Qualificado, Contato Feito, Demo Agendada, Proposta Feita, Negociações Iniciadas.
+[01:14] Explicação das diferenças entre leads e negócios, com foco no rastreamento do pipeline.
+[01:21] Arrasto de um negócio através dos estágios do pipeline.
+[01:30] Visão de "Insights" (Relatórios), mostrando gráficos de negócios iniciados, duração, ganhos ao longo do tempo, previsões de receita e progresso.
+[01:40] Detalhes de um negócio específico, "SpaceCraft deal", com campos personalizáveis, histórico de atividades, notas e documentos.
+[01:46] Opção de duplicar ou transferir negócios para outros pipelines.
+[01:53] Seleção de um pipeline diferente para transferir um negócio.
+[01:56] Visão do calendário de "Activities" (Atividades), mostrando chamadas e reuniões agendadas.
+[01:59] Agendamento de uma nova atividade, "Demo Video Call", com opções para convidados, localização, descrição e tipo de reunião (Google Meet, Zoom, Microsoft Teams).
+[02:16] Visão da seção de "Contacts" (Contatos), exibindo o perfil de "Edward Edison" com detalhes de contato, organização e uma linha do tempo de atividades.
+[02:22] Exibição de negócios abertos para o contato, com valores e status.
+[02:37] Criação de um novo campo "Job Title" para o contato.
+[02:39] Visão da seção de "Organizations" (Organizações), mostrando uma organização com seus membros e negócios associados.
+[03:00] Criação de uma nova atividade diretamente do perfil da organização.
+[03:04] Transição rápida entre Leads, Contatos e Atividades.
+[03:15] Visão da seção de "Products" (Produtos), mostrando uma lista de produtos com seus códigos, preços, status e proprietários.
+[03:22] Adição de produtos a um negócio, preenchendo automaticamente o valor do negócio e calculando impostos.
+[03:33] Uma pessoa olhando através de um telescópio para o logotipo do Pipedrive e os ícones dos componentes, representando a visibilidade e organização dos dados.

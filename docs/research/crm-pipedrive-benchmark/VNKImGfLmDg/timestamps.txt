@@ -1,0 +1,45 @@
+[00:00] Visão geral do pipeline de vendas no Pipedrive
+[00:10] Acesso à lista de contatos (Pessoas)
+[00:16] Visualização e edição do contato "Holly McClane", com foco no campo personalizado "Decision Maker?"
+[00:22] Mudança do campo "Decision Maker?" de "None" para "No"
+[00:27] Mudança do campo "Decision Maker?" de "No" para "Yes"
+[00:30] Retorno à visão do pipeline, sem novas negociações ou atividades
+[00:36] Acesso ao menu de "Mais" (More) e seleção de "Automação de fluxo de trabalho" (Workflow automation)
+[00:41] Criação de um novo fluxo de trabalho personalizado com o nome "Decision Maker"
+[00:51] Adição de um gatilho ("Trigger") para o fluxo de trabalho
+[00:54] Seleção de "Pessoa" (Person) como item do gatilho
+[00:56] Seleção de "Pessoa atualizada" (Person updated) como evento do gatilho
+[01:00] Adição de uma condição ao fluxo de trabalho
+[01:04] Seleção do campo personalizado "Decision Maker?"
+[01:07] Configuração da condição: "Decision Maker?" "has changed to" "Yes"
+[01:10] Demonstração do motivo para usar "has changed to" em vez de "is" (para evitar duplicações de atividades/negociações)
+[01:40] Revisão do gatilho e condição definidos
+[01:47] Adição de uma ação ao fluxo de trabalho
+[01:49] Seleção de "Negociação" (Deal) como item da ação
+[01:51] Seleção de "Criar negociação" (Create deal) como evento da ação
+[01:55] Seleção dos campos padrão para a nova negociação: "Linked person", "Pipeline stage", "Owner"
+[02:04] Definição do título da negociação usando o nome da pessoa
+[02:11] Vinculação da negociação à pessoa atualizada
+[02:16] Seleção do pipeline "VIP Pipeline" e o estágio "Super Qualified" para a negociação
+[02:22] Definição do proprietário da negociação como o proprietário da pessoa atualizada
+[02:30] Aplicação da ação de "Criar negociação"
+[02:33] Adição de outra ação ao fluxo de trabalho (criar atividade)
+[02:37] Seleção de "Atividade" (Activity) como item da ação
+[02:39] Seleção de "Criar atividade" (Create activity) como evento da ação
+[02:42] Seleção dos campos padrão para a nova atividade: "Assigned to", "Linked deal", "Linked people", "Availability status"
+[02:53] Definição do assunto da atividade como nome da pessoa + "Follow up call"
+[02:59] Seleção do tipo de atividade como "Call"
+[03:02] Configuração da data de vencimento personalizada para "4 day(s)" e "Skip weekends"
+[03:17] Definição do atribuído à atividade como o proprietário da negociação
+[03:24] Vinculação da atividade à negociação criada
+[03:29] Vinculação da atividade ao contato da negociação
+[03:33] Definição do status de disponibilidade como "Busy"
+[03:45] Aplicação da ação de "Criar atividade"
+[03:50] Seleção da opção "Triggered by any user" para o fluxo de trabalho
+[03:54] Ativação e salvamento do fluxo de trabalho
+[04:02] Acesso à lista de contatos para testar o fluxo de trabalho
+[04:05] Abertura do contato "Parry Hotter" e edição do campo "Decision Maker?"
+[04:08] Mudança do campo "Decision Maker?" de "No" para "Yes"
+[04:10] Visualização instantânea de uma nova negociação criada ("Parry Hotter Deal") e uma atividade agendada ("Parry Hotter Follow up call") no perfil do contato
+[04:15] Acesso à nova negociação criada no pipeline "VIP Pipeline" no estágio "Super Qualified", com a atividade de acompanhamento já planejada
+[04:30] Encerramento do vídeo, incentivando a criação de fluxos de trabalho personalizados

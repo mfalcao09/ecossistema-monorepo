@@ -1,0 +1,53 @@
+[00:00] Início da apresentação com título "A Not So Fun Fact" e subtítulo "It takes up to 3 days to set up a call or meeting with an interested client."
+[00:10] Imagem de um calendário com dias marcados, ilustrando o tempo de espera.
+[00:15] Animação de e-mails em um loop, representando a troca de mensagens para agendamento.
+[00:25] Tela da interface do Pipedrive com um e-mail sendo composto para "Donald Darko" e o botão "Propose times" destacado.
+[00:30] Menu suspenso do botão "Propose times" com opções de agendamento.
+[00:35] Tela de "Choose date and time" para agendamento, mostrando dias e horários disponíveis.
+[00:39] E-mail de confirmação de reunião agendada pelo Pipedrive Scheduler.
+[00:51] Tela de apresentação com título "How does Scheduler work?" e subtítulo "Watch the rest of the video to learn how it works."
+[01:00] Visão geral do Pipedrive com a lista de "Deals" (negócios).
+[01:04] Menu lateral expandido do Pipedrive, mostrando a opção "Propose times".
+[01:08] Interface do e-mail no Pipedrive com o botão "Propose times" no compositor de e-mail.
+[01:12] Página de detalhes de contato "Donald Darko" com o botão "Propose times" na aba de e-mail.
+[01:17] Tela de "Activities" com o botão "Propose times" na parte superior.
+[01:21] Menu suspenso do botão "Propose times" em "Activities", mostrando "Manage availability" e "Pick times".
+[01:34] Tela de "General availability" para gerenciar a disponibilidade de agendamento.
+[01:37] Tela de "Define availability (1/3)" para configurar a duração da reunião, período ativo e dias da semana disponíveis.
+[01:40] Duração da reunião selecionada como "1 h" (1 hora).
+[01:46] Seleção da data de início da disponibilidade no calendário.
+[01:50] Seleção dos dias da semana para a disponibilidade.
+[01:54] Configuração de horários específicos para "Mondays" (segundas-feiras) arrastando e soltando.
+[02:07] Opção de copiar a disponibilidade para outros dias da semana.
+[02:17] Configuração de horários específicos para "Fridays" (sextas-feiras).
+[02:20] Expansão da seção "BUFFER AND TIME SETTINGS" para definir tempos de buffer antes e depois dos eventos.
+[02:30] Ajuste do tempo de início da reunião em incrementos de 1 hora.
+[02:35] Configuração do aviso mínimo para agendamento para "1 day" (1 dia).
+[02:38] Definição de até quando no futuro alguém pode agendar para "6 months" (6 meses).
+[02:40] Tela de "Meeting details (2/3)" para adicionar informações sobre a reunião.
+[02:44] Nome da reunião alterado para "Meeting with Arrayan".
+[02:47] Marketplace do Pipedrive, exibindo "Video calls & solutions".
+[02:50] Página do aplicativo "Zoom Meetings" no Marketplace.
+[02:52] Página do aplicativo "Microsoft Teams" no Marketplace.
+[02:53] Página do aplicativo "Google Meet" no Marketplace.
+[02:55] Menu suspenso de integração de vídeo chamada, selecionando "Zoom meeting".
+[02:59] Tela de instalação do aplicativo Zoom Meetings.
+[03:05] Preenchimento do campo "Location" com um endereço e "Description" com "Product Demonstration".
+[03:17] Adição de um novo campo "Industry" para o convidado preencher.
+[03:20] Seleção do tipo de atividade para registrar no Pipedrive (Call, Meeting, Task, Deadline, Email, Lunch).
+[03:28] Adição de uma nota pessoal, "Referral from JJ".
+[03:34] Tela "Share (3/3)" mostrando o link para compartilhamento do agendamento.
+[03:38] Tela de "General availability" com o link copiado.
+[03:41] Edição da assinatura de e-mail para incluir o link de agendamento.
+[03:52] Composição de um novo e-mail para "Tyson Fury" com o link de agendamento inserido.
+[04:06] Visualização da página de agendamento para o convidado, com a escolha de data e hora.
+[04:10] Formulário para o convidado preencher suas informações.
+[04:14] E-mail de confirmação de reunião recebido pelo Pipedrive Scheduler.
+[04:20] Menu de configurações do Pipedrive, acessando "Calendar sync".
+[04:24] Configurações de sincronização de calendário, selecionando "Two-way Sync".
+[04:29] Seleção dos tipos de atividade do Pipedrive para sincronizar com o calendário.
+[04:33] Edição de uma atividade no Pipedrive, mostrando que o calendário está sincronizado.
+[04:36] Tela de "Activities" com a nova atividade "Meeting with Arrayan" marcada como concluída.
+[04:38] Agendamento de uma nova atividade "Call", mostrando a disponibilidade.
+[04:41] Animação final de um calendário com um check verde.
+[04:44] Logo do Pipedrive.

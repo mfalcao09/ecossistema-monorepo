@@ -1,0 +1,12 @@
+[00:00] Visão geral do produto Importar dados
+[00:04] Upload de arquivo de dados
+[00:06] Importar de outro software
+[00:13] Configurações da empresa
+[00:17] Visão geral de sincronização de contatos
+[00:22] Configurar sincronização de contatos
+[00:26] Selecionar um grupo de contatos para sincronizar
+[00:27] Direção de sincronização: ida e volta
+[00:43] Selecionar visibilidade para contatos sincronizados
+[00:49] Iniciar sincronização
+[00:53] Sincronização de contatos em andamento
+[00:56] Visão geral de contatos no Pipedrive

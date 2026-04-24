@@ -1,0 +1,30 @@
+[00:00] Transição do logotipo da Pipedrive para a tela inicial do vídeo.
+[00:02] Logotipo da Pipedrive com um ícone de integração (setas circulares) e o logotipo do Zoom.
+[00:05] Um homem está segurando duas peças de quebra-cabeça, uma amarela e outra roxa, e as une, simbolizando a integração.
+[00:10] O homem acena com a cabeça e sorri, expressando satisfação com a integração.
+[00:12] Tela da Pipedrive mostrando o processo de criação de uma ligação Zoom.
+[00:13] O usuário está digitando "Meeting" no campo de atividade.
+[00:15] O usuário clica na opção "Add guests, location, video call, description".
+[00:16] A opção "Make it a Zoom meeting" é selecionada, e um link do Zoom é automaticamente gerado.
+[00:18] Um link exclusivo do Zoom e as informações de convite são exibidos.
+[00:23] A tela mostra que o convite foi enviado, incluindo o link da reunião, senha e ID da reunião.
+[00:27] Transição de tela com animação de formas geométricas coloridas.
+[00:28] O homem está em sua mesa, olhando para o relógio e para o laptop, expressando frustração ao tentar encontrar o link da reunião.
+[00:33] Ele parece confuso e perdido, indicando a dificuldade de organizar os links de reuniões.
+[00:39] Transição de tela com animação de formas geométricas coloridas.
+[00:41] A tela da Pipedrive mostra como o usuário pode entrar em uma reunião Zoom sem sair da plataforma.
+[00:44] O usuário clica no botão "Join Zoom meeting" diretamente da atividade planejada.
+[00:46] Um segundo botão "Join Zoom meeting" aparece para uma outra reunião planejada.
+[00:48] O homem sorri e faz um gesto de "ok" com o polegar, enquanto segura um telefone vermelho, mostrando a facilidade de uso da integração.
+[00:52] Transição de tela com animação de formas geométricas coloridas.
+[00:54] A tela da Pipedrive mostra a compatibilidade com a função "Scheduler".
+[00:55] O usuário clica em "Propose times" na funcionalidade de e-mail.
+[00:56] A opção "Make it a Zoom meeting" é selecionada na configuração de agendamento.
+[00:58] O checkbox "Zoom meeting" é marcado, e o link da reunião é automaticamente gerado.
+[00:59] Uma confirmação de reunião é enviada por e-mail, incluindo o link do Zoom e os detalhes da reunião.
+[01:02] A tela mostra como instalar a integração do Zoom a partir do marketplace da Pipedrive.
+[01:03] A seção "Featured apps" é exibida, e o usuário rola para baixo.
+[01:05] O usuário clica em "Zoom Meetings" no marketplace.
+[01:06] A página da integração "Zoom Meetings" é exibida, e o usuário clica em "Install now".
+[01:10] O logotipo da Pipedrive é exibido.
+[01:12] Tela final com o logotipo da Pipedrive e a chamada para "Read more now" e "Up next".

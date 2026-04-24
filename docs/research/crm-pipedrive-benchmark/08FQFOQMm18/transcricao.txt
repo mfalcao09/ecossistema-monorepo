@@ -1,0 +1,41 @@
+[ 00:00] Hey, how's it going, Pipedrivers?
+[ 00:02] In this video, we will learn all about tracking and analyzing your leads' performance.
+[ 00:07] Real quick, though, if you're new to the insights feature in Pipedrive, you should first check our tutorial that covers the basics of reporting and dashboards.
+[ 00:16] Otherwise, stick around and let's see how we can get better insights on our lead generation, qualification and performance.
+[ 00:24] To create the Leads report, head to the Insights section and click on the Add Report button, and then click Leads.
+[ 00:30] You can choose between two types of reports.
+[ 00:33] Leads performance report will show you how many leads you or your team created, and how many of them were archived or converted to deals.
+[ 00:41] You can filter, group, and segment lead data, both by default and custom fields, and visualize results in various ways.
+[ 00:49] Leads conversion report shows the rate of converting leads to deals for various groups such as lead source, creator, or time period.
+[ 00:57] Let's start with the performance report.
+[ 01:00] Once you created one, it will appear in the reports list on the left.
+[ 01:04] You can easily change its name at the top of the page.
+[ 01:08] The structure of the page is pretty much the same as for other report types.
+[ 01:12] Filtering is on top, chart in the middle, and table at the bottom of the page.
+[ 01:17] Let's say you want to track the performance of your team in terms of creating your leads.
+[ 01:21] For this, you should filter your data by leads created during, for example, last month.
+[ 01:27] You can also check how many leads were created by a specific team member.
+[ 01:32] All you have to do is add another condition and filter your data by the owner.
+[ 01:36] You can also choose the type of chart, be it a column chart, a bar chart, a pie chart, or even a scorecard.
+[ 01:43] You can adjust your data by changing the View By daily, weekly or monthly, Measure By the number of deals or lead value, and Segment By the contact person, currency, label, and so on.
+[ 01:56] It's all up to you.
+[ 01:57] Table section has two different tabs, All Data Leads and Summary.
+[ 02:01] In the Leads tab, you can see all lead details affected by filters applied with different columns.
+[ 02:07] You can also add or remove the columns.
+[ 02:10] In the Summary tab, the exact data that is shown on the current chart is represented.
+[ 02:15] Each row in this table represents a view by record, and each column represents a segment by value.
+[ 02:20] The value on each intersection is the measure by value.
+[ 02:25] Now, let's say you need to manage the money your company spends on new leads and find the best converting lead channels.
+[ 02:30] Here's where the Leads conversion report comes in handy.
+[ 02:33] The structure of the conversion report is pretty much the same.
+[ 02:37] The filters are also the same, so let's choose the leads created during the last year.
+[ 02:43] Then, in the Chart section, you should choose View By Lead source, and now you can see that chatbot and live chat work best for your leads conversion.
+[ 02:51] And the table section is also similar to the performance report one with the Leads tab, where each row represents one lead.
+[ 02:59] And the Summary tab with the data from the current chart.
+[ 03:02] When you're done with creating the report, you can save it and then add it to your dashboard.
+[ 03:07] You can also create a separate dashboard for your leads reports if needed.
+[ 03:10] Customize it by rearranging the report blocks or resizing them.
+[ 03:15] And then share the dashboard with other users, or share it externally.
+[ 03:20] Now that you know how to create leads reports, go and try it yourself.
+[ 03:25] Then analyze your results and improve your leads conversion.
+[ 03:28] Until the next time.

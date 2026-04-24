@@ -1,0 +1,45 @@
+[00:00] Web Forms: Generate leads from anywhere
+[00:04] Deals board in Pipedrive
+[00:11] Registration form
+[00:26] Registration submitted message
+[00:32] Lead created in Leads Inbox
+[00:41] Email notification
+[00:48] Lead details
+[00:57] Leads Inbox
+[00:58] Web Forms link
+[01:00] Try Web Forms button
+[01:04] Customize Theme
+[01:06] Change primary color
+[01:09] Color picker
+[01:14] Dark theme
+[01:15] Light theme with changed background color
+[01:21] Adjust font style to "Techy"
+[01:26] Adjust field style to "Rounded"
+[01:30] Change Web Form language
+[01:36] Choose form template: Contact us
+[01:41] Choose form template: Registration
+[01:46] Choose form template: Download material
+[01:52] Choose form template: Blank
+[01:59] Create Web Form button
+[02:07] Form editor
+[02:08] Preview of the Registration form
+[02:14] Standalone and Embedded toggle
+[02:18] Submit options
+[02:22] Customize success message
+[02:34] Add lead title prefix
+[02:42] Select owner for new leads
+[02:46] Enable email notifications
+[02:50] Email notification example
+[02:57] Style options
+[03:00] Change font style to "Friendly"
+[03:07] Change text and field size to "Large"
+[03:10] Change layout to "Side by side"
+[03:15] Change footer appearance to "Without branding"
+[03:20] Finalized Registration web form
+[03:25] Filling out the Registration form
+[03:32] Registration submitted message
+[03:36] Web Forms dashboard with conversion rate
+[03:41] Leads Inbox with the new lead
+[03:46] Lead details in Pipedrive
+[03:48] Schedule a call activity
+[03:58] Convert to deal option

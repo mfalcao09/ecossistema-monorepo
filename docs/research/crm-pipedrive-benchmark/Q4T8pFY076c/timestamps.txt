@@ -1,0 +1,20 @@
+Um mapeamento dos momentos importantes do vídeo foi criado para você:
+
+[00:00] Título do vídeo: Pipedrive e CloudTalk.
+[00:04] Tela inicial do Pipedrive com informações de um negócio.
+[00:05] O usuário clica no número de telefone para fazer uma chamada.
+[00:07] Abre o discador do CloudTalk.
+[00:09] Tela de chamada do CloudTalk.
+[00:10] O usuário clica para finalizar a chamada e abrir a janela pós-chamada.
+[00:11] A janela pós-chamada permite anotar detalhes da chamada.
+[00:13] O usuário adiciona uma tag à chamada.
+[00:14] O usuário adiciona notas à chamada.
+[00:16] O usuário marca a emoção do contato.
+[00:18] O usuário clica na opção para enviar um SMS.
+[00:19] A janela de SMS do CloudTalk é aberta.
+[00:20] O usuário seleciona um modelo de mensagem.
+[00:21] A mensagem é pré-preenchida e o usuário clica para enviar.
+[00:23] A mensagem é enviada e aparece no histórico.
+[00:24] O usuário escreve uma nova mensagem de SMS.
+[00:26] O usuário envia a mensagem.
+[00:28] Logo do Pipedrive.

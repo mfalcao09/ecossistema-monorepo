@@ -1,0 +1,127 @@
+[00:00] Apresentação do vídeo
+[00:01] Título do vídeo: "Gerenciando o Pós-vendas com Pipedrive CRM"
+[00:06] Trecho de vídeo com o apresentador
+[00:10] Logo "salestime"
+[00:13] Apresentador do vídeo
+[00:16] Informações sobre o canal e convite para se inscrever
+[00:29] Convite para seguir no Instagram
+[00:33] Sugestão de assistir outro vídeo sobre Pipedrive CRM
+[00:48] Sugestão para testar o Pipedrive CRM por 30 dias gratuitamente
+[01:02] Tela de Negócios do Pipedrive CRM
+[01:44] Abertura do menu de funis de vendas
+[01:49] Criação de um novo funil
+[01:51] Nomeando o funil como "Pós-vendas"
+[01:56] Criando as etapas do funil "Kickoff"
+[02:08] Criando a etapa "Diagnóstico"
+[02:13] Criando a etapa "Implementação"
+[02:18] Criando a etapa "Treinamento"
+[02:26] Criando a etapa "Concluído"
+[02:30] Salvando as alterações do novo funil
+[02:40] Novo funil de "Pós-vendas" criado com as etapas definidas
+[02:47] Alternando entre funis na tela de Negócios
+[02:54] Voltando para o funil de "Pré-vendas"
+[03:00] Um negócio marcado como "Ganho" no funil de vendas
+[03:05] Alternando novamente para o funil de "Pós-vendas"
+[03:16] Menção sobre notificar pessoas específicas
+[03:22] Introdução ao módulo de Projetos do Pipedrive
+[03:35] Tela do módulo de Projetos
+[03:46] Menção sobre o módulo de projetos ser pago à parte
+[04:06] Explicação do custo do módulo de projetos
+[04:30] Criação de um novo quadro no módulo de Projetos
+[04:46] Nomeando o quadro como "Implementação Pipedrive"
+[05:06] Criando as fases do projeto "Kickoff"
+[05:12] Criando a fase "Diagnóstico"
+[05:16] Criando a fase "Implementação"
+[05:22] Criando a fase "Treinamento"
+[05:27] Criando a fase "Revisão"
+[05:32] Criando a fase "Conclusão"
+[05:35] Salvando as alterações do quadro
+[06:04] Quadro "Implementação Pipedrive" criado
+[06:18] Acessando a seção "Modelos" no módulo de Projetos
+[06:36] Criação de um novo modelo de projeto
+[06:40] Nomeando o modelo como "Pipedrive Plano A"
+[06:56] Vinculando o modelo ao quadro "Implementação Pipedrive"
+[07:03] Adicionando tarefas e atividades às fases do modelo
+[07:11] Mapeando a Estrutura Analítica do Projeto (EAP)
+[07:22] Adicionando uma tarefa à fase "Kickoff"
+[07:28] Detalhes da tarefa "Agendar a reunião de KickOFF"
+[07:47] Adicionando uma atividade à fase "Kickoff"
+[07:54] Detalhes da atividade "Reunião de Kickoff + [Empresa]"
+[08:03] Configuração de prazo da atividade
+[08:26] Exemplo de configuração de prazo
+[08:37] Adicionando descrição e links à atividade
+[08:50] Atribuindo um proprietário à atividade
+[09:03] Atribuindo a atividade a um usuário específico
+[09:12] Vinculando a atividade a uma organização e definindo a fase
+[09:27] Detalhes da tarefa com campos preenchidos
+[09:37] Opções de tipo de atividade
+[09:50] Adicionando subtarefas a uma tarefa
+[10:07] Configurando a data de vencimento da tarefa
+[10:18] Configurando a fase da tarefa
+[10:23] Criando subtarefas dentro de uma tarefa
+[10:30] Definindo prazos e responsáveis para as subtarefas
+[10:53] Salvando as alterações no modelo
+[10:57] Estrutura do modelo "Pipedrive Plano A" com tarefas e subtarefas
+[11:15] Alternando a visualização do modelo por "Grupos"
+[11:21] Exemplo de grupos de atividades (To Do, Fazendo, Revisão, Concluído)
+[12:35] Comparativo da visualização por "Fases" e "Grupos"
+[12:50] Modelo "Pipedrive Plano A" salvo e disponível
+[12:56] Transição de tela e foco na importância da ferramenta
+[13:06] Acessando a tela de Negócios para demonstrar na prática
+[13:13] Abrindo um negócio existente ("Wolfs Deal")
+[13:20] Tela de detalhes do negócio "Wolfs Deal"
+[13:30] Opção de criar ou vincular um projeto no negócio
+[13:41] Personalizando a barra lateral para incluir "Projetos"
+[13:54] Seção "Projetos" visível na barra lateral
+[14:05] Clicando em "+ Projeto" para adicionar um novo projeto
+[14:15] Tela "Adicionar projeto", selecionando o modelo "Pipedrive Plano A"
+[14:26] Preenchendo a data de início e final do projeto
+[14:40] Selecionando a fase inicial do projeto
+[14:48] Adicionando etiquetas ao projeto
+[14:55] Adicionando uma descrição ao projeto
+[15:02] Salvando o projeto
+[15:10] Notificação de projeto criado e vinculado
+[15:20] Projeto "Wolfs Deal projeto" vinculado ao negócio
+[15:33] Acessando o projeto "Wolfs Deal projeto"
+[15:43] Tela do projeto "Wolfs Deal projeto" com as fases e tarefas do modelo
+[15:57] Detalhes da reunião de Kickoff com a possibilidade de edição e convite
+[16:21] Atribuindo um responsável à tarefa
+[16:29] Exemplo de como marcar tarefas como concluídas e acompanhar o progresso
+[16:47] Adicionando etiquetas para categorizar e agrupar informações do projeto
+[16:56] Barra de progresso do projeto
+[17:15] Exemplo de tarefas atrasadas marcadas em vermelho
+[17:39] Visualizando a pessoa e organização vinculadas ao projeto
+[17:53] Alterando a pessoa vinculada ao projeto
+[18:03] Acessando as configurações de campos personalizados do projeto
+[18:14] Criando um novo campo personalizado para o projeto ("Pasta Drive")
+[18:25] Campo "Pasta Drive" adicionado aos detalhes do projeto
+[18:46] Preenchendo o campo "Pasta Drive" com um link
+[18:57] Visualizando os detalhes da venda (deal) relacionada ao projeto
+[19:15] Adicionando anotações ao projeto
+[19:30] Acessando a seção "CCO Inteligente" para encaminhamento de e-mails
+[19:48] Enviando e-mails diretamente do Pipedrive
+[20:00] Utilizando templates de e-mail pré-definidos
+[20:13] Agendador de reuniões integrado ao Pipedrive
+[20:23] Demonstração do agendador de reuniões
+[20:31] Preenchendo informações para confirmar a reserva da reunião
+[20:46] Seção de "Arquivos" para anexar documentos
+[21:00] Seção de "Anotações" para registrar informações
+[21:13] Seção de "E-mails" com a possibilidade de integração e templates
+[21:28] Utilizando templates de e-mail para comunicação rápida
+[21:52] Demonstração do agendador de reuniões para compartilhar disponibilidade
+[22:04] Cliente visualizando a agenda e agendando a reunião
+[22:20] Seção de "Documentos" com integração ao Google Drive e OneDrive
+[22:38] Criação de modelos de documentos com campos variáveis
+[22:50] Exemplo de modelo de proposta com campos preenchidos automaticamente
+[23:07] Retorno à tela de documentos do projeto
+[23:25] Acessando a listagem de "Tarefas" para acompanhar o time
+[23:37] Retorno à tela de "Projetos" com o quadro de kanban
+[23:55] Convite para bater um papo com o time da Salestime
+[24:19] Acessando a seção de "Automações"
+[24:43] Criação de uma nova automação
+[24:54] Definindo o gatilho da automação: "Status do negócio mudou para Ganho"
+[25:10] Adicionando a ação "Criar projeto" à automação
+[25:27] Configurando os detalhes do projeto a ser criado automaticamente
+[25:40] Usando variáveis para o título do projeto
+[25:56] Salvando a automação
+[26:01] Finalização do vídeo e convite para testar o Pipedrive

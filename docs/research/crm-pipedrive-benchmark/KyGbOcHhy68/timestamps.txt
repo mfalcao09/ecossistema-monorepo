@@ -1,0 +1,104 @@
+Claro, aqui está uma linha do tempo detalhada dos momentos importantes do vídeo:
+
+[00:00] Duas pessoas, Stacey e Janelle, estão visíveis em uma chamada de vídeo, com o nome de Stacey e a função de “Customer Success Specialist” (Especialista em Sucesso do Cliente) em um canto da tela, e o nome de Janelle e a função de “Customer Success Manager” (Gerente de Sucesso do Cliente) em outro.
+[00:07] Stacey sorri e diz "Wonderful, hello", com Janelle respondendo "Good morning, good afternoon".
+[00:15] Stacey encoraja os participantes a compartilhar sua localização no chat.
+[00:32] Stacey e Janelle leem algumas das localizações dos participantes no chat, como Alemanha, Brasil, Virgínia (EUA), México, Irlanda e Minneapolis.
+[01:05] Stacey se apresenta como Especialista em Sucesso do Cliente na Pipedrive há quatro anos.
+[01:29] Janelle se apresenta como Gerente de Sucesso do Cliente na Pipedrive há mais de 18 meses, com experiência em gestão de equipes de vendas e desenvolvimento de CRM.
+[02:14] Stacey explica como usar a ferramenta de chat para perguntas e onde encontrar as enquetes.
+[02:41] Stacey informa que uma gravação do webinar será enviada por e-mail e que haverá uma enquete e um pedido de feedback.
+[03:07] Janelle concorda com a primeira enquete.
+[03:15] Uma enquete aparece, perguntando aos participantes qual plano da Pipedrive eles usam.
+[03:32] Stacey menciona os resultados da enquete, com a maioria dos participantes nos planos Professional e Advanced.
+[04:24] A tela principal do webinar é exibida, com o título "Maximizing essential features" (Maximizando recursos essenciais) e os nomes e cargos de Stacey e Janelle.
+[04:26] A agenda do webinar é apresentada, incluindo "Automations" (Automações), "Visibility Groups, Pipeline specific Custom Fields, & Pipeline Visibility" (Grupos de Visibilidade, Campos Personalizados Específicos do Pipeline e Visibilidade do Pipeline), "Automatic Assignment" (Atribuição Automática) e "Q&A" (Perguntas e Respostas).
+[04:58] Janelle informa que o webinar durará cerca de uma hora.
+[05:27] Stacey compartilha sua tela para demonstrar o recurso de automações.
+[05:41] A Pipedrive é apresentada com o pipeline de negócios da Stacey.
+[05:51] Stacey clica em "More" (Mais) na barra lateral esquerda e seleciona "Automations" (Automações).
+[06:03] A página de automações é exibida, mostrando modelos pré-definidos e a opção de criar novas automações.
+[06:29] Stacey clica em "Automation" (Automação) para criar uma nova.
+[06:33] Stacey seleciona "Deal updated" (Negócio atualizado) como o gatilho para a automação.
+[06:49] Stacey define a condição como "Deal status has changed to won" (Status do negócio mudou para ganho).
+[07:29] Stacey seleciona a ação "Update deal fields" (Atualizar campos do negócio).
+[07:54] Stacey seleciona "Owner" (Proprietário) como o campo a ser atualizado.
+[08:08] Stacey define o novo proprietário como "Big Bird".
+[08:23] Stacey ativa a automação e a salva.
+[08:34] Stacey demonstra a automação em ação, mudando o status de um negócio para "Won" (Ganho), o que altera o proprietário para "Big Bird".
+[09:07] Janelle retoma a palavra, lembrando os participantes de postar as perguntas no painel de perguntas.
+[09:21] Janelle explica a importância dos grupos de visibilidade para controlar o que os usuários veem no Pipedrive, ajudando a reduzir a confusão visual.
+[11:08] Janelle compartilha sua tela para demonstrar os grupos de visibilidade.
+[11:15] Janelle está na página do pipeline "Catering Sales" (Vendas de Catering) em sua conta de demonstração.
+[11:32] Janelle clica na sua foto de perfil e seleciona "Manage users" (Gerenciar usuários).
+[11:45] Janelle clica na aba "Visibility groups" (Grupos de visibilidade).
+[12:14] Janelle mostra os grupos de visibilidade padrão e personalizados, incluindo "Sales Manager Visibility Group" (Grupo de Visibilidade de Gerentes de Vendas) e "Sales Team Visibility Group" (Grupo de Visibilidade de Equipes de Vendas).
+[12:54] Janelle explica que os planos Professional, Power e Enterprise incluem grupos de visibilidade extras.
+[13:06] Janelle mostra as configurações do "Sales Team Visibility Group" (Grupo de Visibilidade de Equipes de Vendas), com "Sales Manager Visibility Group" (Grupo de Visibilidade de Gerentes de Vendas) como o grupo pai.
+[14:24] Janelle mostra os dois membros da equipe de vendas, Molly e Nell.
+[14:36] Janelle demonstra a visibilidade do pipeline para o grupo, mostrando que apenas quatro dos sete pipelines estão visíveis.
+[14:55] Janelle muda para a conta de Nell, mostrando que ela só pode ver sete negócios no pipeline "Catering Sales" (Vendas de Catering).
+[15:10] Janelle mostra que Nell só pode ver os quatro pipelines para os quais seu grupo tem visibilidade.
+[15:31] Janelle volta à sua conta para alterar as configurações de visibilidade.
+[15:47] Janelle define a visibilidade dos itens como "Item owner" (Proprietário do item), o que significa que Nell pode ver seus próprios negócios, mas não os de Molly.
+[16:08] Janelle explica as diferentes opções de visibilidade de itens, como "All Deals admins" (Todos os administradores de negócios) e "All users" (Todos os usuários).
+[17:07] Janelle demonstra que com a opção "Item owner's visibility group" (Grupo de visibilidade do proprietário do item), Nell e Molly podem ver os negócios uma da outra.
+[17:37] Janelle define a visibilidade de volta para "Item owner" (Proprietário do item), que é a configuração mais restritiva.
+[18:35] Janelle volta à conta de Nell, mostrando que ela agora só pode ver seus próprios sete negócios no pipeline.
+[18:54] Janelle demonstra que Nell não consegue ver os negócios de Molly ou Marty, mesmo estando no mesmo grupo de visibilidade.
+[19:21] Janelle sai das configurações do grupo de visibilidade.
+[19:40] Janelle volta à sua conta para mostrar as configurações do "Sales Manager Visibility Group" (Grupo de Visibilidade de Gerentes de Vendas).
+[19:48] Janelle mostra que os gerentes de vendas têm acesso a seis dos sete pipelines, e a visibilidade de itens é definida como "Item owner's visibility group" (Grupo de visibilidade do proprietário do item).
+[20:00] Janelle volta para a sua visualização, onde ela pode ver todos os negócios de todos os usuários.
+[20:30] Janelle explica que também é possível controlar a visibilidade de campos personalizados em pipelines específicos.
+[21:11] Janelle vai para "Company settings" (Configurações da empresa) e "Data fields" (Campos de dados).
+[21:55] Janelle edita o campo personalizado "First Marketing Source" (Primeira Fonte de Marketing).
+[22:07] Janelle mostra como restringir a visibilidade do campo a pipelines específicos, escolhendo apenas os pipelines de vendas.
+[22:21] Janelle sai da edição do campo e volta para um negócio de exemplo.
+[22:31] Janelle mostra que o campo "First Marketing Source" (Primeira Fonte de Marketing) está visível em um negócio no pipeline de Catering Sales.
+[22:54] Janelle muda para um negócio em um pipeline diferente (HR Pipeline) e mostra que o campo "First Marketing Source" (Primeira Fonte de Marketing) está oculto.
+[23:15] Janelle mostra o campo "PO Number" (Número do Pedido de Compra).
+[23:25] Janelle edita o campo "PO Number" (Número do Pedido de Compra) para que apenas os administradores de negócios possam editá-lo, enquanto todos os outros usuários podem apenas visualizá-lo.
+[23:54] Janelle retorna à conta de Nell para demonstrar a alteração.
+[24:19] Nell não consegue editar o campo "PO Number" (Número do Pedido de Compra), sendo ele um campo somente leitura.
+[24:43] Janelle mostra que os campos personalizados por pipeline e usuário estão disponíveis nos planos Professional, Power e Enterprise.
+[24:54] Stacey lembra os participantes de usar o Leads Inbox.
+[25:56] Janelle mostra o Leads Inbox com leads atribuídos a diferentes usuários.
+[26:46] Janelle vai para "Web Forms" (Formulários da Web) e abre um formulário de contato.
+[27:03] Janelle preenche o formulário com o nome "Stacey Weber" e o e-mail "stacey.weber@advisors.edu".
+[27:28] Janelle seleciona "Agriculture" (Agricultura) para o campo "Industry" (Indústria) e envia o formulário.
+[27:48] Janelle mostra o novo lead no Leads Inbox, atribuído a Nell Carlson porque a indústria é "Agriculture" (Agricultura).
+[28:18] Janelle vai para "Automatic assignment" (Atribuição automática).
+[28:30] Janelle mostra as regras de atribuição, incluindo "Agriculture -> Nell" (Agricultura -> Nell).
+[28:52] Janelle edita a regra "Agriculture -> Nell" (Agricultura -> Nell), mostrando que o campo "Industry" (Indústria) igual a "Agriculture" (Agricultura) atribui o lead a Nell Carlson.
+[29:05] Janelle mostra a regra "Manufacturing -> Marty" (Manufatura -> Marty), que atribui leads da indústria de manufatura a Marty Burns.
+[29:22] Janelle mostra a regra "Other Industries -> Molly" (Outras Indústrias -> Molly), que atribui leads de outras indústrias a Molly Crayons.
+[29:43] Janelle explica que é possível adicionar múltiplas condições e atribuir a equipes, não apenas a usuários individuais.
+[29:56] Janelle retorna ao Leads Inbox e mostra que o lead de "Stacey Weber" foi atribuído a Nell.
+[31:02] Janelle mostra que é possível ver o histórico das atribuições para garantir que as regras estão funcionando corretamente.
+[31:18] Janelle para de compartilhar a tela.
+[31:40] Stacey aborda a pergunta sobre como acessar modelos de e-mail sem criar um novo e-mail.
+[32:27] Stacey compartilha sua tela para demonstrar.
+[32:46] Stacey clica no ícone de "Quick Help" (Ajuda Rápida) (ponto de interrogação) no canto superior direito.
+[32:56] Stacey mostra que a Ajuda Rápida oferece acesso a artigos da Base de Conhecimento e vídeos de treinamento da Academia.
+[33:09] Stacey demonstra que a Ajuda Rápida exibe artigos sugeridos relevantes para a página atual.
+[33:17] Stacey mostra a opção de conversar com o suporte da Pipedrive.
+[33:26] Stacey aborda a pergunta sobre notificações de e-mail abertos.
+[33:38] Stacey mostra as configurações de "Email Sync" (Sincronização de E-mail), onde é possível ativar o rastreamento de e-mails abertos e cliques em links.
+[33:50] Stacey mostra como gerenciar notificações no Assistente de Vendas para receber alertas quando os e-mails são abertos.
+[34:14] Stacey responde à pergunta de Dan sobre como obter a assinatura de e-mail do Outlook no Pipedrive.
+[35:05] Janelle compartilha sua tela novamente para mostrar como adicionar a assinatura.
+[35:38] Janelle clica no ícone de assinatura no compositor de e-mail e cola sua assinatura, salvando-a.
+[36:03] Stacey comenta sobre as ferramentas de formatação no Pipedrive para assinaturas de e-mail.
+[36:23] Stacey aborda a pergunta de Nicole sobre adicionar mais de um contato principal a um negócio.
+[36:49] Stacey mostra como criar um campo personalizado do tipo "Person" (Pessoa) para adicionar contatos secundários.
+[37:05] Stacey demonstra como adicionar o contato secundário "Anne Noonan" no campo personalizado.
+[37:19] Stacey explica que o campo personalizado do tipo "Person" (Pessoa) permite associar contatos existentes a um negócio como contatos adicionais.
+[37:58] Stacey responde à pergunta de Valerie sobre adicionar várias organizações a um negócio.
+[38:29] Janelle compartilha sua tela novamente para mostrar como adicionar uma organização secundária.
+[38:57] Janelle clica no campo personalizado "Organization - Secondary" (Organização - Secundária) e busca por "Leffs" para adicionar uma organização secundária.
+[39:15] Janelle salva a organização secundária.
+[39:23] Janelle mostra que é possível acessar os detalhes da organização secundária clicando nela.
+[39:46] Stacey e Janelle respondem à pergunta de Amber sobre canais de treinamento.
+[40:07] Stacey e Janelle respondem à pergunta de Will sobre atribuição automática para múltiplos usuários.
+[40:17] Stacey e Janelle se despedem dos participantes.

@@ -1,0 +1,24 @@
+[00:00] Visão geral do pipeline de vendas no Pipedrive
+[00:02] Arrastando um negócio para a próxima etapa no pipeline
+[00:06] Acessando as configurações da empresa
+[00:10] Navegando até as configurações da empresa
+[00:14] Gerenciando usuários e acessos
+[00:15] Adicionando um novo usuário
+[00:16] Inserindo o endereço de e-mail do novo usuário
+[00:18] Confirmando a adição do usuário
+[00:21] Visualizando o convite de e-mail para o Pipedrive
+[00:26] Transferindo a propriedade de um negócio para outro usuário
+[00:28] Selecionando um novo proprietário para o negócio
+[00:33] Visualizando o negócio com o novo proprietário
+[00:37] Filtrando o pipeline por proprietário
+[00:44] Visualizando o pipeline de um usuário específico
+[00:54] Configurando grupos de visibilidade para usuários
+[00:56] Movendo um usuário para um grupo de visibilidade
+[00:59] Alterando as configurações de visibilidade para negócios
+[01:03] Confirmando as mudanças nas configurações de visibilidade
+[01:06] Visualizando relatórios de desempenho de negócios ao longo do tempo
+[01:09] Segmentando relatórios por proprietário e equipe
+[01:17] Retornando ao pipeline de vendas
+[01:21] Clicando no botão para convidar a equipe
+[01:22] Acessando a página para adicionar usuários novamente
+[01:24] Abrindo o menu de ajuda rápida no Pipedrive
