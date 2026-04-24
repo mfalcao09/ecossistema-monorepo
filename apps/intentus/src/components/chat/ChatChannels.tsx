@@ -8,12 +8,12 @@ import {
   WifiOff,
   Trash2,
   MessageCircle,
+  Instagram,
   Send as TelegramIcon,
   Globe,
   QrCode,
   RefreshCw,
 } from "lucide-react";
-import { Instagram } from "@/components/icons/BrandIcons";
 import { useChatChannels, useUpdateChatChannel } from "@/hooks/useChat";
 import { toast } from "sonner";
 import {
