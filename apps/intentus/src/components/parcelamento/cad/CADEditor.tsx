@@ -74,13 +74,18 @@ export function CADEditor({
   // State
   const [elements, setElements] = useState<CADElement[]>(initialElements);
   const [layers, setLayers] = useState<CADLayer[]>(
-    initialLayers.length > 0 ? initialLayers : DEFAULT_LAYERS
+    initialLayers.length > 0 ? initialLayers : DEFAULT_LAYERS,
   );
   const [settings] = useState<CADSettings>(initialSettings ?? DEFAULT_SETTINGS);
   const [activeTool, setActiveTool] = useState<CADTool>("select");
-  const [activeCategory, setActiveCategory] = useState<CADElementCategory>("lote");
-  const [activeLayerId, setActiveLayerId] = useState<string>(layers[0]?.id ?? "lotes");
-  const [selectedElementId, setSelectedElementId] = useState<string | null>(null);
+  const [activeCategory, setActiveCategory] =
+    useState<CADElementCategory>("lote");
+  const [activeLayerId, setActiveLayerId] = useState<string>(
+    layers[0]?.id ?? "lotes",
+  );
+  const [selectedElementId, setSelectedElementId] = useState<string | null>(
+    null,
+  );
   const [scaleLabel, setScaleLabel] = useState("—");
 
   // Drawing state (ref to avoid re-renders during draw)
@@ -130,7 +135,9 @@ export function CADEditor({
     try {
       const center = map.getCenter();
       const zoom = map.getZoom();
-      const metersPerPx = (156543.03392 * Math.cos((center.lat * Math.PI) / 180)) / Math.pow(2, zoom);
+      const metersPerPx =
+        (156543.03392 * Math.cos((center.lat * Math.PI) / 180)) /
+        Math.pow(2, zoom);
       const pixels100 = 100;
       const meters = metersPerPx * pixels100;
       setScaleLabel(`100px = ${meters.toFixed(0)}m`);
@@ -140,165 +147,185 @@ export function CADEditor({
   }
 
   // ── Project geo → canvas pixel ────────────────────────────────────────────
-  function geoToCanvasPx(map: MapboxMap, [lng, lat]: [number, number]): { x: number; y: number } {
+  function geoToCanvasPx(
+    map: MapboxMap,
+    [lng, lat]: [number, number],
+  ): { x: number; y: number } {
     const px = map.project([lng, lat]);
     return { x: px.x, y: px.y };
   }
 
-  function canvasPxToGeo(map: MapboxMap, x: number, y: number): [number, number] {
+  function canvasPxToGeo(
+    map: MapboxMap,
+    x: number,
+    y: number,
+  ): [number, number] {
     const ll = map.unproject([x, y]);
     return [ll.lng, ll.lat];
   }
 
   // ── Fabric.js rendering ───────────────────────────────────────────────────
-  const renderAll = useCallback((elems: CADElement[], map: MapboxMap, fc: FabricCanvas) => {
-    if (!map || !fc) return;
-    fc.clear();
+  const renderAll = useCallback(
+    (elems: CADElement[], map: MapboxMap, fc: FabricCanvas) => {
+      if (!map || !fc) return;
+      fc.clear();
 
-    for (const el of elems) {
-      const layer = layers.find((l) => l.id === el.layerId);
-      if (layer && !layer.visible) continue;
+      for (const el of elems) {
+        const layer = layers.find((l) => l.id === el.layerId);
+        if (layer && !layer.visible) continue;
 
-      const style = el.style;
-      const pts = el.coordinates.map(([lng, lat]) => geoToCanvasPx(map, [lng, lat]));
+        const style = el.style;
+        const pts = el.coordinates.map(([lng, lat]) =>
+          geoToCanvasPx(map, [lng, lat]),
+        );
 
-      if (pts.length < 2) continue;
+        if (pts.length < 2) continue;
 
-      const isSelected = el.id === selectedElementId;
-      const strokeWidth = style.strokeWidth + (isSelected ? 1 : 0);
+        const isSelected = el.id === selectedElementId;
+        const strokeWidth = style.strokeWidth + (isSelected ? 1 : 0);
 
-      // ── Draw polygon / line ───────────────────────────────────────────────
-      if (el.closed && pts.length >= 3) {
-        // Draw filled polygon via SVG path
-        const pathStr = buildSvgPath(pts, true);
-        const path = new fabricModule.current!.fabric.Path(pathStr, {
-          fill: hexToRgba(style.fill, style.fillOpacity),
-          stroke: style.stroke,
-          strokeWidth,
-          selectable: true,
-          evented: true,
-          objectCaching: false,
-          strokeUniform: true,
-        });
-        (path as Record<string, unknown>).cadId = el.id;
-        fc.add(path);
-
-        // Draw dimension labels
-        if (settings.showDimensions && el.coordinates.length >= 2) {
-          for (let i = 0; i < el.coordinates.length; i++) {
-            const next = (i + 1) % el.coordinates.length;
-            const lenM = haversineM(el.coordinates[i], el.coordinates[next]);
-            if (lenM < 0.5) continue;
-            const mid = midpoint(el.coordinates[i], el.coordinates[next]);
-            const midPx = geoToCanvasPx(map, mid);
-            const label = new fabricModule.current!.fabric.Text(formatLength(lenM), {
-              left: midPx.x,
-              top: midPx.y,
-              fontSize: 10,
-              fill: style.stroke,
-              backgroundColor: "rgba(255,255,255,0.75)",
-              originX: "center",
-              originY: "center",
-              selectable: false,
-              evented: false,
-              objectCaching: false,
-            });
-            fc.add(label);
-          }
-        }
-
-        // Element label
-        if (el.label) {
-          const center = coordsCenter(el.coordinates);
-          const cPx = geoToCanvasPx(map, center);
-          const text = new fabricModule.current!.fabric.Text(el.label, {
-            left: cPx.x,
-            top: cPx.y,
-            fontSize: 12,
-            fontWeight: "bold",
-            fill: style.stroke,
-            backgroundColor: "rgba(255,255,255,0.85)",
-            originX: "center",
-            originY: "center",
-            selectable: false,
-            evented: false,
+        // ── Draw polygon / line ───────────────────────────────────────────────
+        if (el.closed && pts.length >= 3) {
+          // Draw filled polygon via SVG path
+          const pathStr = buildSvgPath(pts, true);
+          const path = new fabricModule.current!.Path(pathStr, {
+            fill: hexToRgba(style.fill, style.fillOpacity),
+            stroke: style.stroke,
+            strokeWidth,
+            selectable: true,
+            evented: true,
             objectCaching: false,
+            strokeUniform: true,
           });
-          fc.add(text);
-        }
-      } else {
-        // Polyline / line
-        const points = pts.map((p) => ({ x: p.x, y: p.y }));
-        const pline = new fabricModule.current!.fabric.Polyline(points, {
-          fill: "transparent",
-          stroke: style.stroke,
-          strokeWidth,
-          selectable: true,
-          evented: true,
-          objectCaching: false,
-          strokeUniform: true,
-        });
-        (pline as Record<string, unknown>).cadId = el.id;
-        fc.add(pline);
+          (path as Record<string, unknown>).cadId = el.id;
+          fc.add(path);
 
-        if (settings.showDimensions && el.coordinates.length >= 2) {
-          for (let i = 0; i < el.coordinates.length - 1; i++) {
-            const lenM = haversineM(el.coordinates[i], el.coordinates[i + 1]);
-            if (lenM < 0.5) continue;
-            const mid = midpoint(el.coordinates[i], el.coordinates[i + 1]);
-            const midPx = geoToCanvasPx(map, mid);
-            const lbl = new fabricModule.current!.fabric.Text(formatLength(lenM), {
-              left: midPx.x,
-              top: midPx.y,
-              fontSize: 10,
+          // Draw dimension labels
+          if (settings.showDimensions && el.coordinates.length >= 2) {
+            for (let i = 0; i < el.coordinates.length; i++) {
+              const next = (i + 1) % el.coordinates.length;
+              const lenM = haversineM(el.coordinates[i], el.coordinates[next]);
+              if (lenM < 0.5) continue;
+              const mid = midpoint(el.coordinates[i], el.coordinates[next]);
+              const midPx = geoToCanvasPx(map, mid);
+              const label = new fabricModule.current!.FabricText(
+                formatLength(lenM),
+                {
+                  left: midPx.x,
+                  top: midPx.y,
+                  fontSize: 10,
+                  fill: style.stroke,
+                  backgroundColor: "rgba(255,255,255,0.75)",
+                  originX: "center",
+                  originY: "center",
+                  selectable: false,
+                  evented: false,
+                  objectCaching: false,
+                },
+              );
+              fc.add(label);
+            }
+          }
+
+          // Element label
+          if (el.label) {
+            const center = coordsCenter(el.coordinates);
+            const cPx = geoToCanvasPx(map, center);
+            const text = new fabricModule.current!.FabricText(el.label, {
+              left: cPx.x,
+              top: cPx.y,
+              fontSize: 12,
+              fontWeight: "bold",
               fill: style.stroke,
-              backgroundColor: "rgba(255,255,255,0.75)",
+              backgroundColor: "rgba(255,255,255,0.85)",
               originX: "center",
               originY: "center",
               selectable: false,
               evented: false,
               objectCaching: false,
             });
-            fc.add(lbl);
+            fc.add(text);
+          }
+        } else {
+          // Polyline / line
+          const points = pts.map((p) => ({ x: p.x, y: p.y }));
+          const pline = new fabricModule.current!.Polyline(points, {
+            fill: "transparent",
+            stroke: style.stroke,
+            strokeWidth,
+            selectable: true,
+            evented: true,
+            objectCaching: false,
+            strokeUniform: true,
+          });
+          (pline as Record<string, unknown>).cadId = el.id;
+          fc.add(pline);
+
+          if (settings.showDimensions && el.coordinates.length >= 2) {
+            for (let i = 0; i < el.coordinates.length - 1; i++) {
+              const lenM = haversineM(el.coordinates[i], el.coordinates[i + 1]);
+              if (lenM < 0.5) continue;
+              const mid = midpoint(el.coordinates[i], el.coordinates[i + 1]);
+              const midPx = geoToCanvasPx(map, mid);
+              const lbl = new fabricModule.current!.FabricText(
+                formatLength(lenM),
+                {
+                  left: midPx.x,
+                  top: midPx.y,
+                  fontSize: 10,
+                  fill: style.stroke,
+                  backgroundColor: "rgba(255,255,255,0.75)",
+                  originX: "center",
+                  originY: "center",
+                  selectable: false,
+                  evented: false,
+                  objectCaching: false,
+                },
+              );
+              fc.add(lbl);
+            }
           }
         }
-      }
 
-      // Selection outline
-      if (isSelected) {
-        const selPts = el.coordinates.map(([lng, lat]) => geoToCanvasPx(map, [lng, lat]));
-        const selPath = buildSvgPath(selPts, el.closed);
-        const selObj = new fabricModule.current!.fabric.Path(selPath, {
-          fill: "transparent",
-          stroke: "#f59e0b",
-          strokeWidth: 2,
-          strokeDashArray: [6, 3],
-          selectable: false,
-          evented: false,
-          objectCaching: false,
-        });
-        fc.add(selObj);
-        // Vertex handles
-        for (const c of el.coordinates) {
-          const cpx = geoToCanvasPx(map, c);
-          const circle = new fabricModule.current!.fabric.Circle({
-            left: cpx.x - 5,
-            top: cpx.y - 5,
-            radius: 5,
-            fill: "#ffffff",
+        // Selection outline
+        if (isSelected) {
+          const selPts = el.coordinates.map(([lng, lat]) =>
+            geoToCanvasPx(map, [lng, lat]),
+          );
+          const selPath = buildSvgPath(selPts, el.closed);
+          const selObj = new fabricModule.current!.Path(selPath, {
+            fill: "transparent",
             stroke: "#f59e0b",
             strokeWidth: 2,
+            strokeDashArray: [6, 3],
             selectable: false,
             evented: false,
             objectCaching: false,
           });
-          fc.add(circle);
+          fc.add(selObj);
+          // Vertex handles
+          for (const c of el.coordinates) {
+            const cpx = geoToCanvasPx(map, c);
+            const circle = new fabricModule.current!.Circle({
+              left: cpx.x - 5,
+              top: cpx.y - 5,
+              radius: 5,
+              fill: "#ffffff",
+              stroke: "#f59e0b",
+              strokeWidth: 2,
+              selectable: false,
+              evented: false,
+              objectCaching: false,
+            });
+            fc.add(circle);
+          }
         }
       }
-    }
 
-    fc.requestRenderAll();
-  }, [layers, selectedElementId, settings.showDimensions]);
+      fc.requestRenderAll();
+    },
+    [layers, selectedElementId, settings.showDimensions],
+  );
 
   // ── Init Mapbox + Fabric ──────────────────────────────────────────────────
   useEffect(() => {
@@ -324,14 +351,17 @@ export function CADEditor({
         import("fabric"),
       ]);
 
-      if (!isMounted || !mapContainerRef.current || !canvasElRef.current) return;
+      if (!isMounted || !mapContainerRef.current || !canvasElRef.current)
+        return;
 
       fabricModule.current = fabricMod;
 
       const mapboxgl = mapboxMod.default;
       mapboxgl.accessToken = token;
 
-      const center: [number, number] = initialViewport?.center ?? [-47.9292, -22.0056];
+      const center: [number, number] = initialViewport?.center ?? [
+        -47.9292, -22.0056,
+      ];
       const zoom = initialViewport?.zoom ?? 16;
 
       mapInstance = new mapboxgl.Map({
@@ -342,9 +372,18 @@ export function CADEditor({
         attributionControl: false,
       });
 
-      mapInstance.addControl(new mapboxgl.NavigationControl({ showCompass: false }), "top-right");
-      mapInstance.addControl(new mapboxgl.ScaleControl({ unit: "metric" }), "bottom-right");
-      mapInstance.addControl(new mapboxgl.AttributionControl({ compact: true }), "bottom-right");
+      mapInstance.addControl(
+        new mapboxgl.NavigationControl({ showCompass: false }),
+        "top-right",
+      );
+      mapInstance.addControl(
+        new mapboxgl.ScaleControl({ unit: "metric" }),
+        "bottom-right",
+      );
+      mapInstance.addControl(
+        new mapboxgl.AttributionControl({ compact: true }),
+        "bottom-right",
+      );
 
       mapRef.current = mapInstance;
 
@@ -358,7 +397,7 @@ export function CADEditor({
         canvasElRef.current.height = h;
       }
 
-      fabricInstance = new fabricMod.fabric.Canvas(canvasElRef.current!, {
+      fabricInstance = new fabricMod.Canvas(canvasElRef.current!, {
         selection: false,
         renderOnAddRemove: false,
         skipOffscreen: true,
@@ -383,7 +422,11 @@ export function CADEditor({
           try {
             mapInstance.addSource("dev-boundary", {
               type: "geojson",
-              data: { type: "Feature", geometry: developmentGeometry, properties: {} },
+              data: {
+                type: "Feature",
+                geometry: developmentGeometry,
+                properties: {},
+              },
             });
             mapInstance.addLayer({
               id: "dev-boundary-fill",
@@ -395,7 +438,11 @@ export function CADEditor({
               id: "dev-boundary-line",
               type: "line",
               source: "dev-boundary",
-              paint: { "line-color": "#fbbf24", "line-width": 2, "line-dasharray": [4, 2] },
+              paint: {
+                "line-color": "#fbbf24",
+                "line-width": 2,
+                "line-dasharray": [4, 2],
+              },
             });
           } catch {
             // ignore source already exists
@@ -447,10 +494,14 @@ export function CADEditor({
   }, [elements, renderAll, selectedElementId]);
 
   // ── Drawing / Selection events ────────────────────────────────────────────
-  function setupCanvasEvents(fc: FabricCanvas, map: MapboxMap, fabricMod: typeof import("fabric")) {
-    let snapIndicator: typeof fabricMod.fabric.Circle.prototype | null = null;
+  function setupCanvasEvents(
+    fc: FabricCanvas,
+    map: MapboxMap,
+    fabricMod: typeof import("fabric"),
+  ) {
+    let snapIndicator: typeof fabricMod.Circle.prototype | null = null;
     const drawing = drawingRef.current;
-    let previewLine: typeof fabricMod.fabric.Polyline.prototype | null = null;
+    let previewLine: typeof fabricMod.Polyline.prototype | null = null;
 
     function getSnapPoint(canvasX: number, canvasY: number): [number, number] {
       const rawGeo = canvasPxToGeo(map, canvasX, canvasY);
@@ -469,7 +520,7 @@ export function CADEditor({
         rawGeo,
         allVertices,
         settings.snapThreshold,
-        (c) => geoToCanvasPx(map, c)
+        (c) => geoToCanvasPx(map, c),
       );
 
       // Show snap indicator
@@ -479,7 +530,7 @@ export function CADEditor({
       }
       if (snapped) {
         const spx = geoToCanvasPx(map, snapped);
-        snapIndicator = new fabricMod.fabric.Circle({
+        snapIndicator = new fabricMod.Circle({
           left: spx.x - 6,
           top: spx.y - 6,
           radius: 6,
@@ -497,57 +548,72 @@ export function CADEditor({
       return rawGeo;
     }
 
-    fc.on("mouse:down", (opt: { e: MouseEvent; pointer: { x: number; y: number } }) => {
-      const { pointer } = opt;
-      const geo = getSnapPoint(pointer.x, pointer.y);
+    fc.on(
+      "mouse:down",
+      (opt: { e: MouseEvent; pointer: { x: number; y: number } }) => {
+        const { pointer } = opt;
+        const geo = getSnapPoint(pointer.x, pointer.y);
 
-      if (activeTool === "select") {
-        const target = fc.findTarget(opt.e) as Record<string, unknown> | undefined;
-        if (target?.cadId) {
-          setSelectedElementId(target.cadId as string);
-        } else {
-          setSelectedElementId(null);
-        }
-        return;
-      }
-
-      if (activeTool === "delete") {
-        const target = fc.findTarget(opt.e) as Record<string, unknown> | undefined;
-        if (target?.cadId) {
-          setElements((prev) => {
-            const next = prev.filter((e) => e.id !== target.cadId);
-            pushUndo(next);
-            return next;
-          });
-        }
-        return;
-      }
-
-      if (activeTool === "polygon" || activeTool === "line") {
-        if (!drawing.active) {
-          drawing.active = true;
-          drawing.points = [geo];
-        } else {
-          // Check if closing polygon (click near first point)
-          if (activeTool === "polygon" && drawing.points.length >= 3) {
-            const firstPx = geoToCanvasPx(map, drawing.points[0]);
-            const closeDist = Math.sqrt(
-              (pointer.x - firstPx.x) ** 2 + (pointer.y - firstPx.y) ** 2
-            );
-            if (closeDist < 20) {
-              finishDrawing(true);
-              return;
-            }
+        if (activeTool === "select") {
+          const target = fc.findTarget(opt.e) as
+            | Record<string, unknown>
+            | undefined;
+          if (target?.cadId) {
+            setSelectedElementId(target.cadId as string);
+          } else {
+            setSelectedElementId(null);
           }
-          drawing.points.push(geo);
+          return;
         }
-      }
-    });
+
+        if (activeTool === "delete") {
+          const target = fc.findTarget(opt.e) as
+            | Record<string, unknown>
+            | undefined;
+          if (target?.cadId) {
+            setElements((prev) => {
+              const next = prev.filter((e) => e.id !== target.cadId);
+              pushUndo(next);
+              return next;
+            });
+          }
+          return;
+        }
+
+        if (activeTool === "polygon" || activeTool === "line") {
+          if (!drawing.active) {
+            drawing.active = true;
+            drawing.points = [geo];
+          } else {
+            // Check if closing polygon (click near first point)
+            if (activeTool === "polygon" && drawing.points.length >= 3) {
+              const firstPx = geoToCanvasPx(map, drawing.points[0]);
+              const closeDist = Math.sqrt(
+                (pointer.x - firstPx.x) ** 2 + (pointer.y - firstPx.y) ** 2,
+              );
+              if (closeDist < 20) {
+                finishDrawing(true);
+                return;
+              }
+            }
+            drawing.points.push(geo);
+          }
+        }
+      },
+    );
 
     fc.on("mouse:dblclick", () => {
-      if (activeTool === "polygon" && drawing.active && drawing.points.length >= 3) {
+      if (
+        activeTool === "polygon" &&
+        drawing.active &&
+        drawing.points.length >= 3
+      ) {
         finishDrawing(true);
-      } else if (activeTool === "line" && drawing.active && drawing.points.length >= 2) {
+      } else if (
+        activeTool === "line" &&
+        drawing.active &&
+        drawing.points.length >= 2
+      ) {
         finishDrawing(false);
       }
     });
@@ -567,7 +633,7 @@ export function CADEditor({
           ...drawing.points.map(([lng, lat]) => geoToCanvasPx(map, [lng, lat])),
           { x: pointer.x, y: pointer.y },
         ];
-        previewLine = new fabricMod.fabric.Polyline(
+        previewLine = new fabricMod.Polyline(
           allPts.map((p) => ({ x: p.x, y: p.y })),
           {
             fill: "transparent",
@@ -577,7 +643,7 @@ export function CADEditor({
             selectable: false,
             evented: false,
             objectCaching: false,
-          }
+          },
         );
         fc.add(previewLine);
         fc.requestRenderAll();
@@ -627,12 +693,17 @@ export function CADEditor({
   // ── Tool cursor ───────────────────────────────────────────────────────────
   const cursorStyle = useMemo(() => {
     switch (activeTool) {
-      case "select":  return "default";
-      case "pan":     return "grab";
+      case "select":
+        return "default";
+      case "pan":
+        return "grab";
       case "line":
-      case "polygon": return "crosshair";
-      case "delete":  return "not-allowed";
-      default:        return "default";
+      case "polygon":
+        return "crosshair";
+      case "delete":
+        return "not-allowed";
+      default:
+        return "default";
     }
   }, [activeTool]);
 
@@ -654,10 +725,17 @@ export function CADEditor({
   // Keyboard shortcuts
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (
+        e.target instanceof HTMLInputElement ||
+        e.target instanceof HTMLTextAreaElement
+      )
+        return;
       const key = e.key.toLowerCase();
       if (key === "v") setActiveTool("select");
-      if (key === " ") { e.preventDefault(); setActiveTool("pan"); }
+      if (key === " ") {
+        e.preventDefault();
+        setActiveTool("pan");
+      }
       if (key === "l") setActiveTool("line");
       if (key === "p") setActiveTool("polygon");
       if (key === "t") setActiveTool("text");
@@ -678,7 +756,11 @@ export function CADEditor({
       }
       if ((e.ctrlKey || e.metaKey) && key === "z") {
         e.preventDefault();
-        if (e.shiftKey) { redo(); } else { undo(); }
+        if (e.shiftKey) {
+          redo();
+        } else {
+          undo();
+        }
       }
       if ((e.ctrlKey || e.metaKey) && key === "y") {
         e.preventDefault();
@@ -697,12 +779,12 @@ export function CADEditor({
   // ── Layer actions ─────────────────────────────────────────────────────────
   function toggleLayerVisibility(id: string) {
     setLayers((prev) =>
-      prev.map((l) => (l.id === id ? { ...l, visible: !l.visible } : l))
+      prev.map((l) => (l.id === id ? { ...l, visible: !l.visible } : l)),
     );
   }
   function toggleLayerLock(id: string) {
     setLayers((prev) =>
-      prev.map((l) => (l.id === id ? { ...l, locked: !l.locked } : l))
+      prev.map((l) => (l.id === id ? { ...l, locked: !l.locked } : l)),
     );
   }
   function renameLayer(id: string, name: string) {
@@ -752,8 +834,7 @@ export function CADEditor({
           ref={canvasContainerRef}
           className="absolute inset-0 pointer-events-none"
           style={{
-            pointerEvents:
-              activeTool === "pan" ? "none" : "all",
+            pointerEvents: activeTool === "pan" ? "none" : "all",
           }}
         >
           <canvas
@@ -785,7 +866,10 @@ export function CADEditor({
         {/* Stats panel */}
         <CADSidePanel
           elements={elements}
-          totalAreaM2={elements.reduce((s, e) => s + (e.properties.area_m2 ?? 0), 0)}
+          totalAreaM2={elements.reduce(
+            (s, e) => s + (e.properties.area_m2 ?? 0),
+            0,
+          )}
           scaleLabel={scaleLabel}
         />
       </div>
