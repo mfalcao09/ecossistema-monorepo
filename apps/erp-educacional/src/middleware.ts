@@ -22,9 +22,13 @@ function isPublicRoute(pathname: string): boolean {
 // ── Domínios ────────────────────────────────────────────────
 // Portal público: diploma.ficcassilandia.com.br (consulta e validação)
 // ERP gestão: gestao.ficcassilandia.com.br (painel administrativo, autenticado)
+// Homologação: hom.ficcassilandia.com.br espelha o ERP (área autenticada)
 // Domínios Vercel e localhost: acesso completo (dev/testes)
 const PORTAL_DOMAINS = ['diploma.ficcassilandia.com.br']
-const ERP_DOMAINS = ['gestao.ficcassilandia.com.br']
+const ERP_DOMAINS = [
+  'gestao.ficcassilandia.com.br',
+  'hom.ficcassilandia.com.br',
+]
 
 function getHostname(host: string): string {
   return host.split(':')[0]
