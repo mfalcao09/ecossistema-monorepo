@@ -42,6 +42,8 @@ import {
   Pencil,
   Send,
   Upload,
+  ShieldCheck,
+  Unlock,
 } from "lucide-react";
 import {
   ModalOverrideRegra,
@@ -571,6 +573,38 @@ function PainelAcoes({
   const [showRvddDialog, setShowRvddDialog] = useState(false);
   const router = useRouter();
 
+  // ── Snapshot Imutável (Fase 0.6) — estado e modais ─────────────────────
+  // Consolidar = gera snapshot imutável a partir das tabelas normalizadas.
+  // Destravar = anula snapshot pra reconsolidar (audita em diploma_unlock_windows).
+  const [snapshotConsolidado, setSnapshotConsolidado] = useState<
+    boolean | null
+  >(null);
+  const [snapshotLoading, setSnapshotLoading] = useState(true);
+  const [confirmarConsolidarAberto, setConfirmarConsolidarAberto] =
+    useState(false);
+  const [destravarAberto, setDestravarAberto] = useState(false);
+  const [justificativaDestravar, setJustificativaDestravar] = useState("");
+
+  useEffect(() => {
+    let cancelled = false;
+    setSnapshotLoading(true);
+    fetch(`/api/diplomas/${diploma.id}/snapshot`)
+      .then((r) => r.json())
+      .then((d) => {
+        if (cancelled) return;
+        setSnapshotConsolidado(d?.snapshot != null);
+      })
+      .catch(() => {
+        if (!cancelled) setSnapshotConsolidado(false);
+      })
+      .finally(() => {
+        if (!cancelled) setSnapshotLoading(false);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [diploma.id, diploma.updated_at]);
+
   // Bug #H — Estado do modal de override de regra de negócio.
   // Quando a API retorna 422 com `tipo: "regra_negocio"`, abrimos o modal.
   const [violacoesPendentes, setViolacoesPendentes] = useState<
@@ -601,6 +635,49 @@ function PainelAcoes({
     } finally {
       setExecutando(null);
     }
+  };
+
+  // ── Handlers Snapshot (Fase 0.6) ────────────────────────────────────────
+  const consolidarDados = async () => {
+    setConfirmarConsolidarAberto(false);
+    await executar("consolidar", async () => {
+      const res = await fetchSeguro(
+        `/api/diplomas/${diploma.id}/snapshot/gerar`,
+        { method: "POST" },
+      );
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || `HTTP ${res.status}`);
+      }
+      setSnapshotConsolidado(true);
+      setSucesso("Dados consolidados — snapshot imutável criado.");
+    });
+  };
+
+  const destravarSnapshot = async () => {
+    const just = justificativaDestravar.trim();
+    if (just.length < 20) {
+      setErro("Justificativa precisa ter pelo menos 20 caracteres.");
+      return;
+    }
+    setDestravarAberto(false);
+    await executar("destravar", async () => {
+      const res = await fetchSeguro(
+        `/api/diplomas/${diploma.id}/snapshot/destravar`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ justificativa: just }),
+        },
+      );
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(body.error || `HTTP ${res.status}`);
+      }
+      setSnapshotConsolidado(false);
+      setJustificativaDestravar("");
+      setSucesso("Snapshot destravado — edite os dados e consolide novamente.");
+    });
   };
 
   /**
@@ -734,12 +811,26 @@ function PainelAcoes({
 
   const s = diploma.status;
   const temXmlValido = xmls.some((x) => x.validado_xsd && x.status !== "erro");
-  const podeGerarXml = [
+  const statusPermiteEdicao = [
     "rascunho",
     "preenchido",
     "validando_dados",
     "erro",
   ].includes(s);
+  // Fase 0.6: gerar XML exige snapshot consolidado.
+  const podeGerarXml = statusPermiteEdicao && snapshotConsolidado === true;
+  // Consolidar: snapshot ainda não criado, status edição, não-legado, auditoria ok
+  const podeConsolidar =
+    statusPermiteEdicao &&
+    !diploma.is_legado &&
+    snapshotConsolidado === false &&
+    auditoria?.pode_gerar_xml === true;
+  // Destravar: já consolidado E ainda não rolou assinatura/registro/publicação
+  const podeDestravar =
+    snapshotConsolidado === true &&
+    !diploma.is_legado &&
+    !["assinado", "registrado", "publicado", "rvdd_gerado"].includes(s) &&
+    !temXmlValido;
   const podeAssinar =
     ["aguardando_assinatura_emissora", "xml_gerado"].includes(s) &&
     temXmlValido;
@@ -755,6 +846,137 @@ function PainelAcoes({
         onCancelar={cancelarOverride}
         onConfirmar={confirmarOverride}
       />
+
+      {/* Fase 0.6 — Modal: Confirmar Consolidação */}
+      {confirmarConsolidarAberto && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-full bg-violet-100 flex items-center justify-center flex-shrink-0">
+                <ShieldCheck size={20} className="text-violet-600" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-gray-900">
+                  Consolidar dados?
+                </h3>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Ação imutável — só pode ser revertida com justificativa
+                </p>
+              </div>
+            </div>
+
+            <div className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-xs space-y-1">
+              <p>
+                <span className="text-gray-500">Diplomado:</span>{" "}
+                <span className="font-semibold text-gray-800">
+                  {diploma.diplomados?.nome ?? "—"}
+                </span>
+              </p>
+              <p>
+                <span className="text-gray-500">Curso:</span>{" "}
+                <span className="font-semibold text-gray-800">
+                  {diploma.cursos?.nome ?? "—"}
+                </span>
+              </p>
+            </div>
+
+            <p className="text-xs text-gray-700 leading-relaxed">
+              Após consolidar, os dados ficam <strong>imutáveis</strong>. Os
+              XMLs, PDFs assinados e a RVDD serão gerados a partir deste
+              snapshot. Para alterar depois, será necessário destravar com
+              justificativa (ação auditada).
+            </p>
+
+            <div className="flex gap-2 justify-end">
+              <button
+                onClick={() => setConfirmarConsolidarAberto(false)}
+                className="px-4 py-2 text-xs font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={consolidarDados}
+                disabled={executando !== null}
+                className="px-4 py-2 text-xs font-semibold text-white bg-violet-600 rounded-lg hover:bg-violet-700 flex items-center gap-1.5 disabled:opacity-40"
+              >
+                <ShieldCheck size={12} /> Consolidar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Fase 0.6 — Modal: Destravar Snapshot (com justificativa) */}
+      {destravarAberto && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4">
+          <div className="bg-white rounded-2xl shadow-xl max-w-md w-full p-6 space-y-4">
+            <div className="flex items-start gap-3">
+              <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center flex-shrink-0">
+                <Unlock size={20} className="text-orange-600" />
+              </div>
+              <div>
+                <h3 className="text-base font-bold text-gray-900">
+                  Destravar para edição?
+                </h3>
+                <p className="text-xs text-gray-500 mt-0.5">
+                  Esta ação será auditada permanentemente
+                </p>
+              </div>
+            </div>
+
+            <p className="text-xs text-gray-700 leading-relaxed">
+              O snapshot atual será anulado. Você poderá editar os dados e
+              consolidar novamente. O motivo informado fica registrado em{" "}
+              <code className="text-[10px] bg-gray-100 px-1 rounded">
+                diploma_unlock_windows
+              </code>
+              .
+            </p>
+
+            <div>
+              <label className="text-xs font-semibold text-gray-700 mb-1 block">
+                Justificativa <span className="text-red-500">*</span>
+                <span className="text-gray-400 font-normal">
+                  {" "}
+                  (mínimo 20 caracteres)
+                </span>
+              </label>
+              <textarea
+                value={justificativaDestravar}
+                onChange={(e) => setJustificativaDestravar(e.target.value)}
+                rows={4}
+                placeholder="Ex: Erro detectado no nome do diplomado após consolidação — corrigir antes da assinatura."
+                className="w-full text-xs border border-gray-300 rounded-lg p-2 focus:outline-none focus:ring-2 focus:ring-orange-300"
+              />
+              <p className="text-[10px] text-gray-400 mt-1">
+                {justificativaDestravar.trim().length} / mínimo 20
+              </p>
+            </div>
+
+            <div className="flex gap-2 justify-end">
+              <button
+                onClick={() => {
+                  setDestravarAberto(false);
+                  setJustificativaDestravar("");
+                }}
+                className="px-4 py-2 text-xs font-semibold text-gray-700 bg-gray-100 rounded-lg hover:bg-gray-200"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={destravarSnapshot}
+                disabled={
+                  executando !== null ||
+                  justificativaDestravar.trim().length < 20
+                }
+                className="px-4 py-2 text-xs font-semibold text-white bg-orange-600 rounded-lg hover:bg-orange-700 flex items-center gap-1.5 disabled:opacity-40"
+              >
+                <Unlock size={12} /> Destravar
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <h3 className="text-sm font-bold text-gray-900">Ações do pipeline</h3>
 
@@ -858,6 +1080,95 @@ function PainelAcoes({
           />
         )}
 
+        {/* Fase 0.6 — Consolidar Dados (snapshot imutável) */}
+        {!diploma.is_legado &&
+          statusPermiteEdicao &&
+          snapshotConsolidado === false && (
+            <div
+              className={`p-3 rounded-xl border-2 transition-all ${podeConsolidar ? "border-violet-200 bg-violet-50/30" : "border-gray-100 opacity-60"}`}
+            >
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-2.5">
+                  <div
+                    className={`w-7 h-7 rounded-lg flex items-center justify-center ${podeConsolidar ? "bg-violet-500" : "bg-gray-200"}`}
+                  >
+                    <ShieldCheck size={13} className="text-white" />
+                  </div>
+                  <div>
+                    <p className="text-xs font-semibold text-gray-800">
+                      Consolidar Dados
+                    </p>
+                    <p className="text-[10px] text-gray-400">
+                      Trava os dados como snapshot imutável · habilita geração
+                      de XMLs
+                    </p>
+                  </div>
+                </div>
+                <button
+                  onClick={() => setConfirmarConsolidarAberto(true)}
+                  disabled={!podeConsolidar || executando !== null}
+                  title={
+                    !podeConsolidar
+                      ? "Resolva os erros críticos da auditoria antes de consolidar"
+                      : ""
+                  }
+                  className="flex-shrink-0 px-3 py-1.5 bg-violet-600 text-white text-xs font-semibold rounded-lg hover:bg-violet-700 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+                >
+                  {executando === "consolidar" ? (
+                    <Loader2 size={12} className="animate-spin" />
+                  ) : (
+                    <ShieldCheck size={12} />
+                  )}
+                  {executando === "consolidar"
+                    ? "Consolidando..."
+                    : "Consolidar"}
+                </button>
+              </div>
+              {!podeConsolidar &&
+                snapshotLoading === false &&
+                auditoria !== null &&
+                !auditoria.pode_gerar_xml && (
+                  <p className="text-[10px] text-amber-600 mt-2 flex items-center gap-1">
+                    <AlertTriangle size={10} />
+                    Resolva os erros críticos da auditoria primeiro.
+                  </p>
+                )}
+            </div>
+          )}
+
+        {/* Fase 0.6 — Destravar Snapshot (com justificativa auditada) */}
+        {podeDestravar && (
+          <div className="p-3 rounded-xl border-2 border-orange-200 bg-orange-50/20 transition-all">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-2.5">
+                <div className="w-7 h-7 rounded-lg flex items-center justify-center bg-orange-500">
+                  <Unlock size={13} className="text-white" />
+                </div>
+                <div>
+                  <p className="text-xs font-semibold text-gray-800">
+                    Destravar para edição
+                  </p>
+                  <p className="text-[10px] text-gray-400">
+                    Anula o snapshot atual · auditado em diploma_unlock_windows
+                  </p>
+                </div>
+              </div>
+              <button
+                onClick={() => setDestravarAberto(true)}
+                disabled={executando !== null}
+                className="flex-shrink-0 px-3 py-1.5 bg-orange-600 text-white text-xs font-semibold rounded-lg hover:bg-orange-700 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
+              >
+                {executando === "destravar" ? (
+                  <Loader2 size={12} className="animate-spin" />
+                ) : (
+                  <Unlock size={12} />
+                )}
+                Destravar
+              </button>
+            </div>
+          </div>
+        )}
+
         {/* Ação 1: Gerar XML */}
         <div
           className={`p-3 rounded-xl border-2 transition-all ${podeGerarXml ? "border-blue-200 bg-blue-50/30" : "border-gray-100 opacity-60"}`}
@@ -881,6 +1192,11 @@ function PainelAcoes({
             <button
               onClick={gerarXml}
               disabled={!podeGerarXml || executando !== null}
+              title={
+                !podeGerarXml && snapshotConsolidado === false
+                  ? "Consolide os dados primeiro"
+                  : ""
+              }
               className="flex-shrink-0 px-3 py-1.5 bg-blue-600 text-white text-xs font-semibold rounded-lg hover:bg-blue-700 disabled:opacity-40 disabled:cursor-not-allowed flex items-center gap-1.5"
             >
               {executando === "xml" ? (
@@ -891,6 +1207,14 @@ function PainelAcoes({
               {executando === "xml" ? "Gerando..." : "Gerar"}
             </button>
           </div>
+          {!podeGerarXml &&
+            snapshotConsolidado === false &&
+            statusPermiteEdicao && (
+              <p className="text-[10px] text-gray-500 mt-2 flex items-center gap-1">
+                <AlertTriangle size={10} />
+                Consolide os dados primeiro para habilitar a geração.
+              </p>
+            )}
           {s === "xml_com_erros" && (
             <p className="text-[10px] text-red-600 mt-2 flex items-center gap-1">
               <AlertTriangle size={10} />
@@ -2325,16 +2649,16 @@ export default function DiplomaDetalhePage() {
               {proc && (
                 <div className="flex items-center gap-1.5 mt-1.5">
                   <FolderOpen size={12} className="text-gray-400" />
-                  <Link
-                    href={
-                      extracao?.id
-                        ? `/diploma/processos/novo/revisao/${extracao.id}`
-                        : `/diploma/processos/${proc.id}`
-                    }
-                    className="text-xs text-primary-600 hover:underline"
-                  >
-                    {proc.nome}
-                  </Link>
+                  {extracao?.id ? (
+                    <Link
+                      href={`/diploma/processos/novo/revisao/${extracao.id}`}
+                      className="text-xs text-primary-600 hover:underline"
+                    >
+                      {proc.nome}
+                    </Link>
+                  ) : (
+                    <span className="text-xs text-gray-700">{proc.nome}</span>
+                  )}
                   {proc.periodo_letivo && (
                     <span className="text-xs text-gray-400">
                       · {proc.periodo_letivo}
@@ -2441,13 +2765,9 @@ export default function DiplomaDetalhePage() {
                         </>
                       )}
                   </p>
-                  {proc && (
+                  {proc && extracao?.id && (
                     <Link
-                      href={
-                        extracao?.id
-                          ? `/diploma/processos/novo/revisao/${extracao.id}`
-                          : `/diploma/processos/${proc.id}`
-                      }
+                      href={`/diploma/processos/novo/revisao/${extracao.id}`}
                       className="text-xs text-primary-600 hover:underline font-medium flex-shrink-0"
                     >
                       Ver chat IA →
@@ -2948,14 +3268,10 @@ export default function DiplomaDetalhePage() {
             />
           )}
 
-          {/* Atalho para o processo */}
-          {proc && (
+          {/* Atalho para o chat de extração IA */}
+          {proc && extracao?.id && (
             <Link
-              href={
-                extracao?.id
-                  ? `/diploma/processos/novo/revisao/${extracao.id}`
-                  : `/diploma/processos/${proc.id}`
-              }
+              href={`/diploma/processos/novo/revisao/${extracao.id}`}
               className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 hover:shadow-sm transition-shadow group"
             >
               <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center">

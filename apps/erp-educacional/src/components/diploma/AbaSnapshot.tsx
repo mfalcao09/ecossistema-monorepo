@@ -224,21 +224,44 @@ export default function AbaSnapshot({
     );
   }
 
-  // Diploma legado (sem snapshot)
+  // Diploma sem snapshot (legado OU ainda não consolidado)
   if (!data?.snapshot) {
+    // Diploma legado: snapshot não se aplica
+    if (
+      data?.diploma_id &&
+      data.status_diploma &&
+      /legado/i.test(data.status_diploma)
+    ) {
+      return (
+        <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm text-amber-800">
+          <div className="flex items-center gap-2 mb-2 font-semibold">
+            <AlertCircle size={16} /> Diploma legado
+          </div>
+          <p className="leading-relaxed">
+            Diplomas legados (migrados antes da Fase 0.6) não passam por
+            consolidação. Os artefatos originais já foram preservados nos
+            arquivos de migração.
+          </p>
+        </div>
+      );
+    }
+
+    // Diploma novo ainda não consolidado
     return (
-      <div className="bg-amber-50 border border-amber-200 rounded-2xl p-5 text-sm text-amber-800">
+      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-sm text-blue-800">
         <div className="flex items-center gap-2 mb-2 font-semibold">
-          <AlertCircle size={16} /> Diploma sem snapshot
+          <AlertCircle size={16} /> Snapshot ainda não consolidado
         </div>
         <p className="leading-relaxed">
-          Este diploma não possui dados consolidados em formato snapshot. Isso
-          pode acontecer em diplomas legados (migrados antes da implementação do
-          snapshot imutável) ou em diplomas criados antes da Fase 0.6.
+          Edite os dados do diploma livremente nas demais abas. Quando estiver
+          tudo certo (auditoria sem erros críticos), clique em{" "}
+          <strong>Consolidar Dados</strong> no painel à direita para travar os
+          dados como referência permanente para os artefatos oficiais (XMLs,
+          PDFs assinados, RVDD).
         </p>
-        <p className="mt-2 leading-relaxed">
-          O fluxo atual continua funcional — os artefatos serão gerados a partir
-          das tabelas normalizadas como no fluxo legado.
+        <p className="mt-2 leading-relaxed text-blue-700">
+          Após consolidar, os dados ficam imutáveis. Para alterar depois, use{" "}
+          <strong>Destravar para edição</strong> com justificativa (auditado).
         </p>
       </div>
     );
