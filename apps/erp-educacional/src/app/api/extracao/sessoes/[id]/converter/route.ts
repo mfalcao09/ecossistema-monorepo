@@ -22,19 +22,19 @@
  *     (b) operador preenche modal de justificativa → reenvia com override
  */
 
-import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
+import { NextRequest, NextResponse } from "next/server";
+import { z } from "zod";
 
-import { protegerRota } from '@/lib/security/api-guard';
-import { createClient } from '@/lib/supabase/server';
+import { protegerRota } from "@/lib/security/api-guard";
+import { createClient } from "@/lib/supabase/server";
 import {
   validarGateCriacaoProcesso,
   type InputGateCriacao,
-} from '@/lib/diploma/gate-criacao-processo';
-import type { TipoXsdComprobatorio } from '@/lib/diploma/regras-fic';
+} from "@/lib/diploma/gate-criacao-processo";
+import type { TipoXsdComprobatorio } from "@/lib/diploma/regras-fic";
 
 export const maxDuration = 30;
-export const dynamic = 'force-dynamic';
+export const dynamic = "force-dynamic";
 
 // ─── Schema de entrada ──────────────────────────────────────────────────────
 
@@ -42,8 +42,8 @@ const bodySchema = z.object({
   override_justificativa: z
     .string()
     .trim()
-    .min(10, 'Justificativa precisa ter pelo menos 10 caracteres')
-    .max(2000, 'Justificativa não pode passar de 2000 caracteres')
+    .min(10, "Justificativa precisa ter pelo menos 10 caracteres")
+    .max(2000, "Justificativa não pode passar de 2000 caracteres")
     .nullable()
     .optional(),
 });
@@ -80,7 +80,10 @@ export const POST = protegerRota(
 
     if (!sessaoId || !/^[0-9a-f-]{36}$/i.test(sessaoId)) {
       return NextResponse.json(
-        { erro: 'SESSAO_ID_INVALIDO', mensagem: 'sessaoId deve ser UUID válido' },
+        {
+          erro: "SESSAO_ID_INVALIDO",
+          mensagem: "sessaoId deve ser UUID válido",
+        },
         { status: 400 },
       );
     }
@@ -93,8 +96,8 @@ export const POST = protegerRota(
       if (!parsed.success) {
         return NextResponse.json(
           {
-            erro: 'BODY_INVALIDO',
-            mensagem: 'Body inválido',
+            erro: "BODY_INVALIDO",
+            mensagem: "Body inválido",
             detalhes: parsed.error.flatten(),
           },
           { status: 400 },
@@ -110,22 +113,27 @@ export const POST = protegerRota(
 
     // 1. Busca a sessão (RLS já filtra por usuario_id = auth.uid())
     const { data: sessao, error: errSessao } = await supabase
-      .from('extracao_sessoes')
-      .select('id, usuario_id, status, processo_id, dados_confirmados, dados_extraidos')
-      .eq('id', sessaoId)
+      .from("extracao_sessoes")
+      .select(
+        "id, usuario_id, status, processo_id, dados_confirmados, dados_extraidos",
+      )
+      .eq("id", sessaoId)
       .maybeSingle<SessaoRow>();
 
     if (errSessao) {
-      console.error('[converter] erro ao buscar sessão:', errSessao);
+      console.error("[converter] erro ao buscar sessão:", errSessao);
       return NextResponse.json(
-        { erro: 'ERRO_BUSCA_SESSAO', mensagem: errSessao.message },
+        { erro: "ERRO_BUSCA_SESSAO", mensagem: errSessao.message },
         { status: 500 },
       );
     }
 
     if (!sessao) {
       return NextResponse.json(
-        { erro: 'SESSAO_NAO_ENCONTRADA', mensagem: 'Sessão não existe ou não pertence a você' },
+        {
+          erro: "SESSAO_NAO_ENCONTRADA",
+          mensagem: "Sessão não existe ou não pertence a você",
+        },
         { status: 404 },
       );
     }
@@ -133,18 +141,18 @@ export const POST = protegerRota(
     // Defense-in-depth (RLS já valida, mas explicitamos)
     if (sessao.usuario_id !== auth.userId) {
       return NextResponse.json(
-        { erro: 'FORBIDDEN', mensagem: 'Sessão pertence a outro usuário' },
+        { erro: "FORBIDDEN", mensagem: "Sessão pertence a outro usuário" },
         { status: 403 },
       );
     }
 
     // 2. Idempotência rápida: já convertida? Retorna o processo_id existente
-    if (sessao.status === 'convertido_em_processo' && sessao.processo_id) {
+    if (sessao.status === "convertido_em_processo" && sessao.processo_id) {
       return NextResponse.json(
         {
           processo_id: sessao.processo_id,
           ja_convertido: true,
-          mensagem: 'Sessão já havia sido convertida anteriormente',
+          mensagem: "Sessão já havia sido convertida anteriormente",
         },
         { status: 200 },
       );
@@ -152,15 +160,15 @@ export const POST = protegerRota(
 
     // 3. Busca os arquivos ainda vinculados à sessão
     const { data: arquivos, error: errArquivos } = await supabase
-      .from('processo_arquivos')
-      .select('id, tipo_xsd, destino_xml, destino_acervo, tamanho_bytes')
-      .eq('sessao_id', sessaoId)
+      .from("processo_arquivos")
+      .select("id, tipo_xsd, destino_xml, destino_acervo, tamanho_bytes")
+      .eq("sessao_id", sessaoId)
       .returns<ArquivoRow[]>();
 
     if (errArquivos) {
-      console.error('[converter] erro ao buscar arquivos:', errArquivos);
+      console.error("[converter] erro ao buscar arquivos:", errArquivos);
       return NextResponse.json(
-        { erro: 'ERRO_BUSCA_ARQUIVOS', mensagem: errArquivos.message },
+        { erro: "ERRO_BUSCA_ARQUIVOS", mensagem: errArquivos.message },
         { status: 500 },
       );
     }
@@ -179,7 +187,10 @@ export const POST = protegerRota(
       {};
 
     // FormularioRevisao salva em "diplomado", dados_extraidos usa "aluno"
-    const alunoRaw = (dados.diplomado ?? dados.aluno ?? {}) as Record<string, unknown>;
+    const alunoRaw = (dados.diplomado ?? dados.aluno ?? {}) as Record<
+      string,
+      unknown
+    >;
     const disciplinasRaw = Array.isArray(dados.disciplinas)
       ? (dados.disciplinas as Array<Record<string, unknown>>)
       : [];
@@ -187,18 +198,23 @@ export const POST = protegerRota(
     const inputGate: InputGateCriacao = {
       aluno: {
         // FormularioRevisao usa "nome_completo", dados_extraidos usa "nome"
-        nome: (alunoRaw.nome_completo as string | null | undefined)
-          ?? (alunoRaw.nome as string | null | undefined) ?? null,
+        nome:
+          (alunoRaw.nome_completo as string | null | undefined) ??
+          (alunoRaw.nome as string | null | undefined) ??
+          null,
         cpf: (alunoRaw.cpf as string | null | undefined) ?? null,
         // FormularioRevisao usa "rg_numero" (ou "rg"), dados_extraidos usa "rg"
-        rg: (alunoRaw.rg_numero as string | null | undefined)
-          ?? (alunoRaw.rg as string | null | undefined) ?? null,
+        rg:
+          (alunoRaw.rg_numero as string | null | undefined) ??
+          (alunoRaw.rg as string | null | undefined) ??
+          null,
         data_nascimento:
           (alunoRaw.data_nascimento as string | null | undefined) ?? null,
         // FormularioRevisao: "naturalidade" pode ser string única ou cidade+uf separados
         naturalidade:
-          (alunoRaw.naturalidade as string | null | undefined)
-          ?? (alunoRaw.naturalidade_municipio as string | null | undefined) ?? null,
+          (alunoRaw.naturalidade as string | null | undefined) ??
+          (alunoRaw.naturalidade_municipio as string | null | undefined) ??
+          null,
         nacionalidade:
           (alunoRaw.nacionalidade as string | null | undefined) ?? null,
       },
@@ -223,9 +239,9 @@ export const POST = protegerRota(
     if (!resultado.pode_prosseguir && !overrideJustificativa) {
       return NextResponse.json(
         {
-          erro: 'GATE_BLOQUEADO',
+          erro: "GATE_BLOQUEADO",
           mensagem:
-            'Gate de criação detectou violações bloqueantes. Preencha a justificativa de override para prosseguir.',
+            "Gate de criação detectou violações bloqueantes. Preencha a justificativa de override para prosseguir.",
           pode_prosseguir: false,
           violacoes: resultado.violacoes,
           bloqueantes: resultado.bloqueantes,
@@ -238,7 +254,7 @@ export const POST = protegerRota(
 
     // 7. Chama a RPC transacional
     const { data: rpcResult, error: errRpc } = await supabase.rpc(
-      'converter_sessao_em_processo',
+      "converter_sessao_em_processo",
       {
         p_sessao_id: sessaoId,
         p_override_justificativa: overrideJustificativa,
@@ -246,10 +262,10 @@ export const POST = protegerRota(
     );
 
     if (errRpc) {
-      console.error('[converter] erro na RPC:', errRpc);
+      console.error("[converter] erro na RPC:", errRpc);
       return NextResponse.json(
         {
-          erro: 'ERRO_CONVERSAO',
+          erro: "ERRO_CONVERSAO",
           mensagem: errRpc.message,
           hint: errRpc.hint ?? null,
           code: errRpc.code ?? null,
@@ -260,16 +276,20 @@ export const POST = protegerRota(
 
     const result = (rpcResult ?? {}) as {
       processo_id?: string;
+      diploma_id?: string;
+      diplomado_id?: string;
       ja_convertido?: boolean;
       arquivos_migrados?: number;
+      comprobatorios_inseridos?: number;
+      enade_inserido?: boolean;
     };
 
     if (!result.processo_id) {
-      console.error('[converter] RPC retornou sem processo_id:', rpcResult);
+      console.error("[converter] RPC retornou sem processo_id:", rpcResult);
       return NextResponse.json(
         {
-          erro: 'ERRO_CONVERSAO',
-          mensagem: 'RPC não retornou processo_id',
+          erro: "ERRO_CONVERSAO",
+          mensagem: "RPC não retornou processo_id",
         },
         { status: 500 },
       );
@@ -278,8 +298,12 @@ export const POST = protegerRota(
     return NextResponse.json(
       {
         processo_id: result.processo_id,
+        diploma_id: result.diploma_id ?? null,
+        diplomado_id: result.diplomado_id ?? null,
         ja_convertido: result.ja_convertido ?? false,
         arquivos_migrados: result.arquivos_migrados ?? 0,
+        comprobatorios_inseridos: result.comprobatorios_inseridos ?? 0,
+        enade_inserido: result.enade_inserido ?? false,
         avisos: resultado.avisos,
         override_aplicado: Boolean(overrideJustificativa),
       },
