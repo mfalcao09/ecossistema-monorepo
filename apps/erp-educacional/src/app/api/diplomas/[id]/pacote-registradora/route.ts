@@ -101,11 +101,12 @@ export const POST = protegerRota(
           "termo_responsabilidade",
         ]);
 
-      // ── 3. Buscar documentos do acervo (tabela documentos_digitais mantida) ──
+      // ── 3. Buscar documentos do acervo (tabela documentos_digitais — referência polimórfica) ──
       const { data: docsAcervo } = await supabase
         .from("documentos_digitais")
         .select("tipo, arquivo_url, status, metadados")
-        .eq("diploma_id", diplomaId)
+        .eq("referencia_tabela", "diplomas")
+        .eq("referencia_id", diplomaId)
         .like("tipo", "acervo_%");
 
       // ── 4. Gerar manifest.json ──

@@ -721,7 +721,14 @@ function PainelAcoes({
       return { aguardandoOverride: true } as const;
     }
 
-    if (!res.ok) throw new Error(data.error ?? "Erro ao gerar XML");
+    if (!res.ok) {
+      // Inclui `detalhes` (ex: "RA do diplomado é obrigatório") na
+      // mensagem visível — sem isso, o usuário só vê "Dados incompletos
+      // para geração do XML" sem saber qual campo está faltando.
+      const erroBase = data.error ?? "Erro ao gerar XML";
+      const detalhes = data.detalhes ? ` — ${data.detalhes}` : "";
+      throw new Error(erroBase + detalhes);
+    }
     return { aguardandoOverride: false } as const;
   };
 

@@ -95,7 +95,8 @@ async function verificarChecklist(
       const { data: docs } = await supabase
         .from("documentos_digitais")
         .select("id, tipo, status")
-        .eq("diploma_id", diplomaId)
+        .eq("referencia_tabela", "diplomas")
+        .eq("referencia_id", diplomaId)
         .in("tipo", [
           "historico_escolar_pdf",
           "termo_expedicao",
@@ -116,7 +117,8 @@ async function verificarChecklist(
       const { data: acervoDocs } = await supabase
         .from("documentos_digitais")
         .select("id, status")
-        .eq("diploma_id", diplomaId)
+        .eq("referencia_tabela", "diplomas")
+        .eq("referencia_id", diplomaId)
         .eq("tipo", "acervo_digitalizado");
       const acervoAssinados = (acervoDocs || []).filter(
         (d: any) => d.status === "assinado",

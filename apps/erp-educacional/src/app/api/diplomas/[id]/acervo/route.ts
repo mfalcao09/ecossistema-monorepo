@@ -131,11 +131,12 @@ export const POST = protegerRota(
         );
       }
 
-      // Registrar no banco
+      // Registrar no banco (referência polimórfica — schema atual)
       const { data: doc, error: errInsert } = await supabase
         .from("documentos_digitais")
         .insert({
-          diploma_id: diplomaId,
+          referencia_tabela: "diplomas",
+          referencia_id: diplomaId,
           tipo: `acervo_${tipo}`,
           status: "pendente",
           arquivo_url: `documentos/${storagePath}`,
@@ -209,7 +210,8 @@ export const GET = protegerRota(
     const { data: docs, error } = await supabase
       .from("documentos_digitais")
       .select("*")
-      .eq("diploma_id", diplomaId)
+      .eq("referencia_tabela", "diplomas")
+      .eq("referencia_id", diplomaId)
       .like("tipo", "acervo_%")
       .order("created_at", { ascending: true });
 
@@ -253,7 +255,8 @@ export const PATCH = protegerRota(
       const { data: docs } = await supabase
         .from("documentos_digitais")
         .select("id")
-        .eq("diploma_id", diplomaId)
+        .eq("referencia_tabela", "diplomas")
+        .eq("referencia_id", diplomaId)
         .like("tipo", "acervo_%");
 
       if (!docs || docs.length === 0) {

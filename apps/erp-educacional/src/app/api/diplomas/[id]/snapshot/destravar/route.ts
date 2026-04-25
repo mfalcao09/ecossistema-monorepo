@@ -1,10 +1,21 @@
 import { NextResponse } from "next/server";
-import { createClient } from "@/lib/supabase/server";
+import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { protegerRota } from "@/lib/security/api-guard";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 20;
+
+// Admin client (bypass RLS) — necessário porque a tabela
+// `diploma_unlock_windows` tem policy "Only service role can insert".
+// Todas as ops desta rota usam o admin client pra atomicidade.
+function getAdmin() {
+  return createAdminClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
+}
 
 interface DiplomaDestravarRow {
   id: string;
@@ -32,7 +43,7 @@ interface XmlAssinadoRow {
 //   • Algum XML já foi assinado por BRy (não dá pra destravar após assinatura)
 // ═══════════════════════════════════════════════════════════════════════════
 export const POST = protegerRota(async (request, { userId }) => {
-  const supabase = await createClient();
+  const supabase = getAdmin();
 
   const pathname = new URL(request.url).pathname;
   const segments = pathname.split("/");

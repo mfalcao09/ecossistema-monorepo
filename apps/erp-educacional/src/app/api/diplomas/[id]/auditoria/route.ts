@@ -58,25 +58,16 @@ export async function GET(
   const { diploma, diplomado, curso, disciplinas, enade } = completo;
 
   // ── 2. Parallel: campos extras não incluídos em buscarDiplomaCompleto ──────
+  // Sessão 2026-04-25: removida query a `diplomados.nome_pai/nome_mae`
+  // (colunas legadas inexistentes — disparavam ERROR 42703 no Postgres).
+  // Filiação agora vem 100% da tabela canônica `filiacoes`.
   const [
-    diplomadoExtras,
     filiacoesData,
     cursoExtras,
     iesData,
     credenciamentosData,
     comprobatoriosData,
   ] = await Promise.all([
-    // nome_pai e nome_mae da tabela diplomados (legado)
-    admin
-      .from("diplomados")
-      .select("nome_pai, nome_mae")
-      .eq("id", diplomado.id)
-      .single()
-      .then(
-        (r) =>
-          r.data as { nome_pai: string | null; nome_mae: string | null } | null,
-      ),
-
     // filiacoes — fonte canônica dos genitores (gerada pela RPC converter)
     admin
       .from("filiacoes")
@@ -165,15 +156,9 @@ export async function GET(
     rg_orgao_expedidor: (diplomado as any).rg_orgao_expedidor ?? null,
     rg_uf: (diplomado as any).rg_uf ?? null,
     data_nascimento: (diplomado as any).data_nascimento ?? null,
-    // FIX s075: prioriza filiacoes (canônico), fallback para diplomados.nome_pai/mae (legado)
-    nome_pai:
-      diplomadoExtras?.nome_pai ??
-      filiacoesData.find((f) => f.sexo === "M")?.nome ??
-      null,
-    nome_mae:
-      diplomadoExtras?.nome_mae ??
-      filiacoesData.find((f) => f.sexo === "F")?.nome ??
-      null,
+    // FIX 2026-04-25: filiacoes é a única fonte (legado nome_pai/nome_mae removido)
+    nome_pai: filiacoesData.find((f) => f.sexo === "M")?.nome ?? null,
+    nome_mae: filiacoesData.find((f) => f.sexo === "F")?.nome ?? null,
   };
 
   // ── 4. Montar DadosCursoAuditoria ─────────────────────────────────────────
