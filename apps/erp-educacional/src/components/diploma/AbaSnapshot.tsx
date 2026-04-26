@@ -146,9 +146,14 @@ const CAMPOS_EDITAVEIS: Array<{ path: string; label: string; grupo: string }> =
 export default function AbaSnapshot({
   diplomaId,
   onAtualizar,
+  refreshKey,
 }: {
   diplomaId: string;
   onAtualizar?: () => void;
+  /** Sessão 2026-04-26: muda quando o pipeline executa qualquer ação
+   * (consolidar, destravar, gerar XML, etc.). O componente reage refazendo
+   * fetch dos dados. Tipicamente recebe `diploma.updated_at` da página pai. */
+  refreshKey?: string | number | null;
 }) {
   const [data, setData] = useState<SnapshotResponse | null>(null);
   const [carregando, setCarregando] = useState(true);
@@ -181,7 +186,10 @@ export default function AbaSnapshot({
 
   useEffect(() => {
     carregar();
-  }, [carregar]);
+    // Sessão 2026-04-26: refreshKey força recarregamento quando o pipeline
+    // executa ações (consolidar, destravar, etc.) — propagado pela página pai.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carregar, refreshKey]);
 
   const travar = async () => {
     setTravando(true);

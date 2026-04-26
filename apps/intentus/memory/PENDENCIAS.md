@@ -1,4 +1,5 @@
 # PENDÊNCIAS — Plano vs Execução
+
 > Gerado automaticamente pela automação `plan-audit`
 > Masterplan: parcelamento-solo
 > Última auditoria: 2026-04-26 09:30
@@ -6,25 +7,25 @@
 
 ## Backlog (planejado, sem progresso ou parcial)
 
-| Bloco | US | Item | Planejado desde | Sessões | Bloqueador |
-|-------|-----|------|-----------------|---------|------------|
-| G | — | Execute actions (ações diretas do copilot) | ~10/04/2026 | 0 | — |
-| G | — | Análise preditiva | ~10/04/2026 | 0 | — |
-| G | — | Comparador de empreendimentos | ~10/04/2026 | 0 | — |
-| H | US125 | Zoneamento Municipal — frontend | 11/04/2026 | 1 (backend s145) | Backend ✅, frontend pendente |
-| H | US127,128,129,132 | Autônoma 1 (próxima sessão definida no TRACKER) | 11/04/2026 | 0 | — |
-| H | US121-123 | Autônoma 2 (3 US) | 11/04/2026 | 0 | — |
-| H | US124,126,131 | Autônoma 3 (3 US) | 11/04/2026 | 0 | — |
-| H | US117 | Autônoma 4 | 11/04/2026 | 0 | — |
-| H | US130 | Autônoma 5 | 11/04/2026 | 0 | — |
-| H | US133,134/135 | Autônoma 7 (2 US) | 11/04/2026 | 0 | — |
-| H-anexo | US136-138 | Autônoma 8 — Tier 1 (FBDS APP hídrica + DataGeo + IBGE) | 24/04/2026 | 0 | Bucket FBDS + RLS pendente decisão |
-| H-anexo | US139-140 | Autônoma 9 — DAEE drenagem + SiCAR rural | 24/04/2026 | 0 | Provedor LLM (P-130 bloqueante geral) |
-| H-anexo | US141-142 | Autônoma 10 — Piracicaba/PCJ (condicional piloto) | 24/04/2026 | 0 | Decisão piloto Splendori |
-| K | — | Bloco K (a definir, ~15 US) | — | 0 | Aguarda H |
-| L | — | Bloco L (a definir, ~15 US) | — | 0 | Aguarda K |
-| E | E2-E6 | Land Designer Fase 2-6 (PRD v1.0 pronto, E1 ✅) | — | 0 | — |
-| — | — | Pricing AI (retomar) | Indeterminado | 0 | ⛔ Urbit API (negociação comercial) |
+| Bloco   | US                | Item                                                    | Planejado desde | Sessões          | Bloqueador                            |
+| ------- | ----------------- | ------------------------------------------------------- | --------------- | ---------------- | ------------------------------------- |
+| G       | —                 | Execute actions (ações diretas do copilot)              | ~10/04/2026     | 0                | —                                     |
+| G       | —                 | Análise preditiva                                       | ~10/04/2026     | 0                | —                                     |
+| G       | —                 | Comparador de empreendimentos                           | ~10/04/2026     | 0                | —                                     |
+| H       | US125             | Zoneamento Municipal — frontend                         | 11/04/2026      | 1 (backend s145) | Backend ✅, frontend pendente         |
+| H       | US127,128,129,132 | Autônoma 1 (próxima sessão definida no TRACKER)         | 11/04/2026      | 0                | —                                     |
+| H       | US121-123         | Autônoma 2 (3 US)                                       | 11/04/2026      | 0                | —                                     |
+| H       | US124,126,131     | Autônoma 3 (3 US)                                       | 11/04/2026      | 0                | —                                     |
+| H       | US117             | Autônoma 4                                              | 11/04/2026      | 0                | —                                     |
+| H       | US130             | Autônoma 5                                              | 11/04/2026      | 0                | —                                     |
+| H       | US133,134/135     | Autônoma 7 (2 US)                                       | 11/04/2026      | 0                | —                                     |
+| H-anexo | US136-138         | Autônoma 8 — Tier 1 (FBDS APP hídrica + DataGeo + IBGE) | 24/04/2026      | 0                | Bucket FBDS + RLS pendente decisão    |
+| H-anexo | US139-140         | Autônoma 9 — DAEE drenagem + SiCAR rural                | 24/04/2026      | 0                | Provedor LLM (P-130 bloqueante geral) |
+| H-anexo | US141-142         | Autônoma 10 — Piracicaba/PCJ (condicional piloto)       | 24/04/2026      | 0                | Decisão piloto Splendori              |
+| K       | —                 | Bloco K (a definir, ~15 US)                             | —               | 0                | Aguarda H                             |
+| L       | —                 | Bloco L (a definir, ~15 US)                             | —               | 0                | Aguarda K                             |
+| E       | E2-E6             | Land Designer Fase 2-6 (PRD v1.0 pronto, E1 ✅)         | —               | 0                | —                                     |
+| —       | —                 | Pricing AI (retomar)                                    | Indeterminado   | 0                | ⛔ Urbit API (negociação comercial)   |
 
 > ✅ Removidos: Bloco J (US-60,62,63,65 s148), Bloco E Fase E1 (CAD Studio s149), US125 backend (s145).
 
@@ -32,13 +33,13 @@
 
 (nenhum no período 16/04–26/04 — projeto sem novas sessões desde s151 em 12/04/2026)
 
-| Sessão | Data | O que fez | Classificação |
-|--------|------|-----------|---------------|
-| (s145) | 11/04/2026 | US-125 backend somente | parcial fora de sequência (audit anterior) |
-| (s148) | 11/04/2026 | Bloco J Geo Avançado antecipado | avanço fora de sequência (audit anterior) |
-| (s149) | 11/04/2026 | CAD Studio E1 antecipado | avanço fora de sequência (audit anterior) |
-| (s150) | 11/04/2026 | 8 bugs (mapa, 3D, EFs 401) | bugfix/QA (audit anterior) |
-| (s151) | 12/04/2026 | Auth fix sistêmico 19 EFs + 4 standalone | bugfix/QA (audit anterior) |
+| Sessão | Data       | O que fez                                | Classificação                              |
+| ------ | ---------- | ---------------------------------------- | ------------------------------------------ |
+| (s145) | 11/04/2026 | US-125 backend somente                   | parcial fora de sequência (audit anterior) |
+| (s148) | 11/04/2026 | Bloco J Geo Avançado antecipado          | avanço fora de sequência (audit anterior)  |
+| (s149) | 11/04/2026 | CAD Studio E1 antecipado                 | avanço fora de sequência (audit anterior)  |
+| (s150) | 11/04/2026 | 8 bugs (mapa, 3D, EFs 401)               | bugfix/QA (audit anterior)                 |
+| (s151) | 12/04/2026 | Auth fix sistêmico 19 EFs + 4 standalone | bugfix/QA (audit anterior)                 |
 
 ## Novidades desde última auditoria (15/04→26/04)
 
@@ -48,25 +49,25 @@
 
 ## Métricas
 
-| Métrica | Valor |
-|---------|-------|
-| Sessões no período (16/04–26/04) | 0 sessões |
-| Sessões no plano | 0 |
-| Sessões hotfix/QA | 0 |
-| % hotfix | n/a (sem atividade) |
-| Velocidade | 0 blocos/semana — projeto pausado |
-| Bloco H Autônoma 1 bloqueado há | 15 dias (desde 11/04/2026) |
-| Bloco G Sprint 2 bloqueado há | ~16 dias |
-| US adicionadas no período | +7 (anexo open-geodata em 24/04) |
+| Métrica                          | Valor                             |
+| -------------------------------- | --------------------------------- |
+| Sessões no período (16/04–26/04) | 0 sessões                         |
+| Sessões no plano                 | 0                                 |
+| Sessões hotfix/QA                | 0                                 |
+| % hotfix                         | n/a (sem atividade)               |
+| Velocidade                       | 0 blocos/semana — projeto pausado |
+| Bloco H Autônoma 1 bloqueado há  | 15 dias (desde 11/04/2026)        |
+| Bloco G Sprint 2 bloqueado há    | ~16 dias                          |
+| US adicionadas no período        | +7 (anexo open-geodata em 24/04)  |
 
 ## Inconsistências detectadas
 
-| Item | Observado | Esperado | Ação |
-|------|-----------|----------|------|
-| bloco-h-moat-regional.md | US125 marcada 🔲 | Registrar backend s145 ✅ parcial | Atualizar na próxima sessão H |
-| TRACKER Bloco H | "145 (US125 backend)" | OK — já reflete | — |
-| Bloco J | ✅ no TRACKER mas sem arquivo sprint próprio | Normal — definido ad-hoc | — |
-| Bloco H anexo (24/04) | 7 US no sprint mas TRACKER ainda mostra "15 US" | Atualizar TRACKER para 22 US no Bloco H | Pendente — manual ou próxima sessão H |
+| Item                     | Observado                                       | Esperado                                | Ação                                  |
+| ------------------------ | ----------------------------------------------- | --------------------------------------- | ------------------------------------- |
+| bloco-h-moat-regional.md | US125 marcada 🔲                                | Registrar backend s145 ✅ parcial       | Atualizar na próxima sessão H         |
+| TRACKER Bloco H          | "145 (US125 backend)"                           | OK — já reflete                         | —                                     |
+| Bloco J                  | ✅ no TRACKER mas sem arquivo sprint próprio    | Normal — definido ad-hoc                | —                                     |
+| Bloco H anexo (24/04)    | 7 US no sprint mas TRACKER ainda mostra "15 US" | Atualizar TRACKER para 22 US no Bloco H | Pendente — manual ou próxima sessão H |
 
 ## Alertas
 

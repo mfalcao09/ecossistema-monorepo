@@ -1525,11 +1525,13 @@ function AbaDocumentosComplementares({
   status,
   onAtualizar,
   isLegado,
+  refreshKey,
 }: {
   diplomaId: string;
   status: string;
   onAtualizar: () => void;
   isLegado?: boolean;
+  refreshKey?: string | number | null;
 }) {
   const [docs, setDocs] = useState<DocComplementar[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -1552,7 +1554,8 @@ function AbaDocumentosComplementares({
 
   useEffect(() => {
     carregar();
-  }, [carregar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carregar, refreshKey]);
 
   // ── Gerar 3 documentos (Histórico + Termos) ──
   const gerarDocumentos = async () => {
@@ -1963,10 +1966,12 @@ function AbaComprobatoriosMec({
   diplomaId,
   status,
   onAtualizar,
+  refreshKey,
 }: {
   diplomaId: string;
   status: string;
   onAtualizar: () => void;
+  refreshKey?: string | number | null;
 }) {
   const [comprobatorios, setComprobatorios] = useState<ComprobatorioItem[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -1986,7 +1991,8 @@ function AbaComprobatoriosMec({
 
   useEffect(() => {
     carregar();
-  }, [carregar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carregar, refreshKey]);
 
   const totalConvertidos = comprobatorios.filter(
     (c) => c.status_pdfa !== "pendente",
@@ -2238,10 +2244,12 @@ function AbaAcervoDigital({
   diplomaId,
   status,
   onAtualizar,
+  refreshKey,
 }: {
   diplomaId: string;
   status: string;
   onAtualizar: () => void;
+  refreshKey?: string | number | null;
 }) {
   const [docs, setDocs] = useState<DocAcervo[]>([]);
   const [carregando, setCarregando] = useState(true);
@@ -2263,7 +2271,8 @@ function AbaAcervoDigital({
 
   useEffect(() => {
     carregar();
-  }, [carregar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carregar, refreshKey]);
 
   const podeUpload = [
     "aguardando_digitalizacao",
@@ -3119,7 +3128,11 @@ export default function DiplomaDetalhePage() {
 
           {/* Aba: Snapshot Imutável (Fase 0.6) — fonte única dos artefatos oficiais */}
           {abaAtiva === "snapshot" && (
-            <AbaSnapshot diplomaId={diploma.id} onAtualizar={carregar} />
+            <AbaSnapshot
+              diplomaId={diploma.id}
+              onAtualizar={carregar}
+              refreshKey={diploma.updated_at}
+            />
           )}
 
           {/* Aba: Documentos Complementares (Fase 4) */}
@@ -3129,6 +3142,7 @@ export default function DiplomaDetalhePage() {
               status={diploma.status}
               onAtualizar={carregar}
               isLegado={diploma.is_legado ?? false}
+              refreshKey={diploma.updated_at}
             />
           )}
 
@@ -3140,18 +3154,25 @@ export default function DiplomaDetalhePage() {
                 diplomaId={diploma.id}
                 status={diploma.status}
                 onAtualizar={carregar}
+                refreshKey={diploma.updated_at}
               />
               {/* Uploads manuais de acervo (documentos_digitais) */}
               <AbaAcervoDigital
                 diplomaId={diploma.id}
                 status={diploma.status}
                 onAtualizar={carregar}
+                refreshKey={diploma.updated_at}
               />
             </div>
           )}
 
           {/* Aba: Histórico */}
-          {abaAtiva === "historico" && <AbaHistorico diplomaId={diploma.id} />}
+          {abaAtiva === "historico" && (
+            <AbaHistorico
+              diplomaId={diploma.id}
+              refreshKey={diploma.updated_at}
+            />
+          )}
         </div>
 
         {/* Coluna lateral (1/3) */}

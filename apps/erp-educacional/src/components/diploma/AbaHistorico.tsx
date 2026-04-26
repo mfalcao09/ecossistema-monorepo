@@ -136,7 +136,15 @@ function formatDateTime(iso: string): string {
   return `${dd}/${mm}/${yy} ${hh}:${min}`;
 }
 
-export default function AbaHistorico({ diplomaId }: { diplomaId: string }) {
+export default function AbaHistorico({
+  diplomaId,
+  refreshKey,
+}: {
+  diplomaId: string;
+  /** Sessão 2026-04-26: muda quando o pipeline executa qualquer ação;
+   * propagado pela página pai (tipicamente diploma.updated_at). */
+  refreshKey?: string | number | null;
+}) {
   const [data, setData] = useState<HistoricoResponse | null>(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
@@ -163,7 +171,8 @@ export default function AbaHistorico({ diplomaId }: { diplomaId: string }) {
 
   useEffect(() => {
     carregar();
-  }, [carregar]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [carregar, refreshKey]);
 
   if (carregando) {
     return (
