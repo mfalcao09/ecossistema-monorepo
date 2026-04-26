@@ -1,7 +1,8 @@
 # PENDÊNCIAS — Plano vs Execução
 > Gerado automaticamente pela automação `plan-audit`
 > Masterplan: diploma-digital-v4 + MASTERPLAN-FIC-MULTIAGENTES-v2 (paralelo)
-> Última auditoria: 2026-04-15 09:30
+> Última auditoria: 2026-04-26 09:30
+> Auditoria anterior: 2026-04-15 09:30
 
 ## Backlog (planejado, sem progresso ou parcial)
 
@@ -9,59 +10,59 @@
 |--------|------|------|-----------------|---------|------------|
 | S2 | E2.2 | Teste e2e completo com Token A3 USB real | 11/04/2026 | 0 | ⛔ Credenciais BRy homologação + Token A3 físico |
 | S2 | E2.2 | BRy credenciais homologação (sandbox real) | 11/04/2026 | 0 | ⛔ Aguardando BRy |
-| S2 | E2.3 | Lógica comparação XML enviado vs retornado | 11/04/2026 | 0 | — |
-| S2 | E2.3 | Auto-accept para case/acentuação | 11/04/2026 | 0 | — |
-| S2 | E2.3 | Flag humano para nomes/datas/códigos | 11/04/2026 | 0 | — |
+| S2 | E2.3 | Lógica comparação XML enviado vs retornado | 11/04/2026 | 0 | — (sem bloqueio técnico) |
+| S2 | E2.3 | Auto-accept cosmético + flag humano semântico | 11/04/2026 | 0 | — |
 | S2 | E2.3 | Painel de reconciliação | 11/04/2026 | 0 | — |
-| S2 | E2.4 | Pass de compressão PDF/A (72dpi+downsampling) | 11/04/2026 | 0 | — |
-| S2 | E2.4 | Verificação pós-compressão (válido PDF/A?) | 11/04/2026 | 0 | — |
-| S2 | E2.4 | Threshold >15MB comprime, <15MB mantém | 11/04/2026 | 0 | — |
+| S2 | E2.4 | Compressão PDF/A (72dpi+downsampling, threshold 15MB) | 11/04/2026 | 0 | — |
 | S8 | — | Fluxo UFMS manual + teste ZIP Kauana + vars BRy Vercel + XML registrado | 15/04/2026 | 0 | — |
-| S3v4 | — | RVDD + Portal Diplomado (3 epics) | — | 0 | Aguarda E2.2 desbloqueio |
-| S4v4 | — | Compliance MEC (3 epics) | — | 0 | Aguarda S3v4 |
-| S5v4 | — | Backup + Expedição (3 epics) | — | 0 | Aguarda S4v4 |
-| CFO | S-04 | Importar alunos 2026/1 + descontos + testar crons + webhook Inter | 15/04/2026 | 0 | ⛔ Credenciais Inter sandbox |
+| Diploma | F0.7-F0.8 | Continuação Snapshot (caso falte algo após F0.6 ENCERRADA) | 22/04/2026 | F0.6/F1+F2+F3 ✅ | Smoke piloto Kauana pendente |
+| Diploma | Smoke | Smoke end-to-end piloto Kauana + merge PR #19 | 22/04/2026 | 0 | — |
+| S3v4 | — | RVDD + Portal Diplomado (3 epics) | 10/04/2026 | 0 | Aguarda E2.2 desbloqueio |
+| S4v4 | — | Compliance MEC (3 epics) | 10/04/2026 | 0 | Aguarda S3v4 |
+| S5v4 | — | Backup + Expedição (3 epics) | 10/04/2026 | 0 | Aguarda S4v4 |
+| S6v4 | — | Observabilidade + Testes (3 epics) | 10/04/2026 | 0 | Aguarda S5v4 |
+| CFO | S-04 | Importar alunos 2026/1 + descontos + crons + webhook Inter | 15/04/2026 | 0 | ⛔ Credenciais Inter sandbox |
 | Atendimento | S4 | Teste WhatsApp real + atribuição agentes + transferência fila | 13/04/2026 | 0 | — |
 
-> Nota: S6=Acervo Digital ✅ (s094) e S7=Pacote Registradora ✅ (s095) foram concluídos neste período. Removidos do backlog.
-> S3v4/S4v4/S5v4 = sprints do masterplan diploma-digital-v4 original (RVDD/Compliance/Backup), distintos dos novos S6-S8 do pipeline.
+> Nota: S6=Acervo (s094) ✅ e S7=Pacote Registradora (s095) ✅ concluídos — removidos do backlog.
+> S3v4–S6v4 = sprints originais do diploma-digital-v4, distintos dos S6/S7/S8 do pipeline pós-pivot.
 
 ## Desvios (feito fora do plano Diploma v4)
 
 | Sessão | Data | O que fez | Classificação |
 |--------|------|-----------|---------------|
-| 083 | 12/04/2026 | Módulo Financeiro (CFO S-01) inaugurado — 4 tabelas + Python runtime + boletos esqueleto | expansão ERP planejada |
-| 084 | 13/04/2026 | CFO S-02 emit-boletos.py completo (OAuth2+mTLS Inter, Bolepix, PDF, Resend) | expansão ERP planejada |
-| 085 | 12/04/2026 | Atendimento S1 — 9 tabelas Supabase + UI TopBar + vercel.json | expansão ERP planejada |
-| 086-088 | 12-13/04/2026 | Análise Nexvy 38 prints + roadmap 10 sprints Atendimento | planejamento/exploração |
-| 089-089b | 13/04/2026 | Webhook WABA Meta validado E2E (schema atendimento_* corrigido) | expansão ERP planejada |
-| 090 | 13/04/2026 | Atendimento S3 — Tela de Conversas 3 painéis completa | expansão ERP planejada |
-| 091 | 13/04/2026 | Hotfixes cadastro usuários (CSRF+Roles+Senha) + título do site | manutenção/hotfix |
-| 092 | 14/04/2026 | CFO S-03 Régua de Cobrança Completa (3 tabelas + 6 endpoints Python) | expansão ERP planejada |
+| F0.4 | 17/04/2026 | Módulo Secretaria + PDFs timbrado/margens + PR #19 (não estava no plano S2) | refinamento/expansão E2.1 |
+| F0.5 | 22/04/2026 | PDF texto selecionável Puppeteer + plano arquitetural Snapshot Imutável | refatoração arquitetural |
+| F0.6/F1 | 22/04/2026 | Snapshot Imutável Fase 1 (migrations + builder + UI Aba Snapshot) | refatoração arquitetural |
+| F0.6/F2 | 22/04/2026 | Snapshot Fase 2 — XMLs lendo snapshot (montador.ts patches) | refatoração arquitetural |
+| F0.6/F3 | 22/04/2026 | Snapshot Fase 3 — PDFs via Puppeteer + 2 templates React + 2 rotas /print/* | refatoração arquitetural |
 
-> Obs: Sessões 083-092 fazem parte do MASTERPLAN-FIC-MULTIAGENTES-v2 (paralelo). Não são hotfixes aleatórios, mas representam desvio do masterplan primário diploma-digital-v4.
+> Obs: F0.4–F0.6 (~14h) entregam arquitetura Snapshot Imutável completa em produção. NÃO previstas no diploma-digital-v4 original, mas decisão arquitetural aprovada por Marcelo na s F0.5. Justificativa: garantir imutabilidade dos artefatos oficiais (XAdES + HUB Signer) lendo do mesmo `dados_snapshot_extracao` JSONB com auditoria em `diploma_snapshot_edicoes`.
 
 ## Métricas
 
 | Métrica | Valor |
 |---------|-------|
-| Sessões no período (s091-s095) | 5 sessões |
-| Sessões no plano Diploma v4 | 3 sessões (s093 diagnóstico S2, s094 S6, s095 S7) |
-| Sessões desvio/expansão | 2 sessões (s091 manutenção, s092 CFO S-03) |
-| % fora do plano Diploma | ~40% (melhora vs 89% na auditoria anterior) |
-| Sprints concluídos no período | 2 (S6 Acervo + S7 Pacote Registradora) ✅ |
-| E2.2 bloqueado há | 4 dias (desde 11/04/2026) |
-| E2.3/E2.4 bloqueados há | 4 dias (desde 11/04/2026) — sem bloqueador técnico |
-| Velocidade Diploma | 2 novos sprints (S6+S7) entregues em 2 sessões |
-| CFO módulos entregues | S-01 ✅ S-02 ✅ S-03 ✅ (régua completa) |
+| Sessões no período (16/04–26/04) | 5 sessões (F0.4, F0.5, F0.6/F1, F0.6/F2, F0.6/F3) |
+| Sessões no plano original Diploma v4 | 0 sessões diretas |
+| Sessões refatoração arquitetural Snapshot | 5 sessões (todas no período) |
+| Sessões hotfix/bugfix puro | 0 |
+| % fora do plano original | ~100% (todas refatoração) — porém alinhadas via aprovação F0.5 |
+| Sprints concluídos no período | 0 (mas Snapshot Imutável completo em produção) |
+| E2.2 bloqueado há | 15 dias (desde 11/04/2026) |
+| E2.3/E2.4 bloqueados há | 15 dias (sem bloqueio técnico) |
+| S8 (UFMS) sem início há | 11 dias |
+| Velocidade Diploma | ~14h arquitetura Snapshot entregue em 1 dia (22/04) |
+| Sessões totais projeto | 95 + 5 fases F0.x = ~100 |
 
 ## Alertas
 
-- 🔴 **CRÍTICO:** E2.2 (BRy OAuth2 + Teste e2e real) bloqueado por credenciais de homologação desde 11/04/2026 (4 dias). Prazo MEC 01/07/2025 **já expirado** — desbloqueio urgente.
-- 🔴 **CRÍTICO:** Inter sandbox credentials bloqueiam CFO S-04 (emissão real de boleto).
-- 🟡 **ATENÇÃO:** E2.3 e E2.4 (Reconciler + Compressão PDF/A) sem sessão agendada há 4 dias. Sem bloqueador técnico — podem ser feitos enquanto BRy está bloqueado.
-- 🟡 **ATENÇÃO:** Sprint 8 (Envio UFMS) é próxima sessão 096. Não tem bloqueador — pode iniciar imediatamente.
-- 🟡 **ATENÇÃO:** Atendimento S4 (WhatsApp real + agentes) sem sessão agendada.
-- 🟠 **RISCO:** S3v4/S4v4/S5v4 (RVDD, Compliance MEC, Backup) — 9+ epics sem início. Risco de prazo MEC.
-- 🟢 **MELHORA:** % desvio caiu de 89% para 40% (s091-s095). Retorno ao foco no Diploma.
-- 🟢 **OK:** S6 ✅ + S7 ✅ entregues. Pipeline diploma tem caminho claro até S8→S9.
+- 🔴 **CRÍTICO:** E2.2 (BRy OAuth2 + Teste Token A3) bloqueado há 15 dias. Prazo MEC 01/07/2025 **vencido**. Desbloqueio urgente.
+- 🔴 **CRÍTICO:** Inter sandbox bloqueia CFO S-04. Sem progresso há 11 dias.
+- 🟡 **ATENÇÃO:** E2.3/E2.4 sem bloqueador técnico parados há 15 dias — janela ideal enquanto BRy não destrava.
+- 🟡 **ATENÇÃO:** Sprint 8 (UFMS) ainda não iniciado, sem bloqueador.
+- 🟡 **ATENÇÃO:** Smoke end-to-end piloto Kauana pendente após F0.6 ENCERRADA — risco de regressão arquitetural não detectada.
+- 🟡 **ATENÇÃO:** PR #19 (Secretaria/F0.4) ainda aberta — bloqueia merge das fases F0.5–F0.6.
+- 🟠 **RISCO:** S3v4–S6v4 (RVDD, Compliance MEC, Backup, Observabilidade) — 12+ epics sem início. Risco para prazo MEC já vencido.
+- 🟢 **POSITIVO:** Arquitetura Snapshot Imutável (5 sessões em 22/04) entrega imutabilidade auditável dos artefatos oficiais. Decisão estratégica robusta.
+- 🟢 **POSITIVO:** Nenhum hotfix puro no período — qualidade do que foi entregue manteve produção estável.

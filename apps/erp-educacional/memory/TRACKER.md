@@ -3,7 +3,7 @@
 > ⚠️ **FASE B ATIVA** — Este arquivo é **backup de emergência**.
 > Fonte primária: Supabase ECOSYSTEM (`gqckbunsfjgerbuiyzvn`).
 > Use `select bootstrap_session('tarefa', 'erp', 15)` no início da sessão.
-> Última sync automática: 2026-04-14
+> Última sync automática: 2026-04-26
 
 > Atualizado: 22/04/2026 (F0.6 ENCERRADA — arquitetura Snapshot Imutável completa em produção) | Sessão mais recente: F0.6/Fase3 (render-pdf.ts + 2 templates React + 2 rotas /print/\* + patch endpoint documentos — produção `diploma-digital-i8arc5f78`) | Próxima: smoke end-to-end piloto Kauana + merge PR #19 | Retroactive pass: ✅ completo
 
