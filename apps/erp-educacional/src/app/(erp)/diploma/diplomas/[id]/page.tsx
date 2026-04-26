@@ -53,6 +53,7 @@ import {
 import { PainelAuditoria } from "@/components/diploma/PainelAuditoria";
 import { EditorFluxoAssinaturas } from "@/components/diploma/EditorFluxoAssinaturas";
 import AbaSnapshot from "@/components/diploma/AbaSnapshot";
+import AbaHistorico from "@/components/diploma/AbaHistorico";
 import { useAuditoria } from "@/hooks/useAuditoria";
 import { fetchSeguro } from "@/lib/security/fetch-seguro";
 
@@ -3150,62 +3151,7 @@ export default function DiplomaDetalhePage() {
           )}
 
           {/* Aba: Histórico */}
-          {abaAtiva === "historico" && (
-            <div className="bg-white border border-gray-200 rounded-2xl overflow-hidden">
-              <div className="px-5 py-4 border-b border-gray-100">
-                <p className="text-sm font-bold text-gray-800">
-                  Histórico de eventos
-                </p>
-              </div>
-              <div className="p-4">
-                <div className="space-y-1 text-xs text-gray-500">
-                  <p className="flex items-center gap-2 py-2 border-b border-gray-50">
-                    <span className="w-32 text-gray-400">Criado em</span>
-                    <span className="text-gray-700">
-                      {formatDatetime(diploma.created_at)}
-                    </span>
-                  </p>
-                  <p className="flex items-center gap-2 py-2 border-b border-gray-50">
-                    <span className="w-32 text-gray-400">Atualizado em</span>
-                    <span className="text-gray-700">
-                      {formatDatetime(diploma.updated_at)}
-                    </span>
-                  </p>
-                  {extracao && (
-                    <p className="flex items-center gap-2 py-2 border-b border-gray-50">
-                      <span className="w-32 text-gray-400">Extração IA</span>
-                      <span className="text-gray-700">
-                        {formatDatetime(extracao.created_at)} ·{" "}
-                        {extracao.status}
-                      </span>
-                    </p>
-                  )}
-                  {xmls.length > 0 && (
-                    <p className="flex items-center gap-2 py-2 border-b border-gray-50">
-                      <span className="w-32 text-gray-400">XMLs gerados</span>
-                      <span className="text-gray-700">
-                        {formatDatetime(xmls[0].created_at)}
-                      </span>
-                    </p>
-                  )}
-                  {docDigital?.assinado_em && (
-                    <p className="flex items-center gap-2 py-2 border-b border-gray-50">
-                      <span className="w-32 text-gray-400">Assinado</span>
-                      <span className="text-emerald-600 font-medium">Sim</span>
-                    </p>
-                  )}
-                  {docDigital?.publicado_em && (
-                    <p className="flex items-center gap-2 py-2">
-                      <span className="w-32 text-gray-400">Publicado em</span>
-                      <span className="font-semibold text-emerald-700">
-                        {formatDatetime(docDigital.publicado_em)}
-                      </span>
-                    </p>
-                  )}
-                </div>
-              </div>
-            </div>
-          )}
+          {abaAtiva === "historico" && <AbaHistorico diplomaId={diploma.id} />}
         </div>
 
         {/* Coluna lateral (1/3) */}

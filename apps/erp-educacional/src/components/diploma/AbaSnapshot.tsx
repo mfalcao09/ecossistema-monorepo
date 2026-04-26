@@ -42,6 +42,16 @@ interface EdicaoAuditoria {
   created_at: string;
 }
 
+interface DestravamentoAuditoria {
+  id: string;
+  override_id: string;
+  usuario_id: string;
+  justificativa: string;
+  expires_at: string;
+  used_at: string | null;
+  created_at: string;
+}
+
 interface SnapshotResponse {
   diploma_id: string;
   status_diploma: string;
@@ -64,6 +74,7 @@ interface SnapshotResponse {
   travado_em: string | null;
   travado_por: string | null;
   edicoes: EdicaoAuditoria[];
+  destravamentos: DestravamentoAuditoria[];
   pode_editar: boolean;
 }
 
@@ -495,6 +506,51 @@ export default function AbaSnapshot({
                 </div>
               </li>
             ))}
+          </ul>
+        </div>
+      )}
+
+      {/* Histórico de destravamentos (Sessão 2026-04-26) */}
+      {data.destravamentos && data.destravamentos.length > 0 && (
+        <div className="bg-white border border-gray-200 rounded-2xl p-5">
+          <h4 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+            <LockOpen size={14} className="text-orange-600" /> Histórico de
+            destravamentos ({data.destravamentos.length})
+          </h4>
+          <ul className="space-y-3">
+            {data.destravamentos.map((d) => {
+              const expirou = new Date(d.expires_at).getTime() < Date.now();
+              const status = d.used_at
+                ? `Consumido em ${formatDate(d.used_at)}`
+                : expirou
+                  ? "Expirou"
+                  : "Janela ainda válida";
+              const statusCor = d.used_at
+                ? "text-emerald-700 bg-emerald-50 border-emerald-200"
+                : expirou
+                  ? "text-gray-600 bg-gray-50 border-gray-200"
+                  : "text-orange-700 bg-orange-50 border-orange-200";
+              return (
+                <li
+                  key={d.id}
+                  className="border-l-2 border-orange-300 pl-3 py-1"
+                >
+                  <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
+                    <Clock size={11} />
+                    {formatDate(d.created_at)}
+                    <span
+                      className={`ml-auto inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full border ${statusCor}`}
+                    >
+                      {status}
+                    </span>
+                  </div>
+                  <p className="text-sm text-gray-700">{d.justificativa}</p>
+                  <div className="mt-1 text-[10px] text-gray-400 font-mono">
+                    override: {d.override_id.slice(0, 8)}…
+                  </div>
+                </li>
+              );
+            })}
           </ul>
         </div>
       )}

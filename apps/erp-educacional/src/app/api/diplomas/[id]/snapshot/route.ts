@@ -77,6 +77,18 @@ export const GET = protegerRota(async (request) => {
     .order("created_at", { ascending: false })
     .limit(10);
 
+  // Histórico de destravamentos (Sessão 2026-04-26) — registros em
+  // diploma_unlock_windows são gerados pelo POST /snapshot/destravar.
+  // Cada destravamento aponta pra um validacao_overrides com a justificativa.
+  const { data: unlockRows } = await supabase
+    .from("diploma_unlock_windows")
+    .select(
+      "id, override_id, usuario_id, justificativa, expires_at, used_at, created_at",
+    )
+    .eq("diploma_id", diplomaId)
+    .order("created_at", { ascending: false })
+    .limit(20);
+
   return NextResponse.json({
     diploma_id: diploma.id,
     status_diploma: diploma.status,
@@ -87,6 +99,7 @@ export const GET = protegerRota(async (request) => {
     travado_em: diploma.dados_snapshot_travado_em,
     travado_por: diploma.dados_snapshot_travado_por,
     edicoes: edicoes ?? [],
+    destravamentos: unlockRows ?? [],
     pode_editar: podeEditarSnapshot(diploma),
   });
 });
