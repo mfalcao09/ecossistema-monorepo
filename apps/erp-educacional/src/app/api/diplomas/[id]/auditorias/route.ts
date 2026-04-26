@@ -81,7 +81,12 @@ export async function GET(
   const { id } = await params;
   const admin = getAdmin();
 
-  const { data, error } = await admin
+  // Sessão 2026-04-26 (Onda 2): query param `?ultima=1` retorna só a
+  // auditoria mais recente — otimização pra hidratação inicial do hook.
+  const url = new URL(req.url);
+  const ultimaApenas = url.searchParams.get("ultima") === "1";
+
+  let query = admin
     .from("diploma_auditorias")
     .select(
       "id, diploma_id, auditado_em, auditado_por, diploma_updated_at, " +
@@ -89,6 +94,10 @@ export async function GET(
     )
     .eq("diploma_id", id)
     .order("auditado_em", { ascending: false });
+
+  if (ultimaApenas) query = query.limit(1);
+
+  const { data, error } = await query;
 
   if (error) {
     console.error("[auditorias] erro ao listar:", error);

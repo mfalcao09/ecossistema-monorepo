@@ -16,6 +16,7 @@ import {
   Clock,
   FileText,
   FileSignature,
+  GitCompare,
   Globe,
   Loader2,
   Lock,
@@ -26,6 +27,7 @@ import {
   Sparkles,
   TrendingUp,
 } from "lucide-react";
+import ModalAuditorias from "./ModalAuditorias";
 
 type EventoTipo =
   | "criado"
@@ -156,6 +158,10 @@ export default function AbaHistorico({
   const [data, setData] = useState<HistoricoResponse | null>(null);
   const [carregando, setCarregando] = useState(true);
   const [erro, setErro] = useState("");
+  // Sessão 2026-04-26 (Onda 2): modal de comparação acessível direto da timeline.
+  const [auditoriaParaComparar, setAuditoriaParaComparar] = useState<
+    string | null
+  >(null);
 
   const carregar = useCallback(async () => {
     setCarregando(true);
@@ -262,6 +268,21 @@ export default function AbaHistorico({
                       <p className="text-sm font-semibold text-gray-800">
                         {ev.titulo}
                       </p>
+                      {ev.tipo === "auditoria_executada" &&
+                      typeof ev.meta?.auditoria_id === "string" ? (
+                        <button
+                          onClick={() =>
+                            setAuditoriaParaComparar(
+                              ev.meta?.auditoria_id as string,
+                            )
+                          }
+                          className="text-[10px] text-cyan-700 hover:bg-cyan-50 font-medium px-1.5 py-0.5 rounded border border-cyan-200 inline-flex items-center gap-1"
+                          title="Comparar com a auditoria anterior"
+                        >
+                          <GitCompare size={10} />
+                          Comparar
+                        </button>
+                      ) : null}
                       <span className="text-[11px] text-gray-400 flex items-center gap-1 ml-auto">
                         <Clock size={10} /> {formatDateTime(ev.em)}
                       </span>
@@ -278,6 +299,13 @@ export default function AbaHistorico({
           </ol>
         )}
       </div>
+
+      <ModalAuditorias
+        diplomaId={diplomaId}
+        aberto={auditoriaParaComparar !== null}
+        onClose={() => setAuditoriaParaComparar(null)}
+        destacarId={auditoriaParaComparar}
+      />
     </div>
   );
 }

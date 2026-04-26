@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CheckCircle2,
   XCircle,
@@ -11,6 +11,7 @@ import {
   ChevronDown,
   ChevronUp,
   ExternalLink,
+  History,
   Shield,
   ShieldAlert,
   Users,
@@ -22,6 +23,7 @@ import type {
   IssueAuditoria,
   AcaoCorrecao,
 } from "@/lib/auditoria/tipos";
+import ModalAuditorias from "./ModalAuditorias";
 
 // ── Ícones/cor por status ───────────────────────────────────────────────────
 
@@ -254,6 +256,28 @@ export function PainelAuditoria({
   onVerDocumentos,
 }: PainelAuditoriaProps) {
   const [detalhesAbertos, setDetalhesAbertos] = useState(false);
+  const [historicoAberto, setHistoricoAberto] = useState(false);
+  const [totalAuditorias, setTotalAuditorias] = useState<number | null>(null);
+
+  // Sessão 2026-04-26 (Onda 2): contador de auditorias persistidas no banco.
+  // Mostra "Ver histórico (N)" no painel pra abrir modal de comparação.
+  useEffect(() => {
+    if (!diplomaId) return;
+    let cancelled = false;
+    void (async () => {
+      try {
+        const res = await fetch(`/api/diplomas/${diplomaId}/auditorias`);
+        if (!res.ok || cancelled) return;
+        const body = await res.json();
+        if (!cancelled) setTotalAuditorias(body?.total ?? 0);
+      } catch {
+        // ignora — botão simplesmente não mostra contador
+      }
+    })();
+    return () => {
+      cancelled = true;
+    };
+  }, [diplomaId, auditoria]);
 
   return (
     <div
@@ -381,6 +405,24 @@ export function PainelAuditoria({
           )}
         </div>
       )}
+
+      {/* Histórico de auditorias (Onda 2) */}
+      {totalAuditorias !== null && totalAuditorias > 0 && (
+        <button
+          onClick={() => setHistoricoAberto(true)}
+          className="mt-2 w-full flex items-center justify-center gap-1.5 text-[10px] text-cyan-700 hover:text-cyan-800 hover:bg-cyan-50 font-medium border-t border-gray-100 pt-2"
+          title="Ver histórico completo + diffs entre execuções"
+        >
+          <History size={11} />
+          Ver histórico ({totalAuditorias})
+        </button>
+      )}
+
+      <ModalAuditorias
+        diplomaId={diplomaId}
+        aberto={historicoAberto}
+        onClose={() => setHistoricoAberto(false)}
+      />
     </div>
   );
 }
