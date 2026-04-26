@@ -253,5 +253,78 @@ export async function GET(
 
   const resultado = executarAuditoria(input);
 
-  return NextResponse.json(resultado);
+  // ── 9. Persistir auditoria (Sessão 2026-04-26) ────────────────────────────
+  // Antes, cache só vivia em sessionStorage (volátil, sem governança).
+  // Agora cada execução é registrada em diploma_auditorias (append-only).
+  // Idempotência: se já existe auditoria pra esse mesmo diploma_updated_at,
+  // não duplicamos — retorna a auditoria existente.
+  // ?forcar=1 força re-execução e novo INSERT.
+  const url = new URL(req.url);
+  const forcar = url.searchParams.get("forcar") === "1";
+  const diplomaUpdatedAt =
+    (diploma as { updated_at?: string }).updated_at ?? null;
+
+  // Aplana issues pra facilitar diff
+  const issuesPlanificadas = resultado.grupos.flatMap((g) =>
+    g.issues.map((i) => ({
+      grupo_id: g.id,
+      grupo_nome: g.nome,
+      campo: i.campo,
+      mensagem: i.mensagem,
+      severidade: i.severidade,
+      acao: i.acao,
+    })),
+  );
+
+  let auditoriaSalvaId: string | null = null;
+  let auditadoEmReal: string = resultado.auditado_em;
+
+  if (diplomaUpdatedAt) {
+    // Checa se já existe auditoria pro mesmo diploma_updated_at
+    const { data: existente } = await admin
+      .from("diploma_auditorias")
+      .select("id, auditado_em")
+      .eq("diploma_id", id)
+      .eq("diploma_updated_at", diplomaUpdatedAt)
+      .order("auditado_em", { ascending: false })
+      .limit(1)
+      .maybeSingle();
+
+    const ja = existente as { id: string; auditado_em: string } | null;
+    if (ja && !forcar) {
+      auditoriaSalvaId = ja.id;
+      auditadoEmReal = ja.auditado_em;
+    } else {
+      const { data: novaRow, error: errAud } = await admin
+        .from("diploma_auditorias")
+        .insert({
+          diploma_id: id,
+          auditado_por: auth.userId,
+          diploma_updated_at: diplomaUpdatedAt,
+          pode_gerar_xml: resultado.pode_gerar_xml,
+          totais: resultado.totais,
+          grupos: resultado.grupos,
+          issues: issuesPlanificadas,
+        })
+        .select("id, auditado_em")
+        .single();
+
+      if (errAud) {
+        console.error(
+          "[auditoria] Falha ao persistir auditoria (resultado retornado mesmo assim):",
+          errAud.message,
+        );
+      } else if (novaRow) {
+        const r = novaRow as { id: string; auditado_em: string };
+        auditoriaSalvaId = r.id;
+        auditadoEmReal = r.auditado_em;
+      }
+    }
+  }
+
+  return NextResponse.json({
+    ...resultado,
+    auditado_em: auditadoEmReal,
+    auditoria_id: auditoriaSalvaId,
+  });
 }

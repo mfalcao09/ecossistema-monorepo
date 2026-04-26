@@ -22,6 +22,7 @@ import {
   LockOpen,
   Pencil,
   RefreshCw,
+  Shield,
   Sparkles,
   TrendingUp,
 } from "lucide-react";
@@ -31,6 +32,7 @@ type EventoTipo =
   | "atualizado"
   | "extracao_iniciada"
   | "extracao_concluida"
+  | "auditoria_executada"
   | "snapshot_consolidado"
   | "snapshot_destravado"
   | "snapshot_editado"
@@ -81,6 +83,12 @@ const EVENTO_VISUAL: Record<
     cor: "text-violet-700",
     bg: "bg-violet-50",
     border: "border-violet-300",
+  },
+  auditoria_executada: {
+    icone: Shield,
+    cor: "text-cyan-700",
+    bg: "bg-cyan-50",
+    border: "border-cyan-300",
   },
   snapshot_consolidado: {
     icone: Lock,

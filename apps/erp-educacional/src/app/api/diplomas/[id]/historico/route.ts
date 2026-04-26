@@ -29,6 +29,7 @@ type EventoTipo =
   | "atualizado"
   | "extracao_iniciada"
   | "extracao_concluida"
+  | "auditoria_executada"
   | "snapshot_consolidado"
   | "snapshot_destravado"
   | "snapshot_editado"
@@ -169,6 +170,83 @@ export const GET = protegerRota(async (request) => {
       descricao: "Dados travados como fonte oficial dos artefatos",
       usuario_id: row.consolidado_por,
       meta: { consolidacao_id: row.id, snapshot_id: row.snapshot_id },
+    });
+  }
+
+  // 3.5. Auditorias executadas (Sessão 2026-04-26 — append-only)
+  // Inclui diff vs anterior pra mostrar evolução na timeline.
+  const { data: auditorias } = await supabase
+    .from("diploma_auditorias")
+    .select("id, auditado_em, auditado_por, pode_gerar_xml, totais, issues")
+    .eq("diploma_id", diplomaId)
+    .order("auditado_em", { ascending: false });
+
+  type IssueLog = {
+    grupo_id: string;
+    campo: string;
+    severidade: string;
+  };
+  type AuditRow = {
+    id: string;
+    auditado_em: string;
+    auditado_por: string | null;
+    pode_gerar_xml: boolean;
+    totais: { criticos: number; avisos: number; infos: number; total: number };
+    issues: IssueLog[];
+  };
+  const auditRows = (auditorias ?? []) as AuditRow[];
+
+  const chave = (i: IssueLog) => `${i.grupo_id}|${i.campo}|${i.severidade}`;
+
+  for (let i = 0; i < auditRows.length; i++) {
+    const row = auditRows[i];
+    const anterior = auditRows[i + 1] ?? null; // ordem desc → próximo é anterior cronológico
+    const t = row.totais ?? { criticos: 0, avisos: 0, infos: 0, total: 0 };
+
+    const partes: string[] = [];
+    if (t.criticos > 0)
+      partes.push(`${t.criticos} crítico${t.criticos === 1 ? "" : "s"}`);
+    if (t.avisos > 0)
+      partes.push(`${t.avisos} aviso${t.avisos === 1 ? "" : "s"}`);
+    if (partes.length === 0) partes.push("0 críticos · 0 avisos");
+
+    let diffMeta: Record<string, unknown> | null = null;
+    if (anterior) {
+      const setAnt = new Set((anterior.issues ?? []).map(chave));
+      const setAtu = new Set((row.issues ?? []).map(chave));
+      const resolvidas = (anterior.issues ?? []).filter(
+        (it) => !setAtu.has(chave(it)),
+      );
+      const novas = (row.issues ?? []).filter((it) => !setAnt.has(chave(it)));
+      const persistentes = (row.issues ?? []).filter((it) =>
+        setAnt.has(chave(it)),
+      );
+      const partesDiff: string[] = [];
+      if (resolvidas.length > 0)
+        partesDiff.push(`-${resolvidas.length} resolvidas`);
+      if (persistentes.length > 0)
+        partesDiff.push(`${persistentes.length} persistem`);
+      if (novas.length > 0) partesDiff.push(`+${novas.length} novas`);
+      diffMeta = {
+        anterior_id: anterior.id,
+        resolvidas: resolvidas.length,
+        persistentes: persistentes.length,
+        novas: novas.length,
+        sumario: partesDiff.join(" · ") || "sem mudanças",
+      };
+    }
+
+    eventos.push({
+      tipo: "auditoria_executada",
+      em: row.auditado_em,
+      titulo: row.pode_gerar_xml
+        ? "Auditoria executada · pode gerar XML"
+        : "Auditoria executada · bloqueada",
+      descricao: diffMeta
+        ? `${partes.join(" · ")} · ${(diffMeta as { sumario: string }).sumario}`
+        : `${partes.join(" · ")} · 1ª auditoria`,
+      usuario_id: row.auditado_por,
+      meta: { auditoria_id: row.id, totais: t, diff: diffMeta },
     });
   }
 
