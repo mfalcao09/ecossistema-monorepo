@@ -61,12 +61,12 @@ function BadgeGrupo({ grupo }: { grupo: GrupoAuditoria }) {
 function BotaoCorrecao({
   acao,
   sessaoId,
-  processoId,
+  diplomaId,
   onVerDocumentos,
 }: {
   acao: AcaoCorrecao;
   sessaoId?: string | null;
-  processoId?: string | null;
+  diplomaId?: string | null;
   onVerDocumentos?: () => void;
 }) {
   const base =
@@ -90,12 +90,14 @@ function BotaoCorrecao({
       preencher_docentes: "Preencher docentes",
     }[acao];
 
+    // Quando temos diplomaId, passa ?from=pipeline pra que o "←" da revisão
+    // volte direto pro pipeline em vez de cair na lista de processos.
+    const href = diplomaId
+      ? `/diploma/processos/novo/revisao/${sessaoId}?from=pipeline&id=${diplomaId}`
+      : `/diploma/processos/novo/revisao/${sessaoId}`;
+
     return (
-      <Link
-        href={`/diploma/processos/novo/revisao/${sessaoId}`}
-        target="_blank"
-        className={primary}
-      >
+      <Link href={href} target="_blank" className={primary}>
         <ExternalLink size={9} /> {label}
       </Link>
     );
@@ -130,12 +132,12 @@ function BotaoCorrecao({
 function IssueRow({
   issue,
   sessaoId,
-  processoId,
+  diplomaId,
   onVerDocumentos,
 }: {
   issue: IssueAuditoria;
   sessaoId?: string | null;
-  processoId?: string | null;
+  diplomaId?: string | null;
   onVerDocumentos?: () => void;
 }) {
   const severityColors = {
@@ -167,7 +169,7 @@ function IssueRow({
           <BotaoCorrecao
             acao={issue.acao}
             sessaoId={sessaoId}
-            processoId={processoId}
+            diplomaId={diplomaId}
             onVerDocumentos={onVerDocumentos}
           />
         </div>
@@ -181,12 +183,12 @@ function IssueRow({
 function GrupoExpandivel({
   grupo,
   sessaoId,
-  processoId,
+  diplomaId,
   onVerDocumentos,
 }: {
   grupo: GrupoAuditoria;
   sessaoId?: string | null;
-  processoId?: string | null;
+  diplomaId?: string | null;
   onVerDocumentos?: () => void;
 }) {
   const [aberto, setAberto] = useState(grupo.status === "com_erros");
@@ -220,7 +222,7 @@ function GrupoExpandivel({
               key={`${issue.campo}-${idx}`}
               issue={issue}
               sessaoId={sessaoId}
-              processoId={processoId}
+              diplomaId={diplomaId}
               onVerDocumentos={onVerDocumentos}
             />
           ))}
@@ -235,7 +237,6 @@ function GrupoExpandivel({
 interface PainelAuditoriaProps {
   diplomaId: string;
   sessaoId?: string | null;
-  processoId?: string | null;
   auditoria: RespostaAuditoria | null;
   carregando: boolean;
   erro: string | null;
@@ -246,7 +247,6 @@ interface PainelAuditoriaProps {
 export function PainelAuditoria({
   diplomaId,
   sessaoId,
-  processoId,
   auditoria,
   carregando,
   erro,
@@ -373,7 +373,7 @@ export function PainelAuditoria({
                   key={grupo.id}
                   grupo={grupo}
                   sessaoId={sessaoId}
-                  processoId={processoId}
+                  diplomaId={diplomaId}
                   onVerDocumentos={onVerDocumentos}
                 />
               ))}

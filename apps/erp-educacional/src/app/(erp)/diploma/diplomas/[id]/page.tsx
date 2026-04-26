@@ -1078,7 +1078,6 @@ function PainelAcoes({
           <PainelAuditoria
             diplomaId={diploma.id}
             sessaoId={sessaoId}
-            processoId={diploma.processos_emissao?.id}
             auditoria={auditoria}
             carregando={auditCarregando}
             erro={auditErro}
@@ -2658,7 +2657,7 @@ export default function DiplomaDetalhePage() {
                   <FolderOpen size={12} className="text-gray-400" />
                   {extracao?.id ? (
                     <Link
-                      href={`/diploma/processos/novo/revisao/${extracao.id}`}
+                      href={`/diploma/processos/novo/revisao/${extracao.id}?from=pipeline&id=${diploma.id}`}
                       className="text-xs text-primary-600 hover:underline"
                     >
                       {proc.nome}
@@ -2774,7 +2773,7 @@ export default function DiplomaDetalhePage() {
                   </p>
                   {proc && extracao?.id && (
                     <Link
-                      href={`/diploma/processos/novo/revisao/${extracao.id}`}
+                      href={`/diploma/processos/novo/revisao/${extracao.id}?from=pipeline&id=${diploma.id}`}
                       className="text-xs text-primary-600 hover:underline font-medium flex-shrink-0"
                     >
                       Ver chat IA →
@@ -3278,7 +3277,7 @@ export default function DiplomaDetalhePage() {
           {/* Atalho para o chat de extração IA */}
           {proc && extracao?.id && (
             <Link
-              href={`/diploma/processos/novo/revisao/${extracao.id}`}
+              href={`/diploma/processos/novo/revisao/${extracao.id}?from=pipeline&id=${diploma.id}`}
               className="flex items-center gap-3 bg-white border border-gray-200 rounded-xl px-4 py-3 hover:shadow-sm transition-shadow group"
             >
               <div className="w-8 h-8 rounded-lg bg-primary-50 flex items-center justify-center">

@@ -3,10 +3,21 @@
 import { useState, useEffect, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import {
-  FolderOpen, Trash2, Sparkles, Search,
-  CheckCircle2, PenTool, Loader2,
-  ArrowRight, Calendar, Users, CloudUpload,
-  Eye, AlertTriangle, Play, XCircle,
+  FolderOpen,
+  Trash2,
+  Sparkles,
+  Search,
+  CheckCircle2,
+  PenTool,
+  Loader2,
+  ArrowRight,
+  Calendar,
+  Users,
+  CloudUpload,
+  Eye,
+  AlertTriangle,
+  Play,
+  XCircle,
 } from "lucide-react";
 
 // ─── Tipos da seção "Em andamento" ───────────────────────────────────────────
@@ -33,13 +44,19 @@ interface Curso {
 interface Processo {
   id: string;
   nome: string | null; // sessão 074: nullable — nome só existe após confirmar dados
-  sessao_id?: string;  // sessão 074: presente em status em_extracao para navegar à revisão
+  sessao_id?: string; // sessão 074: presente em status em_extracao para navegar à revisão
   tipo: "individual";
   curso: Curso | null;
   turno: string;
   periodo_letivo: string;
   data_colacao: string;
-  status: "rascunho" | "em_extracao" | "aguardando_revisao" | "aguardando_assinatura" | "concluido" | "cancelado";
+  status:
+    | "rascunho"
+    | "em_extracao"
+    | "aguardando_revisao"
+    | "aguardando_assinatura"
+    | "concluido"
+    | "cancelado";
   total_diplomas: number;
   diplomas_confirmados: number;
   created_at: string;
@@ -49,11 +66,18 @@ interface Processo {
 
 // ─── Mapeamento de status ────────────────────────────────────────────────────
 
-const STATUS_LABELS: Record<string, { label: string; cor: string; icone: any }> = {
+const STATUS_LABELS: Record<
+  string,
+  { label: string; cor: string; icone: any }
+> = {
   rascunho: { label: "Rascunho", cor: "gray", icone: null },
   em_extracao: { label: "IA Processando", cor: "violet", icone: Sparkles },
   aguardando_revisao: { label: "Aguardando Revisão", cor: "blue", icone: Eye },
-  aguardando_assinatura: { label: "Aguardando Assinatura", cor: "amber", icone: PenTool },
+  aguardando_assinatura: {
+    label: "Aguardando Assinatura",
+    cor: "amber",
+    icone: PenTool,
+  },
   concluido: { label: "Concluído", cor: "green", icone: CheckCircle2 },
   cancelado: { label: "Cancelado", cor: "red", icone: null },
 };
@@ -72,7 +96,9 @@ const COR_BG: Record<string, string> = {
 function formatDate(d: string) {
   if (!d) return "—";
   return new Date(d + "T12:00:00").toLocaleDateString("pt-BR", {
-    day: "2-digit", month: "2-digit", year: "numeric",
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
   });
 }
 
@@ -109,7 +135,9 @@ export default function ProcessosPage() {
     }
   }, [search, statusFiltro]);
 
-  useEffect(() => { carregar(); }, [carregar]);
+  useEffect(() => {
+    carregar();
+  }, [carregar]);
 
   // ── Carregar extrações em andamento (recovery) ────────
   const carregarEmAndamento = useCallback(async () => {
@@ -129,11 +157,18 @@ export default function ProcessosPage() {
     }
   }, []);
 
-  useEffect(() => { carregarEmAndamento(); }, [carregarEmAndamento]);
+  useEffect(() => {
+    carregarEmAndamento();
+  }, [carregarEmAndamento]);
 
   // ── Descartar sessão de extração ───────────────────────
   async function descartarSessao(sessaoId: string) {
-    if (!confirm("Descartar este rascunho de extração? Esta ação não pode ser desfeita.")) return;
+    if (
+      !confirm(
+        "Descartar este rascunho de extração? Esta ação não pode ser desfeita.",
+      )
+    )
+      return;
     setDescartandoId(sessaoId);
     try {
       const res = await fetch(`/api/extracao/sessoes/${sessaoId}/descartar`, {
@@ -171,8 +206,12 @@ export default function ProcessosPage() {
   // ── Estatísticas ──────────────────────────────────────────
   const totalProcessos = processos.length;
   const emExtracao = processos.filter((p) => p.status === "em_extracao").length;
-  const aguardandoRevisao = processos.filter((p) => p.status === "aguardando_revisao").length;
-  const aguardandoAssinatura = processos.filter((p) => p.status === "aguardando_assinatura").length;
+  const aguardandoRevisao = processos.filter(
+    (p) => p.status === "aguardando_revisao",
+  ).length;
+  const aguardandoAssinatura = processos.filter(
+    (p) => p.status === "aguardando_assinatura",
+  ).length;
   const concluidos = processos.filter((p) => p.status === "concluido").length;
   const cancelados = processos.filter((p) => p.status === "cancelado").length;
 
@@ -183,7 +222,12 @@ export default function ProcessosPage() {
 
   // ── Excluir processo ──────────────────────────────────────
   async function excluir(id: string, nome: string | null) {
-    if (!confirm(`Confirma a exclusão do processo "${nome ?? "este processo"}"? Apenas rascunhos podem ser deletados.`)) return;
+    if (
+      !confirm(
+        `Confirma a exclusão do processo "${nome ?? "este processo"}"? Apenas rascunhos podem ser deletados.`,
+      )
+    )
+      return;
     try {
       const res = await fetch(`/api/processos/${id}`, { method: "DELETE" });
       if (!res.ok) {
@@ -227,8 +271,12 @@ export default function ProcessosPage() {
               <FolderOpen size={18} className="text-blue-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 font-medium leading-tight">Total de Processos</p>
-              <p className="text-2xl font-bold text-gray-900 mt-0.5">{totalProcessos}</p>
+              <p className="text-xs text-gray-500 font-medium leading-tight">
+                Total de Processos
+              </p>
+              <p className="text-2xl font-bold text-gray-900 mt-0.5">
+                {totalProcessos}
+              </p>
             </div>
           </div>
         </div>
@@ -240,23 +288,35 @@ export default function ProcessosPage() {
               <Sparkles size={18} className="text-violet-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 font-medium leading-tight">IA Processando</p>
-              <p className="text-2xl font-bold text-gray-900 mt-0.5">{emExtracao}</p>
+              <p className="text-xs text-gray-500 font-medium leading-tight">
+                IA Processando
+              </p>
+              <p className="text-2xl font-bold text-gray-900 mt-0.5">
+                {emExtracao}
+              </p>
             </div>
           </div>
         </div>
 
         {/* Aguardando Revisão — gargalo operacional */}
-        <div className={`rounded-xl border p-4 ${aguardandoRevisao > 0 ? "bg-blue-50 border-blue-200" : "bg-white border-gray-200"}`}>
+        <div
+          className={`rounded-xl border p-4 ${aguardandoRevisao > 0 ? "bg-blue-50 border-blue-200" : "bg-white border-gray-200"}`}
+        >
           <div className="flex flex-col gap-2">
-            <div className={`p-2 rounded-lg w-fit ${aguardandoRevisao > 0 ? "bg-blue-100" : "bg-blue-50"}`}>
+            <div
+              className={`p-2 rounded-lg w-fit ${aguardandoRevisao > 0 ? "bg-blue-100" : "bg-blue-50"}`}
+            >
               <Eye size={18} className="text-blue-600" />
             </div>
             <div>
-              <p className={`text-xs font-medium leading-tight ${aguardandoRevisao > 0 ? "text-blue-700" : "text-gray-500"}`}>
+              <p
+                className={`text-xs font-medium leading-tight ${aguardandoRevisao > 0 ? "text-blue-700" : "text-gray-500"}`}
+              >
                 Aguardando Revisão
               </p>
-              <p className={`text-2xl font-bold mt-0.5 ${aguardandoRevisao > 0 ? "text-blue-800" : "text-gray-900"}`}>
+              <p
+                className={`text-2xl font-bold mt-0.5 ${aguardandoRevisao > 0 ? "text-blue-800" : "text-gray-900"}`}
+              >
                 {aguardandoRevisao}
               </p>
             </div>
@@ -270,8 +330,12 @@ export default function ProcessosPage() {
               <PenTool size={18} className="text-amber-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 font-medium leading-tight">Ag. Assinatura</p>
-              <p className="text-2xl font-bold text-gray-900 mt-0.5">{aguardandoAssinatura}</p>
+              <p className="text-xs text-gray-500 font-medium leading-tight">
+                Ag. Assinatura
+              </p>
+              <p className="text-2xl font-bold text-gray-900 mt-0.5">
+                {aguardandoAssinatura}
+              </p>
             </div>
           </div>
         </div>
@@ -283,8 +347,12 @@ export default function ProcessosPage() {
               <CheckCircle2 size={18} className="text-green-600" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 font-medium leading-tight">Concluídos</p>
-              <p className="text-2xl font-bold text-gray-900 mt-0.5">{concluidos}</p>
+              <p className="text-xs text-gray-500 font-medium leading-tight">
+                Concluídos
+              </p>
+              <p className="text-2xl font-bold text-gray-900 mt-0.5">
+                {concluidos}
+              </p>
             </div>
           </div>
         </div>
@@ -296,8 +364,12 @@ export default function ProcessosPage() {
               <XCircle size={18} className="text-red-500" />
             </div>
             <div>
-              <p className="text-xs text-gray-500 font-medium leading-tight">Cancelados</p>
-              <p className="text-2xl font-bold text-gray-900 mt-0.5">{cancelados}</p>
+              <p className="text-xs text-gray-500 font-medium leading-tight">
+                Cancelados
+              </p>
+              <p className="text-2xl font-bold text-gray-900 mt-0.5">
+                {cancelados}
+              </p>
             </div>
           </div>
         </div>
@@ -324,13 +396,13 @@ export default function ProcessosPage() {
               const rotuloStatus = ehErro
                 ? "Erro na extração"
                 : ehProcessando
-                ? "IA processando…"
-                : "Aguardando revisão";
+                  ? "IA processando…"
+                  : "Aguardando revisão";
               const corStatus = ehErro
                 ? "bg-red-100 text-red-700"
                 : ehProcessando
-                ? "bg-violet-100 text-violet-700"
-                : "bg-blue-100 text-blue-700";
+                  ? "bg-violet-100 text-violet-700"
+                  : "bg-blue-100 text-blue-700";
 
               return (
                 <li
@@ -343,7 +415,9 @@ export default function ProcessosPage() {
                         className={`inline-flex items-center gap-1 rounded-full px-2 py-0.5 text-xs font-medium ${corStatus}`}
                       >
                         {ehErro && <AlertTriangle size={12} />}
-                        {ehProcessando && <Loader2 size={12} className="animate-spin" />}
+                        {ehProcessando && (
+                          <Loader2 size={12} className="animate-spin" />
+                        )}
                         {rotuloStatus}
                       </span>
                       <span className="truncate text-sm font-medium text-gray-900">
@@ -395,7 +469,10 @@ export default function ProcessosPage() {
       <div className="bg-white rounded-xl border border-gray-200 p-4 mb-4 space-y-3">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div className="relative">
-            <Search size={18} className="absolute left-3 top-2.5 text-gray-400" />
+            <Search
+              size={18}
+              className="absolute left-3 top-2.5 text-gray-400"
+            />
             <input
               type="text"
               placeholder="Buscar por nome..."
@@ -432,7 +509,9 @@ export default function ProcessosPage() {
               <CloudUpload size={40} className="text-violet-300" />
             </div>
             <h3 className="text-base font-semibold text-gray-700 mb-1">
-              {search ? "Nenhum resultado encontrado" : "Nenhum processo criado"}
+              {search
+                ? "Nenhum resultado encontrado"
+                : "Nenhum processo criado"}
             </h3>
             <p className="text-sm text-gray-400 mb-4 max-w-sm">
               {search
@@ -459,26 +538,38 @@ export default function ProcessosPage() {
             </div>
 
             {processos.map((p) => {
-              const statusInfo = STATUS_LABELS[p.status] || STATUS_LABELS.rascunho;
+              const statusInfo =
+                STATUS_LABELS[p.status] || STATUS_LABELS.rascunho;
               const IconeStatus = statusInfo.icone;
 
               return (
                 <div
                   key={p.id}
                   className="grid grid-cols-12 gap-4 px-5 py-4 hover:bg-gray-50 transition-colors items-center group cursor-pointer"
-                  onClick={() => router.push(
-                    // FIX s075: sessao_id presente → sempre abre revisão (independente do status)
-                    p.sessao_id
-                      ? `/diploma/processos/novo/revisao/${p.sessao_id}`
-                      : p.diploma_id
-                        ? `/diploma/diplomas/${p.diploma_id}`
-                        : `/diploma/processos/${p.id}`
-                  )}
+                  onClick={() =>
+                    router.push(
+                      // FIX s075: sessao_id presente → sempre abre revisão (independente do status)
+                      // FIX 2026-04-26: fallback final é a própria lista (a página
+                      // /diploma/processos/[id] foi descontinuada na unificação F0.6).
+                      p.sessao_id
+                        ? `/diploma/processos/novo/revisao/${p.sessao_id}`
+                        : p.diploma_id
+                          ? `/diploma/diplomas/${p.diploma_id}`
+                          : "/diploma/processos",
+                    )
+                  }
                 >
                   <div className="col-span-5 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className={`text-sm font-semibold truncate ${p.nome ? "text-gray-900" : "text-violet-500 italic"}`}>
-                        {p.nome ?? (p.status === "em_extracao" ? "Extraindo documentos…" : p.sessao_id ? "Revisão pendente…" : "—")}
+                      <p
+                        className={`text-sm font-semibold truncate ${p.nome ? "text-gray-900" : "text-violet-500 italic"}`}
+                      >
+                        {p.nome ??
+                          (p.status === "em_extracao"
+                            ? "Extraindo documentos…"
+                            : p.sessao_id
+                              ? "Revisão pendente…"
+                              : "—")}
                       </p>
                     </div>
                     {p.data_colacao && (
@@ -488,35 +579,59 @@ export default function ProcessosPage() {
                     )}
                   </div>
                   <div className="col-span-3 min-w-0">
-                    <p className="text-sm text-gray-700 truncate">{p.curso?.nome || "—"}</p>
-                    {p.curso && <p className="text-xs text-gray-400">{p.curso.grau}</p>}
+                    <p className="text-sm text-gray-700 truncate">
+                      {p.curso?.nome || "—"}
+                    </p>
+                    {p.curso && (
+                      <p className="text-xs text-gray-400">{p.curso.grau}</p>
+                    )}
                   </div>
                   <div className="col-span-2">
-                    <div className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium ${COR_BG[statusInfo.cor]} ${p.status === "em_extracao" ? "animate-pulse" : ""}`}>
+                    <div
+                      className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-xs font-medium ${COR_BG[statusInfo.cor]} ${p.status === "em_extracao" ? "animate-pulse" : ""}`}
+                    >
                       {IconeStatus && (
-                        <IconeStatus size={14} className={p.status === "em_extracao" ? "animate-spin" : ""} />
+                        <IconeStatus
+                          size={14}
+                          className={
+                            p.status === "em_extracao" ? "animate-spin" : ""
+                          }
+                        />
                       )}
                       {statusInfo.label}
                     </div>
                   </div>
                   <div className="col-span-2 flex items-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
                     <button
-                      onClick={(e) => { e.stopPropagation(); router.push(
-                        // FIX s075: sessao_id presente → sempre abre revisão
-                        p.sessao_id
-                          ? `/diploma/processos/novo/revisao/${p.sessao_id}`
-                          : p.diploma_id
-                            ? `/diploma/diplomas/${p.diploma_id}`
-                            : `/diploma/processos/${p.id}`
-                      ); }}
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        router.push(
+                          // FIX s075: sessao_id presente → sempre abre revisão
+                          // FIX 2026-04-26: fallback final é a lista (página /diploma/processos/[id] descontinuada).
+                          p.sessao_id
+                            ? `/diploma/processos/novo/revisao/${p.sessao_id}`
+                            : p.diploma_id
+                              ? `/diploma/diplomas/${p.diploma_id}`
+                              : "/diploma/processos",
+                        );
+                      }}
                       className="p-1.5 text-gray-400 hover:text-violet-600 hover:bg-violet-50 rounded-lg transition-colors"
-                      title={p.sessao_id ? "Continuar revisão" : p.diploma_id ? "Ir para Pipeline" : "Abrir processo"}
+                      title={
+                        p.sessao_id
+                          ? "Continuar revisão"
+                          : p.diploma_id
+                            ? "Ir para Pipeline"
+                            : "Abrir processo"
+                      }
                     >
                       <ArrowRight size={15} />
                     </button>
                     {p.status === "rascunho" && (
                       <button
-                        onClick={(e) => { e.stopPropagation(); excluir(p.id, p.nome ?? "este processo"); }}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          excluir(p.id, p.nome ?? "este processo");
+                        }}
                         className="p-1.5 text-gray-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
                         title="Excluir rascunho"
                       >

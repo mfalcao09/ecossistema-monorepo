@@ -22,7 +22,7 @@
 "use client";
 
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import { useParams, useRouter, useSearchParams } from "next/navigation";
 import {
   AlertTriangle,
   ArrowLeft,
@@ -88,6 +88,7 @@ interface ProcessoArquivoRow {
 interface SessaoExtracao {
   id: string;
   processo_id: string | null;
+  diploma_id: string | null;
   status: StatusSessao;
   arquivos: Array<{
     storage_path: string;
@@ -132,6 +133,20 @@ const ETAPAS_LOADING = [
 export default function RevisaoExtracaoPage() {
   const router = useRouter();
   const params = useParams<{ sessaoId: string }>();
+  const searchParams = useSearchParams();
+
+  // Smart back: se a navegação veio do pipeline (?from=pipeline&id=<diplomaId>),
+  // o botão "←" volta pra lá. Caso contrário, vai pra lista de processos.
+  const fromPipeline = searchParams?.get("from") === "pipeline";
+  const fromDiplomaId = searchParams?.get("id");
+  const voltarHref =
+    fromPipeline && fromDiplomaId
+      ? `/diploma/diplomas/${fromDiplomaId}`
+      : "/diploma/processos";
+  const voltarLabel =
+    fromPipeline && fromDiplomaId
+      ? "Voltar ao pipeline"
+      : "Voltar para a lista";
   const sessaoId = params?.sessaoId;
 
   const [sessao, setSessao] = useState<SessaoExtracao | null>(null);
@@ -1424,9 +1439,10 @@ export default function RevisaoExtracaoPage() {
         <div className="mb-6 flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
             <button
-              onClick={() => router.push("/diploma/processos")}
+              onClick={() => router.push(voltarHref)}
               className="flex h-9 w-9 items-center justify-center rounded-md text-gray-500 hover:bg-gray-100 dark:text-gray-400 dark:hover:bg-gray-800"
-              aria-label="Voltar"
+              aria-label={voltarLabel}
+              title={voltarLabel}
             >
               <ArrowLeft className="h-5 w-5" />
             </button>
@@ -1555,14 +1571,14 @@ export default function RevisaoExtracaoPage() {
                     confirmado. Alterações são salvas automaticamente.
                   </p>
                 </div>
-                {sessao.processo_id && (
+                {sessao.diploma_id && (
                   <button
                     onClick={() =>
-                      router.push(`/diploma/processos/${sessao.processo_id}`)
+                      router.push(`/diploma/diplomas/${sessao.diploma_id}`)
                     }
                     className="mt-3 flex w-full items-center justify-center gap-2 rounded-md bg-violet-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-violet-700"
                   >
-                    Ver processo
+                    Voltar ao pipeline
                   </button>
                 )}
               </>

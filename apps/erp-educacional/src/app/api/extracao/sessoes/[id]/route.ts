@@ -55,6 +55,7 @@ export const maxDuration = 30;
 const SELECT_ALL = [
   "id",
   "processo_id",
+  "diploma_id", // Sessão 2026-04-26: necessário pra UI navegar pro pipeline
   "status",
   "confianca_geral",
   "erro_mensagem",
