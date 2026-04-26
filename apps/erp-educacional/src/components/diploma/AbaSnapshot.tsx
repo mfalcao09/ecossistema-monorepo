@@ -52,6 +52,21 @@ interface DestravamentoAuditoria {
   created_at: string;
 }
 
+interface ConsolidacaoAuditoria {
+  id: string;
+  versao: number;
+  snapshot_id: string | null;
+  consolidado_em: string;
+  consolidado_por: string | null;
+}
+
+interface SnapshotStats {
+  total_consolidacoes: number;
+  total_destravamentos: number;
+  ultima_versao: number;
+  proxima_versao: number;
+}
+
 interface SnapshotResponse {
   diploma_id: string;
   status_diploma: string;
@@ -75,6 +90,8 @@ interface SnapshotResponse {
   travado_por: string | null;
   edicoes: EdicaoAuditoria[];
   destravamentos: DestravamentoAuditoria[];
+  consolidacoes: ConsolidacaoAuditoria[];
+  stats: SnapshotStats;
   pode_editar: boolean;
 }
 
@@ -267,21 +284,27 @@ export default function AbaSnapshot({
 
     // Diploma novo ainda não consolidado
     return (
-      <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-sm text-blue-800">
-        <div className="flex items-center gap-2 mb-2 font-semibold">
-          <AlertCircle size={16} /> Snapshot ainda não consolidado
+      <div className="space-y-4">
+        <div className="bg-blue-50 border border-blue-200 rounded-2xl p-5 text-sm text-blue-800">
+          <div className="flex items-center gap-2 mb-2 font-semibold">
+            <AlertCircle size={16} /> Snapshot ainda não consolidado
+          </div>
+          <p className="leading-relaxed">
+            Edite os dados do diploma livremente nas demais abas. Quando estiver
+            tudo certo (auditoria sem erros críticos), clique em{" "}
+            <strong>Consolidar Dados</strong> no painel à direita para travar os
+            dados como referência permanente para os artefatos oficiais (XMLs,
+            PDFs assinados, RVDD).
+          </p>
+          <p className="mt-2 leading-relaxed text-blue-700">
+            Após consolidar, os dados ficam imutáveis. Para alterar depois, use{" "}
+            <strong>Destravar para edição</strong> com justificativa (auditado).
+          </p>
         </div>
-        <p className="leading-relaxed">
-          Edite os dados do diploma livremente nas demais abas. Quando estiver
-          tudo certo (auditoria sem erros críticos), clique em{" "}
-          <strong>Consolidar Dados</strong> no painel à direita para travar os
-          dados como referência permanente para os artefatos oficiais (XMLs,
-          PDFs assinados, RVDD).
-        </p>
-        <p className="mt-2 leading-relaxed text-blue-700">
-          Após consolidar, os dados ficam imutáveis. Para alterar depois, use{" "}
-          <strong>Destravar para edição</strong> com justificativa (auditado).
-        </p>
+
+        {data?.stats && <SnapshotStatsCard stats={data.stats} />}
+        <ConsolidacoesAnteriores consolidacoes={data?.consolidacoes ?? []} />
+        <DestravamentosLista destravamentos={data?.destravamentos ?? []} />
       </div>
     );
   }
@@ -304,6 +327,8 @@ export default function AbaSnapshot({
           </button>
         </div>
       )}
+      <SnapshotStatsCard stats={data.stats} />
+
       {erro && (
         <div className="flex items-center gap-2 bg-red-50 border border-red-200 rounded-xl px-4 py-3 text-sm text-red-700">
           <AlertCircle size={15} /> {erro}
@@ -518,50 +543,8 @@ export default function AbaSnapshot({
         </div>
       )}
 
-      {/* Histórico de destravamentos (Sessão 2026-04-26) */}
-      {data.destravamentos && data.destravamentos.length > 0 && (
-        <div className="bg-white border border-gray-200 rounded-2xl p-5">
-          <h4 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
-            <LockOpen size={14} className="text-orange-600" /> Histórico de
-            destravamentos ({data.destravamentos.length})
-          </h4>
-          <ul className="space-y-3">
-            {data.destravamentos.map((d) => {
-              const expirou = new Date(d.expires_at).getTime() < Date.now();
-              const status = d.used_at
-                ? `Consumido em ${formatDate(d.used_at)}`
-                : expirou
-                  ? "Expirou"
-                  : "Janela ainda válida";
-              const statusCor = d.used_at
-                ? "text-emerald-700 bg-emerald-50 border-emerald-200"
-                : expirou
-                  ? "text-gray-600 bg-gray-50 border-gray-200"
-                  : "text-orange-700 bg-orange-50 border-orange-200";
-              return (
-                <li
-                  key={d.id}
-                  className="border-l-2 border-orange-300 pl-3 py-1"
-                >
-                  <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
-                    <Clock size={11} />
-                    {formatDate(d.created_at)}
-                    <span
-                      className={`ml-auto inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full border ${statusCor}`}
-                    >
-                      {status}
-                    </span>
-                  </div>
-                  <p className="text-sm text-gray-700">{d.justificativa}</p>
-                  <div className="mt-1 text-[10px] text-gray-400 font-mono">
-                    override: {d.override_id.slice(0, 8)}…
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
+      <ConsolidacoesAnteriores consolidacoes={data.consolidacoes} />
+      <DestravamentosLista destravamentos={data.destravamentos} />
 
       {/* Modal: Viewer JSON */}
       {viewerAberto && (
@@ -589,6 +572,141 @@ export default function AbaSnapshot({
 // ═══════════════════════════════════════════════════════════════════════════
 // Subcomponentes
 // ═══════════════════════════════════════════════════════════════════════════
+
+// Painel de métricas do snapshot (Sessão 2026-04-26)
+function SnapshotStatsCard({ stats }: { stats: SnapshotStats }) {
+  const items = [
+    {
+      label: "Consolidações",
+      valor: stats.total_consolidacoes,
+      cor: "text-emerald-700",
+      bg: "bg-emerald-50",
+      border: "border-emerald-200",
+    },
+    {
+      label: "Destravamentos",
+      valor: stats.total_destravamentos,
+      cor: "text-orange-700",
+      bg: "bg-orange-50",
+      border: "border-orange-200",
+    },
+    {
+      label: "Última versão",
+      valor: stats.ultima_versao > 0 ? `v${stats.ultima_versao}` : "—",
+      cor: "text-violet-700",
+      bg: "bg-violet-50",
+      border: "border-violet-200",
+    },
+    {
+      label: "Próxima versão",
+      valor: `v${stats.proxima_versao}`,
+      cor: "text-blue-700",
+      bg: "bg-blue-50",
+      border: "border-blue-200",
+    },
+  ];
+  return (
+    <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
+      {items.map((it) => (
+        <div
+          key={it.label}
+          className={`rounded-xl border ${it.border} ${it.bg} px-3 py-2`}
+        >
+          <p className="text-[10px] uppercase tracking-wide text-gray-500 font-medium">
+            {it.label}
+          </p>
+          <p className={`text-lg font-bold ${it.cor}`}>{it.valor}</p>
+        </div>
+      ))}
+    </div>
+  );
+}
+
+function ConsolidacoesAnteriores({
+  consolidacoes,
+}: {
+  consolidacoes: ConsolidacaoAuditoria[];
+}) {
+  if (!consolidacoes || consolidacoes.length === 0) return null;
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl p-5">
+      <h4 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+        <Lock size={14} className="text-emerald-600" /> Histórico de
+        consolidações ({consolidacoes.length})
+      </h4>
+      <ul className="space-y-3">
+        {consolidacoes.map((c) => (
+          <li key={c.id} className="border-l-2 border-emerald-300 pl-3 py-1">
+            <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
+              <Clock size={11} />
+              {formatDate(c.consolidado_em)}
+              <span className="ml-auto inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full border text-emerald-700 bg-emerald-50 border-emerald-200">
+                versão {c.versao}
+              </span>
+            </div>
+            <p className="text-sm text-gray-700">
+              Snapshot consolidado{" "}
+              {c.consolidado_por ? "(usuário registrado)" : ""}
+            </p>
+            {c.snapshot_id && (
+              <div className="mt-1 text-[10px] text-gray-400 font-mono">
+                snapshot_id: {c.snapshot_id.slice(0, 8)}…
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+function DestravamentosLista({
+  destravamentos,
+}: {
+  destravamentos: DestravamentoAuditoria[];
+}) {
+  if (!destravamentos || destravamentos.length === 0) return null;
+  return (
+    <div className="bg-white border border-gray-200 rounded-2xl p-5">
+      <h4 className="text-sm font-bold text-gray-900 mb-3 flex items-center gap-2">
+        <LockOpen size={14} className="text-orange-600" /> Histórico de
+        destravamentos ({destravamentos.length})
+      </h4>
+      <ul className="space-y-3">
+        {destravamentos.map((d) => {
+          const expirou = new Date(d.expires_at).getTime() < Date.now();
+          const status = d.used_at
+            ? `Consumido em ${formatDate(d.used_at)}`
+            : expirou
+              ? "Expirou"
+              : "Janela ainda válida";
+          const statusCor = d.used_at
+            ? "text-emerald-700 bg-emerald-50 border-emerald-200"
+            : expirou
+              ? "text-gray-600 bg-gray-50 border-gray-200"
+              : "text-orange-700 bg-orange-50 border-orange-200";
+          return (
+            <li key={d.id} className="border-l-2 border-orange-300 pl-3 py-1">
+              <div className="flex items-center gap-2 text-xs text-gray-500 mb-1">
+                <Clock size={11} />
+                {formatDate(d.created_at)}
+                <span
+                  className={`ml-auto inline-flex items-center gap-1 text-[10px] font-medium px-2 py-0.5 rounded-full border ${statusCor}`}
+                >
+                  {status}
+                </span>
+              </div>
+              <p className="text-sm text-gray-700">{d.justificativa}</p>
+              <div className="mt-1 text-[10px] text-gray-400 font-mono">
+                override: {d.override_id.slice(0, 8)}…
+              </div>
+            </li>
+          );
+        })}
+      </ul>
+    </div>
+  );
+}
 
 function ResumoCampo({
   label,

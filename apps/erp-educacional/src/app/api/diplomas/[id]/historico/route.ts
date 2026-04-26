@@ -147,14 +147,28 @@ export const GET = protegerRota(async (request) => {
     }
   }
 
-  // 3. Snapshot consolidado
-  if (diploma.dados_snapshot_gerado_em) {
+  // 3. Consolidações de snapshot (Sessão 2026-04-26: append-only,
+  //    histórico completo de todas as versões — antes só a corrente).
+  const { data: consolidacoes } = await supabase
+    .from("diploma_snapshot_consolidacoes")
+    .select("id, versao, consolidado_em, consolidado_por, snapshot_id")
+    .eq("diploma_id", diplomaId)
+    .order("consolidado_em", { ascending: false });
+
+  for (const row of (consolidacoes ?? []) as Array<{
+    id: string;
+    versao: number;
+    consolidado_em: string;
+    consolidado_por: string | null;
+    snapshot_id: string | null;
+  }>) {
     eventos.push({
       tipo: "snapshot_consolidado",
-      em: diploma.dados_snapshot_gerado_em,
-      titulo: `Snapshot consolidado (versão ${diploma.dados_snapshot_versao ?? 1})`,
+      em: row.consolidado_em,
+      titulo: `Snapshot consolidado (versão ${row.versao})`,
       descricao: "Dados travados como fonte oficial dos artefatos",
-      usuario_id: diploma.dados_snapshot_travado_por,
+      usuario_id: row.consolidado_por,
+      meta: { consolidacao_id: row.id, snapshot_id: row.snapshot_id },
     });
   }
 

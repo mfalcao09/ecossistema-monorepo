@@ -174,7 +174,9 @@ export const POST = protegerRota(async (request, { userId }) => {
     );
   }
 
-  // 5. Zera snapshot (permite reconsolidar)
+  // 5. Zera snapshot (permite reconsolidar). Atualiza updated_at
+  // explicitamente — o trigger de update não rodava confiavelmente
+  // pra esse UPDATE específico, deixando a UI defasada (Sessão 2026-04-26).
   const { error: errUpdate } = await supabase
     .from("diplomas")
     .update({
@@ -184,6 +186,7 @@ export const POST = protegerRota(async (request, { userId }) => {
       dados_snapshot_travado: false,
       dados_snapshot_travado_em: null,
       dados_snapshot_travado_por: null,
+      updated_at: new Date().toISOString(),
     })
     .eq("id", diplomaId);
 

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import { protegerRota } from "@/lib/security/api-guard";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
@@ -196,18 +197,32 @@ export const POST = protegerRota(async (request, { userId }) => {
   // 4. Monta snapshot canônico
   const snapshot = montarSnapshotExtracao(builderInput);
 
-  // 5. Persiste como travado (consolidado = imutável direto)
+  // 5. Calcula próxima versão a partir do histórico append-only
+  // (Sessão 2026-04-26 — antes era hardcoded `1`, perdia versionamento).
+  const { data: ultimaConsolidacao } = await supabase
+    .from("diploma_snapshot_consolidacoes")
+    .select("versao")
+    .eq("diploma_id", diplomaId)
+    .order("versao", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+
+  const proximaVersao =
+    ((ultimaConsolidacao as { versao?: number } | null)?.versao ?? 0) + 1;
+
+  // 6. Persiste como travado (consolidado = imutável direto)
   const agora = new Date().toISOString();
 
   const { error: errUpdate } = await supabase
     .from("diplomas")
     .update({
       dados_snapshot_extracao: snapshot,
-      dados_snapshot_versao: 1,
+      dados_snapshot_versao: proximaVersao,
       dados_snapshot_gerado_em: agora,
       dados_snapshot_travado: true,
       dados_snapshot_travado_em: agora,
       dados_snapshot_travado_por: userId,
+      updated_at: agora,
     })
     .eq("id", diplomaId)
     .is("dados_snapshot_extracao", null); // optimistic — evita race se outra request consolidou simultaneamente
@@ -223,9 +238,37 @@ export const POST = protegerRota(async (request, { userId }) => {
     );
   }
 
+  // 7. Registra no histórico append-only — auditoria forense.
+  // Usa admin client porque a tabela tem policy "Only service role can insert"
+  // (mesmo padrão de diploma_unlock_windows).
+  const adminForLog = createAdminClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+    process.env.SUPABASE_SERVICE_ROLE_KEY!,
+    { auth: { autoRefreshToken: false, persistSession: false } },
+  );
+  const { error: errLog } = await adminForLog
+    .from("diploma_snapshot_consolidacoes")
+    .insert({
+      diploma_id: diplomaId,
+      versao: proximaVersao,
+      snapshot_id: snapshot.snapshot_id,
+      consolidado_em: agora,
+      consolidado_por: userId,
+      dados_snapshot: snapshot,
+    });
+
+  if (errLog) {
+    // Não desfaz o UPDATE — log é desejável mas snapshot já está consolidado.
+    // Loga e segue: o histórico vai ter um gap, mas o estado corrente é válido.
+    console.error(
+      "[API/snapshot/gerar] Falha ao registrar consolidação no log (snapshot já persistido):",
+      errLog.message,
+    );
+  }
+
   return NextResponse.json({
     consolidado: true,
-    versao: 1,
+    versao: proximaVersao,
     gerado_em: agora,
     travado_em: agora,
     snapshot_id: snapshot.snapshot_id,

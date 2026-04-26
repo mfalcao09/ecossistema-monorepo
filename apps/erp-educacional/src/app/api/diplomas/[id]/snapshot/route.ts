@@ -89,6 +89,30 @@ export const GET = protegerRota(async (request) => {
     .order("created_at", { ascending: false })
     .limit(20);
 
+  // Histórico de consolidações (Sessão 2026-04-26) — tabela append-only
+  // que preserva todas as versões do snapshot ao longo do tempo. Antes,
+  // apenas a versão CORRENTE existia em `diplomas.dados_snapshot_*`.
+  const { data: consolidacoesRows } = await supabase
+    .from("diploma_snapshot_consolidacoes")
+    .select(
+      "id, versao, snapshot_id, consolidado_em, consolidado_por, created_at:consolidado_em",
+    )
+    .eq("diploma_id", diplomaId)
+    .order("versao", { ascending: false });
+
+  const consolidacoes = (consolidacoesRows ?? []) as Array<{
+    id: string;
+    versao: number;
+    snapshot_id: string | null;
+    consolidado_em: string;
+    consolidado_por: string | null;
+  }>;
+
+  const totalConsolidacoes = consolidacoes.length;
+  const ultimaVersao = consolidacoes[0]?.versao ?? 0;
+  const proximaVersao = ultimaVersao + 1;
+  const totalDestravamentos = (unlockRows ?? []).length;
+
   return NextResponse.json({
     diploma_id: diploma.id,
     status_diploma: diploma.status,
@@ -100,6 +124,13 @@ export const GET = protegerRota(async (request) => {
     travado_por: diploma.dados_snapshot_travado_por,
     edicoes: edicoes ?? [],
     destravamentos: unlockRows ?? [],
+    consolidacoes,
+    stats: {
+      total_consolidacoes: totalConsolidacoes,
+      total_destravamentos: totalDestravamentos,
+      ultima_versao: ultimaVersao,
+      proxima_versao: proximaVersao,
+    },
     pode_editar: podeEditarSnapshot(diploma),
   });
 });
