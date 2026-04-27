@@ -147,6 +147,7 @@ export async function GET(
     id: diplomado.id,
     nome: diplomado.nome ?? null,
     cpf: diplomado.cpf ?? null,
+    ra: (diplomado as any).ra ?? null,
     sexo: (diplomado as any).sexo ?? null,
     nacionalidade: (diplomado as any).nacionalidade ?? null,
     naturalidade_municipio: (diplomado as any).naturalidade_municipio ?? null,

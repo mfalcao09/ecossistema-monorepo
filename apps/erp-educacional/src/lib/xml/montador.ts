@@ -79,8 +79,17 @@ export function gerarCodigoValidacaoHistorico(
   const cnpj = limparDigitos(params.cnpjEmissora);
 
   if (!ra || !cpf || !codigoCurso || !cnpj) {
+    // Sessão 2026-04-27: mensagem específica indicando exatamente qual
+    // campo está faltando, em vez da lista genérica dos 4. Antes, secretária
+    // via "RA, CPF, CodigoCursoEMEC e CNPJ são obrigatórios" e tinha que
+    // adivinhar qual era o problema (geralmente é só 1 deles).
+    const faltando: string[] = [];
+    if (!ra) faltando.push("RA do diplomado (cadastrado pela secretaria)");
+    if (!cpf) faltando.push("CPF do diplomado");
+    if (!codigoCurso) faltando.push("Código do curso no e-MEC");
+    if (!cnpj) faltando.push("CNPJ da IES emissora");
     throw new Error(
-      "gerarCodigoValidacaoHistorico: RA, CPF, CodigoCursoEMEC e CNPJ são obrigatórios",
+      `Não é possível gerar o código de validação do histórico — campo(s) faltando: ${faltando.join(", ")}`,
     );
   }
 
