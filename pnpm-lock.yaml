@@ -33,8 +33,8 @@ importers:
         specifier: ^3.0.53
         version: 3.0.64(zod@3.25.76)
       '@ai-sdk/openai':
-        specifier: '1.1'
-        version: 1.1.15(zod@3.25.76)
+        specifier: '3.0'
+        version: 3.0.53(zod@3.25.76)
       '@ai-sdk/react':
         specifier: '1.1'
         version: 1.1.25(react@18.3.1)(zod@3.25.76)
@@ -868,20 +868,11 @@ packages:
     peerDependencies:
       zod: ^3.25.76 || ^4.1.8
 
-  '@ai-sdk/openai@1.1.15':
-    resolution: {integrity: sha512-irGQx5lMrYI9gub7Sy2ZHu49D3Icf7OtfOu3X8fVKMONOyi54RTKRNjVZTewkfRNE44psTbZDO8j8qmPirOTNQ==}
+  '@ai-sdk/openai@3.0.53':
+    resolution: {integrity: sha512-Wld+Rbc05KaUn08uBt06eEuwcgalcIFtIl32Yp+GxuZXUQwOb6YeAuq+C6da4ch6BurFoqEaLemJVwjBb7x+PQ==}
     engines: {node: '>=18'}
     peerDependencies:
-      zod: ^3.0.0
-
-  '@ai-sdk/provider-utils@2.1.10':
-    resolution: {integrity: sha512-4GZ8GHjOFxePFzkl3q42AU0DQOtTQ5w09vmaWUf/pKFXJPizlnzKSUkF0f+VkapIUfDugyMqPMT1ge8XQzVI7Q==}
-    engines: {node: '>=18'}
-    peerDependencies:
-      zod: ^3.0.0
-    peerDependenciesMeta:
-      zod:
-        optional: true
+      zod: ^3.25.76 || ^4.1.8
 
   '@ai-sdk/provider-utils@2.1.15':
     resolution: {integrity: sha512-ndMVtDm2xS86t45CJZSfyl7UblZFewRB8gZkXQHeNi7BhjCYkhE+XQMwfDl6UOAO7kaV60IC1R4JLDWxWiiHug==}
@@ -900,10 +891,6 @@ packages:
 
   '@ai-sdk/provider@1.0.12':
     resolution: {integrity: sha512-88Uu1zJIE1UUOVJWfE2ybJXgiH8JJ97QY9fbmplErEbfa/k/1kF+tWMVAAJolF2aOGmazQGyQLhv4I9CCuVACw==}
-    engines: {node: '>=18'}
-
-  '@ai-sdk/provider@1.0.9':
-    resolution: {integrity: sha512-jie6ZJT2ZR0uVOVCDc9R2xCX5I/Dum/wEK28lx21PJx6ZnFAN9EzD2WsPhcDWfCgGx3OAZZ0GyM3CEobXpa9LA==}
     engines: {node: '>=18'}
 
   '@ai-sdk/provider@3.0.8':
@@ -4832,8 +4819,8 @@ packages:
       link-preview-js:
         optional: true
 
-  '@whiskeysockets/libsignal-node@https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
-    resolution: {tarball: https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67}
+  '@whiskeysockets/libsignal-node@git+git@github.com:whiskeysockets/libsignal-node.git#1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
+    resolution: {commit: 1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67, repo: git@github.com:whiskeysockets/libsignal-node.git, type: git}
     version: 2.0.1
 
   '@xmldom/xmldom@0.8.13':
@@ -6259,6 +6246,10 @@ packages:
 
   eventsource-parser@3.0.6:
     resolution: {integrity: sha512-Vo1ab+QXPzZ4tCa8SwIHJFaSzy4R6SHf7BY79rFBDf0idraZWAkYrDjDj8uWaSm3S2TK+hJ7/t1CEmZ7jXw+pg==}
+    engines: {node: '>=18.0.0'}
+
+  eventsource-parser@3.0.8:
+    resolution: {integrity: sha512-70QWGkr4snxr0OXLRWsFLeRBIRPuQOvt4s8QYjmUlmlkyTZkRqS7EDVRZtzU3TiyDbXSzaOeF0XUKy8PchzukQ==}
     engines: {node: '>=18.0.0'}
 
   expand-template@2.0.3:
@@ -10258,19 +10249,10 @@ snapshots:
       '@ai-sdk/provider-utils': 4.0.23(zod@3.25.76)
       zod: 3.25.76
 
-  '@ai-sdk/openai@1.1.15(zod@3.25.76)':
+  '@ai-sdk/openai@3.0.53(zod@3.25.76)':
     dependencies:
-      '@ai-sdk/provider': 1.0.9
-      '@ai-sdk/provider-utils': 2.1.10(zod@3.25.76)
-      zod: 3.25.76
-
-  '@ai-sdk/provider-utils@2.1.10(zod@3.25.76)':
-    dependencies:
-      '@ai-sdk/provider': 1.0.9
-      eventsource-parser: 3.0.6
-      nanoid: 3.3.11
-      secure-json-parse: 2.7.0
-    optionalDependencies:
+      '@ai-sdk/provider': 3.0.8
+      '@ai-sdk/provider-utils': 4.0.23(zod@3.25.76)
       zod: 3.25.76
 
   '@ai-sdk/provider-utils@2.1.15(zod@3.25.76)':
@@ -10286,14 +10268,10 @@ snapshots:
     dependencies:
       '@ai-sdk/provider': 3.0.8
       '@standard-schema/spec': 1.1.0
-      eventsource-parser: 3.0.6
+      eventsource-parser: 3.0.8
       zod: 3.25.76
 
   '@ai-sdk/provider@1.0.12':
-    dependencies:
-      json-schema: 0.4.0
-
-  '@ai-sdk/provider@1.0.9':
     dependencies:
       json-schema: 0.4.0
 
@@ -15446,7 +15424,7 @@ snapshots:
       '@cacheable/node-cache': 1.7.6
       '@hapi/boom': 9.1.4
       async-mutex: 0.5.0
-      libsignal: '@whiskeysockets/libsignal-node@https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67'
+      libsignal: '@whiskeysockets/libsignal-node@git+git@github.com:whiskeysockets/libsignal-node.git#1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67'
       lru-cache: 11.3.5
       music-metadata: 11.12.3
       p-queue: 9.1.2
@@ -15459,7 +15437,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@whiskeysockets/libsignal-node@https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
+  '@whiskeysockets/libsignal-node@git+git@github.com:whiskeysockets/libsignal-node.git#1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
     dependencies:
       curve25519-js: 0.0.4
       protobufjs: 6.8.8
@@ -17137,6 +17115,8 @@ snapshots:
   events@3.3.0: {}
 
   eventsource-parser@3.0.6: {}
+
+  eventsource-parser@3.0.8: {}
 
   expand-template@2.0.3:
     optional: true
