@@ -772,17 +772,31 @@ Deno.serve(async (req: Request) => {
     }
   }
 
-  // Persist to geo_layers table (soft-delete old entries first)
+  // Persist to geo_layers table.
+  // FIX (sessão 156): NÃO soft-delete antes — só desativa as layers que
+  // ATUALMENTE retornaram dados novos. Se uma camada falhou/retornou vazio
+  // (timeout EPE, erro temporário), preservamos o cache anterior bom.
   const tenantId = dev.tenant_id as string;
 
-  await supabase
-    .from("development_parcelamento_geo_layers")
-    .update({ is_active: false })
-    .eq("development_id", development_id)
-    .in("layer_key", validLayers);
+  // Layer keys que retornaram features > 0 nessa execução
+  const layersWithData = results
+    .filter((r) => r.geojson !== null && r.feature_count > 0)
+    .map((r) => r.layer_key);
 
+  // Só desativa cache antigo das layers que TÊM dados novos pra substituir
+  if (layersWithData.length > 0) {
+    await supabase
+      .from("development_parcelamento_geo_layers")
+      .update({ is_active: false })
+      .eq("development_id", development_id)
+      .in("layer_key", layersWithData);
+  }
+
+  // Pra layers que retornaram vazio mas a layer_key foi requisitada,
+  // mantemos cache antigo intacto. Só inserimos as que têm dados novos
+  // OU as que já não têm cache nenhum (ex: primeira vez).
   const insertRows = results
-    .filter((r) => r.geojson !== null)
+    .filter((r) => r.geojson !== null && r.feature_count > 0)
     .map((r) => ({
       development_id,
       tenant_id: tenantId,
