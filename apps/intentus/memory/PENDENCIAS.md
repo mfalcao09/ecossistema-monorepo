@@ -2,8 +2,8 @@
 
 > Gerado automaticamente pela automação `plan-audit`
 > Masterplan: parcelamento-solo
-> Última auditoria: 2026-04-26 09:30
-> Auditoria anterior: 2026-04-15 09:30
+> Última auditoria: 2026-04-27 09:30 (segunda-feira)
+> Auditoria anterior: 2026-04-26 09:30
 
 ## Backlog (planejado, sem progresso ou parcial)
 
@@ -31,7 +31,7 @@
 
 ## Desvios (feito fora do plano)
 
-(nenhum no período 16/04–26/04 — projeto sem novas sessões desde s151 em 12/04/2026)
+(nenhum no período 16/04–27/04 — projeto sem novas sessões desde s151 em 12/04/2026)
 
 | Sessão | Data       | O que fez                                | Classificação                              |
 | ------ | ---------- | ---------------------------------------- | ------------------------------------------ |
@@ -46,19 +46,29 @@
 - **Bloco H anexo open-geodata aprovado em 2026-04-24:** +7 US (US136-142) adicionadas ao plano. Total agora 22 US no Bloco H (15 originais + 7 anexo).
 - Documento canônico criado: `parcelamento-solo-LOTELYTICS-DEEPDIVE.md`.
 - Decisões pendentes para iniciar anexo: bucket FBDS Storage + RLS, provedor LLM (P-130), delegação squad.
+- **Sessão 153 — 2026-04-27 — ANEEL/EPE LT oficial:** EF `development-geo-layers` v3 estendida com fetchers EPE ArcGIS REST (LT existentes layer 21, planejadas layer 10, subestações layer 20+9). UI Parcelamento → tab Mapa & Camadas: 3 toggles novos (azul sólido / laranja tracejado / círculos amarelos), `LTImpactPanel` calcula via Turf km de LT em 5km/10km do terreno + alerta se LT cruza polígono + lista de tensões kV e concessionárias. Fonte oficial substitui Overpass `power=line` (legacy mantido por compat).
+
+## Pendências abertas desta sessão
+
+- **P-181:** Buffer geodésico server-side (PostGIS) — atualmente o painel usa Turf no client (precisão ~95% por amostragem de vértices). Para projetos com mil+ features ou compliance regulatório, migrar pra RPC `parcelamento_lt_intersect_lengths(dev_id, layer_key)` com `ST_Buffer` + `ST_Length` + `ST_Intersection`.
+- **P-182:** BDGD distribuição (média/baixa tensão por concessionária CPFL Piracicaba etc.) — schema varia por distribuidora. Avaliar adoção em sprint posterior (P2 do briefing).
+- **P-183:** Cache TTL ANEEL — hoje cache compartilha TTL com Overpass (sem expiração explícita via `expires_at`). Definir TTL específico de 30d para EPE (LT muda pouco) num próximo deploy.
+- **P-184:** SIGEL ANEEL pasta `SMA` ainda não explorada — pode ter Geração Distribuída + UFV que complementam EPE. Spike em sessão futura.
 
 ## Métricas
 
-| Métrica                          | Valor                             |
-| -------------------------------- | --------------------------------- |
-| Sessões no período (16/04–26/04) | 0 sessões                         |
-| Sessões no plano                 | 0                                 |
-| Sessões hotfix/QA                | 0                                 |
-| % hotfix                         | n/a (sem atividade)               |
-| Velocidade                       | 0 blocos/semana — projeto pausado |
-| Bloco H Autônoma 1 bloqueado há  | 15 dias (desde 11/04/2026)        |
-| Bloco G Sprint 2 bloqueado há    | ~16 dias                          |
-| US adicionadas no período        | +7 (anexo open-geodata em 24/04)  |
+| Métrica                          | Valor                               |
+| -------------------------------- | ----------------------------------- |
+| Sessões no período (16/04–27/04) | 0 sessões                           |
+| Sessões nas últimas 24h          | 0 sessões                           |
+| Sessões no plano                 | 0                                   |
+| Sessões hotfix/QA                | 0                                   |
+| % hotfix                         | n/a (sem atividade)                 |
+| Velocidade                       | 0 blocos/semana — projeto pausado   |
+| Bloco H Autônoma 1 sem início há | 16 dias (desde 11/04/2026)          |
+| Bloco G Sprint 2 sem início há   | ~17 dias                            |
+| Última sessão Intentus           | s151 em 12/04 — 15 dias de silêncio |
+| US adicionadas no período        | +7 (anexo open-geodata em 24/04)    |
 
 ## Inconsistências detectadas
 
@@ -74,7 +84,7 @@
 - 🔴 **CRÍTICO:** Pricing AI bloqueado por Urbit API — negociação comercial em andamento, sem prazo definido.
 - 🔴 **CRÍTICO:** Provedor LLM P-130 é bloqueante geral — afeta Copilot tools novas (US136 anexo) e Bloco G S2.
 - 🟡 **ATENÇÃO:** Projeto sem novas sessões há 15 dias (desde s151 em 12/04). Bloco H Autônoma 1 segue sendo a próxima sessão prevista, sem início.
-- 🟡 **ATENÇÃO:** Bloco G Sprint 2 (Execute actions, Análise preditiva, Comparador) sem sessão planejada há ~16 dias.
+- 🟡 **ATENÇÃO:** Bloco G Sprint 2 (Execute actions, Análise preditiva, Comparador) sem sessão planejada há ~17 dias.
 - 🟠 **INCONSISTÊNCIA:** TRACKER do Bloco H precisa refletir +7 US do anexo open-geodata (24/04). Total deve ser 22 US (não 15).
 - 🟠 **INCONSISTÊNCIA:** bloco-h-moat-regional.md não reflete backend US125 feito em s145 — corrigir na próxima sessão de Bloco H.
 - 🟢 **OK:** Blocos A-D + F + G S1 + J + E1 todos ✅. PRD Bloco E (60 US) + anexo open-geodata (7 US) prontos. ~60% global.

@@ -2,7 +2,15 @@
  * ParcelamentoDetalhe.tsx — Detalhe do Empreendimento de Parcelamento de Solo
  * Fase 4: Tab "Mapa & Camadas" funcional com Mapbox + toggles de camadas geoespaciais
  */
-import React, { useState, useEffect, useRef, useCallback, useMemo, lazy, Suspense } from "react";
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useMemo,
+  lazy,
+  Suspense,
+} from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useParcelamentoProject } from "@/hooks/useParcelamentoProjects";
 import {
@@ -27,6 +35,7 @@ import {
 } from "lucide-react";
 import { fetchGeoLayer } from "@/lib/parcelamento/geoLayersApi";
 import type { GeoLayerKey } from "@/lib/parcelamento/types";
+import * as turf from "@turf/turf";
 
 import VGVReferenceBanner from "./VGVReferenceBanner";
 
@@ -49,13 +58,34 @@ const ParcelamentoCorteTereno = lazy(() => import("./ParcelamentoCorteTereno"));
 const ParcelamentoExclusoes = lazy(() => import("./ParcelamentoExclusoes"));
 // Financeiro e Conformidade — inline nas tabs (sessão 150 — Fix UX)
 const ParcelamentoFinanceiro = lazy(() => import("./ParcelamentoFinanceiro"));
-const ParcelamentoConformidade = lazy(() => import("./ParcelamentoConformidade"));
+const ParcelamentoConformidade = lazy(
+  () => import("./ParcelamentoConformidade"),
+);
 
 // ---------------------------------------------------------------------------
 // Types
 // ---------------------------------------------------------------------------
 
-type TabKey = "visao-geral" | "mapa" | "3d" | "financeiro" | "conformidade" | "regulacoes" | "benchmarks" | "censo" | "embargos" | "export-dxf" | "mapbiomas" | "zoneamento" | "memorial" | "cri" | "fii-cra" | "relatorios" | "export-geo" | "corte-tereno" | "exclusoes";
+type TabKey =
+  | "visao-geral"
+  | "mapa"
+  | "3d"
+  | "financeiro"
+  | "conformidade"
+  | "regulacoes"
+  | "benchmarks"
+  | "censo"
+  | "embargos"
+  | "export-dxf"
+  | "mapbiomas"
+  | "zoneamento"
+  | "memorial"
+  | "cri"
+  | "fii-cra"
+  | "relatorios"
+  | "export-geo"
+  | "corte-tereno"
+  | "exclusoes";
 
 const TABS: { key: TabKey; label: string }[] = [
   { key: "visao-geral", label: "Visão Geral" },
@@ -89,14 +119,57 @@ interface LayerConfig {
   label: string;
   color: string;
   description: string;
+  /** Renderizar pontos (ex: subestações) com paint type circle */
+  point?: boolean;
+  /** Renderizar linha tracejada (ex: LT planejadas/expansão) */
+  dashed?: boolean;
 }
 
 const MAP_LAYERS: LayerConfig[] = [
-  { key: "sigef_privado", label: "SIGEF — Imóveis Certificados", color: "#f59e0b", description: "Áreas certificadas INCRA — sobreposição fundiária" },
-  { key: "ibama_uc", label: "IBAMA — Unidades de Conservação", color: "#16a34a", description: "Áreas protegidas — restrição a parcelamento" },
-  { key: "hidrografia", label: "IBGE — Hidrografia", color: "#0ea5e9", description: "Rios, lagos — APP 30-500 m" },
-  { key: "rodovias_federais", label: "DNIT — Rodovias Federais", color: "#ef4444", description: "Faixa de domínio e non aedificandi" },
-  { key: "linhas_transmissao", label: "ANEEL — Linhas de Transmissão", color: "#a855f7", description: "Faixas de servidão — restrição total" },
+  {
+    key: "sigef_privado",
+    label: "SIGEF — Imóveis Certificados",
+    color: "#f59e0b",
+    description: "Áreas certificadas INCRA — sobreposição fundiária",
+  },
+  {
+    key: "ibama_uc",
+    label: "IBAMA — Unidades de Conservação",
+    color: "#16a34a",
+    description: "Áreas protegidas — restrição a parcelamento",
+  },
+  {
+    key: "hidrografia",
+    label: "IBGE — Hidrografia",
+    color: "#0ea5e9",
+    description: "Rios, lagos — APP 30-500 m",
+  },
+  {
+    key: "rodovias_federais",
+    label: "DNIT — Rodovias Federais",
+    color: "#ef4444",
+    description: "Faixa de domínio e non aedificandi",
+  },
+  {
+    key: "aneel_lt_existentes",
+    label: "ANEEL — LT Existentes (EPE)",
+    color: "#a855f7",
+    description: "Linhas em operação — kV, concessionária, ano",
+  },
+  {
+    key: "aneel_lt_planejadas",
+    label: "ANEEL — LT Planejadas (EPE)",
+    color: "#f97316",
+    description: "Expansão prevista do SIN — servidão futura",
+    dashed: true,
+  },
+  {
+    key: "aneel_subestacoes",
+    label: "ANEEL — Subestações (EPE)",
+    color: "#eab308",
+    description: "Subestações existentes e planejadas",
+    point: true,
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -108,11 +181,15 @@ const MAP_LAYERS: LayerConfig[] = [
  * `geometry_coordinates` (array [lng,lat][]) ou `geometry` (GeoJSON/EWKT string).
  * Retorna null se não houver dados de geometria disponíveis.
  */
-function buildProjectPolygonGeoJSON(
-  project: { geometry_coordinates?: [number, number][] | null; geometry?: unknown },
-): GeoJSON.FeatureCollection | null {
+function buildProjectPolygonGeoJSON(project: {
+  geometry_coordinates?: [number, number][] | null;
+  geometry?: unknown;
+}): GeoJSON.FeatureCollection | null {
   // Prefere geometry_coordinates — já é [lng, lat][] limpo
-  if (project.geometry_coordinates && project.geometry_coordinates.length >= 3) {
+  if (
+    project.geometry_coordinates &&
+    project.geometry_coordinates.length >= 3
+  ) {
     const coords = project.geometry_coordinates;
     // Fechar o anel se necessário
     const ring =
@@ -165,7 +242,10 @@ function addProjectBoundaryToMap(
   try {
     if (map.getSource("src-project-boundary")) return true; // já adicionado
 
-    console.log("[Intentus] addProjectBoundaryToMap — features:", geojson.features.length);
+    console.log(
+      "[Intentus] addProjectBoundaryToMap — features:",
+      geojson.features.length,
+    );
 
     map.addSource("src-project-boundary", { type: "geojson", data: geojson });
 
@@ -194,16 +274,24 @@ function addProjectBoundaryToMap(
 /**
  * Calcula bounds a partir de geometry_coordinates como fallback quando bbox não está disponível.
  */
-function boundsFromCoordinates(coords: [number, number][]): [[number, number], [number, number]] | null {
+function boundsFromCoordinates(
+  coords: [number, number][],
+): [[number, number], [number, number]] | null {
   if (!coords || coords.length < 2) return null;
-  let minLng = Infinity, maxLng = -Infinity, minLat = Infinity, maxLat = -Infinity;
+  let minLng = Infinity,
+    maxLng = -Infinity,
+    minLat = Infinity,
+    maxLat = -Infinity;
   for (const [lng, lat] of coords) {
     if (lng < minLng) minLng = lng;
     if (lng > maxLng) maxLng = lng;
     if (lat < minLat) minLat = lat;
     if (lat > maxLat) maxLat = lat;
   }
-  return [[minLng, minLat], [maxLng, maxLat]];
+  return [
+    [minLng, minLat],
+    [maxLng, maxLat],
+  ];
 }
 
 /**
@@ -219,15 +307,32 @@ function formatCurrency(value: number | null | undefined): string {
   if (!value) return "—";
   if (value >= 1_000_000)
     return `R$ ${(value / 1_000_000).toLocaleString("pt-BR", { maximumFractionDigits: 1 })} M`;
-  return value.toLocaleString("pt-BR", { style: "currency", currency: "BRL", maximumFractionDigits: 0 });
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+    maximumFractionDigits: 0,
+  });
 }
 
 function getAnalysisStatusConfig(status: string | null | undefined) {
-  if (status === "concluido") return { label: "Análise Concluída", icon: CheckCircle2, color: "text-green-600" };
-  if (status === "em_processamento") return { label: "Processando...", icon: Loader2, color: "text-blue-600" };
-  if (status === "erro") return { label: "Erro na Análise", icon: AlertTriangle, color: "text-red-600" };
-  if (status === "em_analise") return { label: "Em Análise", icon: Clock, color: "text-purple-600" };
-  if (status === "rascunho") return { label: "Rascunho", icon: Clock, color: "text-amber-600" };
+  if (status === "concluido")
+    return {
+      label: "Análise Concluída",
+      icon: CheckCircle2,
+      color: "text-green-600",
+    };
+  if (status === "em_processamento")
+    return { label: "Processando...", icon: Loader2, color: "text-blue-600" };
+  if (status === "erro")
+    return {
+      label: "Erro na Análise",
+      icon: AlertTriangle,
+      color: "text-red-600",
+    };
+  if (status === "em_analise")
+    return { label: "Em Análise", icon: Clock, color: "text-purple-600" };
+  if (status === "rascunho")
+    return { label: "Rascunho", icon: Clock, color: "text-amber-600" };
   return { label: "Pendente", icon: Clock, color: "text-gray-500" };
 }
 
@@ -267,7 +372,8 @@ function computePreliminaryAnalysis(
     (project.pct_area_publica ?? 0) +
     (project.pct_area_verde ?? 0) +
     (project.pct_sistema_viario ?? 0);
-  const area_publica_min_pct = pctPublicaDeclarado > 0 ? pctPublicaDeclarado : 35;
+  const area_publica_min_pct =
+    pctPublicaDeclarado > 0 ? pctPublicaDeclarado : 35;
 
   // Declividade: se não tem da EF, usa default conservador (8% = terreno plano).
   const declividade_pct = project.slope_avg_pct ?? 8;
@@ -324,11 +430,15 @@ function MapaPreview({
     let center: [number, number] = [-47.9, -15.8];
     if (project.centroid) {
       try {
-        const parsed = typeof project.centroid === "string"
-          ? JSON.parse(project.centroid)
-          : project.centroid;
-        if (parsed?.coordinates) center = [parsed.coordinates[0], parsed.coordinates[1]];
-      } catch { /* fallback to default */ }
+        const parsed =
+          typeof project.centroid === "string"
+            ? JSON.parse(project.centroid)
+            : project.centroid;
+        if (parsed?.coordinates)
+          center = [parsed.coordinates[0], parsed.coordinates[1]];
+      } catch {
+        /* fallback to default */
+      }
     }
 
     import("mapbox-gl")
@@ -339,7 +449,9 @@ function MapaPreview({
           container: mapContainerRef.current!,
           style: "mapbox://styles/mapbox/satellite-streets-v12",
           center,
-          zoom: project.area_m2 ? Math.max(10, 17 - Math.log2(project.area_m2 / 10000)) : 12,
+          zoom: project.area_m2
+            ? Math.max(10, 17 - Math.log2(project.area_m2 / 10000))
+            : 12,
           interactive: true,
           attributionControl: false,
         });
@@ -349,28 +461,47 @@ function MapaPreview({
           setMapReady(true);
 
           // Desenhar polígono do projeto no mapa
-          console.log("[Intentus] MapaPreview on load — geometry_coordinates:", project.geometry_coordinates?.length ?? "null", "geometry type:", typeof project.geometry);
+          console.log(
+            "[Intentus] MapaPreview on load — geometry_coordinates:",
+            project.geometry_coordinates?.length ?? "null",
+            "geometry type:",
+            typeof project.geometry,
+          );
           const polyGeoJSON = buildProjectPolygonGeoJSON(project);
           if (polyGeoJSON) {
             addProjectBoundaryToMap(mapInstance, polyGeoJSON);
           } else {
-            console.warn("[Intentus] MapaPreview — sem dados de geometria para polígono");
+            console.warn(
+              "[Intentus] MapaPreview — sem dados de geometria para polígono",
+            );
           }
 
           // Fit bounds: prioriza bbox JSONB, fallback de geometry_coordinates
           if (project.bbox) {
-            const bbox = project.bbox as { west: number; south: number; east: number; north: number };
+            const bbox = project.bbox as {
+              west: number;
+              south: number;
+              east: number;
+              north: number;
+            };
             mapInstance.fitBounds(
-              [[bbox.west, bbox.south], [bbox.east, bbox.north]],
-              { padding: 30, duration: 800 }
+              [
+                [bbox.west, bbox.south],
+                [bbox.east, bbox.north],
+              ],
+              { padding: 30, duration: 800 },
             );
           } else if (project.geometry_coordinates) {
             const bounds = boundsFromCoordinates(project.geometry_coordinates);
-            if (bounds) mapInstance.fitBounds(bounds, { padding: 30, duration: 800 });
+            if (bounds)
+              mapInstance.fitBounds(bounds, { padding: 30, duration: 800 });
           }
 
           // Controle de zoom minimalista (sem compass pra não poluir)
-          const nav = new mapboxgl.NavigationControl({ showCompass: false, showZoom: true });
+          const nav = new mapboxgl.NavigationControl({
+            showCompass: false,
+            showZoom: true,
+          });
           mapInstance.addControl(nav, "top-right");
         });
       })
@@ -395,7 +526,10 @@ function MapaPreview({
         </div>
       ) : (
         <>
-          <div ref={mapContainerRef} style={{ width: "100%", height: "100%" }} />
+          <div
+            ref={mapContainerRef}
+            style={{ width: "100%", height: "100%" }}
+          />
           {!mapReady && (
             <div className="absolute inset-0 flex items-center justify-center bg-gray-50 z-10">
               <Loader2 className="h-5 w-5 text-gray-400 animate-spin" />
@@ -442,7 +576,13 @@ function TabVisaoGeral({
   const isPreliminary = realScore === undefined && preliminary !== null;
 
   const scoreColor =
-    score === undefined ? "text-gray-400" : score >= 70 ? "text-green-600" : score >= 45 ? "text-amber-600" : "text-red-600";
+    score === undefined
+      ? "text-gray-400"
+      : score >= 70
+        ? "text-green-600"
+        : score >= 45
+          ? "text-amber-600"
+          : "text-red-600";
 
   // Lotes estimados: prefere total_units (pode ter sido ajustado manualmente);
   // cai pro cálculo preliminar se não tiver.
@@ -450,16 +590,16 @@ function TabVisaoGeral({
     project.total_units != null
       ? project.total_units.toLocaleString("pt-BR")
       : preliminary?.urb.lotes_estimados != null
-      ? preliminary.urb.lotes_estimados.toLocaleString("pt-BR")
-      : "—";
+        ? preliminary.urb.lotes_estimados.toLocaleString("pt-BR")
+        : "—";
 
   // APP: prefere o calculado da EF; cai no declarado pelo wizard.
   const appValue =
     project.app_area_m2 != null
       ? formatHa(project.app_area_m2)
       : preliminary?.urb.app_area_m2
-      ? formatHa(preliminary.urb.app_area_m2)
-      : "—";
+        ? formatHa(preliminary.urb.app_area_m2)
+        : "—";
 
   // Área líquida (apenas do preliminar — é o destaque do cálculo do wizard).
   const areaLiquidaValue = preliminary?.urb.area_loteavel_m2
@@ -500,8 +640,8 @@ function TabVisaoGeral({
             score >= 70
               ? "bg-green-50 border-green-200"
               : score >= 45
-              ? "bg-amber-50 border-amber-200"
-              : "bg-red-50 border-red-200"
+                ? "bg-amber-50 border-amber-200"
+                : "bg-red-50 border-red-200"
           }`}
         >
           <div className="text-center">
@@ -510,7 +650,9 @@ function TabVisaoGeral({
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2">
-              <p className="font-semibold text-gray-900">Score de Viabilidade</p>
+              <p className="font-semibold text-gray-900">
+                Score de Viabilidade
+              </p>
               {isPreliminary && (
                 <Badge className="bg-blue-100 text-blue-700 border-0 text-[10px] font-medium">
                   Estimativa preliminar
@@ -521,12 +663,14 @@ function TabVisaoGeral({
               {score >= 70
                 ? "Empreendimento com alta viabilidade técnica e ambiental."
                 : score >= 45
-                ? "Atenção: parâmetros precisam de ajustes antes de seguir."
-                : "Score baixo — revisar restrições e parâmetros urbanísticos."}
+                  ? "Atenção: parâmetros precisam de ajustes antes de seguir."
+                  : "Score baixo — revisar restrições e parâmetros urbanísticos."}
             </p>
             {isPreliminary && (
               <p className="text-xs text-blue-600 mt-1">
-                Cálculo baseado apenas nos parâmetros declarados no wizard. As análises geoespaciais (declividade, APP, restrições) rodam em background e refinam este score automaticamente.
+                Cálculo baseado apenas nos parâmetros declarados no wizard. As
+                análises geoespaciais (declividade, APP, restrições) rodam em
+                background e refinam este score automaticamente.
               </p>
             )}
           </div>
@@ -553,9 +697,14 @@ function TabVisaoGeral({
         <div className="lg:col-span-2 flex flex-col gap-3">
           <div className="grid grid-cols-2 gap-3">
             {kpis.map(({ label, value }) => (
-              <div key={label} className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm">
+              <div
+                key={label}
+                className="rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
+              >
                 <p className="text-xs text-gray-500">{label}</p>
-                <p className="text-base font-semibold text-gray-900 mt-1">{value}</p>
+                <p className="text-base font-semibold text-gray-900 mt-1">
+                  {value}
+                </p>
               </div>
             ))}
           </div>
@@ -566,7 +715,9 @@ function TabVisaoGeral({
             const Icon = cfg.icon;
             return (
               <div className="flex items-center gap-2 text-xs mt-auto pt-2">
-                <Icon className={`h-3.5 w-3.5 ${cfg.color} ${project.analysis_status === "em_processamento" ? "animate-spin" : ""}`} />
+                <Icon
+                  className={`h-3.5 w-3.5 ${cfg.color} ${project.analysis_status === "em_processamento" ? "animate-spin" : ""}`}
+                />
                 <span className={cfg.color}>{cfg.label}</span>
                 {project.analysis_status === "em_processamento" && (
                   <span className="text-gray-400">— rodando em background</span>
@@ -576,6 +727,287 @@ function TabVisaoGeral({
           })()}
         </div>
       </div>
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// LTImpactPanel — Painel de impacto de Linhas de Transmissão (ANEEL/EPE)
+//
+// Mostra resumo do impacto das LTs no terreno: quantos km dentro de 5km/10km,
+// quantas subestações próximas, e alerta se LT cruza o polígono do projeto.
+// Cálculo via Turf no client (buffer geodésico + booleanPointInPolygon nos
+// vértices das linestrings — suficientemente preciso para preview).
+// ---------------------------------------------------------------------------
+
+interface LTStats {
+  ltExist5km: number;
+  ltExist10km: number;
+  ltExistDentro: number; // km de LT existente cortando o terreno (alerta)
+  ltPlan5km: number;
+  ltPlan10km: number;
+  subEx5km: number;
+  subEx10km: number;
+  subPl5km: number;
+  subPl10km: number;
+  /** Tensões únicas das LTs em 10km (kV) — ordenado desc */
+  tensoesKv: number[];
+  /** Concessionárias presentes em 10km */
+  concessionarias: string[];
+}
+
+/** Soma o comprimento (km) da LineString que está dentro do polígono buffer.
+ *  Aproximação: para cada par de vértices consecutivos, se ambos estão dentro
+ *  conta o segmento inteiro; se só um conta metade. Para preview é OK. */
+function lengthInsideBuffer(
+  lineFeature: GeoJSON.Feature<GeoJSON.LineString>,
+  bufferPoly: GeoJSON.Feature<GeoJSON.Polygon | GeoJSON.MultiPolygon>,
+): number {
+  const coords = lineFeature.geometry.coordinates;
+  if (!coords || coords.length < 2) return 0;
+  let total = 0;
+  for (let i = 0; i < coords.length - 1; i++) {
+    const a = turf.point(coords[i] as [number, number]);
+    const b = turf.point(coords[i + 1] as [number, number]);
+    const aIn = turf.booleanPointInPolygon(a, bufferPoly);
+    const bIn = turf.booleanPointInPolygon(b, bufferPoly);
+    if (!aIn && !bIn) continue;
+    const segKm = turf.length(
+      turf.lineString([coords[i], coords[i + 1]] as [number, number][]),
+      { units: "kilometers" },
+    );
+    if (aIn && bIn) total += segKm;
+    else total += segKm / 2;
+  }
+  return total;
+}
+
+function countPointsInside(
+  fc: GeoJSON.FeatureCollection | undefined | null,
+  bufferPoly: GeoJSON.Feature<GeoJSON.Polygon | GeoJSON.MultiPolygon>,
+  filterStatus?: "existente" | "planejada",
+): number {
+  if (!fc?.features) return 0;
+  let count = 0;
+  for (const f of fc.features) {
+    if (f.geometry?.type !== "Point") continue;
+    if (filterStatus) {
+      const status = (f.properties as Record<string, unknown> | null)?._status;
+      if (status !== filterStatus) continue;
+    }
+    if (
+      turf.booleanPointInPolygon(
+        f as GeoJSON.Feature<GeoJSON.Point>,
+        bufferPoly,
+      )
+    ) {
+      count++;
+    }
+  }
+  return count;
+}
+
+function LTImpactPanel({
+  project,
+  ltExistentes,
+  ltPlanejadas,
+  subestacoes,
+}: {
+  project: NonNullable<ReturnType<typeof useParcelamentoProject>["data"]>;
+  ltExistentes?: GeoJSON.FeatureCollection;
+  ltPlanejadas?: GeoJSON.FeatureCollection;
+  subestacoes?: GeoJSON.FeatureCollection;
+}) {
+  const stats: LTStats | null = useMemo(() => {
+    const polyFC = buildProjectPolygonGeoJSON(project);
+    if (!polyFC?.features?.[0]) return null;
+    const projectFeature = polyFC.features[0] as GeoJSON.Feature<
+      GeoJSON.Polygon | GeoJSON.MultiPolygon
+    >;
+
+    let buf5: GeoJSON.Feature<GeoJSON.Polygon | GeoJSON.MultiPolygon> | null =
+      null;
+    let buf10: GeoJSON.Feature<GeoJSON.Polygon | GeoJSON.MultiPolygon> | null =
+      null;
+    try {
+      buf5 = turf.buffer(projectFeature, 5, {
+        units: "kilometers",
+      }) as typeof buf5;
+      buf10 = turf.buffer(projectFeature, 10, {
+        units: "kilometers",
+      }) as typeof buf10;
+    } catch (err) {
+      console.warn("[LTImpact] buffer falhou:", err);
+      return null;
+    }
+    if (!buf5 || !buf10) return null;
+
+    let ltExist5km = 0,
+      ltExist10km = 0,
+      ltExistDentro = 0;
+    let ltPlan5km = 0,
+      ltPlan10km = 0;
+    const tensoesSet = new Set<number>();
+    const concSet = new Set<string>();
+
+    const procLines = (
+      fc: GeoJSON.FeatureCollection | undefined,
+      kind: "existentes" | "planejadas",
+    ) => {
+      if (!fc?.features) return;
+      for (const f of fc.features) {
+        if (f.geometry?.type !== "LineString") continue;
+        const line = f as GeoJSON.Feature<GeoJSON.LineString>;
+        const km10 = lengthInsideBuffer(line, buf10!);
+        if (km10 <= 0) continue;
+        const km5 = lengthInsideBuffer(line, buf5!);
+        const kmDentro = lengthInsideBuffer(line, projectFeature);
+        if (kind === "existentes") {
+          ltExist10km += km10;
+          ltExist5km += km5;
+          ltExistDentro += kmDentro;
+          const t = Number(
+            (line.properties as Record<string, unknown> | null)?.Tensao,
+          );
+          if (Number.isFinite(t) && t > 0) tensoesSet.add(t);
+          const c = (line.properties as Record<string, unknown> | null)
+            ?.Concession;
+          if (typeof c === "string" && c.trim()) concSet.add(c.trim());
+        } else {
+          ltPlan10km += km10;
+          ltPlan5km += km5;
+        }
+      }
+    };
+
+    procLines(ltExistentes, "existentes");
+    procLines(ltPlanejadas, "planejadas");
+
+    return {
+      ltExist5km,
+      ltExist10km,
+      ltExistDentro,
+      ltPlan5km,
+      ltPlan10km,
+      subEx5km: countPointsInside(subestacoes, buf5, "existente"),
+      subEx10km: countPointsInside(subestacoes, buf10, "existente"),
+      subPl5km: countPointsInside(subestacoes, buf5, "planejada"),
+      subPl10km: countPointsInside(subestacoes, buf10, "planejada"),
+      tensoesKv: Array.from(tensoesSet).sort((a, b) => b - a),
+      concessionarias: Array.from(concSet).sort(),
+    };
+  }, [project, ltExistentes, ltPlanejadas, subestacoes]);
+
+  if (!stats) return null;
+
+  const fmt = (km: number) =>
+    km < 0.1
+      ? "—"
+      : `${km.toLocaleString("pt-BR", { maximumFractionDigits: 1 })} km`;
+
+  const hasAnyData =
+    stats.ltExist10km > 0.1 ||
+    stats.ltPlan10km > 0.1 ||
+    stats.subEx10km > 0 ||
+    stats.subPl10km > 0;
+
+  if (!hasAnyData) {
+    return (
+      <div className="rounded-lg border border-gray-200 bg-gray-50 p-3">
+        <p className="text-xs font-semibold text-gray-700 mb-1">
+          Impacto LT (ANEEL)
+        </p>
+        <p className="text-xs text-gray-500">
+          Nenhuma linha de transmissão ou subestação detectada em 10km do
+          terreno.
+        </p>
+      </div>
+    );
+  }
+
+  return (
+    <div className="rounded-lg border border-purple-200 bg-purple-50/40 p-3 space-y-2">
+      <div className="flex items-center justify-between">
+        <p className="text-xs font-semibold text-gray-800">
+          Impacto LT (ANEEL/EPE)
+        </p>
+        <span className="text-[10px] text-gray-500">5km / 10km</span>
+      </div>
+
+      {stats.ltExistDentro > 0.05 && (
+        <div className="rounded bg-red-100 border border-red-300 px-2 py-1.5">
+          <p className="text-[11px] font-semibold text-red-700">
+            ⚠️ LT existente cruza o terreno
+          </p>
+          <p className="text-[11px] text-red-600">
+            {fmt(stats.ltExistDentro)} de servidão dentro do polígono do projeto
+          </p>
+        </div>
+      )}
+
+      {stats.ltExist10km > 0.1 && (
+        <div className="text-[11px] flex items-center justify-between">
+          <span className="flex items-center gap-1.5 text-gray-700">
+            <span className="h-1.5 w-3 rounded-sm bg-purple-500" />
+            LT Existentes
+          </span>
+          <span className="font-mono text-gray-800">
+            {fmt(stats.ltExist5km)} / {fmt(stats.ltExist10km)}
+          </span>
+        </div>
+      )}
+
+      {stats.ltPlan10km > 0.1 && (
+        <div className="text-[11px] flex items-center justify-between">
+          <span className="flex items-center gap-1.5 text-gray-700">
+            <span className="h-1.5 w-3 border-t-2 border-dashed border-orange-500" />
+            LT Planejadas
+          </span>
+          <span className="font-mono text-gray-800">
+            {fmt(stats.ltPlan5km)} / {fmt(stats.ltPlan10km)}
+          </span>
+        </div>
+      )}
+
+      {stats.subEx10km + stats.subPl10km > 0 && (
+        <div className="text-[11px] flex items-center justify-between">
+          <span className="flex items-center gap-1.5 text-gray-700">
+            <span className="h-2 w-2 rounded-full bg-yellow-400 border border-gray-700" />
+            Subestações
+          </span>
+          <span className="font-mono text-gray-800">
+            {stats.subEx5km + stats.subPl5km} /{" "}
+            {stats.subEx10km + stats.subPl10km}
+          </span>
+        </div>
+      )}
+
+      {stats.tensoesKv.length > 0 && (
+        <div className="pt-1 border-t border-purple-100">
+          <p className="text-[10px] text-gray-500 mb-1">Tensões em 10km</p>
+          <div className="flex flex-wrap gap-1">
+            {stats.tensoesKv.map((kv) => (
+              <span
+                key={kv}
+                className="text-[10px] font-mono bg-white border border-gray-200 rounded px-1.5 py-0.5 text-gray-700"
+              >
+                {kv} kV
+              </span>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {stats.concessionarias.length > 0 && (
+        <div className="pt-1 border-t border-purple-100">
+          <p className="text-[10px] text-gray-500 mb-1">Concessionárias</p>
+          <p className="text-[10px] text-gray-700 leading-tight">
+            {stats.concessionarias.slice(0, 3).join(" • ")}
+            {stats.concessionarias.length > 3 &&
+              ` +${stats.concessionarias.length - 3}`}
+          </p>
+        </div>
+      )}
     </div>
   );
 }
@@ -596,9 +1028,25 @@ function TabMapa({
   const [mapReady, setMapReady] = useState(false);
 
   const [layerStates, setLayerStates] = useState<
-    Record<GeoLayerKey, { active: boolean; loading: boolean; loaded: boolean }>
+    Record<
+      GeoLayerKey,
+      {
+        active: boolean;
+        loading: boolean;
+        loaded: boolean;
+        geojson?: GeoJSON.FeatureCollection;
+      }
+    >
   >(() => {
-    const initial = {} as Record<GeoLayerKey, { active: boolean; loading: boolean; loaded: boolean }>;
+    const initial = {} as Record<
+      GeoLayerKey,
+      {
+        active: boolean;
+        loading: boolean;
+        loaded: boolean;
+        geojson?: GeoJSON.FeatureCollection;
+      }
+    >;
     MAP_LAYERS.forEach((l) => {
       initial[l.key] = { active: false, loading: false, loaded: false };
     });
@@ -626,11 +1074,15 @@ function TabMapa({
     let center: [number, number] = [-47.9, -15.8];
     if (project.centroid) {
       try {
-        const parsed = typeof project.centroid === "string"
-          ? JSON.parse(project.centroid)
-          : project.centroid;
-        if (parsed?.coordinates) center = [parsed.coordinates[0], parsed.coordinates[1]];
-      } catch { /* fallback to default */ }
+        const parsed =
+          typeof project.centroid === "string"
+            ? JSON.parse(project.centroid)
+            : project.centroid;
+        if (parsed?.coordinates)
+          center = [parsed.coordinates[0], parsed.coordinates[1]];
+      } catch {
+        /* fallback to default */
+      }
     }
 
     import("mapbox-gl")
@@ -641,7 +1093,9 @@ function TabMapa({
           container: mapContainerRef.current!,
           style: "mapbox://styles/mapbox/satellite-streets-v12",
           center,
-          zoom: project.area_m2 ? Math.max(10, 17 - Math.log2(project.area_m2 / 10000)) : 12,
+          zoom: project.area_m2
+            ? Math.max(10, 17 - Math.log2(project.area_m2 / 10000))
+            : 12,
         });
         mapRef.current = mapInstance;
 
@@ -649,24 +1103,40 @@ function TabMapa({
           setMapReady(true);
 
           // Desenhar polígono do projeto no mapa
-          console.log("[Intentus] TabMapa on load — geometry_coordinates:", project.geometry_coordinates?.length ?? "null", "geometry type:", typeof project.geometry);
+          console.log(
+            "[Intentus] TabMapa on load — geometry_coordinates:",
+            project.geometry_coordinates?.length ?? "null",
+            "geometry type:",
+            typeof project.geometry,
+          );
           const polyGeoJSON = buildProjectPolygonGeoJSON(project);
           if (polyGeoJSON) {
             addProjectBoundaryToMap(mapInstance, polyGeoJSON);
           } else {
-            console.warn("[Intentus] TabMapa — sem dados de geometria para polígono");
+            console.warn(
+              "[Intentus] TabMapa — sem dados de geometria para polígono",
+            );
           }
 
           // Fit bounds ao polígono: prioriza bbox JSONB, fallback de geometry_coordinates
           if (project.bbox) {
-            const bbox = project.bbox as { west: number; south: number; east: number; north: number };
+            const bbox = project.bbox as {
+              west: number;
+              south: number;
+              east: number;
+              north: number;
+            };
             mapInstance.fitBounds(
-              [[bbox.west, bbox.south], [bbox.east, bbox.north]],
-              { padding: 60, duration: 1000 }
+              [
+                [bbox.west, bbox.south],
+                [bbox.east, bbox.north],
+              ],
+              { padding: 60, duration: 1000 },
             );
           } else if (project.geometry_coordinates) {
             const bounds = boundsFromCoordinates(project.geometry_coordinates);
-            if (bounds) mapInstance.fitBounds(bounds, { padding: 60, duration: 1000 });
+            if (bounds)
+              mapInstance.fitBounds(bounds, { padding: 60, duration: 1000 });
           }
 
           // Add navigation control
@@ -702,11 +1172,22 @@ function TabMapa({
       if (current.loaded) {
         const newActive = !current.active;
         const visibility = newActive ? "visible" : "none";
-        // Tentar cada sub-layer silenciosamente (fill, line, outline)
-        for (const suffix of ["", "-line", "-outline"]) {
-          try { mapRef.current.setLayoutProperty(`layer-${key}${suffix}`, "visibility", visibility); } catch { /* layer may not exist */ }
+        // Tentar cada sub-layer silenciosamente (fill, line, outline, circle)
+        for (const suffix of ["", "-line", "-outline", "-circle"]) {
+          try {
+            mapRef.current.setLayoutProperty(
+              `layer-${key}${suffix}`,
+              "visibility",
+              visibility,
+            );
+          } catch {
+            /* layer may not exist */
+          }
         }
-        setLayerStates((prev) => ({ ...prev, [key]: { ...prev[key], active: newActive } }));
+        setLayerStates((prev) => ({
+          ...prev,
+          [key]: { ...prev[key], active: newActive },
+        }));
         return;
       }
 
@@ -728,23 +1209,33 @@ function TabMapa({
           north: bbox.north,
         });
 
-        console.log(`[Intentus] toggleLayer "${key}" — result ok:`, result.ok, "features:", result.data?.geojson?.features?.length ?? 0);
+        console.log(
+          `[Intentus] toggleLayer "${key}" — result ok:`,
+          result.ok,
+          "features:",
+          result.data?.geojson?.features?.length ?? 0,
+        );
 
         if (!result.ok) throw new Error(result.error?.message ?? "Erro na EF");
 
         const map = mapRef.current;
         if (!map) return;
 
-        const geojson = result.data?.geojson ?? { type: "FeatureCollection", features: [] };
+        const geojson = result.data?.geojson ?? {
+          type: "FeatureCollection",
+          features: [],
+        };
 
         // Se não retornou features, a camada está vazia nesta região
         if (!geojson.features || geojson.features.length === 0) {
-          console.warn(`[Intentus] Camada "${key}" sem features na região do projeto`);
+          console.warn(
+            `[Intentus] Camada "${key}" sem features na região do projeto`,
+          );
         }
 
         map.addSource(`src-${key}`, { type: "geojson", data: geojson });
 
-        // Fill layer (sem filter pra suportar LineString e Polygon)
+        // Fill layer para Polygons (UCs, SIGEF)
         map.addLayer({
           id: `layer-${key}`,
           type: "fill",
@@ -753,26 +1244,53 @@ function TabMapa({
           filter: ["==", "$type", "Polygon"],
         });
 
-        // Line layer para LineString features (hidrografia, rodovias, transmissão)
+        // Line layer para LineString (hidrografia, rodovias, LT)
+        // line-dasharray quando layerConfig.dashed (LT planejadas)
+        const linePaint: Record<string, unknown> = {
+          "line-color": layerConfig.color,
+          "line-width": layerConfig.dashed ? 3 : 2.5,
+          "line-opacity": 0.9,
+        };
+        if (layerConfig.dashed) {
+          linePaint["line-dasharray"] = [2, 2];
+        }
         map.addLayer({
           id: `layer-${key}-line`,
           type: "line",
           source: `src-${key}`,
-          paint: { "line-color": layerConfig.color, "line-width": 2.5, "line-opacity": 0.9 },
+          paint: linePaint,
           filter: ["==", "$type", "LineString"],
         });
 
-        // Outline layer
+        // Circle layer para Points (subestações, ANEEL EPE layer 20+9)
+        if (layerConfig.point) {
+          map.addLayer({
+            id: `layer-${key}-circle`,
+            type: "circle",
+            source: `src-${key}`,
+            paint: {
+              "circle-radius": 6,
+              "circle-color": layerConfig.color,
+              "circle-stroke-color": "#1f2937",
+              "circle-stroke-width": 1.5,
+              "circle-opacity": 0.9,
+            },
+            filter: ["==", "$type", "Point"],
+          });
+        }
+
+        // Outline para Polygons apenas (não polui Points/Lines)
         map.addLayer({
           id: `layer-${key}-outline`,
           type: "line",
           source: `src-${key}`,
           paint: { "line-color": layerConfig.color, "line-width": 1.5 },
+          filter: ["==", "$type", "Polygon"],
         });
 
         setLayerStates((prev) => ({
           ...prev,
-          [key]: { active: true, loading: false, loaded: true },
+          [key]: { active: true, loading: false, loaded: true, geojson },
         }));
       } catch (err) {
         const msg = err instanceof Error ? err.message : "Erro desconhecido";
@@ -784,11 +1302,14 @@ function TabMapa({
         console.warn(`Erro ao carregar camada ${key}:`, msg);
       }
     },
-    [mapReady, layerStates, project.id, project.bbox]
+    [mapReady, layerStates, project.id, project.bbox],
   );
 
   return (
-    <div className="flex gap-4" style={{ height: "calc(100vh - 200px)", minHeight: 520 }}>
+    <div
+      className="flex gap-4"
+      style={{ height: "calc(100vh - 200px)", minHeight: 520 }}
+    >
       {/* Layer panel */}
       <div className="w-60 flex-shrink-0 space-y-3">
         <div className="flex items-center gap-2">
@@ -827,18 +1348,35 @@ function TabMapa({
                   <EyeOff className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
                 )}
               </div>
-              <p className="text-xs text-gray-400 mt-1 leading-tight">{layer.description}</p>
+              <p className="text-xs text-gray-400 mt-1 leading-tight">
+                {layer.description}
+              </p>
             </button>
           );
         })}
 
         {!mapReady && !mapError && (
-          <p className="text-xs text-gray-400 text-center pt-2">Carregando mapa...</p>
+          <p className="text-xs text-gray-400 text-center pt-2">
+            Carregando mapa...
+          </p>
+        )}
+
+        {/* Painel impacto LT — só renderiza se ao menos 1 camada ANEEL EPE estiver carregada */}
+        {(layerStates.aneel_lt_existentes.loaded ||
+          layerStates.aneel_lt_planejadas.loaded ||
+          layerStates.aneel_subestacoes.loaded) && (
+          <LTImpactPanel
+            project={project}
+            ltExistentes={layerStates.aneel_lt_existentes.geojson}
+            ltPlanejadas={layerStates.aneel_lt_planejadas.geojson}
+            subestacoes={layerStates.aneel_subestacoes.geojson}
+          />
         )}
 
         <div className="pt-2 border-t border-gray-100">
           <p className="text-xs text-gray-400">
-            Clique em uma camada para buscar dados da EF Supabase e exibir no mapa.
+            Clique em uma camada para buscar dados da EF Supabase e exibir no
+            mapa.
           </p>
         </div>
       </div>
@@ -852,7 +1390,10 @@ function TabMapa({
           </div>
         ) : (
           <>
-            <div ref={mapContainerRef} style={{ width: "100%", height: "100%" }} />
+            <div
+              ref={mapContainerRef}
+              style={{ width: "100%", height: "100%" }}
+            />
             {!mapReady && (
               <div className="absolute inset-0 flex items-center justify-center bg-gray-50">
                 <Loader2 className="h-6 w-6 text-gray-400 animate-spin" />
@@ -869,7 +1410,10 @@ function TabMapa({
 // Outer ErrorBoundary — protege a tab 3D de crashes fora do R3F Canvas
 // ---------------------------------------------------------------------------
 
-interface ThreeDErrorState { hasError: boolean; error: Error | null }
+interface ThreeDErrorState {
+  hasError: boolean;
+  error: Error | null;
+}
 
 class ThreeDTabErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -886,7 +1430,9 @@ class ThreeDTabErrorBoundary extends React.Component<
     if (this.state.hasError) {
       return (
         <div className="flex flex-col items-center justify-center h-[500px] rounded-xl border-2 border-dashed border-red-200 bg-red-50/50">
-          <p className="text-sm font-medium text-red-600">Erro na visualização 3D</p>
+          <p className="text-sm font-medium text-red-600">
+            Erro na visualização 3D
+          </p>
           <p className="text-xs text-red-400 mt-1 max-w-md text-center px-4">
             {this.state.error?.message ?? "Falha ao renderizar modelo 3D."}
           </p>
@@ -912,23 +1458,41 @@ export default function ParcelamentoDetalhe() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<TabKey>("visao-geral");
 
-  const { data: project, isLoading, error } = useParcelamentoProject(id ?? null);
+  const {
+    data: project,
+    isLoading,
+    error,
+  } = useParcelamentoProject(id ?? null);
 
   // Score: prefere o da EF; cai no preliminar pro badge do header.
   // ATENÇÃO: useMemo DEVE ficar antes de qualquer conditional return (Rules of Hooks).
   const realScore = project?.analysis_results?.viabilidade_score;
   const preliminaryHeader = useMemo(
-    () => (project && realScore === undefined ? computePreliminaryAnalysis(project) : null),
+    () =>
+      project && realScore === undefined
+        ? computePreliminaryAnalysis(project)
+        : null,
     [realScore, project],
   );
   const score = realScore ?? preliminaryHeader?.score;
-  const isPreliminaryHeader = realScore === undefined && preliminaryHeader !== null;
-  const scoreLabel = score !== undefined
-    ? score >= 70 ? "Alta Viabilidade" : score >= 45 ? "Média Viabilidade" : "Baixa Viabilidade"
-    : null;
-  const scoreBadgeColor = score === undefined
-    ? "bg-gray-100 text-gray-600"
-    : score >= 70 ? "bg-green-100 text-green-700" : score >= 45 ? "bg-amber-100 text-amber-700" : "bg-red-100 text-red-700";
+  const isPreliminaryHeader =
+    realScore === undefined && preliminaryHeader !== null;
+  const scoreLabel =
+    score !== undefined
+      ? score >= 70
+        ? "Alta Viabilidade"
+        : score >= 45
+          ? "Média Viabilidade"
+          : "Baixa Viabilidade"
+      : null;
+  const scoreBadgeColor =
+    score === undefined
+      ? "bg-gray-100 text-gray-600"
+      : score >= 70
+        ? "bg-green-100 text-green-700"
+        : score >= 45
+          ? "bg-amber-100 text-amber-700"
+          : "bg-red-100 text-red-700";
 
   if (isLoading) {
     return (
@@ -944,7 +1508,9 @@ export default function ParcelamentoDetalhe() {
         <Alert className="border-red-200 bg-red-50">
           <AlertTriangle className="h-4 w-4 text-red-600" />
           <AlertDescription className="text-red-700">
-            {error ? `Erro: ${error.message}` : "Empreendimento não encontrado."}
+            {error
+              ? `Erro: ${error.message}`
+              : "Empreendimento não encontrado."}
           </AlertDescription>
         </Alert>
       </div>
@@ -964,7 +1530,9 @@ export default function ParcelamentoDetalhe() {
             Projetos
           </button>
           <span className="text-gray-300">/</span>
-          <span className="text-sm text-gray-600 truncate max-w-[250px]">{project.name}</span>
+          <span className="text-sm text-gray-600 truncate max-w-[250px]">
+            {project.name}
+          </span>
         </div>
 
         <div className="flex items-start justify-between">
@@ -980,7 +1548,12 @@ export default function ParcelamentoDetalhe() {
               {project.area_m2 != null && (
                 <>
                   <span className="text-gray-300">•</span>
-                  <span>{project.area_m2.toLocaleString("pt-BR", { maximumFractionDigits: 0 })} m²</span>
+                  <span>
+                    {project.area_m2.toLocaleString("pt-BR", {
+                      maximumFractionDigits: 0,
+                    })}{" "}
+                    m²
+                  </span>
                 </>
               )}
             </div>
@@ -1039,9 +1612,14 @@ export default function ParcelamentoDetalhe() {
       </div>
 
       {/* Tab content */}
-      <div className={`flex-1 ${activeTab === "mapa" ? "p-4" : "p-6"} overflow-auto`}>
+      <div
+        className={`flex-1 ${activeTab === "mapa" ? "p-4" : "p-6"} overflow-auto`}
+      >
         {activeTab === "visao-geral" && (
-          <TabVisaoGeral project={project} onExpandMap={() => setActiveTab("mapa")} />
+          <TabVisaoGeral
+            project={project}
+            onExpandMap={() => setActiveTab("mapa")}
+          />
         )}
 
         {activeTab === "mapa" && <TabMapa project={project} />}
@@ -1053,7 +1631,9 @@ export default function ParcelamentoDetalhe() {
               fallback={
                 <div className="flex flex-col items-center justify-center h-[500px] rounded-xl border border-gray-200 bg-gray-50/50">
                   <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-2" />
-                  <p className="text-sm text-gray-500">Carregando visualização 3D...</p>
+                  <p className="text-sm text-gray-500">
+                    Carregando visualização 3D...
+                  </p>
                 </div>
               }
             >
@@ -1068,7 +1648,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando módulo de relatórios...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando módulo de relatórios...
+                </p>
               </div>
             }
           >
@@ -1082,7 +1664,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-lime-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando regulações brasileiras...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando regulações brasileiras...
+                </p>
               </div>
             }
           >
@@ -1096,7 +1680,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-indigo-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando benchmarks de mercado...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando benchmarks de mercado...
+                </p>
               </div>
             }
           >
@@ -1110,7 +1696,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-violet-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando dados censitários IBGE...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando dados censitários IBGE...
+                </p>
               </div>
             }
           >
@@ -1124,7 +1712,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-red-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando embargos ambientais...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando embargos ambientais...
+                </p>
               </div>
             }
           >
@@ -1138,7 +1728,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-teal-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando exportador DXF...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando exportador DXF...
+                </p>
               </div>
             }
           >
@@ -1166,7 +1758,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-cyan-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando zoneamento municipal...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando zoneamento municipal...
+                </p>
               </div>
             }
           >
@@ -1180,7 +1774,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-amber-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando Memorial Descritivo...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando Memorial Descritivo...
+                </p>
               </div>
             }
           >
@@ -1194,7 +1790,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-orange-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando Matrícula CRI...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando Matrícula CRI...
+                </p>
               </div>
             }
           >
@@ -1208,7 +1806,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-purple-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando Simulador FII/CRA...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando Simulador FII/CRA...
+                </p>
               </div>
             }
           >
@@ -1222,7 +1822,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando Export Geometria...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando Export Geometria...
+                </p>
               </div>
             }
           >
@@ -1231,7 +1833,10 @@ export default function ParcelamentoDetalhe() {
                 id: project.id,
                 name: project.name,
                 area_total_m2: project.area_m2 ?? undefined,
-                centroid: typeof project.centroid === "string" ? project.centroid : JSON.stringify(project.centroid),
+                centroid:
+                  typeof project.centroid === "string"
+                    ? project.centroid
+                    : JSON.stringify(project.centroid),
                 geometry_coordinates: project.geometry_coordinates ?? undefined,
               }}
             />
@@ -1243,7 +1848,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando Corte Transversal...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando Corte Transversal...
+                </p>
               </div>
             }
           >
@@ -1251,7 +1858,10 @@ export default function ParcelamentoDetalhe() {
               project={{
                 id: project.id,
                 name: project.name,
-                centroid: typeof project.centroid === "string" ? project.centroid : JSON.stringify(project.centroid),
+                centroid:
+                  typeof project.centroid === "string"
+                    ? project.centroid
+                    : JSON.stringify(project.centroid),
                 geometry_coordinates: project.geometry_coordinates ?? undefined,
               }}
             />
@@ -1263,7 +1873,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando Áreas de Exclusão...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando Áreas de Exclusão...
+                </p>
               </div>
             }
           >
@@ -1272,7 +1884,10 @@ export default function ParcelamentoDetalhe() {
                 id: project.id,
                 name: project.name,
                 area_m2: project.area_m2 ?? undefined,
-                centroid: typeof project.centroid === "string" ? project.centroid : JSON.stringify(project.centroid),
+                centroid:
+                  typeof project.centroid === "string"
+                    ? project.centroid
+                    : JSON.stringify(project.centroid),
                 geometry_coordinates: project.geometry_coordinates ?? undefined,
                 exclusion_areas: project.exclusion_areas ?? undefined,
               }}
@@ -1286,7 +1901,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-emerald-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando módulo financeiro...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando módulo financeiro...
+                </p>
               </div>
             }
           >
@@ -1300,7 +1917,9 @@ export default function ParcelamentoDetalhe() {
             fallback={
               <div className="flex flex-col items-center justify-center h-64 rounded-xl border border-gray-200 bg-gray-50/50">
                 <Loader2 className="w-8 h-8 text-blue-500 animate-spin mb-2" />
-                <p className="text-sm text-gray-500">Carregando conformidade legal...</p>
+                <p className="text-sm text-gray-500">
+                  Carregando conformidade legal...
+                </p>
               </div>
             }
           >

@@ -72,9 +72,16 @@ export type PadraoEmpreendimento = "popular" | "medio" | "alto" | "luxo";
 
 /** Status de cada item do checklist de conformidade */
 export type ComplianceStatus =
-  | "pass" | "warn" | "fail" | "na" | "pending"
+  | "pass"
+  | "warn"
+  | "fail"
+  | "na"
+  | "pending"
   // Valores usados pela EF parcelamento-legal-analysis v1:
-  | "violation" | "warning" | "compliant" | "missing_info";
+  | "violation"
+  | "warning"
+  | "compliant"
+  | "missing_info";
 
 // ---------------------------------------------------------------------------
 // Legal Analysis (Bloco B — Fase 5)
@@ -143,13 +150,21 @@ export interface LegalAnalysisCached {
  * ⚠️ Atualizado na sessão 129: os valores antigos (`sigef_imoveis`,
  * `sicar_car`, `ibge_setores`, `dnit_rodovias`) NÃO existiam na EF real —
  * causavam 400. Os valores abaixo batem com o código da EF em produção.
+ *
+ * Sessão 153 (ANEEL/EPE): adicionados `aneel_lt_existentes`,
+ * `aneel_lt_planejadas`, `aneel_subestacoes` como camadas oficiais EPE
+ * (com Tensão kV, Concessionária, Ano operação). `linhas_transmissao`
+ * (Overpass) mantido como legacy/fallback — não exibido por padrão na UI.
  */
 export type GeoLayerKey =
   | "sigef_privado"
   | "hidrografia"
   | "ibama_uc"
   | "rodovias_federais"
-  | "linhas_transmissao";
+  | "linhas_transmissao" // legacy Overpass — fallback only
+  | "aneel_lt_existentes" // EPE oficial — base existente
+  | "aneel_lt_planejadas" // EPE oficial — expansão planejada
+  | "aneel_subestacoes"; // EPE oficial — existentes + planejadas
 
 /** Tipo de cenário financeiro (Fase 5 suporta múltiplos cenários simultâneos) */
 export type FinancialScenarioType =

@@ -49,14 +49,19 @@ export type InfluenceLayerKey =
   | "hidrografia"
   | "ibama_uc"
   | "rodovias_federais"
-  | "linhas_transmissao";
+  | "linhas_transmissao" // legacy Overpass — fallback
+  | "aneel_lt_existentes" // EPE oficial — base existente
+  | "aneel_lt_planejadas" // EPE oficial — expansão planejada
+  | "aneel_subestacoes"; // EPE oficial — existentes + planejadas
 
 export const ALL_INFLUENCE_LAYERS: InfluenceLayerKey[] = [
   "sigef_privado",
   "hidrografia",
   "ibama_uc",
   "rodovias_federais",
-  "linhas_transmissao",
+  "aneel_lt_existentes",
+  "aneel_lt_planejadas",
+  "aneel_subestacoes",
 ];
 
 /** Metadados humanos de cada camada — usado no UI para cards de influência */
@@ -68,13 +73,15 @@ export const INFLUENCE_LAYER_META: Record<
     label: "Imóveis certificados (SIGEF/INCRA)",
     shortLabel: "SIGEF",
     color: "#f59e0b",
-    description: "Áreas já certificadas no INCRA — possível sobreposição fundiária",
+    description:
+      "Áreas já certificadas no INCRA — possível sobreposição fundiária",
   },
   hidrografia: {
     label: "Hidrografia (IBGE)",
     shortLabel: "Rios/Lagos",
     color: "#0ea5e9",
-    description: "Cursos d'água — sujeitos a APP de 30-500 m (Código Florestal art. 4º)",
+    description:
+      "Cursos d'água — sujeitos a APP de 30-500 m (Código Florestal art. 4º)",
   },
   ibama_uc: {
     label: "Unidades de Conservação (IBAMA)",
@@ -86,13 +93,34 @@ export const INFLUENCE_LAYER_META: Record<
     label: "Rodovias Federais (DNIT)",
     shortLabel: "Rodovias",
     color: "#ef4444",
-    description: "Faixa de domínio e non aedificandi 15 m (Lei 6.766 art. 4º III)",
+    description:
+      "Faixa de domínio e non aedificandi 15 m (Lei 6.766 art. 4º III)",
   },
   linhas_transmissao: {
-    label: "Linhas de Transmissão (ANEEL)",
-    shortLabel: "Linhões",
+    label: "Linhas Transmissão (OSM)",
+    shortLabel: "LT-OSM",
     color: "#a855f7",
-    description: "Faixas de servidão — restrição total a edificação",
+    description: "Fallback OSM — usar camadas EPE oficiais quando disponíveis",
+  },
+  aneel_lt_existentes: {
+    label: "ANEEL — LT Existentes (EPE)",
+    shortLabel: "LT Existente",
+    color: "#a855f7",
+    description:
+      "Linhas de transmissão em operação — kV, concessionária, ano (fonte EPE)",
+  },
+  aneel_lt_planejadas: {
+    label: "ANEEL — LT Planejadas (EPE)",
+    shortLabel: "LT Planejada",
+    color: "#f97316",
+    description: "Expansão prevista do SIN — pode gerar servidão futura",
+  },
+  aneel_subestacoes: {
+    label: "ANEEL — Subestações (EPE)",
+    shortLabel: "Subestações",
+    color: "#eab308",
+    description:
+      "Subestações existentes e planejadas — pontos de injeção/transformação",
   },
 };
 
@@ -144,7 +172,7 @@ export type Result<T> =
  */
 export async function triggerFetchLayers(
   developmentId: string,
-  layers: InfluenceLayerKey[] = ALL_INFLUENCE_LAYERS
+  layers: InfluenceLayerKey[] = ALL_INFLUENCE_LAYERS,
 ): Promise<Result<FetchLayersResponse>> {
   try {
     const { data, error } = await supabase.functions.invoke(
@@ -155,7 +183,7 @@ export async function triggerFetchLayers(
           development_id: developmentId,
           layers,
         },
-      }
+      },
     );
 
     if (error) {
@@ -163,7 +191,8 @@ export async function triggerFetchLayers(
         ok: false,
         error: {
           code: "EF_ERROR",
-          message: error.message ?? "Erro na Edge Function development-geo-layers",
+          message:
+            error.message ?? "Erro na Edge Function development-geo-layers",
         },
       };
     }
@@ -181,7 +210,10 @@ export async function triggerFetchLayers(
         ok: false,
         error: {
           code: "EF_BODY_ERROR",
-          message: typeof data.error === "string" ? data.error : "Erro no corpo da resposta",
+          message:
+            typeof data.error === "string"
+              ? data.error
+              : "Erro no corpo da resposta",
         },
       };
     }
@@ -210,7 +242,7 @@ export async function triggerFetchLayers(
  * Retorna apenas camadas ativas, mais recentes primeiro.
  */
 export async function loadLayers(
-  developmentId: string
+  developmentId: string,
 ): Promise<Result<CachedLayerRow[]>> {
   try {
     const { data, error } = await supabase.functions.invoke(
@@ -220,7 +252,7 @@ export async function loadLayers(
           action: "get_layers",
           development_id: developmentId,
         },
-      }
+      },
     );
 
     if (error) {
@@ -242,7 +274,10 @@ export async function loadLayers(
         ok: false,
         error: {
           code: "EF_BODY_ERROR",
-          message: typeof data.error === "string" ? data.error : "Erro no corpo da resposta",
+          message:
+            typeof data.error === "string"
+              ? data.error
+              : "Erro no corpo da resposta",
         },
       };
     }
@@ -267,7 +302,7 @@ export async function loadLayers(
 
 export async function invalidateLayers(
   developmentId: string,
-  layerKey?: InfluenceLayerKey
+  layerKey?: InfluenceLayerKey,
 ): Promise<Result<{ invalidated: string }>> {
   try {
     const { data, error } = await supabase.functions.invoke(
@@ -278,13 +313,16 @@ export async function invalidateLayers(
           development_id: developmentId,
           ...(layerKey ? { layer_key: layerKey } : {}),
         },
-      }
+      },
     );
 
     if (error) {
       return {
         ok: false,
-        error: { code: "EF_ERROR", message: error.message ?? "Erro ao invalidar" },
+        error: {
+          code: "EF_ERROR",
+          message: error.message ?? "Erro ao invalidar",
+        },
       };
     }
 
@@ -314,9 +352,7 @@ export async function invalidateLayers(
  * Retorna `{ summary, layers }` — summary tem contagem por camada, layers
  * tem os GeoJSONs completos prontos para usar com Turf.js.
  */
-export async function fetchAndLoadAllLayers(
-  developmentId: string
-): Promise<
+export async function fetchAndLoadAllLayers(developmentId: string): Promise<
   Result<{
     summary: FetchLayersResponse;
     layers: CachedLayerRow[];
@@ -357,8 +393,10 @@ export async function fetchAndLoadAllLayers(
 export async function fetchGeoLayer(
   developmentId: string,
   layerKey: InfluenceLayerKey,
-  _bbox?: BBox
-): Promise<Result<{ geojson: GeoJSON.FeatureCollection; feature_count: number }>> {
+  _bbox?: BBox,
+): Promise<
+  Result<{ geojson: GeoJSON.FeatureCollection; feature_count: number }>
+> {
   // 1) dispara fetch só da camada pedida
   const fetchResult = await triggerFetchLayers(developmentId, [layerKey]);
   if (!fetchResult.ok) return fetchResult;
@@ -368,10 +406,14 @@ export async function fetchGeoLayer(
   if (!loadResult.ok) return loadResult;
 
   // 3) filtra a camada pedida
-  const row = loadResult.data.find((r) => r.layer_key === layerKey && r.is_active);
+  const row = loadResult.data.find(
+    (r) => r.layer_key === layerKey && r.is_active,
+  );
 
-  const geojson: GeoJSON.FeatureCollection =
-    row?.geojson ?? { type: "FeatureCollection", features: [] };
+  const geojson: GeoJSON.FeatureCollection = row?.geojson ?? {
+    type: "FeatureCollection",
+    features: [],
+  };
 
   return {
     ok: true,

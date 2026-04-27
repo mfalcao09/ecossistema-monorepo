@@ -1,26 +1,33 @@
 /**
- * development-geo-layers v2
+ * development-geo-layers v3
  *
  * Busca camadas geoespaciais para terrenos de parcelamento de solo.
  * Persiste cache em `development_parcelamento_geo_layers`.
  *
- * v2: Migrado de WFS governamentais (instáveis) para Overpass API (OSM)
- * como fonte primária para hidrografia, rodovias e linhas de transmissão.
- * SIGEF e IBAMA UCs mantêm tentativa via ArcGIS REST com fallback graceful.
+ * v3 (sessão 153 — ANEEL/EPE): camadas oficiais de transmissão via EPE
+ * ArcGIS REST (https://gisepeprd2.epe.gov.br) — schema `Tensao` (kV),
+ * `Concession` (proprietário), `Ano_Opera`, `Extensao` (km). Substitui
+ * Overpass `power=line` (que não tinha tensão nem proprietário) para a
+ * UI do parcelamento; legacy `linhas_transmissao` mantido por compat.
+ *
+ * v2: Migrou de WFS governamentais (instáveis) para Overpass API (OSM)
+ * como fonte primária para hidrografia, rodovias.
  *
  * Actions:
  *   fetch_layers   — Busca e cacheia todas as camadas solicitadas
  *   get_layers     — Retorna camadas já cacheadas do development
  *   invalidate     — Limpa cache de uma ou todas as camadas
  *
- * Fontes (v2):
- *   SIGEF (INCRA)      : Overpass API (boundary=cadastral) + fallback vazio
- *   Hidrografia (IBGE)  : Overpass API (waterway=river|stream|canal)
- *   IBAMA UCs           : Overpass API (boundary=protected_area) + fallback vazio
- *   Rodovias (DNIT)     : Overpass API (highway=trunk|primary|secondary)
- *   Linhas Transmissão  : Overpass API (power=line)
+ * Fontes (v3):
+ *   SIGEF (INCRA)         : Overpass API (boundary=cadastral) + fallback vazio
+ *   Hidrografia (IBGE)    : Overpass API (waterway=river|stream|canal)
+ *   IBAMA UCs             : Overpass API (boundary=protected_area) + fallback vazio
+ *   Rodovias (DNIT)       : Overpass API (highway=trunk|primary|secondary)
+ *   Linhas Transmissão    : Overpass API (power=line) — LEGACY
+ *   ANEEL LT Existentes   : EPE WMS_Webmap_EPE/MapServer/21 — OFICIAL
+ *   ANEEL LT Planejadas   : EPE WMS_Webmap_EPE/MapServer/10 — OFICIAL
+ *   ANEEL Subestações     : EPE WMS_Webmap_EPE/MapServer/20 — OFICIAL
  *
- * Sessão 152 — Fix: APIs governamentais todas fora do ar
  * Pair programming: Claudinho + Buchecha (MiniMax M2.7)
  */
 
@@ -31,7 +38,9 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // ============================================================
 
 const ALLOWED_ORIGINS_RAW = (Deno.env.get("ALLOWED_ORIGINS") || "")
-  .split(",").map((o: string) => o.trim()).filter(Boolean);
+  .split(",")
+  .map((o: string) => o.trim())
+  .filter(Boolean);
 
 const DEV_PATTERNS = [
   /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
@@ -44,15 +53,19 @@ const PROD_ORIGINS = [
 
 function isOriginAllowed(origin: string): boolean {
   if (!origin) return false;
-  if (ALLOWED_ORIGINS_RAW.length > 0) return ALLOWED_ORIGINS_RAW.includes(origin);
-  return PROD_ORIGINS.includes(origin) || DEV_PATTERNS.some((re) => re.test(origin));
+  if (ALLOWED_ORIGINS_RAW.length > 0)
+    return ALLOWED_ORIGINS_RAW.includes(origin);
+  return (
+    PROD_ORIGINS.includes(origin) || DEV_PATTERNS.some((re) => re.test(origin))
+  );
 }
 
 function corsHeaders(req: Request): Record<string, string> {
   const origin = req.headers.get("origin") || "";
   return {
     "Access-Control-Allow-Origin": isOriginAllowed(origin) ? origin : "",
-    "Access-Control-Allow-Headers": "authorization, x-client-info, apikey, content-type",
+    "Access-Control-Allow-Headers":
+      "authorization, x-client-info, apikey, content-type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     Vary: "Origin",
   };
@@ -62,7 +75,12 @@ function corsHeaders(req: Request): Record<string, string> {
 // Types
 // ============================================================
 
-interface BBox { south: number; north: number; west: number; east: number; }
+interface BBox {
+  south: number;
+  north: number;
+  west: number;
+  east: number;
+}
 
 interface GeoJSONFeature {
   type: "Feature";
@@ -109,8 +127,18 @@ function overpassToGeoJSON(elements: unknown[]): GeoJSONFeatureCollection {
       id: number;
       tags?: Record<string, string>;
       geometry?: { lat: number; lon: number }[];
-      bounds?: { minlat: number; minlon: number; maxlat: number; maxlon: number };
-      members?: { type: string; ref: number; role: string; geometry?: { lat: number; lon: number }[] }[];
+      bounds?: {
+        minlat: number;
+        minlon: number;
+        maxlat: number;
+        maxlon: number;
+      };
+      members?: {
+        type: string;
+        ref: number;
+        role: string;
+        geometry?: { lat: number; lon: number }[];
+      }[];
     };
 
     if (!e.tags) continue;
@@ -118,7 +146,8 @@ function overpassToGeoJSON(elements: unknown[]): GeoJSONFeatureCollection {
     if (e.type === "way" && e.geometry && e.geometry.length > 0) {
       const coords = e.geometry.map((p) => [p.lon, p.lat]);
       // Detectar se é polígono (primeiro == último ponto) ou linha
-      const isPolygon = coords.length >= 4 &&
+      const isPolygon =
+        coords.length >= 4 &&
         coords[0][0] === coords[coords.length - 1][0] &&
         coords[0][1] === coords[coords.length - 1][1];
 
@@ -141,9 +170,13 @@ function overpassToGeoJSON(elements: unknown[]): GeoJSONFeatureCollection {
         features.push({
           type: "Feature",
           properties: { ...e.tags, osm_id: e.id },
-          geometry: outerCoords.length === 1
-            ? { type: "Polygon", coordinates: outerCoords }
-            : { type: "MultiPolygon", coordinates: outerCoords.map((ring) => [ring]) },
+          geometry:
+            outerCoords.length === 1
+              ? { type: "Polygon", coordinates: outerCoords }
+              : {
+                  type: "MultiPolygon",
+                  coordinates: outerCoords.map((ring) => [ring]),
+                },
         });
       }
     }
@@ -174,13 +207,22 @@ async function queryOverpass(
       if (!res.ok) {
         const text = await res.text().catch(() => "");
         // Se é rate limit ou server busy, tentar próximo mirror
-        if (res.status === 429 || res.status === 504 || text.includes("too busy")) {
-          console.log(`[${layerKey}] ${endpoint} busy (${res.status}), trying next...`);
+        if (
+          res.status === 429 ||
+          res.status === 504 ||
+          text.includes("too busy")
+        ) {
+          console.log(
+            `[${layerKey}] ${endpoint} busy (${res.status}), trying next...`,
+          );
           continue;
         }
         return {
-          layer_key: layerKey, source_url: endpoint, geojson: null,
-          feature_count: 0, fetched_at: fetchedAt,
+          layer_key: layerKey,
+          source_url: endpoint,
+          geojson: null,
+          feature_count: 0,
+          fetched_at: fetchedAt,
           error: `HTTP ${res.status}: ${text.substring(0, 100)}`,
         };
       }
@@ -189,8 +231,13 @@ async function queryOverpass(
       const text = await res.text();
 
       // Overpass pode retornar HTML de erro mesmo com 200
-      if (contentType.includes("html") || text.includes("Error") && text.includes("runtime error")) {
-        console.log(`[${layerKey}] ${endpoint} returned error HTML, trying next...`);
+      if (
+        contentType.includes("html") ||
+        (text.includes("Error") && text.includes("runtime error"))
+      ) {
+        console.log(
+          `[${layerKey}] ${endpoint} returned error HTML, trying next...`,
+        );
         continue;
       }
 
@@ -223,7 +270,9 @@ async function queryOverpass(
   };
 }
 
-function delay(ms: number) { return new Promise((r) => setTimeout(r, ms)); }
+function delay(ms: number) {
+  return new Promise((r) => setTimeout(r, ms));
+}
 
 // ============================================================
 // Layer fetchers (Overpass-based)
@@ -239,54 +288,236 @@ async function fetchSIGEF(bbox: BBox): Promise<LayerResult> {
   // SIGEF = imóveis certificados INCRA. No OSM: boundary=cadastral ou landuse
   // Expandir bbox em 50% para pegar propriedades vizinhas
   const expanded = expandBbox(bbox, 0.5);
-  const query = buildOverpassQuery(expanded, `
+  const query = buildOverpassQuery(
+    expanded,
+    `
     way["boundary"="cadastral"]({BBOX});
     relation["boundary"="cadastral"]({BBOX});
     way["landuse"~"farmland|farm"]({BBOX});
-  `);
+  `,
+  );
   return queryOverpass(query, "sigef_privado");
 }
 
 async function fetchHidrografia(bbox: BBox): Promise<LayerResult> {
   // Hidrografia: rios, córregos, canais
   const expanded = expandBbox(bbox, 0.3);
-  const query = buildOverpassQuery(expanded, `
+  const query = buildOverpassQuery(
+    expanded,
+    `
     way["waterway"~"river|stream|canal|drain|ditch"]({BBOX});
     way["natural"="water"]({BBOX});
     relation["natural"="water"]({BBOX});
-  `);
+  `,
+  );
   return queryOverpass(query, "hidrografia");
 }
 
 async function fetchIBAMAUC(bbox: BBox): Promise<LayerResult> {
   // Unidades de Conservação: boundary=protected_area ou leisure=nature_reserve
   const expanded = expandBbox(bbox, 1.0); // Expandir mais — UCs são grandes
-  const query = buildOverpassQuery(expanded, `
+  const query = buildOverpassQuery(
+    expanded,
+    `
     way["boundary"="protected_area"]({BBOX});
     relation["boundary"="protected_area"]({BBOX});
     way["leisure"="nature_reserve"]({BBOX});
     relation["leisure"="nature_reserve"]({BBOX});
-  `, 25);
+  `,
+    25,
+  );
   return queryOverpass(query, "ibama_uc");
 }
 
 async function fetchRodovias(bbox: BBox): Promise<LayerResult> {
   // Rodovias federais e estaduais
   const expanded = expandBbox(bbox, 0.5);
-  const query = buildOverpassQuery(expanded, `
+  const query = buildOverpassQuery(
+    expanded,
+    `
     way["highway"~"trunk|primary|secondary|motorway"]({BBOX});
-  `);
+  `,
+  );
   return queryOverpass(query, "rodovias_federais");
 }
 
 async function fetchLinhasTransmissao(bbox: BBox): Promise<LayerResult> {
   // Linhas de transmissão elétrica
   const expanded = expandBbox(bbox, 0.5);
-  const query = buildOverpassQuery(expanded, `
+  const query = buildOverpassQuery(
+    expanded,
+    `
     way["power"="line"]({BBOX});
     way["power"="minor_line"]({BBOX});
-  `);
+  `,
+  );
   return queryOverpass(query, "linhas_transmissao");
+}
+
+// ============================================================
+// EPE ArcGIS REST helpers (LT Existentes/Planejadas + Subestações)
+// ============================================================
+
+/**
+ * Buffer absoluto em graus — ~0.1° equivale a ~11km em latitude no centro
+ * do Brasil. Usado para ANEEL/EPE pra cobrir o raio de 10km solicitado pelo
+ * Marcelo (briefing parcelamento Bloco H — proximidade de servidão).
+ */
+function expandBboxByDegrees(bbox: BBox, deltaDeg: number): BBox {
+  return {
+    south: bbox.south - deltaDeg,
+    north: bbox.north + deltaDeg,
+    west: bbox.west - deltaDeg,
+    east: bbox.east + deltaDeg,
+  };
+}
+
+const EPE_MAPSERVER_URL =
+  "https://gisepeprd2.epe.gov.br/arcgis/rest/services/SMA/WMS_Webmap_EPE/MapServer";
+
+/**
+ * Query genérica numa Layer ArcGIS REST do MapServer da EPE retornando
+ * GeoJSON. Suporta retry simples, timeout 25s e graceful fallback (FC vazio).
+ */
+async function fetchEPELayer(
+  layerId: number,
+  layerKey: string,
+  bbox: BBox,
+  bufferDeg = 0.1,
+  timeoutMs = 25_000,
+): Promise<LayerResult> {
+  const fetchedAt = new Date().toISOString();
+  const expanded = expandBboxByDegrees(bbox, bufferDeg);
+
+  const geometry = JSON.stringify({
+    xmin: expanded.west,
+    ymin: expanded.south,
+    xmax: expanded.east,
+    ymax: expanded.north,
+    spatialReference: { wkid: 4326 },
+  });
+
+  const params = new URLSearchParams({
+    where: "1=1",
+    geometry,
+    geometryType: "esriGeometryEnvelope",
+    inSR: "4326",
+    spatialRel: "esriSpatialRelIntersects",
+    outFields: "*",
+    outSR: "4326",
+    returnGeometry: "true",
+    f: "geojson",
+  });
+
+  const url = `${EPE_MAPSERVER_URL}/${layerId}/query?${params.toString()}`;
+
+  try {
+    const res = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => "");
+      return {
+        layer_key: layerKey,
+        source_url: url,
+        geojson: { type: "FeatureCollection", features: [] },
+        feature_count: 0,
+        fetched_at: fetchedAt,
+        error: `EPE HTTP ${res.status}: ${text.substring(0, 100)}`,
+      };
+    }
+
+    const text = await res.text();
+
+    // ArcGIS pode retornar HTML de erro com 200
+    if (text.startsWith("<") || text.includes('error":{')) {
+      // Tenta parsear como ArcGIS error JSON
+      try {
+        const parsed = JSON.parse(text);
+        if (parsed?.error) {
+          return {
+            layer_key: layerKey,
+            source_url: url,
+            geojson: { type: "FeatureCollection", features: [] },
+            feature_count: 0,
+            fetched_at: fetchedAt,
+            error: `EPE error: ${parsed.error.message ?? "unknown"}`,
+          };
+        }
+      } catch {
+        /* não é JSON */
+      }
+    }
+
+    const data = JSON.parse(text);
+
+    // GeoJSON válido?
+    if (data?.type !== "FeatureCollection" || !Array.isArray(data.features)) {
+      return {
+        layer_key: layerKey,
+        source_url: url,
+        geojson: { type: "FeatureCollection", features: [] },
+        feature_count: 0,
+        fetched_at: fetchedAt,
+        error: "EPE returned non-FeatureCollection payload",
+      };
+    }
+
+    return {
+      layer_key: layerKey,
+      source_url: url,
+      geojson: data as GeoJSONFeatureCollection,
+      feature_count: data.features.length,
+      fetched_at: fetchedAt,
+    };
+  } catch (err) {
+    return {
+      layer_key: layerKey,
+      source_url: url,
+      geojson: { type: "FeatureCollection", features: [] },
+      feature_count: 0,
+      fetched_at: fetchedAt,
+      error: `EPE fetch failed: ${err instanceof Error ? err.message : String(err)}`,
+    };
+  }
+}
+
+async function fetchLTExistentes(bbox: BBox): Promise<LayerResult> {
+  return fetchEPELayer(21, "aneel_lt_existentes", bbox, 0.12);
+}
+
+async function fetchLTPlanejadas(bbox: BBox): Promise<LayerResult> {
+  return fetchEPELayer(10, "aneel_lt_planejadas", bbox, 0.12);
+}
+
+async function fetchSubestacoes(bbox: BBox): Promise<LayerResult> {
+  // Existentes (20) + Planejadas (9) num só layer key — diferenciamos por
+  // `properties.status` injetado abaixo. Reduz toggles e cliques pro user.
+  const existentes = await fetchEPELayer(20, "aneel_subestacoes", bbox, 0.12);
+  const planejadas = await fetchEPELayer(9, "aneel_subestacoes", bbox, 0.12);
+
+  const features = [
+    ...(existentes.geojson?.features ?? []).map((f) => ({
+      ...f,
+      properties: { ...f.properties, _status: "existente" },
+    })),
+    ...(planejadas.geojson?.features ?? []).map((f) => ({
+      ...f,
+      properties: { ...f.properties, _status: "planejada" },
+    })),
+  ];
+
+  const errors = [existentes.error, planejadas.error]
+    .filter(Boolean)
+    .join(" | ");
+
+  return {
+    layer_key: "aneel_subestacoes",
+    source_url: existentes.source_url,
+    geojson: { type: "FeatureCollection", features },
+    feature_count: features.length,
+    fetched_at: new Date().toISOString(),
+    error: errors || undefined,
+  };
 }
 
 /**
@@ -310,11 +541,14 @@ function expandBbox(bbox: BBox, factor: number): BBox {
 // ============================================================
 
 const LAYER_FETCHERS: Record<string, (bbox: BBox) => Promise<LayerResult>> = {
-  sigef_privado:      fetchSIGEF,
-  hidrografia:        fetchHidrografia,
-  ibama_uc:           fetchIBAMAUC,
-  rodovias_federais:  fetchRodovias,
-  linhas_transmissao: fetchLinhasTransmissao,
+  sigef_privado: fetchSIGEF,
+  hidrografia: fetchHidrografia,
+  ibama_uc: fetchIBAMAUC,
+  rodovias_federais: fetchRodovias,
+  linhas_transmissao: fetchLinhasTransmissao, // legacy Overpass — kept for compat
+  aneel_lt_existentes: fetchLTExistentes, // EPE layer 21 — oficial
+  aneel_lt_planejadas: fetchLTPlanejadas, // EPE layer 10 — oficial
+  aneel_subestacoes: fetchSubestacoes, // EPE layers 20+9 — oficial
 };
 
 const DEFAULT_LAYERS = Object.keys(LAYER_FETCHERS);
@@ -329,7 +563,8 @@ function bboxFromGeojson(geojson: unknown): BBox | null {
     if (!g?.type || !g?.coordinates) return null;
     const coords: number[][] = [];
     function collect(c: unknown) {
-      if (Array.isArray(c) && typeof c[0] === "number") coords.push(c as number[]);
+      if (Array.isArray(c) && typeof c[0] === "number")
+        coords.push(c as number[]);
       else if (Array.isArray(c)) c.forEach(collect);
     }
     collect(g.coordinates);
@@ -337,10 +572,12 @@ function bboxFromGeojson(geojson: unknown): BBox | null {
     return {
       south: Math.min(...coords.map((c) => c[1])),
       north: Math.max(...coords.map((c) => c[1])),
-      west:  Math.min(...coords.map((c) => c[0])),
-      east:  Math.max(...coords.map((c) => c[0])),
+      west: Math.min(...coords.map((c) => c[0])),
+      east: Math.max(...coords.map((c) => c[0])),
     };
-  } catch { return null; }
+  } catch {
+    return null;
+  }
 }
 
 // ============================================================
@@ -349,41 +586,54 @@ function bboxFromGeojson(geojson: unknown): BBox | null {
 
 Deno.serve(async (req: Request) => {
   const cors = corsHeaders(req);
-  if (req.method === "OPTIONS") return new Response(null, { status: 204, headers: cors });
+  if (req.method === "OPTIONS")
+    return new Response(null, { status: 204, headers: cors });
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405, headers: { ...cors, "Content-Type": "application/json" },
+      status: 405,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
-  const supabaseUrl  = Deno.env.get("SUPABASE_URL")!;
-  const supabaseKey  = Deno.env.get("SUPABASE_ANON_KEY")!;
-  const authHeader   = req.headers.get("authorization");
+  const supabaseUrl = Deno.env.get("SUPABASE_URL")!;
+  const supabaseKey = Deno.env.get("SUPABASE_ANON_KEY")!;
+  const authHeader = req.headers.get("authorization");
 
   if (!authHeader) {
     return new Response(JSON.stringify({ error: "Missing authorization" }), {
-      status: 401, headers: { ...cors, "Content-Type": "application/json" },
+      status: 401,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
   const token = authHeader.replace("Bearer ", "");
   const supabase = createClient(supabaseUrl, supabaseKey, {
     global: { headers: { Authorization: authHeader } },
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+    },
   });
 
-  const { data: { user }, error: authErr } = await supabase.auth.getUser(token);
+  const {
+    data: { user },
+    error: authErr,
+  } = await supabase.auth.getUser(token);
   if (authErr || !user) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401, headers: { ...cors, "Content-Type": "application/json" },
+      status: 401,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
   let body: Record<string, unknown>;
-  try { body = await req.json(); }
-  catch {
+  try {
+    body = await req.json();
+  } catch {
     return new Response(JSON.stringify({ error: "Invalid JSON" }), {
-      status: 400, headers: { ...cors, "Content-Type": "application/json" },
+      status: 400,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -392,7 +642,8 @@ Deno.serve(async (req: Request) => {
 
   if (!development_id) {
     return new Response(JSON.stringify({ error: "development_id required" }), {
-      status: 400, headers: { ...cors, "Content-Type": "application/json" },
+      status: 400,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -407,12 +658,15 @@ Deno.serve(async (req: Request) => {
       .eq("is_active", true)
       .order("fetched_at", { ascending: false });
 
-    if (error) return new Response(JSON.stringify({ error: error.message }), {
-      status: 500, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    if (error)
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: { ...cors, "Content-Type": "application/json" },
+      });
 
     return new Response(JSON.stringify({ data }), {
-      status: 200, headers: { ...cors, "Content-Type": "application/json" },
+      status: 200,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -429,22 +683,32 @@ Deno.serve(async (req: Request) => {
     if (layerKey) q.eq("layer_key", layerKey);
     const { error } = await q;
 
-    if (error) return new Response(JSON.stringify({ error: error.message }), {
-      status: 500, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    if (error)
+      return new Response(JSON.stringify({ error: error.message }), {
+        status: 500,
+        headers: { ...cors, "Content-Type": "application/json" },
+      });
 
-    return new Response(JSON.stringify({ ok: true, invalidated: layerKey ?? "all" }), {
-      status: 200, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ ok: true, invalidated: layerKey ?? "all" }),
+      {
+        status: 200,
+        headers: { ...cors, "Content-Type": "application/json" },
+      },
+    );
   }
 
   // ——————————————
   // ACTION: fetch_layers
   // ——————————————
   if (action !== "fetch_layers") {
-    return new Response(JSON.stringify({ error: `Unknown action: ${action}` }), {
-      status: 400, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: `Unknown action: ${action}` }),
+      {
+        status: 400,
+        headers: { ...cors, "Content-Type": "application/json" },
+      },
+    );
   }
 
   // Load development
@@ -455,9 +719,13 @@ Deno.serve(async (req: Request) => {
     .maybeSingle();
 
   if (devErr || !dev) {
-    return new Response(JSON.stringify({ error: devErr?.message ?? "Development not found" }), {
-      status: 404, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: devErr?.message ?? "Development not found" }),
+      {
+        status: 404,
+        headers: { ...cors, "Content-Type": "application/json" },
+      },
+    );
   }
 
   // Determine bbox
@@ -469,18 +737,22 @@ Deno.serve(async (req: Request) => {
   if (!bbox) {
     return new Response(
       JSON.stringify({ error: "No geometry available. Upload KML/KMZ first." }),
-      { status: 422, headers: { ...cors, "Content-Type": "application/json" } }
+      { status: 422, headers: { ...cors, "Content-Type": "application/json" } },
     );
   }
 
   // Determine which layers to fetch
-  const requestedLayers = (body.layers as string[] | undefined) ?? DEFAULT_LAYERS;
+  const requestedLayers =
+    (body.layers as string[] | undefined) ?? DEFAULT_LAYERS;
   const validLayers = requestedLayers.filter((k) => k in LAYER_FETCHERS);
 
   if (validLayers.length === 0) {
     return new Response(
-      JSON.stringify({ error: "No valid layer keys provided", available: DEFAULT_LAYERS }),
-      { status: 400, headers: { ...cors, "Content-Type": "application/json" } }
+      JSON.stringify({
+        error: "No valid layer keys provided",
+        available: DEFAULT_LAYERS,
+      }),
+      { status: 400, headers: { ...cors, "Content-Type": "application/json" } },
     );
   }
 
@@ -551,6 +823,6 @@ Deno.serve(async (req: Request) => {
       cache_error: insertError,
       source: "overpass-api-v2",
     }),
-    { status: 200, headers: { ...cors, "Content-Type": "application/json" } }
+    { status: 200, headers: { ...cors, "Content-Type": "application/json" } },
   );
 });
