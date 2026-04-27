@@ -610,10 +610,10 @@ importers:
         version: 10.0.1
       '@hono/node-server':
         specifier: ^1.13.0
-        version: 1.19.14(hono@4.12.14)
+        version: 1.19.14(hono@4.12.15)
       '@hono/zod-validator':
         specifier: ^0.4.0
-        version: 0.4.3(hono@4.12.14)(zod@3.25.76)
+        version: 0.4.3(hono@4.12.15)(zod@3.25.76)
       '@supabase/supabase-js':
         specifier: ^2.45.0
         version: 2.104.0
@@ -621,8 +621,8 @@ importers:
         specifier: latest
         version: 7.0.0-rc.9(sharp@0.34.5)
       hono:
-        specifier: ^4.6.0
-        version: 4.12.14
+        specifier: ^4.12.15
+        version: 4.12.15
       pino:
         specifier: ^9.0.0
         version: 9.14.0
@@ -4832,8 +4832,8 @@ packages:
       link-preview-js:
         optional: true
 
-  '@whiskeysockets/libsignal-node@https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
-    resolution: {tarball: https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67}
+  '@whiskeysockets/libsignal-node@git+git@github.com:whiskeysockets/libsignal-node.git#1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
+    resolution: {commit: 1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67, repo: git@github.com:whiskeysockets/libsignal-node.git, type: git}
     version: 2.0.1
 
   '@xmldom/xmldom@0.8.13':
@@ -6787,8 +6787,8 @@ packages:
   hls.js@1.6.16:
     resolution: {integrity: sha512-VSIRpLfRwlAAdGL4wiTucx2ScRipo0ed1FBatWkyt832jC4CReKstga6yIhYVwGu9LOBjuX9wzmRMeQdBJtzEA==}
 
-  hono@4.12.14:
-    resolution: {integrity: sha512-am5zfg3yu6sqn5yjKBNqhnTX7Cv+m00ox+7jbaKkrLMRJ4rAdldd1xPd/JzbBWspqaQv6RSTrgFN95EsfhC+7w==}
+  hono@4.12.15:
+    resolution: {integrity: sha512-qM0jDhFEaCBb4TxoW7f53Qrpv9RBiayUHo0S52JudprkhvpjIrGoU1mnnr29Fvd1U335ZFPZQY1wlkqgfGXyLg==}
     engines: {node: '>=16.9.0'}
 
   hookified@1.15.1:
@@ -11730,13 +11730,13 @@ snapshots:
     transitivePeerDependencies:
       - '@types/react'
 
-  '@hono/node-server@1.19.14(hono@4.12.14)':
+  '@hono/node-server@1.19.14(hono@4.12.15)':
     dependencies:
-      hono: 4.12.14
+      hono: 4.12.15
 
-  '@hono/zod-validator@0.4.3(hono@4.12.14)(zod@3.25.76)':
+  '@hono/zod-validator@0.4.3(hono@4.12.15)(zod@3.25.76)':
     dependencies:
-      hono: 4.12.14
+      hono: 4.12.15
       zod: 3.25.76
 
   '@hookform/resolvers@3.10.0(react-hook-form@7.72.1(react@18.3.1))':
@@ -15446,7 +15446,7 @@ snapshots:
       '@cacheable/node-cache': 1.7.6
       '@hapi/boom': 9.1.4
       async-mutex: 0.5.0
-      libsignal: '@whiskeysockets/libsignal-node@https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67'
+      libsignal: '@whiskeysockets/libsignal-node@git+git@github.com:whiskeysockets/libsignal-node.git#1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67'
       lru-cache: 11.3.5
       music-metadata: 11.12.3
       p-queue: 9.1.2
@@ -15459,7 +15459,7 @@ snapshots:
       - supports-color
       - utf-8-validate
 
-  '@whiskeysockets/libsignal-node@https://codeload.github.com/whiskeysockets/libsignal-node/tar.gz/1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
+  '@whiskeysockets/libsignal-node@git+git@github.com:whiskeysockets/libsignal-node.git#1c30d7d7e76a3b0aa120b04dc6a26f5a12dccf67':
     dependencies:
       curve25519-js: 0.0.4
       protobufjs: 6.8.8
@@ -17839,7 +17839,7 @@ snapshots:
 
   hls.js@1.6.16: {}
 
-  hono@4.12.14: {}
+  hono@4.12.15: {}
 
   hookified@1.15.1: {}
 
