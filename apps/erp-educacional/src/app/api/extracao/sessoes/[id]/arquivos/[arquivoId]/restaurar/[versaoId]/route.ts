@@ -1,5 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { createClient } from "@/lib/supabase/server";
 import { verificarAuth } from "@/lib/security/api-guard";
@@ -8,25 +7,19 @@ export const dynamic = "force-dynamic";
 export const maxDuration = 20;
 
 // ═══════════════════════════════════════════════════════════════════════════
-// PATCH /api/extracao/sessoes/[id]/arquivos/[arquivoId]/substituir
+// PATCH /api/extracao/sessoes/[id]/arquivos/[arquivoId]/restaurar/[versaoId]
 //
-// Substitui um arquivo de comprobatório registrando a nova versão em
-// `processo_arquivo_versoes` (append-only). A versão anterior é marcada
-// como `ativa=false` mas permanece no banco — pode ser restaurada via
-// PATCH /restaurar/[versaoId]. O Storage também preserva o blob anterior
-// (não é deletado).
+// Restaura uma versão anterior do arquivo de comprobatório (Sessão 2026-04-26):
+//   1. Pega a versão alvo (deve pertencer ao mesmo arquivo)
+//   2. Desativa a versão atualmente ativa
+//   3. Cria nova versão (clone da alvo) marcada como `ativa=true` com
+//      `origem='restauracao'` e `origem_versao_id` apontando pra alvo
+//   4. Sync `processo_arquivos.storage_path/nome/mime/tamanho` pra nova versão
 //
-// Sessão 2026-04-26: refator do modelo destrutivo (sobrescrever
-// processo_arquivos.storage_path) para versionado (append-only).
+// Por que clonar em vez de só reativar a antiga? Pra preservar a cronologia
+// linear de versões — cada toggle gera um registro temporal claro. A
+// observação documenta "Restauração de v{N}".
 // ═══════════════════════════════════════════════════════════════════════════
-
-const bodySchema = z.object({
-  storage_path: z.string().min(1),
-  bucket: z.string().min(1).optional(),
-  nome_original: z.string().min(1),
-  mime_type: z.string().min(1),
-  tamanho_bytes: z.number().int().nonnegative(),
-});
 
 const STATUS_EDITAVEIS = new Set([
   "rascunho",
@@ -45,38 +38,30 @@ function getAdmin() {
 
 export async function PATCH(
   request: NextRequest,
-  { params }: { params: Promise<{ id: string; arquivoId: string }> },
+  {
+    params,
+  }: {
+    params: Promise<{ id: string; arquivoId: string; versaoId: string }>;
+  },
 ) {
   const auth = await verificarAuth(request);
   if (auth instanceof NextResponse) return auth;
 
-  const { id: sessaoId, arquivoId } = await params;
+  const { id: sessaoId, arquivoId, versaoId } = await params;
 
   const uuidRe =
     /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
-  if (!uuidRe.test(sessaoId) || !uuidRe.test(arquivoId)) {
+  if (
+    !uuidRe.test(sessaoId) ||
+    !uuidRe.test(arquivoId) ||
+    !uuidRe.test(versaoId)
+  ) {
     return NextResponse.json({ erro: "ID inválido" }, { status: 400 });
   }
 
-  const bodyRaw = await request.json().catch(() => null);
-  if (!bodyRaw) {
-    return NextResponse.json(
-      { erro: "Body vazio ou inválido" },
-      { status: 400 },
-    );
-  }
-  const parsed = bodySchema.safeParse(bodyRaw);
-  if (!parsed.success) {
-    return NextResponse.json(
-      { erro: "Body inválido", detalhes: parsed.error.flatten() },
-      { status: 400 },
-    );
-  }
-  const novo = parsed.data;
-
   const supabase = await createClient();
 
-  // 1. Sessão deve existir + estar editável
+  // 1. Sessão editável
   const { data: sessao } = await supabase
     .from("extracao_sessoes")
     .select("id, status, processo_id")
@@ -103,7 +88,7 @@ export async function PATCH(
     );
   }
 
-  // 2. Bloqueio: se há diploma assinado/publicado vinculado, recusa
+  // 2. Bloqueio: diploma assinado/publicado vinculado
   const STATUS_DIPLOMA_BLOQUEADO = new Set([
     "assinado",
     "registrado",
@@ -124,23 +109,19 @@ export async function PATCH(
         {
           erro: "DIPLOMA_PUBLICADO",
           mensagem:
-            "O processo possui diploma(s) publicado(s) ou assinado(s). Substituição bloqueada.",
+            "O processo possui diploma(s) publicado(s) ou assinado(s). Restauração bloqueada.",
         },
         { status: 403 },
       );
     }
   }
 
-  // 3. Confirma que o arquivo pertence à sessão (defesa contra IDs forjados)
+  // 3. Arquivo deve pertencer à sessão
   const { data: arquivoExistente } = await supabase
     .from("processo_arquivos")
-    .select("id, sessao_id, storage_path")
+    .select("id, sessao_id")
     .eq("id", arquivoId)
-    .maybeSingle<{
-      id: string;
-      sessao_id: string | null;
-      storage_path: string;
-    }>();
+    .maybeSingle<{ id: string; sessao_id: string | null }>();
 
   if (!arquivoExistente || arquivoExistente.sessao_id !== sessaoId) {
     return NextResponse.json(
@@ -152,10 +133,48 @@ export async function PATCH(
     );
   }
 
-  // 4. Versionamento append-only — usa admin client (RLS service-role-only)
   const admin = getAdmin();
 
-  // 4a. Calcula próxima versão
+  // 4. Versão alvo deve pertencer ao mesmo arquivo + não pode estar ativa
+  const { data: alvo } = await admin
+    .from("processo_arquivo_versoes")
+    .select(
+      "id, processo_arquivo_id, versao, storage_path, bucket, nome_original, mime_type, tamanho_bytes, ativa",
+    )
+    .eq("id", versaoId)
+    .maybeSingle<{
+      id: string;
+      processo_arquivo_id: string;
+      versao: number;
+      storage_path: string;
+      bucket: string;
+      nome_original: string;
+      mime_type: string;
+      tamanho_bytes: number | null;
+      ativa: boolean;
+    }>();
+
+  if (!alvo || alvo.processo_arquivo_id !== arquivoId) {
+    return NextResponse.json(
+      {
+        erro: "VERSAO_NAO_PERTENCE_AO_ARQUIVO",
+        mensagem: "Versão não pertence a este arquivo",
+      },
+      { status: 403 },
+    );
+  }
+
+  if (alvo.ativa) {
+    return NextResponse.json(
+      {
+        erro: "JA_ATIVA",
+        mensagem: "Esta versão já é a ativa.",
+      },
+      { status: 409 },
+    );
+  }
+
+  // 5. Calcula próxima versão
   const { data: ultima } = await admin
     .from("processo_arquivo_versoes")
     .select("versao")
@@ -166,7 +185,7 @@ export async function PATCH(
 
   const proximaVersao = (ultima?.versao ?? 0) + 1;
 
-  // 4b. Desativa versão atualmente ativa (se houver)
+  // 6. Desativa atual
   const { error: errDeactivate } = await admin
     .from("processo_arquivo_versoes")
     .update({ ativa: false })
@@ -174,41 +193,37 @@ export async function PATCH(
     .eq("ativa", true);
 
   if (errDeactivate) {
-    console.error(
-      "[substituir] Erro ao desativar versão anterior:",
-      errDeactivate,
-    );
     return NextResponse.json(
       {
-        erro: "Falha ao versionar (desativação)",
+        erro: "Falha ao desativar versão atual",
         detalhes: errDeactivate.message,
       },
       { status: 500 },
     );
   }
 
-  // 4c. INSERT nova versão como ativa
+  // 7. INSERT clone da alvo como nova versão ativa
   const { data: novaVersao, error: errInsert } = await admin
     .from("processo_arquivo_versoes")
     .insert({
       processo_arquivo_id: arquivoId,
       versao: proximaVersao,
-      storage_path: novo.storage_path,
-      bucket: novo.bucket ?? "processo-arquivos",
-      nome_original: novo.nome_original,
-      mime_type: novo.mime_type,
-      tamanho_bytes: novo.tamanho_bytes,
+      storage_path: alvo.storage_path,
+      bucket: alvo.bucket,
+      nome_original: alvo.nome_original,
+      mime_type: alvo.mime_type,
+      tamanho_bytes: alvo.tamanho_bytes,
       ativa: true,
       criada_por: auth.userId,
-      origem: "substituicao",
-      observacao: `Substituiu v${ultima?.versao ?? 0}`,
+      origem: "restauracao",
+      origem_versao_id: alvo.id,
+      observacao: `Restauração de v${alvo.versao}`,
     })
     .select("id, versao")
     .single();
 
   if (errInsert || !novaVersao) {
-    console.error("[substituir] Erro ao inserir nova versão:", errInsert);
-    // Tenta reverter o desativamento — best effort, não há transação aqui
+    // Reverte desativação — best effort
     if (ultima) {
       await admin
         .from("processo_arquivo_versoes")
@@ -218,38 +233,36 @@ export async function PATCH(
     }
     return NextResponse.json(
       {
-        erro: "Falha ao registrar nova versão",
+        erro: "Falha ao restaurar versão",
         detalhes: errInsert?.message ?? "INSERT vazio",
       },
       { status: 500 },
     );
   }
 
-  // 5. Sync rápido em processo_arquivos (mantém compat com queries existentes)
+  // 8. Sync em processo_arquivos
   const { error: errSync } = await admin
     .from("processo_arquivos")
     .update({
-      storage_path: novo.storage_path,
-      nome_original: novo.nome_original,
-      mime_type: novo.mime_type,
-      tamanho_bytes: novo.tamanho_bytes,
+      storage_path: alvo.storage_path,
+      nome_original: alvo.nome_original,
+      mime_type: alvo.mime_type,
+      tamanho_bytes: alvo.tamanho_bytes,
       updated_at: new Date().toISOString(),
     })
     .eq("id", arquivoId)
     .eq("sessao_id", sessaoId);
 
   if (errSync) {
-    console.error("[substituir] Sync em processo_arquivos falhou:", errSync);
-    // Versão ficou registrada mas processo_arquivos defasado — log + segue
+    console.error("[restaurar] Sync em processo_arquivos falhou:", errSync);
   }
 
   return NextResponse.json({
     ok: true,
     arquivo_id: arquivoId,
+    versao_restaurada: alvo.versao,
     versao_nova: novaVersao.versao,
-    versao_id: novaVersao.id,
-    storage_path_anterior: arquivoExistente.storage_path,
-    storage_path_novo: novo.storage_path,
-    nome_arquivo_novo: novo.nome_original,
+    versao_nova_id: novaVersao.id,
+    nome_arquivo_restaurado: alvo.nome_original,
   });
 }

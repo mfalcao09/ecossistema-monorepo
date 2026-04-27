@@ -19,10 +19,15 @@ import {
   X,
   CheckCircle2,
   AlertTriangle,
+  ChevronDown,
+  ChevronUp,
+  Clock,
   FileText,
+  History,
   Image as ImageIcon,
   Loader2,
   RefreshCw,
+  RotateCcw,
   Upload,
 } from "lucide-react";
 import type { ConfirmacaoComprobatorio } from "@/lib/diploma/mapa-comprobatorios";
@@ -75,8 +80,36 @@ interface Props {
   onSubstituirArquivo?: (file: File) => Promise<void>;
   /** Indica que o upload de substituição está em andamento */
   substituindo?: boolean;
+  /** Sessão 2026-04-26: ID real do processo_arquivos (pra histórico de versões) */
+  arquivoId?: string;
+  /** Sessão 2026-04-26: ID da sessão de extração (pra chamadas API) */
+  sessaoId?: string;
+  /** Sessão 2026-04-26: callback após restaurar uma versão — caller atualiza preview */
+  onVersaoRestaurada?: (info: {
+    nome_original: string;
+    mime_type: string;
+    tamanho_bytes: number | null;
+    preview_url: string | null;
+  }) => Promise<void> | void;
   /** Callback: fechar o dialog */
   onFechar: () => void;
+}
+
+// ─── Tipos do histórico de versões (Sessão 2026-04-26) ─────────────────────
+
+interface VersaoArquivo {
+  id: string;
+  versao: number;
+  nome_original: string;
+  mime_type: string;
+  tamanho_bytes: number | null;
+  ativa: boolean;
+  criada_em: string;
+  criada_por: string | null;
+  origem: string;
+  origem_versao_id: string | null;
+  observacao: string | null;
+  preview_url: string | null;
 }
 
 // ─── Componente ─────────────────────────────────────────────────────────────
@@ -92,6 +125,9 @@ export function DialogVisualizarDocumento({
   onTrocarTipo,
   onSubstituirArquivo,
   substituindo = false,
+  arquivoId,
+  sessaoId,
+  onVersaoRestaurada,
   onFechar,
 }: Props) {
   const [checkConfirmacao, setCheckConfirmacao] = useState(false);
@@ -167,6 +203,101 @@ export function DialogVisualizarDocumento({
       setCheckConfirmacao(false);
     }
   }, [previewUrl, substituindo]);
+
+  // ── Histórico de versões (Sessão 2026-04-26) ───────────────────────────
+  const [versoes, setVersoes] = useState<VersaoArquivo[]>([]);
+  const [carregandoVersoes, setCarregandoVersoes] = useState(false);
+  const [historicoAberto, setHistoricoAberto] = useState(false);
+  const [restaurandoId, setRestaurandoId] = useState<string | null>(null);
+  const [erroVersoes, setErroVersoes] = useState<string | null>(null);
+
+  const carregarVersoes = useCallback(async () => {
+    if (!arquivoId || !sessaoId) return;
+    setCarregandoVersoes(true);
+    setErroVersoes(null);
+    try {
+      const res = await fetch(
+        `/api/extracao/sessoes/${sessaoId}/arquivos/${arquivoId}/versoes`,
+      );
+      if (!res.ok) {
+        const body = await res.json().catch(() => ({}));
+        throw new Error(
+          (body as { erro?: string; mensagem?: string })?.mensagem ??
+            (body as { erro?: string })?.erro ??
+            `HTTP ${res.status}`,
+        );
+      }
+      const json = await res.json();
+      setVersoes((json?.versoes ?? []) as VersaoArquivo[]);
+    } catch (e) {
+      setErroVersoes(
+        e instanceof Error ? e.message : "Erro ao carregar versões",
+      );
+    } finally {
+      setCarregandoVersoes(false);
+    }
+  }, [arquivoId, sessaoId]);
+
+  useEffect(() => {
+    if (!confirmacao || !arquivoId || !sessaoId) return;
+    void carregarVersoes();
+    // Recarrega quando: dialog abre, arquivo muda, ou previewUrl muda
+    // (substituição concluída)
+  }, [
+    confirmacao?.arquivo_index,
+    arquivoId,
+    sessaoId,
+    previewUrl,
+    carregarVersoes,
+  ]);
+
+  const handleRestaurar = useCallback(
+    async (v: VersaoArquivo) => {
+      if (!arquivoId || !sessaoId || v.ativa || restaurandoId) return;
+      const ok = window.confirm(
+        `Restaurar a versão v${v.versao} (${v.nome_original})?\n\nA versão atualmente ativa será desativada e a v${v.versao} voltará a ser o arquivo do comprobatório. Esta ação fica registrada no histórico.`,
+      );
+      if (!ok) return;
+
+      setRestaurandoId(v.id);
+      try {
+        const res = await fetch(
+          `/api/extracao/sessoes/${sessaoId}/arquivos/${arquivoId}/restaurar/${v.id}`,
+          { method: "PATCH" },
+        );
+        if (!res.ok) {
+          const body = await res.json().catch(() => ({}));
+          const motivo =
+            (body as { mensagem?: string; erro?: string })?.mensagem ??
+            (body as { erro?: string })?.erro ??
+            `HTTP ${res.status}`;
+          alert(`Falha ao restaurar: ${motivo}`);
+          return;
+        }
+        // Recarrega versões (a nova ativa é a recém-criada)
+        const refetch = await fetch(
+          `/api/extracao/sessoes/${sessaoId}/arquivos/${arquivoId}/versoes`,
+        );
+        const refetchJson = refetch.ok ? await refetch.json() : null;
+        const versoesNovas = (refetchJson?.versoes ?? []) as VersaoArquivo[];
+        setVersoes(versoesNovas);
+        const ativa = versoesNovas.find((x) => x.ativa);
+        if (ativa) {
+          await onVersaoRestaurada?.({
+            nome_original: ativa.nome_original,
+            mime_type: ativa.mime_type,
+            tamanho_bytes: ativa.tamanho_bytes,
+            preview_url: ativa.preview_url,
+          });
+        }
+      } catch (e) {
+        alert(e instanceof Error ? e.message : "Erro inesperado ao restaurar");
+      } finally {
+        setRestaurandoId(null);
+      }
+    },
+    [arquivoId, sessaoId, restaurandoId, onVersaoRestaurada, carregarVersoes],
+  );
 
   // Se já está confirmado, pré-marcar o checkbox
   useEffect(() => {
@@ -465,6 +596,126 @@ export function DialogVisualizarDocumento({
                   </>
                 )}
               </div>
+
+              {/* Histórico de versões (Sessão 2026-04-26) */}
+              {arquivoId && sessaoId && versoes.length > 0 && (
+                <div className="mt-4 border-t border-gray-100 pt-3 dark:border-gray-800">
+                  <button
+                    onClick={() => setHistoricoAberto(!historicoAberto)}
+                    className="flex w-full items-center justify-between text-left text-xs font-semibold text-gray-700 hover:text-gray-900 dark:text-gray-300 dark:hover:text-white"
+                  >
+                    <span className="flex items-center gap-1.5">
+                      <History size={12} />
+                      Histórico de versões ({versoes.length})
+                    </span>
+                    {historicoAberto ? (
+                      <ChevronUp size={12} />
+                    ) : (
+                      <ChevronDown size={12} />
+                    )}
+                  </button>
+
+                  {historicoAberto && (
+                    <div className="mt-3 space-y-2">
+                      {carregandoVersoes && (
+                        <div className="flex items-center gap-2 text-xs text-gray-400">
+                          <Loader2 size={11} className="animate-spin" />
+                          Carregando versões…
+                        </div>
+                      )}
+                      {erroVersoes && (
+                        <div className="rounded-md bg-red-50 px-2 py-1 text-xs text-red-700 dark:bg-red-900/20 dark:text-red-400">
+                          <AlertTriangle size={11} className="inline mr-1" />
+                          {erroVersoes}
+                        </div>
+                      )}
+                      <ul className="space-y-2">
+                        {versoes.map((v) => (
+                          <li
+                            key={v.id}
+                            className={`rounded-lg border px-3 py-2 text-xs ${
+                              v.ativa
+                                ? "border-emerald-200 bg-emerald-50 dark:border-emerald-800 dark:bg-emerald-900/20"
+                                : "border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-800/40"
+                            }`}
+                          >
+                            <div className="flex items-center justify-between gap-2">
+                              <div className="flex items-center gap-2 min-w-0">
+                                <span className="font-mono text-gray-500">
+                                  v{v.versao}
+                                </span>
+                                <span className="font-medium text-gray-800 truncate dark:text-gray-100">
+                                  {v.nome_original}
+                                </span>
+                                {v.ativa && (
+                                  <span className="text-[9px] font-bold uppercase text-emerald-700 bg-emerald-100 rounded px-1.5 py-0.5 dark:bg-emerald-900/40 dark:text-emerald-300">
+                                    Ativa
+                                  </span>
+                                )}
+                                <span
+                                  className={`text-[9px] font-medium rounded px-1.5 py-0.5 ${
+                                    v.origem === "upload_inicial"
+                                      ? "bg-blue-100 text-blue-700 dark:bg-blue-900/40 dark:text-blue-300"
+                                      : v.origem === "substituicao"
+                                        ? "bg-amber-100 text-amber-700 dark:bg-amber-900/40 dark:text-amber-300"
+                                        : "bg-violet-100 text-violet-700 dark:bg-violet-900/40 dark:text-violet-300"
+                                  }`}
+                                >
+                                  {v.origem === "upload_inicial"
+                                    ? "inicial"
+                                    : v.origem === "substituicao"
+                                      ? "substituição"
+                                      : "restauração"}
+                                </span>
+                              </div>
+                              <div className="flex items-center gap-1 flex-shrink-0">
+                                {v.preview_url && (
+                                  <a
+                                    href={v.preview_url}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="rounded p-1 text-gray-500 hover:bg-gray-200 hover:text-gray-700 dark:hover:bg-gray-700"
+                                    title="Visualizar versão"
+                                  >
+                                    <FileText size={11} />
+                                  </a>
+                                )}
+                                {!v.ativa && onVersaoRestaurada && (
+                                  <button
+                                    onClick={() => handleRestaurar(v)}
+                                    disabled={restaurandoId !== null}
+                                    className="flex items-center gap-1 rounded border border-violet-300 bg-violet-50 px-2 py-0.5 text-[10px] font-semibold text-violet-700 hover:bg-violet-100 disabled:opacity-40 dark:border-violet-700 dark:bg-violet-900/20 dark:text-violet-300"
+                                    title="Restaurar esta versão"
+                                  >
+                                    {restaurandoId === v.id ? (
+                                      <Loader2
+                                        size={10}
+                                        className="animate-spin"
+                                      />
+                                    ) : (
+                                      <RotateCcw size={10} />
+                                    )}
+                                    Restaurar
+                                  </button>
+                                )}
+                              </div>
+                            </div>
+                            <div className="mt-1 flex items-center gap-2 text-[10px] text-gray-500">
+                              <Clock size={9} />
+                              {new Date(v.criada_em).toLocaleString("pt-BR")}
+                              {v.observacao && (
+                                <span className="text-gray-400">
+                                  · {v.observacao}
+                                </span>
+                              )}
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           )}
         </div>

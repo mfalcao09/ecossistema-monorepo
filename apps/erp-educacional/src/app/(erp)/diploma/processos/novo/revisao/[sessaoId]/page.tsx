@@ -1157,6 +1157,60 @@ export default function RevisaoExtracaoPage() {
     ],
   );
 
+  /**
+   * Sessão 2026-04-26: callback chamado pelo dialog após restaurar versão.
+   * Atualiza estado local (sessao.arquivos, arquivosClassif, preview, dialog)
+   * pra refletir a versão restaurada SEM precisar de F5.
+   */
+  const handleVersaoRestaurada = useCallback(
+    (info: {
+      nome_original: string;
+      mime_type: string;
+      tamanho_bytes: number | null;
+      preview_url: string | null;
+    }) => {
+      const idx = dialogComprobatorio?.arquivo_index;
+      if (idx == null) return;
+
+      // Atualiza sessao.arquivos
+      setSessao((prev) => {
+        if (!prev) return prev;
+        const novosArquivos = [...(prev.arquivos ?? [])];
+        novosArquivos[idx] = {
+          ...novosArquivos[idx],
+          nome_original: info.nome_original,
+          mime_type: info.mime_type,
+          tamanho_bytes: info.tamanho_bytes ?? undefined,
+        };
+        return { ...prev, arquivos: novosArquivos };
+      });
+
+      // Atualiza arquivosClassif
+      setArquivosClassif((prev) =>
+        prev.map((a, i) =>
+          i === idx
+            ? {
+                ...a,
+                nome_original: info.nome_original,
+                mime_type: info.mime_type,
+                tamanho_bytes: info.tamanho_bytes,
+              }
+            : a,
+        ),
+      );
+
+      // Atualiza dialog (header) e preview
+      setDialogComprobatorio((prev) =>
+        prev != null ? { ...prev, nome_arquivo: info.nome_original } : prev,
+      );
+      if (info.preview_url) {
+        setPreviewUrl(info.preview_url);
+        setPreviewMime(info.mime_type);
+      }
+    },
+    [dialogComprobatorio?.arquivo_index],
+  );
+
   /** Descarta a sessão de extração e redireciona para a lista de processos. */
   const descartarExtracao = useCallback(async () => {
     if (!sessaoId) return;
@@ -1703,6 +1757,9 @@ export default function RevisaoExtracaoPage() {
             onTrocarTipo={handleTrocarTipoComprobatorio}
             onSubstituirArquivo={handleSubstituirArquivo}
             substituindo={substituindoArquivo}
+            arquivoId={arquivoAtual?.id}
+            sessaoId={sessaoId ?? undefined}
+            onVersaoRestaurada={handleVersaoRestaurada}
             onFechar={() => setDialogComprobatorio(null)}
           />
         );
