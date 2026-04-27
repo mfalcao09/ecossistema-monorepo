@@ -730,15 +730,23 @@ export async function montarDadosDiploma(
     .select("situacao, condicao, condicao_nao_habilitado, ano_edicao")
     .eq("diploma_id", diplomaId);
 
-  const enade: EnadeInfo[] = (enadeData || []).map((e: any) => ({
-    tipo: (e.situacao || "Habilitado") as
-      | "Habilitado"
-      | "NaoHabilitado"
-      | "Irregular",
-    condicao: (e.condicao || "Concluinte") as "Ingressante" | "Concluinte",
-    edicao: String(e.ano_edicao || new Date().getFullYear()),
-    motivo: e.condicao_nao_habilitado || undefined,
-  }));
+  const enade: EnadeInfo[] = (enadeData || []).map((e: any) => {
+    // XSD TEnumCondicaoEnade só aceita "Ingressante" ou "Concluinte".
+    // O banco pode gravar texto livre (ex: "Regular não Habilitado") — sanitizar.
+    const condicaoRaw = e.condicao || "";
+    const condicao: "Ingressante" | "Concluinte" =
+      condicaoRaw === "Ingressante" ? "Ingressante" : "Concluinte";
+
+    return {
+      tipo: (e.situacao || "Habilitado") as
+        | "Habilitado"
+        | "NaoHabilitado"
+        | "Irregular",
+      condicao,
+      edicao: String(e.ano_edicao || new Date().getFullYear()),
+      motivo: e.condicao_nao_habilitado || undefined,
+    };
+  });
 
   // Mantenedora — monta endereço do JSON se existir
   const mantEnd = iesData.mantenedora_endereco as any;
