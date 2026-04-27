@@ -645,8 +645,24 @@ def main():
 
     if args.filter:
         rx = re.compile(args.filter, re.IGNORECASE)
+        before = len(entries)
         entries = [e for e in entries if rx.search(e["nome"])]
-        log(f"filter '{args.filter}' → {len(entries)} entries")
+        log(f"filter '{args.filter}' (len={len(args.filter)}, "
+            f"chars={[ord(c) for c in args.filter]}) "
+            f"→ {len(entries)}/{before} entries")
+        if len(entries) == 0:
+            # Debug: mostra alguns nomes pra Marcelo identificar regex correto
+            sample = [e["nome"] for e in [
+                e for e in fetch_dcat() if e["nome"].lower().startswith(args.filter.replace('^','').replace('$','').replace('\\','').lower()[:3])
+            ][:5]] if False else []  # noqa
+            from_full = []  # workaround simples
+            try:
+                # re-fetch pra ver primeiros 10 nomes V11
+                fresh = fetch_dcat()
+                log(f"  Top 10 nomes V11 disponíveis: "
+                    f"{[e['nome'] for e in fresh[:10]]}", "WARN")
+            except Exception:
+                pass
 
     log(f"\nVAI PROCESSAR {len(entries)} distribuidoras "
         f"(simplify={args.simplify_deg}°, only_mt={args.only_mt}, "
