@@ -55,6 +55,8 @@ const ParcelamentoFIICRA = lazy(() => import("./ParcelamentoFIICRA"));
 const ParcelamentoExportGeo = lazy(() => import("./ParcelamentoExportGeo"));
 const ParcelamentoCorteTereno = lazy(() => import("./ParcelamentoCorteTereno"));
 const ParcelamentoExclusoes = lazy(() => import("./ParcelamentoExclusoes"));
+// Sessão 154 — BDGD ANEEL distribuição (Tier 1 nacional + Tier 2 HD on-demand)
+const ParcelamentoBDGDPanel = lazy(() => import("./ParcelamentoBDGDPanel"));
 // Financeiro e Conformidade — inline nas tabs (sessão 150 — Fix UX)
 const ParcelamentoFinanceiro = lazy(() => import("./ParcelamentoFinanceiro"));
 const ParcelamentoConformidade = lazy(
@@ -1376,6 +1378,15 @@ function TabMapa({
             subestacoes={layerStates.aneel_subestacoes.geojson}
           />
         )}
+
+        {/* Painel BDGD — rede de distribuição local (MT/BT/SUB) com tier auto */}
+        <Suspense fallback={null}>
+          <ParcelamentoBDGDPanel
+            map={mapRef.current}
+            mapReady={mapReady}
+            developmentId={project.id}
+          />
+        </Suspense>
 
         <div className="pt-2 border-t border-gray-100">
           <p className="text-xs text-gray-400">

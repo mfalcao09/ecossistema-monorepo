@@ -1,0 +1,66 @@
+name: BDGD Sync (ANEEL → Supabase)
+
+on:
+  workflow_dispatch:
+    inputs:
+      filter:
+        description: "Regex no nome da distribuidora (vazio = todas as 114)"
+        type: string
+        default: ""
+      only_mt:
+        description: "Pular UNSEGBT (apenas Média Tensão + Subestações)"
+        type: boolean
+        default: false
+      simplify_deg:
+        description: "Tolerância simplify em graus (0.0001 ≈ 11m, default)"
+        type: string
+        default: "0.0001"
+      dry_run:
+        description: "Listar entries sem baixar"
+        type: boolean
+        default: false
+
+jobs:
+  sync:
+    name: ETL BDGD
+    runs-on: ubuntu-latest
+    # Limite GHA = 6h. Pra rodar Brasil inteiro pode passar — usar filter pra
+    # quebrar em batches (ex: filter="^[A-E]" depois "^[F-N]" etc.)
+    timeout-minutes: 350
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install GDAL + psql + unzip
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y --no-install-recommends \
+            gdal-bin \
+            postgresql-client \
+            unzip \
+            ca-certificates
+          ogr2ogr --version
+          psql --version
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Disk space
+        run: df -h /
+
+      - name: Run BDGD ETL
+        env:
+          SUPABASE_DB_URL: ${{ secrets.SUPABASE_DB_URL }}
+        run: |
+          python3 apps/intentus/scripts/sync_bdgd.py \
+            --filter "${{ inputs.filter }}" \
+            --simplify-deg "${{ inputs.simplify_deg }}" \
+            ${{ inputs.only_mt && '--only-mt' || '' }} \
+            ${{ inputs.dry_run && '--dry-run' || '' }}
+
+      - name: Final disk space
+        if: always()
+        run: df -h /
