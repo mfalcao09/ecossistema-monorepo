@@ -281,13 +281,57 @@ def find_gdb(extracted_dir: Path) -> Path:
     raise RuntimeError(f"Nenhum .gdb encontrado em {extracted_dir}")
 
 def list_layers(gdb: Path) -> set[str]:
-    out = run(["ogrinfo", "-q", "-ro", str(gdb)], capture=True)
-    layers = set()
-    for line in out.stdout.splitlines():
-        # formato: "1: UNSEGMT (Multi Line String)"
-        m = re.match(r"^\s*\d+:\s+(\S+)", line)
-        if m:
-            layers.add(m.group(1).upper())
+    """
+    Lista layers de um .gdb. Tenta múltiplos approaches porque ogrinfo varia
+    de output entre versões GDAL.
+    """
+    layers: set[str] = set()
+    # Approach 1: ogrinfo SEM -q (verbose, mais confiável em GDAL >=3.4)
+    try:
+        out = subprocess.run(
+            ["ogrinfo", "-ro", "-so", str(gdb)],
+            capture_output=True, text=True, check=False, timeout=60,
+        )
+        text = out.stdout + "\n" + out.stderr
+        for line in text.splitlines():
+            # formato comum: "1: UNSEGMT (Multi Line String)"
+            #              ou: "Layer name: UNSEGMT"
+            m = re.match(r"^\s*\d+:\s+(\S+)", line)
+            if m:
+                layers.add(m.group(1).upper())
+                continue
+            m2 = re.match(r"^\s*Layer name:\s*(\S+)", line)
+            if m2:
+                layers.add(m2.group(1).upper())
+    except Exception as e:
+        log(f"  ogrinfo verbose falhou: {e}", "WARN")
+
+    # Approach 2: --formats listing (fallback) — só se nada veio
+    if not layers:
+        try:
+            out2 = subprocess.run(
+                ["ogrinfo", "-ro", "-q", str(gdb)],
+                capture_output=True, text=True, check=False, timeout=60,
+            )
+            for line in out2.stdout.splitlines():
+                m = re.match(r"^\s*\d+:\s+(\S+)", line)
+                if m:
+                    layers.add(m.group(1).upper())
+        except Exception:
+            pass
+
+    # Log defensivo se ainda vazio
+    if not layers:
+        try:
+            raw = subprocess.run(
+                ["ogrinfo", "-ro", str(gdb)],
+                capture_output=True, text=True, check=False, timeout=60,
+            )
+            log(f"  ogrinfo raw stdout (truncado): {raw.stdout[:500]}", "WARN")
+            log(f"  ogrinfo raw stderr (truncado): {raw.stderr[:300]}", "WARN")
+        except Exception:
+            pass
+
     return layers
 
 def extract_layer_to_csv(
@@ -480,15 +524,32 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
             log(f"  gdb encontrado: {gdb.name}")
 
             layers = list_layers(gdb)
-            log(f"  layers no GDB: {sorted(layers)[:10]}{'…' if len(layers)>10 else ''}")
+            log(f"  layers no GDB ({len(layers)} total): {sorted(layers)[:15]}{'…' if len(layers)>15 else ''}")
+
+            # Match flexível: BDGD V11 pode usar nomes diferentes por distribuidora.
+            # UNSEGMT é o padrão, mas algumas usam UNSE_MT, MT_LIN, REDE_MT, etc.
+            def find_layer(candidates: list[str]) -> str | None:
+                for cand in candidates:
+                    if cand in layers:
+                        return cand
+                # Fallback: substring match (UPPERCASE)
+                for cand in candidates:
+                    for layer in layers:
+                        if cand in layer:
+                            return layer
+                return None
+
+            mt_layer = find_layer(["UNSEGMT", "UNSE_MT", "REDE_MT", "MT_LIN", "SEGMT"])
+            bt_layer = find_layer(["UNSEGBT", "UNSE_BT", "REDE_BT", "BT_LIN", "SEGBT"])
+            sub_layer = find_layer(["SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST"])
 
             # MT
             mt_csv = wd / "mt.csv"
             mt_count = 0
-            if "UNSEGMT" in layers:
-                log("  ogr2ogr UNSEGMT → CSV (simplify)")
+            if mt_layer:
+                log(f"  ogr2ogr {mt_layer} → CSV (simplify)")
                 extract_layer_to_csv(
-                    gdb, "UNSEGMT", mt_csv, simplify_deg,
+                    gdb, mt_layer, mt_csv, simplify_deg,
                     ["COD_ID", "CTMT", "TEN_OPE", "FAS_CON", "COMP",
                      "TIP_CND", "POS_CAB", "MUN"],
                 )
@@ -499,15 +560,15 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                 log(f"    MT inseridas: {mt_count:,}")
                 mt_csv.unlink(missing_ok=True)
             else:
-                log("  UNSEGMT ausente no GDB", "WARN")
+                log("  ⚠️ Nenhuma layer MT encontrada (esperado: UNSEGMT/UNSE_MT/REDE_MT)", "WARN")
 
             # BT (skipável)
             bt_count = 0
-            if not only_mt and "UNSEGBT" in layers:
+            if not only_mt and bt_layer:
                 bt_csv = wd / "bt.csv"
-                log("  ogr2ogr UNSEGBT → CSV (simplify)")
+                log(f"  ogr2ogr {bt_layer} → CSV (simplify)")
                 extract_layer_to_csv(
-                    gdb, "UNSEGBT", bt_csv, simplify_deg,
+                    gdb, bt_layer, bt_csv, simplify_deg,
                     ["COD_ID", "CTMT", "TEN_OPE", "FAS_CON", "COMP",
                      "TIP_CND", "MUN"],
                 )
@@ -520,12 +581,11 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
 
             # SUB
             sub_count = 0
-            if "SUB" in layers:
+            if sub_layer:
                 sub_csv = wd / "sub.csv"
-                log("  ogr2ogr SUB → CSV")
-                # SUB é Point — simplify não tem efeito mas mantemos consistência
+                log(f"  ogr2ogr {sub_layer} → CSV")
                 extract_layer_to_csv(
-                    gdb, "SUB", sub_csv, simplify_deg,
+                    gdb, sub_layer, sub_csv, simplify_deg,
                     ["COD_ID", "NOME", "TEN_PRI", "TEN_SEC", "MUN"],
                 )
                 if sub_csv.exists():

@@ -272,145 +272,130 @@ export default function ParcelamentoBDGDPanel({
     (stats?.mt_count ?? 0) + (stats?.bt_count ?? 0) + (stats?.sub_count ?? 0) >
     0;
 
+  // Helper pra renderizar cada toggle BDGD no MESMO formato visual dos MAP_LAYERS
+  const renderBdgdCard = (
+    layerKey: "mt" | "bt" | "sub",
+    label: string,
+    description: string,
+    color: string,
+    count: number,
+    extraInfo: string,
+    isPoint = false,
+    isActive = false,
+    state: { active: boolean },
+  ) => {
+    const empty = count === 0;
+    return (
+      <div
+        className={`rounded-lg border p-3 transition-all ${
+          state.active
+            ? "border-blue-300 bg-blue-50"
+            : "border-gray-200 bg-white"
+        } ${!mapReady || empty ? "opacity-60" : ""}`}
+      >
+        <div className="flex items-start justify-between gap-2">
+          <div className="flex items-start gap-2 flex-1 min-w-0">
+            {isPoint ? (
+              <span
+                className="h-3 w-3 rounded-full flex-shrink-0 mt-0.5 border border-gray-700"
+                style={{ backgroundColor: color, opacity: empty ? 0.4 : 1 }}
+              />
+            ) : (
+              <span
+                className="h-3 w-3 rounded-sm flex-shrink-0 mt-0.5"
+                style={{ backgroundColor: color, opacity: empty ? 0.4 : 1 }}
+              />
+            )}
+            <div className="min-w-0 flex-1">
+              <span className="text-xs font-medium text-gray-800 leading-tight block">
+                {label}
+              </span>
+              <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">
+                {description}
+              </p>
+              <p className="text-[10px] text-gray-500 mt-0.5">
+                {empty ? "aguardando BDGD Sync" : extraInfo}
+              </p>
+            </div>
+          </div>
+          <div className="flex-shrink-0 pt-0.5">
+            <Switch
+              checked={state.active}
+              disabled={!mapReady || empty}
+              onCheckedChange={() => handleToggle(layerKey)}
+              aria-label={`Toggle ${label}`}
+            />
+          </div>
+        </div>
+      </div>
+    );
+  };
+
   return (
-    <div className="rounded-lg border border-amber-200 bg-amber-50/30 p-3 space-y-2">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center gap-1.5">
-          <Zap className="h-3.5 w-3.5 text-amber-700" />
-          <p className="text-xs font-semibold text-gray-800">
-            Rede Distribuição (BDGD)
-          </p>
-        </div>
-        <span className="text-[10px] uppercase tracking-wide text-gray-500">
-          {data.source_tier === "t2" ? (
-            <span className="text-purple-700 font-semibold">HD</span>
-          ) : (
-            "Índice 10m"
-          )}
-        </span>
-      </div>
-
-      {/* Toggles MT/BT/SUB sempre visíveis (disabled quando count=0 com indicação visual) */}
-      <div className="flex items-start justify-between gap-2 pt-1">
-        <div className="flex items-start gap-2 flex-1">
-          <span
-            className="h-1.5 w-3 rounded-sm mt-1"
-            style={{
-              backgroundColor: COLOR_MT,
-              opacity: (stats?.mt_count ?? 0) === 0 ? 0.4 : 1,
-            }}
-          />
-          <div className="min-w-0">
-            <span
-              className={`text-[11px] font-medium block ${
-                (stats?.mt_count ?? 0) === 0 ? "text-gray-400" : "text-gray-800"
-              }`}
-            >
-              Média Tensão (13.8/34.5 kV)
-            </span>
-            <span className="text-[10px] text-gray-500">
-              {(stats?.mt_count ?? 0) === 0
-                ? "aguardando sync"
-                : `${stats?.mt_count} segmentos · ${(
-                    (stats?.mt_length_m ?? 0) / 1000
-                  ).toFixed(1)} km`}
-            </span>
-          </div>
-        </div>
-        <Switch
-          checked={toggleMT.active}
-          disabled={!mapReady || (stats?.mt_count ?? 0) === 0}
-          onCheckedChange={() => handleToggle("mt")}
-          aria-label="Toggle MT"
-        />
-      </div>
-
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-start gap-2 flex-1">
-          <span
-            className="h-1.5 w-3 rounded-sm mt-1"
-            style={{
-              backgroundColor: COLOR_BT,
-              opacity: (stats?.bt_count ?? 0) === 0 ? 0.4 : 1,
-            }}
-          />
-          <div className="min-w-0">
-            <span
-              className={`text-[11px] font-medium block ${
-                (stats?.bt_count ?? 0) === 0 ? "text-gray-400" : "text-gray-800"
-              }`}
-            >
-              Baixa Tensão (127/220/380 V)
-            </span>
-            <span className="text-[10px] text-gray-500">
-              {(stats?.bt_count ?? 0) === 0
-                ? "aguardando sync"
-                : `${stats?.bt_count} segmentos · ${(
-                    (stats?.bt_length_m ?? 0) / 1000
-                  ).toFixed(1)} km`}
-            </span>
-          </div>
-        </div>
-        <Switch
-          checked={toggleBT.active}
-          disabled={!mapReady || (stats?.bt_count ?? 0) === 0}
-          onCheckedChange={() => handleToggle("bt")}
-          aria-label="Toggle BT"
-        />
-      </div>
-
-      <div className="flex items-start justify-between gap-2">
-        <div className="flex items-start gap-2 flex-1">
-          <span
-            className="h-2 w-2 rounded-full mt-1 border border-gray-700"
-            style={{
-              backgroundColor: COLOR_SUB,
-              opacity: (stats?.sub_count ?? 0) === 0 ? 0.4 : 1,
-            }}
-          />
-          <div className="min-w-0">
-            <span
-              className={`text-[11px] font-medium block ${
-                (stats?.sub_count ?? 0) === 0
-                  ? "text-gray-400"
-                  : "text-gray-800"
-              }`}
-            >
-              Subestações distribuição
-            </span>
-            <span className="text-[10px] text-gray-500">
-              {(stats?.sub_count ?? 0) === 0
-                ? "aguardando sync"
-                : `${stats?.sub_count} unidades`}
-            </span>
-          </div>
-        </div>
-        <Switch
-          checked={toggleSUB.active}
-          disabled={!mapReady || (stats?.sub_count ?? 0) === 0}
-          onCheckedChange={() => handleToggle("sub")}
-          aria-label="Toggle SUB"
-        />
-      </div>
+    <div className="space-y-3">
+      {/* Cada camada BDGD vira card individual igual aos MAP_LAYERS */}
+      {renderBdgdCard(
+        "mt",
+        "BDGD — Média Tensão",
+        "Rede 13.8/34.5 kV — concessionária local (ANEEL)",
+        COLOR_MT,
+        stats?.mt_count ?? 0,
+        `${stats?.mt_count ?? 0} segmentos · ${((stats?.mt_length_m ?? 0) / 1000).toFixed(1)} km em 10km`,
+        false,
+        true,
+        toggleMT,
+      )}
+      {renderBdgdCard(
+        "bt",
+        "BDGD — Baixa Tensão",
+        "Rede 127/220/380 V — fiação local",
+        COLOR_BT,
+        stats?.bt_count ?? 0,
+        `${stats?.bt_count ?? 0} segmentos · ${((stats?.bt_length_m ?? 0) / 1000).toFixed(1)} km em 10km`,
+        false,
+        true,
+        toggleBT,
+      )}
+      {renderBdgdCard(
+        "sub",
+        "BDGD — Subestações",
+        "Subestações de distribuição (existentes + planejadas)",
+        COLOR_SUB,
+        stats?.sub_count ?? 0,
+        `${stats?.sub_count ?? 0} unidades em 10km`,
+        true,
+        true,
+        toggleSUB,
+      )}
 
       {!hasAny && (
-        <p className="text-[10px] text-gray-500 italic leading-tight pt-1 border-t border-amber-100">
-          Sem dados nacionais sincronizados ainda. Rode o{" "}
+        <p className="text-[10px] text-gray-500 italic leading-tight">
+          BDGD ainda sem dados sincronizados.{" "}
           <a
             href="https://github.com/mfalcao09/ecossistema-monorepo/actions/workflows/bdgd-sync.yml"
             target="_blank"
             rel="noreferrer"
             className="text-amber-700 underline hover:text-amber-900"
           >
-            workflow BDGD Sync
-          </a>{" "}
-          (3-4h pra Brasil inteiro) — depois os toggles ficam ativos.
+            Re-rodar BDGD Sync
+          </a>
+          .
         </p>
       )}
 
       {distribuidorasNomes.length > 0 && (
-        <div className="pt-2 border-t border-amber-100">
-          <p className="text-[10px] text-gray-500 mb-1">Concessionária(s)</p>
+        <div className="rounded-lg border border-gray-200 bg-gray-50 p-2.5">
+          <div className="flex items-center gap-1.5 mb-1">
+            <Zap className="h-3 w-3 text-amber-700" />
+            <p className="text-[10px] font-semibold text-gray-700">
+              Concessionária(s) detectada(s)
+              {data.source_tier === "t2" && (
+                <span className="ml-1.5 text-[9px] font-normal text-purple-700">
+                  · HD precision
+                </span>
+              )}
+            </p>
+          </div>
           <p className="text-[10px] text-gray-700 leading-tight">
             {distribuidorasNomes.slice(0, 3).join(" · ")}
             {distribuidorasNomes.length > 3 &&
