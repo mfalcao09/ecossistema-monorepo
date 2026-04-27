@@ -397,15 +397,33 @@ export async function fetchGeoLayer(
 ): Promise<
   Result<{ geojson: GeoJSON.FeatureCollection; feature_count: number }>
 > {
-  // 1) dispara fetch só da camada pedida
+  // 1) PRIMEIRO tenta cache (mais barato, mais rápido) — só dispara fetch_layers
+  //    se não tiver cache ativo. Evita re-chamar EPE/Overpass desnecessariamente
+  //    e protege contra falhas de upstream que zerariam cache bom (sessão 156).
+  const cachedResult = await loadLayers(developmentId);
+  if (cachedResult.ok) {
+    const cached = cachedResult.data.find(
+      (r) => r.layer_key === layerKey && r.is_active,
+    );
+    if (cached && cached.feature_count > 0 && cached.geojson) {
+      return {
+        ok: true,
+        data: {
+          geojson: cached.geojson,
+          feature_count: cached.feature_count,
+        },
+      };
+    }
+  }
+
+  // 2) Cache miss — dispara fetch fresh
   const fetchResult = await triggerFetchLayers(developmentId, [layerKey]);
   if (!fetchResult.ok) return fetchResult;
 
-  // 2) lê cache
+  // 3) Re-lê cache após fetch
   const loadResult = await loadLayers(developmentId);
   if (!loadResult.ok) return loadResult;
 
-  // 3) filtra a camada pedida
   const row = loadResult.data.find(
     (r) => r.layer_key === layerKey && r.is_active,
   );
