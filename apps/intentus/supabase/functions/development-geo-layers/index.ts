@@ -45,10 +45,15 @@ const ALLOWED_ORIGINS_RAW = (Deno.env.get("ALLOWED_ORIGINS") || "")
 const DEV_PATTERNS = [
   /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
   /^https:\/\/intentus-plataform-.+\.vercel\.app$/,
+  // Preview/staging do monorepo Vercel — qualquer subdomínio hom.* do Intentus
+  /^https:\/\/hom\.intentusrealestate\.com\.br$/,
+  // Vercel preview deploys do monorepo (branches)
+  /^https:\/\/.+-mfalcao09s-projects\.vercel\.app$/,
 ];
 const PROD_ORIGINS = [
   "https://intentus-plataform.vercel.app",
   "https://app.intentusrealestate.com.br",
+  "https://hom.intentusrealestate.com.br",
 ];
 
 function isOriginAllowed(origin: string): boolean {

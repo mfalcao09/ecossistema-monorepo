@@ -29,10 +29,9 @@ import {
   Clock,
   AlertTriangle,
   Layers,
-  Eye,
-  EyeOff,
   Maximize2,
 } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import { fetchGeoLayer } from "@/lib/parcelamento/geoLayersApi";
 import type { GeoLayerKey } from "@/lib/parcelamento/types";
 import * as turf from "@turf/turf";
@@ -1320,38 +1319,43 @@ function TabMapa({
         {MAP_LAYERS.map((layer) => {
           const state = layerStates[layer.key];
           return (
-            <button
+            <div
               key={layer.key}
-              onClick={() => toggleLayer(layer)}
-              disabled={!mapReady || state.loading}
-              className={`w-full text-left rounded-lg border p-3 transition-all ${
+              className={`rounded-lg border p-3 transition-all ${
                 state.active
                   ? "border-blue-300 bg-blue-50"
-                  : "border-gray-200 bg-white hover:border-gray-300"
-              } ${!mapReady ? "opacity-50 cursor-not-allowed" : "cursor-pointer"}`}
+                  : "border-gray-200 bg-white"
+              } ${!mapReady ? "opacity-50" : ""}`}
             >
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
+              <div className="flex items-start justify-between gap-2">
+                <div className="flex items-start gap-2 flex-1 min-w-0">
                   <div
-                    className="h-3 w-3 rounded-sm flex-shrink-0"
+                    className="h-3 w-3 rounded-sm flex-shrink-0 mt-0.5"
                     style={{ backgroundColor: layer.color }}
                   />
-                  <span className="text-xs font-medium text-gray-800 leading-tight">
-                    {layer.label}
-                  </span>
+                  <div className="min-w-0 flex-1">
+                    <span className="text-xs font-medium text-gray-800 leading-tight block">
+                      {layer.label}
+                    </span>
+                    <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">
+                      {layer.description}
+                    </p>
+                  </div>
                 </div>
-                {state.loading ? (
-                  <Loader2 className="h-3.5 w-3.5 text-blue-500 animate-spin flex-shrink-0" />
-                ) : state.active ? (
-                  <Eye className="h-3.5 w-3.5 text-blue-500 flex-shrink-0" />
-                ) : (
-                  <EyeOff className="h-3.5 w-3.5 text-gray-400 flex-shrink-0" />
-                )}
+                <div className="flex-shrink-0 pt-0.5">
+                  {state.loading ? (
+                    <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />
+                  ) : (
+                    <Switch
+                      checked={state.active}
+                      disabled={!mapReady}
+                      onCheckedChange={() => toggleLayer(layer)}
+                      aria-label={`Alternar camada ${layer.label}`}
+                    />
+                  )}
+                </div>
               </div>
-              <p className="text-xs text-gray-400 mt-1 leading-tight">
-                {layer.description}
-              </p>
-            </button>
+            </div>
           );
         })}
 
