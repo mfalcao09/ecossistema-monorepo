@@ -88,14 +88,22 @@ export function useAuditoria({
             }
           | undefined;
         if (!ultima || cancelled) return;
-        // Só hidrata se a última auditoria foi pra o estado atual do diploma
-        if (ultima.diploma_updated_at !== diplomaUpdatedAt) return;
+
+        // Sessão 2026-04-27: hidrata SEMPRE a última auditoria do histórico,
+        // mesmo que o diploma tenha mudado depois. Antes, o `return` aqui
+        // fazia com que QUALQUER edição posterior (incluindo só o reset de
+        // status pra regerar XML) deixasse o usuário com o aviso "Auditoria
+        // não realizada" — sumindo as 4 auditorias visíveis no painel.
+        // Agora, marcamos `desatualizada` e a UI exibe um hint suave
+        // (não-bloqueante) em vez do alerta forte.
+        const desatualizada = ultima.diploma_updated_at !== diplomaUpdatedAt;
 
         const hidratada: RespostaAuditoria = {
           pode_gerar_xml: ultima.pode_gerar_xml,
           auditado_em: ultima.auditado_em,
           grupos: ultima.grupos,
           totais: ultima.totais,
+          desatualizada,
         };
         if (cancelled) return;
         setAuditoria(hidratada);

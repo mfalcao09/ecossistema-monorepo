@@ -64,6 +64,12 @@ export interface RespostaAuditoria {
     infos: number;
     total: number;
   };
+  /**
+   * Sessão 2026-04-27: quando hidratado do histórico, indica se o diploma
+   * foi modificado depois da última auditoria. UI mostra hint suave em vez
+   * do alerta "Auditoria não realizada" — o operador decide se re-audita.
+   */
+  desatualizada?: boolean;
 }
 
 // ── Dados de entrada da auditoria ────────────────────────────────────────────

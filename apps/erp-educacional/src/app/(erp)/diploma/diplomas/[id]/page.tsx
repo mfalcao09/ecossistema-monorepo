@@ -1013,12 +1013,20 @@ function PainelAcoes({
               <p className="text-xs font-bold text-amber-800">
                 {!auditoria
                   ? "Auditoria não realizada — deseja continuar mesmo assim?"
-                  : `${auditoria.totais.criticos} erro(s) crítico(s) encontrado(s)`}
+                  : auditoria.totais.criticos > 0
+                    ? `${auditoria.totais.criticos} erro(s) crítico(s) encontrado(s)`
+                    : auditoria.desatualizada
+                      ? "Auditoria desatualizada — diploma foi modificado depois"
+                      : "Confirma a geração do XML?"}
               </p>
               <p className="text-[11px] text-amber-700 mt-0.5">
                 {!auditoria
                   ? "Recomendamos auditar os requisitos antes de gerar o XML para evitar erros XSD."
-                  : "O XML pode ser gerado, mas provavelmente será rejeitado pelo XSD ou pela registradora. Corrija os dados ou prossiga com esta justificativa."}
+                  : auditoria.totais.criticos > 0
+                    ? "O XML pode ser gerado, mas provavelmente será rejeitado pelo XSD ou pela registradora. Corrija os dados ou prossiga com esta justificativa."
+                    : auditoria.desatualizada
+                      ? `Última auditoria realizada em ${new Date(auditoria.auditado_em).toLocaleString("pt-BR")} — sem erros críticos no momento, mas o diploma mudou desde então. Re-auditar para garantir.`
+                      : "Sem erros críticos. Você pode gerar o XML."}
               </p>
               {auditoria && auditoria.totais.criticos > 0 && (
                 <ul className="mt-2 space-y-1">
