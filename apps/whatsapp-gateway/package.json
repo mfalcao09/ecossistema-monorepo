@@ -19,7 +19,7 @@
     "@hono/zod-validator": "^0.4.0",
     "@supabase/supabase-js": "^2.45.0",
     "@whiskeysockets/baileys": "latest",
-    "hono": "^4.6.0",
+    "hono": "^4.12.15",
     "pino": "^9.0.0",
     "pino-pretty": "^11.0.0",
     "qrcode": "^1.5.4",
