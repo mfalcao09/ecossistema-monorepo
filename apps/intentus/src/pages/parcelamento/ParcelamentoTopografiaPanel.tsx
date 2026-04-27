@@ -153,6 +153,11 @@ function computeSuitability(
 ): SuitabilityResult | null {
   if (!project) return null;
 
+  // Sem dados de elevação NÃO computar — evita score 100/100 falso
+  const hasSlopeData = project.slope_avg_pct != null;
+  const hasElevationGrid = !!project.elevation_grid?.grid;
+  if (!hasSlopeData && !hasElevationGrid) return null;
+
   // Slope médio (já vem da EF) — ideal <8%
   const slopeAvg = Number(project.slope_avg_pct ?? 0);
   // Slope penaliza não-linearmente: até 5% = 0, 5-15% = 0-30 pts, >30% = 80 pts
@@ -391,7 +396,7 @@ export default function ParcelamentoTopografiaPanel({
             <span className="text-[10px] text-gray-500">
               {slopeCells.length > 0
                 ? `${slopeCells.length} células · max ${slopeStats?.max ?? 0}%`
-                : "Aguardando elevation_grid…"}
+                : "Rode análise 3D para gerar"}
             </span>
           </div>
         </div>
@@ -423,6 +428,18 @@ export default function ParcelamentoTopografiaPanel({
               ⚠️ {slopeStats.above30Pct}% do terreno acima de 30% (não loteável)
             </p>
           )}
+        </div>
+      )}
+
+      {/* Aviso quando não há análise topográfica rodada */}
+      {!suitability && (
+        <div className="pt-2 border-t border-emerald-100">
+          <p className="text-[10px] text-gray-500 italic leading-tight">
+            ℹ️ Suitability Score, heatmap de declividade e análise 3D requerem
+            dados de elevação. Vá pra aba{" "}
+            <strong className="text-emerald-700">Análise 3D</strong> e clique em
+            "Gerar análise topográfica".
+          </p>
         </div>
       )}
 

@@ -278,6 +278,19 @@ def main():
             print(f"ERROR: {tool} ausente", file=sys.stderr)
             sys.exit(1)
 
+    # Sanity check de conexão antes de processar
+    log("Verificando conexão Supabase...")
+    out = subprocess.run(
+        ["psql", db_url, "-At", "-X", "-c", "SELECT 1;"],
+        capture_output=True, text=True, timeout=30,
+    )
+    if out.returncode != 0:
+        log(f"❌ Conexão falhou (exit {out.returncode}): {out.stderr[:400]}", "ERROR")
+        log("Verifique secret SUPABASE_DB_URL no GitHub: Session pooler "
+            "+ senha real (sem [YOUR-PASSWORD] placeholder)", "ERROR")
+        sys.exit(3)
+    log("✅ Conexão OK")
+
     dev_id = args.development_id
     if not re.match(r"^[0-9a-f-]{36}$", dev_id, re.IGNORECASE):
         print(f"ERROR: development_id inválido: {dev_id}", file=sys.stderr)

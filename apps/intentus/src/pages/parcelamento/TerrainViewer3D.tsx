@@ -34,7 +34,10 @@ import {
   ZoomOut,
   Mountain,
   Maximize2,
+  Sparkles,
+  AlertCircle,
 } from "lucide-react";
+import { triggerElevation } from "@/lib/parcelamento/elevationApi";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -512,18 +515,7 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
   // ---------------------------------------------------------------------------
 
   if (!elevationGrid || !elevationGrid.coordinates?.length) {
-    return (
-      <div className="flex flex-col items-center justify-center h-[500px] rounded-xl border-2 border-dashed border-gray-200 bg-gray-50/50">
-        <Mountain className="w-12 h-12 text-gray-300 mb-3" />
-        <p className="text-sm font-medium text-gray-500">
-          Dados de elevação não disponíveis
-        </p>
-        <p className="text-xs text-gray-400 mt-1">
-          Execute a análise de elevação (SRTM 30m) na aba Mapa para gerar o
-          modelo 3D
-        </p>
-      </div>
-    );
+    return <ElevationEmptyState projectId={project.id} />;
   }
 
   return (
@@ -535,7 +527,7 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
             Modelo de Elevação 3D
           </h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            DEM SRTM 30m — {elevationGrid.sampleCount} pontos · Elevação{" "}
+            Copernicus DEM 30m — {elevationGrid.sampleCount} pontos · Elevação{" "}
             {elevMin.toFixed(0)}m–{elevMax.toFixed(0)}m
           </p>
         </div>
@@ -864,6 +856,90 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
           </p>
         </div>
       )}
+    </div>
+  );
+}
+
+// ---------------------------------------------------------------------------
+// ElevationEmptyState — empty state com botão pra disparar EF Copernicus DEM
+// ---------------------------------------------------------------------------
+
+interface ElevationEmptyStateProps {
+  projectId: string;
+}
+
+function ElevationEmptyState({ projectId }: ElevationEmptyStateProps) {
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [done, setDone] = useState(false);
+
+  const handleTrigger = useCallback(async () => {
+    if (loading) return;
+    setLoading(true);
+    setError(null);
+    const r = await triggerElevation(projectId);
+    setLoading(false);
+    if (!r.ok) {
+      setError(r.error.message);
+      return;
+    }
+    setDone(true);
+    // Recarrega a página em 2s pra puxar o elevation_grid populado
+    setTimeout(() => window.location.reload(), 2000);
+  }, [loading, projectId]);
+
+  return (
+    <div className="flex flex-col items-center justify-center h-[500px] rounded-xl border-2 border-dashed border-gray-200 bg-gray-50/50 px-6">
+      <Mountain className="w-12 h-12 text-gray-300 mb-3" />
+      <p className="text-sm font-medium text-gray-600">
+        Análise topográfica não rodada
+      </p>
+      <p className="text-xs text-gray-500 mt-1 text-center max-w-md">
+        Esse projeto ainda não tem dados de elevação. Clique abaixo pra gerar
+        Modelo Digital de Elevação 30m via Copernicus DEM (~10s).
+      </p>
+
+      {error && (
+        <div className="mt-3 flex items-center gap-1.5 text-xs text-red-600 bg-red-50 border border-red-200 rounded px-2 py-1 max-w-md">
+          <AlertCircle className="h-3 w-3 flex-shrink-0" />
+          <span className="leading-tight">{error}</span>
+        </div>
+      )}
+
+      {done && (
+        <div className="mt-3 text-xs text-green-700 bg-green-50 border border-green-200 rounded px-2 py-1">
+          ✅ Análise concluída — recarregando…
+        </div>
+      )}
+
+      <button
+        onClick={handleTrigger}
+        disabled={loading || done}
+        className="mt-4 inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-gradient-to-r from-emerald-600 to-emerald-700 text-white text-sm font-medium shadow-sm hover:from-emerald-700 hover:to-emerald-800 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+      >
+        {loading ? (
+          <>
+            <Loader2 className="h-4 w-4 animate-spin" />
+            Processando Copernicus DEM…
+          </>
+        ) : done ? (
+          <>
+            <Sparkles className="h-4 w-4" />
+            Concluído
+          </>
+        ) : (
+          <>
+            <Sparkles className="h-4 w-4" />
+            Gerar análise topográfica
+          </>
+        )}
+      </button>
+
+      <p className="mt-3 text-[10px] text-gray-400 text-center max-w-md">
+        Fonte: OpenTopography Copernicus DEM GLO-30 · gera elevation_grid 20×20
+        com slope médio. Depois disso o 3D, heatmap de declividade e Suitability
+        ficam disponíveis.
+      </p>
     </div>
   );
 }

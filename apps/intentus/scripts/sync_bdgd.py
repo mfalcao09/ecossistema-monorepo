@@ -139,6 +139,41 @@ def psql(db_url: str, sql: str, capture: bool = False):
     cmd = ["psql", db_url, "-v", "ON_ERROR_STOP=1", "-q", "-X", "-c", sql]
     return run(cmd, capture=capture)
 
+
+def check_db_connection(db_url: str) -> None:
+    """Sanity check: connection + schema. Sai com diagnóstico claro se falhar."""
+    log("Verificando conexão com Supabase...")
+    try:
+        out = subprocess.run(
+            ["psql", db_url, "-At", "-X", "-c",
+             "SELECT 1 FROM bdgd_distribuidoras LIMIT 1; SELECT version();"],
+            capture_output=True, text=True, timeout=30,
+        )
+    except subprocess.TimeoutExpired:
+        log("❌ TIMEOUT conectando no DB (>30s)", "ERROR")
+        log("   Verifique se SUPABASE_DB_URL aponta pra Session pooler "
+            "(porta 5432) e não pra Direct connection (IPv6)", "ERROR")
+        sys.exit(3)
+
+    if out.returncode != 0:
+        stderr = (out.stderr or "").strip()
+        log(f"❌ FALHA conexão Supabase (psql exit {out.returncode})", "ERROR")
+        log(f"   stderr: {stderr[:600]}", "ERROR")
+        log("", "ERROR")
+        log("Causas comuns:", "ERROR")
+        log("  1. SUPABASE_DB_URL não tem a senha real — substituiu [YOUR-PASSWORD]?", "ERROR")
+        log("  2. Senha tem caracteres especiais sem URL-encode (use %40 pra @, etc.)", "ERROR")
+        log("  3. Você copiou Direct connection (IPv6) em vez de Session pooler (IPv4)", "ERROR")
+        log("  4. Tabela bdgd_distribuidoras não existe (migration não foi aplicada)", "ERROR")
+        log("", "ERROR")
+        log("Pra corrigir o secret:", "ERROR")
+        log("  Supabase Dashboard → Project Settings → Database → Connect button", "ERROR")
+        log("  → aba 'Session pooler' → copia URI completa com senha real", "ERROR")
+        log("  → GitHub repo Settings → Secrets → atualiza SUPABASE_DB_URL", "ERROR")
+        sys.exit(3)
+
+    log(f"✅ Conexão OK — {out.stdout.strip().splitlines()[-1][:80]}")
+
 def psql_file(db_url: str, sql_path: Path):
     cmd = ["psql", db_url, "-v", "ON_ERROR_STOP=1", "-q", "-X", "-f", str(sql_path)]
     return run(cmd)
@@ -542,6 +577,9 @@ def main():
         if not shutil.which(tool):
             print(f"ERROR: {tool} não encontrado no PATH", file=sys.stderr)
             sys.exit(1)
+
+    # Sanity check da conexão antes de iterar 114 distribuidoras
+    check_db_connection(db_url)
 
     entries = fetch_dcat()
 
