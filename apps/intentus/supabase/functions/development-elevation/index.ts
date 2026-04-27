@@ -1,19 +1,21 @@
 /**
- * development-elevation v1
+ * development-elevation v2
  *
- * Busca dados de elevação SRTM 30m via OpenTopography API para um terreno de
- * parcelamento de solo. Atualiza a tabela `developments` com dados de elevação e
- * armazena grid de amostras em `elevation_grid`.
+ * Busca dados de elevação Copernicus DEM 30m (GLO-30) via OpenTopography API
+ * para um terreno de parcelamento de solo. Atualiza a tabela `developments`
+ * com elevation_min/max/avg/slope + armazena grid em `elevation_grid`.
+ *
+ * v2 (sessão 155): migrado SRTM 30m → Copernicus DEM 30m (state-of-the-art,
+ * gratuito, melhor cobertura no Brasil que SRTM em áreas de relevo acidentado).
  *
  * Actions:
  *   fetch_elevation  — Busca e persiste dados de elevação para um development_id
  *   get_status       — Retorna status atual de elevação do development
  *
  * APIs:
- *   Primary  : OpenTopography SRTM GL1 30m (https://portal.opentopography.org/API/globaldem)
- *   Fallback : Open-Elevation API (https://api.open-elevation.com/api/v1/lookup) — 90m Copernicus
+ *   Primary  : OpenTopography Copernicus DEM 30m (demtype=COP30)
+ *   Fallback : Open-Elevation API (https://api.open-elevation.com/api/v1/lookup)
  *
- * Sessão 119 — Fase 2 Parcelamento de Solo
  * Pair programming: Claudinho + Buchecha (MiniMax M2.7)
  */
 
@@ -24,22 +26,30 @@ import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 // ============================================================
 
 const ALLOWED_ORIGINS_RAW = (Deno.env.get("ALLOWED_ORIGINS") || "")
-  .split(",").map((o: string) => o.trim()).filter(Boolean);
+  .split(",")
+  .map((o: string) => o.trim())
+  .filter(Boolean);
 
 const DEV_PATTERNS = [
   /^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/,
   /^https:\/\/intentus-plataform-.+\.vercel\.app$/,
+  /^https:\/\/hom\.intentusrealestate\.com\.br$/,
+  /^https:\/\/.+-mfalcao09s-projects\.vercel\.app$/,
 ];
 
 const PROD_ORIGINS = [
   "https://intentus-plataform.vercel.app",
   "https://app.intentusrealestate.com.br",
+  "https://hom.intentusrealestate.com.br",
 ];
 
 function isOriginAllowed(origin: string): boolean {
   if (!origin) return false;
-  if (ALLOWED_ORIGINS_RAW.length > 0) return ALLOWED_ORIGINS_RAW.includes(origin);
-  return PROD_ORIGINS.includes(origin) || DEV_PATTERNS.some((re) => re.test(origin));
+  if (ALLOWED_ORIGINS_RAW.length > 0)
+    return ALLOWED_ORIGINS_RAW.includes(origin);
+  return (
+    PROD_ORIGINS.includes(origin) || DEV_PATTERNS.some((re) => re.test(origin))
+  );
 }
 
 function corsHeaders(req: Request): Record<string, string> {
@@ -81,7 +91,9 @@ interface ElevationStats {
 // OpenTopography SRTM 30m (primary)
 // ============================================================
 
-async function fetchOpenTopography(bbox: BoundingBox): Promise<ElevationStats | null> {
+async function fetchOpenTopography(
+  bbox: BoundingBox,
+): Promise<ElevationStats | null> {
   const apiKey = Deno.env.get("OPENTOPO_API_KEY");
   if (!apiKey) {
     console.warn("OPENTOPO_API_KEY not set — skipping primary");
@@ -92,7 +104,9 @@ async function fetchOpenTopography(bbox: BoundingBox): Promise<ElevationStats | 
   const latSpan = bbox.north - bbox.south;
   const lonSpan = bbox.east - bbox.west;
   if (latSpan > 0.6 || lonSpan > 0.6) {
-    console.warn("BBox too large for OpenTopography — truncating to 0.5° × 0.5°");
+    console.warn(
+      "BBox too large for OpenTopography — truncating to 0.5° × 0.5°",
+    );
     const centerLat = (bbox.north + bbox.south) / 2;
     const centerLon = (bbox.east + bbox.west) / 2;
     bbox = {
@@ -104,17 +118,20 @@ async function fetchOpenTopography(bbox: BoundingBox): Promise<ElevationStats | 
   }
 
   const params = new URLSearchParams({
-    demtype: "SRTMGL1_E",        // SRTM 30m ellipsoidal
+    demtype: "COP30", // Copernicus DEM GLO-30 (30m, state-of-the-art)
     south: bbox.south.toFixed(6),
     north: bbox.north.toFixed(6),
     west: bbox.west.toFixed(6),
     east: bbox.east.toFixed(6),
-    outputFormat: "AAIGrid",     // ASCII Grid — text parseable
+    outputFormat: "AAIGrid", // ASCII Grid — text parseable
     API_Key: apiKey,
   });
 
   const url = `https://portal.opentopography.org/API/globaldem?${params}`;
-  console.log("OpenTopography request:", url.replace(apiKey, "***"));
+  console.log(
+    "OpenTopography Copernicus DEM request:",
+    url.replace(apiKey, "***"),
+  );
 
   const res = await fetch(url, {
     signal: AbortSignal.timeout(25_000),
@@ -123,12 +140,20 @@ async function fetchOpenTopography(bbox: BoundingBox): Promise<ElevationStats | 
 
   if (!res.ok) {
     const body = await res.text();
-    console.error(`OpenTopography error ${res.status}:`, body.substring(0, 300));
+    console.error(
+      `OpenTopography error ${res.status}:`,
+      body.substring(0, 300),
+    );
     return null;
   }
 
   const text = await res.text();
-  return parseAAIGrid(text, bbox, "srtm-30m", "30m (SRTM GL1)");
+  return parseAAIGrid(
+    text,
+    bbox,
+    "copernicus-30m",
+    "30m (Copernicus DEM GLO-30)",
+  );
 }
 
 // ============================================================
@@ -136,7 +161,10 @@ async function fetchOpenTopography(bbox: BoundingBox): Promise<ElevationStats | 
 // ============================================================
 
 function parseAAIGrid(
-  raw: string, bbox: BoundingBox, source: string, resolution: string
+  raw: string,
+  bbox: BoundingBox,
+  source: string,
+  resolution: string,
 ): ElevationStats | null {
   const lines = raw.trim().split("\n");
   if (lines.length < 7) {
@@ -197,7 +225,8 @@ function parseAAIGrid(
   // bbox diagonal in meters ≈ sqrt((latΔ * 111000)² + (lonΔ * 111000 * cos(lat))²)
   const latMid = (bbox.north + bbox.south) / 2;
   const latDist = (bbox.north - bbox.south) * 111_000;
-  const lonDist = (bbox.east - bbox.west) * 111_000 * Math.cos((latMid * Math.PI) / 180);
+  const lonDist =
+    (bbox.east - bbox.west) * 111_000 * Math.cos((latMid * Math.PI) / 180);
   const diagDist = Math.sqrt(latDist * latDist + lonDist * lonDist);
   const slopeAvgPct = diagDist > 0 ? ((max - min) / diagDist) * 100 : 0;
 
@@ -219,7 +248,9 @@ function parseAAIGrid(
 }
 
 function downsampleGrid(
-  grid: number[][], maxRows: number, maxCols: number
+  grid: number[][],
+  maxRows: number,
+  maxCols: number,
 ): number[][] {
   if (grid.length === 0) return [];
   const rowStep = Math.max(1, Math.floor(grid.length / maxRows));
@@ -240,16 +271,19 @@ function downsampleGrid(
 // Open-Elevation fallback (90m Copernicus / SRTM)
 // ============================================================
 
-async function fetchOpenElevationFallback(bbox: BoundingBox): Promise<ElevationStats | null> {
+async function fetchOpenElevationFallback(
+  bbox: BoundingBox,
+): Promise<ElevationStats | null> {
   // Sample a 5×5 grid of points from the bbox
-  const rows = 5, cols = 5;
+  const rows = 5,
+    cols = 5;
   const locations: { latitude: number; longitude: number }[] = [];
 
   for (let r = 0; r < rows; r++) {
     for (let c = 0; c < cols; c++) {
       locations.push({
-        latitude:  bbox.south + (r / (rows - 1)) * (bbox.north - bbox.south),
-        longitude: bbox.west  + (c / (cols - 1)) * (bbox.east  - bbox.west),
+        latitude: bbox.south + (r / (rows - 1)) * (bbox.north - bbox.south),
+        longitude: bbox.west + (c / (cols - 1)) * (bbox.east - bbox.west),
       });
     }
   }
@@ -267,8 +301,9 @@ async function fetchOpenElevationFallback(bbox: BoundingBox): Promise<ElevationS
     return null;
   }
 
-  const data = await res.json() as { results: { elevation: number }[] };
-  const elevations = data.results?.map((r) => r.elevation).filter((e) => e != null) ?? [];
+  const data = (await res.json()) as { results: { elevation: number }[] };
+  const elevations =
+    data.results?.map((r) => r.elevation).filter((e) => e != null) ?? [];
 
   if (elevations.length === 0) return null;
 
@@ -278,7 +313,8 @@ async function fetchOpenElevationFallback(bbox: BoundingBox): Promise<ElevationS
 
   const latMid = (bbox.north + bbox.south) / 2;
   const latDist = (bbox.north - bbox.south) * 111_000;
-  const lonDist = (bbox.east - bbox.west) * 111_000 * Math.cos((latMid * Math.PI) / 180);
+  const lonDist =
+    (bbox.east - bbox.west) * 111_000 * Math.cos((latMid * Math.PI) / 180);
   const diagDist = Math.sqrt(latDist * latDist + lonDist * lonDist);
   const slopeAvgPct = diagDist > 0 ? ((max - min) / diagDist) * 100 : 0;
 
@@ -350,7 +386,8 @@ Deno.serve(async (req: Request) => {
 
   if (req.method !== "POST") {
     return new Response(JSON.stringify({ error: "Method not allowed" }), {
-      status: 405, headers: { ...cors, "Content-Type": "application/json" },
+      status: 405,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -359,22 +396,34 @@ Deno.serve(async (req: Request) => {
   const authHeader = req.headers.get("authorization");
 
   if (!authHeader) {
-    return new Response(JSON.stringify({ error: "Missing authorization header" }), {
-      status: 401, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: "Missing authorization header" }),
+      {
+        status: 401,
+        headers: { ...cors, "Content-Type": "application/json" },
+      },
+    );
   }
 
   const token = authHeader.replace("Bearer ", "");
   const supabase = createClient(supabaseUrl, supabaseAnonKey, {
     global: { headers: { Authorization: authHeader } },
-    auth: { persistSession: false, autoRefreshToken: false, detectSessionInUrl: false },
+    auth: {
+      persistSession: false,
+      autoRefreshToken: false,
+      detectSessionInUrl: false,
+    },
   });
 
   // Verify auth
-  const { data: { user }, error: authErr } = await supabase.auth.getUser(token);
+  const {
+    data: { user },
+    error: authErr,
+  } = await supabase.auth.getUser(token);
   if (authErr || !user) {
     return new Response(JSON.stringify({ error: "Unauthorized" }), {
-      status: 401, headers: { ...cors, "Content-Type": "application/json" },
+      status: 401,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -383,7 +432,8 @@ Deno.serve(async (req: Request) => {
     body = await req.json();
   } catch {
     return new Response(JSON.stringify({ error: "Invalid JSON body" }), {
-      status: 400, headers: { ...cors, "Content-Type": "application/json" },
+      status: 400,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -395,25 +445,33 @@ Deno.serve(async (req: Request) => {
   if (action === "get_status") {
     const { development_id } = body as { development_id: string };
     if (!development_id) {
-      return new Response(JSON.stringify({ error: "development_id required" }), {
-        status: 400, headers: { ...cors, "Content-Type": "application/json" },
-      });
+      return new Response(
+        JSON.stringify({ error: "development_id required" }),
+        {
+          status: 400,
+          headers: { ...cors, "Content-Type": "application/json" },
+        },
+      );
     }
 
     const { data, error } = await supabase
       .from("developments")
-      .select("id, name, analysis_status, elevation_source, elevation_min, elevation_max, elevation_avg, slope_avg_pct, elevation_grid")
+      .select(
+        "id, name, analysis_status, elevation_source, elevation_min, elevation_max, elevation_avg, slope_avg_pct, elevation_grid",
+      )
       .eq("id", development_id)
       .maybeSingle();
 
     if (error) {
       return new Response(JSON.stringify({ error: error.message }), {
-        status: 500, headers: { ...cors, "Content-Type": "application/json" },
+        status: 500,
+        headers: { ...cors, "Content-Type": "application/json" },
       });
     }
 
     return new Response(JSON.stringify({ data }), {
-      status: 200, headers: { ...cors, "Content-Type": "application/json" },
+      status: 200,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -421,15 +479,20 @@ Deno.serve(async (req: Request) => {
   // ACTION: fetch_elevation
   // ——————————————
   if (action !== "fetch_elevation") {
-    return new Response(JSON.stringify({ error: `Unknown action: ${action}` }), {
-      status: 400, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: `Unknown action: ${action}` }),
+      {
+        status: 400,
+        headers: { ...cors, "Content-Type": "application/json" },
+      },
+    );
   }
 
   const { development_id } = body as { development_id: string };
   if (!development_id) {
     return new Response(JSON.stringify({ error: "development_id required" }), {
-      status: 400, headers: { ...cors, "Content-Type": "application/json" },
+      status: 400,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -441,14 +504,22 @@ Deno.serve(async (req: Request) => {
     .maybeSingle();
 
   if (devErr || !dev) {
-    return new Response(JSON.stringify({ error: devErr?.message ?? "Development not found" }), {
-      status: 404, headers: { ...cors, "Content-Type": "application/json" },
-    });
+    return new Response(
+      JSON.stringify({ error: devErr?.message ?? "Development not found" }),
+      {
+        status: 404,
+        headers: { ...cors, "Content-Type": "application/json" },
+      },
+    );
   }
 
   // Mark as geo_analyzing
-  await supabase.from("developments")
-    .update({ analysis_status: "geo_analyzing", updated_at: new Date().toISOString() })
+  await supabase
+    .from("developments")
+    .update({
+      analysis_status: "geo_analyzing",
+      updated_at: new Date().toISOString(),
+    })
     .eq("id", development_id);
 
   // Determine bbox
@@ -456,7 +527,12 @@ Deno.serve(async (req: Request) => {
 
   if (dev.bbox && typeof dev.bbox === "object") {
     const b = dev.bbox as Record<string, number>;
-    if (b.south != null && b.north != null && b.west != null && b.east != null) {
+    if (
+      b.south != null &&
+      b.north != null &&
+      b.west != null &&
+      b.east != null
+    ) {
       bbox = b as BoundingBox;
     }
   }
@@ -473,12 +549,19 @@ Deno.serve(async (req: Request) => {
   }
 
   if (!bbox) {
-    await supabase.from("developments")
-      .update({ analysis_status: "error", updated_at: new Date().toISOString() })
+    await supabase
+      .from("developments")
+      .update({
+        analysis_status: "error",
+        updated_at: new Date().toISOString(),
+      })
       .eq("id", development_id);
     return new Response(
-      JSON.stringify({ error: "No geometry or bbox available for this development. Upload a KML/KMZ first." }),
-      { status: 422, headers: { ...cors, "Content-Type": "application/json" } }
+      JSON.stringify({
+        error:
+          "No geometry or bbox available for this development. Upload a KML/KMZ first.",
+      }),
+      { status: 422, headers: { ...cors, "Content-Type": "application/json" } },
     );
   }
 
@@ -504,12 +587,18 @@ Deno.serve(async (req: Request) => {
   }
 
   if (!stats) {
-    await supabase.from("developments")
-      .update({ analysis_status: "error", updated_at: new Date().toISOString() })
+    await supabase
+      .from("developments")
+      .update({
+        analysis_status: "error",
+        updated_at: new Date().toISOString(),
+      })
       .eq("id", development_id);
     return new Response(
-      JSON.stringify({ error: "All elevation sources failed. Please try again." }),
-      { status: 502, headers: { ...cors, "Content-Type": "application/json" } }
+      JSON.stringify({
+        error: "All elevation sources failed. Please try again.",
+      }),
+      { status: 502, headers: { ...cors, "Content-Type": "application/json" } },
     );
   }
 
@@ -537,7 +626,8 @@ Deno.serve(async (req: Request) => {
   if (updateErr) {
     console.error("DB update error:", updateErr);
     return new Response(JSON.stringify({ error: updateErr.message }), {
-      status: 500, headers: { ...cors, "Content-Type": "application/json" },
+      status: 500,
+      headers: { ...cors, "Content-Type": "application/json" },
     });
   }
 
@@ -556,6 +646,6 @@ Deno.serve(async (req: Request) => {
         fetchedAt: stats.fetchedAt,
       },
     }),
-    { status: 200, headers: { ...cors, "Content-Type": "application/json" } }
+    { status: 200, headers: { ...cors, "Content-Type": "application/json" } },
   );
 });

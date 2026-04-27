@@ -11,7 +11,13 @@
  * ⚠️ NÃO usa CapsuleGeometry (introduzido r142, CDN r128)
  * ⚠️ Lazy-loaded no ParcelamentoDetalhe.tsx
  */
-import React, { useMemo, useRef, useState, useCallback, useEffect } from "react";
+import React, {
+  useMemo,
+  useRef,
+  useState,
+  useCallback,
+  useEffect,
+} from "react";
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { OrbitControls, Text, Html } from "@react-three/drei";
 import * as THREE from "three";
@@ -21,7 +27,14 @@ import type {
   BoundingBox,
   ParcelamentoDevelopment,
 } from "@/lib/parcelamento/types";
-import { Loader2, RotateCcw, ZoomIn, ZoomOut, Mountain, Maximize2 } from "lucide-react";
+import {
+  Loader2,
+  RotateCcw,
+  ZoomIn,
+  ZoomOut,
+  Mountain,
+  Maximize2,
+} from "lucide-react";
 
 // ---------------------------------------------------------------------------
 // Helpers
@@ -35,7 +48,11 @@ function geoToLocal(
   centerLng: number,
 ): [number, number] {
   const R = 6371000; // raio médio da Terra em metros
-  const x = (lng - centerLng) * (Math.PI / 180) * R * Math.cos((centerLat * Math.PI) / 180);
+  const x =
+    (lng - centerLng) *
+    (Math.PI / 180) *
+    R *
+    Math.cos((centerLat * Math.PI) / 180);
   const z = -(lat - centerLat) * (Math.PI / 180) * R; // invertido para Z apontar "norte" → negativo
   return [x, z];
 }
@@ -54,7 +71,9 @@ function elevationColor(t: number): THREE.Color {
   const idx = Math.min(t * (colors.length - 1), colors.length - 1.001);
   const i = Math.floor(idx);
   const frac = idx - i;
-  return colors[i].clone().lerp(colors[Math.min(i + 1, colors.length - 1)], frac);
+  return colors[i]
+    .clone()
+    .lerp(colors[Math.min(i + 1, colors.length - 1)], frac);
 }
 
 // ---------------------------------------------------------------------------
@@ -71,7 +90,8 @@ interface TerrainMeshProps {
 }
 
 /** Normaliza lat/lng para chave de lookup (fix: Buchecha review — floating point precision) */
-const toKey = (lat: number, lng: number) => `${lat.toFixed(6)}_${lng.toFixed(6)}`;
+const toKey = (lat: number, lng: number) =>
+  `${lat.toFixed(6)}_${lng.toFixed(6)}`;
 
 /** Malha 3D do terreno gerada a partir do elevation grid */
 function TerrainMesh({
@@ -117,7 +137,10 @@ function TerrainMesh({
         const elev = elevMap.get(toKey(lat, lng)) ?? elevMin;
 
         const [x, z] = geoToLocal(lat, lng, centerLat, centerLng);
-        const y = ((elev - elevMin) / Math.max(elevRange, 1)) * verticalExaggeration * 50;
+        const y =
+          ((elev - elevMin) / Math.max(elevRange, 1)) *
+          verticalExaggeration *
+          50;
 
         vertices.push(x, y, z);
 
@@ -195,7 +218,10 @@ function LotBoundary({
         : geometry.coordinates;
 
     const y =
-      ((elevAvg - elevMin) / Math.max(elevRange, 1)) * verticalExaggeration * 50 + 1;
+      ((elevAvg - elevMin) / Math.max(elevRange, 1)) *
+        verticalExaggeration *
+        50 +
+      1;
 
     return rings.map((ring) => {
       const flatCoords = ring.flatMap(([lng, lat]) => {
@@ -203,11 +229,22 @@ function LotBoundary({
         return [x, y, z];
       });
       const geo = new THREE.BufferGeometry();
-      geo.setAttribute("position", new THREE.Float32BufferAttribute(flatCoords, 3));
+      geo.setAttribute(
+        "position",
+        new THREE.Float32BufferAttribute(flatCoords, 3),
+      );
       const mat = new THREE.LineBasicMaterial({ color: "#ef4444" });
       return new THREE.Line(geo, mat);
     });
-  }, [geometry, centerLat, centerLng, elevAvg, elevMin, elevRange, verticalExaggeration]);
+  }, [
+    geometry,
+    centerLat,
+    centerLng,
+    elevAvg,
+    elevMin,
+    elevRange,
+    verticalExaggeration,
+  ]);
 
   // Dispose ao desmontar ou ao recriar
   useEffect(() => {
@@ -270,7 +307,10 @@ function CameraFitter({ terrainSize }: { terrainSize: number }) {
 // Error boundary — impede que falhas no Canvas WebGL derrubem a página toda
 // ---------------------------------------------------------------------------
 
-interface ThreeErrorState { hasError: boolean; error: Error | null }
+interface ThreeErrorState {
+  hasError: boolean;
+  error: Error | null;
+}
 
 class ThreeErrorBoundary extends React.Component<
   { children: React.ReactNode },
@@ -291,9 +331,12 @@ class ThreeErrorBoundary extends React.Component<
       return (
         <div className="flex flex-col items-center justify-center h-[500px] rounded-xl border-2 border-dashed border-red-200 bg-red-50/50">
           <Mountain className="w-12 h-12 text-red-300 mb-3" />
-          <p className="text-sm font-medium text-red-600">Erro na visualização 3D</p>
+          <p className="text-sm font-medium text-red-600">
+            Erro na visualização 3D
+          </p>
           <p className="text-xs text-red-400 mt-1 max-w-md text-center px-4">
-            {this.state.error?.message ?? "Falha ao inicializar renderizador WebGL."}
+            {this.state.error?.message ??
+              "Falha ao inicializar renderizador WebGL."}
           </p>
           <button
             className="mt-3 px-3 py-1.5 text-xs bg-red-100 text-red-700 rounded-lg hover:bg-red-200 transition-colors"
@@ -320,23 +363,37 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
   const [verticalExaggeration, setVerticalExaggeration] = useState(3);
   const [showBoundary, setShowBoundary] = useState(true);
   const [showNorth, setShowNorth] = useState(true);
+  // Cut/Fill (sessão 155, Sprint A+C): plano horizontal na cota alvo +
+  // cálculo de volumetria (corte/aterro). Ativável e ajustável via slider.
+  const [cutFillOn, setCutFillOn] = useState(false);
+  const [targetElev, setTargetElev] = useState<number | null>(null);
 
   // Parse elevation grid
   const elevationGrid = useMemo<ElevationGrid | null>(() => {
     const raw = (project as any).elevation_grid;
     if (!raw) return null;
     if (typeof raw === "string") {
-      try { return JSON.parse(raw); } catch { return null; }
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
     }
     return raw as ElevationGrid;
   }, [project]);
 
   // Parse geometry
-  const parsedGeometry = useMemo<GeoJSON.MultiPolygon | GeoJSON.Polygon | null>(() => {
+  const parsedGeometry = useMemo<
+    GeoJSON.MultiPolygon | GeoJSON.Polygon | null
+  >(() => {
     const raw = project.geometry;
     if (!raw) return null;
     if (typeof raw === "string") {
-      try { return JSON.parse(raw); } catch { return null; }
+      try {
+        return JSON.parse(raw);
+      } catch {
+        return null;
+      }
     }
     return raw as GeoJSON.MultiPolygon | GeoJSON.Polygon;
   }, [project]);
@@ -345,26 +402,34 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
   const centerLat = useMemo(() => {
     if (project.centroid) {
       try {
-        const c = typeof project.centroid === "string"
-          ? JSON.parse(project.centroid)
-          : project.centroid;
+        const c =
+          typeof project.centroid === "string"
+            ? JSON.parse(project.centroid)
+            : project.centroid;
         return c?.coordinates?.[1] ?? -22.7;
-      } catch { /* fallback */ }
+      } catch {
+        /* fallback */
+      }
     }
-    if (project.bbox) return ((project.bbox.north ?? 0) + (project.bbox.south ?? 0)) / 2;
+    if (project.bbox)
+      return ((project.bbox.north ?? 0) + (project.bbox.south ?? 0)) / 2;
     return -22.7;
   }, [project]);
 
   const centerLng = useMemo(() => {
     if (project.centroid) {
       try {
-        const c = typeof project.centroid === "string"
-          ? JSON.parse(project.centroid)
-          : project.centroid;
+        const c =
+          typeof project.centroid === "string"
+            ? JSON.parse(project.centroid)
+            : project.centroid;
         return c?.coordinates?.[0] ?? -47.6;
-      } catch { /* fallback */ }
+      } catch {
+        /* fallback */
+      }
     }
-    if (project.bbox) return ((project.bbox.east ?? 0) + (project.bbox.west ?? 0)) / 2;
+    if (project.bbox)
+      return ((project.bbox.east ?? 0) + (project.bbox.west ?? 0)) / 2;
     return -47.6;
   }, [project]);
 
@@ -373,11 +438,72 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
   const elevAvg = project.elevation_avg ?? (elevMin + elevMax) / 2;
   const elevRange = elevMax - elevMin;
 
+  // Inicializa cota alvo na média (1ª render só)
+  useEffect(() => {
+    if (targetElev == null && Number.isFinite(elevAvg)) {
+      setTargetElev(Math.round(elevAvg * 10) / 10);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [elevAvg]);
+
+  // Cut/Fill volumetria: pra cada ponto do grid, soma (cota_atual - cota_alvo) * area_celula
+  const cutFillStats = useMemo(() => {
+    if (targetElev == null) return null;
+    const raw = (project as any).elevation_grid;
+    const gridArr: number[][] | null = raw?.grid ?? null;
+    const bboxRaw: BoundingBox | null = raw?.bbox ?? project.bbox ?? null;
+    if (!gridArr || !Array.isArray(gridArr) || !bboxRaw) return null;
+    const rows = gridArr.length;
+    const cols = gridArr[0]?.length ?? 0;
+    if (rows < 2 || cols < 2) return null;
+
+    const { south, north, west, east } = bboxRaw;
+    const cellLat = (north - south) / rows;
+    const cellLng = (east - west) / cols;
+    const latMid = (north + south) / 2;
+    const cellArea =
+      cellLat *
+      111_000 *
+      Math.abs(cellLng * 111_000 * Math.cos((latMid * Math.PI) / 180));
+
+    let cutM3 = 0;
+    let fillM3 = 0;
+    let cells = 0;
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const z = gridArr[r][c];
+        if (typeof z !== "number") continue;
+        cells++;
+        const diff = targetElev - z;
+        if (diff < 0)
+          cutM3 += -diff * cellArea; // terreno acima da cota → cortar
+        else if (diff > 0) fillM3 += diff * cellArea; // terreno abaixo → aterrar
+      }
+    }
+    const netM3 = fillM3 - cutM3; // positivo = aterro líquido (importar terra)
+    return {
+      cutM3: Math.round(cutM3),
+      fillM3: Math.round(fillM3),
+      netM3: Math.round(netM3),
+      cells,
+    };
+  }, [project, targetElev]);
+
   // Tamanho estimado do terreno (para câmera)
   const terrainSize = useMemo(() => {
     if (!project.bbox) return 200;
-    const [x1] = geoToLocal(project.bbox.south, project.bbox.west, centerLat, centerLng);
-    const [x2] = geoToLocal(project.bbox.north, project.bbox.east, centerLat, centerLng);
+    const [x1] = geoToLocal(
+      project.bbox.south,
+      project.bbox.west,
+      centerLat,
+      centerLng,
+    );
+    const [x2] = geoToLocal(
+      project.bbox.north,
+      project.bbox.east,
+      centerLat,
+      centerLng,
+    );
     return Math.max(Math.abs(x2 - x1), 100);
   }, [project.bbox, centerLat, centerLng]);
 
@@ -389,9 +515,12 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
     return (
       <div className="flex flex-col items-center justify-center h-[500px] rounded-xl border-2 border-dashed border-gray-200 bg-gray-50/50">
         <Mountain className="w-12 h-12 text-gray-300 mb-3" />
-        <p className="text-sm font-medium text-gray-500">Dados de elevação não disponíveis</p>
+        <p className="text-sm font-medium text-gray-500">
+          Dados de elevação não disponíveis
+        </p>
         <p className="text-xs text-gray-400 mt-1">
-          Execute a análise de elevação (SRTM 30m) na aba Mapa para gerar o modelo 3D
+          Execute a análise de elevação (SRTM 30m) na aba Mapa para gerar o
+          modelo 3D
         </p>
       </div>
     );
@@ -402,16 +531,21 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
       {/* Header com controles */}
       <div className="flex items-center justify-between">
         <div>
-          <h3 className="text-sm font-semibold text-gray-800">Modelo de Elevação 3D</h3>
+          <h3 className="text-sm font-semibold text-gray-800">
+            Modelo de Elevação 3D
+          </h3>
           <p className="text-xs text-gray-500 mt-0.5">
-            DEM SRTM 30m — {elevationGrid.sampleCount} pontos · Elevação {elevMin.toFixed(0)}m–{elevMax.toFixed(0)}m
+            DEM SRTM 30m — {elevationGrid.sampleCount} pontos · Elevação{" "}
+            {elevMin.toFixed(0)}m–{elevMax.toFixed(0)}m
           </p>
         </div>
 
         <div className="flex items-center gap-2">
           {/* Exagero vertical */}
           <div className="flex items-center gap-1.5 bg-gray-100 rounded-lg px-2.5 py-1.5">
-            <span className="text-[10px] font-medium text-gray-500 uppercase">Exagero</span>
+            <span className="text-[10px] font-medium text-gray-500 uppercase">
+              Exagero
+            </span>
             <input
               type="range"
               min={1}
@@ -449,93 +583,174 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
           >
             Norte
           </button>
+
+          {/* Toggle Cut/Fill */}
+          <button
+            onClick={() => setCutFillOn(!cutFillOn)}
+            className={`px-2.5 py-1.5 text-[10px] rounded-lg font-medium transition-colors ${
+              cutFillOn
+                ? "bg-purple-100 text-purple-700"
+                : "bg-gray-100 text-gray-500"
+            }`}
+            title="Análise de movimento de terra (corte/aterro)"
+          >
+            Cut/Fill
+          </button>
         </div>
       </div>
+
+      {/* Slider cota alvo (só quando Cut/Fill ativo) */}
+      {cutFillOn && targetElev != null && (
+        <div className="flex items-center gap-3 bg-purple-50 border border-purple-200 rounded-lg px-3 py-2">
+          <span className="text-[10px] font-semibold text-purple-700 uppercase">
+            Cota alvo
+          </span>
+          <input
+            type="range"
+            min={Math.floor(elevMin)}
+            max={Math.ceil(elevMax)}
+            step={0.5}
+            value={targetElev}
+            onChange={(e) => setTargetElev(Number(e.target.value))}
+            className="flex-1 h-1 accent-purple-600"
+          />
+          <span className="text-xs font-mono font-semibold text-purple-700 w-16 text-right">
+            {targetElev.toFixed(1)} m
+          </span>
+          <button
+            onClick={() => setTargetElev(Math.round(elevAvg * 10) / 10)}
+            className="text-[10px] text-purple-700 hover:text-purple-900 underline"
+            title="Redefinir para média"
+          >
+            média
+          </button>
+        </div>
+      )}
 
       {/* Canvas 3D */}
       <div className="relative w-full h-[500px] rounded-xl overflow-hidden border border-gray-200 bg-gradient-to-b from-sky-100 to-sky-50">
         <ThreeErrorBoundary>
-        <Canvas
-          shadows
-          camera={{ fov: 50, near: 0.1, far: 50000 }}
-          gl={{ antialias: true, alpha: true }}
-        >
-          {/* Skybox light */}
-          <color attach="background" args={["#e0f2fe"]} />
-          <fog attach="fog" args={["#e0f2fe", terrainSize * 2, terrainSize * 5]} />
+          <Canvas
+            shadows
+            camera={{ fov: 50, near: 0.1, far: 50000 }}
+            gl={{ antialias: true, alpha: true }}
+          >
+            {/* Skybox light */}
+            <color attach="background" args={["#e0f2fe"]} />
+            <fog
+              attach="fog"
+              args={["#e0f2fe", terrainSize * 2, terrainSize * 5]}
+            />
 
-          {/* Iluminação */}
-          <ambientLight intensity={0.4} />
-          <directionalLight
-            position={[terrainSize, terrainSize * 0.8, terrainSize * 0.5]}
-            intensity={0.8}
-            castShadow
-          />
-          <directionalLight
-            position={[-terrainSize * 0.5, terrainSize * 0.3, -terrainSize]}
-            intensity={0.3}
-          />
+            {/* Iluminação */}
+            <ambientLight intensity={0.4} />
+            <directionalLight
+              position={[terrainSize, terrainSize * 0.8, terrainSize * 0.5]}
+              intensity={0.8}
+              castShadow
+            />
+            <directionalLight
+              position={[-terrainSize * 0.5, terrainSize * 0.3, -terrainSize]}
+              intensity={0.3}
+            />
 
-          {/* Terreno */}
-          <TerrainMesh
-            grid={elevationGrid}
-            centerLat={centerLat}
-            centerLng={centerLng}
-            elevMin={elevMin}
-            elevRange={elevRange}
-            verticalExaggeration={verticalExaggeration}
-          />
-
-          {/* Contorno do lote */}
-          {showBoundary && parsedGeometry && (
-            <LotBoundary
-              geometry={parsedGeometry}
+            {/* Terreno */}
+            <TerrainMesh
+              grid={elevationGrid}
               centerLat={centerLat}
               centerLng={centerLng}
-              elevAvg={elevAvg}
               elevMin={elevMin}
               elevRange={elevRange}
               verticalExaggeration={verticalExaggeration}
             />
-          )}
 
-          {/* Norte */}
-          {showNorth && <NorthIndicator />}
+            {/* Contorno do lote */}
+            {showBoundary && parsedGeometry && (
+              <LotBoundary
+                geometry={parsedGeometry}
+                centerLat={centerLat}
+                centerLng={centerLng}
+                elevAvg={elevAvg}
+                elevMin={elevMin}
+                elevRange={elevRange}
+                verticalExaggeration={verticalExaggeration}
+              />
+            )}
 
-          {/* Controles */}
-          <OrbitControls
-            enableDamping
-            dampingFactor={0.1}
-            maxPolarAngle={Math.PI / 2.1}
-            minDistance={10}
-            maxDistance={terrainSize * 4}
-          />
+            {/* Norte */}
+            {showNorth && <NorthIndicator />}
 
-          {/* Auto-fit câmera */}
-          <CameraFitter terrainSize={terrainSize} />
-        </Canvas>
+            {/* Plano horizontal na cota alvo (Cut/Fill) */}
+            {cutFillOn && targetElev != null && elevRange > 0 && (
+              <mesh
+                position={[
+                  0,
+                  ((targetElev - elevMin) / elevRange) *
+                    verticalExaggeration *
+                    (terrainSize * 0.15),
+                  0,
+                ]}
+                rotation={[-Math.PI / 2, 0, 0]}
+              >
+                <planeGeometry args={[terrainSize * 1.4, terrainSize * 1.4]} />
+                <meshBasicMaterial
+                  color={
+                    cutFillStats && cutFillStats.netM3 > 0
+                      ? "#fb923c"
+                      : "#22d3ee"
+                  }
+                  transparent
+                  opacity={0.35}
+                  side={THREE.DoubleSide}
+                />
+              </mesh>
+            )}
+
+            {/* Controles */}
+            <OrbitControls
+              enableDamping
+              dampingFactor={0.1}
+              maxPolarAngle={Math.PI / 2.1}
+              minDistance={10}
+              maxDistance={terrainSize * 4}
+            />
+
+            {/* Auto-fit câmera */}
+            <CameraFitter terrainSize={terrainSize} />
+          </Canvas>
         </ThreeErrorBoundary>
 
         {/* Legenda de elevação */}
         <div className="absolute bottom-3 left-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm border border-gray-200">
-          <p className="text-[9px] font-medium text-gray-500 mb-1">ELEVAÇÃO (m)</p>
+          <p className="text-[9px] font-medium text-gray-500 mb-1">
+            ELEVAÇÃO (m)
+          </p>
           <div className="flex items-center gap-1">
-            <span className="text-[9px] text-gray-600">{elevMin.toFixed(0)}</span>
+            <span className="text-[9px] text-gray-600">
+              {elevMin.toFixed(0)}
+            </span>
             <div
               className="w-24 h-2 rounded-full"
               style={{
-                background: "linear-gradient(90deg, #4caf50, #8bc34a, #cddc39, #ffeb3b, #ff9800, #795548)",
+                background:
+                  "linear-gradient(90deg, #4caf50, #8bc34a, #cddc39, #ffeb3b, #ff9800, #795548)",
               }}
             />
-            <span className="text-[9px] text-gray-600">{elevMax.toFixed(0)}</span>
+            <span className="text-[9px] text-gray-600">
+              {elevMax.toFixed(0)}
+            </span>
           </div>
         </div>
 
         {/* Info do slope */}
         {project.slope_avg_pct != null && (
           <div className="absolute bottom-3 right-3 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-sm border border-gray-200">
-            <p className="text-[9px] font-medium text-gray-500">DECLIVIDADE MÉDIA</p>
-            <p className="text-sm font-bold text-gray-800">{project.slope_avg_pct.toFixed(1)}%</p>
+            <p className="text-[9px] font-medium text-gray-500">
+              DECLIVIDADE MÉDIA
+            </p>
+            <p className="text-sm font-bold text-gray-800">
+              {project.slope_avg_pct.toFixed(1)}%
+            </p>
           </div>
         )}
 
@@ -548,24 +763,107 @@ export default function TerrainViewer3D({ project }: TerrainViewer3DProps) {
       {/* Resumo estatístico */}
       <div className="grid grid-cols-4 gap-3">
         {[
-          { label: "Elevação Mín.", value: `${elevMin.toFixed(1)} m`, color: "text-green-600" },
-          { label: "Elevação Máx.", value: `${elevMax.toFixed(1)} m`, color: "text-orange-600" },
-          { label: "Desnível", value: `${elevRange.toFixed(1)} m`, color: "text-blue-600" },
+          {
+            label: "Elevação Mín.",
+            value: `${elevMin.toFixed(1)} m`,
+            color: "text-green-600",
+          },
+          {
+            label: "Elevação Máx.",
+            value: `${elevMax.toFixed(1)} m`,
+            color: "text-orange-600",
+          },
+          {
+            label: "Desnível",
+            value: `${elevRange.toFixed(1)} m`,
+            color: "text-blue-600",
+          },
           {
             label: "Declividade Média",
-            value: project.slope_avg_pct != null ? `${project.slope_avg_pct.toFixed(1)}%` : "N/A",
-            color: (project.slope_avg_pct ?? 0) > 30 ? "text-red-600" : "text-gray-800",
+            value:
+              project.slope_avg_pct != null
+                ? `${project.slope_avg_pct.toFixed(1)}%`
+                : "N/A",
+            color:
+              (project.slope_avg_pct ?? 0) > 30
+                ? "text-red-600"
+                : "text-gray-800",
           },
         ].map((stat) => (
           <div
             key={stat.label}
             className="bg-white rounded-lg border border-gray-200 px-3 py-2.5 text-center"
           >
-            <p className="text-[10px] font-medium text-gray-500">{stat.label}</p>
+            <p className="text-[10px] font-medium text-gray-500">
+              {stat.label}
+            </p>
             <p className={`text-lg font-bold ${stat.color}`}>{stat.value}</p>
           </div>
         ))}
       </div>
+
+      {/* Cut/Fill volumetria — só renderiza quando ativo */}
+      {cutFillOn && cutFillStats && (
+        <div className="rounded-lg border border-purple-200 bg-purple-50/40 p-3 space-y-2">
+          <div className="flex items-center justify-between">
+            <p className="text-xs font-semibold text-purple-900">
+              Movimento de Terra (Cut/Fill)
+            </p>
+            <span className="text-[10px] text-purple-700">
+              cota alvo {targetElev?.toFixed(1)}m · {cutFillStats.cells} células
+            </span>
+          </div>
+          <div className="grid grid-cols-3 gap-3">
+            <div className="bg-white rounded-lg border border-cyan-200 px-3 py-2.5 text-center">
+              <p className="text-[10px] font-medium text-gray-500">
+                Corte (escavar)
+              </p>
+              <p className="text-lg font-bold text-cyan-700">
+                {cutFillStats.cutM3.toLocaleString("pt-BR")} m³
+              </p>
+            </div>
+            <div className="bg-white rounded-lg border border-orange-200 px-3 py-2.5 text-center">
+              <p className="text-[10px] font-medium text-gray-500">
+                Aterro (importar)
+              </p>
+              <p className="text-lg font-bold text-orange-600">
+                {cutFillStats.fillM3.toLocaleString("pt-BR")} m³
+              </p>
+            </div>
+            <div
+              className={`bg-white rounded-lg border px-3 py-2.5 text-center ${
+                cutFillStats.netM3 === 0
+                  ? "border-green-200"
+                  : cutFillStats.netM3 > 0
+                    ? "border-orange-300"
+                    : "border-cyan-300"
+              }`}
+            >
+              <p className="text-[10px] font-medium text-gray-500">
+                Saldo líquido
+              </p>
+              <p
+                className={`text-lg font-bold ${
+                  cutFillStats.netM3 === 0
+                    ? "text-green-700"
+                    : cutFillStats.netM3 > 0
+                      ? "text-orange-600"
+                      : "text-cyan-700"
+                }`}
+              >
+                {cutFillStats.netM3 > 0 ? "+" : ""}
+                {cutFillStats.netM3.toLocaleString("pt-BR")} m³
+              </p>
+            </div>
+          </div>
+          <p className="text-[10px] text-gray-500 italic leading-tight">
+            Saldo positivo = importar terra · negativo = exportar · zero =
+            balanceado. Estimativa baseada em grid{" "}
+            {(project as any).elevation_grid?.sampleCount ?? 0} pontos. Pra
+            projeto executivo, carregar Tier 2 BDGD HD + topografia LiDAR.
+          </p>
+        </div>
+      )}
     </div>
   );
 }

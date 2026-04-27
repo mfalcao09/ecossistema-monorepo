@@ -57,6 +57,10 @@ const ParcelamentoCorteTereno = lazy(() => import("./ParcelamentoCorteTereno"));
 const ParcelamentoExclusoes = lazy(() => import("./ParcelamentoExclusoes"));
 // Sessão 154 — BDGD ANEEL distribuição (Tier 1 nacional + Tier 2 HD on-demand)
 const ParcelamentoBDGDPanel = lazy(() => import("./ParcelamentoBDGDPanel"));
+// Sessão 155 — Sprint A+C: Hillshade + Slope Heatmap + Suitability Score
+const ParcelamentoTopografiaPanel = lazy(
+  () => import("./ParcelamentoTopografiaPanel"),
+);
 // Financeiro e Conformidade — inline nas tabs (sessão 150 — Fix UX)
 const ParcelamentoFinanceiro = lazy(() => import("./ParcelamentoFinanceiro"));
 const ParcelamentoConformidade = lazy(
@@ -1385,6 +1389,17 @@ function TabMapa({
             map={mapRef.current}
             mapReady={mapReady}
             developmentId={project.id}
+          />
+        </Suspense>
+
+        {/* Painel Topografia — hillshade + slope heatmap + suitability */}
+        <Suspense fallback={null}>
+          <ParcelamentoTopografiaPanel
+            map={mapRef.current}
+            mapReady={mapReady}
+            project={project}
+            ltExistentes={layerStates.aneel_lt_existentes.geojson}
+            ltPlanejadas={layerStates.aneel_lt_planejadas.geojson}
           />
         </Suspense>
 
