@@ -112,7 +112,20 @@ export function aplicarSnapshotSobreDadosDiploma(
   const s_cur = snapshot.curso;
   if (s_cur) {
     if (s_cur.nome) out.curso.nome = s_cur.nome;
-    if (s_cur.grau) out.curso.grau_conferido = s_cur.grau;
+    if (s_cur.grau) {
+      // XSD TGrauConferido = {Tecnólogo, Bacharelado, Licenciatura, Curso sequencial}.
+      // Banco/snapshot pode ter "bacharel" (lowercase) ou variações — sanitiza
+      // antes de gravar pra não estourar o XSD. Mesma lógica do mapearGrauConferido()
+      // em montador.ts; duplicado aqui pra evitar dependência cruzada xml/ ↔ diploma/.
+      const g = s_cur.grau.trim().toLowerCase();
+      out.curso.grau_conferido = g.includes("tecn")
+        ? "Tecnólogo"
+        : g.includes("licenc")
+          ? "Licenciatura"
+          : g.includes("sequencial")
+            ? "Curso sequencial"
+            : "Bacharelado";
+    }
     if (s_cur.titulo_conferido)
       out.curso.titulo_conferido = s_cur.titulo_conferido;
     if (s_cur.modalidade) {
