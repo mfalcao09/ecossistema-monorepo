@@ -49,6 +49,8 @@ interface EventoTimeline {
   titulo: string;
   descricao?: string | null;
   usuario_id?: string | null;
+  /** Sessão 2026-04-26: nome resolvido server-side pra exibir auditoria */
+  usuario_nome?: string | null;
   meta?: Record<string, unknown> | null;
 }
 
@@ -290,6 +292,14 @@ export default function AbaHistorico({
                     {ev.descricao && (
                       <p className="text-xs text-gray-600 leading-relaxed">
                         {ev.descricao}
+                      </p>
+                    )}
+                    {ev.usuario_nome && (
+                      <p className="text-[10px] text-gray-400 mt-0.5">
+                        por{" "}
+                        <span className="font-medium text-gray-600">
+                          {ev.usuario_nome}
+                        </span>
                       </p>
                     )}
                   </div>

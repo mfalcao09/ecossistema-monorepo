@@ -8,6 +8,10 @@ import {
   podeEditarSnapshot,
   type DadosSnapshot,
 } from "@/lib/diploma/snapshot";
+import {
+  resolverNomesUsuarios,
+  nomeOuSistema,
+} from "@/lib/diploma/resolver-usuarios";
 
 // Fix 2026-04-23: Next.js 15 + Fluid Compute exige dynamic explicito;
 // sem isso, rotas serverless travam em cold-start (ate 300s default).
@@ -113,6 +117,43 @@ export const GET = protegerRota(async (request) => {
   const proximaVersao = ultimaVersao + 1;
   const totalDestravamentos = (unlockRows ?? []).length;
 
+  // Sessão 2026-04-26: resolução de nomes pra cada usuário envolvido
+  // (consolidações, destravamentos, edições, travamento atual).
+  type UnlockRow = { usuario_id: string | null };
+  type EdicaoRow = { usuario_id: string | null };
+  const idsUsuarios: Array<string | null> = [
+    diploma.dados_snapshot_travado_por,
+    ...consolidacoes.map((c) => c.consolidado_por),
+    ...((unlockRows ?? []) as UnlockRow[]).map((u) => u.usuario_id),
+    ...((edicoes ?? []) as EdicaoRow[]).map((e) => e.usuario_id),
+  ];
+  const nomesMap = await resolverNomesUsuarios(idsUsuarios);
+
+  const consolidacoesComNome = consolidacoes.map((c) => ({
+    ...c,
+    consolidado_por_nome: nomeOuSistema(nomesMap, c.consolidado_por),
+  }));
+  const destravamentosComNome = (
+    (unlockRows ?? []) as Array<
+      UnlockRow & {
+        [k: string]: unknown;
+      }
+    >
+  ).map((u) => ({
+    ...u,
+    usuario_nome: nomeOuSistema(nomesMap, u.usuario_id),
+  }));
+  const edicoesComNome = (
+    (edicoes ?? []) as Array<
+      EdicaoRow & {
+        [k: string]: unknown;
+      }
+    >
+  ).map((e) => ({
+    ...e,
+    usuario_nome: nomeOuSistema(nomesMap, e.usuario_id),
+  }));
+
   return NextResponse.json({
     diploma_id: diploma.id,
     status_diploma: diploma.status,
@@ -122,9 +163,12 @@ export const GET = protegerRota(async (request) => {
     travado: diploma.dados_snapshot_travado,
     travado_em: diploma.dados_snapshot_travado_em,
     travado_por: diploma.dados_snapshot_travado_por,
-    edicoes: edicoes ?? [],
-    destravamentos: unlockRows ?? [],
-    consolidacoes,
+    travado_por_nome: diploma.dados_snapshot_travado_por
+      ? nomeOuSistema(nomesMap, diploma.dados_snapshot_travado_por)
+      : null,
+    edicoes: edicoesComNome,
+    destravamentos: destravamentosComNome,
+    consolidacoes: consolidacoesComNome,
     stats: {
       total_consolidacoes: totalConsolidacoes,
       total_destravamentos: totalDestravamentos,

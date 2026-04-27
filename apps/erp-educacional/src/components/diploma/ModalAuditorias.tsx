@@ -41,6 +41,8 @@ interface AuditoriaItem {
   id: string;
   auditado_em: string;
   auditado_por: string | null;
+  /** Sessão 2026-04-26: nome resolvido server-side */
+  auditado_por_nome?: string | null;
   diploma_updated_at: string;
   pode_gerar_xml: boolean;
   totais: { criticos: number; avisos: number; infos: number; total: number };
@@ -243,8 +245,16 @@ function AuditoriaCard({
                 ? "Apta a gerar XML"
                 : `${t.criticos} crítico${t.criticos === 1 ? "" : "s"} bloqueia${t.criticos === 1 ? "" : "m"} geração`}
             </p>
-            <p className="text-xs text-gray-500 flex items-center gap-1.5 mt-0.5">
+            <p className="text-xs text-gray-500 flex items-center gap-1.5 mt-0.5 flex-wrap">
               <Clock size={11} /> {formatDate(item.auditado_em)}
+              {item.auditado_por_nome && (
+                <>
+                  <span className="text-gray-300">·</span>
+                  <span className="text-gray-700 font-medium">
+                    {item.auditado_por_nome}
+                  </span>
+                </>
+              )}
               <span className="text-gray-300">·</span>
               {t.criticos > 0 && (
                 <span className="text-red-600 font-medium">

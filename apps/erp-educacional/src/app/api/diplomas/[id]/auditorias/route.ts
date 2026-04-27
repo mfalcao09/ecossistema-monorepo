@@ -1,6 +1,10 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient as createAdminClient } from "@supabase/supabase-js";
 import { verificarAuth, erroNaoEncontrado } from "@/lib/security/api-guard";
+import {
+  resolverNomesUsuarios,
+  nomeOuSistema,
+} from "@/lib/diploma/resolver-usuarios";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 20;
@@ -106,6 +110,9 @@ export async function GET(
 
   const rows = (data ?? []) as unknown as AuditoriaRow[];
 
+  // Sessão 2026-04-26: resolve nomes em batch
+  const nomesMap = await resolverNomesUsuarios(rows.map((r) => r.auditado_por));
+
   // Diff: como `rows` está ordenado decrescente, o anterior de rows[i] é rows[i+1]
   const auditorias = rows.map((r, i) => {
     const anterior = rows[i + 1] ?? null;
@@ -114,6 +121,7 @@ export async function GET(
       id: r.id,
       auditado_em: r.auditado_em,
       auditado_por: r.auditado_por,
+      auditado_por_nome: nomeOuSistema(nomesMap, r.auditado_por),
       diploma_updated_at: r.diploma_updated_at,
       pode_gerar_xml: r.pode_gerar_xml,
       totais: r.totais,

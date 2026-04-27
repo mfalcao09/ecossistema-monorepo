@@ -46,6 +46,8 @@ interface DestravamentoAuditoria {
   id: string;
   override_id: string;
   usuario_id: string;
+  /** Sessão 2026-04-26: nome resolvido server-side */
+  usuario_nome?: string | null;
   justificativa: string;
   expires_at: string;
   used_at: string | null;
@@ -58,6 +60,8 @@ interface ConsolidacaoAuditoria {
   snapshot_id: string | null;
   consolidado_em: string;
   consolidado_por: string | null;
+  /** Sessão 2026-04-26: nome resolvido server-side */
+  consolidado_por_nome?: string | null;
 }
 
 interface SnapshotStats {
@@ -645,8 +649,16 @@ function ConsolidacoesAnteriores({
               </span>
             </div>
             <p className="text-sm text-gray-700">
-              Snapshot consolidado{" "}
-              {c.consolidado_por ? "(usuário registrado)" : ""}
+              Snapshot consolidado
+              {c.consolidado_por_nome && (
+                <>
+                  {" "}
+                  por{" "}
+                  <span className="font-semibold">
+                    {c.consolidado_por_nome}
+                  </span>
+                </>
+              )}
             </p>
             {c.snapshot_id && (
               <div className="mt-1 text-[10px] text-gray-400 font-mono">
@@ -697,6 +709,11 @@ function DestravamentosLista({
                 </span>
               </div>
               <p className="text-sm text-gray-700">{d.justificativa}</p>
+              {d.usuario_nome && (
+                <p className="text-[11px] text-gray-500 mt-1">
+                  por <span className="font-semibold">{d.usuario_nome}</span>
+                </p>
+              )}
               <div className="mt-1 text-[10px] text-gray-400 font-mono">
                 override: {d.override_id.slice(0, 8)}…
               </div>

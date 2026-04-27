@@ -2,6 +2,10 @@ import { NextResponse } from "next/server";
 import { createClient } from "@/lib/supabase/server";
 import { protegerRota } from "@/lib/security/api-guard";
 import { sanitizarErro } from "@/lib/security/sanitize-error";
+import {
+  resolverNomesUsuarios,
+  nomeOuSistema,
+} from "@/lib/diploma/resolver-usuarios";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 20;
@@ -44,6 +48,8 @@ interface EventoTimeline {
   titulo: string;
   descricao?: string | null;
   usuario_id?: string | null;
+  /** Sessão 2026-04-26: resolvido server-side para auditoria legível */
+  usuario_nome?: string | null;
   meta?: Record<string, unknown> | null;
 }
 
@@ -382,9 +388,19 @@ export const GET = protegerRota(async (request) => {
   // Ordenação descendente
   eventos.sort((a, b) => (a.em < b.em ? 1 : a.em > b.em ? -1 : 0));
 
+  // Resolução de nomes (Sessão 2026-04-26): batch lookup pra exibir
+  // "consolidado por João" em vez de UUID na timeline.
+  const nomesMap = await resolverNomesUsuarios(
+    eventos.map((e) => e.usuario_id),
+  );
+  const eventosComNome = eventos.map((e) => ({
+    ...e,
+    usuario_nome: e.usuario_id ? nomeOuSistema(nomesMap, e.usuario_id) : null,
+  }));
+
   return NextResponse.json({
     diploma_id: diplomaId,
-    eventos,
-    total: eventos.length,
+    eventos: eventosComNome,
+    total: eventosComNome.length,
   });
 });
