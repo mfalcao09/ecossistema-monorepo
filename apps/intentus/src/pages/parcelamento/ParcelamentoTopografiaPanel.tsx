@@ -10,9 +10,22 @@
  */
 
 import React, { useEffect, useMemo, useState, useCallback } from "react";
-import { Mountain, Layers3, Target } from "lucide-react";
+import {
+  Mountain,
+  Layers3,
+  Target,
+  Sparkles,
+  Loader2,
+  AlertCircle,
+} from "lucide-react";
 import { Switch } from "@/components/ui/switch";
+import { Button } from "@/components/ui/button";
 import * as turf from "@turf/turf";
+import {
+  generateContours,
+  loadCachedContours,
+  type ContoursStats,
+} from "@/lib/parcelamento/contoursApi";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type MapboxMap = any;
@@ -252,6 +265,16 @@ export default function ParcelamentoTopografiaPanel({
 }: Props) {
   const [hillshadeOn, setHillshadeOn] = useState(false);
   const [slopeOn, setSlopeOn] = useState(false);
+  const [contoursOn, setContoursOn] = useState(false);
+  const [contoursLoaded, setContoursLoaded] = useState(false);
+  const [contoursLoading, setContoursLoading] = useState(false);
+  const [contoursError, setContoursError] = useState<string | null>(null);
+  const [contoursGeo, setContoursGeo] =
+    useState<GeoJSON.FeatureCollection | null>(null);
+  const [contoursStats, setContoursStats] = useState<ContoursStats | null>(
+    null,
+  );
+  const [contoursInterval, setContoursInterval] = useState<number>(5);
 
   const slopeCells = useMemo(() => computeSlopeGrid(project), [project]);
   const slopeFC = useMemo(() => slopeGridToGeoJSON(slopeCells), [slopeCells]);
@@ -270,6 +293,120 @@ export default function ParcelamentoTopografiaPanel({
     () => computeSuitability(project, ltExistentes),
     [project, ltExistentes],
   );
+
+  // ---------------------------------------------------------------------------
+  // Curvas de nível — Esri ArcGIS Profile + cache
+  // ---------------------------------------------------------------------------
+  useEffect(() => {
+    if (!project?.id) return;
+    let cancelled = false;
+    loadCachedContours(project.id).then((r) => {
+      if (cancelled) return;
+      if (r.ok && r.data) {
+        setContoursGeo(r.data.geojson);
+        setContoursStats(r.data.stats);
+        setContoursInterval(r.data.stats.interval_m);
+        setContoursLoaded(true);
+      }
+    });
+    return () => {
+      cancelled = true;
+    };
+  }, [project?.id]);
+
+  const handleGenerateContours = useCallback(async () => {
+    if (!project?.id || contoursLoading) return;
+    setContoursLoading(true);
+    setContoursError(null);
+    const r = await generateContours(project.id, contoursInterval, "30m");
+    setContoursLoading(false);
+    if (!r.ok) {
+      if (r.error.code === "ARCGIS_KEY_MISSING") {
+        setContoursError(
+          "Secret ARCGIS_API_KEY_1 não configurada na Edge Function",
+        );
+      } else {
+        setContoursError(r.error.message);
+      }
+      return;
+    }
+    setContoursGeo(r.data.geojson);
+    setContoursStats(r.data.stats);
+    setContoursLoaded(true);
+  }, [project?.id, contoursInterval, contoursLoading]);
+
+  const toggleContours = useCallback(() => {
+    if (!map || !mapReady || !contoursGeo) return;
+    const newOn = !contoursOn;
+    setContoursOn(newOn);
+
+    try {
+      if (!map.getSource("src-contours")) {
+        map.addSource("src-contours", { type: "geojson", data: contoursGeo });
+      } else {
+        map.getSource("src-contours").setData(contoursGeo);
+      }
+
+      // Layer linhas mestras (mais grossas, com label)
+      if (!map.getLayer("layer-contours-master")) {
+        map.addLayer({
+          id: "layer-contours-master",
+          source: "src-contours",
+          type: "line",
+          paint: {
+            "line-color": "#fef3c7",
+            "line-width": 1.5,
+            "line-opacity": 0.85,
+          },
+          filter: ["==", ["get", "master"], true],
+        });
+        // Labels apenas em curvas mestras
+        map.addLayer({
+          id: "layer-contours-labels",
+          source: "src-contours",
+          type: "symbol",
+          layout: {
+            "symbol-placement": "line",
+            "text-field": ["concat", ["to-string", ["get", "elevation"]], "m"],
+            "text-size": 10,
+            "text-font": ["Open Sans Regular", "Arial Unicode MS Regular"],
+            "symbol-spacing": 200,
+          },
+          paint: {
+            "text-color": "#fef3c7",
+            "text-halo-color": "#1f2937",
+            "text-halo-width": 1.5,
+          },
+          filter: ["==", ["get", "master"], true],
+        });
+      }
+      // Layer linhas intermediárias (mais finas)
+      if (!map.getLayer("layer-contours-intermediate")) {
+        map.addLayer({
+          id: "layer-contours-intermediate",
+          source: "src-contours",
+          type: "line",
+          paint: {
+            "line-color": "#fef3c7",
+            "line-width": 0.6,
+            "line-opacity": 0.55,
+          },
+          filter: ["==", ["get", "master"], false],
+        });
+      }
+      const visibility = newOn ? "visible" : "none";
+      [
+        "layer-contours-master",
+        "layer-contours-labels",
+        "layer-contours-intermediate",
+      ].forEach((id) => {
+        if (map.getLayer(id))
+          map.setLayoutProperty(id, "visibility", visibility);
+      });
+    } catch (e) {
+      console.warn("[Topografia] curvas falhou:", e);
+    }
+  }, [map, mapReady, contoursOn, contoursGeo]);
 
   // ---------------------------------------------------------------------------
   // Hillshade — Mapbox raster-dem nativo
@@ -428,6 +565,69 @@ export default function ParcelamentoTopografiaPanel({
               ⚠️ {slopeStats.above30Pct}% do terreno acima de 30% (não loteável)
             </p>
           )}
+        </div>
+      )}
+
+      {/* Curvas de nível — Esri ArcGIS Profile */}
+      <div className="flex items-start justify-between gap-2 pt-1">
+        <div className="flex items-start gap-2 flex-1 min-w-0">
+          <Sparkles className="h-3 w-3 text-amber-600 mt-0.5 flex-shrink-0" />
+          <div className="min-w-0">
+            <span className="text-[11px] font-medium text-gray-800 block">
+              Curvas de nível (Esri)
+            </span>
+            <span className="text-[10px] text-gray-500">
+              {contoursLoaded && contoursStats
+                ? `${contoursStats.feature_count} curvas · ${contoursStats.elev_min.toFixed(0)}–${contoursStats.elev_max.toFixed(0)}m · cada ${contoursStats.interval_m}m`
+                : "Não geradas — clique abaixo"}
+            </span>
+          </div>
+        </div>
+        <Switch
+          checked={contoursOn}
+          disabled={!mapReady || !contoursLoaded}
+          onCheckedChange={toggleContours}
+          aria-label="Toggle curvas"
+        />
+      </div>
+
+      {/* Botão gerar / regenerar curvas */}
+      {!contoursLoaded && (
+        <div className="flex items-center gap-2">
+          <select
+            value={contoursInterval}
+            onChange={(e) => setContoursInterval(Number(e.target.value))}
+            disabled={contoursLoading}
+            className="text-[10px] border border-emerald-200 rounded px-1.5 py-0.5 bg-white"
+          >
+            <option value={1}>1m</option>
+            <option value={2}>2m</option>
+            <option value={5}>5m</option>
+            <option value={10}>10m</option>
+            <option value={20}>20m</option>
+          </select>
+          <Button
+            size="sm"
+            variant="outline"
+            className="h-6 text-[10px] flex-1 border-amber-300 text-amber-700 hover:bg-amber-50"
+            disabled={contoursLoading}
+            onClick={handleGenerateContours}
+          >
+            {contoursLoading ? (
+              <>
+                <Loader2 className="h-3 w-3 mr-1 animate-spin" />
+                Gerando…
+              </>
+            ) : (
+              "Gerar curvas (~10s · ~50K samples/mês free)"
+            )}
+          </Button>
+        </div>
+      )}
+      {contoursError && (
+        <div className="flex items-start gap-1.5 text-[10px] text-red-700 bg-red-50 border border-red-200 rounded px-1.5 py-1">
+          <AlertCircle className="h-3 w-3 flex-shrink-0 mt-0.5" />
+          <span className="leading-tight">{contoursError}</span>
         </div>
       )}
 
