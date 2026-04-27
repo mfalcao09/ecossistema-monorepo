@@ -1060,6 +1060,50 @@ export default function RevisaoExtracaoPage() {
           return;
         }
 
+        // Sessão 2026-04-26: persiste a substituição no banco IMEDIATAMENTE.
+        // Antes era 100% client-side (auto-save só toca destino_xml/acervo/
+        // tipo_xsd, não storage_path/nome/mime/tamanho), o que fazia F5
+        // reverter para o arquivo original.
+        const arquivoIdReal = arquivosClassif[idx]?.id;
+        if (!arquivoIdReal) {
+          console.error(
+            "[substituir] arquivoClassif[idx].id ausente, não dá pra persistir",
+          );
+          alert(
+            "Não foi possível identificar o arquivo a substituir. Recarregue a página.",
+          );
+          return;
+        }
+
+        const persistRes = await fetch(
+          `/api/extracao/sessoes/${sessaoId}/arquivos/${arquivoIdReal}/substituir`,
+          {
+            method: "PATCH",
+            headers: { "Content-Type": "application/json" },
+            cache: "no-store",
+            body: JSON.stringify({
+              storage_path: novoPath,
+              bucket,
+              nome_original: file.name,
+              mime_type: file.type,
+              tamanho_bytes: file.size,
+            }),
+          },
+        );
+
+        if (!persistRes.ok) {
+          const body = await persistRes.json().catch(() => ({}));
+          const motivo =
+            (body as { mensagem?: string; erro?: string })?.mensagem ??
+            (body as { erro?: string })?.erro ??
+            `HTTP ${persistRes.status}`;
+          console.error("[substituir] Persistência falhou:", motivo);
+          alert(
+            `Substituição não foi salva no banco: ${motivo}\n\nO arquivo subiu para o Storage mas o registro do diploma continua apontando para o arquivo anterior. Por favor tente novamente.`,
+          );
+          return;
+        }
+
         // Atualiza sessao.arquivos para que futuras aberturas do preview usem o novo arquivo
         setSessao((prev) => {
           if (!prev) return prev;
@@ -1105,7 +1149,12 @@ export default function RevisaoExtracaoPage() {
         setCarregandoPreview(false);
       }
     },
-    [dialogComprobatorio?.arquivo_index, sessaoId, sessao?.arquivos],
+    [
+      dialogComprobatorio?.arquivo_index,
+      sessaoId,
+      sessao?.arquivos,
+      arquivosClassif,
+    ],
   );
 
   /** Descarta a sessão de extração e redireciona para a lista de processos. */
