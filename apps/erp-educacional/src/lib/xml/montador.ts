@@ -404,6 +404,22 @@ function montarAtoRegulatorio(
 }
 
 /**
+ * Mapeia grau do banco (lowercase ou variações) para o enum XSD v1.05
+ * TGrauConferido = {Tecnólogo, Bacharelado, Licenciatura, Curso sequencial}
+ *
+ * Banco da FIC tem valores como "bacharel", "licenciatura", etc. Esses
+ * precisam ser canonizados antes de irem para o XML, ou o XSD rejeita.
+ */
+function mapearGrauConferido(grau: string | null): string {
+  const g = (grau || "").trim().toLowerCase();
+  if (g.includes("tecn")) return "Tecnólogo";
+  if (g.includes("licenc")) return "Licenciatura";
+  if (g.includes("sequencial")) return "Curso sequencial";
+  // "bacharel", "bacharelado", default
+  return "Bacharelado";
+}
+
+/**
  * Mapeia forma_acesso do banco para o enum do XSD v1.05
  */
 function mapearFormaAcesso(formaAcesso: string | null): TFormaAcesso {
@@ -898,7 +914,7 @@ export async function montarDadosDiploma(
       codigo_emec: cur.codigo_emec,
       modalidade: cur.modalidade === "EAD" ? "EAD" : "Presencial",
       titulo_conferido: cur.titulo_conferido || "Bacharel",
-      grau_conferido: cur.grau || "Bacharelado",
+      grau_conferido: mapearGrauConferido(cur.grau),
       enfase: cur.enfase || undefined,
       endereco: montarEndereco(
         cur.logradouro,

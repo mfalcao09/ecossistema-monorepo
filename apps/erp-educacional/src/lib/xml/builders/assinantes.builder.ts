@@ -25,23 +25,23 @@
  * <Nome> dentro de <Assinante> — o nome é apenas referência interna nossa.
  */
 
-import type { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
-import { DadosDiploma, Assinante } from '../tipos';
-import { limparNum } from './base.builder';
+import type { XMLBuilder } from "xmlbuilder2/lib/interfaces";
+import { DadosDiploma, Assinante } from "../tipos";
+import { limparNum } from "./base.builder";
 
 /**
  * Cargos válidos do enum TCargosAssinantes (XSD v1.05).
  * Qualquer cargo fora desta lista vai como <OutroCargo>.
  */
 const CARGOS_VALIDOS_XSD = new Set<string>([
-  'Reitor',
-  'Reitor em Exercício',
-  'Responsável pelo registro',
-  'Coordenador de Curso',
-  'Subcoordenador de Curso',
-  'Coordenador de Curso em exercício',
-  'Chefe da área de registro de diplomas',
-  'Chefe em exercício da área de registro de diplomas',
+  "Reitor",
+  "Reitor em Exercício",
+  "Responsável pelo registro",
+  "Coordenador de Curso",
+  "Subcoordenador de Curso",
+  "Coordenador de Curso em exercício",
+  "Chefe da área de registro de diplomas",
+  "Chefe em exercício da área de registro de diplomas",
 ]);
 
 /**
@@ -49,14 +49,14 @@ const CARGOS_VALIDOS_XSD = new Set<string>([
  * Comparação case-sensitive (o XSD é case-sensitive).
  */
 function classificarCargo(cargo: string | undefined | null): {
-  tag: 'Cargo' | 'OutroCargo';
+  tag: "Cargo" | "OutroCargo";
   valor: string;
 } {
-  const c = (cargo || '').trim();
+  const c = (cargo || "").trim();
   if (CARGOS_VALIDOS_XSD.has(c)) {
-    return { tag: 'Cargo', valor: c };
+    return { tag: "Cargo", valor: c };
   }
-  return { tag: 'OutroCargo', valor: c };
+  return { tag: "OutroCargo", valor: c };
 }
 
 /**
@@ -64,10 +64,22 @@ function classificarCargo(cargo: string | undefined | null): {
  * Retorna `true` se o bloco foi emitido, `false` se foi pulado por
  * ausência de assinantes válidos.
  */
-export function buildAssinantesIes(parent: XMLBuilder, dados: DadosDiploma): boolean {
-  const assinantes = (dados.assinantes || []).filter(
-    (a: Assinante) => !!a && !!a.cpf && !!a.cargo
-  );
+export function buildAssinantesIes(
+  parent: XMLBuilder,
+  dados: DadosDiploma,
+): boolean {
+  // XSD v1.05 TAssinante exige <CPF type="TCpf"> = 11 dígitos.
+  // Não há slot para CNPJ (eCNPJ) nesse bloco — o eCNPJ assina via XAdES,
+  // não aparece como pessoa em <Assinantes>. Filtramos:
+  //   1. Sem CPF/cargo → ignora
+  //   2. tipo_certificado === 'eCNPJ' → ignora (não é pessoa física)
+  //   3. CPF que após limpeza tem ≠ 11 dígitos (CNPJ por engano) → ignora
+  const assinantes = (dados.assinantes || []).filter((a: Assinante) => {
+    if (!a || !a.cpf || !a.cargo) return false;
+    if (a.tipo_certificado === "eCNPJ") return false;
+    const cpfLimpo = limparNum(a.cpf);
+    return cpfLimpo.length === 11;
+  });
 
   if (assinantes.length === 0) {
     // Bloco <Assinantes> exige minOccurs=1 de <Assinante>. Sem assinantes,
@@ -83,11 +95,11 @@ export function buildAssinantesIes(parent: XMLBuilder, dados: DadosDiploma): boo
     return oa - ob;
   });
 
-  const assinantesEle = parent.ele('Assinantes');
+  const assinantesEle = parent.ele("Assinantes");
 
   for (const a of ordenados) {
-    const assinanteEle = assinantesEle.ele('Assinante');
-    assinanteEle.ele('CPF').txt(limparNum(a.cpf));
+    const assinanteEle = assinantesEle.ele("Assinante");
+    assinanteEle.ele("CPF").txt(limparNum(a.cpf));
 
     const { tag, valor } = classificarCargo(a.cargo);
     assinanteEle.ele(tag).txt(valor);

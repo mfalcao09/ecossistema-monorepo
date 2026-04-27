@@ -8,16 +8,17 @@
  * - Factory do xmlbuilder2
  */
 
-import { create } from 'xmlbuilder2';
-import type { XMLBuilder } from 'xmlbuilder2/lib/interfaces';
+import { create } from "xmlbuilder2";
+import type { XMLBuilder } from "xmlbuilder2/lib/interfaces";
 
 // ============================================================
 // CONSTANTES DO XSD v1.05
 // ============================================================
 
-export const XSD_NAMESPACE = 'https://portal.mec.gov.br/diplomadigital/arquivos-em-xsd';
-export const XSI_NAMESPACE = 'http://www.w3.org/2001/XMLSchema-instance';
-export const XSD_VERSAO = '1.05';
+export const XSD_NAMESPACE =
+  "https://portal.mec.gov.br/diplomadigital/arquivos-em-xsd";
+export const XSI_NAMESPACE = "http://www.w3.org/2001/XMLSchema-instance";
+export const XSD_VERSAO = "1.05";
 
 // ============================================================
 // UTILITÁRIOS
@@ -25,13 +26,13 @@ export const XSD_VERSAO = '1.05';
 
 /** Remove tudo exceto dígitos (CPF, CNPJ, CEP) */
 export function limparNum(num: string | undefined | null): string {
-  if (!num) return '';
-  return num.replace(/\D/g, '');
+  if (!num) return "";
+  return num.replace(/\D/g, "");
 }
 
 /** Formata data para ISO YYYY-MM-DD */
 export function fmtData(data: string | undefined | null): string {
-  if (!data) return '';
+  if (!data) return "";
   if (/^\d{4}-\d{2}-\d{2}$/.test(data)) return data;
   const m = data.match(/^(\d{2})\/(\d{2})\/(\d{4})$/);
   if (m) return `${m[3]}-${m[2]}-${m[1]}`;
@@ -60,23 +61,41 @@ export function fmtData(data: string | undefined | null): string {
  * direto pode gerar a data errada após ~21h horário de Brasília).
  */
 export function gerarDataExpedicaoXML(): string {
-  const fmt = new Intl.DateTimeFormat('en-CA', {
-    timeZone: 'America/Sao_Paulo',
-    year: 'numeric',
-    month: '2-digit',
-    day: '2-digit',
+  const fmt = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "America/Sao_Paulo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
   });
-  const parts = fmt.formatToParts(new Date()).reduce((acc, p) => {
-    if (p.type !== 'literal') acc[p.type] = p.value;
-    return acc;
-  }, {} as Record<string, string>);
+  const parts = fmt.formatToParts(new Date()).reduce(
+    (acc, p) => {
+      if (p.type !== "literal") acc[p.type] = p.value;
+      return acc;
+    },
+    {} as Record<string, string>,
+  );
   return `${parts.year}-${parts.month}-${parts.day}`;
 }
 
-/** Gera ID com padding de zeros (ex: Dip + 44 dígitos) */
-export function gerarIdXML(prefixo: string, totalDigitos: number, uuid: string): string {
-  const hex = uuid.replace(/-/g, '');
-  const padded = hex.padStart(totalDigitos, '0').slice(0, totalDigitos);
+/** Gera ID com padding de zeros (ex: Dip + 44 dígitos)
+ *
+ * XSD v1.05 restringe IDs ao padrão `^Prefixo[0-9]{N}$` (apenas dígitos
+ * decimais). Como UUIDs contêm letras hex (a-f), precisamos converter o
+ * UUID para representação decimal antes de fazer padding com zeros.
+ *
+ * Estratégia: BigInt(0x + hex) → decimal string → padStart com zeros.
+ * 32 chars hex = 128 bits → max ≈ 3.4×10³⁸ → cabe em 39 dígitos decimais.
+ * Padding até totalDigitos (44) garante o tamanho exato exigido pelo XSD.
+ */
+export function gerarIdXML(
+  prefixo: string,
+  totalDigitos: number,
+  uuid: string,
+): string {
+  const hex = uuid.replace(/-/g, "");
+  // Converte hex → BigInt → decimal (apenas dígitos 0-9)
+  const decimal = BigInt(`0x${hex || "0"}`).toString(10);
+  const padded = decimal.padStart(totalDigitos, "0").slice(-totalDigitos);
   return `${prefixo}${padded}`;
 }
 
@@ -88,16 +107,16 @@ export function gerarIdXML(prefixo: string, totalDigitos: number, uuid: string):
  * "Homologação" e "Teste" existem só para cenários de desenvolvimento.
  */
 export function formatarAmbienteXSD(
-  ambiente: 'producao' | 'homologacao' | 'teste' | undefined | null
-): 'Produção' | 'Homologação' | 'Teste' {
+  ambiente: "producao" | "homologacao" | "teste" | undefined | null,
+): "Produção" | "Homologação" | "Teste" {
   switch (ambiente) {
-    case 'homologacao':
-      return 'Homologação';
-    case 'teste':
-      return 'Teste';
-    case 'producao':
+    case "homologacao":
+      return "Homologação";
+    case "teste":
+      return "Teste";
+    case "producao":
     default:
-      return 'Produção';
+      return "Produção";
   }
 }
 
@@ -109,8 +128,12 @@ export function formatarAmbienteXSD(
  * Adiciona elemento com texto somente se valor existir
  * Equivalente ao antigo tagOpc()
  */
-export function eleOpc(parent: XMLBuilder, tag: string, value?: string | number | null): void {
-  if (value === null || value === undefined || value === '') return;
+export function eleOpc(
+  parent: XMLBuilder,
+  tag: string,
+  value?: string | number | null,
+): void {
+  if (value === null || value === undefined || value === "") return;
   parent.ele(tag).txt(String(value));
 }
 
@@ -118,9 +141,9 @@ export function eleOpc(parent: XMLBuilder, tag: string, value?: string | number 
  * Cria o documento XML raiz com declaração e namespaces
  */
 export function criarDocumentoXML(rootTag: string): XMLBuilder {
-  const doc = create({ version: '1.0', encoding: 'UTF-8' })
+  const doc = create({ version: "1.0", encoding: "UTF-8" })
     .ele(XSD_NAMESPACE, rootTag)
-    .att('xmlns:xsi', XSI_NAMESPACE);
+    .att("xmlns:xsi", XSI_NAMESPACE);
   return doc;
 }
 
