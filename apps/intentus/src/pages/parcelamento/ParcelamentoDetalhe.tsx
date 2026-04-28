@@ -13,6 +13,7 @@ import React, {
 } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { useParcelamentoProject } from "@/hooks/useParcelamentoProjects";
+import { useAuth } from "@/hooks/useAuth";
 import {
   calculateUrbanistic,
   calculateViabilidadeScore,
@@ -121,65 +122,119 @@ const TABS: { key: TabKey; label: string }[] = [
 interface LayerConfig {
   key: GeoLayerKey;
   label: string;
+  /** Label curto exibido nos toggles compactos (sem prefixo de fonte). */
+  shortLabel?: string;
   color: string;
   description: string;
+  /** Grupo lógico exibido como seção no painel de camadas. */
+  group: LayerGroup;
   /** Renderizar pontos (ex: subestações) com paint type circle */
   point?: boolean;
   /** Renderizar linha tracejada (ex: LT planejadas/expansão) */
   dashed?: boolean;
 }
 
-const MAP_LAYERS: LayerConfig[] = [
+/** Grupos lógicos das camadas exibidos no painel.
+ *
+ * Convenção:
+ * - "Áreas Protegidas": restrições ambientais (UCs, hidrografia/APP, futuro
+ *    SiCAR Reserva Legal).
+ * - "Restrições Legais": cadastro fundiário e servidões administrativas
+ *    (SIGEF, DUP) — onde construir tem ônus legal mesmo sem proteção
+ *    ambiental.
+ * - "Infraestrutura": rodovias e sistema elétrico de transmissão (LT/SUB).
+ *    Não inclui rede de distribuição local (BDGD) — essa tem painel próprio.
+ */
+type LayerGroup = "ambiental" | "legal" | "infra";
+
+const LAYER_GROUPS: { id: LayerGroup; label: string; description: string }[] = [
   {
-    key: "sigef_privado",
-    label: "SIGEF — Imóveis Certificados",
-    color: "#f59e0b",
-    description: "Áreas certificadas INCRA — sobreposição fundiária",
+    id: "ambiental",
+    label: "Áreas Protegidas",
+    description: "Restrições ambientais — APP, UCs, Reserva Legal",
   },
+  {
+    id: "legal",
+    label: "Restrições Legais",
+    description: "Cadastro fundiário e servidões administrativas",
+  },
+  {
+    id: "infra",
+    label: "Infraestrutura",
+    description: "Rodovias e sistema elétrico de transmissão",
+  },
+];
+
+const MAP_LAYERS: LayerConfig[] = [
+  // Áreas Protegidas
   {
     key: "ibama_uc",
     label: "IBAMA — Unidades de Conservação",
+    shortLabel: "UCs",
     color: "#16a34a",
     description: "Áreas protegidas — restrição a parcelamento",
+    group: "ambiental",
   },
   {
     key: "hidrografia",
     label: "IBGE — Hidrografia",
+    shortLabel: "Rios / APP",
     color: "#0ea5e9",
-    description: "Rios, lagos — APP 30-500 m",
+    description: "Rios, lagos — APP 30-500 m (Código Florestal art. 4º)",
+    group: "ambiental",
   },
+  // Restrições Legais
+  {
+    key: "sigef_privado",
+    label: "SIGEF — Imóveis Certificados",
+    shortLabel: "SIGEF",
+    color: "#f59e0b",
+    description: "Áreas certificadas INCRA — sobreposição fundiária",
+    group: "legal",
+  },
+  {
+    key: "aneel_dup",
+    label: "ANEEL — Servidão LT (DUP)",
+    shortLabel: "Servidão LT",
+    color: "#dc2626",
+    description:
+      "Declaração de Utilidade Pública — restrição legal a construir",
+    group: "legal",
+  },
+  // Infraestrutura
   {
     key: "rodovias_federais",
     label: "DNIT — Rodovias Federais",
+    shortLabel: "Rodovias",
     color: "#ef4444",
     description: "Faixa de domínio e non aedificandi",
+    group: "infra",
   },
   {
     key: "aneel_lt_existentes",
     label: "ANEEL — LT Existentes (EPE)",
+    shortLabel: "LT Existentes",
     color: "#a855f7",
     description: "Linhas em operação — kV, concessionária, ano",
+    group: "infra",
   },
   {
     key: "aneel_lt_planejadas",
     label: "ANEEL — LT Planejadas (EPE)",
+    shortLabel: "LT Planejadas",
     color: "#f97316",
     description: "Expansão prevista do SIN — servidão futura",
+    group: "infra",
     dashed: true,
   },
   {
     key: "aneel_subestacoes",
     label: "ANEEL — Subestações (EPE)",
+    shortLabel: "Subestações",
     color: "#eab308",
     description: "Subestações existentes e planejadas",
+    group: "infra",
     point: true,
-  },
-  {
-    key: "aneel_dup",
-    label: "ANEEL — Servidão LT (DUP)",
-    color: "#dc2626",
-    description:
-      "Declaração de Utilidade Pública — restrição legal a construir",
   },
 ];
 
@@ -1441,7 +1496,7 @@ function TabMapa({
         )}
       </div>
 
-      {/* Toggles compactos em grid horizontal — abaixo do mapa */}
+      {/* Toggles agrupados por categoria — abaixo do mapa */}
       <div className="space-y-2">
         <div className="flex items-center gap-2">
           <Layers className="h-3.5 w-3.5 text-gray-600" />
@@ -1455,43 +1510,65 @@ function TabMapa({
           )}
         </div>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5">
-          {MAP_LAYERS.map((layer) => {
-            const state = layerStates[layer.key];
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-2">
+          {LAYER_GROUPS.map((group) => {
+            const layersInGroup = MAP_LAYERS.filter(
+              (l) => l.group === group.id,
+            );
+            if (layersInGroup.length === 0) return null;
             return (
-              <button
-                key={layer.key}
-                onClick={() => mapReady && toggleLayer(layer)}
-                disabled={!mapReady || state.loading}
-                title={layer.description}
-                className={`flex items-center gap-1.5 rounded-md border px-2 py-1.5 text-left transition-all ${
-                  state.active
-                    ? "border-blue-300 bg-blue-50"
-                    : "border-gray-200 bg-white hover:border-gray-300"
-                } ${!mapReady ? "opacity-50" : ""} ${
-                  state.loading ? "cursor-wait" : "cursor-pointer"
-                }`}
+              <div
+                key={group.id}
+                className="rounded-md border border-gray-200 bg-gray-50/40 p-2"
               >
                 <div
-                  className="h-2.5 w-2.5 rounded-sm flex-shrink-0"
-                  style={{ backgroundColor: layer.color }}
-                />
-                <span className="text-[11px] font-medium text-gray-800 truncate flex-1">
-                  {layer.label.replace(/^[A-Z]+ — /, "")}
-                </span>
-                {state.loading ? (
-                  <Loader2 className="h-3 w-3 text-blue-500 animate-spin flex-shrink-0" />
-                ) : (
-                  <Switch
-                    checked={state.active}
-                    disabled={!mapReady}
-                    onCheckedChange={() => toggleLayer(layer)}
-                    onClick={(e) => e.stopPropagation()}
-                    aria-label={`Alternar ${layer.label}`}
-                    className="scale-75 flex-shrink-0"
-                  />
-                )}
-              </button>
+                  className="text-[10px] font-semibold text-gray-600 uppercase tracking-wider mb-1.5 px-0.5"
+                  title={group.description}
+                >
+                  {group.label}
+                </div>
+                <div className="space-y-1">
+                  {layersInGroup.map((layer) => {
+                    const state = layerStates[layer.key];
+                    return (
+                      <button
+                        key={layer.key}
+                        onClick={() => mapReady && toggleLayer(layer)}
+                        disabled={!mapReady || state.loading}
+                        title={layer.description}
+                        className={`w-full flex items-center gap-1.5 rounded-md border px-2 py-1.5 text-left transition-all ${
+                          state.active
+                            ? "border-blue-300 bg-blue-50"
+                            : "border-gray-200 bg-white hover:border-gray-300"
+                        } ${!mapReady ? "opacity-50" : ""} ${
+                          state.loading ? "cursor-wait" : "cursor-pointer"
+                        }`}
+                      >
+                        <div
+                          className="h-2.5 w-2.5 rounded-sm flex-shrink-0"
+                          style={{ backgroundColor: layer.color }}
+                        />
+                        <span className="text-[11px] font-medium text-gray-800 truncate flex-1">
+                          {layer.shortLabel ??
+                            layer.label.replace(/^[A-Z]+ — /, "")}
+                        </span>
+                        {state.loading ? (
+                          <Loader2 className="h-3 w-3 text-blue-500 animate-spin flex-shrink-0" />
+                        ) : (
+                          <Switch
+                            checked={state.active}
+                            disabled={!mapReady}
+                            onCheckedChange={() => toggleLayer(layer)}
+                            onClick={(e) => e.stopPropagation()}
+                            aria-label={`Alternar ${layer.label}`}
+                            className="scale-75 flex-shrink-0"
+                          />
+                        )}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
             );
           })}
         </div>
@@ -1589,6 +1666,10 @@ export default function ParcelamentoDetalhe() {
   const navigate = useNavigate();
   const [activeTab, setActiveTab] = useState<TabKey>("visao-geral");
 
+  // Auth status — necessário pra evitar mostrar "Empreendimento não encontrado"
+  // enquanto tenant ainda está resolvendo (race condition após reload).
+  const { loading: authLoading, tenantId } = useAuth();
+
   const {
     data: project,
     isLoading,
@@ -1625,7 +1706,11 @@ export default function ParcelamentoDetalhe() {
           ? "bg-amber-100 text-amber-700"
           : "bg-red-100 text-red-700";
 
-  if (isLoading) {
+  // Mostra spinner se: auth ainda carregando (loading=true), OU
+  // tenant ainda não resolveu (tenantId=null mas auth pode estar terminando),
+  // OU query do projeto está em vôo. Sem isso, durante reload aparece
+  // "Empreendimento não encontrado" por 3s antes do tenantId resolver.
+  if (authLoading || !tenantId || isLoading) {
     return (
       <div className="flex items-center justify-center h-64">
         <Loader2 className="h-6 w-6 animate-spin text-gray-400" />

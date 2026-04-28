@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState, ReactNode } from "react";
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useState,
+  ReactNode,
+} from "react";
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { invalidateAuthCache } from "@/lib/tenantUtils";
@@ -51,67 +57,89 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setRoles(data?.map((r) => r.role) ?? []);
   };
 
-  /** Resolve tenant and then fetch tenant-scoped roles */
+  /** Resolve tenant and then fetch tenant-scoped roles.
+   *
+   * Defensivo contra falhas transitórias (RLS sincronizando após reload):
+   * - usa .maybeSingle() em vez de .single() — não dá throw em "0 rows"
+   * - só seta needsOnboarding=true quando confirmadamente sem tenant
+   *   (profile retornou mas tenant_id é null)
+   * - se a query do profile FALHA (network/RLS), NÃO redireciona pra
+   *   onboarding — preserva o estado anterior. Senão um blip transitório
+   *   faz o user perder a sessão de trabalho.
+   */
   const initUserContext = async (userId: string) => {
-    // 1. Resolve tenant first
-    const { data: profile } = await supabase
+    const { data: profile, error: profileError } = await supabase
       .from("profiles")
       .select("tenant_id")
       .eq("user_id", userId)
-      .single();
+      .maybeSingle();
+
+    if (profileError) {
+      // Falha transitória — não muda estado, deixa usuário re-tentar
+      console.warn("[useAuth] profile fetch falhou:", profileError.message);
+      return;
+    }
 
     if (!profile?.tenant_id) {
+      // Confirmadamente sem tenant — onboarding genuíno
       setNeedsOnboarding(true);
       setTenant(null);
       setRoles([]);
       return;
     }
 
-    // 2. Fetch tenant info
-    const { data: tenantData } = await supabase
+    const { data: tenantData, error: tenantError } = await supabase
       .from("tenants")
       .select("id, name, slug, logo_url, active")
       .eq("id", profile.tenant_id)
-      .single();
+      .maybeSingle();
+
+    if (tenantError) {
+      console.warn("[useAuth] tenant fetch falhou:", tenantError.message);
+      return;
+    }
 
     if (tenantData) {
       setTenant({ ...tenantData, active: tenantData.active ?? true });
       setNeedsOnboarding(false);
     } else {
+      // Tenant_id existe no profile mas tenant foi deletado — onboarding
       setNeedsOnboarding(true);
       setTenant(null);
       setRoles([]);
       return;
     }
 
-    // 3. Fetch roles scoped to this tenant
     await fetchRoles(userId, profile.tenant_id);
   };
 
   useEffect(() => {
-    const { data: { subscription } } = supabase.auth.onAuthStateChange(
-      async (_event, session) => {
-        setSession(session);
-        if (session?.user) {
-          setTimeout(() => {
-            initUserContext(session.user.id);
-          }, 0);
-        } else {
-          setRoles([]);
-          setTenant(null);
-          setNeedsOnboarding(false);
-        }
-        setLoading(false);
-      }
-    );
-
-    supabase.auth.getSession().then(({ data: { session } }) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       if (session?.user) {
-        initUserContext(session.user.id);
+        // AWAIT — não setar loading=false até tenant resolver
+        await initUserContext(session.user.id);
+      } else {
+        setRoles([]);
+        setTenant(null);
+        setNeedsOnboarding(false);
       }
       setLoading(false);
     });
+
+    // Inicial: carrega session + tenant em sequência antes de liberar UI
+    (async () => {
+      const {
+        data: { session },
+      } = await supabase.auth.getSession();
+      setSession(session);
+      if (session?.user) {
+        await initUserContext(session.user.id);
+      }
+      setLoading(false);
+    })();
 
     return () => subscription.unsubscribe();
   }, []);
