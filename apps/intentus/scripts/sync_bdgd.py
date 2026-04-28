@@ -585,7 +585,12 @@ def _chunked_insert(
     """
     Executa INSERT em chunks de CHUNK_ROWS pra evitar statement_timeout +
     OOM no Supabase. Cada chunk roda em sua própria transação curta com
-    statement_timeout=15min.
+    statement_timeout=30min.
+
+    Bumped 900s → 1800s após Cemig-D BT chunk 106 travar (geometrias
+    patológicas em alguns batches específicos demoram 10-15min só pra
+    parsear ST_GeomFromText). Continua tolerante a falha individual de
+    chunk — re-raise em statement_timeout faz `continuando` no caller.
 
     `insert_sql_template` deve ter `{where}` no lugar do filtro de chunk.
     """
@@ -595,17 +600,20 @@ def _chunked_insert(
     log(f"    INSERT em {chunks} chunks de até {CHUNK_ROWS:,} rows")
     for i in range(chunks):
         offset = i * CHUNK_ROWS
-        # ctid é o row id físico do staging UNLOGGED — equivalente a OFFSET sem ORDER BY
-        # mas usamos um trick com ROW_NUMBER() OVER () pra batch determinístico
         where_clause = (
             f"WHERE wkt IS NOT NULL AND wkt <> '' "
             f"AND _chunk_row >= {offset} AND _chunk_row < {offset + CHUNK_ROWS}"
         )
         sql = insert_sql_template.format(where=where_clause)
-        # SET LOCAL statement_timeout válido só dentro de transação BEGIN/COMMIT
-        wrapped = f"BEGIN; SET LOCAL statement_timeout = '900s'; {sql} COMMIT;"
+        wrapped = f"BEGIN; SET LOCAL statement_timeout = '1800s'; {sql} COMMIT;"
+        t_chunk = time.time()
         psql(db_url, wrapped)
-        log(f"    chunk {i+1}/{chunks} OK ({offset:,}–{min(offset + CHUNK_ROWS, total):,})")
+        elapsed = time.time() - t_chunk
+        log(
+            f"    chunk {i+1}/{chunks} OK "
+            f"({offset:,}–{min(offset + CHUNK_ROWS, total):,}) "
+            f"[{elapsed:.1f}s]"
+        )
 
 
 def load_mt_csv(db_url: str, csv: Path, distribuidora_id: int) -> int:
