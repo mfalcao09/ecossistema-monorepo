@@ -164,7 +164,8 @@ export type GeoLayerKey =
   | "linhas_transmissao" // legacy Overpass — fallback only
   | "aneel_lt_existentes" // EPE oficial — base existente
   | "aneel_lt_planejadas" // EPE oficial — expansão planejada
-  | "aneel_subestacoes"; // EPE oficial — existentes + planejadas
+  | "aneel_subestacoes" // EPE oficial — existentes + planejadas
+  | "aneel_dup"; // SIGEL ANEEL DUP — servidão LT nacional (P-191)
 
 /** Tipo de cenário financeiro (Fase 5 suporta múltiplos cenários simultâneos) */
 export type FinancialScenarioType =

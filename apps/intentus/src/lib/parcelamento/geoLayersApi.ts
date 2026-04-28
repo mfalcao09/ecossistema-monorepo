@@ -52,7 +52,8 @@ export type InfluenceLayerKey =
   | "linhas_transmissao" // legacy Overpass — fallback
   | "aneel_lt_existentes" // EPE oficial — base existente
   | "aneel_lt_planejadas" // EPE oficial — expansão planejada
-  | "aneel_subestacoes"; // EPE oficial — existentes + planejadas
+  | "aneel_subestacoes" // EPE oficial — existentes + planejadas
+  | "aneel_dup"; // SIGEL ANEEL — servidão LT nacional (P-191)
 
 export const ALL_INFLUENCE_LAYERS: InfluenceLayerKey[] = [
   "sigef_privado",
@@ -62,6 +63,7 @@ export const ALL_INFLUENCE_LAYERS: InfluenceLayerKey[] = [
   "aneel_lt_existentes",
   "aneel_lt_planejadas",
   "aneel_subestacoes",
+  "aneel_dup",
 ];
 
 /** Metadados humanos de cada camada — usado no UI para cards de influência */
@@ -121,6 +123,13 @@ export const INFLUENCE_LAYER_META: Record<
     color: "#eab308",
     description:
       "Subestações existentes e planejadas — pontos de injeção/transformação",
+  },
+  aneel_dup: {
+    label: "ANEEL — Servidão LT (DUP)",
+    shortLabel: "Servidão LT",
+    color: "#dc2626",
+    description:
+      "Declaração de Utilidade Pública — polígonos de servidão administrativa onde construções têm restrição legal (fonte SIGEL ANEEL)",
   },
 };
 

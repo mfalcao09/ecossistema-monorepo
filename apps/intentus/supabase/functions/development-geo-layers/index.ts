@@ -1,8 +1,14 @@
 /**
- * development-geo-layers v3
+ * development-geo-layers v4
  *
  * Busca camadas geoespaciais para terrenos de parcelamento de solo.
  * Persiste cache em `development_parcelamento_geo_layers`.
+ *
+ * v4 (sessão 155 — P-191): camada `aneel_dup` adicionada via SIGEL ANEEL
+ * FeatureServer (`DadosAbertos/DUP/FeatureServer/0`). Polígonos de servidão
+ * administrativa (Declaração de Utilidade Pública) cobrindo BR inteiro.
+ * Schema: `EMPREEM`, `ATO_LEGAL`, `Tensao` (kV), `MODALIDADE`, `STATUS_TEXT`.
+ * `fetchEPELayer` refatorada em `fetchArcGISLayer` genérica reusável.
  *
  * v3 (sessão 153 — ANEEL/EPE): camadas oficiais de transmissão via EPE
  * ArcGIS REST (https://gisepeprd2.epe.gov.br) — schema `Tensao` (kV),
@@ -380,16 +386,24 @@ function expandBboxByDegrees(bbox: BBox, deltaDeg: number): BBox {
 const EPE_MAPSERVER_URL =
   "https://gisepeprd2.epe.gov.br/arcgis/rest/services/SMA/WMS_Webmap_EPE/MapServer";
 
+const SIGEL_DUP_URL =
+  "https://sigel.aneel.gov.br/arcgis/rest/services/DadosAbertos/DUP/FeatureServer";
+
 /**
- * Query genérica numa Layer ArcGIS REST do MapServer da EPE retornando
- * GeoJSON. Suporta retry simples, timeout 25s e graceful fallback (FC vazio).
+ * Query genérica em qualquer Layer ArcGIS REST (MapServer/FeatureServer)
+ * retornando GeoJSON. Suporta timeout 25s e graceful fallback (FC vazio).
+ *
+ * `sourceLabel` aparece nas mensagens de erro ("EPE HTTP 500..." vs
+ * "SIGEL HTTP 500...") pra debugar de qual servidor veio a falha.
  */
-async function fetchEPELayer(
+async function fetchArcGISLayer(
+  baseUrl: string,
   layerId: number,
   layerKey: string,
   bbox: BBox,
   bufferDeg = 0.1,
   timeoutMs = 25_000,
+  sourceLabel = "ArcGIS",
 ): Promise<LayerResult> {
   const fetchedAt = new Date().toISOString();
   const expanded = expandBboxByDegrees(bbox, bufferDeg);
@@ -414,7 +428,7 @@ async function fetchEPELayer(
     f: "geojson",
   });
 
-  const url = `${EPE_MAPSERVER_URL}/${layerId}/query?${params.toString()}`;
+  const url = `${baseUrl}/${layerId}/query?${params.toString()}`;
 
   try {
     const res = await fetch(url, { signal: AbortSignal.timeout(timeoutMs) });
@@ -427,15 +441,13 @@ async function fetchEPELayer(
         geojson: { type: "FeatureCollection", features: [] },
         feature_count: 0,
         fetched_at: fetchedAt,
-        error: `EPE HTTP ${res.status}: ${text.substring(0, 100)}`,
+        error: `${sourceLabel} HTTP ${res.status}: ${text.substring(0, 100)}`,
       };
     }
 
     const text = await res.text();
 
-    // ArcGIS pode retornar HTML de erro com 200
     if (text.startsWith("<") || text.includes('error":{')) {
-      // Tenta parsear como ArcGIS error JSON
       try {
         const parsed = JSON.parse(text);
         if (parsed?.error) {
@@ -445,7 +457,7 @@ async function fetchEPELayer(
             geojson: { type: "FeatureCollection", features: [] },
             feature_count: 0,
             fetched_at: fetchedAt,
-            error: `EPE error: ${parsed.error.message ?? "unknown"}`,
+            error: `${sourceLabel} error: ${parsed.error.message ?? "unknown"}`,
           };
         }
       } catch {
@@ -455,7 +467,6 @@ async function fetchEPELayer(
 
     const data = JSON.parse(text);
 
-    // GeoJSON válido?
     if (data?.type !== "FeatureCollection" || !Array.isArray(data.features)) {
       return {
         layer_key: layerKey,
@@ -463,7 +474,7 @@ async function fetchEPELayer(
         geojson: { type: "FeatureCollection", features: [] },
         feature_count: 0,
         fetched_at: fetchedAt,
-        error: "EPE returned non-FeatureCollection payload",
+        error: `${sourceLabel} returned non-FeatureCollection payload`,
       };
     }
 
@@ -481,24 +492,77 @@ async function fetchEPELayer(
       geojson: { type: "FeatureCollection", features: [] },
       feature_count: 0,
       fetched_at: fetchedAt,
-      error: `EPE fetch failed: ${err instanceof Error ? err.message : String(err)}`,
+      error: `${sourceLabel} fetch failed: ${err instanceof Error ? err.message : String(err)}`,
     };
   }
 }
 
+// EPE wrappers (MapServer SMA/WMS_Webmap_EPE)
 async function fetchLTExistentes(bbox: BBox): Promise<LayerResult> {
-  return fetchEPELayer(21, "aneel_lt_existentes", bbox, 0.12);
+  return fetchArcGISLayer(
+    EPE_MAPSERVER_URL,
+    21,
+    "aneel_lt_existentes",
+    bbox,
+    0.12,
+    25_000,
+    "EPE",
+  );
 }
 
 async function fetchLTPlanejadas(bbox: BBox): Promise<LayerResult> {
-  return fetchEPELayer(10, "aneel_lt_planejadas", bbox, 0.12);
+  return fetchArcGISLayer(
+    EPE_MAPSERVER_URL,
+    10,
+    "aneel_lt_planejadas",
+    bbox,
+    0.12,
+    25_000,
+    "EPE",
+  );
+}
+
+/**
+ * SIGEL ANEEL DUP — Declaração de Utilidade Pública (servidão administrativa
+ * de LT/Subestações de transmissão). Polygons cobrindo BR inteiro.
+ *
+ * P-191. bufferDeg generoso (0.5° ≈ 55km) porque DUPs são extensas e podem
+ * impactar empreendimentos mesmo se o ponto de cruzamento estiver longe do
+ * terreno. Útil pra alertar restrição legal antes de aprovar projeto.
+ */
+async function fetchANEELDup(bbox: BBox): Promise<LayerResult> {
+  return fetchArcGISLayer(
+    SIGEL_DUP_URL,
+    0,
+    "aneel_dup",
+    bbox,
+    0.5,
+    25_000,
+    "SIGEL",
+  );
 }
 
 async function fetchSubestacoes(bbox: BBox): Promise<LayerResult> {
   // Existentes (20) + Planejadas (9) num só layer key — diferenciamos por
   // `properties.status` injetado abaixo. Reduz toggles e cliques pro user.
-  const existentes = await fetchEPELayer(20, "aneel_subestacoes", bbox, 0.12);
-  const planejadas = await fetchEPELayer(9, "aneel_subestacoes", bbox, 0.12);
+  const existentes = await fetchArcGISLayer(
+    EPE_MAPSERVER_URL,
+    20,
+    "aneel_subestacoes",
+    bbox,
+    0.12,
+    25_000,
+    "EPE",
+  );
+  const planejadas = await fetchArcGISLayer(
+    EPE_MAPSERVER_URL,
+    9,
+    "aneel_subestacoes",
+    bbox,
+    0.12,
+    25_000,
+    "EPE",
+  );
 
   const features = [
     ...(existentes.geojson?.features ?? []).map((f) => ({
@@ -554,6 +618,7 @@ const LAYER_FETCHERS: Record<string, (bbox: BBox) => Promise<LayerResult>> = {
   aneel_lt_existentes: fetchLTExistentes, // EPE layer 21 — oficial
   aneel_lt_planejadas: fetchLTPlanejadas, // EPE layer 10 — oficial
   aneel_subestacoes: fetchSubestacoes, // EPE layers 20+9 — oficial
+  aneel_dup: fetchANEELDup, // SIGEL ANEEL DUP — servidão LT nacional (P-191)
 };
 
 const DEFAULT_LAYERS = Object.keys(LAYER_FETCHERS);

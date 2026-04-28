@@ -175,6 +175,13 @@ const MAP_LAYERS: LayerConfig[] = [
     description: "Subestações existentes e planejadas",
     point: true,
   },
+  {
+    key: "aneel_dup",
+    label: "ANEEL — Servidão LT (DUP)",
+    color: "#dc2626",
+    description:
+      "Declaração de Utilidade Pública — restrição legal a construir",
+  },
 ];
 
 // ---------------------------------------------------------------------------
@@ -759,6 +766,15 @@ interface LTStats {
   tensoesKv: number[];
   /** Concessionárias presentes em 10km */
   concessionarias: string[];
+  /** P-191 — Polígonos DUP que intersectam o terreno (restrição legal) */
+  dupIntersect: Array<{
+    empreem?: string;
+    ato_legal?: string;
+    modalidade?: string;
+    tensao_kv?: number;
+  }>;
+  /** P-191 — Polígonos DUP em 10km do terreno (mas não intersectam) */
+  dupProximos: number;
 }
 
 /** Soma o comprimento (km) da LineString que está dentro do polígono buffer.
@@ -817,11 +833,13 @@ function LTImpactPanel({
   ltExistentes,
   ltPlanejadas,
   subestacoes,
+  dup,
 }: {
   project: NonNullable<ReturnType<typeof useParcelamentoProject>["data"]>;
   ltExistentes?: GeoJSON.FeatureCollection;
   ltPlanejadas?: GeoJSON.FeatureCollection;
   subestacoes?: GeoJSON.FeatureCollection;
+  dup?: GeoJSON.FeatureCollection;
 }) {
   const stats: LTStats | null = useMemo(() => {
     const polyFC = buildProjectPolygonGeoJSON(project);
@@ -888,6 +906,43 @@ function LTImpactPanel({
     procLines(ltExistentes, "existentes");
     procLines(ltPlanejadas, "planejadas");
 
+    // P-191 — DUP polígonos: intersecção com terreno e proximidade 10km
+    const dupIntersect: LTStats["dupIntersect"] = [];
+    let dupProximos = 0;
+    if (dup?.features) {
+      for (const f of dup.features) {
+        const t = f.geometry?.type;
+        if (t !== "Polygon" && t !== "MultiPolygon") continue;
+        const dupPoly = f as GeoJSON.Feature<
+          GeoJSON.Polygon | GeoJSON.MultiPolygon
+        >;
+        try {
+          if (turf.booleanIntersects(dupPoly, projectFeature)) {
+            const props = (f.properties ?? {}) as Record<string, unknown>;
+            const tensao = Number(props.Tensao);
+            dupIntersect.push({
+              empreem:
+                typeof props.EMPREEM === "string" ? props.EMPREEM : undefined,
+              ato_legal:
+                typeof props.ATO_LEGAL === "string"
+                  ? props.ATO_LEGAL
+                  : undefined,
+              modalidade:
+                typeof props.MODALIDADE === "string"
+                  ? props.MODALIDADE
+                  : undefined,
+              tensao_kv:
+                Number.isFinite(tensao) && tensao > 0 ? tensao : undefined,
+            });
+          } else if (turf.booleanIntersects(dupPoly, buf10!)) {
+            dupProximos++;
+          }
+        } catch {
+          /* turf.booleanIntersects pode falhar em geometrias inválidas */
+        }
+      }
+    }
+
     return {
       ltExist5km,
       ltExist10km,
@@ -900,8 +955,10 @@ function LTImpactPanel({
       subPl10km: countPointsInside(subestacoes, buf10, "planejada"),
       tensoesKv: Array.from(tensoesSet).sort((a, b) => b - a),
       concessionarias: Array.from(concSet).sort(),
+      dupIntersect,
+      dupProximos,
     };
-  }, [project, ltExistentes, ltPlanejadas, subestacoes]);
+  }, [project, ltExistentes, ltPlanejadas, subestacoes, dup]);
 
   if (!stats) return null;
 
@@ -914,7 +971,9 @@ function LTImpactPanel({
     stats.ltExist10km > 0.1 ||
     stats.ltPlan10km > 0.1 ||
     stats.subEx10km > 0 ||
-    stats.subPl10km > 0;
+    stats.subPl10km > 0 ||
+    stats.dupIntersect.length > 0 ||
+    stats.dupProximos > 0;
 
   if (!hasAnyData) {
     return (
@@ -947,6 +1006,52 @@ function LTImpactPanel({
           <p className="text-[11px] text-red-600">
             {fmt(stats.ltExistDentro)} de servidão dentro do polígono do projeto
           </p>
+        </div>
+      )}
+
+      {stats.dupIntersect.length > 0 && (
+        <div className="rounded bg-red-100 border border-red-300 px-2 py-1.5 space-y-1">
+          <p className="text-[11px] font-semibold text-red-700">
+            🚫 Servidão LT (DUP) sobre o terreno
+          </p>
+          <p className="text-[11px] text-red-600">
+            {stats.dupIntersect.length}{" "}
+            {stats.dupIntersect.length === 1
+              ? "polígono de servidão administrativa intersecta"
+              : "polígonos de servidão administrativa intersectam"}{" "}
+            o projeto — restrição legal a construir.
+          </p>
+          <ul className="text-[10px] text-red-700 space-y-0.5 mt-1">
+            {stats.dupIntersect.slice(0, 3).map((d, i) => (
+              <li key={i}>
+                <span className="font-medium">{d.empreem || "DUP"}</span>
+                {d.tensao_kv ? ` · ${d.tensao_kv} kV` : ""}
+                {d.modalidade ? ` · ${d.modalidade}` : ""}
+                {d.ato_legal ? (
+                  <span className="block text-[9px] text-red-500 truncate">
+                    {d.ato_legal}
+                  </span>
+                ) : null}
+              </li>
+            ))}
+            {stats.dupIntersect.length > 3 && (
+              <li className="text-[9px] text-red-500">
+                +{stats.dupIntersect.length - 3} outras DUPs
+              </li>
+            )}
+          </ul>
+        </div>
+      )}
+
+      {stats.dupProximos > 0 && stats.dupIntersect.length === 0 && (
+        <div className="text-[11px] flex items-center justify-between">
+          <span className="flex items-center gap-1.5 text-gray-700">
+            <span className="h-2 w-3 rounded-sm bg-red-500/30 border border-red-600" />
+            Servidão LT (DUP) próxima
+          </span>
+          <span className="font-mono text-gray-800">
+            {stats.dupProximos} em 10km
+          </span>
         </div>
       )}
 
@@ -1374,12 +1479,14 @@ function TabMapa({
         {/* Painel impacto LT — só renderiza se ao menos 1 camada ANEEL EPE estiver carregada */}
         {(layerStates.aneel_lt_existentes.loaded ||
           layerStates.aneel_lt_planejadas.loaded ||
-          layerStates.aneel_subestacoes.loaded) && (
+          layerStates.aneel_subestacoes.loaded ||
+          layerStates.aneel_dup.loaded) && (
           <LTImpactPanel
             project={project}
             ltExistentes={layerStates.aneel_lt_existentes.geojson}
             ltPlanejadas={layerStates.aneel_lt_planejadas.geojson}
             subestacoes={layerStates.aneel_subestacoes.geojson}
+            dup={layerStates.aneel_dup.geojson}
           />
         )}
 
