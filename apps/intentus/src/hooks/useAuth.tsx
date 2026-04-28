@@ -114,20 +114,45 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
-    // SAFETY NET: max 8s pra liberar UI mesmo se Supabase travar
-    // indefinidamente (cookie corrompido, RLS deadlock, network hang).
-    // try/finally só pega exception — await que NUNCA resolve fica
-    // pendente pra sempre. Esse timer é último recurso.
-    const safetyTimer = setTimeout(() => {
-      setLoading((prev) => {
-        if (prev) {
-          console.warn(
-            "[useAuth] safety timeout 8s — liberando UI sem auth resolvido",
-          );
-        }
-        return false;
-      });
-    }, 8000);
+    let resolved = false;
+
+    // SAFETY NET: se em 6s nada resolveu, sessão está corrompida —
+    // o Supabase auth client trava em loop interno de refresh JWT
+    // sem disparar nenhuma exception. Solução: signOut forçado +
+    // redirect pra /auth. Usuário re-loga com sessão fresh.
+    const safetyTimer = setTimeout(async () => {
+      if (resolved) return;
+      console.error(
+        "[useAuth] safety timeout 6s — sessão corrompida, forçando re-login",
+      );
+      try {
+        // signOut local-only (não chama backend, evita travar de novo).
+        // O reload força a UI completa a remontar com state limpo.
+        await supabase.auth.signOut({ scope: "local" } as never);
+      } catch {
+        /* ignore — vamos redirecionar mesmo */
+      }
+      // Limpa storage do supabase pra erradicar cookie corrompido
+      try {
+        Object.keys(localStorage)
+          .filter((k) => k.startsWith("sb-"))
+          .forEach((k) => localStorage.removeItem(k));
+      } catch {
+        /* ignore */
+      }
+      // Redirect pra /auth se ainda não estiver lá
+      if (!window.location.pathname.startsWith("/auth")) {
+        window.location.href = "/auth?reason=session_expired";
+      } else {
+        // Já tá em /auth — só remove o loading
+        setLoading(false);
+      }
+    }, 6000);
+
+    const markResolved = () => {
+      resolved = true;
+      clearTimeout(safetyTimer);
+    };
 
     const {
       data: { subscription },
@@ -144,6 +169,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch (err) {
         console.error("[useAuth] onAuthStateChange falhou:", err);
       } finally {
+        markResolved();
         setLoading(false);
       }
     });
@@ -160,6 +186,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       } catch (err) {
         console.error("[useAuth] init falhou:", err);
       } finally {
+        markResolved();
         setLoading(false);
       }
     })();
