@@ -114,15 +114,27 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   };
 
   useEffect(() => {
+    // SAFETY NET: max 8s pra liberar UI mesmo se Supabase travar
+    // indefinidamente (cookie corrompido, RLS deadlock, network hang).
+    // try/finally só pega exception — await que NUNCA resolve fica
+    // pendente pra sempre. Esse timer é último recurso.
+    const safetyTimer = setTimeout(() => {
+      setLoading((prev) => {
+        if (prev) {
+          console.warn(
+            "[useAuth] safety timeout 8s — liberando UI sem auth resolvido",
+          );
+        }
+        return false;
+      });
+    }, 8000);
+
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
       try {
         if (session?.user) {
-          // AWAIT — não setar loading=false até tenant resolver.
-          // try/finally garante que loading=false SEMPRE roda mesmo
-          // se initUserContext lançar exception inesperada.
           await initUserContext(session.user.id);
         } else {
           setRoles([]);
@@ -136,9 +148,6 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     });
 
-    // Inicial: carrega session + tenant em sequência antes de liberar UI.
-    // try/finally garante que UI nunca fica travada em "Carregando..." se
-    // alguma chamada do Supabase travar/lançar.
     (async () => {
       try {
         const {
@@ -155,7 +164,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       }
     })();
 
-    return () => subscription.unsubscribe();
+    return () => {
+      clearTimeout(safetyTimer);
+      subscription.unsubscribe();
+    };
   }, []);
 
   const signOut = async () => {
