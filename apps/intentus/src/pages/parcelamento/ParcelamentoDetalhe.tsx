@@ -18,7 +18,6 @@ import {
   calculateViabilidadeScore,
   type UrbanisticResult as UrbCalcResult,
 } from "@/lib/parcelamento/urbanisticCalc";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 import {
@@ -1651,27 +1650,24 @@ export default function ParcelamentoDetalhe() {
 
   return (
     <div className="flex flex-col h-full">
-      {/* Header */}
-      <div className="px-6 pt-5 pb-4 border-b border-gray-100">
-        <div className="flex items-center gap-2 mb-2">
-          <button
-            onClick={() => navigate("/parcelamento")}
-            className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-800 transition-colors"
-          >
-            <ArrowLeft className="h-4 w-4" />
-            Projetos
-          </button>
-          <span className="text-gray-300">/</span>
-          <span className="text-sm text-gray-600 truncate max-w-[250px]">
-            {project.name}
-          </span>
-        </div>
+      {/* Header — compacto: breadcrumb + linha consolidada com título/meta/score */}
+      <div className="px-6 pt-2 pb-2 border-b border-gray-100">
+        <button
+          onClick={() => navigate("/parcelamento")}
+          className="flex items-center gap-1 text-[11px] text-gray-400 hover:text-gray-700 transition-colors mb-1"
+        >
+          <ArrowLeft className="h-3 w-3" />
+          Projetos
+        </button>
 
-        <div className="flex items-start justify-between">
-          <div>
-            <h1 className="text-xl font-bold text-gray-900">{project.name}</h1>
-            <div className="flex items-center gap-2 mt-1 text-sm text-gray-500">
-              <MapPin className="h-3.5 w-3.5 flex-shrink-0" />
+        <div className="flex items-center justify-between gap-3 flex-wrap">
+          <div className="flex items-center gap-2 min-w-0 flex-1">
+            <h1 className="text-base font-semibold text-gray-900 truncate">
+              {project.name}
+            </h1>
+            <span className="text-gray-300 flex-shrink-0">·</span>
+            <div className="flex items-center gap-1.5 text-[13px] text-gray-500 flex-shrink-0">
+              <MapPin className="h-3.5 w-3.5" />
               <span>
                 {project.city && project.state
                   ? `${project.city} — ${project.state}`
@@ -1679,7 +1675,7 @@ export default function ParcelamentoDetalhe() {
               </span>
               {project.area_m2 != null && (
                 <>
-                  <span className="text-gray-300">•</span>
+                  <span className="text-gray-300">·</span>
                   <span>
                     {project.area_m2.toLocaleString("pt-BR", {
                       maximumFractionDigits: 0,
@@ -1691,36 +1687,14 @@ export default function ParcelamentoDetalhe() {
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
-            {score !== undefined && scoreLabel && (
-              <Badge className={`${scoreBadgeColor} border-0 font-medium`}>
-                Score {score}
-                {isPreliminaryHeader ? "*" : ""} — {scoreLabel}
-              </Badge>
-            )}
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setActiveTab("financeiro")}
+          {score !== undefined && scoreLabel && (
+            <Badge
+              className={`${scoreBadgeColor} border-0 font-medium flex-shrink-0`}
             >
-              Financeiro
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              onClick={() => setActiveTab("conformidade")}
-            >
-              Conformidade
-            </Button>
-            <Button
-              variant="outline"
-              size="sm"
-              className="gap-1.5"
-              onClick={() => navigate(`/parcelamento/${id}/cad`)}
-            >
-              CAD Studio
-            </Button>
-          </div>
+              Score {score}
+              {isPreliminaryHeader ? "*" : ""} — {scoreLabel}
+            </Badge>
+          )}
         </div>
       </div>
 
