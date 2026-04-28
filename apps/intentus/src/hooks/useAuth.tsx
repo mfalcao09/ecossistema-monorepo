@@ -118,27 +118,41 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       data: { subscription },
     } = supabase.auth.onAuthStateChange(async (_event, session) => {
       setSession(session);
-      if (session?.user) {
-        // AWAIT — não setar loading=false até tenant resolver
-        await initUserContext(session.user.id);
-      } else {
-        setRoles([]);
-        setTenant(null);
-        setNeedsOnboarding(false);
+      try {
+        if (session?.user) {
+          // AWAIT — não setar loading=false até tenant resolver.
+          // try/finally garante que loading=false SEMPRE roda mesmo
+          // se initUserContext lançar exception inesperada.
+          await initUserContext(session.user.id);
+        } else {
+          setRoles([]);
+          setTenant(null);
+          setNeedsOnboarding(false);
+        }
+      } catch (err) {
+        console.error("[useAuth] onAuthStateChange falhou:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
-    // Inicial: carrega session + tenant em sequência antes de liberar UI
+    // Inicial: carrega session + tenant em sequência antes de liberar UI.
+    // try/finally garante que UI nunca fica travada em "Carregando..." se
+    // alguma chamada do Supabase travar/lançar.
     (async () => {
-      const {
-        data: { session },
-      } = await supabase.auth.getSession();
-      setSession(session);
-      if (session?.user) {
-        await initUserContext(session.user.id);
+      try {
+        const {
+          data: { session },
+        } = await supabase.auth.getSession();
+        setSession(session);
+        if (session?.user) {
+          await initUserContext(session.user.id);
+        }
+      } catch (err) {
+        console.error("[useAuth] init falhou:", err);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     })();
 
     return () => subscription.unsubscribe();
