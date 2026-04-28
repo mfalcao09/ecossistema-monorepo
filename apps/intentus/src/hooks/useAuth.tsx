@@ -118,33 +118,57 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
     // SAFETY NET: se em 6s nada resolveu, sessão está corrompida —
     // o Supabase auth client trava em loop interno de refresh JWT
-    // sem disparar nenhuma exception. Solução: signOut forçado +
-    // redirect pra /auth. Usuário re-loga com sessão fresh.
-    const safetyTimer = setTimeout(async () => {
+    // sem disparar nenhuma exception. Solução: limpar storage local
+    // + redirect SÍNCRONO (sem await — qualquer await pode travar).
+    const safetyTimer = setTimeout(() => {
       if (resolved) return;
       console.error(
         "[useAuth] safety timeout 6s — sessão corrompida, forçando re-login",
       );
-      try {
-        // signOut local-only (não chama backend, evita travar de novo).
-        // O reload força a UI completa a remontar com state limpo.
-        await supabase.auth.signOut({ scope: "local" } as never);
-      } catch {
-        /* ignore — vamos redirecionar mesmo */
-      }
-      // Limpa storage do supabase pra erradicar cookie corrompido
+
+      // 1. Limpa localStorage do Supabase IMEDIATAMENTE (síncrono)
       try {
         Object.keys(localStorage)
-          .filter((k) => k.startsWith("sb-"))
+          .filter((k) => k.startsWith("sb-") || k.startsWith("supabase"))
           .forEach((k) => localStorage.removeItem(k));
       } catch {
         /* ignore */
       }
-      // Redirect pra /auth se ainda não estiver lá
+
+      // 2. Limpa sessionStorage também
+      try {
+        Object.keys(sessionStorage)
+          .filter((k) => k.startsWith("sb-") || k.startsWith("supabase"))
+          .forEach((k) => sessionStorage.removeItem(k));
+      } catch {
+        /* ignore */
+      }
+
+      // 3. Limpa cookies do Supabase
+      try {
+        document.cookie.split(";").forEach((c) => {
+          const eq = c.indexOf("=");
+          const name = (eq > -1 ? c.substring(0, eq) : c).trim();
+          if (name.startsWith("sb-")) {
+            document.cookie = `${name}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/`;
+          }
+        });
+      } catch {
+        /* ignore */
+      }
+
+      // 4. signOut em fire-and-forget (não esperamos — pode travar)
+      try {
+        supabase.auth.signOut({ scope: "local" } as never).catch(() => {});
+      } catch {
+        /* ignore */
+      }
+
+      // 5. Redirect SÍNCRONO via window.location.replace (mais agressivo
+      //    que .href — não adiciona ao histórico, força navegação real)
       if (!window.location.pathname.startsWith("/auth")) {
-        window.location.href = "/auth?reason=session_expired";
+        window.location.replace("/auth?reason=session_expired");
       } else {
-        // Já tá em /auth — só remove o loading
         setLoading(false);
       }
     }, 6000);
