@@ -244,6 +244,32 @@ export default function ParcelamentoBDGDPanel({
     return Array.from(set);
   }, [data]);
 
+  // P-193 — tensões MT reais detectadas (ordenadas desc) + alimentadores (CTMT)
+  const mtAnalytics = useMemo(() => {
+    if (!data)
+      return { tensoes: [] as string[], alimentadores: [] as string[] };
+    const tensoesSet = new Set<string>();
+    const alimentadoresSet = new Set<string>();
+    for (const f of data.features.mt.features ?? []) {
+      const p = (f.properties as Record<string, unknown> | null) ?? {};
+      const tensao = typeof p.tensao === "string" ? p.tensao.trim() : "";
+      if (tensao && tensao !== "—" && !tensao.startsWith("null")) {
+        tensoesSet.add(tensao);
+      }
+      const alim = typeof p.ctmt_nome === "string" ? p.ctmt_nome.trim() : "";
+      if (alim) alimentadoresSet.add(alim);
+    }
+    const tensoes = Array.from(tensoesSet).sort((a, b) => {
+      const numA = parseFloat(a);
+      const numB = parseFloat(b);
+      return Number.isFinite(numA) && Number.isFinite(numB) ? numB - numA : 0;
+    });
+    return {
+      tensoes,
+      alimentadores: Array.from(alimentadoresSet).sort(),
+    };
+  }, [data]);
+
   if (loading && !data) {
     return (
       <div className="rounded-lg border border-amber-200 bg-amber-50/40 p-3">
@@ -401,6 +427,42 @@ export default function ParcelamentoBDGDPanel({
             {distribuidorasNomes.length > 3 &&
               ` +${distribuidorasNomes.length - 3}`}
           </p>
+        </div>
+      )}
+
+      {/* P-193 — tensões MT reais (resolvidas via JOIN CTMT + TTEN) */}
+      {mtAnalytics.tensoes.length > 0 && (
+        <div className="rounded-lg border border-amber-200 bg-amber-50/40 p-2.5 space-y-1.5">
+          <div className="flex items-center gap-1.5">
+            <Zap className="h-3 w-3 text-amber-700" />
+            <p className="text-[10px] font-semibold text-amber-900">
+              Tensões MT em 10km
+            </p>
+          </div>
+          <div className="flex flex-wrap gap-1">
+            {mtAnalytics.tensoes.slice(0, 8).map((t) => (
+              <span
+                key={t}
+                className="text-[10px] font-mono bg-white border border-amber-200 rounded px-1.5 py-0.5 text-amber-800"
+              >
+                {t}
+              </span>
+            ))}
+            {mtAnalytics.tensoes.length > 8 && (
+              <span className="text-[10px] text-amber-700">
+                +{mtAnalytics.tensoes.length - 8}
+              </span>
+            )}
+          </div>
+          {mtAnalytics.alimentadores.length > 0 && (
+            <p className="text-[10px] text-gray-600 leading-tight">
+              <span className="text-gray-500">Alimentadores:</span>{" "}
+              {mtAnalytics.alimentadores.length} circuito
+              {mtAnalytics.alimentadores.length === 1 ? "" : "s"} MT
+              {mtAnalytics.alimentadores.length <= 3 &&
+                ` (${mtAnalytics.alimentadores.join(", ")})`}
+            </p>
+          )}
         </div>
       )}
 

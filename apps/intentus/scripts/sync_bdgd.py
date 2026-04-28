@@ -634,6 +634,88 @@ WHERE wkt IS NOT NULL AND wkt <> '';
     psql(db_url, f"DROP TABLE IF EXISTS {staging};")
     return n
 
+def extract_ctmt_to_csv(gdb: Path, dest_csv: Path) -> bool:
+    """
+    Extrai a tabela não-geográfica CTMT (Circuito MT) do .gdb pra CSV.
+
+    Manual BDGD Rev 3 §3.4 — 58 fields. Pegamos só os essenciais pro Intentus:
+    COD_ID, NOME, TEN_NOM (FK TTEN), TEN_OPE (p.u.), SUB, ENE_01..ENE_12 (energia
+    mensal — soma vira anual em kWh, P-195).
+
+    Retorna True se o CSV foi gerado, False se layer CTMT não existe no .gdb.
+    """
+    layers = list_layers(gdb)
+    if "CTMT" not in layers:
+        return False
+
+    # Lista de fields ENE_01..ENE_12 (energia mensal kWh)
+    ene_fields = [f"COALESCE(ENE_{m:02d}, 0)" for m in range(1, 13)]
+    ene_sum = " + ".join(ene_fields)
+
+    sql = (
+        f'SELECT COD_ID, NOME, TEN_NOM, TEN_OPE, SUB, '
+        f'({ene_sum}) AS ENE_ANUAL '
+        f'FROM CTMT'
+    )
+    cmd = [
+        "ogr2ogr",
+        "-f", "CSV",
+        str(dest_csv),
+        str(gdb),
+        "-sql", sql,
+        "-dialect", "OGRSQL",
+        "-lco", "SEPARATOR=COMMA",
+        "-skipfailures",
+    ]
+    run(cmd)
+    return dest_csv.exists() and dest_csv.stat().st_size > 0
+
+
+def load_ctmt_csv(db_url: str, csv: Path, distribuidora_id: int) -> int:
+    """
+    Carrega CTMT csv → bdgd_circuitos_mt. Idempotente via ON CONFLICT.
+    """
+    if not csv.exists() or csv.stat().st_size == 0:
+        return 0
+    staging = f"_staging_ctmt_{distribuidora_id}"
+    setup = f"""
+DROP TABLE IF EXISTS {staging};
+CREATE UNLOGGED TABLE {staging} (
+  COD_ID TEXT, NOME TEXT, TEN_NOM TEXT, TEN_OPE TEXT, SUB TEXT, ENE_ANUAL TEXT
+);
+"""
+    psql(db_url, setup)
+    copy_sql = f"\\COPY {staging} FROM '{csv}' WITH (FORMAT csv, HEADER true)"
+    run(["psql", db_url, "-v", "ON_ERROR_STOP=1", "-X", "-q", "-c", copy_sql])
+    insert = f"""
+INSERT INTO bdgd_circuitos_mt
+  (distribuidora_id, cod_id, nome, ten_nom_cod, ten_ope_pu, sub_cod_id,
+   energia_anual_kwh)
+SELECT
+  {distribuidora_id},
+  COD_ID,
+  NULLIF(NOME, ''),
+  NULLIF(TEN_NOM, ''),
+  NULLIF(TEN_OPE, '')::NUMERIC,
+  NULLIF(SUB, ''),
+  NULLIF(ENE_ANUAL, '')::NUMERIC
+FROM {staging}
+WHERE COD_ID IS NOT NULL AND COD_ID <> ''
+ON CONFLICT (distribuidora_id, cod_id) DO UPDATE SET
+  nome = EXCLUDED.nome,
+  ten_nom_cod = EXCLUDED.ten_nom_cod,
+  ten_ope_pu = EXCLUDED.ten_ope_pu,
+  sub_cod_id = EXCLUDED.sub_cod_id,
+  energia_anual_kwh = EXCLUDED.energia_anual_kwh;
+"""
+    psql(db_url, insert)
+    out = run(["psql", db_url, "-At", "-X", "-c",
+               f"SELECT COUNT(*) FROM {staging};"], capture=True)
+    n = int(out.stdout.strip() or "0")
+    psql(db_url, f"DROP TABLE IF EXISTS {staging};")
+    return n
+
+
 def load_sub_csv(db_url: str, csv: Path, distribuidora_id: int) -> int:
     if not csv.exists() or csv.stat().st_size == 0:
         return 0
@@ -756,6 +838,20 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
             sub_layer = find_layer([
                 "SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST",
             ])
+
+            # CTMT (não-geográfica) — extrair primeiro pra resolver tensão real
+            # via JOIN futuro de SSDMT.CTMT → bdgd_circuitos_mt.cod_id (P-193).
+            ctmt_csv = wd / "ctmt.csv"
+            ctmt_count = 0
+            try:
+                if extract_ctmt_to_csv(gdb, ctmt_csv):
+                    ctmt_count = load_ctmt_csv(db_url, ctmt_csv, distribuidora_id)
+                    log(f"  CTMT (alimentadores) inseridos: {ctmt_count:,}")
+                    ctmt_csv.unlink(missing_ok=True)
+                else:
+                    log("  ⚠️ Layer CTMT não encontrada no .gdb", "WARN")
+            except Exception as e:
+                log(f"  ❌ CTMT falhou (continuando): {e}", "ERROR")
 
             # MT — try local pra não derrubar BT/SUB se MT falhar
             #
