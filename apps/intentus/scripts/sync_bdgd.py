@@ -45,30 +45,129 @@ TITLE_PATTERN = re.compile(
     r"^(.+?)\s+(\d+)\s+(\d{4}-\d{2}-\d{2})\s+V11\s+(\d{8}-\d{4})\s*$"
 )
 
-# Mapa best-effort distribuidora → UF (pra coluna bdgd_distribuidoras.uf_principal).
-# Não é canônico — alguns nomes cobrem múltiplos estados.
-UF_HEURISTIC = {
-    "energisa mt": "MT", "energisa ms": "MS", "energisa pb": "PB",
-    "energisa se": "SE", "energisa to": "TO", "energisa ac": "AC",
-    "energisa ro": "RO", "energisa minas rio": "MG",
-    "energisa sul-sudeste": "SP", "energisa borborema": "PB",
-    "energisa nova friburgo": "RJ",
-    "enel sp": "SP", "enel rj": "RJ", "enel ce": "CE", "enel go": "GO",
-    "equatorial go": "GO", "equatorial pa": "PA", "equatorial ma": "MA",
-    "equatorial pi": "PI", "equatorial al": "AL", "cea equatorial": "AP",
-    "ceee equatorial": "RS",
-    "cpfl paulista": "SP", "cpfl piratininga": "SP", "cpfl santa cruz": "SP",
-    "edp sp": "SP", "edp es": "ES",
-    "neoenergia coelba": "BA", "neoenergia cosern": "RN",
-    "neoenergia pernambuco": "PE", "neoenergia brasilia": "DF",
-    "neoenergia elektro": "SP",
-    "cemig-d": "MG", "celesc-dis": "SC", "copel-dis": "PR",
-    "rge": "RS", "rge sul": "RS", "light": "RJ",
-    "amazonas energia": "AM", "ame": "AM",
-    "roraima energia": "RR", "boa vista": "RR",
-    "elektro": "SP", "celpa": "PA", "celpe": "PE", "cepisa": "PI",
-    "ceron": "RO", "eletroacre": "AC", "cea": "AP", "sulgipe": "SE",
-    "dmed": "MG", "dcelt": "PR",
+# Tabela oficial das 116 distribuidoras (Manual BDGD Rev 3, Anexo III,
+# vigência 2/01/2024). Indexada por cod_aneel = DIST(SARI), que é o número que
+# aparece no título do dataset DCAT. Valor: (sigla_oficial, dist_sig_r, uf).
+#
+# DIST(SIG-R) é a numeração canônica 1-116 (pula 71). DIST(SARI) é o
+# código ANEEL Cadastro Institucional, esse é o que vem como cod_aneel.
+DISTRIBUIDORAS_OFICIAIS: dict[str, tuple[str, int, str]] = {
+    "396":   ("RGE (RGE SUL)",                 1, "RS"),
+    "7019":  ("AmE",                           2, "AM"),
+    "383":   ("ENEL RJ",                       3, "RJ"),
+    "391":   ("EDP SP",                        4, "SP"),
+    "370":   ("Roraima Energia",               5, "RR"),
+    "5216":  ("ESS",                           6, "SP"),
+    "31":    ("CEA",                           7, "AP"),
+    "44":    ("Equatorial AL (CEAL)",          8, "AL"),
+    "5160":  ("Neoenergia Brasília (CEB-DIS)", 9, "DF"),
+    "5707":  ("CEEE-D",                       10, "RS"),
+    "5697":  ("CELESC-DIS",                   11, "SC"),
+    "6072":  ("ENEL GO (CELG-D)",             12, "GO"),
+    "371":   ("Equatorial PA (CELPA)",        13, "PA"),
+    "43":    ("CELPE",                        14, "PE"),
+    "32":    ("ETO",                          15, "TO"),
+    "37":    ("Equatorial MA (CEMAR)",        16, "MA"),
+    "405":   ("EMT",                          17, "MT"),
+    "4950":  ("CEMIG-D",                      18, "MG"),
+    "38":    ("Equatorial PI (CEPISA)",       19, "PI"),
+    "369":   ("ERO (CERON)",                  20, "RO"),
+    "28":    ("CERR",                         21, "RR"),
+    "84":    ("CFLO",                         22, "PR"),
+    "103":   ("CHESP",                        23, "GO"),
+    "69":    ("CPFL Santa Cruz (Jaguari)",    24, "SP"),
+    "70":    ("CPFL Mococa",                  25, "SP"),
+    "75":    ("CNEE",                         26, "SP"),
+    "82":    ("COCEL",                        27, "PR"),
+    "47":    ("COELBA",                       28, "BA"),
+    "39":    ("ENEL CE",                      29, "CE"),
+    "2904":  ("COOPERALIANÇA",                30, "SC"),
+    "2866":  ("COPEL-DIS",                    31, "PR"),
+    "40":    ("COSERN",                       32, "RN"),
+    "71":    ("CPFL Leste Paulista",          33, "SP"),
+    "72":    ("CPFL Santa Cruz",              34, "SP"),
+    "63":    ("CPFL Paulista",                35, "SP"),
+    "2937":  ("CPFL Piratininga",             36, "SP"),
+    "73":    ("CPFL Sul Paulista",            37, "SP"),
+    "95":    ("DEMEI",                        38, "RS"),
+    "51":    ("DMED",                         39, "MG"),
+    "6611":  ("EBO",                          40, "PB"),
+    "386":   ("EEB",                          41, "SP"),
+    "5217":  ("EDEVP",                        42, "SP"),
+    "88":    ("EFLJC",                        43, "SC"),
+    "86":    ("EFLUL",                        44, "SC"),
+    "385":   ("ELEKTRO",                      45, "SP"),
+    "26":    ("EAC (ELETROACRE)",             46, "AC"),
+    "398":   ("ELETROCAR",                    47, "RS"),
+    "390":   ("ENEL SP (ELETROPAULO)",        48, "SP"),
+    "381":   ("ELFSM",                        49, "ES"),
+    "6585":  ("EMG",                          50, "MG"),
+    "404":   ("EMS",                          51, "MS"),
+    "6612":  ("ENF",                          52, "RJ"),
+    "6600":  ("EPB",                          53, "PB"),
+    "380":   ("EDP ES",                       54, "ES"),
+    "6587":  ("ESE",                          55, "SE"),
+    "83":    ("FORCEL",                       56, "PR"),
+    "399":   ("HIDROPAN",                     57, "RS"),
+    "87":    ("DCELT (IENERGIA)",             58, "SC"),
+    "382":   ("LIGHT",                        59, "RJ"),
+    "401":   ("MUXENERGIA",                   60, "RS"),
+    "397":   ("RGE",                          61, "RS"),
+    "46":    ("SULGIPE",                      62, "SE"),
+    "400":   ("UHENPAL",                      63, "RS"),
+    "5352":  ("CEREJ",                        64, "SC"),
+    "5351":  ("CERAL",                        65, "SC"),
+    "7016":  ("COORSEL",                      66, "SC"),
+    "6898":  ("CERBRANORTE",                  67, "SC"),
+    "6897":  ("CERAÇÁ",                       68, "SC"),
+    "5365":  ("CERPALO",                      69, "SC"),
+    "5363":  ("CERGRAL",                      70, "SC"),
+    # 71 não existe no Anexo III (numeração pula)
+    "5368":  ("CERSUL",                       72, "SC"),
+    "5370":  ("COOPERA",                      73, "SC"),
+    "5373":  ("COOPERMILA",                   74, "SC"),
+    "5353":  ("CERGAL",                       75, "SC"),
+    "3223":  ("CERTAJA",                      76, "RS"),
+    "4248":  ("CERAL DIS",                    77, "PR"),
+    "5385":  ("CERRP",                        78, "SP"),
+    "6609":  ("CERNHE",                       79, "RJ"),
+    "5274":  ("CERES",                        80, "RJ"),
+    "5377":  ("CERCOS",                       81, "SE"),
+    "5379":  ("CETRIL",                       82, "SP"),
+    "5384":  ("CERPRO",                       83, "SP"),
+    "6610":  ("CERMC",                        84, "SP"),
+    "5382":  ("CERIS",                        85, "SP"),
+    "5378":  ("CERIPA",                       86, "SP"),
+    "5386":  ("CERIM",                        87, "SP"),
+    "5366":  ("CEDRI",                        88, "SP"),
+    "5381":  ("CEDRAP",                       89, "SP"),
+    "5367":  ("CEPRAG",                       90, "SC"),
+    "5355":  ("CERGAPA",                      91, "SC"),
+    "2763":  ("CERILUZ",                      92, "RS"),
+    "2381":  ("CERMISSÕES",                   93, "RS"),
+    "5364":  ("CERMOFUL",                     94, "SC"),
+    "7371":  ("CERTEL",                       95, "RS"),
+    "5369":  ("CERTREL",                      96, "SC"),
+    "5371":  ("COOPERCOCAL",                  97, "SC"),
+    "3627":  ("COOPERLUZ",                    98, "RS"),
+    "2351":  ("COPREL",                       99, "RS"),
+    "598":   ("CRELUZ-D",                    100, "RS"),
+    "2783":  ("CRERAL",                      101, "RS"),
+    "5372":  ("CEJAMA",                      102, "SC"),
+    "11825": ("CASTRO-DIS",                  103, "PR"),
+    "5356":  ("CEGERO",                      104, "SC"),
+    "5343":  ("CELETRO",                     105, "RS"),
+    "7467":  ("CEMIRIM",                     106, "RJ"),
+    "9160":  ("CERAL ARARUAMA",               107, "RJ"),
+    "5279":  ("CERCI",                        108, "SP"),
+    "504":   ("CERFOX",                       109, "RS"),
+    "7883":  ("CERSAD",                       110, "SC"),
+    "527":   ("CERTHIL",                      111, "RS"),
+    "5375":  ("CERVAM",                       112, "SP"),
+    "11763": ("CODESAM",                      113, "SC"),
+    "5345":  ("COOPERNORTE",                  114, "RS"),
+    "5346":  ("COOPERSUL",                    115, "RS"),
+    "5374":  ("COOPERZEM",                    116, "SC"),
 }
 
 # ----------------------------------------------------------------------------
@@ -91,8 +190,9 @@ def run(cmd, env=None, check=True, capture=False):
         return subprocess.run(cmd, env=env, check=check, capture_output=True, text=True)
     return subprocess.run(cmd, env=env, check=check)
 
-def guess_uf(nome: str) -> str | None:
-    return UF_HEURISTIC.get(nome.lower().strip())
+def lookup_oficial(cod_aneel: str) -> tuple[str, int, str] | None:
+    """Retorna (sigla_oficial, dist_sig_r, uf) do Anexo III pelo cod_aneel (SARI)."""
+    return DISTRIBUIDORAS_OFICIAIS.get(str(cod_aneel))
 
 # ----------------------------------------------------------------------------
 # DCAT discovery
@@ -122,9 +222,13 @@ def fetch_dcat() -> list[dict]:
         key = nome.upper()
         cur = seen.get(key)
         if not cur or ciclo > cur["ciclo"]:
+            oficial = lookup_oficial(cod)
             seen[key] = {
                 "nome": nome, "cod_aneel": cod, "ciclo": ciclo, "pub": pub,
-                "item_id": item_id, "uf": guess_uf(nome),
+                "item_id": item_id,
+                "sigla_oficial": oficial[0] if oficial else None,
+                "dist_sig_r":    oficial[1] if oficial else None,
+                "uf":            oficial[2] if oficial else None,
             }
     entries = sorted(seen.values(), key=lambda r: r["nome"].lower())
     log(f"DCAT: {len(entries)} distribuidoras V11 encontradas")
@@ -193,15 +297,22 @@ def upsert_distribuidora(db_url: str, entry: dict, size_bytes: int) -> int:
     """INSERT ON CONFLICT — retorna id da distribuidora."""
     nome = entry["nome"].replace("'", "''")
     uf = f"'{entry['uf']}'" if entry.get("uf") else "NULL"
+    dist_sig_r = entry.get("dist_sig_r")
+    dist_sig_r_sql = str(dist_sig_r) if dist_sig_r is not None else "NULL"
+    sigla = entry.get("sigla_oficial")
+    sigla_sql = f"'{sigla.replace(chr(39), chr(39)*2)}'" if sigla else "NULL"
     sql = f"""
 INSERT INTO bdgd_distribuidoras
-  (cod_aneel, nome, uf_principal, arcgis_item_id, ciclo, versao_prodist, size_bytes, last_synced_at)
+  (cod_aneel, nome, uf_principal, dist_sig_r, sigla_oficial,
+   arcgis_item_id, ciclo, versao_prodist, size_bytes, last_synced_at)
 VALUES
-  ('{entry['cod_aneel']}', '{nome}', {uf}, '{entry['item_id']}',
-   '{entry['ciclo']}', 'V11', {size_bytes}, NULL)
+  ('{entry['cod_aneel']}', '{nome}', {uf}, {dist_sig_r_sql}, {sigla_sql},
+   '{entry['item_id']}', '{entry['ciclo']}', 'V11', {size_bytes}, NULL)
 ON CONFLICT (cod_aneel) DO UPDATE SET
   nome = EXCLUDED.nome,
   uf_principal = EXCLUDED.uf_principal,
+  dist_sig_r = EXCLUDED.dist_sig_r,
+  sigla_oficial = EXCLUDED.sigla_oficial,
   arcgis_item_id = EXCLUDED.arcgis_item_id,
   ciclo = EXCLUDED.ciclo,
   size_bytes = EXCLUDED.size_bytes,
@@ -571,6 +682,12 @@ def workdir():
 def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                 dry_run: bool, force: bool = False) -> dict:
     log(f"\n=== {entry['nome']} (cod {entry['cod_aneel']}, ciclo {entry['ciclo']}) ===")
+    if entry.get("dist_sig_r"):
+        log(f"  Anexo III: SIGLA={entry['sigla_oficial']!r} "
+            f"DIST(SIG-R)={entry['dist_sig_r']} UF={entry['uf']}")
+    else:
+        log(f"  ⚠️ cod_aneel {entry['cod_aneel']!r} não está no Anexo III "
+            f"(uf={entry.get('uf')})", "WARN")
     item_id = entry["item_id"]
     try:
         size = head_size(item_id)
