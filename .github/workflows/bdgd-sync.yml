@@ -19,6 +19,10 @@ on:
         description: "Listar entries sem baixar"
         type: boolean
         default: false
+      force:
+        description: "Reprocessar mesmo se já sincronizado (ignora sync_log)"
+        type: boolean
+        default: false
 
 jobs:
   sync:
@@ -59,7 +63,8 @@ jobs:
             --filter "${{ inputs.filter }}" \
             --simplify-deg "${{ inputs.simplify_deg }}" \
             ${{ inputs.only_mt && '--only-mt' || '' }} \
-            ${{ inputs.dry_run && '--dry-run' || '' }}
+            ${{ inputs.dry_run && '--dry-run' || '' }} \
+            ${{ inputs.force && '--force' || '' }}
 
       - name: Final disk space
         if: always()

@@ -498,7 +498,7 @@ def workdir():
         shutil.rmtree(d, ignore_errors=True)
 
 def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
-                dry_run: bool) -> dict:
+                dry_run: bool, force: bool = False) -> dict:
     log(f"\n=== {entry['nome']} (cod {entry['cod_aneel']}, ciclo {entry['ciclo']}) ===")
     item_id = entry["item_id"]
     try:
@@ -512,7 +512,7 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
         log("  (dry-run) skipping download/load")
         return {"status": "dry_run", "mt": 0, "bt": 0, "sub": 0}
 
-    if already_synced(db_url, entry["cod_aneel"], item_id, entry["ciclo"]):
+    if not force and already_synced(db_url, entry["cod_aneel"], item_id, entry["ciclo"]):
         log("  já sincronizado nesse ciclo — skip")
         return {"status": "skipped", "mt": 0, "bt": 0, "sub": 0}
 
@@ -646,6 +646,8 @@ def main():
                     help="tolerância simplify em graus (~0.0001 ≈ 11m em 4326)")
     ap.add_argument("--dry-run", action="store_true",
                     help="lista entries, não baixa nada")
+    ap.add_argument("--force", action="store_true",
+                    help="reprocessa mesmo se já marcado como success no sync_log")
     args = ap.parse_args()
 
     db_url = os.environ.get("SUPABASE_DB_URL")
@@ -695,7 +697,7 @@ def main():
         log(f"\n[{i}/{len(entries)}]")
         try:
             r = process_one(entry, db_url, args.simplify_deg,
-                            args.only_mt, args.dry_run)
+                            args.only_mt, args.dry_run, args.force)
             summary[r["status"]] = summary.get(r["status"], 0) + 1
             for k in ("mt", "bt", "sub"):
                 summary[k] += r.get(k, 0)
