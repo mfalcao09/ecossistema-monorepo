@@ -74,6 +74,7 @@ interface ProximityRow {
   tensao: string | null;
   ctmt_nome: string | null; // P-193 — nome humano do alimentador MT
   ctmt_cod_id: string | null; // P-193 — código do alimentador (FK CTMT)
+  ctmt_energia_anual_kwh: number | null; // P-195 — consumo anual no alimentador
   fases: string | null;
   comprimento_buffer_m: number | null;
   geom_geojson: GeoJSON.Geometry | null;
@@ -193,6 +194,7 @@ Deno.serve(async (req: Request) => {
         tensao: r.tensao,
         ctmt_nome: r.ctmt_nome, // P-193
         ctmt_cod_id: r.ctmt_cod_id, // P-193
+        ctmt_energia_anual_kwh: r.ctmt_energia_anual_kwh, // P-195
         fases: r.fases,
         comprimento_buffer_m: r.comprimento_buffer_m,
         source_tier: r.source_tier,

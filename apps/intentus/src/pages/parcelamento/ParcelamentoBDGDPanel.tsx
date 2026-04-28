@@ -244,31 +244,71 @@ export default function ParcelamentoBDGDPanel({
     return Array.from(set);
   }, [data]);
 
-  // P-193 — tensões MT reais detectadas (ordenadas desc) + alimentadores (CTMT)
+  // P-193 + P-195 — tensões MT reais + alimentadores (CTMT) + energia anual
   const mtAnalytics = useMemo(() => {
     if (!data)
-      return { tensoes: [] as string[], alimentadores: [] as string[] };
+      return {
+        tensoes: [] as string[],
+        alimentadores: [] as Array<{
+          nome: string;
+          cod_id: string;
+          energia_kwh: number;
+        }>,
+        energia_total_anual_kwh: 0,
+      };
     const tensoesSet = new Set<string>();
-    const alimentadoresSet = new Set<string>();
+    // Por cod_id — alimentador único pode aparecer em vários segments
+    const alimMap = new Map<
+      string,
+      { nome: string; cod_id: string; energia_kwh: number }
+    >();
     for (const f of data.features.mt.features ?? []) {
       const p = (f.properties as Record<string, unknown> | null) ?? {};
       const tensao = typeof p.tensao === "string" ? p.tensao.trim() : "";
       if (tensao && tensao !== "—" && !tensao.startsWith("null")) {
         tensoesSet.add(tensao);
       }
-      const alim = typeof p.ctmt_nome === "string" ? p.ctmt_nome.trim() : "";
-      if (alim) alimentadoresSet.add(alim);
+      const codId = typeof p.ctmt_cod_id === "string" ? p.ctmt_cod_id : "";
+      const nome = typeof p.ctmt_nome === "string" ? p.ctmt_nome : "";
+      const energia =
+        typeof p.ctmt_energia_anual_kwh === "number"
+          ? p.ctmt_energia_anual_kwh
+          : Number(p.ctmt_energia_anual_kwh) || 0;
+      if (codId && !alimMap.has(codId)) {
+        alimMap.set(codId, {
+          nome: nome || codId,
+          cod_id: codId,
+          energia_kwh: energia,
+        });
+      }
     }
     const tensoes = Array.from(tensoesSet).sort((a, b) => {
       const numA = parseFloat(a);
       const numB = parseFloat(b);
       return Number.isFinite(numA) && Number.isFinite(numB) ? numB - numA : 0;
     });
-    return {
-      tensoes,
-      alimentadores: Array.from(alimentadoresSet).sort(),
-    };
+    const alimentadores = Array.from(alimMap.values()).sort(
+      (a, b) => b.energia_kwh - a.energia_kwh,
+    );
+    const energia_total_anual_kwh = alimentadores.reduce(
+      (acc, a) => acc + a.energia_kwh,
+      0,
+    );
+    return { tensoes, alimentadores, energia_total_anual_kwh };
   }, [data]);
+
+  // Formata kWh em escala humana — < 1 GWh fica MWh, ≥ 1 GWh fica GWh.
+  const fmtEnergia = (kwh: number): string => {
+    if (kwh <= 0) return "—";
+    if (kwh < 1_000_000) {
+      return `${(kwh / 1000).toLocaleString("pt-BR", {
+        maximumFractionDigits: 1,
+      })} MWh/ano`;
+    }
+    return `${(kwh / 1_000_000).toLocaleString("pt-BR", {
+      maximumFractionDigits: 2,
+    })} GWh/ano`;
+  };
 
   if (loading && !data) {
     return (
@@ -460,9 +500,49 @@ export default function ParcelamentoBDGDPanel({
               {mtAnalytics.alimentadores.length} circuito
               {mtAnalytics.alimentadores.length === 1 ? "" : "s"} MT
               {mtAnalytics.alimentadores.length <= 3 &&
-                ` (${mtAnalytics.alimentadores.join(", ")})`}
+                ` (${mtAnalytics.alimentadores.map((a) => a.nome).join(", ")})`}
             </p>
           )}
+        </div>
+      )}
+
+      {/* P-195 — Capacidade de absorção dos alimentadores MT (energia anual) */}
+      {mtAnalytics.energia_total_anual_kwh > 0 && (
+        <div className="rounded-lg border border-emerald-200 bg-emerald-50/40 p-2.5 space-y-1.5">
+          <div className="flex items-center gap-1.5">
+            <Sparkles className="h-3 w-3 text-emerald-700" />
+            <p className="text-[10px] font-semibold text-emerald-900">
+              Capacidade dos alimentadores
+            </p>
+          </div>
+          <p className="text-[11px] text-emerald-800 leading-tight">
+            Total carregado em 10km:{" "}
+            <span className="font-mono font-semibold">
+              {fmtEnergia(mtAnalytics.energia_total_anual_kwh)}
+            </span>
+          </p>
+          {mtAnalytics.alimentadores.slice(0, 3).map((a) => (
+            <div
+              key={a.cod_id}
+              className="text-[10px] flex items-center justify-between gap-2"
+            >
+              <span className="text-gray-700 truncate" title={a.nome}>
+                {a.nome}
+              </span>
+              <span className="font-mono text-emerald-800 flex-shrink-0">
+                {fmtEnergia(a.energia_kwh)}
+              </span>
+            </div>
+          ))}
+          {mtAnalytics.alimentadores.length > 3 && (
+            <p className="text-[9px] text-emerald-600 italic">
+              +{mtAnalytics.alimentadores.length - 3} alimentadores menores
+            </p>
+          )}
+          <p className="text-[9px] text-gray-500 italic leading-tight pt-1 border-t border-emerald-100">
+            Energia consumida no último ciclo BDGD (kWh/ano). Compare com a
+            demanda estimada do empreendimento pra avaliar viabilidade.
+          </p>
         </div>
       )}
 
