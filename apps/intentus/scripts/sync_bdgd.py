@@ -556,6 +556,29 @@ def extract_layer_to_csv(
 CHUNK_ROWS = 50_000  # ~100MB de geom em uma transação — seguro pro Supabase
 
 
+def copy_with_timeout(db_url: str, staging: str, csv: Path, timeout_s: int = 1800):
+    """
+    \\COPY de CSV para staging table com `SET statement_timeout` na mesma sessão.
+
+    O `SET` (não SET LOCAL) e o \\COPY rodam na MESMA sessão psql porque psql
+    processa cada `;` sequencialmente quando lê via heredoc/--file.
+    Sem timeout custom, server default (geralmente ~120s no Supabase pooler)
+    derruba o COPY de CSVs grandes (Cemig-D MT 761MB demora ~3-5min).
+
+    timeout_s default 1800s (30min) — suficiente pra qualquer .gdb V11.
+    """
+    sql_file = Path(tempfile.mkstemp(suffix=".sql", prefix="bdgd-copy-")[1])
+    try:
+        sql_file.write_text(
+            f"SET statement_timeout = '{timeout_s}s';\n"
+            f"\\COPY {staging} FROM '{csv}' WITH (FORMAT csv, HEADER true);\n"
+        )
+        cmd = ["psql", db_url, "-v", "ON_ERROR_STOP=1", "-X", "-q", "-f", str(sql_file)]
+        run(cmd)
+    finally:
+        sql_file.unlink(missing_ok=True)
+
+
 def _chunked_insert(
     db_url: str, staging: str, total: int, insert_sql_template: str,
 ) -> None:
@@ -597,11 +620,7 @@ CREATE UNLOGGED TABLE {staging} (
 );
 """
     psql(db_url, setup)
-    copy_sql = (
-        f"\\COPY {staging} FROM '{csv}' WITH (FORMAT csv, HEADER true)"
-    )
-    cmd = ["psql", db_url, "-v", "ON_ERROR_STOP=1", "-X", "-q", "-c", copy_sql]
-    run(cmd)
+    copy_with_timeout(db_url, staging, csv)
 
     # Adiciona row_number determinístico pra chunking
     psql(db_url, f"""
@@ -649,8 +668,7 @@ CREATE UNLOGGED TABLE {staging} (
 );
 """
     psql(db_url, setup)
-    copy_sql = f"\\COPY {staging} FROM '{csv}' WITH (FORMAT csv, HEADER true)"
-    run(["psql", db_url, "-v", "ON_ERROR_STOP=1", "-X", "-q", "-c", copy_sql])
+    copy_with_timeout(db_url, staging, csv)
 
     psql(db_url, f"""
 ALTER TABLE {staging} ADD COLUMN _chunk_row BIGSERIAL;
@@ -688,8 +706,10 @@ def extract_ctmt_to_csv(gdb: Path, dest_csv: Path) -> bool:
     Extrai a tabela não-geográfica CTMT (Circuito MT) do .gdb pra CSV.
 
     Manual BDGD Rev 3 §3.4 — 58 fields. Pegamos só os essenciais pro Intentus:
-    COD_ID, NOME, TEN_NOM (FK TTEN), TEN_OPE (p.u.), SUB, ENE_01..ENE_12 (energia
-    mensal — soma vira anual em kWh, P-195).
+    COD_ID, NOME, TEN_NOM (FK TTEN), TEN_OPE (p.u.), SUB, ENE_01..ENE_12.
+
+    OGRSQL dialect NÃO suporta COALESCE — então pegamos os 12 fields ENE_xx
+    crus e somamos no Postgres no load_ctmt_csv.
 
     Retorna True se o CSV foi gerado, False se layer CTMT não existe no .gdb.
     """
@@ -697,15 +717,8 @@ def extract_ctmt_to_csv(gdb: Path, dest_csv: Path) -> bool:
     if "CTMT" not in layers:
         return False
 
-    # Lista de fields ENE_01..ENE_12 (energia mensal kWh)
-    ene_fields = [f"COALESCE(ENE_{m:02d}, 0)" for m in range(1, 13)]
-    ene_sum = " + ".join(ene_fields)
-
-    sql = (
-        f'SELECT COD_ID, NOME, TEN_NOM, TEN_OPE, SUB, '
-        f'({ene_sum}) AS ENE_ANUAL '
-        f'FROM CTMT'
-    )
+    ene_cols = ", ".join([f"ENE_{m:02d}" for m in range(1, 13)])
+    sql = f"SELECT COD_ID, NOME, TEN_NOM, TEN_OPE, SUB, {ene_cols} FROM CTMT"
     cmd = [
         "ogr2ogr",
         "-f", "CSV",
@@ -722,20 +735,26 @@ def extract_ctmt_to_csv(gdb: Path, dest_csv: Path) -> bool:
 
 def load_ctmt_csv(db_url: str, csv: Path, distribuidora_id: int) -> int:
     """
-    Carrega CTMT csv → bdgd_circuitos_mt. Idempotente via ON CONFLICT.
+    Carrega CTMT csv → bdgd_circuitos_mt. Soma ENE_01..ENE_12 → energia_anual_kwh
+    no INSERT. Idempotente via ON CONFLICT.
     """
     if not csv.exists() or csv.stat().st_size == 0:
         return 0
     staging = f"_staging_ctmt_{distribuidora_id}"
+    ene_cols_def = ", ".join([f"ENE_{m:02d} TEXT" for m in range(1, 13)])
     setup = f"""
 DROP TABLE IF EXISTS {staging};
 CREATE UNLOGGED TABLE {staging} (
-  COD_ID TEXT, NOME TEXT, TEN_NOM TEXT, TEN_OPE TEXT, SUB TEXT, ENE_ANUAL TEXT
+  COD_ID TEXT, NOME TEXT, TEN_NOM TEXT, TEN_OPE TEXT, SUB TEXT, {ene_cols_def}
 );
 """
     psql(db_url, setup)
-    copy_sql = f"\\COPY {staging} FROM '{csv}' WITH (FORMAT csv, HEADER true)"
-    run(["psql", db_url, "-v", "ON_ERROR_STOP=1", "-X", "-q", "-c", copy_sql])
+    copy_with_timeout(db_url, staging, csv)
+
+    # Somatório dos 12 fields ENE_xx (cada um pode ser '' / NULL)
+    ene_sum = " + ".join(
+        [f"COALESCE(NULLIF(ENE_{m:02d}, '')::NUMERIC, 0)" for m in range(1, 13)]
+    )
     insert = f"""
 INSERT INTO bdgd_circuitos_mt
   (distribuidora_id, cod_id, nome, ten_nom_cod, ten_ope_pu, sub_cod_id,
@@ -747,7 +766,7 @@ SELECT
   NULLIF(TEN_NOM, ''),
   NULLIF(TEN_OPE, '')::NUMERIC,
   NULLIF(SUB, ''),
-  NULLIF(ENE_ANUAL, '')::NUMERIC
+  {ene_sum}
 FROM {staging}
 WHERE COD_ID IS NOT NULL AND COD_ID <> ''
 ON CONFLICT (distribuidora_id, cod_id) DO UPDATE SET
