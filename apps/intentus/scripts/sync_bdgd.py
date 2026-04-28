@@ -616,6 +616,30 @@ def _chunked_insert(
         )
 
 
+def _add_chunk_row(db_url: str, staging: str) -> None:
+    """
+    Adiciona coluna `_chunk_row` numerada via UPDATE com ROW_NUMBER em
+    transação com statement_timeout=30min.
+
+    ALTER TABLE ADD COLUMN BIGSERIAL é caro em UNLOGGED com 1M+ rows
+    (reescreve tabela inteira) — estourava timeout default do pooler
+    (~120s). Solução: criar coluna NULL barata + popular via UPDATE
+    com janela.
+    """
+    sql = f"""
+BEGIN;
+SET LOCAL statement_timeout = '1800s';
+ALTER TABLE {staging} ADD COLUMN _chunk_row BIGINT;
+WITH numbered AS (
+  SELECT ctid, ROW_NUMBER() OVER () - 1 AS rn FROM {staging}
+)
+UPDATE {staging} t SET _chunk_row = n.rn FROM numbered n WHERE t.ctid = n.ctid;
+CREATE INDEX ON {staging}(_chunk_row);
+COMMIT;
+"""
+    psql(db_url, sql)
+
+
 def load_mt_csv(db_url: str, csv: Path, distribuidora_id: int) -> int:
     if not csv.exists() or csv.stat().st_size == 0:
         return 0
@@ -629,12 +653,7 @@ CREATE UNLOGGED TABLE {staging} (
 """
     psql(db_url, setup)
     copy_with_timeout(db_url, staging, csv)
-
-    # Adiciona row_number determinístico pra chunking
-    psql(db_url, f"""
-ALTER TABLE {staging} ADD COLUMN _chunk_row BIGSERIAL;
-CREATE INDEX ON {staging}(_chunk_row);
-""")
+    _add_chunk_row(db_url, staging)
 
     out = run(["psql", db_url, "-At", "-X", "-c",
                f"SELECT COUNT(*) FROM {staging} WHERE wkt IS NOT NULL AND wkt <> '';"],
@@ -677,11 +696,7 @@ CREATE UNLOGGED TABLE {staging} (
 """
     psql(db_url, setup)
     copy_with_timeout(db_url, staging, csv)
-
-    psql(db_url, f"""
-ALTER TABLE {staging} ADD COLUMN _chunk_row BIGSERIAL;
-CREATE INDEX ON {staging}(_chunk_row);
-""")
+    _add_chunk_row(db_url, staging)
 
     out = run(["psql", db_url, "-At", "-X", "-c",
                f"SELECT COUNT(*) FROM {staging} WHERE wkt IS NOT NULL AND wkt <> '';"],
