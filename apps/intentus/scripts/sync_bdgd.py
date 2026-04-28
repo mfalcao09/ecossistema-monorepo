@@ -377,19 +377,21 @@ def extract_layer_to_csv(
     available = list_fields(gdb, layer)
     av_upper = {f.upper() for f in available}
 
+    # Log dos campos REAIS encontrados na layer — útil pra descobrir variantes
+    log(f"    layer '{layer}' fields disponíveis ({len(available)}): {sorted(available)[:20]}")
+
     select_parts = []
     used_fields = []
     for canon, variants in field_map.items():
         chosen = next((v for v in variants if v.upper() in av_upper), None)
         if chosen:
-            # OGR SQL: aspas duplas pra identificadores; alias na sintaxe AS
             select_parts.append(f'"{chosen}" AS "{canon}"')
             used_fields.append(f"{canon}={chosen}")
         else:
             select_parts.append(f'CAST(NULL AS character) AS "{canon}"')
             used_fields.append(f"{canon}=NULL")
 
-    log(f"    fields detectados: {used_fields}")
+    log(f"    fields mapeados: {used_fields}")
 
     sql = f'SELECT {", ".join(select_parts)} FROM "{layer}"'
     cmd = [
@@ -604,76 +606,85 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                 "SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST", "UNSEAT",
             ])
 
-            # MT — field_map detecta variantes BDGD V11 reais
+            # MT — try local pra não derrubar BT/SUB se MT falhar
             mt_csv = wd / "mt.csv"
             mt_count = 0
             if mt_layer:
-                log(f"  ogr2ogr {mt_layer} → CSV (simplify)")
-                extract_layer_to_csv(
-                    gdb, mt_layer, mt_csv, simplify_deg,
-                    {
-                        "COD_ID":  ["COD_ID", "CODID", "ID"],
-                        "CTMT":    ["CTMT", "ALIM", "ALIMENTADOR"],
-                        "TEN_OPE": ["TEN_OPE", "TEN", "TENSAO", "V_OPE", "TENS_OPE"],
-                        "FAS_CON": ["FAS_CON", "FASES", "FASE"],
-                        "COMP":    ["COMP", "COMPR", "COMPRIMENTO", "SHAPE_LENGTH", "LENGTH"],
-                        "TIP_CND": ["TIP_CND", "TIPO_CABO", "CABO"],
-                        "POS_CAB": ["POS_CAB", "POSICAO", "TIPO_INST"],
-                        "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
-                    },
-                )
-                if mt_csv.exists():
-                    sz = mt_csv.stat().st_size
-                    log(f"    CSV MT: {fmt_size(sz)}")
-                mt_count = load_mt_csv(db_url, mt_csv, distribuidora_id)
-                log(f"    MT inseridas: {mt_count:,}")
-                mt_csv.unlink(missing_ok=True)
+                try:
+                    log(f"  ogr2ogr {mt_layer} → CSV (simplify)")
+                    extract_layer_to_csv(
+                        gdb, mt_layer, mt_csv, simplify_deg,
+                        {
+                            "COD_ID":  ["COD_ID", "CODID", "ID"],
+                            "CTMT":    ["CTMT", "ALIM", "ALIMENTADOR"],
+                            "TEN_OPE": ["TEN_OPE", "TEN", "TENSAO", "V_OPE", "TENS_OPE"],
+                            "FAS_CON": ["FAS_CON", "FASES", "FASE"],
+                            "COMP":    ["COMP", "COMPR", "COMPRIMENTO", "SHAPE_LENGTH", "LENGTH"],
+                            "TIP_CND": ["TIP_CND", "TIPO_CABO", "CABO"],
+                            "POS_CAB": ["POS_CAB", "POSICAO", "TIPO_INST"],
+                            "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
+                        },
+                    )
+                    if mt_csv.exists():
+                        sz = mt_csv.stat().st_size
+                        log(f"    CSV MT: {fmt_size(sz)}")
+                    mt_count = load_mt_csv(db_url, mt_csv, distribuidora_id)
+                    log(f"    MT inseridas: {mt_count:,}")
+                    mt_csv.unlink(missing_ok=True)
+                except Exception as e:
+                    log(f"  ❌ MT falhou (continuando): {e}", "ERROR")
             else:
                 log("  ⚠️ Nenhuma layer MT encontrada (esperado: UNSEGMT/UNSE_MT/REDE_MT)", "WARN")
 
-            # BT (skipável)
+            # BT (try local + skipável)
             bt_count = 0
             if not only_mt and bt_layer:
-                bt_csv = wd / "bt.csv"
-                log(f"  ogr2ogr {bt_layer} → CSV (simplify)")
-                extract_layer_to_csv(
-                    gdb, bt_layer, bt_csv, simplify_deg,
-                    {
-                        "COD_ID":  ["COD_ID", "CODID", "ID"],
-                        "CTMT":    ["CTMT", "ALIM", "ALIMENTADOR"],
-                        "TEN_OPE": ["TEN_OPE", "TEN", "TENSAO", "V_OPE", "TENS_OPE"],
-                        "FAS_CON": ["FAS_CON", "FASES", "FASE"],
-                        "COMP":    ["COMP", "COMPR", "COMPRIMENTO", "SHAPE_LENGTH", "LENGTH"],
-                        "TIP_CND": ["TIP_CND", "TIPO_CABO", "CABO"],
-                        "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
-                    },
-                )
-                if bt_csv.exists():
-                    sz = bt_csv.stat().st_size
-                    log(f"    CSV BT: {fmt_size(sz)}")
-                bt_count = load_bt_csv(db_url, bt_csv, distribuidora_id)
-                log(f"    BT inseridas: {bt_count:,}")
-                bt_csv.unlink(missing_ok=True)
+                try:
+                    bt_csv = wd / "bt.csv"
+                    log(f"  ogr2ogr {bt_layer} → CSV (simplify)")
+                    extract_layer_to_csv(
+                        gdb, bt_layer, bt_csv, simplify_deg,
+                        {
+                            "COD_ID":  ["COD_ID", "CODID", "ID"],
+                            "CTMT":    ["CTMT", "ALIM", "ALIMENTADOR"],
+                            "TEN_OPE": ["TEN_OPE", "TEN", "TENSAO", "V_OPE", "TENS_OPE"],
+                            "FAS_CON": ["FAS_CON", "FASES", "FASE"],
+                            "COMP":    ["COMP", "COMPR", "COMPRIMENTO", "SHAPE_LENGTH", "LENGTH"],
+                            "TIP_CND": ["TIP_CND", "TIPO_CABO", "CABO"],
+                            "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
+                        },
+                    )
+                    if bt_csv.exists():
+                        sz = bt_csv.stat().st_size
+                        log(f"    CSV BT: {fmt_size(sz)}")
+                    bt_count = load_bt_csv(db_url, bt_csv, distribuidora_id)
+                    log(f"    BT inseridas: {bt_count:,}")
+                    bt_csv.unlink(missing_ok=True)
+                except Exception as e:
+                    log(f"  ❌ BT falhou (continuando): {e}", "ERROR")
 
-            # SUB
+            # SUB (try local — algumas distribuidoras dão Polygon, outras Point)
             sub_count = 0
             if sub_layer:
                 sub_csv = wd / "sub.csv"
-                log(f"  ogr2ogr {sub_layer} → CSV")
-                extract_layer_to_csv(
-                    gdb, sub_layer, sub_csv, simplify_deg,
-                    {
-                        "COD_ID":  ["COD_ID", "CODID", "ID"],
-                        "NOME":    ["NOME", "NAME", "DESCR"],
-                        "TEN_PRI": ["TEN_PRI", "TENSAO_PRI", "V_PRI"],
-                        "TEN_SEC": ["TEN_SEC", "TENSAO_SEC", "V_SEC"],
-                        "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
-                    },
-                )
-                if sub_csv.exists():
-                    sub_count = load_sub_csv(db_url, sub_csv, distribuidora_id)
-                    log(f"    SUB inseridas: {sub_count:,}")
-                sub_csv.unlink(missing_ok=True)
+                try:
+                    log(f"  ogr2ogr {sub_layer} → CSV")
+                    extract_layer_to_csv(
+                        gdb, sub_layer, sub_csv, simplify_deg,
+                        {
+                            "COD_ID":  ["COD_ID", "CODID", "ID"],
+                            "NOME":    ["NOME", "NAME", "DESCR"],
+                            "TEN_PRI": ["TEN_PRI", "TENSAO_PRI", "V_PRI"],
+                            "TEN_SEC": ["TEN_SEC", "TENSAO_SEC", "V_SEC"],
+                            "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
+                        },
+                    )
+                    if sub_csv.exists():
+                        sub_count = load_sub_csv(db_url, sub_csv, distribuidora_id)
+                        log(f"    SUB inseridas: {sub_count:,}")
+                    sub_csv.unlink(missing_ok=True)
+                except Exception as e:
+                    log(f"  ❌ SUB falhou (continuando): {e}", "ERROR")
 
             # Atualiza last_synced_at
             psql(db_url,
