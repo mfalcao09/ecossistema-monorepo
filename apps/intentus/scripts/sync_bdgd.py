@@ -281,18 +281,47 @@ def find_gdb(extracted_dir: Path) -> Path:
     raise RuntimeError(f"Nenhum .gdb encontrado em {extracted_dir}")
 
 def list_fields(gdb: Path, layer: str) -> set[str]:
-    """Lista atributos/campos de uma layer via ogrinfo -al -so."""
+    """
+    Lista atributos/campos de uma layer via ogrinfo -al -so.
+
+    O output do ogrinfo varia entre versões GDAL. Formatos comuns:
+      "COD_ID: String (32.0)"        ← com precisão entre parênteses
+      "COD_ID: String"                ← sem precisão
+      "COD_ID: String (32) NOT NULL"  ← com modificadores
+    """
     fields: set[str] = set()
     try:
         out = subprocess.run(
-            ["ogrinfo", "-ro", "-al", "-so", "-q", str(gdb), layer],
+            ["ogrinfo", "-ro", "-al", "-so", str(gdb), layer],
             capture_output=True, text=True, check=False, timeout=60,
         )
-        # Format: "FIELD_NAME: Type (precision.scale)"
-        for line in out.stdout.splitlines():
-            m = re.match(r"^\s*([A-Za-z_][\w]*)\s*:\s*\w+\s*\(", line)
+        text = out.stdout
+        # Tipos OGR conhecidos
+        types_re = (
+            r"String|Real|Integer|Integer64|Date|DateTime|Time|Binary|"
+            r"StringList|IntegerList|RealList|String\s*\(?[\d:.]*\)?"
+        )
+        for line in text.splitlines():
+            # Pula linhas de header (Layer name, Geometry, Extent, etc.)
+            if re.match(r"^\s*(Layer|Geometry|Feature Count|Extent|FID|"
+                        r"Schema|Spatial|INFO|GEOGCS|PROJCS|UNIT|AXIS|"
+                        r"DATUM|SPHEROID|PRIMEM|AUTHORITY|PARAMETER):", line):
+                continue
+            # Pula linhas vazias e indentadas demais (parte de WKT)
+            if not line.strip() or line.startswith("    "):
+                continue
+            # Match flexível: NOME: TIPO[opcional resto]
+            m = re.match(
+                r"^\s*([A-Z_][A-Z0-9_]*)\s*:\s*(" + types_re + r")\b",
+                line, re.IGNORECASE,
+            )
             if m:
                 fields.add(m.group(1).upper())
+
+        # Log defensivo se ainda vazio: mostra primeiras linhas do raw
+        if not fields:
+            preview = "\n".join(text.splitlines()[:30])
+            log(f"  ogrinfo -al raw preview ({layer}):\n{preview[:1000]}", "WARN")
     except Exception as e:
         log(f"  ogrinfo -al falhou pra {layer}: {e}", "WARN")
     return fields
