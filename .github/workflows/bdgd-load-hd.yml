@@ -20,7 +20,7 @@ jobs:
     timeout-minutes: 120 # 2h é mais que suficiente: 1-3 distribuidoras por projeto
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - name: Install GDAL + psql
         run: |
