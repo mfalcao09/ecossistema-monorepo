@@ -60,6 +60,7 @@
 - **P-187:** Executar workflow `BDGD Sync` no GitHub Actions (após push) pra popular Tier 1 nacional. Tempo esperado: 3-4h pra 114 distribuidoras × 37GB streaming. Pode rodar com `--filter` em batches.
 - **P-188:** Configurar secret `GITHUB_TRIGGER_TOKEN` (PAT scope `actions:write`) na Edge Function `development-bdgd-trigger-hd` — sem ele, botão "Carregar precisão milimétrica" do Tier 2 retorna erro 503. Marcelo cria PAT em https://github.com/settings/tokens, scope `repo` + `workflow`, salva via Supabase Dashboard → Edge Functions → Secrets.
 - **P-189:** Cron diário `bdgd_cleanup_hd_expired()` ainda não está agendado (pg_cron). Sem ele, dados HD de projetos arquivados acumulam. Configurar via SQL: `SELECT cron.schedule('bdgd-hd-cleanup', '0 3 * * *', $$ SELECT bdgd_cleanup_hd_expired() $$);`
+- **P-190:** Reset `bdgd_*_segments` + re-rodar workflow após push da correção SSDMT/SSDBT — descobrimos via leitura do Manual PRODIST V11 que `UNSEMT/UNSEBT` são **pontos de equipamento** (transformadores, postes), não fios. Os segmentos reais de cabo estão em `SSDMT/SSDBT/SSDAT` (Segmento do Sistema de Distribuição). Os 137k registros "MT" da Energisa MS já carregados estão **errados** (são pontos, não linhas). SQL pra limpar: `TRUNCATE bdgd_mt_segments, bdgd_bt_segments, bdgd_substations, bdgd_segments_hd RESTART IDENTITY; DELETE FROM bdgd_sync_log;`. Depois rodar workflow `BDGD Sync` com `--filter "Energisa MS"` + `--force` pra validar que log mostra `SSDMT chosen` e geometria LineString.
 
 ## Roadmap futuro (radar)
 

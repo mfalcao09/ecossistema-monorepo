@@ -620,22 +620,32 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                             return layer
                 return None
 
-            # Variantes observadas:
-            #   UNSEGMT  - V11 PRODIST canônico (CPFL, Energisa, Cemig-D...)
-            #   UNSEMT   - V10/cooperativas (sem G no meio) - geometria pode ser Point
-            #   UNSE_MT  - separador underscore
-            #   REDE_MT  - distribuidoras antigas
+            # PRODIST V11 (Manual oficial ANEEL):
+            #   SSDMT/SSDBT/SSDAT = Segmento do Sistema de Distribuição (LINHA)
+            #     ← cabos reais da rede, traçado entre estruturas de suporte
+            #   UNSEMT/UNSEBT/UNSEAT = Unidade de Segmento (PONTO)
+            #     ← equipamentos, transformadores — NÃO são fios
+            # Priorizar SSD* (linhas reais), UNSE* como fallback de cooperativas.
             mt_layer = find_layer([
-                "UNSEGMT", "UNSEMT", "UNSE_MT", "REDE_MT", "MT_LIN", "SEGMT",
+                "SSDMT",                                           # V11 oficial — Linha
+                "UNSEGMT", "UNSEMT", "UNSE_MT", "REDE_MT",        # legacy/cooperativas (Point)
+                "MT_LIN", "SEGMT",
             ])
             bt_layer = find_layer([
-                "UNSEGBT", "UNSEBT", "UNSE_BT", "REDE_BT", "BT_LIN", "SEGBT",
+                "SSDBT",                                           # V11 oficial — Linha
+                "UNSEGBT", "UNSEBT", "UNSE_BT", "REDE_BT",        # legacy
+                "BT_LIN", "SEGBT",
             ])
             sub_layer = find_layer([
-                "SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST", "UNSEAT",
+                "SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST",
             ])
 
             # MT — try local pra não derrubar BT/SUB se MT falhar
+            #
+            # SSDMT V11 (canônico): COD_ID, PN_CON_1, PN_CON_2, CTMT, CT_COD_OP,
+            #   UNI_TR_AT, SUB, CONJ, ARE_LOC, DIST, FAS_CON, TIP_INST, TIP_CND,
+            #   POS, COMP. TEN_OPE não existe em SSDMT — vem via JOIN com CTMT.
+            #   MUN também só existe em UCMT (consumidores), não em SSDMT.
             mt_csv = wd / "mt.csv"
             mt_count = 0
             if mt_layer:
@@ -650,7 +660,7 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                             "FAS_CON": ["FAS_CON", "FASES", "FASE"],
                             "COMP":    ["COMP", "COMPR", "COMPRIMENTO", "SHAPE_LENGTH", "LENGTH"],
                             "TIP_CND": ["TIP_CND", "TIPO_CABO", "CABO", "TIP_UNID"],
-                            "POS_CAB": ["POS_CAB", "POSICAO", "TIPO_INST", "POS"],
+                            "POS_CAB": ["POS_CAB", "POSICAO", "TIP_INST", "TIPO_INST", "POS"],
                             "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
                         },
                     )
@@ -666,6 +676,9 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                 log("  ⚠️ Nenhuma layer MT encontrada (esperado: UNSEGMT/UNSE_MT/REDE_MT)", "WARN")
 
             # BT (try local + skipável)
+            #
+            # SSDBT V11 (canônico): mesmos campos de SSDMT mas vinculados a CTBT
+            # via CTMT. TEN_OPE não existe em SSDBT — só em UNSEBT (equipamentos).
             bt_count = 0
             if not only_mt and bt_layer:
                 try:
