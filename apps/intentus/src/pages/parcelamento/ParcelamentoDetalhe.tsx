@@ -1416,110 +1416,12 @@ function TabMapa({
   );
 
   return (
-    <div
-      className="flex gap-4"
-      style={{ height: "calc(100vh - 200px)", minHeight: 520 }}
-    >
-      {/* Layer panel */}
-      <div className="w-60 flex-shrink-0 space-y-3">
-        <div className="flex items-center gap-2">
-          <Layers className="h-4 w-4 text-gray-600" />
-          <h3 className="text-sm font-semibold text-gray-800">Camadas</h3>
-        </div>
-
-        {MAP_LAYERS.map((layer) => {
-          const state = layerStates[layer.key];
-          return (
-            <div
-              key={layer.key}
-              className={`rounded-lg border p-3 transition-all ${
-                state.active
-                  ? "border-blue-300 bg-blue-50"
-                  : "border-gray-200 bg-white"
-              } ${!mapReady ? "opacity-50" : ""}`}
-            >
-              <div className="flex items-start justify-between gap-2">
-                <div className="flex items-start gap-2 flex-1 min-w-0">
-                  <div
-                    className="h-3 w-3 rounded-sm flex-shrink-0 mt-0.5"
-                    style={{ backgroundColor: layer.color }}
-                  />
-                  <div className="min-w-0 flex-1">
-                    <span className="text-xs font-medium text-gray-800 leading-tight block">
-                      {layer.label}
-                    </span>
-                    <p className="text-[11px] text-gray-400 mt-0.5 leading-tight">
-                      {layer.description}
-                    </p>
-                  </div>
-                </div>
-                <div className="flex-shrink-0 pt-0.5">
-                  {state.loading ? (
-                    <Loader2 className="h-4 w-4 text-blue-500 animate-spin" />
-                  ) : (
-                    <Switch
-                      checked={state.active}
-                      disabled={!mapReady}
-                      onCheckedChange={() => toggleLayer(layer)}
-                      aria-label={`Alternar camada ${layer.label}`}
-                    />
-                  )}
-                </div>
-              </div>
-            </div>
-          );
-        })}
-
-        {!mapReady && !mapError && (
-          <p className="text-xs text-gray-400 text-center pt-2">
-            Carregando mapa...
-          </p>
-        )}
-
-        {/* Painel impacto LT — só renderiza se ao menos 1 camada ANEEL EPE estiver carregada */}
-        {(layerStates.aneel_lt_existentes.loaded ||
-          layerStates.aneel_lt_planejadas.loaded ||
-          layerStates.aneel_subestacoes.loaded ||
-          layerStates.aneel_dup.loaded) && (
-          <LTImpactPanel
-            project={project}
-            ltExistentes={layerStates.aneel_lt_existentes.geojson}
-            ltPlanejadas={layerStates.aneel_lt_planejadas.geojson}
-            subestacoes={layerStates.aneel_subestacoes.geojson}
-            dup={layerStates.aneel_dup.geojson}
-          />
-        )}
-
-        {/* Painel BDGD — rede de distribuição local (MT/BT/SUB) com tier auto */}
-        <Suspense fallback={null}>
-          <ParcelamentoBDGDPanel
-            map={mapRef.current}
-            mapReady={mapReady}
-            developmentId={project.id}
-          />
-        </Suspense>
-
-        {/* Painel Topografia — hillshade + slope heatmap + suitability */}
-        <Suspense fallback={null}>
-          <ParcelamentoTopografiaPanel
-            map={mapRef.current}
-            mapReady={mapReady}
-            project={project}
-            ltExistentes={layerStates.aneel_lt_existentes.geojson}
-            ltPlanejadas={layerStates.aneel_lt_planejadas.geojson}
-          />
-        </Suspense>
-
-        <div className="pt-2 border-t border-gray-100">
-          <p className="text-xs text-gray-400">
-            Clique em uma camada para buscar dados da EF Supabase e exibir no
-            mapa.
-          </p>
-        </div>
-      </div>
-
-      {/* Map */}
-      <div className="flex-1 relative rounded-xl overflow-hidden border border-gray-200">
+    <div className="flex flex-col gap-3" style={{ minHeight: 600 }}>
+      {/* Map — ocupa ~70% da viewport disponível */}
+      <div
+        className="relative rounded-xl overflow-hidden border border-gray-200"
+        style={{ height: "calc(100vh - 280px)", minHeight: 480 }}
+      >
         {mapError ? (
           <div className="absolute inset-0 flex flex-col items-center justify-center bg-gray-50">
             <MapPin className="h-10 w-10 text-gray-300 mb-3" />
@@ -1538,6 +1440,99 @@ function TabMapa({
             )}
           </>
         )}
+      </div>
+
+      {/* Toggles compactos em grid horizontal — abaixo do mapa */}
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Layers className="h-3.5 w-3.5 text-gray-600" />
+          <h3 className="text-xs font-semibold text-gray-800 uppercase tracking-wide">
+            Camadas
+          </h3>
+          {!mapReady && !mapError && (
+            <span className="text-[10px] text-gray-400 italic">
+              carregando mapa…
+            </span>
+          )}
+        </div>
+
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-1.5">
+          {MAP_LAYERS.map((layer) => {
+            const state = layerStates[layer.key];
+            return (
+              <button
+                key={layer.key}
+                onClick={() => mapReady && toggleLayer(layer)}
+                disabled={!mapReady || state.loading}
+                title={layer.description}
+                className={`flex items-center gap-1.5 rounded-md border px-2 py-1.5 text-left transition-all ${
+                  state.active
+                    ? "border-blue-300 bg-blue-50"
+                    : "border-gray-200 bg-white hover:border-gray-300"
+                } ${!mapReady ? "opacity-50" : ""} ${
+                  state.loading ? "cursor-wait" : "cursor-pointer"
+                }`}
+              >
+                <div
+                  className="h-2.5 w-2.5 rounded-sm flex-shrink-0"
+                  style={{ backgroundColor: layer.color }}
+                />
+                <span className="text-[11px] font-medium text-gray-800 truncate flex-1">
+                  {layer.label.replace(/^[A-Z]+ — /, "")}
+                </span>
+                {state.loading ? (
+                  <Loader2 className="h-3 w-3 text-blue-500 animate-spin flex-shrink-0" />
+                ) : (
+                  <Switch
+                    checked={state.active}
+                    disabled={!mapReady}
+                    onCheckedChange={() => toggleLayer(layer)}
+                    onClick={(e) => e.stopPropagation()}
+                    aria-label={`Alternar ${layer.label}`}
+                    className="scale-75 flex-shrink-0"
+                  />
+                )}
+              </button>
+            );
+          })}
+        </div>
+
+        {/* Painéis de análise — 2 colunas em telas grandes pra economizar vertical */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-2 pt-1">
+          {/* Painel impacto LT */}
+          {(layerStates.aneel_lt_existentes.loaded ||
+            layerStates.aneel_lt_planejadas.loaded ||
+            layerStates.aneel_subestacoes.loaded ||
+            layerStates.aneel_dup.loaded) && (
+            <LTImpactPanel
+              project={project}
+              ltExistentes={layerStates.aneel_lt_existentes.geojson}
+              ltPlanejadas={layerStates.aneel_lt_planejadas.geojson}
+              subestacoes={layerStates.aneel_subestacoes.geojson}
+              dup={layerStates.aneel_dup.geojson}
+            />
+          )}
+
+          {/* Painel BDGD */}
+          <Suspense fallback={null}>
+            <ParcelamentoBDGDPanel
+              map={mapRef.current}
+              mapReady={mapReady}
+              developmentId={project.id}
+            />
+          </Suspense>
+
+          {/* Painel Topografia */}
+          <Suspense fallback={null}>
+            <ParcelamentoTopografiaPanel
+              map={mapRef.current}
+              mapReady={mapReady}
+              project={project}
+              ltExistentes={layerStates.aneel_lt_existentes.geojson}
+              ltPlanejadas={layerStates.aneel_lt_planejadas.geojson}
+            />
+          </Suspense>
+        </div>
       </div>
     </div>
   );
@@ -1730,13 +1725,13 @@ export default function ParcelamentoDetalhe() {
       </div>
 
       {/* Tabs */}
-      <div className="px-6 pt-3 border-b border-gray-100">
+      <div className="px-6 pt-1 border-b border-gray-100">
         <div className="flex gap-0.5 overflow-x-auto">
           {TABS.map((tab) => (
             <button
               key={tab.key}
               onClick={() => setActiveTab(tab.key)}
-              className={`px-4 py-2 text-sm font-medium whitespace-nowrap rounded-t-md border-b-2 transition-colors ${
+              className={`px-3 py-1.5 text-[13px] font-medium whitespace-nowrap rounded-t-md border-b-2 transition-colors ${
                 activeTab === tab.key
                   ? "border-blue-600 text-blue-600 bg-blue-50/50"
                   : "border-transparent text-gray-500 hover:text-gray-800 hover:border-gray-300"
@@ -1750,7 +1745,7 @@ export default function ParcelamentoDetalhe() {
 
       {/* Tab content */}
       <div
-        className={`flex-1 ${activeTab === "mapa" ? "p-4" : "p-6"} overflow-auto`}
+        className={`flex-1 ${activeTab === "mapa" ? "p-2" : "p-6"} overflow-auto`}
       >
         {activeTab === "visao-geral" && (
           <TabVisaoGeral
