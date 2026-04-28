@@ -284,6 +284,11 @@ def list_layers(gdb: Path) -> set[str]:
     """
     Lista layers de um .gdb. Tenta múltiplos approaches porque ogrinfo varia
     de output entre versões GDAL.
+
+    Formatos observados:
+      "1: UNSEGMT (Multi Line String)"      ← GDAL >=3.5 com -q
+      "Layer: UNSEMT (Point)"                ← GDAL >=3.4 sem -q
+      "Layer name: UNSEGMT"                  ← GDAL antigos
     """
     layers: set[str] = set()
     # Approach 1: ogrinfo SEM -q (verbose, mais confiável em GDAL >=3.4)
@@ -294,15 +299,20 @@ def list_layers(gdb: Path) -> set[str]:
         )
         text = out.stdout + "\n" + out.stderr
         for line in text.splitlines():
-            # formato comum: "1: UNSEGMT (Multi Line String)"
-            #              ou: "Layer name: UNSEGMT"
+            # formato 1: "1: NAME (TYPE)"
             m = re.match(r"^\s*\d+:\s+(\S+)", line)
             if m:
                 layers.add(m.group(1).upper())
                 continue
-            m2 = re.match(r"^\s*Layer name:\s*(\S+)", line)
+            # formato 2: "Layer: NAME (TYPE)"  (GDAL 3.4+)
+            m2 = re.match(r"^\s*Layer:\s+(\S+)", line)
             if m2:
                 layers.add(m2.group(1).upper())
+                continue
+            # formato 3: "Layer name: NAME"  (GDAL antigo)
+            m3 = re.match(r"^\s*Layer name:\s*(\S+)", line)
+            if m3:
+                layers.add(m3.group(1).upper())
     except Exception as e:
         log(f"  ogrinfo verbose falhou: {e}", "WARN")
 
@@ -539,9 +549,20 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                             return layer
                 return None
 
-            mt_layer = find_layer(["UNSEGMT", "UNSE_MT", "REDE_MT", "MT_LIN", "SEGMT"])
-            bt_layer = find_layer(["UNSEGBT", "UNSE_BT", "REDE_BT", "BT_LIN", "SEGBT"])
-            sub_layer = find_layer(["SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST"])
+            # Variantes observadas:
+            #   UNSEGMT  - V11 PRODIST canônico (CPFL, Energisa, Cemig-D...)
+            #   UNSEMT   - V10/cooperativas (sem G no meio) - geometria pode ser Point
+            #   UNSE_MT  - separador underscore
+            #   REDE_MT  - distribuidoras antigas
+            mt_layer = find_layer([
+                "UNSEGMT", "UNSEMT", "UNSE_MT", "REDE_MT", "MT_LIN", "SEGMT",
+            ])
+            bt_layer = find_layer([
+                "UNSEGBT", "UNSEBT", "UNSE_BT", "REDE_BT", "BT_LIN", "SEGBT",
+            ])
+            sub_layer = find_layer([
+                "SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST", "UNSEAT",
+            ])
 
             # MT
             mt_csv = wd / "mt.csv"
