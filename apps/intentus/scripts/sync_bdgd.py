@@ -280,6 +280,24 @@ def find_gdb(extracted_dir: Path) -> Path:
             return p
     raise RuntimeError(f"Nenhum .gdb encontrado em {extracted_dir}")
 
+def list_fields(gdb: Path, layer: str) -> set[str]:
+    """Lista atributos/campos de uma layer via ogrinfo -al -so."""
+    fields: set[str] = set()
+    try:
+        out = subprocess.run(
+            ["ogrinfo", "-ro", "-al", "-so", "-q", str(gdb), layer],
+            capture_output=True, text=True, check=False, timeout=60,
+        )
+        # Format: "FIELD_NAME: Type (precision.scale)"
+        for line in out.stdout.splitlines():
+            m = re.match(r"^\s*([A-Za-z_][\w]*)\s*:\s*\w+\s*\(", line)
+            if m:
+                fields.add(m.group(1).upper())
+    except Exception as e:
+        log(f"  ogrinfo -al falhou pra {layer}: {e}", "WARN")
+    return fields
+
+
 def list_layers(gdb: Path) -> set[str]:
     """
     Lista layers de um .gdb. Tenta múltiplos approaches porque ogrinfo varia
@@ -345,22 +363,44 @@ def list_layers(gdb: Path) -> set[str]:
     return layers
 
 def extract_layer_to_csv(
-    gdb: Path, layer: str, dest_csv: Path, simplify_deg: float, fields: list[str],
+    gdb: Path, layer: str, dest_csv: Path, simplify_deg: float,
+    field_map: dict[str, list[str]],
 ):
     """
-    ogr2ogr GDB → CSV com geometria WKT em EPSG:4326, simplify aplicado.
-    -simplify usa unidade do SRS de saída (graus em 4326).
+    Exporta layer pra CSV com nomes de coluna canônicos.
+
+    field_map: {canonical_name: [real_name_variants]}
+      Pra cada canonical, detecta a primeira variante que existe na layer
+      e usa "real_name AS canonical_name" no SELECT. Se nenhuma variante
+      existir, usa NULL pra preservar schema do CSV consistente.
     """
-    select = ",".join(fields)
+    available = list_fields(gdb, layer)
+    av_upper = {f.upper() for f in available}
+
+    select_parts = []
+    used_fields = []
+    for canon, variants in field_map.items():
+        chosen = next((v for v in variants if v.upper() in av_upper), None)
+        if chosen:
+            # OGR SQL: aspas duplas pra identificadores; alias na sintaxe AS
+            select_parts.append(f'"{chosen}" AS "{canon}"')
+            used_fields.append(f"{canon}={chosen}")
+        else:
+            select_parts.append(f'CAST(NULL AS character) AS "{canon}"')
+            used_fields.append(f"{canon}=NULL")
+
+    log(f"    fields detectados: {used_fields}")
+
+    sql = f'SELECT {", ".join(select_parts)} FROM "{layer}"'
     cmd = [
         "ogr2ogr",
         "-f", "CSV",
         str(dest_csv),
         str(gdb),
-        layer,
         "-t_srs", "EPSG:4326",
         "-simplify", str(simplify_deg),
-        "-select", select,
+        "-sql", sql,
+        "-dialect", "OGRSQL",
         "-lco", "GEOMETRY=AS_WKT",
         "-lco", "SEPARATOR=COMMA",
         "-skipfailures",
@@ -564,15 +604,23 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                 "SUB", "SUBSTATION", "SUBESTACAO", "SUB_DIST", "UNSEAT",
             ])
 
-            # MT
+            # MT — field_map detecta variantes BDGD V11 reais
             mt_csv = wd / "mt.csv"
             mt_count = 0
             if mt_layer:
                 log(f"  ogr2ogr {mt_layer} → CSV (simplify)")
                 extract_layer_to_csv(
                     gdb, mt_layer, mt_csv, simplify_deg,
-                    ["COD_ID", "CTMT", "TEN_OPE", "FAS_CON", "COMP",
-                     "TIP_CND", "POS_CAB", "MUN"],
+                    {
+                        "COD_ID":  ["COD_ID", "CODID", "ID"],
+                        "CTMT":    ["CTMT", "ALIM", "ALIMENTADOR"],
+                        "TEN_OPE": ["TEN_OPE", "TEN", "TENSAO", "V_OPE", "TENS_OPE"],
+                        "FAS_CON": ["FAS_CON", "FASES", "FASE"],
+                        "COMP":    ["COMP", "COMPR", "COMPRIMENTO", "SHAPE_LENGTH", "LENGTH"],
+                        "TIP_CND": ["TIP_CND", "TIPO_CABO", "CABO"],
+                        "POS_CAB": ["POS_CAB", "POSICAO", "TIPO_INST"],
+                        "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
+                    },
                 )
                 if mt_csv.exists():
                     sz = mt_csv.stat().st_size
@@ -590,8 +638,15 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                 log(f"  ogr2ogr {bt_layer} → CSV (simplify)")
                 extract_layer_to_csv(
                     gdb, bt_layer, bt_csv, simplify_deg,
-                    ["COD_ID", "CTMT", "TEN_OPE", "FAS_CON", "COMP",
-                     "TIP_CND", "MUN"],
+                    {
+                        "COD_ID":  ["COD_ID", "CODID", "ID"],
+                        "CTMT":    ["CTMT", "ALIM", "ALIMENTADOR"],
+                        "TEN_OPE": ["TEN_OPE", "TEN", "TENSAO", "V_OPE", "TENS_OPE"],
+                        "FAS_CON": ["FAS_CON", "FASES", "FASE"],
+                        "COMP":    ["COMP", "COMPR", "COMPRIMENTO", "SHAPE_LENGTH", "LENGTH"],
+                        "TIP_CND": ["TIP_CND", "TIPO_CABO", "CABO"],
+                        "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
+                    },
                 )
                 if bt_csv.exists():
                     sz = bt_csv.stat().st_size
@@ -607,7 +662,13 @@ def process_one(entry: dict, db_url: str, simplify_deg: float, only_mt: bool,
                 log(f"  ogr2ogr {sub_layer} → CSV")
                 extract_layer_to_csv(
                     gdb, sub_layer, sub_csv, simplify_deg,
-                    ["COD_ID", "NOME", "TEN_PRI", "TEN_SEC", "MUN"],
+                    {
+                        "COD_ID":  ["COD_ID", "CODID", "ID"],
+                        "NOME":    ["NOME", "NAME", "DESCR"],
+                        "TEN_PRI": ["TEN_PRI", "TENSAO_PRI", "V_PRI"],
+                        "TEN_SEC": ["TEN_SEC", "TENSAO_SEC", "V_SEC"],
+                        "MUN":     ["MUN", "CD_MUN", "MUN_ID", "CODIBGE", "COD_MUN"],
+                    },
                 )
                 if sub_csv.exists():
                     sub_count = load_sub_csv(db_url, sub_csv, distribuidora_id)
