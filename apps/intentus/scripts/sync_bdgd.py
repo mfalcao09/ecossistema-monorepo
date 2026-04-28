@@ -553,6 +553,38 @@ def extract_layer_to_csv(
 # CSV → Postgres via staging + INSERT ... SELECT
 # ----------------------------------------------------------------------------
 
+CHUNK_ROWS = 50_000  # ~100MB de geom em uma transação — seguro pro Supabase
+
+
+def _chunked_insert(
+    db_url: str, staging: str, total: int, insert_sql_template: str,
+) -> None:
+    """
+    Executa INSERT em chunks de CHUNK_ROWS pra evitar statement_timeout +
+    OOM no Supabase. Cada chunk roda em sua própria transação curta com
+    statement_timeout=15min.
+
+    `insert_sql_template` deve ter `{where}` no lugar do filtro de chunk.
+    """
+    if total <= 0:
+        return
+    chunks = (total + CHUNK_ROWS - 1) // CHUNK_ROWS
+    log(f"    INSERT em {chunks} chunks de até {CHUNK_ROWS:,} rows")
+    for i in range(chunks):
+        offset = i * CHUNK_ROWS
+        # ctid é o row id físico do staging UNLOGGED — equivalente a OFFSET sem ORDER BY
+        # mas usamos um trick com ROW_NUMBER() OVER () pra batch determinístico
+        where_clause = (
+            f"WHERE wkt IS NOT NULL AND wkt <> '' "
+            f"AND _chunk_row >= {offset} AND _chunk_row < {offset + CHUNK_ROWS}"
+        )
+        sql = insert_sql_template.format(where=where_clause)
+        # SET LOCAL statement_timeout válido só dentro de transação BEGIN/COMMIT
+        wrapped = f"BEGIN; SET LOCAL statement_timeout = '900s'; {sql} COMMIT;"
+        psql(db_url, wrapped)
+        log(f"    chunk {i+1}/{chunks} OK ({offset:,}–{min(offset + CHUNK_ROWS, total):,})")
+
+
 def load_mt_csv(db_url: str, csv: Path, distribuidora_id: int) -> int:
     if not csv.exists() or csv.stat().st_size == 0:
         return 0
@@ -565,13 +597,24 @@ CREATE UNLOGGED TABLE {staging} (
 );
 """
     psql(db_url, setup)
-    # \COPY via psql -c não funciona com arquivo path absoluto direto, usar -f
     copy_sql = (
         f"\\COPY {staging} FROM '{csv}' WITH (FORMAT csv, HEADER true)"
     )
     cmd = ["psql", db_url, "-v", "ON_ERROR_STOP=1", "-X", "-q", "-c", copy_sql]
     run(cmd)
-    insert = f"""
+
+    # Adiciona row_number determinístico pra chunking
+    psql(db_url, f"""
+ALTER TABLE {staging} ADD COLUMN _chunk_row BIGSERIAL;
+CREATE INDEX ON {staging}(_chunk_row);
+""")
+
+    out = run(["psql", db_url, "-At", "-X", "-c",
+               f"SELECT COUNT(*) FROM {staging} WHERE wkt IS NOT NULL AND wkt <> '';"],
+              capture=True)
+    total = int(out.stdout.strip() or "0")
+
+    insert_template = f"""
 INSERT INTO bdgd_mt_segments
   (distribuidora_id, cod_id, ctmt, tensao_kv, fases, comprimento_m,
    tipo_cabo, posicao, cod_municipio, geom)
@@ -587,14 +630,12 @@ SELECT
   MUN,
   ST_GeomFromText(wkt, 4326)::geography
 FROM {staging}
-WHERE wkt IS NOT NULL AND wkt <> '';
+{{where}};
 """
-    psql(db_url, insert)
-    out = run(["psql", db_url, "-At", "-X", "-c",
-               f"SELECT COUNT(*) FROM {staging};"], capture=True)
-    n = int(out.stdout.strip() or "0")
+    _chunked_insert(db_url, staging, total, insert_template)
     psql(db_url, f"DROP TABLE IF EXISTS {staging};")
-    return n
+    return total
+
 
 def load_bt_csv(db_url: str, csv: Path, distribuidora_id: int) -> int:
     if not csv.exists() or csv.stat().st_size == 0:
@@ -610,7 +651,18 @@ CREATE UNLOGGED TABLE {staging} (
     psql(db_url, setup)
     copy_sql = f"\\COPY {staging} FROM '{csv}' WITH (FORMAT csv, HEADER true)"
     run(["psql", db_url, "-v", "ON_ERROR_STOP=1", "-X", "-q", "-c", copy_sql])
-    insert = f"""
+
+    psql(db_url, f"""
+ALTER TABLE {staging} ADD COLUMN _chunk_row BIGSERIAL;
+CREATE INDEX ON {staging}(_chunk_row);
+""")
+
+    out = run(["psql", db_url, "-At", "-X", "-c",
+               f"SELECT COUNT(*) FROM {staging} WHERE wkt IS NOT NULL AND wkt <> '';"],
+              capture=True)
+    total = int(out.stdout.strip() or "0")
+
+    insert_template = f"""
 INSERT INTO bdgd_bt_segments
   (distribuidora_id, cod_id, ctmt, tensao_v, fases, comprimento_m,
    tipo_cabo, cod_municipio, geom)
@@ -625,14 +677,11 @@ SELECT
   MUN,
   ST_GeomFromText(wkt, 4326)::geography
 FROM {staging}
-WHERE wkt IS NOT NULL AND wkt <> '';
+{{where}};
 """
-    psql(db_url, insert)
-    out = run(["psql", db_url, "-At", "-X", "-c",
-               f"SELECT COUNT(*) FROM {staging};"], capture=True)
-    n = int(out.stdout.strip() or "0")
+    _chunked_insert(db_url, staging, total, insert_template)
     psql(db_url, f"DROP TABLE IF EXISTS {staging};")
-    return n
+    return total
 
 def extract_ctmt_to_csv(gdb: Path, dest_csv: Path) -> bool:
     """
